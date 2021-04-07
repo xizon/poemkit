@@ -1,0 +1,10 @@
+/*!
+ * 
+ * ## Project Name        :  Uix Kit React
+ * ## Version             :  0.0.1
+ * ## Based on            :  Uix Kit React (https://github.com/xizon/uix-kit-react)
+ * ## Last Update         :  April 7, 2021
+ * ## Created by          :  UIUX Lab (https://uiux.cc)
+ * ## Contact Us          :  uiuxlab@gmail.com
+ * 	
+ */nav{display:block;margin-bottom:50px}nav ul{list-style:none}nav li{float:left;padding:1rem 2rem}nav li a{color:#2075ef;text-decoration:none;font-size:16px;text-transform:uppercase;border:1px solid transparent;padding:.5rem 1rem}nav li a.active{background:#f7f6f0;border:1px solid #efe4e5;padding:.5rem 1rem}nav:after{content:"";display:block;clear:both}div.content{display:block;padding:15px;background:#f7f6f0;border:1px solid #efe4e5}.ukr-button{border:0;margin:5px;border-radius:3px;padding:5px 15px}.ukr-button:hover{filter:Invert()}
