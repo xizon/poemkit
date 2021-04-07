@@ -18,12 +18,6 @@ Uix Kit React系一套免费的网站开发工具包，帮助开发者从零建�
 
 
 
-## 本地测试
-
-Server runs on `http://localhost:3000`
-
-
-
 ## 介绍
 
 * 集开发，打包和部署为一体
