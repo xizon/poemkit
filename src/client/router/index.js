@@ -6,7 +6,10 @@ import customRoutesConfig from './routes.js';
 export default () => {
   return (
     <BrowserRouter>
-      <div>{renderRoutes(customRoutesConfig)}</div>
+         <div className="uix-wrapper">
+			{renderRoutes(customRoutesConfig)}
+		 </div>
+         {/* <!-- .uix-wrapper end --> */}
     </BrowserRouter>
   );
 };

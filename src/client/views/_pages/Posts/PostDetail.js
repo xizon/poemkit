@@ -1,6 +1,7 @@
 import React, { Component, Fragment } from 'react';
 import {connect} from 'react-redux';
 import { fetchDemoListDetail } from '../../../actions/demoListDetailActions.js';
+import Footer from '../../../components/Footer/index.js';
 
 
 class PostDetail extends Component {
@@ -83,29 +84,53 @@ class PostDetail extends Component {
     return (
 	  <Fragment>
    
-            <div className="content">
-                { 
-                ( preloadedState != null ) ? preloadedState.map((item, i) => 
+		
+		    <div className="uix-header__placeholder js-uix-header__placeholder-autoheight"></div>
+		
+            <main id="uix-maincontent">
+		
+				{/*
+				<!-- Content   
+				====================================================== -->	
+				*/}
+				<section className="uix-spacing--s">
+					<div className="container">
+							<div className="row">
+								<div className="col-12">
+										{ 
+										( preloadedState != null ) ? preloadedState.map((item, i) => 
 
-                      <div key={"detail"+i} style={{padding: "15px", margin: "10px", display: "inline-block", border: "1px solid #ddd", width: "420px", textAlign: "left", position: "relative"}}>
-                        
-                            <img src={item.flag} alt="" style={{width: "400px", display: "inline-block" }} />
-                            <hr />
-                            <p><strong>Name: </strong>{item.name}</p>
-                            <p><strong>Capital: </strong>{item.capital}</p>
-                            <p><strong>Population: </strong>{item.population}</p>
-                            <p><strong>Subregion: </strong>{item.subregion}</p>
-                            <p><strong>Languages: </strong></p>   
-                            <div>
-                                {item.languages.map((lanItem, k) => <span key={"lan"+k}>{lanItem.name}, </span>)}
-                            </div>
-                                                               
-                      </div>  )
-                 : ""
-                }
-        
-            </div>
-       
+											  <div key={"detail"+i} style={{padding: "15px", margin: "10px", display: "inline-block", border: "1px solid #ddd", width: "420px", textAlign: "left", position: "relative"}}>
+
+													<img src={item.flag} alt="" style={{width: "400px", display: "inline-block" }} />
+													<hr />
+													<p><strong>Name: </strong>{item.name}</p>
+													<p><strong>Capital: </strong>{item.capital}</p>
+													<p><strong>Population: </strong>{item.population}</p>
+													<p><strong>Subregion: </strong>{item.subregion}</p>
+													<p><strong>Languages: </strong></p>   
+													<div>
+														{item.languages.map((lanItem, k) => <span key={"lan"+k}>{lanItem.name}, </span>)}
+													</div>
+
+											  </div>  )
+										 : ""
+										}
+
+								</div>
+							</div>
+							{/*<!-- .row end -->*/}
+
+
+					</div>
+					{/*<!-- .container end -->*/}
+				</section>
+		
+
+            </main>
+
+
+             <Footer />
           
       </Fragment>
 

@@ -55,7 +55,7 @@ let globs = {
 	build                 : 'src/client',
 	dist                  : 'dist',
 	pathCore              : './src/client/components',
-	pathThirdPartyPlugins : './src/client/third-party-plugins/esm',
+	pathThirdPartyPlugins : './src/client/components/_third-party-plugins',
 };
 
 
@@ -234,6 +234,14 @@ const webpackConfig = {
 	},
     module: {
         rules: [
+            {
+                test: /\.(glsl|vs|fs|vert|frag)$/,
+                exclude: path.resolve( __dirname, 'node_modules' ),
+                use: [
+                    'raw-loader',
+                    'glslify-loader'
+                ]
+            },
 			{
 				test: /\.json$/,
 				use: 'json-loader'
@@ -300,7 +308,47 @@ const webpackConfig = {
 				]
 			},
 			
-		
+			{
+			 	test: /\.(png|jpe?g|gif|ttf|eot|svg|woff(2)?)(\?[a-z0-9=&.]+)?$/,
+				loader: 'file-loader', 
+				options: {
+				  esModule: false, //change the css path via output
+				  outputPath: (url, resourcePath, context) => { //the files from `./src/...` will copy to `./dist/`
+					 
+					 //fonts
+					 if ( resourcePath.indexOf( 'webfonts/' ) >= 0 || resourcePath.indexOf( 'fonts/' ) >= 0 ) {
+						 return '../fonts/' + path.basename(resourcePath);
+					 }
+					  
+					 //imags
+					 if ( resourcePath.indexOf( 'images/' ) >= 0 || resourcePath.indexOf( 'img/' ) >= 0 ) {
+						 return '../images/' + path.basename(resourcePath);
+					 } 
+					  
+						 
+					 return '../misc/' + path.basename(resourcePath);
+					
+				  },
+				  publicPath: (url, resourcePath, context) => { //the css path of output 
+					 
+					 //fonts
+					 if ( resourcePath.indexOf( 'webfonts/' ) >= 0 || resourcePath.indexOf( 'fonts/' ) >= 0 ) {
+						 return '/' + globs.dist + '/fonts/' + path.basename(resourcePath);
+					 }
+					  
+					 //imags
+					 if ( resourcePath.indexOf( 'images/' ) >= 0 || resourcePath.indexOf( 'img/' ) >= 0 ) {
+						 return '/' + globs.dist + '/images/' + path.basename(resourcePath);
+					 } 
+					  
+						 
+					 return '/' + globs.dist + '/misc/' + path.basename(resourcePath);
+					  
+					
+				  }
+				}
+			}
+			
         ],
 		
 		

@@ -1,9 +1,19 @@
 # Uix Kit React
 
 
-[![Travis CI](https://img.shields.io/travis/xizon/uix-kit-react/master?style=for-the-badge)](https://travis-ci.org/xizon/uix-kit-react/)
-[![npm version](https://img.shields.io/npm/v/uix-kit-react?style=for-the-badge)](https://www.npmjs.com/package/uix-kit-react)
-[![license](https://img.shields.io/badge/license-MIT-brightgreen.svg?style=for-the-badge)](LICENSE)
+<p align="center">
+  <a href="https://github.com/xizon/uix-kit-react">
+	  <img src="https://raw.githubusercontent.com/xizon/uix-kit-react/master/public/assets/images/logo-colorful.png"  alt="Uix Kit"  width="180" >
+  </a>
+  <p align="center">
+      <a href="https://travis-ci.org/xizon/uix-kit-react/" title="Travis CI"><img src="https://img.shields.io/travis/xizon/uix-kit-react/master?style=for-the-badge"/></a>
+	  <a href="https://www.npmjs.com/package/uix-kit-react" title="npm version"><img src="https://img.shields.io/npm/v/uix-kit-react?style=for-the-badge"/></a>
+	  <a href="https://github.com/xizon/uix-kit-react/blob/master/LICENSE" title="license"><img src="https://img.shields.io/badge/license-MIT-brightgreen.svg?style=for-the-badge"/></a>
+	   
+  </p>
+  <br>
+</p>
+
 
 
 A free web kits with React for fast web design and development via SSR. Using react, redux, router, axios and express. This project was bootstrapped with nodejs library. Project supports automatic deployments from a number of repository hosting services via pm2.
@@ -163,30 +173,29 @@ $ sudo npm rebuild node-sass
 
 
 ```sh
-
 uix-kit-react/
 ├── README.md
 ├── CHANGELOG.md
 ├── CONTRIBUTING.md
 ├── LICENSE
-├── ecosystem.config.js  #for pm2
+├── ecosystem.config.js ------------------------- # for pm2
 ├── babel.config.js
 ├── webpack.config.js
 ├── package-lock.json
 ├── package.json
 ├── public/
-│   ├── index.html
+│   ├── index.html    --------------------------- # HTML template of Homepage
 │   └── assets/
 ├── dist/
 │   ├── css/
-│   │   ├── uix-kit-react.css
+│   │   ├── uix-kit-react.css  ------------------ # Main css file
 │   │   ├── uix-kit-react.css.map
-│   │   ├── uix-kit-react.min.css
+│   │   ├── uix-kit-react.min.css  -------------- # Main css file which is used for production
 │   │   └── uix-kit-react.min.css.map
 │   └── js/
-│   │   ├── uix-kit-react.js
+│   │   ├── uix-kit-react.js   ------------------ # Main js file
 │   │   ├── uix-kit-react.js.map
-│   │   ├── uix-kit-react.min.js
+│   │   ├── uix-kit-react.min.js  --------------- # Main js file which is used for production
 │   │   └── uix-kit-react.min.js.map
 ├── src/
 │   ├── client/
@@ -194,11 +203,16 @@ uix-kit-react/
 │   │   ├── actions/
 │   │   ├── reducers/
 │   │   ├── router/
-│   │   ├── components/ #Independent React components
-│   │   ├── views/
+│   │   ├── components/ -------------------------  # Independent React components
+│   │   │     ├── */
+│   │   │     ├── _utilities/ -------------------  # Generic snippets(js & css)
+│   │   │     └── _third-party-plugins/ ----------  # Third-party plugins
+│   │   │
+│   │   ├── views/ ------------------------------  # Website pages
 │   │   │   ├── _navigation/
 │   │   │   ├── _pages/
 │   │   │   └── _html/
+│   │   │
 │   └── server/
 │   │   ├── app.js
 │   │   ├── server.js

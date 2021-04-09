@@ -1,9 +1,19 @@
 # Uix Kit React
 
 
-[![Travis CI](https://img.shields.io/travis/xizon/uix-kit-react/master?style=for-the-badge)](https://travis-ci.org/xizon/uix-kit-react/)
-[![npm version](https://img.shields.io/npm/v/uix-kit-react?style=for-the-badge)](https://www.npmjs.com/package/uix-kit-react)
-[![license](https://img.shields.io/badge/license-MIT-brightgreen.svg?style=for-the-badge)](LICENSE)
+<p align="center">
+  <a href="https://github.com/xizon/uix-kit-react">
+	  <img src="https://raw.githubusercontent.com/xizon/uix-kit-react/master/public/assets/images/logo-colorful.png"  alt="Uix Kit"  width="180" >
+  </a>
+  <p align="center">
+      <a href="https://travis-ci.org/xizon/uix-kit-react/" title="Travis CI"><img src="https://img.shields.io/travis/xizon/uix-kit-react/master?style=for-the-badge"/></a>
+	  <a href="https://www.npmjs.com/package/uix-kit-react" title="npm version"><img src="https://img.shields.io/npm/v/uix-kit-react?style=for-the-badge"/></a>
+	  <a href="https://github.com/xizon/uix-kit-react/blob/master/LICENSE" title="license"><img src="https://img.shields.io/badge/license-MIT-brightgreen.svg?style=for-the-badge"/></a>
+	   
+  </p>
+  <br>
+</p>
+
 
 
 Uix Kit React系一套免费的网站开发工具包，帮助开发者从零建立一个支持服务端渲染(SSR)的React技术网站，它支持pm2自动部署到服务器。
@@ -155,31 +165,31 @@ $ sudo npm rebuild node-sass
 
 
 
-```sh
 
+```sh
 uix-kit-react/
 ├── README.md
 ├── CHANGELOG.md
 ├── CONTRIBUTING.md
 ├── LICENSE
-├── ecosystem.config.js  #for pm2
+├── ecosystem.config.js ------------------------- # 用于pm2部署
 ├── babel.config.js
 ├── webpack.config.js
 ├── package-lock.json
-├── package.json
+├── package.json 
 ├── public/
-│   ├── index.html
+│   ├── index.html    --------------------------- # 自动生成的首页HTML静态模板
 │   └── assets/
 ├── dist/
 │   ├── css/
-│   │   ├── uix-kit-react.css
+│   │   ├── uix-kit-react.css  ------------------ # 网站核心样式（已编译）
 │   │   ├── uix-kit-react.css.map
-│   │   ├── uix-kit-react.min.css
+│   │   ├── uix-kit-react.min.css  -------------- # 网站核心样式压缩版，默认产品调用（已编译）
 │   │   └── uix-kit-react.min.css.map
 │   └── js/
-│   │   ├── uix-kit-react.js
+│   │   ├── uix-kit-react.js   ------------------ # 网站核心脚本（已编译）
 │   │   ├── uix-kit-react.js.map
-│   │   ├── uix-kit-react.min.js
+│   │   ├── uix-kit-react.min.js  --------------- # 网站核心样式压缩版，默认产品调用（已编译）
 │   │   └── uix-kit-react.min.js.map
 ├── src/
 │   ├── client/
@@ -187,11 +197,16 @@ uix-kit-react/
 │   │   ├── actions/
 │   │   ├── reducers/
 │   │   ├── router/
-│   │   ├── components/ #独立的UI组件库
-│   │   ├── views/
+│   │   ├── components/ -------------------------  # 独立的UI组件
+│   │   │     ├── */
+│   │   │     ├── _utilities/ -------------------  # 公共的js或css模块
+│   │   │     └── _third-party-plugins/ ----------  # 第三方插件
+│   │   │
+│   │   ├── views/ ------------------------------  # 网站页面
 │   │   │   ├── _navigation/
 │   │   │   ├── _pages/
 │   │   │   └── _html/
+│   │   │
 │   └── server/
 │   │   ├── app.js
 │   │   ├── server.js

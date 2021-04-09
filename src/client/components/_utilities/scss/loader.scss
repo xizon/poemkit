@@ -1,0 +1,103 @@
+/* ====================================================== 
+   <!-- Loader -->                                               
+/* ====================================================== */
+.uix-loader-progress {
+	text-align: center;
+	font-size: 0.75rem;
+	transform: translate(10px,-10px);
+}
+
+.uix-loader-progress__line {
+	top: 0;
+	left: 0;
+	width: 0;
+	height: 4px;
+	position: fixed;
+	background-color: #fff;
+	-webkit-touch-callout: none;
+	user-select: none;
+    pointer-events: none;
+	z-index: 99999;
+    box-shadow: 0 1px 5px 0 rgba(255, 255, 255, 0.3);
+}
+
+.uix-loader,
+.uix-loader-progress {
+	bottom: 0;
+	left: 0;
+	width: 65px;
+	height: 65px;
+	position: fixed;
+	background-color: transparent;
+	-webkit-touch-callout: none;
+	user-select: none;
+    pointer-events: none;
+	/* Likely future */
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	z-index: 99999;
+
+
+	svg {
+	    width:  65px;
+	    height: 65px;
+
+		path {
+			fill: $highlight-color1;
+		}
+	}
+
+	span {
+		font-family: Arial, sans-serif;
+		position: fixed;
+		z-index: 100000;
+		bottom: 10px;
+		left: 10px;
+	}
+	.uix-loader__spinner {
+	    animation: uix-cssAnim--rotate .5s linear infinite;
+		
+		path {
+			stroke-dasharray: 1,150;
+			/* 1%, 101% circumference */
+			stroke-dashoffset: 0;
+			stroke: $highlight-color1;
+			stroke-linecap: round;
+			animation: uix-cssAnim--dash 1.5s ease-in-out infinite;
+		}
+	}
+	
+}
+
+
+@keyframes uix-cssAnim--rotate {
+	100% {
+	    transform: rotate(360deg);
+	}
+}
+
+
+@keyframes uix-cssAnim--dash {
+	0% {
+		stroke-dasharray: 1,150;
+		/* 1%, 101% circumference */
+		stroke-dashoffset: 0;
+	}
+
+	50% {
+		stroke-dasharray: 90,150;
+		/* 70%, 101% circumference */
+		stroke-dashoffset: -35;
+		/* 25% circumference */
+	}
+
+	100% {
+		stroke-dasharray: 90,150;
+		/* 70%, 101% circumference */
+		stroke-dashoffset: -124;
+		/* -99% circumference */
+	}
+}
+
+

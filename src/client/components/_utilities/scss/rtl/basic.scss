@@ -1,0 +1,53 @@
+/* ====================================================== 
+   <!-- Basic -->                  
+/* ====================================================== */
+body.rtl {
+	direction: rtl;
+	unicode-bidi: embed;
+}
+
+.rtl caption, 
+.rtl th, 
+.rtl td {
+    text-align: right;
+}
+
+
+.rtl .wp-block-quote,
+.rtl blockquote {
+	border-left-width: 1px !important;
+	border-right-width: 5px !important;
+	border-left-color: #F8F8F8 !important;
+	border-right-color: #CE3A3E !important;
+	
+	&::before {
+		margin-right: auto;
+		margin-left: 0.21875rem;
+	}
+}
+
+
+
+.rtl pre {
+	
+	&.uix-precode {
+		
+		label {
+			
+			left: auto;
+			right: -5px;
+			
+		}
+		code {
+			margin: 0 3rem 0 0;
+			border-left: none;
+			border-right: 1px solid #d9d9d9;
+			
+		}
+		
+	}
+  
+
+}
+
+

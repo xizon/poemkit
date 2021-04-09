@@ -1,0 +1,318 @@
+/* ====================================================== 
+   <!-- Bullet List -->      
+/* ====================================================== */
+
+/*
+ * 1. Normal List Styling
+ * 2. Normal Numbers Ordered List
+ * 3. Custom Circle Icons Ordered List
+ * 4. Big Numbers Ordered List
+ * 5. Step Timeline By Numbers
+*/
+
+
+ul, 
+ol {
+    list-style: none;
+	margin-bottom: 1.421875rem;
+	
+	> li {
+		margin-bottom: 0;
+		@include transition-default();
+	}
+}
+
+.uix-list {
+	&::after {
+		content: '';
+		clear: both;
+		display: block;
+	}
+}
+
+/* 
+ ---------------------------
+ 1. Normal List Styling
+ ---------------------------
+ */ 
+ol.uix-list--normal,
+ul.uix-list--normal,
+.uix-list--normal ul,
+.uix-list--normal ol {
+	
+	display: block;
+	margin: 1.421875rem;
+	padding-left: 0.875rem;	
+	
+	ul, 
+	ol {
+		margin-top: 0;
+		margin-bottom: 0;
+		padding-top: 0;
+		padding-bottom: 0;
+	}
+}
+
+ul.uix-list--normal, 
+.uix-list--normal ul {
+    list-style-type: disc;
+}
+
+ol.uix-list--normal, 
+.uix-list--normal ol {
+    list-style-type: decimal;
+}
+
+/*-- Noemal List Effect by Default --*/
+/* Compatible with  Uix Shortcodes (WordPress Plugin) and Block Button Link */
+.uix-list--normal a:not(.uix-sc-btn):not(.wp-block-button__link):not(.uix-btn) {
+    color: $highlight-color1;
+}
+
+.uix-list--normal a:not(.uix-sc-btn):not(.wp-block-button__link):not(.uix-btn):hover {
+    color: $highlight-color2;
+    text-decoration: underline;
+}
+
+.uix-list--normal a:not(.uix-sc-btn):not(.wp-block-button__link):not(.uix-btn):hover img {
+    text-decoration: none;
+}
+
+
+
+/* 
+ ---------------------------
+ 2. Normal Numbers Ordered List
+ ---------------------------
+ */ 
+
+ol.uix-list--numbered,
+.uix-list--numbered ol {
+    list-style: none;
+    margin-left: 1rem;
+    counter-reset: line;
+	
+	> li {
+		position: relative;
+		margin-bottom: .5rem;
+		margin-left: .5rem;
+	}
+
+	> li::before {
+		position: absolute;
+		left: -2.25em;
+		display: inline-block;
+		width: 22px;
+		height: 22px;
+		margin-right: 0.5em;
+		background-color: $highlight-color1;
+		border-radius: 50%;
+		color: #fff;
+		text-align: center;
+		line-height: 22px;
+		counter-increment: line;
+		content: '0' counter(line);
+		font-size: 0.75rem;
+	}	
+	
+
+}
+.uix-list--numbered.uix-list--numbered-1-digit > li::before {
+	content: counter(line);
+}	
+
+/* 
+ ---------------------------
+ 3. Custom Circle Icons Ordered List
+ ---------------------------
+ */ 
+
+ol.uix-list--circle,
+ul.uix-list--circle,
+.uix-list--circle ol,
+.uix-list--circle ul {
+    list-style: none;
+    margin-left: 1rem;
+    counter-reset: line;
+	
+	> li {
+		position: relative;
+		margin-bottom: .5rem;
+		color: $primary-text-color;
+		margin-left: 1rem;
+	}
+
+	> li::before {
+		position: absolute;
+		left: -1.5em;
+		top: 50%;
+		transform: translateY(-50%);
+		display: inline-block;
+		width: 10px;
+		height: 10px;
+		background-color: $highlight-color1;
+		color: #fff;
+		border-radius: 50%;
+		text-align: center;
+		counter-increment: line;
+		content: '';
+		
+	}
+	
+}
+
+
+/* 
+ ---------------------------
+ 4. Big Numbers Ordered List
+ ---------------------------
+ */ 
+
+ol.uix-list--numbered-large,
+.uix-list--numbered-large ol {
+    counter-reset: item;
+	
+	/*removes original number*/
+    list-style-type: none;
+    /*remove if full width*/
+    text-align: justify;
+	
+	li {
+		display: block;
+		padding-left: 2.5rem;
+		position: relative;
+		min-height: 3.5rem;
+		
+		/*generic alignment*/
+		text-indent: 0;
+		list-style-position: outside;
+		margin-left: 1.2rem;
+		list-style-type: number;
+		
+		&::before {
+			content: '0' counter(item)".";
+			counter-increment: item;
+			position: absolute;
+			margin-left: -3.5rem;
+			font-size: 3rem;
+			color: $sub-text-color;
+			line-height: 1;
+		}	
+	}	
+
+}
+
+.uix-list--numbered-large.uix-list--numbered-1-digit li::before {
+	content: counter(item)".";
+}	
+
+ol.uix-list--numbered-large.uix-list--numbered-bg,
+.uix-list--numbered-large.uix-list--numbered-bg ol {
+   
+	li {
+		background: rgba(228,225,225,1.00);
+		min-height: 70px;
+		border-radius: 50px;
+		margin-bottom: 1rem;
+		margin-left: 0;
+		padding-left: 4.5rem;
+		
+		p {
+			padding-top: 1.5rem;
+			padding-right: 2rem;
+			line-height: 1.3;
+		}
+		
+		&::before {
+			background: $highlight-color1;
+			border-radius: 50%;
+			width: 50px;
+			height: 50px;
+			line-height: 50px;
+			content: '0' counter(item);
+			font-size: 1.5rem;
+			color: #fff;
+			text-align: center;
+			top: 50%;
+			transform: translateY(-50%);
+			margin-left: -4rem;
+			
+		}		
+	}
+
+}
+
+.uix-list--numbered-large.uix-list--numbered-bg.uix-list--numbered-1-digit li::before {
+	content: counter(item);
+}	
+
+
+/* 
+ ---------------------------
+ 5. Step Timeline By Numbers
+ ---------------------------
+ */ 
+$step-line-color: #333;
+
+.uix-list--numbered-step {
+    counter-reset: step;
+    list-style-type: none;
+	margin-left: 1rem;
+	
+	li {
+		position: relative;
+		padding: 0 0 1.5rem 3.75rem;
+		min-height: 75px;
+		border-left: 2px solid $step-line-color;
+	
+
+
+		&::before {
+			counter-increment: step;
+			content: counters(step,".") " ";
+			position: absolute;
+			left: -26px;
+			top: 0;
+			height: 50px;
+			width: 50px;
+			font-size: 1rem;
+			font-weight: 700;
+			line-height: 48px;
+			text-align: center;
+			color: #fff;
+			background-color: $highlight-color1;
+			border: 2px solid $step-line-color;
+			border-radius: 50%;
+			z-index: 2;
+		}
+
+
+		&:last-child {
+			border-left: none;
+		}
+
+		&:last-child::before {
+			content: '\2713';
+		}
+
+	}
+
+	
+}
+
+
+
+@media all and (max-width:768px) {
+
+    .uix-list--numbered-step {
+		
+		li {
+			padding-left: 2.5rem;
+		}
+		
+    }
+
+}
+
+
+

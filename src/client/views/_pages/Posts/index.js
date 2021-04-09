@@ -2,6 +2,7 @@ import React, { Component, Fragment } from 'react';
 import {connect} from 'react-redux';
 import { fetchDemoList } from '../../../actions/demoListActions.js';
 import PostItem from './PostItem.js';
+import Footer from '../../../components/Footer/index.js';
 
 
 class Posts extends Component {
@@ -73,11 +74,38 @@ class Posts extends Component {
     return (
 	  <Fragment>
    
-            <div className="content">
-                 {
-                   ( preloadedState != null ) ? preloadedState.map((item, i) => <PostItem key={i} {...item} />) : ""
-                  }
-            </div>
+		
+		    <div className="uix-header__placeholder js-uix-header__placeholder-autoheight"></div>
+		
+		
+            <main id="uix-maincontent">
+		
+				{/*
+				<!-- Content   
+				====================================================== -->	
+				*/}
+				<section className="uix-spacing--s">
+					<div className="container">
+							<div className="row">
+								<div className="col-12">
+
+									 {
+									   ( preloadedState != null ) ? preloadedState.map((item, i) => <PostItem key={i} {...item} />) : ""
+									  }
+								</div>
+							</div>
+							{/*<!-- .row end -->*/}
+
+
+					</div>
+					{/*<!-- .container end -->*/}
+				</section>
+		
+
+            </main>
+																   
+			<Footer />											   
+																   
        
           
       </Fragment>

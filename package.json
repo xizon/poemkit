@@ -1,7 +1,7 @@
 {
   "author": "UIUX Lab",
   "name": "uix-kit-react",
-  "version": "0.0.1",
+  "version": "0.0.15",
   "description": "A free web kits with React for fast web design and development via SSR.",
   "main": "webpack.config.js",
   "directories": {
@@ -43,6 +43,8 @@
     "babel-loader": "^8.0.4",
     "clean-webpack-plugin": "^1.0.0",
     "css-loader": "^2.0.1",
+    "file-loader": "^6.2.0",
+    "glslify-loader": "^2.0.0",
     "html-loader": "^0.5.5",
     "include-file-webpack-plugin": "^1.0.3",
     "json-loader": "^0.5.7",
@@ -55,6 +57,7 @@
     "prettier": "^1.15.3",
     "prettier-loader": "^2.1.1",
     "random-string": "^0.2.0",
+    "raw-loader": "^4.0.2",
     "safe-buffer": "^5.2.1",
     "sass-loader": "^7.1.0",
     "style-loader": "^0.23.1",

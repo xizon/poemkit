@@ -1,0 +1,146 @@
+/* ====================================================== 
+   <!-- Helper Classes -->                                 
+/* ====================================================== */
+
+
+/*
+ * 5. Element Floating
+ * 6. Element Alignment
+ * 12. Tip Bubble
+ * 14. Position
+*/
+
+
+
+/* 
+ ---------------------------
+ 5. Element Floating
+ ---------------------------
+ */ 
+.rtl .uix-f-l {
+    float: right;
+}
+
+.rtl .uix-f-r {
+    float: left;
+}
+/* 
+ ---------------------------
+ 6. Element Alignment
+ ---------------------------
+ */ 
+
+.rtl .uix-t-r {
+    text-align: left;
+}
+
+.rtl .uix-t-l {
+    text-align: right;
+}
+
+/* The breakpoint is the same as bootstrap 4 */
+/*
+--breakpoint-xs:0;
+--breakpoint-sm:576px;
+--breakpoint-md:768px;
+--breakpoint-lg:992px;
+--breakpoint-xl:1200px;
+*/
+@media all and (max-width: 576px) {
+	.rtl .uix-t-r--sm {
+		text-align: left;
+	}
+
+	.rtl .uix-t-l--sm {
+		text-align: right;
+	}
+}
+
+@media all and (max-width: 768px) {
+	.rtl .uix-t-r--md {
+		text-align: left;
+	}
+
+	.rtl .uix-t-l--md {
+		text-align: right;
+	}
+}
+
+@media all and (max-width: 992px) {
+	.rtl .uix-t-r--lg {
+		text-align: left;
+	}
+
+	.rtl .uix-t-l--lg {
+		text-align: right;
+	}
+}
+
+
+@media all and (max-width: 1200px) {
+	.rtl .uix-t-r--xl {
+		text-align: left;
+	}
+
+	.rtl .uix-t-l--xl {
+		text-align: right;
+	}
+}
+
+
+/* 
+ ---------------------------
+ 12. Tip Bubble
+ ---------------------------
+ */ 
+.rtl .uix-bubble {
+	margin-left: auto;
+	margin-right: .5rem;
+	right: auto;
+	left: 2.3rem;
+}
+
+@media all and (max-width: 768px) {
+	.rtl .uix-bubble {
+		right: auto;
+		left: 1rem;
+	}
+
+}
+
+
+
+/* 
+ ---------------------------
+ 14. Position
+ ---------------------------
+ */ 
+
+/* Don't use `width: 100%` because it is wrong if the parent has padding. */
+.rtl .uix-dir--left {
+    left: auto !important;
+	right: 0 !important;
+}
+.rtl .uix-dir--right {
+	left: 0 !important;
+    right: auto !important;
+}
+
+.rtl .uix-dir--top-left {
+    left: auto !important;
+	right: 0 !important;
+}
+.rtl .uix-dir--top-right {
+	left: 0 !important;
+    right: auto !important;
+
+}
+.rtl .uix-dir--bottom-left {
+    left: auto !important;
+	right: 0 !important;
+}
+.rtl .uix-dir--bottom-right {
+	left: 0 !important;
+    right: auto !important;
+
+}

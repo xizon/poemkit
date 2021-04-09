@@ -180,28 +180,28 @@ class LoginPage extends Component {
                      onSignOut={this.signOut.bind(this)} 
                     />
                   :
-                    <div className="Login">
+                    <div>
                         <form onSubmit={this.handleSubmit.bind(this)}>
 
                                 
                             <div style={{padding: "5px"}}>
-                                <label style={{padding: "10px", display: "inline-block", "width": "62px"}}>Username</label>
+                                <label style={{padding: "10px", display: "inline-block", width: "100px"}}>Username</label>
                                 <input type="text" value={this.state.username} onChange={this.handleUserChange} />   
                             </div>
 
                             <div style={{padding: "5px"}}>
-                                <label style={{padding: "10px", display: "inline-block", "width": "62px"}}>Password</label>
+                                <label style={{padding: "10px", display: "inline-block", width: "100px"}}>Password</label>
                                 <input type="password" value={this.state.password} onChange={this.handlePassChange} />    
                             </div>
 
                             <div style={{padding: "5px"}}>
-                                <label style={{padding: "10px", display: "inline-block", "width": "62px"}}></label>
-                                <input type="submit" value="Log In" />
+                                <label style={{padding: "10px", display: "inline-block", width: "100px"}}></label>
+                                <input style={{padding: "5px 25px", background: "#191919", outline: "none", color: "#fff", borderRadius: "30px", border: "none", fontSize: "16px"}} type="submit" value="Log In" />
                             </div>
 
-
+    
                             <div style={{padding: "5px"}}>
-                                <label style={{padding: "10px", display: "inline-block", "width": "62px"}}></label>
+                                <label style={{padding: "10px", display: "inline-block", width: "100px"}}></label>
 
                                 { this.state.error &&
                                     <span onClick={this.dismissError}>

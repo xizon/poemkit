@@ -1,5 +1,6 @@
 import React, { Component, Fragment } from 'react';
 import LoginPage from './LoginPage.js';
+import Footer from '../../../components/Footer/index.js';
 
 
 class Todos extends Component {
@@ -35,9 +36,34 @@ class Todos extends Component {
     return (
 	  <Fragment>
 		
-            <div className="content">
-               <LoginPage />
-            </div>
+		
+		    <div className="uix-header__placeholder js-uix-header__placeholder-autoheight"></div>
+		
+            <main id="uix-maincontent">
+		
+				{/*
+				<!-- Content   
+				====================================================== -->	
+				*/}
+				<section className="uix-spacing--s">
+					<div className="container">
+							<div className="row">
+								<div className="col-12">
+		
+           							    <LoginPage />
+
+								</div>
+							</div>
+							{/*<!-- .row end -->*/}
+
+
+					</div>
+					{/*<!-- .container end -->*/}
+				</section>
+
+            </main>
+		
+		    <Footer />
        
           
       </Fragment>

@@ -67,7 +67,7 @@ app.get('*', async (req, res) => {
     
     // Checks the given path, matches with component and returns array of items about to be rendered
     const routes = matchRoutes(customRoutesConfig, req.path);
-    //console.log( req.path );
+    //console.log( routes );
 
 	
     // Execute all `appSyncRequestFetching` functions inside given urls and wrap promises with new promises to be able to render pages all the time

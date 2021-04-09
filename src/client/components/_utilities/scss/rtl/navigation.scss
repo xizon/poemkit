@@ -1,0 +1,144 @@
+/* ====================================================== 
+   <!-- Navigation -->                                      
+/* ====================================================== */
+
+.rtl .uix-menu__container:not(.is-mobile) {
+    float: left;
+	
+	
+	
+	/* 
+	 ---------------------------
+	 1. Primary Menu
+	 ---------------------------
+	 */ 
+	ul.uix-menu {
+	    float: right;
+		
+	    > li {
+		    margin-right: auto;
+		    margin-left: 1.6875rem;
+			
+
+			.uix-bubble {
+				right: auto;
+				left: 1rem;
+			}
+			
+		    &:not(.multi-column) > ul ul {
+		        margin-left: auto;
+				margin-right: -0.071875rem;
+
+				ul {
+					margin-right: 0;
+				}
+		    }
+			
+		    > ul {
+		        &::before {
+			        left: auto;
+			        right: 0;
+		        }
+				
+		        &::after {
+			        left: auto;
+			        right: 3.5rem;
+			        margin-left: auto;
+			        margin-right: -0.15625rem;
+		        }
+		    }
+			
+		    li {
+		        padding-left: auto;
+		        padding-right: 0.875rem;
+		    }
+			
+		    ul li {
+		        padding-left: auto;
+		        padding-right: 2.034375rem;
+		    }	
+	    }
+		
+		
+		/* 
+		 ---------------------------
+		 2. Sub Menu (Using WordPress default class name )
+		 ---------------------------
+		 */ 
+	    ul.sub-menu {
+		    left: auto;
+		    right: 0;
+	    }
+		
+		> li:not(.multi-column) > ul {
+			
+			right: 1.784375rem;
+			
+			ul {
+				left: auto;
+				right: 100%;
+			}
+			
+		}
+		
+
+	}
+
+
+
+	/* 
+	 ---------------------------
+	 3. Mega/Dropdown Menu
+	 ---------------------------
+	 */ 
+	/* Multi-column */
+
+	li.multi-column {
+		span.multi-column-title {
+			padding-left: auto;
+			padding-right: 1.159375rem;
+			
+		}
+		> ul li {
+			padding-left: auto !important;
+			padding-right: 1.159375rem !important;
+
+			.uix-bubble {
+				right: auto;
+				left: 1rem;
+			}
+
+		}	
+		
+	}
+
+
+	ul.uix-menu ul.sub-menu .uix-menu__arrow {
+	    right: auto;
+	    left: 1.159375rem;
+	}	
+	
+	/* 
+	 ---------------------------
+	 4. Dropdown Arrow
+	 ---------------------------
+	 */ 
+	.uix-menu__arrow {
+	    right: auto;
+	    left: 0.284375rem;
+	}
+
+	
+	
+}
+
+@media all and (max-width: 1250px) {
+	
+	.rtl .uix-menu__container:not(.is-mobile) {
+		ul.uix-menu > li {
+			margin-right: auto;
+			margin-left: 1.125rem;
+		}	
+	}
+
+}

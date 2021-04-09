@@ -13,7 +13,10 @@ export default (pathname, store, context, template) => {
     const content = renderToString(
         <Provider store={store}>
             <StaticRouter location={pathname} context={context}>
-                <div>{renderRoutes(customRoutesConfig)}</div>
+				 <div className="uix-wrapper">
+					{renderRoutes(customRoutesConfig)}
+				 </div>
+				 {/* <!-- .uix-wrapper end --> */}
             </StaticRouter>
         </Provider>
     );

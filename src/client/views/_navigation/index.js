@@ -7,9 +7,7 @@ import {
 	useLocation
 } from "react-router-dom";
 import customRoutesConfig from '../../router/routes.js';
-
-import './styles.scss';
-
+import Header from '../../components/Header/index.js';
 
 export default props => {
     
@@ -60,28 +58,30 @@ export default props => {
 		
 		
         
-    })
+    });
 	
 
     return (
 	  <Fragment>
-          <nav>
-              <ul>
-                <li>
-                  <NavLink to="/index">Home</NavLink>
-                </li>
-                <li>
-                  <NavLink to="/todos">Todos</NavLink>
-                </li>
-                <li>
-                  <NavLink to="/posts">Posts</NavLink>
-                </li>
-                <li>
-                  <NavLink to="/errorpage">404</NavLink>
-                </li>
-              </ul>
 
-          </nav>
+		<Header ukrMenuContent={
+			<Fragment>
+					<li className={props.location.pathname === '/index' || props.location.pathname === '' ? 'is-active' : ''}>
+					  <NavLink to="/index" activeClassName="is-active">Home</NavLink>
+					</li>
+					<li className={props.location.pathname === '/todos' ? 'is-active' : ''}>
+					  <NavLink to="/todos" activeClassName="is-active">Todos</NavLink>
+					</li>
+					<li className={props.location.pathname.indexOf( '/posts' ) >= 0 ? 'is-active' : ''}>
+					  <NavLink to="/posts" activeClassName="is-active">Posts</NavLink>
+					</li>
+					<li className={props.location.pathname === '/errorpage' ? 'is-active' : ''}>
+					  <NavLink to="/errorpage" activeClassName="is-active">404</NavLink>
+					</li>
+			</Fragment>
+		} />
+
+	
 
         
             {/* A <Switch> looks through its children <Route>s and
