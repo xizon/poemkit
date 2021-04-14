@@ -64,7 +64,7 @@ export default props => {
     return (
 	  <Fragment>
 
-		<Header ukrMenuContent={
+		<Header UixMenuContent={
 			<Fragment>
 					<li className={props.location.pathname === '/index' || props.location.pathname === '' ? 'is-active' : ''}>
 					  <NavLink to="/index" activeClassName="is-active">Home</NavLink>

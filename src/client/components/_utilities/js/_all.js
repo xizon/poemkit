@@ -7,7 +7,7 @@
 
 
 */
-import __ from "./dom.js";
+import __ from "./shortcut.js";
 
 
 export { 

@@ -28,17 +28,42 @@ import '../_utilities/scss/rtl/_all-rtl.scss';
 import { __ } from '../_utilities/js/_all.js';
 
 
+
 export default class Header extends Component {
 
 	componentDidMount(){
 		
 		//
-		__( '.uix-header__container' ).addClass( 'js-heavyShadow' );
+		__( document ).ready( function() {
+		
+			__( 'body' ).imagesloaded({
+				startEvent: function() {
+					console.log( '=> loading.' );
+				},
+				progressEvent: function(percent) {
+					console.log( '=> progress: ' + percent + '%' );
+				},
+				endEvent: function() {
+					console.log( '=> loaded!!!' );
+					
+					
+					__( '.uix-header__container' ).addClass( 'js-heavyShadow' );
+				
+					
+				}
+			});
+
+	
+
+		});
+
+		
+		
 	}
 	
 	render() {
 		
-		const ukrMenuContent = this.props.ukrMenuContent ? this.props.ukrMenuContent : '';
+		const UixMenuContent = this.props.UixMenuContent ? this.props.UixMenuContent : '';
 		
 		return (
 		  <Fragment>
@@ -50,6 +75,7 @@ export default class Header extends Component {
 				 <div className="uix-header">
 					 <div className="container">
 
+			
 							<div className="uix-brand">
 								<NavLink to="/index"><img src="assets/images/logo.png" alt="Uix Kit" /></NavLink>                   
 							</div>
@@ -63,7 +89,7 @@ export default class Header extends Component {
 								   <div className="uix-menu__inner">
 
 										<span className="uix-brand--mobile"><img src="assets/images/logo-colorful.png" alt="Site Name" /></span>
-										<ul className="uix-menu">{ukrMenuContent}</ul>
+										<ul className="uix-menu">{UixMenuContent}</ul>
 										<div className="uix-menu__right-box">
 											<a className="uix-social-btn uix-social-btn--small uix-social-btn--circle uix-social-btn--thin" title="Follow us on Twitter" href="https://twitter.com/uiux_lab" target="_blank">
 												<i className="fa fa-twitter"></i>
@@ -93,7 +119,8 @@ export default class Header extends Component {
 				 </div>
 
 			</header>  
-
+			
+	
 		  </Fragment>
 		)
 	}

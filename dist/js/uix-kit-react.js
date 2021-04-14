@@ -1,9 +1,9 @@
 /*!
  * 
  * ## Project Name        :  Uix Kit React
- * ## Version             :  0.0.15
+ * ## Version             :  0.0.16
  * ## Based on            :  Uix Kit React (https://github.com/xizon/uix-kit-react)
- * ## Last Update         :  April 9, 2021
+ * ## Last Update         :  April 14, 2021
  * ## Created by          :  UIUX Lab (https://uiux.cc)
  * ## Contact Us          :  uiuxlab@gmail.com
  * 	
@@ -102,7 +102,7 @@
 
 
 if (true) {
-  module.exports = __webpack_require__(41);
+  module.exports = __webpack_require__(42);
 } else {}
 
 
@@ -161,7 +161,7 @@ module.exports["default"] = module.exports, module.exports.__esModule = true;
 /* 4 */
 /***/ (function(module, exports, __webpack_require__) {
 
-var setPrototypeOf = __webpack_require__(49);
+var setPrototypeOf = __webpack_require__(50);
 
 function _inherits(subClass, superClass) {
   if (typeof superClass !== "function" && superClass !== null) {
@@ -185,7 +185,7 @@ module.exports["default"] = module.exports, module.exports.__esModule = true;
 /* 5 */
 /***/ (function(module, exports, __webpack_require__) {
 
-var _typeof = __webpack_require__(50)["default"];
+var _typeof = __webpack_require__(13)["default"];
 
 var assertThisInitialized = __webpack_require__(10);
 
@@ -207,7 +207,7 @@ module.exports["default"] = module.exports, module.exports.__esModule = true;
 "use strict";
 
 
-var bind = __webpack_require__(31);
+var bind = __webpack_require__(32);
 
 /*global toString:true*/
 
@@ -598,7 +598,7 @@ function _inheritsLoose(subClass, superClass) {
 if (false) { var throwOnDirectAccess, ReactIs; } else {
   // By explicitly using `prop-types` you are opting into new production behavior.
   // http://fb.me/prop-types-in-prod
-  module.exports = __webpack_require__(45)();
+  module.exports = __webpack_require__(46)();
 }
 
 
@@ -637,7 +637,7 @@ module.exports = __webpack_require__(53);
 "use strict";
 
 
-var reactIs = __webpack_require__(14);
+var reactIs = __webpack_require__(15);
 
 /**
  * Copyright 2015, Yahoo! Inc.
@@ -742,6 +742,33 @@ module.exports = hoistNonReactStatics;
 
 /***/ }),
 /* 13 */
+/***/ (function(module, exports) {
+
+function _typeof(obj) {
+  "@babel/helpers - typeof";
+
+  if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") {
+    module.exports = _typeof = function _typeof(obj) {
+      return typeof obj;
+    };
+
+    module.exports["default"] = module.exports, module.exports.__esModule = true;
+  } else {
+    module.exports = _typeof = function _typeof(obj) {
+      return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj;
+    };
+
+    module.exports["default"] = module.exports, module.exports.__esModule = true;
+  }
+
+  return _typeof(obj);
+}
+
+module.exports = _typeof;
+module.exports["default"] = module.exports, module.exports.__esModule = true;
+
+/***/ }),
+/* 14 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -770,24 +797,24 @@ if (true) {
   // DCE check should happen before ReactDOM bundle executes so that
   // DevTools can report bad minification during injection.
   checkDCE();
-  module.exports = __webpack_require__(42);
+  module.exports = __webpack_require__(43);
 } else {}
 
 
 /***/ }),
-/* 14 */
+/* 15 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 
 if (true) {
-  module.exports = __webpack_require__(47);
+  module.exports = __webpack_require__(48);
 } else {}
 
 
 /***/ }),
-/* 15 */
+/* 16 */
 /***/ (function(module, exports) {
 
 function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) {
@@ -830,7 +857,7 @@ module.exports = _asyncToGenerator;
 module.exports["default"] = module.exports, module.exports.__esModule = true;
 
 /***/ }),
-/* 16 */
+/* 17 */
 /***/ (function(module, exports) {
 
 function _defineProperty(obj, key, value) {
@@ -852,13 +879,7 @@ module.exports = _defineProperty;
 module.exports["default"] = module.exports, module.exports.__esModule = true;
 
 /***/ }),
-/* 17 */,
-/* 18 */
-/***/ (function(module, exports, __webpack_require__) {
-
-// extracted by mini-css-extract-plugin
-
-/***/ }),
+/* 18 */,
 /* 19 */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -902,10 +923,16 @@ module.exports["default"] = module.exports, module.exports.__esModule = true;
 
 /***/ }),
 /* 26 */
+/***/ (function(module, exports, __webpack_require__) {
+
+// extracted by mini-css-extract-plugin
+
+/***/ }),
+/* 27 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* WEBPACK VAR INJECTION */(function(global, module) {/* harmony import */ var _ponyfill_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(39);
+/* WEBPACK VAR INJECTION */(function(global, module) {/* harmony import */ var _ponyfill_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(40);
 /* global window */
 
 
@@ -924,10 +951,10 @@ if (typeof self !== 'undefined') {
 var result = Object(_ponyfill_js__WEBPACK_IMPORTED_MODULE_0__[/* default */ "a"])(root);
 /* harmony default export */ __webpack_exports__["a"] = (result);
 
-/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(30), __webpack_require__(48)(module)))
+/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(31), __webpack_require__(49)(module)))
 
 /***/ }),
-/* 27 */
+/* 28 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -1111,10 +1138,10 @@ var index = react__WEBPACK_IMPORTED_MODULE_0___default.a.createContext || create
 
 /* harmony default export */ __webpack_exports__["a"] = (index);
 
-/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(30)))
+/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(31)))
 
 /***/ }),
-/* 28 */
+/* 29 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var isarray = __webpack_require__(51)
@@ -1546,7 +1573,7 @@ function pathToRegexp (path, keys, options) {
 
 
 /***/ }),
-/* 29 */
+/* 30 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1643,7 +1670,7 @@ module.exports = shouldUseNative() ? Object.assign : function (target, source) {
 
 
 /***/ }),
-/* 30 */
+/* 31 */
 /***/ (function(module, exports) {
 
 var g;
@@ -1669,7 +1696,7 @@ module.exports = g;
 
 
 /***/ }),
-/* 31 */
+/* 32 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1687,7 +1714,7 @@ module.exports = function bind(fn, thisArg) {
 
 
 /***/ }),
-/* 32 */
+/* 33 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1764,7 +1791,7 @@ module.exports = function buildURL(url, params, paramsSerializer) {
 
 
 /***/ }),
-/* 33 */
+/* 34 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1776,7 +1803,7 @@ module.exports = function isCancel(value) {
 
 
 /***/ }),
-/* 34 */
+/* 35 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1799,10 +1826,10 @@ function getDefaultAdapter() {
   var adapter;
   if (typeof XMLHttpRequest !== 'undefined') {
     // For browsers use XHR adapter
-    adapter = __webpack_require__(35);
+    adapter = __webpack_require__(36);
   } else if (typeof process !== 'undefined' && Object.prototype.toString.call(process) === '[object process]') {
     // For node use HTTP adapter
-    adapter = __webpack_require__(35);
+    adapter = __webpack_require__(36);
   }
   return adapter;
 }
@@ -1882,7 +1909,7 @@ module.exports = defaults;
 /* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(59)))
 
 /***/ }),
-/* 35 */
+/* 36 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1891,11 +1918,11 @@ module.exports = defaults;
 var utils = __webpack_require__(6);
 var settle = __webpack_require__(61);
 var cookies = __webpack_require__(63);
-var buildURL = __webpack_require__(32);
+var buildURL = __webpack_require__(33);
 var buildFullPath = __webpack_require__(64);
 var parseHeaders = __webpack_require__(67);
 var isURLSameOrigin = __webpack_require__(68);
-var createError = __webpack_require__(36);
+var createError = __webpack_require__(37);
 
 module.exports = function xhrAdapter(config) {
   return new Promise(function dispatchXhrRequest(resolve, reject) {
@@ -2068,7 +2095,7 @@ module.exports = function xhrAdapter(config) {
 
 
 /***/ }),
-/* 36 */
+/* 37 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -2093,7 +2120,7 @@ module.exports = function createError(message, config, code, request, response) 
 
 
 /***/ }),
-/* 37 */
+/* 38 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -2187,7 +2214,7 @@ module.exports = function mergeConfig(config1, config2) {
 
 
 /***/ }),
-/* 38 */
+/* 39 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -2213,7 +2240,7 @@ module.exports = Cancel;
 
 
 /***/ }),
-/* 39 */
+/* 40 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -2238,7 +2265,7 @@ function symbolObservablePonyfill(root) {
 
 
 /***/ }),
-/* 40 */
+/* 41 */
 /***/ (function(module, exports) {
 
 function _extends() {
@@ -2264,7 +2291,7 @@ module.exports = _extends;
 module.exports["default"] = module.exports, module.exports.__esModule = true;
 
 /***/ }),
-/* 41 */
+/* 42 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -2276,7 +2303,7 @@ module.exports["default"] = module.exports, module.exports.__esModule = true;
  * This source code is licensed under the MIT license found in the
  * LICENSE file in the root directory of this source tree.
  */
-var l=__webpack_require__(29),n=60103,p=60106;exports.Fragment=60107;exports.StrictMode=60108;exports.Profiler=60114;var q=60109,r=60110,t=60112;exports.Suspense=60113;var u=60115,v=60116;
+var l=__webpack_require__(30),n=60103,p=60106;exports.Fragment=60107;exports.StrictMode=60108;exports.Profiler=60114;var q=60109,r=60110,t=60112;exports.Suspense=60113;var u=60115,v=60116;
 if("function"===typeof Symbol&&Symbol.for){var w=Symbol.for;n=w("react.element");p=w("react.portal");exports.Fragment=w("react.fragment");exports.StrictMode=w("react.strict_mode");exports.Profiler=w("react.profiler");q=w("react.provider");r=w("react.context");t=w("react.forward_ref");exports.Suspense=w("react.suspense");u=w("react.memo");v=w("react.lazy")}var x="function"===typeof Symbol&&Symbol.iterator;
 function y(a){if(null===a||"object"!==typeof a)return null;a=x&&a[x]||a["@@iterator"];return"function"===typeof a?a:null}function z(a){for(var b="https://reactjs.org/docs/error-decoder.html?invariant="+a,c=1;c<arguments.length;c++)b+="&args[]="+encodeURIComponent(arguments[c]);return"Minified React error #"+a+"; visit "+b+" for the full message or use the non-minified dev environment for full errors and additional helpful warnings."}
 var A={isMounted:function(){return!1},enqueueForceUpdate:function(){},enqueueReplaceState:function(){},enqueueSetState:function(){}},B={};function C(a,b,c){this.props=a;this.context=b;this.refs=B;this.updater=c||A}C.prototype.isReactComponent={};C.prototype.setState=function(a,b){if("object"!==typeof a&&"function"!==typeof a&&null!=a)throw Error(z(85));this.updater.enqueueSetState(this,a,b,"setState")};C.prototype.forceUpdate=function(a){this.updater.enqueueForceUpdate(this,a,"forceUpdate")};
@@ -2294,7 +2321,7 @@ exports.useLayoutEffect=function(a,b){return S().useLayoutEffect(a,b)};exports.u
 
 
 /***/ }),
-/* 42 */
+/* 43 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -2309,7 +2336,7 @@ exports.useLayoutEffect=function(a,b){return S().useLayoutEffect(a,b)};exports.u
 /*
  Modernizr 3.0.0pre (Custom Build) | MIT
 */
-var aa=__webpack_require__(0),m=__webpack_require__(29),r=__webpack_require__(43);function y(a){for(var b="https://reactjs.org/docs/error-decoder.html?invariant="+a,c=1;c<arguments.length;c++)b+="&args[]="+encodeURIComponent(arguments[c]);return"Minified React error #"+a+"; visit "+b+" for the full message or use the non-minified dev environment for full errors and additional helpful warnings."}if(!aa)throw Error(y(227));var ba=new Set,ca={};function da(a,b){ea(a,b);ea(a+"Capture",b)}
+var aa=__webpack_require__(0),m=__webpack_require__(30),r=__webpack_require__(44);function y(a){for(var b="https://reactjs.org/docs/error-decoder.html?invariant="+a,c=1;c<arguments.length;c++)b+="&args[]="+encodeURIComponent(arguments[c]);return"Minified React error #"+a+"; visit "+b+" for the full message or use the non-minified dev environment for full errors and additional helpful warnings."}if(!aa)throw Error(y(227));var ba=new Set,ca={};function da(a,b){ea(a,b);ea(a+"Capture",b)}
 function ea(a,b){ca[a]=b;for(a=0;a<b.length;a++)ba.add(b[a])}
 var fa=!("undefined"===typeof window||"undefined"===typeof window.document||"undefined"===typeof window.document.createElement),ha=/^[:A-Z_a-z\u00C0-\u00D6\u00D8-\u00F6\u00F8-\u02FF\u0370-\u037D\u037F-\u1FFF\u200C-\u200D\u2070-\u218F\u2C00-\u2FEF\u3001-\uD7FF\uF900-\uFDCF\uFDF0-\uFFFD][:A-Z_a-z\u00C0-\u00D6\u00D8-\u00F6\u00F8-\u02FF\u0370-\u037D\u037F-\u1FFF\u200C-\u200D\u2070-\u218F\u2C00-\u2FEF\u3001-\uD7FF\uF900-\uFDCF\uFDF0-\uFFFD\-.0-9\u00B7\u0300-\u036F\u203F-\u2040]*$/,ia=Object.prototype.hasOwnProperty,
 ja={},ka={};function la(a){if(ia.call(ka,a))return!0;if(ia.call(ja,a))return!1;if(ha.test(a))return ka[a]=!0;ja[a]=!0;return!1}function ma(a,b,c,d){if(null!==c&&0===c.type)return!1;switch(typeof b){case "function":case "symbol":return!0;case "boolean":if(d)return!1;if(null!==c)return!c.acceptsBooleans;a=a.toLowerCase().slice(0,5);return"data-"!==a&&"aria-"!==a;default:return!1}}
@@ -2598,19 +2625,19 @@ exports.unstable_renderSubtreeIntoContainer=function(a,b,c,d){if(!rk(c))throw Er
 
 
 /***/ }),
-/* 43 */
+/* 44 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 
 if (true) {
-  module.exports = __webpack_require__(44);
+  module.exports = __webpack_require__(45);
 } else {}
 
 
 /***/ }),
-/* 44 */
+/* 45 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -2637,7 +2664,7 @@ exports.unstable_wrapCallback=function(a){var b=P;return function(){var c=P;P=b;
 
 
 /***/ }),
-/* 45 */
+/* 46 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -2650,7 +2677,7 @@ exports.unstable_wrapCallback=function(a){var b=P;return function(){var c=P;P=b;
 
 
 
-var ReactPropTypesSecret = __webpack_require__(46);
+var ReactPropTypesSecret = __webpack_require__(47);
 
 function emptyFunction() {}
 function emptyFunctionWithReset() {}
@@ -2708,7 +2735,7 @@ module.exports = function() {
 
 
 /***/ }),
-/* 46 */
+/* 47 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -2727,7 +2754,7 @@ module.exports = ReactPropTypesSecret;
 
 
 /***/ }),
-/* 47 */
+/* 48 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -2749,7 +2776,7 @@ exports.isValidElementType=function(a){return"string"===typeof a||"function"===t
 
 
 /***/ }),
-/* 48 */
+/* 49 */
 /***/ (function(module, exports) {
 
 module.exports = function(originalModule) {
@@ -2779,7 +2806,7 @@ module.exports = function(originalModule) {
 
 
 /***/ }),
-/* 49 */
+/* 50 */
 /***/ (function(module, exports) {
 
 function _setPrototypeOf(o, p) {
@@ -2793,33 +2820,6 @@ function _setPrototypeOf(o, p) {
 }
 
 module.exports = _setPrototypeOf;
-module.exports["default"] = module.exports, module.exports.__esModule = true;
-
-/***/ }),
-/* 50 */
-/***/ (function(module, exports) {
-
-function _typeof(obj) {
-  "@babel/helpers - typeof";
-
-  if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") {
-    module.exports = _typeof = function _typeof(obj) {
-      return typeof obj;
-    };
-
-    module.exports["default"] = module.exports, module.exports.__esModule = true;
-  } else {
-    module.exports = _typeof = function _typeof(obj) {
-      return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj;
-    };
-
-    module.exports["default"] = module.exports, module.exports.__esModule = true;
-  }
-
-  return _typeof(obj);
-}
-
-module.exports = _typeof;
 module.exports["default"] = module.exports, module.exports.__esModule = true;
 
 /***/ }),
@@ -3599,10 +3599,10 @@ try {
 
 
 var utils = __webpack_require__(6);
-var bind = __webpack_require__(31);
+var bind = __webpack_require__(32);
 var Axios = __webpack_require__(55);
-var mergeConfig = __webpack_require__(37);
-var defaults = __webpack_require__(34);
+var mergeConfig = __webpack_require__(38);
+var defaults = __webpack_require__(35);
 
 /**
  * Create an instance of Axios
@@ -3635,9 +3635,9 @@ axios.create = function create(instanceConfig) {
 };
 
 // Expose Cancel & CancelToken
-axios.Cancel = __webpack_require__(38);
+axios.Cancel = __webpack_require__(39);
 axios.CancelToken = __webpack_require__(69);
-axios.isCancel = __webpack_require__(33);
+axios.isCancel = __webpack_require__(34);
 
 // Expose all/spread
 axios.all = function all(promises) {
@@ -3662,10 +3662,10 @@ module.exports.default = axios;
 
 
 var utils = __webpack_require__(6);
-var buildURL = __webpack_require__(32);
+var buildURL = __webpack_require__(33);
 var InterceptorManager = __webpack_require__(56);
 var dispatchRequest = __webpack_require__(57);
-var mergeConfig = __webpack_require__(37);
+var mergeConfig = __webpack_require__(38);
 
 /**
  * Create a new instance of Axios
@@ -3824,8 +3824,8 @@ module.exports = InterceptorManager;
 
 var utils = __webpack_require__(6);
 var transformData = __webpack_require__(58);
-var isCancel = __webpack_require__(33);
-var defaults = __webpack_require__(34);
+var isCancel = __webpack_require__(34);
+var defaults = __webpack_require__(35);
 
 /**
  * Throws a `Cancel` if cancellation has been requested.
@@ -4144,7 +4144,7 @@ module.exports = function normalizeHeaderName(headers, normalizedName) {
 "use strict";
 
 
-var createError = __webpack_require__(36);
+var createError = __webpack_require__(37);
 
 /**
  * Resolve or reject a Promise based on response status.
@@ -4489,7 +4489,7 @@ module.exports = (
 "use strict";
 
 
-var Cancel = __webpack_require__(38);
+var Cancel = __webpack_require__(39);
 
 /**
  * A `CancelToken` is an object that can be used to request cancellation of an operation.
@@ -4611,7 +4611,7 @@ var react = __webpack_require__(0);
 var react_default = /*#__PURE__*/__webpack_require__.n(react);
 
 // EXTERNAL MODULE: ./node_modules/react-dom/index.js
-var react_dom = __webpack_require__(13);
+var react_dom = __webpack_require__(14);
 var react_dom_default = /*#__PURE__*/__webpack_require__.n(react_dom);
 
 // EXTERNAL MODULE: ./node_modules/prop-types/index.js
@@ -4855,7 +4855,7 @@ var hoist_non_react_statics_cjs = __webpack_require__(12);
 var hoist_non_react_statics_cjs_default = /*#__PURE__*/__webpack_require__.n(hoist_non_react_statics_cjs);
 
 // EXTERNAL MODULE: ./node_modules/react-is/index.js
-var react_is = __webpack_require__(14);
+var react_is = __webpack_require__(15);
 
 // CONCATENATED MODULE: ./node_modules/react-redux/es/components/connectAdvanced.js
 
@@ -5238,7 +5238,7 @@ function shallowEqual(objA, objB) {
   return true;
 }
 // EXTERNAL MODULE: ./node_modules/symbol-observable/es/index.js
-var es = __webpack_require__(26);
+var es = __webpack_require__(27);
 
 // CONCATENATED MODULE: ./node_modules/redux/es/redux.js
 
@@ -7601,10 +7601,10 @@ function createMemoryHistory(props) {
 
 
 // EXTERNAL MODULE: ./node_modules/mini-create-react-context/dist/esm/index.js
-var esm = __webpack_require__(27);
+var esm = __webpack_require__(28);
 
 // EXTERNAL MODULE: ./node_modules/path-to-regexp/index.js
-var path_to_regexp = __webpack_require__(28);
+var path_to_regexp = __webpack_require__(29);
 var path_to_regexp_default = /*#__PURE__*/__webpack_require__.n(path_to_regexp);
 
 // CONCATENATED MODULE: ./node_modules/react-router/esm/react-router.js
@@ -8615,68 +8615,329 @@ var getPrototypeOf = __webpack_require__(1);
 var getPrototypeOf_default = /*#__PURE__*/__webpack_require__.n(getPrototypeOf);
 
 // EXTERNAL MODULE: ./src/client/components/_third-party-plugins/Bootstrap/scss/bootstrap.scss
-var bootstrap = __webpack_require__(18);
+var bootstrap = __webpack_require__(19);
 
 // EXTERNAL MODULE: ./src/client/components/_third-party-plugins/FontAwesome/scss/fontawesome.scss
-var fontawesome = __webpack_require__(19);
+var fontawesome = __webpack_require__(20);
 
 // EXTERNAL MODULE: ./src/client/components/_third-party-plugins/FontAwesome/scss/v4-shims.scss
-var v4_shims = __webpack_require__(20);
+var v4_shims = __webpack_require__(21);
 
 // EXTERNAL MODULE: ./src/client/components/_third-party-plugins/FontAwesome/scss/solid.scss
-var solid = __webpack_require__(21);
+var solid = __webpack_require__(22);
 
 // EXTERNAL MODULE: ./src/client/components/_third-party-plugins/FontAwesome/scss/brands.scss
-var brands = __webpack_require__(22);
+var brands = __webpack_require__(23);
 
 // EXTERNAL MODULE: ./src/client/components/_third-party-plugins/FontAwesome/scss/regular.scss
-var regular = __webpack_require__(23);
+var regular = __webpack_require__(24);
 
 // EXTERNAL MODULE: ./src/client/components/_utilities/scss/_all.scss
-var _all = __webpack_require__(24);
+var _all = __webpack_require__(25);
 
 // EXTERNAL MODULE: ./src/client/components/_utilities/scss/rtl/_all-rtl.scss
-var _all_rtl = __webpack_require__(25);
+var _all_rtl = __webpack_require__(26);
 
-// CONCATENATED MODULE: ./src/client/components/_utilities/js/dom.js
+// EXTERNAL MODULE: ./node_modules/@babel/runtime/helpers/typeof.js
+var helpers_typeof = __webpack_require__(13);
+var typeof_default = /*#__PURE__*/__webpack_require__.n(helpers_typeof);
+
+// CONCATENATED MODULE: ./src/client/components/_utilities/js/shortcut.js
+
+
 /* 
  *************************************
- * For selecting DOM elements and manipulating them.
+ * Core Shortcut
+ *
+ * @package: uix-kit-react
+ * @version: 0.1
+ * @last update: April 11, 2021
+ * @license: MIT
+ *
  *************************************
  */
 
 /*
-		__( '.demo' ).addClass( 'class-3' );
-		__( '.demo' ).find( 'li' ).addClass( 'class-1 class-2' );
-		__( '.demo' ).find( 'li' ).removeClass( 'class-2' );
-		__( '.demo' ).closest( '.container' ).addClass( 'class-4' );
-		__( '.demo' ).css({
-			'background': '#f00',
-			'font-size': '18px'
-		});
-		__( '.demo' ).data( 'bg', 'red' );
-		__( '.demo' ).on( 'click', function() {
-			alert( 'click event' );
-		});
+
+
+__( document ).ready( function() {
+	//do something
+});
+
+
+__( 'body' ).imagesloaded({
+	startEvent: function() {
+		//do something
+		console.log( '=> loading.' );
+	},
+	progressEvent: function(percent) {
+		//do something
+		console.log( '=> progress: ' + percent + '%' );
+	},
+	endEvent: function() {
+		
+		console.log( '=> loaded!!!' );
+		//do something
+	}
+});
+
+
+
+__( document ).ready( function() {
+
+	__( 'body' ).imagesloaded({
+		startEvent: function() {
+			console.log( '=> loading.' );
+		},
+		progressEvent: function(percent) {
+			console.log( '=> progress: ' + percent + '%' );
+		},
+		endEvent: function() {
+			console.log( '=> loaded!!!' );
+
+			__( '.demo' ).remove();
+			__( '.demo' ).empty();
+			__( '.demo' ).show();
+			__( '.demo' ).hide();
+			__( '.demo' ).addClass( 'class-3' );
+			__( '.demo, .demo2' ).addClass( 'class-4 );
+			__( '.demo' ).find( 'li' ).addClass( 'class-1 class-2' );
+			__( '.demo' ).find( 'li' ).removeClass( 'class-2' );
+			__( '.demo' ).closest( '.container' ).addClass( 'class-4' );
+			__( '.demo' ).css({
+				'background': '#f00',
+				'font-size': '18px'
+			});
+			__( '.demo' ).data( 'bg', 'red' );
+			__( '.demo' ).attr( 'disabled', 'disabled' );
+			__( '.demo' ).width( 300 );
+			__( '.demo' ).width( "50%" );
+
+			__( '.demo' ).off( 'click' ).on( 'click', function( e ) {
+				console.log(e);
+			});
+
+			__( document ).on( 'click', '.uix-brand', function( e ) {
+				console.log(e);
+			});
+
+			__( '.menu li' ).eq(1).append( '<span style="color:green">after</span>');
+			__( '.menu li' ).eq(1).prepend( '<span style="color:red">before</span>');
+			__( '.menu li' ).first().before( '<li style="color:green">(first)before</li>');
+			__( '.menu li' ).last().after( '<li style="color:red">(last)after</li>');
+			__( 'h1' ).html( '<span style="color:red">New H1</span>' );
+			__( '.demo1' ).prev().addClass( 'prev' );
+			__( '.demo2' ).next().addClass( 'next' );
+			__( '.demo' ).children().addClass( 'children-all' );
+			__( '.demo' ).children( '.demo-children2' ).addClass( 'children-single' );
+			__( '.class-1' ).not( '.class-2' ).addClass( 'class-not' );
+			__( '.class-1' ).filter( '.class-2' ).addClass( 'class-filter' );
+			__( '.class-1' ).siblings().addClass( 'class-siblings' );
+
+
+
+			console.log( '<h1> content: ' + __( 'h1' ).html());
+			console.log( 'len() of .uix-menu li: ' + __( '.uix-menu li' ).length );
+			console.log( 'len() of #none: ' + __( '#none' ).length );
+			console.log( 'width(): ' + __( '.demo' ).width() );
+			console.log( 'outerWidth(): ' + __( '.demo' ).outerWidth() );
+			console.log( 'outerWidth( true ): ' + __( '.demo' ).outerWidth(true) );
+			console.log( '[data-bg] value: ' + __( '.demo' ).data( 'bg' ) );
+			console.log( '[disabled] value: ' + __( '.demo' ).attr( 'disabled' ) );
+
+			console.log( __( '.demo' ).hasClass( 'class-1' ) );
+			console.log( __( 'h1' ).offset() );
+			console.log( __( 'h1' ).position() );		
+
+
+			__( '.menu li' ).each( function( index, value )  {
+				console.log( index + ' : ' );
+				console.log( value );
+				value.style.background = '#333';
+				__( value ).css({
+					'background': '#f00',
+					'font-size': '18px'
+				});
+			});
+
+			__( '.demo' ).fadeOut(1000, function(){
+				setTimeout( function() {
+					__( '.demo' ).fadeIn(3000);
+				},1000 );
+
+			});
+			
+			__( '.demo' ).toggleClass( 'class-toggle-1 class-toggle-2' );
+			
+			
+			__.ajax({
+				url: 'https://restcountries.eu/rest/v2/name/Argentina',
+				method: 'GET',
+				complete: function( data ) {
+					console.log( '=> ajax ok!' );
+					console.log( data );
+				}
+			});
+			
+			
+			__( '#input' ).val( 33333 );
+			console.log( '__( val(): ' + __( '#input' ).val());
+
+			__( '#checkbox1' ).prop('checked', true);
+			console.log( '__( prop(): ' + __( '#checkbox2' ).prop( 'checked' ));	
+
+			__( '#input' ).prop('disabled', true);
+
+
+			const dataObject = __( '#form' ).serializeArray();  
+			console.log( dataObject )
+
+
+
+
+		}
+	});
+
+
+
+});
+
+		
 */
-var __ = function () {
-  'use strict';
+var shortcut_ = function () {
+  'use strict'; //root selector node
+
+  __.prototype.rootSelector = null;
 
   function __(s, root) {
-    return __.prototype.dom(s, root);
+    return __.prototype.core(s, root);
   }
-  /**
-   * Core method
+
+  function getStyle(el, attr) {
+    var self = el;
+
+    if (typeof window !== 'undefined') {
+      var _val = 0;
+      var computedStyle = window.getComputedStyle ? getComputedStyle(self) // Standards
+      : self.currentStyle; // Old IE
+
+      if (computedStyle) {
+        // This will be true on nearly all browsers
+        _val = computedStyle[attr]; //return ??px
+      }
+
+      var newVal = /\d+/.exec(_val);
+      return parseFloat(newVal);
+    } else {
+      return 0;
+    }
+  }
+
+  function isChild(el, p) {
+    if (!el || !p || !p.childNodes || !p.childNodes.length) {
+      return false;
+    }
+
+    return [].slice.call(p.childNodes).filter(function (n) {
+      var found = n === el;
+
+      if (!found && n.childNodes && n.childNodes.length) {
+        return isChild(el, n);
+      }
+
+      return found;
+    }).length;
+  }
+
+  function isJSON(str) {
+    if (typeof str === 'string' && str.length > 0) {
+      if (str.replace(/\"\"/g, '').replace(/\,/g, '') == '[{}]') {
+        return false;
+      } else {
+        if (/^[\],:{}\s]*$/.test(str.replace(/\\["\\\/bfnrtu]/g, '@').replace(/"[^"\\\n\r]*"|true|false|null|-?\d+(?:\.\d*)?(?:[eE][+\-]?\d+)?/g, ']').replace(/(?:^|:|,)(?:\s*\[)+/g, ''))) {
+          return true;
+        } else {
+          return false;
+        }
+      }
+    } else {
+      if (typeof_default()(str) === 'object' && Object.prototype.toString.call(str).toLowerCase() === '[object object]' && !str.length) {
+        return true;
+      } else {
+        return false;
+      }
+    }
+  }
+
+  function removeArray(arr) {
+    var what,
+        args = arguments,
+        len = args.length,
+        index;
+
+    while (len > 1 && arr.length) {
+      what = args[--len];
+
+      while ((index = arr.indexOf(what)) !== -1) {
+        arr.splice(index, 1);
+      }
+    }
+
+    return arr;
+  }
+  /* ------------- Independent Methods -------------- */
+
+  /*
+   * Perform an asynchronous HTTP (Ajax) request.
    *
-   * @param  {String|HTMLElement} s     The CSS selector to search for or HTML element to wrap with functionality
-   * @param  {HTMLElement}        root  OPTIONAL An HTML element to start the element query from
-   * @return {Array}                    The collection of elements, wrapped with functionality (see API methods)
+   * @param  {Json} props   - The attribute and value to be set, the format is JSON
+   * @return {Void} 
    */
 
 
-  __.prototype.dom = function (s, root) {
+  __.ajax = function (props) {
+    if (!isJSON(props)) return false;
     var self = this;
-    root = root || typeof document !== 'undefined' ? document : null;
+
+    var _url = typeof props.url !== 'undefined' ? props.url : '';
+
+    var _method = typeof props.method !== 'undefined' ? props.method : 'POST';
+
+    var _loadedFn = typeof props.complete !== 'undefined' ? props.complete : null;
+
+    if (_url != '') {
+      var config = {
+        mode: 'cors',
+        method: _method
+      };
+      fetch(_url, config).then(function (response) {
+        return response.json();
+      }).then(function (result) {
+        //console.log('Success:', result);
+        if (_loadedFn && typeof _loadedFn == "function") {
+          _loadedFn.call(self, result);
+        }
+      })["catch"](function (error) {
+        console.error('Error:', error);
+      });
+    }
+  };
+  /* ---------------- API methods ----------------- */
+
+  /**
+   * Core method
+   *
+   * @param  {String|Element} s       - The CSS selector to search for or HTML element to wrap with functionality
+   * @param  {Element} root           - OPTIONAL An HTML element to start the element query from
+   * @return {Array}                  - The collection of elements, wrapped with functionality (see API methods)
+   */
+
+
+  __.prototype.core = function (s, root) {
+    var self = this;
+    root = root || typeof document !== 'undefined' ? document : null; //update root selector node
+
+    __.prototype.rootSelector = s;
 
     if (root !== null) {
       if (typeof s === 'string') {
@@ -8684,24 +8945,220 @@ var __ = function () {
       } else if (s.tagName) {
         return self.wrap([s]);
       } else {
-        return [];
+        switch (s.nodeType) {
+          case 9:
+            //if Document
+            return self.wrap([document.body]);
+            break;
+
+          default:
+            return [];
+        }
       }
     }
 
     return [];
   };
-  /* ---------------- API methods ----------------- */
+  /*
+   * Code included inside the code will run once the entire page (all DOM) is ready.
+   *
+   * @param  {Function} fn   - A function to execute after the DOM is ready.
+   * @return {Void}
+   */
+
+
+  __.prototype.ready = function (fn) {
+    if (document.readyState != 'loading') {
+      fn();
+    } else if (document.addEventListener) {
+      document.addEventListener('DOMContentLoaded', fn);
+    } else {
+      document.attachEvent('onreadystatechange', function () {
+        if (document.readyState != 'loading') fn();
+      });
+    }
+  };
+  /*
+   * Detect when images have been loaded. 
+   *
+   * @param  {Json} props   - Contains three event functions before loading, loading, and loading completed.
+   * @return {Void}
+   */
+
+
+  __.prototype.imagesloaded = function (props) {
+    var self = this;
+    var loadingFn = null,
+        progressFn = null,
+        loadedFn = null;
+
+    if (isJSON(props)) {
+      loadingFn = props.startEvent;
+      progressFn = props.progressEvent;
+      loadedFn = props.endEvent;
+    } //loading
+
+
+    if (loadingFn && typeof loadingFn == "function") {
+      loadingFn();
+    } //get all images url
+
+
+    var imgs = this.getElementsByTagName("img");
+    var sources = [];
+
+    for (var i = 0; i < imgs.length; i++) {
+      sources.push(imgs[i].src);
+    } //Execute after all images have loaded
+
+
+    var per = 0;
+    var perInit = 1;
+
+    if (sources.length == 0) {
+      per = 100;
+    }
+
+    var loadImages = function loadImages() {
+      var promises = [];
+
+      var _loop = function _loop(_i) {
+        promises.push(new Promise(function (resolve, reject) {
+          var img = document.createElement("img");
+          img.crossOrigin = "anonymous";
+          img.src = sources[_i];
+
+          img.onload = function (image) {
+            //Compatible with safari and firefox
+            if (typeof_default()(image.path) === ( true ? "undefined" : undefined)) {
+              return resolve(image.target.currentSrc);
+            } else {
+              return resolve(image.path[0].currentSrc);
+            }
+          };
+        }).then(textureLoaded));
+      };
+
+      for (var _i = 0; _i < sources.length; _i++) {
+        _loop(_i);
+      } //end for
+
+
+      return Promise.all(promises);
+    };
+
+    var textureLoaded = function textureLoaded(url) {
+      //progress number
+      per = parseInt(100 * (perInit / sources.length));
+      if (isNaN(per)) per = 100; //Call back progress 
+
+      /* console.log( 'progress: ' + per + '%' ); */
+
+      if (progressFn && typeof progressFn == "function") {
+        progressFn.call(self, per);
+      }
+
+      perInit++;
+      return per;
+    }; //images loaded
+    //Must be placed behind the loadImages()
+
+
+    loadImages().then(function (images) {
+      if (loadedFn && typeof loadedFn == "function") {
+        loadedFn();
+      }
+    });
+  };
+  /*
+   * Puts data inside an element at the last index
+   *
+   * @param  {Element|String} el   - An element or string to be parsed as HTML or XML and inserted into the tree.
+   * @return {Void}
+   */
 
 
   __.prototype.append = function (el) {
+    // Just inside the element, after its last child.
+    if (document.createElement("div").insertAdjacentHTML) {
+      this.insertAdjacentHTML("beforeend", el);
+      return this;
+    } //
+
+
     var html = typeof el === 'string' ? el : el.outerHTML;
     this.innerHTML += html;
   };
+  /*
+   * Puts the prepending element at the first index.
+   *
+   * @param  {Element|String} el   - An element or string to be parsed as HTML or XML and inserted into the tree.
+   * @return {Void}
+   */
+
 
   __.prototype.prepend = function (el) {
+    // Just inside the element, before its first child.
+    if (document.createElement("div").insertAdjacentHTML) {
+      this.insertAdjacentHTML("afterbegin", el);
+      return this;
+    } //
+
+
     var html = typeof el === 'string' ? el : el.outerHTML;
     this.innerHTML = html + this.innerHTML;
   };
+  /*
+   * Before the element itself.
+   *
+   * @param  {String} el   - The string to be parsed as HTML or XML and inserted into the tree.
+   * @return {Void}
+   */
+
+
+  __.prototype.before = function (el) {
+    // 
+    if (document.createElement("div").insertAdjacentHTML) {
+      this.insertAdjacentHTML("beforebegin", el);
+      return this;
+    }
+  };
+  /*
+   * After the element itself.
+   *
+   * @param  {String} el   - The string to be parsed as HTML or XML and inserted into the tree.
+   * @return {Void}
+   */
+
+
+  __.prototype.after = function (el) {
+    if (document.createElement("div").insertAdjacentHTML) {
+      this.insertAdjacentHTML("afterend", el);
+      return this;
+    }
+  };
+  /*
+   * Get the HTML contents of the first element in the set of matched elements or set the HTML contents of every matched element.
+   *
+   * @param  {?String} el   - A string of HTML to set as the content of each matched element.
+   * @return {Void|String}     - The HTML content to set
+   */
+
+
+  __.prototype.html = function (el) {
+    if (el === undefined) {
+      return this.innerHTML;
+    } else {
+      this.innerHTML = el;
+    }
+  };
+  /*
+   * Adds the specified class(es) to each element in the set of matched elements.
+   *
+   * @param  {String} c   - One or more space-separated classes to be added to the class attribute of each matched element.
+   * @return {Void}
+   */
+
 
   __.prototype.addClass = function (c) {
     if (!/^\S+$/g.test(c)) {
@@ -8717,6 +9174,13 @@ var __ = function () {
       this.classList.add(c);
     }
   };
+  /*
+   * Remove a single class, multiple classes, or all classes from each element in the set of matched elements.
+   *
+   * @param  {String} c   - One or more space-separated classes to be removed from the class attribute of each matched element.
+   * @return {Void}
+   */
+
 
   __.prototype.removeClass = function (c) {
     if (!/^\S+$/g.test(c)) {
@@ -8732,25 +9196,48 @@ var __ = function () {
       this.classList.remove(c);
     }
   };
+  /*
+   * Add or remove one or more classes from each element in the set of matched elements, 
+   * depending on either the class's presence or the value of the state argument.
+   *
+   * @param  {String} c   - One or more classes (separated by spaces) to be toggled for each element in the matched set.
+   * @return {Void}
+   */
+
 
   __.prototype.toggleClass = function (c) {
-    if (this.classList.contains(c)) {
-      this.classList.remove(c);
+    if (!/^\S+$/g.test(c)) {
+      // It has only whitespace
+      var classArray = c.split(' ');
+      var className; // Loop through the array of classes to add one class at a time
+
+      for (var j = 0; j < classArray.length; j++) {
+        className = classArray[j];
+
+        if (this.classList.contains(className)) {
+          this.classList.remove(className);
+        } else {
+          this.classList.add(className);
+        }
+      }
     } else {
-      this.classList.add(c);
+      if (this.classList.contains(c)) {
+        this.classList.remove(c);
+      } else {
+        this.classList.add(c);
+      }
     }
   };
+  /*
+   * Set the style properties of elements:
+   *
+   * @param  {Json} props   - The attribute and value to be set, the format is JSON
+   * @return {Void}
+   */
+
 
   __.prototype.css = function (props) {
-    var self = this; //check for a valid JSON, something like:
-
-    var isJSON = function isJSON(str) {
-      try {
-        return JSON.parse(str) && !!str;
-      } catch (e) {
-        return false;
-      }
-    };
+    var self = this;
 
     if (isJSON(props)) {
       //the json is ok
@@ -8759,10 +9246,221 @@ var __ = function () {
       });
     }
   };
+  /*
+   * Get the descendants of each element in the current set of matched elements
+   *
+   * @param  {String|Element} s   - A string or element containing a selector expression to match elements against.
+   * @return {Array}              - The collection of elements
+   */
+
 
   __.prototype.find = function (s) {
     return __(s, this);
   };
+  /*
+   * Reduce the set of matched elements to the one at the specified index.
+   *
+   * @param  {Number} index   - A string or element containing a selector expression to match elements against.
+   * @return {Array}          - Contains only a collection of HTML elements.
+   */
+
+
+  __.prototype.eq = function (index) {
+    var self = this;
+
+    var elements = __(__.prototype.rootSelector, self);
+
+    return elements[index];
+  };
+  /*
+   * Returns the Element immediately prior to the specified one in its parent's children list, 
+   * or null if the specified element is the first one in the list.
+   *
+   * @return {Array}          - Contains only a collection of HTML elements.
+   */
+
+
+  __.prototype.prev = function () {
+    var el = this.previousElementSibling;
+    return __.prototype.wrap([el]);
+  };
+  /*
+      * Returns the element immediately following the specified one in its parent's children list, 
+      * or null if the specified element is the last one in the list.
+   *
+   * @return {Array}          - Contains only a collection of HTML elements.
+   */
+
+
+  __.prototype.next = function () {
+    var el = this.nextElementSibling;
+    return __.prototype.wrap([el]);
+  };
+  /*
+   * Returns the DOM node's parent Element, or null if the node either has no parent,
+   * or its parent isn't a DOM Element.
+   *
+   * @return {Array}          - Contains only a collection of HTML elements.
+   */
+
+
+  __.prototype.parent = function () {
+    var el = this.parentElement;
+    return __.prototype.wrap([el]);
+  };
+  /*
+   * Returns a live HTMLCollection which contains all of the child elements 
+   * of the node upon which it was called.
+   *
+   * @param  {?String|?Element} s   - The selector that needs to be filtered.
+   * @return {Array}                -  The collection of elements
+   */
+
+
+  __.prototype.children = function (s) {
+    var self = this;
+    var childrenList = self.children;
+    var res = [];
+
+    if (s === undefined) {
+      for (var i = 0; i < childrenList.length; i++) {
+        res.push(childrenList[i]);
+      }
+
+      return __.prototype.wrap(res);
+    } else {
+      return __(s, self);
+    }
+  };
+  /*
+   * Reduce the set of matched elements to those that match the selector or pass the function's test.
+   *
+   * @param  {String|Element} s   - The selector that needs to be filtered.
+   * @return {Array}              -  The collection of elements
+   */
+
+
+  __.prototype.filter = function (s) {
+    var self = this;
+
+    var elements = __(__.prototype.rootSelector, self);
+
+    var targetEl = __(s, self);
+
+    var list = Array.from(elements);
+
+    for (var j = 0; j < targetEl.length; j++) {
+      var _el = targetEl[j];
+
+      for (var i = 0; i < list.length; i++) {
+        if (_el != list[i]) {
+          removeArray(list, list[i]);
+        }
+      }
+    }
+
+    return __.prototype.wrap(list);
+  };
+  /*
+   * Remove elements from the set of matched elements.
+   *
+   * @param  {String|Element} s   - The selector that needs to be filtered.
+   * @return {Array}              -  The collection of elements
+   */
+
+
+  __.prototype.not = function (s) {
+    var self = this;
+
+    var elements = __(__.prototype.rootSelector, self);
+
+    var targetEl = __(s, self);
+
+    var list = Array.from(elements);
+
+    for (var j = 0; j < targetEl.length; j++) {
+      var _el = targetEl[j];
+
+      for (var i = 0; i < list.length; i++) {
+        if (_el == list[i]) {
+          removeArray(list, list[i]);
+        }
+      }
+    }
+
+    return __.prototype.wrap(list);
+  };
+  /*
+   * Get the siblings of each element in the set of matched elements
+   *
+   * @return {Array}              -  The collection of elements
+   */
+
+
+  __.prototype.siblings = function () {
+    var self = this; // for collecting siblings
+
+    var siblings = []; // if no parent, return no sibling
+
+    if (!self.parentNode) {
+      return siblings;
+    } // first child of the parent node
+
+
+    var sibling = self.parentNode.firstChild; // collecting siblings
+
+    while (sibling) {
+      if (sibling.nodeType === 1 && sibling !== self) {
+        siblings.push(sibling);
+      }
+
+      sibling = sibling.nextSibling;
+    }
+
+    return __.prototype.wrap(siblings);
+  };
+  /*
+   * Reduce the set of matched elements to the first in the set.
+   *
+   * @return {Array}          - Contains only a collection of HTML elements.
+   */
+
+
+  __.prototype.first = function () {
+    var self = this;
+
+    var elements = __(__.prototype.rootSelector, self);
+
+    var newEl = null; //
+
+    var length = elements.length;
+    return elements[0];
+  };
+  /*
+   * Reduce the set of matched elements to the last in the set.
+   *
+   * @return {Array}          - Contains only a collection of HTML elements.
+   */
+
+
+  __.prototype.last = function () {
+    var self = this;
+
+    var elements = __(__.prototype.rootSelector, self);
+
+    var newEl = null; //
+
+    var length = elements.length;
+    return elements[length - 1];
+  };
+  /*
+   * Traverses the Element and its parents (heading toward the document root) 
+   * until it finds a node that matches the provided selector string. 
+   *
+   * @param  {String|Element} s   - The selector that needs to be filtered.
+   * @return {Array}              - Contains only a collection of HTML elements.
+   */
+
 
   __.prototype.closest = function (s) {
     //using recursivity
@@ -8770,6 +9468,14 @@ var __ = function () {
 
     return __(el, this);
   };
+  /*
+   * Store arbitrary data associated with the matched elements.
+   *
+   * @param  {String} a                 - A string naming the piece of data to set
+   * @param  {String} v                 - The new data value.
+   * @return {Void|String}              - Return arbitrary data associated with the first element as set by data() or by an HTML5 data-* attribute.
+   */
+
 
   __.prototype.data = function (a, v) {
     a = a || '';
@@ -8780,86 +9486,540 @@ var __ = function () {
       this.setAttribute('data-' + a, v);
     }
   };
+  /*
+   * Remove a previously-stored piece of data.
+   *
+   * @param  {String} a                 - A string naming the piece of data to delete.
+   * @return {Void} 
+   */
 
-  __.prototype.on = function (e, s, f) {
-    if (typeof f !== 'function') {
-      f = s;
-      s = null;
+
+  __.prototype.removeData = function (a) {
+    a = a || '';
+    this.removeAttribute('data-' + a);
+  };
+  /*
+   * Set one or more attributes for the set of matched elements.
+   *
+   * @param  {String} a                 - The name of the attribute to set.
+   * @param  {String} v               - A value to set for the attribute. 
+   * @return {Void|String}              - Get the value of an attribute for the first element in the set of matched elements.
+   */
+
+
+  __.prototype.attr = function (a, v) {
+    a = a || '';
+
+    if (v === undefined) {
+      return this.getAttribute(a);
+    } else {
+      this.setAttribute(a, v);
+    }
+  };
+  /*
+   * Remove an attribute from each element in the set of matched elements.
+   *
+   * @param  {String} a                 - A string naming the piece of data to delete.
+   * @return {Void} 
+   */
+
+
+  __.prototype.removeAttr = function (a) {
+    a = a || '';
+    this.removeAttribute(a);
+  };
+  /*
+   * Attach an event handler function for one or more events to the selected elements.
+   *
+   * @param  {String} eventType         - One event types and optional namespaces, such as "click" 
+   * @param  {?String} selector         - A selector string to filter the descendants of the selected elements that trigger the event. 
+   * @param  {Function} callBack        - A function to execute when the event is triggered. 
+   * @return {Void}      
+   */
+
+
+  __.prototype.on = function (eventType, selector, callBack) {
+    var self = this;
+
+    if (typeof callBack !== 'function') {
+      callBack = selector;
+      selector = null;
     }
 
-    if (s) {
-      var self = this;
-      self.addEventListener(e, function (evt) {
-        __(s, self).forEach(function (el) {
+    if (!this.myListeners) {
+      this.myListeners = [];
+    }
+
+    ;
+
+    if (selector) {
+      var fun = function fun(evt) {
+        __(selector, self).forEach(function (el) {
           if (el === evt.target) {
-            f.call(el, evt);
+            callBack.call(el, evt);
           } else if (isChild(evt.target, el)) {
-            f.call(el, evt);
+            callBack.call(el, evt);
           }
         });
+      };
+
+      this.myListeners.push({
+        eType: eventType,
+        callBack: fun
       });
+      self.addEventListener(eventType, fun);
     } else {
-      this.addEventListener(e, f);
+      this.myListeners.push({
+        eType: eventType,
+        callBack: callBack
+      });
+      this.addEventListener(eventType, function (event) {
+        callBack(event);
+      });
     }
+  };
+  /*
+   * Remove an event handler.
+   *
+   * @param  {?String}          - One event types and optional namespaces, such as "click"
+   * @return {Void}      
+   */
+
+
+  __.prototype.off = function () {
+    if (this.myListeners) {
+      for (var i = 0; i < this.myListeners.length; i++) {
+        this.removeEventListener(this.myListeners[i].eType, this.myListeners[i].callBack);
+      }
+
+      ;
+      delete this.myListeners;
+    }
+
+    ;
+  };
+  /*
+   * Get the current coordinates of the first element in the set of matched elements, relative to the document.
+   *
+   * @return {Json}      - An object containing the properties top and left.- 
+   */
+
+
+  __.prototype.offset = function () {
+    var box = this.getBoundingClientRect();
+    var top = 0,
+        left = 0; //Include scrollbar and border
+
+    top = box.top + window.pageYOffset - document.documentElement.clientTop;
+    left = box.left + window.pageXOffset - document.documentElement.clientLeft;
+    return {
+      top: top,
+      left: left
+    };
+  };
+  /*
+   * Get the current coordinates of the first element in the set of matched elements, relative to the offset parent.
+   *
+   * @return {Json}      - An object containing the properties top and left.
+   */
+
+
+  __.prototype.position = function () {
+    var top = this.offsetTop ? this.offsetTop : 0,
+        left = this.offsetLeft ? this.offsetLeft : 0;
+    return {
+      top: top,
+      left: left
+    };
+  };
+  /*
+   * Get or set the current computed width for elenments
+   *
+   * @param  {?String|?Number} val         - An integer representing the number of pixels, or 
+      *                                         an integer along with an optional unit of measure appended (as a string).
+   * @return {Void|Number}                 -  Get the current computed width for the first element in the set of matched elements.
+   */
+
+
+  __.prototype.width = function (val) {
+    var self = this;
+
+    if (typeof val !== 'undefined') {
+      self.style.width = val.toString().indexOf('%') < 0 ? val + 'px' : val;
+    }
+
+    return getStyle(self, 'width');
+  };
+  /*
+   * Get or set the current computed height for elenments
+   *
+   * @param  {?String|?Number} val         - An integer representing the number of pixels, or 
+      *                                         an integer along with an optional unit of measure appended (as a string).
+   * @return {Void|Number}                 -  Get the current computed height for the first element in the set of matched elements.
+   */
+
+
+  __.prototype.height = function (val) {
+    var self = this;
+
+    if (typeof val !== 'undefined') {
+      self.style.height = val.toString().indexOf('%') < 0 ? val + 'px' : val;
+    }
+
+    return getStyle(self, 'height');
+  };
+  /*
+   * Get or set the current computed outer width for elenments (including padding, border, and optionally margin)
+   *
+   * @param  {Boolean} includeMargin         - A Boolean indicating whether to include the element's margin in the calculation.
+   * @return {Number}  - Returns the width of the element, including left and right padding, border, and optionally margin, in pixels.
+   */
+
+
+  __.prototype.outerWidth = function (includeMargin) {
+    var self = this;
+    var width_IncPaddingBorderScrollbar = self.offsetWidth;
+    var marginLeft = getStyle(self, 'marginLeft');
+    var marginRight = getStyle(self, 'marginRight');
+    var borderLeftWidth = getStyle(self, 'borderLeftWidth') || 0;
+    var borderRightWidth = getStyle(self, 'borderRightWidth') || 0;
+    var totalWidth = width_IncPaddingBorderScrollbar;
+
+    if (typeof includeMargin !== 'undefined') {
+      totalWidth = totalWidth + marginLeft + marginRight;
+    }
+
+    return totalWidth;
+  };
+  /*
+   * Get or set the current computed outer height for elenments (including padding, border, and optionally margin)
+   *
+   * @param  {Boolean} includeMargin         - A Boolean indicating whether to include the element's margin in the calculation.
+   * @return {Number}   - Returns the height of the element, including left and right padding, border, and optionally margin, in pixels.
+   */
+
+
+  __.prototype.outerHeight = function (includeMargin) {
+    var self = this;
+    var height_IncPaddingBorderScrollbar = self.offsetHeight;
+    var marginTop = getStyle(self, 'marginTop');
+    var marginBottom = getStyle(self, 'marginBottom');
+    var borderTopWidth = getStyle(self, 'borderTopWidth') || 0;
+    var borderBottomWidth = getStyle(self, 'borderBottomWidth') || 0;
+    var totalHeight = height_IncPaddingBorderScrollbar;
+
+    if (typeof includeMargin !== 'undefined') {
+      totalHeight = totalHeight + marginTop + marginBottom;
+    }
+
+    return totalHeight;
+  };
+  /*
+   * Remove the set of matched elements from the DOM.
+   *
+   * @return {Void} 
+   */
+
+
+  __.prototype.remove = function () {
+    this.parentNode.removeChild(this);
+  };
+  /*
+   * Remove all child nodes of the set of matched elements from the DOM.
+   *
+   * @return {Void} 
+   */
+
+
+  __.prototype.empty = function () {
+    while (this.firstChild) {
+      this.removeChild(this.firstChild);
+    }
+  };
+  /*
+   * Iterate over an object, executing a function for each matched element.
+   *
+   * @param  {Function} fn         - A function to execute for each matched element.
+   * @return {Void} 
+   */
+
+
+  __.prototype.each = function (fn) {
+    var _this = this;
+
+    var self = this;
+
+    var elements = __(__.prototype.rootSelector, self);
+
+    elements.map(function (item, index) {
+      if (fn && typeof fn == "function") {
+        fn.call(_this, index, item);
+      }
+    });
+  };
+  /*
+   * Determine whether any of the matched elements are assigned the given class.
+   *
+   * @param  {String} v         - The class name to search for.
+   * @return {Boolean}   - Return true if the class is assigned to an element
+   */
+
+
+  __.prototype.hasClass = function (v) {
+    return this.classList.contains(v) ? true : false;
+  };
+  /*
+   * Get or set the current value of the first element in the set of matched elements.
+   *
+   * @param  {?String|?Number|?Array} v      - Corresponding to the value of each matched element.
+   * @return {String}          - Get the values of form elements.
+   */
+
+
+  __.prototype.val = function (v) {
+    if (typeof v !== 'undefined') {
+      this.value = v;
+    }
+
+    return this.value;
+  };
+  /*
+   * Set one or more attributes for the set of matched Form elements.
+   *
+   * @param  {String} a                 - The name of the attribute to set.
+   * @param  {String} v                 - A value to set for the attribute. 
+   * @return {Void|String}              - Get the value of an attribute for the first element in the set of matched elements.
+   */
+
+
+  __.prototype.prop = function (a, v) {
+    a = a || '';
+
+    if (v === undefined) {
+      return this[a];
+    } else {
+      this[a] = v;
+    }
+  };
+  /*
+   * Display the matched elements.
+   *
+   * @return {Void} 
+   */
+
+
+  __.prototype.show = function () {
+    // use inherit so that your CSS controls block/flex/inline-block etc
+    this.style.display = 'inherit';
+  };
+  /*
+   * Hide the matched elements.
+   *
+   * @return {Void}    
+   */
+
+
+  __.prototype.hide = function () {
+    this.style.display = 'none';
+  };
+  /*
+   * Display the matched elements by fading them to opaque.
+   *
+   * @param  {Number} speed             - A string or number determining how long the animation will run.
+   * @param  {Function} callback        - A function to call once the animation is complete, called once per matched element.
+   * @return {Void} 
+   */
+
+
+  __.prototype.fadeIn = function (speed, callback) {
+    var elem = this;
+    var opacity = 0;
+
+    if (!elem.style.opacity) {
+      elem.style.opacity = 0;
+    }
+
+    elem.style.display = "inherit";
+    var inInterval = setInterval(function () {
+      opacity += .02;
+      elem.style.opacity = opacity;
+
+      if (opacity >= 1) {
+        clearInterval(inInterval); //do something after inInterval()
+
+        elem.style.removeProperty("opacity");
+
+        if (callback && typeof callback == "function") {
+          callback();
+        }
+      }
+    }, speed / 50);
+  };
+  /*
+   * Hide the matched elements by fading them to transparent.
+   *
+   * @param  {Number} speed             - A string or number determining how long the animation will run.
+   * @param  {Function} callback        - A function to call once the animation is complete, called once per matched element.
+   * @return {Void} 
+   */
+
+
+  __.prototype.fadeOut = function (speed, callback) {
+    var elem = this;
+    var opacity = 1;
+
+    if (!elem.style.opacity) {
+      elem.style.opacity = 1;
+    }
+
+    var outInterval = setInterval(function () {
+      opacity -= .02;
+      elem.style.opacity = opacity;
+
+      if (opacity <= 0) {
+        clearInterval(outInterval); //do something after outInterval()
+
+        elem.style.opacity = 0;
+        elem.style.display = "none"; //adding dispaly property and equall to none	
+
+        if (callback && typeof callback == "function") {
+          callback();
+        }
+      }
+    }, speed / 50);
+  };
+  /*
+   * Serialize html form to JSON
+   *
+   * @return {Void}    
+   */
+
+
+  __.prototype.serializeArray = function () {
+    var form = this;
+    var objects = [];
+
+    if (typeof_default()(form) == 'object' && form.nodeName.toLowerCase() == "form") {
+      var fieldsTypes = ['input', 'textarea', 'select', 'checkbox', 'progress', 'datalist'];
+      fieldsTypes.map(function (item, index) {
+        var fields = form.getElementsByTagName(item);
+
+        for (var i = 0; i < fields.length; i++) {
+          objects[objects.length] = {
+            name: fields[i].getAttribute("name"),
+            value: fields[i].value
+          };
+        }
+      });
+    }
+
+    return objects;
   };
   /* ------------- Private Methods -------------- */
 
 
-  var ___api = {
+  var API = {
+    //dom
+    find: __.prototype.find,
+    closest: __.prototype.closest,
+    prev: __.prototype.prev,
+    next: __.prototype.next,
+    first: __.prototype.first,
+    last: __.prototype.last,
+    parent: __.prototype.parent,
+    children: __.prototype.children,
+    eq: __.prototype.eq,
+    not: __.prototype.not,
+    filter: __.prototype.filter,
+    siblings: __.prototype.siblings,
+    each: __.prototype.each,
+    //
+    ready: __.prototype.ready,
+    imagesloaded: __.prototype.imagesloaded,
     append: __.prototype.append,
     prepend: __.prototype.prepend,
+    before: __.prototype.before,
+    after: __.prototype.after,
+    html: __.prototype.html,
     addClass: __.prototype.addClass,
     removeClass: __.prototype.removeClass,
     toggleClass: __.prototype.toggleClass,
     css: __.prototype.css,
-    find: __.prototype.find,
-    closest: __.prototype.closest,
     data: __.prototype.data,
-    on: __.prototype.on
-  };
-
-  __.prototype.isChild = function (el, p) {
-    if (!el || !p || !p.childNodes || !p.childNodes.length) {
-      return false;
-    }
-
-    return [].slice.call(p.childNodes).filter(function (n) {
-      var found = n === el;
-
-      if (!found && n.childNodes && n.childNodes.length) {
-        return isChild(el, n);
-      }
-
-      return found;
-    }).length;
+    removeData: __.prototype.removeData,
+    attr: __.prototype.attr,
+    removeAttr: __.prototype.removeAttr,
+    on: __.prototype.on,
+    off: __.prototype.off,
+    offset: __.prototype.offset,
+    position: __.prototype.position,
+    width: __.prototype.width,
+    height: __.prototype.height,
+    outerWidth: __.prototype.outerWidth,
+    outerHeight: __.prototype.outerHeight,
+    remove: __.prototype.remove,
+    empty: __.prototype.empty,
+    hasClass: __.prototype.hasClass,
+    val: __.prototype.val,
+    prop: __.prototype.prop,
+    show: __.prototype.show,
+    hide: __.prototype.hide,
+    fadeIn: __.prototype.fadeIn,
+    fadeOut: __.prototype.fadeOut,
+    serializeArray: __.prototype.serializeArray
   };
 
   __.prototype.wrap = function (list) {
     var self = this;
-    Object.keys(___api).forEach(function (f) {
-      list[f] = function () {
-        var args = arguments;
+    Object.keys(API).forEach(function (fn) {
+      list[fn] = function () {
+        //slice method can also be called to convert Array-like objects/collections to a new Array. 
+        //You just bind the method to the object. The arguments inside a function is an example of an 'array-like object'.
+        var args = arguments; //
+
         var result;
+        var breakException = {};
 
         if (Array.isArray(this)) {
           result = [];
-          this.forEach(function (root) {
-            var fnResult = ___api[f].apply(root, [].slice.call(args));
 
-            if (Array.isArray(fnResult)) {
-              result = result.concat(fnResult);
-            } else if (fnResult !== undefined) {
-              result.push(fnResult);
-            }
-          });
+          try {
+            this.forEach(function (root) {
+              var fnResult = API[fn].apply(root, [].slice.call(args));
 
-          if (f === 'find' || f === 'closest') {
+              if (Array.isArray(fnResult)) {
+                result = result.concat(fnResult);
+              } else if (fnResult !== undefined) {
+                result.push(fnResult);
+              } // Check Dom Element: 
+              // Break out of the loop from All Elements
+              //----------------------
+
+
+              if (fn === 'eq' || fn === 'first' || fn === 'last' || fn === 'each') throw breakException;
+            });
+          } catch (e) {} // Check Dom Element: 
+          // If it is to return the dom element, you need to determine the function key value
+          //----------------------
+
+
+          if (fn === 'find' || fn === 'closest' || fn === 'prev' || fn === 'next' || fn === 'first' || fn === 'last' || fn === 'parent' || fn === 'children' || fn === 'eq' || fn === 'filter' || fn === 'not' || fn === 'siblings') {
             self.wrap(result);
           } else {
             result = result.length && result || undefined;
           }
         } else {
-          result = ___api[f].apply(this, [].slice.call(args));
+          result = API[fn].apply(this, [].slice.call(args));
+        } //end Array.isArray(this)
+        // Check Value:
+        // Methods whose return value is not an array
+        //----------------------
+
+
+        if (typeof result !== 'undefined') {
+          if (fn === 'hasClass' || fn === 'offset' || fn === 'position') {
+            result = result[0];
+          }
         }
 
         return result === undefined ? this : result;
@@ -8871,7 +10031,7 @@ var __ = function () {
   return __;
 }();
 
-/* harmony default export */ var dom = (__);
+/* harmony default export */ var shortcut = (shortcut_);
 // CONCATENATED MODULE: ./src/client/components/_utilities/js/_all.js
 /**
 
@@ -8932,12 +10092,26 @@ var Header_Header = /*#__PURE__*/function (_Component) {
     key: "componentDidMount",
     value: function componentDidMount() {
       //
-      dom('.uix-header__container').addClass('js-heavyShadow');
+      shortcut(document).ready(function () {
+        shortcut('body').imagesloaded({
+          startEvent: function startEvent() {
+            console.log('=> loading.');
+          },
+          progressEvent: function progressEvent(percent) {
+            console.log('=> progress: ' + percent + '%');
+          },
+          endEvent: function endEvent() {
+            console.log('=> loaded!!!');
+
+            shortcut('.uix-header__container').addClass('js-heavyShadow');
+          }
+        });
+      });
     }
   }, {
     key: "render",
     value: function render() {
-      var ukrMenuContent = this.props.ukrMenuContent ? this.props.ukrMenuContent : '';
+      var UixMenuContent = this.props.UixMenuContent ? this.props.UixMenuContent : '';
       return /*#__PURE__*/react_default.a.createElement(react["Fragment"], null, /*#__PURE__*/react_default.a.createElement("header", {
         className: "uix-header__container"
       }, /*#__PURE__*/react_default.a.createElement("div", {
@@ -8962,7 +10136,7 @@ var Header_Header = /*#__PURE__*/function (_Component) {
         alt: "Site Name"
       })), /*#__PURE__*/react_default.a.createElement("ul", {
         className: "uix-menu"
-      }, ukrMenuContent), /*#__PURE__*/react_default.a.createElement("div", {
+      }, UixMenuContent), /*#__PURE__*/react_default.a.createElement("div", {
         className: "uix-menu__right-box"
       }, /*#__PURE__*/react_default.a.createElement("a", {
         className: "uix-social-btn uix-social-btn--small uix-social-btn--circle uix-social-btn--thin",
@@ -9036,7 +10210,7 @@ var Header_Header = /*#__PURE__*/function (_Component) {
     }
   });
   return /*#__PURE__*/react_default.a.createElement(react["Fragment"], null, /*#__PURE__*/react_default.a.createElement(Header_Header, {
-    ukrMenuContent: /*#__PURE__*/react_default.a.createElement(react["Fragment"], null, /*#__PURE__*/react_default.a.createElement("li", {
+    UixMenuContent: /*#__PURE__*/react_default.a.createElement(react["Fragment"], null, /*#__PURE__*/react_default.a.createElement("li", {
       className: props.location.pathname === '/index' || props.location.pathname === '' ? 'is-active' : ''
     }, /*#__PURE__*/react_default.a.createElement(NavLink, {
       to: "/index",
@@ -9146,10 +10320,10 @@ var Buttons_Button = /*#__PURE__*/function (_Component) {
     key: "render",
     value: function render() {
       return /*#__PURE__*/react_default.a.createElement(react["Fragment"], null, /*#__PURE__*/react_default.a.createElement("button", {
-        className: "ukr-button",
+        className: "uix-button",
         type: "button",
-        style: Buttons_styles[this.props.ukrBtnBgColor] || Buttons_styles['info']
-      }, this.props.ukrBtnName || 'Default'));
+        style: Buttons_styles[this.props.UixBtnBgColor] || Buttons_styles['info']
+      }, this.props.UixBtnName || 'Default'));
     }
   }]);
 
@@ -9242,8 +10416,8 @@ var Footer_Footer = /*#__PURE__*/function (_Component) {
 
 
 var spreadOperator = {
-  ukrBtnBgColor: 'info',
-  ukrBtnName: 'Spread Operator'
+  UixBtnBgColor: 'info',
+  UixBtnName: 'Spread Operator'
 };
 /* harmony default export */ var Home = (function (_ref) {
   var _ref$staticContext = _ref.staticContext,
@@ -9262,28 +10436,28 @@ var spreadOperator = {
   }, /*#__PURE__*/react_default.a.createElement("div", {
     className: "col-12"
   }, /*#__PURE__*/react_default.a.createElement("h1", null, "Home!"), /*#__PURE__*/react_default.a.createElement("h3", null, "Buttons:"), /*#__PURE__*/react_default.a.createElement(Buttons_Button, {
-    ukrBtnBgColor: "",
-    ukrBtnName: ""
+    UixBtnBgColor: "",
+    UixBtnName: ""
   }), /*#__PURE__*/react_default.a.createElement(Buttons_Button, {
-    ukrBtnBgColor: "success",
-    ukrBtnName: "success"
+    UixBtnBgColor: "success",
+    UixBtnName: "success"
   }), /*#__PURE__*/react_default.a.createElement(Buttons_Button, {
-    ukrBtnBgColor: "info",
-    ukrBtnName: "info"
+    UixBtnBgColor: "info",
+    UixBtnName: "info"
   }), /*#__PURE__*/react_default.a.createElement(Buttons_Button, {
-    ukrBtnBgColor: "danger",
-    ukrBtnName: "danger"
+    UixBtnBgColor: "danger",
+    UixBtnName: "danger"
   }), /*#__PURE__*/react_default.a.createElement(Buttons_Button, {
-    ukrBtnBgColor: "warning",
-    ukrBtnName: "warning"
+    UixBtnBgColor: "warning",
+    UixBtnName: "warning"
   }), /*#__PURE__*/react_default.a.createElement(Buttons_Button, spreadOperator)))))), /*#__PURE__*/react_default.a.createElement(Footer_Footer, null));
 });
 // EXTERNAL MODULE: ./node_modules/@babel/runtime/helpers/extends.js
-var helpers_extends = __webpack_require__(40);
+var helpers_extends = __webpack_require__(41);
 var extends_default = /*#__PURE__*/__webpack_require__.n(helpers_extends);
 
 // EXTERNAL MODULE: ./node_modules/@babel/runtime/helpers/asyncToGenerator.js
-var asyncToGenerator = __webpack_require__(15);
+var asyncToGenerator = __webpack_require__(16);
 var asyncToGenerator_default = /*#__PURE__*/__webpack_require__.n(asyncToGenerator);
 
 // EXTERNAL MODULE: ./node_modules/@babel/runtime/regenerator/index.js
@@ -10117,7 +11291,7 @@ thunk.withExtraArgument = createThunkMiddleware;
 
 /* harmony default export */ var redux_thunk_es = (thunk);
 // EXTERNAL MODULE: ./node_modules/@babel/runtime/helpers/defineProperty.js
-var defineProperty = __webpack_require__(16);
+var defineProperty = __webpack_require__(17);
 var defineProperty_default = /*#__PURE__*/__webpack_require__.n(defineProperty);
 
 // CONCATENATED MODULE: ./src/client/reducers/demoListReducer.js

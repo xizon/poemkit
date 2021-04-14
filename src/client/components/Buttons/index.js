@@ -58,8 +58,8 @@ export default class Button extends Component {
 	render() {
 		return (
 		  <Fragment>
-			  <button className='ukr-button' type='button' style={styles[this.props.ukrBtnBgColor] || styles['info']}>
-				{this.props.ukrBtnName || 'Default'}
+			  <button className='uix-button' type='button' style={styles[this.props.UixBtnBgColor] || styles['info']}>
+				{this.props.UixBtnName || 'Default'}
 			  </button>
 		  </Fragment>
 		)

@@ -12,20 +12,20 @@ import React, { Fragment } from 'react';
 import Button from './src/client/components/Buttons/index.js';
 
 let spreadOperator = {
-  ukrBtnBgColor: 'info',
-  ukrBtnName: 'Spread Operator',
+  UixBtnBgColor: 'info',
+  UixBtnName: 'Spread Operator',
 };
 
 
 export default function ButtonsExamples() {
   return (
     <Fragment>
-		<Button className='ukr-button' ukrBtnBgColor='' ukrBtnName=''/>
-		<Button className='ukr-button' ukrBtnBgColor='success' ukrBtnName='success'/>
-		<Button className='ukr-button' ukrBtnBgColor='info' ukrBtnName='info'/>
-		<Button className='ukr-button' ukrBtnBgColor='danger' ukrBtnName='danger'/>
-		<Button className='ukr-button' ukrBtnBgColor='warning' ukrBtnName='warning'/>
-		<Button className='ukr-button' {...spreadOperator}/>
+		<Button className='uix-button' UixBtnBgColor='' UixBtnName=''/>
+		<Button className='uix-button' UixBtnBgColor='success' UixBtnName='success'/>
+		<Button className='uix-button' UixBtnBgColor='info' UixBtnName='info'/>
+		<Button className='uix-button' UixBtnBgColor='danger' UixBtnName='danger'/>
+		<Button className='uix-button' UixBtnBgColor='warning' UixBtnName='warning'/>
+		<Button className='uix-button' {...spreadOperator}/>
     </Fragment>
   );
 }

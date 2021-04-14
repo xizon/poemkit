@@ -3,8 +3,8 @@ import Button from '../../../components/Buttons/index.js';
 import Footer from '../../../components/Footer/index.js';
 
 let spreadOperator = {
-  ukrBtnBgColor: 'info',
-  ukrBtnName: 'Spread Operator',
+  UixBtnBgColor: 'info',
+  UixBtnName: 'Spread Operator',
 };
 
 
@@ -30,11 +30,11 @@ export default ({ staticContext = {} }) => {
 									<h1>Home!</h1>
 
 									<h3>Buttons:</h3>
-									<Button ukrBtnBgColor='' ukrBtnName=''/>
-									<Button ukrBtnBgColor='success' ukrBtnName='success'/>
-									<Button ukrBtnBgColor='info' ukrBtnName='info'/>
-									<Button ukrBtnBgColor='danger' ukrBtnName='danger'/>
-									<Button ukrBtnBgColor='warning' ukrBtnName='warning'/>
+									<Button UixBtnBgColor='' UixBtnName=''/>
+									<Button UixBtnBgColor='success' UixBtnName='success'/>
+									<Button UixBtnBgColor='info' UixBtnName='info'/>
+									<Button UixBtnBgColor='danger' UixBtnName='danger'/>
+									<Button UixBtnBgColor='warning' UixBtnName='warning'/>
 									<Button {...spreadOperator}/>
 
 								</div>

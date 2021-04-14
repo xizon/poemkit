@@ -314,35 +314,37 @@ const webpackConfig = {
 				options: {
 				  esModule: false, //change the css path via output
 				  outputPath: (url, resourcePath, context) => { //the files from `./src/...` will copy to `./dist/`
+					  
+					 //original name: path.basename(resourcePath)
 					 
 					 //fonts
 					 if ( resourcePath.indexOf( 'webfonts/' ) >= 0 || resourcePath.indexOf( 'fonts/' ) >= 0 ) {
-						 return '../fonts/' + path.basename(resourcePath);
+						 return '../fonts/' + url;
 					 }
 					  
 					 //imags
 					 if ( resourcePath.indexOf( 'images/' ) >= 0 || resourcePath.indexOf( 'img/' ) >= 0 ) {
-						 return '../images/' + path.basename(resourcePath);
+						 return '../images/' + url;
 					 } 
 					  
 						 
-					 return '../misc/' + path.basename(resourcePath);
+					 return '../misc/' + url;
 					
 				  },
 				  publicPath: (url, resourcePath, context) => { //the css path of output 
 					 
 					 //fonts
 					 if ( resourcePath.indexOf( 'webfonts/' ) >= 0 || resourcePath.indexOf( 'fonts/' ) >= 0 ) {
-						 return '/' + globs.dist + '/fonts/' + path.basename(resourcePath);
+						 return '/' + globs.dist + '/fonts/' + url;
 					 }
 					  
 					 //imags
 					 if ( resourcePath.indexOf( 'images/' ) >= 0 || resourcePath.indexOf( 'img/' ) >= 0 ) {
-						 return '/' + globs.dist + '/images/' + path.basename(resourcePath);
+						 return '/' + globs.dist + '/images/' + url;
 					 } 
 					  
 						 
-					 return '/' + globs.dist + '/misc/' + path.basename(resourcePath);
+					 return '/' + globs.dist + '/misc/' + url;
 					  
 					
 				  }

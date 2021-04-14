@@ -1,9 +1,9 @@
 /*!
  * 
  * ## Project Name        :  Uix Kit React
- * ## Version             :  0.0.15
+ * ## Version             :  0.0.16
  * ## Based on            :  Uix Kit React (https://github.com/xizon/uix-kit-react)
- * ## Last Update         :  April 9, 2021
+ * ## Last Update         :  April 14, 2021
  * ## Created by          :  UIUX Lab (https://uiux.cc)
  * ## Contact Us          :  uiuxlab@gmail.com
  * 	
@@ -18559,8 +18559,8 @@ readers do not read off random characters that represent icons */
   font-style: normal;
   font-weight: 900;
   font-display: block;
-  src: url(/dist/fonts/fa-solid-900.eot);
-  src: url(/dist/fonts/fa-solid-900.eot?#iefix) format("embedded-opentype"), url(/dist/fonts/fa-solid-900.woff2) format("woff2"), url(/dist/fonts/fa-solid-900.woff) format("woff"), url(/dist/fonts/fa-solid-900.ttf) format("truetype"), url(/dist/fonts/fa-solid-900.svg#fontawesome) format("svg");
+  src: url(/dist/fonts/955a30b768e953a98af8fb417cf9b287.eot);
+  src: url(/dist/fonts/955a30b768e953a98af8fb417cf9b287.eot?#iefix) format("embedded-opentype"), url(/dist/fonts/c66ab38a9d0b9f9a3ae881586bfd3412.woff2) format("woff2"), url(/dist/fonts/578154818f50dccf310592380634061f.woff) format("woff"), url(/dist/fonts/fde69373d55514ce8a911ce44c484082.ttf) format("truetype"), url(/dist/fonts/d5b5d90e03b89376f494dcb0477bbcd1.svg#fontawesome) format("svg");
 }
 
 .fa,
@@ -18578,8 +18578,8 @@ readers do not read off random characters that represent icons */
   font-style: normal;
   font-weight: 400;
   font-display: block;
-  src: url(/dist/fonts/fa-brands-400.eot);
-  src: url(/dist/fonts/fa-brands-400.eot?#iefix) format("embedded-opentype"), url(/dist/fonts/fa-brands-400.woff2) format("woff2"), url(/dist/fonts/fa-brands-400.woff) format("woff"), url(/dist/fonts/fa-brands-400.ttf) format("truetype"), url(/dist/fonts/fa-brands-400.svg#fontawesome) format("svg");
+  src: url(/dist/fonts/c852ed61ae5a540342d60f8e6fd0e6e7.eot);
+  src: url(/dist/fonts/c852ed61ae5a540342d60f8e6fd0e6e7.eot?#iefix) format("embedded-opentype"), url(/dist/fonts/9571274fa420741f57ca940e65ac3e59.woff2) format("woff2"), url(/dist/fonts/b6f0efe25f4cd075c828a43f522e2d99.woff) format("woff"), url(/dist/fonts/1c1af5562e360fc3a543aa040bbce13f.ttf) format("truetype"), url(/dist/fonts/f5e2e0c0c58b37f0f4f9178f51a5aa38.svg#fontawesome) format("svg");
 }
 
 .fab {
@@ -18596,8 +18596,8 @@ readers do not read off random characters that represent icons */
   font-style: normal;
   font-weight: 400;
   font-display: block;
-  src: url(/dist/fonts/fa-regular-400.eot);
-  src: url(/dist/fonts/fa-regular-400.eot?#iefix) format("embedded-opentype"), url(/dist/fonts/fa-regular-400.woff2) format("woff2"), url(/dist/fonts/fa-regular-400.woff) format("woff"), url(/dist/fonts/fa-regular-400.ttf) format("truetype"), url(/dist/fonts/fa-regular-400.svg#fontawesome) format("svg");
+  src: url(/dist/fonts/da211cba2b8113026eab2cdb78fa34f1.eot);
+  src: url(/dist/fonts/da211cba2b8113026eab2cdb78fa34f1.eot?#iefix) format("embedded-opentype"), url(/dist/fonts/e45d7b341ca28038715e9dadf148a9d2.woff2) format("woff2"), url(/dist/fonts/a4c26bdc27451efd8911fd872512d360.woff) format("woff"), url(/dist/fonts/0729f3fe43b0ab4e66175678901b93e6.ttf) format("truetype"), url(/dist/fonts/612675b332912240c92e55eb115f7068.svg#fontawesome) format("svg");
 }
 
 .far {
@@ -23539,14 +23539,14 @@ body.rtl {
 /* ======================================================
    <!-- Button -->
 /* ====================================================== */
-.ukr-button {
+.uix-button {
   border: 0;
   margin: 5px;
   border-radius: 3px;
   padding: 5px 15px;
 }
 
-.ukr-button:hover {
+.uix-button:hover {
   filter: Invert();
 }
 
