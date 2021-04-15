@@ -1,4 +1,4 @@
-# ./src/client/components/Buttons
+# @uixkit.react/components/Buttons
 
 ![MIT license](https://badgen.now.sh/badge/license/MIT)
 
@@ -9,7 +9,7 @@
 
 ```js
 import React, { Fragment } from 'react';
-import Button from './src/client/components/Buttons/index.js';
+import Button from '@uixkit.react/components/Buttons/index.js';
 
 let spreadOperator = {
   UixBtnBgColor: 'info',
@@ -17,7 +17,7 @@ let spreadOperator = {
 };
 
 
-export default function ButtonsExamples() {
+export default function Examples() {
   return (
     <Fragment>
 		<Button className='uix-button' UixBtnBgColor='' UixBtnName=''/>

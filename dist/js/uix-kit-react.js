@@ -1,7 +1,7 @@
 /*!
  * 
  * ## Project Name        :  Uix Kit React
- * ## Version             :  0.0.18
+ * ## Version             :  0.0.19
  * ## Based on            :  Uix Kit React (https://github.com/xizon/uix-kit-react)
  * ## Last Update         :  April 15, 2021
  * ## Created by          :  UIUX Lab (https://uiux.cc)
@@ -11246,9 +11246,18 @@ var Todos_Todos = /*#__PURE__*/function (_Component) {
 
 
 
-/* Convert Allowance class component to functional component */
 
-var NestedRoutesDetail_NestedRoutesDetail = function NestedRoutesDetail() {
+
+
+function NestedRoutesDetail_createSuper(Derived) { var hasNativeReflectConstruct = NestedRoutesDetail_isNativeReflectConstruct(); return function _createSuperInternal() { var Super = getPrototypeOf_default()(Derived), result; if (hasNativeReflectConstruct) { var NewTarget = getPrototypeOf_default()(this).constructor; result = Reflect.construct(Super, arguments, NewTarget); } else { result = Super.apply(this, arguments); } return possibleConstructorReturn_default()(this, result); }; }
+
+function NestedRoutesDetail_isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Reflect.construct) return false; if (Reflect.construct.sham) return false; if (typeof Proxy === "function") return true; try { Boolean.prototype.valueOf.call(Reflect.construct(Boolean, [], function () {})); return true; } catch (e) { return false; } }
+
+
+
+ //Might have mismatching versions of React and the renderer (such as React DOM)
+
+function HookScript() {
   //Click the route to trigger the event
   var theLocation = useLocation();
   react_default.a.useEffect(function () {
@@ -11272,21 +11281,47 @@ var NestedRoutesDetail_NestedRoutesDetail = function NestedRoutesDetail() {
 
 
     if (pageTitle !== null) document.title = pageTitle;
-  }); // The <Route> that rendered this component has a
+  });
+  return /*#__PURE__*/react_default.a.createElement(react_default.a.Fragment, null);
+}
+
+function HookTopicId() {
+  // The <Route> that rendered this component has a
   // path of `/nested-routes/:topicId`. The `:topicId` portion
   // of the URL indicates a placeholder that we can
   // get from `useParams()`.
-
   var _useParams = useParams(),
       topicId = _useParams.topicId;
 
-  return /*#__PURE__*/react_default.a.createElement(react["Fragment"], null, /*#__PURE__*/react_default.a.createElement("p", null, "Detail topicId: ", /*#__PURE__*/react_default.a.createElement("span", {
-    style: {
-      background: "yellow",
-      padding: "5px"
+  return topicId;
+} //---
+
+
+var NestedRoutesDetail_NestedRoutesDetail = /*#__PURE__*/function (_Component) {
+  inherits_default()(NestedRoutesDetail, _Component);
+
+  var _super = NestedRoutesDetail_createSuper(NestedRoutesDetail);
+
+  function NestedRoutesDetail() {
+    classCallCheck_default()(this, NestedRoutesDetail);
+
+    return _super.apply(this, arguments);
+  }
+
+  createClass_default()(NestedRoutesDetail, [{
+    key: "render",
+    value: function render() {
+      return /*#__PURE__*/react_default.a.createElement(react["Fragment"], null, /*#__PURE__*/react_default.a.createElement(HookScript, null), /*#__PURE__*/react_default.a.createElement("p", null, "Detail topicId: ", /*#__PURE__*/react_default.a.createElement("span", {
+        style: {
+          background: "yellow",
+          padding: "5px"
+        }
+      }, /*#__PURE__*/react_default.a.createElement(HookTopicId, null))));
     }
-  }, topicId)));
-};
+  }]);
+
+  return NestedRoutesDetail;
+}(react["Component"]);
 
 /* harmony default export */ var NestedRoutes_NestedRoutesDetail = (NestedRoutesDetail_NestedRoutesDetail);
 // CONCATENATED MODULE: ./src/client/views/_pages/NestedRoutes/index.js
@@ -11295,7 +11330,18 @@ var NestedRoutesDetail_NestedRoutesDetail = function NestedRoutesDetail() {
 
 
 
-/* harmony default export */ var NestedRoutes = (function (props) {
+
+function NestedRoutes_createSuper(Derived) { var hasNativeReflectConstruct = NestedRoutes_isNativeReflectConstruct(); return function _createSuperInternal() { var Super = getPrototypeOf_default()(Derived), result; if (hasNativeReflectConstruct) { var NewTarget = getPrototypeOf_default()(this).constructor; result = Reflect.construct(Super, arguments, NewTarget); } else { result = Super.apply(this, arguments); } return possibleConstructorReturn_default()(this, result); }; }
+
+function NestedRoutes_isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Reflect.construct) return false; if (Reflect.construct.sham) return false; if (typeof Proxy === "function") return true; try { Boolean.prototype.valueOf.call(Reflect.construct(Boolean, [], function () {})); return true; } catch (e) { return false; } }
+
+
+
+
+
+ //Might have mismatching versions of React and the renderer (such as React DOM)
+
+function HookContent() {
   // The `path` lets us build <Route> paths that are
   // relative to the parent route, while the `url` lets
   // us build relative links.
@@ -11303,19 +11349,7 @@ var NestedRoutesDetail_NestedRoutesDetail = function NestedRoutesDetail() {
       path = _useRouteMatch.path,
       url = _useRouteMatch.url;
 
-  return /*#__PURE__*/react_default.a.createElement(react["Fragment"], null, /*#__PURE__*/react_default.a.createElement("div", {
-    className: "uix-header__placeholder js-uix-header__placeholder-autoheight"
-  }), /*#__PURE__*/react_default.a.createElement("main", {
-    id: "uix-maincontent"
-  }, /*#__PURE__*/react_default.a.createElement("section", {
-    className: "uix-spacing--s"
-  }, /*#__PURE__*/react_default.a.createElement("div", {
-    className: "container"
-  }, /*#__PURE__*/react_default.a.createElement("div", {
-    className: "row"
-  }, /*#__PURE__*/react_default.a.createElement("div", {
-    className: "col-12"
-  }, /*#__PURE__*/react_default.a.createElement("h3", null, "Nested Routes Page"), /*#__PURE__*/react_default.a.createElement("div", null, /*#__PURE__*/react_default.a.createElement(NavLink, {
+  return /*#__PURE__*/react_default.a.createElement(react["Fragment"], null, /*#__PURE__*/react_default.a.createElement("h3", null, "Nested Routes Page"), /*#__PURE__*/react_default.a.createElement("div", null, /*#__PURE__*/react_default.a.createElement(NavLink, {
     to: "".concat(url, "/topic-one"),
     activeClassName: "is-active"
   }, "> click here to display Topic One")), /*#__PURE__*/react_default.a.createElement("div", null, /*#__PURE__*/react_default.a.createElement(NavLink, {
@@ -11329,8 +11363,43 @@ var NestedRoutesDetail_NestedRoutesDetail = function NestedRoutesDetail() {
     path: path
   }, /*#__PURE__*/react_default.a.createElement("p", null, "None.")), /*#__PURE__*/react_default.a.createElement(react_router_Route, {
     path: "".concat(path, "/:topicId")
-  }, /*#__PURE__*/react_default.a.createElement(NestedRoutes_NestedRoutesDetail, null)))))))), /*#__PURE__*/react_default.a.createElement(Footer_Footer, null));
-});
+  }, /*#__PURE__*/react_default.a.createElement(NestedRoutes_NestedRoutesDetail, null))));
+}
+
+var NestedRoutes_NestedRoutes = /*#__PURE__*/function (_Component) {
+  inherits_default()(NestedRoutes, _Component);
+
+  var _super = NestedRoutes_createSuper(NestedRoutes);
+
+  function NestedRoutes() {
+    classCallCheck_default()(this, NestedRoutes);
+
+    return _super.apply(this, arguments);
+  }
+
+  createClass_default()(NestedRoutes, [{
+    key: "render",
+    value: function render() {
+      return /*#__PURE__*/react_default.a.createElement(react["Fragment"], null, /*#__PURE__*/react_default.a.createElement("div", {
+        className: "uix-header__placeholder js-uix-header__placeholder-autoheight"
+      }), /*#__PURE__*/react_default.a.createElement("main", {
+        id: "uix-maincontent"
+      }, /*#__PURE__*/react_default.a.createElement("section", {
+        className: "uix-spacing--s"
+      }, /*#__PURE__*/react_default.a.createElement("div", {
+        className: "container"
+      }, /*#__PURE__*/react_default.a.createElement("div", {
+        className: "row"
+      }, /*#__PURE__*/react_default.a.createElement("div", {
+        className: "col-12"
+      }, /*#__PURE__*/react_default.a.createElement(HookContent, null)))))), /*#__PURE__*/react_default.a.createElement(Footer_Footer, null));
+    }
+  }]);
+
+  return NestedRoutes;
+}(react["Component"]);
+
+/* harmony default export */ var _pages_NestedRoutes = (NestedRoutes_NestedRoutes);
 // CONCATENATED MODULE: ./src/client/router/RoutesConfig.js
  //
 
@@ -11374,7 +11443,7 @@ var routesConfig = [{
   /* In order to make nested routes valid, do not add the exact attribute here */
   {
     path: '/nested-routes',
-    component: NestedRoutes,
+    component: _pages_NestedRoutes,
     pageTitle: 'Nested Routes'
   }, {
     path: '*',

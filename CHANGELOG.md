@@ -1,9 +1,10 @@
 # Changelog
 
-#### = 0.0.18 (April 15, 2021) =
+#### = 0.0.19 (April 16, 2021) =
 
 * Supports directories and custom aliases for specific files when the express server is running.
 * Detail optimization.
+* Router Pages optimization.
 
 
 #### = 0.0.17 (April 15, 2021) =

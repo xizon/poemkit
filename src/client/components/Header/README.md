@@ -1,4 +1,4 @@
-# ./src/client/components/Header
+# @uixkit.react/components/Header
 
 ![MIT license](https://badgen.now.sh/badge/license/MIT)
 
@@ -9,17 +9,17 @@
 
 ```js
 import React, { Fragment } from 'react';
-import Header from './src/client/components/Header/index.js';
+import Header from '@uixkit.react/components/Header/index.js';
 
-export default function ButtonsExamples() {
+export default function Examples() {
   return (
     <Fragment>
 		<Header UixMenuContent={
-			<React.Fragment>
+			<Fragment>
 					<li><a href="#">Menu 1</a></li>
 					<li><a href="#">Menu 2</a></li>
 					<li><a href="#">Menu 3</a></li>  
-			</React.Fragment>
+			</Fragment>
 		} />
     </Fragment>
   );

@@ -1,4 +1,4 @@
-# ./src/client/components/Footer
+# @uixkit.react/components/Footer
 
 ![MIT license](https://badgen.now.sh/badge/license/MIT)
 
@@ -9,9 +9,9 @@
 
 ```js
 import React, { Fragment } from 'react';
-import Footer from './src/client/components/Footer/index.js';
+import Footer from '@uixkit.react/components/Footer/index.js';
 
-export default function ButtonsExamples() {
+export default function Examples() {
   return (
     <Fragment>
 		<Footer />

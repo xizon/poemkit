@@ -1,4 +1,4 @@
-import React, { Fragment } from 'react';
+import React, { Component, Fragment } from 'react';
 import {
 	Route, 
 	Switch, 
@@ -12,13 +12,47 @@ import Footer from '@uixkit.react/components/Footer/index.js';
 import NestedRoutesDetail from '@uixkit.react/pages/NestedRoutes/NestedRoutesDetail.js';
 
 
-export default (props) => {
-    
+
+//Might have mismatching versions of React and the renderer (such as React DOM)
+function HookContent() {
+	
 	// The `path` lets us build <Route> paths that are
 	// relative to the parent route, while the `url` lets
 	// us build relative links.
 	let { path, url } = useRouteMatch();
 
+	
+	return (
+		<Fragment>
+		
+			<h3>Nested Routes Page</h3>
+
+			<div><NavLink to={`${url}/topic-one`} activeClassName="is-active">&gt; click here to display Topic One</NavLink></div>
+			<div><NavLink to={`${url}/topic-two`} activeClassName="is-active">&gt; click here to display Topic Two</NavLink></div>
+			<div><NavLink to={`${url}/topic-three`} activeClassName="is-active">&gt; click here to display Topic Three</NavLink></div>
+
+			<hr />
+
+			 <h5>Content:</h5>
+
+			  <Switch>
+				<Route exact path={path}>
+				  <p>None.</p>
+				</Route>
+				<Route path={`${path}/:topicId`}>
+				  <NestedRoutesDetail />
+				</Route>
+			  </Switch>
+		</Fragment>
+	)
+
+}
+
+
+class NestedRoutes extends Component {
+	
+  render() {
+	  
     return (
 	  <Fragment>
 
@@ -34,26 +68,8 @@ export default (props) => {
 				<div className="container">
 						<div className="row">
 							<div className="col-12">
-
-								<h3>Nested Routes Page</h3>
-		                        
-								<div><NavLink to={`${url}/topic-one`} activeClassName="is-active">&gt; click here to display Topic One</NavLink></div>
-								<div><NavLink to={`${url}/topic-two`} activeClassName="is-active">&gt; click here to display Topic Two</NavLink></div>
-								<div><NavLink to={`${url}/topic-three`} activeClassName="is-active">&gt; click here to display Topic Three</NavLink></div>
-								
-								<hr />
-
-								 <h5>Content:</h5>
-
-								  <Switch>
-									<Route exact path={path}>
-									  <p>None.</p>
-									</Route>
-									<Route path={`${path}/:topicId`}>
-									  <NestedRoutesDetail />
-									</Route>
-								  </Switch>
-
+		                         
+		                         <HookContent />
 
 							</div>
 						</div>
@@ -72,7 +88,11 @@ export default (props) => {
           
 
       </Fragment>
-    );
+    ); 
+	  
+  }
+    
+}
 
-};
+export default NestedRoutes;
 
