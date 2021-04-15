@@ -5,9 +5,9 @@ import {
 	NavLink,
 	Redirect,
 	useLocation
-} from "react-router-dom";
-import customRoutesConfig from './RoutesConfig.js';
-import Header from '../components/Header/index.js';
+} from 'react-router-dom';
+import customRoutesConfig from '@uixkit.react/router/RoutesConfig.js';
+import Header from '@uixkit.react/components/Header/index.js';
 
 
 export default (props) => {

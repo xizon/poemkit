@@ -1,5 +1,5 @@
 import React, { Fragment } from 'react';
-import Footer from '../../../components/Footer/index.js';
+import Footer from '@uixkit.react/components/Footer/index.js';
 
 export default ({ staticContext = {} }) => {
     staticContext.status = 404;

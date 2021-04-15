@@ -1,7 +1,7 @@
 import React, { Component, Fragment } from 'react';
 import {connect} from 'react-redux';
-import { fetchDemoListDetail } from '../../../actions/demoListDetailActions.js';
-import Footer from '../../../components/Footer/index.js';
+import { fetchDemoListDetail } from '@uixkit.react/actions/demoListDetailActions.js';
+import Footer from '@uixkit.react/components/Footer/index.js';
 
 
 class PostDetail extends Component {

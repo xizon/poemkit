@@ -2,9 +2,9 @@ import React, { Fragment } from 'react';
 import {
 	useParams,
 	useLocation
-} from "react-router-dom";
+} from 'react-router-dom';
 
-import customRoutesConfig from '../../../router/RoutesConfig.js';
+import customRoutesConfig from '@uixkit.react/router/RoutesConfig.js';
 
 
 /* Convert Allowance class component to functional component */ 

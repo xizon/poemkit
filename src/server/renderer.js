@@ -4,7 +4,7 @@ import { Provider } from 'react-redux';
 import { StaticRouter } from 'react-router-dom';
 import { renderRoutes } from 'react-router-config';
 
-import customRoutesConfig from '../client/router/RoutesConfig.js';
+import customRoutesConfig from '@uixkit.react/router/RoutesConfig.js';
 
 
 //As we can not use BrowserRouter on server side, we will use StaticRouter . 

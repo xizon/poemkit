@@ -1,6 +1,6 @@
 import {combineReducers} from 'redux';
-import demoListReducer from './demoListReducer.js';
-import demoListDetailReducer from './demoListDetailReducer.js';
+import demoListReducer from '@uixkit.react/reducers/demoListReducer.js';
+import demoListDetailReducer from '@uixkit.react/reducers/demoListDetailReducer.js';
 
 export default combineReducers({
     listData: demoListReducer,

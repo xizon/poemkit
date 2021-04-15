@@ -6,4 +6,5 @@ require( '@babel/polyfill' );
 require( 'ignore-styles' ).default(['.sass', '.scss']);
 
 //Remount the code that uses the express service
+//!important: Cannot use custom aliases
 require( './app.js' );

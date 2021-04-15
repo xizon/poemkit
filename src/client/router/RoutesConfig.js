@@ -1,11 +1,11 @@
-import App from './App.js';
+import App from '@uixkit.react/router/App.js';
 //
-import Home from '../views/_pages/Home/index.js';
-import Posts from '../views/_pages/Posts/index.js';
-import PostDetail from '../views/_pages/Posts/PostDetail.js';
-import Todos from '../views/_pages/Todos/index.js';
-import NoMatch from '../views/_pages/404/index.js';
-import NestedRoutes from '../views/_pages/NestedRoutes/index.js';
+import Home from '@uixkit.react/pages/Home/index.js';
+import Posts from '@uixkit.react/pages/Posts/index.js';
+import PostDetail from '@uixkit.react/pages/Posts/PostDetail.js';
+import Todos from '@uixkit.react/pages/Todos/index.js';
+import NoMatch from '@uixkit.react/pages/404/index.js';
+import NestedRoutes from '@uixkit.react/pages/NestedRoutes/index.js';
 
 
 const routesConfig = [

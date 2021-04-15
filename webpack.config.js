@@ -49,15 +49,23 @@ const colors = {
     }
 };
 
-let globs = {
+const globs = {
 	port                  : 8080,
 	examples              : 'public',
 	build                 : 'src/client',
-	dist                  : 'dist',
-	pathCore              : './src/client/components',
-	pathThirdPartyPlugins : './src/client/components/_third-party-plugins',
+	dist                  : 'dist'
 };
 
+const alias = {
+	pathComponents        : './src/client/components',
+	pathThirdPartyPlugins : './src/client/components/_third-party-plugins',
+	pathRouter            : './src/client/router',
+	pathReducers          : './src/client/reducers',
+	pathPages             : './src/client/views/_pages',
+	pathActions           : './src/client/actions',
+	pathServer            : './src/server',
+	pathStore             : './src/store'
+};
 
 
 /*! 
@@ -188,8 +196,17 @@ const webpackConfig = {
 		alias: {
 			
 			// specific mappings.
-			'@uixkit.react/core': path.resolve(__dirname, globs.pathCore ),
-			'@uixkit.react/plugins': path.resolve(__dirname, globs.pathThirdPartyPlugins ),
+			// Supports directories and custom aliases for specific files when the express server is running, 
+			// you need to configure the `babel.config.js` at the same time
+			'@uixkit.react/components': path.resolve(__dirname, alias.pathComponents ),
+			'@uixkit.react/plugins': path.resolve(__dirname, alias.pathThirdPartyPlugins ),
+			'@uixkit.react/router': path.resolve(__dirname, alias.pathRouter ),
+			'@uixkit.react/reducers': path.resolve(__dirname, alias.pathReducers ),
+			'@uixkit.react/pages': path.resolve(__dirname, alias.pathPages ),
+			'@uixkit.react/actions': path.resolve(__dirname, alias.pathActions ),
+			'@uixkit.react/server': path.resolve(__dirname, alias.pathServer ),
+			'@uixkit.react/store': path.resolve(__dirname, alias.pathStore ),
+			
 		}
     },
 	

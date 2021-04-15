@@ -1,6 +1,6 @@
 import React, { Component, Fragment } from 'react';
-import LoginPage from './LoginPage.js';
-import Footer from '../../../components/Footer/index.js';
+import LoginPage from '@uixkit.react/pages/Todos/LoginPage.js';
+import Footer from '@uixkit.react/components/Footer/index.js';
 
 
 class Todos extends Component {

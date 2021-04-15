@@ -1,6 +1,6 @@
 import React, { Fragment } from 'react';
-import Button from '../../../components/Buttons/index.js';
-import Footer from '../../../components/Footer/index.js';
+import Button from '@uixkit.react/components/Buttons/index.js';
+import Footer from '@uixkit.react/components/Footer/index.js';
 
 let spreadOperator = {
   UixBtnBgColor: 'info',

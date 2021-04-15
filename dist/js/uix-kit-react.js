@@ -1,7 +1,7 @@
 /*!
  * 
  * ## Project Name        :  Uix Kit React
- * ## Version             :  0.0.17
+ * ## Version             :  0.0.18
  * ## Based on            :  Uix Kit React (https://github.com/xizon/uix-kit-react)
  * ## Last Update         :  April 15, 2021
  * ## Created by          :  UIUX Lab (https://uiux.cc)
@@ -11290,7 +11290,6 @@ var NestedRoutesDetail_NestedRoutesDetail = function NestedRoutesDetail() {
 
 /* harmony default export */ var NestedRoutes_NestedRoutesDetail = (NestedRoutesDetail_NestedRoutesDetail);
 // CONCATENATED MODULE: ./src/client/views/_pages/NestedRoutes/index.js
-
 
 
 
