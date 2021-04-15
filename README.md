@@ -209,7 +209,6 @@ uix-kit-react/
 │   │   │     └── _third-party-plugins/ ----------  # Third-party plugins
 │   │   │
 │   │   ├── views/ ------------------------------  # Website pages
-│   │   │   ├── _navigation/
 │   │   │   ├── _pages/
 │   │   │   └── _html/
 │   │   │

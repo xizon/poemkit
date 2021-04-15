@@ -1,7 +1,7 @@
 {
   "author": "UIUX Lab",
   "name": "uix-kit-react",
-  "version": "0.0.16",
+  "version": "0.0.17",
   "description": "A free web kits with React for fast web design and development via SSR.",
   "main": "webpack.config.js",
   "directories": {

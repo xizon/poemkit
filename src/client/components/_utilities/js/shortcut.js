@@ -142,8 +142,21 @@ __( document ).ready( function() {
 			__( '#input' ).prop('disabled', true);
 
 
-			const dataObject = __( '#form' ).serializeArray();  
-			console.log( dataObject )
+			// To send data in the application/x-www-form-urlencoded format instead
+			const formData = new FormData();
+			const defaultPostData = {
+				action  : 'load_singlepages_ajax_content'
+			};
+			for(let k in defaultPostData) {
+				formData.append(k, defaultPostData[k]);
+			}
+
+			// For multiple form fields data acquisition
+			const oldFormData = __( '#form' ).serializeArray();  
+			oldFormData.forEach(function(item){
+				formData.append(item.name, item.value);
+			});
+
 
 
 

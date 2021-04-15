@@ -5,7 +5,6 @@
  */
 
 import React, { Component, Fragment } from 'react';
-import { NavLink } from "react-router-dom";
 
 
 /*-- Apply Third-party plugins --*/
@@ -48,7 +47,8 @@ export default class Header extends Component {
 					
 					
 					__( '.uix-header__container' ).addClass( 'js-heavyShadow' );
-				
+
+					
 					
 				}
 			});
@@ -77,7 +77,7 @@ export default class Header extends Component {
 
 			
 							<div className="uix-brand">
-								<NavLink to="/index"><img src="assets/images/logo.png" alt="Uix Kit" /></NavLink>                   
+								<a href="/index"><img src="/assets/images/logo.png" alt="Uix Kit" /></a>             
 							</div>
 							{/*<!-- .uix-brand end -->*/}
 
@@ -88,7 +88,7 @@ export default class Header extends Component {
 
 								   <div className="uix-menu__inner">
 
-										<span className="uix-brand--mobile"><img src="assets/images/logo-colorful.png" alt="Site Name" /></span>
+										<span className="uix-brand--mobile"><img src="/assets/images/logo-colorful.png" alt="Site Name" /></span>
 										<ul className="uix-menu">{UixMenuContent}</ul>
 										<div className="uix-menu__right-box">
 											<a className="uix-social-btn uix-social-btn--small uix-social-btn--circle uix-social-btn--thin" title="Follow us on Twitter" href="https://twitter.com/uiux_lab" target="_blank">
@@ -119,7 +119,6 @@ export default class Header extends Component {
 				 </div>
 
 			</header>  
-			
 	
 		  </Fragment>
 		)

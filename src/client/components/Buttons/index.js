@@ -31,24 +31,23 @@ import './styles/index.scss';
 
 
 const styles = {
-  info: {
-    backgroundColor: '#38c9ff',
-    color: 'white'
-  },
-  success: {
-    backgroundColor: '#16c900',
-    color: 'white'
-  },
-  danger: {
-    backgroundColor: '#ff2222',
-    color: 'white'
-  },
-  warning: {
-    backgroundColor: '#dfa22f',
-    color: 'white'
-  }
+    info: {
+        backgroundColor: '#38c9ff',
+        color: 'white'
+    },
+    success: {
+        backgroundColor: '#16c900',
+        color: 'white'
+    },
+    danger: {
+        backgroundColor: '#ff2222',
+        color: 'white'
+    },
+    warning: {
+        backgroundColor: '#dfa22f',
+        color: 'white'
+    }
 };
-
 
 
 export default class Button extends Component {

@@ -203,7 +203,6 @@ uix-kit-react/
 │   │   │     └── _third-party-plugins/ ----------  # 第三方插件
 │   │   │
 │   │   ├── views/ ------------------------------  # 网站页面
-│   │   │   ├── _navigation/
 │   │   │   ├── _pages/
 │   │   │   └── _html/
 │   │   │

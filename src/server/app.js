@@ -1,8 +1,9 @@
 import express from 'express';
 import { matchRoutes } from 'react-router-config';
 import render from './renderer.js';
-import customRoutesConfig from '../client/router/routes.js';
 import createNewStore from '../store/createStore.js';
+
+import customRoutesConfig from '../client/router/RoutesConfig.js';
 
 //
 import compression from 'compression';

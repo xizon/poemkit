@@ -1,9 +1,9 @@
 /*!
  * 
  * ## Project Name        :  Uix Kit React
- * ## Version             :  0.0.16
+ * ## Version             :  0.0.17
  * ## Based on            :  Uix Kit React (https://github.com/xizon/uix-kit-react)
- * ## Last Update         :  April 14, 2021
+ * ## Last Update         :  April 15, 2021
  * ## Created by          :  UIUX Lab (https://uiux.cc)
  * ## Contact Us          :  uiuxlab@gmail.com
  * 	
@@ -8789,8 +8789,21 @@ __( document ).ready( function() {
 			__( '#input' ).prop('disabled', true);
 
 
-			const dataObject = __( '#form' ).serializeArray();  
-			console.log( dataObject )
+			// To send data in the application/x-www-form-urlencoded format instead
+			const formData = new FormData();
+			const defaultPostData = {
+				action  : 'load_singlepages_ajax_content'
+			};
+			for(let k in defaultPostData) {
+				formData.append(k, defaultPostData[k]);
+			}
+
+			// For multiple form fields data acquisition
+			const oldFormData = __( '#form' ).serializeArray();  
+			oldFormData.forEach(function(item){
+				formData.append(item.name, item.value);
+			});
+
 
 
 
@@ -10060,7 +10073,6 @@ function _isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Re
  *************************************
  */
 
-
 /*-- Apply Third-party plugins --*/
 //1) Bootstrap
 
@@ -10120,10 +10132,10 @@ var Header_Header = /*#__PURE__*/function (_Component) {
         className: "container"
       }, /*#__PURE__*/react_default.a.createElement("div", {
         className: "uix-brand"
-      }, /*#__PURE__*/react_default.a.createElement(NavLink, {
-        to: "/index"
+      }, /*#__PURE__*/react_default.a.createElement("a", {
+        href: "/index"
       }, /*#__PURE__*/react_default.a.createElement("img", {
-        src: "assets/images/logo.png",
+        src: "/assets/images/logo.png",
         alt: "Uix Kit"
       }))), /*#__PURE__*/react_default.a.createElement("nav", {
         className: "uix-menu__container"
@@ -10132,7 +10144,7 @@ var Header_Header = /*#__PURE__*/function (_Component) {
       }, /*#__PURE__*/react_default.a.createElement("span", {
         className: "uix-brand--mobile"
       }, /*#__PURE__*/react_default.a.createElement("img", {
-        src: "assets/images/logo-colorful.png",
+        src: "/assets/images/logo-colorful.png",
         alt: "Site Name"
       })), /*#__PURE__*/react_default.a.createElement("ul", {
         className: "uix-menu"
@@ -10169,45 +10181,55 @@ var Header_Header = /*#__PURE__*/function (_Component) {
 }(react["Component"]);
 
 
-// CONCATENATED MODULE: ./src/client/views/_navigation/index.js
+// CONCATENATED MODULE: ./src/client/router/App.js
 
 
 
 
-/* harmony default export */ var _navigation = (function (props) {
+/* harmony default export */ var App = (function (props) {
   //Click the route to trigger the event
   var theLocation = useLocation();
   react_default.a.useEffect(function () {
-    //console.log('props: ');
-    //console.log(props);
     //change page title
     //-------------
-    var pageTitle = router_routes[0].routes[0].pageTitle; //default title via Homepage
+    var pageTitle = null;
+    var pageNoMatchTitle = null;
+    var breakException = {};
+    var pathname = theLocation.pathname; //page: 404
 
-    var noMatchPageEnable = true;
-    var pathname = theLocation.pathname; //page: ...
-
-    router_routes[0].routes.forEach(function (item, index) {
-      if (item.path === pathname) {
-        noMatchPageEnable = false;
-        pageTitle = item.pageTitle;
-        return true;
-      }
-    }); //page: 404
-
-    if (noMatchPageEnable) {
-      router_routes[0].routes.forEach(function (item, index) {
+    try {
+      RoutesConfig[0].routes.forEach(function (item, index) {
         if (item.status === 404) {
-          pageTitle = item.pageTitle;
-          return true;
+          pageNoMatchTitle = item.pageTitle; //
+
+          throw breakException;
         }
       });
-    } //page: not post detail
+    } catch (e) {}
+
+    try {
+      RoutesConfig[0].routes.forEach(function (item, index) {
+        if (item.path.indexOf("/".concat(pathname.replace(/^\/([^\/]*).*$/, '$1'))) < 0 && item.path != '/') {
+          pageTitle = pageNoMatchTitle; //
+
+          throw breakException;
+        }
+      });
+    } catch (e) {} //page: ...
 
 
-    if (pathname.indexOf('posts/') < 0) {
-      document.title = pageTitle;
-    }
+    try {
+      RoutesConfig[0].routes.forEach(function (item, index) {
+        if (item.path === pathname || item.path.indexOf("/".concat(pathname.replace(/^\/([^\/]*).*$/, '$1'))) >= 0 && item.path != '/') {
+          pageTitle = item.pageTitle; //
+
+          throw breakException;
+        }
+      });
+    } catch (e) {} //update page title
+
+
+    if (pageTitle !== null) document.title = pageTitle;
   });
   return /*#__PURE__*/react_default.a.createElement(react["Fragment"], null, /*#__PURE__*/react_default.a.createElement(Header_Header, {
     UixMenuContent: /*#__PURE__*/react_default.a.createElement(react["Fragment"], null, /*#__PURE__*/react_default.a.createElement("li", {
@@ -10230,7 +10252,12 @@ var Header_Header = /*#__PURE__*/function (_Component) {
     }, /*#__PURE__*/react_default.a.createElement(NavLink, {
       to: "/errorpage",
       activeClassName: "is-active"
-    }, "404")))
+    }, "404")), /*#__PURE__*/react_default.a.createElement("li", {
+      className: props.location.pathname.indexOf('/nested-routes') >= 0 ? 'is-active' : ''
+    }, /*#__PURE__*/react_default.a.createElement(NavLink, {
+      to: "/nested-routes",
+      activeClassName: "is-active"
+    }, "Nested Routes")))
   }), /*#__PURE__*/react_default.a.createElement(react_router_Switch, null, /*#__PURE__*/react_default.a.createElement(react_router_Route, {
     exact: true,
     path: "/",
@@ -10239,7 +10266,7 @@ var Header_Header = /*#__PURE__*/function (_Component) {
         to: "/index"
       });
     }
-  }), router_routes[0].routes.map(function (item, index) {
+  }), RoutesConfig[0].routes.map(function (item, index) {
     return /*#__PURE__*/react_default.a.createElement(react_router_Route, {
       key: index,
       path: item.path,
@@ -10435,7 +10462,7 @@ var spreadOperator = {
     className: "row"
   }, /*#__PURE__*/react_default.a.createElement("div", {
     className: "col-12"
-  }, /*#__PURE__*/react_default.a.createElement("h1", null, "Home!"), /*#__PURE__*/react_default.a.createElement("h3", null, "Buttons:"), /*#__PURE__*/react_default.a.createElement(Buttons_Button, {
+  }, /*#__PURE__*/react_default.a.createElement("h1", null, "Components List"), /*#__PURE__*/react_default.a.createElement("hr", null), /*#__PURE__*/react_default.a.createElement("h3", null, "Buttons"), /*#__PURE__*/react_default.a.createElement(Buttons_Button, {
     UixBtnBgColor: "",
     UixBtnName: ""
   }), /*#__PURE__*/react_default.a.createElement(Buttons_Button, {
@@ -11215,15 +11242,107 @@ var Todos_Todos = /*#__PURE__*/function (_Component) {
     className: "col-12"
   }, /*#__PURE__*/react_default.a.createElement("h3", null, "Page Not found")))))), /*#__PURE__*/react_default.a.createElement(Footer_Footer, null));
 });
-// CONCATENATED MODULE: ./src/client/router/routes.js
+// CONCATENATED MODULE: ./src/client/views/_pages/NestedRoutes/NestedRoutesDetail.js
+
+
+
+/* Convert Allowance class component to functional component */
+
+var NestedRoutesDetail_NestedRoutesDetail = function NestedRoutesDetail() {
+  //Click the route to trigger the event
+  var theLocation = useLocation();
+  react_default.a.useEffect(function () {
+    //change page title
+    //-------------
+    var pageTitle = null;
+    var breakException = {};
+    var pathname = theLocation.pathname; //page: Nested Routes detail
+
+    if (pathname.indexOf('nested-routes/') >= 0) {
+      try {
+        RoutesConfig[0].routes.forEach(function (item, index) {
+          if (pathname.indexOf(item.path) >= 0) {
+            pageTitle = item.pageTitle; //
+
+            throw breakException;
+          }
+        });
+      } catch (e) {}
+    } //update page title
+
+
+    if (pageTitle !== null) document.title = pageTitle;
+  }); // The <Route> that rendered this component has a
+  // path of `/nested-routes/:topicId`. The `:topicId` portion
+  // of the URL indicates a placeholder that we can
+  // get from `useParams()`.
+
+  var _useParams = useParams(),
+      topicId = _useParams.topicId;
+
+  return /*#__PURE__*/react_default.a.createElement(react["Fragment"], null, /*#__PURE__*/react_default.a.createElement("p", null, "Detail topicId: ", /*#__PURE__*/react_default.a.createElement("span", {
+    style: {
+      background: "yellow",
+      padding: "5px"
+    }
+  }, topicId)));
+};
+
+/* harmony default export */ var NestedRoutes_NestedRoutesDetail = (NestedRoutesDetail_NestedRoutesDetail);
+// CONCATENATED MODULE: ./src/client/views/_pages/NestedRoutes/index.js
 
 
 
 
 
 
-/* harmony default export */ var router_routes = ([{
-  component: _navigation,
+/* harmony default export */ var NestedRoutes = (function (props) {
+  // The `path` lets us build <Route> paths that are
+  // relative to the parent route, while the `url` lets
+  // us build relative links.
+  var _useRouteMatch = useRouteMatch(),
+      path = _useRouteMatch.path,
+      url = _useRouteMatch.url;
+
+  return /*#__PURE__*/react_default.a.createElement(react["Fragment"], null, /*#__PURE__*/react_default.a.createElement("div", {
+    className: "uix-header__placeholder js-uix-header__placeholder-autoheight"
+  }), /*#__PURE__*/react_default.a.createElement("main", {
+    id: "uix-maincontent"
+  }, /*#__PURE__*/react_default.a.createElement("section", {
+    className: "uix-spacing--s"
+  }, /*#__PURE__*/react_default.a.createElement("div", {
+    className: "container"
+  }, /*#__PURE__*/react_default.a.createElement("div", {
+    className: "row"
+  }, /*#__PURE__*/react_default.a.createElement("div", {
+    className: "col-12"
+  }, /*#__PURE__*/react_default.a.createElement("h3", null, "Nested Routes Page"), /*#__PURE__*/react_default.a.createElement("div", null, /*#__PURE__*/react_default.a.createElement(NavLink, {
+    to: "".concat(url, "/topic-one"),
+    activeClassName: "is-active"
+  }, "> click here to display Topic One")), /*#__PURE__*/react_default.a.createElement("div", null, /*#__PURE__*/react_default.a.createElement(NavLink, {
+    to: "".concat(url, "/topic-two"),
+    activeClassName: "is-active"
+  }, "> click here to display Topic Two")), /*#__PURE__*/react_default.a.createElement("div", null, /*#__PURE__*/react_default.a.createElement(NavLink, {
+    to: "".concat(url, "/topic-three"),
+    activeClassName: "is-active"
+  }, "> click here to display Topic Three")), /*#__PURE__*/react_default.a.createElement("hr", null), /*#__PURE__*/react_default.a.createElement("h5", null, "Content:"), /*#__PURE__*/react_default.a.createElement(react_router_Switch, null, /*#__PURE__*/react_default.a.createElement(react_router_Route, {
+    exact: true,
+    path: path
+  }, /*#__PURE__*/react_default.a.createElement("p", null, "None.")), /*#__PURE__*/react_default.a.createElement(react_router_Route, {
+    path: "".concat(path, "/:topicId")
+  }, /*#__PURE__*/react_default.a.createElement(NestedRoutes_NestedRoutesDetail, null)))))))), /*#__PURE__*/react_default.a.createElement(Footer_Footer, null));
+});
+// CONCATENATED MODULE: ./src/client/router/RoutesConfig.js
+ //
+
+
+
+
+
+
+
+var routesConfig = [{
+  component: App,
   routes: [{
     path: "/",
     component: Home,
@@ -11252,13 +11371,20 @@ var Todos_Todos = /*#__PURE__*/function (_Component) {
     path: '/posts/:post_id',
     component: Posts_PostDetail,
     pageTitle: ''
+  },
+  /* In order to make nested routes valid, do not add the exact attribute here */
+  {
+    path: '/nested-routes',
+    component: NestedRoutes,
+    pageTitle: 'Nested Routes'
   }, {
     path: '*',
     component: _404,
     pageTitle: '404 Error',
     status: 404
   }]
-}]);
+}];
+/* harmony default export */ var RoutesConfig = (routesConfig);
 // CONCATENATED MODULE: ./src/client/router/index.js
 
 
@@ -11267,7 +11393,7 @@ var Todos_Todos = /*#__PURE__*/function (_Component) {
 /* harmony default export */ var router = (function () {
   return /*#__PURE__*/react_default.a.createElement(react_router_dom_BrowserRouter, null, /*#__PURE__*/react_default.a.createElement("div", {
     className: "uix-wrapper"
-  }, renderRoutes(router_routes)));
+  }, renderRoutes(RoutesConfig)));
 });
 // CONCATENATED MODULE: ./node_modules/redux-thunk/es/index.js
 function createThunkMiddleware(extraArgument) {

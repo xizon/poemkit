@@ -6,57 +6,70 @@ import {
 	Redirect,
 	useLocation
 } from "react-router-dom";
-import customRoutesConfig from '../../router/routes.js';
-import Header from '../../components/Header/index.js';
+import customRoutesConfig from './RoutesConfig.js';
+import Header from '../components/Header/index.js';
 
-export default props => {
+
+export default (props) => {
     
 	
 	//Click the route to trigger the event
     const theLocation = useLocation();
     React.useEffect(() => {
 		
-		
-		//console.log('props: ');
-		//console.log(props);
-		
 		//change page title
 		//-------------
-		let pageTitle = customRoutesConfig[0].routes[0].pageTitle; //default title via Homepage
-		let noMatchPageEnable = true;
-		
+		let pageTitle = null;
+		let pageNoMatchTitle = null;
+		const breakException = {};
 		const pathname = theLocation.pathname;
+
+		
+		//page: 404
+		try {
+			customRoutesConfig[0].routes.forEach((item, index) => {
+				if ( item.status === 404 ) {
+					pageNoMatchTitle = item.pageTitle;
+					//
+					throw breakException;
+				}
+			});
+		} catch (e) {}	
+
+		
+		try {
+			customRoutesConfig[0].routes.forEach((item, index) => {
+				if ( item.path.indexOf( `/${pathname.replace(/^\/([^\/]*).*$/, '$1')}` ) < 0 && item.path != '/' ) {
+					pageTitle = pageNoMatchTitle;
+					//
+					throw breakException;
+				}
+			});
+		} catch (e) {}	
+
 		
 		
 		//page: ...
-		customRoutesConfig[0].routes.forEach((item, index) => {
-
-			if ( item.path === pathname ) {
-				noMatchPageEnable = false;
-				pageTitle = item.pageTitle;
-				return true;
-			}
-		});
-		
-		
-		//page: 404
-		if ( noMatchPageEnable ) {
+		try {
 			customRoutesConfig[0].routes.forEach((item, index) => {
-				if ( item.status === 404 ) {
+				if ( item.path === pathname || 
+					 ( item.path.indexOf( `/${pathname.replace(/^\/([^\/]*).*$/, '$1')}` ) >= 0 && item.path != '/' )
+				   ) {
 					pageTitle = item.pageTitle;
-					return true;
+					//
+					throw breakException;
+					
 				}
-			});	
-		}
+			});
+		} catch (e) {}	
 
-		
-	
-		//page: not post detail
-		if ( pathname.indexOf( 'posts/' ) < 0 ) {
-			document.title = pageTitle;
-		}
-		
-		
+
+
+
+		//update page title
+		if ( pageTitle !== null ) document.title = pageTitle;
+
+
         
     });
 	
@@ -66,6 +79,7 @@ export default props => {
 
 		<Header UixMenuContent={
 			<Fragment>
+		
 					<li className={props.location.pathname === '/index' || props.location.pathname === '' ? 'is-active' : ''}>
 					  <NavLink to="/index" activeClassName="is-active">Home</NavLink>
 					</li>
@@ -78,10 +92,13 @@ export default props => {
 					<li className={props.location.pathname === '/errorpage' ? 'is-active' : ''}>
 					  <NavLink to="/errorpage" activeClassName="is-active">404</NavLink>
 					</li>
+					<li className={props.location.pathname.indexOf( '/nested-routes' ) >= 0 ? 'is-active' : ''}>
+					  <NavLink to="/nested-routes" activeClassName="is-active">Nested Routes</NavLink>
+					</li>
+	
 			</Fragment>
 		} />
 
-	
 
         
             {/* A <Switch> looks through its children <Route>s and
@@ -116,6 +133,7 @@ export default props => {
               {/* Loop through an array to create routes in react router` */}
 			  {
 				customRoutesConfig[0].routes.map((item,index) => {
+					
 					return (
 					  <Route
 						key={index}
@@ -123,11 +141,16 @@ export default props => {
 						exact={item.exact}
 						component={item.component}
 					  />
-					);
+					);	
+
 				})
 		   	  }
 
           </Switch>
+
+
+
+
       </Fragment>
     );
 

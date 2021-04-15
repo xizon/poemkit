@@ -1,7 +1,7 @@
 import React from 'react';
 import { BrowserRouter } from 'react-router-dom';
 import { renderRoutes } from 'react-router-config';
-import customRoutesConfig from './routes.js';
+import customRoutesConfig from './RoutesConfig.js';
 
 export default () => {
   return (

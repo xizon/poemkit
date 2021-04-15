@@ -27,9 +27,10 @@ export default ({ staticContext = {} }) => {
 							<div className="row">
 								<div className="col-12">
 		
-									<h1>Home!</h1>
+									<h1>Components List</h1>
+									<hr />
 
-									<h3>Buttons:</h3>
+									<h3>Buttons</h3>
 									<Button UixBtnBgColor='' UixBtnName=''/>
 									<Button UixBtnBgColor='success' UixBtnName='success'/>
 									<Button UixBtnBgColor='info' UixBtnName='info'/>
