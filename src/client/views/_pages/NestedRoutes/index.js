@@ -6,7 +6,7 @@ import {
 	useRouteMatch,
 	useParams
 } from 'react-router-dom';
-import customRoutesConfig from '@uixkit.react/router/RoutesConfig.js';
+
 import Footer from '@uixkit.react/components/Footer/index.js';
 
 import NestedRoutesDetail from '@uixkit.react/pages/NestedRoutes/NestedRoutesDetail.js';

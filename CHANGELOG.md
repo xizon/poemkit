@@ -1,5 +1,11 @@
 # Changelog
 
+
+#### = 0.0.20 (April 18, 2021) =
+
+* Detail optimization.
+
+
 #### = 0.0.19 (April 16, 2021) =
 
 * Supports directories and custom aliases for specific files when the express server is running.

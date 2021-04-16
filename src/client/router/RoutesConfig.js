@@ -13,14 +13,14 @@ const routesConfig = [
     component: App,
     routes: [
       {
-        path: "/",
+        path: '/',
         component: Home,
         exact: true,
 		pageTitle: 'Home'
       },
 		
       {
-        path: "/index",
+        path: '/index',
         component: Home,
 		pageTitle: 'Home'
       },
@@ -32,7 +32,7 @@ const routesConfig = [
 	*/
 		
       {
-        path: "/posts",
+        path: '/posts',
         component: Posts,
 		pageTitle: 'Posts',
 		exact: true
