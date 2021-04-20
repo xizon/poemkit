@@ -1,9 +1,9 @@
 /*!
  * 
  * ## Project Name        :  Uix Kit React
- * ## Version             :  0.0.19
+ * ## Version             :  0.0.22
  * ## Based on            :  Uix Kit React (https://github.com/xizon/uix-kit-react)
- * ## Last Update         :  April 15, 2021
+ * ## Last Update         :  April 20, 2021
  * ## Created by          :  UIUX Lab (https://uiux.cc)
  * ## Contact Us          :  uiuxlab@gmail.com
  * 	
@@ -19397,9 +19397,10 @@ ul.uix-entry__meta:not(.uix-entry__meta--wrap) li:first-child::before {
   z-index: 90000;
   border-bottom: 2.15px solid rgba(255, 255, 255, 0.2);
   box-shadow: 0px 5px 40px 0px rgba(0, 0, 0, 0.08);
-  background-color: #fff;
   transition: .3s ease-in-out;
   transition-delay: 3s;
+  background-color: #CE3A3E;
+  background-image: linear-gradient(to right, #CE3A3E 0%, #C04645 20%, #DE510E 100%);
   /* 
 	 ---------------------------
 	 2. Overlay Header
@@ -20879,17 +20880,17 @@ details.uix-details-reset > summary::-webkit-details-marker {
 }
 
 .uix-menu__container:not(.is-mobile) ul.uix-menu > li.is-active, .uix-menu__container:not(.is-mobile) ul.uix-menu > li.current-menu-item {
-  box-shadow: 0 2.15px 0 black;
+  box-shadow: 0 2.15px 0 white;
 }
 
 .uix-menu__container:not(.is-mobile) ul.uix-menu > li > a {
   text-transform: uppercase;
   font-weight: 700;
-  color: #4A4A4A;
+  color: #DEDEDE;
 }
 
 .uix-menu__container:not(.is-mobile) ul.uix-menu > li > a:hover {
-  color: #333;
+  color: #fff;
 }
 
 .uix-menu__container:not(.is-mobile) ul.uix-menu > li ul {
@@ -23539,15 +23540,503 @@ body.rtl {
 /* ======================================================
    <!-- Button -->
 /* ====================================================== */
-.uix-button {
-  border: 0;
-  margin: 5px;
-  border-radius: 3px;
-  padding: 5px 15px;
+/*
+ * 1. Common button styles
+ * 2. Borders
+ * 3. Sizes
+ * 4. Icons
+ * 5. Group
+ * 6. Background
+ * 7. Margin
+*/
+/*
+ ---------------------------
+ 1. Common button styles
+ ---------------------------
+ */
+.uix-btn[class*=button-]:focus {
+  box-shadow: none;
 }
 
-.uix-button:hover {
-  filter: Invert();
+.uix-btn {
+  display: inline-block;
+  text-align: center;
+  margin: 0;
+  border: none;
+  background: none;
+  color: inherit;
+  vertical-align: middle;
+  position: relative;
+  background-size: 300% 100%;
+  font-weight: 600;
+  z-index: 1;
+  letter-spacing: .02rem;
+  line-height: 1.2;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  /* Waiting state */
+}
+
+.uix-btn:hover {
+  background-position: 100% 0;
+  color: #fff;
+}
+
+.uix-btn:focus {
+  outline: 3px auto -webkit-focus-ring-color;
+}
+
+.uix-btn:disabled, .uix-btn.is-disabled {
+  background-image: linear-gradient(to right, #e4e7ed 0%, #e4e7ed 20%, #e4e7ed 100%) !important;
+  border-color: #e4e7ed !important;
+  cursor: not-allowed !important;
+  box-shadow: 0 2px 8px 0 rgba(0, 0, 0, 0.05) !important;
+  pointer-events: none !important;
+  user-select: none !important;
+  color: #474747 !important;
+}
+
+.uix-btn.wait {
+  background-image: linear-gradient(-45deg, rgba(0, 0, 0, 0.15) 25%, transparent 25%, transparent 50%, rgba(0, 0, 0, 0.15) 50%, rgba(0, 0, 0, 0.15) 75%, transparent 75%, transparent) !important;
+  background-size: 30px 30px !important;
+  animation: uix-cssAnim--moveWaitingStripes 0.5s linear infinite !important;
+  cursor: wait !important;
+  pointer-events: none !important;
+}
+
+.uix-btn.is-hide {
+  display: none;
+}
+
+.uix-btn.is-pill {
+  border-radius: 35px;
+}
+
+.uix-btn.is-rounded {
+  border-radius: 4px;
+}
+
+.uix-btn.is-fullwidth {
+  max-width: none;
+  width: 100%;
+}
+
+.uix-btn.is-fullwidth.is-pill {
+  padding-left: 35px;
+  padding-right: 35px;
+}
+
+.uix-btn > span {
+  vertical-align: middle;
+}
+
+.uix-btn i {
+  margin-right: .5rem;
+  margin-left: .5rem;
+}
+
+@keyframes uix-cssAnim--moveWaitingStripes {
+  0% {
+    background-position: 0 0;
+  }
+  100% {
+    background-position: 30px 0px;
+  }
+}
+
+/*
+ ---------------------------
+ 2. Borders
+ ---------------------------
+ */
+.uix-btn__border--thin {
+  border: 1px solid;
+}
+
+.uix-btn__border--medium {
+  border: 2px solid;
+}
+
+.uix-btn__border--thick {
+  border: 3px solid;
+}
+
+.uix-btn__border--white {
+  border-color: #fff;
+}
+
+/*
+ ---------------------------
+ 3. Sizes
+ ---------------------------
+ */
+/* tiny */
+.uix-btn__size--t {
+  font-size: 0.75rem;
+  padding: .5rem 1rem;
+}
+
+/* small */
+.uix-btn__size--s {
+  font-size: 0.875rem;
+  padding: .8rem 1.5rem;
+}
+
+/* medium */
+.uix-btn__size--m {
+  font-size: 1rem;
+  padding: 1rem 2.5rem;
+}
+
+/* large */
+.uix-btn__size--l {
+  font-size: 1.375rem;
+  padding: 1.25rem 5rem;
+}
+
+@media all and (max-width: 320px) {
+  /* tiny */
+  .uix-btn__size--t {
+    font-size: 0.625rem;
+    padding: .3rem .7rem;
+  }
+  /* small */
+  .uix-btn__size--s {
+    font-size: 0.75rem;
+    padding: .5rem 1rem;
+  }
+  /* medium */
+  .uix-btn__size--m {
+    font-size: 0.875rem;
+    padding: 0.7rem 2rem;
+  }
+  /* large */
+  .uix-btn__size--l {
+    font-size: 1rem;
+    padding: 1rem 3.5rem;
+  }
+}
+
+/*
+ ---------------------------
+ 4. Icons
+ ---------------------------
+ */
+.uix-btn__icon {
+  padding-left: 3.6rem;
+  position: relative;
+}
+
+.uix-btn__icon.uix-btn__icon--right {
+  padding-left: 2.5rem;
+  padding-right: 3.6rem;
+}
+
+.uix-btn__icon.uix-btn__icon--right > span {
+  right: 0;
+  left: auto;
+}
+
+.uix-btn__icon > span {
+  width: 2.6rem;
+  left: 0;
+  top: 0;
+  height: 100%;
+  position: absolute;
+  background-color: rgba(0, 0, 0, 0.1);
+}
+
+.uix-btn__icon > span i {
+  margin: 0;
+  position: relative;
+  margin-top: 50%;
+  transform: translateY(-50%);
+}
+
+.uix-btn__icon.uix-btn__icon--left > span {
+  left: 0;
+}
+
+.uix-btn__icon.is-transparent.uix-btn__icon--left > span {
+  background-color: transparent;
+  border-right: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+.uix-btn__icon.is-transparent.uix-btn__icon--right > span {
+  background-color: transparent;
+  border-left: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+.uix-btn__icon.is-pill.uix-btn__icon--left span {
+  border-radius: 35px 0 0 35px;
+}
+
+.uix-btn__icon.is-pill.uix-btn__icon--right span {
+  border-radius: 0 50px 50px 0;
+}
+
+.uix-btn__icon.is-rounded.uix-btn__icon--left span {
+  border-radius: 4px 0 0 4px;
+}
+
+.uix-btn__icon.is-rounded.uix-btn__icon--right span {
+  border-radius: 0 4px 4px 0;
+}
+
+/*
+ ---------------------------
+ 5. Group
+ ---------------------------
+ */
+.uix-btn__group {
+  display: inline-block;
+  /* Each fullwidth button from group */
+}
+
+.uix-btn__group::after {
+  content: '';
+  display: table;
+  clear: both;
+}
+
+.uix-btn__group > .uix-btn {
+  margin: 0;
+  border-radius: 0;
+  float: left;
+  box-sizing: border-box;
+}
+
+.uix-btn__group > .uix-btn.is-pill:first-child {
+  border-radius: 50px 0 0 50px;
+}
+
+.uix-btn__group > .uix-btn.is-pill:last-child {
+  border-radius: 0 50px 50px 0;
+}
+
+.uix-btn__group > .uix-btn.is-rounded:first-child {
+  border-radius: 4px 0 0 4px;
+}
+
+.uix-btn__group > .uix-btn.is-rounded:last-child {
+  border-radius: 0 4px 4px 0;
+}
+
+.uix-btn__group > .uix-btn.uix-btn__border--thin:not(:first-child) {
+  margin-left: -1px;
+}
+
+.uix-btn__group > .uix-btn.uix-btn__border--medium:not(:first-child) {
+  margin-left: -2px;
+}
+
+.uix-btn__group > .uix-btn.uix-btn__border--thick:not(:first-child) {
+  margin-left: -3px;
+}
+
+.uix-btn__group.is-fullwidth {
+  display: flex;
+}
+
+.uix-btn__group.is-fullwidth > .uix-btn {
+  flex: 1;
+}
+
+/*
+ ---------------------------
+ 6. Background
+ ---------------------------
+ */
+/* Your Custom colors for buttons */
+.uix-btn__bg--primary {
+  border-color: #CE3A3E;
+  background-color: #CE3A3E;
+  background-image: linear-gradient(to right, #CE3A3E 0%, #C04645 20%, #DE510E 100%);
+  box-shadow: rgba(0, 0, 0, 0.07) 0px 5px 15px 0px, rgba(206, 58, 62, 0.2) 0px 15px 35px 0px;
+  color: #fff;
+}
+
+.uix-btn__bg--primary.is-transparent {
+  border-color: #DADCDF;
+  background-color: transparent;
+  background-image: linear-gradient(to right, #fff 0%, #fff 0%, #fff 0%);
+  color: #CE3A3E;
+  box-shadow: 0 4px 15px 0 rgba(0, 0, 0, 0.05);
+}
+
+.uix-btn__bg--primary.is-transparent:hover {
+  background-color: #F8F8F8;
+  background-image: linear-gradient(to right, #F8F8F8 0%, #F8F8F8 20%, #F8F8F8 100%);
+  color: #CE3A3E;
+}
+
+.uix-btn__bg--secondary:not(.is-fill-white) {
+  border-color: #DADCDF;
+  background-color: transparent;
+  box-shadow: 0 4px 15px 0 rgba(0, 0, 0, 0.05);
+  color: #fff;
+}
+
+.uix-btn__bg--secondary.is-fill-white {
+  border-color: #DADCDF;
+  background-color: #fff;
+  color: #474747;
+}
+
+.uix-btn__bg--secondary:hover {
+  background-color: #F8F8F8;
+  color: #474747;
+}
+
+.uix-btn__bg--hyperlink {
+  border-color: transparent;
+  background-color: transparent;
+  box-shadow: none;
+  color: #CE3A3E;
+}
+
+.uix-btn__bg--hyperlink:hover {
+  background-color: #F8F8F8;
+  color: #CE3A3E;
+}
+
+.uix-btn__bg--hyperlink2 {
+  border-color: transparent;
+  background-color: transparent;
+  box-shadow: none;
+  color: #474747;
+}
+
+.uix-btn__bg--hyperlink2:hover {
+  background-color: #F8F8F8;
+  color: #474747;
+}
+
+/*
+ ---------------------------
+ 7. Margin
+ ---------------------------
+ */
+.uix-btn__margin--b {
+  margin-bottom: 1rem;
+}
+
+.uix-btn__margin--l {
+  margin-left: 1rem;
+}
+
+.uix-btn__margin--r {
+  margin-right: 1rem;
+}
+
+/* ======================================================
+   <!-- Button -->
+/* ====================================================== */
+/*
+ * 4. Icons
+ * 5. Group
+ * 7. Margin
+*/
+/*
+ ---------------------------
+ 4. Icons
+ ---------------------------
+ */
+.rtl .uix-btn__icon {
+  padding-left: auto;
+  padding-right: 3.6rem;
+}
+
+.rtl .uix-btn__icon.uix-btn__icon--right {
+  padding-left: 3.6rem;
+  padding-right: 2.5rem;
+}
+
+.rtl .uix-btn__icon.uix-btn__icon--right > span {
+  left: 0;
+  right: auto;
+}
+
+.rtl .uix-btn__icon > span {
+  left: auto;
+  right: 0;
+}
+
+.rtl .uix-btn__icon.uix-btn__icon--left > span {
+  right: 0;
+}
+
+.rtl .uix-btn__icon.is-transparent.uix-btn__icon--left > span {
+  border-right: none;
+  border-left: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+.rtl .uix-btn__icon.is-transparent.uix-btn__icon--right > span {
+  border-left: none;
+  border-right: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+.rtl .uix-btn__icon.is-pill.uix-btn__icon--left span {
+  border-radius: 35px 35px 0 0;
+}
+
+.rtl .uix-btn__icon.is-pill.uix-btn__icon--right span {
+  border-radius: 0 0 50px 50px;
+}
+
+.rtl .uix-btn__icon.is-rounded.uix-btn__icon--left span {
+  border-radius: 4px 4px 0 0;
+}
+
+.rtl .uix-btn__icon.is-rounded.uix-btn__icon--right span {
+  border-radius: 0 0 4px 4px;
+}
+
+/*
+ ---------------------------
+ 5. Group
+ ---------------------------
+ */
+.rtl .uix-btn__group > .uix-btn {
+  float: right;
+}
+
+.rtl .uix-btn__group > .uix-btn.is-rounded:first-child {
+  border-radius: 4px 4px 0 0;
+}
+
+.rtl .uix-btn__group > .uix-btn.is-rounded:last-child {
+  border-radius: 0 0 4px 4px;
+}
+
+.rtl .uix-btn__group > .uix-btn.uix-btn__border--thin:not(:first-child) {
+  margin-left: auto;
+  margin-right: -1px;
+}
+
+.rtl .uix-btn__group > .uix-btn.uix-btn__border--medium:not(:first-child) {
+  margin-left: auto;
+  margin-right: -2px;
+}
+
+.rtl .uix-btn__group > .uix-btn.uix-btn__border--thick:not(:first-child) {
+  margin-left: auto;
+  margin-right: -3px;
+}
+
+/*
+ ---------------------------
+ 7. Margin
+ ---------------------------
+ */
+.rtl .uix-btn__margin--l {
+  margin-left: auto;
+  margin-right: 1rem;
+}
+
+.rtl .uix-btn__margin--r {
+  margin-right: auto;
+  margin-left: 1rem;
 }
 
 

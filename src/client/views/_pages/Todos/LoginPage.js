@@ -1,5 +1,6 @@
 import React, { Component, Fragment } from 'react';
 import axios from 'axios';
+import { __ } from '@uixkit.react/components/_utilities/js/_all.js';
 
 
 

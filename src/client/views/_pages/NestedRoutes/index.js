@@ -6,7 +6,7 @@ import {
 	useRouteMatch,
 	useParams
 } from 'react-router-dom';
-
+import { __ } from '@uixkit.react/components/_utilities/js/_all.js';
 import Footer from '@uixkit.react/components/Footer/index.js';
 
 import NestedRoutesDetail from '@uixkit.react/pages/NestedRoutes/NestedRoutesDetail.js';
@@ -55,8 +55,6 @@ class NestedRoutes extends Component {
 	  
     return (
 	  <Fragment>
-
-		<div className="uix-header__placeholder js-uix-header__placeholder-autoheight"></div>
 
 		<main id="uix-maincontent">
 

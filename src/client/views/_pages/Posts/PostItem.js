@@ -1,5 +1,6 @@
 import React, { Fragment } from 'react';
 import { NavLink } from 'react-router-dom';
+import { __ } from '@uixkit.react/components/_utilities/js/_all.js';
 
 export default ({ name, flag })  => {
     

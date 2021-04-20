@@ -23,31 +23,15 @@ import '@uixkit.react/plugins/FontAwesome/scss/regular.scss';
 
 /*-- Apply global scripts and styles --*/
 import '@uixkit.react/components/_utilities/scss/_all.scss';
-import '@uixkit.react/components/_utilities/scss/rtl/_all-rtl.scss';
+import '@uixkit.react/components/_utilities/scss-rtl/_all.scss';
 import { __ } from '@uixkit.react/components/_utilities/js/_all.js';
 
+
+
 /*-- Apply this component styles --*/
-import '@uixkit.react/components/Buttons/styles/index.scss';
+import '@uixkit.react/components/Buttons/scss/_style.scss';
+import '@uixkit.react/components/Buttons/scss-rtl/_style.scss';
 
-
-const styles = {
-    info: {
-        backgroundColor: '#38c9ff',
-        color: 'white'
-    },
-    success: {
-        backgroundColor: '#16c900',
-        color: 'white'
-    },
-    danger: {
-        backgroundColor: '#ff2222',
-        color: 'white'
-    },
-    warning: {
-        backgroundColor: '#dfa22f',
-        color: 'white'
-    }
-};
 
 
 export default class Button extends Component {
@@ -55,11 +39,26 @@ export default class Button extends Component {
 		super(props);
 	}
 	render() {
+		
+		const { 
+			href,
+			target,
+			className,
+			id,
+			type,
+			...others
+		} = this.props;
+
+		
 		return (
 		  <Fragment>
-			  <button className='uix-button' type='button' style={styles[this.props.UixBtnBgColor] || styles['info']}>
-				{this.props.UixBtnName || 'Default'}
-			  </button>
+			
+           {href ? (
+                <a tabIndex="0" href={href || '#'} className={className || ''} target={target || '_self'} id={id || __.GUID.create()} {...others}></a>
+            ) : (
+			  <button className={className || ''} id={id ? id : __.GUID.create() } type={type || 'button'} {...others}></button>
+            )}	
+	
 		  </Fragment>
 		)
 	}

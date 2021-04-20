@@ -1,4 +1,5 @@
 import React, { Fragment } from 'react';
+import { __ } from '@uixkit.react/components/_utilities/js/_all.js';
 import Footer from '@uixkit.react/components/Footer/index.js';
 
 export default ({ staticContext = {} }) => {
@@ -6,8 +7,6 @@ export default ({ staticContext = {} }) => {
     
     return (
 	  <Fragment>
-		
-		    <div className="uix-header__placeholder js-uix-header__placeholder-autoheight"></div>
 		
             <main id="uix-maincontent">
 		

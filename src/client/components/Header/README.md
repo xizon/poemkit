@@ -14,7 +14,7 @@ import Header from '@uixkit.react/components/Header/index.js';
 export default function Examples() {
   return (
     <Fragment>
-		<Header UixMenuContent={
+		<Header headerOverlayEnable="false" htmlString={
 			<Fragment>
 					<li><a href="#">Menu 1</a></li>
 					<li><a href="#">Menu 2</a></li>

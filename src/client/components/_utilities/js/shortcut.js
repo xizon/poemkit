@@ -4,8 +4,8 @@
  * Core Shortcut
  *
  * @package: uix-kit-react
- * @version: 0.1
- * @last update: April 11, 2021
+ * @version: 0.15
+ * @last update: April 20, 2021
  * @license: MIT
  *
  *************************************
@@ -158,6 +158,13 @@ __( document ).ready( function() {
 			});
 
 
+			console.log( __.browser.isIE );  //.isMobile, .isAndroid, .isPC, .isSafari, .isIE, .supportsPassive
+			console.log( __.GUID.create() );
+			console.log( __.math.evaluate( '100/3' ) );
+			console.log( __.cssProperty.getAbsoluteCoordinates( __( '.col-12' )[0] ).left );
+			console.log( __.styleFormat( 'font-size: 10px;background: #51B801; color:#fff; border-radius: 5px;padding: 2px 3px;display: inline-block;margin-left: 3px;' ) )
+			console.log( __.trim( 'string string spacing string' ) );
+
 
 
 
@@ -186,6 +193,10 @@ const __ = (function () {
 	
 	
 	
+	/*
+	 * Get real style data
+	 * @private method
+	 */
     function getStyle( el, attr ) {
 		const self = el;
 
@@ -212,6 +223,11 @@ const __ = (function () {
     }
 	
 
+	
+	/*
+	 * Determine whether it is Child Node
+	 * @private method
+	 */
 	function isChild( el, p ) {
 		if (!el || !p || !p.childNodes || !p.childNodes.length) {
 			return false;
@@ -226,6 +242,11 @@ const __ = (function () {
 	}
 
 	
+	
+	/*
+	 * Determine whether it is in JSON format
+	 * @private method
+	 */
 	function isJSON( str ){
 		
 		
@@ -265,6 +286,10 @@ const __ = (function () {
 	
 	
 	
+	/*
+	 * Delete elements in the array
+	 * @private method
+	 */
 	function removeArray(arr) {
 		let what, 
 			args = arguments, 
@@ -281,8 +306,224 @@ const __ = (function () {
 	}
 	
 	
+	/*
+	 * Convert string to camel case
+	 * @private method
+	 */
+	function toCamelCase(s) {
+		
+		if (typeof(s) === 'string') {
+			let firstWord="";
+			let arr = s.split("-");
+
+			for (let i = 1; i < arr.length; i++) 
+			{
+				firstWord = arr[i].charAt(0).toUpperCase();
+				arr[i] = firstWord + arr[i].slice(1);  
+			}
+			arr = arr.join(""); //Convert the arr array to a string
+			return arr;	
+		} else {
+			return s;
+		}
+	}
+	
+	
+	
+	
 	
 	/* ------------- Independent Methods -------------- */
+	
+	
+	/*
+	 * Determine whether it is a special browser
+	 *
+	 * @return {Json}  - Boolean judgment collection of common browsers
+	 */  
+
+	__.browser = __.browser || ( () => {
+		
+		let browser = {};
+		
+		if ( typeof (navigator) !== 'undefined' ) {
+			// Add feature test for passive event listener support
+			let supportsPassive = false;
+			try {
+			  document.addEventListener("test", null, { get passive() { supportsPassive = true }});
+			} catch(e) {}
+
+			browser = {
+				isMobile        : /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent),
+				isAndroid       : /(android)/i.test(navigator.userAgent),
+				isPC            : !navigator.userAgent.match(/(iPhone|iPod|Android|ios|Mobile)/i),
+				isSafari        : !!navigator.userAgent.match(/Version\/[\d\.]+.*Safari/), /*Test to 9, 10. */
+				isIE            : !!window.ActiveXObject || "ActiveXObject" in window,     /*Test to 6 ~ 11 (not edge) */
+				supportsPassive : supportsPassive
+			};	
+		}
+		
+		return browser;
+
+	})();
+	
+	
+	
+	/*
+	 * Create GUID / UUID
+	 *
+	 * @description This function can be used separately in HTML pages or custom JavaScript.
+	 * @return {String}                        - The globally-unique identifiers.
+	 */  
+
+	__.GUID = __.GUID || ( () => {
+		function t() { }
+
+		return t.version = "0.0.1",
+
+		t.create = function() {
+			return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function (c) {
+				const r = Math.random() * 16 | 0,
+					  v = c == 'x' ? r : (r & 0x3 | 0x8);
+				return v.toString(16);
+			});
+		},
+
+		//
+		t
+
+	})();
+	
+	
+	/*
+	 * Evaluating a string as a mathematical expression in JavaScript
+	 *
+	 * @description This function can be used separately in HTML pages or custom JavaScript.
+	 * @return {String}            - New calculation result.
+	 */  
+
+	__.math = __.math || ( () => {
+		function t() { }
+
+		return t.version = "0.0.1",
+
+		t.evaluate = function(s) {
+
+			const chars = s.replace(/\s/g, '').split("");
+			let n = [], op = [], index = 0, oplast = true;
+
+			n[index] = "";
+
+			// Parse the expression
+			for (let c = 0; c < chars.length; c++) {
+
+				if (isNaN(parseInt(chars[c])) && chars[c] !== "." && !oplast) {
+					op[index] = chars[c];
+					index++;
+					n[index] = "";
+					oplast = true;
+				} else {
+					n[index] += chars[c];
+					oplast = false;
+				}
+			}
+
+			// Calculate the expression
+			s = parseFloat(n[0]);
+			for (let o = 0; o < op.length; o++) {
+				const num = parseFloat(n[o + 1]);
+				switch (op[o]) {
+					case "+":
+						s = s + num;
+						break;
+					case "-":
+						s = s - num;
+						break;
+					case "*":
+						s = s * num;
+						break;
+					case "/":
+						s = s / num;
+						break;
+				}
+			}
+
+			return s;
+		},
+
+		//
+		t
+		
+	})();
+	
+	
+	/*
+	 * Get the CSS property
+	 *
+	 * @description This function can be used separately in HTML pages or custom JavaScript.
+	 * @param  {!Element} el     - The Element for which to get the computed style. Using class name or ID to locate.
+	 * @return {String|Object}   - The value of property.
+	 */  
+
+	__.cssProperty = __.cssProperty || ( () => {
+		function t() { }
+
+		return t.version = "0.0.1",
+
+		t.getTransitionDuration = function( el ) {
+
+			if ( typeof el === typeof undefined ) {
+				return 0;
+			}
+
+
+			let style    = window.getComputedStyle(el),
+				duration = style.webkitTransitionDuration,
+				delay    = style.webkitTransitionDelay;
+
+			if ( typeof duration != typeof undefined ) {
+				// fix miliseconds vs seconds
+				duration = (duration.indexOf("ms")>-1) ? parseFloat(duration) : parseFloat(duration)*1000;
+				delay = (delay.indexOf("ms")>-1) ? parseFloat(delay) : parseFloat(delay)*1000;
+
+				return duration;
+			} else {
+				return 0;
+			}
+
+		},
+
+		//
+		t.getAbsoluteCoordinates = function( el ) {
+
+			let windowWidth     = window.innerWidth,
+				leftPos         = null,
+				topPos          = null;
+
+			if ( ! document.getElementsByTagName( 'body' )[0].className.match(/rtl/) ) {
+				leftPos = ( el.offsetLeft == 0 ) ? el.parentElement.offsetLeft : el.offsetLeft;
+				topPos = ( el.offsetTop == 0 ) ? el.parentElement.offsetTop : el.offsetTop;
+			} else {
+
+				// width and height in pixels, including padding and border
+				// Corresponds to jQuery outerWidth(), outerHeight()
+				leftPos = ( el.offsetLeft == 0 ) ? ( windowWidth - ( el.parentElement.offsetLeft + el.parentElement.offsetWidth ) ) : ( windowWidth - ( el.offsetLeft + el.offsetWidth ) );
+				topPos = ( el.offsetTop == 0 ) ? ( windowWidth - ( el.parentElement.offsetTop + el.parentElement.offsetHeight ) ) : ( windowWidth - ( el.offsetTop + el.offsetHeight ) );
+			}
+
+
+			return {
+				'left': leftPos,
+				'top': topPos
+			};
+
+		},
+
+
+		 //
+		t
+		
+	})();
+	
 	
 	
 	/*
@@ -325,6 +566,67 @@ const __ = (function () {
 
 			
 		}
+
+	};
+	
+	
+	/*
+	 * Remove all spaces in the string
+	 *
+	 * @param  {String} s                 - Any string.
+	 * @param  {Boolean} isGlobal         - If the value is `true`, remove all spaces including the middle
+	 * @return {String}                   - A new string with no spaces
+	 */  
+    __.trim = function(s, isGlobal = false) {
+		if (typeof(s) === 'string') {
+			let result;
+			result = s.replace(/(^\s+)|(\s+$)/g, "");
+			if ( isGlobal === true ) {
+				result = result.replace(/\s/g, "");
+			}
+			return result;
+		} else {
+			return s;
+		}
+    }	
+
+
+	
+	/*
+	 * Convert HTML Element's `Style` Attribute to JSON
+	 *
+	 * @param  {String} str   - The content of the style attribute in the HTML element, usually a string
+	 * @return {Json}     - An HTML element to a JSON object
+	 */  
+	__.styleFormat = function(s) {
+		
+		s = s || '';
+
+		if ( s.length > 0 ) {
+			const styles = s.split(';'),
+				  json = {};
+			
+			let i = styles.length,
+				style, 
+				k, 
+				v;
+
+
+			while (i--) {
+				style = styles[i].split(':');
+				k = toCamelCase(__.trim(style[0]));
+				v = __.trim(style[1]);
+				if (k.length > 0 && v.length > 0)
+				{
+					json[k] = v;
+				}
+			}	
+			
+			return json;
+		} else {
+			return '';
+		}
+
 
 	};
 	
@@ -402,6 +704,18 @@ const __ = (function () {
 	 */
 	__.prototype.imagesloaded = function(props) {
 
+		
+		//count all images on a page
+		if ( typeof (document.images) !== 'undefined' && document.images.length == 0 ) {
+			
+			const imgPlaceholder = document.createElement("div");
+			imgPlaceholder.innerHTML = '<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt="" style="display:none">';
+			// insert liLast at the end of <>
+			document.body.append(imgPlaceholder);		
+			
+		}
+
+		//
 		const self = this;
 		let loadingFn = null,
 			progressFn = null,
@@ -1345,6 +1659,7 @@ const __ = (function () {
 		}, speed/50 );
     }	
 	
+
 
 	/*
 	 * Serialize html form to JSON

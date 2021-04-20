@@ -3,6 +3,7 @@ import {
 	useParams,
 	useLocation
 } from 'react-router-dom';
+import { __ } from '@uixkit.react/components/_utilities/js/_all.js';
 
 import customRoutesConfig from '@uixkit.react/router/RoutesConfig.js';
 

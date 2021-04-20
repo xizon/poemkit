@@ -1,10 +1,51 @@
 import React, { Component, Fragment } from 'react';
+import {
+	Route, 
+	Switch, 
+	NavLink,
+	useRouteMatch,
+} from 'react-router-dom';
 import { __ } from '@uixkit.react/components/_utilities/js/_all.js';
-import LoginPage from '@uixkit.react/pages/Todos/LoginPage.js';
 import Footer from '@uixkit.react/components/Footer/index.js';
 
 
-class Todos extends Component {
+//components list
+import Buttons from '@uixkit.react/pages/ComponentsDemo/Buttons.js';
+
+
+//Might have mismatching versions of React and the renderer (such as React DOM)
+function HookContent() {
+	
+	// The `path` lets us build <Route> paths that are
+	// relative to the parent route, while the `url` lets
+	// us build relative links.
+	let { path, url } = useRouteMatch();
+
+	
+	return (
+		<Fragment>
+		
+			<div><NavLink to={`${url}/buttons`} activeClassName="is-active"><i className="fa fa-check-circle-o" aria-hidden="true"></i> Buttons</NavLink></div>
+
+			 <hr />
+
+			  <Switch>
+				<Route exact path={path}>
+				  <p>None.</p>
+				</Route>
+				<Route path={`${path}/buttons`}>
+				  <Buttons />
+				</Route>
+			  </Switch>
+		</Fragment>
+	)
+
+}
+
+
+
+
+class ComponentsDemo extends Component {
 	constructor(props) {
 
 		//You are extending the React.Component class, and per the ES2015 spec, 
@@ -37,6 +78,7 @@ class Todos extends Component {
     return (
 	  <Fragment>
 		
+		
             <main id="uix-maincontent">
 		
 				{/*
@@ -48,7 +90,7 @@ class Todos extends Component {
 							<div className="row">
 								<div className="col-12">
 		
-           							    <LoginPage />
+									<HookContent />
 
 								</div>
 							</div>
@@ -71,4 +113,4 @@ class Todos extends Component {
     
 }
 
-export default Todos;
+export default ComponentsDemo;

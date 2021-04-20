@@ -1,9 +1,9 @@
 /*!
  * 
  * ## Project Name        :  Uix Kit React
- * ## Version             :  0.0.19
+ * ## Version             :  0.0.22
  * ## Based on            :  Uix Kit React (https://github.com/xizon/uix-kit-react)
- * ## Last Update         :  April 15, 2021
+ * ## Last Update         :  April 20, 2021
  * ## Created by          :  UIUX Lab (https://uiux.cc)
  * ## Contact Us          :  uiuxlab@gmail.com
  * 	
@@ -91,7 +91,7 @@
 /******/
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 72);
+/******/ 	return __webpack_require__(__webpack_require__.s = 75);
 /******/ })
 /************************************************************************/
 /******/ ([
@@ -102,7 +102,7 @@
 
 
 if (true) {
-  module.exports = __webpack_require__(42);
+  module.exports = __webpack_require__(43);
 } else {}
 
 
@@ -161,7 +161,7 @@ module.exports["default"] = module.exports, module.exports.__esModule = true;
 /* 4 */
 /***/ (function(module, exports, __webpack_require__) {
 
-var setPrototypeOf = __webpack_require__(50);
+var setPrototypeOf = __webpack_require__(51);
 
 function _inherits(subClass, superClass) {
   if (typeof superClass !== "function" && superClass !== null) {
@@ -185,9 +185,9 @@ module.exports["default"] = module.exports, module.exports.__esModule = true;
 /* 5 */
 /***/ (function(module, exports, __webpack_require__) {
 
-var _typeof = __webpack_require__(13)["default"];
+var _typeof = __webpack_require__(8)["default"];
 
-var assertThisInitialized = __webpack_require__(10);
+var assertThisInitialized = __webpack_require__(11);
 
 function _possibleConstructorReturn(self, call) {
   if (call && (_typeof(call) === "object" || typeof call === "function")) {
@@ -207,7 +207,7 @@ module.exports["default"] = module.exports, module.exports.__esModule = true;
 "use strict";
 
 
-var bind = __webpack_require__(32);
+var bind = __webpack_require__(33);
 
 /*global toString:true*/
 
@@ -586,6 +586,33 @@ function _inheritsLoose(subClass, superClass) {
 
 /***/ }),
 /* 8 */
+/***/ (function(module, exports) {
+
+function _typeof(obj) {
+  "@babel/helpers - typeof";
+
+  if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") {
+    module.exports = _typeof = function _typeof(obj) {
+      return typeof obj;
+    };
+
+    module.exports["default"] = module.exports, module.exports.__esModule = true;
+  } else {
+    module.exports = _typeof = function _typeof(obj) {
+      return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj;
+    };
+
+    module.exports["default"] = module.exports, module.exports.__esModule = true;
+  }
+
+  return _typeof(obj);
+}
+
+module.exports = _typeof;
+module.exports["default"] = module.exports, module.exports.__esModule = true;
+
+/***/ }),
+/* 9 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /**
@@ -598,18 +625,18 @@ function _inheritsLoose(subClass, superClass) {
 if (false) { var throwOnDirectAccess, ReactIs; } else {
   // By explicitly using `prop-types` you are opting into new production behavior.
   // http://fb.me/prop-types-in-prod
-  module.exports = __webpack_require__(46)();
+  module.exports = __webpack_require__(47)();
 }
 
 
 /***/ }),
-/* 9 */
+/* 10 */
 /***/ (function(module, exports, __webpack_require__) {
 
 module.exports = __webpack_require__(54);
 
 /***/ }),
-/* 10 */
+/* 11 */
 /***/ (function(module, exports) {
 
 function _assertThisInitialized(self) {
@@ -624,20 +651,20 @@ module.exports = _assertThisInitialized;
 module.exports["default"] = module.exports, module.exports.__esModule = true;
 
 /***/ }),
-/* 11 */
+/* 12 */
 /***/ (function(module, exports, __webpack_require__) {
 
 module.exports = __webpack_require__(53);
 
 
 /***/ }),
-/* 12 */
+/* 13 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 
-var reactIs = __webpack_require__(15);
+var reactIs = __webpack_require__(16);
 
 /**
  * Copyright 2015, Yahoo! Inc.
@@ -741,34 +768,33 @@ module.exports = hoistNonReactStatics;
 
 
 /***/ }),
-/* 13 */
+/* 14 */
 /***/ (function(module, exports) {
 
-function _typeof(obj) {
-  "@babel/helpers - typeof";
+function _extends() {
+  module.exports = _extends = Object.assign || function (target) {
+    for (var i = 1; i < arguments.length; i++) {
+      var source = arguments[i];
 
-  if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") {
-    module.exports = _typeof = function _typeof(obj) {
-      return typeof obj;
-    };
+      for (var key in source) {
+        if (Object.prototype.hasOwnProperty.call(source, key)) {
+          target[key] = source[key];
+        }
+      }
+    }
 
-    module.exports["default"] = module.exports, module.exports.__esModule = true;
-  } else {
-    module.exports = _typeof = function _typeof(obj) {
-      return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj;
-    };
+    return target;
+  };
 
-    module.exports["default"] = module.exports, module.exports.__esModule = true;
-  }
-
-  return _typeof(obj);
+  module.exports["default"] = module.exports, module.exports.__esModule = true;
+  return _extends.apply(this, arguments);
 }
 
-module.exports = _typeof;
+module.exports = _extends;
 module.exports["default"] = module.exports, module.exports.__esModule = true;
 
 /***/ }),
-/* 14 */
+/* 15 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -797,24 +823,24 @@ if (true) {
   // DCE check should happen before ReactDOM bundle executes so that
   // DevTools can report bad minification during injection.
   checkDCE();
-  module.exports = __webpack_require__(43);
+  module.exports = __webpack_require__(44);
 } else {}
 
 
 /***/ }),
-/* 15 */
+/* 16 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 
 if (true) {
-  module.exports = __webpack_require__(48);
+  module.exports = __webpack_require__(49);
 } else {}
 
 
 /***/ }),
-/* 16 */
+/* 17 */
 /***/ (function(module, exports) {
 
 function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) {
@@ -857,7 +883,7 @@ module.exports = _asyncToGenerator;
 module.exports["default"] = module.exports, module.exports.__esModule = true;
 
 /***/ }),
-/* 17 */
+/* 18 */
 /***/ (function(module, exports) {
 
 function _defineProperty(obj, key, value) {
@@ -879,13 +905,7 @@ module.exports = _defineProperty;
 module.exports["default"] = module.exports, module.exports.__esModule = true;
 
 /***/ }),
-/* 18 */,
-/* 19 */
-/***/ (function(module, exports, __webpack_require__) {
-
-// extracted by mini-css-extract-plugin
-
-/***/ }),
+/* 19 */,
 /* 20 */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -929,10 +949,16 @@ module.exports["default"] = module.exports, module.exports.__esModule = true;
 
 /***/ }),
 /* 27 */
+/***/ (function(module, exports, __webpack_require__) {
+
+// extracted by mini-css-extract-plugin
+
+/***/ }),
+/* 28 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* WEBPACK VAR INJECTION */(function(global, module) {/* harmony import */ var _ponyfill_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(40);
+/* WEBPACK VAR INJECTION */(function(global, module) {/* harmony import */ var _ponyfill_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(41);
 /* global window */
 
 
@@ -951,17 +977,17 @@ if (typeof self !== 'undefined') {
 var result = Object(_ponyfill_js__WEBPACK_IMPORTED_MODULE_0__[/* default */ "a"])(root);
 /* harmony default export */ __webpack_exports__["a"] = (result);
 
-/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(31), __webpack_require__(49)(module)))
+/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(32), __webpack_require__(50)(module)))
 
 /***/ }),
-/* 28 */
+/* 29 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 /* WEBPACK VAR INJECTION */(function(global) {/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(0);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var _babel_runtime_helpers_esm_inheritsLoose__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(7);
-/* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(8);
+/* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(9);
 /* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(prop_types__WEBPACK_IMPORTED_MODULE_2__);
 
 
@@ -1138,13 +1164,13 @@ var index = react__WEBPACK_IMPORTED_MODULE_0___default.a.createContext || create
 
 /* harmony default export */ __webpack_exports__["a"] = (index);
 
-/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(31)))
+/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(32)))
 
 /***/ }),
-/* 29 */
+/* 30 */
 /***/ (function(module, exports, __webpack_require__) {
 
-var isarray = __webpack_require__(51)
+var isarray = __webpack_require__(52)
 
 /**
  * Expose `pathToRegexp`.
@@ -1573,7 +1599,7 @@ function pathToRegexp (path, keys, options) {
 
 
 /***/ }),
-/* 30 */
+/* 31 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1670,7 +1696,7 @@ module.exports = shouldUseNative() ? Object.assign : function (target, source) {
 
 
 /***/ }),
-/* 31 */
+/* 32 */
 /***/ (function(module, exports) {
 
 var g;
@@ -1696,7 +1722,7 @@ module.exports = g;
 
 
 /***/ }),
-/* 32 */
+/* 33 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1714,7 +1740,7 @@ module.exports = function bind(fn, thisArg) {
 
 
 /***/ }),
-/* 33 */
+/* 34 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1791,7 +1817,7 @@ module.exports = function buildURL(url, params, paramsSerializer) {
 
 
 /***/ }),
-/* 34 */
+/* 35 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1803,7 +1829,7 @@ module.exports = function isCancel(value) {
 
 
 /***/ }),
-/* 35 */
+/* 36 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1826,10 +1852,10 @@ function getDefaultAdapter() {
   var adapter;
   if (typeof XMLHttpRequest !== 'undefined') {
     // For browsers use XHR adapter
-    adapter = __webpack_require__(36);
+    adapter = __webpack_require__(37);
   } else if (typeof process !== 'undefined' && Object.prototype.toString.call(process) === '[object process]') {
     // For node use HTTP adapter
-    adapter = __webpack_require__(36);
+    adapter = __webpack_require__(37);
   }
   return adapter;
 }
@@ -1909,7 +1935,7 @@ module.exports = defaults;
 /* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(59)))
 
 /***/ }),
-/* 36 */
+/* 37 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1918,11 +1944,11 @@ module.exports = defaults;
 var utils = __webpack_require__(6);
 var settle = __webpack_require__(61);
 var cookies = __webpack_require__(63);
-var buildURL = __webpack_require__(33);
+var buildURL = __webpack_require__(34);
 var buildFullPath = __webpack_require__(64);
 var parseHeaders = __webpack_require__(67);
 var isURLSameOrigin = __webpack_require__(68);
-var createError = __webpack_require__(37);
+var createError = __webpack_require__(38);
 
 module.exports = function xhrAdapter(config) {
   return new Promise(function dispatchXhrRequest(resolve, reject) {
@@ -2095,7 +2121,7 @@ module.exports = function xhrAdapter(config) {
 
 
 /***/ }),
-/* 37 */
+/* 38 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -2120,7 +2146,7 @@ module.exports = function createError(message, config, code, request, response) 
 
 
 /***/ }),
-/* 38 */
+/* 39 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -2214,7 +2240,7 @@ module.exports = function mergeConfig(config1, config2) {
 
 
 /***/ }),
-/* 39 */
+/* 40 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -2240,7 +2266,7 @@ module.exports = Cancel;
 
 
 /***/ }),
-/* 40 */
+/* 41 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -2265,33 +2291,35 @@ function symbolObservablePonyfill(root) {
 
 
 /***/ }),
-/* 41 */
-/***/ (function(module, exports) {
+/* 42 */
+/***/ (function(module, exports, __webpack_require__) {
 
-function _extends() {
-  module.exports = _extends = Object.assign || function (target) {
-    for (var i = 1; i < arguments.length; i++) {
-      var source = arguments[i];
+var objectWithoutPropertiesLoose = __webpack_require__(72);
 
-      for (var key in source) {
-        if (Object.prototype.hasOwnProperty.call(source, key)) {
-          target[key] = source[key];
-        }
-      }
+function _objectWithoutProperties(source, excluded) {
+  if (source == null) return {};
+  var target = objectWithoutPropertiesLoose(source, excluded);
+  var key, i;
+
+  if (Object.getOwnPropertySymbols) {
+    var sourceSymbolKeys = Object.getOwnPropertySymbols(source);
+
+    for (i = 0; i < sourceSymbolKeys.length; i++) {
+      key = sourceSymbolKeys[i];
+      if (excluded.indexOf(key) >= 0) continue;
+      if (!Object.prototype.propertyIsEnumerable.call(source, key)) continue;
+      target[key] = source[key];
     }
+  }
 
-    return target;
-  };
-
-  module.exports["default"] = module.exports, module.exports.__esModule = true;
-  return _extends.apply(this, arguments);
+  return target;
 }
 
-module.exports = _extends;
+module.exports = _objectWithoutProperties;
 module.exports["default"] = module.exports, module.exports.__esModule = true;
 
 /***/ }),
-/* 42 */
+/* 43 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -2303,7 +2331,7 @@ module.exports["default"] = module.exports, module.exports.__esModule = true;
  * This source code is licensed under the MIT license found in the
  * LICENSE file in the root directory of this source tree.
  */
-var l=__webpack_require__(30),n=60103,p=60106;exports.Fragment=60107;exports.StrictMode=60108;exports.Profiler=60114;var q=60109,r=60110,t=60112;exports.Suspense=60113;var u=60115,v=60116;
+var l=__webpack_require__(31),n=60103,p=60106;exports.Fragment=60107;exports.StrictMode=60108;exports.Profiler=60114;var q=60109,r=60110,t=60112;exports.Suspense=60113;var u=60115,v=60116;
 if("function"===typeof Symbol&&Symbol.for){var w=Symbol.for;n=w("react.element");p=w("react.portal");exports.Fragment=w("react.fragment");exports.StrictMode=w("react.strict_mode");exports.Profiler=w("react.profiler");q=w("react.provider");r=w("react.context");t=w("react.forward_ref");exports.Suspense=w("react.suspense");u=w("react.memo");v=w("react.lazy")}var x="function"===typeof Symbol&&Symbol.iterator;
 function y(a){if(null===a||"object"!==typeof a)return null;a=x&&a[x]||a["@@iterator"];return"function"===typeof a?a:null}function z(a){for(var b="https://reactjs.org/docs/error-decoder.html?invariant="+a,c=1;c<arguments.length;c++)b+="&args[]="+encodeURIComponent(arguments[c]);return"Minified React error #"+a+"; visit "+b+" for the full message or use the non-minified dev environment for full errors and additional helpful warnings."}
 var A={isMounted:function(){return!1},enqueueForceUpdate:function(){},enqueueReplaceState:function(){},enqueueSetState:function(){}},B={};function C(a,b,c){this.props=a;this.context=b;this.refs=B;this.updater=c||A}C.prototype.isReactComponent={};C.prototype.setState=function(a,b){if("object"!==typeof a&&"function"!==typeof a&&null!=a)throw Error(z(85));this.updater.enqueueSetState(this,a,b,"setState")};C.prototype.forceUpdate=function(a){this.updater.enqueueForceUpdate(this,a,"forceUpdate")};
@@ -2321,7 +2349,7 @@ exports.useLayoutEffect=function(a,b){return S().useLayoutEffect(a,b)};exports.u
 
 
 /***/ }),
-/* 43 */
+/* 44 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -2336,7 +2364,7 @@ exports.useLayoutEffect=function(a,b){return S().useLayoutEffect(a,b)};exports.u
 /*
  Modernizr 3.0.0pre (Custom Build) | MIT
 */
-var aa=__webpack_require__(0),m=__webpack_require__(30),r=__webpack_require__(44);function y(a){for(var b="https://reactjs.org/docs/error-decoder.html?invariant="+a,c=1;c<arguments.length;c++)b+="&args[]="+encodeURIComponent(arguments[c]);return"Minified React error #"+a+"; visit "+b+" for the full message or use the non-minified dev environment for full errors and additional helpful warnings."}if(!aa)throw Error(y(227));var ba=new Set,ca={};function da(a,b){ea(a,b);ea(a+"Capture",b)}
+var aa=__webpack_require__(0),m=__webpack_require__(31),r=__webpack_require__(45);function y(a){for(var b="https://reactjs.org/docs/error-decoder.html?invariant="+a,c=1;c<arguments.length;c++)b+="&args[]="+encodeURIComponent(arguments[c]);return"Minified React error #"+a+"; visit "+b+" for the full message or use the non-minified dev environment for full errors and additional helpful warnings."}if(!aa)throw Error(y(227));var ba=new Set,ca={};function da(a,b){ea(a,b);ea(a+"Capture",b)}
 function ea(a,b){ca[a]=b;for(a=0;a<b.length;a++)ba.add(b[a])}
 var fa=!("undefined"===typeof window||"undefined"===typeof window.document||"undefined"===typeof window.document.createElement),ha=/^[:A-Z_a-z\u00C0-\u00D6\u00D8-\u00F6\u00F8-\u02FF\u0370-\u037D\u037F-\u1FFF\u200C-\u200D\u2070-\u218F\u2C00-\u2FEF\u3001-\uD7FF\uF900-\uFDCF\uFDF0-\uFFFD][:A-Z_a-z\u00C0-\u00D6\u00D8-\u00F6\u00F8-\u02FF\u0370-\u037D\u037F-\u1FFF\u200C-\u200D\u2070-\u218F\u2C00-\u2FEF\u3001-\uD7FF\uF900-\uFDCF\uFDF0-\uFFFD\-.0-9\u00B7\u0300-\u036F\u203F-\u2040]*$/,ia=Object.prototype.hasOwnProperty,
 ja={},ka={};function la(a){if(ia.call(ka,a))return!0;if(ia.call(ja,a))return!1;if(ha.test(a))return ka[a]=!0;ja[a]=!0;return!1}function ma(a,b,c,d){if(null!==c&&0===c.type)return!1;switch(typeof b){case "function":case "symbol":return!0;case "boolean":if(d)return!1;if(null!==c)return!c.acceptsBooleans;a=a.toLowerCase().slice(0,5);return"data-"!==a&&"aria-"!==a;default:return!1}}
@@ -2625,19 +2653,19 @@ exports.unstable_renderSubtreeIntoContainer=function(a,b,c,d){if(!rk(c))throw Er
 
 
 /***/ }),
-/* 44 */
+/* 45 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 
 if (true) {
-  module.exports = __webpack_require__(45);
+  module.exports = __webpack_require__(46);
 } else {}
 
 
 /***/ }),
-/* 45 */
+/* 46 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -2664,7 +2692,7 @@ exports.unstable_wrapCallback=function(a){var b=P;return function(){var c=P;P=b;
 
 
 /***/ }),
-/* 46 */
+/* 47 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -2677,7 +2705,7 @@ exports.unstable_wrapCallback=function(a){var b=P;return function(){var c=P;P=b;
 
 
 
-var ReactPropTypesSecret = __webpack_require__(47);
+var ReactPropTypesSecret = __webpack_require__(48);
 
 function emptyFunction() {}
 function emptyFunctionWithReset() {}
@@ -2735,7 +2763,7 @@ module.exports = function() {
 
 
 /***/ }),
-/* 47 */
+/* 48 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -2754,7 +2782,7 @@ module.exports = ReactPropTypesSecret;
 
 
 /***/ }),
-/* 48 */
+/* 49 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -2776,7 +2804,7 @@ exports.isValidElementType=function(a){return"string"===typeof a||"function"===t
 
 
 /***/ }),
-/* 49 */
+/* 50 */
 /***/ (function(module, exports) {
 
 module.exports = function(originalModule) {
@@ -2806,7 +2834,7 @@ module.exports = function(originalModule) {
 
 
 /***/ }),
-/* 50 */
+/* 51 */
 /***/ (function(module, exports) {
 
 function _setPrototypeOf(o, p) {
@@ -2823,19 +2851,13 @@ module.exports = _setPrototypeOf;
 module.exports["default"] = module.exports, module.exports.__esModule = true;
 
 /***/ }),
-/* 51 */
+/* 52 */
 /***/ (function(module, exports) {
 
 module.exports = Array.isArray || function (arr) {
   return Object.prototype.toString.call(arr) == '[object Array]';
 };
 
-
-/***/ }),
-/* 52 */
-/***/ (function(module, exports, __webpack_require__) {
-
-// extracted by mini-css-extract-plugin
 
 /***/ }),
 /* 53 */
@@ -3599,10 +3621,10 @@ try {
 
 
 var utils = __webpack_require__(6);
-var bind = __webpack_require__(32);
+var bind = __webpack_require__(33);
 var Axios = __webpack_require__(55);
-var mergeConfig = __webpack_require__(38);
-var defaults = __webpack_require__(35);
+var mergeConfig = __webpack_require__(39);
+var defaults = __webpack_require__(36);
 
 /**
  * Create an instance of Axios
@@ -3635,9 +3657,9 @@ axios.create = function create(instanceConfig) {
 };
 
 // Expose Cancel & CancelToken
-axios.Cancel = __webpack_require__(39);
+axios.Cancel = __webpack_require__(40);
 axios.CancelToken = __webpack_require__(69);
-axios.isCancel = __webpack_require__(34);
+axios.isCancel = __webpack_require__(35);
 
 // Expose all/spread
 axios.all = function all(promises) {
@@ -3662,10 +3684,10 @@ module.exports.default = axios;
 
 
 var utils = __webpack_require__(6);
-var buildURL = __webpack_require__(33);
+var buildURL = __webpack_require__(34);
 var InterceptorManager = __webpack_require__(56);
 var dispatchRequest = __webpack_require__(57);
-var mergeConfig = __webpack_require__(38);
+var mergeConfig = __webpack_require__(39);
 
 /**
  * Create a new instance of Axios
@@ -3824,8 +3846,8 @@ module.exports = InterceptorManager;
 
 var utils = __webpack_require__(6);
 var transformData = __webpack_require__(58);
-var isCancel = __webpack_require__(34);
-var defaults = __webpack_require__(35);
+var isCancel = __webpack_require__(35);
+var defaults = __webpack_require__(36);
 
 /**
  * Throws a `Cancel` if cancellation has been requested.
@@ -4144,7 +4166,7 @@ module.exports = function normalizeHeaderName(headers, normalizedName) {
 "use strict";
 
 
-var createError = __webpack_require__(37);
+var createError = __webpack_require__(38);
 
 /**
  * Resolve or reject a Promise based on response status.
@@ -4489,7 +4511,7 @@ module.exports = (
 "use strict";
 
 
-var Cancel = __webpack_require__(39);
+var Cancel = __webpack_require__(40);
 
 /**
  * A `CancelToken` is an object that can be used to request cancellation of an operation.
@@ -4600,6 +4622,40 @@ module.exports = function isAxiosError(payload) {
 
 /***/ }),
 /* 72 */
+/***/ (function(module, exports) {
+
+function _objectWithoutPropertiesLoose(source, excluded) {
+  if (source == null) return {};
+  var target = {};
+  var sourceKeys = Object.keys(source);
+  var key, i;
+
+  for (i = 0; i < sourceKeys.length; i++) {
+    key = sourceKeys[i];
+    if (excluded.indexOf(key) >= 0) continue;
+    target[key] = source[key];
+  }
+
+  return target;
+}
+
+module.exports = _objectWithoutPropertiesLoose;
+module.exports["default"] = module.exports, module.exports.__esModule = true;
+
+/***/ }),
+/* 73 */
+/***/ (function(module, exports, __webpack_require__) {
+
+// extracted by mini-css-extract-plugin
+
+/***/ }),
+/* 74 */
+/***/ (function(module, exports, __webpack_require__) {
+
+// extracted by mini-css-extract-plugin
+
+/***/ }),
+/* 75 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -4611,11 +4667,11 @@ var react = __webpack_require__(0);
 var react_default = /*#__PURE__*/__webpack_require__.n(react);
 
 // EXTERNAL MODULE: ./node_modules/react-dom/index.js
-var react_dom = __webpack_require__(14);
+var react_dom = __webpack_require__(15);
 var react_dom_default = /*#__PURE__*/__webpack_require__.n(react_dom);
 
 // EXTERNAL MODULE: ./node_modules/prop-types/index.js
-var prop_types = __webpack_require__(8);
+var prop_types = __webpack_require__(9);
 
 // CONCATENATED MODULE: ./node_modules/react-redux/es/components/Context.js
 
@@ -4851,11 +4907,11 @@ function _objectWithoutPropertiesLoose(source, excluded) {
   return target;
 }
 // EXTERNAL MODULE: ./node_modules/hoist-non-react-statics/dist/hoist-non-react-statics.cjs.js
-var hoist_non_react_statics_cjs = __webpack_require__(12);
+var hoist_non_react_statics_cjs = __webpack_require__(13);
 var hoist_non_react_statics_cjs_default = /*#__PURE__*/__webpack_require__.n(hoist_non_react_statics_cjs);
 
 // EXTERNAL MODULE: ./node_modules/react-is/index.js
-var react_is = __webpack_require__(15);
+var react_is = __webpack_require__(16);
 
 // CONCATENATED MODULE: ./node_modules/react-redux/es/components/connectAdvanced.js
 
@@ -5238,7 +5294,7 @@ function shallowEqual(objA, objB) {
   return true;
 }
 // EXTERNAL MODULE: ./node_modules/symbol-observable/es/index.js
-var es = __webpack_require__(27);
+var es = __webpack_require__(28);
 
 // CONCATENATED MODULE: ./node_modules/redux/es/redux.js
 
@@ -7601,10 +7657,10 @@ function createMemoryHistory(props) {
 
 
 // EXTERNAL MODULE: ./node_modules/mini-create-react-context/dist/esm/index.js
-var esm = __webpack_require__(28);
+var esm = __webpack_require__(29);
 
 // EXTERNAL MODULE: ./node_modules/path-to-regexp/index.js
-var path_to_regexp = __webpack_require__(29);
+var path_to_regexp = __webpack_require__(30);
 var path_to_regexp_default = /*#__PURE__*/__webpack_require__.n(path_to_regexp);
 
 // CONCATENATED MODULE: ./node_modules/react-router/esm/react-router.js
@@ -8615,31 +8671,31 @@ var getPrototypeOf = __webpack_require__(1);
 var getPrototypeOf_default = /*#__PURE__*/__webpack_require__.n(getPrototypeOf);
 
 // EXTERNAL MODULE: ./src/client/components/_third-party-plugins/Bootstrap/scss/bootstrap.scss
-var bootstrap = __webpack_require__(19);
+var bootstrap = __webpack_require__(20);
 
 // EXTERNAL MODULE: ./src/client/components/_third-party-plugins/FontAwesome/scss/fontawesome.scss
-var fontawesome = __webpack_require__(20);
+var fontawesome = __webpack_require__(21);
 
 // EXTERNAL MODULE: ./src/client/components/_third-party-plugins/FontAwesome/scss/v4-shims.scss
-var v4_shims = __webpack_require__(21);
+var v4_shims = __webpack_require__(22);
 
 // EXTERNAL MODULE: ./src/client/components/_third-party-plugins/FontAwesome/scss/solid.scss
-var solid = __webpack_require__(22);
+var solid = __webpack_require__(23);
 
 // EXTERNAL MODULE: ./src/client/components/_third-party-plugins/FontAwesome/scss/brands.scss
-var brands = __webpack_require__(23);
+var brands = __webpack_require__(24);
 
 // EXTERNAL MODULE: ./src/client/components/_third-party-plugins/FontAwesome/scss/regular.scss
-var regular = __webpack_require__(24);
+var regular = __webpack_require__(25);
 
 // EXTERNAL MODULE: ./src/client/components/_utilities/scss/_all.scss
-var _all = __webpack_require__(25);
+var _all = __webpack_require__(26);
 
-// EXTERNAL MODULE: ./src/client/components/_utilities/scss/rtl/_all-rtl.scss
-var _all_rtl = __webpack_require__(26);
+// EXTERNAL MODULE: ./src/client/components/_utilities/scss-rtl/_all.scss
+var scss_rtl_all = __webpack_require__(27);
 
 // EXTERNAL MODULE: ./node_modules/@babel/runtime/helpers/typeof.js
-var helpers_typeof = __webpack_require__(13);
+var helpers_typeof = __webpack_require__(8);
 var typeof_default = /*#__PURE__*/__webpack_require__.n(helpers_typeof);
 
 // CONCATENATED MODULE: ./src/client/components/_utilities/js/shortcut.js
@@ -8650,8 +8706,8 @@ var typeof_default = /*#__PURE__*/__webpack_require__.n(helpers_typeof);
  * Core Shortcut
  *
  * @package: uix-kit-react
- * @version: 0.1
- * @last update: April 11, 2021
+ * @version: 0.15
+ * @last update: April 20, 2021
  * @license: MIT
  *
  *************************************
@@ -8805,6 +8861,13 @@ __( document ).ready( function() {
 			});
 
 
+			console.log( __.browser.isIE );  //.isMobile, .isAndroid, .isPC, .isSafari, .isIE, .supportsPassive
+			console.log( __.GUID.create() );
+			console.log( __.math.evaluate( '100/3' ) );
+			console.log( __.cssProperty.getAbsoluteCoordinates( __( '.col-12' )[0] ).left );
+			console.log( __.styleFormat( 'font-size: 10px;background: #51B801; color:#fff; border-radius: 5px;padding: 2px 3px;display: inline-block;margin-left: 3px;' ) )
+			console.log( __.trim( 'string string spacing string' ) );
+
 
 
 
@@ -8825,6 +8888,11 @@ var shortcut_ = function () {
   function __(s, root) {
     return __.prototype.core(s, root);
   }
+  /*
+   * Get real style data
+   * @private method
+   */
+
 
   function getStyle(el, attr) {
     var self = el;
@@ -8845,6 +8913,11 @@ var shortcut_ = function () {
       return 0;
     }
   }
+  /*
+   * Determine whether it is Child Node
+   * @private method
+   */
+
 
   function isChild(el, p) {
     if (!el || !p || !p.childNodes || !p.childNodes.length) {
@@ -8861,6 +8934,11 @@ var shortcut_ = function () {
       return found;
     }).length;
   }
+  /*
+   * Determine whether it is in JSON format
+   * @private method
+   */
+
 
   function isJSON(str) {
     if (typeof str === 'string' && str.length > 0) {
@@ -8881,6 +8959,11 @@ var shortcut_ = function () {
       }
     }
   }
+  /*
+   * Delete elements in the array
+   * @private method
+   */
+
 
   function removeArray(arr) {
     var what,
@@ -8898,8 +8981,202 @@ var shortcut_ = function () {
 
     return arr;
   }
+  /*
+   * Convert string to camel case
+   * @private method
+   */
+
+
+  function toCamelCase(s) {
+    if (typeof s === 'string') {
+      var firstWord = "";
+      var arr = s.split("-");
+
+      for (var i = 1; i < arr.length; i++) {
+        firstWord = arr[i].charAt(0).toUpperCase();
+        arr[i] = firstWord + arr[i].slice(1);
+      }
+
+      arr = arr.join(""); //Convert the arr array to a string
+
+      return arr;
+    } else {
+      return s;
+    }
+  }
   /* ------------- Independent Methods -------------- */
 
+  /*
+   * Determine whether it is a special browser
+   *
+   * @return {Json}  - Boolean judgment collection of common browsers
+   */
+
+
+  __.browser = __.browser || function () {
+    var browser = {};
+
+    if (typeof navigator !== 'undefined') {
+      // Add feature test for passive event listener support
+      var supportsPassive = false;
+
+      try {
+        document.addEventListener("test", null, {
+          get passive() {
+            supportsPassive = true;
+          }
+
+        });
+      } catch (e) {}
+
+      browser = {
+        isMobile: /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent),
+        isAndroid: /(android)/i.test(navigator.userAgent),
+        isPC: !navigator.userAgent.match(/(iPhone|iPod|Android|ios|Mobile)/i),
+        isSafari: !!navigator.userAgent.match(/Version\/[\d\.]+.*Safari/),
+
+        /*Test to 9, 10. */
+        isIE: !!window.ActiveXObject || "ActiveXObject" in window,
+
+        /*Test to 6 ~ 11 (not edge) */
+        supportsPassive: supportsPassive
+      };
+    }
+
+    return browser;
+  }();
+  /*
+   * Create GUID / UUID
+   *
+   * @description This function can be used separately in HTML pages or custom JavaScript.
+   * @return {String}                        - The globally-unique identifiers.
+   */
+
+
+  __.GUID = __.GUID || function () {
+    function t() {}
+
+    return t.version = "0.0.1", t.create = function () {
+      return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function (c) {
+        var r = Math.random() * 16 | 0,
+            v = c == 'x' ? r : r & 0x3 | 0x8;
+        return v.toString(16);
+      });
+    }, //
+    t;
+  }();
+  /*
+   * Evaluating a string as a mathematical expression in JavaScript
+   *
+   * @description This function can be used separately in HTML pages or custom JavaScript.
+   * @return {String}            - New calculation result.
+   */
+
+
+  __.math = __.math || function () {
+    function t() {}
+
+    return t.version = "0.0.1", t.evaluate = function (s) {
+      var chars = s.replace(/\s/g, '').split("");
+      var n = [],
+          op = [],
+          index = 0,
+          oplast = true;
+      n[index] = ""; // Parse the expression
+
+      for (var c = 0; c < chars.length; c++) {
+        if (isNaN(parseInt(chars[c])) && chars[c] !== "." && !oplast) {
+          op[index] = chars[c];
+          index++;
+          n[index] = "";
+          oplast = true;
+        } else {
+          n[index] += chars[c];
+          oplast = false;
+        }
+      } // Calculate the expression
+
+
+      s = parseFloat(n[0]);
+
+      for (var o = 0; o < op.length; o++) {
+        var num = parseFloat(n[o + 1]);
+
+        switch (op[o]) {
+          case "+":
+            s = s + num;
+            break;
+
+          case "-":
+            s = s - num;
+            break;
+
+          case "*":
+            s = s * num;
+            break;
+
+          case "/":
+            s = s / num;
+            break;
+        }
+      }
+
+      return s;
+    }, //
+    t;
+  }();
+  /*
+   * Get the CSS property
+   *
+   * @description This function can be used separately in HTML pages or custom JavaScript.
+   * @param  {!Element} el     - The Element for which to get the computed style. Using class name or ID to locate.
+   * @return {String|Object}   - The value of property.
+   */
+
+
+  __.cssProperty = __.cssProperty || function () {
+    function t() {}
+
+    return t.version = "0.0.1", t.getTransitionDuration = function (el) {
+      if (typeof_default()(el) === ( true ? "undefined" : undefined)) {
+        return 0;
+      }
+
+      var style = window.getComputedStyle(el),
+          duration = style.webkitTransitionDuration,
+          delay = style.webkitTransitionDelay;
+
+      if (typeof_default()(duration) != ( true ? "undefined" : undefined)) {
+        // fix miliseconds vs seconds
+        duration = duration.indexOf("ms") > -1 ? parseFloat(duration) : parseFloat(duration) * 1000;
+        delay = delay.indexOf("ms") > -1 ? parseFloat(delay) : parseFloat(delay) * 1000;
+        return duration;
+      } else {
+        return 0;
+      }
+    }, //
+    t.getAbsoluteCoordinates = function (el) {
+      var windowWidth = window.innerWidth,
+          leftPos = null,
+          topPos = null;
+
+      if (!document.getElementsByTagName('body')[0].className.match(/rtl/)) {
+        leftPos = el.offsetLeft == 0 ? el.parentElement.offsetLeft : el.offsetLeft;
+        topPos = el.offsetTop == 0 ? el.parentElement.offsetTop : el.offsetTop;
+      } else {
+        // width and height in pixels, including padding and border
+        // Corresponds to jQuery outerWidth(), outerHeight()
+        leftPos = el.offsetLeft == 0 ? windowWidth - (el.parentElement.offsetLeft + el.parentElement.offsetWidth) : windowWidth - (el.offsetLeft + el.offsetWidth);
+        topPos = el.offsetTop == 0 ? windowWidth - (el.parentElement.offsetTop + el.parentElement.offsetHeight) : windowWidth - (el.offsetTop + el.offsetHeight);
+      }
+
+      return {
+        'left': leftPos,
+        'top': topPos
+      };
+    }, //
+    t;
+  }();
   /*
    * Perform an asynchronous HTTP (Ajax) request.
    *
@@ -8933,6 +9210,65 @@ var shortcut_ = function () {
       })["catch"](function (error) {
         console.error('Error:', error);
       });
+    }
+  };
+  /*
+   * Remove all spaces in the string
+   *
+   * @param  {String} s                 - Any string.
+   * @param  {Boolean} isGlobal         - If the value is `true`, remove all spaces including the middle
+   * @return {String}                   - A new string with no spaces
+   */
+
+
+  __.trim = function (s) {
+    var isGlobal = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : false;
+
+    if (typeof s === 'string') {
+      var result;
+      result = s.replace(/(^\s+)|(\s+$)/g, "");
+
+      if (isGlobal === true) {
+        result = result.replace(/\s/g, "");
+      }
+
+      return result;
+    } else {
+      return s;
+    }
+  };
+  /*
+   * Convert HTML Element's `Style` Attribute to JSON
+   *
+   * @param  {String} str   - The content of the style attribute in the HTML element, usually a string
+   * @return {Json}     - An HTML element to a JSON object
+   */
+
+
+  __.styleFormat = function (s) {
+    s = s || '';
+
+    if (s.length > 0) {
+      var styles = s.split(';'),
+          json = {};
+      var i = styles.length,
+          style,
+          k,
+          v;
+
+      while (i--) {
+        style = styles[i].split(':');
+        k = toCamelCase(__.trim(style[0]));
+        v = __.trim(style[1]);
+
+        if (k.length > 0 && v.length > 0) {
+          json[k] = v;
+        }
+      }
+
+      return json;
+    } else {
+      return '';
     }
   };
   /* ---------------- API methods ----------------- */
@@ -9000,6 +9336,15 @@ var shortcut_ = function () {
 
 
   __.prototype.imagesloaded = function (props) {
+    //count all images on a page
+    if (typeof document.images !== 'undefined' && document.images.length == 0) {
+      var imgPlaceholder = document.createElement("div");
+      imgPlaceholder.innerHTML = '<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt="" style="display:none">'; // insert liLast at the end of <>
+
+      document.body.append(imgPlaceholder);
+    } //
+
+
     var self = this;
     var loadingFn = null,
         progressFn = null,
@@ -10051,9 +10396,33 @@ var shortcut_ = function () {
 	TABLE OF CONTENTS FOR `ALL UTILITIES`
 	---------------------------
 
-
-
 */
+
+/*
+ * Core Shortcut
+ *
+ */
+
+/*
+ * Global variables from front pages
+ *
+ */
+
+var //If the file is in the root directory, you can leave it empty.
+//If in another directory, you can write: "/blog"
+templateUrl, //Eg. https://uiux.cc
+homeUrl, //Eg. https://uiux.cc/wp-admin/admin-ajax.php
+ajaxUrl;
+
+if (typeof APP_ROOTPATH === 'undefined') {
+  templateUrl = '';
+  homeUrl = '';
+  ajaxUrl = '';
+} else {
+  templateUrl = APP_ROOTPATH.templateUrl.replace(/\/\s*$/, '');
+  homeUrl = APP_ROOTPATH.homeUrl.replace(/\/\s*$/, '');
+  ajaxUrl = APP_ROOTPATH.ajaxUrl.replace(/\/\s*$/, '');
+}
 
 
 // CONCATENATED MODULE: ./src/client/components/Header/index.js
@@ -10123,9 +10492,10 @@ var Header_Header = /*#__PURE__*/function (_Component) {
   }, {
     key: "render",
     value: function render() {
-      var UixMenuContent = this.props.UixMenuContent ? this.props.UixMenuContent : '';
+      var htmlString = this.props.htmlString ? this.props.htmlString : '';
+      var headerOverlayEnable = this.props.headerOverlayEnable == 'true' ? true : false;
       return /*#__PURE__*/react_default.a.createElement(react["Fragment"], null, /*#__PURE__*/react_default.a.createElement("header", {
-        className: "uix-header__container"
+        className: headerOverlayEnable ? 'uix-header__container uix-header__container--overlay' : 'uix-header__container'
       }, /*#__PURE__*/react_default.a.createElement("div", {
         className: "uix-header"
       }, /*#__PURE__*/react_default.a.createElement("div", {
@@ -10136,7 +10506,7 @@ var Header_Header = /*#__PURE__*/function (_Component) {
         href: "/index"
       }, /*#__PURE__*/react_default.a.createElement("img", {
         src: "/assets/images/logo.png",
-        alt: "Uix Kit"
+        alt: "Uix Kit React"
       }))), /*#__PURE__*/react_default.a.createElement("nav", {
         className: "uix-menu__container"
       }, /*#__PURE__*/react_default.a.createElement("div", {
@@ -10145,27 +10515,27 @@ var Header_Header = /*#__PURE__*/function (_Component) {
         className: "uix-brand--mobile"
       }, /*#__PURE__*/react_default.a.createElement("img", {
         src: "/assets/images/logo-colorful.png",
-        alt: "Site Name"
+        alt: "Uix Kit React"
       })), /*#__PURE__*/react_default.a.createElement("ul", {
         className: "uix-menu"
-      }, UixMenuContent), /*#__PURE__*/react_default.a.createElement("div", {
+      }, htmlString), /*#__PURE__*/react_default.a.createElement("div", {
         className: "uix-menu__right-box"
       }, /*#__PURE__*/react_default.a.createElement("a", {
-        className: "uix-social-btn uix-social-btn--small uix-social-btn--circle uix-social-btn--thin",
+        className: "uix-social-btn uix-social-btn--small uix-social-btn--circle uix-social-btn--thin uix-social-btn--white",
         title: "Follow us on Twitter",
         href: "https://twitter.com/uiux_lab",
         target: "_blank"
       }, /*#__PURE__*/react_default.a.createElement("i", {
         className: "fa fa-twitter"
       })), /*#__PURE__*/react_default.a.createElement("a", {
-        className: "uix-social-btn uix-social-btn--small uix-social-btn--circle uix-social-btn--thin",
+        className: "uix-social-btn uix-social-btn--small uix-social-btn--circle uix-social-btn--thin uix-social-btn--white",
         title: "Follow us on Facebook",
         href: "https://www.facebook.com/uiuxlabhome",
         target: "_blank"
       }, /*#__PURE__*/react_default.a.createElement("i", {
         className: "fa fa-facebook"
       })), /*#__PURE__*/react_default.a.createElement("a", {
-        className: "uix-social-btn uix-social-btn--small uix-social-btn--circle uix-social-btn--thin",
+        className: "uix-social-btn uix-social-btn--small uix-social-btn--circle uix-social-btn--thin uix-social-btn--white",
         title: "Fork on Github",
         href: "https://github.com/xizon/uix-kit-react",
         target: "_blank"
@@ -10173,7 +10543,9 @@ var Header_Header = /*#__PURE__*/function (_Component) {
         className: "fa fa-github"
       })))))), /*#__PURE__*/react_default.a.createElement("div", {
         className: "uix-clearfix"
-      }))));
+      }))), headerOverlayEnable === true ? /*#__PURE__*/react_default.a.createElement(react_default.a.Fragment, null) : /*#__PURE__*/react_default.a.createElement("div", {
+        className: "uix-header__placeholder js-uix-header__placeholder-autoheight"
+      }));
     }
   }]);
 
@@ -10232,7 +10604,8 @@ var Header_Header = /*#__PURE__*/function (_Component) {
     if (pageTitle !== null) document.title = pageTitle;
   });
   return /*#__PURE__*/react_default.a.createElement(react["Fragment"], null, /*#__PURE__*/react_default.a.createElement(Header_Header, {
-    UixMenuContent: /*#__PURE__*/react_default.a.createElement(react["Fragment"], null, /*#__PURE__*/react_default.a.createElement("li", {
+    headerOverlayEnable: "false",
+    htmlString: /*#__PURE__*/react_default.a.createElement(react["Fragment"], null, /*#__PURE__*/react_default.a.createElement("li", {
       className: props.location.pathname === '/index' || props.location.pathname === '' ? 'is-active' : ''
     }, /*#__PURE__*/react_default.a.createElement(NavLink, {
       to: "/index",
@@ -10275,89 +10648,6 @@ var Header_Header = /*#__PURE__*/function (_Component) {
     });
   })));
 });
-// EXTERNAL MODULE: ./src/client/components/Buttons/styles/index.scss
-var styles = __webpack_require__(52);
-
-// CONCATENATED MODULE: ./src/client/components/Buttons/index.js
-
-
-
-
-
-
-function Buttons_createSuper(Derived) { var hasNativeReflectConstruct = Buttons_isNativeReflectConstruct(); return function _createSuperInternal() { var Super = getPrototypeOf_default()(Derived), result; if (hasNativeReflectConstruct) { var NewTarget = getPrototypeOf_default()(this).constructor; result = Reflect.construct(Super, arguments, NewTarget); } else { result = Super.apply(this, arguments); } return possibleConstructorReturn_default()(this, result); }; }
-
-function Buttons_isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Reflect.construct) return false; if (Reflect.construct.sham) return false; if (typeof Proxy === "function") return true; try { Boolean.prototype.valueOf.call(Reflect.construct(Boolean, [], function () {})); return true; } catch (e) { return false; } }
-
-/* 
- *************************************
- * <!-- Button -->
- *************************************
- */
-
-/*-- Apply Third-party plugins --*/
-//1) Bootstrap
-
- //2) Fontawesome
-
-
-
-
-
-
-/*-- Apply global scripts and styles --*/
-
-
-
-
-/*-- Apply this component styles --*/
-
-
-var Buttons_styles = {
-  info: {
-    backgroundColor: '#38c9ff',
-    color: 'white'
-  },
-  success: {
-    backgroundColor: '#16c900',
-    color: 'white'
-  },
-  danger: {
-    backgroundColor: '#ff2222',
-    color: 'white'
-  },
-  warning: {
-    backgroundColor: '#dfa22f',
-    color: 'white'
-  }
-};
-
-var Buttons_Button = /*#__PURE__*/function (_Component) {
-  inherits_default()(Button, _Component);
-
-  var _super = Buttons_createSuper(Button);
-
-  function Button(props) {
-    classCallCheck_default()(this, Button);
-
-    return _super.call(this, props);
-  }
-
-  createClass_default()(Button, [{
-    key: "render",
-    value: function render() {
-      return /*#__PURE__*/react_default.a.createElement(react["Fragment"], null, /*#__PURE__*/react_default.a.createElement("button", {
-        className: "uix-button",
-        type: "button",
-        style: Buttons_styles[this.props.UixBtnBgColor] || Buttons_styles['info']
-      }, this.props.UixBtnName || 'Default'));
-    }
-  }]);
-
-  return Button;
-}(react["Component"]);
-
-
 // CONCATENATED MODULE: ./src/client/components/Footer/index.js
 
 
@@ -10442,17 +10732,12 @@ var Footer_Footer = /*#__PURE__*/function (_Component) {
 
 
 
-var spreadOperator = {
-  UixBtnBgColor: 'info',
-  UixBtnName: 'Spread Operator'
-};
+
 /* harmony default export */ var Home = (function (_ref) {
   var _ref$staticContext = _ref.staticContext,
       staticContext = _ref$staticContext === void 0 ? {} : _ref$staticContext;
   staticContext.status = 200;
-  return /*#__PURE__*/react_default.a.createElement(react["Fragment"], null, /*#__PURE__*/react_default.a.createElement("div", {
-    className: "uix-header__placeholder js-uix-header__placeholder-autoheight"
-  }), /*#__PURE__*/react_default.a.createElement("main", {
+  return /*#__PURE__*/react_default.a.createElement(react["Fragment"], null, /*#__PURE__*/react_default.a.createElement("main", {
     id: "uix-maincontent"
   }, /*#__PURE__*/react_default.a.createElement("section", {
     className: "uix-spacing--s"
@@ -10461,38 +10746,40 @@ var spreadOperator = {
   }, /*#__PURE__*/react_default.a.createElement("div", {
     className: "row"
   }, /*#__PURE__*/react_default.a.createElement("div", {
-    className: "col-12"
-  }, /*#__PURE__*/react_default.a.createElement("h1", null, "Components List"), /*#__PURE__*/react_default.a.createElement("hr", null), /*#__PURE__*/react_default.a.createElement("h3", null, "Buttons"), /*#__PURE__*/react_default.a.createElement(Buttons_Button, {
-    UixBtnBgColor: "",
-    UixBtnName: ""
-  }), /*#__PURE__*/react_default.a.createElement(Buttons_Button, {
-    UixBtnBgColor: "success",
-    UixBtnName: "success"
-  }), /*#__PURE__*/react_default.a.createElement(Buttons_Button, {
-    UixBtnBgColor: "info",
-    UixBtnName: "info"
-  }), /*#__PURE__*/react_default.a.createElement(Buttons_Button, {
-    UixBtnBgColor: "danger",
-    UixBtnName: "danger"
-  }), /*#__PURE__*/react_default.a.createElement(Buttons_Button, {
-    UixBtnBgColor: "warning",
-    UixBtnName: "warning"
-  }), /*#__PURE__*/react_default.a.createElement(Buttons_Button, spreadOperator)))))), /*#__PURE__*/react_default.a.createElement(Footer_Footer, null));
+    className: "col-md-10 offset-md-1"
+  }, /*#__PURE__*/react_default.a.createElement("div", {
+    className: "uix-t-c"
+  }, /*#__PURE__*/react_default.a.createElement("img", {
+    src: "/assets/images/logo-colorful.png",
+    alt: "Uix Kit React"
+  })), /*#__PURE__*/react_default.a.createElement("p", {
+    className: "uix-t-c"
+  }, "A free web kits with React for fast web design and development via SSR. Using react, redux, router, axios and express. This project was bootstrapped with nodejs library. Project supports automatic deployments from a number of repository hosting services via pm2."), /*#__PURE__*/react_default.a.createElement("p", {
+    className: "uix-t-c"
+  }, /*#__PURE__*/react_default.a.createElement(NavLink, {
+    to: "/components-demo",
+    style: {
+      textDecoration: "underline"
+    }
+  }, /*#__PURE__*/react_default.a.createElement("i", {
+    className: "fa fa-external-link",
+    "aria-hidden": "true"
+  }), " Click me to view components!"))))))), /*#__PURE__*/react_default.a.createElement(Footer_Footer, null));
 });
 // EXTERNAL MODULE: ./node_modules/@babel/runtime/helpers/extends.js
-var helpers_extends = __webpack_require__(41);
+var helpers_extends = __webpack_require__(14);
 var extends_default = /*#__PURE__*/__webpack_require__.n(helpers_extends);
 
 // EXTERNAL MODULE: ./node_modules/@babel/runtime/helpers/asyncToGenerator.js
-var asyncToGenerator = __webpack_require__(16);
+var asyncToGenerator = __webpack_require__(17);
 var asyncToGenerator_default = /*#__PURE__*/__webpack_require__.n(asyncToGenerator);
 
 // EXTERNAL MODULE: ./node_modules/@babel/runtime/regenerator/index.js
-var regenerator = __webpack_require__(11);
+var regenerator = __webpack_require__(12);
 var regenerator_default = /*#__PURE__*/__webpack_require__.n(regenerator);
 
 // EXTERNAL MODULE: ./node_modules/axios/index.js
-var axios = __webpack_require__(9);
+var axios = __webpack_require__(10);
 var axios_default = /*#__PURE__*/__webpack_require__.n(axios);
 
 // CONCATENATED MODULE: ./src/client/actions/demoListActions.js
@@ -10534,6 +10821,7 @@ var demoListActions_fetchDemoList = function fetchDemoList() {
   }();
 };
 // CONCATENATED MODULE: ./src/client/views/_pages/Posts/PostItem.js
+
 
 
 /* harmony default export */ var PostItem = (function (_ref) {
@@ -10589,6 +10877,7 @@ var demoListActions_fetchDemoList = function fetchDemoList() {
 function Posts_createSuper(Derived) { var hasNativeReflectConstruct = Posts_isNativeReflectConstruct(); return function _createSuperInternal() { var Super = getPrototypeOf_default()(Derived), result; if (hasNativeReflectConstruct) { var NewTarget = getPrototypeOf_default()(this).constructor; result = Reflect.construct(Super, arguments, NewTarget); } else { result = Super.apply(this, arguments); } return possibleConstructorReturn_default()(this, result); }; }
 
 function Posts_isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Reflect.construct) return false; if (Reflect.construct.sham) return false; if (typeof Proxy === "function") return true; try { Boolean.prototype.valueOf.call(Reflect.construct(Boolean, [], function () {})); return true; } catch (e) { return false; } }
+
 
 
 
@@ -10653,9 +10942,7 @@ var Posts_Posts = /*#__PURE__*/function (_Component) {
         console.log('preloadedState: Return an Array');
       }
 
-      return /*#__PURE__*/react_default.a.createElement(react["Fragment"], null, /*#__PURE__*/react_default.a.createElement("div", {
-        className: "uix-header__placeholder js-uix-header__placeholder-autoheight"
-      }), /*#__PURE__*/react_default.a.createElement("main", {
+      return /*#__PURE__*/react_default.a.createElement(react["Fragment"], null, /*#__PURE__*/react_default.a.createElement("main", {
         id: "uix-maincontent"
       }, /*#__PURE__*/react_default.a.createElement("section", {
         className: "uix-spacing--s"
@@ -10756,6 +11043,7 @@ function PostDetail_isNativeReflectConstruct() { if (typeof Reflect === "undefin
 
 
 
+
 var PostDetail_PostDetail = /*#__PURE__*/function (_Component) {
   inherits_default()(PostDetail, _Component);
 
@@ -10817,9 +11105,7 @@ var PostDetail_PostDetail = /*#__PURE__*/function (_Component) {
         }
       }
 
-      return /*#__PURE__*/react_default.a.createElement(react["Fragment"], null, /*#__PURE__*/react_default.a.createElement("div", {
-        className: "uix-header__placeholder js-uix-header__placeholder-autoheight"
-      }), /*#__PURE__*/react_default.a.createElement("main", {
+      return /*#__PURE__*/react_default.a.createElement(react["Fragment"], null, /*#__PURE__*/react_default.a.createElement("main", {
         id: "uix-maincontent"
       }, /*#__PURE__*/react_default.a.createElement("section", {
         className: "uix-spacing--s"
@@ -10889,7 +11175,7 @@ var PostDetail_mapDispatchToProps = function mapDispatchToProps(dispatch) {
 
 /* harmony default export */ var Posts_PostDetail = (connect_connect(PostDetail_mapStateToProps, PostDetail_mapDispatchToProps)(PostDetail_PostDetail));
 // EXTERNAL MODULE: ./node_modules/@babel/runtime/helpers/assertThisInitialized.js
-var assertThisInitialized = __webpack_require__(10);
+var assertThisInitialized = __webpack_require__(11);
 var assertThisInitialized_default = /*#__PURE__*/__webpack_require__.n(assertThisInitialized);
 
 // CONCATENATED MODULE: ./src/client/views/_pages/Todos/LoginPage.js
@@ -10903,6 +11189,7 @@ var assertThisInitialized_default = /*#__PURE__*/__webpack_require__.n(assertThi
 function LoginPage_createSuper(Derived) { var hasNativeReflectConstruct = LoginPage_isNativeReflectConstruct(); return function _createSuperInternal() { var Super = getPrototypeOf_default()(Derived), result; if (hasNativeReflectConstruct) { var NewTarget = getPrototypeOf_default()(this).constructor; result = Reflect.construct(Super, arguments, NewTarget); } else { result = Super.apply(this, arguments); } return possibleConstructorReturn_default()(this, result); }; }
 
 function LoginPage_isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Reflect.construct) return false; if (Reflect.construct.sham) return false; if (typeof Proxy === "function") return true; try { Boolean.prototype.valueOf.call(Reflect.construct(Boolean, [], function () {})); return true; } catch (e) { return false; } }
+
 
 
 
@@ -11171,6 +11458,7 @@ function Todos_isNativeReflectConstruct() { if (typeof Reflect === "undefined" |
 
 
 
+
 var Todos_Todos = /*#__PURE__*/function (_Component) {
   inherits_default()(Todos, _Component);
 
@@ -11201,9 +11489,7 @@ var Todos_Todos = /*#__PURE__*/function (_Component) {
   }, {
     key: "render",
     value: function render() {
-      return /*#__PURE__*/react_default.a.createElement(react["Fragment"], null, /*#__PURE__*/react_default.a.createElement("div", {
-        className: "uix-header__placeholder js-uix-header__placeholder-autoheight"
-      }), /*#__PURE__*/react_default.a.createElement("main", {
+      return /*#__PURE__*/react_default.a.createElement(react["Fragment"], null, /*#__PURE__*/react_default.a.createElement("main", {
         id: "uix-maincontent"
       }, /*#__PURE__*/react_default.a.createElement("section", {
         className: "uix-spacing--s"
@@ -11224,13 +11510,12 @@ var Todos_Todos = /*#__PURE__*/function (_Component) {
 // CONCATENATED MODULE: ./src/client/views/_pages/404/index.js
 
 
+
 /* harmony default export */ var _404 = (function (_ref) {
   var _ref$staticContext = _ref.staticContext,
       staticContext = _ref$staticContext === void 0 ? {} : _ref$staticContext;
   staticContext.status = 404;
-  return /*#__PURE__*/react_default.a.createElement(react["Fragment"], null, /*#__PURE__*/react_default.a.createElement("div", {
-    className: "uix-header__placeholder js-uix-header__placeholder-autoheight"
-  }), /*#__PURE__*/react_default.a.createElement("main", {
+  return /*#__PURE__*/react_default.a.createElement(react["Fragment"], null, /*#__PURE__*/react_default.a.createElement("main", {
     id: "uix-maincontent"
   }, /*#__PURE__*/react_default.a.createElement("section", {
     className: "uix-spacing--s"
@@ -11252,6 +11537,7 @@ var Todos_Todos = /*#__PURE__*/function (_Component) {
 function NestedRoutesDetail_createSuper(Derived) { var hasNativeReflectConstruct = NestedRoutesDetail_isNativeReflectConstruct(); return function _createSuperInternal() { var Super = getPrototypeOf_default()(Derived), result; if (hasNativeReflectConstruct) { var NewTarget = getPrototypeOf_default()(this).constructor; result = Reflect.construct(Super, arguments, NewTarget); } else { result = Super.apply(this, arguments); } return possibleConstructorReturn_default()(this, result); }; }
 
 function NestedRoutesDetail_isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Reflect.construct) return false; if (Reflect.construct.sham) return false; if (typeof Proxy === "function") return true; try { Boolean.prototype.valueOf.call(Reflect.construct(Boolean, [], function () {})); return true; } catch (e) { return false; } }
+
 
 
 
@@ -11380,9 +11666,7 @@ var NestedRoutes_NestedRoutes = /*#__PURE__*/function (_Component) {
   createClass_default()(NestedRoutes, [{
     key: "render",
     value: function render() {
-      return /*#__PURE__*/react_default.a.createElement(react["Fragment"], null, /*#__PURE__*/react_default.a.createElement("div", {
-        className: "uix-header__placeholder js-uix-header__placeholder-autoheight"
-      }), /*#__PURE__*/react_default.a.createElement("main", {
+      return /*#__PURE__*/react_default.a.createElement(react["Fragment"], null, /*#__PURE__*/react_default.a.createElement("main", {
         id: "uix-maincontent"
       }, /*#__PURE__*/react_default.a.createElement("section", {
         className: "uix-spacing--s"
@@ -11400,6 +11684,539 @@ var NestedRoutes_NestedRoutes = /*#__PURE__*/function (_Component) {
 }(react["Component"]);
 
 /* harmony default export */ var _pages_NestedRoutes = (NestedRoutes_NestedRoutes);
+// EXTERNAL MODULE: ./node_modules/@babel/runtime/helpers/objectWithoutProperties.js
+var objectWithoutProperties = __webpack_require__(42);
+var objectWithoutProperties_default = /*#__PURE__*/__webpack_require__.n(objectWithoutProperties);
+
+// EXTERNAL MODULE: ./src/client/components/Buttons/scss/_style.scss
+var _style = __webpack_require__(73);
+
+// EXTERNAL MODULE: ./src/client/components/Buttons/scss-rtl/_style.scss
+var scss_rtl_style = __webpack_require__(74);
+
+// CONCATENATED MODULE: ./src/client/components/Buttons/index.js
+
+
+
+
+
+
+
+
+function Buttons_createSuper(Derived) { var hasNativeReflectConstruct = Buttons_isNativeReflectConstruct(); return function _createSuperInternal() { var Super = getPrototypeOf_default()(Derived), result; if (hasNativeReflectConstruct) { var NewTarget = getPrototypeOf_default()(this).constructor; result = Reflect.construct(Super, arguments, NewTarget); } else { result = Super.apply(this, arguments); } return possibleConstructorReturn_default()(this, result); }; }
+
+function Buttons_isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Reflect.construct) return false; if (Reflect.construct.sham) return false; if (typeof Proxy === "function") return true; try { Boolean.prototype.valueOf.call(Reflect.construct(Boolean, [], function () {})); return true; } catch (e) { return false; } }
+
+/* 
+ *************************************
+ * <!-- Button -->
+ *************************************
+ */
+
+/*-- Apply Third-party plugins --*/
+//1) Bootstrap
+
+ //2) Fontawesome
+
+
+
+
+
+
+/*-- Apply global scripts and styles --*/
+
+
+
+
+/*-- Apply this component styles --*/
+
+
+
+
+var Buttons_Button = /*#__PURE__*/function (_Component) {
+  inherits_default()(Button, _Component);
+
+  var _super = Buttons_createSuper(Button);
+
+  function Button(props) {
+    classCallCheck_default()(this, Button);
+
+    return _super.call(this, props);
+  }
+
+  createClass_default()(Button, [{
+    key: "render",
+    value: function render() {
+      var _this$props = this.props,
+          href = _this$props.href,
+          target = _this$props.target,
+          className = _this$props.className,
+          id = _this$props.id,
+          type = _this$props.type,
+          others = objectWithoutProperties_default()(_this$props, ["href", "target", "className", "id", "type"]);
+
+      return /*#__PURE__*/react_default.a.createElement(react["Fragment"], null, href ? /*#__PURE__*/react_default.a.createElement("a", extends_default()({
+        tabIndex: "0",
+        href: href || '#',
+        className: className || '',
+        target: target || '_self',
+        id: id || shortcut.GUID.create()
+      }, others)) : /*#__PURE__*/react_default.a.createElement("button", extends_default()({
+        className: className || '',
+        id: id ? id : shortcut.GUID.create(),
+        type: type || 'button'
+      }, others)));
+    }
+  }]);
+
+  return Button;
+}(react["Component"]);
+
+
+// CONCATENATED MODULE: ./src/client/views/_pages/ComponentsDemo/Buttons.js
+
+
+
+
+/* harmony default export */ var Buttons = (function () {
+  return /*#__PURE__*/react_default.a.createElement(react["Fragment"], null, /*#__PURE__*/react_default.a.createElement("main", {
+    id: "uix-maincontent"
+  }, /*#__PURE__*/react_default.a.createElement("section", {
+    className: "uix-spacing--s uix-spacing--no-bottom"
+  }, /*#__PURE__*/react_default.a.createElement("div", {
+    className: "container"
+  }, /*#__PURE__*/react_default.a.createElement("div", {
+    className: "row"
+  }, /*#__PURE__*/react_default.a.createElement("div", {
+    className: "col-12"
+  }, /*#__PURE__*/react_default.a.createElement("h1", {
+    className: "uix-t-c"
+  }, "Buttons"))))), /*#__PURE__*/react_default.a.createElement("section", {
+    className: "uix-spacing--s uix-spacing--no-bottom"
+  }, /*#__PURE__*/react_default.a.createElement("div", {
+    className: "container"
+  }, /*#__PURE__*/react_default.a.createElement("div", {
+    className: "row"
+  }, /*#__PURE__*/react_default.a.createElement("div", {
+    className: "col-12"
+  }, /*#__PURE__*/react_default.a.createElement("h3", null, "Click Event"), /*#__PURE__*/react_default.a.createElement("p", null, "Add onClick event to the button."), /*#__PURE__*/react_default.a.createElement("hr", null))))), /*#__PURE__*/react_default.a.createElement("section", {
+    className: "uix-spacing--s"
+  }, /*#__PURE__*/react_default.a.createElement("div", {
+    className: "container"
+  }, /*#__PURE__*/react_default.a.createElement("div", {
+    className: "row"
+  }, /*#__PURE__*/react_default.a.createElement("div", {
+    className: "col-12",
+    id: "my-ajax-demo-target-button"
+  }, /*#__PURE__*/react_default.a.createElement(Buttons_Button, {
+    id: "app-btn-1",
+    href: "#",
+    className: "uix-btn uix-btn__border--thin uix-btn__margin--b uix-btn__size--m uix-btn__bg--primary is-pill",
+    onClick: function onClick(e) {
+      return alert(e.target.id);
+    }
+  }, "Click me to view ID!"), /*#__PURE__*/react_default.a.createElement("br", null), /*#__PURE__*/react_default.a.createElement(Buttons_Button, {
+    id: "app-btn-2",
+    href: "#",
+    className: "uix-btn uix-btn__border--thin uix-btn__margin--b uix-btn__size--m uix-btn__bg--primary is-pill",
+    onClick: function onClick(e) {
+      return shortcut('#app-btn-2').width('50%');
+    }
+  }, "Click me to change the width!"))))), /*#__PURE__*/react_default.a.createElement("section", {
+    className: "uix-spacing--s uix-spacing--no-bottom"
+  }, /*#__PURE__*/react_default.a.createElement("div", {
+    className: "container"
+  }, /*#__PURE__*/react_default.a.createElement("div", {
+    className: "row"
+  }, /*#__PURE__*/react_default.a.createElement("div", {
+    className: "col-12"
+  }, /*#__PURE__*/react_default.a.createElement("h3", null, "Button"), /*#__PURE__*/react_default.a.createElement("p", null, "If you need to use multiple colors, you can add CSS styles yourself, such as: ", /*#__PURE__*/react_default.a.createElement("code", null, ".uix-btn__bg--blue"), ", ", /*#__PURE__*/react_default.a.createElement("code", null, ".uix-btn__bg--purple"), " ..."), /*#__PURE__*/react_default.a.createElement("hr", null))))), /*#__PURE__*/react_default.a.createElement("section", {
+    className: "uix-spacing--s"
+  }, /*#__PURE__*/react_default.a.createElement("div", {
+    className: "container"
+  }, /*#__PURE__*/react_default.a.createElement("div", {
+    className: "row"
+  }, /*#__PURE__*/react_default.a.createElement("div", {
+    className: "col-12",
+    id: "my-ajax-demo-target-button"
+  }, /*#__PURE__*/react_default.a.createElement(Buttons_Button, {
+    href: "#",
+    className: "uix-btn uix-btn__border--thin uix-btn__margin--b uix-btn__size--t uix-btn__bg--hyperlink"
+  }, "Tiny"), /*#__PURE__*/react_default.a.createElement(Buttons_Button, {
+    href: "#",
+    className: "uix-btn uix-btn__border--thin uix-btn__margin--b uix-btn__size--s uix-btn__bg--hyperlink"
+  }, "Small"), /*#__PURE__*/react_default.a.createElement(Buttons_Button, {
+    href: "#",
+    className: "uix-btn uix-btn__border--thin uix-btn__margin--b uix-btn__size--m uix-btn__bg--hyperlink"
+  }, "Medium"), /*#__PURE__*/react_default.a.createElement(Buttons_Button, {
+    href: "#",
+    className: "uix-btn uix-btn__border--thin uix-btn__margin--b uix-btn__size--l uix-btn__bg--hyperlink"
+  }, "Large"), /*#__PURE__*/react_default.a.createElement("br", null), /*#__PURE__*/react_default.a.createElement(Buttons_Button, {
+    href: "#",
+    className: "uix-btn uix-btn__border--thin uix-btn__margin--b uix-btn__size--t uix-btn__bg--hyperlink2"
+  }, "Tiny"), /*#__PURE__*/react_default.a.createElement(Buttons_Button, {
+    href: "#",
+    className: "uix-btn uix-btn__border--thin uix-btn__margin--b uix-btn__size--s uix-btn__bg--hyperlink2"
+  }, "Small"), /*#__PURE__*/react_default.a.createElement(Buttons_Button, {
+    href: "#",
+    className: "uix-btn uix-btn__border--thin uix-btn__margin--b uix-btn__size--m uix-btn__bg--hyperlink2"
+  }, "Medium"), /*#__PURE__*/react_default.a.createElement(Buttons_Button, {
+    href: "#",
+    className: "uix-btn uix-btn__border--thin uix-btn__margin--b uix-btn__size--l uix-btn__bg--hyperlink2"
+  }, "Large"), /*#__PURE__*/react_default.a.createElement("br", null), /*#__PURE__*/react_default.a.createElement(Buttons_Button, {
+    href: "#",
+    className: "uix-btn uix-btn__border--thin uix-btn__margin--b uix-btn__size--t uix-btn__bg--primary"
+  }, /*#__PURE__*/react_default.a.createElement("i", {
+    className: "fa fa-bullhorn",
+    "aria-hidden": "true"
+  }), "Tiny"), /*#__PURE__*/react_default.a.createElement(Buttons_Button, {
+    href: "#",
+    className: "uix-btn uix-btn__border--thin uix-btn__margin--b uix-btn__size--s uix-btn__bg--primary"
+  }, /*#__PURE__*/react_default.a.createElement("i", {
+    className: "fa fa-bullhorn",
+    "aria-hidden": "true"
+  }), "Small"), /*#__PURE__*/react_default.a.createElement(Buttons_Button, {
+    href: "#",
+    className: "uix-btn uix-btn__border--thin uix-btn__margin--b uix-btn__size--m uix-btn__bg--primary"
+  }, /*#__PURE__*/react_default.a.createElement("i", {
+    className: "fa fa-cogs",
+    "aria-hidden": "true"
+  }), "Medium"), /*#__PURE__*/react_default.a.createElement(Buttons_Button, {
+    href: "#",
+    className: "uix-btn uix-btn__border--thin uix-btn__margin--b uix-btn__size--l uix-btn__bg--primary"
+  }, /*#__PURE__*/react_default.a.createElement("i", {
+    className: "fa fa-flask",
+    "aria-hidden": "true"
+  }), "Large"), /*#__PURE__*/react_default.a.createElement("br", null), /*#__PURE__*/react_default.a.createElement(Buttons_Button, {
+    href: "#",
+    className: "uix-btn uix-btn__border--thin uix-btn__margin--b uix-btn__size--t uix-btn__bg--primary"
+  }, "Tiny", /*#__PURE__*/react_default.a.createElement("i", {
+    className: "fa fa-bullhorn",
+    "aria-hidden": "true"
+  })), /*#__PURE__*/react_default.a.createElement(Buttons_Button, {
+    href: "#",
+    className: "uix-btn uix-btn__border--thin uix-btn__margin--b uix-btn__size--s uix-btn__bg--primary"
+  }, "Small", /*#__PURE__*/react_default.a.createElement("i", {
+    className: "fa fa-bullhorn",
+    "aria-hidden": "true"
+  })), /*#__PURE__*/react_default.a.createElement(Buttons_Button, {
+    href: "#",
+    className: "uix-btn uix-btn__border--thin uix-btn__margin--b uix-btn__size--m uix-btn__bg--primary"
+  }, "Medium", /*#__PURE__*/react_default.a.createElement("i", {
+    className: "fa fa-cogs",
+    "aria-hidden": "true"
+  })), /*#__PURE__*/react_default.a.createElement(Buttons_Button, {
+    href: "#",
+    className: "uix-btn uix-btn__border--thin uix-btn__margin--b uix-btn__size--l uix-btn__bg--primary"
+  }, "Large", /*#__PURE__*/react_default.a.createElement("i", {
+    className: "fa fa-flask",
+    "aria-hidden": "true"
+  })), /*#__PURE__*/react_default.a.createElement("br", null), /*#__PURE__*/react_default.a.createElement(Buttons_Button, {
+    href: "#",
+    className: "uix-btn uix-btn__border--thin uix-btn__margin--b uix-btn__size--s uix-btn__bg--primary uix-btn__icon uix-btn__icon--right"
+  }, /*#__PURE__*/react_default.a.createElement("span", null, /*#__PURE__*/react_default.a.createElement("i", {
+    className: "fa fa-bullhorn",
+    "aria-hidden": "true"
+  })), "Icon Right"), /*#__PURE__*/react_default.a.createElement(Buttons_Button, {
+    href: "#",
+    className: "uix-btn uix-btn__border--thin uix-btn__margin--b uix-btn__size--s uix-btn__bg--primary uix-btn__icon uix-btn__icon--left"
+  }, /*#__PURE__*/react_default.a.createElement("span", null, /*#__PURE__*/react_default.a.createElement("i", {
+    className: "fa fa-cogs",
+    "aria-hidden": "true"
+  })), "Icon Left"), /*#__PURE__*/react_default.a.createElement(Buttons_Button, {
+    href: "#",
+    className: "uix-btn uix-btn__border--thin uix-btn__margin--b uix-btn__size--s uix-btn__bg--primary is-pill is-transparent uix-btn__icon uix-btn__icon--right"
+  }, /*#__PURE__*/react_default.a.createElement("span", null, /*#__PURE__*/react_default.a.createElement("i", {
+    className: "fa fa-bullhorn",
+    "aria-hidden": "true"
+  })), "Icon Left"), /*#__PURE__*/react_default.a.createElement(Buttons_Button, {
+    href: "#",
+    className: "uix-btn uix-btn__border--thin uix-btn__margin--b uix-btn__size--s uix-btn__bg--primary is-pill is-transparent uix-btn__icon uix-btn__icon--left"
+  }, /*#__PURE__*/react_default.a.createElement("span", null, /*#__PURE__*/react_default.a.createElement("i", {
+    className: "fa fa-cogs",
+    "aria-hidden": "true"
+  })), "Icon Right"), /*#__PURE__*/react_default.a.createElement("br", null), /*#__PURE__*/react_default.a.createElement(Buttons_Button, {
+    href: "#",
+    className: "uix-btn uix-btn__border--thin uix-btn__margin--b uix-btn__size--t uix-btn__bg--primary is-disabled"
+  }, "Tiny"), /*#__PURE__*/react_default.a.createElement(Buttons_Button, {
+    href: "#",
+    className: "uix-btn uix-btn__border--thin uix-btn__margin--b uix-btn__size--s uix-btn__bg--primary is-disabled"
+  }, "Small"), /*#__PURE__*/react_default.a.createElement(Buttons_Button, {
+    href: "#",
+    className: "uix-btn uix-btn__border--thin uix-btn__margin--b uix-btn__size--m uix-btn__bg--primary is-disabled"
+  }, "Medium"), /*#__PURE__*/react_default.a.createElement(Buttons_Button, {
+    href: "#",
+    className: "uix-btn uix-btn__border--thin uix-btn__margin--b uix-btn__size--l uix-btn__bg--primary is-disabled"
+  }, "Large"), /*#__PURE__*/react_default.a.createElement("br", null), /*#__PURE__*/react_default.a.createElement(Buttons_Button, {
+    href: "#",
+    className: "uix-btn uix-btn__border--thin uix-btn__margin--b uix-btn__size--t uix-btn__bg--primary wait"
+  }, "Tiny"), /*#__PURE__*/react_default.a.createElement(Buttons_Button, {
+    href: "#",
+    className: "uix-btn uix-btn__border--thin uix-btn__margin--b uix-btn__size--s uix-btn__bg--primary wait"
+  }, "Small"), /*#__PURE__*/react_default.a.createElement(Buttons_Button, {
+    href: "#",
+    className: "uix-btn uix-btn__border--thin uix-btn__margin--b uix-btn__size--m uix-btn__bg--primary wait"
+  }, "Medium"), /*#__PURE__*/react_default.a.createElement(Buttons_Button, {
+    href: "#",
+    className: "uix-btn uix-btn__border--thin uix-btn__margin--b uix-btn__size--l uix-btn__bg--primary wait"
+  }, "Large"), /*#__PURE__*/react_default.a.createElement("br", null), /*#__PURE__*/react_default.a.createElement(Buttons_Button, {
+    href: "#",
+    className: "uix-btn uix-btn__border--thin uix-btn__margin--b uix-btn__size--t uix-btn__bg--primary is-pill"
+  }, "Tiny"), /*#__PURE__*/react_default.a.createElement(Buttons_Button, {
+    href: "#",
+    className: "uix-btn uix-btn__border--thin uix-btn__margin--b uix-btn__size--s uix-btn__bg--primary is-pill"
+  }, "Small"), /*#__PURE__*/react_default.a.createElement(Buttons_Button, {
+    href: "#",
+    className: "uix-btn uix-btn__border--thin uix-btn__margin--b uix-btn__size--m uix-btn__bg--primary is-pill"
+  }, "Medium"), /*#__PURE__*/react_default.a.createElement(Buttons_Button, {
+    href: "#",
+    className: "uix-btn uix-btn__border--thin uix-btn__margin--b uix-btn__size--l uix-btn__bg--primary is-pill"
+  }, "Large"), /*#__PURE__*/react_default.a.createElement("br", null), /*#__PURE__*/react_default.a.createElement(Buttons_Button, {
+    href: "#",
+    className: "uix-btn uix-btn__border--thin uix-btn__margin--b uix-btn__size--t uix-btn__bg--primary is-rounded"
+  }, "Tiny"), /*#__PURE__*/react_default.a.createElement(Buttons_Button, {
+    href: "#",
+    className: "uix-btn uix-btn__border--thin uix-btn__margin--b uix-btn__size--s uix-btn__bg--primary is-rounded"
+  }, "Small"), /*#__PURE__*/react_default.a.createElement(Buttons_Button, {
+    href: "#",
+    className: "uix-btn uix-btn__border--thin uix-btn__margin--b uix-btn__size--m uix-btn__bg--primary is-rounded"
+  }, "Medium"), /*#__PURE__*/react_default.a.createElement(Buttons_Button, {
+    href: "#",
+    className: "uix-btn uix-btn__border--thin uix-btn__margin--b uix-btn__size--l uix-btn__bg--primary is-rounded"
+  }, "Large"), /*#__PURE__*/react_default.a.createElement("br", null), /*#__PURE__*/react_default.a.createElement(Buttons_Button, {
+    href: "#",
+    className: "uix-btn uix-btn__border--thin uix-btn__margin--b uix-btn__size--t uix-btn__bg--primary is-pill is-transparent"
+  }, "Tiny Radius"), /*#__PURE__*/react_default.a.createElement(Buttons_Button, {
+    href: "#",
+    className: "uix-btn uix-btn__border--thin uix-btn__margin--b uix-btn__size--s uix-btn__bg--primary is-pill is-transparent"
+  }, "Small Radius"), /*#__PURE__*/react_default.a.createElement(Buttons_Button, {
+    href: "#",
+    className: "uix-btn uix-btn__border--thin uix-btn__margin--b uix-btn__size--m uix-btn__bg--primary is-pill is-transparent"
+  }, "Medium Radius"), /*#__PURE__*/react_default.a.createElement(Buttons_Button, {
+    href: "#",
+    className: "uix-btn uix-btn__border--thin uix-btn__margin--b uix-btn__size--l uix-btn__bg--primary is-pill is-transparent"
+  }, "Large Radius"), /*#__PURE__*/react_default.a.createElement("hr", null), /*#__PURE__*/react_default.a.createElement("div", {
+    className: "uix-btn__group uix-btn__margin--b"
+  }, /*#__PURE__*/react_default.a.createElement(Buttons_Button, {
+    href: "#",
+    className: "uix-btn uix-btn__border--thin uix-btn__size--s uix-btn__bg--primary is-pill is-transparent"
+  }, "Group"), /*#__PURE__*/react_default.a.createElement(Buttons_Button, {
+    href: "#",
+    className: "uix-btn uix-btn__border--thin uix-btn__size--s uix-btn__bg--primary is-pill is-transparent"
+  }, "Group"), /*#__PURE__*/react_default.a.createElement(Buttons_Button, {
+    href: "#",
+    className: "uix-btn uix-btn__border--thin uix-btn__size--s uix-btn__bg--primary is-pill is-transparent"
+  }, "Group")), /*#__PURE__*/react_default.a.createElement("br", null), /*#__PURE__*/react_default.a.createElement("div", {
+    className: "uix-btn__group uix-btn__margin--b"
+  }, /*#__PURE__*/react_default.a.createElement(Buttons_Button, {
+    href: "#",
+    className: "uix-btn uix-btn__border--thin uix-btn__size--s uix-btn__bg--primary"
+  }, "Group"), /*#__PURE__*/react_default.a.createElement(Buttons_Button, {
+    href: "#",
+    className: "uix-btn uix-btn__border--thin uix-btn__size--s uix-btn__bg--primary"
+  }, "Group"), /*#__PURE__*/react_default.a.createElement(Buttons_Button, {
+    href: "#",
+    className: "uix-btn uix-btn__border--thin uix-btn__size--s uix-btn__bg--primary"
+  }, "Group")), /*#__PURE__*/react_default.a.createElement("hr", null), /*#__PURE__*/react_default.a.createElement("div", {
+    className: "uix-btn__group is-fullwidth uix-btn__margin--b"
+  }, /*#__PURE__*/react_default.a.createElement(Buttons_Button, {
+    href: "#",
+    className: "uix-btn uix-btn__border--thin uix-btn__size--s uix-btn__bg--primary is-pill is-transparent"
+  }, "Group"), /*#__PURE__*/react_default.a.createElement(Buttons_Button, {
+    href: "#",
+    className: "uix-btn uix-btn__border--thin uix-btn__size--s uix-btn__bg--primary is-pill is-transparent"
+  }, "Group"), /*#__PURE__*/react_default.a.createElement(Buttons_Button, {
+    href: "#",
+    className: "uix-btn uix-btn__border--thin uix-btn__size--s uix-btn__bg--primary is-pill is-transparent"
+  }, "Group")), /*#__PURE__*/react_default.a.createElement("br", null), /*#__PURE__*/react_default.a.createElement("div", {
+    className: "uix-btn__group is-fullwidth uix-btn__margin--b"
+  }, /*#__PURE__*/react_default.a.createElement(Buttons_Button, {
+    href: "#",
+    className: "uix-btn uix-btn__border--thin uix-btn__size--s uix-btn__bg--primary"
+  }, "Group"), /*#__PURE__*/react_default.a.createElement(Buttons_Button, {
+    href: "#",
+    className: "uix-btn uix-btn__border--thin uix-btn__size--s uix-btn__bg--primary"
+  }, "Group"), /*#__PURE__*/react_default.a.createElement(Buttons_Button, {
+    href: "#",
+    className: "uix-btn uix-btn__border--thin uix-btn__size--s uix-btn__bg--primary"
+  }, "Group")), /*#__PURE__*/react_default.a.createElement("hr", null), /*#__PURE__*/react_default.a.createElement(Buttons_Button, {
+    href: "#",
+    className: "uix-btn uix-btn__border--thin uix-btn__margin--b uix-btn__size--t uix-btn__bg--primary is-fullwidth"
+  }, "Tiny Full Width"), /*#__PURE__*/react_default.a.createElement(Buttons_Button, {
+    href: "#",
+    className: "uix-btn uix-btn__border--thin uix-btn__margin--b uix-btn__size--s uix-btn__bg--primary is-fullwidth"
+  }, "Small Full Width"), /*#__PURE__*/react_default.a.createElement("br", null), /*#__PURE__*/react_default.a.createElement(Buttons_Button, {
+    href: "#",
+    className: "uix-btn uix-btn__border--thin uix-btn__margin--b uix-btn__size--m uix-btn__bg--primary is-fullwidth"
+  }, "Medium Full Width"), /*#__PURE__*/react_default.a.createElement("br", null), /*#__PURE__*/react_default.a.createElement(Buttons_Button, {
+    href: "#",
+    className: "uix-btn uix-btn__border--thin uix-btn__margin--b uix-btn__size--l uix-btn__bg--primary is-fullwidth"
+  }, "Large Full Width"), /*#__PURE__*/react_default.a.createElement("br", null), /*#__PURE__*/react_default.a.createElement(Buttons_Button, {
+    href: "#",
+    className: "uix-btn uix-btn__border--thin uix-btn__margin--b uix-btn__size--t uix-btn__bg--primary is-fullwidth is-pill"
+  }, "Tiny Full Width Radius"), /*#__PURE__*/react_default.a.createElement(Buttons_Button, {
+    href: "#",
+    className: "uix-btn uix-btn__border--thin uix-btn__margin--b uix-btn__size--s uix-btn__bg--primary is-fullwidth is-pill"
+  }, "Small Full Width Radius"), /*#__PURE__*/react_default.a.createElement("br", null), /*#__PURE__*/react_default.a.createElement(Buttons_Button, {
+    href: "#",
+    className: "uix-btn uix-btn__border--thin uix-btn__margin--b uix-btn__size--m uix-btn__bg--primary is-fullwidth is-pill"
+  }, "Medium Full Width Radius"), /*#__PURE__*/react_default.a.createElement("br", null), /*#__PURE__*/react_default.a.createElement(Buttons_Button, {
+    href: "#",
+    className: "uix-btn uix-btn__border--thin uix-btn__margin--b uix-btn__size--l uix-btn__bg--primary is-fullwidth is-pill"
+  }, "Large Full Width Radius ( More Text )"))))), /*#__PURE__*/react_default.a.createElement("section", {
+    className: "uix-spacing--s uix-spacing--no-bottom"
+  }, /*#__PURE__*/react_default.a.createElement("div", {
+    className: "container"
+  }, /*#__PURE__*/react_default.a.createElement("div", {
+    className: "row"
+  }, /*#__PURE__*/react_default.a.createElement("div", {
+    className: "col-12"
+  }, /*#__PURE__*/react_default.a.createElement("h3", null, "Secondary Button"), /*#__PURE__*/react_default.a.createElement("hr", null))))), /*#__PURE__*/react_default.a.createElement("section", {
+    className: "uix-spacing--s"
+  }, /*#__PURE__*/react_default.a.createElement("div", {
+    className: "container"
+  }, /*#__PURE__*/react_default.a.createElement("div", {
+    className: "row"
+  }, /*#__PURE__*/react_default.a.createElement("div", {
+    className: "col-12"
+  }, /*#__PURE__*/react_default.a.createElement(Buttons_Button, {
+    href: "#",
+    className: "uix-btn uix-btn__border--thin uix-btn__margin--b uix-btn__size--s uix-btn__bg--secondary is-fill-white"
+  }, "Secondary Button"), /*#__PURE__*/react_default.a.createElement(Buttons_Button, {
+    href: "#",
+    className: "uix-btn uix-btn__border--thin uix-btn__margin--b uix-btn__size--s uix-btn__bg--secondary is-rounded is-fill-white"
+  }, "Secondary Button"), /*#__PURE__*/react_default.a.createElement(Buttons_Button, {
+    href: "#",
+    className: "uix-btn uix-btn__border--thin uix-btn__margin--b uix-btn__size--s uix-btn__bg--secondary is-pill is-fill-white"
+  }, "Secondary Button"), /*#__PURE__*/react_default.a.createElement("br", null), /*#__PURE__*/react_default.a.createElement("div", {
+    className: "uix-t-c",
+    style: shortcut.styleFormat("background: #333; padding: 1.5rem 0 0; margin-top: 1rem;")
+  }, /*#__PURE__*/react_default.a.createElement(Buttons_Button, {
+    href: "#",
+    className: "uix-btn uix-btn__border--thin uix-btn__margin--b uix-btn__size--s uix-btn__bg--secondary is-fill-white"
+  }, "White Button"), /*#__PURE__*/react_default.a.createElement(Buttons_Button, {
+    href: "#",
+    className: "uix-btn uix-btn__border--thin uix-btn__margin--b uix-btn__size--s uix-btn__bg--secondary"
+  }, "White Button"), /*#__PURE__*/react_default.a.createElement("br", null), /*#__PURE__*/react_default.a.createElement(Buttons_Button, {
+    href: "#",
+    className: "uix-btn uix-btn__border--thin uix-btn__margin--b uix-btn__size--s uix-btn__bg--secondary is-pill is-fill-white"
+  }, "White Button"), /*#__PURE__*/react_default.a.createElement(Buttons_Button, {
+    href: "#",
+    className: "uix-btn uix-btn__border--thin uix-btn__margin--b uix-btn__size--s uix-btn__bg--secondary is-pill"
+  }, "White Button"), /*#__PURE__*/react_default.a.createElement("br", null), /*#__PURE__*/react_default.a.createElement(Buttons_Button, {
+    href: "#",
+    className: "uix-btn uix-btn__border--thin uix-btn__margin--b uix-btn__size--s uix-btn__bg--secondary is-fill-white uix-btn__icon uix-btn__icon--right"
+  }, /*#__PURE__*/react_default.a.createElement("span", null, /*#__PURE__*/react_default.a.createElement("i", {
+    className: "fa fa-bullhorn",
+    "aria-hidden": "true"
+  })), "Icon Right"), /*#__PURE__*/react_default.a.createElement(Buttons_Button, {
+    href: "#",
+    className: "uix-btn uix-btn__border--thin uix-btn__margin--b uix-btn__size--s uix-btn__bg--secondary is-fill-white uix-btn__icon uix-btn__icon--left"
+  }, /*#__PURE__*/react_default.a.createElement("span", null, /*#__PURE__*/react_default.a.createElement("i", {
+    className: "fa fa-cogs",
+    "aria-hidden": "true"
+  })), "Icon Left"), /*#__PURE__*/react_default.a.createElement("br", null), /*#__PURE__*/react_default.a.createElement(Buttons_Button, {
+    href: "#",
+    className: "uix-btn uix-btn__border--thin uix-btn__margin--b uix-btn__size--s uix-btn__bg--secondary uix-btn__icon uix-btn__icon--right"
+  }, /*#__PURE__*/react_default.a.createElement("span", null, /*#__PURE__*/react_default.a.createElement("i", {
+    className: "fa fa-bullhorn",
+    "aria-hidden": "true"
+  })), "Icon Right"), /*#__PURE__*/react_default.a.createElement(Buttons_Button, {
+    href: "#",
+    className: "uix-btn uix-btn__border--thin uix-btn__margin--b uix-btn__size--s uix-btn__bg--secondary uix-btn__icon uix-btn__icon--left"
+  }, /*#__PURE__*/react_default.a.createElement("span", null, /*#__PURE__*/react_default.a.createElement("i", {
+    className: "fa fa-cogs",
+    "aria-hidden": "true"
+  })), "Icon Left"), /*#__PURE__*/react_default.a.createElement("br", null))))))), /*#__PURE__*/react_default.a.createElement(Footer_Footer, null));
+});
+// CONCATENATED MODULE: ./src/client/views/_pages/ComponentsDemo/index.js
+
+
+
+
+
+
+function ComponentsDemo_createSuper(Derived) { var hasNativeReflectConstruct = ComponentsDemo_isNativeReflectConstruct(); return function _createSuperInternal() { var Super = getPrototypeOf_default()(Derived), result; if (hasNativeReflectConstruct) { var NewTarget = getPrototypeOf_default()(this).constructor; result = Reflect.construct(Super, arguments, NewTarget); } else { result = Super.apply(this, arguments); } return possibleConstructorReturn_default()(this, result); }; }
+
+function ComponentsDemo_isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Reflect.construct) return false; if (Reflect.construct.sham) return false; if (typeof Proxy === "function") return true; try { Boolean.prototype.valueOf.call(Reflect.construct(Boolean, [], function () {})); return true; } catch (e) { return false; } }
+
+
+
+
+ //components list
+
+ //Might have mismatching versions of React and the renderer (such as React DOM)
+
+function ComponentsDemo_HookContent() {
+  // The `path` lets us build <Route> paths that are
+  // relative to the parent route, while the `url` lets
+  // us build relative links.
+  var _useRouteMatch = useRouteMatch(),
+      path = _useRouteMatch.path,
+      url = _useRouteMatch.url;
+
+  return /*#__PURE__*/react_default.a.createElement(react["Fragment"], null, /*#__PURE__*/react_default.a.createElement("div", null, /*#__PURE__*/react_default.a.createElement(NavLink, {
+    to: "".concat(url, "/buttons"),
+    activeClassName: "is-active"
+  }, /*#__PURE__*/react_default.a.createElement("i", {
+    className: "fa fa-check-circle-o",
+    "aria-hidden": "true"
+  }), " Buttons")), /*#__PURE__*/react_default.a.createElement("hr", null), /*#__PURE__*/react_default.a.createElement(react_router_Switch, null, /*#__PURE__*/react_default.a.createElement(react_router_Route, {
+    exact: true,
+    path: path
+  }, /*#__PURE__*/react_default.a.createElement("p", null, "None.")), /*#__PURE__*/react_default.a.createElement(react_router_Route, {
+    path: "".concat(path, "/buttons")
+  }, /*#__PURE__*/react_default.a.createElement(Buttons, null))));
+}
+
+var ComponentsDemo_ComponentsDemo = /*#__PURE__*/function (_Component) {
+  inherits_default()(ComponentsDemo, _Component);
+
+  var _super = ComponentsDemo_createSuper(ComponentsDemo);
+
+  function ComponentsDemo(props) {
+    classCallCheck_default()(this, ComponentsDemo);
+
+    //You are extending the React.Component class, and per the ES2015 spec, 
+    //a child class constructor cannot make use of this until super() has 
+    //been called; also, ES2015 class constructors have to call super() 
+    //if they are subclasses.
+    return _super.call(this, props); //console.log(this.props) //props will get logged.
+  }
+  /**
+   * componentDidMount() is invoked immediately after a component 
+   * is mounted (inserted into the tree). 
+   * Initialization that requires DOM nodes should go here. 
+   * If you need to load data from a remote endpoint, this 
+   * is a good place to instantiate the network request.
+   */
+
+
+  createClass_default()(ComponentsDemo, [{
+    key: "componentDidMount",
+    value: function componentDidMount() {//do shmething
+    }
+  }, {
+    key: "render",
+    value: function render() {
+      return /*#__PURE__*/react_default.a.createElement(react["Fragment"], null, /*#__PURE__*/react_default.a.createElement("main", {
+        id: "uix-maincontent"
+      }, /*#__PURE__*/react_default.a.createElement("section", {
+        className: "uix-spacing--s"
+      }, /*#__PURE__*/react_default.a.createElement("div", {
+        className: "container"
+      }, /*#__PURE__*/react_default.a.createElement("div", {
+        className: "row"
+      }, /*#__PURE__*/react_default.a.createElement("div", {
+        className: "col-12"
+      }, /*#__PURE__*/react_default.a.createElement(ComponentsDemo_HookContent, null)))))), /*#__PURE__*/react_default.a.createElement(Footer_Footer, null));
+    }
+  }]);
+
+  return ComponentsDemo;
+}(react["Component"]);
+
+/* harmony default export */ var _pages_ComponentsDemo = (ComponentsDemo_ComponentsDemo);
 // CONCATENATED MODULE: ./src/client/router/RoutesConfig.js
  //
 
@@ -11409,17 +12226,26 @@ var NestedRoutes_NestedRoutes = /*#__PURE__*/function (_Component) {
 
 
 
+
 var routesConfig = [{
   component: App,
-  routes: [{
-    path: "/",
+  routes: [
+  /*======================================== */
+
+  /* Primary Menu */
+  {
+    path: '/',
     component: Home,
     exact: true,
     pageTitle: 'Home'
   }, {
-    path: "/index",
+    path: '/index',
     component: Home,
     pageTitle: 'Home'
+  }, {
+    path: '/components-demo',
+    component: _pages_ComponentsDemo,
+    pageTitle: 'Components Demo'
   },
   /* 
   important!! 
@@ -11427,7 +12253,7 @@ var routesConfig = [{
   	Add a new route of /posts/:post_id and add an `exact` property to the current route: 
   */
   {
-    path: "/posts",
+    path: '/posts',
     component: _pages_Posts,
     pageTitle: 'Posts',
     exact: true
@@ -11485,7 +12311,7 @@ thunk.withExtraArgument = createThunkMiddleware;
 
 /* harmony default export */ var redux_thunk_es = (thunk);
 // EXTERNAL MODULE: ./node_modules/@babel/runtime/helpers/defineProperty.js
-var defineProperty = __webpack_require__(17);
+var defineProperty = __webpack_require__(18);
 var defineProperty_default = /*#__PURE__*/__webpack_require__.n(defineProperty);
 
 // CONCATENATED MODULE: ./src/client/reducers/demoListReducer.js

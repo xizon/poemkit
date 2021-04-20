@@ -1,5 +1,6 @@
 import React, { Component, Fragment } from 'react';
 import {connect} from 'react-redux';
+import { __ } from '@uixkit.react/components/_utilities/js/_all.js';
 import { fetchDemoListDetail } from '@uixkit.react/actions/demoListDetailActions.js';
 import Footer from '@uixkit.react/components/Footer/index.js';
 
@@ -84,8 +85,6 @@ class PostDetail extends Component {
     return (
 	  <Fragment>
    
-		
-		    <div className="uix-header__placeholder js-uix-header__placeholder-autoheight"></div>
 		
             <main id="uix-maincontent">
 		

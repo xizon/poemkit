@@ -23,7 +23,7 @@ import '@uixkit.react/plugins/FontAwesome/scss/regular.scss';
 
 /*-- Apply global scripts and styles --*/
 import '@uixkit.react/components/_utilities/scss/_all.scss';
-import '@uixkit.react/components/_utilities/scss/rtl/_all-rtl.scss';
+import '@uixkit.react/components/_utilities/scss-rtl/_all.scss';
 import { __ } from '@uixkit.react/components/_utilities/js/_all.js';
 
 

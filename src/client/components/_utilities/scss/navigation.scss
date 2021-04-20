@@ -68,17 +68,17 @@ $nav-mega-li-w    : 270px;
 			/* Sync to WordPress activation class name ".current-menu-item" */
 			&.is-active, 
 			&.current-menu-item {
-				box-shadow: 0 2.15px 0 rgba(0,0,0,1);
+				box-shadow: 0 2.15px 0 rgba(255, 255, 255, 1);
 			} 
 
 			
 			> a {
 				text-transform: uppercase;
 				font-weight: 700;
-				color: #4A4A4A;
+				color: #DEDEDE;
 				
 				&:hover {
-					color: #333;
+					color: #fff;
 				}	
 				
 			}

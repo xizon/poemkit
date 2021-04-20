@@ -77,7 +77,7 @@ export default (props) => {
     return (
 	  <Fragment>
 
-		<Header UixMenuContent={
+		<Header headerOverlayEnable="false" htmlString={
 			<Fragment>
 		
 					<li className={props.location.pathname === '/index' || props.location.pathname === '' ? 'is-active' : ''}>

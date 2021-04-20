@@ -1,11 +1,7 @@
 import React, { Fragment } from 'react';
-import Button from '@uixkit.react/components/Buttons/index.js';
+import { NavLink } from 'react-router-dom';
+import { __ } from '@uixkit.react/components/_utilities/js/_all.js';
 import Footer from '@uixkit.react/components/Footer/index.js';
-
-let spreadOperator = {
-  UixBtnBgColor: 'info',
-  UixBtnName: 'Spread Operator',
-};
 
 
 export default ({ staticContext = {} }) => {
@@ -13,9 +9,8 @@ export default ({ staticContext = {} }) => {
     
     return (
 	  <Fragment>
-		    
-		    <div className="uix-header__placeholder js-uix-header__placeholder-autoheight"></div>
-		   
+		
+		
             <main id="uix-maincontent">
 		
 				{/*
@@ -25,18 +20,19 @@ export default ({ staticContext = {} }) => {
 				<section className="uix-spacing--s">
 					<div className="container">
 							<div className="row">
-								<div className="col-12">
+								<div className="col-md-10 offset-md-1">
 		
-									<h1>Components List</h1>
-									<hr />
+									<div className="uix-t-c"><img src="/assets/images/logo-colorful.png" alt="Uix Kit React" /></div>
+									<p className="uix-t-c">
+										A free web kits with React for fast web design and development via SSR. Using react, redux, router, axios and express. This project was bootstrapped with nodejs library. Project supports automatic deployments from a number of repository hosting services via pm2.
+									</p>		
+		
+									<p className="uix-t-c">
+										<NavLink to="/components-demo" style={{textDecoration: "underline"}}>
+											<i className="fa fa-external-link" aria-hidden="true"></i> Click me to view components!
+										</NavLink>
+									</p>
 
-									<h3>Buttons</h3>
-									<Button UixBtnBgColor='' UixBtnName=''/>
-									<Button UixBtnBgColor='success' UixBtnName='success'/>
-									<Button UixBtnBgColor='info' UixBtnName='info'/>
-									<Button UixBtnBgColor='danger' UixBtnName='danger'/>
-									<Button UixBtnBgColor='warning' UixBtnName='warning'/>
-									<Button {...spreadOperator}/>
 
 								</div>
 							</div>
@@ -46,14 +42,12 @@ export default ({ staticContext = {} }) => {
 					</div>
 					{/*<!-- .container end -->*/}
 				</section>
-		
-		
 
             </main>
 		
 		    <Footer />
        
-        
+          
       </Fragment>
     );
 };

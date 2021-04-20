@@ -1,5 +1,14 @@
 # Changelog
 
+#### = 0.0.22 (April 22, 2021) =
+
+* New: Embedding and debugging of navigation and common modules.
+* New: New extension of utilities script.
+* New: Add more UI components.
+* Tweak: Component path adjustment for better use of aliases.
+* Fix: Fixed an issue where it was judged that the image was completely loaded in utilities `__( '' ).imagesloaded()` and might not be displayed because the image did not exist on page.
+
+
 
 #### = 0.0.20 (April 18, 2021) =
 

@@ -23,7 +23,7 @@ import '@uixkit.react/plugins/FontAwesome/scss/regular.scss';
 
 /*-- Apply global scripts and styles --*/
 import '@uixkit.react/components/_utilities/scss/_all.scss';
-import '@uixkit.react/components/_utilities/scss/rtl/_all-rtl.scss';
+import '@uixkit.react/components/_utilities/scss-rtl/_all.scss';
 import { __ } from '@uixkit.react/components/_utilities/js/_all.js';
 
 
@@ -48,13 +48,10 @@ export default class Header extends Component {
 					
 					__( '.uix-header__container' ).addClass( 'js-heavyShadow' );
 
-					
-					
 				}
 			});
 
-	
-
+		
 		});
 
 		
@@ -63,21 +60,22 @@ export default class Header extends Component {
 	
 	render() {
 		
-		const UixMenuContent = this.props.UixMenuContent ? this.props.UixMenuContent : '';
+		const htmlString = this.props.htmlString ? this.props.htmlString : '';
+		const headerOverlayEnable = this.props.headerOverlayEnable == 'true' ? true : false;
 		
 		return (
 		  <Fragment>
 			
 			{/*<!-- Header Area
 			============================================= -->     */} 
-			<header className="uix-header__container">
+			<header className={ headerOverlayEnable ? 'uix-header__container uix-header__container--overlay' : 'uix-header__container'}>
 
 				 <div className="uix-header">
 					 <div className="container">
 
 			
 							<div className="uix-brand">
-								<a href="/index"><img src="/assets/images/logo.png" alt="Uix Kit" /></a>             
+								<a href="/index"><img src="/assets/images/logo.png" alt="Uix Kit React" /></a>             
 							</div>
 							{/*<!-- .uix-brand end -->*/}
 
@@ -88,16 +86,16 @@ export default class Header extends Component {
 
 								   <div className="uix-menu__inner">
 
-										<span className="uix-brand--mobile"><img src="/assets/images/logo-colorful.png" alt="Site Name" /></span>
-										<ul className="uix-menu">{UixMenuContent}</ul>
+										<span className="uix-brand--mobile"><img src="/assets/images/logo-colorful.png" alt="Uix Kit React" /></span>
+										<ul className="uix-menu">{htmlString}</ul>
 										<div className="uix-menu__right-box">
-											<a className="uix-social-btn uix-social-btn--small uix-social-btn--circle uix-social-btn--thin" title="Follow us on Twitter" href="https://twitter.com/uiux_lab" target="_blank">
+											<a className="uix-social-btn uix-social-btn--small uix-social-btn--circle uix-social-btn--thin uix-social-btn--white" title="Follow us on Twitter" href="https://twitter.com/uiux_lab" target="_blank">
 												<i className="fa fa-twitter"></i>
 											</a>
-											<a className="uix-social-btn uix-social-btn--small uix-social-btn--circle uix-social-btn--thin" title="Follow us on Facebook" href="https://www.facebook.com/uiuxlabhome" target="_blank">
+											<a className="uix-social-btn uix-social-btn--small uix-social-btn--circle uix-social-btn--thin uix-social-btn--white" title="Follow us on Facebook" href="https://www.facebook.com/uiuxlabhome" target="_blank">
 												<i className="fa fa-facebook"></i>
 											</a>
-											<a className="uix-social-btn uix-social-btn--small uix-social-btn--circle uix-social-btn--thin" title="Fork on Github" href="https://github.com/xizon/uix-kit-react" target="_blank">
+											<a className="uix-social-btn uix-social-btn--small uix-social-btn--circle uix-social-btn--thin uix-social-btn--white" title="Fork on Github" href="https://github.com/xizon/uix-kit-react" target="_blank">
 												<i className="fa fa-github"></i>
 											</a>          
 										</div>
@@ -119,6 +117,13 @@ export default class Header extends Component {
 				 </div>
 
 			</header>  
+			
+           {headerOverlayEnable === true ? (
+              <></>
+            ) : (
+              <div className="uix-header__placeholder js-uix-header__placeholder-autoheight"></div>
+            )}
+			
 	
 		  </Fragment>
 		)

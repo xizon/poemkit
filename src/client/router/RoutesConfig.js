@@ -6,12 +6,19 @@ import PostDetail from '@uixkit.react/pages/Posts/PostDetail.js';
 import Todos from '@uixkit.react/pages/Todos/index.js';
 import NoMatch from '@uixkit.react/pages/404/index.js';
 import NestedRoutes from '@uixkit.react/pages/NestedRoutes/index.js';
+import ComponentsDemo from '@uixkit.react/pages/ComponentsDemo/index.js';
+
 
 
 const routesConfig = [
   {
     component: App,
     routes: [
+		
+		
+	  /*======================================== */
+	  /* Primary Menu */
+		
       {
         path: '/',
         component: Home,
@@ -24,6 +31,12 @@ const routesConfig = [
         component: Home,
 		pageTitle: 'Home'
       },
+		
+	  {
+        path: '/components-demo',
+        component: ComponentsDemo,
+		pageTitle: 'Components Demo'
+      },	
 
 	/* 
 	important!! 
@@ -60,7 +73,7 @@ const routesConfig = [
         component: NoMatch,
 		pageTitle: '404 Error',
 		status: 404
-      }  	
+      },
 		
     ]
   }
