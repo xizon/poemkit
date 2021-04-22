@@ -1,6 +1,6 @@
-import React, { Component, Fragment } from 'react';
+import React, { Component } from 'react';
 import {connect} from 'react-redux';
-import { __ } from '@uixkit.react/components/_utilities/js/_all.js';
+import { __ } from '@uixkit.react/components/_utilities/_all.js';
 import { fetchDemoList } from '@uixkit.react/actions/demoListActions.js';
 import PostItem from '@uixkit.react/pages/Posts/PostItem.js';
 import Footer from '@uixkit.react/components/Footer/index.js';
@@ -73,7 +73,7 @@ class Posts extends Component {
     }
     
     return (
-	  <Fragment>
+	  <>
    
 		
             <main id="uix-maincontent">
@@ -106,7 +106,7 @@ class Posts extends Component {
 																   
        
           
-      </Fragment>
+      </>
 
     );
   }

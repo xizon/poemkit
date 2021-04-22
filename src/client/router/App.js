@@ -1,4 +1,4 @@
-import React, { Fragment } from 'react';
+import React from 'react';
 import {
 	Route, 
 	Switch, 
@@ -6,6 +6,8 @@ import {
 	Redirect,
 	useLocation
 } from 'react-router-dom';
+import { __ } from '@uixkit.react/components/_utilities/_all.js';
+
 import customRoutesConfig from '@uixkit.react/router/RoutesConfig.js';
 import Header from '@uixkit.react/components/Header/index.js';
 
@@ -64,21 +66,36 @@ export default (props) => {
 		} catch (e) {}	
 
 
+		//page: Components Demo
+		if ( pathname.indexOf( 'components-demo/' ) >= 0 ) {
+			let titleStr = pathname.split( '/' ).pop();
+			pageTitle = __.lastUrlParamFormat( titleStr );	
+		}
 
+		
 
-		//update page title
-		if ( pageTitle !== null ) document.title = pageTitle;
-
+		// update page title
+		// When the page is not the homepage (including all homepage addresses of 
+		// the routing configuration), change the page title
+		if ( 
+			pageTitle !== null &&
+			pathname !== '/' &&
+			pathname !== '/index'
+		) {
+			document.title =  `${pageTitle} - ${customRoutesConfig[0].routes[0].pageTitle}`;
+		} else {
+			document.title =  `${pageTitle}`;
+		}
 
         
     });
 	
 
     return (
-	  <Fragment>
+	  <>
 
 		<Header headerOverlayEnable="false" htmlString={
-			<Fragment>
+			<>
 		
 					<li className={props.location.pathname === '/index' || props.location.pathname === '' ? 'is-active' : ''}>
 					  <NavLink to="/index" activeClassName="is-active">Home</NavLink>
@@ -96,7 +113,7 @@ export default (props) => {
 					  <NavLink to="/nested-routes" activeClassName="is-active">Nested Routes</NavLink>
 					</li>
 	
-			</Fragment>
+			</>
 		} />
 
 
@@ -151,7 +168,7 @@ export default (props) => {
 
 
 
-      </Fragment>
+      </>
     );
 
 };

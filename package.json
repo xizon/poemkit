@@ -1,7 +1,8 @@
 {
+  "development": true,
   "author": "UIUX Lab",
   "name": "uix-kit-react",
-  "version": "0.0.22",
+  "version": "0.0.23",
   "description": "A free web kits with React for fast web design and development via SSR.",
   "main": "webpack.config.js",
   "directories": {
@@ -42,6 +43,7 @@
     "babel-loader": "^8.0.4",
     "clean-webpack-plugin": "^1.0.0",
     "css-loader": "^2.0.1",
+    "eslint": "^7.24.0",
     "file-loader": "^6.2.0",
     "glslify-loader": "^2.0.0",
     "html-loader": "^0.5.5",

@@ -434,6 +434,16 @@ webpackConfig.plugins.push(
 );
 
 
+
+// Create global constants which can be configured at compile time
+// his can be useful for allowing different behavior between development builds and production builds.
+webpackConfig.plugins.push(
+	new webpack.DefinePlugin({
+      __DEV__: process.env.NODE_ENV === "development"
+	}),
+);
+
+
 /*! 
  *************************************
  *  Hook our plugins to fix webpack dev server is not serving the latest compiled code

@@ -1,6 +1,6 @@
-import React, { Fragment } from 'react';
+import React from 'react';
 import { NavLink } from 'react-router-dom';
-import { __ } from '@uixkit.react/components/_utilities/js/_all.js';
+import { __ } from '@uixkit.react/components/_utilities/_all.js';
 import Footer from '@uixkit.react/components/Footer/index.js';
 
 
@@ -8,7 +8,7 @@ export default ({ staticContext = {} }) => {
     staticContext.status = 200;
     
     return (
-	  <Fragment>
+	  <>
 		
 		
             <main id="uix-maincontent">
@@ -48,6 +48,6 @@ export default ({ staticContext = {} }) => {
 		    <Footer />
        
           
-      </Fragment>
+      </>
     );
 };

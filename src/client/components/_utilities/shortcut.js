@@ -4,8 +4,8 @@
  * Core Shortcut
  *
  * @package: uix-kit-react
- * @version: 0.15
- * @last update: April 20, 2021
+ * @version: 0.16
+ * @last update: April 22, 2021
  * @license: MIT
  *
  *************************************
@@ -64,14 +64,22 @@ __( document ).ready( function() {
 			__( '.demo' ).data( 'bg', 'red' );
 			__( '.demo' ).attr( 'disabled', 'disabled' );
 			__( '.demo' ).width( 300 );
-			__( '.demo' ).width( "50%" );
+			__( '.menu li:first-child' ).width( "50%" );
 
-			__( '.demo' ).off( 'click' ).on( 'click', function( e ) {
-				console.log(e);
+			__( '.menu li' ).off( 'click' ).on( 'click', function( e ) {
+				console.log('e: ', e);
+				console.log('this: ', this);
+				console.log('index(): ', __( this ).index());
+				console.log('attr(class): ', __( this ).attr( 'class' ));
+				__( this ).addClass( 'new-class' )
 			});
 
-			__( document ).on( 'click', '.uix-brand', function( e ) {
-				console.log(e);
+			__( document ).on( 'click', '.menu li', function( e ) {
+				console.log('e: ', e);
+				console.log('this: ', this);
+				console.log('index(): ', __( this ).index());
+				console.log('attr(class): ', __( this ).attr( 'class' ));
+				__( this ).addClass( 'new-class' )
 			});
 
 			__( '.menu li' ).eq(1).append( '<span style="color:green">after</span>');
@@ -86,31 +94,56 @@ __( document ).ready( function() {
 			__( '.class-1' ).not( '.class-2' ).addClass( 'class-not' );
 			__( '.class-1' ).filter( '.class-2' ).addClass( 'class-filter' );
 			__( '.class-1' ).siblings().addClass( 'class-siblings' );
-
+			__( '.demo' ).trigger( 'click' );
 
 
 			console.log( '<h1> content: ' + __( 'h1' ).html());
-			console.log( 'len() of .uix-menu li: ' + __( '.uix-menu li' ).length );
+			console.log( 'len() of .menu li: ' + __( '.menu li' ).length );
 			console.log( 'len() of #none: ' + __( '#none' ).length );
 			console.log( 'width(): ' + __( '.demo' ).width() );
 			console.log( 'outerWidth(): ' + __( '.demo' ).outerWidth() );
 			console.log( 'outerWidth( true ): ' + __( '.demo' ).outerWidth(true) );
+			
+			console.log( 'height(): ' + __( '.demo' ).height() );
+			console.log( 'outerHeight(): ' + __( '.demo' ).outerHeight() );
+			console.log( 'outerHeight( true ): ' + __( '.demo' ).outerHeight(true) );	
+			
 			console.log( '[data-bg] value: ' + __( '.demo' ).data( 'bg' ) );
 			console.log( '[disabled] value: ' + __( '.demo' ).attr( 'disabled' ) );
-
 			console.log( __( '.demo' ).hasClass( 'class-1' ) );
 			console.log( __( 'h1' ).offset() );
 			console.log( __( 'h1' ).position() );		
+			console.log( __( '.menu li:nth-child(2)' ).index() );
 
 
-			__( '.menu li' ).each( function( index, value )  {
+			__( '.menu li' ).each( function( index, selectors )  {
 				console.log( index + ' : ' );
-				console.log( value );
-				value.style.background = '#333';
-				__( value ).css({
+				console.log( this );
+				this.style.background = '#333';
+				__( this ).css({
 					'background': '#f00',
 					'font-size': '18px'
 				});
+				
+				
+				//Nested `each() `
+				//__( selectors) are generally used for exact each selector
+				__( selectors ).find( 'ul > li' ).each( function( index ) {
+					__( this ).attr( 'id', 'li-id-' + index );
+				});
+	
+	
+				//Nested `eq()`
+				for (let k = 0; k<liNum; k++) {
+					__( selectors + ' ul > li' ).eq(k).css({
+						'font-size'        : '18px'
+					});
+					
+					__( selectors + ' ul > li:nth-child('+k+') > a' ).css({
+						'font-size'        : '18px'
+					});
+				}
+
 			});
 
 			__( '.demo' ).fadeOut(1000, function(){
@@ -164,8 +197,9 @@ __( document ).ready( function() {
 			console.log( __.cssProperty.getAbsoluteCoordinates( __( '.col-12' )[0] ).left );
 			console.log( __.styleFormat( 'font-size: 10px;background: #51B801; color:#fff; border-radius: 5px;padding: 2px 3px;display: inline-block;margin-left: 3px;' ) )
 			console.log( __.trim( 'string string spacing string' ) );
-
-
+            console.log( __.lastUrlParamFormat( 'string-string-spacing_string' ) );
+			
+			
 
 
 		}
@@ -183,8 +217,8 @@ const __ = (function () {
 	'use strict';
 	
 	
-	//root selector node
-	__.prototype.rootSelector = null;
+	//The default selector to search for or HTML element
+	__.prototype.defaultTargetSelector = null;
 	
 	
 	function __(s, root) {
@@ -330,6 +364,38 @@ const __ = (function () {
 	
 	
 	
+	/*
+	 * Returns the set of ID and classes of the current target element for use by the selector
+	 * @private method
+	 */
+	function currentElselectors(el) {
+		
+		let itemDomsStr = '';
+
+		//get ID
+		let id = el.id;
+		if ( typeof( id ) !== 'undefined' && id != '' ) {
+			itemDomsStr += `#${id}`;
+		}	
+
+		//get all classes
+		let classes = el.classList;
+		if ( typeof( classes ) !== 'undefined' ) {
+			classes.forEach(
+				function(value, key, listObj) {
+					itemDomsStr += `.${value}`;
+				}, 'arg' );	
+
+		}
+		
+		//If the ID does not exist, return the current object
+		if ( typeof( id ) === 'undefined' || id === '' ) {
+			itemDomsStr = '';
+		}	
+		
+		
+		return itemDomsStr;
+	}
 	
 	
 	/* ------------- Independent Methods -------------- */
@@ -590,7 +656,35 @@ const __ = (function () {
 		}
     }	
 
+	
+	
+	/*
+	 * Capitalize the first letter of all words in a string
+	 *
+	 * @param  {String} s                 - Any string.
+	 * @return {String}                   - A new string.
+	 */  	
+	__.lastUrlParamFormat = function(s) {
+		
+		s = s || '';
 
+		if ( s.length > 0 ) {
+			
+			s = s.replace(/\-/g, ' ' ).replace(/\_/g, ' ' );
+			const pieces = s.split(" ");
+			for ( let i = 0; i < pieces.length; i++ )
+			{
+				const j = pieces[i].charAt(0).toUpperCase();
+				pieces[i] = j + pieces[i].substr(1);
+			}
+			return pieces.join(" ");	
+			
+		} else {
+			return s;
+		}
+		
+
+	}
 	
 	/*
 	 * Convert HTML Element's `Style` Attribute to JSON
@@ -638,39 +732,46 @@ const __ = (function () {
 	/**
 	 * Core method
 	 *
-	 * @param  {String|Element} s       - The CSS selector to search for or HTML element to wrap with functionality
+	 * @param  {String|Element} s       - The selector to search for or HTML element to wrap with functionality
 	 * @param  {Element} root           - OPTIONAL An HTML element to start the element query from
 	 * @return {Array}                  - The collection of elements, wrapped with functionality (see API methods)
 	 */
 	__.prototype.core = function(s, root) {
 		const self = this;
-		root = root || (typeof (document) !== 'undefined') ? document : null;
+		root = root || document;
+
 		
-		//update root selector node
-		__.prototype.rootSelector = s;
+		//update the default selector
+		__.prototype.defaultTargetSelector = s;
 		
-		if ( root !== null ) {
+		if ( typeof (s) !== 'undefined' ) {
+
 			if (typeof(s) === 'string') {
+				//1) string
 				return self.wrap([].slice.call( root.querySelectorAll(s) ));
+
 			} else if (s.tagName) {
+				//2) HTML elements
 				return self.wrap( [s] );
+
 			} else {
-				
+				//3) document or other
 				switch( s.nodeType ) {
 					 case 9:
 						//if Document
 						return self.wrap( [document.body] );
 						break;
-						
+
 					 default:
 						return [];
-						
+
 				} 
 
-			}	
-		}
+			}		
 
+		}//typeof (s) !== 'undefined'
 
+		
 		return [];
 	};
 
@@ -1021,7 +1122,8 @@ const __ = (function () {
 		return __(s, this);
 	};
 
-	
+
+		 
 	/*
 	 * Reduce the set of matched elements to the one at the specified index.
 	 *
@@ -1029,8 +1131,7 @@ const __ = (function () {
 	 * @return {Array}          - Contains only a collection of HTML elements.
 	 */
 	__.prototype.eq = function(index) {
-		const self = this;
-		const elements = __(__.prototype.rootSelector, self);
+		const elements = __(__.prototype.defaultTargetSelector, document);
 	
 		return elements[ index ];
 	};
@@ -1107,16 +1208,13 @@ const __ = (function () {
 	 * @return {Array}              -  The collection of elements
 	 */
     __.prototype.filter = function(s) {
-		const self = this;
-		const elements = __(__.prototype.rootSelector, self);
-		const targetEl = __(s, self);
+		const elements = __(__.prototype.defaultTargetSelector, document);
+		const targetEl = __(s, document);
 		const list = Array.from(elements);
 		
 		for (let j = 0; j < targetEl.length; j++ ) {
-			const _el = targetEl[j];
-
 			for (let i = 0; i < list.length; i++ ) {
-				if ( _el != list[i] ) {
+				if ( ! list[i].classList.contains( s.replace(/\./g,'') ) ) {
 					removeArray(list, list[i]);
 				}
 			}	
@@ -1134,16 +1232,13 @@ const __ = (function () {
 	 * @return {Array}              -  The collection of elements
 	 */
     __.prototype.not = function(s) {
-		const self = this;
-		const elements = __(__.prototype.rootSelector, self);
-		const targetEl = __(s, self);
+		const elements = __(__.prototype.defaultTargetSelector, document);
+		const targetEl = __(s, document);
 		const list = Array.from(elements);
 		
 		for (let j = 0; j < targetEl.length; j++ ) {
-			const _el = targetEl[j];
-
 			for (let i = 0; i < list.length; i++ ) {
-				if ( _el == list[i] ) {
+				if ( list[i].classList.contains( s.replace(/\./g,'') ) ) {
 					removeArray(list, list[i]);
 				}
 			}	
@@ -1192,8 +1287,7 @@ const __ = (function () {
 	 * @return {Array}          - Contains only a collection of HTML elements.
 	 */
     __.prototype.first = function() {
-		const self = this;
-		const elements = __(__.prototype.rootSelector, self);
+		const elements = __(__.prototype.defaultTargetSelector, document);
 		let newEl = null;
 		//
 		const length = elements.length;
@@ -1207,8 +1301,7 @@ const __ = (function () {
 	 * @return {Array}          - Contains only a collection of HTML elements.
 	 */
     __.prototype.last = function() {
-		const self = this;
-		const elements = __(__.prototype.rootSelector, self);
+		const elements = __(__.prototype.defaultTargetSelector, document);
 		let newEl = null;
 		//
 		const length = elements.length;
@@ -1232,21 +1325,6 @@ const __ = (function () {
 
 	}
 	
-	/*
-	 * Store arbitrary data associated with the matched elements.
-	 *
-	 * @param  {String} a                 - A string naming the piece of data to set
-	 * @param  {String} v                 - The new data value.
-	 * @return {Void|String}              - Return arbitrary data associated with the first element as set by data() or by an HTML5 data-* attribute.
-	 */
-	__.prototype.data = function(a, v) {
-		a = a || '';
-		if (v === undefined) {
-			return this.getAttribute('data-' + a);
-		} else {
-			this.setAttribute('data-' + a, v);
-		}
-	};
 
 	/*
 	 * Remove a previously-stored piece of data.
@@ -1270,12 +1348,65 @@ const __ = (function () {
 	__.prototype.attr = function(a, v) {
 		a = a || '';
 		if (v === undefined) {
-			return this.getAttribute(a);
+			
+			let res = this.getAttribute(a);
+			if ( res == 'true' ) res = true;
+			if ( res == 'false' ) res = false;
+			if ( isJSON(res) ) res = JSON.parse(res);
+			// Non-existent attributes return null, we normalize to undefined
+			return res == null ? undefined : res;
 		} else {
 			this.setAttribute(a, v);
 		}
 	};
 
+	/*
+	 * Store arbitrary data associated with the matched elements.
+	 *
+	 * @param  {String} a                 - A string naming the piece of data to set
+	 * @param  {String} v                 - The new data value.
+	 * @return {Void|String}              - Return arbitrary data associated with the first element as set by data() or by an HTML5 data-* attribute.
+	 */
+	__.prototype.data = function(a, v) {
+		a = a || '';
+		if (v === undefined) {
+			
+			let res = this.getAttribute('data-' + a);
+			if ( res == 'true' ) res = true;
+			if ( res == 'false' ) res = false;
+			if ( isJSON(res) ) res = JSON.parse(res);
+			// Non-existent attributes return null, we normalize to undefined
+			return res == null ? undefined : res;
+		} else {
+			this.setAttribute('data-' + a, v);
+		}
+	};
+
+
+	/*
+	 * Set one or more attributes for the set of matched Form elements.
+	 *
+	 * @param  {String} a                 - The name of the attribute to set.
+	 * @param  {String} v                 - A value to set for the attribute. 
+	 * @return {Void|String}              - Get the value of an attribute for the first element in the set of matched elements.
+	 */
+	__.prototype.prop = function(a, v) {
+		a = a || '';
+		if (v === undefined) {
+			
+			let res = this[a];
+			if ( res == 'true' ) res = true;
+			if ( res == 'false' ) res = false;
+			if ( isJSON(res) ) res = JSON.parse(res);
+			// Non-existent attributes return null, we normalize to undefined
+			return res == null ? undefined : res;
+		} else {
+			this[a] = v;
+		}
+	};
+
+	
+	
 	/*
 	 * Remove an attribute from each element in the set of matched elements.
 	 *
@@ -1309,7 +1440,7 @@ const __ = (function () {
 		};
 		
 		if (selector) {
-			
+			//if string
 			const fun = function(evt) {
 				__(selector, self).forEach(function(el) {
 					if (el === evt.target) {
@@ -1329,14 +1460,19 @@ const __ = (function () {
 			
 		} else {
 		
+			//if HTML element
+			const fun = function(evt) {
+				callBack.call(this, evt);
+			};
+			
+			
 			this.myListeners.push({
 				eType: eventType,
 				callBack: callBack
 			});
+			
+			this.addEventListener(eventType, fun, false);
 
-			this.addEventListener(eventType, function(event) {
-				callBack(event);
-			});
 		}
 		
 
@@ -1506,15 +1642,24 @@ const __ = (function () {
 	 * @param  {Function} fn         - A function to execute for each matched element.
 	 * @return {Void} 
 	 */  
+
     __.prototype.each = function(fn) {
 		
-		const self = this;
-		const elements = __(__.prototype.rootSelector, self);
+		let elements = __(__.prototype.defaultTargetSelector, document);
+		
+		
 		elements.map((item, index) => {
+			
+			//!import: The returned HTML element must be current, 
+			//otherwise all HTML elements under document may be queried
+			const itemDomsStr = currentElselectors( item );
+			
 			if (fn && (typeof fn == "function")) {
-				fn.call(this,index, item);
+				fn.call(item, index, itemDomsStr);
 			}
 		});
+		
+		
 
     }	
 	
@@ -1544,22 +1689,6 @@ const __ = (function () {
 		
 		return this.value;
     }	
-
-	/*
-	 * Set one or more attributes for the set of matched Form elements.
-	 *
-	 * @param  {String} a                 - The name of the attribute to set.
-	 * @param  {String} v                 - A value to set for the attribute. 
-	 * @return {Void|String}              - Get the value of an attribute for the first element in the set of matched elements.
-	 */
-	__.prototype.prop = function(a, v) {
-		a = a || '';
-		if (v === undefined) {
-			return this[a];
-		} else {
-			this[a] = v;
-		}
-	};
 
 
 	/*
@@ -1687,6 +1816,44 @@ const __ = (function () {
 		return objects;
     }	
 
+
+	/*
+	 * Search for a given element from among the matched elements.
+	 *
+	 * @return {Number}     - The return value is an integer indicating the position of the 
+	 *                        first element within the jQuery object relative to its sibling elements.
+	 */
+    __.prototype.index = function() {
+		const self = this;
+		const children = self.parentNode.childNodes;
+		
+		let num = 0;
+		for (let i=0; i<children.length; i++) {
+			 if (children[i]==self) return num;
+			 if (children[i].nodeType==1) num++;
+		}
+		return -1;
+    }	
+
+
+	/*
+	 * Bind an event in the HTML element
+	 *
+	 * @param  {String} eventType         - One event types and optional namespaces, such as "click" 
+	 * @return {Void}  
+	 */
+    __.prototype.trigger = function(eventType) {
+		const fire = function( elem, type ) {
+			var event = document.createEvent('Event');
+			event.initEvent(type, true, true); //can bubble, and is cancellable
+			elem.dispatchEvent(event);
+		};
+		
+		document.addEventListener( "plop", function() { }, false );
+		fire( this, eventType );
+		
+    }	
+	
 	
 	/* ------------- Private Methods -------------- */
 
@@ -1717,9 +1884,10 @@ const __ = (function () {
 		removeClass: __.prototype.removeClass,
 		toggleClass: __.prototype.toggleClass,
 		css: __.prototype.css,
-		data: __.prototype.data,
 		removeData: __.prototype.removeData,
 		attr: __.prototype.attr,
+		data: __.prototype.data,
+		prop: __.prototype.prop,
 		removeAttr: __.prototype.removeAttr,
 		on: __.prototype.on,
 		off: __.prototype.off,
@@ -1733,13 +1901,13 @@ const __ = (function () {
 		empty: __.prototype.empty,
 		hasClass: __.prototype.hasClass,
 		val: __.prototype.val,
-		prop: __.prototype.prop,
 		show: __.prototype.show,
 		hide: __.prototype.hide,
 		fadeIn: __.prototype.fadeIn,
 		fadeOut: __.prototype.fadeOut,
 		serializeArray: __.prototype.serializeArray,
-		
+		index: __.prototype.index,
+		trigger: __.prototype.trigger,
 	};
 
 
@@ -1756,7 +1924,7 @@ const __ = (function () {
 				//
 				let result;
 				const breakException = {};
-				
+			
 				
 				if (Array.isArray(this)) {
 					result = [];
@@ -1771,21 +1939,21 @@ const __ = (function () {
 								result.push(fnResult);
 							}
 
-							// Check Dom Element: 
-							// Break out of the loop from All Elements
+							// ////////////////////
+							// Break out of the loop of global retrieval of elements
 							//----------------------
 							if ( fn === 'eq' ||
 								 fn === 'first' ||
 								 fn === 'last' ||
-								 fn === 'each'
+							 	 fn === 'each'
 							   ) throw breakException;
 						});
 					} catch (e) {}	
 					
 
 
-					// Check Dom Element: 
-					// If it is to return the dom element, you need to determine the function key value
+					// ////////////////////
+					// Methods that return value is `DOM elements using selectors`
 					//----------------------
 					if (
 						fn === 'find' || 
@@ -1813,21 +1981,43 @@ const __ = (function () {
 				}//end Array.isArray(this)
 
 				
-		
-				// Check Value:
-				// Methods whose return value is not an array
-				//----------------------
-				if ( typeof (result) !== 'undefined' ) {
-					if (
-						fn === 'hasClass' || 
-						fn === 'offset' ||
-						fn === 'position'
-					) {	
-						result = result[0];
-					}
-				}
-
 				
+				// ////////////////////
+				// Methods that return value is `JSON`, `Boolean` or `Number`
+				//----------------------
+				if (
+					fn === 'hasClass' || 
+					fn === 'offset' ||
+					fn === 'position' ||
+					fn === 'index' ||
+					fn === 'width' ||
+					fn === 'outerWidth' ||
+					fn === 'height' ||
+					fn === 'outerHeight'
+
+				) {	
+					return (result === undefined) ? undefined : result[0];
+				}
+		
+				
+				
+				// ////////////////////
+				// Methods that return value is `Array` or `HTML element`
+				//----------------------
+				if (
+					fn === 'data' ||
+					fn === 'attr' ||
+					fn === 'prop' 
+
+				) {	
+					
+					return (result === undefined) ? this : result[0];
+				}
+		
+				
+				// ////////////////////
+				// The default returns value from a function
+				//----------------------
 				return (result === undefined) ? this : result;
 			};
 		});

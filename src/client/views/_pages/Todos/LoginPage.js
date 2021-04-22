@@ -1,6 +1,6 @@
-import React, { Component, Fragment } from 'react';
+import React, { Component } from 'react';
 import axios from 'axios';
-import { __ } from '@uixkit.react/components/_utilities/js/_all.js';
+import { __ } from '@uixkit.react/components/_utilities/_all.js';
 
 
 
@@ -171,7 +171,7 @@ class LoginPage extends Component {
     // NOTE: I use data-attributes for easier E2E testing
     // but you don't need to target those (any css-selector will work)
         return (
-          <Fragment>
+          <>
 
             
                 { 
@@ -220,7 +220,7 @@ class LoginPage extends Component {
             
 
 
-          </Fragment>
+          </>
         );
     }
 }

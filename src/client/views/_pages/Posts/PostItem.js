@@ -1,11 +1,11 @@
-import React, { Fragment } from 'react';
+import React from 'react';
 import { NavLink } from 'react-router-dom';
-import { __ } from '@uixkit.react/components/_utilities/js/_all.js';
+import { __ } from '@uixkit.react/components/_utilities/_all.js';
 
 export default ({ name, flag })  => {
     
     return (
-	  <Fragment>
+	  <>
 		
           <div style={{padding: "10px 10px 0 10px", margin: "10px", display: "inline-block", border: "1px solid #ddd", width: "120px", height: "120px", textAlign: "center", position: "relative"}}>
             <NavLink to={`/posts/${name}`} className="item">
@@ -15,7 +15,7 @@ export default ({ name, flag })  => {
 
           </div>
           
-      </Fragment>
+      </>
 
     );
 };

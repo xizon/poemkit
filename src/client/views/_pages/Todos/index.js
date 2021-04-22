@@ -1,5 +1,5 @@
-import React, { Component, Fragment } from 'react';
-import { __ } from '@uixkit.react/components/_utilities/js/_all.js';
+import React, { Component } from 'react';
+import { __ } from '@uixkit.react/components/_utilities/_all.js';
 import LoginPage from '@uixkit.react/pages/Todos/LoginPage.js';
 import Footer from '@uixkit.react/components/Footer/index.js';
 
@@ -35,7 +35,7 @@ class Todos extends Component {
   render() {
 
     return (
-	  <Fragment>
+	  <>
 		
             <main id="uix-maincontent">
 		
@@ -64,7 +64,7 @@ class Todos extends Component {
 		    <Footer />
        
           
-      </Fragment>
+      </>
 
     );
   }

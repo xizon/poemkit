@@ -1,12 +1,12 @@
-import React, { Fragment } from 'react';
-import { __ } from '@uixkit.react/components/_utilities/js/_all.js';
+import React from 'react';
+import { __ } from '@uixkit.react/components/_utilities/_all.js';
 import Footer from '@uixkit.react/components/Footer/index.js';
 
 export default ({ staticContext = {} }) => {
     staticContext.status = 404;
     
     return (
-	  <Fragment>
+	  <>
 		
             <main id="uix-maincontent">
 		
@@ -36,6 +36,6 @@ export default ({ staticContext = {} }) => {
 		    <Footer />
        
         
-      </Fragment>
+      </>
     );
 };

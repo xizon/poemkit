@@ -4,7 +4,7 @@
  *************************************
  */
 
-import React, { Component, Fragment } from 'react';
+import React, { Component } from 'react';
 
 
 /*-- Apply Third-party plugins --*/
@@ -22,9 +22,9 @@ import '@uixkit.react/plugins/FontAwesome/scss/regular.scss';
 
 
 /*-- Apply global scripts and styles --*/
-import '@uixkit.react/components/_utilities/scss/_all.scss';
-import '@uixkit.react/components/_utilities/scss-rtl/_all.scss';
-import { __ } from '@uixkit.react/components/_utilities/js/_all.js';
+import '@uixkit.react/components/_utilities/styles/_all.scss';
+import '@uixkit.react/components/_utilities/styles/rtl/_all.scss';
+import { __ } from '@uixkit.react/components/_utilities/_all.js';
 
 
 
@@ -47,7 +47,8 @@ export default class Header extends Component {
 					
 					
 					__( '.uix-header__container' ).addClass( 'js-heavyShadow' );
-
+					
+					
 				}
 			});
 
@@ -64,7 +65,7 @@ export default class Header extends Component {
 		const headerOverlayEnable = this.props.headerOverlayEnable == 'true' ? true : false;
 		
 		return (
-		  <Fragment>
+		  <>
 			
 			{/*<!-- Header Area
 			============================================= -->     */} 
@@ -125,7 +126,7 @@ export default class Header extends Component {
             )}
 			
 	
-		  </Fragment>
+		  </>
 		)
 	}
 }

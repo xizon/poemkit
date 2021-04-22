@@ -33,11 +33,12 @@ Uix Kit React系一套免费的网站开发工具包，帮助开发者从零建�
 * 集开发，打包和部署为一体
 * 它不是一个JavaScript框架
 * 支持服务器端渲染（SSR）
-* 组件分离，可以导入任何第三方UI组件到项目
+* 组件分离，可以导入任何第三方UI组件到项目 (比如Ant Design)
 * 使用Sass/SCSS来设置React组件的样式
 * 提供常见的网页组件和布局
 * 自动捆绑并生成独立的核心CSS和JS文件
 * 支持通过pm2自动部署到服务器
+* 默认组件演示植入了诸如Bootstrap 4+, GSAP, FontAwesome, Three, Pixi等常用的第三方动画库和栅格系统，以便能够快速扩展您的网站
 
 
 * * *
@@ -139,7 +140,7 @@ $ pm2 logs
 
 
 
-### Note:
+### ⚙️ 温馨提示:
  
 **a) ERROR: npm update check failed.**
 
@@ -155,6 +156,118 @@ $ sudo chown -R $USER:$(id -gn $USER) /Users/{username}/.config
 $ sudo npm install
 $ sudo npm rebuild node-sass
 ```
+
+
+
+### ⚙️ 配置模块和别名:
+
+您可以通过修改 `webpack.config.js` 的 `resolve` 属性来创建 `import` 或 `require` 的别名，来确保模块引入变得更简单.
+
+```js
+...
+const alias = {
+	pathComponents        : './src/client/components',
+	pathThirdPartyPlugins : './src/client/components/_third-party-plugins',
+	pathRouter            : './src/client/router',
+	pathReducers          : './src/client/reducers',
+	pathPages             : './src/client/views/_pages',
+	pathActions           : './src/client/actions',
+	pathServer            : './src/server',
+	pathStore             : './src/store'
+};
+
+...
+resolve: {
+	extensions: ['.js', '.es6', '.vue', '.jsx' ],
+	alias: {
+
+		// specific mappings.
+		// Supports directories and custom aliases for specific files when the express server is running, 
+		// you need to configure the `babel.config.js` at the same time
+		'@uixkit.react/components': path.resolve(__dirname, alias.pathComponents ),
+		'@uixkit.react/plugins': path.resolve(__dirname, alias.pathThirdPartyPlugins ),
+		'@uixkit.react/router': path.resolve(__dirname, alias.pathRouter ),
+		'@uixkit.react/reducers': path.resolve(__dirname, alias.pathReducers ),
+		'@uixkit.react/pages': path.resolve(__dirname, alias.pathPages ),
+		'@uixkit.react/actions': path.resolve(__dirname, alias.pathActions ),
+		'@uixkit.react/server': path.resolve(__dirname, alias.pathServer ),
+		'@uixkit.react/store': path.resolve(__dirname, alias.pathStore ),
+
+	}
+},
+...
+```
+
+
+
+### ⚙️ 库相关配置:
+
+您可以通过修改 `webpack.config.js` 的 `output` 属性来指示 webpack 如何去输出、以及在哪里输出你的「bundle、asset 和其他你所打包或使用 webpack 载入的任何内容」
+
+
+```js
+...
+const globs = {
+	port                  : 8080,
+	examples              : 'public',
+	build                 : 'src/client',
+	dist                  : 'dist'
+};
+
+...
+output: {
+	path: path.resolve(__dirname, './' + globs.dist + '/js' ),
+	filename: '[name].js'
+},
+...
+```
+
+
+### ⚙️ 网站配置:
+
+修改`package.json`文件即可：
+
+```json
+{
+  "author": "UIUX Lab",
+  "name": "uix-kit-react",
+  "email": "uiuxlab@gmail.com",
+  "version": "1.0.0",
+  "projectName": "Uix Kit",
+  "createdInfo": "UIUX Lab (https://uiux.cc)",
+  "projectURL": "https://uiux.cc",
+  "description": "A free web kits with React for fast web design and development via SSR.",
+  ...
+}
+```
+
+
+
+### ⚙️ 路由配置:
+
+路由配置同时也兼顾了网站的主导航（不包括将在主导航的页面上配置的嵌套路由）。 访问文件 `uix-kit-react/src/client/router/RoutesConfig.js`. 
+
+
+路由器的一些脚本可以在文件中修改 `uix-kit-react/src/client/router/App.js`.
+
+
+### ⚙️ 服务端渲染配置:
+
+服务端渲染和标签替换的一些脚本可以在文件中修改 `uix-kit-react/src/server/renderer.js`.
+
+
+
+### ⚙️ 设置服务器代理:
+
+为了同时运行服务器和React应用程序，我们需要在 `package.json` 中添加`proxy` 键。我们已经将服务器设置为在端口3000上运行，因此将代理指向 `localhost:3000`。
+
+```json
+{
+  "proxy": "http://localhost:3000",
+  ...
+}
+```
+
 
 
 

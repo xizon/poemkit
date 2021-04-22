@@ -1,4 +1,4 @@
-import React, { Component, Fragment } from 'react';
+import React, { Component } from 'react';
 import {
 	Route, 
 	Switch, 
@@ -6,7 +6,7 @@ import {
 	useRouteMatch,
 	useParams
 } from 'react-router-dom';
-import { __ } from '@uixkit.react/components/_utilities/js/_all.js';
+import { __ } from '@uixkit.react/components/_utilities/_all.js';
 import Footer from '@uixkit.react/components/Footer/index.js';
 
 import NestedRoutesDetail from '@uixkit.react/pages/NestedRoutes/NestedRoutesDetail.js';
@@ -23,7 +23,7 @@ function HookContent() {
 
 	
 	return (
-		<Fragment>
+		<>
 		
 			<h3>Nested Routes Page</h3>
 
@@ -43,7 +43,7 @@ function HookContent() {
 				  <NestedRoutesDetail />
 				</Route>
 			  </Switch>
-		</Fragment>
+		</>
 	)
 
 }
@@ -54,7 +54,7 @@ class NestedRoutes extends Component {
   render() {
 	  
     return (
-	  <Fragment>
+	  <>
 
 		<main id="uix-maincontent">
 
@@ -85,7 +85,7 @@ class NestedRoutes extends Component {
 
           
 
-      </Fragment>
+      </>
     ); 
 	  
   }

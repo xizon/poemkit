@@ -17,20 +17,24 @@ const routesConfig = [
 		
 		
 	  /*======================================== */
-	  /* Primary Menu */
+	  /* Homepage */
 		
       {
         path: '/',
         component: Home,
         exact: true,
-		pageTitle: 'Home'
+		pageTitle: 'Uix Kit React'
       },
 		
       {
         path: '/index',
         component: Home,
-		pageTitle: 'Home'
+		pageTitle: 'Uix Kit React'
       },
+		
+		
+	  /*======================================== */
+	  /* Primary Menu */
 		
 	  {
         path: '/components-demo',

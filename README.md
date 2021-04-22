@@ -52,11 +52,12 @@ Server runs on `http://localhost:3000`
 * Development, packaging, and deployment in one
 * Not a JavaScript framework
 * Server-Side Rendering (SSR) Support
-* Components are separated, you can use any UI component
+* Components are separated, you can use any UI component (such as Ant Design)
 * Styling React Components in Sass/SCSS
 * Provides a common web page components and layouts
 * Automatically bundle and generate independent core CSS and JS files
 * Project supports automatic deployments from a number of repository hosting services via pm2
+* The default components demo is embedded with commonly used third-party animation libraries and grid system, such as Bootstrap 4+, GSAP, FontAwesome, Three, Pixi, etc., so that you can quickly expand your website
 
 
 * * *
@@ -148,7 +149,7 @@ $ pm2 logs
 
 
 
-### Note:
+### ⚙️ Note:
  
 **a) ERROR: npm update check failed.**
 
@@ -161,6 +162,116 @@ $ sudo chown -R $USER:$(id -gn $USER) /Users/{username}/.config
 ```sh
 $ sudo npm install
 $ sudo npm rebuild node-sass
+```
+
+
+
+### ⚙️ Configuring Module resolve and alias:
+
+You can configure the module resolution by adding resolve to the `webpack.config.js`. If you use a relative path when you import another module, it would be bothersome because you would have to figure out all of the relative paths. Therefore, you can add alias to make it easier for yourself.
+
+```js
+...
+const alias = {
+	pathComponents        : './src/client/components',
+	pathThirdPartyPlugins : './src/client/components/_third-party-plugins',
+	pathRouter            : './src/client/router',
+	pathReducers          : './src/client/reducers',
+	pathPages             : './src/client/views/_pages',
+	pathActions           : './src/client/actions',
+	pathServer            : './src/server',
+	pathStore             : './src/store'
+};
+
+...
+resolve: {
+	extensions: ['.js', '.es6', '.vue', '.jsx' ],
+	alias: {
+
+		// specific mappings.
+		// Supports directories and custom aliases for specific files when the express server is running, 
+		// you need to configure the `babel.config.js` at the same time
+		'@uixkit.react/components': path.resolve(__dirname, alias.pathComponents ),
+		'@uixkit.react/plugins': path.resolve(__dirname, alias.pathThirdPartyPlugins ),
+		'@uixkit.react/router': path.resolve(__dirname, alias.pathRouter ),
+		'@uixkit.react/reducers': path.resolve(__dirname, alias.pathReducers ),
+		'@uixkit.react/pages': path.resolve(__dirname, alias.pathPages ),
+		'@uixkit.react/actions': path.resolve(__dirname, alias.pathActions ),
+		'@uixkit.react/server': path.resolve(__dirname, alias.pathServer ),
+		'@uixkit.react/store': path.resolve(__dirname, alias.pathStore ),
+
+	}
+},
+...
+```
+
+
+
+### ⚙️ Library Related Configurations:
+
+Use the output found in `webpack.config.js` to configure settings related to the library like the module type and the namespace.
+
+
+```js
+...
+const globs = {
+	port                  : 8080,
+	examples              : 'public',
+	build                 : 'src/client',
+	dist                  : 'dist'
+};
+
+...
+output: {
+	path: path.resolve(__dirname, './' + globs.dist + '/js' ),
+	filename: '[name].js'
+},
+...
+```
+
+
+### ⚙️ Site Info Configurations:
+
+You can update the Placeholders in Templates by modifying the Site Info configuration of `package.json`. Like this:
+
+```json
+{
+  "author": "UIUX Lab",
+  "name": "uix-kit-react",
+  "email": "uiuxlab@gmail.com",
+  "version": "1.0.0",
+  "projectName": "Uix Kit",
+  "createdInfo": "UIUX Lab (https://uiux.cc)",
+  "projectURL": "https://uiux.cc",
+  "description": "A free web kits with React for fast web design and development via SSR.",
+  ...
+}
+```
+
+
+
+### ⚙️ Router Configurations:
+
+Configuration of routes, which is also the primary navigation of the website (not including the configuration of Nested routes which will be configured on the page in the primary navigation). Access to `uix-kit-react/src/client/router/RoutesConfig.js`. 
+
+
+Some scripts of the router can be modified in the file `uix-kit-react/src/client/router/App.js`.
+
+
+### ⚙️ Server-side rendering Configurations:
+
+Some scripts on the server side can be modified in the file `uix-kit-react/src/server/renderer.js`.
+
+
+### ⚙️ Set up server proxy:
+
+To run both the server and React application at the same time we need to add the `proxy` key to `package.json`. We've already set our server to run on port 3000, so point the proxy at `localhost:3000`.
+
+```json
+{
+  "proxy": "http://localhost:3000",
+  ...
+}
 ```
 
 

@@ -1,6 +1,6 @@
-import React, { Component, Fragment } from 'react';
+import React, { Component } from 'react';
 import {connect} from 'react-redux';
-import { __ } from '@uixkit.react/components/_utilities/js/_all.js';
+import { __ } from '@uixkit.react/components/_utilities/_all.js';
 import { fetchDemoListDetail } from '@uixkit.react/actions/demoListDetailActions.js';
 import Footer from '@uixkit.react/components/Footer/index.js';
 
@@ -72,8 +72,12 @@ class PostDetail extends Component {
     } else {
         console.log( 'preloadedState: Return an Array' );
 		
+		
 		//change page title
+		//-------------
 		if (typeof (document) !== "undefined") {
+			
+			// update page title
 			document.title = preloadedState[0].name;
 		}
 		
@@ -83,7 +87,7 @@ class PostDetail extends Component {
 	  
     
     return (
-	  <Fragment>
+	  <>
    
 		
             <main id="uix-maincontent">
@@ -131,7 +135,7 @@ class PostDetail extends Component {
 
              <Footer />
           
-      </Fragment>
+      </>
 
     );
   }

@@ -1,5 +1,5 @@
 //
-//   @description Used for all modules from ./src/client/components/[__]/scss
+//   @description Used for all modules from ./src/client/components/[__]/styles/
 // 
 //
 //
@@ -85,10 +85,10 @@
 // FONTS
 // ---------------------------
 // @Files used: 
-// ./src/client/components/_utilities/scss/basic.scss
-// ./src/client/components/_utilities/scss/mobile-menu.scss
-// ./src/client/components/_utilities/scss/typography.scss
-// ./src/client/components/form/scss/_basic.scss
+// ./src/client/components/_utilities/styles/basic.scss
+// ./src/client/components/_utilities/styles/mobile-menu.scss
+// ./src/client/components/_utilities/styles/typography.scss
+// ./src/client/components/Form/styles/_basic.scss
 //
 //Default font-size for HTML
 //English (compatible with Chinese)  --> 'Helvetica Neue', Helvetica, 'Microsoft YaHei', STXihei, 'PingFang SC','Hiragino Sans GB', Arial, sans-serif;
@@ -112,8 +112,8 @@ $font-size-h6          : 0.75rem;
 // GLOBAL SPACING HIERARCHY WITH <section>
 // ---------------------------
 // @Files used: 
-// ./src/client/components/_utilities/scss/spacing.scss
-// ./src/client/components/_utilities/scss/footer.scss
+// ./src/client/components/_utilities/styles/spacing.scss
+// ./src/client/components/_utilities/styles/footer.scss
 //
 $spacing-large          : 11.375rem;
 $spacing-medium         : 6.5625rem;

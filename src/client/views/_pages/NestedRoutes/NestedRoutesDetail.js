@@ -1,9 +1,9 @@
-import React, { Component, Fragment } from 'react';
+import React, { Component } from 'react';
 import {
 	useParams,
 	useLocation
 } from 'react-router-dom';
-import { __ } from '@uixkit.react/components/_utilities/js/_all.js';
+import { __ } from '@uixkit.react/components/_utilities/_all.js';
 
 import customRoutesConfig from '@uixkit.react/router/RoutesConfig.js';
 
@@ -15,32 +15,19 @@ function HookScript() {
     const theLocation = useLocation();
     React.useEffect(() => {
 		
-		//change page title
+		//output name
 		//-------------
 		let pageTitle = null;
 		const breakException = {};
 		const pathname = theLocation.pathname;
 
+		let titleStr = pathname.split( '/' ).pop();
+		titleStr = __.lastUrlParamFormat( titleStr );
 		
-		//page: Nested Routes detail
-		if ( pathname.indexOf( 'nested-routes/' ) >= 0 ) {
-			try {
-				customRoutesConfig[0].routes.forEach((item, index) => {
-					if (  pathname.indexOf( item.path ) >= 0 ) {
-						pageTitle = item.pageTitle;
-						//
-						throw breakException;
+		console.log( 'titleOutput: ', titleStr );
+		
+		__( '#app-topic-name' ).html( titleStr );
 
-					}
-				});
-			} catch (e) {}	
-
-
-		}
-
-
-		//update page title
-		if ( pageTitle !== null ) document.title = pageTitle;
 
         
     });
@@ -71,12 +58,13 @@ class NestedRoutesDetail extends Component {
   render() {
 	
 	return (
-		<Fragment>
+		<>
 		
 		    <HookScript />
 		
-			<p>Detail topicId: <span style={{background:"yellow",padding:"5px"}}><HookTopicId /></span></p>
-		</Fragment>
+			<p>Detail for topic ID: <span style={{background:"yellow",padding:"5px"}}><HookTopicId /></span><br />
+		    Detail for topic Name: <span id="app-topic-name" style={{background:"yellow",padding:"5px"}}></span></p>
+		</>
 	)  
 	  
 	  

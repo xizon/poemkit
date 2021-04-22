@@ -1,29 +1,31 @@
 # @uixkit.react/components/Buttons
 
-![MIT license](https://badgen.now.sh/badge/license/MIT)
-
 [Source](https://github.com/xizon/uix-kit-react/tree/master/src/client/components/Buttons)
+
+## Version
+
+=> 0.0.1
 
 
 ## Examples
 
 ```js
-import React, { Fragment } from 'react';
+import React from 'react';
 import Button from '@uixkit.react/components/Buttons/index.js';
 
 
 export default function Examples() {
   return (
-    <Fragment>
+    <>
 
 	    <h3>Click Event</h3>
 	    <p>Add onClick event to the button.</p>
 		<hr />
 	  
-		<Button id="app-btn-1" href="#" className="uix-btn uix-btn__border--thin uix-btn__margin--b uix-btn__size--m uix-btn__bg--primary is-pill" onClick={(e) => alert( e.target.id )}>Click me to view ID!</Button>
+		<Button id="app-btn-1" href="#" data-go="222" className="uix-btn uix-btn__border--thin uix-btn__margin--b uix-btn__size--m uix-btn__bg--primary is-pill" onClick={(e) => {e.preventDefault(); alert( e.target.id );} }>Click me to view ID!</Button>
 
-		<Button id="app-btn-2" href="#" className="uix-btn uix-btn__border--thin uix-btn__margin--b uix-btn__size--m uix-btn__bg--primary is-pill" onClick={(e) => __( '#app-btn-2' ).width( '50%' ) }>Click me to change the width!</Button>
-
+		<br />
+		<Button id="app-btn-2" href="#" className="uix-btn uix-btn__border--thin uix-btn__margin--b uix-btn__size--m uix-btn__bg--primary is-pill" onClick={(e) => {e.preventDefault(); __( '#app-btn-2' ).width( '50%' );} }>Click me to change the width!</Button>
 
 		<h3>Button</h3>
 		<p>zIf you need to use multiple colors, you can add CSS styles yourself, such as: <code>.uix-btn__bg--blue</code>, <code>.uix-btn__bg--purple</code> ...</p>
@@ -283,7 +285,7 @@ export default function Examples() {
 
 
 	  
-    </Fragment>
+    </>
   );
 }
 

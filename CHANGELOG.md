@@ -1,6 +1,16 @@
 # Changelog
 
-#### = 0.0.22 (April 22, 2021) =
+#### = 0.0.23 (April 22, 2021) =
+
+* New: Turn on typechecking on the props for a component in development mode.
+* New: Add new UI components `Tabs`.
+* Tweak: Detail optimization.
+* Tweak: Refine the README documents.
+* Fix: Fixed some issues for Core Shortcut.
+
+
+
+#### = 0.0.22 (April 20, 2021) =
 
 * New: Embedding and debugging of navigation and common modules.
 * New: New extension of utilities script.

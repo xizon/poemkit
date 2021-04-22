@@ -1,16 +1,17 @@
-import React, { Component, Fragment } from 'react';
+import React, { Component } from 'react';
 import {
 	Route, 
 	Switch, 
 	NavLink,
-	useRouteMatch,
+	useRouteMatch
 } from 'react-router-dom';
-import { __ } from '@uixkit.react/components/_utilities/js/_all.js';
+import { __ } from '@uixkit.react/components/_utilities/_all.js';
 import Footer from '@uixkit.react/components/Footer/index.js';
 
 
 //components list
-import Buttons from '@uixkit.react/pages/ComponentsDemo/Buttons.js';
+import ButtonsDemo from '@uixkit.react/pages/ComponentsDemo/ButtonsDemo.js';
+import TabsDemo from '@uixkit.react/pages/ComponentsDemo/TabsDemo.js';
 
 
 //Might have mismatching versions of React and the renderer (such as React DOM)
@@ -23,9 +24,12 @@ function HookContent() {
 
 	
 	return (
-		<Fragment>
+		<>
 		
-			<div><NavLink to={`${url}/buttons`} activeClassName="is-active"><i className="fa fa-check-circle-o" aria-hidden="true"></i> Buttons</NavLink></div>
+			<div>
+		        <NavLink to={`${url}/buttons`} activeClassName="is-active"><i className="fa fa-check-circle-o" aria-hidden="true"></i> Buttons</NavLink>&nbsp;&nbsp;
+		        <NavLink to={`${url}/tabs`} activeClassName="is-active"><i className="fa fa-check-circle-o" aria-hidden="true"></i> Tabs</NavLink>&nbsp;&nbsp;
+		    </div>
 
 			 <hr />
 
@@ -34,14 +38,18 @@ function HookContent() {
 				  <p>None.</p>
 				</Route>
 				<Route path={`${path}/buttons`}>
-				  <Buttons />
+				  <ButtonsDemo />
 				</Route>
+				<Route path={`${path}/tabs`}>
+				  <TabsDemo />
+				</Route>
+		
+		
 			  </Switch>
-		</Fragment>
+		</>
 	)
 
 }
-
 
 
 
@@ -76,7 +84,7 @@ class ComponentsDemo extends Component {
   render() {
 
     return (
-	  <Fragment>
+	  <>
 		
 		
             <main id="uix-maincontent">
@@ -106,7 +114,7 @@ class ComponentsDemo extends Component {
 		    <Footer />
        
           
-      </Fragment>
+      </>
 
     );
   }

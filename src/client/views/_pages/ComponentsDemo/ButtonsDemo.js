@@ -1,14 +1,13 @@
-import React, { Fragment } from 'react';
-import { __ } from '@uixkit.react/components/_utilities/js/_all.js';
+import React from 'react';
+import { __ } from '@uixkit.react/components/_utilities/_all.js';
 import Button from '@uixkit.react/components/Buttons/index.js';
-import Footer from '@uixkit.react/components/Footer/index.js';
 
 
 export default () => {
 
 	
     return (
-	  <Fragment>
+	  <>
 		    
 
 			<main id="uix-maincontent">
@@ -19,7 +18,10 @@ export default () => {
 					<div className="container">
 						<div className="row">
 							<div className="col-12">
-								<h1 className="uix-t-c">Buttons</h1>
+								<h1 className="uix-t-c">
+									Buttons 
+									<a className="uix-typo--h3 align-middle" href="https://github.com/xizon/uix-kit-react/tree/master/src/client/components/Buttons" target="_blank"><code><i className="fa fa-code" aria-hidden="true"></i></code></a>
+								</h1>
 							</div>
 						</div>
 						{/*<!-- .row end -->*/}
@@ -66,10 +68,10 @@ export default () => {
 								<div className="col-12" id="my-ajax-demo-target-button">
 
 
-									<Button id="app-btn-1" href="#" className="uix-btn uix-btn__border--thin uix-btn__margin--b uix-btn__size--m uix-btn__bg--primary is-pill" onClick={(e) => alert( e.target.id )}>Click me to view ID!</Button>
+									<Button id="app-btn-1" href="#" data-go="222" className="uix-btn uix-btn__border--thin uix-btn__margin--b uix-btn__size--m uix-btn__bg--primary is-pill" onClick={(e) => {e.preventDefault(); alert( e.target.id );} }>Click me to view ID!</Button>
 
  								    <br />
- 								    <Button id="app-btn-2" href="#" className="uix-btn uix-btn__border--thin uix-btn__margin--b uix-btn__size--m uix-btn__bg--primary is-pill" onClick={(e) => __( '#app-btn-2' ).width( '50%' ) }>Click me to change the width!</Button>
+ 								    <Button id="app-btn-2" href="#" className="uix-btn uix-btn__border--thin uix-btn__margin--b uix-btn__size--m uix-btn__bg--primary is-pill" onClick={(e) => {e.preventDefault(); __( '#app-btn-2' ).width( '50%' );} }>Click me to change the width!</Button>
 		
 
 
@@ -440,10 +442,6 @@ export default () => {
 			</main>
 
 		
-		
-		    <Footer />
-       
-        
-      </Fragment>
+      </>
     );
 };

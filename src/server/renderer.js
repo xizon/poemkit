@@ -3,6 +3,7 @@ import { renderToString } from 'react-dom/server.js';
 import { Provider } from 'react-redux';
 import { StaticRouter } from 'react-router-dom';
 import { renderRoutes } from 'react-router-config';
+import { __ } from '@uixkit.react/components/_utilities/_all.js';
 
 import customRoutesConfig from '@uixkit.react/router/RoutesConfig.js';
 
@@ -82,10 +83,27 @@ export default (pathname, store, context, template) => {
 			if ( store.getState().listDetailData.detail ) pageTitle = store.getState().listDetailData.detail[0].name;
 		}
 	
+		//page: Components Demo
+		if ( pathname.indexOf( 'components-demo/' ) >= 0 ) {
+			let titleStr = pathname.split( '/' ).pop();
+			pageTitle = __.lastUrlParamFormat( titleStr );	
+		}
 		
 		
-		//Replace template title tag
-		template = template.replace('{{pageTitle}}', pageTitle ); 
+		// update page title
+		// When the page is not the homepage (including all homepage addresses of 
+		// the routing configuration), change the page title
+		if ( 
+			pageTitle !== null &&
+			pathname !== '/' &&
+			pathname !== '/index'
+		) {
+			template = template.replace('{{pageTitle}}', `${pageTitle} - ${customRoutesConfig[0].routes[0].pageTitle}` ); 
+		} else {
+			template = template.replace('{{pageTitle}}', `${pageTitle}` ); 
+		}
+		
+		
 
 		
     }

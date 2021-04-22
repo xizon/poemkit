@@ -10,7 +10,7 @@
  * Core Shortcut
  *
  */
-import __ from '@uixkit.react/components/_utilities/js/shortcut.js';
+import __ from '@uixkit.react/components/_utilities/shortcut.js';
 
 
 

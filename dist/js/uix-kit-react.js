@@ -1,9 +1,9 @@
 /*!
  * 
  * ## Project Name        :  Uix Kit React
- * ## Version             :  0.0.22
+ * ## Version             :  0.0.23
  * ## Based on            :  Uix Kit React (https://github.com/xizon/uix-kit-react)
- * ## Last Update         :  April 20, 2021
+ * ## Last Update         :  April 22, 2021
  * ## Created by          :  UIUX Lab (https://uiux.cc)
  * ## Contact Us          :  uiuxlab@gmail.com
  * 	
@@ -91,7 +91,7 @@
 /******/
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 75);
+/******/ 	return __webpack_require__(__webpack_require__.s = 76);
 /******/ })
 /************************************************************************/
 /******/ ([
@@ -185,9 +185,9 @@ module.exports["default"] = module.exports, module.exports.__esModule = true;
 /* 5 */
 /***/ (function(module, exports, __webpack_require__) {
 
-var _typeof = __webpack_require__(8)["default"];
+var _typeof = __webpack_require__(9)["default"];
 
-var assertThisInitialized = __webpack_require__(11);
+var assertThisInitialized = __webpack_require__(14);
 
 function _possibleConstructorReturn(self, call) {
   if (call && (_typeof(call) === "object" || typeof call === "function")) {
@@ -207,7 +207,7 @@ module.exports["default"] = module.exports, module.exports.__esModule = true;
 "use strict";
 
 
-var bind = __webpack_require__(33);
+var bind = __webpack_require__(34);
 
 /*global toString:true*/
 
@@ -560,6 +560,32 @@ module.exports = {
 
 /***/ }),
 /* 7 */
+/***/ (function(module, exports) {
+
+function _extends() {
+  module.exports = _extends = Object.assign || function (target) {
+    for (var i = 1; i < arguments.length; i++) {
+      var source = arguments[i];
+
+      for (var key in source) {
+        if (Object.prototype.hasOwnProperty.call(source, key)) {
+          target[key] = source[key];
+        }
+      }
+    }
+
+    return target;
+  };
+
+  module.exports["default"] = module.exports, module.exports.__esModule = true;
+  return _extends.apply(this, arguments);
+}
+
+module.exports = _extends;
+module.exports["default"] = module.exports, module.exports.__esModule = true;
+
+/***/ }),
+/* 8 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -585,7 +611,7 @@ function _inheritsLoose(subClass, superClass) {
 }
 
 /***/ }),
-/* 8 */
+/* 9 */
 /***/ (function(module, exports) {
 
 function _typeof(obj) {
@@ -612,7 +638,35 @@ module.exports = _typeof;
 module.exports["default"] = module.exports, module.exports.__esModule = true;
 
 /***/ }),
-/* 9 */
+/* 10 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var objectWithoutPropertiesLoose = __webpack_require__(72);
+
+function _objectWithoutProperties(source, excluded) {
+  if (source == null) return {};
+  var target = objectWithoutPropertiesLoose(source, excluded);
+  var key, i;
+
+  if (Object.getOwnPropertySymbols) {
+    var sourceSymbolKeys = Object.getOwnPropertySymbols(source);
+
+    for (i = 0; i < sourceSymbolKeys.length; i++) {
+      key = sourceSymbolKeys[i];
+      if (excluded.indexOf(key) >= 0) continue;
+      if (!Object.prototype.propertyIsEnumerable.call(source, key)) continue;
+      target[key] = source[key];
+    }
+  }
+
+  return target;
+}
+
+module.exports = _objectWithoutProperties;
+module.exports["default"] = module.exports, module.exports.__esModule = true;
+
+/***/ }),
+/* 11 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /**
@@ -630,13 +684,35 @@ if (false) { var throwOnDirectAccess, ReactIs; } else {
 
 
 /***/ }),
-/* 10 */
+/* 12 */
 /***/ (function(module, exports, __webpack_require__) {
 
 module.exports = __webpack_require__(54);
 
 /***/ }),
-/* 11 */
+/* 13 */
+/***/ (function(module, exports) {
+
+function _defineProperty(obj, key, value) {
+  if (key in obj) {
+    Object.defineProperty(obj, key, {
+      value: value,
+      enumerable: true,
+      configurable: true,
+      writable: true
+    });
+  } else {
+    obj[key] = value;
+  }
+
+  return obj;
+}
+
+module.exports = _defineProperty;
+module.exports["default"] = module.exports, module.exports.__esModule = true;
+
+/***/ }),
+/* 14 */
 /***/ (function(module, exports) {
 
 function _assertThisInitialized(self) {
@@ -651,20 +727,20 @@ module.exports = _assertThisInitialized;
 module.exports["default"] = module.exports, module.exports.__esModule = true;
 
 /***/ }),
-/* 12 */
+/* 15 */
 /***/ (function(module, exports, __webpack_require__) {
 
 module.exports = __webpack_require__(53);
 
 
 /***/ }),
-/* 13 */
+/* 16 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 
-var reactIs = __webpack_require__(16);
+var reactIs = __webpack_require__(26);
 
 /**
  * Copyright 2015, Yahoo! Inc.
@@ -768,33 +844,55 @@ module.exports = hoistNonReactStatics;
 
 
 /***/ }),
-/* 14 */
-/***/ (function(module, exports) {
+/* 17 */
+/***/ (function(module, exports, __webpack_require__) {
 
-function _extends() {
-  module.exports = _extends = Object.assign || function (target) {
-    for (var i = 1; i < arguments.length; i++) {
-      var source = arguments[i];
-
-      for (var key in source) {
-        if (Object.prototype.hasOwnProperty.call(source, key)) {
-          target[key] = source[key];
-        }
-      }
-    }
-
-    return target;
-  };
-
-  module.exports["default"] = module.exports, module.exports.__esModule = true;
-  return _extends.apply(this, arguments);
-}
-
-module.exports = _extends;
-module.exports["default"] = module.exports, module.exports.__esModule = true;
+// extracted by mini-css-extract-plugin
 
 /***/ }),
-/* 15 */
+/* 18 */
+/***/ (function(module, exports, __webpack_require__) {
+
+// extracted by mini-css-extract-plugin
+
+/***/ }),
+/* 19 */
+/***/ (function(module, exports, __webpack_require__) {
+
+// extracted by mini-css-extract-plugin
+
+/***/ }),
+/* 20 */
+/***/ (function(module, exports, __webpack_require__) {
+
+// extracted by mini-css-extract-plugin
+
+/***/ }),
+/* 21 */
+/***/ (function(module, exports, __webpack_require__) {
+
+// extracted by mini-css-extract-plugin
+
+/***/ }),
+/* 22 */
+/***/ (function(module, exports, __webpack_require__) {
+
+// extracted by mini-css-extract-plugin
+
+/***/ }),
+/* 23 */
+/***/ (function(module, exports, __webpack_require__) {
+
+// extracted by mini-css-extract-plugin
+
+/***/ }),
+/* 24 */
+/***/ (function(module, exports, __webpack_require__) {
+
+// extracted by mini-css-extract-plugin
+
+/***/ }),
+/* 25 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -828,7 +926,7 @@ if (true) {
 
 
 /***/ }),
-/* 16 */
+/* 26 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -840,7 +938,7 @@ if (true) {
 
 
 /***/ }),
-/* 17 */
+/* 27 */
 /***/ (function(module, exports) {
 
 function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) {
@@ -883,82 +981,12 @@ module.exports = _asyncToGenerator;
 module.exports["default"] = module.exports, module.exports.__esModule = true;
 
 /***/ }),
-/* 18 */
-/***/ (function(module, exports) {
-
-function _defineProperty(obj, key, value) {
-  if (key in obj) {
-    Object.defineProperty(obj, key, {
-      value: value,
-      enumerable: true,
-      configurable: true,
-      writable: true
-    });
-  } else {
-    obj[key] = value;
-  }
-
-  return obj;
-}
-
-module.exports = _defineProperty;
-module.exports["default"] = module.exports, module.exports.__esModule = true;
-
-/***/ }),
-/* 19 */,
-/* 20 */
-/***/ (function(module, exports, __webpack_require__) {
-
-// extracted by mini-css-extract-plugin
-
-/***/ }),
-/* 21 */
-/***/ (function(module, exports, __webpack_require__) {
-
-// extracted by mini-css-extract-plugin
-
-/***/ }),
-/* 22 */
-/***/ (function(module, exports, __webpack_require__) {
-
-// extracted by mini-css-extract-plugin
-
-/***/ }),
-/* 23 */
-/***/ (function(module, exports, __webpack_require__) {
-
-// extracted by mini-css-extract-plugin
-
-/***/ }),
-/* 24 */
-/***/ (function(module, exports, __webpack_require__) {
-
-// extracted by mini-css-extract-plugin
-
-/***/ }),
-/* 25 */
-/***/ (function(module, exports, __webpack_require__) {
-
-// extracted by mini-css-extract-plugin
-
-/***/ }),
-/* 26 */
-/***/ (function(module, exports, __webpack_require__) {
-
-// extracted by mini-css-extract-plugin
-
-/***/ }),
-/* 27 */
-/***/ (function(module, exports, __webpack_require__) {
-
-// extracted by mini-css-extract-plugin
-
-/***/ }),
-/* 28 */
+/* 28 */,
+/* 29 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* WEBPACK VAR INJECTION */(function(global, module) {/* harmony import */ var _ponyfill_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(41);
+/* WEBPACK VAR INJECTION */(function(global, module) {/* harmony import */ var _ponyfill_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(42);
 /* global window */
 
 
@@ -977,17 +1005,17 @@ if (typeof self !== 'undefined') {
 var result = Object(_ponyfill_js__WEBPACK_IMPORTED_MODULE_0__[/* default */ "a"])(root);
 /* harmony default export */ __webpack_exports__["a"] = (result);
 
-/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(32), __webpack_require__(50)(module)))
+/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(33), __webpack_require__(50)(module)))
 
 /***/ }),
-/* 29 */
+/* 30 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 /* WEBPACK VAR INJECTION */(function(global) {/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(0);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _babel_runtime_helpers_esm_inheritsLoose__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(7);
-/* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(9);
+/* harmony import */ var _babel_runtime_helpers_esm_inheritsLoose__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(8);
+/* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(11);
 /* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(prop_types__WEBPACK_IMPORTED_MODULE_2__);
 
 
@@ -1164,10 +1192,10 @@ var index = react__WEBPACK_IMPORTED_MODULE_0___default.a.createContext || create
 
 /* harmony default export */ __webpack_exports__["a"] = (index);
 
-/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(32)))
+/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(33)))
 
 /***/ }),
-/* 30 */
+/* 31 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var isarray = __webpack_require__(52)
@@ -1599,7 +1627,7 @@ function pathToRegexp (path, keys, options) {
 
 
 /***/ }),
-/* 31 */
+/* 32 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1696,7 +1724,7 @@ module.exports = shouldUseNative() ? Object.assign : function (target, source) {
 
 
 /***/ }),
-/* 32 */
+/* 33 */
 /***/ (function(module, exports) {
 
 var g;
@@ -1722,7 +1750,7 @@ module.exports = g;
 
 
 /***/ }),
-/* 33 */
+/* 34 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1740,7 +1768,7 @@ module.exports = function bind(fn, thisArg) {
 
 
 /***/ }),
-/* 34 */
+/* 35 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1817,7 +1845,7 @@ module.exports = function buildURL(url, params, paramsSerializer) {
 
 
 /***/ }),
-/* 35 */
+/* 36 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1829,7 +1857,7 @@ module.exports = function isCancel(value) {
 
 
 /***/ }),
-/* 36 */
+/* 37 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1852,10 +1880,10 @@ function getDefaultAdapter() {
   var adapter;
   if (typeof XMLHttpRequest !== 'undefined') {
     // For browsers use XHR adapter
-    adapter = __webpack_require__(37);
+    adapter = __webpack_require__(38);
   } else if (typeof process !== 'undefined' && Object.prototype.toString.call(process) === '[object process]') {
     // For node use HTTP adapter
-    adapter = __webpack_require__(37);
+    adapter = __webpack_require__(38);
   }
   return adapter;
 }
@@ -1935,7 +1963,7 @@ module.exports = defaults;
 /* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(59)))
 
 /***/ }),
-/* 37 */
+/* 38 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1944,11 +1972,11 @@ module.exports = defaults;
 var utils = __webpack_require__(6);
 var settle = __webpack_require__(61);
 var cookies = __webpack_require__(63);
-var buildURL = __webpack_require__(34);
+var buildURL = __webpack_require__(35);
 var buildFullPath = __webpack_require__(64);
 var parseHeaders = __webpack_require__(67);
 var isURLSameOrigin = __webpack_require__(68);
-var createError = __webpack_require__(38);
+var createError = __webpack_require__(39);
 
 module.exports = function xhrAdapter(config) {
   return new Promise(function dispatchXhrRequest(resolve, reject) {
@@ -2121,7 +2149,7 @@ module.exports = function xhrAdapter(config) {
 
 
 /***/ }),
-/* 38 */
+/* 39 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -2146,7 +2174,7 @@ module.exports = function createError(message, config, code, request, response) 
 
 
 /***/ }),
-/* 39 */
+/* 40 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -2240,7 +2268,7 @@ module.exports = function mergeConfig(config1, config2) {
 
 
 /***/ }),
-/* 40 */
+/* 41 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -2266,7 +2294,7 @@ module.exports = Cancel;
 
 
 /***/ }),
-/* 41 */
+/* 42 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -2291,34 +2319,6 @@ function symbolObservablePonyfill(root) {
 
 
 /***/ }),
-/* 42 */
-/***/ (function(module, exports, __webpack_require__) {
-
-var objectWithoutPropertiesLoose = __webpack_require__(72);
-
-function _objectWithoutProperties(source, excluded) {
-  if (source == null) return {};
-  var target = objectWithoutPropertiesLoose(source, excluded);
-  var key, i;
-
-  if (Object.getOwnPropertySymbols) {
-    var sourceSymbolKeys = Object.getOwnPropertySymbols(source);
-
-    for (i = 0; i < sourceSymbolKeys.length; i++) {
-      key = sourceSymbolKeys[i];
-      if (excluded.indexOf(key) >= 0) continue;
-      if (!Object.prototype.propertyIsEnumerable.call(source, key)) continue;
-      target[key] = source[key];
-    }
-  }
-
-  return target;
-}
-
-module.exports = _objectWithoutProperties;
-module.exports["default"] = module.exports, module.exports.__esModule = true;
-
-/***/ }),
 /* 43 */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -2331,7 +2331,7 @@ module.exports["default"] = module.exports, module.exports.__esModule = true;
  * This source code is licensed under the MIT license found in the
  * LICENSE file in the root directory of this source tree.
  */
-var l=__webpack_require__(31),n=60103,p=60106;exports.Fragment=60107;exports.StrictMode=60108;exports.Profiler=60114;var q=60109,r=60110,t=60112;exports.Suspense=60113;var u=60115,v=60116;
+var l=__webpack_require__(32),n=60103,p=60106;exports.Fragment=60107;exports.StrictMode=60108;exports.Profiler=60114;var q=60109,r=60110,t=60112;exports.Suspense=60113;var u=60115,v=60116;
 if("function"===typeof Symbol&&Symbol.for){var w=Symbol.for;n=w("react.element");p=w("react.portal");exports.Fragment=w("react.fragment");exports.StrictMode=w("react.strict_mode");exports.Profiler=w("react.profiler");q=w("react.provider");r=w("react.context");t=w("react.forward_ref");exports.Suspense=w("react.suspense");u=w("react.memo");v=w("react.lazy")}var x="function"===typeof Symbol&&Symbol.iterator;
 function y(a){if(null===a||"object"!==typeof a)return null;a=x&&a[x]||a["@@iterator"];return"function"===typeof a?a:null}function z(a){for(var b="https://reactjs.org/docs/error-decoder.html?invariant="+a,c=1;c<arguments.length;c++)b+="&args[]="+encodeURIComponent(arguments[c]);return"Minified React error #"+a+"; visit "+b+" for the full message or use the non-minified dev environment for full errors and additional helpful warnings."}
 var A={isMounted:function(){return!1},enqueueForceUpdate:function(){},enqueueReplaceState:function(){},enqueueSetState:function(){}},B={};function C(a,b,c){this.props=a;this.context=b;this.refs=B;this.updater=c||A}C.prototype.isReactComponent={};C.prototype.setState=function(a,b){if("object"!==typeof a&&"function"!==typeof a&&null!=a)throw Error(z(85));this.updater.enqueueSetState(this,a,b,"setState")};C.prototype.forceUpdate=function(a){this.updater.enqueueForceUpdate(this,a,"forceUpdate")};
@@ -2364,7 +2364,7 @@ exports.useLayoutEffect=function(a,b){return S().useLayoutEffect(a,b)};exports.u
 /*
  Modernizr 3.0.0pre (Custom Build) | MIT
 */
-var aa=__webpack_require__(0),m=__webpack_require__(31),r=__webpack_require__(45);function y(a){for(var b="https://reactjs.org/docs/error-decoder.html?invariant="+a,c=1;c<arguments.length;c++)b+="&args[]="+encodeURIComponent(arguments[c]);return"Minified React error #"+a+"; visit "+b+" for the full message or use the non-minified dev environment for full errors and additional helpful warnings."}if(!aa)throw Error(y(227));var ba=new Set,ca={};function da(a,b){ea(a,b);ea(a+"Capture",b)}
+var aa=__webpack_require__(0),m=__webpack_require__(32),r=__webpack_require__(45);function y(a){for(var b="https://reactjs.org/docs/error-decoder.html?invariant="+a,c=1;c<arguments.length;c++)b+="&args[]="+encodeURIComponent(arguments[c]);return"Minified React error #"+a+"; visit "+b+" for the full message or use the non-minified dev environment for full errors and additional helpful warnings."}if(!aa)throw Error(y(227));var ba=new Set,ca={};function da(a,b){ea(a,b);ea(a+"Capture",b)}
 function ea(a,b){ca[a]=b;for(a=0;a<b.length;a++)ba.add(b[a])}
 var fa=!("undefined"===typeof window||"undefined"===typeof window.document||"undefined"===typeof window.document.createElement),ha=/^[:A-Z_a-z\u00C0-\u00D6\u00D8-\u00F6\u00F8-\u02FF\u0370-\u037D\u037F-\u1FFF\u200C-\u200D\u2070-\u218F\u2C00-\u2FEF\u3001-\uD7FF\uF900-\uFDCF\uFDF0-\uFFFD][:A-Z_a-z\u00C0-\u00D6\u00D8-\u00F6\u00F8-\u02FF\u0370-\u037D\u037F-\u1FFF\u200C-\u200D\u2070-\u218F\u2C00-\u2FEF\u3001-\uD7FF\uF900-\uFDCF\uFDF0-\uFFFD\-.0-9\u00B7\u0300-\u036F\u203F-\u2040]*$/,ia=Object.prototype.hasOwnProperty,
 ja={},ka={};function la(a){if(ia.call(ka,a))return!0;if(ia.call(ja,a))return!1;if(ha.test(a))return ka[a]=!0;ja[a]=!0;return!1}function ma(a,b,c,d){if(null!==c&&0===c.type)return!1;switch(typeof b){case "function":case "symbol":return!0;case "boolean":if(d)return!1;if(null!==c)return!c.acceptsBooleans;a=a.toLowerCase().slice(0,5);return"data-"!==a&&"aria-"!==a;default:return!1}}
@@ -3621,10 +3621,10 @@ try {
 
 
 var utils = __webpack_require__(6);
-var bind = __webpack_require__(33);
+var bind = __webpack_require__(34);
 var Axios = __webpack_require__(55);
-var mergeConfig = __webpack_require__(39);
-var defaults = __webpack_require__(36);
+var mergeConfig = __webpack_require__(40);
+var defaults = __webpack_require__(37);
 
 /**
  * Create an instance of Axios
@@ -3657,9 +3657,9 @@ axios.create = function create(instanceConfig) {
 };
 
 // Expose Cancel & CancelToken
-axios.Cancel = __webpack_require__(40);
+axios.Cancel = __webpack_require__(41);
 axios.CancelToken = __webpack_require__(69);
-axios.isCancel = __webpack_require__(35);
+axios.isCancel = __webpack_require__(36);
 
 // Expose all/spread
 axios.all = function all(promises) {
@@ -3684,10 +3684,10 @@ module.exports.default = axios;
 
 
 var utils = __webpack_require__(6);
-var buildURL = __webpack_require__(34);
+var buildURL = __webpack_require__(35);
 var InterceptorManager = __webpack_require__(56);
 var dispatchRequest = __webpack_require__(57);
-var mergeConfig = __webpack_require__(39);
+var mergeConfig = __webpack_require__(40);
 
 /**
  * Create a new instance of Axios
@@ -3846,8 +3846,8 @@ module.exports = InterceptorManager;
 
 var utils = __webpack_require__(6);
 var transformData = __webpack_require__(58);
-var isCancel = __webpack_require__(35);
-var defaults = __webpack_require__(36);
+var isCancel = __webpack_require__(36);
+var defaults = __webpack_require__(37);
 
 /**
  * Throws a `Cancel` if cancellation has been requested.
@@ -4166,7 +4166,7 @@ module.exports = function normalizeHeaderName(headers, normalizedName) {
 "use strict";
 
 
-var createError = __webpack_require__(38);
+var createError = __webpack_require__(39);
 
 /**
  * Resolve or reject a Promise based on response status.
@@ -4511,7 +4511,7 @@ module.exports = (
 "use strict";
 
 
-var Cancel = __webpack_require__(40);
+var Cancel = __webpack_require__(41);
 
 /**
  * A `CancelToken` is an object that can be used to request cancellation of an operation.
@@ -4656,6 +4656,12 @@ module.exports["default"] = module.exports, module.exports.__esModule = true;
 
 /***/ }),
 /* 75 */
+/***/ (function(module, exports, __webpack_require__) {
+
+// extracted by mini-css-extract-plugin
+
+/***/ }),
+/* 76 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -4667,11 +4673,11 @@ var react = __webpack_require__(0);
 var react_default = /*#__PURE__*/__webpack_require__.n(react);
 
 // EXTERNAL MODULE: ./node_modules/react-dom/index.js
-var react_dom = __webpack_require__(15);
+var react_dom = __webpack_require__(25);
 var react_dom_default = /*#__PURE__*/__webpack_require__.n(react_dom);
 
 // EXTERNAL MODULE: ./node_modules/prop-types/index.js
-var prop_types = __webpack_require__(9);
+var prop_types = __webpack_require__(11);
 
 // CONCATENATED MODULE: ./node_modules/react-redux/es/components/Context.js
 
@@ -4907,11 +4913,11 @@ function _objectWithoutPropertiesLoose(source, excluded) {
   return target;
 }
 // EXTERNAL MODULE: ./node_modules/hoist-non-react-statics/dist/hoist-non-react-statics.cjs.js
-var hoist_non_react_statics_cjs = __webpack_require__(13);
+var hoist_non_react_statics_cjs = __webpack_require__(16);
 var hoist_non_react_statics_cjs_default = /*#__PURE__*/__webpack_require__.n(hoist_non_react_statics_cjs);
 
 // EXTERNAL MODULE: ./node_modules/react-is/index.js
-var react_is = __webpack_require__(16);
+var react_is = __webpack_require__(26);
 
 // CONCATENATED MODULE: ./node_modules/react-redux/es/components/connectAdvanced.js
 
@@ -5294,7 +5300,7 @@ function shallowEqual(objA, objB) {
   return true;
 }
 // EXTERNAL MODULE: ./node_modules/symbol-observable/es/index.js
-var es = __webpack_require__(28);
+var es = __webpack_require__(29);
 
 // CONCATENATED MODULE: ./node_modules/redux/es/redux.js
 
@@ -6603,7 +6609,7 @@ var useSelector_useSelector = /*#__PURE__*/createSelectorHook();
 setBatch(react_dom["unstable_batchedUpdates"]);
 
 // EXTERNAL MODULE: ./node_modules/@babel/runtime/helpers/esm/inheritsLoose.js + 1 modules
-var inheritsLoose = __webpack_require__(7);
+var inheritsLoose = __webpack_require__(8);
 
 // CONCATENATED MODULE: ./node_modules/resolve-pathname/esm/resolve-pathname.js
 function isAbsolute(pathname) {
@@ -7657,10 +7663,10 @@ function createMemoryHistory(props) {
 
 
 // EXTERNAL MODULE: ./node_modules/mini-create-react-context/dist/esm/index.js
-var esm = __webpack_require__(29);
+var esm = __webpack_require__(30);
 
 // EXTERNAL MODULE: ./node_modules/path-to-regexp/index.js
-var path_to_regexp = __webpack_require__(30);
+var path_to_regexp = __webpack_require__(31);
 var path_to_regexp_default = /*#__PURE__*/__webpack_require__.n(path_to_regexp);
 
 // CONCATENATED MODULE: ./node_modules/react-router/esm/react-router.js
@@ -8650,55 +8656,11 @@ function renderRoutes(routes, extraProps, switchProps) {
 
 //# sourceMappingURL=react-router-config.js.map
 
-// EXTERNAL MODULE: ./node_modules/@babel/runtime/helpers/classCallCheck.js
-var classCallCheck = __webpack_require__(2);
-var classCallCheck_default = /*#__PURE__*/__webpack_require__.n(classCallCheck);
-
-// EXTERNAL MODULE: ./node_modules/@babel/runtime/helpers/createClass.js
-var createClass = __webpack_require__(3);
-var createClass_default = /*#__PURE__*/__webpack_require__.n(createClass);
-
-// EXTERNAL MODULE: ./node_modules/@babel/runtime/helpers/inherits.js
-var inherits = __webpack_require__(4);
-var inherits_default = /*#__PURE__*/__webpack_require__.n(inherits);
-
-// EXTERNAL MODULE: ./node_modules/@babel/runtime/helpers/possibleConstructorReturn.js
-var possibleConstructorReturn = __webpack_require__(5);
-var possibleConstructorReturn_default = /*#__PURE__*/__webpack_require__.n(possibleConstructorReturn);
-
-// EXTERNAL MODULE: ./node_modules/@babel/runtime/helpers/getPrototypeOf.js
-var getPrototypeOf = __webpack_require__(1);
-var getPrototypeOf_default = /*#__PURE__*/__webpack_require__.n(getPrototypeOf);
-
-// EXTERNAL MODULE: ./src/client/components/_third-party-plugins/Bootstrap/scss/bootstrap.scss
-var bootstrap = __webpack_require__(20);
-
-// EXTERNAL MODULE: ./src/client/components/_third-party-plugins/FontAwesome/scss/fontawesome.scss
-var fontawesome = __webpack_require__(21);
-
-// EXTERNAL MODULE: ./src/client/components/_third-party-plugins/FontAwesome/scss/v4-shims.scss
-var v4_shims = __webpack_require__(22);
-
-// EXTERNAL MODULE: ./src/client/components/_third-party-plugins/FontAwesome/scss/solid.scss
-var solid = __webpack_require__(23);
-
-// EXTERNAL MODULE: ./src/client/components/_third-party-plugins/FontAwesome/scss/brands.scss
-var brands = __webpack_require__(24);
-
-// EXTERNAL MODULE: ./src/client/components/_third-party-plugins/FontAwesome/scss/regular.scss
-var regular = __webpack_require__(25);
-
-// EXTERNAL MODULE: ./src/client/components/_utilities/scss/_all.scss
-var _all = __webpack_require__(26);
-
-// EXTERNAL MODULE: ./src/client/components/_utilities/scss-rtl/_all.scss
-var scss_rtl_all = __webpack_require__(27);
-
 // EXTERNAL MODULE: ./node_modules/@babel/runtime/helpers/typeof.js
-var helpers_typeof = __webpack_require__(8);
+var helpers_typeof = __webpack_require__(9);
 var typeof_default = /*#__PURE__*/__webpack_require__.n(helpers_typeof);
 
-// CONCATENATED MODULE: ./src/client/components/_utilities/js/shortcut.js
+// CONCATENATED MODULE: ./src/client/components/_utilities/shortcut.js
 
 
 /* 
@@ -8706,8 +8668,8 @@ var typeof_default = /*#__PURE__*/__webpack_require__.n(helpers_typeof);
  * Core Shortcut
  *
  * @package: uix-kit-react
- * @version: 0.15
- * @last update: April 20, 2021
+ * @version: 0.16
+ * @last update: April 22, 2021
  * @license: MIT
  *
  *************************************
@@ -8767,14 +8729,22 @@ __( document ).ready( function() {
 			__( '.demo' ).data( 'bg', 'red' );
 			__( '.demo' ).attr( 'disabled', 'disabled' );
 			__( '.demo' ).width( 300 );
-			__( '.demo' ).width( "50%" );
+			__( '.menu li:first-child' ).width( "50%" );
 
-			__( '.demo' ).off( 'click' ).on( 'click', function( e ) {
-				console.log(e);
+			__( '.menu li' ).off( 'click' ).on( 'click', function( e ) {
+				console.log('e: ', e);
+				console.log('this: ', this);
+				console.log('index(): ', __( this ).index());
+				console.log('attr(class): ', __( this ).attr( 'class' ));
+				__( this ).addClass( 'new-class' )
 			});
 
-			__( document ).on( 'click', '.uix-brand', function( e ) {
-				console.log(e);
+			__( document ).on( 'click', '.menu li', function( e ) {
+				console.log('e: ', e);
+				console.log('this: ', this);
+				console.log('index(): ', __( this ).index());
+				console.log('attr(class): ', __( this ).attr( 'class' ));
+				__( this ).addClass( 'new-class' )
 			});
 
 			__( '.menu li' ).eq(1).append( '<span style="color:green">after</span>');
@@ -8789,31 +8759,56 @@ __( document ).ready( function() {
 			__( '.class-1' ).not( '.class-2' ).addClass( 'class-not' );
 			__( '.class-1' ).filter( '.class-2' ).addClass( 'class-filter' );
 			__( '.class-1' ).siblings().addClass( 'class-siblings' );
-
+			__( '.demo' ).trigger( 'click' );
 
 
 			console.log( '<h1> content: ' + __( 'h1' ).html());
-			console.log( 'len() of .uix-menu li: ' + __( '.uix-menu li' ).length );
+			console.log( 'len() of .menu li: ' + __( '.menu li' ).length );
 			console.log( 'len() of #none: ' + __( '#none' ).length );
 			console.log( 'width(): ' + __( '.demo' ).width() );
 			console.log( 'outerWidth(): ' + __( '.demo' ).outerWidth() );
 			console.log( 'outerWidth( true ): ' + __( '.demo' ).outerWidth(true) );
+			
+			console.log( 'height(): ' + __( '.demo' ).height() );
+			console.log( 'outerHeight(): ' + __( '.demo' ).outerHeight() );
+			console.log( 'outerHeight( true ): ' + __( '.demo' ).outerHeight(true) );	
+			
 			console.log( '[data-bg] value: ' + __( '.demo' ).data( 'bg' ) );
 			console.log( '[disabled] value: ' + __( '.demo' ).attr( 'disabled' ) );
-
 			console.log( __( '.demo' ).hasClass( 'class-1' ) );
 			console.log( __( 'h1' ).offset() );
 			console.log( __( 'h1' ).position() );		
+			console.log( __( '.menu li:nth-child(2)' ).index() );
 
 
-			__( '.menu li' ).each( function( index, value )  {
+			__( '.menu li' ).each( function( index, selectors )  {
 				console.log( index + ' : ' );
-				console.log( value );
-				value.style.background = '#333';
-				__( value ).css({
+				console.log( this );
+				this.style.background = '#333';
+				__( this ).css({
 					'background': '#f00',
 					'font-size': '18px'
 				});
+				
+				
+				//Nested `each() `
+				//__( selectors) are generally used for exact each selector
+				__( selectors ).find( 'ul > li' ).each( function( index ) {
+					__( this ).attr( 'id', 'li-id-' + index );
+				});
+	
+	
+				//Nested `eq()`
+				for (let k = 0; k<liNum; k++) {
+					__( selectors + ' ul > li' ).eq(k).css({
+						'font-size'        : '18px'
+					});
+					
+					__( selectors + ' ul > li:nth-child('+k+') > a' ).css({
+						'font-size'        : '18px'
+					});
+				}
+
 			});
 
 			__( '.demo' ).fadeOut(1000, function(){
@@ -8867,8 +8862,9 @@ __( document ).ready( function() {
 			console.log( __.cssProperty.getAbsoluteCoordinates( __( '.col-12' )[0] ).left );
 			console.log( __.styleFormat( 'font-size: 10px;background: #51B801; color:#fff; border-radius: 5px;padding: 2px 3px;display: inline-block;margin-left: 3px;' ) )
 			console.log( __.trim( 'string string spacing string' ) );
-
-
+            console.log( __.lastUrlParamFormat( 'string-string-spacing_string' ) );
+			
+			
 
 
 		}
@@ -8881,9 +8877,9 @@ __( document ).ready( function() {
 		
 */
 var shortcut_ = function () {
-  'use strict'; //root selector node
+  'use strict'; //The default selector to search for or HTML element
 
-  __.prototype.rootSelector = null;
+  __.prototype.defaultTargetSelector = null;
 
   function __(s, root) {
     return __.prototype.core(s, root);
@@ -9003,6 +8999,37 @@ var shortcut_ = function () {
     } else {
       return s;
     }
+  }
+  /*
+   * Returns the set of ID and classes of the current target element for use by the selector
+   * @private method
+   */
+
+
+  function currentElselectors(el) {
+    var itemDomsStr = ''; //get ID
+
+    var id = el.id;
+
+    if (typeof id !== 'undefined' && id != '') {
+      itemDomsStr += "#".concat(id);
+    } //get all classes
+
+
+    var classes = el.classList;
+
+    if (typeof classes !== 'undefined') {
+      classes.forEach(function (value, key, listObj) {
+        itemDomsStr += ".".concat(value);
+      }, 'arg');
+    } //If the ID does not exist, return the current object
+
+
+    if (typeof id === 'undefined' || id === '') {
+      itemDomsStr = '';
+    }
+
+    return itemDomsStr;
   }
   /* ------------- Independent Methods -------------- */
 
@@ -9238,6 +9265,31 @@ var shortcut_ = function () {
     }
   };
   /*
+   * Capitalize the first letter of all words in a string
+   *
+   * @param  {String} s                 - Any string.
+   * @return {String}                   - A new string.
+   */
+
+
+  __.lastUrlParamFormat = function (s) {
+    s = s || '';
+
+    if (s.length > 0) {
+      s = s.replace(/\-/g, ' ').replace(/\_/g, ' ');
+      var pieces = s.split(" ");
+
+      for (var i = 0; i < pieces.length; i++) {
+        var j = pieces[i].charAt(0).toUpperCase();
+        pieces[i] = j + pieces[i].substr(1);
+      }
+
+      return pieces.join(" ");
+    } else {
+      return s;
+    }
+  };
+  /*
    * Convert HTML Element's `Style` Attribute to JSON
    *
    * @param  {String} str   - The content of the style attribute in the HTML element, usually a string
@@ -9276,7 +9328,7 @@ var shortcut_ = function () {
   /**
    * Core method
    *
-   * @param  {String|Element} s       - The CSS selector to search for or HTML element to wrap with functionality
+   * @param  {String|Element} s       - The selector to search for or HTML element to wrap with functionality
    * @param  {Element} root           - OPTIONAL An HTML element to start the element query from
    * @return {Array}                  - The collection of elements, wrapped with functionality (see API methods)
    */
@@ -9284,16 +9336,19 @@ var shortcut_ = function () {
 
   __.prototype.core = function (s, root) {
     var self = this;
-    root = root || typeof document !== 'undefined' ? document : null; //update root selector node
+    root = root || document; //update the default selector
 
-    __.prototype.rootSelector = s;
+    __.prototype.defaultTargetSelector = s;
 
-    if (root !== null) {
+    if (typeof s !== 'undefined') {
       if (typeof s === 'string') {
+        //1) string
         return self.wrap([].slice.call(root.querySelectorAll(s)));
       } else if (s.tagName) {
+        //2) HTML elements
         return self.wrap([s]);
       } else {
+        //3) document or other
         switch (s.nodeType) {
           case 9:
             //if Document
@@ -9304,7 +9359,8 @@ var shortcut_ = function () {
             return [];
         }
       }
-    }
+    } //typeof (s) !== 'undefined'
+
 
     return [];
   };
@@ -9624,9 +9680,7 @@ var shortcut_ = function () {
 
 
   __.prototype.eq = function (index) {
-    var self = this;
-
-    var elements = __(__.prototype.rootSelector, self);
+    var elements = __(__.prototype.defaultTargetSelector, document);
 
     return elements[index];
   };
@@ -9699,19 +9753,15 @@ var shortcut_ = function () {
 
 
   __.prototype.filter = function (s) {
-    var self = this;
+    var elements = __(__.prototype.defaultTargetSelector, document);
 
-    var elements = __(__.prototype.rootSelector, self);
-
-    var targetEl = __(s, self);
+    var targetEl = __(s, document);
 
     var list = Array.from(elements);
 
     for (var j = 0; j < targetEl.length; j++) {
-      var _el = targetEl[j];
-
       for (var i = 0; i < list.length; i++) {
-        if (_el != list[i]) {
+        if (!list[i].classList.contains(s.replace(/\./g, ''))) {
           removeArray(list, list[i]);
         }
       }
@@ -9728,19 +9778,15 @@ var shortcut_ = function () {
 
 
   __.prototype.not = function (s) {
-    var self = this;
+    var elements = __(__.prototype.defaultTargetSelector, document);
 
-    var elements = __(__.prototype.rootSelector, self);
-
-    var targetEl = __(s, self);
+    var targetEl = __(s, document);
 
     var list = Array.from(elements);
 
     for (var j = 0; j < targetEl.length; j++) {
-      var _el = targetEl[j];
-
       for (var i = 0; i < list.length; i++) {
-        if (_el == list[i]) {
+        if (list[i].classList.contains(s.replace(/\./g, ''))) {
           removeArray(list, list[i]);
         }
       }
@@ -9785,9 +9831,7 @@ var shortcut_ = function () {
 
 
   __.prototype.first = function () {
-    var self = this;
-
-    var elements = __(__.prototype.rootSelector, self);
+    var elements = __(__.prototype.defaultTargetSelector, document);
 
     var newEl = null; //
 
@@ -9802,9 +9846,7 @@ var shortcut_ = function () {
 
 
   __.prototype.last = function () {
-    var self = this;
-
-    var elements = __(__.prototype.rootSelector, self);
+    var elements = __(__.prototype.defaultTargetSelector, document);
 
     var newEl = null; //
 
@@ -9825,24 +9867,6 @@ var shortcut_ = function () {
     var el = this.closest(s); //console.log( __(el, this) );
 
     return __(el, this);
-  };
-  /*
-   * Store arbitrary data associated with the matched elements.
-   *
-   * @param  {String} a                 - A string naming the piece of data to set
-   * @param  {String} v                 - The new data value.
-   * @return {Void|String}              - Return arbitrary data associated with the first element as set by data() or by an HTML5 data-* attribute.
-   */
-
-
-  __.prototype.data = function (a, v) {
-    a = a || '';
-
-    if (v === undefined) {
-      return this.getAttribute('data-' + a);
-    } else {
-      this.setAttribute('data-' + a, v);
-    }
   };
   /*
    * Remove a previously-stored piece of data.
@@ -9869,9 +9893,60 @@ var shortcut_ = function () {
     a = a || '';
 
     if (v === undefined) {
-      return this.getAttribute(a);
+      var res = this.getAttribute(a);
+      if (res == 'true') res = true;
+      if (res == 'false') res = false;
+      if (isJSON(res)) res = JSON.parse(res); // Non-existent attributes return null, we normalize to undefined
+
+      return res == null ? undefined : res;
     } else {
       this.setAttribute(a, v);
+    }
+  };
+  /*
+   * Store arbitrary data associated with the matched elements.
+   *
+   * @param  {String} a                 - A string naming the piece of data to set
+   * @param  {String} v                 - The new data value.
+   * @return {Void|String}              - Return arbitrary data associated with the first element as set by data() or by an HTML5 data-* attribute.
+   */
+
+
+  __.prototype.data = function (a, v) {
+    a = a || '';
+
+    if (v === undefined) {
+      var res = this.getAttribute('data-' + a);
+      if (res == 'true') res = true;
+      if (res == 'false') res = false;
+      if (isJSON(res)) res = JSON.parse(res); // Non-existent attributes return null, we normalize to undefined
+
+      return res == null ? undefined : res;
+    } else {
+      this.setAttribute('data-' + a, v);
+    }
+  };
+  /*
+   * Set one or more attributes for the set of matched Form elements.
+   *
+   * @param  {String} a                 - The name of the attribute to set.
+   * @param  {String} v                 - A value to set for the attribute. 
+   * @return {Void|String}              - Get the value of an attribute for the first element in the set of matched elements.
+   */
+
+
+  __.prototype.prop = function (a, v) {
+    a = a || '';
+
+    if (v === undefined) {
+      var res = this[a];
+      if (res == 'true') res = true;
+      if (res == 'false') res = false;
+      if (isJSON(res)) res = JSON.parse(res); // Non-existent attributes return null, we normalize to undefined
+
+      return res == null ? undefined : res;
+    } else {
+      this[a] = v;
     }
   };
   /*
@@ -9911,6 +9986,7 @@ var shortcut_ = function () {
     ;
 
     if (selector) {
+      //if string
       var fun = function fun(evt) {
         __(selector, self).forEach(function (el) {
           if (el === evt.target) {
@@ -9927,13 +10003,16 @@ var shortcut_ = function () {
       });
       self.addEventListener(eventType, fun);
     } else {
+      //if HTML element
+      var _fun = function _fun(evt) {
+        callBack.call(this, evt);
+      };
+
       this.myListeners.push({
         eType: eventType,
         callBack: callBack
       });
-      this.addEventListener(eventType, function (event) {
-        callBack(event);
-      });
+      this.addEventListener(eventType, _fun, false);
     }
   };
   /*
@@ -10103,15 +10182,15 @@ var shortcut_ = function () {
 
 
   __.prototype.each = function (fn) {
-    var _this = this;
-
-    var self = this;
-
-    var elements = __(__.prototype.rootSelector, self);
+    var elements = __(__.prototype.defaultTargetSelector, document);
 
     elements.map(function (item, index) {
+      //!import: The returned HTML element must be current, 
+      //otherwise all HTML elements under document may be queried
+      var itemDomsStr = currentElselectors(item);
+
       if (fn && typeof fn == "function") {
-        fn.call(_this, index, item);
+        fn.call(item, index, itemDomsStr);
       }
     });
   };
@@ -10140,24 +10219,6 @@ var shortcut_ = function () {
     }
 
     return this.value;
-  };
-  /*
-   * Set one or more attributes for the set of matched Form elements.
-   *
-   * @param  {String} a                 - The name of the attribute to set.
-   * @param  {String} v                 - A value to set for the attribute. 
-   * @return {Void|String}              - Get the value of an attribute for the first element in the set of matched elements.
-   */
-
-
-  __.prototype.prop = function (a, v) {
-    a = a || '';
-
-    if (v === undefined) {
-      return this[a];
-    } else {
-      this[a] = v;
-    }
   };
   /*
    * Display the matched elements.
@@ -10273,6 +10334,45 @@ var shortcut_ = function () {
 
     return objects;
   };
+  /*
+   * Search for a given element from among the matched elements.
+   *
+   * @return {Number}     - The return value is an integer indicating the position of the 
+   *                        first element within the jQuery object relative to its sibling elements.
+   */
+
+
+  __.prototype.index = function () {
+    var self = this;
+    var children = self.parentNode.childNodes;
+    var num = 0;
+
+    for (var i = 0; i < children.length; i++) {
+      if (children[i] == self) return num;
+      if (children[i].nodeType == 1) num++;
+    }
+
+    return -1;
+  };
+  /*
+   * Bind an event in the HTML element
+   *
+   * @param  {String} eventType         - One event types and optional namespaces, such as "click" 
+   * @return {Void}  
+   */
+
+
+  __.prototype.trigger = function (eventType) {
+    var fire = function fire(elem, type) {
+      var event = document.createEvent('Event');
+      event.initEvent(type, true, true); //can bubble, and is cancellable
+
+      elem.dispatchEvent(event);
+    };
+
+    document.addEventListener("plop", function () {}, false);
+    fire(this, eventType);
+  };
   /* ------------- Private Methods -------------- */
 
 
@@ -10303,9 +10403,10 @@ var shortcut_ = function () {
     removeClass: __.prototype.removeClass,
     toggleClass: __.prototype.toggleClass,
     css: __.prototype.css,
-    data: __.prototype.data,
     removeData: __.prototype.removeData,
     attr: __.prototype.attr,
+    data: __.prototype.data,
+    prop: __.prototype.prop,
     removeAttr: __.prototype.removeAttr,
     on: __.prototype.on,
     off: __.prototype.off,
@@ -10319,12 +10420,13 @@ var shortcut_ = function () {
     empty: __.prototype.empty,
     hasClass: __.prototype.hasClass,
     val: __.prototype.val,
-    prop: __.prototype.prop,
     show: __.prototype.show,
     hide: __.prototype.hide,
     fadeIn: __.prototype.fadeIn,
     fadeOut: __.prototype.fadeOut,
-    serializeArray: __.prototype.serializeArray
+    serializeArray: __.prototype.serializeArray,
+    index: __.prototype.index,
+    trigger: __.prototype.trigger
   };
 
   __.prototype.wrap = function (list) {
@@ -10349,15 +10451,15 @@ var shortcut_ = function () {
                 result = result.concat(fnResult);
               } else if (fnResult !== undefined) {
                 result.push(fnResult);
-              } // Check Dom Element: 
-              // Break out of the loop from All Elements
+              } // ////////////////////
+              // Break out of the loop of global retrieval of elements
               //----------------------
 
 
               if (fn === 'eq' || fn === 'first' || fn === 'last' || fn === 'each') throw breakException;
             });
-          } catch (e) {} // Check Dom Element: 
-          // If it is to return the dom element, you need to determine the function key value
+          } catch (e) {} // ////////////////////
+          // Methods that return value is `DOM elements using selectors`
           //----------------------
 
 
@@ -10369,16 +10471,24 @@ var shortcut_ = function () {
         } else {
           result = API[fn].apply(this, [].slice.call(args));
         } //end Array.isArray(this)
-        // Check Value:
-        // Methods whose return value is not an array
+        // ////////////////////
+        // Methods that return value is `JSON`, `Boolean` or `Number`
         //----------------------
 
 
-        if (typeof result !== 'undefined') {
-          if (fn === 'hasClass' || fn === 'offset' || fn === 'position') {
-            result = result[0];
-          }
-        }
+        if (fn === 'hasClass' || fn === 'offset' || fn === 'position' || fn === 'index' || fn === 'width' || fn === 'outerWidth' || fn === 'height' || fn === 'outerHeight') {
+          return result === undefined ? undefined : result[0];
+        } // ////////////////////
+        // Methods that return value is `Array` or `HTML element`
+        //----------------------
+
+
+        if (fn === 'data' || fn === 'attr' || fn === 'prop') {
+          return result === undefined ? this : result[0];
+        } // ////////////////////
+        // The default returns value from a function
+        //----------------------
+
 
         return result === undefined ? this : result;
       };
@@ -10390,7 +10500,7 @@ var shortcut_ = function () {
 }();
 
 /* harmony default export */ var shortcut = (shortcut_);
-// CONCATENATED MODULE: ./src/client/components/_utilities/js/_all.js
+// CONCATENATED MODULE: ./src/client/components/_utilities/_all.js
 /**
 
 	TABLE OF CONTENTS FOR `ALL UTILITIES`
@@ -10424,6 +10534,50 @@ if (typeof APP_ROOTPATH === 'undefined') {
   ajaxUrl = APP_ROOTPATH.ajaxUrl.replace(/\/\s*$/, '');
 }
 
+
+// EXTERNAL MODULE: ./node_modules/@babel/runtime/helpers/classCallCheck.js
+var classCallCheck = __webpack_require__(2);
+var classCallCheck_default = /*#__PURE__*/__webpack_require__.n(classCallCheck);
+
+// EXTERNAL MODULE: ./node_modules/@babel/runtime/helpers/createClass.js
+var createClass = __webpack_require__(3);
+var createClass_default = /*#__PURE__*/__webpack_require__.n(createClass);
+
+// EXTERNAL MODULE: ./node_modules/@babel/runtime/helpers/inherits.js
+var inherits = __webpack_require__(4);
+var inherits_default = /*#__PURE__*/__webpack_require__.n(inherits);
+
+// EXTERNAL MODULE: ./node_modules/@babel/runtime/helpers/possibleConstructorReturn.js
+var possibleConstructorReturn = __webpack_require__(5);
+var possibleConstructorReturn_default = /*#__PURE__*/__webpack_require__.n(possibleConstructorReturn);
+
+// EXTERNAL MODULE: ./node_modules/@babel/runtime/helpers/getPrototypeOf.js
+var getPrototypeOf = __webpack_require__(1);
+var getPrototypeOf_default = /*#__PURE__*/__webpack_require__.n(getPrototypeOf);
+
+// EXTERNAL MODULE: ./src/client/components/_third-party-plugins/Bootstrap/scss/bootstrap.scss
+var bootstrap = __webpack_require__(17);
+
+// EXTERNAL MODULE: ./src/client/components/_third-party-plugins/FontAwesome/scss/fontawesome.scss
+var fontawesome = __webpack_require__(18);
+
+// EXTERNAL MODULE: ./src/client/components/_third-party-plugins/FontAwesome/scss/v4-shims.scss
+var v4_shims = __webpack_require__(19);
+
+// EXTERNAL MODULE: ./src/client/components/_third-party-plugins/FontAwesome/scss/solid.scss
+var solid = __webpack_require__(20);
+
+// EXTERNAL MODULE: ./src/client/components/_third-party-plugins/FontAwesome/scss/brands.scss
+var brands = __webpack_require__(21);
+
+// EXTERNAL MODULE: ./src/client/components/_third-party-plugins/FontAwesome/scss/regular.scss
+var regular = __webpack_require__(22);
+
+// EXTERNAL MODULE: ./src/client/components/_utilities/styles/_all.scss
+var _all = __webpack_require__(23);
+
+// EXTERNAL MODULE: ./src/client/components/_utilities/styles/rtl/_all.scss
+var rtl_all = __webpack_require__(24);
 
 // CONCATENATED MODULE: ./src/client/components/Header/index.js
 
@@ -10494,7 +10648,7 @@ var Header_Header = /*#__PURE__*/function (_Component) {
     value: function render() {
       var htmlString = this.props.htmlString ? this.props.htmlString : '';
       var headerOverlayEnable = this.props.headerOverlayEnable == 'true' ? true : false;
-      return /*#__PURE__*/react_default.a.createElement(react["Fragment"], null, /*#__PURE__*/react_default.a.createElement("header", {
+      return /*#__PURE__*/react_default.a.createElement(react_default.a.Fragment, null, /*#__PURE__*/react_default.a.createElement("header", {
         className: headerOverlayEnable ? 'uix-header__container uix-header__container--overlay' : 'uix-header__container'
       }, /*#__PURE__*/react_default.a.createElement("div", {
         className: "uix-header"
@@ -10558,6 +10712,7 @@ var Header_Header = /*#__PURE__*/function (_Component) {
 
 
 
+
 /* harmony default export */ var App = (function (props) {
   //Click the route to trigger the event
   var theLocation = useLocation();
@@ -10598,14 +10753,26 @@ var Header_Header = /*#__PURE__*/function (_Component) {
           throw breakException;
         }
       });
-    } catch (e) {} //update page title
+    } catch (e) {} //page: Components Demo
 
 
-    if (pageTitle !== null) document.title = pageTitle;
+    if (pathname.indexOf('components-demo/') >= 0) {
+      var titleStr = pathname.split('/').pop();
+      pageTitle = shortcut.lastUrlParamFormat(titleStr);
+    } // update page title
+    // When the page is not the homepage (including all homepage addresses of 
+    // the routing configuration), change the page title
+
+
+    if (pageTitle !== null && pathname !== '/' && pathname !== '/index') {
+      document.title = "".concat(pageTitle, " - ").concat(RoutesConfig[0].routes[0].pageTitle);
+    } else {
+      document.title = "".concat(pageTitle);
+    }
   });
-  return /*#__PURE__*/react_default.a.createElement(react["Fragment"], null, /*#__PURE__*/react_default.a.createElement(Header_Header, {
+  return /*#__PURE__*/react_default.a.createElement(react_default.a.Fragment, null, /*#__PURE__*/react_default.a.createElement(Header_Header, {
     headerOverlayEnable: "false",
-    htmlString: /*#__PURE__*/react_default.a.createElement(react["Fragment"], null, /*#__PURE__*/react_default.a.createElement("li", {
+    htmlString: /*#__PURE__*/react_default.a.createElement(react_default.a.Fragment, null, /*#__PURE__*/react_default.a.createElement("li", {
       className: props.location.pathname === '/index' || props.location.pathname === '' ? 'is-active' : ''
     }, /*#__PURE__*/react_default.a.createElement(NavLink, {
       to: "/index",
@@ -10695,7 +10862,7 @@ var Footer_Footer = /*#__PURE__*/function (_Component) {
   createClass_default()(Footer, [{
     key: "render",
     value: function render() {
-      return /*#__PURE__*/react_default.a.createElement(react["Fragment"], null, /*#__PURE__*/react_default.a.createElement("footer", {
+      return /*#__PURE__*/react_default.a.createElement(react_default.a.Fragment, null, /*#__PURE__*/react_default.a.createElement("footer", {
         className: "uix-footer__container"
       }, /*#__PURE__*/react_default.a.createElement("div", {
         className: "uix-footer"
@@ -10737,7 +10904,7 @@ var Footer_Footer = /*#__PURE__*/function (_Component) {
   var _ref$staticContext = _ref.staticContext,
       staticContext = _ref$staticContext === void 0 ? {} : _ref$staticContext;
   staticContext.status = 200;
-  return /*#__PURE__*/react_default.a.createElement(react["Fragment"], null, /*#__PURE__*/react_default.a.createElement("main", {
+  return /*#__PURE__*/react_default.a.createElement(react_default.a.Fragment, null, /*#__PURE__*/react_default.a.createElement("main", {
     id: "uix-maincontent"
   }, /*#__PURE__*/react_default.a.createElement("section", {
     className: "uix-spacing--s"
@@ -10767,19 +10934,19 @@ var Footer_Footer = /*#__PURE__*/function (_Component) {
   }), " Click me to view components!"))))))), /*#__PURE__*/react_default.a.createElement(Footer_Footer, null));
 });
 // EXTERNAL MODULE: ./node_modules/@babel/runtime/helpers/extends.js
-var helpers_extends = __webpack_require__(14);
+var helpers_extends = __webpack_require__(7);
 var extends_default = /*#__PURE__*/__webpack_require__.n(helpers_extends);
 
 // EXTERNAL MODULE: ./node_modules/@babel/runtime/helpers/asyncToGenerator.js
-var asyncToGenerator = __webpack_require__(17);
+var asyncToGenerator = __webpack_require__(27);
 var asyncToGenerator_default = /*#__PURE__*/__webpack_require__.n(asyncToGenerator);
 
 // EXTERNAL MODULE: ./node_modules/@babel/runtime/regenerator/index.js
-var regenerator = __webpack_require__(12);
+var regenerator = __webpack_require__(15);
 var regenerator_default = /*#__PURE__*/__webpack_require__.n(regenerator);
 
 // EXTERNAL MODULE: ./node_modules/axios/index.js
-var axios = __webpack_require__(10);
+var axios = __webpack_require__(12);
 var axios_default = /*#__PURE__*/__webpack_require__.n(axios);
 
 // CONCATENATED MODULE: ./src/client/actions/demoListActions.js
@@ -10827,7 +10994,7 @@ var demoListActions_fetchDemoList = function fetchDemoList() {
 /* harmony default export */ var PostItem = (function (_ref) {
   var name = _ref.name,
       flag = _ref.flag;
-  return /*#__PURE__*/react_default.a.createElement(react["Fragment"], null, /*#__PURE__*/react_default.a.createElement("div", {
+  return /*#__PURE__*/react_default.a.createElement(react_default.a.Fragment, null, /*#__PURE__*/react_default.a.createElement("div", {
     style: {
       padding: "10px 10px 0 10px",
       margin: "10px",
@@ -10942,7 +11109,7 @@ var Posts_Posts = /*#__PURE__*/function (_Component) {
         console.log('preloadedState: Return an Array');
       }
 
-      return /*#__PURE__*/react_default.a.createElement(react["Fragment"], null, /*#__PURE__*/react_default.a.createElement("main", {
+      return /*#__PURE__*/react_default.a.createElement(react_default.a.Fragment, null, /*#__PURE__*/react_default.a.createElement("main", {
         id: "uix-maincontent"
       }, /*#__PURE__*/react_default.a.createElement("section", {
         className: "uix-spacing--s"
@@ -11099,13 +11266,15 @@ var PostDetail_PostDetail = /*#__PURE__*/function (_Component) {
         console.log('preloadedState: null');
       } else {
         console.log('preloadedState: Return an Array'); //change page title
+        //-------------
 
         if (typeof document !== "undefined") {
+          // update page title
           document.title = preloadedState[0].name;
         }
       }
 
-      return /*#__PURE__*/react_default.a.createElement(react["Fragment"], null, /*#__PURE__*/react_default.a.createElement("main", {
+      return /*#__PURE__*/react_default.a.createElement(react_default.a.Fragment, null, /*#__PURE__*/react_default.a.createElement("main", {
         id: "uix-maincontent"
       }, /*#__PURE__*/react_default.a.createElement("section", {
         className: "uix-spacing--s"
@@ -11175,7 +11344,7 @@ var PostDetail_mapDispatchToProps = function mapDispatchToProps(dispatch) {
 
 /* harmony default export */ var Posts_PostDetail = (connect_connect(PostDetail_mapStateToProps, PostDetail_mapDispatchToProps)(PostDetail_PostDetail));
 // EXTERNAL MODULE: ./node_modules/@babel/runtime/helpers/assertThisInitialized.js
-var assertThisInitialized = __webpack_require__(11);
+var assertThisInitialized = __webpack_require__(14);
 var assertThisInitialized_default = /*#__PURE__*/__webpack_require__.n(assertThisInitialized);
 
 // CONCATENATED MODULE: ./src/client/views/_pages/Todos/LoginPage.js
@@ -11365,7 +11534,7 @@ var LoginPage_LoginPage = /*#__PURE__*/function (_Component) {
     value: function render() {
       // NOTE: I use data-attributes for easier E2E testing
       // but you don't need to target those (any css-selector will work)
-      return /*#__PURE__*/react_default.a.createElement(react["Fragment"], null, this.state.user ? /*#__PURE__*/react_default.a.createElement(LoginPage_Welcome, {
+      return /*#__PURE__*/react_default.a.createElement(react_default.a.Fragment, null, this.state.user ? /*#__PURE__*/react_default.a.createElement(LoginPage_Welcome, {
         user: this.state.user,
         onSignOut: this.signOut.bind(this)
       }) : /*#__PURE__*/react_default.a.createElement("div", null, /*#__PURE__*/react_default.a.createElement("form", {
@@ -11489,7 +11658,7 @@ var Todos_Todos = /*#__PURE__*/function (_Component) {
   }, {
     key: "render",
     value: function render() {
-      return /*#__PURE__*/react_default.a.createElement(react["Fragment"], null, /*#__PURE__*/react_default.a.createElement("main", {
+      return /*#__PURE__*/react_default.a.createElement(react_default.a.Fragment, null, /*#__PURE__*/react_default.a.createElement("main", {
         id: "uix-maincontent"
       }, /*#__PURE__*/react_default.a.createElement("section", {
         className: "uix-spacing--s"
@@ -11515,7 +11684,7 @@ var Todos_Todos = /*#__PURE__*/function (_Component) {
   var _ref$staticContext = _ref.staticContext,
       staticContext = _ref$staticContext === void 0 ? {} : _ref$staticContext;
   staticContext.status = 404;
-  return /*#__PURE__*/react_default.a.createElement(react["Fragment"], null, /*#__PURE__*/react_default.a.createElement("main", {
+  return /*#__PURE__*/react_default.a.createElement(react_default.a.Fragment, null, /*#__PURE__*/react_default.a.createElement("main", {
     id: "uix-maincontent"
   }, /*#__PURE__*/react_default.a.createElement("section", {
     className: "uix-spacing--s"
@@ -11547,26 +11716,16 @@ function HookScript() {
   //Click the route to trigger the event
   var theLocation = useLocation();
   react_default.a.useEffect(function () {
-    //change page title
+    //output name
     //-------------
     var pageTitle = null;
     var breakException = {};
-    var pathname = theLocation.pathname; //page: Nested Routes detail
+    var pathname = theLocation.pathname;
+    var titleStr = pathname.split('/').pop();
+    titleStr = shortcut.lastUrlParamFormat(titleStr);
+    console.log('titleOutput: ', titleStr);
 
-    if (pathname.indexOf('nested-routes/') >= 0) {
-      try {
-        RoutesConfig[0].routes.forEach(function (item, index) {
-          if (pathname.indexOf(item.path) >= 0) {
-            pageTitle = item.pageTitle; //
-
-            throw breakException;
-          }
-        });
-      } catch (e) {}
-    } //update page title
-
-
-    if (pageTitle !== null) document.title = pageTitle;
+    shortcut('#app-topic-name').html(titleStr);
   });
   return /*#__PURE__*/react_default.a.createElement(react_default.a.Fragment, null);
 }
@@ -11597,12 +11756,18 @@ var NestedRoutesDetail_NestedRoutesDetail = /*#__PURE__*/function (_Component) {
   createClass_default()(NestedRoutesDetail, [{
     key: "render",
     value: function render() {
-      return /*#__PURE__*/react_default.a.createElement(react["Fragment"], null, /*#__PURE__*/react_default.a.createElement(HookScript, null), /*#__PURE__*/react_default.a.createElement("p", null, "Detail topicId: ", /*#__PURE__*/react_default.a.createElement("span", {
+      return /*#__PURE__*/react_default.a.createElement(react_default.a.Fragment, null, /*#__PURE__*/react_default.a.createElement(HookScript, null), /*#__PURE__*/react_default.a.createElement("p", null, "Detail for topic ID: ", /*#__PURE__*/react_default.a.createElement("span", {
         style: {
           background: "yellow",
           padding: "5px"
         }
-      }, /*#__PURE__*/react_default.a.createElement(HookTopicId, null))));
+      }, /*#__PURE__*/react_default.a.createElement(HookTopicId, null)), /*#__PURE__*/react_default.a.createElement("br", null), "Detail for topic Name: ", /*#__PURE__*/react_default.a.createElement("span", {
+        id: "app-topic-name",
+        style: {
+          background: "yellow",
+          padding: "5px"
+        }
+      })));
     }
   }]);
 
@@ -11635,7 +11800,7 @@ function HookContent() {
       path = _useRouteMatch.path,
       url = _useRouteMatch.url;
 
-  return /*#__PURE__*/react_default.a.createElement(react["Fragment"], null, /*#__PURE__*/react_default.a.createElement("h3", null, "Nested Routes Page"), /*#__PURE__*/react_default.a.createElement("div", null, /*#__PURE__*/react_default.a.createElement(NavLink, {
+  return /*#__PURE__*/react_default.a.createElement(react_default.a.Fragment, null, /*#__PURE__*/react_default.a.createElement("h3", null, "Nested Routes Page"), /*#__PURE__*/react_default.a.createElement("div", null, /*#__PURE__*/react_default.a.createElement(NavLink, {
     to: "".concat(url, "/topic-one"),
     activeClassName: "is-active"
   }, "> click here to display Topic One")), /*#__PURE__*/react_default.a.createElement("div", null, /*#__PURE__*/react_default.a.createElement(NavLink, {
@@ -11666,7 +11831,7 @@ var NestedRoutes_NestedRoutes = /*#__PURE__*/function (_Component) {
   createClass_default()(NestedRoutes, [{
     key: "render",
     value: function render() {
-      return /*#__PURE__*/react_default.a.createElement(react["Fragment"], null, /*#__PURE__*/react_default.a.createElement("main", {
+      return /*#__PURE__*/react_default.a.createElement(react_default.a.Fragment, null, /*#__PURE__*/react_default.a.createElement("main", {
         id: "uix-maincontent"
       }, /*#__PURE__*/react_default.a.createElement("section", {
         className: "uix-spacing--s"
@@ -11685,14 +11850,14 @@ var NestedRoutes_NestedRoutes = /*#__PURE__*/function (_Component) {
 
 /* harmony default export */ var _pages_NestedRoutes = (NestedRoutes_NestedRoutes);
 // EXTERNAL MODULE: ./node_modules/@babel/runtime/helpers/objectWithoutProperties.js
-var objectWithoutProperties = __webpack_require__(42);
+var objectWithoutProperties = __webpack_require__(10);
 var objectWithoutProperties_default = /*#__PURE__*/__webpack_require__.n(objectWithoutProperties);
 
-// EXTERNAL MODULE: ./src/client/components/Buttons/scss/_style.scss
+// EXTERNAL MODULE: ./src/client/components/Buttons/styles/_style.scss
 var _style = __webpack_require__(73);
 
-// EXTERNAL MODULE: ./src/client/components/Buttons/scss-rtl/_style.scss
-var scss_rtl_style = __webpack_require__(74);
+// EXTERNAL MODULE: ./src/client/components/Buttons/styles/rtl/_style.scss
+var rtl_style = __webpack_require__(74);
 
 // CONCATENATED MODULE: ./src/client/components/Buttons/index.js
 
@@ -11753,19 +11918,19 @@ var Buttons_Button = /*#__PURE__*/function (_Component) {
           className = _this$props.className,
           id = _this$props.id,
           type = _this$props.type,
-          others = objectWithoutProperties_default()(_this$props, ["href", "target", "className", "id", "type"]);
+          attributes = objectWithoutProperties_default()(_this$props, ["href", "target", "className", "id", "type"]);
 
-      return /*#__PURE__*/react_default.a.createElement(react["Fragment"], null, href ? /*#__PURE__*/react_default.a.createElement("a", extends_default()({
+      return /*#__PURE__*/react_default.a.createElement(react_default.a.Fragment, null, href ? /*#__PURE__*/react_default.a.createElement("a", extends_default()({
         tabIndex: "0",
         href: href || '#',
         className: className || '',
         target: target || '_self',
-        id: id || shortcut.GUID.create()
-      }, others)) : /*#__PURE__*/react_default.a.createElement("button", extends_default()({
+        id: id || 'app-btn-' + shortcut.GUID.create()
+      }, attributes)) : /*#__PURE__*/react_default.a.createElement("button", extends_default()({
         className: className || '',
-        id: id ? id : shortcut.GUID.create(),
+        id: id ? id : 'app-btn-' + shortcut.GUID.create(),
         type: type || 'button'
-      }, others)));
+      }, attributes)));
     }
   }]);
 
@@ -11773,13 +11938,12 @@ var Buttons_Button = /*#__PURE__*/function (_Component) {
 }(react["Component"]);
 
 
-// CONCATENATED MODULE: ./src/client/views/_pages/ComponentsDemo/Buttons.js
+// CONCATENATED MODULE: ./src/client/views/_pages/ComponentsDemo/ButtonsDemo.js
 
 
 
-
-/* harmony default export */ var Buttons = (function () {
-  return /*#__PURE__*/react_default.a.createElement(react["Fragment"], null, /*#__PURE__*/react_default.a.createElement("main", {
+/* harmony default export */ var ButtonsDemo = (function () {
+  return /*#__PURE__*/react_default.a.createElement(react_default.a.Fragment, null, /*#__PURE__*/react_default.a.createElement("main", {
     id: "uix-maincontent"
   }, /*#__PURE__*/react_default.a.createElement("section", {
     className: "uix-spacing--s uix-spacing--no-bottom"
@@ -11791,7 +11955,14 @@ var Buttons_Button = /*#__PURE__*/function (_Component) {
     className: "col-12"
   }, /*#__PURE__*/react_default.a.createElement("h1", {
     className: "uix-t-c"
-  }, "Buttons"))))), /*#__PURE__*/react_default.a.createElement("section", {
+  }, "Buttons", /*#__PURE__*/react_default.a.createElement("a", {
+    className: "uix-typo--h3 align-middle",
+    href: "https://github.com/xizon/uix-kit-react/tree/master/src/client/components/Buttons",
+    target: "_blank"
+  }, /*#__PURE__*/react_default.a.createElement("code", null, /*#__PURE__*/react_default.a.createElement("i", {
+    className: "fa fa-code",
+    "aria-hidden": "true"
+  })))))))), /*#__PURE__*/react_default.a.createElement("section", {
     className: "uix-spacing--s uix-spacing--no-bottom"
   }, /*#__PURE__*/react_default.a.createElement("div", {
     className: "container"
@@ -11811,16 +11982,20 @@ var Buttons_Button = /*#__PURE__*/function (_Component) {
   }, /*#__PURE__*/react_default.a.createElement(Buttons_Button, {
     id: "app-btn-1",
     href: "#",
+    "data-go": "222",
     className: "uix-btn uix-btn__border--thin uix-btn__margin--b uix-btn__size--m uix-btn__bg--primary is-pill",
     onClick: function onClick(e) {
-      return alert(e.target.id);
+      e.preventDefault();
+      alert(e.target.id);
     }
   }, "Click me to view ID!"), /*#__PURE__*/react_default.a.createElement("br", null), /*#__PURE__*/react_default.a.createElement(Buttons_Button, {
     id: "app-btn-2",
     href: "#",
     className: "uix-btn uix-btn__border--thin uix-btn__margin--b uix-btn__size--m uix-btn__bg--primary is-pill",
     onClick: function onClick(e) {
-      return shortcut('#app-btn-2').width('50%');
+      e.preventDefault();
+
+      shortcut('#app-btn-2').width('50%');
     }
   }, "Click me to change the width!"))))), /*#__PURE__*/react_default.a.createElement("section", {
     className: "uix-spacing--s uix-spacing--no-bottom"
@@ -12127,7 +12302,620 @@ var Buttons_Button = /*#__PURE__*/function (_Component) {
   }, /*#__PURE__*/react_default.a.createElement("span", null, /*#__PURE__*/react_default.a.createElement("i", {
     className: "fa fa-cogs",
     "aria-hidden": "true"
-  })), "Icon Left"), /*#__PURE__*/react_default.a.createElement("br", null))))))), /*#__PURE__*/react_default.a.createElement(Footer_Footer, null));
+  })), "Icon Left"), /*#__PURE__*/react_default.a.createElement("br", null))))))));
+});
+// EXTERNAL MODULE: ./node_modules/@babel/runtime/helpers/defineProperty.js
+var defineProperty = __webpack_require__(13);
+var defineProperty_default = /*#__PURE__*/__webpack_require__.n(defineProperty);
+
+// EXTERNAL MODULE: ./src/client/components/Tabs/styles/_style.scss
+var styles_style = __webpack_require__(75);
+
+// CONCATENATED MODULE: ./src/client/components/Tabs/TabList.js
+
+
+
+
+
+
+
+
+function TabList_createSuper(Derived) { var hasNativeReflectConstruct = TabList_isNativeReflectConstruct(); return function _createSuperInternal() { var Super = getPrototypeOf_default()(Derived), result; if (hasNativeReflectConstruct) { var NewTarget = getPrototypeOf_default()(this).constructor; result = Reflect.construct(Super, arguments, NewTarget); } else { result = Super.apply(this, arguments); } return possibleConstructorReturn_default()(this, result); }; }
+
+function TabList_isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Reflect.construct) return false; if (Reflect.construct.sham) return false; if (typeof Proxy === "function") return true; try { Boolean.prototype.valueOf.call(Reflect.construct(Boolean, [], function () {})); return true; } catch (e) { return false; } }
+
+
+
+var TabList_TabList = /*#__PURE__*/function (_Component) {
+  inherits_default()(TabList, _Component);
+
+  var _super = TabList_createSuper(TabList);
+
+  function TabList(props) {
+    classCallCheck_default()(this, TabList);
+
+    return _super.call(this, props);
+  }
+
+  createClass_default()(TabList, [{
+    key: "render",
+    value: function render() {
+      var _this$props = this.props,
+          defaultActive = _this$props.defaultActive,
+          attributes = objectWithoutProperties_default()(_this$props, ["defaultActive"]);
+
+      var activedClassName = typeof defaultActive !== 'undefined' ? ' is-active' : '';
+      return /*#__PURE__*/react_default.a.createElement(react_default.a.Fragment, null, /*#__PURE__*/react_default.a.createElement("li", {
+        role: "presentation",
+        className: activedClassName
+      }, /*#__PURE__*/react_default.a.createElement("a", extends_default()({
+        href: "#"
+      }, attributes))));
+    }
+  }]);
+
+  return TabList;
+}(react["Component"]);
+
+
+// CONCATENATED MODULE: ./src/client/components/Tabs/TabPanel.js
+
+
+
+
+
+
+
+
+function TabPanel_createSuper(Derived) { var hasNativeReflectConstruct = TabPanel_isNativeReflectConstruct(); return function _createSuperInternal() { var Super = getPrototypeOf_default()(Derived), result; if (hasNativeReflectConstruct) { var NewTarget = getPrototypeOf_default()(this).constructor; result = Reflect.construct(Super, arguments, NewTarget); } else { result = Super.apply(this, arguments); } return possibleConstructorReturn_default()(this, result); }; }
+
+function TabPanel_isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Reflect.construct) return false; if (Reflect.construct.sham) return false; if (typeof Proxy === "function") return true; try { Boolean.prototype.valueOf.call(Reflect.construct(Boolean, [], function () {})); return true; } catch (e) { return false; } }
+
+
+
+var TabPanel_TabPanel = /*#__PURE__*/function (_Component) {
+  inherits_default()(TabPanel, _Component);
+
+  var _super = TabPanel_createSuper(TabPanel);
+
+  function TabPanel(props) {
+    classCallCheck_default()(this, TabPanel);
+
+    return _super.call(this, props);
+  }
+
+  createClass_default()(TabPanel, [{
+    key: "render",
+    value: function render() {
+      var _this$props = this.props,
+          defaultActive = _this$props.defaultActive,
+          tabpanelClass = _this$props.tabpanelClass,
+          attributes = objectWithoutProperties_default()(_this$props, ["defaultActive", "tabpanelClass"]);
+
+      var activedClassName = typeof defaultActive !== 'undefined' ? ' is-active' : '';
+      return /*#__PURE__*/react_default.a.createElement(react_default.a.Fragment, null, /*#__PURE__*/react_default.a.createElement("div", extends_default()({
+        role: "tabpanel",
+        className: tabpanelClass ? "uix-tabs__content ".concat(tabpanelClass, " ").concat(activedClassName) : "uix-tabs__content ".concat(activedClassName)
+      }, attributes)));
+    }
+  }]);
+
+  return TabPanel;
+}(react["Component"]);
+
+
+// CONCATENATED MODULE: ./src/client/components/Tabs/Tabs.js
+
+
+
+
+
+
+
+
+
+
+function Tabs_ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
+
+function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { Tabs_ownKeys(Object(source), true).forEach(function (key) { defineProperty_default()(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { Tabs_ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
+
+function Tabs_createSuper(Derived) { var hasNativeReflectConstruct = Tabs_isNativeReflectConstruct(); return function _createSuperInternal() { var Super = getPrototypeOf_default()(Derived), result; if (hasNativeReflectConstruct) { var NewTarget = getPrototypeOf_default()(this).constructor; result = Reflect.construct(Super, arguments, NewTarget); } else { result = Super.apply(this, arguments); } return possibleConstructorReturn_default()(this, result); }; }
+
+function Tabs_isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Reflect.construct) return false; if (Reflect.construct.sham) return false; if (typeof Proxy === "function") return true; try { Boolean.prototype.valueOf.call(Reflect.construct(Boolean, [], function () {})); return true; } catch (e) { return false; } }
+
+
+/*-- Apply Third-party plugins --*/
+//1) Bootstrap
+
+ //2) Fontawesome
+
+
+
+
+
+
+/*-- Apply global scripts and styles --*/
+
+
+
+
+/*-- Apply this component styles --*/
+
+ //
+
+
+
+
+var Tabs_Tabs = /*#__PURE__*/function (_Component) {
+  inherits_default()(Tabs, _Component);
+
+  var _super = Tabs_createSuper(Tabs);
+
+  function Tabs(props) {
+    classCallCheck_default()(this, Tabs);
+
+    return _super.call(this, props);
+  }
+
+  createClass_default()(Tabs, [{
+    key: "componentDidMount",
+    value: function componentDidMount() {
+      //
+      shortcut(document).ready(function () {
+        shortcut('.uix-tabs').each(function (index, selectors) {
+          var $this = shortcut(this);
+
+          var $li = $this.find('.uix-tabs__nav ul > li'),
+              liWidth = $li.first().outerWidth(),
+              liHeight = $li.first().outerHeight(),
+              liNum = $li.length,
+              isNumeric = /^[-+]?(\d+|\d+\.\d*|\d*\.\d+)$/,
+              tabBoxID = $this.attr('id');
+          var ulWidth = $this.data('width'),
+              fullwidth = $this.data('fullwidth'),
+              rotation = $this.data('rotation'),
+              rotationRadius = $this.data('rotation-radius'),
+              rotationWapperDeg = $this.data('rotation-wrapper-angle'),
+              rotationDisplay = $this.data('rotation-display'); //console.log( '$this.data( rotation ): ', $this.data( 'rotation' ));
+
+          if (typeof_default()(fullwidth) != ( true ? "undefined" : undefined) && fullwidth == 1) {
+            $li.css({
+              'width': 100 / liNum + '%'
+            });
+          }
+
+          if (typeof_default()(rotation) === ( true ? "undefined" : undefined)) {
+            rotation = false;
+          }
+
+          if (typeof_default()(rotationWapperDeg) === ( true ? "undefined" : undefined)) {
+            rotationWapperDeg = 0;
+          }
+
+          if (typeof_default()(rotationDisplay) === ( true ? "undefined" : undefined)) {
+            rotationDisplay = 5;
+          } //Initialize tab list
+
+
+          shortcut(selectors).find('.uix-tabs__nav ul > li').each(function (index) {
+            shortcut(this).find('a').attr('href', 'javascript:').attr('id', tabBoxID + '-tablist-link' + index);
+
+            shortcut(this).attr('data-tab', tabBoxID + '-tabs-show' + index).attr('id', tabBoxID + '-tablist' + index);
+          }); //Initialize tab panel
+
+
+          shortcut(selectors).find('.uix-tabs__content').each(function (index) {
+            shortcut(this).attr('id', tabBoxID + '-tabs-show' + index);
+          }); // Tab Rotation Effect
+
+
+          if (rotation) {
+            (function () {
+              $this.find('.uix-tabs__nav').css({
+                'width': rotationRadius * 2 + 'px'
+              });
+              $this.find('.uix-tabs__nav ul').css({
+                'width': rotationRadius * 2 + 'px',
+                'height': rotationRadius * 2 + 'px',
+                'transform': 'rotate(' + parseFloat(rotationWapperDeg) + 'deg)'
+              }); //Layout components in a circle layout
+
+              var step = 2 * Math.PI / rotationDisplay,
+                  pad = $this.find('.uix-tabs__nav ul').width();
+              var angle = 0,
+                  transitionDelay = 0;
+
+              for (var k = 0; k <= liNum; k++) {
+                var el = shortcut(selectors + ' .uix-tabs__nav ul > li').eq(k),
+                    elLink = shortcut(selectors + ' .uix-tabs__nav ul > li:nth-child(' + k + ') > a'),
+                    x = rotationRadius * Math.cos(angle) - liWidth / 2,
+                    y = rotationRadius * Math.sin(angle) - liHeight / 2;
+
+                el.css({
+                  'transform': 'translate(' + parseFloat(x) + 'px,' + parseFloat(pad / 2 + y) + 'px)',
+                  'transition-delay': transitionDelay + "s"
+                });
+                elLink.css({
+                  'transform': 'rotate(' + parseFloat(-rotationWapperDeg) + 'deg)'
+                });
+                angle += step;
+                transitionDelay += 0.15; //Click on the rotation effect
+                //----------------------- begin ----------------------
+
+                el.off('click').on('click', function (e) {
+                  var increase = Math.PI * 2 / rotationDisplay,
+                      n = shortcut(this).index(),
+                      endAngle = n % rotationDisplay * increase;
+
+                  (function turn() {
+                    if (Math.abs(endAngle - angle) > 1 / 8) {
+                      var sign = endAngle > angle ? 1 : -1;
+                      angle = angle + sign / 8;
+                      setTimeout(turn, 20);
+                    } else {
+                      angle = endAngle;
+                    }
+
+                    for (var j = 0; j <= liNum; j++) {
+                      var _el = shortcut(selectors + ' .uix-tabs__nav ul > li').eq(j),
+                          _elLink = shortcut(selectors + ' .uix-tabs__nav ul > li:nth-child(' + j + ') > a'),
+                          x2 = Math.cos(-Math.PI / 2 + j * increase - angle) * rotationRadius - liWidth / 2,
+                          y2 = Math.sin(-Math.PI / 2 + j * increase - angle) * rotationRadius + liHeight;
+
+                      _el.css({
+                        'transform': 'translate(' + parseFloat(x2) + 'px,' + parseFloat(y2) + 'px)',
+                        'transition': 'none',
+                        'transition-delay': 0
+                      });
+
+                      _elLink.css({
+                        'transform': 'rotate(' + parseFloat(-rotationWapperDeg) + 'deg)'
+                      });
+                    } //end for
+
+                  })();
+                }); //----------------------- end ----------------------	
+              } //end for
+              // Init
+
+
+              $this.find('.uix-tabs__nav ul > li.is-active').trigger('click');
+            })();
+          } //end rotation
+          // Tab Sliding Effext
+
+
+          if ($this.find('.uix-tabs__nav ul > li:first-child .uix-tabs__marker').length == 0) {
+            $this.find('.uix-tabs__nav ul > li:first-child').prepend('<div class="uix-tabs__marker"></div>');
+          } // Tab Fade Effect
+
+
+          $this.off('click').on('click', '.uix-tabs__nav ul > li', function (e) {
+            var tabID = shortcut(this).attr('data-tab'),
+                index = parseFloat(shortcut(this).index() - 1);
+
+            $this.find('.uix-tabs__nav ul > li').removeClass('is-active');
+            $this.find('.uix-tabs__content').removeClass('is-active');
+
+            shortcut(this).addClass('is-active');
+
+            shortcut('#' + tabID).addClass('is-active'); //sliding marker
+
+
+            var translateX = shortcut(this).index() * 100,
+                liHeight = $this.find('.uix-tabs__nav ul > li:first-child').outerHeight(),
+                translateY = shortcut(this).index() * liHeight;
+
+            if (window.innerWidth <= 768) {
+              $this.find('.uix-tabs__marker').css({
+                'transform': 'translateY( ' + translateY + 'px )'
+              });
+            } else {
+              $this.find('.uix-tabs__marker').css({
+                'transform': 'translateX( ' + translateX + '% )'
+              });
+            }
+
+            return false;
+          });
+        });
+      });
+    }
+  }, {
+    key: "typeSwitch",
+    value: function typeSwitch(param) {
+      switch (param) {
+        case 'normal':
+          return 'uix-tabs uix-tabs--normal';
+
+        case 'center':
+          return 'uix-tabs uix-tabs--center';
+
+        case 'fullwidth':
+          return 'uix-tabs';
+
+        case 'rotation':
+          return 'uix-tabs uix-tabs--rotation';
+
+        default:
+          return 'uix-tabs uix-tabs--normal';
+      }
+    }
+  }, {
+    key: "render",
+    value: function render() {
+      var _this$props = this.props,
+          type = _this$props.type,
+          id = _this$props.id,
+          children = _this$props.children,
+          attributes = objectWithoutProperties_default()(_this$props, ["type", "id", "children"]);
+
+      return /*#__PURE__*/react_default.a.createElement(react_default.a.Fragment, null, /*#__PURE__*/react_default.a.createElement("div", extends_default()({
+        id: id ? id : 'app-tabs-' + shortcut.GUID.create(),
+        className: this.typeSwitch(type)
+      }, attributes), /*#__PURE__*/react_default.a.createElement("div", {
+        className: "uix-tabs__nav"
+      }, /*#__PURE__*/react_default.a.createElement("ul", {
+        role: "tablist"
+      }, children != null ? children.map(function (item, i) {
+        var childProps = _objectSpread({}, item.props);
+
+        delete childProps.key;
+
+        if (item.key.indexOf('tab-list') >= 0) {
+          return /*#__PURE__*/react_default.a.createElement(TabList_TabList, extends_default()({
+            key: item.key
+          }, childProps));
+        }
+      }) : "")), children != null ? children.map(function (item, i) {
+        var childProps = _objectSpread({}, item.props);
+
+        delete childProps.key;
+
+        if (item.key.indexOf('tab-panel') >= 0) {
+          return /*#__PURE__*/react_default.a.createElement(TabPanel_TabPanel, extends_default()({
+            key: item.key
+          }, childProps));
+        }
+      }) : ""));
+    }
+  }]);
+
+  return Tabs;
+}(react["Component"]);
+
+
+// CONCATENATED MODULE: ./src/client/components/Tabs/index.js
+/* 
+ *************************************
+ * <!-- Tabs -->
+ *************************************
+ */
+
+
+
+// CONCATENATED MODULE: ./src/client/views/_pages/ComponentsDemo/TabsDemo.js
+
+
+
+/* harmony default export */ var TabsDemo = (function () {
+  return /*#__PURE__*/react_default.a.createElement(react_default.a.Fragment, null, /*#__PURE__*/react_default.a.createElement("main", {
+    id: "uix-maincontent"
+  }, /*#__PURE__*/react_default.a.createElement("section", {
+    className: "uix-spacing--s uix-spacing--no-bottom"
+  }, /*#__PURE__*/react_default.a.createElement("div", {
+    className: "container"
+  }, /*#__PURE__*/react_default.a.createElement("div", {
+    className: "row"
+  }, /*#__PURE__*/react_default.a.createElement("div", {
+    className: "col-12"
+  }, /*#__PURE__*/react_default.a.createElement("h1", {
+    className: "uix-t-c"
+  }, "Tabs", /*#__PURE__*/react_default.a.createElement("a", {
+    className: "uix-typo--h3 align-middle",
+    href: "https://github.com/xizon/uix-kit-react/tree/master/src/client/components/Tabs",
+    target: "_blank"
+  }, /*#__PURE__*/react_default.a.createElement("code", null, /*#__PURE__*/react_default.a.createElement("i", {
+    className: "fa fa-code",
+    "aria-hidden": "true"
+  })))))))), /*#__PURE__*/react_default.a.createElement("section", {
+    className: "uix-spacing--s uix-spacing--no-bottom"
+  }, /*#__PURE__*/react_default.a.createElement("div", {
+    className: "container"
+  }, /*#__PURE__*/react_default.a.createElement("div", {
+    className: "row"
+  }, /*#__PURE__*/react_default.a.createElement("div", {
+    className: "col-12"
+  }, /*#__PURE__*/react_default.a.createElement("h3", null, "Tab Normal"), /*#__PURE__*/react_default.a.createElement("hr", null))))), /*#__PURE__*/react_default.a.createElement("section", {
+    className: "uix-spacing--s"
+  }, /*#__PURE__*/react_default.a.createElement("div", {
+    className: "container"
+  }, /*#__PURE__*/react_default.a.createElement("div", {
+    className: "row"
+  }, /*#__PURE__*/react_default.a.createElement("div", {
+    className: "col-12"
+  }, /*#__PURE__*/react_default.a.createElement(Tabs_Tabs, {
+    type: "normal"
+  }, /*#__PURE__*/react_default.a.createElement(TabList_TabList, {
+    key: "tab-list-1",
+    defaultActive: true
+  }, "Tab 1"), /*#__PURE__*/react_default.a.createElement(TabList_TabList, {
+    key: "tab-list-2"
+  }, "Tab 2"), /*#__PURE__*/react_default.a.createElement(TabList_TabList, {
+    key: "tab-list-3"
+  }, "Tab 3"), /*#__PURE__*/react_default.a.createElement(TabPanel_TabPanel, {
+    key: "tab-panel-1",
+    defaultActive: true
+  }, /*#__PURE__*/react_default.a.createElement("p", null, "Hi, this is the first tab.")), /*#__PURE__*/react_default.a.createElement(TabPanel_TabPanel, {
+    key: "tab-panel-2"
+  }, /*#__PURE__*/react_default.a.createElement("p", null, "This is the 2nd tab."), /*#__PURE__*/react_default.a.createElement("p", null, "This is the 2nd tab."), /*#__PURE__*/react_default.a.createElement("p", null, "This is the 2nd tab.")), /*#__PURE__*/react_default.a.createElement(TabPanel_TabPanel, {
+    key: "tab-panel-3"
+  }, /*#__PURE__*/react_default.a.createElement("p", null, "And this is the 3rd tab."))))))), /*#__PURE__*/react_default.a.createElement("section", {
+    className: "uix-spacing--s"
+  }, /*#__PURE__*/react_default.a.createElement("div", {
+    className: "container"
+  }, /*#__PURE__*/react_default.a.createElement("div", {
+    className: "row"
+  }, /*#__PURE__*/react_default.a.createElement("div", {
+    className: "col-12"
+  }, /*#__PURE__*/react_default.a.createElement(Tabs_Tabs, {
+    type: "center"
+  }, /*#__PURE__*/react_default.a.createElement(TabList_TabList, {
+    key: "tab-list-1",
+    defaultActive: true
+  }, "Tab 1"), /*#__PURE__*/react_default.a.createElement(TabList_TabList, {
+    key: "tab-list-2"
+  }, "Tab 2"), /*#__PURE__*/react_default.a.createElement(TabList_TabList, {
+    key: "tab-list-3"
+  }, "Tab 3"), /*#__PURE__*/react_default.a.createElement(TabPanel_TabPanel, {
+    key: "tab-panel-1",
+    defaultActive: true
+  }, /*#__PURE__*/react_default.a.createElement("p", null, "Hi, this is the first tab.")), /*#__PURE__*/react_default.a.createElement(TabPanel_TabPanel, {
+    key: "tab-panel-2"
+  }, /*#__PURE__*/react_default.a.createElement("p", null, "This is the 2nd tab."), /*#__PURE__*/react_default.a.createElement("p", null, "This is the 2nd tab."), /*#__PURE__*/react_default.a.createElement("p", null, "This is the 2nd tab.")), /*#__PURE__*/react_default.a.createElement(TabPanel_TabPanel, {
+    key: "tab-panel-3"
+  }, /*#__PURE__*/react_default.a.createElement("p", null, "And this is the 3rd tab."))))))), /*#__PURE__*/react_default.a.createElement("section", {
+    className: "uix-spacing--s"
+  }, /*#__PURE__*/react_default.a.createElement("div", {
+    className: "container"
+  }, /*#__PURE__*/react_default.a.createElement("div", {
+    className: "row"
+  }, /*#__PURE__*/react_default.a.createElement("div", {
+    className: "col-12"
+  }, /*#__PURE__*/react_default.a.createElement(Tabs_Tabs, {
+    type: "fullwidth",
+    "data-fullwidth": "1"
+  }, /*#__PURE__*/react_default.a.createElement(TabList_TabList, {
+    key: "tab-list-1",
+    defaultActive: true
+  }, "Tab 1"), /*#__PURE__*/react_default.a.createElement(TabList_TabList, {
+    key: "tab-list-2"
+  }, "Tab 2"), /*#__PURE__*/react_default.a.createElement(TabList_TabList, {
+    key: "tab-list-3"
+  }, "Tab 3"), /*#__PURE__*/react_default.a.createElement(TabPanel_TabPanel, {
+    key: "tab-panel-1",
+    defaultActive: true
+  }, /*#__PURE__*/react_default.a.createElement("p", null, "Hi, this is the first tab.")), /*#__PURE__*/react_default.a.createElement(TabPanel_TabPanel, {
+    key: "tab-panel-2"
+  }, /*#__PURE__*/react_default.a.createElement("p", null, "This is the 2nd tab."), /*#__PURE__*/react_default.a.createElement("p", null, "This is the 2nd tab."), /*#__PURE__*/react_default.a.createElement("p", null, "This is the 2nd tab.")), /*#__PURE__*/react_default.a.createElement(TabPanel_TabPanel, {
+    key: "tab-panel-3"
+  }, /*#__PURE__*/react_default.a.createElement("p", null, "And this is the 3rd tab."))))))), /*#__PURE__*/react_default.a.createElement("section", null, /*#__PURE__*/react_default.a.createElement("div", {
+    className: "container"
+  }, /*#__PURE__*/react_default.a.createElement("div", {
+    className: "row"
+  }, /*#__PURE__*/react_default.a.createElement("div", {
+    className: "col-12"
+  }, /*#__PURE__*/react_default.a.createElement("h3", null, "Tab Rotation Effect 1"), /*#__PURE__*/react_default.a.createElement("hr", null))))), /*#__PURE__*/react_default.a.createElement("section", {
+    className: "uix-spacing--s"
+  }, /*#__PURE__*/react_default.a.createElement("div", {
+    className: "container uix-t-c"
+  }, /*#__PURE__*/react_default.a.createElement("div", {
+    className: "row"
+  }, /*#__PURE__*/react_default.a.createElement("div", {
+    className: "col-12"
+  }, /*#__PURE__*/react_default.a.createElement(Tabs_Tabs, {
+    type: "rotation",
+    "data-rotation": "true",
+    "data-rotation-display": "5",
+    "data-rotation-radius": "130",
+    "data-rotation-wrapper-angle": "0"
+  }, /*#__PURE__*/react_default.a.createElement(TabList_TabList, {
+    key: "tab-list-1",
+    defaultActive: true
+  }, "Tab 1"), /*#__PURE__*/react_default.a.createElement(TabList_TabList, {
+    key: "tab-list-2"
+  }, "Tab 2"), /*#__PURE__*/react_default.a.createElement(TabList_TabList, {
+    key: "tab-list-3"
+  }, "Tab 3"), /*#__PURE__*/react_default.a.createElement(TabList_TabList, {
+    key: "tab-list-4"
+  }, "Tab 4"), /*#__PURE__*/react_default.a.createElement(TabList_TabList, {
+    key: "tab-list-5"
+  }, "Tab 5"), /*#__PURE__*/react_default.a.createElement(TabPanel_TabPanel, {
+    key: "tab-panel-1",
+    tabpanelClass: "uix-outer-shadow--regular",
+    style: {
+      marginTop: '50px'
+    },
+    defaultActive: true
+  }, /*#__PURE__*/react_default.a.createElement("p", null, "Hi, this is the first tab.")), /*#__PURE__*/react_default.a.createElement(TabPanel_TabPanel, {
+    key: "tab-panel-2",
+    tabpanelClass: "uix-outer-shadow--regular",
+    style: {
+      marginTop: '50px'
+    }
+  }, /*#__PURE__*/react_default.a.createElement("p", null, "This is the 2nd tab."), /*#__PURE__*/react_default.a.createElement("p", null, "This is the 2nd tab."), /*#__PURE__*/react_default.a.createElement("p", null, "This is the 2nd tab.")), /*#__PURE__*/react_default.a.createElement(TabPanel_TabPanel, {
+    key: "tab-panel-3",
+    tabpanelClass: "uix-outer-shadow--regular",
+    style: {
+      marginTop: '50px'
+    }
+  }, /*#__PURE__*/react_default.a.createElement("p", null, "And this is the 3rd tab.")), /*#__PURE__*/react_default.a.createElement(TabPanel_TabPanel, {
+    key: "tab-panel-3",
+    tabpanelClass: "uix-outer-shadow--regular",
+    style: {
+      marginTop: '50px'
+    }
+  }, /*#__PURE__*/react_default.a.createElement("p", null, "And this is the 4th tab.")), /*#__PURE__*/react_default.a.createElement(TabPanel_TabPanel, {
+    key: "tab-panel-3",
+    tabpanelClass: "uix-outer-shadow--regular",
+    style: {
+      marginTop: '50px'
+    }
+  }, /*#__PURE__*/react_default.a.createElement("p", null, "And this is the 5th tab."))))))), /*#__PURE__*/react_default.a.createElement("section", null, /*#__PURE__*/react_default.a.createElement("div", {
+    className: "container"
+  }, /*#__PURE__*/react_default.a.createElement("div", {
+    className: "row"
+  }, /*#__PURE__*/react_default.a.createElement("div", {
+    className: "col-12"
+  }, /*#__PURE__*/react_default.a.createElement("h3", null, "Tab Rotation Effect 2"), /*#__PURE__*/react_default.a.createElement("hr", null))))), /*#__PURE__*/react_default.a.createElement("section", {
+    className: "uix-spacing--s"
+  }, /*#__PURE__*/react_default.a.createElement("div", {
+    className: "container uix-t-c"
+  }, /*#__PURE__*/react_default.a.createElement("div", {
+    className: "row"
+  }, /*#__PURE__*/react_default.a.createElement("div", {
+    className: "col-12"
+  }, /*#__PURE__*/react_default.a.createElement(Tabs_Tabs, {
+    type: "rotation",
+    "data-rotation": "true",
+    "data-rotation-display": "4",
+    "data-rotation-radius": "130",
+    "data-rotation-wrapper-angle": "-45"
+  }, /*#__PURE__*/react_default.a.createElement(TabList_TabList, {
+    key: "tab-list-1",
+    defaultActive: true
+  }, "Tab 1"), /*#__PURE__*/react_default.a.createElement(TabList_TabList, {
+    key: "tab-list-2"
+  }, "Tab 2"), /*#__PURE__*/react_default.a.createElement(TabList_TabList, {
+    key: "tab-list-3"
+  }, "Tab 3"), /*#__PURE__*/react_default.a.createElement(TabList_TabList, {
+    key: "tab-list-4"
+  }, "Tab 4"), /*#__PURE__*/react_default.a.createElement(TabPanel_TabPanel, {
+    key: "tab-panel-1",
+    tabpanelClass: "uix-outer-shadow--regular",
+    style: {
+      marginTop: '50px'
+    },
+    defaultActive: true
+  }, /*#__PURE__*/react_default.a.createElement("p", null, "Hi, this is the first tab.")), /*#__PURE__*/react_default.a.createElement(TabPanel_TabPanel, {
+    key: "tab-panel-2",
+    tabpanelClass: "uix-outer-shadow--regular",
+    style: {
+      marginTop: '50px'
+    }
+  }, /*#__PURE__*/react_default.a.createElement("p", null, "This is the 2nd tab."), /*#__PURE__*/react_default.a.createElement("p", null, "This is the 2nd tab."), /*#__PURE__*/react_default.a.createElement("p", null, "This is the 2nd tab.")), /*#__PURE__*/react_default.a.createElement(TabPanel_TabPanel, {
+    key: "tab-panel-3",
+    tabpanelClass: "uix-outer-shadow--regular",
+    style: {
+      marginTop: '50px'
+    }
+  }, /*#__PURE__*/react_default.a.createElement("p", null, "And this is the 3rd tab.")), /*#__PURE__*/react_default.a.createElement(TabPanel_TabPanel, {
+    key: "tab-panel-3",
+    tabpanelClass: "uix-outer-shadow--regular",
+    style: {
+      marginTop: '50px'
+    }
+  }, /*#__PURE__*/react_default.a.createElement("p", null, "And this is the 4th tab.")))))))));
 });
 // CONCATENATED MODULE: ./src/client/views/_pages/ComponentsDemo/index.js
 
@@ -12145,6 +12933,7 @@ function ComponentsDemo_isNativeReflectConstruct() { if (typeof Reflect === "und
 
  //components list
 
+
  //Might have mismatching versions of React and the renderer (such as React DOM)
 
 function ComponentsDemo_HookContent() {
@@ -12155,18 +12944,26 @@ function ComponentsDemo_HookContent() {
       path = _useRouteMatch.path,
       url = _useRouteMatch.url;
 
-  return /*#__PURE__*/react_default.a.createElement(react["Fragment"], null, /*#__PURE__*/react_default.a.createElement("div", null, /*#__PURE__*/react_default.a.createElement(NavLink, {
+  return /*#__PURE__*/react_default.a.createElement(react_default.a.Fragment, null, /*#__PURE__*/react_default.a.createElement("div", null, /*#__PURE__*/react_default.a.createElement(NavLink, {
     to: "".concat(url, "/buttons"),
     activeClassName: "is-active"
   }, /*#__PURE__*/react_default.a.createElement("i", {
     className: "fa fa-check-circle-o",
     "aria-hidden": "true"
-  }), " Buttons")), /*#__PURE__*/react_default.a.createElement("hr", null), /*#__PURE__*/react_default.a.createElement(react_router_Switch, null, /*#__PURE__*/react_default.a.createElement(react_router_Route, {
+  }), " Buttons"), "\xA0\xA0", /*#__PURE__*/react_default.a.createElement(NavLink, {
+    to: "".concat(url, "/tabs"),
+    activeClassName: "is-active"
+  }, /*#__PURE__*/react_default.a.createElement("i", {
+    className: "fa fa-check-circle-o",
+    "aria-hidden": "true"
+  }), " Tabs"), "\xA0\xA0"), /*#__PURE__*/react_default.a.createElement("hr", null), /*#__PURE__*/react_default.a.createElement(react_router_Switch, null, /*#__PURE__*/react_default.a.createElement(react_router_Route, {
     exact: true,
     path: path
   }, /*#__PURE__*/react_default.a.createElement("p", null, "None.")), /*#__PURE__*/react_default.a.createElement(react_router_Route, {
     path: "".concat(path, "/buttons")
-  }, /*#__PURE__*/react_default.a.createElement(Buttons, null))));
+  }, /*#__PURE__*/react_default.a.createElement(ButtonsDemo, null)), /*#__PURE__*/react_default.a.createElement(react_router_Route, {
+    path: "".concat(path, "/tabs")
+  }, /*#__PURE__*/react_default.a.createElement(TabsDemo, null))));
 }
 
 var ComponentsDemo_ComponentsDemo = /*#__PURE__*/function (_Component) {
@@ -12199,7 +12996,7 @@ var ComponentsDemo_ComponentsDemo = /*#__PURE__*/function (_Component) {
   }, {
     key: "render",
     value: function render() {
-      return /*#__PURE__*/react_default.a.createElement(react["Fragment"], null, /*#__PURE__*/react_default.a.createElement("main", {
+      return /*#__PURE__*/react_default.a.createElement(react_default.a.Fragment, null, /*#__PURE__*/react_default.a.createElement("main", {
         id: "uix-maincontent"
       }, /*#__PURE__*/react_default.a.createElement("section", {
         className: "uix-spacing--s"
@@ -12232,17 +13029,21 @@ var routesConfig = [{
   routes: [
   /*======================================== */
 
-  /* Primary Menu */
+  /* Homepage */
   {
     path: '/',
     component: Home,
     exact: true,
-    pageTitle: 'Home'
+    pageTitle: 'Uix Kit React'
   }, {
     path: '/index',
     component: Home,
-    pageTitle: 'Home'
-  }, {
+    pageTitle: 'Uix Kit React'
+  },
+  /*======================================== */
+
+  /* Primary Menu */
+  {
     path: '/components-demo',
     component: _pages_ComponentsDemo,
     pageTitle: 'Components Demo'
@@ -12310,16 +13111,12 @@ var thunk = createThunkMiddleware();
 thunk.withExtraArgument = createThunkMiddleware;
 
 /* harmony default export */ var redux_thunk_es = (thunk);
-// EXTERNAL MODULE: ./node_modules/@babel/runtime/helpers/defineProperty.js
-var defineProperty = __webpack_require__(18);
-var defineProperty_default = /*#__PURE__*/__webpack_require__.n(defineProperty);
-
 // CONCATENATED MODULE: ./src/client/reducers/demoListReducer.js
 
 
 function demoListReducer_ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
 
-function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { demoListReducer_ownKeys(Object(source), true).forEach(function (key) { defineProperty_default()(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { demoListReducer_ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
+function demoListReducer_objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { demoListReducer_ownKeys(Object(source), true).forEach(function (key) { defineProperty_default()(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { demoListReducer_ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
 
 //initialize state
 var initialState = {
@@ -12332,7 +13129,7 @@ var initialState = {
   switch (action.type) {
     case 'RECEIVE_DEMO_LIST':
       {
-        return _objectSpread(_objectSpread({}, state), {}, {
+        return demoListReducer_objectSpread(demoListReducer_objectSpread({}, state), {}, {
           items: action.payload
         });
       }
