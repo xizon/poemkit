@@ -1,7 +1,9 @@
 # Changelog
 
-#### = 0.0.25 (April 23, 2021) =
 
+#### = 0.0.26 (April 23, 2021) =
+
+* Tweak: Adjustment of the resource directory structure.
 * New: Add development mode and component compile-time debugging.
 * New: Add new UI components `Tabs Animated`.
 * Tweak: Simplified the import method of third-party plugin import.

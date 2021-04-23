@@ -1,7 +1,7 @@
 /*!
  * 
  * ## Project Name        :  Uix Kit React
- * ## Version             :  0.0.25
+ * ## Version             :  0.0.26
  * ## Based on            :  Uix Kit React (https://github.com/xizon/uix-kit-react)
  * ## Last Update         :  April 23, 2021
  * ## Created by          :  UIUX Lab (https://uiux.cc)
@@ -5623,20 +5623,12 @@ var bootstrap = __webpack_require__(58);
 // EXTERNAL MODULE: ./src/client/components/_third-party-plugins/Bootstrap/scss-rtl/bootstrap.scss
 var scss_rtl_bootstrap = __webpack_require__(59);
 
-// EXTERNAL MODULE: ./src/client/components/_third-party-plugins/FontAwesome/scss/fontawesome.scss
-var fontawesome = __webpack_require__(60);
+// CONCATENATED MODULE: ./src/client/components/_third-party-plugins/lib-bootstrap.js
+/*
+  Bootstrap
+  ------------- 
+*/
 
-// EXTERNAL MODULE: ./src/client/components/_third-party-plugins/FontAwesome/scss/v4-shims.scss
-var v4_shims = __webpack_require__(61);
-
-// EXTERNAL MODULE: ./src/client/components/_third-party-plugins/FontAwesome/scss/solid.scss
-var solid = __webpack_require__(62);
-
-// EXTERNAL MODULE: ./src/client/components/_third-party-plugins/FontAwesome/scss/brands.scss
-var brands = __webpack_require__(63);
-
-// EXTERNAL MODULE: ./src/client/components/_third-party-plugins/FontAwesome/scss/regular.scss
-var regular = __webpack_require__(64);
 
 // EXTERNAL MODULE: ./src/client/components/_third-party-plugins/GSAP/esm/TweenLite.js
 var TweenLite = __webpack_require__(1);
@@ -13373,13 +13365,28 @@ var TweenMax_TweenMax = TweenMaxBase_TweenMax;
 TweenMax_TweenMax._autoActivated = [TimelineLite_TimelineLite, TimelineMax_TimelineMax, CSSPlugin_CSSPlugin, AttrPlugin, BezierPlugin, RoundPropsPlugin, DirectionalRotationPlugin, EasePack_Back, Elastic, Bounce, EasePack_RoughEase, EasePack_SlowMo, EasePack_SteppedEase, Circ, Expo, Sine, EasePack_ExpoScaleEase];
 
 
-// CONCATENATED MODULE: ./src/client/components/_third-party-plugins/_all.js
+// CONCATENATED MODULE: ./src/client/components/_third-party-plugins/lib-gsap.js
 /*
-  Bootstrap
+  GSAP
   ------------- 
 */
 
+// EXTERNAL MODULE: ./src/client/components/_third-party-plugins/FontAwesome/scss/fontawesome.scss
+var fontawesome = __webpack_require__(60);
 
+// EXTERNAL MODULE: ./src/client/components/_third-party-plugins/FontAwesome/scss/v4-shims.scss
+var v4_shims = __webpack_require__(61);
+
+// EXTERNAL MODULE: ./src/client/components/_third-party-plugins/FontAwesome/scss/solid.scss
+var solid = __webpack_require__(62);
+
+// EXTERNAL MODULE: ./src/client/components/_third-party-plugins/FontAwesome/scss/brands.scss
+var brands = __webpack_require__(63);
+
+// EXTERNAL MODULE: ./src/client/components/_third-party-plugins/FontAwesome/scss/regular.scss
+var regular = __webpack_require__(64);
+
+// CONCATENATED MODULE: ./src/client/components/_third-party-plugins/lib-icons.js
 /*
   Fontawesome
   ------------- 
@@ -13389,13 +13396,11 @@ TweenMax_TweenMax._autoActivated = [TimelineLite_TimelineLite, TimelineMax_Timel
 
 
 
-
-/*
-  GSAP
-  ------------- 
-*/
+// CONCATENATED MODULE: ./src/client/components/_third-party-plugins/_all.js
 
 
+ //import '@uixkit.react/plugins/lib-player.js';
+//import '@uixkit.react/plugins/lib-3d.js';
 
 /***/ }),
 /* 23 */
@@ -22252,7 +22257,7 @@ var possibleConstructorReturn_default = /*#__PURE__*/__webpack_require__.n(possi
 var getPrototypeOf = __webpack_require__(4);
 var getPrototypeOf_default = /*#__PURE__*/__webpack_require__.n(getPrototypeOf);
 
-// EXTERNAL MODULE: ./src/client/components/_third-party-plugins/_all.js + 10 modules
+// EXTERNAL MODULE: ./src/client/components/_third-party-plugins/_all.js + 13 modules
 var _third_party_plugins_all = __webpack_require__(22);
 
 // EXTERNAL MODULE: ./src/client/components/_utilities/styles/_all.scss
