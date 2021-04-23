@@ -12,6 +12,9 @@ import Footer from '@uixkit.react/components/Footer/index.js';
 //components list
 import ButtonsDemo from '@uixkit.react/pages/ComponentsDemo/ButtonsDemo.js';
 import TabsDemo from '@uixkit.react/pages/ComponentsDemo/TabsDemo.js';
+import TabsAnimatedDemo from '@uixkit.react/pages/ComponentsDemo/TabsAnimatedDemo.js';
+
+
 
 
 //Might have mismatching versions of React and the renderer (such as React DOM)
@@ -29,6 +32,7 @@ function HookContent() {
 			<div>
 		        <NavLink to={`${url}/buttons`} activeClassName="is-active"><i className="fa fa-check-circle-o" aria-hidden="true"></i> Buttons</NavLink>&nbsp;&nbsp;
 		        <NavLink to={`${url}/tabs`} activeClassName="is-active"><i className="fa fa-check-circle-o" aria-hidden="true"></i> Tabs</NavLink>&nbsp;&nbsp;
+		        <NavLink to={`${url}/tabs-animated`} activeClassName="is-active"><i className="fa fa-check-circle-o" aria-hidden="true"></i> Tabs Animated</NavLink>&nbsp;&nbsp;
 		    </div>
 
 			 <hr />
@@ -43,6 +47,10 @@ function HookContent() {
 				<Route path={`${path}/tabs`}>
 				  <TabsDemo />
 				</Route>
+				<Route path={`${path}/tabs-animated`}>
+				  <TabsAnimatedDemo />
+				</Route>	
+		
 		
 		
 			  </Switch>

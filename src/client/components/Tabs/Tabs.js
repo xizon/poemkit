@@ -1,26 +1,13 @@
+import PropTypes from "prop-types";
 import React, { Component } from 'react';
 
-
-/*-- Apply Third-party plugins --*/
-//1) Bootstrap
-import '@uixkit.react/plugins/Bootstrap/scss/bootstrap.scss';  
-
-
-//2) Fontawesome
-import '@uixkit.react/plugins/FontAwesome/scss/fontawesome.scss';  
-import '@uixkit.react/plugins/FontAwesome/scss/v4-shims.scss';  
-import '@uixkit.react/plugins/FontAwesome/scss/solid.scss';  
-import '@uixkit.react/plugins/FontAwesome/scss/brands.scss';  
-import '@uixkit.react/plugins/FontAwesome/scss/regular.scss';  
-
-
+/*-- Apply Third-party plugins (import location should be in front of "global scripts and styles") --*/
+import '@uixkit.react/plugins/_all.js';  
 
 /*-- Apply global scripts and styles --*/
 import '@uixkit.react/components/_utilities/styles/_all.scss';
 import '@uixkit.react/components/_utilities/styles/rtl/_all.scss';
 import { __ } from '@uixkit.react/components/_utilities/_all.js';
-
-
 
 /*-- Apply this component styles --*/
 import '@uixkit.react/components/Tabs/styles/_style.scss';
@@ -349,4 +336,16 @@ export default class Tabs extends Component {
 	}
 }
 
+
+//Configure your application to run in "development" mode.
+if ( process.env.npm_package_development == 'true' ) {
+			
+	Tabs.propTypes = {
+		type: PropTypes.string.isRequired,
+		id: PropTypes.string,
+		children: PropTypes.array.isRequired
+	}
+
+	
+}
 

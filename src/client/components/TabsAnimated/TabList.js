@@ -15,7 +15,7 @@ export default class TabList extends Component {
 		} = this.props;
 		
 		const activedClassName = typeof( defaultActive ) !== 'undefined' ? ' is-active' : '';
-
+	
 		
 		return (
 		  <>

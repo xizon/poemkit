@@ -4,8 +4,8 @@
  * Core Shortcut
  *
  * @package: uix-kit-react
- * @version: 0.16
- * @last update: April 22, 2021
+ * @version: 0.17
+ * @last update: April 23, 2021
  * @license: MIT
  *
  *************************************
@@ -113,6 +113,7 @@ __( document ).ready( function() {
 			console.log( __( '.demo' ).hasClass( 'class-1' ) );
 			console.log( __( 'h1' ).offset() );
 			console.log( __( 'h1' ).position() );		
+			console.log( __( '.demo' ).maxDimension() );		
 			console.log( __( '.menu li:nth-child(2)' ).index() );
 
 
@@ -194,11 +195,15 @@ __( document ).ready( function() {
 			console.log( __.browser.isIE );  //.isMobile, .isAndroid, .isPC, .isSafari, .isIE, .supportsPassive
 			console.log( __.GUID.create() );
 			console.log( __.math.evaluate( '100/3' ) );
+			console.log( __.math.getRandomFloat(1, 10) );
+			console.log( __.math.getDegree(135) );
+			console.log( __.math.getRadian(1) );
+			console.log( __.math.getPolarCoord(10,30,0) );
 			console.log( __.cssProperty.getAbsoluteCoordinates( __( '.col-12' )[0] ).left );
+			console.log( __.cssProperty.getTransitionDuration( __( '.col-12' )[0] ) );
 			console.log( __.styleFormat( 'font-size: 10px;background: #51B801; color:#fff; border-radius: 5px;padding: 2px 3px;display: inline-block;margin-left: 3px;' ) )
 			console.log( __.trim( 'string string spacing string' ) );
             console.log( __.lastUrlParamFormat( 'string-string-spacing_string' ) );
-			
 			
 
 
@@ -446,6 +451,13 @@ const __ = (function () {
 
 		return t.version = "0.0.1",
 
+			
+			
+		/*
+		 * Generate a string of unique characters
+		 *
+		 * @return {String}
+		 */		
 		t.create = function() {
 			return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function (c) {
 				const r = Math.random() * 16 | 0,
@@ -470,8 +482,15 @@ const __ = (function () {
 	__.math = __.math || ( () => {
 		function t() { }
 
-		return t.version = "0.0.1",
+		return t.version = "0.0.2",
 
+			
+		/*
+		 * Expression parsing and evaluation
+		 *
+		 * @param {String} s - A math expression given in string.
+		 * @return {Number}  - Returns a pure number calculated.
+		 */	
 		t.evaluate = function(s) {
 
 			const chars = s.replace(/\s/g, '').split("");
@@ -515,6 +534,75 @@ const __ = (function () {
 
 			return s;
 		},
+			
+			
+           
+            
+		/*
+		 * Generate random number between two numbers
+		 *
+		 * @return {Number} min - Enter a expected minimum.
+		 * @return {Number} max - Enter a expected maximum.
+		 * @return {Number}     - A new random number
+		 */
+		t.getRandomFloat = function(min, max) {
+			return Math.random() * (max - min) + min;
+		},
+
+
+		/*
+		 * Returns the degree from radian.
+		 *
+		 * @return {Number} rad - Value of radian.
+		 * @return {Number}
+		 * @usage: 
+
+		   angle = rad / ( Math.PI / 180 )  = rad * ( 180/Math.PI );
+		 */
+
+		t.getDegree = function(rad) {
+			return rad / Math.PI * 180;
+		},
+
+
+		/*
+		 * Returns the radian degree .
+		 *
+		 * @return {Number} deg - Value of degree.
+		 * @return {Number}
+		 * @usage: 
+
+			rad = Math.PI / 180 * 30 ;
+		 */
+		t.getRadian = function(deg) {
+			return deg * Math.PI / 180;
+		},
+
+
+		/*
+		 * Convert three.js scene rotation to polar coordinates
+		 *
+		 * @return {Number} x - X coordinate value.
+		 * @return {Number} y - Y coordinate value.
+		 * @return {Number} z - Z coordinate value.
+		 * @return {Json}
+		 * @usage: 
+
+			x = r * cos（θ）
+			y = r * sin（θ）  
+		 */
+		t.getPolarCoord = function(x, y, z) {
+			const nx = Math.cos(x) * Math.cos(y) * z,
+				  nz = Math.cos(x) * Math.sin(y) * z,
+				  ny = Math.sin(x) * z;
+			return {
+			    x: nx,
+				y: ny,
+				z: nz
+			};
+		},
+
+
 
 		//
 		t
@@ -535,6 +623,13 @@ const __ = (function () {
 
 		return t.version = "0.0.1",
 
+			
+		/*
+		 * Get the -webkit-transition-duration property
+		 *
+		 * @param {Element} el - A DOMString containing one selector to match against.
+		 * @return {Number}    - Returns a pure number.
+		 */		
 		t.getTransitionDuration = function( el ) {
 
 			if ( typeof el === typeof undefined ) {
@@ -558,7 +653,14 @@ const __ = (function () {
 
 		},
 
-		//
+			
+			
+		/*
+		 * Get an object's absolute position on the page
+		 *
+		 * @param {Element} el - A DOMString containing one selector to match against.
+		 * @return {Json}    - An object containing the properties top and left. 
+		 */	
 		t.getAbsoluteCoordinates = function( el ) {
 
 			let windowWidth     = window.innerWidth,
@@ -723,9 +825,9 @@ const __ = (function () {
 
 
 	};
-	
-	
 
+	
+	
 	/* ---------------- API methods ----------------- */
 	
 	
@@ -1288,8 +1390,6 @@ const __ = (function () {
 	 */
     __.prototype.first = function() {
 		const elements = __(__.prototype.defaultTargetSelector, document);
-		let newEl = null;
-		//
 		const length = elements.length;
 		return elements[ 0 ];
     }
@@ -1302,8 +1402,6 @@ const __ = (function () {
 	 */
     __.prototype.last = function() {
 		const elements = __(__.prototype.defaultTargetSelector, document);
-		let newEl = null;
-		//
 		const length = elements.length;
 		return elements[ length-1 ];
     }
@@ -1498,7 +1596,7 @@ const __ = (function () {
 	/*
 	 * Get the current coordinates of the first element in the set of matched elements, relative to the document.
 	 *
-	 * @return {Json}      - An object containing the properties top and left.- 
+	 * @return {Json}      - An object containing the properties top and left. 
 	 */
 	__.prototype.offset = function() {
 		const box = this.getBoundingClientRect();
@@ -1844,7 +1942,7 @@ const __ = (function () {
 	 */
     __.prototype.trigger = function(eventType) {
 		const fire = function( elem, type ) {
-			var event = document.createEvent('Event');
+			const event = document.createEvent('Event');
 			event.initEvent(type, true, true); //can bubble, and is cancellable
 			elem.dispatchEvent(event);
 		};
@@ -1853,6 +1951,36 @@ const __ = (function () {
 		fire( this, eventType );
 		
     }	
+	
+	
+	/*
+	 *  Find the Tallest or widest of all elements
+	 *
+	 * @return {Json}      - An object containing the properties width and height.
+	 */
+	__.prototype.maxDimension = function() {
+		
+		let elements = __(__.prototype.defaultTargetSelector, document);
+		
+		const elementHeights = Array.prototype.map.call(elements, function(el)  {
+			return el.clientHeight;
+		});
+		
+		const elementWidths = Array.prototype.map.call(elements, function(el)  {
+			return el.clientWidth;
+		});
+
+		const maxHeight = Math.max.apply(null, elementHeights);
+		const maxWidth = Math.max.apply(null, elementWidths);
+	
+		return {
+			'height': maxHeight,
+			'width': maxWidth
+		};
+
+	};
+
+	
 	
 	
 	/* ------------- Private Methods -------------- */
@@ -1871,8 +1999,12 @@ const __ = (function () {
 		not: __.prototype.not,
 		filter: __.prototype.filter,
 		siblings: __.prototype.siblings,
+		
+		//traverse 
 		each: __.prototype.each,
-		//
+		maxDimension: __.prototype.maxDimension,
+		
+		//functions
 		ready: __.prototype.ready,
 		imagesloaded: __.prototype.imagesloaded,
 		append: __.prototype.append,
@@ -1945,7 +2077,8 @@ const __ = (function () {
 							if ( fn === 'eq' ||
 								 fn === 'first' ||
 								 fn === 'last' ||
-							 	 fn === 'each'
+							 	 fn === 'each' ||
+						         fn === 'maxDimension'
 							   ) throw breakException;
 						});
 					} catch (e) {}	
@@ -1993,7 +2126,8 @@ const __ = (function () {
 					fn === 'width' ||
 					fn === 'outerWidth' ||
 					fn === 'height' ||
-					fn === 'outerHeight'
+					fn === 'outerHeight' ||
+					fn === 'maxDimension'
 
 				) {	
 					return (result === undefined) ? undefined : result[0];

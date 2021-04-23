@@ -10,10 +10,10 @@
 
 ```js
 import React from 'react';
-import Tabs from '@uixkit.react/components/Tabs/index.js';
+import { Tabs, TabList, TabPanel } from '@uixkit.react/components/Tabs/index.js';
 
 
-export default function Examples() {
+export default () => {
   return (
     <>
 	  

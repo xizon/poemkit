@@ -1,0 +1,105 @@
+/* ======================================================
+    <!-- Tabs Animated -->
+/* ====================================================== */
+@import '@uixkit.react/components/_utilities/styles/_variable-and-mixin.scss';
+
+
+
+.uix-tabs-animated {
+	
+	width: 100%;
+	min-height: 150px;
+	position: relative;
+	overflow: hidden; /* reqiured */
+
+	.uix-tabs__nav {
+		
+		> ul {
+			display: flex;
+			flex-direction: row;
+			justify-content: space-between;
+			counter-reset: counter;
+			border-bottom: 1px solid #efefef;
+
+			> li {
+				flex : 1;
+				position: relative;
+				padding: 1rem;
+				text-align: center;
+				
+				a {
+					display: block;
+				}
+
+				&:after {
+					position: absolute;
+					bottom: 0;
+					left: 50%;
+					display: block;
+					content: "";
+					width: 0;
+					height: 0;
+					border: 10px solid transparent;
+					transform: translateX(-50%);
+					border-bottom-color: #333;
+					transition: all 0.4s ease-out;
+					opacity: 0;
+				}
+
+				&.is-active::after {
+					opacity: 1;
+				}
+
+
+			}
+		}
+
+	}
+	.uix-tabs__contentWrapper {
+		
+		.uix-tabs__content {
+			position: absolute;
+			width: 100%;
+			opacity: 0;
+			transform: translateX(100%);
+			transition: .5s ease-in-out;
+
+			&.leave {
+				animation: uix-cssAnim--leave 0.5s 1 forwards;
+			}
+
+			&.is-active {
+				animation: uix-cssAnim--rightToLeft 0.5s 1 forwards;
+			}
+
+		}	
+	}
+
+
+}
+
+/*----------*/
+
+@keyframes uix-cssAnim--rightToLeft {
+  0% {
+    opacity: 0;
+    transform: translateX(100%);
+  }
+
+  100% {
+    opacity: 1;
+    transform: translateX(0%);
+  }
+}
+
+@keyframes uix-cssAnim--leave {
+  0% {
+    opacity: 1;
+    transform: translateX(0%);
+  }
+
+  100% {
+    opacity: 0;
+    transform: translateX(-100%);
+  }
+}

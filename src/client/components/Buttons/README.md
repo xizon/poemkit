@@ -14,7 +14,7 @@ import React from 'react';
 import Button from '@uixkit.react/components/Buttons/index.js';
 
 
-export default function Examples() {
+export default () => {
   return (
     <>
 
@@ -22,7 +22,7 @@ export default function Examples() {
 	    <p>Add onClick event to the button.</p>
 		<hr />
 	  
-		<Button id="app-btn-1" href="#" data-go="222" className="uix-btn uix-btn__border--thin uix-btn__margin--b uix-btn__size--m uix-btn__bg--primary is-pill" onClick={(e) => {e.preventDefault(); alert( e.target.id );} }>Click me to view ID!</Button>
+		<Button id="app-btn-1" href="#" data-title="button" className="uix-btn uix-btn__border--thin uix-btn__margin--b uix-btn__size--m uix-btn__bg--primary is-pill" onClick={(e) => {e.preventDefault(); alert( e.target.id );} }>Click me to view ID!</Button>
 
 		<br />
 		<Button id="app-btn-2" href="#" className="uix-btn uix-btn__border--thin uix-btn__margin--b uix-btn__size--m uix-btn__bg--primary is-pill" onClick={(e) => {e.preventDefault(); __( '#app-btn-2' ).width( '50%' );} }>Click me to change the width!</Button>

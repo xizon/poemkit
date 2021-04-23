@@ -12,7 +12,7 @@
 import React from 'react';
 import Footer from '@uixkit.react/components/Footer/index.js';
 
-export default function Examples() {
+export default () => {
   return (
     <>
 		<Footer />

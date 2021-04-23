@@ -57,7 +57,8 @@ Server runs on `http://localhost:3000`
 * Provides a common web page components and layouts
 * Automatically bundle and generate independent core CSS and JS files
 * Project supports automatic deployments from a number of repository hosting services via pm2
-* The default components demo is embedded with commonly used third-party animation libraries and grid system, such as Bootstrap 4+, GSAP, FontAwesome, Three, Pixi, etc., so that you can quickly expand your website
+* The default components import some third-party plug-ins, such as  grid system of Bootstrap 4, GSAP animation library, FontAwesome icon library, 3D engine, etc., so that you can quickly expand your website (Support on-demand configuration)
+
 
 
 * * *
@@ -273,6 +274,35 @@ To run both the server and React application at the same time we need to add the
   ...
 }
 ```
+
+### ⚙️ Run the Webpack build in "development" mode:
+
+Add the `development` key and set it value to `true` to `package.json`.
+
+```json
+{
+  "development": true,
+  ...
+}
+```
+
+Then, you could use the following JavaScript code to debug it:
+
+```js
+if ( process.env.npm_package_development == 'true' ) {
+
+	YourComponentName.propTypes = {
+	    displayEnable: PropTypes.bool.isRequired,
+		htmlString: PropTypes.string.isRequired
+	}
+	
+}
+```
+
+
+### ⚙️ Custom import third-party library:
+
+The application loads some third-party libraries (icons, animations, 3D engines, etc.) by default, you can load them as needed, or modify the configuration file. Access to `src/client/components/_third-party-plugins/_all.js`
 
 
 

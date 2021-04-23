@@ -13,7 +13,7 @@
 import React from 'react';
 import Header from '@uixkit.react/components/Header/index.js';
 
-export default function Examples() {
+export default () => {
   return (
     <>
 		<Header headerOverlayEnable="false" htmlString={

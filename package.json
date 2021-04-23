@@ -2,7 +2,7 @@
   "development": true,
   "author": "UIUX Lab",
   "name": "uix-kit-react",
-  "version": "0.0.23",
+  "version": "0.0.25",
   "description": "A free web kits with React for fast web design and development via SSR.",
   "main": "webpack.config.js",
   "directories": {
@@ -71,7 +71,6 @@
     "webpack-dev-server": "^3.1.14"
   },
   "dependencies": {
-    "babel-plugin-module-resolver": "^4.1.0",
     "@babel/core": "^7.13.14",
     "@babel/node": "^7.8.7",
     "@babel/plugin-proposal-class-properties": "^7.2.3",
@@ -83,6 +82,7 @@
     "@babel/preset-typescript": "^7.1.0",
     "@babel/register": "^7.13.14",
     "axios": "^0.21.1",
+    "babel-plugin-module-resolver": "^4.1.0",
     "compression": "^1.7.4",
     "cors": "^2.8.5",
     "ignore-styles": "^5.0.1",

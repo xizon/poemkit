@@ -38,7 +38,7 @@ Uix Kit React系一套免费的网站开发工具包，帮助开发者从零建�
 * 提供常见的网页组件和布局
 * 自动捆绑并生成独立的核心CSS和JS文件
 * 支持通过pm2自动部署到服务器
-* 默认组件演示植入了诸如Bootstrap 4+, GSAP, FontAwesome, Three, Pixi等常用的第三方动画库和栅格系统，以便能够快速扩展您的网站
+* 默认组件演示导入了诸如Bootstrap4栅格系统, GSAP动画库, FontAwesome图标库, 3D引擎等常用的第三方插件，以便能够快速扩展您的网站 (可以按需配置需要导入的库或者插件)
 
 
 * * *
@@ -267,6 +267,38 @@ output: {
   ...
 }
 ```
+
+### ⚙️ 打包编译应用时运行开发模式:
+
+运行开发模式有助于维护你的组件系统，在 `package.json` 文件中添加键 `development` 并把值设为 `true`.
+
+
+```json
+{
+  "development": true,
+  ...
+}
+```
+
+使用下面的JavaScript脚本可以编写调试代码，比如:
+
+```js
+if ( process.env.npm_package_development == 'true' ) {
+
+	YourComponentName.propTypes = {
+	    displayEnable: PropTypes.bool.isRequired,
+		htmlString: PropTypes.string.isRequired
+	}
+	
+}
+```
+
+
+
+
+### ⚙️ 自定义导入的第三方库或插件:
+
+应用默认加载了常用的第三方库(图标，动画，3D引擎等)，您可以按需加载，或者修改导入配置。第三方插件配置文件位于`src/client/components/_third-party-plugins/_all.js`
 
 
 

@@ -1,0 +1,632 @@
+body.rtl {
+  direction: rtl;
+  text-align: right;
+}
+
+.rtl .list-unstyled {
+  padding-left: initial !important;
+  padding-right: 0;
+}
+
+/* ----------------- List Group ----------------- */
+
+.rtl .list-group, .list-inline {
+  padding-right: 0;
+}
+
+/* ---------------- List Inline -------------------- */
+
+.rtl .list-inline-item {
+  margin-left: .5rem;
+  margin-right: auto !important;
+}
+
+/* ------------------ Input Group --------------- */
+
+.rtl .input-group > {
+  .input-group-append > {
+    .btn, .input-group-text {
+      border-top-left-radius: .25rem;
+      border-bottom-left-radius: .25rem;
+      border-top-right-radius: 0 !important;
+      border-bottom-right-radius: 0 !important;
+    }
+  }
+
+  .input-group-prepend {
+    &:first-child > {
+      .btn:not(:first-child), .input-group-text:not(:first-child) {
+        border-top-left-radius: .25rem;
+        border-bottom-left-radius: .25rem;
+        border-top-right-radius: 0 !important;
+        border-bottom-right-radius: 0 !important;
+      }
+    }
+
+    &:not(:first-child) > {
+      .btn, .input-group-text {
+        border-top-left-radius: .25rem;
+        border-bottom-left-radius: .25rem;
+        border-top-right-radius: 0 !important;
+        border-bottom-right-radius: 0 !important;
+      }
+    }
+  }
+
+  .input-group-append {
+    &:last-child > {
+      .btn:not(:last-child):not(.dropdown-toggle), .input-group-text:not(:last-child) {
+        border-top-right-radius: .25rem;
+        border-bottom-right-radius: .2rem;
+        border-top-left-radius: 0 !important;
+        border-bottom-left-radius: 0 !important;
+      }
+    }
+
+    &:not(:last-child) > {
+      .btn, .input-group-text {
+        border-top-right-radius: .25rem;
+        border-bottom-right-radius: .2rem;
+        border-top-left-radius: 0 !important;
+        border-bottom-left-radius: 0 !important;
+      }
+    }
+  }
+
+  .input-group-prepend > {
+    .btn, .input-group-text {
+      border-top-right-radius: .25rem;
+      border-bottom-right-radius: .2rem;
+      border-top-left-radius: 0 !important;
+      border-bottom-left-radius: 0 !important;
+    }
+  }
+
+  .custom-select:not(:first-child), .form-control:not(:first-child) {
+    border-top-left-radius: .25rem;
+    border-bottom-left-radius: .25rem;
+    border-top-right-radius: 0 !important;
+    border-bottom-right-radius: 0 !important;
+  }
+
+  .custom-select:not(:last-child), .form-control:not(:last-child) {
+    border-top-right-radius: .25rem;
+    border-bottom-right-radius: .25rem;
+    border-top-left-radius: 0 !important;
+    border-bottom-left-radius: 0 !important;
+  }
+}
+
+.rtl .input-group-prepend {
+  margin-right: 0;
+  margin-left: -1px;
+}
+
+.rtl .input-group-append {
+  margin-left: 0;
+  margin-right: -1px;
+
+  .btn + {
+    .btn, .input-group-text {
+      margin-left: 0;
+      margin-right: -1px;
+    }
+  }
+
+  .input-group-text + {
+    .btn, .input-group-text {
+      margin-left: 0;
+      margin-right: -1px;
+    }
+  }
+}
+
+.rtl .input-group-prepend {
+  .btn + {
+    .btn, .input-group-text {
+      margin-left: 0;
+      margin-right: -1px;
+    }
+  }
+
+  .input-group-text + {
+    .btn, .input-group-text {
+      margin-left: 0;
+      margin-right: -1px;
+    }
+  }
+}
+
+.rtl .input-group > {
+  .custom-file + {
+    .custom-file, .custom-select, .form-control {
+      margin-left: 0;
+      margin-right: -1px;
+    }
+  }
+
+  .custom-select + {
+    .custom-file, .custom-select, .form-control {
+      margin-left: 0;
+      margin-right: -1px;
+    }
+  }
+
+  .form-control + {
+    .custom-file, .custom-select, .form-control {
+      margin-left: 0;
+      margin-right: -1px;
+    }
+  }
+
+  .custom-file {
+    &:not(:first-child) .custom-file-label {
+      border-top-left-radius: .25rem;
+      border-bottom-left-radius: .25rem;
+      border-top-right-radius: 0 !important;
+      border-bottom-right-radius: 0 !important;
+
+      &::before {
+        border-top-left-radius: .25rem;
+        border-bottom-left-radius: .25rem;
+        border-top-right-radius: 0 !important;
+        border-bottom-right-radius: 0 !important;
+      }
+    }
+
+    &:not(:last-child) .custom-file-label {
+      border-top-right-radius: .25rem;
+      border-bottom-right-radius: .25rem;
+      border-top-left-radius: 0 !important;
+      border-bottom-left-radius: 0 !important;
+
+      &::before {
+        border-top-right-radius: .25rem;
+        border-bottom-right-radius: .25rem;
+        border-top-left-radius: 0 !important;
+        border-bottom-left-radius: 0 !important;
+      }
+    }
+  }
+}
+
+.rtl .custom-file-label::after {
+  left: 0;
+  right: auto;
+  border-right: 1px solid #ced4da;
+  border-radius: .25rem 0 0 .25rem;
+}
+
+.rtl .custom-control, .form-check {
+  padding-left: 0;
+  padding-right: 1.25rem;
+}
+
+.rtl .custom-control-label {
+  &::before, &::after {
+    left: auto;
+    right: 0;
+  }
+}
+
+.rtl .form-check-input {
+  margin-left: 0;
+  margin-right: -1.25rem;
+}
+
+/* ------------------ Btn Group ------------------ */
+
+.rtl .btn-group {
+  > {
+    .btn-group:not(:last-child) > .btn, .btn:not(:last-child):not(.dropdown-toggle) {
+      border-top-right-radius: .25rem;
+      border-bottom-right-radius: .25rem;
+      border-top-left-radius: 0 !important;
+      border-bottom-left-radius: 0 !important;
+    }
+
+    .btn-group:not(:first-child) > .btn, .btn:not(:first-child) {
+      border-top-left-radius: .25rem;
+      border-bottom-left-radius: .25rem;
+      border-top-right-radius: 0 !important;
+      border-bottom-right-radius: 0 !important;
+    }
+  }
+
+  .btn + {
+    .btn, .btn-group {
+      margin-right: -1px;
+      margin-left: 0;
+    }
+  }
+
+  .btn-group + {
+    .btn, .btn-group {
+      margin-right: -1px;
+      margin-left: 0;
+    }
+  }
+}
+
+.rtl .btn-group-vertical {
+  .btn + {
+    .btn, .btn-group {
+      margin-right: -1px;
+      margin-left: 0;
+    }
+  }
+
+  .btn-group + {
+    .btn, .btn-group {
+      margin-right: -1px;
+      margin-left: 0;
+    }
+  }
+}
+
+/* ----------------- Drop Down ---------------- */
+
+.rtl .dropdown-toggle::after {
+  margin-right: .255em;
+  margin-left: 0;
+}
+
+.rtl .dropright {
+  direction: ltr;
+
+  > .btn {
+    &:not(:last-child):not(.dropdown-toggle) {
+      border-radius: .25rem 0 0 .25rem !important;
+    }
+
+    &:not(:first-child) {
+      border-radius: 0 .25rem .25rem 0 !important;
+    }
+  }
+}
+
+/* ------------------- Pagination ------------------------ */
+
+.rtl .page-item {
+  &:first-child .page-link {
+    margin-right: 0;
+    border-top-right-radius: .25rem;
+    border-bottom-right-radius: .25rem;
+    border-top-left-radius: 0 !important;
+    border-bottom-left-radius: 0 !important;
+  }
+
+  &:last-child .page-link {
+    border-top-right-radius: 0 !important;
+    border-bottom-right-radius: 0 !important;
+    border-top-left-radius: .25rem;
+    border-bottom-left-radius: .25rem;
+  }
+}
+
+/* ------------------- Dismissing ------------------------ */
+
+.rtl .alert-dismissible {
+  padding-right: 1.25rem !important;
+  padding-left: 4rem;
+
+  .close {
+    left: 0;
+    right: auto !important;
+  }
+}
+
+/* ------------------- Offsets ------------------------ */
+
+.rtl .offset-1 {
+  margin-right: 8.333333%;
+  margin-left: unset;
+}
+
+.rtl .offset-2 {
+  margin-right: 16.666667%;
+  margin-left: unset;
+}
+
+.rtl .offset-3 {
+  margin-right: 25%;
+  margin-left: unset;
+}
+
+.rtl .offset-4 {
+  margin-right: 33.333333%;
+  margin-left: unset;
+}
+
+.rtl .offset-5 {
+  margin-right: 41.666667%;
+  margin-left: unset;
+}
+
+.rtl .offset-6 {
+  margin-right: 50%;
+  margin-left: unset;
+}
+
+.rtl .offset-7 {
+  margin-right: 58.333333%;
+  margin-left: unset;
+}
+
+.rtl .offset-8 {
+  margin-right: 66.666667%;
+  margin-left: unset;
+}
+
+.rtl .offset-9 {
+  margin-right: 75%;
+  margin-left: unset;
+}
+
+.rtl .offset-10 {
+  margin-right: 83.333333%;
+  margin-left: unset;
+}
+
+.rtl .offset-11 {
+  margin-right: 91.666667%;
+  margin-left: unset;
+}
+
+@media (min-width: 576px) {
+  .rtl .offset-sm-0 {
+    margin-right: 0;
+    margin-left: unset;
+  }
+
+  .rtl .offset-sm-1 {
+    margin-right: 8.333333%;
+    margin-left: unset;
+  }
+
+  .rtl .offset-sm-2 {
+    margin-right: 16.666667%;
+    margin-left: unset;
+  }
+
+  .rtl .offset-sm-3 {
+    margin-right: 25%;
+    margin-left: unset;
+  }
+
+  .rtl .offset-sm-4 {
+    margin-right: 33.333333%;
+    margin-left: unset;
+  }
+
+  .rtl .offset-sm-5 {
+    margin-right: 41.666667%;
+    margin-left: unset;
+  }
+
+  .rtl .offset-sm-6 {
+    margin-right: 50%;
+    margin-left: unset;
+  }
+
+  .rtl .offset-sm-7 {
+    margin-right: 58.333333%;
+    margin-left: unset;
+  }
+
+  .rtl .offset-sm-8 {
+    margin-right: 66.666667%;
+    margin-left: unset;
+  }
+
+  .rtl .offset-sm-9 {
+    margin-right: 75%;
+    margin-left: unset;
+  }
+
+  .rtl .offset-sm-10 {
+    margin-right: 83.333333%;
+    margin-left: unset;
+  }
+
+  .rtl .offset-sm-11 {
+    margin-right: 91.666667%;
+    margin-left: unset;
+  }
+}
+
+@media (min-width: 768px) {
+  .rtl .offset-md-0 {
+    margin-right: 0;
+    margin-left: unset;
+  }
+
+  .rtl .offset-md-1 {
+    margin-right: 8.333333%;
+    margin-left: unset;
+  }
+
+  .rtl .offset-md-2 {
+    margin-right: 16.666667%;
+    margin-left: unset;
+  }
+
+  .rtl .offset-md-3 {
+    margin-right: 25%;
+    margin-left: unset;
+  }
+
+  .rtl .offset-md-4 {
+    margin-right: 33.333333%;
+    margin-left: unset;
+  }
+
+  .rtl .offset-md-5 {
+    margin-right: 41.666667%;
+    margin-left: unset;
+  }
+
+  .rtl .offset-md-6 {
+    margin-right: 50%;
+    margin-left: unset;
+  }
+
+  .rtl .offset-md-7 {
+    margin-right: 58.333333%;
+    margin-left: unset;
+  }
+
+  .rtl .offset-md-8 {
+    margin-right: 66.666667%;
+    margin-left: unset;
+  }
+
+  .rtl .offset-md-9 {
+    margin-right: 75%;
+    margin-left: unset;
+  }
+
+  .rtl .offset-md-10 {
+    margin-right: 83.333333%;
+    margin-left: unset;
+  }
+
+  .rtl .offset-md-11 {
+    margin-right: 91.666667%;
+    margin-left: unset;
+  }
+}
+
+@media (min-width: 992px) {
+  .rtl .offset-lg-0 {
+    margin-right: 0;
+    margin-left: unset;
+  }
+
+  .rtl .offset-lg-1 {
+    margin-right: 8.333333%;
+    margin-left: unset;
+  }
+
+  .rtl .offset-lg-2 {
+    margin-right: 16.666667%;
+    margin-left: unset;
+  }
+
+  .rtl .offset-lg-3 {
+    margin-right: 25%;
+    margin-left: unset;
+  }
+
+  .rtl .offset-lg-4 {
+    margin-right: 33.333333%;
+    margin-left: unset;
+  }
+
+  .rtl .offset-lg-5 {
+    margin-right: 41.666667%;
+    margin-left: unset;
+  }
+
+  .rtl .offset-lg-6 {
+    margin-right: 50%;
+    margin-left: unset;
+  }
+
+  .rtl .offset-lg-7 {
+    margin-right: 58.333333%;
+    margin-left: unset;
+  }
+
+  .rtl .offset-lg-8 {
+    margin-right: 66.666667%;
+    margin-left: unset;
+  }
+
+  .rtl .offset-lg-9 {
+    margin-right: 75%;
+    margin-left: unset;
+  }
+
+  .rtl .offset-lg-10 {
+    margin-right: 83.333333%;
+    margin-left: unset;
+  }
+
+  .rtl .offset-lg-11 {
+    margin-right: 91.666667%;
+    margin-left: unset;
+  }
+}
+
+@media (min-width: 1200px) {
+  .rtl .offset-xl-0 {
+    margin-right: 0;
+    margin-left: unset;
+  }
+
+  .rtl .offset-xl-1 {
+    margin-right: 8.333333%;
+    margin-left: unset;
+  }
+
+  .rtl .offset-xl-2 {
+    margin-right: 16.666667%;
+    margin-left: unset;
+  }
+
+  .rtl .offset-xl-3 {
+    margin-right: 25%;
+    margin-left: unset;
+  }
+
+  .rtl .offset-xl-4 {
+    margin-right: 33.333333%;
+    margin-left: unset;
+  }
+
+  .rtl .offset-xl-5 {
+    margin-right: 41.666667%;
+    margin-left: unset;
+  }
+
+  .rtl .offset-xl-6 {
+    margin-right: 50%;
+    margin-left: unset;
+  }
+
+  .rtl .offset-xl-7 {
+    margin-right: 58.333333%;
+    margin-left: unset;
+  }
+
+  .rtl .offset-xl-8 {
+    margin-right: 66.666667%;
+    margin-left: unset;
+  }
+
+  .rtl .offset-xl-9 {
+    margin-right: 75%;
+    margin-left: unset;
+  }
+
+  .rtl .offset-xl-10 {
+    margin-right: 83.333333%;
+    margin-left: unset;
+  }
+
+  .rtl .offset-xl-11 {
+    margin-right: 91.666667%;
+    margin-left: unset;
+  }
+}
+
+.rtl .table-striped tr td {
+  &:first-of-type {
+    border-radius: 0 5px 5px 0;
+  }
+
+  &:last-of-type {
+    border-radius: 5px 0 0 5px;
+  }
+}

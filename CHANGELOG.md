@@ -1,5 +1,12 @@
 # Changelog
 
+#### = 0.0.25 (April 23, 2021) =
+
+* New: Add development mode and component compile-time debugging.
+* New: Add new UI components `Tabs Animated`.
+* Tweak: Simplified the import method of third-party plugin import.
+
+
 #### = 0.0.23 (April 22, 2021) =
 
 * New: Turn on typechecking on the props for a component in development mode.
