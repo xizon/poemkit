@@ -3,7 +3,7 @@
  * ## Project Name        :  Uix Kit React
  * ## Version             :  0.0.27
  * ## Based on            :  Uix Kit React (https://github.com/xizon/uix-kit-react)
- * ## Last Update         :  April 25, 2021
+ * ## Last Update         :  April 26, 2021
  * ## Created by          :  UIUX Lab (https://uiux.cc)
  * ## Contact Us          :  uiuxlab@gmail.com
  * 	
@@ -3038,8 +3038,13 @@ __( document ).ready( function() {
 			console.log( __.styleFormat( 'font-size: 10px;background: #51B801; color:#fff; border-radius: 5px;padding: 2px 3px;display: inline-block;margin-left: 3px;' ) )
 			console.log( __.trim( 'string string spacing string' ) );
             console.log( __.lastUrlParamFormat( 'string-string-spacing_string' ) );
-			
-
+			console.log( __.removeFirstLastStr( ',string,string,string,' ) );
+			console.log( __.validate.isMobile( '13167678787' ) ); //true
+			console.log( __.validate.isTel( '123-456-7890' ) ); //true
+			console.log( __.validate.isEmail( 'name@gmail.com' ) );	 //true
+			console.log( __.validate.isNumber( '1421.231' ) );	//true
+			console.log( __.validate.isInt( '1421.231' ) ); //false		
+			console.log( __.validate.isJSON( '{"a":true}' ) ); //true	
 
 		}
 	});
@@ -3207,6 +3212,42 @@ var shortcut_ = function () {
   }
   /* ------------- Independent Methods -------------- */
 
+  /*
+   * Object validation
+   *
+   * @return {Boolean}  
+   */
+
+
+  __.validate = __.validate || function () {
+    function t() {}
+
+    return t.version = "0.0.1", t.isNumber = function (B) {
+      var A = /^[\d|\.|,]+$/;
+      return A.test(B);
+    }, t.isInt = function (B) {
+      if (B == "") {
+        return false;
+      }
+
+      var A = /\D+/;
+      return !A.test(B);
+    }, t.isEmail = function (A) {
+      var B = /^\s*([A-Za-z0-9_-]+(\.\w+)*@(\w+\.)+\w{2,3})\s*$/;
+      return B.test(A);
+    }, t.isTel = function (A) {
+      //const B = /^[\d|\-|\s|\_]+$/;
+      var B = /^[0-9- ]{7,20}$/;
+      return B.test(A);
+    }, t.isMobile = function (A) {
+      //const B = /^13[0-9]{9}|15[012356789][0-9]{8}|18[0256789][0-9]{8}|147[0-9]{8}$/;
+      var B = /^1[0-9]{10}$/;
+      return B.test(A);
+    }, t.isJSON = function (A) {
+      return isJSON(A);
+    }, //
+    t;
+  }();
   /*
    * Determine whether it is a special browser
    *
@@ -3574,6 +3615,33 @@ var shortcut_ = function () {
       return json;
     } else {
       return '';
+    }
+  };
+  /*
+   * Remove first, last or both symbols
+   *
+   * @param  {String} str       - Any string.
+   * @param  {Number} type      - Type of all or not. if `0`, is all.
+   * @param  {String} symbol    - The target string to remove.
+   * @return {String}           - An new string.
+   */
+
+
+  __.removeFirstLastStr = function (str) {
+    var type = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 0;
+    var symbol = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : ',';
+
+    if (typeof str === 'string') {
+      if (type == 0) {
+        var flRegExp = new RegExp('^\\' + symbol + '|\\' + symbol + '$', 'g');
+        return str.replace(flRegExp, '');
+      } else {
+        var _flRegExp = new RegExp('' + symbol + '\s*$', 'g');
+
+        return str.replace(_flRegExp, '');
+      }
+    } else {
+      return str;
     }
   };
   /* ---------------- API methods ----------------- */

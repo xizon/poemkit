@@ -208,8 +208,13 @@ __( document ).ready( function() {
 			console.log( __.styleFormat( 'font-size: 10px;background: #51B801; color:#fff; border-radius: 5px;padding: 2px 3px;display: inline-block;margin-left: 3px;' ) )
 			console.log( __.trim( 'string string spacing string' ) );
             console.log( __.lastUrlParamFormat( 'string-string-spacing_string' ) );
-			
-
+			console.log( __.removeFirstLastStr( ',string,string,string,' ) );
+			console.log( __.validate.isMobile( '13167678787' ) ); //true
+			console.log( __.validate.isTel( '123-456-7890' ) ); //true
+			console.log( __.validate.isEmail( 'name@gmail.com' ) );	 //true
+			console.log( __.validate.isNumber( '1421.231' ) );	//true
+			console.log( __.validate.isInt( '1421.231' ) ); //false		
+			console.log( __.validate.isJSON( '{"a":true}' ) ); //true	
 
 		}
 	});
@@ -408,6 +413,52 @@ const __ = (function () {
 	
 	
 	/* ------------- Independent Methods -------------- */
+	
+	
+	/*
+	 * Object validation
+	 *
+	 * @return {Boolean}  
+	 */
+	__.validate = __.validate || ( () => {
+		function t() { }
+
+		return t.version = "0.0.1",
+
+		t.isNumber = function(B) {
+			const A = /^[\d|\.|,]+$/;
+			return A.test(B);
+		},
+		t.isInt = function(B) {
+			if (B == "") {
+				return false;
+			}
+			const A = /\D+/;
+			return ! A.test(B);
+		},
+		t.isEmail = function(A) {
+			const B = /^\s*([A-Za-z0-9_-]+(\.\w+)*@(\w+\.)+\w{2,3})\s*$/;
+			return B.test(A);
+		},
+		t.isTel = function(A) {
+			//const B = /^[\d|\-|\s|\_]+$/;
+			const B = /^[0-9- ]{7,20}$/; 
+			return B.test(A);
+		},
+		t.isMobile = function(A) {
+			//const B = /^13[0-9]{9}|15[012356789][0-9]{8}|18[0256789][0-9]{8}|147[0-9]{8}$/;
+			const B = /^1[0-9]{10}$/;
+			return B.test(A);
+		},
+		t.isJSON = function(A) {
+			return isJSON(A);
+		},
+
+		//
+		t
+		
+	})();
+	
 	
 	
 	/*
@@ -829,6 +880,33 @@ const __ = (function () {
 
 
 	};
+
+	
+	
+	/*
+	 * Remove first, last or both symbols
+	 *
+	 * @param  {String} str       - Any string.
+	 * @param  {Number} type      - Type of all or not. if `0`, is all.
+	 * @param  {String} symbol    - The target string to remove.
+	 * @return {String}           - An new string.
+	 */  
+	__.removeFirstLastStr = function( str, type = 0, symbol = ',' ) {
+
+		if (typeof(str) === 'string') {
+			if ( type == 0 ) {
+				const flRegExp = new RegExp( '^\\'+symbol+'|\\'+symbol+'$' , 'g' );
+				return str.replace( flRegExp, '' );
+			} else {
+				const flRegExp = new RegExp( ''+symbol+'\s*$' , 'g' );
+				return str.replace( flRegExp, '' );
+			}
+		} else {
+			return str;
+		}
+
+	};
+
 
 	
 	
