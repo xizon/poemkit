@@ -2,7 +2,7 @@
   "development": true,
   "author": "UIUX Lab",
   "name": "uix-kit-react",
-  "version": "0.0.26",
+  "version": "0.0.27",
   "description": "A free web kits with React for fast web design and development via SSR.",
   "main": "webpack.config.js",
   "directories": {
@@ -12,7 +12,7 @@
   "scripts": {
     "watch": "webpack --watch",
     "dev": "nodemon --require ignore-styles --exec babel-node ./src/server/server.js",
-    "build": "webpack --mode production",
+    "build": "webpack --progress --mode production",
     "prettier": "prettier \"./dist/css/uix-kit-react.css\""
   },
   "repository": {

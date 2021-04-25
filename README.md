@@ -302,7 +302,7 @@ if ( process.env.npm_package_development == 'true' ) {
 
 ### ⚙️ Custom import third-party library:
 
-The application loads some third-party libraries (icons, animations, 3D engines, etc.) by default, you can load them as needed, or modify the configuration file. Access to `src/client/components/_third-party-plugins/_all.js`
+The application loads some third-party libraries (icons, animations, 3D engines, etc.) by default, you can load them as needed, or modify the configuration file. Access to `src/client/components/_third-party-plugins/`
 
 
 

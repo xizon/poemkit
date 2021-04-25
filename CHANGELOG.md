@@ -1,6 +1,18 @@
 # Changelog
 
 
+#### = 0.0.27 (April 26, 2021) =
+
+* New: The loader of the shortcut function adds the judgment condition of the video loading.
+* New: Integrate the video playback function into the UI component through the plyr plug-in.
+* Tweak: Component detail optimization and debugging.
+* Tweak: Modify the method name of the shortcut function `imagesloaded` to `loader`.
+* Tweak: Adjusted the introduction of third-party plug-ins.
+* Fix: Fixed some mouse event issues for Core Shortcut.
+
+
+
+
 #### = 0.0.26 (April 23, 2021) =
 
 * Tweak: Adjustment of the resource directory structure.

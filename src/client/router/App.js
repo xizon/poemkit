@@ -94,7 +94,7 @@ export default (props) => {
     return (
 	  <>
 
-		<Header headerOverlayEnable="false" htmlString={
+		<Header headerOverlayEnabled="false" htmlString={
 			<>
 		
 					<li className={props.location.pathname === '/index' || props.location.pathname === '' ? 'is-active' : ''}>

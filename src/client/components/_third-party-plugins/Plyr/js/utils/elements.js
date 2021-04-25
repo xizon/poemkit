@@ -50,6 +50,7 @@ export function setAttributes(element, attributes) {
 
 // Create a DocumentFragment
 export function createElement(type, attributes, text) {
+  if ( typeof(document) === 'undefined' ) return false;
   // Create a new <element>
   const element = document.createElement(type);
 

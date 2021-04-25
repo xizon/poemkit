@@ -13,7 +13,7 @@ import Footer from '@uixkit.react/components/Footer/index.js';
 import ButtonsDemo from '@uixkit.react/pages/ComponentsDemo/ButtonsDemo.js';
 import TabsDemo from '@uixkit.react/pages/ComponentsDemo/TabsDemo.js';
 import TabsAnimatedDemo from '@uixkit.react/pages/ComponentsDemo/TabsAnimatedDemo.js';
-
+import VideoDemo from '@uixkit.react/pages/ComponentsDemo/VideoDemo.js';
 
 
 
@@ -33,6 +33,7 @@ function HookContent() {
 		        <NavLink to={`${url}/buttons`} activeClassName="is-active"><i className="fa fa-check-circle-o" aria-hidden="true"></i> Buttons</NavLink>&nbsp;&nbsp;
 		        <NavLink to={`${url}/tabs`} activeClassName="is-active"><i className="fa fa-check-circle-o" aria-hidden="true"></i> Tabs</NavLink>&nbsp;&nbsp;
 		        <NavLink to={`${url}/tabs-animated`} activeClassName="is-active"><i className="fa fa-check-circle-o" aria-hidden="true"></i> Tabs Animated</NavLink>&nbsp;&nbsp;
+		        <NavLink to={`${url}/video`} activeClassName="is-active"><i className="fa fa-check-circle-o" aria-hidden="true"></i> Video</NavLink>&nbsp;&nbsp;
 		    </div>
 
 			 <hr />
@@ -49,6 +50,9 @@ function HookContent() {
 				</Route>
 				<Route path={`${path}/tabs-animated`}>
 				  <TabsAnimatedDemo />
+				</Route>	
+				<Route path={`${path}/video`}>
+				  <VideoDemo />
 				</Route>	
 		
 		

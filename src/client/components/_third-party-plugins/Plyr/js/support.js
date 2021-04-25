@@ -17,13 +17,10 @@ const defaultCodecs = {
 };
 
 // Check for feature support
-let support = {};
-
-if ( typeof(document) !== 'undefined' ) {
-	const support = {
+const support = {
 	  // Basic support
-	  audio: 'canPlayType' in document.createElement('audio'),
-	  video: 'canPlayType' in document.createElement('video'),
+	  audio: typeof(document) !== 'undefined' ? 'canPlayType' in document.createElement('audio') : false,
+	  video: typeof(document) !== 'undefined' ? 'canPlayType' in document.createElement('video') : false,
 
 	  // Check for support
 	  // Basic functionality vs full UI
@@ -53,20 +50,23 @@ if ( typeof(document) !== 'undefined' ) {
 
 		// Chrome
 		// https://developers.google.com/web/updates/2018/10/watch-video-using-picture-in-picture
-		if (document.pictureInPictureEnabled && !createElement('video').disablePictureInPicture) {
-		  return true;
+		if ( typeof(document) !== 'undefined' ) {
+			if (document.pictureInPictureEnabled && !createElement('video').disablePictureInPicture) {
+			  return true;
+			}	
 		}
+
 
 		return false;
 	  })(),
 
 	  // Airplay support
 	  // Safari only currently
-	  airplay: is.function(window.WebKitPlaybackTargetAvailabilityEvent),
+	  airplay: typeof(window) !== 'undefined' ? is.function(window.WebKitPlaybackTargetAvailabilityEvent) : false,
 
 	  // Inline playback support
 	  // https://webkit.org/blog/6784/new-video-policies-for-ios/
-	  playsinline: 'playsInline' in document.createElement('video'),
+	  playsinline: typeof(document) !== 'undefined' ? 'playsInline' in document.createElement('video') : false,
 
 	  // Check for mime type support against a player instance
 	  // Credits: http://diveintohtml5.info/everything.html
@@ -97,27 +97,27 @@ if ( typeof(document) !== 'undefined' ) {
 	  },
 
 	  // Check for textTracks support
-	  textTracks: 'textTracks' in document.createElement('video'),
+	  textTracks: typeof(document) !== 'undefined' ? 'textTracks' in document.createElement('video') : false,
 
 	  // <input type="range"> Sliders
-	  rangeInput: (() => {
+	  rangeInput: typeof(document) !== 'undefined' ? (() => {
 		const range = document.createElement('input');
 		range.type = 'range';
 		return range.type === 'range';
-	  })(),
+	  })() : false,
 
 	  // Touch
 	  // NOTE: Remember a device can be mouse + touch enabled so we check on first touch event
-	  touch: 'ontouchstart' in document.documentElement,
+	  touch: typeof(document) !== 'undefined' ? 'ontouchstart' in document.documentElement : false,
 
 	  // Detect transitions support
 	  transitions: transitionEndEvent !== false,
 
 	  // Reduced motion iOS & MacOS setting
 	  // https://webkit.org/blog/7551/responsive-design-for-motion/
-	  reducedMotion: 'matchMedia' in window && window.matchMedia('(prefers-reduced-motion)').matches,
+	  reducedMotion: typeof(window) !== 'undefined' ? 'matchMedia' in window && window.matchMedia('(prefers-reduced-motion)').matches : false,
 	};
 
-}
+
 
 export default support;

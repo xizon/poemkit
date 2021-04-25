@@ -298,7 +298,7 @@ if ( process.env.npm_package_development == 'true' ) {
 
 ### ⚙️ 自定义导入的第三方库或插件:
 
-应用默认加载了常用的第三方库(图标，动画，3D引擎等)，您可以按需加载，或者修改导入配置。第三方插件配置文件位于`src/client/components/_third-party-plugins/_all.js`
+应用默认加载了常用的第三方库(图标，动画，3D引擎等)，您可以按需加载，或者修改导入配置。第三方插件配置文件位于 `src/client/components/_third-party-plugins/`
 
 
 

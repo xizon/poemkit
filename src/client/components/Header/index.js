@@ -7,7 +7,9 @@ import PropTypes from "prop-types";
 import React, { Component } from 'react';
 
 /*-- Apply Third-party plugins (import location should be in front of "global scripts and styles") --*/
-import '@uixkit.react/plugins/_all.js';  
+import '@uixkit.react/plugins/_lib-bootstrap.js';
+import '@uixkit.react/plugins/_lib-gsap.js';
+import '@uixkit.react/plugins/_lib-icons.js';
 
 /*-- Apply global scripts and styles --*/
 import '@uixkit.react/components/_utilities/styles/_all.scss';
@@ -21,7 +23,9 @@ export default class Header extends Component {
 		//
 		__( document ).ready( function() {
 		
-			__( 'body' ).imagesloaded({
+			__( 'body' ).loader({
+				imagesSelector: 'body img',
+				videosSelector: 'body video',
 				startEvent: function() {
 					console.log( '=> loading.' );
 				},
@@ -33,6 +37,7 @@ export default class Header extends Component {
 					
 					
 					__( '.uix-header__container' ).addClass( 'js-heavyShadow' );
+					
 					
 					
 				}
@@ -47,15 +52,20 @@ export default class Header extends Component {
 	
 	render() {
 		
-		const htmlString = this.props.htmlString ? this.props.htmlString : '';
-		const headerOverlayEnable = this.props.headerOverlayEnable == 'true' ? true : false;
+		const { 
+			htmlString,
+			headerOverlayEnabled,
+		} = this.props;
+		
+		
+		const _headerOverlayEnabled = headerOverlayEnabled == 'true' ? true : false;
 		
 		return (
 		  <>
 			
 			{/*<!-- Header Area
 			============================================= -->     */} 
-			<header className={ headerOverlayEnable ? 'uix-header__container uix-header__container--overlay' : 'uix-header__container'}>
+			<header className={ _headerOverlayEnabled ? 'uix-header__container uix-header__container--overlay' : 'uix-header__container'}>
 
 				 <div className="uix-header">
 					 <div className="container">
@@ -105,7 +115,7 @@ export default class Header extends Component {
 
 			</header>  
 			
-           {headerOverlayEnable === true ? (
+           {headerOverlayEnabled === true ? (
               <></>
             ) : (
               <div className="uix-header__placeholder js-uix-header__placeholder-autoheight"></div>
@@ -122,12 +132,12 @@ export default class Header extends Component {
 if ( process.env.npm_package_development == 'true' ) {
 	
 	Header.propTypes = {
-	    headerOverlayEnable: PropTypes.string.isRequired,
+	    headerOverlayEnabled: PropTypes.string.isRequired,
 		htmlString: PropTypes.oneOfType([PropTypes.string, PropTypes.object])
 	}
 
 	Header.defaultProps = {
-	    headerOverlayEnable: false,
+	    headerOverlayEnabled: false,
 		htmlString: ''
 	}
 	

@@ -2,7 +2,9 @@ import PropTypes from "prop-types";
 import React, { Component } from 'react';
 
 /*-- Apply Third-party plugins (import location should be in front of "global scripts and styles") --*/
-import '@uixkit.react/plugins/_all.js';  
+import '@uixkit.react/plugins/_lib-bootstrap.js';
+import '@uixkit.react/plugins/_lib-gsap.js';
+import '@uixkit.react/plugins/_lib-icons.js'; 
 
 /*-- Apply global scripts and styles --*/
 import '@uixkit.react/components/_utilities/styles/_all.scss';
@@ -144,7 +146,7 @@ export default class Tabs extends Component {
 						//Click on the rotation effect
 						//----------------------- begin ----------------------
 						el.off( 'click' ).on( 'click', function( e ) {
-
+							
 							const increase   = Math.PI * 2 / rotationDisplay,
 								  n          = __( this ).index(),
 								  endAngle   = n % rotationDisplay * increase; 

@@ -4,8 +4,8 @@
  * Core Shortcut
  *
  * @package: uix-kit-react
- * @version: 0.17
- * @last update: April 23, 2021
+ * @version: 0.19
+ * @last update: April 26, 2021
  * @license: MIT
  *
  *************************************
@@ -18,7 +18,9 @@ __( document ).ready( function() {
 });
 
 
-__( 'body' ).imagesloaded({
+__( 'body' ).loader({
+	imagesSelector: 'body img',
+	videosSelector: 'body video',
 	startEvent: function() {
 		//do something
 		console.log( '=> loading.' );
@@ -38,7 +40,9 @@ __( 'body' ).imagesloaded({
 
 __( document ).ready( function() {
 
-	__( 'body' ).imagesloaded({
+	__( 'body' ).loader({
+		imagesSelector: 'body img',
+		videosSelector: 'body video',
 		startEvent: function() {
 			console.log( '=> loading.' );
 		},
@@ -900,14 +904,32 @@ const __ = (function () {
 	
 	
 	/*
-	 * Detect when images have been loaded. 
+	 * Detect when images and videos have been loaded. 
 	 *
 	 * @param  {Json} props   - Contains three event functions before loading, loading, and loading completed.
 	 * @return {Void}
 	 */
-	__.prototype.imagesloaded = function(props) {
+	__.prototype.loader = function(props) {
 
+
+		const self = this;
+		const sources = [];
+		let loadingFn = null,
+			progressFn = null,
+			loadedFn = null,
+			imagesSelector = 'body img',
+			videosSelector = 'body video';
 		
+		
+		if ( isJSON(props) ) {
+			loadingFn = props.startEvent;
+			progressFn = props.progressEvent;
+			loadedFn = props.endEvent;
+			imagesSelector = props.imagesSelector;
+			videosSelector = props.videosSelector;
+		}
+		
+	
 		//count all images on a page
 		if ( typeof (document.images) !== 'undefined' && document.images.length == 0 ) {
 			
@@ -918,64 +940,110 @@ const __ = (function () {
 			
 		}
 
-		//
-		const self = this;
-		let loadingFn = null,
-			progressFn = null,
-			loadedFn = null;
-		
-		
-		if ( isJSON(props) ) {
-			loadingFn = props.startEvent;
-			progressFn = props.progressEvent;
-			loadedFn = props.endEvent;
-		}
 		
 		//loading
 		if (loadingFn && (typeof loadingFn == "function")) {
 			loadingFn();
 		}
 
-		//get all images url
-		const imgs = this.getElementsByTagName("img");
-		const sources = [];
-
+		
+		//Push all images from page
+		const imgs = document.querySelectorAll( imagesSelector );
 		for (let i = 0; i < imgs.length; i++) {
-			sources.push(imgs[i].src);
+			sources.push(
+				{
+					"url": imgs[i].src,
+					"type": 'img'
+				}
+			);
 		}
+
 		
 		
-		//Execute after all images have loaded
+	   //Push all videos from page
+		const videos = document.querySelectorAll( videosSelector );
+		for (let i = 0; i < videos.length; i++) {
+			
+			const _sources = videos[i].getElementsByTagName('source');
+			sources.push(
+				{
+					"url": _sources.length > 0 ? _sources[0].src : videos[i].src,
+					"type": 'video'
+				}
+			);
+		}
+
+		
+		
+		//Execute after all images and videos have loaded
 		let per = 0;
 		let perInit = 1;
 		if ( sources.length == 0 ) {
 			per = 100;
 		}
 
-		const loadImages = function() {
+		const loadResources = function() {
 			let promises = [];
 
 			for (let i = 0; i < sources.length; i++) {
+				
 
-				promises.push( 
+				if ( sources[i].type == 'img' ) {
 
-					new Promise(function(resolve, reject) {
+					///////////
+					// IMAGE //
+					///////////   
+					promises.push( 
 
-						const img = document.createElement("img");
-						img.crossOrigin = "anonymous";
-						img.src = sources[i];
+						new Promise(function(resolve, reject) {
 
-						img.onload = function(image) {
-						  //Compatible with safari and firefox
-						  if ( typeof image.path === typeof undefined ) {
-							  return resolve(image.target.currentSrc);
-						  } else {
-							  return resolve(image.path[0].currentSrc);
-						  }
-						};  
+							const img = document.createElement( 'img' );
+							img.crossOrigin = 'anonymous';
+							img.src = sources[i].url;
 
-					}).then( textureLoaded )
-				);
+							img.onload = function(image) {
+							  //Compatible with safari and firefox
+							  if ( typeof image.path === typeof undefined ) {
+								  return resolve(image.target.currentSrc);
+							  } else {
+								  return resolve(image.path[0].currentSrc);
+							  }
+							};  
+
+						}).then( textureLoaded )
+					);
+
+				} else {
+
+					///////////
+					// VIDEO //
+					///////////    
+					promises.push( 
+						new Promise(function(resolve, reject) {
+
+							const video = document.createElement('video');
+							video.addEventListener( 'loadedmetadata', function( video ) {
+
+								  //Compatible with safari and firefox
+								  if ( typeof video.path === typeof undefined ) {
+									  return resolve(video.target.currentSrc);
+								  } else {
+									  return resolve(video.path[0].currentSrc);
+								  }	
+
+
+							}, false);	
+
+							video.src = sources[i].url;
+
+						}).then( textureLoaded )
+					);
+
+
+
+				}   
+				
+				
 
 			}//end for
 
@@ -1002,9 +1070,9 @@ const __ = (function () {
 
 		};
 		
-		//images loaded
-		//Must be placed behind the loadImages()
-		loadImages().then( function( images ) {
+		//and videos loaded
+		//Must be placed behind the loadResources()
+		loadResources().then( function( images ) {
 			 if (loadedFn && (typeof loadedFn == "function")) {
 				 loadedFn();
 			 }
@@ -1566,7 +1634,7 @@ const __ = (function () {
 			
 			this.myListeners.push({
 				eType: eventType,
-				callBack: callBack
+				callBack: fun
 			});
 			
 			this.addEventListener(eventType, fun, false);
@@ -1585,6 +1653,7 @@ const __ = (function () {
 	 * @return {Void}      
 	 */
 	__.prototype.off = function() {
+		
 		if (this.myListeners) {
 			for (let i = 0; i < this.myListeners.length; i++) {
 				this.removeEventListener(this.myListeners[i].eType, this.myListeners[i].callBack);
@@ -2006,7 +2075,7 @@ const __ = (function () {
 		
 		//functions
 		ready: __.prototype.ready,
-		imagesloaded: __.prototype.imagesloaded,
+		loader: __.prototype.loader,
 		append: __.prototype.append,
 		prepend: __.prototype.prepend,
 		before: __.prototype.before,
