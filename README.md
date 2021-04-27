@@ -361,12 +361,12 @@ if ( process.env.npm_package_development == 'true' ) {
 
 ### ⚙️ Custom import third-party library:
 
-The application loads some third-party libraries (icons, animations, 3D engines, etc.) by default, you can load them as needed, or modify the configuration file. Access to `src/client/components/_third-party-plugins/`
+The application loads some third-party libraries (icons, animations, 3D engines, etc.) by default, you can load them as needed, or modify the configuration file. Access to `uix-kit-react/src/client/components/_third-party-plugins/`
 
 
 ### ⚙️ Root Directory Configurations:
 
-Change the root directory of the website so that it can be used when you upload the project to another directory. Modify the key `rootDirectory` of the `src/config/websiteConfig.js`.
+Change the root directory of the website so that it can be used when you upload the project to another directory. Modify the key `rootDirectory` of the `uix-kit-react/src/config/websiteConfig.js`.
 
 If the file is in the root directory, you can leave it empty. If in another directory, you can write: "/blog".
 
@@ -380,7 +380,7 @@ If the file is in the root directory, you can leave it empty. If in another dire
 
 ### ⚙️ API Configurations:
 
-Change the API URLs of the website. Modify the key `API` of the `src/config/websiteConfig.js`, as shown below:
+Change the API URLs of the website. Modify the key `API` of the `uix-kit-react/src/config/websiteConfig.js`, as shown below:
 
 
 ```json

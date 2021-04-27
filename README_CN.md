@@ -168,9 +168,10 @@ $ pm2 logs
 ```
 
 
-8.5) 使用domain访问您的React应用。
+8.5) 使用域名访问您的React应用。
 
 需要在Apache或Nginx的Web服务器上部署React App。请参考网络以获取有关设置代理的教程。
+
 
 
 
@@ -358,13 +359,13 @@ if ( process.env.npm_package_development == 'true' ) {
 
 ### ⚙️ 自定义导入的第三方库或插件:
 
-应用默认加载了常用的第三方库(图标，动画，3D引擎等)，您可以按需加载，或者修改导入配置。第三方插件配置文件位于 `src/client/components/_third-party-plugins/`
+应用默认加载了常用的第三方库(图标，动画，3D引擎等)，您可以按需加载，或者修改导入配置。第三方插件配置文件位于 `uix-kit-react/src/client/components/_third-party-plugins/`
 
 
 
 ### ⚙️ 网站根目录配置:
 
-更改网站的根目录，以便您的项目上传到另一个目录时可以使用它。修改 `src/config/websiteConfig.js` 的键 `rootDirectory`。
+更改网站的根目录，以便您的项目上传到另一个目录时可以使用它。修改 `uix-kit-react/src/config/websiteConfig.js` 的键 `rootDirectory`。
 
 如果该文件位于根目录中，则可以将其保留为空。 如果在另一个目录中，则可以写成 "/blog"
 
@@ -377,7 +378,7 @@ if ( process.env.npm_package_development == 'true' ) {
 
 ### ⚙️ 接口API配置:
 
-修改 `src/config/websiteConfig.js` 的键 `API`, 如下代码:
+修改 `uix-kit-react/src/config/websiteConfig.js` 的键 `API`, 如下代码:
 
 
 ```json
