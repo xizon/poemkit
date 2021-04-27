@@ -2,6 +2,8 @@ import React from 'react';
 import { __ } from '@uixkit.react/components/_utilities/_all.js';
 import Video from '@uixkit.react/components/Video/index.js';
 
+//get project config
+import { rootDirectory } from '@uixkit.react/config';
 
 export default () => {
 
@@ -64,7 +66,7 @@ export default () => {
 							<div className="row">
 								<div className="col-md-6">
 
-									<Video config='{"clickToPlay":false,"muted":true,"autoplay":true,"controls":[""],"loop":{"active":true},"fullscreen":{"enabled": false}}' data-poster="/assets/videos/480x270/demo.jpg" src="/assets/videos/480x270/demo.mp4" />
+									<Video config='{"clickToPlay":false,"muted":true,"autoplay":true,"controls":[""],"loop":{"active":true},"fullscreen":{"enabled": false}}' data-poster={`${rootDirectory}/assets/videos/480x270/demo.jpg`} src={`${rootDirectory}/assets/videos/480x270/demo.mp4`} />
 		
 		
 
@@ -115,7 +117,7 @@ export default () => {
 								<div className="col-md-6">
 
 		
-								    <Video config='{"muted":false,"autoplay":false,"controls":["play-large", "play", "progress", "current-time", "mute", "volume", "captions", "settings", "pip", "airplay", "fullscreen"],"loop":{"active":false}}' src="/assets/videos/1440x1050/demo.mp4" />
+								    <Video config='{"muted":false,"autoplay":false,"controls":["play-large", "play", "progress", "current-time", "mute", "volume", "captions", "settings", "pip", "airplay", "fullscreen"],"loop":{"active":false}}' src={`${rootDirectory}/assets/videos/1440x1050/demo.mp4`} />
 
 
 

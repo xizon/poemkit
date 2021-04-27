@@ -27,6 +27,14 @@ Uix Kit React系一套免费的网站开发工具包，帮助开发者从零建�
 ---
 
 
+## 演示
+
+
+在线演示 [https://uiux.cc/uix-kit-react](https://uiux.cc/uix-kit-react)
+
+服务器端运行 `http://localhost:3000`
+
+
 
 ## 介绍
 
@@ -103,40 +111,67 @@ $ npm run dev
 ```
 
 
-**Step 7.** 浏览器中访问以下网址：
+**Step 7.** 浏览器中访问以下网址，可快速调试：
 
 ```sh
 http://localhost:3000
 ```
 
+建议在调试之前将新代码重新编译打包。
+
+
 **Step 8 (可选).** 用PM2启动Reactjs应用程序（仅在使用Node v13.9.0或更高版本时有效）。
 
 
-8.1) 使用npm安装PM2
+8.1) 安装Node和NPM
 
 ```sh
-$ npm install pm2@latest -g
+$ curl -sL https://rpm.nodesource.com/setup_14.x | sudo bash -
+$ sudo yum install nodejs
+$ node --version  #v14.16.1
+$ npm --version   #6.14.12
+$ which node babel-node #check the location of node and babel-node
 ```
 
 
-8.2) 常用命令:
+8.2) 全局安装PM2
 
 ```sh
-#into your `"uix-kit-react/"` folder directory.
+$ sudo npm install pm2@latest -g
+```
+
+
+8.3) 全局安装Babel
+
+```sh
+$ sudo npm install -g babel-cli
+$ sudo npm install -g @babel/core @babel/cli @babel/preset-env 
+```
+
+
+8.4) PM2常用命令:
+
+```sh
+#先进入 `"uix-kit-react/"` 目录 
 $ cd /{your_directory}/uix-kit-react
 
-#install Babel globally on your machine
-$ sudo npm install -g @babel/core @babel/cli @babel/preset-env 
 
-#use babel-node with pm2
+#用pm2执行babel-node命令
 $ pm2 start ecosystem.config.js  --interpreter babel-node  
 
-#other commands
+#其它命令
+$ pm2 restart ecosystem.config.js –-interpreter babel-node
 $ pm2 stop ecosystem.config.js
 $ pm2 delete ecosystem.config.js
 $ pm2 list
 $ pm2 logs
 ```
+
+
+8.5) 使用domain访问您的React应用。
+
+需要在Apache或Nginx的Web服务器上部署React App。请参考网络以获取有关设置代理的教程。
+
 
 
 
@@ -163,9 +198,12 @@ $ sudo npm rebuild node-sass
 
 您可以通过修改 `webpack.config.js` 的 `resolve` 属性来创建 `import` 或 `require` 的别名，来确保模块引入变得更简单.
 
+`webpack.config.js` :
+
 ```js
 ...
 const alias = {
+	pathConfig            : './src/config/websiteConfig.js',
 	pathComponents        : './src/client/components',
 	pathThirdPartyPlugins : './src/client/components/_third-party-plugins',
 	pathRouter            : './src/client/router',
@@ -181,9 +219,8 @@ resolve: {
 	extensions: ['.js', '.es6', '.vue', '.jsx' ],
 	alias: {
 
-		// specific mappings.
-		// Supports directories and custom aliases for specific files when the express server is running, 
-		// you need to configure the `babel.config.js` at the same time
+		// 需要同时配置 `babel.config.js` 文件
+		'@uixkit.react/config': path.resolve(__dirname, alias.pathConfig ),
 		'@uixkit.react/components': path.resolve(__dirname, alias.pathComponents ),
 		'@uixkit.react/plugins': path.resolve(__dirname, alias.pathThirdPartyPlugins ),
 		'@uixkit.react/router': path.resolve(__dirname, alias.pathRouter ),
@@ -195,6 +232,29 @@ resolve: {
 
 	}
 },
+...
+```
+
+`babel.config.js` :
+
+```js
+...
+  "plugins": [
+	["module-resolver", {
+	  "root": ["./src"],
+	  "alias": {
+		"@uixkit.react/config": "./src/config/websiteConfig.js",
+		"@uixkit.react/components": "./src/client/components",
+		"@uixkit.react/plugins": "./src/client/components/_third-party-plugins",
+		"@uixkit.react/router": "./src/client/router",
+		"@uixkit.react/reducers": "./src/client/reducers",
+		"@uixkit.react/pages": "./src/client/views/_pages",
+		"@uixkit.react/actions": "./src/client/actions",
+		"@uixkit.react/server": "./src/server",
+		"@uixkit.react/store": "./src/store"
+	  }
+	}]
+  ]
 ...
 ```
 
@@ -233,7 +293,7 @@ output: {
   "name": "uix-kit-react",
   "email": "uiuxlab@gmail.com",
   "version": "1.0.0",
-  "projectName": "Uix Kit",
+  "projectName": "Uix Kit React",
   "createdInfo": "UIUX Lab (https://uiux.cc)",
   "projectURL": "https://uiux.cc",
   "description": "A free web kits with React for fast web design and development via SSR.",
@@ -302,6 +362,35 @@ if ( process.env.npm_package_development == 'true' ) {
 
 
 
+### ⚙️ 网站根目录配置:
+
+更改网站的根目录，以便您的项目上传到另一个目录时可以使用它。修改 `src/config/websiteConfig.js` 的键 `rootDirectory`。
+
+如果该文件位于根目录中，则可以将其保留为空。 如果在另一个目录中，则可以写成 "/blog"
+
+
+```json
+{
+  "rootDirectory": ""
+}
+```
+
+### ⚙️ 接口API配置:
+
+修改 `src/config/websiteConfig.js` 的键 `API`, 如下代码:
+
+
+```json
+{
+  "API": {
+	  "RECEIVE_DEMO_LIST": "https://apiurl1.com",
+	  "RECEIVE_DEMO_LISTDETAIL": "https://apiurl2.com"
+  }
+}
+```
+
+
+
 
 * * *
 
@@ -357,6 +446,8 @@ uix-kit-react/
 │   │   └── renderer.js
 │   └── store/
 │   │   └── createStore.js
+│   └── config/
+│   │   └── websiteConfig.js  --------------------  # 网站配置文件(比如根目录)
 └──
 ```
 

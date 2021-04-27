@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import {connect} from 'react-redux';
+import { connect } from 'react-redux';
 import { __ } from '@uixkit.react/components/_utilities/_all.js';
 import { fetchDemoListDetail } from '@uixkit.react/actions/demoListDetailActions.js';
 import Footer from '@uixkit.react/components/Footer/index.js';
@@ -66,11 +66,15 @@ class PostDetail extends Component {
   render() {
     // Bind data and display
     const preloadedState = this.props.currentData;
+	  
+	//loader
+	let isLoaded = false;
  
     if ( preloadedState == null ) {
         console.log( 'preloadedState: null' );
     } else {
         console.log( 'preloadedState: Return an Array' );
+		isLoaded = true;
 		
 		
 		//change page title
@@ -100,7 +104,9 @@ class PostDetail extends Component {
 					<div className="container">
 							<div className="row">
 								<div className="col-12">
-										{ 
+		
+									{ isLoaded ? (
+
 										( preloadedState != null ) ? preloadedState.map((item, i) => 
 
 											  <div key={"detail"+i} style={{padding: "15px", margin: "10px", display: "inline-block", border: "1px solid #ddd", width: "420px", textAlign: "left", position: "relative"}}>
@@ -118,8 +124,12 @@ class PostDetail extends Component {
 
 											  </div>  )
 										 : ""
-										}
 
+									) : (
+									  <div>Loading...</div>
+									)}
+		
+		
 								</div>
 							</div>
 							{/*<!-- .row end -->*/}

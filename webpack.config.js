@@ -13,10 +13,13 @@ const randomString               = require('random-string');
 const IncludeFileWebpackPlugin   = require('include-file-webpack-plugin');
 const moment                     = require('moment');
 const WebpackDevServer           = require('webpack-dev-server');
-const json                       = JSON.parse(fs.readFileSync('./package.json'));
+const json                       = require('./package.json');
 const webpackDevMiddleware       = require('webpack-dev-middleware');
 const minify                     = require('@node-minify/core');
 const uglifyJS                   = require('@node-minify/uglify-js');
+const websiteConfig              = require('./src/config/websiteConfig.js');
+
+
 const colors = {
     Reset: "\x1b[0m",
     Bright: "\x1b[1m",
@@ -57,6 +60,7 @@ const globs = {
 };
 
 const alias = {
+	pathConfig            : './src/config/websiteConfig.js',
 	pathComponents        : './src/client/components',
 	pathThirdPartyPlugins : './src/client/components/_third-party-plugins',
 	pathRouter            : './src/client/router',
@@ -75,19 +79,24 @@ const alias = {
  */
 
 let customWebsiteVersion     = json.version,
+	customWebsiteRootDir     = websiteConfig.rootDirectory,
 	customWebsiteAuthor      = ( Object.prototype.toString.call( json.author ) == '[object Object]' ) ? json.author.name : json.author,
-	customWebsiteTitle       = 'Uix Kit React',
-	customWebsiteDesc        = 'A free web kits with React for fast web design and development via SSR.',
-	customWebsiteCanonical   = '',
+	customWebsiteTitle       = json.projectName,
+	customWebsiteDesc        = json.description,
 	customWebsiteGenerator   = 'Uix Kit React',
 	customWebsiteHash        = randomString({length: 20}),
 	customWebsiteComment     = `
+DO NOT OVERRIDE THIS FILE.
+Generated with "npm run build"
+
 ## Project Name        :  ` + customWebsiteTitle + `
+## Project Description :  ` + customWebsiteDesc + `
+## Project URL         :  ` + json.projectURL + `
 ## Version             :  ` + customWebsiteVersion + `
-## Based on            :  Uix Kit React (https://github.com/xizon/uix-kit-react)
+## Based on            :  Uix Kit React (` + json.homepage + `)
 ## Last Update         :  ` + moment().format( "MMMM D, YYYY" ) + `
-## Created by          :  UIUX Lab (https://uiux.cc)
-## Contact Us          :  uiuxlab@gmail.com
+## Created by          :  ` + json.createdInfo + ( json.email != '' ? ' (' + json.email + ')' : '' ) + `
+## Released under the ` + json.license + ` license.
 	`;
 
 
@@ -147,12 +156,12 @@ class ReplacePlaceholderForFile {
 					if ( data.length > 0 && data.indexOf( '</html>' ) >= 0 ) {
 						data = data.replace(/\@\@\{website_title\}/g, customWebsiteTitle )
 									.replace(/\@\@\{website_desc\}/g, customWebsiteDesc )
-									.replace(/\@\@\{website_canonical\}/g, customWebsiteCanonical )
 									.replace(/\@\@\{website_author\}/g, customWebsiteAuthor )
 									.replace(/\@\@\{website_generator\}/g, customWebsiteGenerator )
 									.replace(/\@\@\{website_version\}/g, customWebsiteVersion )
 									.replace(/\@\@\{website_comment\}/g, customWebsiteComment )
-									.replace(/\@\@\{website_hash\}/g, customWebsiteHash );
+									.replace(/\@\@\{website_hash\}/g, customWebsiteHash )
+						            .replace(/\@\@\{website_root_directory\}/g, customWebsiteRootDir );
 
 						fs.writeFile( filepath, data, (err) => {
 							if ( err ) {
@@ -198,6 +207,7 @@ const webpackConfig = {
 			// specific mappings.
 			// Supports directories and custom aliases for specific files when the express server is running, 
 			// you need to configure the `babel.config.js` at the same time
+			'@uixkit.react/config': path.resolve(__dirname, alias.pathConfig ),
 			'@uixkit.react/components': path.resolve(__dirname, alias.pathComponents ),
 			'@uixkit.react/plugins': path.resolve(__dirname, alias.pathThirdPartyPlugins ),
 			'@uixkit.react/router': path.resolve(__dirname, alias.pathRouter ),
@@ -205,7 +215,7 @@ const webpackConfig = {
 			'@uixkit.react/pages': path.resolve(__dirname, alias.pathPages ),
 			'@uixkit.react/actions': path.resolve(__dirname, alias.pathActions ),
 			'@uixkit.react/server': path.resolve(__dirname, alias.pathServer ),
-			'@uixkit.react/store': path.resolve(__dirname, alias.pathStore ),
+			'@uixkit.react/store': path.resolve(__dirname, alias.pathStore )
 			
 		}
     },
@@ -352,16 +362,16 @@ const webpackConfig = {
 					 
 					 //fonts
 					 if ( resourcePath.indexOf( 'webfonts/' ) >= 0 || resourcePath.indexOf( 'fonts/' ) >= 0 ) {
-						 return '/' + globs.dist + '/fonts/' + url;
+						 return `${customWebsiteRootDir}/${globs.dist}/fonts/${url}`;
 					 }
-					  
+					
 					 //imags
 					 if ( resourcePath.indexOf( 'images/' ) >= 0 || resourcePath.indexOf( 'img/' ) >= 0 ) {
-						 return '/' + globs.dist + '/images/' + url;
+						 return `${customWebsiteRootDir}/${globs.dist}/images/${url}`;
 					 } 
 					  
 						 
-					 return '/' + globs.dist + '/misc/' + url;
+					 return `${customWebsiteRootDir}/${globs.dist}/misc/${url}`;
 					  
 					
 				  }

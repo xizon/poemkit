@@ -1,6 +1,12 @@
 # Changelog
 
 
+
+#### = 0.0.28 (April 26, 2021) =
+
+* New: Added the root directory configuration method for server-side deployment.
+
+
 #### = 0.0.27 (April 26, 2021) =
 
 * New: The loader of the shortcut function adds the judgment condition of the video loading.

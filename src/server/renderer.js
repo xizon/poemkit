@@ -7,6 +7,8 @@ import { __ } from '@uixkit.react/components/_utilities/_all.js';
 
 import customRoutesConfig from '@uixkit.react/router/RoutesConfig.js';
 
+//get project config
+import { rootDirectory } from '@uixkit.react/config';
 
 //As we can not use BrowserRouter on server side, we will use StaticRouter . 
 //Also we have same set up as frontend, but wrap it all by renderToString function 
@@ -32,12 +34,24 @@ export default (pathname, store, context, template) => {
                            .replace('{{preloadedState}}', JSON.stringify(store.getState()) );  
 	
 		
+		
+		//Replace the default address of the router with the proxy path you configured 
+		//through Apache or Nginx (only when rendering)
+		//-------------
+		template = template.replace(/data\-route\=\"true\"\s*href\=\"/g, `data-route="true" href="${rootDirectory}` );
+	
+		
+		
+		
 		//change page title
 		//-------------
 		let pageTitle = null;
 		let pageNoMatchTitle = null;
 		const breakException = {};
-	
+		
+		//
+		pathname = pathname.replace(`${rootDirectory}`, '')
+		
 		
 		//page: 404
 		try {
@@ -53,7 +67,10 @@ export default (pathname, store, context, template) => {
 		
 		try {
 			customRoutesConfig[0].routes.forEach((item, index) => {
-				if ( item.path.indexOf( `/${pathname.replace(/^\/([^\/]*).*$/, '$1')}` ) < 0 && item.path != '/' ) {
+
+				const _path = item.path.replace(`${rootDirectory}`, '');
+				
+				if ( _path.indexOf( `/${pathname.replace(/^\/([^\/]*).*$/, '$1')}` ) < 0 && _path != "/" ) {
 					pageTitle = pageNoMatchTitle;
 					//
 					throw breakException;
@@ -66,8 +83,16 @@ export default (pathname, store, context, template) => {
 		//page: ...
 		try {
 			customRoutesConfig[0].routes.forEach((item, index) => {
-				if ( item.path === pathname || 
-					 ( item.path.indexOf( `/${pathname.replace(/^\/([^\/]*).*$/, '$1')}` ) >= 0 && item.path != '/' )
+				
+				const _path = item.path.replace(`${rootDirectory}`, '');
+				/*
+				console.log( '_path: ', _path );
+				console.log( 'pathname: ', pathname );
+				console.log( 'check: ', `/${pathname.replace(/^\/([^\/]*).*$/, '$1')}` );
+				*/
+				
+				if ( _path === pathname || 
+					 ( _path.indexOf( `/${pathname.replace(/^\/([^\/]*).*$/, '$1')}` ) >= 0 && _path != "/" )
 				   ) {
 					pageTitle = item.pageTitle;
 					//
@@ -95,8 +120,8 @@ export default (pathname, store, context, template) => {
 		// the routing configuration), change the page title
 		if ( 
 			pageTitle !== null &&
-			pathname !== '/' &&
-			pathname !== '/index'
+			pathname !== "/" &&
+			pathname !== "/index"
 		) {
 			template = template.replace('{{pageTitle}}', `${pageTitle} - ${customRoutesConfig[0].routes[0].pageTitle}` ); 
 		} else {

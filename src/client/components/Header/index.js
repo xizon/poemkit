@@ -16,6 +16,9 @@ import '@uixkit.react/components/_utilities/styles/_all.scss';
 import '@uixkit.react/components/_utilities/styles/rtl/_all.scss';
 import { __ } from '@uixkit.react/components/_utilities/_all.js';
 
+//get project config
+import { rootDirectory } from '@uixkit.react/config';
+
 export default class Header extends Component {
 
 	componentDidMount(){
@@ -72,7 +75,7 @@ export default class Header extends Component {
 
 			
 							<div className="uix-brand">
-								<a href="/index"><img src="/assets/images/logo.png" alt="Uix Kit React" /></a>             
+								<a href={`${rootDirectory}/index`}><img src={`${rootDirectory}/assets/images/logo.png`} alt="Uix Kit React" /></a>             
 							</div>
 							{/*<!-- .uix-brand end -->*/}
 
@@ -83,7 +86,7 @@ export default class Header extends Component {
 
 								   <div className="uix-menu__inner">
 
-										<span className="uix-brand--mobile"><img src="/assets/images/logo-colorful.png" alt="Uix Kit React" /></span>
+										<span className="uix-brand--mobile"><img src={`${rootDirectory}/assets/images/logo-colorful.png`} alt="Uix Kit React" /></span>
 										<ul className="uix-menu">{htmlString}</ul>
 										<div className="uix-menu__right-box">
 											<a className="uix-social-btn uix-social-btn--small uix-social-btn--circle uix-social-btn--thin uix-social-btn--white" title="Follow us on Twitter" href="https://twitter.com/uiux_lab" target="_blank">

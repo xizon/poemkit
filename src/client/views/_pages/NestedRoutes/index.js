@@ -27,9 +27,9 @@ function HookContent() {
 		
 			<h3>Nested Routes Page</h3>
 
-			<div><NavLink to={`${url}/topic-one`} activeClassName="is-active">&gt; click here to display Topic One</NavLink></div>
-			<div><NavLink to={`${url}/topic-two`} activeClassName="is-active">&gt; click here to display Topic Two</NavLink></div>
-			<div><NavLink to={`${url}/topic-three`} activeClassName="is-active">&gt; click here to display Topic Three</NavLink></div>
+			<div><NavLink data-route="true" to={`${url}/topic-one`} activeClassName="is-active">&gt; click here to display Topic One</NavLink></div>
+			<div><NavLink data-route="true" to={`${url}/topic-two`} activeClassName="is-active">&gt; click here to display Topic Two</NavLink></div>
+			<div><NavLink data-route="true" to={`${url}/topic-three`} activeClassName="is-active">&gt; click here to display Topic Three</NavLink></div>
 
 			<hr />
 

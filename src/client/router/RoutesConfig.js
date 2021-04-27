@@ -8,8 +8,6 @@ import NoMatch from '@uixkit.react/pages/404/index.js';
 import NestedRoutes from '@uixkit.react/pages/NestedRoutes/index.js';
 import ComponentsDemo from '@uixkit.react/pages/ComponentsDemo/index.js';
 
-
-
 const routesConfig = [
   {
     component: App,
@@ -20,14 +18,14 @@ const routesConfig = [
 	  /* Homepage */
 		
       {
-        path: '/',
+        path: "/",
         component: Home,
         exact: true,
 		pageTitle: 'Uix Kit React'
       },
 		
       {
-        path: '/index',
+        path: "/index",
         component: Home,
 		pageTitle: 'Uix Kit React'
       },
@@ -37,7 +35,7 @@ const routesConfig = [
 	  /* Primary Menu */
 		
 	  {
-        path: '/components-demo',
+        path: "/components-demo",
         component: ComponentsDemo,
 		pageTitle: 'Components Demo'
       },	
@@ -45,35 +43,35 @@ const routesConfig = [
 	/* 
 	important!! 
 		Fixed: Nested routes not working
-		Add a new route of /posts/:post_id and add an `exact` property to the current route: 
+		Add a new route of /posts/:post_id and add an "exact" property to the current route: 
 	*/
 		
       {
-        path: '/posts',
+        path: "/posts",
         component: Posts,
 		pageTitle: 'Posts',
 		exact: true
       },
       {
-        path: '/todos',
+        path: "/todos",
         component: Todos,
 		pageTitle: 'Todos'
       },
   
       {
-        path: '/posts/:post_id',
+        path: "/posts/:post_id",
         component: PostDetail,
 		pageTitle: ''
       },	
 		
 	  /* In order to make nested routes valid, do not add the exact attribute here */
 	  {
-        path: '/nested-routes',
+        path: "/nested-routes",
         component: NestedRoutes,
 		pageTitle: 'Nested Routes',
       },	
       {
-        path: '*',
+        path: "*",
         component: NoMatch,
 		pageTitle: '404 Error',
 		status: 404

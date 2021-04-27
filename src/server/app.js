@@ -43,12 +43,13 @@ app.use(
     })
 );
 
-app.use(express.static( '/dist' ));
 
+//To use multiple static assets directories, call the express.static middleware function multiple times:
+app.use(express.static( 'public' ));
+app.use(express.static( 'dist' ));
 
-
-// Serving static files in Express
-//console.log(__dirname);
+//To create a virtual path prefix (where the path does not actually exist in the file system) for files that are 
+//served by the express.static function, specify a mount path for the static directory, as shown below:
 app.use('/', express.static( 'public' ));
 app.use('/dist', express.static( 'dist' ));
 

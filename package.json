@@ -1,8 +1,12 @@
 {
   "development": true,
   "author": "UIUX Lab",
+  "email": "uiuxlab@gmail.com",
   "name": "uix-kit-react",
-  "version": "0.0.27",
+  "projectName": "Uix Kit React",
+  "createdInfo": "UIUX Lab (https://uiux.cc)",
+  "projectURL": "https://uiux.cc",
+  "version": "0.0.28",
   "description": "A free web kits with React for fast web design and development via SSR.",
   "main": "webpack.config.js",
   "directories": {

@@ -30,10 +30,10 @@ function HookContent() {
 		<>
 		
 			<div>
-		        <NavLink to={`${url}/buttons`} activeClassName="is-active"><i className="fa fa-check-circle-o" aria-hidden="true"></i> Buttons</NavLink>&nbsp;&nbsp;
-		        <NavLink to={`${url}/tabs`} activeClassName="is-active"><i className="fa fa-check-circle-o" aria-hidden="true"></i> Tabs</NavLink>&nbsp;&nbsp;
-		        <NavLink to={`${url}/tabs-animated`} activeClassName="is-active"><i className="fa fa-check-circle-o" aria-hidden="true"></i> Tabs Animated</NavLink>&nbsp;&nbsp;
-		        <NavLink to={`${url}/video`} activeClassName="is-active"><i className="fa fa-check-circle-o" aria-hidden="true"></i> Video</NavLink>&nbsp;&nbsp;
+		        <NavLink data-route="true" to={`${url}/buttons`} activeClassName="is-active"><i className="fa fa-check-circle-o" aria-hidden="true"></i> Buttons</NavLink>&nbsp;&nbsp;
+		        <NavLink data-route="true" to={`${url}/tabs`} activeClassName="is-active"><i className="fa fa-check-circle-o" aria-hidden="true"></i> Tabs</NavLink>&nbsp;&nbsp;
+		        <NavLink data-route="true" to={`${url}/tabs-animated`} activeClassName="is-active"><i className="fa fa-check-circle-o" aria-hidden="true"></i> Tabs Animated</NavLink>&nbsp;&nbsp;
+		        <NavLink data-route="true" to={`${url}/video`} activeClassName="is-active"><i className="fa fa-check-circle-o" aria-hidden="true"></i> Video</NavLink>&nbsp;&nbsp;
 		    </div>
 
 			 <hr />

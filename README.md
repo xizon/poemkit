@@ -30,6 +30,9 @@ A free web kits with React for fast web design and development via SSR. Using re
 
 ## Demo
 
+
+For online demo, please checkout [https://uiux.cc/uix-kit-react](https://uiux.cc/uix-kit-react)
+
 Server runs on `http://localhost:3000`
 
 
@@ -117,36 +120,63 @@ $ npm run dev
 
 ```sh
 http://localhost:3000
+
+The new code is recommended to be bundled before debugging.
+
+
 ```
 
 **Step 8 (Optional).** Start Reactjs application with PM2 as a service (only works if you are using Node v13.9.0 or above.)
 
-
-8.1) Installing PM2. With NPM
+8.1) Installing Node and NPM
 
 ```sh
-$ npm install pm2@latest -g
+$ curl -sL https://rpm.nodesource.com/setup_14.x | sudo bash -
+$ sudo yum install nodejs
+$ node --version  #v14.16.1
+$ npm --version   #6.14.12
+$ which node babel-node #check the location of node and babel-node
 ```
 
 
-8.2) Frequently used commands:
+8.2) Installing PM2. With NPM
+
+```sh
+$ sudo npm install pm2@latest -g
+```
+
+
+8.3) Install Babel globally on your machine
+
+```sh
+$ sudo npm install -g babel-cli
+$ sudo npm install -g @babel/core @babel/cli @babel/preset-env 
+```
+
+
+8.4) Frequently used commands for PM2:
 
 ```sh
 #into your `"uix-kit-react/"` folder directory.
 $ cd /{your_directory}/uix-kit-react
 
-#install Babel globally on your machine
-$ sudo npm install -g @babel/core @babel/cli @babel/preset-env 
 
 #use babel-node with pm2
 $ pm2 start ecosystem.config.js  --interpreter babel-node  
 
 #other commands
+$ pm2 restart ecosystem.config.js –-interpreter babel-node
 $ pm2 stop ecosystem.config.js
 $ pm2 delete ecosystem.config.js
 $ pm2 list
 $ pm2 logs
 ```
+
+
+8.5) Use domain to access your React appication.
+
+You had created a basic React App from here, then you need to deploy a React App on Apache or Nginx web server. Please refer to the network for the tutorial on setting up the proxy.
+
 
 
 
@@ -171,9 +201,12 @@ $ sudo npm rebuild node-sass
 
 You can configure the module resolution by adding resolve to the `webpack.config.js`. If you use a relative path when you import another module, it would be bothersome because you would have to figure out all of the relative paths. Therefore, you can add alias to make it easier for yourself.
 
+`webpack.config.js` :
+
 ```js
 ...
 const alias = {
+	pathConfig            : './src/config/websiteConfig.js',
 	pathComponents        : './src/client/components',
 	pathThirdPartyPlugins : './src/client/components/_third-party-plugins',
 	pathRouter            : './src/client/router',
@@ -192,6 +225,7 @@ resolve: {
 		// specific mappings.
 		// Supports directories and custom aliases for specific files when the express server is running, 
 		// you need to configure the `babel.config.js` at the same time
+		'@uixkit.react/config': path.resolve(__dirname, alias.pathConfig ),
 		'@uixkit.react/components': path.resolve(__dirname, alias.pathComponents ),
 		'@uixkit.react/plugins': path.resolve(__dirname, alias.pathThirdPartyPlugins ),
 		'@uixkit.react/router': path.resolve(__dirname, alias.pathRouter ),
@@ -205,6 +239,31 @@ resolve: {
 },
 ...
 ```
+
+`babel.config.js` :
+
+```js
+...
+  "plugins": [
+	["module-resolver", {
+	  "root": ["./src"],
+	  "alias": {
+		"@uixkit.react/config": "./src/config/websiteConfig.js",
+		"@uixkit.react/components": "./src/client/components",
+		"@uixkit.react/plugins": "./src/client/components/_third-party-plugins",
+		"@uixkit.react/router": "./src/client/router",
+		"@uixkit.react/reducers": "./src/client/reducers",
+		"@uixkit.react/pages": "./src/client/views/_pages",
+		"@uixkit.react/actions": "./src/client/actions",
+		"@uixkit.react/server": "./src/server",
+		"@uixkit.react/store": "./src/store"
+	  }
+	}]
+  ]
+...
+```
+
+
 
 
 
@@ -241,7 +300,7 @@ You can update the Placeholders in Templates by modifying the Site Info configur
   "name": "uix-kit-react",
   "email": "uiuxlab@gmail.com",
   "version": "1.0.0",
-  "projectName": "Uix Kit",
+  "projectName": "Uix Kit React",
   "createdInfo": "UIUX Lab (https://uiux.cc)",
   "projectURL": "https://uiux.cc",
   "description": "A free web kits with React for fast web design and development via SSR.",
@@ -305,6 +364,35 @@ if ( process.env.npm_package_development == 'true' ) {
 The application loads some third-party libraries (icons, animations, 3D engines, etc.) by default, you can load them as needed, or modify the configuration file. Access to `src/client/components/_third-party-plugins/`
 
 
+### ⚙️ Root Directory Configurations:
+
+Change the root directory of the website so that it can be used when you upload the project to another directory. Modify the key `rootDirectory` of the `src/config/websiteConfig.js`.
+
+If the file is in the root directory, you can leave it empty. If in another directory, you can write: "/blog".
+
+
+```json
+{
+  "rootDirectory": ""
+}
+```
+
+
+### ⚙️ API Configurations:
+
+Change the API URLs of the website. Modify the key `API` of the `src/config/websiteConfig.js`, as shown below:
+
+
+```json
+{
+  "API": {
+	  "RECEIVE_DEMO_LIST": "https://apiurl1.com",
+	  "RECEIVE_DEMO_LISTDETAIL": "https://apiurl2.com"
+  }
+}
+```
+
+
 
 * * *
 
@@ -359,6 +447,8 @@ uix-kit-react/
 │   │   └── renderer.js
 │   └── store/
 │   │   └── createStore.js
+│   └── config/
+│   │   └── websiteConfig.js  -------------------  # website config
 └──
 ```
 

@@ -25,6 +25,7 @@ module.exports = {
 	["module-resolver", {
 	  "root": ["./src"],
 	  "alias": {
+		"@uixkit.react/config": "./src/config/websiteConfig.js",
 		"@uixkit.react/components": "./src/client/components",
 		"@uixkit.react/plugins": "./src/client/components/_third-party-plugins",
 		"@uixkit.react/router": "./src/client/router",
