@@ -549,6 +549,53 @@ compiler.hooks.done.tap( 'MyPlugin', ( compilation ) => {
     return true;
 });
 		
+
+
+
+
+/*! 
+ *************************************
+ * Automatically generate `manifest.json`.
+ *************************************
+ */
+const manifestFilepath = `./${globs.examples}/manifest.json`;
+fs.readFile( `./src/config/manifest.json.tmp.js`, 'utf8', function(err, data ){
+
+	if ( err ) {
+		console.log(colors.fg.Red, err, colors.Reset);
+	} else {
+
+
+		if ( data.length > 0 ) {
+			data = data.replace(/\@\@\{website_title\}/g, customWebsiteTitle )
+						.replace(/\@\@\{website_desc\}/g, customWebsiteDesc )
+						.replace(/\@\@\{website_author\}/g, customWebsiteAuthor )
+						.replace(/\@\@\{website_generator\}/g, customWebsiteGenerator )
+						.replace(/\@\@\{website_version\}/g, customWebsiteVersion )
+						.replace(/\@\@\{website_comment\}/g, customWebsiteComment )
+						.replace(/\@\@\{website_hash\}/g, customWebsiteHash )
+						.replace(/\@\@\{website_root_directory\}/g, customWebsiteRootDir );
+
+			fs.writeFile( manifestFilepath, data, (err) => {
+				if ( err ) {
+					console.log(colors.fg.Red, err, colors.Reset);
+					return;
+				}
+				//file written successfully
+				console.log(colors.fg.Green, `${manifestFilepath} written successfully!`, colors.Reset);
+
+
+			});		
+		}
+
+
+	}
+
+
+}); //end fs.readFile	
+
+
+
 									
 									
 /*! 

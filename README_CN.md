@@ -414,6 +414,7 @@ uix-kit-react/
 ├── package.json 
 ├── public/
 │   ├── index.html    --------------------------- # 自动生成的首页HTML静态模板
+│   ├── manifest.json
 │   └── assets/
 ├── dist/
 │   ├── css/
@@ -448,6 +449,7 @@ uix-kit-react/
 │   └── store/
 │   │   └── createStore.js
 │   └── config/
+│   │   ├── manifest.json.tmp.js  ---------------  # 自动生成的 `manifest.json` 文件模板
 │   │   └── websiteConfig.js  --------------------  # 网站配置文件(比如根目录)
 └──
 ```

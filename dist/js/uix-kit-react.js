@@ -6,7 +6,7 @@
  * ## Project Name        :  Uix Kit React
  * ## Project Description :  A free web kits with React for fast web design and development via SSR.
  * ## Project URL         :  https://uiux.cc
- * ## Version             :  0.0.29
+ * ## Version             :  0.0.30
  * ## Based on            :  Uix Kit React (https://github.com/xizon/uix-kit-react#readme)
  * ## Last Update         :  April 28, 2021
  * ## Created by          :  UIUX Lab (https://uiux.cc) (uiuxlab@gmail.com)
@@ -45969,7 +45969,14 @@ var Swiper = __webpack_require__(59);
     className: "col-12"
   }, /*#__PURE__*/react_default.a.createElement("h1", {
     className: "uix-t-c"
-  }, "Swiper"))))), /*#__PURE__*/react_default.a.createElement("section", {
+  }, "Swiper", /*#__PURE__*/react_default.a.createElement("a", {
+    className: "uix-typo--h3 align-middle",
+    href: "https://github.com/xizon/uix-kit-react/tree/master/src/client/components/Swiper",
+    target: "_blank"
+  }, /*#__PURE__*/react_default.a.createElement("code", null, /*#__PURE__*/react_default.a.createElement("i", {
+    className: "fa fa-code",
+    "aria-hidden": "true"
+  })))))))), /*#__PURE__*/react_default.a.createElement("section", {
     className: "uix-spacing--s"
   }, /*#__PURE__*/react_default.a.createElement("div", {
     className: "container"

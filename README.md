@@ -414,6 +414,7 @@ uix-kit-react/
 ├── package.json
 ├── public/
 │   ├── index.html    --------------------------- # HTML template of Homepage
+│   ├── manifest.json
 │   └── assets/
 ├── dist/
 │   ├── css/
@@ -448,6 +449,7 @@ uix-kit-react/
 │   └── store/
 │   │   └── createStore.js
 │   └── config/
+│   │   ├── manifest.json.tmp.js  ---------------  # `manifest.json` file template
 │   │   └── websiteConfig.js  -------------------  # website config
 └──
 ```

@@ -1,5 +1,12 @@
 # Changelog
 
+
+#### = 0.0.30 (April 28, 2021) =
+
+* New: Automatically generate `manifest.json` to `public/` folder.
+
+
+
 #### = 0.0.29 (April 28, 2021) =
 
 * New: Add new demo `Swiper`.

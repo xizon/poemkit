@@ -3,6 +3,8 @@
 	<head>
 		<meta charset="utf-8" />
 		<title>{{pageTitle}}</title>	
+		
+		<link rel="manifest" href="@@{website_root_directory}/manifest.json" />
         
 		<!-- Mobile Settings
 		============================================= -->
@@ -20,8 +22,6 @@
 		<!-- Core & Theme CSS
 		============================================= -->
         <link rel="stylesheet" href="@@{website_root_directory}/dist/css/uix-kit-react.min.css?ver=@@{website_hash}"/>
-
-        
         <!-- Core & Theme CSS  end -->
 		
 
@@ -33,7 +33,17 @@
         <meta name="author" content="@@{website_author}"> 
         <!-- SEO  end -->
 
-        
+
+		<!-- Favicons
+		============================================= -->
+		<link rel="icon" href="@@{website_root_directory}/assets/images/favicon/favicon-32x32.png" type="image/x-icon">
+		<link rel="shortcut icon" href="@@{website_root_directory}/assets/images/favicon/favicon-32x32.png" sizes="32x32">
+		<link rel="apple-touch-icon" href="@@{website_root_directory}/assets/images/favicon/apple-touch-icon-57x57.png">
+		<link rel="apple-touch-icon" sizes="72x72" href="@@{website_root_directory}/assets/images/favicon/apple-touch-icon-72x72.png">
+		<link rel="apple-touch-icon" sizes="114x114" href="@@{website_root_directory}/assets/images/favicon/apple-touch-icon-114x114.png">
+		<!-- Favicons  end -->
+
+
      
   </head>  
   
