@@ -120,11 +120,11 @@ $ npm run dev
 
 ```sh
 http://localhost:3000
+```
 
 The new code is recommended to be bundled before debugging.
 
 
-```
 
 **Step 8 (Optional).** Start Reactjs application with PM2 as a service (only works if you are using Node v13.9.0 or above.)
 
