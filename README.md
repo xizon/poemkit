@@ -312,15 +312,15 @@ You can update the Placeholders in Templates by modifying the Site Info configur
 
 ### ⚙️ Router Configurations:
 
-Configuration of routes, which is also the primary navigation of the website (not including the configuration of Nested routes which will be configured on the page in the primary navigation). Access to `uix-kit-react/src/client/router/RoutesConfig.js`. 
+Configuration of routes, which is also the primary navigation of the website (not including the configuration of Nested routes which will be configured on the page in the primary navigation). Access to `./src/client/router/RoutesConfig.js`. 
 
 
-Some scripts of the router can be modified in the file `uix-kit-react/src/client/router/App.js`.
+Some scripts of the router can be modified in the file `./src/client/router/App.js`.
 
 
 ### ⚙️ Server-side rendering Configurations:
 
-Some scripts on the server side can be modified in the file `uix-kit-react/src/server/renderer.js`.
+Some scripts on the server side can be modified in the file `./src/server/renderer.js`.
 
 
 ### ⚙️ Set up server proxy:
@@ -361,12 +361,12 @@ if ( process.env.npm_package_development == 'true' ) {
 
 ### ⚙️ Custom import third-party library:
 
-The application loads some third-party libraries (icons, animations, 3D engines, etc.) by default, you can load them as needed, or modify the configuration file. Access to `uix-kit-react/src/client/components/_third-party-plugins/`
+The application loads some third-party libraries (icons, animations, 3D engines, etc.) by default, you can load them as needed, or modify the configuration file. Access to `./src/client/components/_third-party-plugins/`
 
 
 ### ⚙️ Root Directory Configurations:
 
-Change the root directory of the website so that it can be used when you upload the project to another directory. Modify the key `rootDirectory` of the `uix-kit-react/src/config/websiteConfig.js`.
+Change the root directory of the website so that it can be used when you upload the project to another directory. Modify the key `rootDirectory` of the `./src/config/websiteConfig.js`.
 
 If the file is in the root directory, you can leave it empty. If in another directory, you can write: "/blog". (but no trailing slash)
 
@@ -380,7 +380,7 @@ If the file is in the root directory, you can leave it empty. If in another dire
 
 ### ⚙️ API Configurations:
 
-Change the API URLs of the website. Modify the key `API` of the `uix-kit-react/src/config/websiteConfig.js`, as shown below:
+Change the API URLs of the website. Modify the key `API` of the `./src/config/websiteConfig.js`, as shown below:
 
 
 ```json

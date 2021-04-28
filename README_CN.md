@@ -306,15 +306,15 @@ output: {
 
 ### ⚙️ 路由配置:
 
-路由配置同时也兼顾了网站的主导航（不包括将在主导航的页面上配置的嵌套路由）。 访问文件 `uix-kit-react/src/client/router/RoutesConfig.js`. 
+路由配置同时也兼顾了网站的主导航（不包括将在主导航的页面上配置的嵌套路由）。 访问文件 `./src/client/router/RoutesConfig.js`. 
 
 
-路由器的一些脚本可以在文件中修改 `uix-kit-react/src/client/router/App.js`.
+路由器的一些脚本可以在文件中修改 `./src/client/router/App.js`.
 
 
 ### ⚙️ 服务端渲染配置:
 
-服务端渲染和标签替换的一些脚本可以在文件中修改 `uix-kit-react/src/server/renderer.js`.
+服务端渲染和标签替换的一些脚本可以在文件中修改 `./src/server/renderer.js`.
 
 
 
@@ -359,13 +359,13 @@ if ( process.env.npm_package_development == 'true' ) {
 
 ### ⚙️ 自定义导入的第三方库或插件:
 
-应用默认加载了常用的第三方库(图标，动画，3D引擎等)，您可以按需加载，或者修改导入配置。第三方插件配置文件位于 `uix-kit-react/src/client/components/_third-party-plugins/`
+应用默认加载了常用的第三方库(图标，动画，3D引擎等)，您可以按需加载，或者修改导入配置。第三方插件配置文件位于 `./src/client/components/_third-party-plugins/`
 
 
 
 ### ⚙️ 网站根目录配置:
 
-更改网站的根目录，以便您的项目上传到另一个目录时可以使用它。修改 `uix-kit-react/src/config/websiteConfig.js` 的键 `rootDirectory`。
+更改网站的根目录，以便您的项目上传到另一个目录时可以使用它。修改 `./src/config/websiteConfig.js` 的键 `rootDirectory`。
 
 如果该文件位于根目录中，则可以将其保留为空。 如果在另一个目录中，则可以写成 "/blog" (结尾不要加斜杠)
 
@@ -378,7 +378,7 @@ if ( process.env.npm_package_development == 'true' ) {
 
 ### ⚙️ 接口API配置:
 
-修改 `uix-kit-react/src/config/websiteConfig.js` 的键 `API`, 如下代码:
+修改 `./src/config/websiteConfig.js` 的键 `API`, 如下代码:
 
 
 ```json
