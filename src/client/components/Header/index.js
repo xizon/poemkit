@@ -39,10 +39,9 @@ export default class Header extends Component {
 					console.log( '=> loaded!!!' );
 					
 					
-					__( '.uix-header__container' ).addClass( 'js-heavyShadow' );
+					//do something
 					
-					
-					
+				
 				}
 			});
 
@@ -89,13 +88,13 @@ export default class Header extends Component {
 										<span className="uix-brand--mobile"><img src={`${rootDirectory}/assets/images/logo-colorful.png`} alt="Uix Kit React" /></span>
 										<ul className="uix-menu">{htmlString}</ul>
 										<div className="uix-menu__right-box">
-											<a className="uix-social-btn uix-social-btn--small uix-social-btn--circle uix-social-btn--thin uix-social-btn--white" title="Follow us on Twitter" href="https://twitter.com/uiux_lab" target="_blank">
+											<a className="uix-social-btn uix-social-btn--small uix-social-btn--circle uix-social-btn--thin" title="Follow us on Twitter" href="https://twitter.com/uiux_lab" target="_blank">
 												<i className="fa fa-twitter"></i>
 											</a>
-											<a className="uix-social-btn uix-social-btn--small uix-social-btn--circle uix-social-btn--thin uix-social-btn--white" title="Follow us on Facebook" href="https://www.facebook.com/uiuxlabhome" target="_blank">
+											<a className="uix-social-btn uix-social-btn--small uix-social-btn--circle uix-social-btn--thin" title="Follow us on Facebook" href="https://www.facebook.com/uiuxlabhome" target="_blank">
 												<i className="fa fa-facebook"></i>
 											</a>
-											<a className="uix-social-btn uix-social-btn--small uix-social-btn--circle uix-social-btn--thin uix-social-btn--white" title="Fork on Github" href="https://github.com/xizon/uix-kit-react" target="_blank">
+											<a className="uix-social-btn uix-social-btn--small uix-social-btn--circle uix-social-btn--thin" title="Fork on Github" href="https://github.com/xizon/uix-kit-react" target="_blank">
 												<i className="fa fa-github"></i>
 											</a>          
 										</div>

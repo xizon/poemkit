@@ -123,7 +123,7 @@ export default () => {
 
 
 							<div className="row">
-								<div className="col-12" id="my-ajax-demo-target-button">
+								<div className="col-12">
 
 
 									<Button href="#" className="uix-btn uix-btn__border--thin uix-btn__margin--b uix-btn__size--t uix-btn__bg--hyperlink">Tiny</Button>

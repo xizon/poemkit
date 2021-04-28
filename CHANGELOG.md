@@ -1,5 +1,13 @@
 # Changelog
 
+#### = 0.0.29 (April 28, 2021) =
+
+* New: Add new demo `Swiper`.
+* Tweak: Change the header styles and primary colors.
+* Tweak: Optimize some script structures in the default component library.
+* Fix: Fixed the title rendering problem of the post detail page.
+* Tweak: Added website configuration method to the README files.
+
 
 
 #### = 0.0.28 (April 26, 2021) =

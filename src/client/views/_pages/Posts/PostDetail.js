@@ -4,6 +4,7 @@ import { __ } from '@uixkit.react/components/_utilities/_all.js';
 import { fetchDemoListDetail } from '@uixkit.react/actions/demoListDetailActions.js';
 import Footer from '@uixkit.react/components/Footer/index.js';
 
+import customRoutesConfig from '@uixkit.react/router/RoutesConfig.js';
 
 class PostDetail extends Component {
 	constructor(props) {
@@ -82,7 +83,7 @@ class PostDetail extends Component {
 		if (typeof (document) !== "undefined") {
 			
 			// update page title
-			document.title = preloadedState[0].name;
+			document.title =  `${preloadedState[0].name} - ${customRoutesConfig[0].routes[0].pageTitle}`;
 		}
 		
 		

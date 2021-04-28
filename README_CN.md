@@ -367,7 +367,7 @@ if ( process.env.npm_package_development == 'true' ) {
 
 更改网站的根目录，以便您的项目上传到另一个目录时可以使用它。修改 `uix-kit-react/src/config/websiteConfig.js` 的键 `rootDirectory`。
 
-如果该文件位于根目录中，则可以将其保留为空。 如果在另一个目录中，则可以写成 "/blog"
+如果该文件位于根目录中，则可以将其保留为空。 如果在另一个目录中，则可以写成 "/blog" (结尾不要加斜杠)
 
 
 ```json

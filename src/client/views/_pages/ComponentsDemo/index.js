@@ -14,6 +14,7 @@ import ButtonsDemo from '@uixkit.react/pages/ComponentsDemo/ButtonsDemo.js';
 import TabsDemo from '@uixkit.react/pages/ComponentsDemo/TabsDemo.js';
 import TabsAnimatedDemo from '@uixkit.react/pages/ComponentsDemo/TabsAnimatedDemo.js';
 import VideoDemo from '@uixkit.react/pages/ComponentsDemo/VideoDemo.js';
+import SwiperDemo from '@uixkit.react/pages/ComponentsDemo/SwiperDemo.js';
 
 
 
@@ -34,6 +35,7 @@ function HookContent() {
 		        <NavLink data-route="true" to={`${url}/tabs`} activeClassName="is-active"><i className="fa fa-check-circle-o" aria-hidden="true"></i> Tabs</NavLink>&nbsp;&nbsp;
 		        <NavLink data-route="true" to={`${url}/tabs-animated`} activeClassName="is-active"><i className="fa fa-check-circle-o" aria-hidden="true"></i> Tabs Animated</NavLink>&nbsp;&nbsp;
 		        <NavLink data-route="true" to={`${url}/video`} activeClassName="is-active"><i className="fa fa-check-circle-o" aria-hidden="true"></i> Video</NavLink>&nbsp;&nbsp;
+		        <NavLink data-route="true" to={`${url}/swiper`} activeClassName="is-active"><i className="fa fa-check-circle-o" aria-hidden="true"></i> Swiper</NavLink>&nbsp;&nbsp;
 		    </div>
 
 			 <hr />
@@ -54,7 +56,9 @@ function HookContent() {
 				<Route path={`${path}/video`}>
 				  <VideoDemo />
 				</Route>	
-		
+				<Route path={`${path}/swiper`}>
+				  <SwiperDemo />
+				</Route>			
 		
 		
 			  </Switch>

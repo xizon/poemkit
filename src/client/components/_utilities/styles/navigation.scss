@@ -64,24 +64,29 @@ $nav-mega-li-w    : 270px;
 			.uix-bubble {
 				right: 1rem;
 			}
-			
-			/* Sync to WordPress activation class name ".current-menu-item" */
-			&.is-active, 
-			&.current-menu-item {
-				box-shadow: 0 2.15px 0 rgba(255, 255, 255, 1);
-			} 
 
 			
 			> a {
 				text-transform: uppercase;
 				font-weight: 700;
-				color: #DEDEDE;
+				color: #525252;
 				
 				&:hover {
-					color: #fff;
+					color: #000;
 				}	
 				
 			}
+			
+			
+			/* Sync to WordPress activation class name ".current-menu-item" */
+			&.is-active, 
+			&.current-menu-item {
+				> a {
+					color: #000;
+				}
+			} 
+			
+			
 			
 			ul {
 				
@@ -330,6 +335,41 @@ $nav-mega-li-w    : 270px;
 	}
 
 }
+
+
+
+.uix-header__container--overlay .uix-menu__container:not(.is-mobile) {
+	
+	/* 
+	 ---------------------------
+	 1. Primary Menu
+	 ---------------------------
+	 */ 
+	ul.uix-menu {
+	
+		> li {
+			
+			> a {
+				color: #DEDEDD;
+				
+				&:hover {
+					color: #fff;
+				}	
+				
+			}
+			&.is-active, 
+			&.current-menu-item {
+				> a {
+					color: #fff;
+				}
+			} 
+		
+		}
+
+	}
+
+}
+
 
 
 @media all and (max-width: 1250px) {

@@ -368,7 +368,7 @@ The application loads some third-party libraries (icons, animations, 3D engines,
 
 Change the root directory of the website so that it can be used when you upload the project to another directory. Modify the key `rootDirectory` of the `uix-kit-react/src/config/websiteConfig.js`.
 
-If the file is in the root directory, you can leave it empty. If in another directory, you can write: "/blog".
+If the file is in the root directory, you can leave it empty. If in another directory, you can write: "/blog". (but no trailing slash)
 
 
 ```json

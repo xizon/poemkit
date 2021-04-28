@@ -2306,6 +2306,12 @@ const __ = (function () {
 		
 		return list;
 	};
+	
+	
+	if ( typeof (window) !== 'undefined' ) {
+		window.__ = __;
+	}
+	
 
 	
     return __;

@@ -23,22 +23,15 @@
 	top: 0;
 	width: 100%;
 	z-index: 90000;
-	border-bottom: 2.15px solid rgba(255, 255, 255, .2);
-	box-shadow: 0px 5px 40px 0px rgba(0, 0, 0, 0.08);
-	transition: .3s ease-in-out;
-	transition-delay: 3s;
-	background-color: $highlight-color1;
-	background-image: linear-gradient(to right, $btn-gradient-color1 0%, $btn-gradient-color2 20%, $btn-gradient-color3 100%);
+	box-shadow: 0px 2px 3px 0px rgba(0,0,0,0.10);
+	transition: .1s ease-in-out;
+	background-color: #fff;
 	
 	
 	&.is-fixed {
 		
 	}
 	
-	
-	&.js-heavyShadow {
-		box-shadow: 0px 5px 40px 0px rgba(0, 0, 0, 0.28);
-	}
 
 	/* 
 	 ---------------------------
@@ -47,11 +40,10 @@
 	 */ 
 	&.uix-header__container--overlay {
 		background: rgba(255, 255, 255, 0.15);
-		background: linear-gradient(to right, rgba(255, 255, 255, 0.15) 0%,rgba(255, 255, 255, 0.15) 100%);	
+		border-bottom: 1px solid rgba(255, 255, 255, .2);
 
 		&.is-fixed {
-			background-color: $highlight-color1;
-			background-image: linear-gradient(to right, $btn-gradient-color1 0%, $btn-gradient-color2 20%, $btn-gradient-color3 100%);
+			background-color: #fff;
 		}
 
 	}

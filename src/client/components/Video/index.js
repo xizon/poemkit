@@ -1,6 +1,6 @@
 /* 
  *************************************
- * <!-- Header -->
+ * <!-- Video -->
  *************************************
  */
 import PropTypes from "prop-types";
@@ -11,7 +11,7 @@ import '@uixkit.react/plugins/_lib-bootstrap.js';
 import '@uixkit.react/plugins/_lib-gsap.js';
 import '@uixkit.react/plugins/_lib-icons.js';
 
-// Plyr
+// Player
 import { Plyr } from '@uixkit.react/plugins/_lib-player.js';
 
 
