@@ -449,7 +449,7 @@ uix-kit-react/
 │   └── store/
 │   │   └── createStore.js
 │   └── config/
-│   │   ├── manifest.json.tmp.js  ---------------  # `manifest.json` file template
+│   │   ├── tmpl-manifest.json  -----------------  # `manifest.json` file template
 │   │   └── websiteConfig.js  -------------------  # website config
 └──
 ```

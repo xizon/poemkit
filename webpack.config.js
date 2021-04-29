@@ -100,6 +100,20 @@ Generated with "npm run build"
 	`;
 
 
+//replacing template
+function tmplFormat( s ) {
+	return s.replace(/\@\@\{website_title\}/g, customWebsiteTitle )
+			.replace(/\@\@\{website_desc\}/g, customWebsiteDesc )
+			.replace(/\@\@\{website_author\}/g, customWebsiteAuthor )
+			.replace(/\@\@\{website_generator\}/g, customWebsiteGenerator )
+			.replace(/\@\@\{website_version\}/g, customWebsiteVersion )
+			.replace(/\@\@\{website_comment\}/g, customWebsiteComment )
+			.replace(/\@\@\{website_hash\}/g, customWebsiteHash )
+			.replace(/\@\@\{website_root_directory\}/g, customWebsiteRootDir );
+}
+
+
+
 // Get all the HTML template files
 let tempAllPages = glob.sync( './'+globs.build+'/views/**/*.html' );
 let targetTempFilesName = [];
@@ -154,14 +168,7 @@ class ReplacePlaceholderForFile {
 					
 					
 					if ( data.length > 0 && data.indexOf( '</html>' ) >= 0 ) {
-						data = data.replace(/\@\@\{website_title\}/g, customWebsiteTitle )
-									.replace(/\@\@\{website_desc\}/g, customWebsiteDesc )
-									.replace(/\@\@\{website_author\}/g, customWebsiteAuthor )
-									.replace(/\@\@\{website_generator\}/g, customWebsiteGenerator )
-									.replace(/\@\@\{website_version\}/g, customWebsiteVersion )
-									.replace(/\@\@\{website_comment\}/g, customWebsiteComment )
-									.replace(/\@\@\{website_hash\}/g, customWebsiteHash )
-						            .replace(/\@\@\{website_root_directory\}/g, customWebsiteRootDir );
+						data = tmplFormat( data );
 
 						fs.writeFile( filepath, data, (err) => {
 							if ( err ) {
@@ -559,7 +566,7 @@ compiler.hooks.done.tap( 'MyPlugin', ( compilation ) => {
  *************************************
  */
 const manifestFilepath = `./${globs.examples}/manifest.json`;
-fs.readFile( `./src/config/manifest.json.tmp.js`, 'utf8', function(err, data ){
+fs.readFile( `./src/config/tmpl-manifest.json`, 'utf8', function(err, data ){
 
 	if ( err ) {
 		console.log(colors.fg.Red, err, colors.Reset);
@@ -567,14 +574,7 @@ fs.readFile( `./src/config/manifest.json.tmp.js`, 'utf8', function(err, data ){
 
 
 		if ( data.length > 0 ) {
-			data = data.replace(/\@\@\{website_title\}/g, customWebsiteTitle )
-						.replace(/\@\@\{website_desc\}/g, customWebsiteDesc )
-						.replace(/\@\@\{website_author\}/g, customWebsiteAuthor )
-						.replace(/\@\@\{website_generator\}/g, customWebsiteGenerator )
-						.replace(/\@\@\{website_version\}/g, customWebsiteVersion )
-						.replace(/\@\@\{website_comment\}/g, customWebsiteComment )
-						.replace(/\@\@\{website_hash\}/g, customWebsiteHash )
-						.replace(/\@\@\{website_root_directory\}/g, customWebsiteRootDir );
+			data = tmplFormat( data );
 
 			fs.writeFile( manifestFilepath, data, (err) => {
 				if ( err ) {

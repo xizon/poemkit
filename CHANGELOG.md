@@ -1,6 +1,14 @@
 # Changelog
 
 
+
+#### = 0.0.31 (April 29, 2021) =
+
+* Tweak: `webpack.config.js` optimization.
+* Tweak: Added a new method to Core Shortcut.
+* Tweak: Optimized some scripts.
+
+
 #### = 0.0.30 (April 28, 2021) =
 
 * New: Automatically generate `manifest.json` to `public/` folder.

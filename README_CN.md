@@ -449,7 +449,7 @@ uix-kit-react/
 │   └── store/
 │   │   └── createStore.js
 │   └── config/
-│   │   ├── manifest.json.tmp.js  ---------------  # 自动生成的 `manifest.json` 文件模板
+│   │   ├── tmpl-manifest.json  ------------------  # 自动生成的 `manifest.json` 文件模板
 │   │   └── websiteConfig.js  --------------------  # 网站配置文件(比如根目录)
 └──
 ```

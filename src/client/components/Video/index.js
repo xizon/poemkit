@@ -68,7 +68,7 @@ export default class Video extends Component {
 
 
 					/* ---------  Default settings  */
-					if ( typeof( config.muted ) !== 'undefined' ) {
+					if ( typeof(config.muted) !== 'undefined' ) {
 						instance.media.muted = config.muted;
 					}
 				

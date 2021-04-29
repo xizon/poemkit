@@ -43,7 +43,7 @@ export default class Swiper extends Component {
 
 				const $el = __( this );
 				const actived = $el.data( 'activated' );
-				if( typeof( actived ) === 'object' ) {
+				if( actived === null ) {
 
 					//Synchronize multiple objects
 					//------------------------------------------

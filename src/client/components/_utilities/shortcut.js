@@ -4,8 +4,8 @@
  * Core Shortcut
  *
  * @package: uix-kit-react
- * @version: 0.19
- * @last update: April 26, 2021
+ * @version: 0.20
+ * @last update: April 29, 2021
  * @license: MIT
  *
  *************************************
@@ -70,6 +70,8 @@ __( document ).ready( function() {
 			__( '.demo' ).width( 300 );
 			__( '.menu li:first-child' ).width( "50%" );
 
+			
+
 			__( '.menu li' ).off( 'click' ).on( 'click', function( e ) {
 				console.log('e: ', e);
 				console.log('this: ', this);
@@ -112,8 +114,19 @@ __( document ).ready( function() {
 			console.log( 'outerHeight(): ' + __( '.demo' ).outerHeight() );
 			console.log( 'outerHeight( true ): ' + __( '.demo' ).outerHeight(true) );	
 			
-			console.log( '[data-bg] value: ' + __( '.demo' ).data( 'bg' ) );
-			console.log( '[disabled] value: ' + __( '.demo' ).attr( 'disabled' ) );
+			console.log( 'document h: ', __( document ).height() );
+			console.log( 'document w: ', __( document ).width() );
+			console.log( 'window h: ', __( window ).height() );			
+			console.log( 'window h: ', __( window ).width() );			
+			console.log( 'window scrollTop: ', __( window ).scrollTop() );			
+			console.log( 'window scrollLeft: ', __( window ).scrollLeft() );	
+
+			
+			console.log( 'data: [data-bg] value: ' + __( '.demo' ).data( 'bg' ) );
+			console.log( 'attr: [disabled] value: ' + __( '.demo' ).attr( 'disabled' ) );
+			console.log( 'allAttrs(): ', __( '.demo' ).allAttrs() );
+			
+			
 			console.log( __( '.demo' ).hasClass( 'class-1' ) );
 			console.log( __( 'h1' ).offset() );
 			console.log( __( 'h1' ).position() );		
@@ -247,9 +260,27 @@ const __ = (function () {
 	 */
     function getStyle( el, attr ) {
 		const self = el;
+		
 
 		if ( typeof (window) !== 'undefined' ) {
+			
+			//document or window data
+			//-----------------
+			if ( self === document.body ) {
+				if ( attr == 'height' ) return document.body.clientHeight;
+				if ( attr == 'width' ) return document.body.clientWidth;
+			}
 
+			if ( self === window ) {
+				if ( attr == 'height' ) return window.innerHeight;
+				if ( attr == 'width' ) return window.innerWidth;
+			}		
+	
+			
+			
+
+			//element data
+			//-----------------
 			let _val = 0;
 			
 			const computedStyle = window.getComputedStyle
@@ -298,7 +329,7 @@ const __ = (function () {
 	function isJSON( str ){
 		
 		
-		if ( typeof( str ) === 'string' && str.length > 0 ) {
+		if ( typeof(str) === 'string' && str.length > 0 ) {
 
 			if ( str.replace( /\"\"/g, '' ).replace( /\,/g, '' ) == '[{}]' ) {
 				return false;
@@ -388,13 +419,13 @@ const __ = (function () {
 
 		//get ID
 		let id = el.id;
-		if ( typeof( id ) !== 'undefined' && id != '' ) {
+		if ( typeof(id) !== 'undefined' && id != '' ) {
 			itemDomsStr += `#${id}`;
 		}	
 
 		//get all classes
 		let classes = el.classList;
-		if ( typeof( classes ) !== 'undefined' ) {
+		if ( typeof(classes) !== 'undefined' ) {
 			classes.forEach(
 				function(value, key, listObj) {
 					itemDomsStr += `.${value}`;
@@ -403,7 +434,7 @@ const __ = (function () {
 		}
 		
 		//If the ID does not exist, return the current object
-		if ( typeof( id ) === 'undefined' || id === '' ) {
+		if ( typeof(id) === 'undefined' || id === '' ) {
 			itemDomsStr = '';
 		}	
 		
@@ -939,6 +970,11 @@ const __ = (function () {
 				return self.wrap( [s] );
 
 			} else {
+				
+				if(s == window) {
+					return self.wrap( [s] );
+				}
+				
 				//3) document or other
 				switch( s.nodeType ) {
 					 case 9:
@@ -1592,17 +1628,19 @@ const __ = (function () {
 	__.prototype.attr = function(a, v) {
 		a = a || '';
 		if (v === undefined) {
-			
+
 			let res = this.getAttribute(a);
 			if ( res == 'true' ) res = true;
 			if ( res == 'false' ) res = false;
 			if ( isJSON(res) ) res = JSON.parse(res);
 			// Non-existent attributes return null, we normalize to undefined
-			return res == null ? undefined : res;
+			return res == null ? null : res;
 		} else {
 			this.setAttribute(a, v);
-		}
+		}	
+		
 	};
+
 
 	/*
 	 * Store arbitrary data associated with the matched elements.
@@ -1620,7 +1658,7 @@ const __ = (function () {
 			if ( res == 'false' ) res = false;
 			if ( isJSON(res) ) res = JSON.parse(res);
 			// Non-existent attributes return null, we normalize to undefined
-			return res == null ? undefined : res;
+			return res == null ? null : res;
 		} else {
 			this.setAttribute('data-' + a, v);
 		}
@@ -1643,7 +1681,7 @@ const __ = (function () {
 			if ( res == 'false' ) res = false;
 			if ( isJSON(res) ) res = JSON.parse(res);
 			// Non-existent attributes return null, we normalize to undefined
-			return res == null ? undefined : res;
+			return res == null ? null : res;
 		} else {
 			this[a] = v;
 		}
@@ -1772,6 +1810,32 @@ const __ = (function () {
         return { top: top, left: left };
     }
 
+	/*
+	 * Get the number of pixels that an element's content is scrolled vertically.
+	 *
+	 * @return {Number}  - Returns a pure number calculated.
+	 */    
+	__.prototype.scrollTop = function() {
+		const supportPageOffset = window.pageXOffset !== undefined;
+		const isCSS1Compat = ((document.compatMode || "") === "CSS1Compat");
+		const scrollTop = supportPageOffset ? window.pageYOffset : isCSS1Compat ? this.scrollTop : document.body.scrollTop;
+		return scrollTop;
+    }
+	
+	
+	/*
+	 * Get the number of pixels that an element's content is scrolled from its left edge.
+	 *
+	  @return {Number}  - Returns a pure number calculated.
+	 */   
+    __.prototype.scrollLeft = function( val ) {
+		const supportPageOffset = window.pageXOffset !== undefined;
+		const isCSS1Compat = ((document.compatMode || "") === "CSS1Compat");
+		const scrollLeft = supportPageOffset ? window.pageXOffset : isCSS1Compat ? this.scrollLeft : document.body.scrollLeft;
+		return scrollLeft;
+    }
+	
+	
 	
 	/*
 	 * Get or set the current computed width for elenments
@@ -1786,7 +1850,7 @@ const __ = (function () {
 			self.style.width = val.toString().indexOf( '%' ) < 0 ? val + 'px' : val;
 		}
 		
-		return getStyle( self,  'width' );
+		return getStyle( self, 'width' );
     }
 	
 	
@@ -1803,7 +1867,7 @@ const __ = (function () {
 			self.style.height = val.toString().indexOf( '%' ) < 0 ? val + 'px' : val;
 		}
 		
-		return getStyle( self,  'height' );
+		return getStyle( self, 'height' );
     }
 	
 	
@@ -1907,6 +1971,30 @@ const __ = (function () {
 		
 
     }	
+	
+	
+	/*
+	 * Traverse all the attribute names and values in an HTML element
+	 *
+	 * @return {Array}              - A new array.
+	 */
+	__.prototype.allAttrs = function() {
+		const newArr = [];
+		
+		Array.from(this.attributes)
+			.filter(obj => { 
+				return obj.specified; 
+			})
+			.map(obj => { 
+				newArr[ obj.nodeName ] = obj.textContent;
+			});
+
+		return { data: newArr };
+
+
+	};
+	
+	
 	
 	/*
 	 * Determine whether any of the matched elements are assigned the given class.
@@ -2172,12 +2260,15 @@ const __ = (function () {
 		off: __.prototype.off,
 		offset: __.prototype.offset,
 		position: __.prototype.position,		
+		scrollTop: __.prototype.scrollTop,
+		scrollLeft: __.prototype.scrollLeft,
 		width: __.prototype.width,
 		height: __.prototype.height,
 		outerWidth: __.prototype.outerWidth,
 		outerHeight: __.prototype.outerHeight,
 		remove: __.prototype.remove,
 		empty: __.prototype.empty,
+		allAttrs: __.prototype.allAttrs,
 		hasClass: __.prototype.hasClass,
 		val: __.prototype.val,
 		show: __.prototype.show,
@@ -2274,10 +2365,13 @@ const __ = (function () {
 					fn === 'outerWidth' ||
 					fn === 'height' ||
 					fn === 'outerHeight' ||
-					fn === 'maxDimension'
+					fn === 'maxDimension' ||
+					fn === 'allAttrs' ||
+					fn === 'scrollTop' ||
+					fn === 'scrollLeft'	
 
 				) {	
-					return (result === undefined) ? undefined : result[0];
+					return (result === undefined) ? undefined : ( typeof(result[0].data) !== 'undefined' ? result[0].data : result[0] );
 				}
 		
 				
@@ -2288,11 +2382,11 @@ const __ = (function () {
 				if (
 					fn === 'data' ||
 					fn === 'attr' ||
-					fn === 'prop' 
-
+					fn === 'prop'
 				) {	
 					
 					return (result === undefined) ? this : result[0];
+					
 				}
 		
 				

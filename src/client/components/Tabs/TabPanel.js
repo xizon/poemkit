@@ -15,7 +15,7 @@ export default class TabPanel extends Component {
 			...attributes
 		} = this.props;
 		
-		const activedClassName = typeof( defaultActive ) !== 'undefined' ? ' is-active' : '';
+		const activedClassName = typeof(defaultActive) !== 'undefined' ? ' is-active' : '';
 
 		
 		return (
