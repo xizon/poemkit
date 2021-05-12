@@ -6,9 +6,9 @@
  * ## Project Name        :  Uix Kit React
  * ## Project Description :  A free web kits with React for fast web design and development via SSR.
  * ## Project URL         :  https://uiux.cc
- * ## Version             :  0.0.31
+ * ## Version             :  0.0.32
  * ## Based on            :  Uix Kit React (https://github.com/xizon/uix-kit-react#readme)
- * ## Last Update         :  April 29, 2021
+ * ## Last Update         :  May 12, 2021
  * ## Created by          :  UIUX Lab (https://uiux.cc) (uiuxlab@gmail.com)
  * ## Released under the MIT license.
  * 	
@@ -27241,6 +27241,1454 @@ button.swiper-pagination-bullet {
   cursor: pointer;
   width: auto;
   height: 60px;
+}
+
+/* ======================================================
+   <!-- Table -->
+/* ====================================================== */
+/*
+ * 1. Generic
+*/
+/*
+ ---------------------------
+ 1. Generic
+ ---------------------------
+ */
+table.uix-table,
+.uix-table table {
+  margin: 0;
+  padding: 0;
+  border-collapse: collapse;
+  border-spacing: 0;
+  empty-cells: show;
+  border: 1px solid #EEEEEE;
+  width: 100%;
+  border-color: #EEEEEE;
+}
+
+table.uix-table caption,
+.uix-table table caption {
+  padding: 0.875rem 0;
+}
+
+table.uix-table th,
+table.uix-table td,
+.uix-table table th,
+.uix-table table td {
+  border-color: #EEEEEE;
+  border-left: 1px solid #EEEEEE;
+  border-width: 0 0 0 1px;
+  margin: 0;
+  overflow: visible;
+  padding: 0.5rem 0.75rem;
+  vertical-align: top;
+}
+
+table.uix-table thead,
+.uix-table table thead {
+  background: #FAFAFA;
+  vertical-align: bottom;
+}
+
+table.uix-table thead th,
+.uix-table table thead th {
+  text-align: inherit;
+  /* Required */
+  /* The breakpoint is the same as bootstrap 4 */
+  /*
+			--breakpoint-xs:0;
+			--breakpoint-sm:576px;
+			--breakpoint-md:768px;
+			--breakpoint-lg:992px;
+			--breakpoint-xl:1200px;
+			*/
+}
+
+table.uix-table thead th.uix-t-r,
+.uix-table table thead th.uix-t-r {
+  text-align: right;
+}
+
+table.uix-table thead th.uix-t-l,
+.uix-table table thead th.uix-t-l {
+  text-align: left;
+}
+
+table.uix-table thead th.uix-t-c,
+.uix-table table thead th.uix-t-c {
+  text-align: center;
+}
+
+@media all and (max-width: 576px) {
+  table.uix-table thead th.uix-t-r--sm,
+  .uix-table table thead th.uix-t-r--sm {
+    text-align: right;
+  }
+  table.uix-table thead th.uix-t-l--sm,
+  .uix-table table thead th.uix-t-l--sm {
+    text-align: left;
+  }
+  table.uix-table thead th.uix-t-c--sm,
+  .uix-table table thead th.uix-t-c--sm {
+    text-align: center;
+  }
+}
+
+@media all and (max-width: 768px) {
+  table.uix-table thead th.uix-t-r--md,
+  .uix-table table thead th.uix-t-r--md {
+    text-align: right;
+  }
+  table.uix-table thead th.uix-t-l--md,
+  .uix-table table thead th.uix-t-l--md {
+    text-align: left;
+  }
+  table.uix-table thead th.uix-t-c--md,
+  .uix-table table thead th.uix-t-c--md {
+    text-align: center;
+  }
+}
+
+@media all and (max-width: 992px) {
+  table.uix-table thead th.uix-t-r--lg,
+  .uix-table table thead th.uix-t-r--lg {
+    text-align: right;
+  }
+  table.uix-table thead th.uix-t-l--lg,
+  .uix-table table thead th.uix-t-l--lg {
+    text-align: left;
+  }
+  table.uix-table thead th.uix-t-c--lg,
+  .uix-table table thead th.uix-t-c--lg {
+    text-align: center;
+  }
+}
+
+@media all and (max-width: 1200px) {
+  table.uix-table thead th.uix-t-r--xl,
+  .uix-table table thead th.uix-t-r--xl {
+    text-align: right;
+  }
+  table.uix-table thead th.uix-t-l--xl,
+  .uix-table table thead th.uix-t-l--xl {
+    text-align: left;
+  }
+  table.uix-table thead th .uix-t-c--xl,
+  .uix-table table thead th .uix-t-c--xl {
+    text-align: center;
+  }
+}
+
+table.uix-table tfoot,
+.uix-table table tfoot {
+  border: 1px solid #EEEEEE;
+}
+
+table.uix-table td,
+.uix-table table td {
+  background-color: transparent;
+}
+
+/*-- Table Effect by Default --*/
+/* Compatible with  Uix Shortcodes (WordPress Plugin) and Block Button Link */
+.uix-table a:not(.uix-sc-btn):not(.wp-block-button__link):not(.uix-btn) {
+  color: #6B6BF6;
+}
+
+.uix-table a:not(.uix-sc-btn):not(.wp-block-button__link):not(.uix-btn):hover {
+  color: #7D7DFC;
+  text-decoration: underline;
+}
+
+.uix-table a:not(.uix-sc-btn):not(.wp-block-button__link):not(.uix-btn):hover img {
+  text-decoration: none;
+}
+
+@media all and (max-width: 768px) {
+  table.uix-table.is-responsive thead,
+  .uix-table.is-responsive table thead {
+    display: none;
+  }
+  table.uix-table.is-responsive tbody tr,
+  .uix-table.is-responsive table tbody tr {
+    box-shadow: rgba(0, 0, 0, 0.1) 0px 2px 4px 0px;
+    margin-bottom: 1rem;
+    display: block;
+  }
+  table.uix-table.is-responsive tbody td,
+  .uix-table.is-responsive table tbody td {
+    display: block;
+  }
+  table.uix-table.is-responsive tbody td::before,
+  .uix-table.is-responsive table tbody td::before {
+    content: attr(data-table);
+    display: block;
+    float: left;
+    width: 40%;
+    font-weight: bold;
+    border-right: 1px solid #EEEEEE;
+    margin-right: 0.5rem;
+  }
+  table.uix-table.is-responsive tbody td::after,
+  .uix-table.is-responsive table tbody td::after {
+    content: '';
+    display: block;
+    clear: both;
+  }
+  /* With scroll bars */
+  .js-uix-table--responsive-scrolled table,
+  table.js-uix-table--responsive-scrolled {
+    display: block;
+    width: 100%;
+    border-bottom: 0 !important;
+    border-left: 0 !important;
+    border-right: 0 !important;
+    overflow: auto;
+  }
+  .js-uix-table--responsive-scrolled table thead,
+  table.js-uix-table--responsive-scrolled thead {
+    display: block;
+    float: left;
+    width: 100px;
+    border-bottom: 1px solid #EEEEEE;
+  }
+  .js-uix-table--responsive-scrolled table thead th,
+  table.js-uix-table--responsive-scrolled thead th {
+    display: block;
+  }
+  .js-uix-table--responsive-scrolled table thead th:not(last-child),
+  table.js-uix-table--responsive-scrolled thead th:not(last-child) {
+    border-bottom: 0;
+  }
+  .js-uix-table--responsive-scrolled table tbody,
+  table.js-uix-table--responsive-scrolled tbody {
+    width: calc(100% - 100px);
+    display: block;
+    float: left;
+    overflow-x: scroll;
+    border-bottom: 1px solid #EEEEEE;
+    border-right: 1px solid #EEEEEE;
+  }
+  .js-uix-table--responsive-scrolled table thead tr,
+  .js-uix-table--responsive-scrolled table tbody tr,
+  table.js-uix-table--responsive-scrolled thead tr,
+  table.js-uix-table--responsive-scrolled tbody tr {
+    display: block;
+  }
+  .js-uix-table--responsive-scrolled table th,
+  .js-uix-table--responsive-scrolled table tbody td,
+  table.js-uix-table--responsive-scrolled th,
+  table.js-uix-table--responsive-scrolled tbody td {
+    box-sizing: border-box;
+    overflow-x: hidden;
+    overflow-y: auto;
+  }
+  .js-uix-table--responsive-scrolled table th:first-child,
+  .js-uix-table--responsive-scrolled table tbody td:first-child,
+  table.js-uix-table--responsive-scrolled th:first-child,
+  table.js-uix-table--responsive-scrolled tbody td:first-child {
+    border-top: 0;
+  }
+  .js-uix-table--responsive-scrolled table th:not(last-child),
+  .js-uix-table--responsive-scrolled table tbody td:not(last-child),
+  table.js-uix-table--responsive-scrolled th:not(last-child),
+  table.js-uix-table--responsive-scrolled tbody td:not(last-child) {
+    border-bottom: 0;
+    border-right: 0;
+  }
+  .js-uix-table--responsive-scrolled table tbody tr,
+  table.js-uix-table--responsive-scrolled tbody tr {
+    display: table-cell;
+  }
+  .js-uix-table--responsive-scrolled table tbody td,
+  table.js-uix-table--responsive-scrolled tbody td {
+    display: block;
+  }
+}
+
+table.uix-table--bordered,
+.uix-table--bordered table {
+  border: 1px solid #EEEEEE;
+  border-collapse: collapse;
+  width: 100%;
+}
+
+table.uix-table--bordered td,
+table.uix-table--bordered th,
+.uix-table--bordered table td,
+.uix-table--bordered table th {
+  border: 1px solid #EEEEEE;
+  padding: 0.6875rem;
+}
+
+table.uix-table--noborder,
+.uix-table--noborder table {
+  border: none;
+}
+
+table.uix-table--top-noborder td,
+.uix-table--top-noborder table td {
+  border-top: none;
+}
+
+table.uix-table--bottom-noborder td,
+.uix-table--bottom-noborder table td {
+  border-bottom: none;
+}
+
+table.uix-table--alternant-row tbody tr:nth-child(even),
+.uix-table--alternant-row table tbody tr:nth-child(even) {
+  background-color: #FAFAFA;
+}
+
+table.uix-table--alternant-col tbody tr td:first-child,
+.uix-table--alternant-col table tbody tr td:first-child {
+  color: #fff;
+}
+
+table.uix-table--alternant-col col:nth-child(odd),
+.uix-table--alternant-col table col:nth-child(odd) {
+  background-color: #FAFAFA;
+}
+
+table.uix-table--alternant-col col:first-child,
+.uix-table--alternant-col table col:first-child {
+  background-color: #000;
+}
+
+table.uix-table--striped tr:nth-child(2n-1) td,
+.uix-table--striped table tr:nth-child(2n-1) td {
+  background-color: #FAFAFA;
+}
+
+table.uix-table--per-line td,
+.uix-table--per-line table td {
+  border-bottom: 1px solid #EEEEEE;
+  border-width: 0 0 1px;
+}
+
+table.uix-table--per-line tbody tr:last-child td,
+.uix-table--per-line table tbody tr:last-child td {
+  border-bottom-width: 0;
+}
+
+table.is-horizontal td,
+.is-horizontal table td {
+  border-bottom: 1px solid #EEEEEE;
+  border-width: 0 0 1px;
+}
+
+table.is-horizontal tbody tr:last-child td,
+.is-horizontal table tbody tr:last-child td {
+  border-bottom-width: 0;
+}
+
+table.is-horizontal th,
+.is-horizontal table th {
+  border-bottom: 1px solid #EEEEEE;
+}
+
+@media all and (max-width: 768px) {
+  table.uix-table--per-line.is-responsive tbody tr:last-child td,
+  .uix-table--per-line.is-responsive table tbody tr:last-child td {
+    border-bottom-width: 1px;
+  }
+  table.is-horizontal.is-responsive tbody tr:last-child td,
+  .is-horizontal.is-responsive table tbody tr:last-child td {
+    border-bottom-width: 1px;
+  }
+}
+
+/* ======================================================
+   <!-- Table -->
+/* ====================================================== */
+/*
+ * 1. Generic
+*/
+/*
+ ---------------------------
+ 1. Generic
+ ---------------------------
+ */
+.rtl table.uix-table th,
+.rtl table.uix-table td,
+.rtl .uix-table table th,
+.rtl .uix-table table td {
+  border-left: none;
+  border-right: 1px solid #d6d5d5;
+}
+
+.rtl table.uix-table thead th,
+.rtl .uix-table table thead th {
+  /* The breakpoint is the same as bootstrap 4 */
+  /*
+			--breakpoint-xs:0;
+			--breakpoint-sm:576px;
+			--breakpoint-md:768px;
+			--breakpoint-lg:992px;
+			--breakpoint-xl:1200px;
+			*/
+}
+
+.rtl table.uix-table thead th.uix-t-r,
+.rtl .uix-table table thead th.uix-t-r {
+  text-align: left;
+}
+
+.rtl table.uix-table thead th.uix-t-l,
+.rtl .uix-table table thead th.uix-t-l {
+  text-align: right;
+}
+
+@media all and (max-width: 576px) {
+  .rtl table.uix-table thead th.uix-t-r--sm,
+  .rtl .uix-table table thead th.uix-t-r--sm {
+    text-align: left;
+  }
+  .rtl table.uix-table thead th.uix-t-l--sm,
+  .rtl .uix-table table thead th.uix-t-l--sm {
+    text-align: right;
+  }
+}
+
+@media all and (max-width: 768px) {
+  .rtl table.uix-table thead th.uix-t-r--md,
+  .rtl .uix-table table thead th.uix-t-r--md {
+    text-align: left;
+  }
+  .rtl table.uix-table thead th.uix-t-l--md,
+  .rtl .uix-table table thead th.uix-t-l--md {
+    text-align: right;
+  }
+}
+
+@media all and (max-width: 992px) {
+  .rtl table.uix-table thead th.uix-t-r--lg,
+  .rtl .uix-table table thead th.uix-t-r--lg {
+    text-align: left;
+  }
+  .rtl table.uix-table thead th.uix-t-l--lg,
+  .rtl .uix-table table thead th.uix-t-l--lg {
+    text-align: right;
+  }
+}
+
+@media all and (max-width: 1200px) {
+  .rtl table.uix-table thead th.uix-t-r--xl,
+  .rtl .uix-table table thead th.uix-t-r--xl {
+    text-align: left;
+  }
+  .rtl table.uix-table thead th.uix-t-l--xl,
+  .rtl .uix-table table thead th.uix-t-l--xl {
+    text-align: right;
+  }
+}
+
+@media all and (max-width: 768px) {
+  .rtl table.uix-table.is-responsive tbody td::before,
+  .rtl .uix-table.is-responsive table tbody td::before {
+    float: right;
+    border-left: 1px solid #d6d5d5;
+    margin-right: auto;
+    margin-left: 0.5rem;
+  }
+  /* With scroll bars */
+  .rtl .js-uix-table--responsive-scrolled table thead,
+  .rtl table.js-uix-table--responsive-scrolled thead {
+    float: right;
+  }
+  .rtl .js-uix-table--responsive-scrolled table tbody,
+  .rtl table.js-uix-table--responsive-scrolled tbody {
+    float: right;
+    border-left: 1px solid #d6d5d5;
+  }
+  .rtl .js-uix-table--responsive-scrolled table th:not(last-child),
+  .rtl .js-uix-table--responsive-scrolled table tbody td:not(last-child),
+  .rtl table.js-uix-table--responsive-scrolled th:not(last-child),
+  .rtl table.js-uix-table--responsive-scrolled tbody td:not(last-child) {
+    border-left: 0;
+  }
+}
+
+/* ======================================================
+   <!-- Table Grid -->
+/* ====================================================== */
+/*
+ * 1. Row Dropzone
+*/
+/*
+ ---------------------------
+ 1. Row Dropzone
+ ---------------------------
+ */
+.uix-table-grid {
+  border-collapse: separate;
+  border-spacing: 0;
+}
+
+.uix-table-grid .uix-table-grid__head {
+  display: flex;
+}
+
+.uix-table-grid .uix-table-grid__head .uix-table-grid__head-cell {
+  flex: 1;
+  /* default value, this attribute can be specified in HTML */
+  box-sizing: border-box;
+  text-align: start;
+  font-size: 0.875rem;
+  font-weight: bold;
+  line-height: 1.71428571429;
+  text-transform: uppercase;
+  outline: 0;
+  padding: .5rem 1rem;
+  color: #AEAEAE;
+}
+
+.uix-table-grid .uix-table-grid__body {
+  position: relative;
+  border: 1px #EEEEEE solid;
+  border-radius: 3px;
+  overflow: auto;
+  vertical-align: middle;
+  background-color: #FAFAFA;
+  margin-top: 1rem;
+}
+
+.uix-table-grid .uix-table-grid__row {
+  display: flex;
+  position: relative;
+  cursor: pointer;
+  border-bottom: 1px solid #EEEEEE;
+  transition: all 0.3s ease;
+  /* Helper for shared drop target overlay */
+}
+
+.uix-table-grid .uix-table-grid__row:focus {
+  outline: 0;
+}
+
+.uix-table-grid .uix-table-grid__row.is-drop-target {
+  border-radius: 3px;
+}
+
+.uix-table-grid .uix-table-grid__row.is-drop-target::before {
+  content: '';
+  position: absolute;
+  height: 100%;
+  width: 100%;
+  z-index: 1;
+  box-shadow: inset 0 0 0 2px #378ef0;
+}
+
+.uix-table-grid .uix-table-grid__row .uix-table-grid__row-cell {
+  flex: 1;
+  /* default value, this attribute can be specified in HTML */
+  font-size: 1rem;
+  padding: .5rem 1rem;
+}
+
+/* ======================================================
+   <!-- Table Sorter -->
+/* ====================================================== */
+/* ======================================================
+   <!-- Table -->
+/* ====================================================== */
+/*
+ * 1. Generic
+*/
+/*
+ ---------------------------
+ 1. Generic
+ ---------------------------
+ */
+table.uix-table,
+.uix-table table {
+  margin: 0;
+  padding: 0;
+  border-collapse: collapse;
+  border-spacing: 0;
+  empty-cells: show;
+  border: 1px solid #EEEEEE;
+  width: 100%;
+  border-color: #EEEEEE;
+}
+
+table.uix-table caption,
+.uix-table table caption {
+  padding: 0.875rem 0;
+}
+
+table.uix-table th,
+table.uix-table td,
+.uix-table table th,
+.uix-table table td {
+  border-color: #EEEEEE;
+  border-left: 1px solid #EEEEEE;
+  border-width: 0 0 0 1px;
+  margin: 0;
+  overflow: visible;
+  padding: 0.5rem 0.75rem;
+  vertical-align: top;
+}
+
+table.uix-table thead,
+.uix-table table thead {
+  background: #FAFAFA;
+  vertical-align: bottom;
+}
+
+table.uix-table thead th,
+.uix-table table thead th {
+  text-align: inherit;
+  /* Required */
+  /* The breakpoint is the same as bootstrap 4 */
+  /*
+			--breakpoint-xs:0;
+			--breakpoint-sm:576px;
+			--breakpoint-md:768px;
+			--breakpoint-lg:992px;
+			--breakpoint-xl:1200px;
+			*/
+}
+
+table.uix-table thead th.uix-t-r,
+.uix-table table thead th.uix-t-r {
+  text-align: right;
+}
+
+table.uix-table thead th.uix-t-l,
+.uix-table table thead th.uix-t-l {
+  text-align: left;
+}
+
+table.uix-table thead th.uix-t-c,
+.uix-table table thead th.uix-t-c {
+  text-align: center;
+}
+
+@media all and (max-width: 576px) {
+  table.uix-table thead th.uix-t-r--sm,
+  .uix-table table thead th.uix-t-r--sm {
+    text-align: right;
+  }
+  table.uix-table thead th.uix-t-l--sm,
+  .uix-table table thead th.uix-t-l--sm {
+    text-align: left;
+  }
+  table.uix-table thead th.uix-t-c--sm,
+  .uix-table table thead th.uix-t-c--sm {
+    text-align: center;
+  }
+}
+
+@media all and (max-width: 768px) {
+  table.uix-table thead th.uix-t-r--md,
+  .uix-table table thead th.uix-t-r--md {
+    text-align: right;
+  }
+  table.uix-table thead th.uix-t-l--md,
+  .uix-table table thead th.uix-t-l--md {
+    text-align: left;
+  }
+  table.uix-table thead th.uix-t-c--md,
+  .uix-table table thead th.uix-t-c--md {
+    text-align: center;
+  }
+}
+
+@media all and (max-width: 992px) {
+  table.uix-table thead th.uix-t-r--lg,
+  .uix-table table thead th.uix-t-r--lg {
+    text-align: right;
+  }
+  table.uix-table thead th.uix-t-l--lg,
+  .uix-table table thead th.uix-t-l--lg {
+    text-align: left;
+  }
+  table.uix-table thead th.uix-t-c--lg,
+  .uix-table table thead th.uix-t-c--lg {
+    text-align: center;
+  }
+}
+
+@media all and (max-width: 1200px) {
+  table.uix-table thead th.uix-t-r--xl,
+  .uix-table table thead th.uix-t-r--xl {
+    text-align: right;
+  }
+  table.uix-table thead th.uix-t-l--xl,
+  .uix-table table thead th.uix-t-l--xl {
+    text-align: left;
+  }
+  table.uix-table thead th .uix-t-c--xl,
+  .uix-table table thead th .uix-t-c--xl {
+    text-align: center;
+  }
+}
+
+table.uix-table tfoot,
+.uix-table table tfoot {
+  border: 1px solid #EEEEEE;
+}
+
+table.uix-table td,
+.uix-table table td {
+  background-color: transparent;
+}
+
+/*-- Table Effect by Default --*/
+/* Compatible with  Uix Shortcodes (WordPress Plugin) and Block Button Link */
+.uix-table a:not(.uix-sc-btn):not(.wp-block-button__link):not(.uix-btn) {
+  color: #6B6BF6;
+}
+
+.uix-table a:not(.uix-sc-btn):not(.wp-block-button__link):not(.uix-btn):hover {
+  color: #7D7DFC;
+  text-decoration: underline;
+}
+
+.uix-table a:not(.uix-sc-btn):not(.wp-block-button__link):not(.uix-btn):hover img {
+  text-decoration: none;
+}
+
+@media all and (max-width: 768px) {
+  table.uix-table.is-responsive thead,
+  .uix-table.is-responsive table thead {
+    display: none;
+  }
+  table.uix-table.is-responsive tbody tr,
+  .uix-table.is-responsive table tbody tr {
+    box-shadow: rgba(0, 0, 0, 0.1) 0px 2px 4px 0px;
+    margin-bottom: 1rem;
+    display: block;
+  }
+  table.uix-table.is-responsive tbody td,
+  .uix-table.is-responsive table tbody td {
+    display: block;
+  }
+  table.uix-table.is-responsive tbody td::before,
+  .uix-table.is-responsive table tbody td::before {
+    content: attr(data-table);
+    display: block;
+    float: left;
+    width: 40%;
+    font-weight: bold;
+    border-right: 1px solid #EEEEEE;
+    margin-right: 0.5rem;
+  }
+  table.uix-table.is-responsive tbody td::after,
+  .uix-table.is-responsive table tbody td::after {
+    content: '';
+    display: block;
+    clear: both;
+  }
+  /* With scroll bars */
+  .js-uix-table--responsive-scrolled table,
+  table.js-uix-table--responsive-scrolled {
+    display: block;
+    width: 100%;
+    border-bottom: 0 !important;
+    border-left: 0 !important;
+    border-right: 0 !important;
+    overflow: auto;
+  }
+  .js-uix-table--responsive-scrolled table thead,
+  table.js-uix-table--responsive-scrolled thead {
+    display: block;
+    float: left;
+    width: 100px;
+    border-bottom: 1px solid #EEEEEE;
+  }
+  .js-uix-table--responsive-scrolled table thead th,
+  table.js-uix-table--responsive-scrolled thead th {
+    display: block;
+  }
+  .js-uix-table--responsive-scrolled table thead th:not(last-child),
+  table.js-uix-table--responsive-scrolled thead th:not(last-child) {
+    border-bottom: 0;
+  }
+  .js-uix-table--responsive-scrolled table tbody,
+  table.js-uix-table--responsive-scrolled tbody {
+    width: calc(100% - 100px);
+    display: block;
+    float: left;
+    overflow-x: scroll;
+    border-bottom: 1px solid #EEEEEE;
+    border-right: 1px solid #EEEEEE;
+  }
+  .js-uix-table--responsive-scrolled table thead tr,
+  .js-uix-table--responsive-scrolled table tbody tr,
+  table.js-uix-table--responsive-scrolled thead tr,
+  table.js-uix-table--responsive-scrolled tbody tr {
+    display: block;
+  }
+  .js-uix-table--responsive-scrolled table th,
+  .js-uix-table--responsive-scrolled table tbody td,
+  table.js-uix-table--responsive-scrolled th,
+  table.js-uix-table--responsive-scrolled tbody td {
+    box-sizing: border-box;
+    overflow-x: hidden;
+    overflow-y: auto;
+  }
+  .js-uix-table--responsive-scrolled table th:first-child,
+  .js-uix-table--responsive-scrolled table tbody td:first-child,
+  table.js-uix-table--responsive-scrolled th:first-child,
+  table.js-uix-table--responsive-scrolled tbody td:first-child {
+    border-top: 0;
+  }
+  .js-uix-table--responsive-scrolled table th:not(last-child),
+  .js-uix-table--responsive-scrolled table tbody td:not(last-child),
+  table.js-uix-table--responsive-scrolled th:not(last-child),
+  table.js-uix-table--responsive-scrolled tbody td:not(last-child) {
+    border-bottom: 0;
+    border-right: 0;
+  }
+  .js-uix-table--responsive-scrolled table tbody tr,
+  table.js-uix-table--responsive-scrolled tbody tr {
+    display: table-cell;
+  }
+  .js-uix-table--responsive-scrolled table tbody td,
+  table.js-uix-table--responsive-scrolled tbody td {
+    display: block;
+  }
+}
+
+table.uix-table--bordered,
+.uix-table--bordered table {
+  border: 1px solid #EEEEEE;
+  border-collapse: collapse;
+  width: 100%;
+}
+
+table.uix-table--bordered td,
+table.uix-table--bordered th,
+.uix-table--bordered table td,
+.uix-table--bordered table th {
+  border: 1px solid #EEEEEE;
+  padding: 0.6875rem;
+}
+
+table.uix-table--noborder,
+.uix-table--noborder table {
+  border: none;
+}
+
+table.uix-table--top-noborder td,
+.uix-table--top-noborder table td {
+  border-top: none;
+}
+
+table.uix-table--bottom-noborder td,
+.uix-table--bottom-noborder table td {
+  border-bottom: none;
+}
+
+table.uix-table--alternant-row tbody tr:nth-child(even),
+.uix-table--alternant-row table tbody tr:nth-child(even) {
+  background-color: #FAFAFA;
+}
+
+table.uix-table--alternant-col tbody tr td:first-child,
+.uix-table--alternant-col table tbody tr td:first-child {
+  color: #fff;
+}
+
+table.uix-table--alternant-col col:nth-child(odd),
+.uix-table--alternant-col table col:nth-child(odd) {
+  background-color: #FAFAFA;
+}
+
+table.uix-table--alternant-col col:first-child,
+.uix-table--alternant-col table col:first-child {
+  background-color: #000;
+}
+
+table.uix-table--striped tr:nth-child(2n-1) td,
+.uix-table--striped table tr:nth-child(2n-1) td {
+  background-color: #FAFAFA;
+}
+
+table.uix-table--per-line td,
+.uix-table--per-line table td {
+  border-bottom: 1px solid #EEEEEE;
+  border-width: 0 0 1px;
+}
+
+table.uix-table--per-line tbody tr:last-child td,
+.uix-table--per-line table tbody tr:last-child td {
+  border-bottom-width: 0;
+}
+
+table.is-horizontal td,
+.is-horizontal table td {
+  border-bottom: 1px solid #EEEEEE;
+  border-width: 0 0 1px;
+}
+
+table.is-horizontal tbody tr:last-child td,
+.is-horizontal table tbody tr:last-child td {
+  border-bottom-width: 0;
+}
+
+table.is-horizontal th,
+.is-horizontal table th {
+  border-bottom: 1px solid #EEEEEE;
+}
+
+@media all and (max-width: 768px) {
+  table.uix-table--per-line.is-responsive tbody tr:last-child td,
+  .uix-table--per-line.is-responsive table tbody tr:last-child td {
+    border-bottom-width: 1px;
+  }
+  table.is-horizontal.is-responsive tbody tr:last-child td,
+  .is-horizontal.is-responsive table tbody tr:last-child td {
+    border-bottom-width: 1px;
+  }
+}
+
+.uix-table-sorter {
+  cursor: pointer;
+}
+
+.uix-table-sorter::after {
+  content: '';
+  font-family: 'Font Awesome 5 Free';
+  font-weight: 600;
+  color: #AEAEAE;
+  margin-left: .5rem;
+  font-size: 0.75rem;
+  content: "\f0dc";
+}
+
+.js-uix-newsort {
+  animation: uix-cssAnim--newsort .5s linear 1 forwards;
+  opacity: 0;
+}
+
+.js-uix-newsort:nth-child(2) {
+  animation-delay: 100ms;
+}
+
+.js-uix-newsort:nth-child(3) {
+  animation-delay: 200ms;
+}
+
+.js-uix-newsort:nth-child(4) {
+  animation-delay: 300ms;
+}
+
+.js-uix-newsort:nth-child(5) {
+  animation-delay: 400ms;
+}
+
+.js-uix-newsort:nth-child(6) {
+  animation-delay: 500ms;
+}
+
+.js-uix-newsort:nth-child(7) {
+  animation-delay: 600ms;
+}
+
+.js-uix-newsort:nth-child(8) {
+  animation-delay: 700ms;
+}
+
+.js-uix-newsort:nth-child(9) {
+  animation-delay: 800ms;
+}
+
+.js-uix-newsort:nth-child(10) {
+  animation-delay: 900ms;
+}
+
+.js-uix-newsort:nth-child(11) {
+  animation-delay: 1000ms;
+}
+
+.js-uix-newsort:nth-child(12) {
+  animation-delay: 1100ms;
+}
+
+.js-uix-newsort:nth-child(13) {
+  animation-delay: 1200ms;
+}
+
+.js-uix-newsort:nth-child(14) {
+  animation-delay: 1300ms;
+}
+
+.js-uix-newsort:nth-child(15) {
+  animation-delay: 1400ms;
+}
+
+.js-uix-newsort:nth-child(16) {
+  animation-delay: 1500ms;
+}
+
+.js-uix-newsort:nth-child(17) {
+  animation-delay: 1600ms;
+}
+
+.js-uix-newsort:nth-child(18) {
+  animation-delay: 1700ms;
+}
+
+.js-uix-newsort:nth-child(19) {
+  animation-delay: 1800ms;
+}
+
+.js-uix-newsort:nth-child(20) {
+  animation-delay: 1900ms;
+}
+
+.js-uix-newsort:nth-child(21) {
+  animation-delay: 2000ms;
+}
+
+.js-uix-newsort:nth-child(22) {
+  animation-delay: 2100ms;
+}
+
+.js-uix-newsort:nth-child(23) {
+  animation-delay: 2200ms;
+}
+
+.js-uix-newsort:nth-child(24) {
+  animation-delay: 2300ms;
+}
+
+.js-uix-newsort:nth-child(25) {
+  animation-delay: 2400ms;
+}
+
+.js-uix-newsort:nth-child(26) {
+  animation-delay: 2500ms;
+}
+
+.js-uix-newsort:nth-child(27) {
+  animation-delay: 2600ms;
+}
+
+.js-uix-newsort:nth-child(28) {
+  animation-delay: 2700ms;
+}
+
+.js-uix-newsort:nth-child(29) {
+  animation-delay: 2800ms;
+}
+
+.js-uix-newsort:nth-child(30) {
+  animation-delay: 2900ms;
+}
+
+.js-uix-newsort:nth-child(31) {
+  animation-delay: 3000ms;
+}
+
+.js-uix-newsort:nth-child(32) {
+  animation-delay: 3100ms;
+}
+
+.js-uix-newsort:nth-child(33) {
+  animation-delay: 3200ms;
+}
+
+.js-uix-newsort:nth-child(34) {
+  animation-delay: 3300ms;
+}
+
+.js-uix-newsort:nth-child(35) {
+  animation-delay: 3400ms;
+}
+
+.js-uix-newsort:nth-child(36) {
+  animation-delay: 3500ms;
+}
+
+.js-uix-newsort:nth-child(37) {
+  animation-delay: 3600ms;
+}
+
+.js-uix-newsort:nth-child(38) {
+  animation-delay: 3700ms;
+}
+
+.js-uix-newsort:nth-child(39) {
+  animation-delay: 3800ms;
+}
+
+.js-uix-newsort:nth-child(40) {
+  animation-delay: 3900ms;
+}
+
+.js-uix-newsort:nth-child(41) {
+  animation-delay: 4000ms;
+}
+
+.js-uix-newsort:nth-child(42) {
+  animation-delay: 4100ms;
+}
+
+.js-uix-newsort:nth-child(43) {
+  animation-delay: 4200ms;
+}
+
+.js-uix-newsort:nth-child(44) {
+  animation-delay: 4300ms;
+}
+
+.js-uix-newsort:nth-child(45) {
+  animation-delay: 4400ms;
+}
+
+.js-uix-newsort:nth-child(46) {
+  animation-delay: 4500ms;
+}
+
+.js-uix-newsort:nth-child(47) {
+  animation-delay: 4600ms;
+}
+
+.js-uix-newsort:nth-child(48) {
+  animation-delay: 4700ms;
+}
+
+.js-uix-newsort:nth-child(49) {
+  animation-delay: 4800ms;
+}
+
+.js-uix-newsort:nth-child(50) {
+  animation-delay: 4900ms;
+}
+
+.js-uix-newsort:nth-child(51) {
+  animation-delay: 5000ms;
+}
+
+.js-uix-newsort:nth-child(52) {
+  animation-delay: 5100ms;
+}
+
+.js-uix-newsort:nth-child(53) {
+  animation-delay: 5200ms;
+}
+
+.js-uix-newsort:nth-child(54) {
+  animation-delay: 5300ms;
+}
+
+.js-uix-newsort:nth-child(55) {
+  animation-delay: 5400ms;
+}
+
+.js-uix-newsort:nth-child(56) {
+  animation-delay: 5500ms;
+}
+
+.js-uix-newsort:nth-child(57) {
+  animation-delay: 5600ms;
+}
+
+.js-uix-newsort:nth-child(58) {
+  animation-delay: 5700ms;
+}
+
+.js-uix-newsort:nth-child(59) {
+  animation-delay: 5800ms;
+}
+
+.js-uix-newsort:nth-child(60) {
+  animation-delay: 5900ms;
+}
+
+.js-uix-newsort:nth-child(61) {
+  animation-delay: 6000ms;
+}
+
+.js-uix-newsort:nth-child(62) {
+  animation-delay: 6100ms;
+}
+
+.js-uix-newsort:nth-child(63) {
+  animation-delay: 6200ms;
+}
+
+.js-uix-newsort:nth-child(64) {
+  animation-delay: 6300ms;
+}
+
+.js-uix-newsort:nth-child(65) {
+  animation-delay: 6400ms;
+}
+
+.js-uix-newsort:nth-child(66) {
+  animation-delay: 6500ms;
+}
+
+.js-uix-newsort:nth-child(67) {
+  animation-delay: 6600ms;
+}
+
+.js-uix-newsort:nth-child(68) {
+  animation-delay: 6700ms;
+}
+
+.js-uix-newsort:nth-child(69) {
+  animation-delay: 6800ms;
+}
+
+.js-uix-newsort:nth-child(70) {
+  animation-delay: 6900ms;
+}
+
+.js-uix-newsort:nth-child(71) {
+  animation-delay: 7000ms;
+}
+
+.js-uix-newsort:nth-child(72) {
+  animation-delay: 7100ms;
+}
+
+.js-uix-newsort:nth-child(73) {
+  animation-delay: 7200ms;
+}
+
+.js-uix-newsort:nth-child(74) {
+  animation-delay: 7300ms;
+}
+
+.js-uix-newsort:nth-child(75) {
+  animation-delay: 7400ms;
+}
+
+.js-uix-newsort:nth-child(76) {
+  animation-delay: 7500ms;
+}
+
+.js-uix-newsort:nth-child(77) {
+  animation-delay: 7600ms;
+}
+
+.js-uix-newsort:nth-child(78) {
+  animation-delay: 7700ms;
+}
+
+.js-uix-newsort:nth-child(79) {
+  animation-delay: 7800ms;
+}
+
+.js-uix-newsort:nth-child(80) {
+  animation-delay: 7900ms;
+}
+
+.js-uix-newsort:nth-child(81) {
+  animation-delay: 8000ms;
+}
+
+.js-uix-newsort:nth-child(82) {
+  animation-delay: 8100ms;
+}
+
+.js-uix-newsort:nth-child(83) {
+  animation-delay: 8200ms;
+}
+
+.js-uix-newsort:nth-child(84) {
+  animation-delay: 8300ms;
+}
+
+.js-uix-newsort:nth-child(85) {
+  animation-delay: 8400ms;
+}
+
+.js-uix-newsort:nth-child(86) {
+  animation-delay: 8500ms;
+}
+
+.js-uix-newsort:nth-child(87) {
+  animation-delay: 8600ms;
+}
+
+.js-uix-newsort:nth-child(88) {
+  animation-delay: 8700ms;
+}
+
+.js-uix-newsort:nth-child(89) {
+  animation-delay: 8800ms;
+}
+
+.js-uix-newsort:nth-child(90) {
+  animation-delay: 8900ms;
+}
+
+.js-uix-newsort:nth-child(91) {
+  animation-delay: 9000ms;
+}
+
+.js-uix-newsort:nth-child(92) {
+  animation-delay: 9100ms;
+}
+
+.js-uix-newsort:nth-child(93) {
+  animation-delay: 9200ms;
+}
+
+.js-uix-newsort:nth-child(94) {
+  animation-delay: 9300ms;
+}
+
+.js-uix-newsort:nth-child(95) {
+  animation-delay: 9400ms;
+}
+
+.js-uix-newsort:nth-child(96) {
+  animation-delay: 9500ms;
+}
+
+.js-uix-newsort:nth-child(97) {
+  animation-delay: 9600ms;
+}
+
+.js-uix-newsort:nth-child(98) {
+  animation-delay: 9700ms;
+}
+
+.js-uix-newsort:nth-child(99) {
+  animation-delay: 9800ms;
+}
+
+.js-uix-newsort:nth-child(100) {
+  animation-delay: 9900ms;
+}
+
+@keyframes uix-cssAnim--newsort {
+  0% {
+    opacity: 0;
+    transform: translateX(10px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+/* ======================================================
+   <!-- Table Sorter -->
+/* ====================================================== */
+/* ======================================================
+   <!-- Table -->
+/* ====================================================== */
+/*
+ * 1. Generic
+*/
+/*
+ ---------------------------
+ 1. Generic
+ ---------------------------
+ */
+.rtl table.uix-table th,
+.rtl table.uix-table td,
+.rtl .uix-table table th,
+.rtl .uix-table table td {
+  border-left: none;
+  border-right: 1px solid #d6d5d5;
+}
+
+.rtl table.uix-table thead th,
+.rtl .uix-table table thead th {
+  /* The breakpoint is the same as bootstrap 4 */
+  /*
+			--breakpoint-xs:0;
+			--breakpoint-sm:576px;
+			--breakpoint-md:768px;
+			--breakpoint-lg:992px;
+			--breakpoint-xl:1200px;
+			*/
+}
+
+.rtl table.uix-table thead th.uix-t-r,
+.rtl .uix-table table thead th.uix-t-r {
+  text-align: left;
+}
+
+.rtl table.uix-table thead th.uix-t-l,
+.rtl .uix-table table thead th.uix-t-l {
+  text-align: right;
+}
+
+@media all and (max-width: 576px) {
+  .rtl table.uix-table thead th.uix-t-r--sm,
+  .rtl .uix-table table thead th.uix-t-r--sm {
+    text-align: left;
+  }
+  .rtl table.uix-table thead th.uix-t-l--sm,
+  .rtl .uix-table table thead th.uix-t-l--sm {
+    text-align: right;
+  }
+}
+
+@media all and (max-width: 768px) {
+  .rtl table.uix-table thead th.uix-t-r--md,
+  .rtl .uix-table table thead th.uix-t-r--md {
+    text-align: left;
+  }
+  .rtl table.uix-table thead th.uix-t-l--md,
+  .rtl .uix-table table thead th.uix-t-l--md {
+    text-align: right;
+  }
+}
+
+@media all and (max-width: 992px) {
+  .rtl table.uix-table thead th.uix-t-r--lg,
+  .rtl .uix-table table thead th.uix-t-r--lg {
+    text-align: left;
+  }
+  .rtl table.uix-table thead th.uix-t-l--lg,
+  .rtl .uix-table table thead th.uix-t-l--lg {
+    text-align: right;
+  }
+}
+
+@media all and (max-width: 1200px) {
+  .rtl table.uix-table thead th.uix-t-r--xl,
+  .rtl .uix-table table thead th.uix-t-r--xl {
+    text-align: left;
+  }
+  .rtl table.uix-table thead th.uix-t-l--xl,
+  .rtl .uix-table table thead th.uix-t-l--xl {
+    text-align: right;
+  }
+}
+
+@media all and (max-width: 768px) {
+  .rtl table.uix-table.is-responsive tbody td::before,
+  .rtl .uix-table.is-responsive table tbody td::before {
+    float: right;
+    border-left: 1px solid #d6d5d5;
+    margin-right: auto;
+    margin-left: 0.5rem;
+  }
+  /* With scroll bars */
+  .rtl .js-uix-table--responsive-scrolled table thead,
+  .rtl table.js-uix-table--responsive-scrolled thead {
+    float: right;
+  }
+  .rtl .js-uix-table--responsive-scrolled table tbody,
+  .rtl table.js-uix-table--responsive-scrolled tbody {
+    float: right;
+    border-left: 1px solid #d6d5d5;
+  }
+  .rtl .js-uix-table--responsive-scrolled table th:not(last-child),
+  .rtl .js-uix-table--responsive-scrolled table tbody td:not(last-child),
+  .rtl table.js-uix-table--responsive-scrolled th:not(last-child),
+  .rtl table.js-uix-table--responsive-scrolled tbody td:not(last-child) {
+    border-left: 0;
+  }
+}
+
+.rtl .uix-table-sorter::after {
+  margin-left: auto;
+  margin-right: .5rem;
 }
 
 

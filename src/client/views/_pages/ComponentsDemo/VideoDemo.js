@@ -22,7 +22,7 @@ export default () => {
 							<div className="col-12">
 								<h1 className="uix-t-c">
 									Video 
-									<a className="uix-typo--h3 align-middle" href="https://github.com/xizon/uix-kit-react/tree/master/src/client/components/Video" target="_blank"><code><i className="fa fa-code" aria-hidden="true"></i></code></a>
+									<a className="uix-typo--h3 align-middle" href="https://github.com/xizon/uix-kit-react/tree/main/src/client/components/Video" target="_blank"><code><i className="fa fa-code" aria-hidden="true"></i></code></a>
 								</h1>
 							</div>
 						</div>

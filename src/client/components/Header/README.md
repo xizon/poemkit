@@ -1,6 +1,6 @@
 # @uixkit.react/components/Header
 
-[Source](https://github.com/xizon/uix-kit-react/tree/master/src/client/components/Header)
+[Source](https://github.com/xizon/uix-kit-react/tree/main/src/client/components/Header)
 
 ## Version
 

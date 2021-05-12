@@ -1,6 +1,6 @@
 # @uixkit.react/components/Footer
 
-[Source](https://github.com/xizon/uix-kit-react/tree/master/src/client/components/Footer)
+[Source](https://github.com/xizon/uix-kit-react/tree/main/src/client/components/Footer)
 
 ## Version
 

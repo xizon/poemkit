@@ -1,6 +1,6 @@
 # @uixkit.react/components/Tabs
 
-[Source](https://github.com/xizon/uix-kit-react/tree/master/src/client/components/Tabs)
+[Source](https://github.com/xizon/uix-kit-react/tree/main/src/client/components/Tabs)
 
 ## Version
 

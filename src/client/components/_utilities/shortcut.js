@@ -4,8 +4,8 @@
  * Core Shortcut
  *
  * @package: uix-kit-react
- * @version: 0.20
- * @last update: April 29, 2021
+ * @version: 0.21
+ * @last update: May 11, 2021
  * @license: MIT
  *
  *************************************
@@ -69,7 +69,14 @@ __( document ).ready( function() {
 			__( '.demo' ).attr( 'disabled', 'disabled' );
 			__( '.demo' ).width( 300 );
 			__( '.menu li:first-child' ).width( "50%" );
-
+			
+			if( __( '.demo' ).data( 'activated' ) === null ) {
+			   //do something...
+			}
+			if( __( '.demo' ).attr( 'data-activated' ) === null ) {
+			   //do something...
+			}	
+			
 			
 
 			__( '.menu li' ).off( 'click' ).on( 'click', function( e ) {
@@ -92,9 +99,11 @@ __( document ).ready( function() {
 			__( '.menu li' ).eq(1).prepend( '<span style="color:red">before</span>');
 			__( '.menu li' ).first().before( '<li style="color:green">(first)before</li>');
 			__( '.menu li' ).last().after( '<li style="color:red">(last)after</li>');
+			__( 'h1' ).wrapInner( '<span class="new-div" />' );
 			__( 'h1' ).html( '<span style="color:red">New H1</span>' );
 			__( '.demo1' ).prev().addClass( 'prev' );
 			__( '.demo2' ).next().addClass( 'next' );
+			__( '.demo3' ).parent().addClass( 'parent' );
 			__( '.demo' ).children().addClass( 'children-all' );
 			__( '.demo' ).children( '.demo-children2' ).addClass( 'children-single' );
 			__( '.class-1' ).not( '.class-2' ).addClass( 'class-not' );
@@ -1203,17 +1212,20 @@ const __ = (function () {
 	 * @return {Void}
 	 */
 	__.prototype.append = function(el) {
-
-		// Just inside the element, after its last child.
-		if(document.createElement("div").insertAdjacentHTML) {
-			this.insertAdjacentHTML("beforeend", el);
-			return this;
-		}
 		
-	
-		//
-		const html = (typeof(el) === 'string') ? el : el.outerHTML;
-		this.innerHTML += html;
+		if ( typeof(el) === 'string' ) {
+
+			// Just inside the element, after its last child.
+			if(document.createElement("div").insertAdjacentHTML) {
+				this.insertAdjacentHTML("beforeend", el);
+				return this;
+			}	
+		} else {
+			const html = (typeof(el) === 'string') ? el : el.outerHTML;
+			this.innerHTML += html;
+		}
+
+
 	};
 
 	
@@ -1225,15 +1237,19 @@ const __ = (function () {
 	 */
 	__.prototype.prepend = function(el) {
 		
-		// Just inside the element, before its first child.
-		if(document.createElement("div").insertAdjacentHTML) {
-			this.insertAdjacentHTML("afterbegin", el);
-			return this;
+		if ( typeof(el) === 'string' ) {
+			
+			// Just inside the element, before its first child.
+			if(document.createElement("div").insertAdjacentHTML) {
+				this.insertAdjacentHTML("afterbegin", el);
+				return this;
+			}	
+		} else {
+			
+			const html = (typeof(el) === 'string') ? el : el.outerHTML;
+			this.innerHTML = html + this.innerHTML;	
 		}
-
-		//
-		const html = (typeof(el) === 'string') ? el : el.outerHTML;
-		this.innerHTML = html + this.innerHTML;
+		
 	};
 
 	
@@ -1269,6 +1285,63 @@ const __ = (function () {
 	
     }
 	
+	
+	/*
+	 * Wrap an HTML structure around the content of each element in the set of matched elements.
+	 *
+	 * @param  {String} el   - An HTML snippet.
+	 * @return {Void}
+	 */
+    __.prototype.wrapInner = function(el) {
+
+		//get old value
+		const val = this.innerHTML;
+
+		//empty default value
+		this.innerHTML = '';
+
+		//The DOMParser() method is awesome, but the parseFromString() method stops at IE10.
+		const support = (function() {
+			if (!window.DOMParser) return false;
+			const parser = new DOMParser();
+			try {
+				parser.parseFromString('x', 'text/html');
+			} catch(err) {
+				return false;
+			}
+			return true;
+		})();
+
+		//Convert a template string into HTML DOM nodes
+		const stringToHTML = function stringToHTML(str) {
+
+			// If DOMParser is supported, use it
+			if (support) {
+				const parser = new DOMParser();
+				const doc = parser.parseFromString(str, 'text/html');
+				const res = doc.body;
+				return res.children[0];
+			}
+
+			// Otherwise, fallback to old-school method
+			const dom = document.createElement('div');
+			dom.innerHTML = str;
+			const res = dom;
+			return res.children[0];
+		};
+
+		if (typeof el === 'string') {
+			const div = this.appendChild(stringToHTML(el));
+			div.innerHTML = val;
+
+			while (this.firstChild !== div) {
+				div.appendChild(this.firstChild);
+			}
+		}
+		
+    }
+	
+	
 	/*
 	 * Get the HTML contents of the first element in the set of matched elements or set the HTML contents of every matched element.
 	 *
@@ -1277,7 +1350,7 @@ const __ = (function () {
 	 */
     __.prototype.html = function(el) {
 		if (el === undefined) {
-			return this.innerHTML;
+			return { data: this.innerHTML };
 		} else {
 			this.innerHTML = el; 
 		}
@@ -2246,6 +2319,7 @@ const __ = (function () {
 		prepend: __.prototype.prepend,
 		before: __.prototype.before,
 		after: __.prototype.after,
+		wrapInner: __.prototype.wrapInner,
 		html: __.prototype.html,		
 		addClass: __.prototype.addClass,
 		removeClass: __.prototype.removeClass,
@@ -2368,7 +2442,8 @@ const __ = (function () {
 					fn === 'maxDimension' ||
 					fn === 'allAttrs' ||
 					fn === 'scrollTop' ||
-					fn === 'scrollLeft'	
+					fn === 'scrollLeft'	||
+					fn === 'html'	
 
 				) {	
 					return (result === undefined) ? undefined : ( typeof(result[0].data) !== 'undefined' ? result[0].data : result[0] );

@@ -1,6 +1,6 @@
 # @uixkit.react/components/Buttons
 
-[Source](https://github.com/xizon/uix-kit-react/tree/master/src/client/components/Buttons)
+[Source](https://github.com/xizon/uix-kit-react/tree/main/src/client/components/Buttons)
 
 ## Version
 

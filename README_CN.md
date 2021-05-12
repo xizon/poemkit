@@ -38,7 +38,7 @@ Uix Kit React系一套免费的网站开发工具包，帮助开发者从零建�
 
 ## 介绍
 
-* 集开发，打包和部署为一体
+* 集开发、调试、打包和部署为一体
 * 它不是一个JavaScript框架
 * 支持服务器端渲染（SSR）
 * 组件分离，可以导入任何第三方UI组件到项目 (比如Ant Design)
@@ -348,7 +348,7 @@ if ( process.env.npm_package_development == 'true' ) {
 
 	YourComponentName.propTypes = {
 	    displayEnable: PropTypes.bool.isRequired,
-		htmlString: PropTypes.string.isRequired
+		htmlString: PropTypes.oneOfType([PropTypes.string, PropTypes.object])
 	}
 	
 }
@@ -437,11 +437,9 @@ uix-kit-react/
 │   │   │     ├── */
 │   │   │     ├── _utilities/ -------------------  # 公共的js或css模块
 │   │   │     └── _third-party-plugins/ ----------  # 第三方插件
-│   │   │
 │   │   ├── views/ ------------------------------  # 网站页面
-│   │   │   ├── _pages/
-│   │   │   └── _html/
-│   │   │
+│   │   │     ├── _pages/
+│   │   │     └── _html/
 │   └── server/
 │   │   ├── app.js
 │   │   ├── server.js

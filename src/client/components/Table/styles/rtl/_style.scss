@@ -1,0 +1,155 @@
+/* ======================================================
+   <!-- Table -->
+/* ====================================================== */
+@import '@uixkit.react/components/_utilities/styles/_variable-and-mixin.scss';
+
+
+/*
+ * 1. Generic
+*/
+
+$table-border-color: #d6d5d5;
+
+/*
+ ---------------------------
+ 1. Generic
+ ---------------------------
+ */
+.rtl table.uix-table,
+.rtl .uix-table table {
+
+	th,
+	td {
+		border-left: none;
+		border-right: 1px solid $table-border-color;
+
+
+	}
+
+	thead {
+
+		th {
+
+			&.uix-t-r {
+				text-align: left;
+			}
+
+			&.uix-t-l {
+				text-align: right;
+			}
+
+
+			/* The breakpoint is the same as bootstrap 4 */
+			/*
+			--breakpoint-xs:0;
+			--breakpoint-sm:576px;
+			--breakpoint-md:768px;
+			--breakpoint-lg:992px;
+			--breakpoint-xl:1200px;
+			*/
+			@media all and (max-width: 576px) {
+				&.uix-t-r--sm {
+					text-align: left;
+				}
+
+				&.uix-t-l--sm {
+					text-align: right;
+				}
+			}
+
+			@media all and (max-width: 768px) {
+				&.uix-t-r--md {
+					text-align: left;
+				}
+
+				&.uix-t-l--md {
+					text-align: right;
+				}
+			}
+
+			@media all and (max-width: 992px) {
+				&.uix-t-r--lg {
+					text-align: left;
+				}
+
+				&.uix-t-l--lg {
+					text-align: right;
+				}
+			}
+
+
+			@media all and (max-width: 1200px) {
+				&.uix-t-r--xl {
+					text-align: left;
+				}
+
+				&.uix-t-l--xl {
+					text-align: right;
+				}
+			}
+
+
+		}
+	}
+
+
+
+
+}
+
+
+
+@media all and (max-width: 768px) {
+
+	.rtl table.uix-table.is-responsive,
+	.rtl .uix-table.is-responsive table {
+
+		tbody {
+
+			td {
+
+				&::before {
+					float: right;
+					border-left: 1px solid $table-border-color;
+					margin-right: auto;
+					margin-left: 0.5rem;
+
+				}
+
+			}
+
+		}
+
+
+	}
+
+
+	/* With scroll bars */
+	.rtl .js-uix-table--responsive-scrolled table,
+	.rtl table.js-uix-table--responsive-scrolled {
+
+
+		thead {
+			float: right;
+
+
+		}
+		tbody {
+			float: right;
+			border-left: 1px solid $table-border-color;
+		}
+
+		th,
+		tbody td {
+
+			&:not(last-child) {
+				border-left: 0;
+			}
+
+		}
+
+
+	}
+
+
+}

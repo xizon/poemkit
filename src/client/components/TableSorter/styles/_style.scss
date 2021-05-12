@@ -1,0 +1,52 @@
+/* ======================================================
+   <!-- Table Sorter -->
+/* ====================================================== */
+@import '@uixkit.react/components/_utilities/styles/_variable-and-mixin.scss';
+
+//The basic style uses the Table component
+@import '@uixkit.react/components/Table/styles/_style.scss';
+
+.uix-table-sorter {
+	cursor: pointer;
+
+	&::after {
+		content: '';
+		font-family: 'Font Awesome 5 Free';
+		font-weight: 600;
+		color: $sub-text-color;
+		margin-left: .5rem;
+		font-size: 0.75rem;
+		content: "\f0dc";
+	}
+
+}
+
+
+.js-uix-newsort {
+	animation: uix-cssAnim--newsort .5s linear 1 forwards;
+	opacity: 0;
+}
+
+@for $i from 1 to 100 {
+
+	.js-uix-newsort:nth-child(#{$i+1}) {
+		animation-delay: #{$i*100}ms;
+	}
+}
+
+
+
+@keyframes uix-cssAnim--newsort {
+	0%   {
+		opacity: 0;
+		transform: translateX(10px);
+	}
+
+	100% {
+		opacity: 1;
+		transform: translateX(0);
+	}
+}
+
+
+

@@ -25,6 +25,10 @@ import { __ } from '@uixkit.react/components/_utilities/_all.js';
 
 export default class Video extends Component {
 
+	constructor(props) {
+		super(props);
+	}
+	
 	componentDidMount(){
 		
 		//

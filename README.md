@@ -52,7 +52,8 @@ Server runs on `http://localhost:3000`
 
 ## Description
 
-* Development, packaging, and deployment in one
+
+* Integrate development, debugging, bundle, and deployment in one
 * Not a JavaScript framework
 * Server-Side Rendering (SSR) Support
 * Components are separated, you can use any UI component (such as Ant Design)
@@ -352,7 +353,7 @@ if ( process.env.npm_package_development == 'true' ) {
 
 	YourComponentName.propTypes = {
 	    displayEnable: PropTypes.bool.isRequired,
-		htmlString: PropTypes.string.isRequired
+		htmlString: PropTypes.oneOfType([PropTypes.string, PropTypes.object])
 	}
 	
 }
@@ -437,11 +438,9 @@ uix-kit-react/
 │   │   │     ├── */
 │   │   │     ├── _utilities/ -------------------  # Generic snippets(js & css)
 │   │   │     └── _third-party-plugins/ ----------  # Third-party plugins
-│   │   │
 │   │   ├── views/ ------------------------------  # Website pages
-│   │   │   ├── _pages/
-│   │   │   └── _html/
-│   │   │
+│   │   │     ├── _pages/
+│   │   │     └── _html/
 │   └── server/
 │   │   ├── app.js
 │   │   ├── server.js

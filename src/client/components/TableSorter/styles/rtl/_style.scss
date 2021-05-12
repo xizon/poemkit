@@ -1,0 +1,16 @@
+/* ======================================================
+   <!-- Table Sorter -->
+/* ====================================================== */
+@import '@uixkit.react/components/_utilities/styles/_variable-and-mixin.scss';
+
+//The basic style uses the Table component
+@import '@uixkit.react/components/Table/styles/rtl/_style.scss';
+
+.rtl .uix-table-sorter {
+
+	&::after {
+		margin-left: auto;
+		margin-right: .5rem;
+	}
+
+}

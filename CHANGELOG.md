@@ -1,5 +1,14 @@
 # Changelog
 
+#### = 0.0.32 (May 12, 2021) =
+
+
+* New: Added new demo `Table`, `Table Sorter` and `Table Grid` using json for rendering data.
+* New: * Tweak: Added a new method `wrapInner()` to Core Shortcut.
+* Doc: The document has been optimized in some details.
+* Fix: Fixed the `html()` method in Core Shortcut.
+
+
 
 
 #### = 0.0.31 (April 29, 2021) =
