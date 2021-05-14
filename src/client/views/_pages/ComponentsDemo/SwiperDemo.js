@@ -35,28 +35,7 @@ export default () => {
 
 			   {/*<!-- Content 
 				====================================================== -->*/}
-				<section className="uix-spacing--s">
-					<div className="container">
-
-
-							<div className="row">
-								<div className="col-12">
-
-
-									<Swiper />
-		
-
-								</div>     
-							</div>
-							{/*<!-- .row end -->*/}  
-
-
-					</div>
-					{/*<!-- .container end -->*/}
-
-
-
-				</section>
+				<Swiper />
 
 
 			</main>

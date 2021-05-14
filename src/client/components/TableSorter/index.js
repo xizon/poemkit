@@ -111,78 +111,88 @@ export default class TableSorter extends Component {
 		__( document ).ready( function() {
 
 			
-			//Add an identifier so that the mobile terminal can compare by row
-			__( '.js-uix-table-sorter tbody tr' ).each(function( index, selectors ) {
-				__( selectors + '> td' ).each( function( index ) {
-					__( '.js-uix-table-sorter thead th' ).eq(index).data( 'table-row', index );
-					__( this ).data( 'table-row', index );
+			__( '.js-uix-table-sorter' ).each(function( index, selectors ) {
+			
+
+				//Add an identifier so that the mobile terminal can compare by row
+				__( selectors + ' tbody tr' ).each(function( index, tdSelectors ) {
+					__( tdSelectors + '> td' ).each( function( index ) {
+						__( selectors + ' thead th' ).eq(index).data( 'table-row', index );
+						__( this ).data( 'table-row', index );
+					});
 				});
-			});
-	
-			
-		
-			//Filter functions
-			__( '.js-uix-table-sorter thead tr [data-sort-type]' ).each( function( index, selectors )  {
-				
-				//add arrows
-				if ( __( this ).find( '.uix-table-sorter' ).length == 0 && __( this ).data( 'sort-type' ) !== false ) {
-					__( this ).wrapInner( '<span class="uix-table-sorter" />' );
-				}
-			});
-			
-			
-			//Click event
-			let	inverse = false;
-			__( '.js-uix-table-sorter thead tr [data-sort-type]' ).off( 'click' ).on( 'click', function() {
 
-				const thType  = __( this ).data( 'sort-type' );
-				const curIndex = __( this ).index();
-				const targetComparator = __( '.js-uix-table-sorter tbody [data-table-row="'+curIndex+'"]' );
-				const root = __( '.js-uix-table-sorter tbody' );
-				
-				//sort of HTML elements
-				const sortBy = function(a, b) {
-					
-					let txt1 = a.innerHTML.replace(/(<([^>]+)>)/ig, '').toLowerCase(),
-						txt2 = b.innerHTML.replace(/(<([^>]+)>)/ig, '').toLowerCase();	
 
-					//type of number
-					if ( thType == 'number' ) {
-						txt1 = Number( txt1.replace(/[^0-9.-]+/g, '' ) );
-						txt2 = Number( txt2.replace(/[^0-9.-]+/g, '' ) );
+
+				//Filter functions
+				__( selectors + ' thead tr [data-sort-type]' ).each( function()  {
+					//add arrows
+					if ( __( this ).find( '.uix-table-sorter' ).length == 0 && __( this ).data( 'sort-type' ) !== false ) {
+						__( this ).wrapInner( '<span class="uix-table-sorter" />' );
+					}
+				});
+
+
+				//Click event
+				let	inverse = false;
+				__( selectors + ' thead tr [data-sort-type]' ).off( 'click' ).on( 'click', function() {
+
+					const thType  = __( this ).data( 'sort-type' );
+					const curIndex = __( this ).index();
+					const targetComparator = __( selectors + ' tbody [data-table-row="'+curIndex+'"]' );
+					const root = __( selectors + ' tbody' );
+
+
+					if ( thType === false ) return false;
+
+
+					//sort of HTML elements
+					const sortBy = function(a, b) {
+
+						let txt1 = a.innerHTML.replace(/(<([^>]+)>)/ig, '').toLowerCase(),
+							txt2 = b.innerHTML.replace(/(<([^>]+)>)/ig, '').toLowerCase();	
+
+						//type of number
+						if ( thType == 'number' ) {
+							txt1 = Number( txt1.replace(/[^0-9.-]+/g, '' ) );
+							txt2 = Number( txt2.replace(/[^0-9.-]+/g, '' ) );
+						}
+
+						//type of date
+						if ( thType == 'date' ) {
+							txt1 = new Date( txt1 );
+							txt2 = new Date( txt2 );	
+						}	
+
+						//add filter class
+						__( selectors + ' tbody tr' ).addClass( 'js-uix-newsort' );
+
+						inverse = !inverse;
+
+						return txt2<txt1 ? -1 : txt2>txt1 ? 1 : 0;
 					}
 
-					//type of date
-					if ( thType == 'date' ) {
-						txt1 = new Date( txt1 );
-						txt2 = new Date( txt2 );	
-					}	
+					targetComparator.sort(sortBy);
 
-					//add filter class
-					__( '.js-uix-table-sorter tbody tr' ).addClass( 'js-uix-newsort' );
-					
-					inverse = !inverse;
-					
-					return txt2<txt1 ? -1 : txt2>txt1 ? 1 : 0;
-				}
-				
-				targetComparator.sort(sortBy);
-				
-				//console.log( 'targetComparator:', targetComparator );
-				//console.log( 'inverse:', inverse );
-				
-				if ( !inverse ) targetComparator.reverse();
-				
-				
-				root.empty();
-				for (let i = 0; i < targetComparator.length; i++) {
-					const curRow = targetComparator[i].parentNode;
-					root[0].appendChild(curRow);
-				}
-				
+					//console.log( 'targetComparator:', targetComparator );
+					//console.log( 'inverse:', inverse );
 
+					if ( !inverse ) targetComparator.reverse();
+
+
+					root.empty();
+					for (let i = 0; i < targetComparator.length; i++) {
+						const curRow = targetComparator[i].parentNode;
+						root[0].appendChild(curRow);
+					}
+
+
+				});
+	
+				
+				
 			});
-
+			
 
 		});
 

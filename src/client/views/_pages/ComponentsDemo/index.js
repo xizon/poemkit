@@ -18,6 +18,7 @@ import SwiperDemo from '@uixkit.react/pages/ComponentsDemo/SwiperDemo.js';
 import TableDemo from '@uixkit.react/pages/ComponentsDemo/TableDemo.js';
 import TableGridDemo from '@uixkit.react/pages/ComponentsDemo/TableGridDemo.js';
 import TableSorterDemo from '@uixkit.react/pages/ComponentsDemo/TableSorterDemo.js';
+import FormDemo from '@uixkit.react/pages/ComponentsDemo/FormDemo.js';
 
 
 
@@ -43,6 +44,7 @@ function HookContent() {
 		        <NavLink data-route="true" to={`${url}/table`} activeClassName="is-active"><i className="fa fa-check-circle-o" aria-hidden="true"></i> Table</NavLink>&nbsp;&nbsp;
 		        <NavLink data-route="true" to={`${url}/table-grid`} activeClassName="is-active"><i className="fa fa-check-circle-o" aria-hidden="true"></i> Table Grid</NavLink>&nbsp;&nbsp;
 		        <NavLink data-route="true" to={`${url}/table-sorter`} activeClassName="is-active"><i className="fa fa-check-circle-o" aria-hidden="true"></i> Table Sorter</NavLink>&nbsp;&nbsp;
+		        <NavLink data-route="true" to={`${url}/form`} activeClassName="is-active"><i className="fa fa-check-circle-o" aria-hidden="true"></i> Form</NavLink>&nbsp;&nbsp;
 		    </div>
 
 			 <hr />
@@ -75,7 +77,11 @@ function HookContent() {
 				<Route path={`${path}/table-sorter`}>
 				  <TableSorterDemo />
 				</Route>		
+				<Route path={`${path}/form`}>
+				  <FormDemo />
+				</Route>	
 		
+	
 		
 		
 		

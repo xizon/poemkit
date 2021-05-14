@@ -1,14 +1,24 @@
 # Changelog
 
+
+#### = 0.0.33 (May 14, 2021) =
+
+* New: Added new demo `Form` controls. It contains the following controls: 	`Input`.
+* New: Added a new method `toSlug()` to Core Shortcut.
+* Tweak: Optimized the scripts of some demo components.
+* Doc: Added the key description of the product.
+* Fix: Fixed the problem of each traversal of the `Table` component script.
+* Fix: Fixed loop errors by nesting other methods in each() method via Core Shortcut.
+* Security: Upgrade serialize-javascript to version 4.0.0 or later.
+
+
+
 #### = 0.0.32 (May 12, 2021) =
 
-
 * New: Added new demo `Table`, `Table Sorter` and `Table Grid` using json for rendering data.
-* New: * Tweak: Added a new method `wrapInner()` to Core Shortcut.
+* New: Added a new method `wrapInner()` to Core Shortcut.
 * Doc: The document has been optimized in some details.
 * Fix: Fixed the `html()` method in Core Shortcut.
-
-
 
 
 #### = 0.0.31 (April 29, 2021) =

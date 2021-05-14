@@ -4,8 +4,8 @@
  * Core Shortcut
  *
  * @package: uix-kit-react
- * @version: 0.21
- * @last update: May 11, 2021
+ * @version: 0.22
+ * @last update: May 13, 2021
  * @license: MIT
  *
  *************************************
@@ -231,6 +231,7 @@ __( document ).ready( function() {
 			console.log( __.trim( 'string string spacing string' ) );
             console.log( __.lastUrlParamFormat( 'string-string-spacing_string' ) );
 			console.log( __.removeFirstLastStr( ',string,string,string,' ) );
+			console.log( __.toSlug( 'string String2-s' ) );
 			console.log( __.validate.isMobile( '13167678787' ) ); //true
 			console.log( __.validate.isTel( '123-456-7890' ) ); //true
 			console.log( __.validate.isEmail( 'name@gmail.com' ) );	 //true
@@ -949,6 +950,31 @@ const __ = (function () {
 
 
 	
+	/*
+	 * Convert a string to slug.
+	 *
+	 * @param  {string} str            - Any string.
+	 * @return {string}                - A new string.
+	 */  
+	__.toSlug = function( str ) {
+
+		if ( typeof( str ) == 'string' && str.length > 0 ) {
+			return str
+					.toString()
+					.replace(/[^\w\s\-！￥【】\u4e00-\u9eff]/gi, '')
+					.replace(/\s/g, '-')
+					.replace(/(\-){2,}/g, '-')
+					.replace(/\-\s*$/, '' )
+					.toLowerCase();
+
+
+
+		} else {
+			return str;
+		}
+
+	};
+
 	
 	/* ---------------- API methods ----------------- */
 	
@@ -2446,7 +2472,7 @@ const __ = (function () {
 					fn === 'html'	
 
 				) {	
-					return (result === undefined) ? undefined : ( typeof(result[0].data) !== 'undefined' ? result[0].data : result[0] );
+					return (result === undefined) ? this : ( typeof(result[0].data) !== 'undefined' ? result[0].data : result[0] );
 				}
 		
 				
@@ -2457,7 +2483,8 @@ const __ = (function () {
 				if (
 					fn === 'data' ||
 					fn === 'attr' ||
-					fn === 'prop'
+					fn === 'prop' ||
+					fn === 'val'
 				) {	
 					
 					return (result === undefined) ? this : result[0];

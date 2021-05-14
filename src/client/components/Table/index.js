@@ -179,23 +179,25 @@ export default class Table extends Component {
 			 Duplicate title
 			 ---------------------------
 			 */
-
-			__( '.js-uix-table--responsive thead th' ).each(function( index, selectors ) {
-				const data = __( this ).html().replace(/<span[^>]*>[\s\S]+<\/span>/g, '');
-				if( __( this ).data( 'table' ) === null ) {
-					__( this ).data( 'table', data );
-				}
-			});
-
-			__( '.js-uix-table--responsive tbody tr' ).each(function( index, selectors ) {
-				__( selectors + '> td' ).each( function( index ) {
-					const data = __( '.js-uix-table--responsive thead th' ).eq(index).data( 'table' );
-					__( this ).data( 'table', data );
-					
+			__( '.js-uix-table--responsive' ).each(function( index, selectors ) {
+				__( selectors + ' thead th' ).each(function( index, selectors ) {
+					const data = __( this ).html().replace(/<span[^>]*>[\s\S]+<\/span>/g, '');
+					if( __( this ).data( 'table' ) === null ) {
+						__( this ).data( 'table', data );
+					}
 				});
-				
-			});
+
+				__( selectors + ' tbody tr' ).each(function( index, trSelectors ) {
+					__( trSelectors + '> td' ).each( function( index ) {
+						const data = __( selectors + ' thead th' ).eq(index).data( 'table' );
+						__( this ).data( 'table', data );
+
+					});
+
+				});
 	
+			});
+			
 
 			/* 
 			 ---------------------------
@@ -205,7 +207,7 @@ export default class Table extends Component {
 		
 			tableDataScrolledInit( windowWidth );
 
-			$window.on( 'resize', function() {
+			$window.off( 'resize' ).on( 'resize', function() {
 				// Check window width has actually changed and it's not just iOS triggering a resize event on scroll
 				if ( window.innerWidth != windowWidth ) {
 					
@@ -225,27 +227,30 @@ export default class Table extends Component {
 
 					
 				//Add an identifier so that the mobile terminal can compare by row
-				__( '.js-uix-table--responsive-scrolled tbody tr' ).each(function( index, selectors ) {
-					__( selectors + '> td' ).each( function( index ) {
-						__( '.js-uix-table--responsive-scrolled thead th' ).eq(index).data( 'table-row', index );
-						__( this ).data( 'table-row', index );
+				__( '.js-uix-table--responsive-scrolled' ).each(function( index, selectors ) {
+					__( selectors + ' tbody tr' ).each(function( index, tdSelectors ) {
+						__( tdSelectors + '> td' ).each( function( index ) {
+							__( selectors + ' thead th' ).eq(index).data( 'table-row', index );
+							__( this ).data( 'table-row', index );
+						});
 					});
 				});
-
-	
+			
 
 				if ( w <= 768 ) {
 
 
 
 					//get maxHeight of per row
-					const len = __( '.js-uix-table--responsive-scrolled tbody tr' ).length;
-					for (let i=0; i<len; i++ ) {
-						const maxHeight = __( '.js-uix-table--responsive-scrolled [data-table-row="'+i+'"]' ).maxDimension().height;
-						__( '.js-uix-table--responsive-scrolled [data-table-row="'+i+'"]' ).css({'height': maxHeight + 'px'});
-					}
+					__( '.js-uix-table--responsive-scrolled' ).each(function( index, selectors ) {
 					
-					
+						const len = __( selectors + ' tbody tr' ).length;
+						for (let i=0; i<len; i++ ) {
+							const maxHeight = __( selectors + ' [data-table-row="'+i+'"]' ).maxDimension().height;
+							__( selectors + ' [data-table-row="'+i+'"]' ).css({'height': maxHeight + 'px'});
+						}
+					});
+
 				
 				} else {
 					__( '.js-uix-table--responsive-scrolled tbody td, .js-uix-table--responsive-scrolled thead th' ).removeAttr( 'style') ;

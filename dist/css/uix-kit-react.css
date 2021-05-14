@@ -6,9 +6,9 @@
  * ## Project Name        :  Uix Kit React
  * ## Project Description :  A free web kits with React for fast web design and development via SSR.
  * ## Project URL         :  https://uiux.cc
- * ## Version             :  0.0.32
+ * ## Version             :  0.0.33
  * ## Based on            :  Uix Kit React (https://github.com/xizon/uix-kit-react#readme)
- * ## Last Update         :  May 12, 2021
+ * ## Last Update         :  May 14, 2021
  * ## Created by          :  UIUX Lab (https://uiux.cc) (uiuxlab@gmail.com)
  * ## Released under the MIT license.
  * 	
@@ -28689,6 +28689,2166 @@ table.is-horizontal th,
 .rtl .uix-table-sorter::after {
   margin-left: auto;
   margin-right: .5rem;
+}
+
+/* ======================================================
+    <!-- Form -->
+/* ====================================================== */
+/*
+ * 1. Controls
+ * 2. Upload
+ * 3. Group
+ * 4. Custom Select
+ * 5. Custom Radio, Toggle And Checkbox
+ * 6. Custom Input Number
+ * 7. Multiple Selector
+ * 8. Single Selector
+ * 9. Search of Widget
+ * 10. Add / remove input field dynamically
+*/
+/*
+ ---------------------------
+ 1. Controls
+ ---------------------------
+ */
+/* Change Autocomplete styles in Chrome*/
+input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus textarea:-webkit-autofill,
+textarea:-webkit-autofill:hover textarea:-webkit-autofill:focus,
+select:-webkit-autofill,
+select:-webkit-autofill:hover,
+select:-webkit-autofill:focus {
+  border: 1px solid #dce4e8;
+  -webkit-text-fill-color: #dce4e8;
+  box-shadow: 0 0 0px 1000px #fff inset;
+  transition: background-color 5000s ease-in-out 0s;
+}
+
+/* Required field marker */
+.uix-controls__im {
+  color: red;
+  display: inline-block;
+  padding: 0 .5rem;
+  font-size: 1.5rem;
+  position: absolute;
+}
+
+/* Default Controls */
+.uix-controls:not(.uix-controls__toggle):not(.uix-controls__checkbox):not(.uix-controls__radio):not(.uix-controls__select) {
+  position: relative;
+  margin-bottom: 1.09375rem;
+  display: inline-block;
+  /* Avoid line breaks */
+  /*-- Select Arrow --*/
+  /*-- Radio --*/
+  /*-- Select --*/
+  /*-- Form With Icon --*/
+  /*-- Form Status: Success --*/
+  /*-- Form Status: Error --*/
+  /*-- Form Status: Disable --*/
+  /*-- WordPress Style --*/
+}
+
+.uix-controls:not(.uix-controls__toggle):not(.uix-controls__checkbox):not(.uix-controls__radio):not(.uix-controls__select).is-fullwidth {
+  display: block;
+}
+
+.uix-controls:not(.uix-controls__toggle):not(.uix-controls__checkbox):not(.uix-controls__radio):not(.uix-controls__select).uix-controls__side {
+  margin-left: .2rem;
+}
+
+.uix-controls:not(.uix-controls__toggle):not(.uix-controls__checkbox):not(.uix-controls__radio):not(.uix-controls__select).uix-t-c {
+  text-align: center !important;
+}
+
+.uix-controls:not(.uix-controls__toggle):not(.uix-controls__checkbox):not(.uix-controls__radio):not(.uix-controls__select).is-pill input:not([type="checkbox"]):not([type="radio"]),
+.uix-controls:not(.uix-controls__toggle):not(.uix-controls__checkbox):not(.uix-controls__radio):not(.uix-controls__select).is-pill textarea,
+.uix-controls:not(.uix-controls__toggle):not(.uix-controls__checkbox):not(.uix-controls__radio):not(.uix-controls__select).is-pill button:not(.uix-btn),
+.uix-controls:not(.uix-controls__toggle):not(.uix-controls__checkbox):not(.uix-controls__radio):not(.uix-controls__select).is-pill select {
+  border-radius: 50px;
+}
+
+.uix-controls:not(.uix-controls__toggle):not(.uix-controls__checkbox):not(.uix-controls__radio):not(.uix-controls__select).is-rounded input:not([type="checkbox"]):not([type="radio"]),
+.uix-controls:not(.uix-controls__toggle):not(.uix-controls__checkbox):not(.uix-controls__radio):not(.uix-controls__select).is-rounded textarea,
+.uix-controls:not(.uix-controls__toggle):not(.uix-controls__checkbox):not(.uix-controls__radio):not(.uix-controls__select).is-rounded button:not(.uix-btn),
+.uix-controls:not(.uix-controls__toggle):not(.uix-controls__checkbox):not(.uix-controls__radio):not(.uix-controls__select).is-rounded select {
+  border-radius: 4px;
+}
+
+.uix-controls:not(.uix-controls__toggle):not(.uix-controls__checkbox):not(.uix-controls__radio):not(.uix-controls__select) input:not([type="checkbox"]):not([type="radio"]) {
+  border-radius: 0;
+  /* Remove inner shadow from inputs on mobile iOS */
+  -webkit-appearance: none;
+  transition: all 0.3s ease;
+  font-size: 0.875rem;
+  padding: 0.54688rem 0.54688rem;
+  margin: 0;
+  box-sizing: content-box;
+  background-color: #fff;
+  color: #888;
+  border: 1px solid #dce4e8;
+  width: calc(100% - 1.09375rem - 2px);
+}
+
+.uix-controls:not(.uix-controls__toggle):not(.uix-controls__checkbox):not(.uix-controls__radio):not(.uix-controls__select) input:not([type="checkbox"]):not([type="radio"]):focus ~ label {
+  color: #212121;
+  cursor: text;
+}
+
+.uix-controls:not(.uix-controls__toggle):not(.uix-controls__checkbox):not(.uix-controls__radio):not(.uix-controls__select) input:not([type="checkbox"]):not([type="radio"]):focus {
+  outline: none;
+  border-color: #212121;
+}
+
+.uix-controls:not(.uix-controls__toggle):not(.uix-controls__checkbox):not(.uix-controls__radio):not(.uix-controls__select).uix-controls__short-s input:not([type="checkbox"]):not([type="radio"]) {
+  width: 120px;
+  margin-right: .5rem;
+}
+
+.uix-controls:not(.uix-controls__toggle):not(.uix-controls__checkbox):not(.uix-controls__radio):not(.uix-controls__select).uix-controls__short-m input:not([type="checkbox"]):not([type="radio"]) {
+  width: 155px;
+  margin-right: .5rem;
+}
+
+.uix-controls:not(.uix-controls__toggle):not(.uix-controls__checkbox):not(.uix-controls__radio):not(.uix-controls__select).uix-controls__short-l input:not([type="checkbox"]):not([type="radio"]) {
+  width: 192px;
+  margin-right: .5rem;
+}
+
+.uix-controls:not(.uix-controls__toggle):not(.uix-controls__checkbox):not(.uix-controls__radio):not(.uix-controls__select) textarea,
+.uix-controls:not(.uix-controls__toggle):not(.uix-controls__checkbox):not(.uix-controls__radio):not(.uix-controls__select) button:not(.uix-btn),
+.uix-controls:not(.uix-controls__toggle):not(.uix-controls__checkbox):not(.uix-controls__radio):not(.uix-controls__select) select {
+  border-radius: 0;
+  /* Remove inner shadow from inputs on mobile iOS */
+  -webkit-appearance: none;
+  font-size: 0.875rem;
+  padding: 0.54688rem 0.54688rem;
+  margin: 0;
+  border: none;
+  box-sizing: content-box;
+  transition: all 0.3s ease;
+  width: calc(100% - 1.09375rem - 2px);
+  background-color: #fff;
+  color: #888;
+  border: 1px solid #dce4e8;
+}
+
+.uix-controls:not(.uix-controls__toggle):not(.uix-controls__checkbox):not(.uix-controls__radio):not(.uix-controls__select) textarea {
+  resize: none;
+}
+
+.uix-controls:not(.uix-controls__toggle):not(.uix-controls__checkbox):not(.uix-controls__radio):not(.uix-controls__select) textarea:focus ~ label {
+  color: #212121;
+  cursor: text;
+}
+
+.uix-controls:not(.uix-controls__toggle):not(.uix-controls__checkbox):not(.uix-controls__radio):not(.uix-controls__select) textarea:focus {
+  outline: none;
+  border-color: #212121;
+}
+
+.uix-controls:not(.uix-controls__toggle):not(.uix-controls__checkbox):not(.uix-controls__radio):not(.uix-controls__select) button:not(.uix-btn) {
+  cursor: pointer;
+  padding: 0.75rem 0;
+  width: auto;
+  border-radius: 0;
+}
+
+.uix-controls:not(.uix-controls__toggle):not(.uix-controls__checkbox):not(.uix-controls__radio):not(.uix-controls__select) button:not(.uix-btn):focus ~ label {
+  color: #212121;
+  cursor: text;
+}
+
+.uix-controls:not(.uix-controls__toggle):not(.uix-controls__checkbox):not(.uix-controls__radio):not(.uix-controls__select) button:not(.uix-btn):focus {
+  outline: none;
+  border-color: #212121;
+}
+
+.uix-controls:not(.uix-controls__toggle):not(.uix-controls__checkbox):not(.uix-controls__radio):not(.uix-controls__select) select {
+  cursor: pointer;
+}
+
+.uix-controls:not(.uix-controls__toggle):not(.uix-controls__checkbox):not(.uix-controls__radio):not(.uix-controls__select) select:focus {
+  outline: none;
+  border-color: #212121;
+}
+
+.uix-controls:not(.uix-controls__toggle):not(.uix-controls__checkbox):not(.uix-controls__radio):not(.uix-controls__select) label {
+  font-weight: 500;
+  color: #999;
+  position: absolute;
+  left: 0.29688rem;
+  top: 0.54688rem;
+  display: inline-block;
+  padding: 0 0.25rem;
+  background-color: rgba(255, 255, 255, 0);
+  pointer-events: none;
+  transition: all 0.3s ease;
+  transform-origin: left top;
+}
+
+.uix-controls:not(.uix-controls__toggle):not(.uix-controls__checkbox):not(.uix-controls__radio):not(.uix-controls__select) label.is-active {
+  color: #555;
+  background-color: white;
+  transform: scale(0.875) translateY(-1.6rem);
+}
+
+.uix-controls:not(.uix-controls__toggle):not(.uix-controls__checkbox):not(.uix-controls__radio):not(.uix-controls__select) .uix-controls__arrow {
+  display: inline-block;
+  position: absolute;
+  right: 0.875rem;
+  top: 1.04688rem;
+  font-size: 0.625rem;
+  font-weight: 500;
+  color: #999;
+}
+
+.uix-controls:not(.uix-controls__toggle):not(.uix-controls__checkbox):not(.uix-controls__radio):not(.uix-controls__select).uix-controls__normal-radio label {
+  padding-left: 1.25rem !important;
+  position: relative !important;
+  left: auto !important;
+  top: auto !important;
+  pointer-events: auto !important;
+}
+
+.uix-controls:not(.uix-controls__toggle):not(.uix-controls__checkbox):not(.uix-controls__radio):not(.uix-controls__select).uix-controls__normal-radio label.is-active {
+  top: auto !important;
+}
+
+.uix-controls:not(.uix-controls__toggle):not(.uix-controls__checkbox):not(.uix-controls__radio):not(.uix-controls__select).uix-controls__normal-select:not(.is-fullwidth) {
+  margin-right: 1.5rem;
+}
+
+.uix-controls:not(.uix-controls__toggle):not(.uix-controls__checkbox):not(.uix-controls__radio):not(.uix-controls__select).uix-controls__normal-select .uix-controls__arrow {
+  right: 0;
+}
+
+.uix-controls:not(.uix-controls__toggle):not(.uix-controls__checkbox):not(.uix-controls__radio):not(.uix-controls__select).uix-controls__normal-select label {
+  display: none;
+}
+
+.uix-controls:not(.uix-controls__toggle):not(.uix-controls__checkbox):not(.uix-controls__radio):not(.uix-controls__select).uix-controls__normal-select select {
+  padding-right: 1rem;
+  padding-left: 0.54688rem;
+  font-weight: 500;
+  font-size: 1rem;
+}
+
+.uix-controls:not(.uix-controls__toggle):not(.uix-controls__checkbox):not(.uix-controls__radio):not(.uix-controls__select).uix-controls__normal-select.is-fullwidth .uix-controls__arrow {
+  right: 0.54688rem;
+}
+
+.uix-controls:not(.uix-controls__toggle):not(.uix-controls__checkbox):not(.uix-controls__radio):not(.uix-controls__select).uix-controls__normal-select.is-fullwidth label {
+  display: inline-block;
+}
+
+.uix-controls:not(.uix-controls__toggle):not(.uix-controls__checkbox):not(.uix-controls__radio):not(.uix-controls__select).uix-controls__normal-select.is-fullwidth select {
+  padding-right: 0.54688rem;
+}
+
+.uix-controls:not(.uix-controls__toggle):not(.uix-controls__checkbox):not(.uix-controls__radio):not(.uix-controls__select).uix-controls__normal-select.is-disabled {
+  /* Mask used to prohibit selection */
+}
+
+.uix-controls:not(.uix-controls__toggle):not(.uix-controls__checkbox):not(.uix-controls__radio):not(.uix-controls__select).uix-controls__normal-select.is-disabled::before {
+  content: '';
+  position: absolute;
+  display: block;
+  width: 100%;
+  height: 100%;
+  background: none;
+  top: 0;
+  left: 0;
+  z-index: 2;
+  user-select: none;
+}
+
+.uix-controls:not(.uix-controls__toggle):not(.uix-controls__checkbox):not(.uix-controls__radio):not(.uix-controls__select).is-iconic label {
+  left: 2.54688rem;
+}
+
+.uix-controls:not(.uix-controls__toggle):not(.uix-controls__checkbox):not(.uix-controls__radio):not(.uix-controls__select).is-iconic i {
+  position: absolute;
+  left: 1rem;
+  top: 0.79688rem;
+  color: #dce4e8;
+}
+
+.uix-controls:not(.uix-controls__toggle):not(.uix-controls__checkbox):not(.uix-controls__radio):not(.uix-controls__select).is-iconic i::after {
+  content: '';
+  display: block;
+  height: 100%;
+  width: 1px;
+  background: #dce4e8;
+  position: absolute;
+  left: 1.2rem;
+  top: 0;
+}
+
+.uix-controls:not(.uix-controls__toggle):not(.uix-controls__checkbox):not(.uix-controls__radio):not(.uix-controls__select).is-iconic input:not([type="checkbox"]):not([type="radio"]) {
+  padding-left: 2.54688rem;
+  width: calc(100% - 2.54688rem - 2px - 0.54688rem);
+}
+
+.uix-controls:not(.uix-controls__toggle):not(.uix-controls__checkbox):not(.uix-controls__radio):not(.uix-controls__select).is-iconic textarea,
+.uix-controls:not(.uix-controls__toggle):not(.uix-controls__checkbox):not(.uix-controls__radio):not(.uix-controls__select).is-iconic button:not(.uix-btn),
+.uix-controls:not(.uix-controls__toggle):not(.uix-controls__checkbox):not(.uix-controls__radio):not(.uix-controls__select).is-iconic select {
+  padding-left: 2.54688rem;
+  width: calc(100% - 2.54688rem - 2px - 0.54688rem);
+}
+
+.uix-controls:not(.uix-controls__toggle):not(.uix-controls__checkbox):not(.uix-controls__radio):not(.uix-controls__select).is-iconic.is-reversed label {
+  left: 0.54688rem;
+}
+
+.uix-controls:not(.uix-controls__toggle):not(.uix-controls__checkbox):not(.uix-controls__radio):not(.uix-controls__select).is-iconic.is-reversed i {
+  left: auto;
+  right: 1rem;
+}
+
+.uix-controls:not(.uix-controls__toggle):not(.uix-controls__checkbox):not(.uix-controls__radio):not(.uix-controls__select).is-iconic.is-reversed i::after {
+  left: auto;
+  right: 1.2rem;
+}
+
+.uix-controls:not(.uix-controls__toggle):not(.uix-controls__checkbox):not(.uix-controls__radio):not(.uix-controls__select).is-iconic.is-reversed input:not([type="checkbox"]):not([type="radio"]) {
+  padding-left: 0.54688rem;
+  padding-right: 2.54688rem;
+}
+
+.uix-controls:not(.uix-controls__toggle):not(.uix-controls__checkbox):not(.uix-controls__radio):not(.uix-controls__select).is-iconic.is-reversed textarea,
+.uix-controls:not(.uix-controls__toggle):not(.uix-controls__checkbox):not(.uix-controls__radio):not(.uix-controls__select).is-iconic.is-reversed button:not(.uix-btn),
+.uix-controls:not(.uix-controls__toggle):not(.uix-controls__checkbox):not(.uix-controls__radio):not(.uix-controls__select).is-iconic.is-reversed select {
+  padding-left: 0.54688rem;
+  padding-right: 2.54688rem;
+}
+
+.uix-controls:not(.uix-controls__toggle):not(.uix-controls__checkbox):not(.uix-controls__radio):not(.uix-controls__select).is-success input:not([type="checkbox"]):not([type="radio"]) {
+  border-color: #4AB005;
+}
+
+.uix-controls:not(.uix-controls__toggle):not(.uix-controls__checkbox):not(.uix-controls__radio):not(.uix-controls__select).is-success textarea,
+.uix-controls:not(.uix-controls__toggle):not(.uix-controls__checkbox):not(.uix-controls__radio):not(.uix-controls__select).is-success button:not(.uix-btn),
+.uix-controls:not(.uix-controls__toggle):not(.uix-controls__checkbox):not(.uix-controls__radio):not(.uix-controls__select).is-success select {
+  border-color: #4AB005;
+}
+
+.uix-controls:not(.uix-controls__toggle):not(.uix-controls__checkbox):not(.uix-controls__radio):not(.uix-controls__select).is-success label {
+  color: #4AB005 !important;
+}
+
+.uix-controls:not(.uix-controls__toggle):not(.uix-controls__checkbox):not(.uix-controls__radio):not(.uix-controls__select).is-error input:not([type="checkbox"]):not([type="radio"]) {
+  border-color: #f00;
+}
+
+.uix-controls:not(.uix-controls__toggle):not(.uix-controls__checkbox):not(.uix-controls__radio):not(.uix-controls__select).is-error textarea,
+.uix-controls:not(.uix-controls__toggle):not(.uix-controls__checkbox):not(.uix-controls__radio):not(.uix-controls__select).is-error button:not(.uix-btn),
+.uix-controls:not(.uix-controls__toggle):not(.uix-controls__checkbox):not(.uix-controls__radio):not(.uix-controls__select).is-error select {
+  border-color: #f00;
+}
+
+.uix-controls:not(.uix-controls__toggle):not(.uix-controls__checkbox):not(.uix-controls__radio):not(.uix-controls__select).is-error label {
+  color: #f00 !important;
+}
+
+.uix-controls:not(.uix-controls__toggle):not(.uix-controls__checkbox):not(.uix-controls__radio):not(.uix-controls__select):not(.uix-controls--line).is-disabled input:not([type="checkbox"]):not([type="radio"]) {
+  border-color: #E1E1E1;
+  background: #EDEDED;
+}
+
+.uix-controls:not(.uix-controls__toggle):not(.uix-controls__checkbox):not(.uix-controls__radio):not(.uix-controls__select):not(.uix-controls--line).is-disabled textarea,
+.uix-controls:not(.uix-controls__toggle):not(.uix-controls__checkbox):not(.uix-controls__radio):not(.uix-controls__select):not(.uix-controls--line).is-disabled button:not(.uix-btn),
+.uix-controls:not(.uix-controls__toggle):not(.uix-controls__checkbox):not(.uix-controls__radio):not(.uix-controls__select):not(.uix-controls--line).is-disabled select {
+  border-color: #E1E1E1;
+  background: #E1E1E1;
+}
+
+.uix-controls:not(.uix-controls__toggle):not(.uix-controls__checkbox):not(.uix-controls__radio):not(.uix-controls__select) .req-icon {
+  position: absolute;
+  right: 0.721875rem;
+  top: 0.721875rem;
+  color: #6B6BF6;
+}
+
+/*
+ ---------------------------
+ 2. Upload
+ ---------------------------
+ */
+.uix-controls__file-container {
+  position: relative;
+  cursor: pointer;
+  display: inline-block;
+  height: 2.71875rem;
+  color: #888;
+  transition: all 0.3s ease;
+}
+
+.uix-controls__file-container .uix-controls__file-trigger i {
+  margin-right: .5rem;
+}
+
+.uix-controls__file-container:hover, .uix-controls__multi-sel > span.uix-controls__file-container.is-active {
+  color: #000;
+}
+
+.uix-controls__file-container input[type="file"] {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 14.0625rem;
+  opacity: 0;
+}
+
+.uix-controls__file-return {
+  font-style: italic;
+}
+
+/* HTML5 drag and drop upload control */
+.uix-controls__file-field-container {
+  height: 400px;
+  max-height: 30vh;
+  margin: 0 auto;
+  position: relative;
+  z-index: 2;
+  background-color: transparent;
+  margin-bottom: 2.5rem;
+}
+
+.uix-controls__file-field-container .uix-controls__file-field-trigger {
+  width: 400px;
+  max-width: 100%;
+  height: 100%;
+  background: #FBFDFD;
+  border-radius: 8px;
+  position: absolute;
+  z-index: 4;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  color: #CBCBCB;
+  pointer-events: hover;
+  cursor: pointer;
+  box-shadow: rgba(0, 0, 0, 0.07) 0px 5px 15px 0px, rgba(50, 50, 93, 0.1) 0px 15px 35px 0px;
+}
+
+.uix-controls__file-field-container .uix-controls__file-field-trigger > div {
+  width: 60%;
+  height: 65%;
+  text-align: center;
+}
+
+.uix-controls__file-field-container .uix-controls__file-field-trigger > div::after {
+  display: inline-block;
+  font-family: 'Font Awesome 5 Free';
+  font-weight: 600;
+  content: "\f093";
+  font-size: 2em;
+  color: #6B6BF6;
+  transform: translateY(50%);
+}
+
+.uix-controls__file-field-container .uix-controls__file-field-trigger > div input {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  outline: none;
+  visibility: hidden;
+  cursor: pointer;
+}
+
+.uix-controls__file-field-container .uix-controls__file-field-trigger > div input::before {
+  content: attr(data-title);
+  position: absolute;
+  color: #CBCBCB;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  opacity: 1;
+  visibility: visible;
+  font-size: 1.2rem;
+  border: 2px dashed #6B6BF6;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  transition: all 0.3s ease;
+  padding-top: 20%;
+}
+
+.uix-controls__file-field-container .uix-controls__file-field-trigger > div input.in::before {
+  border-color: #333;
+}
+
+.uix-controls__file-field-container .uix-controls__file-field-trigger > div input.hover::before, .uix-controls__file-field-container .uix-controls__file-field-trigger > div input:hover::before {
+  border-style: solid;
+}
+
+/*
+ ---------------------------
+ 3. Group
+ ---------------------------
+ */
+.uix-controls__merge {
+  position: relative;
+  /*-- Form With Icon --*/
+}
+
+.uix-controls__merge::after {
+  display: block;
+  content: '';
+  clear: both;
+}
+
+.uix-controls__merge i {
+  margin-left: 0;
+  margin-right: 0;
+  opacity: .7;
+}
+
+.uix-controls__merge textarea,
+.uix-controls__merge button,
+.uix-controls__merge select {
+  border-radius: 0;
+  /* Remove inner shadow from inputs on mobile iOS */
+  -webkit-appearance: none;
+  border: none;
+}
+
+.uix-controls__merge input {
+  transition: all 0.3s ease;
+  font-size: 0.875rem;
+  font-weight: 600;
+  padding: 0.54688rem 0.54688rem;
+  box-sizing: content-box;
+  color: #888;
+  margin-bottom: 1.09375rem;
+  border: 1px solid #dce4e8;
+  width: calc(80% - 1.09375rem - 2px);
+  /* Fixed the gap*/
+  float: left;
+}
+
+.uix-controls__merge input:focus {
+  outline: none;
+}
+
+.uix-controls__merge button {
+  padding: 0.82812rem 0;
+  width: 20%;
+  margin-left: -1px;
+  min-width: 0;
+  letter-spacing: .02rem;
+  font-weight: 600;
+  font-size: 0.875rem;
+  /* Fixed the gap*/
+  float: left;
+}
+
+.uix-controls__merge button span {
+  display: inline-block;
+  padding-left: .3rem;
+  padding-right: .3rem;
+  line-height: 100%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  width: 100%;
+  white-space: nowrap;
+}
+
+.uix-controls__merge.is-pill input {
+  border-radius: 50px 0 0 50px;
+}
+
+.uix-controls__merge.is-pill button {
+  border-radius: 0 50px 50px 0;
+}
+
+.uix-controls__merge.is-rounded input {
+  border-radius: 4px 0 0 4px;
+}
+
+.uix-controls__merge.is-rounded button {
+  border-radius: 0 4px 4px 0;
+}
+
+.uix-controls__merge.is-iconic input {
+  padding-left: 2.54688rem;
+  width: calc(80% - 3.09375rem - 2px);
+}
+
+.uix-controls__merge.is-iconic i {
+  position: absolute;
+  left: 1rem;
+  top: 0.79688rem;
+  color: #dce4e8;
+}
+
+.uix-controls__merge.is-iconic i::after {
+  content: '';
+  display: block;
+  height: 100%;
+  width: 1px;
+  background: #dce4e8;
+  position: absolute;
+  left: 1.2rem;
+  top: 0;
+}
+
+.uix-controls__merge.is-iconic.is-reversed input {
+  padding-right: auto;
+  padding-left: calc(3rem - 0.54688rem);
+}
+
+.uix-controls__merge.is-iconic.is-reversed i {
+  left: auto;
+  right: 1rem;
+}
+
+.uix-controls__merge.is-iconic.is-reversed i::after {
+  left: auto;
+  right: 1.2rem;
+}
+
+/*
+ ---------------------------
+ 4. Custom Select
+ ---------------------------
+ */
+.uix-controls__select {
+  position: relative;
+  margin-right: .3rem;
+}
+
+.uix-controls__select.js-uix-new {
+  text-align: left;
+  /* Required */
+}
+
+.uix-controls__select.is-fullwidth {
+  width: 100%;
+}
+
+.uix-controls__select-wrapper {
+  position: relative;
+  display: inline-block;
+  user-select: none;
+  min-height: 4.1rem;
+  /* Shown above */
+}
+
+.uix-controls__select-wrapper.is-fullwidth {
+  width: 100%;
+}
+
+.uix-controls__select-wrapper.is-fullwidth .uix-controls__select-trigger {
+  width: 100% !important;
+}
+
+.uix-controls__select-wrapper:not(.uix-controls--line).is-disabled {
+  /* Mask used to prohibit selection */
+}
+
+.uix-controls__select-wrapper:not(.uix-controls--line).is-disabled::before {
+  content: '';
+  position: absolute;
+  display: block;
+  width: 100%;
+  height: 100%;
+  background: none;
+  top: 0;
+  left: 0;
+  z-index: 2;
+  user-select: none;
+}
+
+.uix-controls__select-wrapper:not(.uix-controls--line).is-disabled .uix-controls__select-trigger {
+  border-color: #E1E1E1 !important;
+  background: #EDEDED !important;
+}
+
+.uix-controls__select-wrapper select {
+  display: none;
+}
+
+.uix-controls__select-wrapper .uix-controls__select-trigger {
+  font-weight: 500;
+  color: #999;
+  position: relative;
+  display: inline-block;
+  min-width: 100px;
+  padding: 0.54688rem 2.04688rem 0.54688rem 0.54688rem;
+  border: 1px solid #dce4e8;
+  background: #fff;
+  cursor: pointer;
+  margin-bottom: 1.09375rem;
+}
+
+.uix-controls__select-wrapper .uix-controls__select-trigger.is-active {
+  color: #888;
+}
+
+.uix-controls__select-wrapper .uix-controls__select-trigger:focus {
+  outline: none;
+  border-color: #212121;
+}
+
+.uix-controls__select-wrapper .uix-controls__select-trigger::after {
+  border: 1px solid #dce4e8;
+  border-right: 0;
+  border-top: 0;
+  content: " ";
+  display: block;
+  width: .35rem;
+  height: .35rem;
+  pointer-events: none;
+  position: absolute;
+  transform: rotate(-45deg);
+  margin-top: -0.275rem;
+  right: 1rem;
+  top: 50%;
+  z-index: 1;
+}
+
+.uix-controls__select-wrapper .is-pill .uix-controls__select-trigger {
+  border-radius: 50px;
+}
+
+.uix-controls__select-wrapper.is-rounded .uix-controls__select-trigger {
+  border-radius: 4px;
+}
+
+.uix-controls__select-wrapper .uix-controls__select-label {
+  display: inline-block;
+  margin-left: .3rem;
+  margin-right: .3rem;
+  font-weight: 500;
+  color: #999;
+}
+
+.uix-controls__select-wrapper .uix-controls__select__option-container {
+  position: absolute;
+  z-index: 2;
+  display: block;
+  top: 100%;
+  left: 0;
+  right: 0;
+  min-width: 150px;
+  border: 1px solid #dce4e8;
+  border-radius: 2px;
+  box-sizing: border-box;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  background: #fff;
+  transition: all 0.3s ease;
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+  transform: translateY(-15px);
+}
+
+.uix-controls__select-wrapper .uix-controls__select__option-container > div {
+  overflow-y: auto;
+  max-height: 315px;
+}
+
+.uix-controls__select-wrapper .uix-controls__select__option-container::before {
+  position: absolute;
+  display: block;
+  content: '';
+  bottom: 100%;
+  right: 25px;
+  width: 7px;
+  height: 7px;
+  margin-bottom: -4px;
+  border-top: 1px solid #dce4e8;
+  border-left: 1px solid #dce4e8;
+  background: #fff;
+  transform: rotate(45deg);
+  transition: all 0.3s ease;
+}
+
+.uix-controls__select-wrapper .uix-controls__select__option {
+  position: relative;
+  display: block;
+  border-bottom: 1px solid #dce4e8;
+  font-size: 0.875rem;
+  color: #888;
+  line-height: 1.5;
+  padding: .75rem 1.2rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.uix-controls__select-wrapper .uix-controls__select__option:first-of-type {
+  border-radius: 2px 2px 0 0;
+}
+
+.uix-controls__select-wrapper .uix-controls__select__option:last-of-type {
+  border-bottom: 0;
+  border-radius: 0 0 2px 2px;
+}
+
+.uix-controls__select-wrapper .uix-controls__select__option:hover, .uix-controls__select-wrapper .uix-controls__multi-sel > span.uix-controls__select__option.is-active, .uix-controls__select-wrapper .uix-controls__select__option.is-active {
+  background: #f9f9f9;
+}
+
+.uix-controls__select-wrapper .uix-controls__select {
+  position: relative;
+  display: inline-block;
+}
+
+.uix-controls__select-wrapper .uix-controls__select.is-opened .uix-controls__select-trigger::after {
+  transform: rotate(-135deg);
+}
+
+.uix-controls__select-wrapper .uix-controls__select.is-opened .uix-controls__select__option-container {
+  opacity: 1;
+  visibility: visible;
+  pointer-events: all;
+  transform: translateY(-0.54688rem);
+}
+
+.uix-controls__select-wrapper .uix-controls__select.is-transparent .uix-controls__select-trigger {
+  background: none;
+  border-color: rgba(255, 255, 255, 0.1);
+}
+
+.uix-controls__select-wrapper .uix-controls__select--top {
+  /* Shown from above */
+}
+
+.uix-controls__select-wrapper .uix-controls__select--top .uix-controls__select__option-container {
+  top: auto;
+  bottom: 100%;
+  margin-bottom: 15px;
+}
+
+.uix-controls__select-wrapper .uix-controls__select--top .uix-controls__select__option-container::after {
+  position: absolute;
+  display: block;
+  content: '';
+  bottom: 0;
+  right: 25px;
+  width: 7px;
+  height: 7px;
+  margin-bottom: -4px;
+  border-bottom: 1px solid #dce4e8;
+  border-left: 1px solid transparent;
+  background: #fff;
+  transform: rotate(45deg);
+  transition: all 0.3s ease;
+  z-index: 1;
+}
+
+.uix-controls__select-wrapper .uix-controls__select--top .uix-controls__select__option-container::before {
+  display: none;
+}
+
+.uix-controls__select-wrapper .uix-controls__select--top.is-opened .uix-controls__select__option-container {
+  transform: translateY(0);
+}
+
+/*
+ ---------------------------
+ 5. Custom Radio, Toggle And Checkbox
+ ---------------------------
+ */
+.uix-controls__radio {
+  position: relative;
+}
+
+.uix-controls__radio label {
+  margin: 0.54688rem 0.5rem 0.54688rem 0;
+  position: relative;
+  left: auto;
+  top: auto;
+  pointer-events: auto;
+  /* Required */
+  cursor: pointer;
+  font-weight: 500;
+  color: #999;
+}
+
+.uix-controls__radio:not(.uix-controls--line).is-disabled {
+  user-select: none;
+  pointer-events: none;
+  opacity: .3;
+}
+
+.uix-controls__radio:not(.uix-controls--line).is-disabled label {
+  user-select: none;
+  pointer-events: none;
+}
+
+.uix-controls__radio input[type="radio"] {
+  display: none;
+}
+
+.uix-controls__radio input[type="radio"]:checked + .uix-controls__radio-trigger::before {
+  transform: scale(1);
+}
+
+.uix-controls__radio .uix-controls__radio-trigger {
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  border: 1px solid #dce4e8;
+  margin-right: 5px;
+  display: inline-block;
+  position: relative;
+  vertical-align: middle;
+}
+
+.uix-controls__radio .uix-controls__radio-trigger::before {
+  content: "";
+  width: 10px;
+  height: 10px;
+  background: #212121;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  border-radius: 50%;
+  margin-left: -5px;
+  margin-top: -5px;
+  transform: scale(0);
+  transition: all 0.3s ease;
+}
+
+.uix-controls__toggle {
+  position: relative;
+}
+
+.uix-controls__toggle:not(.uix-controls--line).is-disabled {
+  user-select: none;
+  pointer-events: none;
+  opacity: .3;
+}
+
+.uix-controls__toggle label {
+  display: inline-block;
+  width: 70px;
+  border: 1px solid #dce4e8;
+  white-space: nowrap;
+  overflow: hidden;
+  cursor: pointer;
+  margin-top: 0;
+  margin-bottom: 0.54688rem;
+  text-align: left;
+  /* Required */
+}
+
+.uix-controls__toggle.is-pill label {
+  border-radius: 18px;
+}
+
+.uix-controls__toggle.is-rounded label {
+  border-radius: 4px;
+}
+
+.uix-controls__toggle input[type="checkbox"] {
+  display: none;
+}
+
+.uix-controls__toggle input[type="checkbox"]:checked + .uix-controls__toggle-trigger {
+  margin-left: 8px;
+  background: #212121;
+}
+
+.uix-controls__toggle .uix-controls__toggle-trigger {
+  width: 12px;
+  height: 12px;
+  background: #dce4e8;
+  border-radius: 50%;
+  display: inline-block;
+  vertical-align: top;
+  position: relative;
+  margin: 0.5rem .5rem 0.5rem 0;
+  margin-left: 50px;
+  transition: all 0.3s ease;
+}
+
+.uix-controls__toggle .uix-controls__toggle-trigger::before, .uix-controls__toggle .uix-controls__toggle-trigger::after {
+  position: absolute;
+  display: inline-block;
+  width: 55px;
+  text-align: center;
+  line-height: 100%;
+  font-weight: 500;
+  color: #999;
+  font-size: 0.75rem;
+}
+
+.uix-controls__toggle .uix-controls__toggle-trigger::before {
+  content: attr(data-off-text);
+  left: -50px;
+}
+
+.uix-controls__toggle .uix-controls__toggle-trigger::after {
+  content: attr(data-on-text);
+  right: -50px;
+}
+
+.uix-controls__checkbox {
+  position: relative;
+}
+
+.uix-controls__checkbox:not(.uix-controls--line).is-disabled {
+  user-select: none;
+  pointer-events: none;
+  opacity: .3;
+}
+
+.uix-controls__checkbox label {
+  font-weight: 500;
+  color: #999;
+  cursor: pointer;
+  text-align: left;
+  /* Required */
+}
+
+.uix-controls__checkbox input[type="checkbox"] {
+  display: none;
+}
+
+.uix-controls__checkbox input[type="checkbox"]:checked + .uix-controls__checkbox-trigger::before,
+.uix-controls__checkbox input[type="checkbox"]:checked + .uix-controls__checkbox-trigger::after {
+  opacity: 1;
+}
+
+.uix-controls__checkbox .uix-controls__checkbox-trigger {
+  display: inline-block;
+  width: 15px;
+  height: 15px;
+  border: 1px solid #dce4e8;
+  vertical-align: middle;
+  position: relative;
+  margin: 0.54688rem 0.5rem 0.54688rem 0;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.uix-controls__checkbox .uix-controls__checkbox-trigger::before, .uix-controls__checkbox .uix-controls__checkbox-trigger::after {
+  transition: all 0.3s ease;
+  content: "";
+  position: absolute;
+  background: #212121;
+  height: 3px;
+  left: 4px;
+  bottom: 2px;
+  transform-origin: 1px 1px;
+  opacity: 0;
+}
+
+.uix-controls__checkbox .uix-controls__checkbox-trigger::before {
+  transform: rotate(-45deg);
+  width: 9px;
+}
+
+.uix-controls__checkbox .uix-controls__checkbox-trigger::after {
+  transform: rotate(-135deg);
+  width: 6px;
+}
+
+/*
+ ---------------------------
+ 6. Custom Input Number
+ ---------------------------
+ */
+.uix-controls__number input[type="number"]::-webkit-inner-spin-button,
+.uix-controls__number input[type="number"]::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+.uix-controls__number input[type="number"] {
+  -moz-appearance: textfield;
+  min-width: 100px;
+}
+
+.uix-controls__number input {
+  box-sizing: border-box;
+}
+
+.uix-controls__number .uix-controls__number__btn {
+  position: absolute;
+  height: calc(50% - 1px);
+  width: 27px;
+  border-left: 1px solid #dce4e8;
+  color: #dce4e8;
+  text-align: center;
+  line-height: 1.04688rem;
+  cursor: pointer;
+  user-select: none;
+  right: 1px;
+  background-color: #fff;
+}
+
+.uix-controls__number .uix-controls__number__btn:hover, .uix-controls__number .uix-controls__multi-sel > span.uix-controls__number__btn.is-active {
+  color: #333;
+}
+
+.uix-controls__number .uix-controls__number__btn.uix-controls__number__btn--add {
+  top: 1px;
+  border-radius: 0 4px 0 0;
+  border-bottom: 1px solid #dce4e8;
+}
+
+.uix-controls__number .uix-controls__number__btn.uix-controls__number__btn--remove {
+  bottom: 1px;
+  border-radius: 0 0 4px 0;
+}
+
+/*
+ ---------------------------
+ 7. Multiple Selector
+ ---------------------------
+ */
+.uix-controls__multi-sel > span {
+  position: relative;
+  display: inline-block;
+  border: 1px solid #dce4e8;
+  color: #888;
+  padding: .3rem .7rem;
+  text-decoration: none;
+  cursor: pointer;
+  font-size: 1rem;
+  background: #fff;
+  margin-bottom: 1rem;
+  margin-right: 1rem;
+  transition: all 0.3s ease;
+}
+
+.uix-controls__multi-sel > span i {
+  position: absolute;
+  top: -5px;
+  right: -8px;
+  background: #F1F1F1;
+  border: 1px solid #E0E0E0;
+  font-size: 0.75rem;
+  transition: all 0.3s ease;
+}
+
+.uix-controls__multi-sel > span:hover, .uix-controls__multi-sel > span.is-active {
+  border-color: #d7d7d7;
+  background: #EEEEEE;
+}
+
+.uix-controls__multi-sel > span.is-active i {
+  background: #6B6BF6;
+  border-color: #6B6BF6;
+  color: #fff;
+}
+
+.uix-controls__multi-sel.is-pill > span {
+  border-radius: 50px;
+}
+
+.uix-controls__multi-sel.is-rounded > span {
+  border-radius: 4px;
+}
+
+/*
+ ---------------------------
+ 8. Single Selector
+ ---------------------------
+ */
+.uix-controls__single-sel > span {
+  position: relative;
+  display: inline-block;
+  border: 1px solid #dce4e8;
+  color: #888;
+  padding: .3rem .7rem;
+  text-decoration: none;
+  cursor: pointer;
+  font-size: 1rem;
+  background: #fff;
+  float: left;
+  margin-bottom: 1rem;
+  transition: all 0.3s ease;
+}
+
+.uix-controls__single-sel > span:not(:first-child) {
+  border-left: 0;
+}
+
+.uix-controls__single-sel > span:hover, .uix-controls__multi-sel.uix-controls__single-sel > span.is-active {
+  border-color: #6B6BF6;
+  background: #6B6BF6;
+  background: linear-gradient(to bottom, #6B6BF6 0%, #7D7DFC 100%);
+}
+
+.uix-controls__single-sel > span.is-active {
+  color: #fff;
+  border-color: #6B6BF6;
+  background: #6B6BF6;
+}
+
+.uix-controls__single-sel.is-pill > span:first-child {
+  border-radius: 50px 0 0 50px;
+}
+
+.uix-controls__single-sel.is-pill > span:last-child {
+  border-radius: 0 50px 50px 0;
+}
+
+.uix-controls__single-sel.is-rounded > span:first-child {
+  border-radius: 4px 0 0 4px;
+}
+
+.uix-controls__single-sel.is-rounded > span:last-child {
+  border-radius: 0 4px 4px 0;
+}
+
+/*
+ ---------------------------
+ 9. Search of Widget
+ ---------------------------
+ */
+.uix-search-box {
+  position: relative;
+  font-size: 0.875rem;
+}
+
+.uix-search-box label {
+  width: 100%;
+}
+
+.uix-search-box .uix-search-box__field {
+  width: 100%;
+  background: #fff;
+  border: 1px solid #AEAEAE;
+  box-sizing: border-box;
+  color: #555;
+  outline: none;
+  padding: 0.4375rem 1.421875rem;
+  font-weight: 600;
+  font-size: 0.75rem;
+  border-radius: 25px;
+}
+
+.uix-search-box .uix-search-box__field::-webkit-search-cancel-button {
+  -webkit-appearance: none;
+}
+
+.uix-search-box .uix-search-box__field::-webkit-search-decoration {
+  display: none;
+}
+
+.uix-search-box .uix-search-box__submit {
+  position: absolute;
+  top: 0.5rem;
+  right: 0.875rem;
+  cursor: pointer;
+  font-size: 1rem;
+  /* Icon */
+  color: #CCC;
+}
+
+.uix-search-box .uix-search-box__submit:hover, .uix-search-box .uix-controls__multi-sel > span.uix-search-box__submit.is-active {
+  color: #212121;
+}
+
+/*
+ ---------------------------
+ 10. Add / remove input field dynamically
+ ---------------------------
+ */
+.uix-controls__dynamic-fields-container {
+  margin-bottom: 2.5rem;
+}
+
+.uix-controls__dynamic-fields-container .uix-controls__dynamic-fields__append::before {
+  display: block;
+  content: '';
+  clear: both;
+}
+
+.uix-controls__dynamic-fields-container .uix-controls__dynamic-fields__tmpl {
+  display: none;
+}
+
+.uix-controls__dynamic-fields-container .uix-controls__dynamic-fields__tmpl__wrapper:first-child .uix-controls__dynamic-fields__removebtn {
+  display: none;
+}
+
+/* ======================================================
+    <!-- Form ( Layout ) -->
+/* ====================================================== */
+.uix-controls-layout {
+  align-items: center;
+  display: flex;
+  padding: 0.54688rem 0;
+}
+
+.uix-controls-layout .uix-controls-layout__content {
+  flex: 1;
+}
+
+.uix-controls-layout .uix-controls-layout__content .uix-controls-layout__content__inner {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+}
+
+.uix-controls-layout .uix-controls-layout__content .uix-controls-layout__content__inner > div:first-child {
+  margin-right: 1.5rem;
+  width: 150px;
+}
+
+.uix-controls-layout .uix-controls-layout__content .uix-controls-layout__content__inner > div:last-child {
+  flex: 1;
+}
+
+.uix-controls-layout .uix-controls-layout__icon {
+  flex-grow: 0;
+  margin-left: 1rem;
+}
+
+@media all and (max-width: 768px) {
+  .uix-controls-layout .uix-controls-layout__content .uix-controls-layout__content__inner > div:first-child {
+    margin-right: 0;
+    width: 100%;
+  }
+}
+
+/* ======================================================
+    <!-- Form  ( Material Design Theme )-->
+/* ====================================================== */
+/*
+ * 1. Controls
+ * 4. Custom Select
+ * 6. Custom Input Number
+ * 7. Multiple Selector
+ * 8. Single Selector
+*/
+/*
+ ---------------------------
+ 1. Controls
+ ---------------------------
+ */
+/* Default Controls */
+.uix-controls:not(.uix-controls__toggle):not(.uix-controls__checkbox):not(.uix-controls__radio):not(.uix-controls__select) {
+  /*-- Form Status: Success --*/
+  /*-- Form Status: Error --*/
+  /*-- Form Status: Disable --*/
+}
+
+.uix-controls:not(.uix-controls__toggle):not(.uix-controls__checkbox):not(.uix-controls__radio):not(.uix-controls__select) .uix-controls__basic-bar,
+.uix-controls:not(.uix-controls__toggle):not(.uix-controls__checkbox):not(.uix-controls__radio):not(.uix-controls__select) .uix-controls__bar {
+  position: absolute;
+  height: 2px;
+  left: 0;
+  width: 0;
+  bottom: 0;
+  z-index: 1;
+  display: none;
+  transform: translateX(0);
+  background: #212121;
+  transition: all 0.3s ease;
+}
+
+.uix-controls:not(.uix-controls__toggle):not(.uix-controls__checkbox):not(.uix-controls__radio):not(.uix-controls__select) .uix-controls__basic-bar.is-active,
+.uix-controls:not(.uix-controls__toggle):not(.uix-controls__checkbox):not(.uix-controls__radio):not(.uix-controls__select) .uix-controls__bar.is-active {
+  width: 100%;
+}
+
+.uix-controls:not(.uix-controls__toggle):not(.uix-controls__checkbox):not(.uix-controls__radio):not(.uix-controls__select) .uix-controls__basic-bar {
+  z-index: 0;
+  display: block;
+  width: 100%;
+  height: 1px;
+  background: #dce4e8;
+}
+
+.uix-controls:not(.uix-controls__toggle):not(.uix-controls__checkbox):not(.uix-controls__radio):not(.uix-controls__select).is-success .uix-controls__bar {
+  background: #4AB005;
+  width: 100%;
+}
+
+.uix-controls:not(.uix-controls__toggle):not(.uix-controls__checkbox):not(.uix-controls__radio):not(.uix-controls__select).is-error .uix-controls__bar {
+  background: #f00;
+  width: 100%;
+}
+
+.uix-controls:not(.uix-controls__toggle):not(.uix-controls__checkbox):not(.uix-controls__radio):not(.uix-controls__select).is-disabled .uix-controls__bar {
+  background: #E1E1E1;
+  width: 100%;
+}
+
+/* Create Line Effect on Click */
+.uix-controls.uix-controls--line {
+  /*-- Form With Icon --*/
+  /*-- Select --*/
+  /*-- Form Status: Disable --*/
+}
+
+.uix-controls.uix-controls--line.is-pill input:not([type="checkbox"]):not([type="radio"]),
+.uix-controls.uix-controls--line.is-pill textarea,
+.uix-controls.uix-controls--line.is-pill button:not(.uix-btn),
+.uix-controls.uix-controls--line.is-pill select, .uix-controls.uix-controls--line.is-rounded input:not([type="checkbox"]):not([type="radio"]),
+.uix-controls.uix-controls--line.is-rounded textarea,
+.uix-controls.uix-controls--line.is-rounded button:not(.uix-btn),
+.uix-controls.uix-controls--line.is-rounded select {
+  border-radius: 0 !important;
+}
+
+.uix-controls.uix-controls--line .uix-controls__bar {
+  display: block !important;
+}
+
+.uix-controls.uix-controls--line input:not([type="checkbox"]):not([type="radio"]) {
+  border-top-color: transparent !important;
+  border-left-color: transparent !important;
+  border-right-color: transparent !important;
+  border-bottom-color: transparent !important;
+}
+
+.uix-controls.uix-controls--line textarea,
+.uix-controls.uix-controls--line button:not(.uix-btn),
+.uix-controls.uix-controls--line select {
+  border-top-color: transparent !important;
+  border-left-color: transparent !important;
+  border-right-color: transparent !important;
+  border-bottom-color: transparent !important;
+}
+
+.uix-controls.uix-controls--line:not(.is-iconic) input:not([type="checkbox"]):not([type="radio"]) {
+  padding-left: 0 !important;
+  padding-right: 0 !important;
+  width: 100% !important;
+}
+
+.uix-controls.uix-controls--line:not(.is-iconic) textarea,
+.uix-controls.uix-controls--line:not(.is-iconic) button:not(.uix-btn),
+.uix-controls.uix-controls--line:not(.is-iconic) select {
+  padding-left: 0 !important;
+  padding-right: 0 !important;
+  width: 100% !important;
+}
+
+.uix-controls.uix-controls--line.uix-controls__short-s input:not([type="checkbox"]):not([type="radio"]) {
+  width: 120px !important;
+}
+
+.uix-controls.uix-controls--line.uix-controls__short-m input:not([type="checkbox"]):not([type="radio"]) {
+  width: 155px !important;
+}
+
+.uix-controls.uix-controls--line.uix-controls__short-l input:not([type="checkbox"]):not([type="radio"]) {
+  width: 192px !important;
+}
+
+.uix-controls.uix-controls--line.is-fullwidth select:focus {
+  border-bottom-color: transparent !important;
+}
+
+.uix-controls.uix-controls--line textarea:focus {
+  border-color: transparent !important;
+}
+
+.uix-controls.uix-controls--line button:not(.uix-btn):focus {
+  border-color: transparent !important;
+}
+
+.uix-controls.uix-controls--line label {
+  left: -0.25rem !important;
+}
+
+.uix-controls.uix-controls--line label.is-active {
+  transform: translateX(-1.75rem) scale(0.875);
+}
+
+.uix-controls.uix-controls--line.is-iconic label {
+  left: 2.54688rem !important;
+}
+
+.uix-controls.uix-controls--line.is-iconic label.is-active {
+  transform: translateX(-4.09375rem) scale(0.875);
+}
+
+.uix-controls.uix-controls--line.is-iconic.is-reversed input:not([type="checkbox"]):not([type="radio"]) {
+  padding-left: 0 !important;
+}
+
+.uix-controls.uix-controls--line.is-iconic.is-reversed textarea,
+.uix-controls.uix-controls--line.is-iconic.is-reversed button:not(.uix-btn),
+.uix-controls.uix-controls--line.is-iconic.is-reversed select {
+  padding-left: !important;
+}
+
+.uix-controls.uix-controls--line.is-iconic.is-reversed label {
+  left: -0.25rem !important;
+}
+
+.uix-controls.uix-controls--line.is-iconic.is-reversed label.is-active {
+  transform: translateX(-1.75rem) scale(0.875);
+}
+
+.uix-controls.uix-controls--line.uix-controls__normal-select select {
+  padding-left: 0 !important;
+  padding-right: 1.54688rem !important;
+}
+
+.uix-controls.uix-controls--line.is-disabled input:not([type="checkbox"]):not([type="radio"]) {
+  opacity: .7;
+}
+
+.uix-controls.uix-controls--line.is-disabled textarea,
+.uix-controls.uix-controls--line.is-disabled button:not(.uix-btn),
+.uix-controls.uix-controls--line.is-disabled select {
+  opacity: .7;
+}
+
+.uix-controls.uix-controls--line.is-disabled label {
+  opacity: .5;
+}
+
+/*
+ ---------------------------
+ 4. Custom Select
+ ---------------------------
+ */
+.uix-controls__select-wrapper.uix-controls--line.is-disabled {
+  opacity: .7;
+  /* Mask used to prohibit selection */
+}
+
+.uix-controls__select-wrapper.uix-controls--line.is-disabled::before {
+  content: '';
+  position: absolute;
+  display: block;
+  width: 100%;
+  height: 100%;
+  background: none;
+  top: 0;
+  left: 0;
+  z-index: 2;
+  user-select: none;
+}
+
+.uix-controls__select-wrapper .uix-controls--line .uix-controls__select-trigger {
+  border-radius: 0;
+  padding-left: 0;
+  border-top-color: transparent !important;
+  border-left-color: transparent !important;
+  border-right-color: transparent !important;
+  border-bottom-color: transparent !important;
+}
+
+.uix-controls__select-wrapper .uix-controls--line .uix-controls__basic-bar,
+.uix-controls__select-wrapper .uix-controls--line .uix-controls__bar {
+  position: absolute;
+  height: 2px;
+  left: 0;
+  width: 0;
+  bottom: 0;
+  z-index: 1;
+  display: none;
+  transform: translateX(0);
+  background: #212121;
+  transition: all 0.3s ease;
+}
+
+.uix-controls__select-wrapper .uix-controls--line .uix-controls__basic-bar.is-active,
+.uix-controls__select-wrapper .uix-controls--line .uix-controls__bar.is-active {
+  width: 100%;
+}
+
+.uix-controls__select-wrapper .uix-controls--line .uix-controls__basic-bar {
+  z-index: 0;
+  display: block;
+  width: 100%;
+  height: 1px;
+  background: #dce4e8;
+}
+
+.uix-controls__select-wrapper .uix-controls--line .uix-controls__basic-bar,
+.uix-controls__select-wrapper .uix-controls--line .uix-controls__bar {
+  bottom: 1.09375rem;
+}
+
+.uix-controls__select-wrapper .uix-controls__select.is-opened .uix-controls__bar {
+  width: 100%;
+}
+
+/*
+ ---------------------------
+ 6. Custom Input Number
+ ---------------------------
+ */
+.uix-controls__number.uix-controls--line .uix-controls__number__btn {
+  border: none;
+}
+
+/*
+ ---------------------------
+ 7. Multiple Selector
+ ---------------------------
+ */
+.uix-controls__multi-sel {
+  /* Create Line Effect on Click */
+}
+
+.uix-controls__multi-sel.uix-controls--line > span {
+  border-top-color: transparent !important;
+  border-left-color: transparent !important;
+  border-right-color: transparent !important;
+  background: #fff !important;
+  border-bottom-color: transparent !important;
+}
+
+.uix-controls__multi-sel.uix-controls--line > span.is-active {
+  color: #888 !important;
+}
+
+.uix-controls__multi-sel.uix-controls--line > span:hover .uix-controls__bar {
+  width: 100% !important;
+  bottom: -1px !important;
+}
+
+/*
+ ---------------------------
+ 8. Single Selector
+ ---------------------------
+ */
+.uix-controls__single-sel {
+  /* Create Line Effect on Click */
+}
+
+.uix-controls__single-sel.uix-controls--line > span {
+  border-top-color: transparent !important;
+  border-left-color: transparent !important;
+  border-right-color: transparent !important;
+  background: #fff !important;
+  border-bottom-color: transparent !important;
+}
+
+.uix-controls__single-sel.uix-controls--line > span.is-active {
+  color: #888 !important;
+}
+
+.uix-controls__single-sel.uix-controls--line > span.is-active .uix-controls__basic-bar {
+  background: #6B6BF6 !important;
+}
+
+.uix-controls__single-sel.uix-controls--line > span:hover .uix-controls__bar {
+  width: 100% !important;
+  bottom: -1px !important;
+}
+
+/* ======================================================
+    <!-- Form -->
+/* ====================================================== */
+/*
+ * 1. Controls
+ * 2. Upload
+ * 3. Group
+ * 4. Custom Select
+ * 5. Custom Radio, Toggle And Checkbox
+ * 6. Custom Input Number
+ * 7. Multiple Selector
+ * 8. Single Selector
+ * 9. Search of Widget
+*/
+/*
+ ---------------------------
+ 1. Controls
+ ---------------------------
+ */
+/* Default Controls */
+.rtl .uix-controls:not(.uix-controls__toggle):not(.uix-controls__checkbox):not(.uix-controls__radio):not(.uix-controls__select) {
+  text-align: right;
+  /*-- Select Arrow --*/
+  /*-- Radio --*/
+  /*-- Select --*/
+  /*-- Form With Icon --*/
+  /*-- WordPress Style --*/
+}
+
+.rtl .uix-controls:not(.uix-controls__toggle):not(.uix-controls__checkbox):not(.uix-controls__radio):not(.uix-controls__select).uix-controls__side {
+  margin-left: auto;
+  margin-right: .2rem;
+}
+
+.rtl .uix-controls:not(.uix-controls__toggle):not(.uix-controls__checkbox):not(.uix-controls__radio):not(.uix-controls__select).uix-controls__short-s input:not([type="checkbox"]):not([type="radio"]) {
+  margin-right: auto;
+  margin-left: .5rem;
+}
+
+.rtl .uix-controls:not(.uix-controls__toggle):not(.uix-controls__checkbox):not(.uix-controls__radio):not(.uix-controls__select).uix-controls__short-m input:not([type="checkbox"]):not([type="radio"]) {
+  margin-right: auto;
+  margin-left: .5rem;
+}
+
+.rtl .uix-controls:not(.uix-controls__toggle):not(.uix-controls__checkbox):not(.uix-controls__radio):not(.uix-controls__select).uix-controls__short-l input:not([type="checkbox"]):not([type="radio"]) {
+  margin-right: auto;
+  margin-left: .5rem;
+}
+
+.rtl .uix-controls:not(.uix-controls__toggle):not(.uix-controls__checkbox):not(.uix-controls__radio):not(.uix-controls__select) label {
+  left: auto;
+  right: 0.875rem;
+  transform-origin: right top;
+}
+
+.rtl .uix-controls:not(.uix-controls__toggle):not(.uix-controls__checkbox):not(.uix-controls__radio):not(.uix-controls__select) .uix-controls__arrow {
+  right: auto;
+  left: 0.875rem;
+}
+
+.rtl .uix-controls:not(.uix-controls__toggle):not(.uix-controls__checkbox):not(.uix-controls__radio):not(.uix-controls__select).uix-controls__normal-radio label {
+  padding-left: auto !important;
+  padding-right: 1.25rem !important;
+  right: auto !important;
+}
+
+.rtl .uix-controls:not(.uix-controls__toggle):not(.uix-controls__checkbox):not(.uix-controls__radio):not(.uix-controls__select).uix-controls__normal-select {
+  margin-right: auto;
+  margin-left: 1.65rem;
+}
+
+.rtl .uix-controls:not(.uix-controls__toggle):not(.uix-controls__checkbox):not(.uix-controls__radio):not(.uix-controls__select).uix-controls__normal-select .uix-controls__arrow {
+  left: -1rem;
+}
+
+.rtl .uix-controls:not(.uix-controls__toggle):not(.uix-controls__checkbox):not(.uix-controls__radio):not(.uix-controls__select).is-iconic label {
+  left: auto;
+  right: 2.54688rem;
+}
+
+.rtl .uix-controls:not(.uix-controls__toggle):not(.uix-controls__checkbox):not(.uix-controls__radio):not(.uix-controls__select).is-iconic i {
+  left: auto;
+  right: 1rem;
+}
+
+.rtl .uix-controls:not(.uix-controls__toggle):not(.uix-controls__checkbox):not(.uix-controls__radio):not(.uix-controls__select).is-iconic i::after {
+  left: auto;
+  right: 1.2rem;
+}
+
+.rtl .uix-controls:not(.uix-controls__toggle):not(.uix-controls__checkbox):not(.uix-controls__radio):not(.uix-controls__select).is-iconic input:not([type="checkbox"]):not([type="radio"]) {
+  padding-left: auto;
+  padding-right: 2.54688rem;
+}
+
+.rtl .uix-controls:not(.uix-controls__toggle):not(.uix-controls__checkbox):not(.uix-controls__radio):not(.uix-controls__select).is-iconic textarea,
+.rtl .uix-controls:not(.uix-controls__toggle):not(.uix-controls__checkbox):not(.uix-controls__radio):not(.uix-controls__select).is-iconic button:not(.uix-btn),
+.rtl .uix-controls:not(.uix-controls__toggle):not(.uix-controls__checkbox):not(.uix-controls__radio):not(.uix-controls__select).is-iconic select {
+  padding-left: auto;
+  padding-right: 2.54688rem;
+}
+
+.rtl .uix-controls:not(.uix-controls__toggle):not(.uix-controls__checkbox):not(.uix-controls__radio):not(.uix-controls__select).is-iconic.is-reversed label {
+  left: auto;
+  right: 0.54688rem;
+}
+
+.rtl .uix-controls:not(.uix-controls__toggle):not(.uix-controls__checkbox):not(.uix-controls__radio):not(.uix-controls__select).is-iconic.is-reversed i {
+  left: 1rem;
+  right: auto;
+}
+
+.rtl .uix-controls:not(.uix-controls__toggle):not(.uix-controls__checkbox):not(.uix-controls__radio):not(.uix-controls__select).is-iconic.is-reversed i::after {
+  left: 1.2rem;
+  right: auto;
+}
+
+.rtl .uix-controls:not(.uix-controls__toggle):not(.uix-controls__checkbox):not(.uix-controls__radio):not(.uix-controls__select).is-iconic.is-reversed input:not([type="checkbox"]):not([type="radio"]) {
+  padding-right: 0.54688rem;
+  padding-left: 2.54688rem;
+}
+
+.rtl .uix-controls:not(.uix-controls__toggle):not(.uix-controls__checkbox):not(.uix-controls__radio):not(.uix-controls__select).is-iconic.is-reversed textarea,
+.rtl .uix-controls:not(.uix-controls__toggle):not(.uix-controls__checkbox):not(.uix-controls__radio):not(.uix-controls__select).is-iconic.is-reversed button:not(.uix-btn),
+.rtl .uix-controls:not(.uix-controls__toggle):not(.uix-controls__checkbox):not(.uix-controls__radio):not(.uix-controls__select).is-iconic.is-reversed select {
+  padding-right: 0.54688rem;
+  padding-left: 2.54688rem;
+}
+
+.rtl .uix-controls:not(.uix-controls__toggle):not(.uix-controls__checkbox):not(.uix-controls__radio):not(.uix-controls__select) .req-icon {
+  right: auto;
+  left: 0.721875rem;
+}
+
+/*
+ ---------------------------
+ 2. Upload
+ ---------------------------
+ */
+.rtl .uix-controls__file-container .uix-controls__file-trigger i {
+  margin-right: auto;
+  margin-left: .5rem;
+}
+
+.rtl .uix-controls__file-container input[type="file"] {
+  left: auto;
+  right: 0;
+}
+
+/* HTML5 drag and drop upload control */
+.rtl .uix-controls__file-field-container .uix-controls__file-field-trigger > div input {
+  left: auto;
+  right: 0;
+}
+
+.rtl .uix-controls__file-field-container .uix-controls__file-field-trigger > div input::before {
+  left: auto;
+  right: 0;
+}
+
+/*
+ ---------------------------
+ 3. Group
+ ---------------------------
+ */
+.rtl .uix-controls__merge {
+  /*-- Form With Icon --*/
+}
+
+.rtl .uix-controls__merge i {
+  margin-right: auto;
+  margin-left: .5rem;
+}
+
+.rtl .uix-controls__merge button {
+  margin-left: auto;
+  margin-right: -5px;
+}
+
+.rtl .uix-controls__merge.is-pill input {
+  border-radius: 0 50px 50px 0;
+}
+
+.rtl .uix-controls__merge.is-pill button {
+  border-radius: 50px 0 0 50px;
+}
+
+.rtl .uix-controls__merge.is-iconic input {
+  padding-left: auto;
+  padding-right: 2.54688rem;
+}
+
+.rtl .uix-controls__merge.is-iconic i {
+  left: auto;
+  right: 1rem;
+}
+
+.rtl .uix-controls__merge.is-iconic i::after {
+  left: auto;
+  right: 1.2rem;
+}
+
+.rtl .uix-controls__merge.is-iconic.is-reversed input {
+  padding-left: auto;
+  padding-right: calc(3rem - 0.54688rem);
+}
+
+.rtl .uix-controls__merge.is-iconic.is-reversed i {
+  right: auto;
+  left: 1rem;
+}
+
+.rtl .uix-controls__merge.is-iconic.is-reversed i::after {
+  right: auto;
+  left: 1.2rem;
+}
+
+/*
+ ---------------------------
+ 4. Custom Select
+ ---------------------------
+ */
+.rtl .uix-controls__select {
+  margin-right: auto;
+  margin-left: .3rem;
+}
+
+.rtl .uix-controls__select.js-uix-new {
+  text-align: right;
+  /* Required */
+}
+
+.rtl .uix-controls__select-wrapper:not(.uix-controls--line).is-disabled {
+  /* Mask used to prohibit selection */
+}
+
+.rtl .uix-controls__select-wrapper:not(.uix-controls--line).is-disabled::before {
+  left: auto;
+  right: 0;
+}
+
+.rtl .uix-controls__select-wrapper .uix-controls__select-trigger {
+  padding: 0.54688rem 0.54688rem 0.54688rem 2.04688rem;
+}
+
+.rtl .uix-controls__select-wrapper .uix-controls__select-trigger::after {
+  border-left: 0;
+  right: auto;
+  left: 1rem;
+}
+
+.rtl .uix-controls__select-wrapper .uix-controls__select__option-container {
+  left: auto;
+  right: 0;
+}
+
+.rtl .uix-controls__select-wrapper .uix-controls__select__option-container::before {
+  left: auto;
+  right: 25px;
+  border-left: 1px solid transparent;
+  border-right: 1px solid #dce4e8;
+}
+
+.rtl .uix-controls__select-wrapper .uix-controls__select--top {
+  /* Shown from above */
+}
+
+.rtl .uix-controls__select-wrapper .uix-controls__select--top .uix-controls__select__option-container::after {
+  right: auto;
+  left: 25px;
+  border-left: 1px solid #dce4e8;
+  border-right: 1px solid transparent;
+}
+
+.rtl .uix-controls__select-wrapper .uix-controls__select__option:first-of-type {
+  border-radius: 0 0 2px 2px;
+}
+
+.rtl .uix-controls__select-wrapper .uix-controls__select__option:last-of-type {
+  border-radius: 2px 2px 0 0;
+}
+
+/*
+ ---------------------------
+ 5. Custom Radio, Toggle And Checkbox
+ ---------------------------
+ */
+.rtl .uix-controls__radio {
+  text-align: right;
+}
+
+.rtl .uix-controls__radio label {
+  right: auto;
+}
+
+.rtl .uix-controls__radio .uix-controls__radio-trigger {
+  margin-right: auto;
+  margin-left: 5px;
+}
+
+.rtl .uix-controls__radio .uix-controls__radio-trigger::before {
+  left: auto;
+  margin-left: auto;
+  right: 50%;
+  margin-right: -3px;
+}
+
+.rtl .uix-controls__toggle label {
+  text-align: right;
+  /* Required */
+}
+
+.rtl .uix-controls__toggle input[type="checkbox"] {
+  display: none;
+}
+
+.rtl .uix-controls__toggle input[type="checkbox"]:checked + .uix-controls__toggle-trigger {
+  margin-left: auto;
+  margin-right: 8px;
+}
+
+.rtl .uix-controls__toggle .uix-controls__toggle-trigger {
+  margin: 0.5rem 0 0.5rem .5rem;
+}
+
+.rtl .uix-controls__toggle .uix-controls__toggle-trigger::before {
+  left: auto;
+  right: -50px;
+}
+
+.rtl .uix-controls__toggle .uix-controls__toggle-trigger::after {
+  right: auto;
+  left: -50px;
+}
+
+.rtl .uix-controls__checkbox label {
+  text-align: right;
+  /* Required */
+}
+
+.rtl .uix-controls__checkbox .uix-controls__checkbox-trigger {
+  margin: 0.54688rem 0 0.54688rem 0.5rem;
+}
+
+.rtl .uix-controls__checkbox .uix-controls__checkbox-trigger::before, .rtl .uix-controls__checkbox .uix-controls__checkbox-trigger::after {
+  left: auto;
+  right: 4px;
+}
+
+/*
+ ---------------------------
+ 6. Custom Input Number
+ ---------------------------
+ */
+.rtl .uix-controls__number .uix-controls__number__btn {
+  border-left: none;
+  border-right: 1px solid #dce4e8;
+  right: auto;
+  left: 1px;
+}
+
+/*
+ ---------------------------
+ 7. Multiple Selector
+ ---------------------------
+ */
+.rtl .uix-controls__multi-sel {
+  float: right;
+}
+
+.rtl .uix-controls__multi-sel > span {
+  margin-right: auto;
+  margin-left: 1rem;
+}
+
+.rtl .uix-controls__multi-sel > span i {
+  right: auto;
+  left: -8px;
+}
+
+/*
+ ---------------------------
+ 8. Single Selector
+ ---------------------------
+ */
+.rtl .uix-controls__single-sel {
+  float: right;
+}
+
+.rtl .uix-controls__single-sel > span {
+  margin-right: auto;
+  margin-left: 1rem;
+}
+
+/*
+ ---------------------------
+ 9. Search of Widget
+ ---------------------------
+ */
+.rtl .uix-search-box .uix-search-box__submit {
+  right: auto;
+  left: 0.875rem;
+}
+
+/* ======================================================
+    <!-- Form ( Layout ) -->
+/* ====================================================== */
+.rtl .uix-controls-layout .uix-controls-layout__content .uix-controls-layout__content__inner > div:first-child {
+  margin-right: auto;
+  margin-left: 1.5rem;
+}
+
+.rtl .uix-controls-layout .uix-controls-layout__icon {
+  margin-left: auto;
+  margin-right: 1rem;
+}
+
+@media all and (max-width: 768px) {
+  .rtl .uix-controls-layout .uix-controls-layout__content .uix-controls-layout__content__inner > div:first-child {
+    margin-left: 0;
+  }
+}
+
+/* ======================================================
+    <!-- Form  ( Material Design Theme )-->
+/* ====================================================== */
+/*
+ * 1. Controls
+ * 4. Custom Select
+*/
+/*
+ ---------------------------
+ 1. Controls
+ ---------------------------
+ */
+/* Default Controls */
+.rtl .uix-controls:not(.uix-controls__toggle):not(.uix-controls__checkbox):not(.uix-controls__radio):not(.uix-controls__select) .rtl .uix-controls__basic-bar,
+.rtl .uix-controls:not(.uix-controls__toggle):not(.uix-controls__checkbox):not(.uix-controls__radio):not(.uix-controls__select) .rtl .uix-controls__bar {
+  left: auto;
+  right: 0;
+}
+
+/* Create Line Effect on Click */
+.rtl .uix-controls.uix-controls--line {
+  /*-- Form With Icon --*/
+  /*-- Select --*/
+}
+
+.rtl .uix-controls.uix-controls--line label {
+  left: auto !important;
+  right: -0.25rem !important;
+}
+
+.rtl .uix-controls.uix-controls--line label.is-active {
+  transform-origin: right top;
+  transform: translateX(1.75rem) scale(0.875);
+}
+
+.rtl .uix-controls.uix-controls--line.is-iconic label {
+  left: auto !important;
+  right: 2.54688rem !important;
+}
+
+.rtl .uix-controls.uix-controls--line.is-iconic label.is-active {
+  transform: translateX(4.09375rem) scale(0.875);
+}
+
+.rtl .uix-controls.uix-controls--line.is-iconic.is-reversed input:not([type="checkbox"]):not([type="radio"]) {
+  padding-right: 0 !important;
+}
+
+.rtl .uix-controls.uix-controls--line.is-iconic.is-reversed textarea,
+.rtl .uix-controls.uix-controls--line.is-iconic.is-reversed button:not(.uix-btn),
+.rtl .uix-controls.uix-controls--line.is-iconic.is-reversed select {
+  padding-right: 0 !important;
+}
+
+.rtl .uix-controls.uix-controls--line.is-iconic.is-reversed label {
+  left: auto !important;
+  right: -0.25rem !important;
+}
+
+.rtl .uix-controls.uix-controls--line.is-iconic.is-reversed label.is-active {
+  transform: translateX(1.75rem) scale(0.875);
+}
+
+.rtl .uix-controls.uix-controls--line.uix-controls__normal-select select {
+  padding-right: 0 !important;
+  padding-left: 1.54688rem !important;
+}
+
+/*
+ ---------------------------
+ 4. Custom Select
+ ---------------------------
+ */
+.rtl .uix-controls__select-wrapper.uix-controls--line.is-disabled {
+  /* Mask used to prohibit selection */
+}
+
+.rtl .uix-controls__select-wrapper.uix-controls--line.is-disabled::before {
+  left: auto;
+  right: 0;
+}
+
+.rtl .uix-controls__select-wrapper .uix-controls--line .uix-controls__select-trigger {
+  padding-right: 0;
 }
 
 
