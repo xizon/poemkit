@@ -6,7 +6,7 @@
  * ## Project Name        :  Uix Kit React
  * ## Project Description :  A free web kits with React for fast web design and development via SSR.
  * ## Project URL         :  https://uiux.cc
- * ## Version             :  0.0.33
+ * ## Version             :  0.0.34
  * ## Based on            :  Uix Kit React (https://github.com/xizon/uix-kit-react#readme)
  * ## Last Update         :  May 14, 2021
  * ## Created by          :  UIUX Lab (https://uiux.cc) (uiuxlab@gmail.com)
@@ -48078,9 +48078,9 @@ var Input = __webpack_require__(58);
     className: "col-12"
   }, /*#__PURE__*/react_default.a.createElement("h1", {
     className: "uix-t-c"
-  }, "From", /*#__PURE__*/react_default.a.createElement("a", {
+  }, "Form", /*#__PURE__*/react_default.a.createElement("a", {
     className: "uix-typo--h3 align-middle",
-    href: "https://github.com/xizon/uix-kit-react/tree/main/src/client/components/From",
+    href: "https://github.com/xizon/uix-kit-react/tree/main/src/client/components/Form",
     target: "_blank"
   }, /*#__PURE__*/react_default.a.createElement("code", null, /*#__PURE__*/react_default.a.createElement("i", {
     className: "fa fa-code",
