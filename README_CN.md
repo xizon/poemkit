@@ -16,7 +16,9 @@
 
 
 
-Uix Kit React系一套免费的网站开发工具包，帮助开发者从零建立一个支持服务端渲染(SSR)的React技术网站，它支持pm2自动部署到服务器。演示模块提供了部分迁移组件。它们没有属性，用于需要快速迁移一些已经完成的(完整的)HTML代码。这对于快速创建由脚本驱动的模块非常有用。
+Uix Kit React系一套免费的网站开发工具包，帮助开发者从零建立一个支持服务端渲染(SSR)的React技术网站，它支持pm2自动部署到服务器。
+
+演示模块提供了部分迁移组件。它们没有属性，用于需要快速迁移一些已经完成的(完整的)HTML代码。这对于快速创建由脚本驱动的模块非常有用。
 
 
 ---
@@ -332,20 +334,16 @@ output: {
 
 ### ⚙️ 打包编译应用时运行开发模式:
 
-运行开发模式有助于维护你的组件系统，在 `package.json` 文件中添加键 `development` 并把值设为 `true`.
+运行以下命令来测试:
 
-
-```json
-{
-  "development": true,
-  ...
-}
+```sh
+$ npm run dev
 ```
 
 使用下面的JavaScript脚本可以编写调试代码，比如:
 
 ```js
-if ( process.env.npm_package_development == 'true' ) {
+if ( process.env.NODE_ENV === 'development' ) {
 
 	YourComponentName.propTypes = {
 	    displayEnable: PropTypes.bool.isRequired,

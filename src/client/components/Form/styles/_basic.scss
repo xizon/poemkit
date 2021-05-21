@@ -117,6 +117,8 @@ select:-webkit-autofill:focus {
 		&:focus {
 			outline: none;
 			border-color: $control-focus-bordercolor;
+			box-shadow: 0px 0px 0px 3px rgba($control-focus-bordercolor,.35);
+			
 		}
 
 
@@ -188,6 +190,7 @@ select:-webkit-autofill:focus {
 		&:focus {
 			outline: none;
 			border-color: $control-focus-bordercolor;
+			box-shadow: 0px 0px 0px 3px rgba($control-focus-bordercolor,.35);
 		}
 
 
@@ -210,6 +213,7 @@ select:-webkit-autofill:focus {
 		&:focus {
 			outline: none;
 			border-color: $control-focus-bordercolor;
+			box-shadow: 0px 0px 0px 3px rgba($control-focus-bordercolor,.35);
 		}
 
 	}
@@ -220,6 +224,7 @@ select:-webkit-autofill:focus {
 		&:focus {
 			outline: none;
 			border-color: $control-focus-bordercolor;
+			box-shadow: 0px 0px 0px 3px rgba($control-focus-bordercolor,.35);
 		}
 
 
@@ -890,6 +895,7 @@ $controls-merge-button-width: 20%;
 		&:focus {
 			outline: none;
 			border-color: $control-focus-bordercolor;
+			box-shadow: 0px 0px 0px 3px rgba($control-focus-bordercolor,.35);
 		}
 
 		&::after {

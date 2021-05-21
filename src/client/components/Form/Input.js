@@ -145,7 +145,7 @@ export default class Input extends Component {
 
 
 //Configure your application to run in "development" mode.
-if ( process.env.npm_package_development == 'true' ) {
+if ( process.env.NODE_ENV === 'development' ) {
 			
 	Input.propTypes = {
 		type: PropTypes.string,	  

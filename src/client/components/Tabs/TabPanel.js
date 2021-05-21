@@ -31,7 +31,7 @@ export default class TabPanel extends Component {
 
 
 //Configure your application to run in "development" mode.
-if ( process.env.npm_package_development == 'true' ) {
+if ( process.env.NODE_ENV === 'development' ) {
 			
 	TabPanel.propTypes = {
 	    defaultActive: PropTypes.any,

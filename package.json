@@ -1,12 +1,11 @@
 {
-  "development": true,
   "author": "UIUX Lab",
   "email": "uiuxlab@gmail.com",
   "name": "uix-kit-react",
   "projectName": "Uix Kit React",
   "createdInfo": "UIUX Lab (https://uiux.cc)",
   "projectURL": "https://uiux.cc",
-  "version": "0.0.34",
+  "version": "0.0.35",
   "description": "A free web kits with React for fast web design and development via SSR.",
   "main": "webpack.config.js",
   "directories": {
@@ -15,8 +14,8 @@
   "proxy": "http://localhost:3000",
   "scripts": {
     "watch": "webpack --watch",
-    "dev": "nodemon --require ignore-styles --exec babel-node ./src/server/server.js",
-    "build": "webpack --progress --mode production",
+    "dev": "cross-env NODE_ENV=development nodemon --require ignore-styles --exec babel-node ./src/server/server.js",
+    "build": "cross-env NODE_ENV=production webpack --progress --mode production",
     "prettier": "prettier \"./dist/css/uix-kit-react.css\""
   },
   "repository": {
@@ -46,6 +45,7 @@
     "@node-minify/uglify-js": "^4.0.2",
     "babel-loader": "^8.0.4",
     "clean-webpack-plugin": "^1.0.0",
+    "cross-env": "^7.0.3",
     "css-loader": "^2.0.1",
     "eslint": "^7.24.0",
     "file-loader": "^6.2.0",

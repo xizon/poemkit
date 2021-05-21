@@ -245,7 +245,7 @@ export default class TableSorter extends Component {
 
 
 //Configure your application to run in "development" mode.
-if ( process.env.npm_package_development == 'true' ) {
+if ( process.env.NODE_ENV === 'development' ) {
 			
 	TableSorter.propTypes = {
 		data: PropTypes.object.isRequired,

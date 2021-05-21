@@ -24,16 +24,22 @@ export default ({ staticContext = {} }) => {
 							<div className="row">
 								<div className="col-md-10 offset-md-1">
 		
-									<div className="uix-t-c"><img src={`${rootDirectory}/assets/images/logo-colorful.png`} alt="Uix Kit React" /></div>
-									<p className="uix-t-c">
-										A free web kits with React for fast web design and development via SSR. Using react, redux, router, axios and express. This project was bootstrapped with nodejs library. Project supports automatic deployments from a number of repository hosting services via pm2.
-									</p>		
+									<div className="uix-t-c">
 		
-									<p className="uix-t-c">
-										<NavLink data-route="true" to="/components-demo" style={{textDecoration: "underline"}}>
-											<i className="fa fa-external-link" aria-hidden="true"></i> Click me to view components!
-										</NavLink>
-									</p>
+										<img src={`${rootDirectory}/assets/images/logo-colorful.png`} alt="Uix Kit React" />
+
+										<p>
+											A free web kits with React for fast web design and development via SSR. Using react, redux, router, axios and express. This project was bootstrapped with nodejs library. Project supports automatic deployments from a number of repository hosting services via pm2.
+										</p>		
+										<p>Migrating components are partially provided by demonstration. They have no properties and are used to quickly migrate some completed HTML code. This is very useful for quickly creating a script-driven module.	</p>
+
+										<p>
+											<NavLink data-route="true" to="/components-demo" style={{textDecoration: "underline"}}>
+												<i className="fa fa-external-link" aria-hidden="true"></i> Click me to view components!
+											</NavLink>
+										</p>
+									</div>
+
 
 
 								</div>

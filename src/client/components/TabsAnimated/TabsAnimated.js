@@ -134,7 +134,7 @@ export default class TabsAnimated extends Component {
 
 
 //Configure your application to run in "development" mode.
-if ( process.env.npm_package_development == 'true' ) {
+if ( process.env.NODE_ENV === 'development' ) {
 			
 	TabsAnimated.propTypes = {
 		id: PropTypes.string,

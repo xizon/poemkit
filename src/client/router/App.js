@@ -117,6 +117,9 @@ export default (props) => {
 					<li className={props.location.pathname === "/index" || props.location.pathname === '' ? 'is-active' : ''}>
 					  <NavLink data-route="true" to="/index" activeClassName="is-active">Home</NavLink>
 					</li>
+					<li className={props.location.pathname === "/components-demo" ? 'is-active' : ''}>
+					  <NavLink data-route="true" to="/components-demo" activeClassName="is-active">Components</NavLink>
+					</li>
 					<li className={props.location.pathname === "/todos" ? 'is-active' : ''}>
 					  <NavLink data-route="true" to="/todos" activeClassName="is-active">Todos</NavLink>
 					</li>

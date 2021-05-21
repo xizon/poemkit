@@ -6,9 +6,9 @@
  * ## Project Name        :  Uix Kit React
  * ## Project Description :  A free web kits with React for fast web design and development via SSR.
  * ## Project URL         :  https://uiux.cc
- * ## Version             :  0.0.34
+ * ## Version             :  0.0.35
  * ## Based on            :  Uix Kit React (https://github.com/xizon/uix-kit-react#readme)
- * ## Last Update         :  May 14, 2021
+ * ## Last Update         :  May 21, 2021
  * ## Created by          :  UIUX Lab (https://uiux.cc) (uiuxlab@gmail.com)
  * ## Released under the MIT license.
  * 	
@@ -28798,7 +28798,8 @@ select:-webkit-autofill:focus {
 
 .uix-controls:not(.uix-controls__toggle):not(.uix-controls__checkbox):not(.uix-controls__radio):not(.uix-controls__select) input:not([type="checkbox"]):not([type="radio"]):focus {
   outline: none;
-  border-color: #212121;
+  border-color: #dadada;
+  box-shadow: 0px 0px 0px 3px rgba(218, 218, 218, 0.35);
 }
 
 .uix-controls:not(.uix-controls__toggle):not(.uix-controls__checkbox):not(.uix-controls__radio):not(.uix-controls__select).uix-controls__short-s input:not([type="checkbox"]):not([type="radio"]) {
@@ -28845,7 +28846,8 @@ select:-webkit-autofill:focus {
 
 .uix-controls:not(.uix-controls__toggle):not(.uix-controls__checkbox):not(.uix-controls__radio):not(.uix-controls__select) textarea:focus {
   outline: none;
-  border-color: #212121;
+  border-color: #dadada;
+  box-shadow: 0px 0px 0px 3px rgba(218, 218, 218, 0.35);
 }
 
 .uix-controls:not(.uix-controls__toggle):not(.uix-controls__checkbox):not(.uix-controls__radio):not(.uix-controls__select) button:not(.uix-btn) {
@@ -28862,7 +28864,8 @@ select:-webkit-autofill:focus {
 
 .uix-controls:not(.uix-controls__toggle):not(.uix-controls__checkbox):not(.uix-controls__radio):not(.uix-controls__select) button:not(.uix-btn):focus {
   outline: none;
-  border-color: #212121;
+  border-color: #dadada;
+  box-shadow: 0px 0px 0px 3px rgba(218, 218, 218, 0.35);
 }
 
 .uix-controls:not(.uix-controls__toggle):not(.uix-controls__checkbox):not(.uix-controls__radio):not(.uix-controls__select) select {
@@ -28871,7 +28874,8 @@ select:-webkit-autofill:focus {
 
 .uix-controls:not(.uix-controls__toggle):not(.uix-controls__checkbox):not(.uix-controls__radio):not(.uix-controls__select) select:focus {
   outline: none;
-  border-color: #212121;
+  border-color: #dadada;
+  box-shadow: 0px 0px 0px 3px rgba(218, 218, 218, 0.35);
 }
 
 .uix-controls:not(.uix-controls__toggle):not(.uix-controls__checkbox):not(.uix-controls__radio):not(.uix-controls__select) label {
@@ -29396,7 +29400,8 @@ select:-webkit-autofill:focus {
 
 .uix-controls__select-wrapper .uix-controls__select-trigger:focus {
   outline: none;
-  border-color: #212121;
+  border-color: #dadada;
+  box-shadow: 0px 0px 0px 3px rgba(218, 218, 218, 0.35);
 }
 
 .uix-controls__select-wrapper .uix-controls__select-trigger::after {
@@ -30852,5 +30857,4 @@ select:-webkit-autofill:focus {
 }
 
 
-/*# sourceMappingURL=uix-kit-react.css.map*/
 /*# sourceMappingURL=uix-kit-react.css.map*/

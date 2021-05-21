@@ -1084,7 +1084,7 @@ export default class Swiper extends Component {
 
 
 //Configure your application to run in "development" mode.
-if ( process.env.npm_package_development == 'true' ) {
+if ( process.env.NODE_ENV === 'development' ) {
 			
 	Swiper.propTypes = {
 		id: PropTypes.string

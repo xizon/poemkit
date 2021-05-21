@@ -1,6 +1,12 @@
 # Changelog
 
 
+#### = 0.0.35 (May 20, 2021) =
+
+Tweak: Modified global environment variables during testing.
+Tweak: Optimize commands for node.
+
+
 #### = 0.0.33 (May 14, 2021) =
 
 * New: Added new demo `Form` controls. It contains the following controls: 	`Input`.

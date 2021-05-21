@@ -163,9 +163,6 @@ export default () => {
 
 				</section>
 
-
-			
-	
 	
 
 			   {/*<!-- Content 
@@ -197,8 +194,8 @@ export default () => {
 	
 	
 	
+
 	        </form>
-	
 	
 	
 	

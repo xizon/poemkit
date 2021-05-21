@@ -16,7 +16,9 @@
 
 
 
-A free web kits with React for fast web design and development via SSR. Using react, redux, router, axios and express. This project was bootstrapped with nodejs library. Project supports automatic deployments from a number of repository hosting services via pm2. Migrating components are partially provided by demonstration. They have no properties and are used to quickly migrate some completed HTML code. This is very useful for quickly creating a script-driven module.
+A free web kits with React for fast web design and development via SSR. Using react, redux, router, axios and express. This project was bootstrapped with nodejs library. Project supports automatic deployments from a number of repository hosting services via pm2.
+
+Migrating components are partially provided by demonstration. They have no properties and are used to quickly migrate some completed HTML code. This is very useful for quickly creating a script-driven module.
 
 
 ---
@@ -338,19 +340,16 @@ To run both the server and React application at the same time we need to add the
 
 ### ⚙️ Run the Webpack build in "development" mode:
 
-Add the `development` key and set it value to `true` to `package.json`.
+Run the following command to test:
 
-```json
-{
-  "development": true,
-  ...
-}
+```sh
+$ npm run dev
 ```
 
 Then, you could use the following JavaScript code to debug it:
 
 ```js
-if ( process.env.npm_package_development == 'true' ) {
+if ( process.env.NODE_ENV === 'development' ) {
 
 	YourComponentName.propTypes = {
 	    displayEnable: PropTypes.bool.isRequired,
