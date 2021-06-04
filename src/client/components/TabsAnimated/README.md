@@ -19,7 +19,7 @@ export default () => {
 	  
 		<h3>Tabs Animated</h3>
 	    <p>The most basic style allows you to set transition animation</p>
-		<hr />
+		{/* ================================================================== */} 
 
 		<TabsAnimated>
 			<TabList key="tab-list-1" defaultActive>Tab 1</TabList>

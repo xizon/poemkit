@@ -59,7 +59,7 @@ export default () => {
     <>
 		<h3>Row Dropzone</h3>
 		<p>Not applicable to tables with <code>&lt;table&gt;</code></p>
-		<hr />
+		{/* ================================================================== */} 
 	  
 	    <TableGrid className="uix-table-grid" data={data1} />
 				

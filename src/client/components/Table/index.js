@@ -166,7 +166,7 @@ export default class Table extends Component {
 	
 	componentDidMount(){
 		
-		//
+		
 		__( document ).ready( function() {
 
 			

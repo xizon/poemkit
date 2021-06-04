@@ -1,6 +1,15 @@
 # Changelog
 
 
+
+
+
+#### = 0.0.36 (June 2, 2021) =
+
+* New: Added new form controls: `Textarea`, `Select`, `Custom Select`, `Checkbox`, `Radio`, `Multiple Select`, `Single Select`, `Date`, `Number`, `Switch`, `Dynamic Fields`, `File`.
+Tweak: Adjusted Node.js script location.
+
+
 #### = 0.0.35 (May 20, 2021) =
 
 Tweak: Modified global environment variables during testing.

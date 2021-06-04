@@ -85,7 +85,7 @@ export default () => {
 
 		<h3>Table Sorter</h3>
 		<p>Users can filter and limit the data displayed within a long data table.</p>
-		<hr />
+		{/* ================================================================== */}      
 
 		<TableSorter className="uix-table is-horizontal uix-table--alternant-row js-uix-table-sorter" data={data1} />
 

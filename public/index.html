@@ -5,6 +5,10 @@
 		<meta charset="utf-8" />
 		<title>{{pageTitle}}</title>	
 		
+
+		<!-- manifest.json provides metadata used when your web app is added to the
+             homescreen on Android. See https://developers.google.com/web/fundamentals/engage-and-retain/web-app-manifest/
+		============================================= -->
 		<link rel="manifest" href="/manifest.json" />
         
 		<!-- Mobile Settings
@@ -22,7 +26,7 @@
         
 		<!-- Core & Theme CSS
 		============================================= -->
-        <link rel="stylesheet" href="/dist/css/uix-kit-react.min.css?ver=zUqj6T9i5jHOygj6R83t"/>
+        <link rel="stylesheet" href="/dist/css/uix-kit-react.min.css?ver=YhoQmMB6JyxOrsEAAFmp"/>
         <!-- Core & Theme CSS  end -->
 		
 
@@ -53,6 +57,10 @@
   <body class="home">
 
 	  
+	  <noscript>
+	      You need to enable JavaScript to run this app.
+	  </noscript>
+	  
 	  <div id="app">{{reactApp}}</div>
 	  
 	  
@@ -60,7 +68,7 @@
 	============================================= -->
 	
 	<script>
-		var REVISION     = "0.0.35",
+		var REVISION     = "0.0.36",
 			APP_ROOTPATH = {
 				"templateUrl" : "", //If the file is in the root directory, you can leave it empty. If in another directory, you can write: "/blog"  (but no trailing slash)
 				"homeUrl"     : "",  //Eg. https://uiux.cc
@@ -68,7 +76,7 @@
 			};
     </script>  
     <script>window.__PRELOADED_STATE__ = {{preloadedState}};</script>
-    <script src="/dist/js/uix-kit-react.min.js?ver=zUqj6T9i5jHOygj6R83t"></script>
+    <script src="/dist/js/uix-kit-react.min.js?ver=YhoQmMB6JyxOrsEAAFmp"></script>
 
 
 	<!-- Your Plugins & Theme Scripts  end -->

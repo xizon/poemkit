@@ -6,9 +6,9 @@
  * ## Project Name        :  Uix Kit React
  * ## Project Description :  A free web kits with React for fast web design and development via SSR.
  * ## Project URL         :  https://uiux.cc
- * ## Version             :  0.0.35
+ * ## Version             :  0.0.36
  * ## Based on            :  Uix Kit React (https://github.com/xizon/uix-kit-react#readme)
- * ## Last Update         :  May 21, 2021
+ * ## Last Update         :  June 4, 2021
  * ## Created by          :  UIUX Lab (https://uiux.cc) (uiuxlab@gmail.com)
  * ## Released under the MIT license.
  * 	
@@ -28725,6 +28725,19 @@ select:-webkit-autofill:focus {
   transition: background-color 5000s ease-in-out 0s;
 }
 
+/* Remove default text/placeholder present in html5 input element of type=date and type=datetime-local */
+input[type="date"]::-webkit-datetime-edit,
+input[type="datetime-local"]::-webkit-datetime-edit {
+  color: transparent !important;
+}
+
+input[type="date"]:focus::-webkit-datetime-edit,
+input[type="datetime-local"]:focus::-webkit-datetime-edit,
+input[type="date"].is-active::-webkit-datetime-edit,
+input[type="datetime-local"].is-active::-webkit-datetime-edit {
+  color: #888 !important;
+}
+
 /* Required field marker */
 .uix-controls__im {
   color: red;
@@ -29355,6 +29368,11 @@ select:-webkit-autofill:focus {
   width: 100% !important;
 }
 
+.uix-controls__select-wrapper.is-disabled {
+  pointer-events: none;
+  user-select: none;
+}
+
 .uix-controls__select-wrapper:not(.uix-controls--line).is-disabled {
   /* Mask used to prohibit selection */
 }
@@ -29809,6 +29827,12 @@ select:-webkit-autofill:focus {
   border-radius: 0 0 4px 0;
 }
 
+.uix-controls__number.is-disabled .uix-controls__number__btn {
+  pointer-events: none;
+  user-select: none;
+  opacity: .6;
+}
+
 /*
  ---------------------------
  7. Multiple Selector
@@ -30112,6 +30136,7 @@ select:-webkit-autofill:focus {
   border-left-color: transparent !important;
   border-right-color: transparent !important;
   border-bottom-color: transparent !important;
+  box-shadow: none !important;
 }
 
 .uix-controls.uix-controls--line textarea,
@@ -30121,6 +30146,7 @@ select:-webkit-autofill:focus {
   border-left-color: transparent !important;
   border-right-color: transparent !important;
   border-bottom-color: transparent !important;
+  box-shadow: none !important;
 }
 
 .uix-controls.uix-controls--line:not(.is-iconic) input:not([type="checkbox"]):not([type="radio"]) {
@@ -30244,6 +30270,7 @@ select:-webkit-autofill:focus {
   border-left-color: transparent !important;
   border-right-color: transparent !important;
   border-bottom-color: transparent !important;
+  box-shadow: none !important;
 }
 
 .uix-controls__select-wrapper .uix-controls--line .uix-controls__basic-bar,

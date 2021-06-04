@@ -21,7 +21,7 @@ import '@uixkit.react/components/Form/styles/rtl/_theme_material.scss';
 
 
 
-export default class Input extends Component {
+export default class Textarea extends Component {
 	
 	constructor(props) {
 		super(props);
@@ -76,10 +76,6 @@ export default class Input extends Component {
 
 		//sizes
 		if ( param.indexOf( 'fullwidth' ) >= 0 ) classes += ' is-fullwidth';
-		if ( param.indexOf( 'small' ) >= 0 ) classes += ' uix-controls__short-s';
-		if ( param.indexOf( 'medium' ) >= 0 ) classes += ' uix-controls__short-m';
-		if ( param.indexOf( 'large' ) >= 0 ) classes += ' uix-controls__short-l';
-
 
 		
 		return classes;
@@ -91,40 +87,34 @@ export default class Input extends Component {
 		
 		const { 
 			theme,
-			type,
+			cols,
+			rows,
 			ui,
 			disabled,
 			required,
 			value,
 			label,
-			units,
 			name,
 			id,
 			maxLength,
-			iconLeft,
-			iconRight,
 			...attributes
 		} = this.props;
 		
 		
-		const typeRes = typeof(type) === 'undefined' ? 'text' : type;
 		const uiRes = typeof(ui) === 'undefined' ? '' : ui;
 		const nameRes = typeof(name) === 'undefined' ? ( typeof(label) !== 'undefined' ? __.toSlug( label ) : '' )  : name;
 		const idRes = id ? id : 'app-control-' + __.GUID.create();
 		const wrapperClassDisabled = disabled ? ' is-disabled' : '';
-		const wrapperClassIconLeft = iconLeft ? ' is-iconic' : '';
-		const wrapperClassIconRight = iconRight ? ' is-iconic is-reversed' : '';
 		const wrapperClassUi = this.uiSwitch(uiRes);
 		const wrapperClassTheme = theme === 'line' ? ' uix-controls--line' : '';
 		
 		return (
 		  <>
 
-				<div className={"uix-controls" + wrapperClassDisabled + wrapperClassIconLeft + wrapperClassIconRight + wrapperClassUi + wrapperClassTheme}>
-			      {iconLeft || null}
-			      {iconRight || null}
-				  <input 
-					  type={typeRes} 
+	
+				<div className={"uix-controls uix-controls__textarea" + wrapperClassDisabled + wrapperClassUi + wrapperClassTheme}>
+
+				  <textarea  
 					  className="js-uix-float-label" 
 			          id={idRes}
 					  name={nameRes}
@@ -135,15 +125,17 @@ export default class Input extends Component {
 			          onChange={this.handleOnBlurChange}
 			          disabled={disabled || null}
 					  required={required || null}
+					  cols={cols || 20}
+					  rows={rows || 2}
                       {...attributes}
-					/>
+					>
+					</textarea>
 				  <label htmlFor={idRes} className={(value && value.length > 0 ? 'is-active' : '')}>
 					  {label || null}
 					  {required ? <><span className="uix-controls__im">*</span></> : ''}
 				  </label>
 				  {theme === 'line' ? <><ins className="uix-controls__bar"></ins><ins className="uix-controls__basic-bar"></ins></> : ''}
-				  {units || null}
-
+	
 				</div>
 	
 		  </>
@@ -155,22 +147,20 @@ export default class Input extends Component {
 //Configure your application to run in "development" mode.
 if ( process.env.NODE_ENV === 'development' ) {
 			
-	Input.propTypes = {
+	Textarea.propTypes = { 
 		theme: PropTypes.string,
-		type: PropTypes.string,	  
 		ui: PropTypes.string,
 		value: PropTypes.string,
 		label: PropTypes.string,
-		units: PropTypes.string,
 		name: PropTypes.string,
 		id: PropTypes.string,
 		maxLength: PropTypes.string,
 		disabled: PropTypes.any,
-		required: PropTypes.any,
-		iconLeft: PropTypes.object,
-		iconRight: PropTypes.object			   
-		
+		required: PropTypes.any,   
+		cols: PropTypes.string,
+		rows: PropTypes.string
 	}
 
 }
+
 

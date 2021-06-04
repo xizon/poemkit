@@ -28,7 +28,7 @@ export default class Tabs extends Component {
 	
 	componentDidMount(){
 		
-		//
+		
 		__( document ).ready( function() {
 
 			

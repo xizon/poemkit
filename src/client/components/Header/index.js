@@ -23,7 +23,7 @@ export default class Header extends Component {
 
 	componentDidMount(){
 		
-		//
+	
 		__( document ).ready( function() {
 		
 			__( 'body' ).loader({

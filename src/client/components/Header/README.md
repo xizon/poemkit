@@ -16,7 +16,7 @@ import Header from '@uixkit.react/components/Header/index.js';
 export default () => {
   return (
     <>
-		<Header headerOverlayEnable="false" htmlString={
+		<Header headerOverlayEnabled="false" htmlString={
 			<>
 					<li><a href="#">Menu 1</a></li>
 					<li><a href="#">Menu 2</a></li>

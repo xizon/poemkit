@@ -193,7 +193,7 @@ export default () => {
 
 		<h3>Table Series</h3>
 		<p>Provides some common styles of table.</p>
-		<hr />
+		{/* ================================================================== */} 
 
 
 		<Table className="uix-table uix-table--bordered" data={data1} />
@@ -215,7 +215,7 @@ export default () => {
 
 		<h3>Responsive Table</h3>
 		<p>Change window size to watch. The class <code>.is-responsive.js-uix-table--responsive</code> used here will be applied <code>.uix-table</code></p>
-		<hr />
+		{/* ================================================================== */} 
 
 
 		<Table className="uix-table uix-table--noborder is-horizontal is-responsive js-uix-table--responsive" data={data3} />
@@ -223,7 +223,7 @@ export default () => {
 
 		<h3>Responsive Table with Scroll Bars</h3>
 		<p>Change window size to watch. The class <code>.js-uix-table--responsive-scrolled</code> used here will be applied <code>.uix-table</code></p>
-		<hr />
+		{/* ================================================================== */} 
 
 	   <Table className="uix-table uix-table--bordered js-uix-table--responsive-scrolled" data={data3} />
 

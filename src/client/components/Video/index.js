@@ -31,7 +31,7 @@ export default class Video extends Component {
 	
 	componentDidMount(){
 		
-		//
+
 		__( document ).ready( function() {
 
 			

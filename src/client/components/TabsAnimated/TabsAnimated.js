@@ -32,7 +32,7 @@ export default class TabsAnimated extends Component {
 	}
 	componentDidMount(){
 		
-		//
+
 		__( document ).ready( function() {
 
 			//init content boxes height

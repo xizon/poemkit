@@ -107,7 +107,7 @@ export default class TableSorter extends Component {
 	
 	componentDidMount(){
 		
-		//
+		
 		__( document ).ready( function() {
 
 			

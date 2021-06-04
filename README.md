@@ -57,14 +57,15 @@ Server runs on `http://localhost:3000`
 
 * Integrate development, debugging, bundle, and deployment in one
 * Not a JavaScript framework
+* No jQuery & Does not bind any tool libraries
 * Server-Side Rendering (SSR) Support
 * Components are separated, you can use any UI component (such as Ant Design)
 * Styling React Components in Sass/SCSS
 * Provides a common web page components and layouts
 * Automatically bundle and generate independent core CSS and JS files
 * Project supports automatic deployments from a number of repository hosting services via pm2
-* Migrating components: Migrating components are partially provided by demonstration. They have no properties and are used to quickly migrate some completed HTML code. This is very useful for quickly creating a script-driven module
-* The default components import some third-party plug-ins, such as  grid system of Bootstrap 4, GSAP animation library, FontAwesome icon library, 3D engine, etc., so that you can quickly expand your website (Support on-demand configuration)
+* ✂️ Migrating Components: Migrating components are partially provided by demonstration. They have no properties and are used to quickly migrate some completed HTML code. This is very useful for quickly creating a script-driven module
+* ✂️ Pluggable: The default components import some third-party plug-ins, such as  grid system of Bootstrap 4, GSAP animation library, FontAwesome icon library, 3D engine, etc., so that you can quickly expand your website (Support on-demand configuration)
 
 
 
@@ -410,23 +411,24 @@ uix-kit-react/
 ├── LICENSE
 ├── ecosystem.config.js ------------------------- # for pm2
 ├── babel.config.js
-├── webpack.config.js
+├── webpack.config.js 
 ├── package-lock.json
 ├── package.json
-├── public/
-│   ├── index.html    --------------------------- # HTML template of Homepage
+├── scripts/         --------------------------- # Node.js scripts
+├── public/          --------------------------- # HTML template of Homepage
+│   ├── index.html    
 │   ├── manifest.json
 │   └── assets/
-├── dist/
+├── dist/        ------------------------------- # Files compiled, used in the production environment
 │   ├── css/
-│   │   ├── uix-kit-react.css  ------------------ # Main css file
+│   │   ├── uix-kit-react.css
 │   │   ├── uix-kit-react.css.map
-│   │   ├── uix-kit-react.min.css  -------------- # Main css file which is used for production
+│   │   ├── uix-kit-react.min.css
 │   │   └── uix-kit-react.min.css.map
 │   └── js/
-│   │   ├── uix-kit-react.js   ------------------ # Main js file
+│   │   ├── uix-kit-react.js
 │   │   ├── uix-kit-react.js.map
-│   │   ├── uix-kit-react.min.js  --------------- # Main js file which is used for production
+│   │   ├── uix-kit-react.min.js
 │   │   └── uix-kit-react.min.js.map
 ├── src/
 │   ├── client/

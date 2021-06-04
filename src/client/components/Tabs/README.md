@@ -18,7 +18,7 @@ export default () => {
     <>
 	  
 		<h3>Tab Normal</h3>
-		<hr />
+		{/* ================================================================== */} 
 
 		<Tabs type="normal">
 			<TabList key="tab-list-1" defaultActive>Tab 1</TabList>
@@ -81,7 +81,7 @@ export default () => {
 
 
 		<h3>Tab Rotation Effect 1</h3>
-		<hr />
+		{/* ================================================================== */} 
 
 
 		<Tabs type="rotation" data-rotation="true" data-rotation-display="5" data-rotation-radius="130" data-rotation-wrapper-angle="0">
@@ -113,7 +113,7 @@ export default () => {
 
 
 		<h3>Tab Rotation Effect 2</h3>
-		<hr />
+		{/* ================================================================== */} 
 
 
 		<Tabs type="rotation" data-rotation="true" data-rotation-display="4" data-rotation-radius="130" data-rotation-wrapper-angle="-45">

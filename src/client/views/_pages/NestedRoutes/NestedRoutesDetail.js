@@ -13,7 +13,7 @@ function HookScript() {
 	
 	//Click the route to trigger the event
     const theLocation = useLocation();
-    React.useEffect(() => {
+    React.useEffect(() => { // Equivalent to componentDidMount and componentDidUpdate:
 		
 		//output name
 		//-------------

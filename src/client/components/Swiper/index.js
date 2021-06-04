@@ -38,7 +38,7 @@ export default class Swiper extends Component {
 	
 	componentDidMount(){
 		
-		//
+		
 		__( document ).ready( function() {
 
 			

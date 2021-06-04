@@ -4,8 +4,8 @@
  * Core Shortcut
  *
  * @package: uix-kit-react
- * @version: 0.22
- * @last update: May 13, 2021
+ * @version: 0.23
+ * @last update: June 3, 2021
  * @license: MIT
  *
  *************************************
@@ -193,7 +193,13 @@ __( document ).ready( function() {
 			});
 			
 			
-			__( '#input' ).val( 33333 );
+			__( '#input-name-1' ).val(  );  //form control: `<Input />`
+			__( '#select-name-1' ).val( 'value-3' ); //form control: `<Select />`
+			__( '#switch-name-1' ).val( true );   //form control: `<Switch />`
+			__( '#checkbox-name-1' ).val( true );  //form control: `<Checkbox />`
+			__('input[name="radio-name-1"]').val( 'value-3' ); //form control: `<Radio />`
+			
+			
 			console.log( '__( val(): ' + __( '#input' ).val());
 
 			__( '#checkbox1' ).prop('checked', true);
@@ -928,11 +934,11 @@ const __ = (function () {
 	 * Remove first, last or both symbols
 	 *
 	 * @param  {String} str       - Any string.
-	 * @param  {Number} type      - Type of all or not. if `0`, is all.
 	 * @param  {String} symbol    - The target string to remove.
+	 * @param  {Number} type      - Type of all or not. if `0`, is all.
 	 * @return {String}           - An new string.
 	 */  
-	__.removeFirstLastStr = function( str, type = 0, symbol = ',' ) {
+	__.removeFirstLastStr = function( str, symbol = ',', type = 0 ) {
 
 		if (typeof(str) === 'string') {
 			if ( type == 0 ) {
@@ -1502,6 +1508,11 @@ const __ = (function () {
 	 * @return {Array}              - The collection of elements
 	 */
 	__.prototype.find = function(s) {
+		
+		if ( __.trim(s).slice(0,1) == '>' ){
+			console.error( 'The symbol ">" is not allowed at the beginning of the find() method.' );
+		}
+		
 		return __(s, this);
 	};
 
@@ -2115,11 +2126,91 @@ const __ = (function () {
 	 * @return {String}          - Get the values of form elements.
 	 */
     __.prototype.val = function(v) {
+		
+		let controlType = '';
+		if (this.tagName == "INPUT" || this.tagName == "TEXTARTA" ) {
+
+			//not `radio`, `checkbox`
+			if (this.type != 'checkbox' && this.type !='radio') {
+				controlType = 'input-textarea';
+			}
+
+			//`checkbox`
+			if (this.type == 'checkbox') {
+				controlType = 'checkbox';
+			}
+
+			//`radio`
+			if (this.type =='radio') {
+				controlType = 'radio';
+			}	
+
+		}
+
+		//`select`
+		if (this.tagName == "SELECT") {
+			controlType = 'select';
+		}
+			
+		
+		//
 		if ( typeof (v) !== 'undefined' ) {
-			this.value = v;
+			
+			switch (controlType) {
+				case "input-textarea":
+					
+					this.value = v;
+					break;
+				case "checkbox":
+					
+					this.checked = v;
+					break;
+				case "radio":
+					
+					let elements = __(__.prototype.defaultTargetSelector, document);
+					elements.map((item, index) => {
+						if(item.value == v.toString()) {
+							item.checked = true;
+						}	
+					});
+
+					break;
+				case "select":
+					
+					this.value = v;
+					this.dispatchEvent(new Event('change'));
+					break;
+				default:
+					this.value = v;
+					
+			}//end switch
+			
+
 		}	
 		
-		return this.value;
+		switch (controlType) {
+			case "input-textarea":
+
+				return this.value;
+				break;
+			case "checkbox":
+
+				return this.checked ? 1 : 0;
+				break;
+			case "radio":
+
+				return this.value;
+				break;
+			case "select":
+
+				return this.value;
+				break;
+			default:
+				return this.value;
+
+		}//end switch
+		
+		
     }	
 
 
@@ -2276,8 +2367,14 @@ const __ = (function () {
 	 */
     __.prototype.trigger = function(eventType) {
 		const fire = function( elem, type ) {
-			const event = document.createEvent('Event');
-			event.initEvent(type, true, true); //can bubble, and is cancellable
+			
+			// create and dispatch the event
+			const event = new CustomEvent(type, {
+			  detail: {
+				hazcheeseburger: true
+			  }
+			});
+			
 			elem.dispatchEvent(event);
 		};
 		

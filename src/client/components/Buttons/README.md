@@ -20,7 +20,7 @@ export default () => {
 
 	    <h3>Click Event</h3>
 	    <p>Add onClick event to the button.</p>
-		<hr />
+		{/* ================================================================== */} 
 	  
 		<Button id="app-btn-1" href="#" data-title="button" className="uix-btn uix-btn__border--thin uix-btn__margin--b uix-btn__size--m uix-btn__bg--primary is-pill" onClick={(e) => {e.preventDefault(); alert( e.target.id );} }>Click me to view ID!</Button>
 
@@ -29,7 +29,7 @@ export default () => {
 
 		<h3>Button</h3>
 		<p>zIf you need to use multiple colors, you can add CSS styles yourself, such as: <code>.uix-btn__bg--blue</code>, <code>.uix-btn__bg--purple</code> ...</p>
-		<hr />
+		{/* ================================================================== */} 
 
 
 		<Button href="#" className="uix-btn uix-btn__border--thin uix-btn__margin--b uix-btn__size--t uix-btn__bg--hyperlink">Tiny</Button>
@@ -156,7 +156,7 @@ export default () => {
 		<Button href="#" className="uix-btn uix-btn__border--thin uix-btn__margin--b uix-btn__size--l uix-btn__bg--primary is-pill is-transparent">Large Radius</Button>
 
 
-		<hr />
+		{/* ================================================================== */} 
 
 		<div className="uix-btn__group uix-btn__margin--b">
 			<Button href="#" className="uix-btn uix-btn__border--thin uix-btn__size--s uix-btn__bg--primary is-pill is-transparent">Group</Button>
@@ -183,7 +183,7 @@ export default () => {
 
 
 
-		<hr />
+		{/* ================================================================== */} 
 
 
 
@@ -212,7 +212,7 @@ export default () => {
 
 
 
-		<hr />
+		{/* ================================================================== */} 
 
 		<Button href="#" className="uix-btn uix-btn__border--thin uix-btn__margin--b uix-btn__size--t uix-btn__bg--primary is-fullwidth">Tiny Full Width</Button>
 
@@ -243,7 +243,7 @@ export default () => {
 
 
 		<h3>Secondary Button</h3>
-		<hr />
+		{/* ================================================================== */} 
 
 		<Button href="#" className="uix-btn uix-btn__border--thin uix-btn__margin--b uix-btn__size--s uix-btn__bg--secondary is-fill-white">Secondary Button</Button>
 
