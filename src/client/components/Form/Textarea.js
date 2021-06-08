@@ -2,9 +2,9 @@ import PropTypes from "prop-types";
 import React, { Component } from 'react';
 
 /*-- Apply Third-party plugins (import location should be in front of "global scripts and styles") --*/
-import '@uixkit.react/plugins/_lib-bootstrap.js';
-import '@uixkit.react/plugins/_lib-gsap.js';
-import '@uixkit.react/plugins/_lib-icons.js'; 
+import '@uixkit.react/components/_plugins/_lib-bootstrap.js';
+import '@uixkit.react/components/_plugins/_lib-gsap.js';
+import '@uixkit.react/components/_plugins/_lib-icons.js'; 
 
 /*-- Apply global scripts and styles --*/
 import '@uixkit.react/components/_utilities/styles/_all.scss';
@@ -26,18 +26,18 @@ export default class Textarea extends Component {
 	constructor(props) {
 		super(props);
 	
-        this.handleOnFocus = this.handleOnFocus.bind(this);
-        this.handleOnBlurChange = this.handleOnBlurChange.bind(this);
+        this.handleFocus = this.handleFocus.bind(this);
+        this.handleBlurChange = this.handleBlurChange.bind(this);
 		
 	}
 
-    handleOnFocus(event) {
+    handleFocus(event) {
 		const el = __( event.target );
 		
 		el.closest( 'div' ).find( 'label, .uix-controls__bar' ).addClass( 'is-active' );
     }
 
-    handleOnBlurChange(event) {
+    handleBlurChange(event) {
 		const el = __( event.target );
 		const val = event.target.value;
 		
@@ -120,9 +120,9 @@ export default class Textarea extends Component {
 					  name={nameRes}
 					  defaultValue={value || ''}
 					  maxLength={maxLength || null}
-			          onFocus={this.handleOnFocus}
-					  onBlur={this.handleOnBlurChange}
-			          onChange={this.handleOnBlurChange}
+			          onFocus={this.handleFocus}
+					  onBlur={this.handleBlurChange}
+			          onChange={this.handleBlurChange}
 			          disabled={disabled || null}
 					  required={required || null}
 					  cols={cols || 20}
@@ -151,7 +151,7 @@ if ( process.env.NODE_ENV === 'development' ) {
 		theme: PropTypes.string,
 		ui: PropTypes.string,
 		value: PropTypes.string,
-		label: PropTypes.string,
+		label: PropTypes.oneOfType([PropTypes.string, PropTypes.object]),
 		name: PropTypes.string,
 		id: PropTypes.string,
 		maxLength: PropTypes.string,

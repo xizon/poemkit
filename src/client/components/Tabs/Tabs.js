@@ -2,9 +2,9 @@ import PropTypes from "prop-types";
 import React, { Component } from 'react';
 
 /*-- Apply Third-party plugins (import location should be in front of "global scripts and styles") --*/
-import '@uixkit.react/plugins/_lib-bootstrap.js';
-import '@uixkit.react/plugins/_lib-gsap.js';
-import '@uixkit.react/plugins/_lib-icons.js'; 
+import '@uixkit.react/components/_plugins/_lib-bootstrap.js';
+import '@uixkit.react/components/_plugins/_lib-gsap.js';
+import '@uixkit.react/components/_plugins/_lib-icons.js'; 
 
 /*-- Apply global scripts and styles --*/
 import '@uixkit.react/components/_utilities/styles/_all.scss';
@@ -55,7 +55,7 @@ export default class Tabs extends Component {
 
 				//console.log( '$this.data( rotation ): ', $this.data( 'rotation' ));
 
-				if ( typeof fullwidth != typeof undefined && fullwidth == 1 ) {
+				if ( fullwidth != null && fullwidth == 1 ) {
 					$li.css( {
 						'width': ( 100 / liNum ) + '%'
 					} );
@@ -63,16 +63,16 @@ export default class Tabs extends Component {
 				}
 
 
-				if ( typeof rotation === typeof undefined ) {
+				if ( rotation === null ) {
 					rotation = false;
 				}	
 
 
-				if ( typeof rotationWapperDeg === typeof undefined ) {
+				if ( rotationWapperDeg === null ) {
 					rotationWapperDeg = 0;
 				}	
 
-				if ( typeof rotationDisplay === typeof undefined ) {
+				if ( rotationDisplay === null ) {
 					rotationDisplay = 5;
 				}		
 		

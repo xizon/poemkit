@@ -210,7 +210,6 @@ $ sudo npm rebuild node-sass
 const alias = {
 	pathConfig            : './src/config/websiteConfig.js',
 	pathComponents        : './src/client/components',
-	pathThirdPartyPlugins : './src/client/components/_third-party-plugins',
 	pathRouter            : './src/client/router',
 	pathReducers          : './src/client/reducers',
 	pathPages             : './src/client/views/_pages',
@@ -227,7 +226,6 @@ resolve: {
 		// 需要同时配置 `babel.config.js` 文件
 		'@uixkit.react/config': path.resolve(__dirname, alias.pathConfig ),
 		'@uixkit.react/components': path.resolve(__dirname, alias.pathComponents ),
-		'@uixkit.react/plugins': path.resolve(__dirname, alias.pathThirdPartyPlugins ),
 		'@uixkit.react/router': path.resolve(__dirname, alias.pathRouter ),
 		'@uixkit.react/reducers': path.resolve(__dirname, alias.pathReducers ),
 		'@uixkit.react/pages': path.resolve(__dirname, alias.pathPages ),
@@ -250,7 +248,6 @@ resolve: {
 	  "alias": {
 		"@uixkit.react/config": "./src/config/websiteConfig.js",
 		"@uixkit.react/components": "./src/client/components",
-		"@uixkit.react/plugins": "./src/client/components/_third-party-plugins",
 		"@uixkit.react/router": "./src/client/router",
 		"@uixkit.react/reducers": "./src/client/reducers",
 		"@uixkit.react/pages": "./src/client/views/_pages",
@@ -359,7 +356,7 @@ if ( process.env.NODE_ENV === 'development' ) {
 
 ### ⚙️ 自定义导入的第三方库或插件:
 
-应用默认加载了常用的第三方库(图标，动画，3D引擎等)，您可以按需加载，或者修改导入配置。第三方插件配置文件位于 `./src/client/components/_third-party-plugins/`
+应用默认加载了常用的第三方库(图标，动画，3D引擎等)，您可以按需加载，或者修改导入配置。第三方插件配置文件位于 `./src/client/components/_plugins/`. 第三方插件默认和自定义组件一起使用，您也可以主动移除它们。
 
 
 
@@ -437,7 +434,7 @@ uix-kit-react/
 │   │   ├── components/ -------------------------  # 独立的UI组件
 │   │   │     ├── */
 │   │   │     ├── _utilities/ -------------------  # 公共的js或css模块
-│   │   │     └── _third-party-plugins/ ----------  # 第三方插件
+│   │   │     └── _plugins/ ---------------------  # 第三方插件
 │   │   ├── views/ ------------------------------  # 网站页面
 │   │   │     ├── _pages/
 │   │   │     └── _html/

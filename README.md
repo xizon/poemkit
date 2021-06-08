@@ -213,7 +213,6 @@ You can configure the module resolution by adding resolve to the `webpack.config
 const alias = {
 	pathConfig            : './src/config/websiteConfig.js',
 	pathComponents        : './src/client/components',
-	pathThirdPartyPlugins : './src/client/components/_third-party-plugins',
 	pathRouter            : './src/client/router',
 	pathReducers          : './src/client/reducers',
 	pathPages             : './src/client/views/_pages',
@@ -232,7 +231,6 @@ resolve: {
 		// you need to configure the `babel.config.js` at the same time
 		'@uixkit.react/config': path.resolve(__dirname, alias.pathConfig ),
 		'@uixkit.react/components': path.resolve(__dirname, alias.pathComponents ),
-		'@uixkit.react/plugins': path.resolve(__dirname, alias.pathThirdPartyPlugins ),
 		'@uixkit.react/router': path.resolve(__dirname, alias.pathRouter ),
 		'@uixkit.react/reducers': path.resolve(__dirname, alias.pathReducers ),
 		'@uixkit.react/pages': path.resolve(__dirname, alias.pathPages ),
@@ -255,7 +253,6 @@ resolve: {
 	  "alias": {
 		"@uixkit.react/config": "./src/config/websiteConfig.js",
 		"@uixkit.react/components": "./src/client/components",
-		"@uixkit.react/plugins": "./src/client/components/_third-party-plugins",
 		"@uixkit.react/router": "./src/client/router",
 		"@uixkit.react/reducers": "./src/client/reducers",
 		"@uixkit.react/pages": "./src/client/views/_pages",
@@ -363,7 +360,9 @@ if ( process.env.NODE_ENV === 'development' ) {
 
 ### ⚙️ Custom import third-party library:
 
-The application loads some third-party libraries (icons, animations, 3D engines, etc.) by default, you can load them as needed, or modify the configuration file. Access to `./src/client/components/_third-party-plugins/`
+The application loads some third-party libraries (icons, animations, 3D engines, etc.) by default, you can load them as needed, or modify the configuration file. Access to `./src/client/components/_plugins/`
+
+Third-party plug-ins are used together with custom components by default, and you can also remove them.
 
 
 ### ⚙️ Root Directory Configurations:
@@ -439,7 +438,7 @@ uix-kit-react/
 │   │   ├── components/ -------------------------  # Independent React components
 │   │   │     ├── */
 │   │   │     ├── _utilities/ -------------------  # Generic snippets(js & css)
-│   │   │     └── _third-party-plugins/ ----------  # Third-party plugins
+│   │   │     └── _plugins/ ---------------------  # Third-party plugins
 │   │   ├── views/ ------------------------------  # Website pages
 │   │   │     ├── _pages/
 │   │   │     └── _html/

@@ -27,7 +27,6 @@ module.exports = {
 	  "alias": {
 		"@uixkit.react/config": "./src/config/websiteConfig.js",
 		"@uixkit.react/components": "./src/client/components",
-		"@uixkit.react/plugins": "./src/client/components/_third-party-plugins",
 		"@uixkit.react/router": "./src/client/router",
 		"@uixkit.react/reducers": "./src/client/reducers",
 		"@uixkit.react/pages": "./src/client/views/_pages",

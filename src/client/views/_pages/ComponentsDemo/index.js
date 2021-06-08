@@ -19,6 +19,7 @@ import TableDemo from '@uixkit.react/pages/ComponentsDemo/TableDemo.js';
 import TableGridDemo from '@uixkit.react/pages/ComponentsDemo/TableGridDemo.js';
 import TableSorterDemo from '@uixkit.react/pages/ComponentsDemo/TableSorterDemo.js';
 import FormDemo from '@uixkit.react/pages/ComponentsDemo/FormDemo.js';
+import ScrollRevealDemo from '@uixkit.react/pages/ComponentsDemo/ScrollRevealDemo.js';
 
 
 
@@ -35,18 +36,38 @@ function HookContent() {
 	return (
 		<>
 		
-			<div>
-		        <NavLink data-route="true" to={`${url}/buttons`} activeClassName="is-active"><i className="fa fa-check-circle-o" aria-hidden="true"></i> Buttons</NavLink>&nbsp;&nbsp;
-		        <NavLink data-route="true" to={`${url}/tabs`} activeClassName="is-active"><i className="fa fa-check-circle-o" aria-hidden="true"></i> Tabs</NavLink>&nbsp;&nbsp;
-		        <NavLink data-route="true" to={`${url}/tabs-animated`} activeClassName="is-active"><i className="fa fa-check-circle-o" aria-hidden="true"></i> Tabs Animated</NavLink>&nbsp;&nbsp;
-		        <NavLink data-route="true" to={`${url}/video`} activeClassName="is-active"><i className="fa fa-check-circle-o" aria-hidden="true"></i> Video</NavLink>&nbsp;&nbsp;
-		        <NavLink data-route="true" to={`${url}/swiper`} activeClassName="is-active"><i className="fa fa-check-circle-o" aria-hidden="true"></i> Swiper</NavLink>&nbsp;&nbsp;
-		        <NavLink data-route="true" to={`${url}/table`} activeClassName="is-active"><i className="fa fa-check-circle-o" aria-hidden="true"></i> Table</NavLink>&nbsp;&nbsp;
-		        <NavLink data-route="true" to={`${url}/table-grid`} activeClassName="is-active"><i className="fa fa-check-circle-o" aria-hidden="true"></i> Table Grid</NavLink>&nbsp;&nbsp;
-		        <NavLink data-route="true" to={`${url}/table-sorter`} activeClassName="is-active"><i className="fa fa-check-circle-o" aria-hidden="true"></i> Table Sorter</NavLink>&nbsp;&nbsp;
-		        <NavLink data-route="true" to={`${url}/form`} activeClassName="is-active"><i className="fa fa-check-circle-o" aria-hidden="true"></i> Form</NavLink>&nbsp;&nbsp;
-		    </div>
 
+			{/*
+			<!-- Content   
+			====================================================== -->	
+			*/}
+			<section className="uix-spacing--s uix-spacing--no-bottom">
+				<div className="container">
+						<div className="row">
+							<div className="col-12">
+
+								<NavLink data-route="true" to={`${url}/buttons`} activeClassName="is-active"><i className="fa fa-check-circle-o" aria-hidden="true"></i> Buttons</NavLink>&nbsp;&nbsp;
+								<NavLink data-route="true" to={`${url}/tabs`} activeClassName="is-active"><i className="fa fa-check-circle-o" aria-hidden="true"></i> Tabs</NavLink>&nbsp;&nbsp;
+								<NavLink data-route="true" to={`${url}/tabs-animated`} activeClassName="is-active"><i className="fa fa-check-circle-o" aria-hidden="true"></i> Tabs Animated</NavLink>&nbsp;&nbsp;
+								<NavLink data-route="true" to={`${url}/video`} activeClassName="is-active"><i className="fa fa-check-circle-o" aria-hidden="true"></i> Video</NavLink>&nbsp;&nbsp;
+								<NavLink data-route="true" to={`${url}/swiper`} activeClassName="is-active"><i className="fa fa-check-circle-o" aria-hidden="true"></i> Swiper</NavLink>&nbsp;&nbsp;
+								<NavLink data-route="true" to={`${url}/table`} activeClassName="is-active"><i className="fa fa-check-circle-o" aria-hidden="true"></i> Table</NavLink>&nbsp;&nbsp;
+								<NavLink data-route="true" to={`${url}/table-grid`} activeClassName="is-active"><i className="fa fa-check-circle-o" aria-hidden="true"></i> Table Grid</NavLink>&nbsp;&nbsp;
+								<NavLink data-route="true" to={`${url}/table-sorter`} activeClassName="is-active"><i className="fa fa-check-circle-o" aria-hidden="true"></i> Table Sorter</NavLink>&nbsp;&nbsp;
+								<NavLink data-route="true" to={`${url}/form`} activeClassName="is-active"><i className="fa fa-check-circle-o" aria-hidden="true"></i> Form</NavLink>&nbsp;&nbsp;
+								<NavLink data-route="true" to={`${url}/scroll-reveal`} activeClassName="is-active"><i className="fa fa-check-circle-o" aria-hidden="true"></i> Scroll Reveal</NavLink>&nbsp;&nbsp;
+
+							</div>
+						</div>
+						{/*<!-- .row end -->*/}
+
+
+				</div>
+				{/*<!-- .container end -->*/}
+			</section>
+		
+			
+		
 			 <hr />
 
 			  <Switch>
@@ -80,7 +101,9 @@ function HookContent() {
 				<Route path={`${path}/form`}>
 				  <FormDemo />
 				</Route>	
-		
+				<Route path={`${path}/scroll-reveal`}>
+				  <ScrollRevealDemo />
+				</Route>		
 	
 		
 		
@@ -129,25 +152,7 @@ class ComponentsDemo extends Component {
 		
             <main id="uix-maincontent">
 		
-				{/*
-				<!-- Content   
-				====================================================== -->	
-				*/}
-				<section className="uix-spacing--s">
-					<div className="container">
-							<div className="row">
-								<div className="col-12">
-		
-									<HookContent />
-
-								</div>
-							</div>
-							{/*<!-- .row end -->*/}
-
-
-					</div>
-					{/*<!-- .container end -->*/}
-				</section>
+				<HookContent />
 
             </main>
 		

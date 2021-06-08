@@ -1,6 +1,18 @@
 # Changelog
 
 
+#### = 0.0.37 (June 8, 2021) =
+
+
+* New: Added `throttle()` and `debounce()` to the core shortcut.
+* New: Add new UI components `Scroll Reveal`.
+* New: Added new form controls: `Password Input`, `Merge Input`, `File Field`.
+* Tweak: Added default assignments for some controls.
+* Tweak: Optimized the event binding name of the element.
+* Tweak: Modify the plugin directory `./src/client/components/_third-party-plugins` to `./src/client/components/_plugins`.
+* Tweak: Removed redundant HTML tags.
+* Tweak: Throttling and debouncing optimization of high-frequency interactive events.
+* Tweak: Modified the type of label in the form control can be Object.
 
 
 

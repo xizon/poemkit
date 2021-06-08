@@ -62,7 +62,6 @@ const globs = {
 const alias = {
 	pathConfig            : './src/config/websiteConfig.js',
 	pathComponents        : './src/client/components',
-	pathThirdPartyPlugins : './src/client/components/_third-party-plugins',
 	pathRouter            : './src/client/router',
 	pathReducers          : './src/client/reducers',
 	pathPages             : './src/client/views/_pages',
@@ -216,7 +215,6 @@ const webpackConfig = {
 			// you need to configure the `babel.config.js` at the same time
 			'@uixkit.react/config': path.resolve(__dirname, alias.pathConfig ),
 			'@uixkit.react/components': path.resolve(__dirname, alias.pathComponents ),
-			'@uixkit.react/plugins': path.resolve(__dirname, alias.pathThirdPartyPlugins ),
 			'@uixkit.react/router': path.resolve(__dirname, alias.pathRouter ),
 			'@uixkit.react/reducers': path.resolve(__dirname, alias.pathReducers ),
 			'@uixkit.react/pages': path.resolve(__dirname, alias.pathPages ),

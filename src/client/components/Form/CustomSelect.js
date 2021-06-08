@@ -3,9 +3,9 @@ import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
 
 /*-- Apply Third-party plugins (import location should be in front of "global scripts and styles") --*/
-import '@uixkit.react/plugins/_lib-bootstrap.js';
-import '@uixkit.react/plugins/_lib-gsap.js';
-import '@uixkit.react/plugins/_lib-icons.js'; 
+import '@uixkit.react/components/_plugins/_lib-bootstrap.js';
+import '@uixkit.react/components/_plugins/_lib-gsap.js';
+import '@uixkit.react/components/_plugins/_lib-icons.js'; 
 
 /*-- Apply global scripts and styles --*/
 import '@uixkit.react/components/_utilities/styles/_all.scss';
@@ -33,8 +33,8 @@ export default class CustomSelect extends Component {
 		this.wrapperRef = React.createRef();
 		
 		
-        this.handleOnClick = this.handleOnClick.bind(this);
-		this.handleOnClickItem = this.handleOnClickItem.bind(this);
+        this.handleClick = this.handleClick.bind(this);
+		this.handleClickItem = this.handleClickItem.bind(this);
 		this.handleClickOutside = this.handleClickOutside.bind(this);
 		
 	}
@@ -58,7 +58,7 @@ export default class CustomSelect extends Component {
     /**
      * Show Selector
      */
-    handleOnClick(event) {
+    handleClick(event) {
 		event.preventDefault();
 		
 		const root = ReactDOM.findDOMNode(this.wrapperRef.current);
@@ -74,7 +74,7 @@ export default class CustomSelect extends Component {
      * Change Event Here
 	  * Prevents the triggering of multiple change events
      */
-	handleOnClickItem(event) {
+	handleClickItem(event) {
 		event.preventDefault();
 		
 		const el = __( event.target );
@@ -172,7 +172,7 @@ export default class CustomSelect extends Component {
 		//Synchronize to the original select change event
 		const defaultValIndex = value ? optionValues.indexOf( value ) : 0; //get index from default value
 		const selectOptionsListPresentation = optionKeys.map((selectOption, index) => {
-		    return <span role="option" className={index === defaultValIndex ? 'uix-controls__select__option is-active' : 'uix-controls__select__option'} key={index} data-value={optionValues[index]} onClick={this.handleOnClickItem}>{selectOption}</span>;
+		    return <span role="option" className={index === defaultValIndex ? 'uix-controls__select__option is-active' : 'uix-controls__select__option'} key={index} data-value={optionValues[index]} onClick={this.handleClickItem}>{selectOption}</span>;
 		});	
 
 		
@@ -198,7 +198,7 @@ export default class CustomSelect extends Component {
 					<div className={"uix-controls uix-controls__select js-uix-new" + wrapperClassPosition + wrapperClassDisabled + wrapperClassUi + wrapperClassTheme}>
 						<span 
 							className="uix-controls__select-trigger"
-							onClick={this.handleOnClick}
+							onClick={this.handleClick}
 						>
 							{optionKeys[defaultValIndex]}
 						</span>
@@ -233,7 +233,7 @@ if ( process.env.NODE_ENV === 'development' ) {
 		ui: PropTypes.string,
 		options: PropTypes.string.isRequired,
 		value: PropTypes.string,
-		label: PropTypes.string,
+		label: PropTypes.oneOfType([PropTypes.string, PropTypes.object]),
 		name: PropTypes.string,
 		id: PropTypes.string,
 		disabled: PropTypes.any,

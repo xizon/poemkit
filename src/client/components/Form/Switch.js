@@ -2,9 +2,9 @@ import PropTypes from "prop-types";
 import React, { Component } from 'react';
 
 /*-- Apply Third-party plugins (import location should be in front of "global scripts and styles") --*/
-import '@uixkit.react/plugins/_lib-bootstrap.js';
-import '@uixkit.react/plugins/_lib-gsap.js';
-import '@uixkit.react/plugins/_lib-icons.js'; 
+import '@uixkit.react/components/_plugins/_lib-bootstrap.js';
+import '@uixkit.react/components/_plugins/_lib-gsap.js';
+import '@uixkit.react/components/_plugins/_lib-icons.js'; 
 
 /*-- Apply global scripts and styles --*/
 import '@uixkit.react/components/_utilities/styles/_all.scss';
@@ -170,7 +170,7 @@ if ( process.env.NODE_ENV === 'development' ) {
 		textOff: PropTypes.string,
 		textOn: PropTypes.string,
 		value: PropTypes.string,
-		label: PropTypes.string,
+		label: PropTypes.oneOfType([PropTypes.string, PropTypes.object]),
 		name: PropTypes.string,
 		id: PropTypes.string,
 		disabled: PropTypes.any,

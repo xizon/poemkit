@@ -57,6 +57,40 @@ input[type="datetime-local"].is-active::-webkit-datetime-edit {
 
 
 
+/* Password display hidden switch */
+.uix-controls__passwordSwitch {
+    position: absolute;
+    font-size: 12px;
+    opacity: .6;
+    transform: translate(-1.8rem, 10px);	
+}
+
+.is-iconic .uix-controls__passwordSwitch {
+    transform: translate(-2.5rem,5px);
+	
+	i {
+		color: #333;
+	}
+}
+.is-iconic.is-reversed .uix-controls__passwordSwitch {
+    transform: translate(-1.8rem,5px);
+	
+	i {
+		color: #333;
+		&::after {
+			display: none;
+		}
+	}
+}
+
+.uix-controls--line .uix-controls__passwordSwitch {
+    top: 0;
+    right: -10px;
+}
+
+
+
+
 /* Required field marker */
 .uix-controls__im {
 	color: red;

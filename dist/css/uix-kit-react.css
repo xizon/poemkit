@@ -6,9 +6,9 @@
  * ## Project Name        :  Uix Kit React
  * ## Project Description :  A free web kits with React for fast web design and development via SSR.
  * ## Project URL         :  https://uiux.cc
- * ## Version             :  0.0.36
+ * ## Version             :  0.0.37
  * ## Based on            :  Uix Kit React (https://github.com/xizon/uix-kit-react#readme)
- * ## Last Update         :  June 4, 2021
+ * ## Last Update         :  June 8, 2021
  * ## Created by          :  UIUX Lab (https://uiux.cc) (uiuxlab@gmail.com)
  * ## Released under the MIT license.
  * 	
@@ -28738,6 +28738,39 @@ input[type="datetime-local"].is-active::-webkit-datetime-edit {
   color: #888 !important;
 }
 
+/* Password display hidden switch */
+.uix-controls__passwordSwitch {
+  position: absolute;
+  font-size: 12px;
+  opacity: .6;
+  transform: translate(-1.8rem, 10px);
+}
+
+.is-iconic .uix-controls__passwordSwitch {
+  transform: translate(-2.5rem, 5px);
+}
+
+.is-iconic .uix-controls__passwordSwitch i {
+  color: #333;
+}
+
+.is-iconic.is-reversed .uix-controls__passwordSwitch {
+  transform: translate(-1.8rem, 5px);
+}
+
+.is-iconic.is-reversed .uix-controls__passwordSwitch i {
+  color: #333;
+}
+
+.is-iconic.is-reversed .uix-controls__passwordSwitch i::after {
+  display: none;
+}
+
+.uix-controls--line .uix-controls__passwordSwitch {
+  top: 0;
+  right: -10px;
+}
+
 /* Required field marker */
 .uix-controls__im {
   color: red;
@@ -30013,6 +30046,10 @@ input[type="datetime-local"].is-active::-webkit-datetime-edit {
   align-items: center;
   display: flex;
   padding: 0.54688rem 0;
+}
+
+.uix-controls-layout .uix-controls {
+  margin: 0 !important;
 }
 
 .uix-controls-layout .uix-controls-layout__content {

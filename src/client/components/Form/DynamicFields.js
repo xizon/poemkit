@@ -4,9 +4,9 @@ import ReactDOM from 'react-dom';
 
 
 /*-- Apply Third-party plugins (import location should be in front of "global scripts and styles") --*/
-import '@uixkit.react/plugins/_lib-bootstrap.js';
-import '@uixkit.react/plugins/_lib-gsap.js';
-import '@uixkit.react/plugins/_lib-icons.js'; 
+import '@uixkit.react/components/_plugins/_lib-bootstrap.js';
+import '@uixkit.react/components/_plugins/_lib-gsap.js';
+import '@uixkit.react/components/_plugins/_lib-icons.js'; 
 
 /*-- Apply global scripts and styles --*/
 import '@uixkit.react/components/_utilities/styles/_all.scss';
@@ -31,34 +31,35 @@ export default class DynamicFields extends Component {
 		//Refs are commonly assigned to an instance property when a component 
 		//is constructed so they can be referenced throughout the component.
 		this.wrapperRef = React.createRef();
+		this.addBtnRef = React.createRef();
 		
 		this.state = {
-			values: [] 
+			elVals: this.props.value ? [...Array( JSON.parse( '[' + this.props.value + ']' ).length-1 )].map(() => [""]) : [] 
 		};
 		
-		this.handleOnClickAdd = this.handleOnClickAdd.bind(this);
-		this.handleOnClickRemove = this.handleOnClickRemove.bind(this);
+		this.handleClickAdd = this.handleClickAdd.bind(this);
+		this.handleClickRemove = this.handleClickRemove.bind(this);
 		
 		
 	}
 
-	handleOnClickAdd(event){
+	handleClickAdd(event){
 		event.preventDefault();
 		
 		const root = ReactDOM.findDOMNode(this.wrapperRef.current);
-		const curVal = this.state.values;
+		const curVal = this.state.elVals;
 		
 	
 		//button status
-		if ( curVal.length >= parseFloat(this.props.maxFields) ) {
-			__( root ).find( '.uix-controls__dynamic-fields__addbtn' ).hide();
+		if ( curVal.length >= parseFloat(this.props.maxFields) && ReactDOM.findDOMNode(this.addBtnRef.current) != null ) {
+			ReactDOM.findDOMNode(this.addBtnRef.current).style.display = 'none';
 		}
 
 
 		//
 		this.setState(function(prevState) {
 		  return {
-			values: [...prevState.values, '']
+			elVals: [...prevState.elVals, [""]]
 		  };
 		});
 		
@@ -66,16 +67,16 @@ export default class DynamicFields extends Component {
 	}
 
 	
-	handleOnClickRemove(param) { // param is the argument you passed to the function
+	handleClickRemove(param) { // param is the argument you passed to the function
 		
 		const root = ReactDOM.findDOMNode(this.wrapperRef.current);
 		const self = this;
-		const curVal = this.state.values;
+		const curVal = this.state.elVals;
 		
 	
 		//button status
-		if ( curVal.length <= parseFloat(this.props.maxFields) ) {
-			__( root ).find( '.uix-controls__dynamic-fields__addbtn' ).show();
+		if ( curVal.length <= parseFloat(this.props.maxFields) && ReactDOM.findDOMNode(this.addBtnRef.current) != null ) {
+			ReactDOM.findDOMNode(this.addBtnRef.current).style.display = 'inherit';
 		}
 		
 		
@@ -83,29 +84,65 @@ export default class DynamicFields extends Component {
 		return function (event) { // e is the event object that returned
 			event.preventDefault();
 			
-			let values = [...curVal];
-			values.splice(param,1);
-			//console.log(curVal); //["", "", "", ""]
-			self.setState({ values });
+			let elVals = [...curVal];
+			elVals.splice(param,1);
+			//console.log(curVal); //[[""],[""],[""],[""]]
+			self.setState({ elVals });
 		};
 	}
 	
 	createUI(){
-		return this.state.values.map((el, i) => 
+		return this.state.elVals.map((el, i) => 
 		   <div key={i} className="uix-controls__dynamic-fields__tmpl__wrapper">
-			  {this.props.tempHtmlString}
+									 
+				{el.map((data,index) => {
+						return (
+							<React.Fragment key={index}>
+								{this.props.tempHtmlString}
+							</React.Fragment>
+						)
+					})
+				}
 
 			  &nbsp;&nbsp;
-			  <a href="#" className="uix-controls__dynamic-fields__removebtn" onClick={this.handleOnClickRemove(i)}><i className="fa fa-minus-circle" aria-hidden="true"></i></a> {this.props.removeLabel || ''}
+			  <a href="#" className="uix-controls__dynamic-fields__removebtn" onClick={this.handleClickRemove(i)}><i className="fa fa-minus-circle" aria-hidden="true"></i></a> {this.props.removeLabel || ''}
 		   </div>          
 		)
 	}
 
+	componentDidMount(){
+
+		const _val = this.props.value ? JSON.parse( '[' + this.props.value + ']' ) : [];
+	
+	
+		
+		//update values for all displayed controls
+		const root = ReactDOM.findDOMNode(this.wrapperRef.current);
+		const controls = __( root ).find( '.uix-controls__dynamic-fields__append' ).find( '[name]' );
+		
+		let n = 0;
+		_val.map((data,index) => {
+
+			data.map((item,i) => {
+
+				//console.log(index + '===' + item + 'i: ' + i);
+				if ( controls[n] ) controls[n].value = item;
+				n++;
+
+			})	
+
+		});
+		
+		
+			
+
+	}
+	
+	
 
 	render() {
 		
 		const { 
-			removeLabel,
 			addLabel,
 			tempHtmlString,
 			maxFields,
@@ -125,7 +162,7 @@ export default class DynamicFields extends Component {
 			            {tempHtmlString}
 			            {this.createUI()}
 			       </div>
-					<a href="#" className="uix-controls__dynamic-fields__addbtn" onClick={this.handleOnClickAdd}><i className="fa fa-plus-circle" aria-hidden="true"></i> {addLabel || 'Add new'}</a>
+					<a ref={this.addBtnRef} href="#" className="uix-controls__dynamic-fields__addbtn" onClick={this.handleClickAdd}><i className="fa fa-plus-circle" aria-hidden="true"></i> {addLabel || 'Add new'}</a>
 
 				</div>
 			
@@ -139,6 +176,7 @@ export default class DynamicFields extends Component {
 if ( process.env.NODE_ENV === 'development' ) {
 			
 	DynamicFields.propTypes = {
+		value: PropTypes.string,
 		removeLabel: PropTypes.string,
 		addLabel: PropTypes.string,
 		tempHtmlString: PropTypes.oneOfType([PropTypes.string, PropTypes.object]),

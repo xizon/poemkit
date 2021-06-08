@@ -16,6 +16,8 @@ export { default as Number } from '@uixkit.react/components/Form/Number.js';
 export { default as Date } from '@uixkit.react/components/Form/Date.js';
 export { default as DynamicFields } from '@uixkit.react/components/Form/DynamicFields.js';
 export { default as File } from '@uixkit.react/components/Form/File.js';
-
+export { default as FileField } from '@uixkit.react/components/Form/FileField.js';
+export { default as MergeInput } from '@uixkit.react/components/Form/MergeInput.js';
+export { default as PasswordInput } from '@uixkit.react/components/Form/PasswordInput.js';
 
 

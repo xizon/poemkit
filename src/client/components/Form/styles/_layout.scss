@@ -9,6 +9,11 @@
     align-items: center;
     display: flex;
     padding: #{$control-padding-height} 0;
+	
+	
+	.uix-controls {
+		margin: 0 !important;
+	}
     
     .uix-controls-layout__content {
         flex: 1;

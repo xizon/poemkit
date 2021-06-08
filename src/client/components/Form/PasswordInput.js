@@ -1,7 +1,5 @@
 import PropTypes from "prop-types";
 import React, { Component } from 'react';
-import moment from "moment";
-
 
 /*-- Apply Third-party plugins (import location should be in front of "global scripts and styles") --*/
 import '@uixkit.react/components/_plugins/_lib-bootstrap.js';
@@ -23,20 +21,34 @@ import '@uixkit.react/components/Form/styles/rtl/_theme_material.scss';
 
 
 
-export default class Date extends Component {
+export default class PasswordInput extends Component {
 	
 	constructor(props) {
 		super(props);
-	
+
+		this.state = {
+		  type: this.props.type ? this.props.type : 'password'
+		}
+		
+		this.showHide = this.showHide.bind(this);
         this.handleFocus = this.handleFocus.bind(this);
         this.handleBlurChange = this.handleBlurChange.bind(this);
 		
 	}
-
+	
+	showHide(event){
+		event.preventDefault();
+		event.stopPropagation();
+		this.setState({
+			type: this.state.type === 'input' ? 'password' : 'input'
+		})  
+	}
+	
+	
     handleFocus(event) {
 		const el = __( event.target );
 		
-		el.closest( 'div' ).find( 'input, label, .uix-controls__bar' ).addClass( 'is-active' );
+		el.closest( 'div' ).find( 'label, .uix-controls__bar' ).addClass( 'is-active' );
     }
 
     handleBlurChange(event) {
@@ -47,7 +59,7 @@ export default class Date extends Component {
 		//----
 		//remove focus style
 		if( val === '' || val === 'blank' ) {
-			el.closest( 'div' ).find( 'input, label' ).removeClass( 'is-active' );
+			el.closest( 'div' ).find( 'label' ).removeClass( 'is-active' );
 		}	
 
 		//
@@ -68,6 +80,9 @@ export default class Date extends Component {
 		
 		let classes = '';
 		
+		//status
+		if ( param.indexOf( 'error' ) >= 0 ) classes += ' is-error';
+		if ( param.indexOf( 'success' ) >= 0 ) classes += ' is-success';
 		
 		//radius
 		if ( param.indexOf( 'pill' ) >= 0 ) classes += ' is-pill';
@@ -89,56 +104,58 @@ export default class Date extends Component {
 	render() {
 		
 		const { 
-			defaultNow,
-			time,
 			theme,
 			ui,
 			disabled,
 			required,
 			value,
 			label,
+			units,
 			name,
 			id,
+			maxLength,
+			iconLeft,
+			iconRight,
 			...attributes
 		} = this.props;
 		
-		const typeRes = typeof(time) === 'undefined' ? 'date' : 'datetime-local';
+		
 		const uiRes = typeof(ui) === 'undefined' ? '' : ui;
 		const nameRes = typeof(name) === 'undefined' ? ( typeof(label) !== 'undefined' ? __.toSlug( label ) : '' )  : name;
 		const idRes = id ? id : 'app-control-' + __.GUID.create();
 		const wrapperClassDisabled = disabled ? ' is-disabled' : '';
+		const wrapperClassIconLeft = iconLeft ? ' is-iconic' : '';
+		const wrapperClassIconRight = iconRight ? ' is-iconic is-reversed' : '';
 		const wrapperClassUi = this.uiSwitch(uiRes);
 		const wrapperClassTheme = theme === 'line' ? ' uix-controls--line' : '';
-		const pattern = typeof(time) === 'undefined' ? '\\d{4}-\\d{2}-\\d{2}' : '[0-9]{4}-[0-9]{2}-[0-9]{2}T[0-9]{2}:[0-9]{2}';
-		const today = typeof(time) === 'undefined' ? moment().format('YYYY-MM-DD') : moment().format('YYYY-MM-DDThh:mm');
-		let defaultValue = value;
-		
-		if ( defaultNow == 'true' ) defaultValue = today;
 		
 		return (
 		  <>
 
-			
-				<div className={"uix-controls uix-controls__date" + wrapperClassDisabled  + wrapperClassUi + wrapperClassTheme}>
+				<div className={"uix-controls" + wrapperClassDisabled + wrapperClassIconLeft + wrapperClassIconRight + wrapperClassUi + wrapperClassTheme}>
+			      {iconLeft || null}
+			      {iconRight || null}
 				  <input 
-			          className={(defaultValue && defaultValue.length > 0 ? 'is-active' : '')}
-					  type={typeRes}
+					  type={this.state.type}
+					  className="js-uix-float-label" 
 			          id={idRes}
 					  name={nameRes}
-					  defaultValue={defaultValue || ''}
+					  defaultValue={value || ''}
+					  maxLength={maxLength || null}
 			          onFocus={this.handleFocus}
 					  onBlur={this.handleBlurChange}
 			          onChange={this.handleBlurChange}
 			          disabled={disabled || null}
 					  required={required || null}
-			          pattern={pattern}
                       {...attributes}
 					/>
-				  <label htmlFor={idRes} className={(defaultValue && defaultValue.length > 0 ? 'is-active' : '')}>
+			      <span className="uix-controls__passwordSwitch" onClick={this.showHide}>{this.state.type === 'input' ? <><i className="fa fa-eye-slash" aria-hidden="true"></i></> : <><i className="fa fa-eye" aria-hidden="true"></i></>}</span>
+				  <label htmlFor={idRes} className={(value && value.length > 0 ? 'is-active' : '')}>
 					  {label || null}
 					  {required ? <><span className="uix-controls__im">*</span></> : ''}
 				  </label>
 				  {theme === 'line' ? <><ins className="uix-controls__bar"></ins><ins className="uix-controls__basic-bar"></ins></> : ''}
+				  {units || null}
 
 				</div>
 	
@@ -151,17 +168,19 @@ export default class Date extends Component {
 //Configure your application to run in "development" mode.
 if ( process.env.NODE_ENV === 'development' ) {
 			
-	Date.propTypes = {
-		defaultNow: PropTypes.string, 	  
-		time: PropTypes.string, 	  
-		theme: PropTypes.string, 
+	PasswordInput.propTypes = {
+		theme: PropTypes.string,
 		ui: PropTypes.string,
 		value: PropTypes.string,
 		label: PropTypes.oneOfType([PropTypes.string, PropTypes.object]),
+		units: PropTypes.string,
 		name: PropTypes.string,
 		id: PropTypes.string,
+		maxLength: PropTypes.string,
 		disabled: PropTypes.any,
-		required: PropTypes.any	   
+		required: PropTypes.any,
+		iconLeft: PropTypes.object,
+		iconRight: PropTypes.object			   
 		
 	}
 

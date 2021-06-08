@@ -23,32 +23,87 @@ import '@uixkit.react/components/Form/styles/rtl/_theme_material.scss';
 
 
 
-export default class File extends Component {
+export default class FileField extends Component {
 	
 	constructor(props) {
 		super(props);
 		
 		//Refs are commonly assigned to an instance property when a component 
 		//is constructed so they can be referenced throughout the component.
-		this.fileRef = React.createRef();
+		this.dropZoneRef = React.createRef();
 		
+		this.handleDragOver = this.handleDragOver.bind(this);
         this.handleChange = this.handleChange.bind(this);
 		
 	}
 
+	
+	
+	/**
+	 * Bind a DragOver event to target modules.
+	 *
+	 */
+    handleDragOver(event) {
+		event.preventDefault();
+		const $dropZone = __( ReactDOM.findDOMNode(this.dropZoneRef.current) );
+	
+		const timeout = window.dropZoneTimeout;
+		if (!timeout) {
+			$dropZone.addClass( 'in' );
+		} else {
+			clearTimeout(timeout);
+		}
+		let found = false,
+			$node = event.target;
+		do {
+			if ($node === $dropZone[0]) {
+				found = true;
+				break;
+			}
+			$node = $node.parentNode;
+		} while ( $node != null );
+		if (found) {
+			$dropZone.addClass( 'hover' );
+		} else {
+			$dropZone.removeClass( 'hover' );
+		}
+		window.dropZoneTimeout = setTimeout(function() {
+			window.dropZoneTimeout = null;
+			$dropZone.removeClass( 'in hover' );
+		}, 100 );	
+		
+    }
+	
+	
 	
 	/**
 	 * Listen to changes on this control
 	 *
 	 */
     handleChange(event) {
-		const val = event.target.value;
+		const el = __( event.target );
+		const $input = el[0];
 		
-		const $filePath = __( ReactDOM.findDOMNode(this.fileRef.current) );
-		$filePath.html( val );
+		if ( $input.files && $input.files[0] ) {
+			const reader = new FileReader();
+			reader.onload = function( e ) {
+				const imgData = e.target.result;
+				const imgName = $input.files[0].name;
+				$input.setAttribute( 'data-title', imgName );
+				//console.log(e.target.result);
+			}
+			reader.readAsDataURL( $input.files[0] );
+		}
+		
 	
     }
 	
+	
+	componentDidMount(){
+
+		document.body.addEventListener( 'dragover', this.handleDragOver );
+	}
+
 	
 	render() {
 		
@@ -69,23 +124,25 @@ export default class File extends Component {
 		  <>
 			
 			
-
-				<div className="uix-controls__file-container">  
-				  <input 
-					  type="file"
-			          id={idRes}
-					  name={nameRes}
-					  defaultValue={value || ''}
-			          onChange={this.handleChange}
-					  required={required || null}
-                      {...attributes}
-					/>
-				  <label htmlFor={idRes} className="uix-controls__file-trigger">
-					  <i className="fa fa-upload" aria-hidden="true"></i>{label || null}
-					  {required ? <><span className="uix-controls__im">*</span></> : ''}
-				  </label>
+				<div className="uix-controls__file-field-container">  
+					<div className="uix-controls__file-field-trigger">
+					  <div>
+						  <input 
+			                  ref={this.dropZoneRef}
+							  type="file"
+			                  accept="image/*"
+			                  data-title={value ? value : label || null}
+							  id={idRes}
+							  name={nameRes}
+							  defaultValue={value || ''}
+							  onChange={this.handleChange}
+							  required={required || null}
+							  {...attributes}
+							/>
+			
+					  </div>
+					</div>
 				</div>
-			    <p ref={this.fileRef} className="uix-controls__file-return">{value || ''}</p>
 	
 		  </>
 		)
@@ -96,7 +153,7 @@ export default class File extends Component {
 //Configure your application to run in "development" mode.
 if ( process.env.NODE_ENV === 'development' ) {
 			
-	File.propTypes = {
+	FileField.propTypes = {
 		value: PropTypes.string,
 		label: PropTypes.oneOfType([PropTypes.string, PropTypes.object]),
 		name: PropTypes.string,

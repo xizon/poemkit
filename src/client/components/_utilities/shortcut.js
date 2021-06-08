@@ -4,8 +4,8 @@
  * Core Shortcut
  *
  * @package: uix-kit-react
- * @version: 0.23
- * @last update: June 3, 2021
+ * @version: 0.24
+ * @last update: June 8, 2021
  * @license: MIT
  *
  *************************************
@@ -244,6 +244,21 @@ __( document ).ready( function() {
 			console.log( __.validate.isNumber( '1421.231' ) );	//true
 			console.log( __.validate.isInt( '1421.231' ) ); //false		
 			console.log( __.validate.isJSON( '{"a":true}' ) ); //true	
+			
+			const throttleFunc = __.throttle(myFunc, 300);
+			window.removeEventListener("scroll", throttleFunc);
+			window.addEventListener("scroll", throttleFunc);
+				
+			
+			const debounceFunc = __.debounce(myFunc, 300);
+			function handleClick() {
+			    debounceFunc();
+			}	
+			
+			
+			
+			let a = [1,2,3,4], b = __.deepClone(a);
+			let demo = document.querySelector( '#demo' ), demoCopy = __.deepClone(demo);
 
 		}
 	});
@@ -959,8 +974,8 @@ const __ = (function () {
 	/*
 	 * Convert a string to slug.
 	 *
-	 * @param  {string} str            - Any string.
-	 * @return {string}                - A new string.
+	 * @param  {String} str            - Any string.
+	 * @return {String}                - A new string.
 	 */  
 	__.toSlug = function( str ) {
 
@@ -981,6 +996,86 @@ const __ = (function () {
 
 	};
 
+	
+	/*
+	 * Throttle
+	 *
+	 * @param  {Function} fn    - A function to be executed within the time limit.
+	 * @param  {Number} limit   - Waiting time.
+	 * @return {Void}    
+	 */  
+	__.throttle = function( fn, limit = 300 ) {
+		let waiting = false;                     
+		return function () {                     
+			if (!waiting) {                       
+				fn.apply(this, arguments);  
+				waiting = true;                  
+				setTimeout(function () {          
+					waiting = false;           
+				}, limit);
+			}
+		}
+	};
+	
+	
+	
+	/*
+	 * Debounce
+	 *
+	 * @param  {Function} fn    - A function to be executed within the time limit.
+	 * @param  {Number} limit   - Waiting time.
+	 * @return {Void}    
+	 */  
+	__.debounce = function( fn, limit = 300 ) {
+		let timer;
+		return function() {
+		
+			//Every time this returned function is called, the timer is cleared to ensure that fn is not executed
+			clearTimeout(timer);
+
+			// When the returned function is called for the last time (that is the user stops a continuous operation)
+			// Execute fn after another delay milliseconds
+			timer = setTimeout(function() {
+				fn.apply(this, arguments);
+			}, limit);
+		}
+	};
+	
+	
+	
+
+	/*
+	 *  Create a deep copy of the set of matched elements.
+	 *
+	 * @param  {Object|Element} obj             - The array, JSON or HTML element to be copied.
+	 * @return {Object|Element}   
+	 */
+	__.deepClone = function(obj) {
+		
+		if ( obj.nodeType === 1 ) {
+			return obj.cloneNode(true);
+		} else {
+			let objClone = Array.isArray(obj)?[]:{};
+			if(obj && typeof obj==="object"){
+				for(key in obj){
+					if(obj.hasOwnProperty(key)){
+						//Determine whether the ojb child element is an object, if it is, copy it recursively
+						if(obj[key] && typeof obj[key] ==="object"){
+							objClone[key] = deepClone(obj[key]);
+						}else{
+							//If not, simply copy
+							objClone[key] = obj[key];
+						}
+					}
+				}
+			}
+			return objClone;
+		}
+
+	};
+
+	
+	
 	
 	/* ---------------- API methods ----------------- */
 	
@@ -2409,10 +2504,9 @@ const __ = (function () {
 			'width': maxWidth
 		};
 
-	};
+	}
 
-	
-	
+
 	
 	/* ------------- Private Methods -------------- */
 

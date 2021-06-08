@@ -7,9 +7,9 @@ import PropTypes from "prop-types";
 import React, { Component } from 'react';
 
 /*-- Apply Third-party plugins (import location should be in front of "global scripts and styles") --*/
-import '@uixkit.react/plugins/_lib-bootstrap.js';
-import '@uixkit.react/plugins/_lib-gsap.js';
-import '@uixkit.react/plugins/_lib-icons.js';
+import '@uixkit.react/components/_plugins/_lib-bootstrap.js';
+import '@uixkit.react/components/_plugins/_lib-gsap.js';
+import '@uixkit.react/components/_plugins/_lib-icons.js';
 
 /*-- Apply global scripts and styles --*/
 import '@uixkit.react/components/_utilities/styles/_all.scss';
@@ -169,11 +169,9 @@ export default class Table extends Component {
 		
 		__( document ).ready( function() {
 
-			
-			const $window          = __( window );
-			let	windowWidth        = window.innerWidth,
-				windowHeight       = window.innerHeight;
 
+			
+			
 			/* 
 			 ---------------------------
 			 Duplicate title
@@ -205,22 +203,8 @@ export default class Table extends Component {
 			 ---------------------------
 			 */
 		
+			let	windowWidth = window.innerWidth;
 			tableDataScrolledInit( windowWidth );
-
-			$window.off( 'resize' ).on( 'resize', function() {
-				// Check window width has actually changed and it's not just iOS triggering a resize event on scroll
-				if ( window.innerWidth != windowWidth ) {
-					
-					// Update the window width for next time
-					windowWidth = window.innerWidth;
-
-					// Do stuff here
-					tableDataScrolledInit( windowWidth );
-
-
-				}
-			});
-
 
 			function tableDataScrolledInit( w ) {
 				
@@ -257,6 +241,27 @@ export default class Table extends Component {
 				}
 
 			}	
+			
+			
+			function windowUpdate() {
+				// Check window width has actually changed and it's not just iOS triggering a resize event on scroll
+				if ( window.innerWidth != windowWidth ) {
+					
+					// Update the window width for next time
+					windowWidth = window.innerWidth;
+
+					// Do stuff here
+					tableDataScrolledInit( windowWidth );
+
+
+				}
+			}
+			
+			const debounceFunc = __.debounce(windowUpdate, 50);
+			window.removeEventListener("resize", debounceFunc);
+			window.addEventListener("resize", debounceFunc);
+			
+			
 
 		});
 

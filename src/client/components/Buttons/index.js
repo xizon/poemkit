@@ -7,9 +7,9 @@ import PropTypes from "prop-types";
 import React, { Component } from 'react';
 
 /*-- Apply Third-party plugins (import location should be in front of "global scripts and styles") --*/
-import '@uixkit.react/plugins/_lib-bootstrap.js';
-import '@uixkit.react/plugins/_lib-gsap.js';
-import '@uixkit.react/plugins/_lib-icons.js';
+import '@uixkit.react/components/_plugins/_lib-bootstrap.js';
+import '@uixkit.react/components/_plugins/_lib-gsap.js';
+import '@uixkit.react/components/_plugins/_lib-icons.js';
 
 /*-- Apply global scripts and styles --*/
 import '@uixkit.react/components/_utilities/styles/_all.scss';
@@ -34,6 +34,7 @@ export default class Button extends Component {
 			className,
 			id,
 			type,
+			children,
 			...attributes
 		} = this.props;
 
@@ -42,9 +43,9 @@ export default class Button extends Component {
 		  <>
 			
            {href ? (
-                <a tabIndex="0" href={href || '#'} className={className || ''} target={target || '_self'} id={id || 'app-btn-' + __.GUID.create()} {...attributes}></a>
+                <a tabIndex="0" href={href || '#'} className={className || ''} target={target || '_self'} id={id || 'app-btn-' + __.GUID.create()} {...attributes}>{children}</a>
             ) : (
-			  <button className={className || ''} id={id ? id : 'app-btn-' + __.GUID.create() } type={type || 'button'} {...attributes}></button>
+			  <button className={className || ''} id={id ? id : 'app-btn-' + __.GUID.create() } type={type || 'button'} {...attributes}>{children}</button>
             )}	
 	
 		  </>

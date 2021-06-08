@@ -3,9 +3,9 @@ import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
 
 /*-- Apply Third-party plugins (import location should be in front of "global scripts and styles") --*/
-import '@uixkit.react/plugins/_lib-bootstrap.js';
-import '@uixkit.react/plugins/_lib-gsap.js';
-import '@uixkit.react/plugins/_lib-icons.js'; 
+import '@uixkit.react/components/_plugins/_lib-bootstrap.js';
+import '@uixkit.react/components/_plugins/_lib-gsap.js';
+import '@uixkit.react/components/_plugins/_lib-icons.js'; 
 
 /*-- Apply global scripts and styles --*/
 import '@uixkit.react/components/_utilities/styles/_all.scss';
@@ -33,7 +33,7 @@ export default class SingleSelect extends Component {
 		this.resRef = React.createRef();
 		
 		
-        this.handleOnClickItem = this.handleOnClickItem.bind(this);
+        this.handleClickItem = this.handleClickItem.bind(this);
 		
 	}
 
@@ -60,7 +60,7 @@ export default class SingleSelect extends Component {
      * Change Event Here
 	  * Prevents the triggering of multiple change events
      */
-	handleOnClickItem(event) {
+	handleClickItem(event) {
 		event.preventDefault();
 		
 		const el = __( event.target );
@@ -162,7 +162,7 @@ export default class SingleSelect extends Component {
 
 		    return (
 			    <React.Fragment key={index}>
-				    <span aria-checked={(activeThisEl ? 'true' : 'false')} role="radio" data-value={optionValues[index]} className={activeThisEl ? 'is-active' : ''} data-switchid={_targetArr[index]}  onClick={this.handleOnClickItem}>
+				    <span aria-checked={(activeThisEl ? 'true' : 'false')} role="radio" data-value={optionValues[index]} className={activeThisEl ? 'is-active' : ''} data-switchid={_targetArr[index]}  onClick={this.handleClickItem}>
 				        {theme === 'line' ? <><ins className="uix-controls__bar"></ins><ins className="uix-controls__basic-bar"></ins></> : ''}
 				        {selectOption}
 				    </span>

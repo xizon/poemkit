@@ -10,7 +10,6 @@
 
 ```js
 import React from 'react';
-import { __ } from '@uixkit.react/components/_utilities/_all.js';
 import {
 	Input,
 	PasswordInput,
@@ -32,25 +31,8 @@ import {
 
 
 
-			
-
-
 export default () => {
-	
-   // Equivalent to componentDidMount and componentDidUpdate:
-   React.useEffect(() => {
-		__( document ).ready( function() {
 
-			__( '#input-name-1' ).val(  );  //form control: `<Input />`
-			__( '#select-name-1' ).val( 'value-3' ); //form control: `<Select />`
-			__( '#switch-name-1' ).val( true );   //form control: `<Switch />`
-			__( '#checkbox-name-1' ).val( true );  //form control: `<Checkbox />`
-			__('input[name="radio-name-1"]').val( 'value-3' ); //form control: `<Radio />`
-			
-		});       
-   });
-		
-	
 	
   return (
     <>
@@ -123,6 +105,76 @@ export default () => {
 		<Input ui="fullwidth small medium large pill rounded success error" label="All UI attributes" name="input-name-all" />
 
 
+																	
+	    <h3>Password Input</h3>
+		{/* ================================================================== */}      
+	  
+		Password Input Line Style (theme="line"):
+		<PasswordInput theme="line" label="Title" name="passwordinput-name-linestyle" />
+		
+	  
+	    Password Input 1:
+		<PasswordInput label="Input Normal" name="passwordinput-name-1"/> (Only label and name attributes)
+		
+
+		Password Input 2:
+		<PasswordInput label="Input Normal" name="passwordinput-name-2" id="input-name-2" maxLength="50" value="0" />
+		
+
+		Password Input 3:
+		<PasswordInput label="Disabled" name="passwordinput-name-3" disabled />
+		<PasswordInput label="Read Only" name="passwordinput-name-3_2" readOnly />
+		<PasswordInput label="Required" name="passwordinput-name-3_3" required />
+		
+
+		Password Input 4:
+		<PasswordInput ui="fullwidth" label="Fullwidth" name="passwordinput-name-4" />
+		
+
+
+		Password Input 5:
+		<PasswordInput ui="error" label="Error" name="passwordinput-name-5" value="Error" />
+		
+
+		Password Input 6:
+		<PasswordInput ui="success" label="Success" name="passwordinput-name-6" value="Success" />
+		
+
+		Password Input 7:
+		<PasswordInput ui="pill" label="Pill" name="passwordinput-name-7" />
+		
+
+		Password Input 8:
+		<PasswordInput ui="rounded" label="Rounded" name="passwordinput-name-8" />
+		
+
+		Password Input 9:
+		<PasswordInput ui="small" units="unit" label="Small Size" name="passwordinput-name-9" />
+		
+
+
+		Password Input 10:
+		<PasswordInput ui="medium" units="em" label="Medium Size" name="passwordinput-name-10" />
+		
+
+
+		Password Input 11:
+		<PasswordInput ui="large" units="custom string" label="Large Size" name="passwordinput-name-11" />
+		
+
+		Password Input 12:
+		<PasswordInput label="Icon Left" name="passwordinput-name-icon-1" iconLeft={<i className="fa fa-user-o" aria-hidden="true"></i>} />\
+		<PasswordInput label="Icon Right" name="passwordinput-name-icon-2" iconRight={<i className="fa fa-feed" aria-hidden="true"></i>} />				
+		
+
+		Mixed some UI attributes (ui="fullwidth pill success"):
+		<PasswordInput ui="fullwidth pill success" label="Mixed some UI attributes" name="passwordinput-name-mixed" />	
+
+		All UI attributes (ui="fullwidth small medium large pill rounded success error"):
+		<PasswordInput ui="fullwidth small medium large pill rounded success error" label="All UI attributes" name="passwordinput-name-all" />
+															
+																	
+																	
 	  
 		<h3>Textarea</h3>
 		{/* ================================================================== */}      
@@ -466,7 +518,7 @@ export default () => {
 
 		<Date ui="fullwidth rounded" label="Date" name="date-name-7" autoComplete="off" time="true" min="1950-01-01T08:30" max="2017-06-30T16:30" />
 
-		<Date ui="fullwidth pill" label="Date" name="date-name-6" autoComplete="off" time="true" min="1950-01-01T08:30" max="2017-06-30T16:30" />
+		<Date ui="fullwidth pill" label="Date" name="date-name-8" autoComplete="off" time="true" min="1950-01-01T08:30" max="2017-06-30T16:30" />
 
 																	
 																	
@@ -505,7 +557,18 @@ export default () => {
 		}  />
 									
 									
-																	
+		<DynamicFields maxFields="10" addLabel="Add new" removeLabel="" tempHtmlString={
+			<>
+				<Input placeholder="Title" name="appnotice-title[]" />
+				&nbsp;&nbsp;
+				<Input ui="medium" placeholder="URL" name="appnotice-url[]" />
+			</>
+		}  
+		value='["title 1","https://google.com/pa1"],["title 2","https://uiux.cc"],["title 3","https://youtube.com"]'
+		/>
+
+			
+			
 																	
 		<h3>File</h3>
 		{/* ================================================================== */}      
@@ -518,8 +581,183 @@ export default () => {
 		<h3>File Field</h3>
 		{/* ================================================================== */}      
 
-				
-					
+		<FileField label="Drag and drop a file here" name="file-field-name-1" />
+			
+			
+		<h3>Merge Input</h3>
+		{/* ================================================================== */}      
+
+		<MergeInput btnType="button" placeholder="Enter your search term..." label={<><i className="fa fa-search" aria-hidden="true"></i> Icon Label</>} name="mergeInput-name-1-btnicon" />
+		<br />
+
+		<MergeInput btnType="button" placeholder="Enter your search term..." label="Search" name="mergeInput-name-1" />
+		<br />
+
+		<MergeInput btnType="submit" ui="pill" placeholder="Enter your search term..." label="Search" name="mergeInput-name-2" />
+		<br />	
+
+		<MergeInput btnType="submit" ui="rounded" placeholder="Enter your search term..." label="Search" name="mergeInput-name-2_2" />
+		<br />					
+
+
+		<MergeInput btnType="button" placeholder="Enter your Email" type="email" label="Subscribe" name="mergeInput-name-4" icon={<i className="fa fa-envelope" aria-hidden="true"></i>} />
+		<br />																			
+
+
+		<MergeInput btnType="button" ui="pill" placeholder="Enter your Email" type="email" label="Subscribe" name="mergeInput-name-5" icon={<i className="fa fa-envelope" aria-hidden="true"></i>} />
+		<br />																			
+
+
+		<MergeInput btnType="button" ui="rounded" placeholder="Enter your Email" type="email" label="Subscribe" name="mergeInput-name-5_2" icon={<i className="fa fa-envelope" aria-hidden="true"></i>} />
+
+	
+			
+
+		<h3>Flex Layout</h3>
+		{/* ================================================================== */}      
+
+		 <form method="post" action="#" id="app-my-form">
+
+			<div className="uix-controls-layout">
+				<div className="uix-controls-layout__content">
+					<div className="uix-controls-layout__content__inner">
+						<div>
+							{/*<!-- // -->*/}
+							<h3 className="uix-typo--color-sub uix-typo--h6 uix-spacing--no uix-typo--style-uppercase">Left Title</h3>
+							{/*<!-- // -->*/}
+						</div>
+						<div>
+							{/*<!-- // -->*/}   
+							<Input ui="rounded fullwidth" label="Field Name" name="flexlayput-input-name-1" />
+							{/*<!-- // -->*/}
+						</div>
+					</div>
+				</div>
+				<div className="uix-controls-layout__icon">
+					<i className="fa fa-angle-right"></i>
+				</div>
+			</div>     
+
+
+			 <div className="uix-controls-layout">
+				<div className="uix-controls-layout__content">
+					<div className="uix-controls-layout__content__inner">
+						<div>
+							{/*<!-- // -->*/}
+							<h3 className="uix-typo--color-sub uix-typo--h6 uix-spacing--no uix-typo--style-uppercase">Left Title</h3>
+							{/*<!-- // -->*/}
+						</div>
+						<div>
+							{/*<!-- // -->*/}
+							<Input ui="rounded fullwidth" label="Field Name" name="flexlayput-input-name-2" />
+							{/*<!-- // -->*/}
+						</div>
+					</div>
+				</div>
+				<div className="uix-controls-layout__icon">
+					<i className="fa fa-angle-right"></i>
+				</div>
+			</div>     
+
+			<div className="uix-controls-layout">
+				<div className="uix-controls-layout__content">
+					<div className="uix-controls-layout__content__inner">
+						<div className="uix-t-r">
+							{/*<!-- // -->*/}
+							<h3 className="uix-typo--color-sub uix-typo--h6 uix-spacing--no uix-typo--style-uppercase">Right Title</h3>
+							{/*<!-- // -->*/}
+						</div>
+						<div>
+							{/*<!-- // -->*/}
+							<Input ui="rounded fullwidth" label="Field Name" name="flexlayput-input-name-3" />     
+							{/*<!-- // -->*/}
+						</div>
+					</div>
+				</div>
+				<div className="uix-controls-layout__icon">
+					<i className="fa fa-angle-right"></i>
+				</div>
+			</div>     
+
+
+			<div className="uix-controls-layout">
+				<div className="uix-controls-layout__content">
+					<div className="uix-controls-layout__content__inner">
+						<div className="uix-t-r">
+							{/*<!-- // -->*/}
+							<h3 className="uix-typo--color-sub uix-typo--h6 uix-spacing--no uix-typo--style-uppercase">Right Title</h3>
+							{/*<!-- // -->*/}
+						</div>
+						<div>
+							{/*<!-- // -->*/}
+							<Input ui="rounded fullwidth" label="Field Name" name="flexlayput-input-name-4" />  
+							{/*<!-- // -->*/}
+						</div>
+					</div>
+				</div>
+				<div className="uix-controls-layout__icon">
+					<i className="fa fa-angle-right"></i>
+				</div>
+			</div>     
+
+
+			<div className="uix-controls-layout">
+				<div className="uix-controls-layout__content">
+					<div className="uix-controls-layout__content__inner">
+						<div>
+							{/*<!-- // -->*/}
+							<h3 className="uix-typo--color-sub uix-typo--h6 uix-spacing--no uix-typo--style-uppercase">No Icon</h3>
+							{/*<!-- // -->*/}
+						</div>
+						<div>
+							{/*<!-- // -->*/}
+							<Input ui="rounded fullwidth" label="Field Name" name="flexlayput-input-name-5" />   
+							{/*<!-- // -->*/}
+						</div>
+					</div>
+				</div>
+			</div>     
+
+
+			 <div className="uix-controls-layout">
+				<div className="uix-controls-layout__content">
+					<div className="uix-controls-layout__content__inner">
+						<div>
+							{/*<!-- // -->*/}
+							<h3 className="uix-typo--color-sub uix-typo--h6 uix-spacing--no uix-typo--style-uppercase">No Icon</h3>
+							{/*<!-- // -->*/}
+						</div>
+						<div>
+							{/*<!-- // -->*/}
+							<Input ui="rounded fullwidth" label="Field Name" name="flexlayput-input-name-6" />       
+							{/*<!-- // -->*/}
+						</div>
+					</div>
+				</div>
+			</div>          
+
+
+			 <div className="uix-controls-layout">
+				<div className="uix-controls-layout__content">
+					<div className="uix-controls-layout__content__inner">
+						<div>
+							{/*<!-- // -->*/}
+
+							{/*<!-- // -->*/}
+						</div>
+						<div>
+							{/*<!-- // -->*/}
+							<button type="submit" className="uix-btn uix-btn__border--thin uix-btn__size--s uix-btn__bg--primary">Submit Your Info</button>   
+							{/*<!-- // -->*/}
+						</div>
+					</div>
+				</div>
+			</div>          
+
+
+
+		</form>		
+			
 
     </>
   );
