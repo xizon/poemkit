@@ -120,9 +120,6 @@ export default (props) => {
 					<li className={props.location.pathname === "/components-demo" ? 'is-active' : ''}>
 					  <NavLink data-route="true" to="/components-demo" activeClassName="is-active">Components</NavLink>
 					</li>
-					<li className={props.location.pathname === "/todos" ? 'is-active' : ''}>
-					  <NavLink data-route="true" to="/todos" activeClassName="is-active">Todos</NavLink>
-					</li>
 					<li className={props.location.pathname.indexOf( "/posts" ) >= 0 ? 'is-active' : ''}>
 					  <NavLink data-route="true" to="/posts" activeClassName="is-active">Posts</NavLink>
 					</li>
@@ -132,6 +129,14 @@ export default (props) => {
 					<li className={props.location.pathname.indexOf( "/nested-routes" ) >= 0 ? 'is-active' : ''}>
 					  <NavLink data-route="true" to="/nested-routes" activeClassName="is-active">Nested Routes</NavLink>
 					</li>
+					<li className={props.location.pathname === "/member" ? 'is-active' : ''}>
+					  <NavLink data-route="true" to="/member" activeClassName="is-active">Member</NavLink>
+					</li>
+					<li className={props.location.pathname.indexOf( "/admin" ) >= 0 ? 'is-active' : ''}>
+					  <NavLink data-route="true" to="/admin" activeClassName="is-active">Admin</NavLink>
+					</li>
+
+
 	
 			</>
 		} />

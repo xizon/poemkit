@@ -1,6 +1,12 @@
 # Changelog
 
 
+#### = 0.0.40 (June 10, 2021) =
+
+* New: Create JWT of business logic development with react and redux.
+* Tweak: Optimized the structure of redux.
+
+
 #### = 0.0.37 (June 8, 2021) =
 
 

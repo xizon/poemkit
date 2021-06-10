@@ -111,6 +111,8 @@ $ sudo npm install
 $ npm run build
 ```
 
+
+
 **Step 5.** Using `Ctrl + C` to stop webpack.
 
 
@@ -417,6 +419,7 @@ uix-kit-react/
 ├── public/          --------------------------- # HTML template of Homepage
 │   ├── index.html    
 │   ├── manifest.json
+│   └── server/  ------------------------------- # PHP scripts used to the server for testing
 │   └── assets/
 ├── dist/        ------------------------------- # Files compiled, used in the production environment
 │   ├── css/
@@ -434,6 +437,7 @@ uix-kit-react/
 │   │   ├── client.js
 │   │   ├── actions/
 │   │   ├── reducers/
+│   │   ├── helpers/
 │   │   ├── router/
 │   │   ├── components/ -------------------------  # Independent React components
 │   │   │     ├── */

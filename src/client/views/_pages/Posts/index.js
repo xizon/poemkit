@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { __ } from '@uixkit.react/components/_utilities/_all.js';
-import { fetchDemoList } from '@uixkit.react/actions/demoListActions.js';
+import actionCreators from '@uixkit.react/actions/demoListActions.js';
 import PostItem from '@uixkit.react/pages/Posts/PostItem.js';
 import Footer from '@uixkit.react/components/Footer/index.js';
 
@@ -23,19 +23,84 @@ class Posts extends Component {
 	//Static properties/methords are the properties of the class. 
 	//@link to: `src/server/app.js`
 	/*
-	When requesting from the server, the program will look for the react component with 
-	the `appSyncRequestFetching` function (this function is named by the developer) to complete the 
-	initial update and rendering of the data(SSR).
-
-	if ( typeof route.component.appSyncRequestFetching !== typeof undefined ) {
-		console.log( 'route.component.appSyncRequestFetching: ' );
-		console.log( route.component.appSyncRequestFetching );	
-	}	
+	 * When requesting from the server, the program will look for the react component with 
+	 * the `appSyncRequestFetching` function (this function is named by the developer) to complete the 
+	 * initial update and rendering of the data(SSR).
+	 
+		if ( typeof route.component.appSyncRequestFetching !== typeof undefined ) {
+			//...
+		}	
+	
 	*/
-    static appSyncRequestFetching ({ dispatch }) {
-        return [ dispatch( fetchDemoList() ) ];
+	
+	/*
+	Dispatch an async function. The `redux-thunk` middleware handles running this function.
+	Implementation principle:
+	(put the following code in the app.get('*', (req, res) => {...} code snippet in `src/server/app.js`):
+	
+	-------------------
+
+	store.dispatch(async function(dispatch) {
+
+		// Wait for all the `httpRequest` functions, if they are resolved, run 'store.dispatch()'
+		const httpRequest = () => {
+			return new Promise( (resolve,reject) => {
+				axios({
+					timeout: 15000,
+					method: 'get',
+					url: `https://restcountries.eu/rest/v2`,
+					responseType: 'json'
+				}).then(function (response) {
+					resolve( response );
+				})
+				.catch(function (error) {
+					console.log( error );
+				});
+			});
+		};
+
+
+		const getApiData = await httpRequest();
+		const action = {
+			type: 'RECEIVE_DEMO_LIST',
+			payload: getApiData.data
+		}
+		dispatch( action );
+
+
+
+		// Send the rendered html to browser.
+		const indexFile = path.join(__dirname,'../../public/index.html');
+		fs.readFile(indexFile, 'utf8', (err, data) => {
+			if (err) {
+				console.error('Something went wrong:', err);
+				return res.status(500).send('Oops, better luck next time!');
+			} 
+
+			//
+			const context = {};
+			const content = render(req.path, store, context, data);
+
+			if (context.notFound) {
+				res.status(404);
+			}
+
+			res.send(content);
+		});
+
+	});
+
+	
+	*/
+    static appSyncRequestFetching( storeAPI ) {
+		const AppDispatch = storeAPI.dispatch;
+		
+		//
+		const data = actionCreators();
+		return [ AppDispatch(data) ];
     } 
 
+	
     /**
      * componentDidMount() is invoked immediately after a component 
      * is mounted (inserted into the tree). 
@@ -52,7 +117,7 @@ class Posts extends Component {
 		const { contentInformation } = this.props;
 
 		// Request data
-        contentInformation(fetchDemoList());
+        contentInformation(actionCreators());
 		
    
         
@@ -125,18 +190,19 @@ class Posts extends Component {
     
 // Subscribe to the required state in the reducers is bound 
 // here (for details of the data structure: initState)
-const mapStateToProps = (state) => {
+const mapStateToProps = (storeState) => {
     return {
-        currentData: state.listData.items  //Receive redux
+        currentData: storeState.listData.items  //Receive redux
     }
 };
 
 // Bind the introduced Actions
-const mapDispatchToProps = (dispatch) => {
+const mapDispatchToProps = (storeDispatch) => {
     return {
-        contentInformation: dispatch  //Throw redux
+        contentInformation: storeDispatch  //Throw redux
     }
 };
+
 
 
 // The most important step is to bind the required Reducer and Actions to the current page 

@@ -15,7 +15,10 @@ const state = window.__PRELOADED_STATE__;
 delete window.__PRELOADED_STATE__;
 
 
-const store = createStore(rootReducer, state, applyMiddleware(thunk));
+const _initialState = state; //JSON
+const _reducer = rootReducer; //Function
+const _enhancer = applyMiddleware(thunk); //Function
+const store = createStore(_reducer, _initialState, _enhancer);
 
 //
 ReactDOM.hydrate(

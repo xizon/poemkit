@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
 import { __ } from '@uixkit.react/components/_utilities/_all.js';
-import LoginPage from '@uixkit.react/pages/Todos/LoginPage.js';
+import LoginPage from '@uixkit.react/pages/Member/LoginPage.js';
 import Footer from '@uixkit.react/components/Footer/index.js';
 
 
-class Todos extends Component {
+class Member extends Component {
 	constructor(props) {
 
 		//You are extending the React.Component class, and per the ES2015 spec, 
@@ -71,4 +71,4 @@ class Todos extends Component {
     
 }
 
-export default Todos;
+export default Member;

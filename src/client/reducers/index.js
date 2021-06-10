@@ -6,3 +6,5 @@ export default combineReducers({
     listData: demoListReducer,
     listDetailData: demoListDetailReducer
 });
+
+//@link to: `src/client/client.js`, src/store/createStore.js`

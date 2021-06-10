@@ -1,15 +1,17 @@
 import React, { Component } from 'react';
+import ReactDOM from 'react-dom';
 import axios from 'axios';
 import { __ } from '@uixkit.react/components/_utilities/_all.js';
 
+//get project config
+import { API } from '@uixkit.react/config';
 
-
-const Welcome = ({user, onSignOut}) => {
+const Welcome = ({ onSignOut}) => {
     // This is a dumb "stateless" component
     return (
         <div>
-            Welcome <strong>{user.username}</strong>!
-            <a href="javascript:;" onClick={onSignOut}>Sign out</a>
+            Welcome to this page!
+            | <a href="javascript:;" onClick={onSignOut}>Sign out</a>
         </div>
     )
 }
@@ -19,12 +21,19 @@ class LoginPage extends Component {
     constructor() {
         super();
         this.state = {
+			loginOk: null,
             user: null,
             username: '',
             password: '',
             error: '',
         };
 
+		
+		//Refs are commonly assigned to an instance property when a component 
+		//is constructed so they can be referenced throughout the component.
+		this.wrapperRef = React.createRef();
+		
+		
         this.handlePassChange = this.handlePassChange.bind(this);
         this.handleUserChange = this.handleUserChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
@@ -45,19 +54,31 @@ class LoginPage extends Component {
     
     handleSubmit(evt) {
         evt.preventDefault();
+		
+		const self = this;
+		const root = ReactDOM.findDOMNode(this.wrapperRef.current);
+		const $selectWrapper = __( root );
 
-        if (!this.state.username) {
-            return this.setState({ error: 'Username is required' });
+	
+		
+        if (!self.state.username) {
+            return self.setState({ error: 'Username is required' });
         }
 
-        if (!this.state.password) {
-            return this.setState({ error: 'Password is required' });
+        if (!self.state.password) {
+            return self.setState({ error: 'Password is required' });
         }
         
-        
+		//control status
+		$selectWrapper.find( 'input' ).prop('disabled', true);
+		
+		
+        //
         var formData = new FormData();
         var defaultPostData = {
-          action: 'login_check'
+            action: 'login_check',
+			user_name: self.state.username, 
+			user_password: self.state.password
         };
 
         for (var k in defaultPostData) {
@@ -72,57 +93,74 @@ class LoginPage extends Component {
         });
         formData.append('action', 'load_singlepages_ajax_content');
         */
-        axios({
-          timeout: 15000,
-          method: 'get',
-          url: 'https://api.github.com/users',
-          data: formData,
-          responseType: 'json'
-        }).then(function (response) {
-
+		axios.post(API.LOGIN_REQUEST, formData )
+		.then(function (response) {
+			
             const jsonData = response.data;
 
-            console.log( jsonData );
-   
+			/*-----------------------------
+			 Login successful
+			-------------------------------*/
+            // This is where you would call Firebase, an API etc...
+			
+			console.log(jsonData);
+			
+			if ( jsonData.code === 200 ) {
 
-        })
-        .catch(function (error) {
-
-            if (error.response) {
-                // The request was made and the server responded with a status code
-                // that falls out of the range of 2xx
-                const status = error.response.status;
-                console.log(status);
+				//control status
+				$selectWrapper.find( 'input' ).prop('disabled', false);
 
 
+				// Save info
+				localStorage.setItem('user',JSON.stringify({
+					token: jsonData.data.token
+				}));
 
-            } else if (error.request) {
-                // The request was made but no response was received
-                // `error.request` is an instance of XMLHttpRequest in the browser and an instance of
-                // http.ClientRequest in node.js
-                console.log(error.request);
 
-                //
-            } else {
-                // If there was a problem, we need to
-                // dispatch the error condition
-                console.log(error.message);
-            }
-        });
+				// Fire state
+				self.setState({
+					loginOk: 1,
+					user: {
+						username: self.state.username
+					}
+				});	
 
-        
-        
-        // login successfully
-        // This is where you would call Firebase, an API etc...
-        // calling setState will re-render the entire app (efficiently!)
-        this.setState({
-            user: {
-                username: this.state.username
-            }
-        });
-        
+				return self.setState({ error: '' });
 
-        return this.setState({ error: '' });
+
+				// Fire `store.dispatch()`
+				//dispatch(...)
+
+			}
+
+			/*-----------------------------
+			 Login failed
+			-------------------------------*/
+			if ( jsonData.code === 401 || jsonData.code === 419 ) {
+
+				//control status
+				$selectWrapper.find( 'input' ).prop('disabled', false);
+
+				// Clear info
+				localStorage.setItem('user', JSON.stringify({}) );
+
+
+				// Fire state
+				return self.setState({ error: 'ERROR: '+jsonData.code+': '+jsonData.error+'!' });
+
+
+				// Fire `store.dispatch()`
+				//dispatch(...)
+
+			}	
+
+           
+		}).catch(function (error) {
+			return self.setState({ error: 'ERROR: '+error+'!' });
+		});
+
+		
+       
     }
 
     handleUserChange(evt) {
@@ -151,13 +189,26 @@ class LoginPage extends Component {
     }
 
     signOut() {
+		
+		// Clear localStorage
+		localStorage.setItem('user', JSON.stringify({}) );
+		localStorage.clear();
+		
         // clear out user from state
-        this.setState({user: null});
-    }
+        this.setState({
+			loginOk: null,
+			user: null
+		});
+		
+		
+	}
     
 
     checkLogin() {
 
+		if ( localStorage.getItem('user') ) {
+			this.setState({loginOk: 1});	
+		}
     }
     
     
@@ -173,15 +224,15 @@ class LoginPage extends Component {
         return (
           <>
 
-            
+
                 { 
-                  (this.state.user) ? 
+                  (this.state.loginOk) ? 
                     <Welcome 
-                     user={this.state.user} 
                      onSignOut={this.signOut.bind(this)} 
                     />
                   :
-                    <div>
+                    <div ref={this.wrapperRef}>
+						<p>Test Account: <code>admin</code> Password: <code>admin</code></p>
                         <form onSubmit={this.handleSubmit.bind(this)}>
 
                                 

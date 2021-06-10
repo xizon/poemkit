@@ -3,10 +3,13 @@ import App from '@uixkit.react/router/App.js';
 import Home from '@uixkit.react/pages/Home/index.js';
 import Posts from '@uixkit.react/pages/Posts/index.js';
 import PostDetail from '@uixkit.react/pages/Posts/PostDetail.js';
-import Todos from '@uixkit.react/pages/Todos/index.js';
+import Member from '@uixkit.react/pages/Member/index.js';
 import NoMatch from '@uixkit.react/pages/404/index.js';
 import NestedRoutes from '@uixkit.react/pages/NestedRoutes/index.js';
 import ComponentsDemo from '@uixkit.react/pages/ComponentsDemo/index.js';
+import Admin from '@uixkit.react/pages/Admin/index.js';
+
+
 
 const routesConfig = [
   {
@@ -53,9 +56,9 @@ const routesConfig = [
 		exact: true
       },
       {
-        path: "/todos",
-        component: Todos,
-		pageTitle: 'Todos'
+        path: "/member",
+        component: Member,
+		pageTitle: 'Member'
       },
   
       {
@@ -64,12 +67,22 @@ const routesConfig = [
 		pageTitle: ''
       },	
 		
+      {
+        path: "/admin",
+        component: Admin,
+		pageTitle: 'Admin'
+      },
+  
+		
 	  /* In order to make nested routes valid, do not add the exact attribute here */
 	  {
         path: "/nested-routes",
         component: NestedRoutes,
 		pageTitle: 'Nested Routes',
       },	
+		
+		
+	  /* 404 */
       {
         path: "*",
         component: NoMatch,

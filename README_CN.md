@@ -105,6 +105,8 @@ $ sudo npm install
 $ npm run build
 ```
 
+
+
 **Step 5.** 使用 `Ctrl + C` 退出终端命令
 
 
@@ -413,6 +415,7 @@ uix-kit-react/
 ├── public/          --------------------------- # 自动生成的首页HTML静态模板
 │   ├── index.html 
 │   ├── manifest.json
+│   └── server/   ------------------------------- # 用于服务器测试的PHP脚本
 │   └── assets/
 ├── dist/         ------------------------------- # web 编译出的文件，用于生产环境
 │   ├── css/
@@ -430,6 +433,7 @@ uix-kit-react/
 │   │   ├── client.js
 │   │   ├── actions/
 │   │   ├── reducers/
+│   │   ├── helpers/
 │   │   ├── router/
 │   │   ├── components/ -------------------------  # 独立的UI组件
 │   │   │     ├── */

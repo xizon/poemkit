@@ -60,64 +60,80 @@ app.use(cors({origin: '*' }));
 
 
 
-app.get('*', async (req, res) => {
+app.get('*', (req, res) => {
 
-
+    // (1)
     // We create store before rendering html
     const store = createNewStore();
 
-    
+    // (2)
     // Checks the given path, matches with component and returns array of items about to be rendered
     const routes = matchRoutes(customRoutesConfig, req.path);
     //console.log( routes );
 
 	
+	
+    // (3)
     // Execute all `appSyncRequestFetching` functions inside given urls and wrap promises with new promises to be able to render pages all the time
     // Even if we get an error while loading data, we will still attempt to render page.
-	//@link to: `src/client/views/_pages/index.js`, `src/client/views/_pages/PostDetail.js`
-    const actions = routes
-                        .map(({ route }) => {
-							
-							if ( typeof route.component.appSyncRequestFetching !== typeof undefined ) {
-								console.log( 'route.component.appSyncRequestFetching: ' );
-								console.log( route.component.appSyncRequestFetching );	
-							}
+	//@link to: `src/client/views/_pages/Posts/`
+    const actions = routes.map( (item) => {		
+		const _route = item.route;
 
-                            return route.component.appSyncRequestFetching ? route.component.appSyncRequestFetching({...store, path: req.path }) : null;
-                        })
-                        .map(async actions => await Promise.all(
-                                (actions || []).map(p => p && new Promise(resolve => p.then(resolve).catch(resolve)))
-                            )
-                        );
-
-    
-    
-    //read template
-    const indexFile = path.join(__dirname,'../../public/index.html');
-    actions.push(
-        new Promise(function(resolve, reject){
-            fs.readFile(indexFile, 'utf8', (err, data) => {
-                if (err) {
-                    reject(err);
-                } else {
-                    resolve(data);
-                }
-            });
-        })
-    );
+		if ( _route.component.appSyncRequestFetching ) {
+			const storeAPI = {...store, path: req.path };
+			//console.log( 'storeAPI: ', storeAPI);
+			return _route.component.appSyncRequestFetching(storeAPI);
+		} else {
+			return null;
+		}
 
 
-    // Wait for all the `appSyncRequestFetching` functions, if they are resolved, send the rendered html to browser.
-    await  Promise.all( actions ).then(( data ) => {
-        const templateCode = data.slice(-1).pop(); //get last item
-        const context = {};
-        const content = render(req.path, store, context, templateCode);
+	});
+	
+	const dispatchEvents = 	actions.map(function (promiseTask) {
+		const _promiseTask = promiseTask === null ? [] : promiseTask;
+		
+		return Promise.all(
+		
+			_promiseTask.map(function (item) {
+				//console.log('item: ', item ); //Promise { <pending> }
+				return new Promise(function (resolve, reject) {
+					//console.log('resolve: ', resolve ); //[Function (anonymous)]
+					return item.then(resolve);
+				});
+				
+			})
+		);
+	});
 
-        if (context.notFound) {
-            res.status(404);
-        }
 
-        res.send(content);
+	
+    // (4)
+	// Wait for all the `appSyncRequestFetching` functions, if they are resolved, send the rendered html to browser.
+    Promise.all(dispatchEvents).then(( result ) => {
+		
+		//read template
+		const indexFile = path.join(__dirname,'../../public/index.html');
+		fs.readFile(indexFile, 'utf8', (err, data) => {
+			if (err) {
+				console.error('Something went wrong:', err);
+				return res.status(500).send('Oops, better luck next time!');
+			} 
+			
+			//
+			const context = {};
+			const content = render(req.path, store, context, data);
+
+			if (context.notFound) {
+				res.status(404);
+			}
+
+			res.send(content);
+		});
+
+		
+
     });
     
 
@@ -125,5 +141,7 @@ app.get('*', async (req, res) => {
 });
 
 app.listen(port, () => console.log(`Frontend service listening on port: ${port}`));
+
+
 
 

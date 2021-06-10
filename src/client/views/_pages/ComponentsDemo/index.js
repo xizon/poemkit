@@ -72,7 +72,29 @@ function HookContent() {
 
 			  <Switch>
 				<Route exact path={path}>
-				  <p>None.</p>
+		
+					{/*
+					<!-- Content   
+					====================================================== -->	
+					*/}
+					<section className="uix-spacing--s uix-spacing--no-bottom">
+						<div className="container">
+								<div className="row">
+									<div className="col-12">
+
+										<p>None.</p>
+
+									</div>
+								</div>
+								{/*<!-- .row end -->*/}
+
+
+						</div>
+						{/*<!-- .container end -->*/}
+					</section>
+
+		
+				  
 				</Route>
 				<Route path={`${path}/buttons`}>
 				  <ButtonsDemo />

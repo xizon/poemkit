@@ -6,9 +6,9 @@
  * ## Project Name        :  Uix Kit React
  * ## Project Description :  A free web kits with React for fast web design and development via SSR.
  * ## Project URL         :  https://uiux.cc
- * ## Version             :  0.0.37
+ * ## Version             :  0.0.40
  * ## Based on            :  Uix Kit React (https://github.com/xizon/uix-kit-react#readme)
- * ## Last Update         :  June 8, 2021
+ * ## Last Update         :  June 10, 2021
  * ## Created by          :  UIUX Lab (https://uiux.cc) (uiuxlab@gmail.com)
  * ## Released under the MIT license.
  * 	
@@ -8520,17 +8520,34 @@ module.exports["default"] = module.exports, module.exports.__esModule = true;
 /* 11 */
 /***/ (function(module, exports) {
 
-module.exports = {
-  //If the file is in the root directory, you can leave it empty. If in another directory, you can write: "/blog". (but no trailing slash)
+/* API for Test  */
+var configTest = {
   "rootDirectory": "",
-  //Corresponding to folder `./src/client/actions/*`
   "API": {
-    "RECEIVE_DEMO_LIST": "https://restcountries.eu/rest/v2",
-    "RECEIVE_DEMO_LISTDETAIL": "https://restcountries.eu/rest/v2/name/{id}" //"RECEIVE_DEMO_LIST": "../../assets/json/Posts.json",
-    //"RECEIVE_DEMO_LISTDETAIL": "../../assets/json/PostDetail.json"
+    /*------ Posts -------*/
+    "RECEIVE_DEMO_LIST": "../../assets/json/Posts.json",
+    "RECEIVE_DEMO_LISTDETAIL": "../../assets/json/PostDetail.json",
 
+    /*------ Login -------*/
+    "LOGIN_REQUEST": "http://localhost:8888/uix-kit-react/public/server/sessions-create.php",
+    "LOGIN_AUTHENTICATE": "http://localhost:8888/uix-kit-react/public/server/authenticate.php"
   }
 };
+var config = {
+  //If the file is in the root directory, you can leave it empty. If in another directory, you can write: "/blog". (but no trailing slash)
+  "rootDirectory": "",
+  "API": {
+    /*------ Posts -------*/
+    //Corresponding to folder `./src/client/actions/*`
+    "RECEIVE_DEMO_LIST": "https://restcountries.eu/rest/v2",
+    "RECEIVE_DEMO_LISTDETAIL": "https://restcountries.eu/rest/v2/name/{id}",
+
+    /*------ Login -------*/
+    "LOGIN_REQUEST": "https://uiux.cc/server/sessions-create.php",
+    "LOGIN_AUTHENTICATE": "https://uiux.cc/server/authenticate.php"
+  }
+};
+module.exports = config;
 
 /***/ }),
 /* 12 */
@@ -8615,18 +8632,6 @@ module.exports["default"] = module.exports, module.exports.__esModule = true;
 /* 16 */
 /***/ (function(module, exports, __webpack_require__) {
 
-// extracted by mini-css-extract-plugin
-
-/***/ }),
-/* 17 */
-/***/ (function(module, exports, __webpack_require__) {
-
-// extracted by mini-css-extract-plugin
-
-/***/ }),
-/* 18 */
-/***/ (function(module, exports, __webpack_require__) {
-
 "use strict";
 
 
@@ -8656,6 +8661,18 @@ if (true) {
   module.exports = __webpack_require__(187);
 } else {}
 
+
+/***/ }),
+/* 17 */
+/***/ (function(module, exports, __webpack_require__) {
+
+// extracted by mini-css-extract-plugin
+
+/***/ }),
+/* 18 */
+/***/ (function(module, exports, __webpack_require__) {
+
+// extracted by mini-css-extract-plugin
 
 /***/ }),
 /* 19 */
@@ -28505,7 +28522,7 @@ var react = __webpack_require__(0);
 var react_default = /*#__PURE__*/__webpack_require__.n(react);
 
 // EXTERNAL MODULE: ./node_modules/react-dom/index.js
-var react_dom = __webpack_require__(18);
+var react_dom = __webpack_require__(16);
 var react_dom_default = /*#__PURE__*/__webpack_require__.n(react_dom);
 
 // EXTERNAL MODULE: ./node_modules/prop-types/index.js
@@ -42721,10 +42738,10 @@ var regular = __webpack_require__(200);
 
 
 // EXTERNAL MODULE: ./src/client/components/_utilities/styles/_all.scss
-var _all = __webpack_require__(16);
+var _all = __webpack_require__(17);
 
 // EXTERNAL MODULE: ./src/client/components/_utilities/styles/rtl/_all.scss
-var rtl_all = __webpack_require__(17);
+var rtl_all = __webpack_require__(18);
 
 // EXTERNAL MODULE: ./src/config/websiteConfig.js
 var websiteConfig = __webpack_require__(11);
@@ -42953,12 +42970,6 @@ if (false) {}
       to: "/components-demo",
       activeClassName: "is-active"
     }, "Components")), /*#__PURE__*/react_default.a.createElement("li", {
-      className: props.location.pathname === "/todos" ? 'is-active' : ''
-    }, /*#__PURE__*/react_default.a.createElement(NavLink, {
-      "data-route": "true",
-      to: "/todos",
-      activeClassName: "is-active"
-    }, "Todos")), /*#__PURE__*/react_default.a.createElement("li", {
       className: props.location.pathname.indexOf("/posts") >= 0 ? 'is-active' : ''
     }, /*#__PURE__*/react_default.a.createElement(NavLink, {
       "data-route": "true",
@@ -42976,7 +42987,19 @@ if (false) {}
       "data-route": "true",
       to: "/nested-routes",
       activeClassName: "is-active"
-    }, "Nested Routes")))
+    }, "Nested Routes")), /*#__PURE__*/react_default.a.createElement("li", {
+      className: props.location.pathname === "/member" ? 'is-active' : ''
+    }, /*#__PURE__*/react_default.a.createElement(NavLink, {
+      "data-route": "true",
+      to: "/member",
+      activeClassName: "is-active"
+    }, "Member")), /*#__PURE__*/react_default.a.createElement("li", {
+      className: props.location.pathname.indexOf("/admin") >= 0 ? 'is-active' : ''
+    }, /*#__PURE__*/react_default.a.createElement(NavLink, {
+      "data-route": "true",
+      to: "/admin",
+      activeClassName: "is-active"
+    }, "Admin")))
   }), /*#__PURE__*/react_default.a.createElement(react_router_Switch, null, /*#__PURE__*/react_default.a.createElement(react_router_Route, {
     exact: true,
     path: "/",
@@ -43129,10 +43152,13 @@ var axios_default = /*#__PURE__*/__webpack_require__.n(axios);
  //get project config
 
 
-var demoListActions_fetchDemoList = function fetchDemoList() {
+
+var demoListActions_actionCreators = function actionCreators() {
+  // The function defined by async will return the value of a `Promise()` object resolve by default, 
+  // so the `then()` can be used directly, and the returned value is the params of the `then()`
   return /*#__PURE__*/function () {
-    var _ref = asyncToGenerator_default()( /*#__PURE__*/regenerator_default.a.mark(function _callee(dispatch) {
-      var res;
+    var _ref = asyncToGenerator_default()( /*#__PURE__*/regenerator_default.a.mark(function _callee(storeDispatch) {
+      var res, action;
       return regenerator_default.a.wrap(function _callee$(_context) {
         while (1) {
           switch (_context.prev = _context.next) {
@@ -43142,14 +43168,14 @@ var demoListActions_fetchDemoList = function fetchDemoList() {
 
             case 2:
               res = _context.sent;
-              //The Redux store has a method called dispatch.
-              //@https://redux.js.org/tutorials/fundamentals/part-2-concepts-data-flow
-              dispatch({
+              //The Redux store has a method called `store.dispatch()`.
+              action = {
                 type: 'RECEIVE_DEMO_LIST',
                 payload: res.data
-              });
+              };
+              storeDispatch(action);
 
-            case 4:
+            case 5:
             case "end":
               return _context.stop();
           }
@@ -43162,6 +43188,8 @@ var demoListActions_fetchDemoList = function fetchDemoList() {
     };
   }();
 };
+
+/* harmony default export */ var demoListActions = (demoListActions_actionCreators);
 // CONCATENATED MODULE: ./src/client/views/_pages/Posts/PostItem.js
 
 
@@ -43245,13 +43273,64 @@ var Posts_Posts = /*#__PURE__*/function (_Component) {
   //@link to: `src/server/app.js`
 
   /*
-  When requesting from the server, the program will look for the react component with 
-  the `appSyncRequestFetching` function (this function is named by the developer) to complete the 
-  initial update and rendering of the data(SSR).
+   * When requesting from the server, the program will look for the react component with 
+   * the `appSyncRequestFetching` function (this function is named by the developer) to complete the 
+   * initial update and rendering of the data(SSR).
+   
   	if ( typeof route.component.appSyncRequestFetching !== typeof undefined ) {
-  	console.log( 'route.component.appSyncRequestFetching: ' );
-  	console.log( route.component.appSyncRequestFetching );	
-  }	
+  		//...
+  	}	
+  
+  */
+
+  /*
+  Dispatch an async function. The `redux-thunk` middleware handles running this function.
+  Implementation principle:
+  (put the following code in the app.get('*', (req, res) => {...} code snippet in `src/server/app.js`):
+  
+  -------------------
+  	store.dispatch(async function(dispatch) {
+  		// Wait for all the `httpRequest` functions, if they are resolved, run 'store.dispatch()'
+  	const httpRequest = () => {
+  		return new Promise( (resolve,reject) => {
+  			axios({
+  				timeout: 15000,
+  				method: 'get',
+  				url: `https://restcountries.eu/rest/v2`,
+  				responseType: 'json'
+  			}).then(function (response) {
+  				resolve( response );
+  			})
+  			.catch(function (error) {
+  				console.log( error );
+  			});
+  		});
+  	};
+  
+  	const getApiData = await httpRequest();
+  	const action = {
+  		type: 'RECEIVE_DEMO_LIST',
+  		payload: getApiData.data
+  	}
+  	dispatch( action );
+  
+  		// Send the rendered html to browser.
+  	const indexFile = path.join(__dirname,'../../public/index.html');
+  	fs.readFile(indexFile, 'utf8', (err, data) => {
+  		if (err) {
+  			console.error('Something went wrong:', err);
+  			return res.status(500).send('Oops, better luck next time!');
+  		} 
+  			//
+  		const context = {};
+  		const content = render(req.path, store, context, data);
+  			if (context.notFound) {
+  			res.status(404);
+  		}
+  			res.send(content);
+  	});
+  	});
+  	
   */
 
 
@@ -43271,7 +43350,7 @@ var Posts_Posts = /*#__PURE__*/function (_Component) {
       console.log(this.props);
       var contentInformation = this.props.contentInformation; // Request data
 
-      contentInformation(demoListActions_fetchDemoList());
+      contentInformation(demoListActions());
     }
   }, {
     key: "render",
@@ -43306,9 +43385,11 @@ var Posts_Posts = /*#__PURE__*/function (_Component) {
     }
   }], [{
     key: "appSyncRequestFetching",
-    value: function appSyncRequestFetching(_ref) {
-      var dispatch = _ref.dispatch;
-      return [dispatch(demoListActions_fetchDemoList())];
+    value: function appSyncRequestFetching(storeAPI) {
+      var AppDispatch = storeAPI.dispatch; //
+
+      var data = demoListActions();
+      return [AppDispatch(data)];
     }
   }]);
 
@@ -43317,17 +43398,17 @@ var Posts_Posts = /*#__PURE__*/function (_Component) {
 // here (for details of the data structure: initState)
 
 
-var Posts_mapStateToProps = function mapStateToProps(state) {
+var Posts_mapStateToProps = function mapStateToProps(storeState) {
   return {
-    currentData: state.listData.items //Receive redux
+    currentData: storeState.listData.items //Receive redux
 
   };
 }; // Bind the introduced Actions
 
 
-var Posts_mapDispatchToProps = function mapDispatchToProps(dispatch) {
+var Posts_mapDispatchToProps = function mapDispatchToProps(storeDispatch) {
   return {
-    contentInformation: dispatch //Throw redux
+    contentInformation: storeDispatch //Throw redux
 
   };
 }; // The most important step is to bind the required Reducer and Actions to the current page 
@@ -43341,10 +43422,13 @@ var Posts_mapDispatchToProps = function mapDispatchToProps(dispatch) {
  //get project config
 
 
-var demoListDetailActions_fetchDemoListDetail = function fetchDemoListDetail(id) {
+
+var demoListDetailActions_actionCreators = function actionCreators(id) {
+  // The function defined by async will return the value of a `Promise()` object resolve by default, 
+  // so the `then()` can be used directly, and the returned value is the params of the `then()`
   return /*#__PURE__*/function () {
-    var _ref = asyncToGenerator_default()( /*#__PURE__*/regenerator_default.a.mark(function _callee(dispatch) {
-      var res;
+    var _ref = asyncToGenerator_default()( /*#__PURE__*/regenerator_default.a.mark(function _callee(storeDispatch) {
+      var res, action;
       return regenerator_default.a.wrap(function _callee$(_context) {
         while (1) {
           switch (_context.prev = _context.next) {
@@ -43354,14 +43438,14 @@ var demoListDetailActions_fetchDemoListDetail = function fetchDemoListDetail(id)
 
             case 2:
               res = _context.sent;
-              //The Redux store has a method called dispatch.
-              //@https://redux.js.org/tutorials/fundamentals/part-2-concepts-data-flow
-              dispatch({
+              //The Redux store has a method called `store.dispatch()`.
+              action = {
                 type: 'RECEIVE_DEMO_LISTDETAIL',
                 payload: res.data
-              });
+              };
+              storeDispatch(action);
 
-            case 4:
+            case 5:
             case "end":
               return _context.stop();
           }
@@ -43374,6 +43458,8 @@ var demoListDetailActions_fetchDemoListDetail = function fetchDemoListDetail(id)
     };
   }();
 };
+
+/* harmony default export */ var demoListDetailActions = (demoListDetailActions_actionCreators);
 // CONCATENATED MODULE: ./src/client/views/_pages/Posts/PostDetail.js
 
 
@@ -43409,13 +43495,72 @@ var PostDetail_PostDetail = /*#__PURE__*/function (_Component) {
   //@link to: `src/server/app.js`
 
   /*
-  When requesting from the server, the program will look for the react component with 
-  the `appSyncRequestFetching` function (this function is named by the developer) to complete the 
-  initial update and rendering of the data(SSR).
+   * When requesting from the server, the program will look for the react component with 
+   * the `appSyncRequestFetching` function (this function is named by the developer) to complete the 
+   * initial update and rendering of the data(SSR).
+   
   	if ( typeof route.component.appSyncRequestFetching !== typeof undefined ) {
-  	console.log( 'route.component.appSyncRequestFetching: ' );
-  	console.log( route.component.appSyncRequestFetching );	
-  }	
+  		//...
+  	}	
+  
+  */
+
+  /*
+  Dispatch an async function. The `redux-thunk` middleware handles running this function.
+  Implementation principle:
+  (put the following code in the app.get('*', (req, res) => {...} code snippet in `src/server/app.js`):
+  
+  -------------------
+  	store.dispatch(async function(dispatch) {
+  
+  	const currentID = req.path.split( '/' ).pop();
+  	if ( req.path.indexOf( '/posts/' ) >= 0 ) {
+  		
+  		// Wait for all the `httpRequest` functions, if they are resolved, run 'store.dispatch()'
+  		const httpRequest = () => {
+  			return new Promise( (resolve,reject) => {
+  				axios({
+  					timeout: 15000,
+  					method: 'get',
+  					url: `https://restcountries.eu/rest/v2/name/${currentID}`,
+  					responseType: 'json'
+  				}).then(function (response) {
+  					resolve( response );
+  				})
+  				.catch(function (error) {
+  					console.log( error );
+  				});
+  			});
+  		};
+  
+  		const getApiData = await httpRequest();
+  		const action = {
+  			type: 'RECEIVE_DEMO_LISTDETAIL',
+  			payload: getApiData.data
+  		}
+  		dispatch( action );	
+  		
+  	}
+  
+  
+  	// Send the rendered html to browser.
+  	const indexFile = path.join(__dirname,'../../public/index.html');
+  	fs.readFile(indexFile, 'utf8', (err, data) => {
+  		if (err) {
+  			console.error('Something went wrong:', err);
+  			return res.status(500).send('Oops, better luck next time!');
+  		} 
+  			//
+  		const context = {};
+  		const content = render(req.path, store, context, data);
+  			if (context.notFound) {
+  			res.status(404);
+  		}
+  			res.send(content);
+  	});
+  	});
+  
+  
   */
 
 
@@ -43435,7 +43580,7 @@ var PostDetail_PostDetail = /*#__PURE__*/function (_Component) {
       console.log(this.props);
       var contentInformation = this.props.contentInformation; // Request data
 
-      contentInformation(demoListDetailActions_fetchDemoListDetail(this.props.match.params.post_id));
+      contentInformation(demoListDetailActions(this.props.match.params.post_id));
     }
   }, {
     key: "render",
@@ -43496,11 +43641,13 @@ var PostDetail_PostDetail = /*#__PURE__*/function (_Component) {
     }
   }], [{
     key: "appSyncRequestFetching",
-    value: function appSyncRequestFetching(_ref) {
-      var dispatch = _ref.dispatch,
-          path = _ref.path;
-      var currentID = path.split('/').pop();
-      return [dispatch(demoListDetailActions_fetchDemoListDetail(currentID))];
+    value: function appSyncRequestFetching(storeAPI) {
+      var AppDispatch = storeAPI.dispatch;
+      var AppPath = storeAPI.path; //
+
+      var currentID = AppPath.split('/').pop();
+      var data = demoListDetailActions(currentID);
+      return [AppDispatch(data)];
     }
   }]);
 
@@ -43509,17 +43656,17 @@ var PostDetail_PostDetail = /*#__PURE__*/function (_Component) {
 // here (for details of the data structure: initState)
 
 
-var PostDetail_mapStateToProps = function mapStateToProps(state) {
+var PostDetail_mapStateToProps = function mapStateToProps(storeState) {
   return {
-    currentData: state.listDetailData.detail //Receive redux
+    currentData: storeState.listDetailData.detail //Receive redux
 
   };
 }; // Bind the introduced Actions
 
 
-var PostDetail_mapDispatchToProps = function mapDispatchToProps(dispatch) {
+var PostDetail_mapDispatchToProps = function mapDispatchToProps(storeDispatch) {
   return {
-    contentInformation: dispatch //Throw redux
+    contentInformation: storeDispatch //Throw redux
 
   };
 }; // The most important step is to bind the required Reducer and Actions to the current page 
@@ -43531,7 +43678,7 @@ var PostDetail_mapDispatchToProps = function mapDispatchToProps(dispatch) {
 var assertThisInitialized = __webpack_require__(13);
 var assertThisInitialized_default = /*#__PURE__*/__webpack_require__.n(assertThisInitialized);
 
-// CONCATENATED MODULE: ./src/client/views/_pages/Todos/LoginPage.js
+// CONCATENATED MODULE: ./src/client/views/_pages/Member/LoginPage.js
 
 
 
@@ -43546,12 +43693,14 @@ function LoginPage_isNativeReflectConstruct() { if (typeof Reflect === "undefine
 
 
 
+ //get project config
+
+
 
 var LoginPage_Welcome = function Welcome(_ref) {
-  var user = _ref.user,
-      onSignOut = _ref.onSignOut;
+  var onSignOut = _ref.onSignOut;
   // This is a dumb "stateless" component
-  return /*#__PURE__*/react_default.a.createElement("div", null, "Welcome ", /*#__PURE__*/react_default.a.createElement("strong", null, user.username), "!", /*#__PURE__*/react_default.a.createElement("a", {
+  return /*#__PURE__*/react_default.a.createElement("div", null, "Welcome to this page! | ", /*#__PURE__*/react_default.a.createElement("a", {
     href: "javascript:;",
     onClick: onSignOut
   }, "Sign out"));
@@ -43569,11 +43718,15 @@ var LoginPage_LoginPage = /*#__PURE__*/function (_Component) {
 
     _this = _super.call(this);
     _this.state = {
+      loginOk: null,
       user: null,
       username: '',
       password: '',
       error: ''
-    };
+    }; //Refs are commonly assigned to an instance property when a component 
+    //is constructed so they can be referenced throughout the component.
+
+    _this.wrapperRef = /*#__PURE__*/react_default.a.createRef();
     _this.handlePassChange = _this.handlePassChange.bind(assertThisInitialized_default()(_this));
     _this.handleUserChange = _this.handleUserChange.bind(assertThisInitialized_default()(_this));
     _this.handleSubmit = _this.handleSubmit.bind(assertThisInitialized_default()(_this));
@@ -43600,22 +43753,31 @@ var LoginPage_LoginPage = /*#__PURE__*/function (_Component) {
     key: "handleSubmit",
     value: function handleSubmit(evt) {
       evt.preventDefault();
+      var self = this;
+      var root = react_dom_default.a.findDOMNode(this.wrapperRef.current);
 
-      if (!this.state.username) {
-        return this.setState({
+      var $selectWrapper = shortcut(root);
+
+      if (!self.state.username) {
+        return self.setState({
           error: 'Username is required'
         });
       }
 
-      if (!this.state.password) {
-        return this.setState({
+      if (!self.state.password) {
+        return self.setState({
           error: 'Password is required'
         });
-      }
+      } //control status
+
+
+      $selectWrapper.find('input').prop('disabled', true); //
 
       var formData = new FormData();
       var defaultPostData = {
-        action: 'login_check'
+        action: 'login_check',
+        user_name: self.state.username,
+        user_password: self.state.password
       };
 
       for (var k in defaultPostData) {
@@ -43632,42 +43794,54 @@ var LoginPage_LoginPage = /*#__PURE__*/function (_Component) {
       */
 
 
-      axios_default()({
-        timeout: 15000,
-        method: 'get',
-        url: 'https://api.github.com/users',
-        data: formData,
-        responseType: 'json'
-      }).then(function (response) {
+      axios_default.a.post(websiteConfig["API"].LOGIN_REQUEST, formData).then(function (response) {
         var jsonData = response.data;
-        console.log(jsonData);
-      })["catch"](function (error) {
-        if (error.response) {
-          // The request was made and the server responded with a status code
-          // that falls out of the range of 2xx
-          var status = error.response.status;
-          console.log(status);
-        } else if (error.request) {
-          // The request was made but no response was received
-          // `error.request` is an instance of XMLHttpRequest in the browser and an instance of
-          // http.ClientRequest in node.js
-          console.log(error.request); //
-        } else {
-          // If there was a problem, we need to
-          // dispatch the error condition
-          console.log(error.message);
-        }
-      }); // login successfully
-      // This is where you would call Firebase, an API etc...
-      // calling setState will re-render the entire app (efficiently!)
+        /*-----------------------------
+         Login successful
+        -------------------------------*/
+        // This is where you would call Firebase, an API etc...
 
-      this.setState({
-        user: {
-          username: this.state.username
+        console.log(jsonData);
+
+        if (jsonData.code === 200) {
+          //control status
+          $selectWrapper.find('input').prop('disabled', false); // Save info
+
+          localStorage.setItem('user', JSON.stringify({
+            token: jsonData.data.token
+          })); // Fire state
+
+          self.setState({
+            loginOk: 1,
+            user: {
+              username: self.state.username
+            }
+          });
+          return self.setState({
+            error: ''
+          }); // Fire `store.dispatch()`
+          //dispatch(...)
         }
-      });
-      return this.setState({
-        error: ''
+        /*-----------------------------
+         Login failed
+        -------------------------------*/
+
+
+        if (jsonData.code === 401 || jsonData.code === 419) {
+          //control status
+          $selectWrapper.find('input').prop('disabled', false); // Clear info
+
+          localStorage.setItem('user', JSON.stringify({})); // Fire state
+
+          return self.setState({
+            error: 'ERROR: ' + jsonData.code + ': ' + jsonData.error + '!'
+          }); // Fire `store.dispatch()`
+          //dispatch(...)
+        }
+      })["catch"](function (error) {
+        return self.setState({
+          error: 'ERROR: ' + error + '!'
+        });
       });
     }
   }, {
@@ -43700,14 +43874,24 @@ var LoginPage_LoginPage = /*#__PURE__*/function (_Component) {
   }, {
     key: "signOut",
     value: function signOut() {
-      // clear out user from state
+      // Clear localStorage
+      localStorage.setItem('user', JSON.stringify({}));
+      localStorage.clear(); // clear out user from state
+
       this.setState({
+        loginOk: null,
         user: null
       });
     }
   }, {
     key: "checkLogin",
-    value: function checkLogin() {}
+    value: function checkLogin() {
+      if (localStorage.getItem('user')) {
+        this.setState({
+          loginOk: 1
+        });
+      }
+    }
   }, {
     key: "componentDidMount",
     value: function componentDidMount() {
@@ -43718,10 +43902,11 @@ var LoginPage_LoginPage = /*#__PURE__*/function (_Component) {
     value: function render() {
       // NOTE: I use data-attributes for easier E2E testing
       // but you don't need to target those (any css-selector will work)
-      return /*#__PURE__*/react_default.a.createElement(react_default.a.Fragment, null, this.state.user ? /*#__PURE__*/react_default.a.createElement(LoginPage_Welcome, {
-        user: this.state.user,
+      return /*#__PURE__*/react_default.a.createElement(react_default.a.Fragment, null, this.state.loginOk ? /*#__PURE__*/react_default.a.createElement(LoginPage_Welcome, {
         onSignOut: this.signOut.bind(this)
-      }) : /*#__PURE__*/react_default.a.createElement("div", null, /*#__PURE__*/react_default.a.createElement("form", {
+      }) : /*#__PURE__*/react_default.a.createElement("div", {
+        ref: this.wrapperRef
+      }, /*#__PURE__*/react_default.a.createElement("p", null, "Test Account: ", /*#__PURE__*/react_default.a.createElement("code", null, "admin"), " Password: ", /*#__PURE__*/react_default.a.createElement("code", null, "admin")), /*#__PURE__*/react_default.a.createElement("form", {
         onSubmit: this.handleSubmit.bind(this)
       }, /*#__PURE__*/react_default.a.createElement("div", {
         style: {
@@ -43795,30 +43980,30 @@ var LoginPage_LoginPage = /*#__PURE__*/function (_Component) {
   return LoginPage;
 }(react["Component"]);
 
-/* harmony default export */ var Todos_LoginPage = (LoginPage_LoginPage);
-// CONCATENATED MODULE: ./src/client/views/_pages/Todos/index.js
+/* harmony default export */ var Member_LoginPage = (LoginPage_LoginPage);
+// CONCATENATED MODULE: ./src/client/views/_pages/Member/index.js
 
 
 
 
 
 
-function Todos_createSuper(Derived) { var hasNativeReflectConstruct = Todos_isNativeReflectConstruct(); return function _createSuperInternal() { var Super = getPrototypeOf_default()(Derived), result; if (hasNativeReflectConstruct) { var NewTarget = getPrototypeOf_default()(this).constructor; result = Reflect.construct(Super, arguments, NewTarget); } else { result = Super.apply(this, arguments); } return possibleConstructorReturn_default()(this, result); }; }
+function Member_createSuper(Derived) { var hasNativeReflectConstruct = Member_isNativeReflectConstruct(); return function _createSuperInternal() { var Super = getPrototypeOf_default()(Derived), result; if (hasNativeReflectConstruct) { var NewTarget = getPrototypeOf_default()(this).constructor; result = Reflect.construct(Super, arguments, NewTarget); } else { result = Super.apply(this, arguments); } return possibleConstructorReturn_default()(this, result); }; }
 
-function Todos_isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Reflect.construct) return false; if (Reflect.construct.sham) return false; if (typeof Proxy === "function") return true; try { Boolean.prototype.valueOf.call(Reflect.construct(Boolean, [], function () {})); return true; } catch (e) { return false; } }
-
-
+function Member_isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Reflect.construct) return false; if (Reflect.construct.sham) return false; if (typeof Proxy === "function") return true; try { Boolean.prototype.valueOf.call(Reflect.construct(Boolean, [], function () {})); return true; } catch (e) { return false; } }
 
 
 
 
-var Todos_Todos = /*#__PURE__*/function (_Component) {
-  inherits_default()(Todos, _Component);
 
-  var _super = Todos_createSuper(Todos);
 
-  function Todos(props) {
-    classCallCheck_default()(this, Todos);
+var Member_Member = /*#__PURE__*/function (_Component) {
+  inherits_default()(Member, _Component);
+
+  var _super = Member_createSuper(Member);
+
+  function Member(props) {
+    classCallCheck_default()(this, Member);
 
     //You are extending the React.Component class, and per the ES2015 spec, 
     //a child class constructor cannot make use of this until super() has 
@@ -43835,7 +44020,7 @@ var Todos_Todos = /*#__PURE__*/function (_Component) {
    */
 
 
-  createClass_default()(Todos, [{
+  createClass_default()(Member, [{
     key: "componentDidMount",
     value: function componentDidMount() {//do shmething
     }
@@ -43852,14 +44037,14 @@ var Todos_Todos = /*#__PURE__*/function (_Component) {
         className: "row"
       }, /*#__PURE__*/react_default.a.createElement("div", {
         className: "col-12"
-      }, /*#__PURE__*/react_default.a.createElement(Todos_LoginPage, null)))))), /*#__PURE__*/react_default.a.createElement(Footer_Footer, null));
+      }, /*#__PURE__*/react_default.a.createElement(Member_LoginPage, null)))))), /*#__PURE__*/react_default.a.createElement(Footer_Footer, null));
     }
   }]);
 
-  return Todos;
+  return Member;
 }(react["Component"]);
 
-/* harmony default export */ var _pages_Todos = (Todos_Todos);
+/* harmony default export */ var _pages_Member = (Member_Member);
 // CONCATENATED MODULE: ./src/client/views/_pages/404/index.js
 
 
@@ -72370,7 +72555,15 @@ function ComponentsDemo_HookContent() {
   }), " Scroll Reveal"), "\xA0\xA0")))), /*#__PURE__*/react_default.a.createElement("hr", null), /*#__PURE__*/react_default.a.createElement(react_router_Switch, null, /*#__PURE__*/react_default.a.createElement(react_router_Route, {
     exact: true,
     path: path
-  }, /*#__PURE__*/react_default.a.createElement("p", null, "None.")), /*#__PURE__*/react_default.a.createElement(react_router_Route, {
+  }, /*#__PURE__*/react_default.a.createElement("section", {
+    className: "uix-spacing--s uix-spacing--no-bottom"
+  }, /*#__PURE__*/react_default.a.createElement("div", {
+    className: "container"
+  }, /*#__PURE__*/react_default.a.createElement("div", {
+    className: "row"
+  }, /*#__PURE__*/react_default.a.createElement("div", {
+    className: "col-12"
+  }, /*#__PURE__*/react_default.a.createElement("p", null, "None.")))))), /*#__PURE__*/react_default.a.createElement(react_router_Route, {
     path: "".concat(path, "/buttons")
   }, /*#__PURE__*/react_default.a.createElement(ButtonsDemo, null)), /*#__PURE__*/react_default.a.createElement(react_router_Route, {
     path: "".concat(path, "/tabs")
@@ -72433,8 +72626,151 @@ var ComponentsDemo_ComponentsDemo = /*#__PURE__*/function (_Component) {
 }(react["Component"]);
 
 /* harmony default export */ var _pages_ComponentsDemo = (ComponentsDemo_ComponentsDemo);
+// CONCATENATED MODULE: ./src/client/views/_pages/Admin/Authorized.js
+
+
+
+
+
+
+function Authorized_createSuper(Derived) { var hasNativeReflectConstruct = Authorized_isNativeReflectConstruct(); return function _createSuperInternal() { var Super = getPrototypeOf_default()(Derived), result; if (hasNativeReflectConstruct) { var NewTarget = getPrototypeOf_default()(this).constructor; result = Reflect.construct(Super, arguments, NewTarget); } else { result = Super.apply(this, arguments); } return possibleConstructorReturn_default()(this, result); }; }
+
+function Authorized_isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Reflect.construct) return false; if (Reflect.construct.sham) return false; if (typeof Proxy === "function") return true; try { Boolean.prototype.valueOf.call(Reflect.construct(Boolean, [], function () {})); return true; } catch (e) { return false; } }
+
+
+
+
+
+var Authorized_Authorized = /*#__PURE__*/function (_Component) {
+  inherits_default()(Authorized, _Component);
+
+  var _super = Authorized_createSuper(Authorized);
+
+  function Authorized() {
+    classCallCheck_default()(this, Authorized);
+
+    return _super.apply(this, arguments);
+  }
+
+  createClass_default()(Authorized, [{
+    key: "render",
+    value: function render() {
+      return /*#__PURE__*/react_default.a.createElement(react_default.a.Fragment, null, /*#__PURE__*/react_default.a.createElement("main", {
+        id: "uix-maincontent"
+      }, /*#__PURE__*/react_default.a.createElement("section", {
+        className: "uix-spacing--s"
+      }, /*#__PURE__*/react_default.a.createElement("div", {
+        className: "container"
+      }, /*#__PURE__*/react_default.a.createElement("div", {
+        className: "row"
+      }, /*#__PURE__*/react_default.a.createElement("div", {
+        className: "col-12"
+      }, /*#__PURE__*/react_default.a.createElement("p", null, "You need to be authorized after successful login to see this information.")))))), /*#__PURE__*/react_default.a.createElement(Footer_Footer, null));
+    }
+  }]);
+
+  return Authorized;
+}(react["Component"]);
+
+/* harmony default export */ var Admin_Authorized = (Authorized_Authorized);
+// CONCATENATED MODULE: ./src/client/router/PrivateRoute.js
+
+
+
+ // The goal is to prevent the user to access any pages if is is not Logged In.
+// Example: <PrivateRoute exact path="/admin" component={Member} />
+
+var PrivateRoute_PrivateRoute = function PrivateRoute(_ref) {
+  var Component = _ref.component,
+      attributes = objectWithoutProperties_default()(_ref, ["component"]);
+
+  return /*#__PURE__*/react_default.a.createElement(react_router_Route, extends_default()({}, attributes, {
+    render: function render(props) {
+      if (typeof localStorage !== "undefined") {
+        if (localStorage.getItem('user')) {
+          return /*#__PURE__*/react_default.a.createElement(Component, props);
+        } else {
+          return /*#__PURE__*/react_default.a.createElement(Redirect, {
+            to: {
+              pathname: '/member',
+              state: {
+                from: props.location
+              }
+            }
+          });
+        }
+      }
+    }
+  }));
+};
+// CONCATENATED MODULE: ./src/client/views/_pages/Admin/index.js
+
+
+
+
+
+
+function Admin_createSuper(Derived) { var hasNativeReflectConstruct = Admin_isNativeReflectConstruct(); return function _createSuperInternal() { var Super = getPrototypeOf_default()(Derived), result; if (hasNativeReflectConstruct) { var NewTarget = getPrototypeOf_default()(this).constructor; result = Reflect.construct(Super, arguments, NewTarget); } else { result = Super.apply(this, arguments); } return possibleConstructorReturn_default()(this, result); }; }
+
+function Admin_isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Reflect.construct) return false; if (Reflect.construct.sham) return false; if (typeof Proxy === "function") return true; try { Boolean.prototype.valueOf.call(Reflect.construct(Boolean, [], function () {})); return true; } catch (e) { return false; } }
+
+
+
+
+
+
+ //Might have mismatching versions of React and the renderer (such as React DOM)
+
+function Admin_HookContent() {
+  // The `path` lets us build <Route> paths that are
+  // relative to the parent route, while the `url` lets
+  // us build relative links.
+  var _useRouteMatch = useRouteMatch(),
+      path = _useRouteMatch.path,
+      url = _useRouteMatch.url;
+
+  return /*#__PURE__*/react_default.a.createElement(react_default.a.Fragment, null, /*#__PURE__*/react_default.a.createElement("h3", null, "Admin Page (Authorization required)"), /*#__PURE__*/react_default.a.createElement("hr", null), /*#__PURE__*/react_default.a.createElement(react_router_Switch, null, /*#__PURE__*/react_default.a.createElement(PrivateRoute_PrivateRoute, {
+    exact: true,
+    path: "/admin",
+    component: Admin_Authorized
+  })));
+}
+
+var Admin_Admin = /*#__PURE__*/function (_Component) {
+  inherits_default()(Admin, _Component);
+
+  var _super = Admin_createSuper(Admin);
+
+  function Admin() {
+    classCallCheck_default()(this, Admin);
+
+    return _super.apply(this, arguments);
+  }
+
+  createClass_default()(Admin, [{
+    key: "render",
+    value: function render() {
+      return /*#__PURE__*/react_default.a.createElement(react_default.a.Fragment, null, /*#__PURE__*/react_default.a.createElement("main", {
+        id: "uix-maincontent"
+      }, /*#__PURE__*/react_default.a.createElement("section", {
+        className: "uix-spacing--s"
+      }, /*#__PURE__*/react_default.a.createElement("div", {
+        className: "container"
+      }, /*#__PURE__*/react_default.a.createElement("div", {
+        className: "row"
+      }, /*#__PURE__*/react_default.a.createElement("div", {
+        className: "col-12"
+      }, /*#__PURE__*/react_default.a.createElement(Admin_HookContent, null)))))), /*#__PURE__*/react_default.a.createElement(Footer_Footer, null));
+    }
+  }]);
+
+  return Admin;
+}(react["Component"]);
+
+/* harmony default export */ var _pages_Admin = (Admin_Admin);
 // CONCATENATED MODULE: ./src/client/router/RoutesConfig.js
  //
+
 
 
 
@@ -72478,20 +72814,26 @@ var routesConfig = [{
     pageTitle: 'Posts',
     exact: true
   }, {
-    path: "/todos",
-    component: _pages_Todos,
-    pageTitle: 'Todos'
+    path: "/member",
+    component: _pages_Member,
+    pageTitle: 'Member'
   }, {
     path: "/posts/:post_id",
     component: Posts_PostDetail,
     pageTitle: ''
+  }, {
+    path: "/admin",
+    component: _pages_Admin,
+    pageTitle: 'Admin'
   },
   /* In order to make nested routes valid, do not add the exact attribute here */
   {
     path: "/nested-routes",
     component: _pages_NestedRoutes,
     pageTitle: 'Nested Routes'
-  }, {
+  },
+  /* 404 */
+  {
     path: "*",
     component: _404,
     pageTitle: '404 Error',
@@ -72604,7 +72946,7 @@ var demoListDetailReducer_initialState = {
 /* harmony default export */ var reducers = (combineReducers({
   listData: demoListReducer,
   listDetailData: demoListDetailReducer
-}));
+})); //@link to: `src/client/client.js`, src/store/createStore.js`
 // CONCATENATED MODULE: ./src/client/client.js
 
 
@@ -72618,7 +72960,14 @@ var demoListDetailReducer_initialState = {
 
 var client_state = window.__PRELOADED_STATE__;
 delete window.__PRELOADED_STATE__;
-var client_store = createStore(reducers, client_state, applyMiddleware(redux_thunk_es)); //
+var _initialState = client_state; //JSON
+
+var _reducer = reducers; //Function
+
+var _enhancer = applyMiddleware(redux_thunk_es); //Function
+
+
+var client_store = createStore(_reducer, _initialState, _enhancer); //
 
 react_dom_default.a.hydrate( /*#__PURE__*/react_default.a.createElement(components_Provider, {
   store: client_store

@@ -3,6 +3,11 @@ import thunk from 'redux-thunk';
 import rootReducer from '@uixkit.react/reducers/index.js';
 
 export default () => {
-  const store = createStore(rootReducer, {}, applyMiddleware(thunk));
-  return store;
+	
+	const _initialState = {}; //JSON
+	const _reducer = rootReducer; //Function
+	const _enhancer = applyMiddleware(thunk); //Function
+	const store = createStore(_reducer, _initialState, _enhancer);
+	
+    return store;
 };
