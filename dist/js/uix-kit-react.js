@@ -6,9 +6,9 @@
  * ## Project Name        :  Uix Kit React
  * ## Project Description :  A free web kits with React for fast web design and development via SSR.
  * ## Project URL         :  https://uiux.cc
- * ## Version             :  0.0.40
+ * ## Version             :  0.0.41
  * ## Based on            :  Uix Kit React (https://github.com/xizon/uix-kit-react#readme)
- * ## Last Update         :  June 10, 2021
+ * ## Last Update         :  June 11, 2021
  * ## Created by          :  UIUX Lab (https://uiux.cc) (uiuxlab@gmail.com)
  * ## Released under the MIT license.
  * 	
@@ -8520,21 +8520,9 @@ module.exports["default"] = module.exports, module.exports.__esModule = true;
 /* 11 */
 /***/ (function(module, exports) {
 
-/* API for Test  */
-var configTest = {
-  "rootDirectory": "",
-  "API": {
-    /*------ Posts -------*/
-    "RECEIVE_DEMO_LIST": "../../assets/json/Posts.json",
-    "RECEIVE_DEMO_LISTDETAIL": "../../assets/json/PostDetail.json",
-
-    /*------ Login -------*/
-    "LOGIN_REQUEST": "http://localhost:8888/uix-kit-react/public/server/sessions-create.php",
-    "LOGIN_AUTHENTICATE": "http://localhost:8888/uix-kit-react/public/server/authenticate.php"
-  }
-};
 var config = {
-  //If the file is in the root directory, you can leave it empty. If in another directory, you can write: "/blog". (but no trailing slash)
+  // If the file is in the root directory, you can leave it empty. If in another directory, 
+  // you can write: "/blog". (but no trailing slash)
   "rootDirectory": "",
   "API": {
     /*------ Posts -------*/
@@ -8542,11 +8530,33 @@ var config = {
     "RECEIVE_DEMO_LIST": "https://restcountries.eu/rest/v2",
     "RECEIVE_DEMO_LISTDETAIL": "https://restcountries.eu/rest/v2/name/{id}",
 
-    /*------ Login -------*/
+    /*------ USER -------*/
     "LOGIN_REQUEST": "https://uiux.cc/server/sessions-create.php",
-    "LOGIN_AUTHENTICATE": "https://uiux.cc/server/authenticate.php"
+    "USER_AUTHENTICATE": "https://uiux.cc/server/authenticate.php",
+    "SIGNUP_REQUEST": ""
   }
 };
+/**
+ * API for Test
+ */
+
+var configTest = {
+  // If the file is in the root directory, you can leave it empty. If in another directory, 
+  // you can write: "/blog". (but no trailing slash)
+  "rootDirectory": "",
+  "API": {
+    /*------ Posts -------*/
+    //Corresponding to folder `./src/client/actions/*`
+    "RECEIVE_DEMO_LIST": "../../assets/json/Posts.json",
+    "RECEIVE_DEMO_LISTDETAIL": "../../assets/json/PostDetail.json",
+
+    /*------ USER -------*/
+    "LOGIN_REQUEST": "http://localhost:8888/uix-kit-react/public/server/sessions-create.php",
+    "USER_AUTHENTICATE": "http://localhost:8888/uix-kit-react/public/server/authenticate.php",
+    "SIGNUP_REQUEST": ""
+  }
+}; //
+
 module.exports = config;
 
 /***/ }),
@@ -43678,6 +43688,152 @@ var PostDetail_mapDispatchToProps = function mapDispatchToProps(storeDispatch) {
 var assertThisInitialized = __webpack_require__(13);
 var assertThisInitialized_default = /*#__PURE__*/__webpack_require__.n(assertThisInitialized);
 
+// CONCATENATED MODULE: ./src/client/services/auth-service.js
+
+
+ //get project config
+
+
+
+var auth_service_AuthService = /*#__PURE__*/function () {
+  function AuthService() {
+    classCallCheck_default()(this, AuthService);
+  }
+
+  createClass_default()(AuthService, [{
+    key: "login",
+    value:
+    /**
+     * Login
+     */
+    function login(formData) {
+      return axios_default.a.post(websiteConfig["API"].LOGIN_REQUEST, formData).then(function (response) {
+        var jsonData = response.data; // Save user from local storage
+
+        if (jsonData.code === 200) {
+          localStorage.setItem('user', JSON.stringify({
+            token: jsonData.data.token
+          }));
+        } // Dispatch auth actions (login) to Redux Thunk Middleware 
+        // which uses `AuthService` to call API.
+        //-----------
+        //dispatch({type: 'TYPENAME', payload: jsonData});
+        //Callback Data must be returned, otherwise res cannot be accepted after 
+        //calling the `login(formData).then((res) =>{})` method of this function
+        //-----------
+
+
+        return jsonData;
+      })["catch"](function (error) {
+        if (error.response) {
+          // The request was made and the server responded with a status code
+          // that falls out of the range of 2xx
+          reject(error.response.status);
+        } else if (error.request) {
+          // The request was made but no response was received
+          // `error.request` is an instance of XMLHttpRequest in the browser and an instance of
+          // http.ClientRequest in node.js
+          reject(error.request);
+        } else {
+          // If there was a problem, we need to
+          // dispatch the error condition
+          reject(error.message);
+        }
+      });
+    }
+    /*---
+    !!! Asynchronous Version:
+    
+    async login(formData) {
+    		const httpRequest = () => {
+    		return new Promise( (resolve,reject) => {
+    			
+    			axios.post(API.LOGIN_REQUEST, formData)
+    			.then(function (response) {
+    					const jsonData = response.data;
+    				
+    					// Save user from local storage
+    				if ( jsonData.code === 200 ) {
+    						localStorage.setItem('user',JSON.stringify({
+    						token: jsonData.data.token
+    					}));
+    						
+    				}
+    				
+    				resolve(response);
+    				}).catch(function (error) {
+    				
+    				if (error.response) {
+    					// The request was made and the server responded with a status code
+    					// that falls out of the range of 2xx
+    					reject(error.response.status);
+    					} else if (error.request) {
+    					// The request was made but no response was received
+    					// `error.request` is an instance of XMLHttpRequest in the browser and an instance of
+    					// http.ClientRequest in node.js
+    					reject(error.request);
+    					} else {
+    					// If there was a problem, we need to
+    					// dispatch the error condition
+    					reject(error.message);
+    				}
+    				
+    				
+    				
+    			});
+    	
+    		
+    		});
+    	};
+    
+    	
+    	const getApiData = await httpRequest(); //The value here is passed from resolve()
+    	
+    	
+    	// Dispatch auth actions (login) to Redux Thunk Middleware 
+    	// which uses `AuthService` to call API.
+    	//-----------
+    	//dispatch({type: 'TYPENAME', payload: getApiData.data});
+    		
+    	
+    	//Callback Data must be returned, otherwise res cannot be accepted after 
+    	//calling the `login(formData).then((res) =>{})` method of this function
+    	//-----------
+    	return getApiData.data;
+    	
+    	}
+    
+    
+    ---*/
+
+    /**
+     * Register (!!! This feature has not been implemented for demo. )
+     */
+
+  }, {
+    key: "register",
+    value: function register(username, email, password) {
+      return axios_default.a.post(websiteConfig["API"].SIGNUP_REQUEST, {
+        username: username,
+        email: email,
+        password: password
+      });
+    }
+    /**
+     * Remove user from local storage
+     */
+
+  }, {
+    key: "logout",
+    value: function logout() {
+      localStorage.removeItem('user');
+    }
+  }]);
+
+  return AuthService;
+}();
+
+/* harmony default export */ var auth_service = (new auth_service_AuthService());
 // CONCATENATED MODULE: ./src/client/views/_pages/Member/LoginPage.js
 
 
@@ -43693,30 +43849,23 @@ function LoginPage_isNativeReflectConstruct() { if (typeof Reflect === "undefine
 
 
 
- //get project config
 
-
-
-var LoginPage_Welcome = function Welcome(_ref) {
-  var onSignOut = _ref.onSignOut;
-  // This is a dumb "stateless" component
-  return /*#__PURE__*/react_default.a.createElement("div", null, "Welcome to this page! | ", /*#__PURE__*/react_default.a.createElement("a", {
-    href: "javascript:;",
-    onClick: onSignOut
-  }, "Sign out"));
-};
 
 var LoginPage_LoginPage = /*#__PURE__*/function (_Component) {
   inherits_default()(LoginPage, _Component);
 
   var _super = LoginPage_createSuper(LoginPage);
 
-  function LoginPage() {
+  function LoginPage(props) {
     var _this;
 
     classCallCheck_default()(this, LoginPage);
 
-    _this = _super.call(this);
+    //You are extending the React.Component class, and per the ES2015 spec, 
+    //a child class constructor cannot make use of this until super() has 
+    //been called; also, ES2015 class constructors have to call super() 
+    //if they are subclasses.
+    _this = _super.call(this, props);
     _this.state = {
       loginOk: null,
       user: null,
@@ -43754,7 +43903,7 @@ var LoginPage_LoginPage = /*#__PURE__*/function (_Component) {
     value: function handleSubmit(evt) {
       evt.preventDefault();
       var self = this;
-      var root = react_dom_default.a.findDOMNode(this.wrapperRef.current);
+      var root = react_dom_default.a.findDOMNode(self.wrapperRef.current);
 
       var $selectWrapper = shortcut(root);
 
@@ -43794,22 +43943,17 @@ var LoginPage_LoginPage = /*#__PURE__*/function (_Component) {
       */
 
 
-      axios_default.a.post(websiteConfig["API"].LOGIN_REQUEST, formData).then(function (response) {
-        var jsonData = response.data;
+      auth_service.login(formData).then(function (response) {
+        console.log('Login Info: ', response);
         /*-----------------------------
          Login successful
         -------------------------------*/
         // This is where you would call Firebase, an API etc...
 
-        console.log(jsonData);
-
-        if (jsonData.code === 200) {
+        if (response.code === 200) {
           //control status
-          $selectWrapper.find('input').prop('disabled', false); // Save info
-
-          localStorage.setItem('user', JSON.stringify({
-            token: jsonData.data.token
-          })); // Fire state
+          $selectWrapper.find('input').prop('disabled', false); //update state
+          //-----------
 
           self.setState({
             loginOk: 1,
@@ -43819,29 +43963,23 @@ var LoginPage_LoginPage = /*#__PURE__*/function (_Component) {
           });
           return self.setState({
             error: ''
-          }); // Fire `store.dispatch()`
-          //dispatch(...)
+          });
         }
         /*-----------------------------
          Login failed
         -------------------------------*/
 
 
-        if (jsonData.code === 401 || jsonData.code === 419) {
+        if (response.code === 401 || response.code === 419) {
           //control status
-          $selectWrapper.find('input').prop('disabled', false); // Clear info
-
-          localStorage.setItem('user', JSON.stringify({})); // Fire state
+          //-----------
+          $selectWrapper.find('input').prop('disabled', false); //update state
+          //-----------
 
           return self.setState({
-            error: 'ERROR: ' + jsonData.code + ': ' + jsonData.error + '!'
-          }); // Fire `store.dispatch()`
-          //dispatch(...)
+            error: 'ERROR: ' + response.code + ': ' + response.error + '!'
+          });
         }
-      })["catch"](function (error) {
-        return self.setState({
-          error: 'ERROR: ' + error + '!'
-        });
       });
     }
   }, {
@@ -43874,9 +44012,7 @@ var LoginPage_LoginPage = /*#__PURE__*/function (_Component) {
   }, {
     key: "signOut",
     value: function signOut() {
-      // Clear localStorage
-      localStorage.setItem('user', JSON.stringify({}));
-      localStorage.clear(); // clear out user from state
+      auth_service.logout(); //update state
 
       this.setState({
         loginOk: null,
@@ -43902,9 +44038,10 @@ var LoginPage_LoginPage = /*#__PURE__*/function (_Component) {
     value: function render() {
       // NOTE: I use data-attributes for easier E2E testing
       // but you don't need to target those (any css-selector will work)
-      return /*#__PURE__*/react_default.a.createElement(react_default.a.Fragment, null, this.state.loginOk ? /*#__PURE__*/react_default.a.createElement(LoginPage_Welcome, {
-        onSignOut: this.signOut.bind(this)
-      }) : /*#__PURE__*/react_default.a.createElement("div", {
+      return /*#__PURE__*/react_default.a.createElement(react_default.a.Fragment, null, this.state.loginOk ? /*#__PURE__*/react_default.a.createElement("div", null, "Welcome to this page! | ", /*#__PURE__*/react_default.a.createElement("a", {
+        href: "javascript:;",
+        onClick: this.signOut.bind(this)
+      }, "Sign out")) : /*#__PURE__*/react_default.a.createElement("div", {
         ref: this.wrapperRef
       }, /*#__PURE__*/react_default.a.createElement("p", null, "Test Account: ", /*#__PURE__*/react_default.a.createElement("code", null, "admin"), " Password: ", /*#__PURE__*/react_default.a.createElement("code", null, "admin")), /*#__PURE__*/react_default.a.createElement("form", {
         onSubmit: this.handleSubmit.bind(this)
@@ -44650,9 +44787,9 @@ if (false) {}
   }, "Secondary Button"), /*#__PURE__*/react_default.a.createElement("br", null), /*#__PURE__*/react_default.a.createElement("div", {
     className: "uix-t-c",
     style: {
-      background: '#333',
-      padding: '1.5rem 0 0',
-      marginTop: '1rem'
+      background: "#333",
+      padding: "1.5rem 0 0",
+      marginTop: "1rem"
     }
   }, /*#__PURE__*/react_default.a.createElement(Buttons_Button, {
     href: "#",
@@ -45239,32 +45376,32 @@ if (false) {}
     key: "tab-panel-1",
     tabpanelClass: "uix-outer-shadow--regular",
     style: {
-      marginTop: '50px'
+      marginTop: "50px"
     },
     defaultActive: true
   }, /*#__PURE__*/react_default.a.createElement("p", null, "Hi, this is the first tab.")), /*#__PURE__*/react_default.a.createElement(TabPanel_TabPanel, {
     key: "tab-panel-2",
     tabpanelClass: "uix-outer-shadow--regular",
     style: {
-      marginTop: '50px'
+      marginTop: "50px"
     }
   }, /*#__PURE__*/react_default.a.createElement("p", null, "This is the 2nd tab."), /*#__PURE__*/react_default.a.createElement("p", null, "This is the 2nd tab."), /*#__PURE__*/react_default.a.createElement("p", null, "This is the 2nd tab.")), /*#__PURE__*/react_default.a.createElement(TabPanel_TabPanel, {
     key: "tab-panel-3",
     tabpanelClass: "uix-outer-shadow--regular",
     style: {
-      marginTop: '50px'
+      marginTop: "50px"
     }
   }, /*#__PURE__*/react_default.a.createElement("p", null, "And this is the 3rd tab.")), /*#__PURE__*/react_default.a.createElement(TabPanel_TabPanel, {
     key: "tab-panel-3",
     tabpanelClass: "uix-outer-shadow--regular",
     style: {
-      marginTop: '50px'
+      marginTop: "50px"
     }
   }, /*#__PURE__*/react_default.a.createElement("p", null, "And this is the 4th tab.")), /*#__PURE__*/react_default.a.createElement(TabPanel_TabPanel, {
     key: "tab-panel-3",
     tabpanelClass: "uix-outer-shadow--regular",
     style: {
-      marginTop: '50px'
+      marginTop: "50px"
     }
   }, /*#__PURE__*/react_default.a.createElement("p", null, "And this is the 5th tab."))))))), /*#__PURE__*/react_default.a.createElement("section", null, /*#__PURE__*/react_default.a.createElement("div", {
     className: "container"
@@ -45299,26 +45436,26 @@ if (false) {}
     key: "tab-panel-1",
     tabpanelClass: "uix-outer-shadow--regular",
     style: {
-      marginTop: '50px'
+      marginTop: "50px"
     },
     defaultActive: true
   }, /*#__PURE__*/react_default.a.createElement("p", null, "Hi, this is the first tab.")), /*#__PURE__*/react_default.a.createElement(TabPanel_TabPanel, {
     key: "tab-panel-2",
     tabpanelClass: "uix-outer-shadow--regular",
     style: {
-      marginTop: '50px'
+      marginTop: "50px"
     }
   }, /*#__PURE__*/react_default.a.createElement("p", null, "This is the 2nd tab."), /*#__PURE__*/react_default.a.createElement("p", null, "This is the 2nd tab."), /*#__PURE__*/react_default.a.createElement("p", null, "This is the 2nd tab.")), /*#__PURE__*/react_default.a.createElement(TabPanel_TabPanel, {
     key: "tab-panel-3",
     tabpanelClass: "uix-outer-shadow--regular",
     style: {
-      marginTop: '50px'
+      marginTop: "50px"
     }
   }, /*#__PURE__*/react_default.a.createElement("p", null, "And this is the 3rd tab.")), /*#__PURE__*/react_default.a.createElement(TabPanel_TabPanel, {
     key: "tab-panel-3",
     tabpanelClass: "uix-outer-shadow--regular",
     style: {
-      marginTop: '50px'
+      marginTop: "50px"
     }
   }, /*#__PURE__*/react_default.a.createElement("p", null, "And this is the 4th tab."))))))));
 });
@@ -72393,7 +72530,7 @@ if (false) {}
     className: "uix-spacing--s uix-height--50 uix-el--transparent",
     config: "{\"viewport\":\"100%\",\"from\":{\"opacity\":0,\"x\":100},\"to\":{\"opacity\":1,\"x\":0},\"ease\":\"Power2.easeOut\",\"duration\":0.8,\"delay\":0,\"infinite\":false}",
     style: {
-      background: '#e6e6e6'
+      background: "#e6e6e6"
     }
   }, /*#__PURE__*/react_default.a.createElement("div", {
     className: "uix-v-align--relative uix-t-c"
@@ -72401,7 +72538,7 @@ if (false) {}
     className: "uix-spacing--s uix-height--50 uix-el--transparent",
     config: "{\"viewport\":\"100%\",\"from\":{\"opacity\":0,\"scale\":0.5,\"transform\":\"translateX(50px) rotate(30deg)\"},\"to\":{\"opacity\":1,\"scale\":1,\"transform\":\"translateX(0) rotate(0deg)\"},\"ease\":\"Power2.easeOut\",\"duration\":0.8,\"delay\":0.5,\"infinite\":false}",
     style: {
-      background: '#ACABA3'
+      background: "#ACABA3"
     }
   }, /*#__PURE__*/react_default.a.createElement("div", {
     className: "uix-v-align--relative uix-t-c"
@@ -72409,7 +72546,7 @@ if (false) {}
     className: "uix-spacing--s uix-height--50 uix-el--transparent",
     config: "{\"viewport\":\"80%\",\"from\":{\"opacity\":0,\"y\":150},\"to\":{\"opacity\":1,\"y\":0},\"ease\":\"Power2.easeOut\",\"duration\":0.8,\"delay\":0,\"infinite\":true}",
     style: {
-      background: '#C7BAAF'
+      background: "#C7BAAF"
     }
   }, /*#__PURE__*/react_default.a.createElement("div", {
     className: "uix-v-align--relative uix-t-c"
@@ -72417,7 +72554,7 @@ if (false) {}
     className: "uix-spacing--s uix-height--50 uix-el--transparent",
     config: "{\"viewport\":\"100%\",\"from\":{\"opacity\":0,\"y\":150},\"to\":{\"opacity\":1,\"y\":0},\"ease\":\"Power2.easeOut\",\"duration\":0.8,\"delay\":0,\"infinite\":false}",
     style: {
-      background: '#AB9799'
+      background: "#AB9799"
     }
   }, /*#__PURE__*/react_default.a.createElement("div", {
     className: "uix-v-align--relative uix-t-c"
@@ -72425,7 +72562,7 @@ if (false) {}
     className: "uix-spacing--s uix-height--50",
     config: "{\"viewport\":\"100%\",\"from\":\"\",\"to\":\".demo-sr-active\",\"infinite\":true}",
     style: {
-      background: '#91707A'
+      background: "#91707A"
     }
   }, /*#__PURE__*/react_default.a.createElement("div", {
     className: "uix-v-align--relative uix-t-c"
@@ -72433,7 +72570,7 @@ if (false) {}
     className: "uix-spacing--s uix-height--50 uix-el--zoom",
     config: "{\"viewport\":\"100%\",\"from\":{\"scale\":0},\"to\":{\"scale\":1},\"ease\":\"Power2.easeOut\",\"duration\":0.8,\"delay\":0,\"infinite\":false}",
     style: {
-      background: '#805965'
+      background: "#805965"
     }
   }, /*#__PURE__*/react_default.a.createElement("div", {
     className: "uix-v-align--relative uix-t-c"
@@ -72626,6 +72763,100 @@ var ComponentsDemo_ComponentsDemo = /*#__PURE__*/function (_Component) {
 }(react["Component"]);
 
 /* harmony default export */ var _pages_ComponentsDemo = (ComponentsDemo_ComponentsDemo);
+// CONCATENATED MODULE: ./src/client/helpers/auth-header.js
+/* harmony default export */ var auth_header = (function () {
+  // return authorization header with JWT(JSON Web Token) token
+  var user = JSON.parse(localStorage.getItem('user'));
+
+  if (user && user.token) {
+    return {
+      'Authorization': 'Bearer ' + user.token
+    };
+  } else {
+    return {};
+  }
+});
+/*
+Example:
+
+import authHeader from '@uixkit.react/helpers/auth-header.js';
+axios({headers: { ...authHeader(), 'Content-Type': 'application/json' }})
+
+
+Note: For Node.js Express back-end, please use x-access-token header like this:
+
+export default () => {
+    // return authorization header with JWT(JSON Web Token) token
+    let user = JSON.parse(localStorage.getItem('user'));
+
+    if (user && user.token) {
+        return { 'x-access-token': user.token };
+    } else {
+        return {};
+    }
+}
+
+*/
+// CONCATENATED MODULE: ./src/client/services/user-service.js
+
+
+
+
+function user_service_ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
+
+function user_service_objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { user_service_ownKeys(Object(source), true).forEach(function (key) { defineProperty_default()(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { user_service_ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
+
+ //get project config
+
+ // Authority 
+
+
+
+var user_service_UserService = /*#__PURE__*/function () {
+  function UserService() {
+    classCallCheck_default()(this, UserService);
+  }
+
+  createClass_default()(UserService, [{
+    key: "getUserName",
+    value:
+    /**
+     * Get User Name
+     */
+    function getUserName() {
+      return axios_default.a.post(websiteConfig["API"].USER_AUTHENTICATE, {
+        headers: user_service_objectSpread(user_service_objectSpread({}, auth_header()), {}, {
+          'content-type': 'application/json'
+        }),
+        withCredentials: true
+      }).then(function (response) {
+        var jsonData = response.data;
+        return jsonData.data ? jsonData.data.name : null;
+      });
+    }
+    /**
+     * Get User ID
+     */
+
+  }, {
+    key: "getUserID",
+    value: function getUserID() {
+      return axios_default.a.post(websiteConfig["API"].USER_AUTHENTICATE, {
+        headers: user_service_objectSpread(user_service_objectSpread({}, auth_header()), {}, {
+          'content-type': 'application/json'
+        }),
+        withCredentials: true
+      }).then(function (response) {
+        var jsonData = response.data;
+        return jsonData.data ? jsonData.data.user_id : null;
+      });
+    }
+  }]);
+
+  return UserService;
+}();
+
+/* harmony default export */ var user_service = (new user_service_UserService());
 // CONCATENATED MODULE: ./src/client/views/_pages/Admin/Authorized.js
 
 
@@ -72646,26 +72877,40 @@ var Authorized_Authorized = /*#__PURE__*/function (_Component) {
 
   var _super = Authorized_createSuper(Authorized);
 
-  function Authorized() {
+  function Authorized(props) {
+    var _this;
+
     classCallCheck_default()(this, Authorized);
 
-    return _super.apply(this, arguments);
+    //You are extending the React.Component class, and per the ES2015 spec, 
+    //a child class constructor cannot make use of this until super() has 
+    //been called; also, ES2015 class constructors have to call super() 
+    //if they are subclasses.
+    _this = _super.call(this, props);
+    _this.state = {
+      userName: '...'
+    };
+    return _this;
   }
 
   createClass_default()(Authorized, [{
+    key: "componentDidMount",
+    value: function componentDidMount() {
+      var self = this;
+      user_service.getUserName().then(function (response) {
+        self.setState({
+          userName: response
+        });
+      });
+    }
+  }, {
     key: "render",
     value: function render() {
-      return /*#__PURE__*/react_default.a.createElement(react_default.a.Fragment, null, /*#__PURE__*/react_default.a.createElement("main", {
-        id: "uix-maincontent"
-      }, /*#__PURE__*/react_default.a.createElement("section", {
-        className: "uix-spacing--s"
-      }, /*#__PURE__*/react_default.a.createElement("div", {
-        className: "container"
-      }, /*#__PURE__*/react_default.a.createElement("div", {
-        className: "row"
-      }, /*#__PURE__*/react_default.a.createElement("div", {
-        className: "col-12"
-      }, /*#__PURE__*/react_default.a.createElement("p", null, "You need to be authorized after successful login to see this information.")))))), /*#__PURE__*/react_default.a.createElement(Footer_Footer, null));
+      return /*#__PURE__*/react_default.a.createElement(react_default.a.Fragment, null, /*#__PURE__*/react_default.a.createElement("p", {
+        style: {
+          color: "green"
+        }
+      }, "\u221A You need to be authorized after successful login to see this information."), /*#__PURE__*/react_default.a.createElement("p", null, "Your user name is: ", /*#__PURE__*/react_default.a.createElement("code", null, this.state.userName)));
     }
   }]);
 
@@ -72729,7 +72974,7 @@ function Admin_HookContent() {
       path = _useRouteMatch.path,
       url = _useRouteMatch.url;
 
-  return /*#__PURE__*/react_default.a.createElement(react_default.a.Fragment, null, /*#__PURE__*/react_default.a.createElement("h3", null, "Admin Page (Authorization required)"), /*#__PURE__*/react_default.a.createElement("hr", null), /*#__PURE__*/react_default.a.createElement(react_router_Switch, null, /*#__PURE__*/react_default.a.createElement(PrivateRoute_PrivateRoute, {
+  return /*#__PURE__*/react_default.a.createElement(react_default.a.Fragment, null, /*#__PURE__*/react_default.a.createElement("h3", null, "Admin Page"), /*#__PURE__*/react_default.a.createElement("hr", null), /*#__PURE__*/react_default.a.createElement(react_router_Switch, null, /*#__PURE__*/react_default.a.createElement(PrivateRoute_PrivateRoute, {
     exact: true,
     path: "/admin",
     component: Admin_Authorized

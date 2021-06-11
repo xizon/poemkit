@@ -23,7 +23,7 @@ function HookContent() {
 	return (
 		<>
 		
-			<h3>Admin Page (Authorization required)</h3>
+			<h3>Admin Page</h3>
 
 			<hr />
 		

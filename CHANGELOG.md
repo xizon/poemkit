@@ -1,5 +1,13 @@
 # Changelog
 
+#### = 0.0.41 (June 11, 2021) =
+
+* Tweak: Optimized the JWT communication of axios.
+* Tweak: Adjust the structure of JWT permission demonstration.
+* Tweak: Admin and Member page permission management.
+* Remove: Removed unnecessary HTML calls in the demo.
+
+
 
 #### = 0.0.40 (June 10, 2021) =
 

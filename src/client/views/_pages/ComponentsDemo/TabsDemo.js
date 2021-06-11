@@ -199,21 +199,21 @@ export default () => {
 								<TabList key="tab-list-4">Tab 4</TabList>
 								<TabList key="tab-list-5">Tab 5</TabList>
 
-								<TabPanel key="tab-panel-1" tabpanelClass="uix-outer-shadow--regular" style={{marginTop: '50px'}} defaultActive>
+								<TabPanel key="tab-panel-1" tabpanelClass="uix-outer-shadow--regular" style={{marginTop:"50px"}} defaultActive>
 									<p>Hi, this is the first tab.</p>
 								</TabPanel>
-								<TabPanel key="tab-panel-2" tabpanelClass="uix-outer-shadow--regular" style={{marginTop: '50px'}}>
+								<TabPanel key="tab-panel-2" tabpanelClass="uix-outer-shadow--regular" style={{marginTop:"50px"}}>
 									<p>This is the 2nd tab.</p>
 									<p>This is the 2nd tab.</p>
 									<p>This is the 2nd tab.</p>
 								</TabPanel>
-								<TabPanel key="tab-panel-3" tabpanelClass="uix-outer-shadow--regular" style={{marginTop: '50px'}}>
+								<TabPanel key="tab-panel-3" tabpanelClass="uix-outer-shadow--regular" style={{marginTop:"50px"}}>
 									<p>And this is the 3rd tab.</p>
 								</TabPanel>    
-								<TabPanel key="tab-panel-3" tabpanelClass="uix-outer-shadow--regular" style={{marginTop: '50px'}}>
+								<TabPanel key="tab-panel-3" tabpanelClass="uix-outer-shadow--regular" style={{marginTop:"50px"}}>
 									<p>And this is the 4th tab.</p>
 								</TabPanel> 
-								<TabPanel key="tab-panel-3" tabpanelClass="uix-outer-shadow--regular" style={{marginTop: '50px'}}>
+								<TabPanel key="tab-panel-3" tabpanelClass="uix-outer-shadow--regular" style={{marginTop:"50px"}}>
 									<p>And this is the 5th tab.</p>
 								</TabPanel> 
 							</Tabs>	
@@ -268,18 +268,18 @@ export default () => {
 								<TabList key="tab-list-3">Tab 3</TabList>
 								<TabList key="tab-list-4">Tab 4</TabList>
 
-								<TabPanel key="tab-panel-1" tabpanelClass="uix-outer-shadow--regular" style={{marginTop: '50px'}} defaultActive>
+								<TabPanel key="tab-panel-1" tabpanelClass="uix-outer-shadow--regular" style={{marginTop:"50px"}} defaultActive>
 									<p>Hi, this is the first tab.</p>
 								</TabPanel>
-								<TabPanel key="tab-panel-2" tabpanelClass="uix-outer-shadow--regular" style={{marginTop: '50px'}}>
+								<TabPanel key="tab-panel-2" tabpanelClass="uix-outer-shadow--regular" style={{marginTop:"50px"}}>
 									<p>This is the 2nd tab.</p>
 									<p>This is the 2nd tab.</p>
 									<p>This is the 2nd tab.</p>
 								</TabPanel>
-								<TabPanel key="tab-panel-3" tabpanelClass="uix-outer-shadow--regular" style={{marginTop: '50px'}}>
+								<TabPanel key="tab-panel-3" tabpanelClass="uix-outer-shadow--regular" style={{marginTop:"50px"}}>
 									<p>And this is the 3rd tab.</p>
 								</TabPanel>    
-								<TabPanel key="tab-panel-3" tabpanelClass="uix-outer-shadow--regular" style={{marginTop: '50px'}}>
+								<TabPanel key="tab-panel-3" tabpanelClass="uix-outer-shadow--regular" style={{marginTop:"50px"}}>
 									<p>And this is the 4th tab.</p>
 								</TabPanel> 
 							</Tabs>		

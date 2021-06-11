@@ -386,7 +386,7 @@ export default () => {
 							<br /> 
 
 
-							<div className="uix-t-c" style={{background:'#333',padding:'1.5rem 0 0',marginTop:'1rem'}}>
+							<div className="uix-t-c" style={{background:"#333",padding:"1.5rem 0 0",marginTop:"1rem"}}>
 
 								<Button href="#" className="uix-btn uix-btn__border--thin uix-btn__margin--b uix-btn__size--s uix-btn__bg--secondary is-fill-white">White Button</Button>
 

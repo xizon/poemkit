@@ -1,25 +1,19 @@
 import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
-import axios from 'axios';
 import { __ } from '@uixkit.react/components/_utilities/_all.js';
 
-//get project config
-import { API } from '@uixkit.react/config';
-
-const Welcome = ({ onSignOut}) => {
-    // This is a dumb "stateless" component
-    return (
-        <div>
-            Welcome to this page!
-            | <a href="javascript:;" onClick={onSignOut}>Sign out</a>
-        </div>
-    )
-}
-
+import AuthService from "@uixkit.react/services/auth-service.js";
 
 class LoginPage extends Component {
-    constructor() {
-        super();
+	
+    constructor(props) {
+		//You are extending the React.Component class, and per the ES2015 spec, 
+		//a child class constructor cannot make use of this until super() has 
+		//been called; also, ES2015 class constructors have to call super() 
+		//if they are subclasses.
+		super(props);
+		
+		
         this.state = {
 			loginOk: null,
             user: null,
@@ -56,7 +50,7 @@ class LoginPage extends Component {
         evt.preventDefault();
 		
 		const self = this;
-		const root = ReactDOM.findDOMNode(this.wrapperRef.current);
+		const root = ReactDOM.findDOMNode(self.wrapperRef.current);
 		const $selectWrapper = __( root );
 
 	
@@ -93,31 +87,22 @@ class LoginPage extends Component {
         });
         formData.append('action', 'load_singlepages_ajax_content');
         */
-		axios.post(API.LOGIN_REQUEST, formData )
-		.then(function (response) {
+		AuthService.login(formData).then(function(response) {
 			
-            const jsonData = response.data;
-
+			console.log('Login Info: ', response);
+			
 			/*-----------------------------
 			 Login successful
 			-------------------------------*/
-            // This is where you would call Firebase, an API etc...
-			
-			console.log(jsonData);
-			
-			if ( jsonData.code === 200 ) {
+			// This is where you would call Firebase, an API etc...
+			if ( response.code === 200 ) {
 
 				//control status
+
 				$selectWrapper.find( 'input' ).prop('disabled', false);
 
-
-				// Save info
-				localStorage.setItem('user',JSON.stringify({
-					token: jsonData.data.token
-				}));
-
-
-				// Fire state
+				//update state
+				//-----------
 				self.setState({
 					loginOk: 1,
 					user: {
@@ -128,37 +113,25 @@ class LoginPage extends Component {
 				return self.setState({ error: '' });
 
 
-				// Fire `store.dispatch()`
-				//dispatch(...)
-
 			}
 
 			/*-----------------------------
 			 Login failed
 			-------------------------------*/
-			if ( jsonData.code === 401 || jsonData.code === 419 ) {
+			if ( response.code === 401 || response.code === 419 ) {
 
 				//control status
+				//-----------
 				$selectWrapper.find( 'input' ).prop('disabled', false);
 
-				// Clear info
-				localStorage.setItem('user', JSON.stringify({}) );
+				//update state
+				//-----------
+				return self.setState({ error: 'ERROR: '+response.code+': '+response.error+'!' });
 
-
-				// Fire state
-				return self.setState({ error: 'ERROR: '+jsonData.code+': '+jsonData.error+'!' });
-
-
-				// Fire `store.dispatch()`
-				//dispatch(...)
-
-			}	
-
-           
-		}).catch(function (error) {
-			return self.setState({ error: 'ERROR: '+error+'!' });
+			}		
+	
 		});
-
+	
 		
        
     }
@@ -190,11 +163,10 @@ class LoginPage extends Component {
 
     signOut() {
 		
-		// Clear localStorage
-		localStorage.setItem('user', JSON.stringify({}) );
-		localStorage.clear();
+		AuthService.logout();
 		
-        // clear out user from state
+		
+        //update state
         this.setState({
 			loginOk: null,
 			user: null
@@ -227,9 +199,10 @@ class LoginPage extends Component {
 
                 { 
                   (this.state.loginOk) ? 
-                    <Welcome 
-                     onSignOut={this.signOut.bind(this)} 
-                    />
+					<div>
+						Welcome to this page!
+						| <a href="javascript:;" onClick={this.signOut.bind(this)}>Sign out</a>
+					</div>	
                   :
                     <div ref={this.wrapperRef}>
 						<p>Test Account: <code>admin</code> Password: <code>admin</code></p>

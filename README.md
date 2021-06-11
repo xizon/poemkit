@@ -216,6 +216,8 @@ const alias = {
 	pathConfig            : './src/config/websiteConfig.js',
 	pathComponents        : './src/client/components',
 	pathRouter            : './src/client/router',
+	pathHelpers            : './src/client/helpers',
+	pathServices          : './src/client/services',
 	pathReducers          : './src/client/reducers',
 	pathPages             : './src/client/views/_pages',
 	pathActions           : './src/client/actions',
@@ -234,6 +236,8 @@ resolve: {
 		'@uixkit.react/config': path.resolve(__dirname, alias.pathConfig ),
 		'@uixkit.react/components': path.resolve(__dirname, alias.pathComponents ),
 		'@uixkit.react/router': path.resolve(__dirname, alias.pathRouter ),
+		'@uixkit.react/helpers': path.resolve(__dirname, alias.pathHelpers ),
+		'@uixkit.react/services': path.resolve(__dirname, alias.pathServices ),
 		'@uixkit.react/reducers': path.resolve(__dirname, alias.pathReducers ),
 		'@uixkit.react/pages': path.resolve(__dirname, alias.pathPages ),
 		'@uixkit.react/actions': path.resolve(__dirname, alias.pathActions ),
@@ -256,6 +260,8 @@ resolve: {
 		"@uixkit.react/config": "./src/config/websiteConfig.js",
 		"@uixkit.react/components": "./src/client/components",
 		"@uixkit.react/router": "./src/client/router",
+		"@uixkit.react/helpers": "./src/client/helpers",
+		"@uixkit.react/services": "./src/client/services",
 		"@uixkit.react/reducers": "./src/client/reducers",
 		"@uixkit.react/pages": "./src/client/views/_pages",
 		"@uixkit.react/actions": "./src/client/actions",
@@ -438,6 +444,7 @@ uix-kit-react/
 │   │   ├── actions/
 │   │   ├── reducers/
 │   │   ├── helpers/
+│   │   ├── services/
 │   │   ├── router/
 │   │   ├── components/ -------------------------  # Independent React components
 │   │   │     ├── */
