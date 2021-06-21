@@ -186,6 +186,13 @@ You had created a basic React App from here, then you need to deploy a React App
 
 
 
+**Step 9 (Optional).** Unit Testing
+
+```sh
+$ npm run test
+```
+
+
 
 ### ⚙️ Note:
  
@@ -421,7 +428,7 @@ uix-kit-react/
 ├── webpack.config.js 
 ├── package-lock.json
 ├── package.json
-├── scripts/         --------------------------- # Node.js scripts
+├── tests/           --------------------------- # Unit Testing scripts
 ├── public/          --------------------------- # HTML template of Homepage
 │   ├── index.html    
 │   ├── manifest.json

@@ -180,6 +180,13 @@ $ pm2 logs
 
 
 
+**Step 9 (可选).** 单元测试
+
+```sh
+$ npm run test
+```
+
+
 
 
 ### ⚙️ 温馨提示:
@@ -417,7 +424,7 @@ uix-kit-react/
 ├── webpack.config.js 
 ├── package-lock.json
 ├── package.json 
-├── scripts/         --------------------------- # Node.js脚本
+├── tests/           --------------------------- # 单元测试脚本
 ├── public/          --------------------------- # 自动生成的首页HTML静态模板
 │   ├── index.html 
 │   ├── manifest.json

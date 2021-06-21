@@ -11,7 +11,12 @@ process.on('unhandledRejection', err => {
 });
 
 
-//If all your configs are in the jest.config.js, you can just code like this:
-const jest = require('jest');
+//---
 
-jest.run([]);
+function sum(a, b) {
+  return a + b;
+}
+
+test('1 + 2 = 3', () => {
+  expect(sum(1, 2)).toBe(3);
+});

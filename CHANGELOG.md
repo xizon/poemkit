@@ -1,5 +1,12 @@
 # Changelog
 
+
+#### = 0.0.42 (June 21, 2021) =
+
+* New: Test-driven React.js Development: React.js Unit Testing with Jest.
+
+
+
 #### = 0.0.41 (June 11, 2021) =
 
 * Tweak: Optimized the JWT communication of axios.
