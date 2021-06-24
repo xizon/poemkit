@@ -9,7 +9,7 @@
   "description": "A free web kits with React for fast web design and development via SSR.",
   "main": "index.js",
   "directories": {
-    "test": "tests"
+    "test": "test"
   },
   "proxy": "http://localhost:3000",
   "scripts": {
