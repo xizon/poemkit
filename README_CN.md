@@ -424,7 +424,7 @@ uix-kit-react/
 ├── webpack.config.js 
 ├── package-lock.json
 ├── package.json 
-├── tests/           --------------------------- # 单元测试脚本
+├── test/            --------------------------- # 单元测试脚本
 ├── public/          --------------------------- # 自动生成的首页HTML静态模板
 │   ├── index.html 
 │   ├── manifest.json

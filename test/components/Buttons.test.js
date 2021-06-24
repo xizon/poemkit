@@ -1,13 +1,26 @@
 'use strict';
 
+// Do this as the first thing so that any code reading it knows the right env.
+process.env.NODE_ENV = 'test';
+
+// Makes the script crash on unhandled rejections instead of silently
+// ignoring them. In the future, promise rejections that are not handled will
+// terminate the Node.js process with a non-zero exit code.
+process.on('unhandledRejection', err => {
+  throw err;
+});
+
+
+
+/*
+ * @uixkit.react/components/Buttons
+ * ----------------------------------------
+ */
+
 import ReactTestRenderer from 'react-test-renderer';
 import { render, fireEvent, screen } from '@testing-library/react';
 import '@testing-library/jest-dom';
 
-
-/*-----
- * @uixkit.react/components/Buttons
- * ------*/
 
 import React from 'react';
 import Button from '@uixkit.react/components/Buttons/index.js';

@@ -428,7 +428,7 @@ uix-kit-react/
 ├── webpack.config.js 
 ├── package-lock.json
 ├── package.json
-├── tests/           --------------------------- # Unit Testing scripts
+├── test/            --------------------------- # Unit Testing scripts
 ├── public/          --------------------------- # HTML template of Homepage
 │   ├── index.html    
 │   ├── manifest.json
