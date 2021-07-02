@@ -1,5 +1,10 @@
 # Changelog
 
+#### = 0.0.43 (July 2, 2021) =
+
+* New: Add some React component unit tests.
+* Tweak: Key test optimization techniques.
+
 
 #### = 0.0.42 (June 21, 2021) =
 

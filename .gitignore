@@ -79,3 +79,7 @@ typings/
 
 # misc
 .DS_Store
+
+
+# Webstorm Project
+.idea/

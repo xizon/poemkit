@@ -67,7 +67,7 @@ export default class TabsAnimated extends Component {
 		return (
 		  <>
  
-			  <div id={id ? id : 'app-tabs-' + __.GUID.create() } className="uix-tabs-animated">
+			  <div id={id ? id : 'app-tabs-' + __.GUID.create() } className="uix-tabs-animated" {...attributes}>
 				<div className="uix-tabs__nav">
 					<ul role="tablist">
 						{( children != null ) ? children.map((item, i) => {

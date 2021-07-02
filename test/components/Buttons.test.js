@@ -7,9 +7,8 @@ process.env.NODE_ENV = 'test';
 // ignoring them. In the future, promise rejections that are not handled will
 // terminate the Node.js process with a non-zero exit code.
 process.on('unhandledRejection', err => {
-  throw err;
+    throw err;
 });
-
 
 
 /*
@@ -26,36 +25,53 @@ import React from 'react';
 import Button from '@uixkit.react/components/Buttons/index.js';
 
 
-describe("<Button />", () => {
-	
-  const renderer = ReactTestRenderer.create(
-	<Button data-testid="btn-element">Button Label</Button>
-  );
+describe('Buttons', () => {
 
-  console.log(renderer.toJSON());
-	
+    const renderer = ReactTestRenderer.create(
+        <Button data-testid="test-element">Button Label</Button>
+    );
 
-  //
-  test('render <a>...</a>', () => {
-    render(<Button href="https://google.com" data-testid="btn-element">Button Label</Button>);
-		   
-	const $btn = screen.getByTestId('btn-element');    
-	expect($btn).toBeInTheDocument();
-	expect($btn).toHaveAttribute('href', 'https://google.com');
-	fireEvent.click($btn);
-	 
-  });
-	
-  //
-  test('render <button>...</button>', () => {
-    render(<Button data-testid="btn-element">Button Label</Button>);
-		   
-	const $btn = screen.getByTestId('btn-element');    
-	expect($btn).toBeInTheDocument();
-	expect($btn).toHaveAttribute('type', 'button');
-	  
-  });	
-	
+    console.log(renderer.toJSON());
+
+
+    //
+    test('renders initial button to <a>...</a>', () => {
+        render(<Button href="https://google.com" data-testid="test-element">Button Label</Button>);
+
+        const $btn = screen.getByTestId('test-element');
+
+        // Received value must be an HTMLElement or an SVGElement.
+        // .toBeInTheDocument() is an assertion that comes from jest-dom
+        //-----------
+        expect($btn).toBeInTheDocument();
+
+        // Determine the type of button
+        //-----------
+        expect($btn).toHaveAttribute('href', 'https://google.com');
+
+        // Click event simulation
+        //-----------
+        fireEvent.click($btn);
+
+    });
+
+    //
+    test('renders initial button to <button>...</button>', () => {
+        render(<Button data-testid="test-element">Button Label</Button>);
+
+        const $btn = screen.getByTestId('test-element');
+
+        // Received value must be an HTMLElement or an SVGElement.
+        // .toBeInTheDocument() is an assertion that comes from jest-dom
+        //-----------
+        expect($btn).toBeInTheDocument();
+
+        // Determine the type of button
+        //-----------
+        expect($btn).toHaveAttribute('type', 'button');
+
+    });
+
 
 });
 
