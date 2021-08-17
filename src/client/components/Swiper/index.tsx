@@ -15,13 +15,13 @@ import { Swiper as SW } from '@uixkit.react/components/_plugins/_lib-slideshow';
 
 
 /*-- Apply global scripts and styles --*/
-import '@uixkit.react/components/_utils/styles/_all';
-import '@uixkit.react/components/_utils/styles/rtl/_all';
+import '@uixkit.react/components/_utils/styles/_all.scss';
+import '@uixkit.react/components/_utils/styles/rtl/_all.scss';
 import { __ } from '@uixkit.react/components/_utils/_all';
 
 
 /*-- Apply this component styles --*/
-import '@uixkit.react/components/Swiper/styles/_style';
+import '@uixkit.react/components/Swiper/styles/_style.scss';
 
 
 //get project config

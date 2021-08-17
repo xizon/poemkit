@@ -15,8 +15,8 @@ import { Plyr } from '@uixkit.react/components/_plugins/_lib-player';
 
 
 /*-- Apply global scripts and styles --*/
-import '@uixkit.react/components/_utils/styles/_all';
-import '@uixkit.react/components/_utils/styles/rtl/_all';
+import '@uixkit.react/components/_utils/styles/_all.scss';
+import '@uixkit.react/components/_utils/styles/rtl/_all.scss';
 import { __ } from '@uixkit.react/components/_utils/_all';
 
 
