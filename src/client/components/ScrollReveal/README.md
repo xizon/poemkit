@@ -11,7 +11,7 @@
 
 ```js
 import React from 'react';
-import ScrollReveal from '@uixkit.react/components/ScrollReveal/index.js';
+import ScrollReveal from '@uixkit.react/components/ScrollReveal/index.tsx';
 
 
 export default () => {

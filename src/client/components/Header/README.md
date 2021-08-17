@@ -11,7 +11,7 @@
 
 ```js
 import React from 'react';
-import Header from '@uixkit.react/components/Header/index.js';
+import Header from '@uixkit.react/components/Header/index.tsx';
 
 export default () => {
   return (

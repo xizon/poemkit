@@ -27,7 +27,7 @@ import {
 	DynamicFields,
 	File,
 	FileField
-} from '@uixkit.react/components/Form/index.js';
+} from '@uixkit.react/components/Form/index.tsx';
 
 
 

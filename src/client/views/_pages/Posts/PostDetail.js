@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { __ } from '@uixkit.react/components/_utilities/_all.js';
+import { __ } from '@uixkit.react/components/_utils/_all';
 import actionCreators from '@uixkit.react/actions/demoListDetailActions.js';
-import Footer from '@uixkit.react/components/Footer/index.js';
+import Footer from '@uixkit.react/components/Footer/index.tsx';
 
 import customRoutesConfig from '@uixkit.react/router/RoutesConfig.js';
 
@@ -153,7 +153,7 @@ class PostDetail extends Component {
 		
 		
 		//change page title
-		//-------------
+		//------------------------------------------
 		if (typeof (document) !== "undefined") {
 			
 			// update page title

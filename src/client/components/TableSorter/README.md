@@ -11,7 +11,7 @@
 
 ```js
 import React from 'react';
-import TableSorter from '@uixkit.react/components/TableSorter/index.js';
+import TableSorter from '@uixkit.react/components/TableSorter/index.tsx';
 
 
 

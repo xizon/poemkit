@@ -3,12 +3,12 @@ import { renderToString } from 'react-dom/server.js';
 import { Provider } from 'react-redux';
 import { StaticRouter } from 'react-router-dom';
 import { renderRoutes } from 'react-router-config';
-import { __ } from '@uixkit.react/components/_utilities/_all.js';
+import { __ } from '@uixkit.react/components/_utils/_all';
 
 import customRoutesConfig from '@uixkit.react/router/RoutesConfig.js';
 
 //get project config
-import { rootDirectory } from '@uixkit.react/config';
+import { rootDirectory } from '@uixkit.react/config/websiteConfig.js';
 
 //As we can not use BrowserRouter on server side, we will use StaticRouter . 
 //Also we have same set up as frontend, but wrap it all by renderToString function 
@@ -37,14 +37,14 @@ export default (pathname, store, context, template) => {
 		
 		//Replace the default address of the router with the proxy path you configured 
 		//through Apache or Nginx (only when rendering)
-		//-------------
+		//------------------------------------------
 		template = template.replace(/data\-route\=\"true\"\s*href\=\"/g, `data-route="true" href="${rootDirectory}` );
 	
 		
 		
 		
 		//change page title
-		//-------------
+		//------------------------------------------
 		let pageTitle = null;
 		let pageNoMatchTitle = null;
 		const breakException = {};

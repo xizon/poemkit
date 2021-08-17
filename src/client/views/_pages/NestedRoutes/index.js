@@ -6,8 +6,8 @@ import {
 	useRouteMatch,
 	useParams
 } from 'react-router-dom';
-import { __ } from '@uixkit.react/components/_utilities/_all.js';
-import Footer from '@uixkit.react/components/Footer/index.js';
+import { __ } from '@uixkit.react/components/_utils/_all';
+import Footer from '@uixkit.react/components/Footer/index.tsx';
 
 import NestedRoutesDetail from '@uixkit.react/pages/NestedRoutes/NestedRoutesDetail.js';
 

@@ -11,7 +11,7 @@
 
 ```js
 import React from 'react';
-import TableGrid from '@uixkit.react/components/TableGrid/index.js';
+import TableGrid from '@uixkit.react/components/TableGrid/index.tsx';
 
 
 const data1 = {

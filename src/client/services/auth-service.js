@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 //get project config
-import { API } from '@uixkit.react/config';
+import { API } from '@uixkit.react/config/websiteConfig.js';
 
 
 class AuthService {
@@ -29,14 +29,14 @@ class AuthService {
 
 					// Dispatch auth actions (login) to Redux Thunk Middleware 
 					// which uses `AuthService` to call API.
-					//-----------
+					//------------------------------------------
 					//dispatch({type: 'TYPENAME', payload: jsonData});
 
 
 
 					//Callback Data must be returned, otherwise res cannot be accepted after 
 					//calling the `login(formData).then((res) =>{})` method of this function
-					//-----------
+					//------------------------------------------
 					return jsonData;
 
 				}).catch(function (error) {
@@ -123,14 +123,14 @@ class AuthService {
 		
 		// Dispatch auth actions (login) to Redux Thunk Middleware 
 		// which uses `AuthService` to call API.
-		//-----------
+		//------------------------------------------
 		//dispatch({type: 'TYPENAME', payload: getApiData.data});
 
 		
 		
 		//Callback Data must be returned, otherwise res cannot be accepted after 
 		//calling the `login(formData).then((res) =>{})` method of this function
-		//-----------
+		//------------------------------------------
 		return getApiData.data;
 		
 

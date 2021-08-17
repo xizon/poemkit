@@ -2,16 +2,16 @@
  * 
  * DO NOT OVERRIDE THIS FILE.
  * Generated with "npm run build"
- * 
+ *
  * ## Project Name        :  Uix Kit React
  * ## Project Description :  A free web kits with React for fast web design and development via SSR.
  * ## Project URL         :  https://uiux.cc
- * ## Version             :  0.0.41
+ * ## Version             :  0.0.5
  * ## Based on            :  Uix Kit React (https://github.com/xizon/uix-kit-react#readme)
- * ## Last Update         :  June 11, 2021
+ * ## Last Update         :  August 18, 2021
  * ## Created by          :  UIUX Lab (https://uiux.cc) (uiuxlab@gmail.com)
  * ## Released under the MIT license.
- * 	
+ *
  */
 /*!
  * Bootstrap v4.6.0 (https://getbootstrap.com/)
@@ -21020,7 +21020,7 @@ details.uix-details-reset > summary::-webkit-details-marker {
 
 /* Show Toolbar when viewing site with WordPress */
 .admin-bar .uix-menu-mobile__toggle {
-  top: 66px;
+  top: 0;
 }
 
 .admin-bar .uix-menu-mobile__toggle.is-fixed {
@@ -21030,7 +21030,7 @@ details.uix-details-reset > summary::-webkit-details-marker {
 /* Admin bar becomes taller on smaller devices with WordPress */
 @media all and (max-width: 782px) {
   .admin-bar .uix-menu-mobile__toggle.is-fixed {
-    top: 66px;
+    top: 0;
   }
 }
 
@@ -21476,7 +21476,7 @@ details.uix-details-reset > summary::-webkit-details-marker {
   height: 0;
   border-left: 8px solid transparent;
   border-right: 8px solid transparent;
-  border-bottom: 8px solid #fff;
+  border-bottom: 8px solid #ECECE8;
 }
 
 .uix-menu__container:not(.is-mobile) ul.uix-menu > li:not(.multi-column) > ul ul {
@@ -21575,7 +21575,7 @@ details.uix-details-reset > summary::-webkit-details-marker {
   height: 0;
   border-left: 8px solid transparent;
   border-right: 8px solid transparent;
-  border-bottom: 8px solid #fff;
+  border-bottom: 8px solid #ECECE8;
   opacity: 0;
   z-index: 1;
 }
@@ -30918,6 +30918,604 @@ input[type="datetime-local"].is-active::-webkit-datetime-edit {
 
 .rtl .uix-controls__select-wrapper .uix-controls--line .uix-controls__select-trigger {
   padding-right: 0;
+}
+
+/* ======================================================
+   <!-- Card -->
+/* ====================================================== */
+/*
+ * 1. Author Card
+ * 2. Gallery Card (via Flex)
+ * 3. Thumbnail Card (via Flex)
+
+*/
+/*
+ ---------------------------
+ 1. Author Card
+ ---------------------------
+ */
+.uix-card--author {
+  box-sizing: border-box;
+  margin: 0 auto;
+  border: 1px solid #eaeaea;
+  position: relative;
+  border-top: 8px solid #6B6BF6;
+  border-radius: 8px;
+  box-shadow: rgba(0, 0, 0, 0.07) 0px 5px 15px 0px, rgba(50, 50, 93, 0.1) 0px 15px 35px 0px;
+}
+
+.uix-card--author.uix-card--author--noborder {
+  border: none;
+}
+
+.uix-card--author.uix-card--author--stats {
+  margin-top: 2rem;
+}
+
+.uix-card--author::before, .uix-card--author::after {
+  content: " ";
+  display: table;
+  clear: both;
+}
+
+.uix-card--author .uix-card--author__tagline {
+  font-size: 0.75rem;
+  font-weight: 500;
+  text-transform: uppercase;
+  color: rgba(51, 51, 51, 0.4);
+}
+
+.uix-card--author .uix-card--author__header {
+  min-height: 2.086538461rem;
+  background: #fff;
+  padding: 0.65625rem 1.75rem 0 1.75rem;
+  border-radius: 8px 8px 0 0;
+}
+
+.uix-card--author .uix-card--author__header h3 {
+  margin: 0;
+  padding: 0;
+  font-size: 1.125rem;
+}
+
+.uix-card--author .uix-card--author__header .uix-card--author__text {
+  margin-top: 0.4375rem;
+  width: calc(100% - 105px);
+}
+
+.uix-card--author .uix-card--author__header .uix-card--author__text a {
+  font-size: 0.75rem;
+}
+
+.uix-card--author .uix-card--author__header .uix-card--author__preview {
+  position: relative;
+  display: inline-block;
+  top: 0.175rem;
+  width: 100px;
+  height: 100px;
+}
+
+.uix-card--author .uix-card--author__header .uix-card--author__preview.uix-card--author__preview--rounded {
+  border-radius: 8px;
+}
+
+.uix-card--author .uix-card--author__header .uix-card--author__preview.uix-card--author__preview--jumpOut {
+  box-shadow: rgba(0, 0, 0, 0.07) 0px 5px 15px 0px, rgba(50, 50, 93, 0.1) 0px 15px 35px 0px;
+  position: absolute;
+  transform: translateY(-2rem);
+}
+
+.uix-card--author .uix-card--author__header .uix-card--author__preview img {
+  width: 90px !important;
+  height: 90px !important;
+  margin: 0.3125rem 0 0 0.3125rem;
+}
+
+.uix-card--author .uix-card--author__content {
+  background: #fff;
+  padding: 1.75rem 1.75rem 1.3125rem 1.75rem;
+  line-height: 1.5;
+  /*-- Equal-width Columns --*/
+  /**
+        * Using only CSS, we can make a tabbed navigation whose tabs always
+        * occupy an equal share of the available width. No JS to interrogate
+        * the DOM, no server-side logic to count through items, no inline styles.
+        *
+        */
+}
+
+.uix-card--author .uix-card--author__content.uix-card--author__content--rounded {
+  border-radius: 0 0 8px 8px;
+}
+
+.uix-card--author .uix-card--author__content::after {
+  content: '';
+  position: relative;
+  height: 0;
+  width: 0;
+  border-left: 0.4375rem solid transparent;
+  border-right: 0.4375rem solid transparent;
+  border-top: 0.4375rem solid #fff;
+  position: absolute;
+  bottom: 2.125rem;
+  left: 1.75rem;
+}
+
+.uix-card--author .uix-card--author__content p {
+  margin-top: 0.875rem;
+  padding: 0 0.875rem 0 1.75rem;
+}
+
+.uix-card--author .uix-card--author__content ul {
+  list-style: none;
+  font-size: 0;
+  /*Fighting the Space Between Inline Block Elements*/
+  display: table;
+  /* [1] */
+  table-layout: fixed;
+  /* [2] */
+  width: 100%;
+  /* [3] */
+}
+
+.uix-card--author .uix-card--author__content ul li {
+  font-size: 1rem;
+  /*Fighting the Space Between Inline Block Elements*/
+  display: table-cell;
+  /* [4] */
+  box-shadow: 1px 0px 0px 0px #AEAEAE;
+}
+
+.uix-card--author .uix-card--author__content ul li:last-child {
+  box-shadow: none;
+}
+
+.uix-card--author .uix-card--author__content ul li span {
+  display: block;
+  font-size: 0.75rem;
+}
+
+@media all and (max-width: 768px) {
+  .uix-card--author .uix-card--author__content ul {
+    display: block;
+  }
+  .uix-card--author .uix-card--author__content ul li {
+    display: inline-block;
+    width: 50%;
+    margin-bottom: .5rem;
+  }
+  .uix-card--author .uix-card--author__content ul li:nth-child(2n+0) {
+    box-shadow: none;
+  }
+  .uix-card--author .uix-card--author__content ul li span {
+    padding-bottom: 1rem;
+  }
+}
+
+.uix-card--author .uix-card--author__jump {
+  font-size: 0.875rem;
+  display: block;
+  background: #F6F6F6;
+  padding: 0.525rem 2.1875rem;
+  text-align: right;
+  transition: all 500ms ease-in-out;
+  color: #BDBDBD;
+  border-radius: 0 0 8px 8px;
+  vertical-align: middle;
+}
+
+/*
+ ---------------------------
+ 2. Gallery Card
+ ---------------------------
+ */
+.uix-card--gallery {
+  box-sizing: border-box;
+  position: relative;
+  display: inline-flex;
+  flex-direction: column;
+  max-width: 100%;
+  /* Prevent text overflow with no-wrap */
+  /* demo style */
+  box-shadow: rgba(0, 0, 0, 0.07) 0px 5px 15px 0px, rgba(50, 50, 93, 0.1) 0px 15px 35px 0px;
+  border-radius: 8px;
+  /*-- horizontal layout --*/
+  /*-- overlay layout --*/
+  /*-- Menu Group --*/
+  /*
+     If you do not use "justify-content: space-between; ", 
+     you need to use the following to achieve the layout
+    */
+  /*
+    .uix-card--gallery__menu {
+        display: flex;
+        
+        .uix-card--gallery__menu__items {
+            display: flex;
+            margin-left: auto;
+        }
+
+        .uix-card--gallery__menu__action {
+            display: flex;
+            margin-left: auto;
+        }
+    }
+    */
+  /*-- rxtra elements style --*/
+}
+
+.uix-card--gallery .uix-card--gallery__preview,
+.uix-card--gallery .uix-card--gallery__body {
+  display: flex;
+  /* nested flex container */
+  flex-direction: column;
+  /* vertical alignment of flex items */
+  justify-content: center;
+  /* center flex items vertically */
+}
+
+.uix-card--gallery .uix-card--gallery__preview {
+  align-items: center;
+  /* center flex items horizontally */
+  padding: 0;
+  /* default value, this attribute can be specified in HTML */
+  box-sizing: border-box;
+  position: relative;
+  border-radius: 8px 8px 0 0;
+  /* Use a :before to show the selection outline so that the border doesn't
+        * affect the layout of the content within the preview. */
+}
+
+.uix-card--gallery .uix-card--gallery__preview img {
+  object-fit: cover;
+  object-position: center;
+  height: 100%;
+  width: 100%;
+  border-radius: 8px 8px 0 0;
+}
+
+.uix-card--gallery .uix-card--gallery__preview::before {
+  content: '';
+  position: absolute;
+  inset-block-start: 0;
+  inset-inline-start: 0;
+  inline-size: 100%;
+  block-size: 100%;
+  box-sizing: border-box;
+  border-radius: inherit;
+  border: 1px solid transparent;
+}
+
+.uix-card--gallery .uix-card--gallery__header {
+  display: flex;
+  align-items: center;
+  /* center flex items horizontally */
+}
+
+.uix-card--gallery .uix-card--gallery__header .uix-card--gallery__header__child {
+  display: flex;
+  flex: 1;
+  word-break: break-all;
+  align-items: center;
+  max-width: 100%;
+}
+
+.uix-card--gallery .uix-card--gallery__header .uix-card--gallery__header__child small {
+  white-space: nowrap;
+}
+
+.uix-card--gallery .uix-card--gallery__content > .uix-card--gallery__content__child {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.uix-card--gallery .uix-card--gallery__content > .uix-card--gallery__content__child .uix-card--gallery__content__child--left {
+  display: flex;
+  flex-direction: row;
+  flex: 1;
+  align-items: center;
+  /* center flex items horizontally */
+  word-break: break-all;
+  min-width: 0;
+  /* prevents flex-boxes of becoming smaller than it's contents -- for rows */
+}
+
+.uix-card--gallery .uix-card--gallery__content > .uix-card--gallery__content__child .uix-card--gallery__content__child--left > div {
+  line-height: 1.25;
+  margin-left: .5rem;
+  width: 100%;
+}
+
+.uix-card--gallery .uix-card--gallery__content > .uix-card--gallery__content__child .uix-card--gallery__content__child--right {
+  min-width: 50px;
+  /* default value, this attribute can be specified in HTML */
+}
+
+.uix-card--gallery .uix-card--gallery__body {
+  flex: 1;
+  max-width: 100%;
+  /* Prevent text overflow with no-wrap when horizontal type is used  */
+  min-width: 0;
+  /* prevents flex-boxes of becoming smaller than it's contents -- for rows */
+}
+
+.uix-card--gallery .uix-card--gallery__action {
+  display: flex;
+  flex: 1;
+  margin-left: 1rem;
+  justify-content: flex-end;
+  /* end flex items vertically */
+}
+
+.uix-card--gallery.uix-card--gallery--horizontal {
+  flex-direction: row;
+}
+
+.uix-card--gallery.uix-card--gallery--horizontal .uix-card--gallery__preview {
+  border-radius: 8px 0 0 8px;
+}
+
+.uix-card--gallery.uix-card--gallery--horizontal .uix-card--gallery__preview img {
+  visibility: hidden;
+  border-radius: 8px 0 0 8px;
+}
+
+.uix-card--gallery.uix-card--gallery--horizontal .uix-card--gallery__header .uix-card--gallery__header__child {
+  display: block;
+}
+
+.uix-card--gallery.uix-card--gallery--overlay .uix-card--gallery__preview {
+  border-radius: 8px;
+}
+
+.uix-card--gallery.uix-card--gallery--overlay .uix-card--gallery__preview img {
+  border-radius: 8px;
+}
+
+.uix-card--gallery.uix-card--gallery--overlay .uix-card--gallery__body {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+}
+
+.uix-card--gallery.uix-card--gallery--overlay .uix-card--gallery__body.uix-card--gallery__body--verticalCenter {
+  height: 100%;
+}
+
+.uix-card--gallery .uix-card--gallery__status {
+  position: absolute;
+  justify-content: center;
+  display: flex;
+  background-color: rgba(0, 0, 0, 0.3);
+  width: 100%;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: 2;
+}
+
+.uix-card--gallery .uix-card--gallery__status .uix-card--gallery__status__item {
+  display: flex;
+  align-items: center;
+  color: #fff;
+  padding: 0.5rem 1rem;
+  white-space: nowrap;
+}
+
+.uix-card--gallery .uix-card--gallery__status .uix-card--gallery__status__item svg {
+  width: 20px;
+  margin-right: .5rem;
+}
+
+.uix-card--gallery .uix-card--gallery__menu {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  box-shadow: -1px 3px 8px -1px rgba(0, 0, 0, 0.1);
+  border-radius: 0 0 4px 4px;
+  padding: 0 25px;
+  z-index: 2;
+}
+
+.uix-card--gallery .uix-card--gallery__menu .uix-card--gallery__menu__avatar {
+  display: flex;
+  align-items: center;
+}
+
+.uix-card--gallery .uix-card--gallery__menu .uix-card--gallery__menu__avatar > span {
+  white-space: nowrap;
+}
+
+.uix-card--gallery .uix-card--gallery__menu .uix-card--gallery__menu__avatar img {
+  width: 42px;
+  height: 42px;
+  object-fit: cover;
+  /* required */
+  margin-right: 15px;
+}
+
+.uix-card--gallery .uix-card--gallery__menu .uix-card--gallery__menu__items {
+  display: flex;
+  cursor: pointer;
+}
+
+.uix-card--gallery .uix-card--gallery__menu .uix-card--gallery__menu__items > a {
+  padding: 20px;
+  transition: all 500ms ease-in-out;
+}
+
+.uix-card--gallery .uix-card--gallery__menu .uix-card--gallery__menu__items > a.is-active, .uix-card--gallery .uix-card--gallery__menu .uix-card--gallery__menu__items > a:hover {
+  border-bottom: 3px solid #6B6BF6;
+  color: #6B6BF6;
+}
+
+.uix-card--gallery .uix-card--gallery__menu .uix-card--gallery__menu__action {
+  display: flex;
+}
+
+.uix-card--gallery .uix-card--gallery__menu .uix-card--gallery__menu__action button {
+  border: 1px solid #dcdcdc;
+  color: #C9C9C9;
+  border-radius: 25px 0 0 25px;
+  padding: .5rem 1rem;
+  font-weight: 600;
+  font-size: 0.75rem;
+  cursor: pointer;
+  background-color: transparent;
+}
+
+.uix-card--gallery .uix-card--gallery__menu .uix-card--gallery__menu__action button:last-child {
+  border-radius: 0 25px 25px 0;
+  margin-left: -1px;
+}
+
+.uix-card--gallery .uix-card--gallery__menu .uix-card--gallery__menu__action button:hover {
+  background-color: #FAFAFA;
+}
+
+.uix-card--gallery button {
+  background-color: rgba(0, 0, 0, 0);
+  border-color: rgba(0, 0, 0, 0);
+  color: #4b4b4b;
+}
+
+.uix-card--gallery button:active {
+  background-color: #e1e1e1;
+  border-color: #e1e1e1;
+  color: #2c2c2c;
+  box-shadow: none;
+  outline: 5px auto -webkit-focus-ring-color;
+}
+
+@media all and (max-width: 768px) {
+  .uix-card--gallery {
+    /*-- horizontal layout --*/
+    /*-- Menu Group --*/
+  }
+  .uix-card--gallery.uix-card--gallery--horizontal:not(.is-mobile-still) {
+    flex-direction: column;
+  }
+  .uix-card--gallery.uix-card--gallery--horizontal:not(.is-mobile-still) .uix-card--gallery__preview {
+    border-radius: 8px 8px 0 0;
+  }
+  .uix-card--gallery.uix-card--gallery--horizontal:not(.is-mobile-still) .uix-card--gallery__preview img {
+    border-radius: 8px 8px 0 0;
+  }
+  .uix-card--gallery .uix-card--gallery__menu {
+    flex-direction: column;
+  }
+  .uix-card--gallery .uix-card--gallery__menu .uix-card--gallery__menu__avatar {
+    margin: 1rem;
+  }
+  .uix-card--gallery .uix-card--gallery__menu .uix-card--gallery__menu__action {
+    margin: 1rem;
+  }
+}
+
+/*
+ ---------------------------
+ 3. Thumbnail Card
+ ---------------------------
+ */
+.uix-card--thumb {
+  box-sizing: border-box;
+  position: relative;
+  display: inline-flex;
+  flex-direction: column;
+  max-width: 100%;
+  /* Prevent text overflow with no-wrap */
+  /* demo style */
+  padding: 1rem;
+  box-shadow: rgba(0, 0, 0, 0.07) 0px 5px 15px 0px, rgba(50, 50, 93, 0.1) 0px 15px 35px 0px;
+  border-radius: 8px;
+  /*-- rxtra elements style --*/
+}
+
+.uix-card--thumb .uix-card--thumb__header {
+  display: inline-flex;
+  flex-direction: row;
+  align-items: center;
+  /* center flex items horizontally */
+}
+
+.uix-card--thumb .uix-card--thumb__header .uix-card--thumb__preview {
+  flex-basis: 50px;
+  /* default value, this attribute can be specified in HTML */
+  margin-right: 5px;
+}
+
+.uix-card--thumb .uix-card--thumb__header .uix-card--thumb__content {
+  /* ----- Keep the width of the picture fixed -----  begin  */
+  flex: 1;
+  min-width: 0;
+  /* prevents flex-boxes of becoming smaller than it's contents -- for rows */
+  /* ----- Keep the width of the picture fixed -----  end  */
+}
+
+.uix-card--thumb .uix-card--thumb__header .uix-card--thumb__content > .uix-card--thumb__content__child {
+  display: flex;
+  flex-direction: row;
+}
+
+.uix-card--thumb .uix-card--thumb__header .uix-card--thumb__content > .uix-card--thumb__content__child .uix-card--thumb__content__child--left {
+  display: flex;
+  flex-direction: row;
+  flex: 1;
+  align-items: center;
+  /* center flex items horizontally */
+  word-break: break-all;
+  min-width: 0;
+  /* prevents flex-boxes of becoming smaller than it's contents -- for rows */
+}
+
+.uix-card--thumb .uix-card--thumb__header .uix-card--thumb__content > .uix-card--thumb__content__child .uix-card--thumb__content__child--left > div {
+  line-height: 1.25;
+  margin-left: .5rem;
+  width: 100%;
+}
+
+.uix-card--thumb .uix-card--thumb__header .uix-card--thumb__content > .uix-card--thumb__content__child .uix-card--thumb__content__child--right {
+  min-width: 50px;
+  /* default value, this attribute can be specified in HTML */
+}
+
+.uix-card--thumb .uix-card--thumb__body {
+  padding-top: .5rem;
+  line-height: 1.25;
+}
+
+.uix-card--thumb button {
+  background-color: rgba(0, 0, 0, 0);
+  border-color: rgba(0, 0, 0, 0);
+  color: #4b4b4b;
+}
+
+.uix-card--thumb button:active {
+  background-color: #e1e1e1;
+  border-color: #e1e1e1;
+  color: #2c2c2c;
+  box-shadow: none;
+  outline: 5px auto -webkit-focus-ring-color;
+}
+
+/* ====================================================== 
+   <!-- Parallax -->                                        
+/* ====================================================== */
+.uix-parallax {
+  position: relative;
+  width: 100%;
+  background-attachment: fixed;
+  background-position: center center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  height: auto;
+  width: 100%;
+}
+
+.uix-parallax .uix-parallax__img {
+  visibility: hidden;
 }
 
 

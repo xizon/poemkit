@@ -1,0 +1,40 @@
+/**
+
+	TABLE OF CONTENTS FOR `ALL UTILITIES` (RTL)
+	---------------------------
+	
+*/
+
+
+/**
+
+	Adding support for language written in a Right To Left (RTL) direction is easy -
+	it's just a matter of overwriting all the horizontal positioning attributes
+	of your CSS stylesheet in a separate stylesheet file named -rtl.css.
+
+
+*/
+
+
+/******/
+/******/
+/* must be placed in the first place */
+@import '@uixkit.react/components/_utils/styles/_variable-and-mixin.scss';
+
+
+/******/
+/******/
+/* base */
+@import '@uixkit.react/components/_utils/styles/rtl/basic.scss';
+@import '@uixkit.react/components/_utils/styles/rtl/brand.scss';
+@import '@uixkit.react/components/_utils/styles/rtl/bullet-list.scss';
+@import '@uixkit.react/components/_utils/styles/rtl/entry.scss';
+@import '@uixkit.react/components/_utils/styles/rtl/header-area.scss';
+@import '@uixkit.react/components/_utils/styles/rtl/helper-classes.scss';
+@import '@uixkit.react/components/_utils/styles/rtl/layout.scss';
+@import '@uixkit.react/components/_utils/styles/rtl/mobile-menu.scss';
+@import '@uixkit.react/components/_utils/styles/rtl/navigation.scss';
+@import '@uixkit.react/components/_utils/styles/rtl/navs.scss';
+@import '@uixkit.react/components/_utils/styles/rtl/sidebar.scss';
+@import '@uixkit.react/components/_utils/styles/rtl/typography.scss';
+

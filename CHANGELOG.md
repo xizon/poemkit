@@ -1,5 +1,27 @@
 # Changelog
 
+#### = 0.0.5 (August 16, 2021) =
+
+* New: TypeScript Support.
+* New: Add new UI components `Card`.
+* New: Add new UI components `Parallax`.
+* New: Added some new methods `prependTo()`, `appendTo()`, `text()`, `clone()` and `parents()` to Core Shortcut.
+* New: Upgrade webpack 4 to 5. Compilation speed and performance are greatly improved.
+* New: Update and compatible debugging of Node related dependencies
+* Fix: Fixed some issues with the `__()` selector.
+* Fix: Fixed the bug that the value of the Number control in the form component was not updated after the route was triggered (the page was not refreshed).
+* Tweak: Refactor all UI components using TypeScript.
+* Tweak: Convert core files to TypeScript.
+* Tweak: Optimized the command script.
+* Tweak: Optimized mobile and desktop navigation.
+* Tweak: Added a new method to Core Shortcut.
+* Tweak: Optimized some component related codes.
+* Tweak: Optimized part of the naming of the component library.
+* Tweak: Optimization and review of overall code and comments.
+* Tweak: Modify the folder name `src/client/components/_utilities` to `src/client/components/_utils`.
+* Tweak: Component file directory optimization.
+
+
 #### = 0.0.43 (July 2, 2021) =
 
 * New: Add some React component unit tests.

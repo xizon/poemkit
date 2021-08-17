@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
-import { __ } from '@uixkit.react/components/_utilities/_all.js';
+import { __ } from '@uixkit.react/components/_utils/_all';
 
 import AuthService from "@uixkit.react/services/auth-service.js";
 
@@ -91,9 +91,13 @@ class LoginPage extends Component {
 			
 			console.log('Login Info: ', response);
 			
-			/*-----------------------------
-			 Login successful
-			-------------------------------*/
+            
+			/*
+			 ////////////////////////////////////////////////////////////
+			 ////////////////   (1) Login successful   //////////////////
+			 ////////////////////////////////////////////////////////////
+			 */
+
 			// This is where you would call Firebase, an API etc...
 			if ( response.code === 200 ) {
 
@@ -102,7 +106,7 @@ class LoginPage extends Component {
 				$selectWrapper.find( 'input' ).prop('disabled', false);
 
 				//update state
-				//-----------
+				//------------------------------------------
 				self.setState({
 					loginOk: 1,
 					user: {
@@ -115,17 +119,19 @@ class LoginPage extends Component {
 
 			}
 
-			/*-----------------------------
-			 Login failed
-			-------------------------------*/
+			/*
+			 ////////////////////////////////////////////////////////////
+			 ////////////////   (2) Login failed       //////////////////
+			 ////////////////////////////////////////////////////////////
+			 */
 			if ( response.code === 401 || response.code === 419 ) {
 
 				//control status
-				//-----------
+				//------------------------------------------
 				$selectWrapper.find( 'input' ).prop('disabled', false);
 
 				//update state
-				//-----------
+				//------------------------------------------
 				return self.setState({ error: 'ERROR: '+response.code+': '+response.error+'!' });
 
 			}		

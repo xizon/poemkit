@@ -22,7 +22,7 @@ import '@testing-library/jest-dom';
 
 
 import React from 'react';
-import { Tabs, TabList, TabPanel } from '@uixkit.react/components/Tabs/index.js';
+import { Tabs, TabList, TabPanel } from '@uixkit.react/components/Tabs/index.tsx';
 
 
 describe('Tabs', () => {
@@ -62,12 +62,12 @@ describe('Tabs', () => {
 
         // Received value must be an HTMLElement or an SVGElement.
         // .toBeInTheDocument() is an assertion that comes from jest-dom
-        //-----------
+        //------------------------------------------
         expect(container).toBeInTheDocument();
 
 
         // The default style of the first item is `is-active`
-        //-----------
+        //------------------------------------------
         const $tabsItemFirst = container.querySelectorAll(`[data-testid="test-element"] [role="tablist"] > li`)[0];
         let firstItemClassName = $tabsItemFirst.className;
         expect( firstItemClassName).toMatch( 'is-active' );
@@ -77,7 +77,7 @@ describe('Tabs', () => {
         // Click event simulation
         // When the second item is clicked, the activation style of the first item is removed,
         // and the second is assigned the value `is-active`
-        //-----------
+        //------------------------------------------
         const $tabsItemSecond = container.querySelectorAll(`[data-testid="test-element"] [role="tablist"] > li`)[1];
         fireEvent.click($tabsItemSecond);
 

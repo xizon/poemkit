@@ -10,7 +10,7 @@
 
 ```js
 import React from 'react';
-import { Tabs, TabList, TabPanel } from '@uixkit.react/components/Tabs/index.js';
+import { Tabs, TabList, TabPanel } from '@uixkit.react/components/Tabs/index.tsx';
 
 
 export default () => {

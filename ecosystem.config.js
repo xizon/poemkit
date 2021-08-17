@@ -4,7 +4,7 @@ module.exports = {
       //App name
       "name": "uix-kit-react",
       //The path of the executable file
-      "script": "./src/server/server.js",
+      "script": "ts-node -r tsconfig-paths/register ./src/server/server.js",
       "env": {
         "COMMON_VARIABLE": "true"
       },

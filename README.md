@@ -55,6 +55,7 @@ Server runs on `http://localhost:3000`
 ## Description
 
 
+* Base Environment: TypeScript 4.x.x + Babel 7.x.x + Webpack 5.x.x
 * Integrate development, debugging, bundle, and deployment in one
 * Not a JavaScript framework
 * No jQuery & Does not bind any tool libraries
@@ -105,25 +106,28 @@ $ sudo npm install
 ```
 
 
-**Step 4.** To use webpack to bundle files.
+**Step 4.** Commonly used commands:
+
+Debug application. It can be checked separately as TypeScript without compiling and packaging behavior.
+
+```sh
+$ npm run check
+```
+
+To use webpack to bundle files.
 
 ```sh
 $ npm run build
 ```
 
-
-
-**Step 5.** Using `Ctrl + C` to stop webpack.
-
-
-**Step 6.** Finally, let's enter the code below. You can see that the server is running. (Run the Express server only.)
+Run the following commands for local testing and code inspection. You can see that the server is running. (Run the Express server only.). Using `Ctrl + C` to stop it.
 
 ```sh
 $ npm run dev
 ```
 
 
-**Step 7.** When you done, this will spin up a server that can be accessed at
+**Step 5.** When you done, this will spin up a server that can be accessed at
 
 ```sh
 http://localhost:3000
@@ -132,10 +136,9 @@ http://localhost:3000
 The new code is recommended to be bundled before debugging.
 
 
+**Step 6 (Optional).** Start Reactjs application with PM2 as a service (only works if you are using Node v13.9.0 or above.)
 
-**Step 8 (Optional).** Start Reactjs application with PM2 as a service (only works if you are using Node v13.9.0 or above.)
-
-8.1) Installing Node and NPM
+6.1) Installing Node and NPM
 
 ```sh
 $ curl -sL https://rpm.nodesource.com/setup_14.x | sudo bash -
@@ -146,14 +149,14 @@ $ which node babel-node #check the location of node and babel-node
 ```
 
 
-8.2) Installing PM2. With NPM
+6.2) Installing PM2. With NPM
 
 ```sh
 $ sudo npm install pm2@latest -g
 ```
 
 
-8.3) Install Babel globally on your machine
+6.3) Install Babel globally on your machine
 
 ```sh
 $ sudo npm install -g babel-cli
@@ -161,18 +164,33 @@ $ sudo npm install -g @babel/core @babel/cli @babel/preset-env
 ```
 
 
-8.4) Frequently used commands for PM2:
+6.4) Install TypeScript and ts-node globally on your machine
+
+```sh
+$ sudo npm install -g typescript ts-node
+```
+
+
+6.5) Install TypeScript dependencies with PM2
+
+```sh
+$ sudo pm2 install typescript
+```
+
+
+
+6.6) Frequently used commands for PM2:
 
 ```sh
 #into your `"uix-kit-react/"` folder directory.
 $ cd /{your_directory}/uix-kit-react
 
 
-#use babel-node with pm2
-$ pm2 start ecosystem.config.js  --interpreter babel-node  
+#run app
+$ pm2 start ecosystem.config.js
 
 #other commands
-$ pm2 restart ecosystem.config.js –-interpreter babel-node
+$ pm2 restart ecosystem.config.js
 $ pm2 stop ecosystem.config.js
 $ pm2 delete ecosystem.config.js
 $ pm2 list
@@ -180,29 +198,52 @@ $ pm2 logs
 ```
 
 
-8.5) Use domain to access your React appication.
+6.7) Use domain to access your React appication.
 
 You had created a basic React App from here, then you need to deploy a React App on Apache or Nginx web server. Please refer to the network for the tutorial on setting up the proxy.
 
 
 
-**Step 9 (Optional).** Unit Testing
+**Step 7 (Optional).** Unit Testing
 
 ```sh
 $ npm run test
 ```
 
 
+**Step 8 (Optional).** Deploy to the server
+
+```sh
+$ npm run deploy
+```
+
+Stop the existing deployments:
+
+```sh
+$ npm run destroy
+```
+
 
 ### ⚙️ Note:
  
 **a) ERROR: npm update check failed.**
 
+Solution:
+
 ```sh
 $ sudo chown -R $USER:$(id -gn $USER) /Users/{username}/.config
 ```
 
-**b) If you upgrade the version of Node, please execute the following code:**
+**b) ERROR: Node sass version 6.x.x is not compatible with ^ 4.x.x.**
+
+Solution:
+
+```sh
+$ npm install node-sass@4.14.1
+```
+
+
+**c) If you upgrade the version of Node, please execute the following code:**
 
 ```sh
 $ sudo npm install
@@ -220,7 +261,7 @@ You can configure the module resolution by adding resolve to the `webpack.config
 ```js
 ...
 const alias = {
-	pathConfig            : './src/config/websiteConfig.js',
+	pathConfig            : './src/config',
 	pathComponents        : './src/client/components',
 	pathRouter            : './src/client/router',
 	pathHelpers            : './src/client/helpers',
@@ -234,12 +275,12 @@ const alias = {
 
 ...
 resolve: {
-	extensions: ['.js', '.es6', '.vue', '.jsx' ],
+	extensions: ['.js', '.es6', '.vue', '.jsx', '.ts', '.tsx' ],
 	alias: {
 
 		// specific mappings.
 		// Supports directories and custom aliases for specific files when the express server is running, 
-		// you need to configure the `babel.config.js` at the same time
+		// you need to configure the `babel.config.js` and `tsconfig.json` at the same time
 		'@uixkit.react/config': path.resolve(__dirname, alias.pathConfig ),
 		'@uixkit.react/components': path.resolve(__dirname, alias.pathComponents ),
 		'@uixkit.react/router': path.resolve(__dirname, alias.pathRouter ),
@@ -264,7 +305,7 @@ resolve: {
 	["module-resolver", {
 	  "root": ["./src"],
 	  "alias": {
-		"@uixkit.react/config": "./src/config/websiteConfig.js",
+		"@uixkit.react/config": "./src/config",
 		"@uixkit.react/components": "./src/client/components",
 		"@uixkit.react/router": "./src/client/router",
 		"@uixkit.react/helpers": "./src/client/helpers",
@@ -281,7 +322,27 @@ resolve: {
 ```
 
 
+`tsconfig.json` :
 
+```json
+{
+  "compilerOptions": {
+    "baseUrl": "./src",
+    "paths": {
+        "@uixkit.react/config/*": ["config/*"],
+        "@uixkit.react/components/*": ["client/components/*"],
+        "@uixkit.react/router/*": ["client/router/*"],
+        "@uixkit.react/helpers/*": ["client/helpers/*"],
+        "@uixkit.react/services/*": ["client/services/*"],
+        "@uixkit.react/reducers/*": ["client/reducers/*"],
+        "@uixkit.react/pages/*": ["client/views/_pages/*"],
+        "@uixkit.react/actions/*": ["client/actions/*"],
+        "@uixkit.react/server/*": ["server/*"],
+        "@uixkit.react/store/*": ["store/*"]
+    }
+  }
+}
+```
 
 
 ### ⚙️ Library Related Configurations:
@@ -351,17 +412,26 @@ To run both the server and React application at the same time we need to add the
 }
 ```
 
-### ⚙️ Run the Webpack build in "development" mode:
-
-Run the following command to test:
+### ⚙️ Use `PropTypes` to check the type:
 
 ```sh
 $ npm run dev
 ```
 
-Then, you could use the following JavaScript code to debug it:
+Then, you could use the following JavaScript code to debug it. Display error and warning messages in the terminal.
 
 ```js
+import PropTypes from "prop-types";
+import React, { Component } from 'react';
+
+export default class YourComponentName extends Component { 
+	public static propTypes = {};
+	constructor(props) {
+		super(props);
+	}
+	render() { ... }
+}
+
 if ( process.env.NODE_ENV === 'development' ) {
 
 	YourComponentName.propTypes = {
@@ -437,14 +507,10 @@ uix-kit-react/
 ├── dist/        ------------------------------- # Files compiled, used in the production environment
 │   ├── css/
 │   │   ├── uix-kit-react.css
-│   │   ├── uix-kit-react.css.map
-│   │   ├── uix-kit-react.min.css
-│   │   └── uix-kit-react.min.css.map
+│   │   └── uix-kit-react.min.css
 │   └── js/
 │   │   ├── uix-kit-react.js
-│   │   ├── uix-kit-react.js.map
-│   │   ├── uix-kit-react.min.js
-│   │   └── uix-kit-react.min.js.map
+│   │   └── uix-kit-react.min.js
 ├── src/
 │   ├── client/
 │   │   ├── client.js
@@ -455,7 +521,7 @@ uix-kit-react/
 │   │   ├── router/
 │   │   ├── components/ -------------------------  # Independent React components
 │   │   │     ├── */
-│   │   │     ├── _utilities/ -------------------  # Generic snippets(js & css)
+│   │   │     ├── _utils/ -----------------------  # General utilities & snippets(js & css)
 │   │   │     └── _plugins/ ---------------------  # Third-party plugins
 │   │   ├── views/ ------------------------------  # Website pages
 │   │   │     ├── _pages/

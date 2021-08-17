@@ -11,7 +11,7 @@
 
 ```js
 import React from 'react';
-import Video from '@uixkit.react/components/Video/index.js';
+import Video from '@uixkit.react/components/Video/index.tsx';
 
 export default () => {
   return (

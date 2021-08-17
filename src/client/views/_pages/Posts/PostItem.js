@@ -1,6 +1,6 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
-import { __ } from '@uixkit.react/components/_utilities/_all.js';
+import { __ } from '@uixkit.react/components/_utils/_all';
 
 
 export default ({ name, flag })  => {

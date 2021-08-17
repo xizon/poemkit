@@ -1,6 +1,6 @@
 import React from 'react';
-import { __ } from '@uixkit.react/components/_utilities/_all.js';
-import Footer from '@uixkit.react/components/Footer/index.js';
+import { __ } from '@uixkit.react/components/_utils/_all';
+import Footer from '@uixkit.react/components/Footer/index.tsx';
 
 export default ({ staticContext = {} }) => {
     staticContext.status = 404;

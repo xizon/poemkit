@@ -3,7 +3,7 @@ import {
 	useParams,
 	useLocation
 } from 'react-router-dom';
-import { __ } from '@uixkit.react/components/_utilities/_all.js';
+import { __ } from '@uixkit.react/components/_utils/_all';
 
 import customRoutesConfig from '@uixkit.react/router/RoutesConfig.js';
 
@@ -16,7 +16,7 @@ function HookScript() {
     React.useEffect(() => { // Equivalent to componentDidMount and componentDidUpdate:
 		
 		//output name
-		//-------------
+		//------------------------------------------
 		let pageTitle = null;
 		const breakException = {};
 		const pathname = theLocation.pathname;

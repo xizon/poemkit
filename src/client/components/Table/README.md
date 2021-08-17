@@ -11,7 +11,7 @@
 
 ```js
 import React from 'react';
-import Table from '@uixkit.react/components/Table/index.js';
+import Table from '@uixkit.react/components/Table/index.tsx';
 
 
 

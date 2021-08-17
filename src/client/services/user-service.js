@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 //get project config
-import { API } from '@uixkit.react/config';
+import { API } from '@uixkit.react/config/websiteConfig.js';
 
 // Authority 
 import authHeader from '@uixkit.react/helpers/auth-header.js';

@@ -5,7 +5,7 @@
   "projectName": "Uix Kit React",
   "createdInfo": "UIUX Lab (https://uiux.cc)",
   "projectURL": "https://uiux.cc",
-  "version": "0.0.43",
+  "version": "0.0.5",
   "description": "A free web kits with React for fast web design and development via SSR.",
   "main": "index.js",
   "directories": {
@@ -13,19 +13,43 @@
   },
   "proxy": "http://localhost:3000",
   "scripts": {
-    "watch": "webpack --watch",
-    "dev": "cross-env NODE_ENV=development nodemon --require ignore-styles --exec babel-node ./src/server/server.js",
+    "_comment_1_": "Verify that webpack is not being notified of changes by running webpack with the --progress flag.",
+    "watch": "webpack --watch --progress",
+    "_comment_2_": "open a specified browser window",
+    "start:open": "webpack-dev-server --open-page http://localhost:3000",
+    "_comment_3_": "start Reactjs application with PM2 as a service",
+    "deploy": "pm2 start ecosystem.config.js",
+    "_comment_4_": "stop the existing deployments",
+    "destroy": "pm2 stop ecosystem.config.js & pm2 delete ecosystem.config.js",
+    "_comment_5_": "debug application, it can be checked separately as TypeScript without compiling and packaging behavior.",
+    "check": "tsc",
+    "_comment_6_": "start the build in development mode (run the Express server only)",
+    "dev": "cross-env NODE_ENV=development nodemon --require ignore-styles --exec ts-node -r tsconfig-paths/register ./src/server/server.js",
+    "_comment_7_": "start the build in production mode",
     "build": "cross-env NODE_ENV=production webpack --progress --mode production",
-    "prettier": "prettier \"./dist/css/uix-kit-react.css\"",
-    "test": "cross-env NODE_ENV=test jest"
+    "_comment_8_": "run a specific test",
+    "test": "cross-env NODE_ENV=test jest",
+    "_comment_9_": "An opinionated code formatter for core CSS file",
+    "prettier": "prettier \"./dist/css/uix-kit-react.css\""
   },
   "jest": {
     "testEnvironment": "jsdom",
     "moduleNameMapper": {
-      "\\.(css|less|scss|sass)$": "identity-obj-proxy"
+      "\\.(css|less|scss|sass)$": "identity-obj-proxy",
+      "^@uixkit.react/config/(.*)": "<rootDir>/src/config/$1",
+      "^@uixkit.react/components/(.*)": "<rootDir>/src/client/components/$1",
+      "^@uixkit.react/router/(.*)": "<rootDir>/src/client/router/$1",
+      "^@uixkit.react/helpers/(.*)": "<rootDir>/src/client/helpers/$1",
+      "^@uixkit.react/services/(.*)": "<rootDir>/src/client/services/$1",
+      "^@uixkit.react/reducers/(.*)": "<rootDir>/src/client/reducers/$1",
+      "^@uixkit.react/pages/(.*)": "<rootDir>/src/client/views/_pages/$1",
+      "^@uixkit.react/actions/(.*)": "<rootDir>/src/client/actions/$1",
+      "^@uixkit.react/server/(.*)": "<rootDir>/src/server/$1",
+      "^@uixkit.react/store/(.*)": "<rootDir>/src/store/$1"
     },
     "transform": {
-      "^.+\\.(js|jsx)$": "babel-jest"
+      "^.+\\.(js|jsx)$": "babel-jest",
+      "^.+\\.(ts|tsx)?$": "ts-jest"
     }
   },
   "repository": {
@@ -34,6 +58,7 @@
   },
   "keywords": [
     "uix",
+    "typescript",
     "component",
     "components",
     "design",
@@ -51,18 +76,26 @@
   },
   "homepage": "https://github.com/xizon/uix-kit-react#readme",
   "devDependencies": {
-    "@node-minify/core": "^4.0.2",
+    "@node-minify/core": "^6.2.0",
     "@node-minify/uglify-js": "^4.0.2",
     "@testing-library/jest-dom": "^5.14.1",
     "@testing-library/react": "^11.2.7",
+    "@types/react": "^17.0.17",
+    "@typescript-eslint/eslint-plugin": "^4.28.5",
+    "@typescript-eslint/parser": "^4.28.5",
     "babel-loader": "^8.0.4",
     "clean-webpack-plugin": "^1.0.0",
     "cross-env": "^7.0.3",
     "css-loader": "^2.0.1",
-    "eslint": "^7.24.0",
+    "css-minimizer-webpack-plugin": "^3.0.2",
+    "eslint": "^7.32.0",
+    "eslint-config-prettier": "^8.3.0",
+    "eslint-plugin-prettier": "^3.4.0",
+    "eslint-plugin-react": "^7.24.0",
     "file-loader": "^6.2.0",
     "glslify-loader": "^2.0.0",
     "html-loader": "^0.5.5",
+    "html-webpack-plugin": "^5.3.2",
     "identity-obj-proxy": "^3.0.0",
     "include-file-webpack-plugin": "^1.0.3",
     "jest": "^27.0.4",
@@ -70,11 +103,11 @@
     "json-loader": "^0.5.7",
     "log-timestamp": "^0.2.1",
     "mime-types": "^2.1.29",
-    "mini-css-extract-plugin": "^0.5.0",
-    "node-sass": "^4.13.1",
+    "mini-css-extract-plugin": "^2.1.0",
+    "node-sass": "^4.14.1",
     "nodemon": "^2.0.2",
-    "optimize-css-assets-webpack-plugin": "^5.0.1",
-    "prettier": "^1.15.3",
+    "postcss": "^8.3.6",
+    "prettier": "^1.19.1",
     "prettier-loader": "^2.1.1",
     "random-string": "^0.2.0",
     "raw-loader": "^4.0.2",
@@ -83,12 +116,16 @@
     "sass-loader": "^7.1.0",
     "style-loader": "^0.23.1",
     "tar": "^4.4.8",
-    "uglifyjs-webpack-plugin": "^2.0.1",
-    "webpack": "^4.27.0",
-    "webpack-cli": "^3.1.2",
+    "terser-webpack-plugin": "^5.1.4",
+    "ts-jest": "^27.0.4",
+    "ts-node": "^10.1.0",
+    "tsconfig-paths": "^3.10.1",
+    "typescript": "^4.3.5",
+    "webpack": "^5.47.1",
+    "webpack-cli": "^3.3.12",
     "webpack-concat-plugin": "^3.0.0",
     "webpack-dev-middleware": "^3.4.0",
-    "webpack-dev-server": "^3.1.14"
+    "webpack-dev-server": "^3.11.2"
   },
   "dependencies": {
     "@babel/core": "^7.13.14",
@@ -124,12 +161,27 @@
     "printWidth": 120,
     "tabWidth": 4,
     "semi": true,
-    "singleQuote": true,
-    "trailingComma": "none",
-    "bracketSpacing": true,
-    "jsxBracketSameLine": false,
-    "arrowParens": "avoid",
-    "requirePragma": false,
-    "proseWrap": "preserve"
+    "trailingComma": "all",
+    "singleQuote": true
+  },
+  "eslintConfig": {
+    "parserOptions": {
+      "parser": "@typescript-eslint/parser",
+      "ecmaVersion": 2018,
+      "sourceType": "module",
+      "ecmaFeatures": {
+        "jsx": true
+      }
+    },
+    "extends": [
+      "plugin:react/recommended",
+      "plugin:@typescript-eslint/recommended"
+    ],
+    "rules": {},
+    "settings": {
+      "react": {
+        "version": "detect"
+      }
+    }
   }
 }

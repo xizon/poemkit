@@ -10,7 +10,7 @@
 
 ```js
 import React from 'react';
-import Footer from '@uixkit.react/components/Footer/index.js';
+import Footer from '@uixkit.react/components/Footer/index.tsx';
 
 export default () => {
   return (

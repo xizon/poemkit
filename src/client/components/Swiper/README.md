@@ -11,7 +11,7 @@
 
 ```js
 import React from 'react';
-import Swiper from '@uixkit.react/components/Swiper/index.js';
+import Swiper from '@uixkit.react/components/Swiper/index.tsx';
 
 export default () => {
   return (

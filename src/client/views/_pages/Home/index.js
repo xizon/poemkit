@@ -1,10 +1,10 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
-import { __ } from '@uixkit.react/components/_utilities/_all.js';
-import Footer from '@uixkit.react/components/Footer/index.js';
+import { __ } from '@uixkit.react/components/_utils/_all';
+import Footer from '@uixkit.react/components/Footer/index.tsx';
 
 //get project config
-import { rootDirectory } from '@uixkit.react/config';
+import { rootDirectory } from '@uixkit.react/config/websiteConfig.js';
 
 export default ({ staticContext = {} }) => {
     staticContext.status = 200;

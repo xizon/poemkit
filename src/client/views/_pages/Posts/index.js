@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { __ } from '@uixkit.react/components/_utilities/_all.js';
+import { __ } from '@uixkit.react/components/_utils/_all';
 import actionCreators from '@uixkit.react/actions/demoListActions.js';
 import PostItem from '@uixkit.react/pages/Posts/PostItem.js';
-import Footer from '@uixkit.react/components/Footer/index.js';
+import Footer from '@uixkit.react/components/Footer/index.tsx';
 
 
 class Posts extends Component {

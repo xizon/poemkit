@@ -40,6 +40,8 @@ Uix Kit React系一套免费的网站开发工具包，帮助开发者从零建�
 
 ## 介绍
 
+
+* 基础环境: TypeScript 4.x.x + Babel 7.x.x + Webpack 5.x.x
 * 集开发、调试、打包和部署为一体
 * 它不是一个JavaScript框架
 * 没有jQuery且不绑定任何工具库
@@ -98,26 +100,28 @@ $ cd /{your_directory}/uix-kit-react
 $ sudo npm install
 ```
 
+**Step 4.** 常用的命令:
 
-**Step 4.** 打包生成CSS，JS，HTML文件
+调试应用程序, 它可以用来单独检查TypeScript类型的文件而不进行编译操作，便于提高开发效率，专注整体代码的编写。
+
+```sh
+$ npm run check
+```
+
+打包生成CSS，JS，HTML文件
 
 ```sh
 $ npm run build
 ```
 
-
-
-**Step 5.** 使用 `Ctrl + C` 退出终端命令
-
-
-**Step 6.** 最后，运行运如下代码进行本地测试。 （仅运行Express服务器。）
+运行下面的命令进行本地测试和代码检查 (仅运行Express服务器）。 使用 `Ctrl + C` 退出终端
 
 ```sh
 $ npm run dev
 ```
 
 
-**Step 7.** 浏览器中访问以下网址，可快速调试：
+**Step 5.** 浏览器中访问以下网址，可快速调试：
 
 ```sh
 http://localhost:3000
@@ -126,10 +130,10 @@ http://localhost:3000
 建议在调试之前将新代码重新编译打包。
 
 
-**Step 8 (可选).** 用PM2启动Reactjs应用程序（仅在使用Node v13.9.0或更高版本时有效）。
+**Step 6 (可选).** 用PM2启动Reactjs应用程序（仅在使用Node v13.9.0或更高版本时有效）。
 
 
-8.1) 安装Node和NPM
+6.1) 安装Node和NPM
 
 ```sh
 $ curl -sL https://rpm.nodesource.com/setup_14.x | sudo bash -
@@ -140,33 +144,45 @@ $ which node babel-node #check the location of node and babel-node
 ```
 
 
-8.2) 全局安装PM2
+6.2) 全局安装PM2
 
 ```sh
 $ sudo npm install pm2@latest -g
 ```
 
 
-8.3) 全局安装Babel
+6.3) 全局安装Babel
 
 ```sh
 $ sudo npm install -g babel-cli
 $ sudo npm install -g @babel/core @babel/cli @babel/preset-env 
 ```
 
+6.4) 全局安装TypeScript和ts-node
 
-8.4) PM2常用命令:
+```sh
+$ sudo npm install -g typescript ts-node
+```
+
+6.5) 使用PM2安装TypeScript依赖
+
+```sh
+$ sudo pm2 install typescript
+```
+
+
+6.6) PM2常用命令:
 
 ```sh
 #先进入 `"uix-kit-react/"` 目录 
 $ cd /{your_directory}/uix-kit-react
 
 
-#用pm2执行babel-node命令
-$ pm2 start ecosystem.config.js  --interpreter babel-node  
+#用pm2运行应用
+$ pm2 start ecosystem.config.js
 
 #其它命令
-$ pm2 restart ecosystem.config.js –-interpreter babel-node
+$ pm2 restart ecosystem.config.js
 $ pm2 stop ecosystem.config.js
 $ pm2 delete ecosystem.config.js
 $ pm2 list
@@ -174,18 +190,29 @@ $ pm2 logs
 ```
 
 
-8.5) 使用域名访问您的React应用。
+6.7) 使用域名访问您的React应用。
 
 需要在Apache或Nginx的Web服务器上部署React App。请参考网络以获取有关设置代理的教程。
 
 
 
-**Step 9 (可选).** 单元测试
+**Step 7 (可选).** 单元测试
 
 ```sh
 $ npm run test
 ```
 
+**Step 8 (可选).** 部署到服务器
+
+```sh
+$ npm run deploy
+```
+
+撤销现有部署:
+
+```sh
+$ npm run destroy
+```
 
 
 
@@ -199,7 +226,15 @@ $ npm run test
 $ sudo chown -R $USER:$(id -gn $USER) /Users/{username}/.config
 ```
 
-**b) 如果升级Node版本，请执行以下代码：**
+**b) ERROR: Node sass version 6.x.x is not compatible with ^ 4.x.x.**
+
+如果出现如上错误,请修改node-sass的版本:
+
+```sh
+$ npm install node-sass@4.14.1
+```
+
+**c) 如果升级Node版本，请执行以下代码：**
 
 ```sh
 $ sudo npm install
@@ -217,7 +252,7 @@ $ sudo npm rebuild node-sass
 ```js
 ...
 const alias = {
-	pathConfig            : './src/config/websiteConfig.js',
+	pathConfig            : './src/config',
 	pathComponents        : './src/client/components',
 	pathRouter            : './src/client/router',
 	pathHelpers            : './src/client/helpers',
@@ -231,10 +266,10 @@ const alias = {
 
 ...
 resolve: {
-	extensions: ['.js', '.es6', '.vue', '.jsx' ],
+	extensions: ['.js', '.es6', '.vue', '.jsx', '.ts', '.tsx' ],
 	alias: {
 
-		// 需要同时配置 `babel.config.js` 文件
+		// 需要同时配置 `babel.config.js` 和 `tsconfig.json` 文件
 		'@uixkit.react/config': path.resolve(__dirname, alias.pathConfig ),
 		'@uixkit.react/components': path.resolve(__dirname, alias.pathComponents ),
 		'@uixkit.react/router': path.resolve(__dirname, alias.pathRouter ),
@@ -259,7 +294,7 @@ resolve: {
 	["module-resolver", {
 	  "root": ["./src"],
 	  "alias": {
-		"@uixkit.react/config": "./src/config/websiteConfig.js",
+		"@uixkit.react/config": "./src/config",
 		"@uixkit.react/components": "./src/client/components",
 		"@uixkit.react/router": "./src/client/router",
 		"@uixkit.react/helpers": "./src/client/helpers",
@@ -274,6 +309,31 @@ resolve: {
   ]
 ...
 ```
+
+
+`tsconfig.json` :
+
+```json
+{
+  "compilerOptions": {
+    "baseUrl": "./src",
+    "paths": {
+        "@uixkit.react/config/*": ["config/*"],
+        "@uixkit.react/components/*": ["client/components/*"],
+        "@uixkit.react/router/*": ["client/router/*"],
+        "@uixkit.react/helpers/*": ["client/helpers/*"],
+        "@uixkit.react/services/*": ["client/services/*"],
+        "@uixkit.react/reducers/*": ["client/reducers/*"],
+        "@uixkit.react/pages/*": ["client/views/_pages/*"],
+        "@uixkit.react/actions/*": ["client/actions/*"],
+        "@uixkit.react/server/*": ["server/*"],
+        "@uixkit.react/store/*": ["store/*"]
+    }
+  }
+}
+```
+
+
 
 
 
@@ -345,17 +405,27 @@ output: {
 }
 ```
 
-### ⚙️ 打包编译应用时运行开发模式:
+### ⚙️ 使用 `PropTypes` 检查类型:
 
-运行以下命令来测试:
 
 ```sh
 $ npm run dev
 ```
 
-使用下面的JavaScript脚本可以编写调试代码，比如:
+使用下面的JavaScript脚本可以编写调试代码，在终端显示错误和警告信息。
 
 ```js
+import PropTypes from "prop-types";
+import React, { Component } from 'react';
+
+export default class YourComponentName extends Component { 
+	public static propTypes = {};
+	constructor(props) {
+		super(props);
+	}
+	render() { ... }
+}
+
 if ( process.env.NODE_ENV === 'development' ) {
 
 	YourComponentName.propTypes = {
@@ -433,14 +503,10 @@ uix-kit-react/
 ├── dist/         ------------------------------- # web 编译出的文件，用于生产环境
 │   ├── css/
 │   │   ├── uix-kit-react.css
-│   │   ├── uix-kit-react.css.map
-│   │   ├── uix-kit-react.min.css
-│   │   └── uix-kit-react.min.css.map
+│   │   └── uix-kit-react.min.css
 │   └── js/
 │   │   ├── uix-kit-react.js
-│   │   ├── uix-kit-react.js.map
-│   │   ├── uix-kit-react.min.js
-│   │   └── uix-kit-react.min.js.map
+│   │   └── uix-kit-react.min.js
 ├── src/
 │   ├── client/
 │   │   ├── client.js
@@ -451,7 +517,7 @@ uix-kit-react/
 │   │   ├── router/
 │   │   ├── components/ -------------------------  # 独立的UI组件
 │   │   │     ├── */
-│   │   │     ├── _utilities/ -------------------  # 公共的js或css模块
+│   │   │     ├── _utils/ -----------------------  # 常用的实用程序和样式脚本
 │   │   │     └── _plugins/ ---------------------  # 第三方插件
 │   │   ├── views/ ------------------------------  # 网站页面
 │   │   │     ├── _pages/

@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { __ } from '@uixkit.react/components/_utilities/_all.js';
+import { __ } from '@uixkit.react/components/_utils/_all';
 import UserService from "@uixkit.react/services/user-service.js";
 
 class Authorized extends Component {

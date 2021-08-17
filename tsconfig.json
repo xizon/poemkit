@@ -1,0 +1,46 @@
+{
+    "compilerOptions": {
+      "target": "esnext",
+      "lib": [
+        "dom",
+        "dom.iterable",
+        "esnext"
+      ],
+      "allowJs": true,
+      "skipLibCheck": true,
+      "esModuleInterop": true,
+      "allowSyntheticDefaultImports": true,
+      "strict": true,
+      "forceConsistentCasingInFileNames": true,
+      "module": "commonjs",
+      "moduleResolution": "node",
+      "isolatedModules": true,
+      "resolveJsonModule": true,
+      "noEmit": true,
+      "jsx": "react",
+      "sourceMap": true,
+      "declaration": true,
+      "noUnusedLocals": false,
+      "noUnusedParameters": false,
+      "incremental": true,
+      "noFallthroughCasesInSwitch": true,
+      "noImplicitAny": false,
+      "baseUrl": "./src",
+      "paths": {
+        "@uixkit.react/config/*": ["config/*"],
+        "@uixkit.react/components/*": ["client/components/*"],
+        "@uixkit.react/router/*": ["client/router/*"],
+        "@uixkit.react/helpers/*": ["client/helpers/*"],
+        "@uixkit.react/services/*": ["client/services/*"],
+        "@uixkit.react/reducers/*": ["client/reducers/*"],
+        "@uixkit.react/pages/*": ["client/views/_pages/*"],
+        "@uixkit.react/actions/*": ["client/actions/*"],
+        "@uixkit.react/server/*": ["server/*"],
+        "@uixkit.react/store/*": ["store/*"]
+      }
+    },
+    "include": [
+      "src/**/*.ts", "src/**/*.tsx"
+    ],
+    "exclude": ["node_modules"]
+  }

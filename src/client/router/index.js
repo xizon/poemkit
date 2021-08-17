@@ -4,7 +4,7 @@ import { renderRoutes } from 'react-router-config';
 import customRoutesConfig from '@uixkit.react/router/RoutesConfig.js';
 
 //get project config
-import { rootDirectory } from '@uixkit.react/config';
+import { rootDirectory } from '@uixkit.react/config/websiteConfig.js';
 
 
 export default () => {

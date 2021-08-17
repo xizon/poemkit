@@ -6,13 +6,13 @@ import {
 	Redirect,
 	useLocation
 } from 'react-router-dom';
-import { __ } from '@uixkit.react/components/_utilities/_all.js';
+import { __ } from '@uixkit.react/components/_utils/_all';
 
 import customRoutesConfig from '@uixkit.react/router/RoutesConfig.js';
-import Header from '@uixkit.react/components/Header/index.js';
+import Header from '@uixkit.react/components/Header/index.tsx';
 
 //get project config
-import { rootDirectory } from '@uixkit.react/config';
+import { rootDirectory } from '@uixkit.react/config/websiteConfig.js';
 
 export default (props) => {
     
@@ -23,7 +23,7 @@ export default (props) => {
 		
 		
 		//change page title
-		//-------------
+		//------------------------------------------
 		let pageTitle = null;
 		let pageNoMatchTitle = null;
 		const breakException = {};

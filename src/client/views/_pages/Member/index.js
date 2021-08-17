@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
-import { __ } from '@uixkit.react/components/_utilities/_all.js';
+import { __ } from '@uixkit.react/components/_utils/_all';
 import LoginPage from '@uixkit.react/pages/Member/LoginPage.js';
-import Footer from '@uixkit.react/components/Footer/index.js';
+import Footer from '@uixkit.react/components/Footer/index.tsx';
 
 
 class Member extends Component {

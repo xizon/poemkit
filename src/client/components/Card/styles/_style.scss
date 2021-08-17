@@ -1,0 +1,667 @@
+/* ======================================================
+   <!-- Card -->
+/* ====================================================== */
+@import '@uixkit.react/components/_utils/styles/_variable-and-mixin.scss';
+
+
+/*
+ * 1. Author Card
+ * 2. Gallery Card (via Flex)
+ * 3. Thumbnail Card (via Flex)
+
+*/
+
+$card-radius: 8px;
+
+/*
+ ---------------------------
+ 1. Author Card
+ ---------------------------
+ */
+
+.uix-card--author {
+    box-sizing: border-box;
+	margin: 0 auto;
+	border: 1px solid #eaeaea;
+	position: relative;
+	border-top: 8px solid $highlight-color1;
+	border-radius: $card-radius;
+	@include outer-shadow( 'regular' );
+
+	&.uix-card--author--noborder {
+		border: none;
+	}
+	&.uix-card--author--stats {
+		margin-top: 2rem;
+	}
+
+	&::before,
+	&::after {
+		content: " ";
+		display: table;
+		clear: both;
+	}
+
+	.uix-card--author__tagline {
+		font-size: 0.75rem;
+		font-weight: 500;
+		text-transform: uppercase;
+		color: rgba(51, 51, 51, .4);
+	}
+
+
+	.uix-card--author__header {
+		min-height: 2.086538461rem;
+		background: #fff;
+		padding: 0.65625rem 1.75rem 0 1.75rem;
+		border-radius: #{$card-radius} #{$card-radius} 0  0;
+
+
+		h3 {
+			margin: 0;
+			padding: 0;
+			font-size: 1.125rem;
+
+		}
+		.uix-card--author__text {
+			margin-top: 0.4375rem;
+			width: calc(100% - 105px );
+			a {
+				font-size: 0.75rem;
+			}
+		}
+		.uix-card--author__preview {
+			position: relative;
+			display: inline-block;
+			top: 0.175rem;
+			width: 100px;
+			height: 100px;
+
+			&.uix-card--author__preview--rounded {
+				border-radius: $card-radius;
+			}
+
+			&.uix-card--author__preview--jumpOut {
+				@include outer-shadow( 'regular' );
+				position: absolute;
+				transform: translateY(-2rem);
+
+			}
+
+			img {
+				width: 90px !important;
+				height: 90px !important;
+				margin: 0.3125rem 0 0 0.3125rem;
+			}
+
+		}
+	}
+
+	.uix-card--author__content {
+		background: #fff;
+		padding: 1.75rem 1.75rem 1.3125rem 1.75rem;
+		line-height: 1.5;
+
+		&.uix-card--author__content--rounded {
+			border-radius: 0  0 #{$card-radius} #{$card-radius};
+		}
+
+		&::after {
+			content: '';
+			position: relative;
+			height: 0;
+			width: 0;
+			border-left: 0.4375rem solid transparent;
+			border-right: 0.4375rem solid transparent;
+			border-top: 0.4375rem solid #fff;
+			position: absolute;
+			bottom: 2.125rem;
+			left: 1.75rem;
+		}
+
+		p {
+			margin-top: 0.875rem;
+			padding: 0 0.875rem 0 1.75rem;
+		}
+
+        
+
+        /*-- Equal-width Columns --*/
+        /**
+        * Using only CSS, we can make a tabbed navigation whose tabs always
+        * occupy an equal share of the available width. No JS to interrogate
+        * the DOM, no server-side logic to count through items, no inline styles.
+        *
+        */
+
+        ul {
+            list-style: none;
+            font-size: 0; /*Fighting the Space Between Inline Block Elements*/
+
+            display: table; /* [1] */
+            table-layout: fixed; /* [2] */
+            width: 100%; /* [3] */
+
+
+            li {
+                font-size: 1rem;/*Fighting the Space Between Inline Block Elements*/
+                display: table-cell; /* [4] */
+                box-shadow: 1px 0px 0px 0px $sub-text-color;
+
+                &:last-child {
+                    box-shadow: none;
+                }
+
+                span {
+                    display: block;
+                    font-size: 0.75rem;
+                }
+
+            }
+
+        }
+
+        @media all and (max-width: 768px) {
+            ul {
+                display: block;
+
+                li {
+
+                    display: inline-block;
+                    width: 50%;
+                    margin-bottom: .5rem;
+
+
+
+                    &:nth-child(2n+0) {
+                        box-shadow: none;
+                    }
+
+                    span {
+                        padding-bottom: 1rem;
+                    }
+
+                }
+
+            }
+        }
+
+
+
+	}
+
+	.uix-card--author__jump {
+		font-size: 0.875rem;
+		display: block;
+		background: #F6F6F6;
+		padding: 0.525rem 2.1875rem;
+		text-align: right;
+		transition: all 500ms ease-in-out;
+		color: #BDBDBD;
+		border-radius: 0  0 #{$card-radius} #{$card-radius};
+		vertical-align: middle;
+	}
+
+
+}
+
+
+/*
+ ---------------------------
+ 2. Gallery Card
+ ---------------------------
+ */
+.uix-card--gallery {
+    box-sizing: border-box;
+    position: relative;
+    display: inline-flex;
+    flex-direction: column;
+    max-width: 100%; /* Prevent text overflow with no-wrap */
+    
+    /* demo style */
+    @include outer-shadow( 'regular' );
+    border-radius: $card-radius;
+   
+    
+    .uix-card--gallery__preview,
+    .uix-card--gallery__body {
+        display: flex;                 /* nested flex container */
+        flex-direction: column;        /* vertical alignment of flex items */
+        justify-content: center;       /* center flex items vertically */  
+    }
+    
+    .uix-card--gallery__preview {
+        align-items: center; /* center flex items horizontally */
+        padding: 0;  /* default value, this attribute can be specified in HTML */
+        box-sizing: border-box;
+        position: relative;
+        border-radius: $card-radius $card-radius 0 0;
+        
+        
+        img {
+            object-fit: cover;
+            object-position: center;
+            height: 100%;
+            width: 100%;
+            border-radius: $card-radius $card-radius 0 0;
+        }
+
+        /* Use a :before to show the selection outline so that the border doesn't
+        * affect the layout of the content within the preview. */
+        &::before {
+            content: '';
+            position: absolute;
+            inset-block-start: 0;
+            inset-inline-start: 0;
+            inline-size: 100%;
+            block-size: 100%;
+            box-sizing: border-box;
+            border-radius: inherit;
+            border: 1px solid transparent;
+        }
+        
+    }
+    
+    
+    .uix-card--gallery__header {
+        display: flex;
+        align-items: center; /* center flex items horizontally */
+        
+        .uix-card--gallery__header__child {
+            display: flex;
+            flex: 1;
+            word-break: break-all;
+            align-items: center;
+            max-width: 100%;
+ 
+            
+            small {
+                white-space: nowrap;
+            }
+        }      
+    }
+    
+    .uix-card--gallery__content {
+  
+        > .uix-card--gallery__content__child {
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+
+
+            .uix-card--gallery__content__child--left {
+                display: flex;
+                flex-direction: row;
+                flex: 1;
+                align-items: center; /* center flex items horizontally */
+                word-break: break-all;
+                min-width: 0; /* prevents flex-boxes of becoming smaller than it's contents -- for rows */
+
+                > div {
+                    line-height: 1.25;
+                    margin-left: .5rem;
+                    width: 100%;
+                }   
+
+            }
+
+
+            .uix-card--gallery__content__child--right {
+                min-width: 50px; /* default value, this attribute can be specified in HTML */
+            }   
+
+
+        }
+
+
+    }
+
+
+    
+    
+    .uix-card--gallery__body {
+        flex: 1;
+        max-width: 100%; /* Prevent text overflow with no-wrap when horizontal type is used  */
+        min-width: 0; /* prevents flex-boxes of becoming smaller than it's contents -- for rows */
+    }
+    
+    .uix-card--gallery__action {
+        display: flex;
+        flex: 1;
+        margin-left: 1rem;
+        justify-content: flex-end; /* end flex items vertically */
+    }
+    
+  
+    /*-- horizontal layout --*/
+    &.uix-card--gallery--horizontal {
+        flex-direction: row;
+        
+
+        .uix-card--gallery__preview {
+            border-radius: $card-radius 0 0 $card-radius;
+        
+            img {
+                visibility: hidden;
+                border-radius: $card-radius 0 0 $card-radius;
+            }  
+            
+        }
+        
+        .uix-card--gallery__header {
+            .uix-card--gallery__header__child {
+                display: block;
+            }      
+        }   
+        
+    }
+    
+    
+    /*-- overlay layout --*/
+    &.uix-card--gallery--overlay {
+        
+        .uix-card--gallery__preview {
+            border-radius: $card-radius;
+            img {
+                border-radius: $card-radius;
+            }
+        }
+
+        .uix-card--gallery__body {
+			position: absolute;
+			bottom: 0;
+            left: 0;
+            
+            &.uix-card--gallery__body--verticalCenter {
+                height: 100%;
+            }
+        }
+    }
+
+    
+    
+
+    /*-- Menu Group --*/
+    .uix-card--gallery__status {
+        position: absolute;
+        justify-content: center;
+        display: flex;
+        background-color: rgba(0, 0, 0, 0.3);
+        width: 100%;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        z-index: 2;
+
+
+        .uix-card--gallery__status__item {
+            display: flex;
+            align-items: center;
+            color: #fff;
+            padding: 0.5rem 1rem;
+            white-space: nowrap;
+
+            svg {
+                width: 20px;
+                margin-right: .5rem;
+            }
+        }
+
+
+    }
+
+
+
+    .uix-card--gallery__menu {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        width: 100%;
+        box-shadow: -1px 3px 8px -1px rgba(0, 0, 0, 0.1);
+        border-radius: 0 0 4px 4px;
+        padding: 0 25px;
+        z-index: 2;
+
+
+        .uix-card--gallery__menu__avatar {
+            display: flex;
+            align-items: center;
+
+            > span {
+                white-space: nowrap;
+            }
+
+            img {
+                width: 42px;
+                height: 42px;
+                object-fit: cover; /* required */
+                margin-right: 15px;
+            }
+
+
+        }
+
+
+        .uix-card--gallery__menu__items {
+            display: flex;
+            cursor: pointer;
+
+            > a {
+                padding: 20px;
+                transition: all 500ms ease-in-out;
+
+                &.is-active,
+                &:hover {
+                    border-bottom: 3px solid $highlight-color1;
+                    color: $highlight-color1;
+                }
+            }  
+        }
+
+
+        .uix-card--gallery__menu__action {
+            display: flex;
+
+            button {
+                border: 1px solid #dcdcdc;
+                color: #C9C9C9;
+                border-radius: 25px 0 0 25px;
+                padding: .5rem 1rem;
+                font-weight: 600;
+                font-size: 0.75rem;
+                cursor: pointer;
+                background-color: transparent;
+
+
+                &:last-child {
+                    border-radius: 0 25px 25px 0;
+                    margin-left: -1px;
+                }
+
+                &:hover {
+                    background-color: #FAFAFA;
+                }
+            }
+
+
+        }
+
+
+    }
+
+
+    /*
+     If you do not use "justify-content: space-between; ", 
+     you need to use the following to achieve the layout
+    */
+    /*
+    .uix-card--gallery__menu {
+        display: flex;
+        
+        .uix-card--gallery__menu__items {
+            display: flex;
+            margin-left: auto;
+        }
+
+        .uix-card--gallery__menu__action {
+            display: flex;
+            margin-left: auto;
+        }
+    }
+    */
+
+    
+    
+    /*-- rxtra elements style --*/
+    button {
+        background-color: rgba(0, 0, 0, 0);
+        border-color: rgba(0, 0, 0, 0);
+        color: rgb(75, 75, 75);  
+
+        &:active {
+            background-color: rgb(225, 225, 225);
+            border-color: rgb(225, 225, 225);
+            color: rgb(44, 44, 44);
+            box-shadow: none;
+            outline: 5px auto -webkit-focus-ring-color;
+        }
+    }
+
+    
+    
+
+}
+
+@media all and (max-width: 768px) {
+	.uix-card--gallery {
+
+        
+        /*-- horizontal layout --*/
+        &.uix-card--gallery--horizontal:not(.is-mobile-still) {
+            flex-direction: column;
+            
+            .uix-card--gallery__preview {
+                border-radius: $card-radius $card-radius 0 0;
+                img {
+                    border-radius: $card-radius $card-radius 0 0;
+                }  
+            }  
+        }
+        
+        
+
+        /*-- Menu Group --*/
+        .uix-card--gallery__menu {
+            flex-direction: column;
+
+            .uix-card--gallery__menu__avatar {
+                margin: 1rem;
+            }
+
+            .uix-card--gallery__menu__action {
+                margin: 1rem;
+            }
+
+        }
+
+        
+		
+	}
+
+}
+
+/*
+ ---------------------------
+ 3. Thumbnail Card
+ ---------------------------
+ */
+.uix-card--thumb {
+    box-sizing: border-box;
+    position: relative;
+    display: inline-flex;
+    flex-direction: column;
+    max-width: 100%; /* Prevent text overflow with no-wrap */
+    
+    /* demo style */
+    padding: 1rem;
+    @include outer-shadow( 'regular' );
+    border-radius: $card-radius;
+
+    .uix-card--thumb__header {
+        display: inline-flex;
+        flex-direction: row;
+        align-items: center; /* center flex items horizontally */
+        
+        
+        .uix-card--thumb__preview {
+            flex-basis: 50px; /* default value, this attribute can be specified in HTML */
+            margin-right: 5px;
+        }
+        
+        .uix-card--thumb__content {
+            /* ----- Keep the width of the picture fixed -----  begin  */
+            flex: 1;
+            min-width: 0; /* prevents flex-boxes of becoming smaller than it's contents -- for rows */
+            /* ----- Keep the width of the picture fixed -----  end  */
+            
+            > .uix-card--thumb__content__child {
+                display: flex;
+                flex-direction: row;
+
+                
+                .uix-card--thumb__content__child--left {
+                    display: flex;
+                    flex-direction: row;
+                    flex: 1;
+                    align-items: center; /* center flex items horizontally */
+                    word-break: break-all;
+                    min-width: 0; /* prevents flex-boxes of becoming smaller than it's contents -- for rows */
+
+                    > div {
+                        line-height: 1.25;
+                        margin-left: .5rem;
+                        width: 100%;
+                    }   
+
+                }
+                
+
+                .uix-card--thumb__content__child--right {
+                    min-width: 50px; /* default value, this attribute can be specified in HTML */
+                }   
+
+                  
+            }
+           
+            
+        }
+
+
+    }
+    
+    
+    .uix-card--thumb__body {
+        padding-top: .5rem;
+        line-height: 1.25;
+    }
+
+
+    /*-- rxtra elements style --*/
+    button {
+        background-color: rgba(0, 0, 0, 0);
+        border-color: rgba(0, 0, 0, 0);
+        color: rgb(75, 75, 75);  
+
+        &:active {
+            background-color: rgb(225, 225, 225);
+            border-color: rgb(225, 225, 225);
+            color: rgb(44, 44, 44);
+            box-shadow: none;
+            outline: 5px auto -webkit-focus-ring-color;
+        }
+    }
+
+    
+    
+}
+
