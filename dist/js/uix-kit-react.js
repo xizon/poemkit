@@ -6,7 +6,7 @@
  * ## Project Name        :  Uix Kit React
  * ## Project Description :  A free web kits with React for fast web design and development via SSR.
  * ## Project URL         :  https://uiux.cc
- * ## Version             :  0.0.5
+ * ## Version             :  0.0.6
  * ## Based on            :  Uix Kit React (https://github.com/xizon/uix-kit-react#readme)
  * ## Last Update         :  August 18, 2021
  * ## Created by          :  UIUX Lab (https://uiux.cc) (uiuxlab@gmail.com)
@@ -42580,11 +42580,31 @@ var actionCreators = function actionCreators() {
         while (1) {
           switch (_context.prev = _context.next) {
             case 0:
-              _context.next = 2;
+              res = {
+                data: []
+              }; // You should catch your potential promise rejection
+              // To avoid causing `502 Proxy Error` errors when requesting from the express server
+
+              /*
+                If the API asynchronous request failed asynchronously (usually a 403 permission error), the error report `502 Proxy Error` of the Express Server will be skipped, and cannot use server-side rendering (SSR) features.
+                The test on the local server is correct, this error usually occurs on the cloud server.
+              */
+
+              _context.prev = 1;
+              _context.next = 4;
               return axios_default().get(websiteConfig.API.RECEIVE_DEMO_LIST);
 
-            case 2:
+            case 4:
               res = _context.sent;
+              _context.next = 10;
+              break;
+
+            case 7:
+              _context.prev = 7;
+              _context.t0 = _context["catch"](1);
+              console.warn(_context.t0);
+
+            case 10:
               //The Redux store has a method called `store.dispatch()`.
               action = {
                 type: 'RECEIVE_DEMO_LIST',
@@ -42592,12 +42612,12 @@ var actionCreators = function actionCreators() {
               };
               storeDispatch(action);
 
-            case 5:
+            case 12:
             case "end":
               return _context.stop();
           }
         }
-      }, _callee);
+      }, _callee, null, [[1, 7]]);
     }));
 
     return function (_x) {
@@ -42794,7 +42814,10 @@ var Posts = /*#__PURE__*/function (_Component) {
         className: "row"
       }, /*#__PURE__*/react.createElement("div", {
         className: "col-12"
-      }, isLoaded ? preloadedState != null ? preloadedState.map(function (item, i) {
+      }, /*#__PURE__*/react.createElement("div", {
+        className: "alert alert-warning",
+        role: "alert"
+      }, "If the API asynchronous request failed asynchronously (usually a 403 permission error), the error report ", /*#__PURE__*/react.createElement("strong", null, "`502 Proxy Error`"), " of the Express Server will be skipped, and cannot use server-side rendering (SSR) features.", /*#__PURE__*/react.createElement("br", null), "The test on the local server is correct, this error usually occurs on the cloud server."), isLoaded ? preloadedState != null ? preloadedState.map(function (item, i) {
         return /*#__PURE__*/react.createElement(PostItem, extends_extends({
           key: i
         }, item));
@@ -42850,11 +42873,40 @@ var demoListDetailActions_actionCreators = function actionCreators(id) {
         while (1) {
           switch (_context.prev = _context.next) {
             case 0:
-              _context.next = 2;
+              res = {
+                data: [{
+                  "name": "",
+                  "capital": "",
+                  "population": "",
+                  "subregion": "",
+                  "languages": [{
+                    "name": ""
+                  }],
+                  "flag": ""
+                }]
+              }; // You should catch your potential promise rejection
+              // To avoid causing `502 Proxy Error` errors when requesting from the express server
+
+              /*
+                If the API asynchronous request failed asynchronously (usually a 403 permission error), the error report `502 Proxy Error` of the Express Server will be skipped, and cannot use server-side rendering (SSR) features.
+                The test on the local server is correct, this error usually occurs on the cloud server.
+              */
+
+              _context.prev = 1;
+              _context.next = 4;
               return axios_default().get(websiteConfig.API.RECEIVE_DEMO_LISTDETAIL.replace('{id}', id));
 
-            case 2:
+            case 4:
               res = _context.sent;
+              _context.next = 10;
+              break;
+
+            case 7:
+              _context.prev = 7;
+              _context.t0 = _context["catch"](1);
+              console.warn(_context.t0);
+
+            case 10:
               //The Redux store has a method called `store.dispatch()`.
               action = {
                 type: 'RECEIVE_DEMO_LISTDETAIL',
@@ -42862,12 +42914,12 @@ var demoListDetailActions_actionCreators = function actionCreators(id) {
               };
               storeDispatch(action);
 
-            case 5:
+            case 12:
             case "end":
               return _context.stop();
           }
         }
-      }, _callee);
+      }, _callee, null, [[1, 7]]);
     }));
 
     return function (_x) {
@@ -43030,7 +43082,10 @@ var PostDetail = /*#__PURE__*/function (_Component) {
         className: "row"
       }, /*#__PURE__*/react.createElement("div", {
         className: "col-12"
-      }, isLoaded ? preloadedState != null ? preloadedState.map(function (item, i) {
+      }, /*#__PURE__*/react.createElement("div", {
+        className: "alert alert-warning",
+        role: "alert"
+      }, "If the API asynchronous request failed asynchronously (usually a 403 permission error), the error report ", /*#__PURE__*/react.createElement("strong", null, "`502 Proxy Error`"), " of the Express Server will be skipped, and cannot use server-side rendering (SSR) features.", /*#__PURE__*/react.createElement("br", null), "The test on the local server is correct, this error usually occurs on the cloud server."), isLoaded ? preloadedState != null ? preloadedState.map(function (item, i) {
         return /*#__PURE__*/react.createElement("div", {
           key: "detail" + i,
           style: {
@@ -74065,8 +74120,8 @@ var routesConfig = [{
   },
   /* 
   important!! 
-  	Fixed: Nested routes not working
-  	Add a new route of /posts/:post_id and add an "exact" property to the current route: 
+    Fixed: Nested routes not working
+    Add a new route of /posts/:post_id and add an "exact" property to the current route: 
   */
   {
     path: "/posts",

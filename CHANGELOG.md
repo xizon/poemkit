@@ -1,5 +1,10 @@
 # Changelog
 
+#### = 0.0.6 (August 18, 2021) =
+
+* Fix: Fixed the error that may occur when axios asynchronous request. To avoid causing 502 Proxy Error errors when requesting from the express server.
+
+
 #### = 0.0.5 (August 16, 2021) =
 
 * New: TypeScript Support.

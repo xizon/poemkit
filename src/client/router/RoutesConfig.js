@@ -15,81 +15,81 @@ const routesConfig = [
   {
     component: App,
     routes: [
-		
-		
-	  /*======================================== */
-	  /* Homepage */
-		
+
+
+      /*======================================== */
+      /* Homepage */
+
       {
         path: "/",
         component: Home,
         exact: true,
-		pageTitle: 'Uix Kit React'
+        pageTitle: 'Uix Kit React'
       },
-		
+
       {
         path: "/index",
         component: Home,
-		pageTitle: 'Uix Kit React'
+        pageTitle: 'Uix Kit React'
       },
-		
-		
-	  /*======================================== */
-	  /* Primary Menu */
-		
-	  {
+
+
+      /*======================================== */
+      /* Primary Menu */
+
+      {
         path: "/components-demo",
         component: ComponentsDemo,
-		pageTitle: 'Components Demo'
-      },	
+        pageTitle: 'Components Demo'
+      },
 
-	/* 
-	important!! 
-		Fixed: Nested routes not working
-		Add a new route of /posts/:post_id and add an "exact" property to the current route: 
-	*/
-		
+      /* 
+      important!! 
+        Fixed: Nested routes not working
+        Add a new route of /posts/:post_id and add an "exact" property to the current route: 
+      */
+
       {
         path: "/posts",
         component: Posts,
-		pageTitle: 'Posts',
-		exact: true
+        pageTitle: 'Posts',
+        exact: true
       },
       {
         path: "/member",
         component: Member,
-		pageTitle: 'Member'
+        pageTitle: 'Member'
       },
-  
+
       {
         path: "/posts/:post_id",
         component: PostDetail,
-		pageTitle: ''
-      },	
-		
+        pageTitle: ''
+      },
+
       {
         path: "/admin",
         component: Admin,
-		pageTitle: 'Admin'
+        pageTitle: 'Admin'
       },
-  
-		
-	  /* In order to make nested routes valid, do not add the exact attribute here */
-	  {
+
+
+      /* In order to make nested routes valid, do not add the exact attribute here */
+      {
         path: "/nested-routes",
         component: NestedRoutes,
-		pageTitle: 'Nested Routes',
-      },	
-		
-		
-	  /* 404 */
+        pageTitle: 'Nested Routes',
+      },
+
+
+      /* 404 */
       {
         path: "*",
         component: NoMatch,
-		pageTitle: '404 Error',
-		status: 404
+        pageTitle: '404 Error',
+        status: 404
       },
-		
+
     ]
   }
 ];
