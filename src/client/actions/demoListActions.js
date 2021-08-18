@@ -14,7 +14,7 @@ const actionCreators = () => {
 		// You should catch your potential promise rejection
 		// To avoid causing `502 Proxy Error` errors when requesting from the express server
 		/*
-		  If the API asynchronous request failed asynchronously (usually a 403 permission error), the error report `502 Proxy Error` of the Express Server will be skipped, and cannot use server-side rendering (SSR) features.
+		  If the API asynchronous request failed (usually a 403 permission error), the error report `502 Proxy Error` of the Express Server will be skipped, and cannot use server-side rendering (SSR) features.
 		  The test on the local server is correct, this error usually occurs on the cloud server.
 		*/
 		try {

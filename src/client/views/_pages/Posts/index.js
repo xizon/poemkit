@@ -158,7 +158,7 @@ class Posts extends Component {
 
 
 									<div className="alert alert-warning" role="alert">
-									If the API asynchronous request failed asynchronously (usually a 403 permission error), the error report <strong>`502 Proxy Error`</strong> of the Express Server will be skipped, and cannot use server-side rendering (SSR) features.<br />
+									If the API asynchronous request failed (usually a 403 permission error), the error report <strong>`502 Proxy Error`</strong> of the Express Server will be skipped, and cannot use server-side rendering (SSR) features.<br />
 									The test on the local server is correct, this error usually occurs on the cloud server.
 									</div>
 
