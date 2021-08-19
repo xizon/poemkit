@@ -6,9 +6,9 @@
  * ## Project Name        :  Uix Kit React
  * ## Project Description :  A free web kits with React for fast web design and development via SSR.
  * ## Project URL         :  https://uiux.cc
- * ## Version             :  0.0.6
+ * ## Version             :  0.0.7
  * ## Based on            :  Uix Kit React (https://github.com/xizon/uix-kit-react#readme)
- * ## Last Update         :  August 18, 2021
+ * ## Last Update         :  August 19, 2021
  * ## Created by          :  UIUX Lab (https://uiux.cc) (uiuxlab@gmail.com)
  * ## Released under the MIT license.
  *
@@ -4357,15 +4357,18 @@ var EventDispatcher = nonGlobals.events.EventDispatcher;
 /***/ 1929:
 /***/ ((module) => {
 
+var ROOT_DIR = "";
 var config = {
   // If the file is in the root directory, you can leave it empty. If in another directory, 
   // you can write: "/blog". (but no trailing slash)
-  "rootDirectory": "",
+  "rootDirectory": ROOT_DIR,
   "API": {
     /*------ Posts -------*/
     //Corresponding to folder `./src/client/actions/*`
     "RECEIVE_DEMO_LIST": "https://restcountries.eu/rest/v2",
     "RECEIVE_DEMO_LISTDETAIL": "https://restcountries.eu/rest/v2/name/{id}",
+    //"RECEIVE_DEMO_LIST": `https://uiux.cc${ROOT_DIR}/assets/json/Posts.json`,
+    //"RECEIVE_DEMO_LISTDETAIL": `https://uiux.cc${ROOT_DIR}/assets/json/PostDetail.json`,
 
     /*------ USER -------*/
     "LOGIN_REQUEST": "https://uiux.cc/server/sessions-create.php",
@@ -4380,12 +4383,12 @@ var config = {
 var configTest = {
   // If the file is in the root directory, you can leave it empty. If in another directory, 
   // you can write: "/blog". (but no trailing slash)
-  "rootDirectory": "",
+  "rootDirectory": ROOT_DIR,
   "API": {
     /*------ Posts -------*/
     //Corresponding to folder `./src/client/actions/*`
-    "RECEIVE_DEMO_LIST": "../../assets/json/Posts.json",
-    "RECEIVE_DEMO_LISTDETAIL": "../../assets/json/PostDetail.json",
+    "RECEIVE_DEMO_LIST": "http://localhost:8888/uix-kit-react/public/assets/json/Posts.json",
+    "RECEIVE_DEMO_LISTDETAIL": "http://localhost:8888/uix-kit-react/public/assets/json/PostDetail.json",
 
     /*------ USER -------*/
     "LOGIN_REQUEST": "http://localhost:8888/uix-kit-react/public/server/sessions-create.php",
@@ -42580,31 +42583,11 @@ var actionCreators = function actionCreators() {
         while (1) {
           switch (_context.prev = _context.next) {
             case 0:
-              res = {
-                data: []
-              }; // You should catch your potential promise rejection
-              // To avoid causing `502 Proxy Error` errors when requesting from the express server
-
-              /*
-                If the API asynchronous request failed (usually a 403 permission error), the error report `502 Proxy Error` of the Express Server will be skipped, and cannot use server-side rendering (SSR) features.
-                The test on the local server is correct, this error usually occurs on the cloud server.
-              */
-
-              _context.prev = 1;
-              _context.next = 4;
+              _context.next = 2;
               return axios_default().get(websiteConfig.API.RECEIVE_DEMO_LIST);
 
-            case 4:
+            case 2:
               res = _context.sent;
-              _context.next = 10;
-              break;
-
-            case 7:
-              _context.prev = 7;
-              _context.t0 = _context["catch"](1);
-              console.warn(_context.t0);
-
-            case 10:
               //The Redux store has a method called `store.dispatch()`.
               action = {
                 type: 'RECEIVE_DEMO_LIST',
@@ -42612,12 +42595,12 @@ var actionCreators = function actionCreators() {
               };
               storeDispatch(action);
 
-            case 12:
+            case 5:
             case "end":
               return _context.stop();
           }
         }
-      }, _callee, null, [[1, 7]]);
+      }, _callee);
     }));
 
     return function (_x) {
@@ -42627,6 +42610,25 @@ var actionCreators = function actionCreators() {
 };
 
 /* harmony default export */ const demoListActions = (actionCreators);
+/** //////////////////////////////////////// */
+
+/*
+	If the API asynchronous request failed asynchronously (usually a 403 permission error), the error report `502 Proxy Error` of the Express Server will be skipped, and cannot use server-side rendering (SSR) features.
+	The test on the local server is correct, this error usually occurs on the cloud server.
+*/
+
+/*
+let res = {data: []};
+
+// You should catch your potential promise rejection to avoid causing `502 Proxy Error` 
+// errors when requesting from the express server
+try {
+	res = await axios.get( API.RECEIVE_DEMO_LIST );
+} catch (err) {
+	console.warn(err);
+}
+
+*/
 ;// CONCATENATED MODULE: ./src/client/views/_pages/Posts/PostItem.js
 
 
@@ -42873,40 +42875,11 @@ var demoListDetailActions_actionCreators = function actionCreators(id) {
         while (1) {
           switch (_context.prev = _context.next) {
             case 0:
-              res = {
-                data: [{
-                  "name": "",
-                  "capital": "",
-                  "population": "",
-                  "subregion": "",
-                  "languages": [{
-                    "name": ""
-                  }],
-                  "flag": ""
-                }]
-              }; // You should catch your potential promise rejection
-              // To avoid causing `502 Proxy Error` errors when requesting from the express server
-
-              /*
-                If the API asynchronous request failed (usually a 403 permission error), the error report `502 Proxy Error` of the Express Server will be skipped, and cannot use server-side rendering (SSR) features.
-                The test on the local server is correct, this error usually occurs on the cloud server.
-              */
-
-              _context.prev = 1;
-              _context.next = 4;
+              _context.next = 2;
               return axios_default().get(websiteConfig.API.RECEIVE_DEMO_LISTDETAIL.replace('{id}', id));
 
-            case 4:
+            case 2:
               res = _context.sent;
-              _context.next = 10;
-              break;
-
-            case 7:
-              _context.prev = 7;
-              _context.t0 = _context["catch"](1);
-              console.warn(_context.t0);
-
-            case 10:
               //The Redux store has a method called `store.dispatch()`.
               action = {
                 type: 'RECEIVE_DEMO_LISTDETAIL',
@@ -42914,12 +42887,12 @@ var demoListDetailActions_actionCreators = function actionCreators(id) {
               };
               storeDispatch(action);
 
-            case 12:
+            case 5:
             case "end":
               return _context.stop();
           }
         }
-      }, _callee, null, [[1, 7]]);
+      }, _callee);
     }));
 
     return function (_x) {
@@ -42929,6 +42902,41 @@ var demoListDetailActions_actionCreators = function actionCreators(id) {
 };
 
 /* harmony default export */ const demoListDetailActions = (demoListDetailActions_actionCreators);
+/** //////////////////////////////////////// */
+
+/*
+	If the API asynchronous request failed asynchronously (usually a 403 permission error), the error report `502 Proxy Error` of the Express Server will be skipped, and cannot use server-side rendering (SSR) features.
+	The test on the local server is correct, this error usually occurs on the cloud server.
+*/
+
+/*
+let res = {
+	data: [
+		{
+			"name": "",
+			"capital": "",
+			"population": "",
+			"subregion": "",
+			"languages": [
+				{
+					"name": ""
+				}
+			],
+			"flag": ""
+		}
+	]
+
+};
+
+// You should catch your potential promise rejection to avoid causing `502 Proxy Error` 
+// errors when requesting from the express server
+try {
+	res = await axios.get( API.RECEIVE_DEMO_LISTDETAIL.replace( '{id}', id ) );
+} catch (err) {
+	console.warn(err);
+}
+
+*/
 ;// CONCATENATED MODULE: ./src/client/views/_pages/Posts/PostDetail.js
 
 
