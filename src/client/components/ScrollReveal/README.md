@@ -18,14 +18,17 @@ export default () => {
 	
 
    React.useEffect(() => {
-		const $style = document.createElement("style");
-		document.head.appendChild($style);
-		$style.innerHTML = `
-			.demo-sr-active {
-				transition: all 1s ease;
-				transform: scale(0.7);
-			}
-        `;     
+		if ( document.querySelector( '#app-demo-sr-style') === null ) {
+			const $style = document.createElement("style");
+			$style.id = 'app-demo-sr-style';
+			document.head.appendChild($style);
+			$style.innerHTML = `
+				.demo-sr-active {
+					transition: all 1s ease;
+					transform: scale(0.7);
+				}
+			`;  
+		}  
    });
 	
   return (

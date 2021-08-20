@@ -6,9 +6,9 @@
  * ## Project Name        :  Uix Kit React
  * ## Project Description :  A free web kits with React for fast web design and development via SSR.
  * ## Project URL         :  https://uiux.cc
- * ## Version             :  0.0.7
+ * ## Version             :  0.0.8
  * ## Based on            :  Uix Kit React (https://github.com/xizon/uix-kit-react#readme)
- * ## Last Update         :  August 19, 2021
+ * ## Last Update         :  August 20, 2021
  * ## Created by          :  UIUX Lab (https://uiux.cc) (uiuxlab@gmail.com)
  * ## Released under the MIT license.
  *
@@ -4363,21 +4363,28 @@ var config = {
   // you can write: "/blog". (but no trailing slash)
   "rootDirectory": ROOT_DIR,
   "API": {
-    /*------ Posts -------*/
-    //Corresponding to folder `./src/client/actions/*`
+    /*
+     TYPE: Posts
+     ------------------------------------------
+        Corresponding to folder `./src/client/actions/*`
+    */
     "RECEIVE_DEMO_LIST": "https://restcountries.eu/rest/v2",
     "RECEIVE_DEMO_LISTDETAIL": "https://restcountries.eu/rest/v2/name/{id}",
     //"RECEIVE_DEMO_LIST": `https://uiux.cc${ROOT_DIR}/assets/json/Posts.json`,
     //"RECEIVE_DEMO_LISTDETAIL": `https://uiux.cc${ROOT_DIR}/assets/json/PostDetail.json`,
 
-    /*------ USER -------*/
+    /*
+     TYPE: User
+     ------------------------------------------
+        Corresponding to folder `./src/client/services/*`
+    */
     "LOGIN_REQUEST": "https://uiux.cc/server/sessions-create.php",
     "USER_AUTHENTICATE": "https://uiux.cc/server/authenticate.php",
     "SIGNUP_REQUEST": ""
   }
 };
 /**
- * API for Test
+ * API for Test (Please use a PHP server environment with a local port of 8888)
  */
 
 var configTest = {
@@ -4385,12 +4392,19 @@ var configTest = {
   // you can write: "/blog". (but no trailing slash)
   "rootDirectory": ROOT_DIR,
   "API": {
-    /*------ Posts -------*/
-    //Corresponding to folder `./src/client/actions/*`
+    /*
+     TYPE: Posts
+     ------------------------------------------
+        Corresponding to folder `./src/client/actions/*`
+    */
     "RECEIVE_DEMO_LIST": "http://localhost:8888/uix-kit-react/public/assets/json/Posts.json",
     "RECEIVE_DEMO_LISTDETAIL": "http://localhost:8888/uix-kit-react/public/assets/json/PostDetail.json",
 
-    /*------ USER -------*/
+    /*
+     TYPE: User
+     ------------------------------------------
+        Corresponding to folder `./src/client/services/*`
+    */
     "LOGIN_REQUEST": "http://localhost:8888/uix-kit-react/public/server/sessions-create.php",
     "USER_AUTHENTICATE": "http://localhost:8888/uix-kit-react/public/server/authenticate.php",
     "SIGNUP_REQUEST": ""
@@ -18699,7 +18713,7 @@ module.exports = Array.isArray || function (arr) {
 
 /***/ }),
 
-/***/ 4126:
+/***/ 588:
 /***/ (function(__unused_webpack_module, __unused_webpack_exports, __webpack_require__) {
 
 //! moment.js locale configuration
@@ -19827,8 +19841,8 @@ var map = {
 	"./ur": 3795,
 	"./ur.js": 3795,
 	"./uz": 6791,
-	"./uz-latn": 4126,
-	"./uz-latn.js": 4126,
+	"./uz-latn": 588,
+	"./uz-latn.js": 588,
 	"./uz.js": 6791,
 	"./vi": 9822,
 	"./vi.js": 9822,
@@ -42275,10 +42289,178 @@ var Header = /*#__PURE__*/function (_Component) {
 }(react.Component);
 
 
+;// CONCATENATED MODULE: ./src/client/views/_pages/ComponentsDemo/_SidebarMenu.js
+
+
+/** 
+ * Create or Remove Sidebar Menu 
+ * 
+ */
+function throttle(fn, limit) {
+  var waiting = false;
+  return function () {
+    if (!waiting) {
+      fn.apply(this, arguments);
+      waiting = true;
+      setTimeout(function () {
+        waiting = false;
+      }, limit);
+    }
+  };
+}
+
+function createSidebarMenu(navItems) {
+  // A few variables for use later
+  var navElem = document.createElement("nav"),
+      navList = document.createElement("ul");
+  var navItem, navLink;
+  navElem.className = 'app-sidebar-menu';
+  navElem.appendChild(navList); // Cycle over each nav item
+
+  for (var i = 0; i < navItems.length; i++) {
+    // Create a fresh list item, and anchor
+    navItem = document.createElement("li");
+    navLink = document.createElement("a"); // Set properties on anchor
+
+    navLink.href = navItems[i].href;
+    navLink.innerHTML = navItems[i].text; // Add anchor to list item, and list item to list
+
+    navItem.appendChild(navLink);
+    navList.appendChild(navItem);
+  } // Add list to body (or anywhere else)
+
+
+  document.body.appendChild(navElem); // Smooth scrolling when clicking an anchor link
+
+  document.querySelectorAll('a[href^="#"]').forEach(function (anchor) {
+    anchor.addEventListener('click', function (e) {
+      e.preventDefault();
+      var targetEl = document.querySelector('#' + this.href.split('#')[1]);
+
+      if (targetEl !== null) {
+        var elTop = targetEl.offsetTop;
+        window.scrollTo({
+          top: elTop,
+          behavior: 'smooth'
+        });
+      }
+    });
+  });
+}
+
+function highlightNavigation() {
+  // get the current vertical position of the scroll bar
+  var scrollPosition = window.pageYOffset || document.documentElement.scrollTop; // iterate the sections
+
+  var $sections = [];
+  Array.prototype.slice.call(document.querySelectorAll('h3.app-header-title')).forEach(function (node) {
+    $sections.push(node.closest('section'));
+  });
+
+  for (var i = $sections.length - 1; i >= 0; i--) {
+    var currentSection = $sections[i];
+    var sectionTop = currentSection.offsetTop; // if the user has scrolled over the top of the section  
+
+    if (scrollPosition >= sectionTop - 250) {
+      var _ret = function () {
+        var curID = currentSection.id;
+        var sidebarMenuItems = document.querySelectorAll('.app-sidebar-menu ul > li > a');
+        sidebarMenuItems.forEach(function (item) {
+          var _url = item.getAttribute('href').replace('#', '');
+
+          if (curID === _url) {
+            document.querySelectorAll('a[href^="#"]').forEach(function (anchor) {
+              var _parent = anchor.parentNode;
+
+              if (_parent) {
+                _parent.classList.remove('is-active');
+              }
+            });
+            var _parentCur = item.parentNode;
+
+            if (_parentCur) {
+              _parentCur.classList.add('is-active');
+            }
+          }
+        }); // we have found our section, so we return false to exit the each loop
+
+        return {
+          v: false
+        };
+      }();
+
+      if ((0,esm_typeof/* default */.Z)(_ret) === "object") return _ret.v;
+    }
+  }
+}
+
+function SidebarMenu() {
+  if (typeof document === "undefined") return; //-----
+
+  Array.prototype.forEach.call(document.querySelectorAll('.app-sidebar-menu'), function (node) {
+    node.parentNode.removeChild(node);
+  }); //-----
+
+  if (document.querySelector('#app-sidebar-menu-style') === null) {
+    var $style = document.createElement("style");
+    $style.id = 'app-sidebar-menu-style';
+    document.head.appendChild($style);
+    $style.innerHTML = "\n\n\t\t\t/*-- Sidebar Menu --*/\n\t\t\t.app-sidebar-menu {\n\t\t\t\tposition: fixed;\n\t\t\t\ttop: 100px;\n\t\t\t\tright: 40px;\n\t\t\t\tbox-sizing: border-box;\n\t\t\t\tmax-width: 200px;\n\t\t\t\toverflow: auto;\n\t\t\t\tmax-height: calc(95vh - 100px);\n\t\t\t\tborder-left: 1px #e5e5e5 solid;\n\t\t\t\tpadding: 15px;\n\t\t\t}\n\t\t\t\n\t\t\t.app-sidebar-menu ul {\n\t\t\t\tmargin: 0;\n\t\t\t\tpadding: 0;\n\t\t\t\tlist-style: none;\n\t\t\t\tfont-size: .75rem;\n\t\t\t}\n\t\t\t\n\t\t\t.app-sidebar-menu-header {\n\t\t\t\tpadding: 8px 0;\n\t\t\t\tborder-bottom: 1px solid #e5e5e5;\n\t\t\t}\n\t\t\t\n\t\t\t.app-sidebar-menu li {\n\t\t\t\tposition: relative;\n\t\t\t\tmargin-bottom: .3rem;\n\t\t\t}\n\t\t\t\n\t\t\t.app-sidebar-menu li>a {\n\t\t\t\tdisplay: flex;\n\t\t\t\talign-items: center;\n\t\t\t\tcolumn-gap: .25em;\n\t\t\t\ttext-decoration: none;\n\t\t\t\tcolor: #999;\n\t\t\t}\n\t\t\t\n\t\t\t.app-sidebar-menu li>a>* {\n\t\t\t\tflex: none;\n\t\t\t}\n\t\t\t\n\t\t\t.app-sidebar-menu li>a:focus {\n\t\t\t\toutline: none;\n\t\t\t}\n\t\t\t\n\t\t\t.app-sidebar-menu>li>a {\n\t\t\t\tpadding: 5px 0;\n\t\t\t}\n\t\t\t\n\t\t\t.app-sidebar-menu li.is-active > a {\n\t\t\t\tcolor: #333;\n\t\t\t}\n\n\t\t\t@media all and (max-width: 768px) {\n\t\t\t\t.app-sidebar-menu {\n\t\t\t\t\tdisplay: none;\n\t\t\t\t}\n\t\t\t\t\n\t\t\t\t.app-header-title--sidebar > a[href^=\"#\"] {\n\t\t\t\t\tdisplay: none;\n\t\t\t\t}\n\t\t\t}\n\t\t\t\n\t\t";
+  } //-----
+
+
+  var titleSelector = document.querySelectorAll('h3.app-header-title');
+
+  if (titleSelector.length > 0) {
+    var grabAllHeaderTitle = Array.prototype.slice.call(titleSelector);
+    var allHeaderTitleLinks = [];
+    var result = grabAllHeaderTitle.filter(function (node) {
+      return node.textContent.trim().length > 1;
+    });
+    result.forEach(function (node, index) {
+      var linkID = 'app-header-title-' + index;
+      var linkTitle = node.textContent;
+      var sectionID = linkID + '__section';
+
+      if (document.querySelector('#' + linkID) === null) {
+        //update ID
+        node.id = linkID;
+        node.closest('section').id = sectionID; // Create anchor element.
+
+        var a = document.createElement('a');
+        var link = document.createTextNode('#');
+        a.appendChild(link);
+        a.title = linkTitle;
+        a.href = '#' + sectionID;
+        a.setAttribute('style', 'float: left; margin-left: -20px; text-decoration: none; color: #9e9e9e;');
+        node.prepend(a); //
+
+        node.classList.add("app-header-title--sidebar");
+      } //
+
+
+      allHeaderTitleLinks.push({
+        href: '#' + sectionID,
+        text: linkTitle.replace('#', '')
+      });
+    }); //Create Sidebar Menu
+
+    createSidebarMenu(allHeaderTitleLinks); //Highlight menu item when scrolling down to section
+
+    var throttleFunc = throttle(highlightNavigation, 150);
+    window.removeEventListener('scroll', throttleFunc);
+    window.addEventListener('scroll', throttleFunc);
+  }
+}
+/* harmony default export */ const _SidebarMenu = ({
+  SidebarMenu: SidebarMenu
+});
 ;// CONCATENATED MODULE: ./src/client/router/App.js
 
 
 
+
+ //Create or Remove Sidebar Menu
 
  //get project config
 
@@ -42287,8 +42469,11 @@ var Header = /*#__PURE__*/function (_Component) {
   //Click the route to trigger the event
   var theLocation = useLocation();
   react.useEffect(function () {
-    //change page title
+    //Remove sidebar menu
     //------------------------------------------
+    SidebarMenu(); //change page title
+    //------------------------------------------
+
     var pageTitle = null;
     var pageNoMatchTitle = null;
     var breakException = {};
@@ -43926,8 +44111,17 @@ var Button = /*#__PURE__*/function (_Component) {
 ;// CONCATENATED MODULE: ./src/client/views/_pages/ComponentsDemo/ButtonDemo.js
 
 
+ //Create or Remove Sidebar Menu
+
 
 /* harmony default export */ const ButtonDemo = (function () {
+  react.useEffect(function () {
+    // Equivalent to componentDidMount and componentDidUpdate:
+    shortcut(document).ready(function () {
+      //Create sidebar menu
+      SidebarMenu();
+    });
+  });
   return /*#__PURE__*/react.createElement(react.Fragment, null, /*#__PURE__*/react.createElement("section", null, /*#__PURE__*/react.createElement("div", {
     className: "container"
   }, /*#__PURE__*/react.createElement("div", {
@@ -43945,7 +44139,7 @@ var Button = /*#__PURE__*/function (_Component) {
     style: {
       fontSize: "0.75rem",
       color: "#ababab",
-      margin: ".5rem 0 0 0"
+      margin: ".5rem .5rem 0 0"
     }
   }, /*#__PURE__*/react.createElement("svg", {
     style: {
@@ -43973,7 +44167,9 @@ var Button = /*#__PURE__*/function (_Component) {
     className: "row"
   }, /*#__PURE__*/react.createElement("div", {
     className: "col-12"
-  }, /*#__PURE__*/react.createElement("h3", null, "Click Event"), /*#__PURE__*/react.createElement("p", null, "Add onClick event to the button."), /*#__PURE__*/react.createElement("hr", null))))), /*#__PURE__*/react.createElement("section", {
+  }, /*#__PURE__*/react.createElement("h3", {
+    className: "app-header-title"
+  }, "Click Event"), /*#__PURE__*/react.createElement("p", null, "Add onClick event to the button."), /*#__PURE__*/react.createElement("hr", null))))), /*#__PURE__*/react.createElement("section", {
     className: "uix-spacing--s"
   }, /*#__PURE__*/react.createElement("div", {
     className: "container"
@@ -44008,7 +44204,9 @@ var Button = /*#__PURE__*/function (_Component) {
     className: "row"
   }, /*#__PURE__*/react.createElement("div", {
     className: "col-12"
-  }, /*#__PURE__*/react.createElement("h3", null, "Button"), /*#__PURE__*/react.createElement("p", null, "If you need to use multiple colors, you can add CSS styles yourself, such as: ", /*#__PURE__*/react.createElement("code", null, ".uix-btn__bg--blue"), ", ", /*#__PURE__*/react.createElement("code", null, ".uix-btn__bg--purple"), " ..."), /*#__PURE__*/react.createElement("hr", null))))), /*#__PURE__*/react.createElement("section", {
+  }, /*#__PURE__*/react.createElement("h3", {
+    className: "app-header-title"
+  }, "Button"), /*#__PURE__*/react.createElement("p", null, "If you need to use multiple colors, you can add CSS styles yourself, such as: ", /*#__PURE__*/react.createElement("code", null, ".uix-btn__bg--blue"), ", ", /*#__PURE__*/react.createElement("code", null, ".uix-btn__bg--purple"), " ..."), /*#__PURE__*/react.createElement("hr", null))))), /*#__PURE__*/react.createElement("section", {
     className: "uix-spacing--s"
   }, /*#__PURE__*/react.createElement("div", {
     className: "container"
@@ -44248,7 +44446,9 @@ var Button = /*#__PURE__*/function (_Component) {
     className: "row"
   }, /*#__PURE__*/react.createElement("div", {
     className: "col-12"
-  }, /*#__PURE__*/react.createElement("h3", null, "Secondary Button"), /*#__PURE__*/react.createElement("hr", null))))), /*#__PURE__*/react.createElement("section", {
+  }, /*#__PURE__*/react.createElement("h3", {
+    className: "app-header-title"
+  }, "Secondary Button"), /*#__PURE__*/react.createElement("hr", null))))), /*#__PURE__*/react.createElement("section", {
     className: "uix-spacing--s"
   }, /*#__PURE__*/react.createElement("div", {
     className: "container"
@@ -44706,8 +44906,17 @@ var Tabs = /*#__PURE__*/function (_Component) {
 ;// CONCATENATED MODULE: ./src/client/views/_pages/ComponentsDemo/TabsDemo.js
 
 
+ //Create or Remove Sidebar Menu
+
 
 /* harmony default export */ const TabsDemo = (function () {
+  react.useEffect(function () {
+    // Equivalent to componentDidMount and componentDidUpdate:
+    shortcut(document).ready(function () {
+      //Create sidebar menu
+      SidebarMenu();
+    });
+  });
   return /*#__PURE__*/react.createElement(react.Fragment, null, /*#__PURE__*/react.createElement("section", null, /*#__PURE__*/react.createElement("div", {
     className: "container"
   }, /*#__PURE__*/react.createElement("div", {
@@ -44725,7 +44934,7 @@ var Tabs = /*#__PURE__*/function (_Component) {
     style: {
       fontSize: "0.75rem",
       color: "#ababab",
-      margin: ".5rem 0 0 0"
+      margin: ".5rem .5rem 0 0"
     }
   }, /*#__PURE__*/react.createElement("svg", {
     style: {
@@ -44753,7 +44962,9 @@ var Tabs = /*#__PURE__*/function (_Component) {
     className: "row"
   }, /*#__PURE__*/react.createElement("div", {
     className: "col-12"
-  }, /*#__PURE__*/react.createElement("h3", null, "Tab Normal"), /*#__PURE__*/react.createElement("hr", null))))), /*#__PURE__*/react.createElement("section", {
+  }, /*#__PURE__*/react.createElement("h3", {
+    className: "app-header-title"
+  }, "Tab Normal"), /*#__PURE__*/react.createElement("hr", null))))), /*#__PURE__*/react.createElement("section", {
     className: "uix-spacing--s"
   }, /*#__PURE__*/react.createElement("div", {
     className: "container"
@@ -44832,7 +45043,9 @@ var Tabs = /*#__PURE__*/function (_Component) {
     className: "row"
   }, /*#__PURE__*/react.createElement("div", {
     className: "col-12"
-  }, /*#__PURE__*/react.createElement("h3", null, "Tab Rotation Effect 1"), /*#__PURE__*/react.createElement("hr", null))))), /*#__PURE__*/react.createElement("section", {
+  }, /*#__PURE__*/react.createElement("h3", {
+    className: "app-header-title"
+  }, "Tab Rotation Effect 1"), /*#__PURE__*/react.createElement("hr", null))))), /*#__PURE__*/react.createElement("section", {
     className: "uix-spacing--s"
   }, /*#__PURE__*/react.createElement("div", {
     className: "container uix-t-c"
@@ -44894,7 +45107,9 @@ var Tabs = /*#__PURE__*/function (_Component) {
     className: "row"
   }, /*#__PURE__*/react.createElement("div", {
     className: "col-12"
-  }, /*#__PURE__*/react.createElement("h3", null, "Tab Rotation Effect 2"), /*#__PURE__*/react.createElement("hr", null))))), /*#__PURE__*/react.createElement("section", {
+  }, /*#__PURE__*/react.createElement("h3", {
+    className: "app-header-title"
+  }, "Tab Rotation Effect 2"), /*#__PURE__*/react.createElement("hr", null))))), /*#__PURE__*/react.createElement("section", {
     className: "uix-spacing--s"
   }, /*#__PURE__*/react.createElement("div", {
     className: "container uix-t-c"
@@ -45189,8 +45404,17 @@ var TabsAnimated = /*#__PURE__*/function (_Component) {
 ;// CONCATENATED MODULE: ./src/client/views/_pages/ComponentsDemo/TabsAnimatedDemo.js
 
 
+ //Create or Remove Sidebar Menu
+
 
 /* harmony default export */ const TabsAnimatedDemo = (function () {
+  react.useEffect(function () {
+    // Equivalent to componentDidMount and componentDidUpdate:
+    shortcut(document).ready(function () {
+      //Create sidebar menu
+      SidebarMenu();
+    });
+  });
   return /*#__PURE__*/react.createElement(react.Fragment, null, /*#__PURE__*/react.createElement("section", null, /*#__PURE__*/react.createElement("div", {
     className: "container"
   }, /*#__PURE__*/react.createElement("div", {
@@ -45208,7 +45432,7 @@ var TabsAnimated = /*#__PURE__*/function (_Component) {
     style: {
       fontSize: "0.75rem",
       color: "#ababab",
-      margin: ".5rem 0 0 0"
+      margin: ".5rem .5rem 0 0"
     }
   }, /*#__PURE__*/react.createElement("svg", {
     style: {
@@ -45236,7 +45460,9 @@ var TabsAnimated = /*#__PURE__*/function (_Component) {
     className: "row"
   }, /*#__PURE__*/react.createElement("div", {
     className: "col-12"
-  }, /*#__PURE__*/react.createElement("h3", null, "Tab Animated Normal"), /*#__PURE__*/react.createElement("p", null, "The most basic style allows you to set transition animation"), /*#__PURE__*/react.createElement("hr", null))))), /*#__PURE__*/react.createElement("section", {
+  }, /*#__PURE__*/react.createElement("h3", {
+    className: "app-header-title"
+  }, "Tab Animated Normal"), /*#__PURE__*/react.createElement("p", null, "The most basic style allows you to set transition animation"), /*#__PURE__*/react.createElement("hr", null))))), /*#__PURE__*/react.createElement("section", {
     className: "uix-spacing--s"
   }, /*#__PURE__*/react.createElement("div", {
     className: "container"
@@ -54975,10 +55201,19 @@ var Video = /*#__PURE__*/function (_Component) {
 ;// CONCATENATED MODULE: ./src/client/views/_pages/ComponentsDemo/VideoDemo.js
 
 
+ //Create or Remove Sidebar Menu
+
  //get project config
 
 
 /* harmony default export */ const VideoDemo = (function () {
+  react.useEffect(function () {
+    // Equivalent to componentDidMount and componentDidUpdate:
+    shortcut(document).ready(function () {
+      //Create sidebar menu
+      SidebarMenu();
+    });
+  });
   return /*#__PURE__*/react.createElement(react.Fragment, null, /*#__PURE__*/react.createElement("section", null, /*#__PURE__*/react.createElement("div", {
     className: "container"
   }, /*#__PURE__*/react.createElement("div", {
@@ -54996,7 +55231,7 @@ var Video = /*#__PURE__*/function (_Component) {
     style: {
       fontSize: "0.75rem",
       color: "#ababab",
-      margin: ".5rem 0 0 0"
+      margin: ".5rem .5rem 0 0"
     }
   }, /*#__PURE__*/react.createElement("svg", {
     style: {
@@ -55024,7 +55259,9 @@ var Video = /*#__PURE__*/function (_Component) {
     className: "row"
   }, /*#__PURE__*/react.createElement("div", {
     className: "col-12"
-  }, /*#__PURE__*/react.createElement("h3", null, "Autoplay, No controls"), /*#__PURE__*/react.createElement("p", null, "Must be muted"), /*#__PURE__*/react.createElement("hr", null))))), /*#__PURE__*/react.createElement("section", {
+  }, /*#__PURE__*/react.createElement("h3", {
+    className: "app-header-title"
+  }, "Autoplay, No controls"), /*#__PURE__*/react.createElement("p", null, "Must be muted"), /*#__PURE__*/react.createElement("hr", null))))), /*#__PURE__*/react.createElement("section", {
     className: "uix-spacing--s"
   }, /*#__PURE__*/react.createElement("div", {
     className: "container"
@@ -55044,7 +55281,9 @@ var Video = /*#__PURE__*/function (_Component) {
     className: "row"
   }, /*#__PURE__*/react.createElement("div", {
     className: "col-12"
-  }, /*#__PURE__*/react.createElement("h3", null, "Contains all controls"), /*#__PURE__*/react.createElement("hr", null))))), /*#__PURE__*/react.createElement("section", {
+  }, /*#__PURE__*/react.createElement("h3", {
+    className: "app-header-title"
+  }, "Contains all controls"), /*#__PURE__*/react.createElement("hr", null))))), /*#__PURE__*/react.createElement("section", {
     className: "uix-spacing--s"
   }, /*#__PURE__*/react.createElement("div", {
     className: "container"
@@ -66667,8 +66906,17 @@ var Swiper_Swiper = /*#__PURE__*/function (_Component) {
 ;// CONCATENATED MODULE: ./src/client/views/_pages/ComponentsDemo/SwiperDemo.js
 
 
+ //Create or Remove Sidebar Menu
+
 
 /* harmony default export */ const SwiperDemo = (function () {
+  react.useEffect(function () {
+    // Equivalent to componentDidMount and componentDidUpdate:
+    shortcut(document).ready(function () {
+      //Create sidebar menu
+      SidebarMenu();
+    });
+  });
   return /*#__PURE__*/react.createElement(react.Fragment, null, /*#__PURE__*/react.createElement("section", null, /*#__PURE__*/react.createElement("div", {
     className: "container"
   }, /*#__PURE__*/react.createElement("div", {
@@ -66686,7 +66934,7 @@ var Swiper_Swiper = /*#__PURE__*/function (_Component) {
     style: {
       fontSize: "0.75rem",
       color: "#ababab",
-      margin: ".5rem 0 0 0"
+      margin: ".5rem .5rem 0 0"
     }
   }, /*#__PURE__*/react.createElement("svg", {
     style: {
@@ -67031,6 +67279,8 @@ var Table = /*#__PURE__*/function (_Component6) {
 ;// CONCATENATED MODULE: ./src/client/views/_pages/ComponentsDemo/TableDemo.js
 
 
+ //Create or Remove Sidebar Menu
+
 
 var data1 = {
   "fields": [[{
@@ -67364,6 +67614,13 @@ var data5 = {
   }]]
 };
 /* harmony default export */ const TableDemo = (function () {
+  react.useEffect(function () {
+    // Equivalent to componentDidMount and componentDidUpdate:
+    shortcut(document).ready(function () {
+      //Create sidebar menu
+      SidebarMenu();
+    });
+  });
   return /*#__PURE__*/react.createElement(react.Fragment, null, /*#__PURE__*/react.createElement("section", null, /*#__PURE__*/react.createElement("div", {
     className: "container"
   }, /*#__PURE__*/react.createElement("div", {
@@ -67381,7 +67638,7 @@ var data5 = {
     style: {
       fontSize: "0.75rem",
       color: "#ababab",
-      margin: ".5rem 0 0 0"
+      margin: ".5rem .5rem 0 0"
     }
   }, /*#__PURE__*/react.createElement("svg", {
     style: {
@@ -67409,7 +67666,9 @@ var data5 = {
     className: "row"
   }, /*#__PURE__*/react.createElement("div", {
     className: "col-12"
-  }, /*#__PURE__*/react.createElement("h3", null, "Table Series"), /*#__PURE__*/react.createElement("p", null, "Provides some common styles of table."), /*#__PURE__*/react.createElement("hr", null))))), /*#__PURE__*/react.createElement("section", {
+  }, /*#__PURE__*/react.createElement("h3", {
+    className: "app-header-title"
+  }, "Table Series"), /*#__PURE__*/react.createElement("p", null, "Provides some common styles of table."), /*#__PURE__*/react.createElement("hr", null))))), /*#__PURE__*/react.createElement("section", {
     className: "uix-spacing--s"
   }, /*#__PURE__*/react.createElement("div", {
     className: "container"
@@ -67447,7 +67706,9 @@ var data5 = {
     className: "row"
   }, /*#__PURE__*/react.createElement("div", {
     className: "col-12"
-  }, /*#__PURE__*/react.createElement("h3", null, "Responsive Table"), /*#__PURE__*/react.createElement("p", null, "Change window size to watch. The class ", /*#__PURE__*/react.createElement("code", null, ".is-responsive.js-uix-table--responsive"), " used here will be applied ", /*#__PURE__*/react.createElement("code", null, ".uix-table")), /*#__PURE__*/react.createElement("hr", null))))), /*#__PURE__*/react.createElement("section", {
+  }, /*#__PURE__*/react.createElement("h3", {
+    className: "app-header-title"
+  }, "Responsive Table"), /*#__PURE__*/react.createElement("p", null, "Change window size to watch. The class ", /*#__PURE__*/react.createElement("code", null, ".is-responsive.js-uix-table--responsive"), " used here will be applied ", /*#__PURE__*/react.createElement("code", null, ".uix-table")), /*#__PURE__*/react.createElement("hr", null))))), /*#__PURE__*/react.createElement("section", {
     className: "uix-spacing--s"
   }, /*#__PURE__*/react.createElement("div", {
     className: "container"
@@ -67464,7 +67725,9 @@ var data5 = {
     className: "row"
   }, /*#__PURE__*/react.createElement("div", {
     className: "col-12"
-  }, /*#__PURE__*/react.createElement("h3", null, "Responsive Table with Scroll Bars"), /*#__PURE__*/react.createElement("p", null, "Change window size to watch. The class ", /*#__PURE__*/react.createElement("code", null, ".js-uix-table--responsive-scrolled"), " used here will be applied ", /*#__PURE__*/react.createElement("code", null, ".uix-table")), /*#__PURE__*/react.createElement("hr", null))))), /*#__PURE__*/react.createElement("section", {
+  }, /*#__PURE__*/react.createElement("h3", {
+    className: "app-header-title"
+  }, "Responsive Table with Scroll Bars"), /*#__PURE__*/react.createElement("p", null, "Change window size to watch. The class ", /*#__PURE__*/react.createElement("code", null, ".js-uix-table--responsive-scrolled"), " used here will be applied ", /*#__PURE__*/react.createElement("code", null, ".uix-table")), /*#__PURE__*/react.createElement("hr", null))))), /*#__PURE__*/react.createElement("section", {
     className: "uix-spacing--s"
   }, /*#__PURE__*/react.createElement("div", {
     className: "container"
@@ -67672,6 +67935,8 @@ var TableGrid = /*#__PURE__*/function (_Component4) {
 ;// CONCATENATED MODULE: ./src/client/views/_pages/ComponentsDemo/TableGridDemo.js
 
 
+ //Create or Remove Sidebar Menu
+
 
 var TableGridDemo_data1 = {
   "headers": ["COLUMN TITLE 1", "COLUMN TITLE 2", "COLUMN TITLE 3"],
@@ -67726,6 +67991,13 @@ var TableGridDemo_data1 = {
   }]
 };
 /* harmony default export */ const TableGridDemo = (function () {
+  react.useEffect(function () {
+    // Equivalent to componentDidMount and componentDidUpdate:
+    shortcut(document).ready(function () {
+      //Create sidebar menu
+      SidebarMenu();
+    });
+  });
   return /*#__PURE__*/react.createElement(react.Fragment, null, /*#__PURE__*/react.createElement("section", null, /*#__PURE__*/react.createElement("div", {
     className: "container"
   }, /*#__PURE__*/react.createElement("div", {
@@ -67743,7 +68015,7 @@ var TableGridDemo_data1 = {
     style: {
       fontSize: "0.75rem",
       color: "#ababab",
-      margin: ".5rem 0 0 0"
+      margin: ".5rem .5rem 0 0"
     }
   }, /*#__PURE__*/react.createElement("svg", {
     style: {
@@ -67771,7 +68043,9 @@ var TableGridDemo_data1 = {
     className: "row"
   }, /*#__PURE__*/react.createElement("div", {
     className: "col-12"
-  }, /*#__PURE__*/react.createElement("h3", null, "Row Dropzone"), /*#__PURE__*/react.createElement("p", null, "Not applicable to tables with ", /*#__PURE__*/react.createElement("code", null, "<table>")), /*#__PURE__*/react.createElement("hr", null))))), /*#__PURE__*/react.createElement("section", {
+  }, /*#__PURE__*/react.createElement("h3", {
+    className: "app-header-title"
+  }, "Row Dropzone"), /*#__PURE__*/react.createElement("p", null, "Not applicable to tables with ", /*#__PURE__*/react.createElement("code", null, "<table>")), /*#__PURE__*/react.createElement("hr", null))))), /*#__PURE__*/react.createElement("section", {
     className: "uix-spacing--s"
   }, /*#__PURE__*/react.createElement("div", {
     className: "container"
@@ -68029,6 +68303,8 @@ var TableSorter = /*#__PURE__*/function (_Component4) {
 ;// CONCATENATED MODULE: ./src/client/views/_pages/ComponentsDemo/TableSorterDemo.js
 
 
+ //Create or Remove Sidebar Menu
+
 
 var TableSorterDemo_data1 = {
   "headers": [{
@@ -68161,6 +68437,13 @@ var TableSorterDemo_data1 = {
   }]]
 };
 /* harmony default export */ const TableSorterDemo = (function () {
+  react.useEffect(function () {
+    // Equivalent to componentDidMount and componentDidUpdate:
+    shortcut(document).ready(function () {
+      //Create sidebar menu
+      SidebarMenu();
+    });
+  });
   return /*#__PURE__*/react.createElement(react.Fragment, null, /*#__PURE__*/react.createElement("section", null, /*#__PURE__*/react.createElement("div", {
     className: "container"
   }, /*#__PURE__*/react.createElement("div", {
@@ -68178,7 +68461,7 @@ var TableSorterDemo_data1 = {
     style: {
       fontSize: "0.75rem",
       color: "#ababab",
-      margin: ".5rem 0 0 0"
+      margin: ".5rem .5rem 0 0"
     }
   }, /*#__PURE__*/react.createElement("svg", {
     style: {
@@ -68206,7 +68489,9 @@ var TableSorterDemo_data1 = {
     className: "row"
   }, /*#__PURE__*/react.createElement("div", {
     className: "col-12"
-  }, /*#__PURE__*/react.createElement("h3", null, "Table Sorter"), /*#__PURE__*/react.createElement("p", null, "Users can filter and limit the data displayed within a long data table."), /*#__PURE__*/react.createElement("hr", null))))), /*#__PURE__*/react.createElement("section", {
+  }, /*#__PURE__*/react.createElement("h3", {
+    className: "app-header-title"
+  }, "Table Sorter"), /*#__PURE__*/react.createElement("p", null, "Users can filter and limit the data displayed within a long data table."), /*#__PURE__*/react.createElement("hr", null))))), /*#__PURE__*/react.createElement("section", {
     className: "uix-spacing--s"
   }, /*#__PURE__*/react.createElement("div", {
     className: "container"
@@ -70718,11 +71003,15 @@ var PasswordInput = /*#__PURE__*/function (_Component) {
 ;// CONCATENATED MODULE: ./src/client/views/_pages/ComponentsDemo/FormDemo.js
 
 
+ //Create or Remove Sidebar Menu
+
 
 /* harmony default export */ const FormDemo = (function () {
   react.useEffect(function () {
     // Equivalent to componentDidMount and componentDidUpdate:
-    shortcut(document).ready(function () {//do something
+    shortcut(document).ready(function () {
+      //Create sidebar menu
+      SidebarMenu();
     });
   });
   return /*#__PURE__*/react.createElement(react.Fragment, null, /*#__PURE__*/react.createElement("section", null, /*#__PURE__*/react.createElement("div", {
@@ -70742,7 +71031,7 @@ var PasswordInput = /*#__PURE__*/function (_Component) {
     style: {
       fontSize: "0.75rem",
       color: "#ababab",
-      margin: ".5rem 0 0 0"
+      margin: ".5rem .5rem 0 0"
     }
   }, /*#__PURE__*/react.createElement("svg", {
     style: {
@@ -70774,7 +71063,9 @@ var PasswordInput = /*#__PURE__*/function (_Component) {
     className: "row"
   }, /*#__PURE__*/react.createElement("div", {
     className: "col-12"
-  }, /*#__PURE__*/react.createElement("h3", null, "Input"), /*#__PURE__*/react.createElement("hr", null))))), /*#__PURE__*/react.createElement("section", {
+  }, /*#__PURE__*/react.createElement("h3", {
+    className: "app-header-title"
+  }, "Input"), /*#__PURE__*/react.createElement("hr", null))))), /*#__PURE__*/react.createElement("section", {
     className: "uix-spacing--s"
   }, /*#__PURE__*/react.createElement("div", {
     className: "container"
@@ -70874,7 +71165,9 @@ var PasswordInput = /*#__PURE__*/function (_Component) {
     className: "row"
   }, /*#__PURE__*/react.createElement("div", {
     className: "col-12"
-  }, /*#__PURE__*/react.createElement("h3", null, "Password Input"), /*#__PURE__*/react.createElement("hr", null))))), /*#__PURE__*/react.createElement("section", {
+  }, /*#__PURE__*/react.createElement("h3", {
+    className: "app-header-title"
+  }, "Password Input"), /*#__PURE__*/react.createElement("hr", null))))), /*#__PURE__*/react.createElement("section", {
     className: "uix-spacing--s"
   }, /*#__PURE__*/react.createElement("div", {
     className: "container"
@@ -70972,7 +71265,9 @@ var PasswordInput = /*#__PURE__*/function (_Component) {
     className: "row"
   }, /*#__PURE__*/react.createElement("div", {
     className: "col-12"
-  }, /*#__PURE__*/react.createElement("h3", null, "Textarea"), /*#__PURE__*/react.createElement("hr", null))))), /*#__PURE__*/react.createElement("section", {
+  }, /*#__PURE__*/react.createElement("h3", {
+    className: "app-header-title"
+  }, "Textarea"), /*#__PURE__*/react.createElement("hr", null))))), /*#__PURE__*/react.createElement("section", {
     className: "uix-spacing--s"
   }, /*#__PURE__*/react.createElement("div", {
     className: "container"
@@ -71033,7 +71328,9 @@ var PasswordInput = /*#__PURE__*/function (_Component) {
     className: "row"
   }, /*#__PURE__*/react.createElement("div", {
     className: "col-12"
-  }, /*#__PURE__*/react.createElement("h3", null, "Select (normal)"), /*#__PURE__*/react.createElement("hr", null))))), /*#__PURE__*/react.createElement("section", {
+  }, /*#__PURE__*/react.createElement("h3", {
+    className: "app-header-title"
+  }, "Select (normal)"), /*#__PURE__*/react.createElement("hr", null))))), /*#__PURE__*/react.createElement("section", {
     className: "uix-spacing--s"
   }, /*#__PURE__*/react.createElement("div", {
     className: "container"
@@ -71070,7 +71367,9 @@ var PasswordInput = /*#__PURE__*/function (_Component) {
     className: "row"
   }, /*#__PURE__*/react.createElement("div", {
     className: "col-12"
-  }, /*#__PURE__*/react.createElement("h3", null, "Custom Select"), /*#__PURE__*/react.createElement("hr", null))))), /*#__PURE__*/react.createElement("section", {
+  }, /*#__PURE__*/react.createElement("h3", {
+    className: "app-header-title"
+  }, "Custom Select"), /*#__PURE__*/react.createElement("hr", null))))), /*#__PURE__*/react.createElement("section", {
     className: "uix-spacing--s"
   }, /*#__PURE__*/react.createElement("div", {
     className: "container"
@@ -71113,7 +71412,9 @@ var PasswordInput = /*#__PURE__*/function (_Component) {
     className: "row"
   }, /*#__PURE__*/react.createElement("div", {
     className: "col-12"
-  }, /*#__PURE__*/react.createElement("h3", null, "Multiple Select"), /*#__PURE__*/react.createElement("hr", null))))), /*#__PURE__*/react.createElement("section", {
+  }, /*#__PURE__*/react.createElement("h3", {
+    className: "app-header-title"
+  }, "Multiple Select"), /*#__PURE__*/react.createElement("hr", null))))), /*#__PURE__*/react.createElement("section", {
     className: "uix-spacing--s"
   }, /*#__PURE__*/react.createElement("div", {
     className: "container"
@@ -71135,7 +71436,9 @@ var PasswordInput = /*#__PURE__*/function (_Component) {
     className: "row"
   }, /*#__PURE__*/react.createElement("div", {
     className: "col-12"
-  }, /*#__PURE__*/react.createElement("h3", null, "Single Select"), /*#__PURE__*/react.createElement("hr", null))))), /*#__PURE__*/react.createElement("section", {
+  }, /*#__PURE__*/react.createElement("h3", {
+    className: "app-header-title"
+  }, "Single Select"), /*#__PURE__*/react.createElement("hr", null))))), /*#__PURE__*/react.createElement("section", {
     className: "uix-spacing--s"
   }, /*#__PURE__*/react.createElement("div", {
     className: "container"
@@ -71203,7 +71506,9 @@ var PasswordInput = /*#__PURE__*/function (_Component) {
     className: "row"
   }, /*#__PURE__*/react.createElement("div", {
     className: "col-12"
-  }, /*#__PURE__*/react.createElement("h3", null, "Switch"), /*#__PURE__*/react.createElement("hr", null))))), /*#__PURE__*/react.createElement("section", {
+  }, /*#__PURE__*/react.createElement("h3", {
+    className: "app-header-title"
+  }, "Switch"), /*#__PURE__*/react.createElement("hr", null))))), /*#__PURE__*/react.createElement("section", {
     className: "uix-spacing--s"
   }, /*#__PURE__*/react.createElement("div", {
     className: "container"
@@ -71257,7 +71562,9 @@ var PasswordInput = /*#__PURE__*/function (_Component) {
     className: "row"
   }, /*#__PURE__*/react.createElement("div", {
     className: "col-12"
-  }, /*#__PURE__*/react.createElement("h3", null, "Radio"), /*#__PURE__*/react.createElement("hr", null))))), /*#__PURE__*/react.createElement("section", {
+  }, /*#__PURE__*/react.createElement("h3", {
+    className: "app-header-title"
+  }, "Radio"), /*#__PURE__*/react.createElement("hr", null))))), /*#__PURE__*/react.createElement("section", {
     className: "uix-spacing--s"
   }, /*#__PURE__*/react.createElement("div", {
     className: "container"
@@ -71285,7 +71592,9 @@ var PasswordInput = /*#__PURE__*/function (_Component) {
     className: "row"
   }, /*#__PURE__*/react.createElement("div", {
     className: "col-12"
-  }, /*#__PURE__*/react.createElement("h3", null, "Date"), /*#__PURE__*/react.createElement("hr", null))))), /*#__PURE__*/react.createElement("section", {
+  }, /*#__PURE__*/react.createElement("h3", {
+    className: "app-header-title"
+  }, "Date"), /*#__PURE__*/react.createElement("hr", null))))), /*#__PURE__*/react.createElement("section", {
     className: "uix-spacing--s"
   }, /*#__PURE__*/react.createElement("div", {
     className: "container"
@@ -71366,7 +71675,9 @@ var PasswordInput = /*#__PURE__*/function (_Component) {
     className: "row"
   }, /*#__PURE__*/react.createElement("div", {
     className: "col-12"
-  }, /*#__PURE__*/react.createElement("h3", null, "Checkbox"), /*#__PURE__*/react.createElement("hr", null))))), /*#__PURE__*/react.createElement("section", {
+  }, /*#__PURE__*/react.createElement("h3", {
+    className: "app-header-title"
+  }, "Checkbox"), /*#__PURE__*/react.createElement("hr", null))))), /*#__PURE__*/react.createElement("section", {
     className: "uix-spacing--s"
   }, /*#__PURE__*/react.createElement("div", {
     className: "container"
@@ -71392,7 +71703,9 @@ var PasswordInput = /*#__PURE__*/function (_Component) {
     className: "row"
   }, /*#__PURE__*/react.createElement("div", {
     className: "col-12"
-  }, /*#__PURE__*/react.createElement("h3", null, "Number"), /*#__PURE__*/react.createElement("hr", null))))), /*#__PURE__*/react.createElement("section", {
+  }, /*#__PURE__*/react.createElement("h3", {
+    className: "app-header-title"
+  }, "Number"), /*#__PURE__*/react.createElement("hr", null))))), /*#__PURE__*/react.createElement("section", {
     className: "uix-spacing--s"
   }, /*#__PURE__*/react.createElement("div", {
     className: "container"
@@ -71428,7 +71741,9 @@ var PasswordInput = /*#__PURE__*/function (_Component) {
     className: "row"
   }, /*#__PURE__*/react.createElement("div", {
     className: "col-12"
-  }, /*#__PURE__*/react.createElement("h3", null, "Dynamic Fields"), /*#__PURE__*/react.createElement("hr", null))))), /*#__PURE__*/react.createElement("section", {
+  }, /*#__PURE__*/react.createElement("h3", {
+    className: "app-header-title"
+  }, "Dynamic Fields"), /*#__PURE__*/react.createElement("hr", null))))), /*#__PURE__*/react.createElement("section", {
     className: "uix-spacing--s"
   }, /*#__PURE__*/react.createElement("div", {
     className: "container"
@@ -71467,7 +71782,9 @@ var PasswordInput = /*#__PURE__*/function (_Component) {
     className: "row"
   }, /*#__PURE__*/react.createElement("div", {
     className: "col-12"
-  }, /*#__PURE__*/react.createElement("h3", null, "File"), /*#__PURE__*/react.createElement("hr", null))))), /*#__PURE__*/react.createElement("section", {
+  }, /*#__PURE__*/react.createElement("h3", {
+    className: "app-header-title"
+  }, "File"), /*#__PURE__*/react.createElement("hr", null))))), /*#__PURE__*/react.createElement("section", {
     className: "uix-spacing--s"
   }, /*#__PURE__*/react.createElement("div", {
     className: "container"
@@ -71484,7 +71801,9 @@ var PasswordInput = /*#__PURE__*/function (_Component) {
     className: "row"
   }, /*#__PURE__*/react.createElement("div", {
     className: "col-12"
-  }, /*#__PURE__*/react.createElement("h3", null, "File Field"), /*#__PURE__*/react.createElement("hr", null))))), /*#__PURE__*/react.createElement("section", {
+  }, /*#__PURE__*/react.createElement("h3", {
+    className: "app-header-title"
+  }, "File Field"), /*#__PURE__*/react.createElement("hr", null))))), /*#__PURE__*/react.createElement("section", {
     className: "uix-spacing--s"
   }, /*#__PURE__*/react.createElement("div", {
     className: "container"
@@ -71501,7 +71820,9 @@ var PasswordInput = /*#__PURE__*/function (_Component) {
     className: "row"
   }, /*#__PURE__*/react.createElement("div", {
     className: "col-12"
-  }, /*#__PURE__*/react.createElement("h3", null, "Merge Input"), /*#__PURE__*/react.createElement("hr", null))))), /*#__PURE__*/react.createElement("section", {
+  }, /*#__PURE__*/react.createElement("h3", {
+    className: "app-header-title"
+  }, "Merge Input"), /*#__PURE__*/react.createElement("hr", null))))), /*#__PURE__*/react.createElement("section", {
     className: "uix-spacing--s"
   }, /*#__PURE__*/react.createElement("div", {
     className: "container uix-t-c"
@@ -71587,7 +71908,9 @@ var PasswordInput = /*#__PURE__*/function (_Component) {
     className: "row"
   }, /*#__PURE__*/react.createElement("div", {
     className: "col-12"
-  }, /*#__PURE__*/react.createElement("h3", null, "Flex Layout"), /*#__PURE__*/react.createElement("hr", null))))), /*#__PURE__*/react.createElement("section", {
+  }, /*#__PURE__*/react.createElement("h3", {
+    className: "app-header-title"
+  }, "Flex Layout"), /*#__PURE__*/react.createElement("hr", null))))), /*#__PURE__*/react.createElement("section", {
     className: "uix-spacing--s"
   }, /*#__PURE__*/react.createElement("div", {
     className: "container"
@@ -71929,13 +72252,23 @@ var ScrollReveal = /*#__PURE__*/function (_Component) {
 ;// CONCATENATED MODULE: ./src/client/views/_pages/ComponentsDemo/ScrollRevealDemo.js
 
 
+ //Create or Remove Sidebar Menu
+
 
 /* harmony default export */ const ScrollRevealDemo = (function () {
   react.useEffect(function () {
     // Equivalent to componentDidMount and componentDidUpdate:
-    var $style = document.createElement("style");
-    document.head.appendChild($style);
-    $style.innerHTML = "\n\t\t\t.demo-sr-active {\n\t\t\t\ttransition: all 1s ease;\n\t\t\t\ttransform: scale(0.7);\n\t\t\t}\n        ";
+    shortcut(document).ready(function () {
+      //Create sidebar menu
+      SidebarMenu(); //Add some class in order to use ScrollReveal
+
+      if (document.querySelector('#app-demo-sr-style') === null) {
+        var $style = document.createElement("style");
+        $style.id = 'app-demo-sr-style';
+        document.head.appendChild($style);
+        $style.innerHTML = "\n\t\t\t\t\t.demo-sr-active {\n\t\t\t\t\t\ttransition: all 1s ease;\n\t\t\t\t\t\ttransform: scale(0.7);\n\t\t\t\t\t}\n\t\t\t\t";
+      }
+    });
   });
   return /*#__PURE__*/react.createElement(react.Fragment, null, /*#__PURE__*/react.createElement("section", null, /*#__PURE__*/react.createElement("div", {
     className: "container"
@@ -71954,7 +72287,7 @@ var ScrollReveal = /*#__PURE__*/function (_Component) {
     style: {
       fontSize: "0.75rem",
       color: "#ababab",
-      margin: ".5rem 0 0 0"
+      margin: ".5rem .5rem 0 0"
     }
   }, /*#__PURE__*/react.createElement("svg", {
     style: {
@@ -72421,10 +72754,19 @@ var Card = /*#__PURE__*/function (_Component) {
 ;// CONCATENATED MODULE: ./src/client/views/_pages/ComponentsDemo/CardDemo.js
 
 
+ //Create or Remove Sidebar Menu
+
  //get project config
 
 
 /* harmony default export */ const CardDemo = (function () {
+  react.useEffect(function () {
+    // Equivalent to componentDidMount and componentDidUpdate:
+    shortcut(document).ready(function () {
+      //Create sidebar menu
+      SidebarMenu();
+    });
+  });
   return /*#__PURE__*/react.createElement(react.Fragment, null, /*#__PURE__*/react.createElement("section", null, /*#__PURE__*/react.createElement("div", {
     className: "container"
   }, /*#__PURE__*/react.createElement("div", {
@@ -72442,7 +72784,7 @@ var Card = /*#__PURE__*/function (_Component) {
     style: {
       fontSize: "0.75rem",
       color: "#ababab",
-      margin: ".5rem 0 0 0"
+      margin: ".5rem .5rem 0 0"
     }
   }, /*#__PURE__*/react.createElement("svg", {
     style: {
@@ -72470,7 +72812,9 @@ var Card = /*#__PURE__*/function (_Component) {
     className: "row"
   }, /*#__PURE__*/react.createElement("div", {
     className: "col-12"
-  }, /*#__PURE__*/react.createElement("h3", null, "Thumbnail Card"), /*#__PURE__*/react.createElement("p", null, "The following is a Thumbnail style card using flex."), /*#__PURE__*/react.createElement("hr", null))))), /*#__PURE__*/react.createElement("section", {
+  }, /*#__PURE__*/react.createElement("h3", {
+    className: "app-header-title"
+  }, "Thumbnail Card"), /*#__PURE__*/react.createElement("p", null, "The following is a Thumbnail style card using flex."), /*#__PURE__*/react.createElement("hr", null))))), /*#__PURE__*/react.createElement("section", {
     className: "uix-spacing--s"
   }, /*#__PURE__*/react.createElement("div", {
     className: "container"
@@ -72533,7 +72877,9 @@ var Card = /*#__PURE__*/function (_Component) {
     className: "row"
   }, /*#__PURE__*/react.createElement("div", {
     className: "col-12"
-  }, /*#__PURE__*/react.createElement("h3", null, "Gallery Card"), /*#__PURE__*/react.createElement("p", null, "The following is a gallery style card using flex."), /*#__PURE__*/react.createElement("hr", null))))), /*#__PURE__*/react.createElement("section", {
+  }, /*#__PURE__*/react.createElement("h3", {
+    className: "app-header-title"
+  }, "Gallery Card"), /*#__PURE__*/react.createElement("p", null, "The following is a gallery style card using flex."), /*#__PURE__*/react.createElement("hr", null))))), /*#__PURE__*/react.createElement("section", {
     className: "uix-spacing--s"
   }, /*#__PURE__*/react.createElement("div", {
     className: "container"
@@ -73061,7 +73407,9 @@ var Card = /*#__PURE__*/function (_Component) {
     className: "row"
   }, /*#__PURE__*/react.createElement("div", {
     className: "col-12"
-  }, /*#__PURE__*/react.createElement("h3", null, "Author Card"), /*#__PURE__*/react.createElement("p", null, "Author Card is a very popular used web page element that can display a lot of key information."), /*#__PURE__*/react.createElement("hr", null))))), /*#__PURE__*/react.createElement("section", {
+  }, /*#__PURE__*/react.createElement("h3", {
+    className: "app-header-title"
+  }, "Author Card"), /*#__PURE__*/react.createElement("p", null, "Author Card is a very popular used web page element that can display a lot of key information."), /*#__PURE__*/react.createElement("hr", null))))), /*#__PURE__*/react.createElement("section", {
     className: "uix-spacing--s"
   }, /*#__PURE__*/react.createElement("div", {
     className: "container"
@@ -73481,10 +73829,19 @@ var Parallax_Parallax = /*#__PURE__*/function (_Component) {
 ;// CONCATENATED MODULE: ./src/client/views/_pages/ComponentsDemo/ParallaxDemo.js
 
 
+ //Create or Remove Sidebar Menu
+
  //get project config
 
 
 /* harmony default export */ const ParallaxDemo = (function () {
+  react.useEffect(function () {
+    // Equivalent to componentDidMount and componentDidUpdate:
+    shortcut(document).ready(function () {
+      //Create sidebar menu
+      SidebarMenu();
+    });
+  });
   return /*#__PURE__*/react.createElement(react.Fragment, null, /*#__PURE__*/react.createElement("section", null, /*#__PURE__*/react.createElement("div", {
     className: "container"
   }, /*#__PURE__*/react.createElement("div", {
@@ -73502,7 +73859,7 @@ var Parallax_Parallax = /*#__PURE__*/function (_Component) {
     style: {
       fontSize: "0.75rem",
       color: "#ababab",
-      margin: ".5rem 0 0 0"
+      margin: ".5rem .5rem 0 0"
     }
   }, /*#__PURE__*/react.createElement("svg", {
     style: {
@@ -73823,9 +74180,12 @@ var ComponentsDemo = /*#__PURE__*/function (_Component) {
     key: "componentDidMount",
     value: function componentDidMount() {
       //do shmething
-      var $style = document.createElement("style");
-      document.head.appendChild($style);
-      $style.innerHTML = "\n\t\t\t/*-- Sidebar --*/\n\t\t\t.uix-demo-sidebar-left {\n\t\t\t\tposition: fixed;\n\t\t\t\ttop: 70px;\n\t\t\t\tbottom: 0;\n\t\t\t\tbox-sizing: border-box;\n\t\t\t\twidth: 240px;\n\t\t\t\tpadding: 40px 40px 60px 40px;\n\t\t\t\tborder-right: 1px #e5e5e5 solid;\n\t\t\t\toverflow: auto;\n\t\t\t}\n\n\t\t\t@media all and (max-width: 768px) {\n\t\t\t\t.uix-demo-sidebar-left {\n\t\t\t\t\tposition: relative;\n\t\t\t\t\ttop: 0;\n\t\t\t\t\twidth: 100%;\n\t\t\t\t\tpadding: 15px;\n\t\t\t\t}\n\t\t\t}\n\n\t\t\t\n\t\t\t/*-- Navigation --*/\n\t\t\t.uix-demo-nav,\n\t\t\t.uix-demo-nav ul {\n\t\t\t\tmargin: 0;\n\t\t\t\tpadding: 0;\n\t\t\t\tlist-style: none;\n\t\t\t\tfont-size: .875rem;\n\t\t\t}\n\n\t\t\t.uix-demo-nav-header {\n\t\t\t\tpadding: 8px 0;\n\t\t\t\tborder-bottom: 1px solid #e5e5e5;\n\t\t\t}\n\n\t\t\t.uix-demo-nav li {\n\t\t\t\tposition: relative;\n\t\t\t}\n\n\t\t\t\n\t\t\t\n\t\t\t.uix-demo-nav li>a {\n\t\t\t\tdisplay: flex;\n\t\t\t\talign-items: center;\n\t\t\t\tcolumn-gap: .25em;\n\t\t\t\ttext-decoration: none;\n\t\t\t\tcolor: #999;\n\t\t\t}\n\t\t\t\n\n\t\t\t.uix-demo-nav li>a>* {\n\t\t\t\tflex: none;\n\t\t\t}\n\t\t\t\n\t\t\t.uix-demo-nav li>a:focus {\n\t\t\t\toutline: none;\n\t\t\t}\n\t\t\t\n\t\t\t.uix-demo-nav>li>a {\n\t\t\t\tpadding: 5px 0;\n\t\t\t}\n\n\t\t\t.uix-demo-nav li.is-active > a {\n\t\t\t\tcolor: #333;\n\t\t\t}\n\t\t\t.uix-demo-nav li.is-active > a:after {\n\t\t\t\tcontent: '';\n\t\t\t\tdisplay: block;\n\t\t\t\twidth: 5px;\n\t\t\t\theight: 5px;\n\t\t\t\tposition: absolute;\n\t\t\t\ttop: 45%;\n\t\t\t\tleft: -1rem;\n\t\t\t\tbackground: #333;\n\t\t\t}\t\t\n\n\t\t\t@media all and (max-width: 768px) {\n\t\t\t\t.uix-demo-nav li {\n\t\t\t\t\tposition: relative;\n\t\t\t\t\tfloat: left;\n\t\t\t\t\tdisplay: inline-block;\n\t\t\t\t\tmargin: 0 1.2rem 0 0;\n\t\t\t\t}\n\n\t\t\t\t.uix-demo-nav-header {\n\t\t\t\t\twidth: 100%;\n\t\t\t\t}\t\n\n\t\t\t\t.uix-demo-nav li.is-active > a:after {\n\t\t\t\t\tleft: -.7rem;\n\t\t\t\t}\t\n\n\t\t\t}\n\t\t\t\n\t\t\t\n\t\t\t/*-- Main --*/\n\t\t\t.uix-demo-container {\n\t\t\t\tpadding-left: 15px;\n\t\t\t\tpadding-right: 15px;\n\t\t\t\tmax-width: 1000px;\n\t\t\t\tposition: relative;\n\t\t\t\tmargin-left: auto;\n\t\t\t\tmargin-right: auto;\n\t\t\t\tpadding-bottom: 70px;\n\t\t\t\ttransform: translateX(100px);\n\t\t\t}\n\t\t\t\n\t\t\t@media all and (max-width: 768px) {\n\t\t\t\t.uix-demo-container {\n\t\t\t\t\tpadding: 0;\t\n\t\t\t\t\tmax-width: 100%;\n\t\t\t\t\ttransform: translateX(0);\n\t\t\t\t}\n\t\t\t}\n\n\t\t\t@media all and (max-width: 1141px) {\n\t\t\t\t.uix-demo-container {\n\t\t\t\t\tmax-width: 700px;\n\t\t\t\t}\n\t\t\t}\n\t\n\t\t\t@media all and (min-width: 1430px) {\n\t\t\t\t.uix-demo-container {\n\t\t\t\t\tmax-width: 1140px;\n\t\t\t\t\ttransform: translateX(0);\n\t\t\t\t}\n\t\t\t}\n\n\t\t\t\n\t\t\t.uix-demo-section {\n\t\t\t\tdisplay: flow-root;\n\t\t\t\tbox-sizing: border-box;\n\t\t\t\tpadding-top: 40px;\n\t\t\t\tpadding-bottom: 40px;\n\t\t\t}\n\t\t\t\n        ";
+      if (document.querySelector('#app-uix-demo-style') === null) {
+        var $style = document.createElement("style");
+        $style.id = 'app-uix-demo-style';
+        document.head.appendChild($style);
+        $style.innerHTML = "\n\t\t\t\t/*-- Sidebar --*/\n\t\t\t\t.uix-demo-sidebar-left {\n\t\t\t\t\tposition: fixed;\n\t\t\t\t\ttop: 70px;\n\t\t\t\t\tbottom: 0;\n\t\t\t\t\tbox-sizing: border-box;\n\t\t\t\t\twidth: 240px;\n\t\t\t\t\tpadding: 40px 40px 60px 40px;\n\t\t\t\t\tborder-right: 1px #e5e5e5 solid;\n\t\t\t\t\toverflow: auto;\n\t\t\t\t}\n\n\t\t\t\t@media all and (max-width: 768px) {\n\t\t\t\t\t.uix-demo-sidebar-left {\n\t\t\t\t\t\tposition: relative;\n\t\t\t\t\t\ttop: 0;\n\t\t\t\t\t\twidth: 100%;\n\t\t\t\t\t\tpadding: 15px;\n\t\t\t\t\t}\n\t\t\t\t}\n\n\t\t\t\t\n\t\t\t\t/*-- Navigation --*/\n\t\t\t\t.uix-demo-nav,\n\t\t\t\t.uix-demo-nav ul {\n\t\t\t\t\tmargin: 0;\n\t\t\t\t\tpadding: 0;\n\t\t\t\t\tlist-style: none;\n\t\t\t\t\tfont-size: .875rem;\n\t\t\t\t}\n\n\t\t\t\t.uix-demo-nav-header {\n\t\t\t\t\tpadding: 8px 0;\n\t\t\t\t\tborder-bottom: 1px solid #e5e5e5;\n\t\t\t\t}\n\n\t\t\t\t.uix-demo-nav li {\n\t\t\t\t\tposition: relative;\n\t\t\t\t}\n\n\t\t\t\t\n\t\t\t\t\n\t\t\t\t.uix-demo-nav li>a {\n\t\t\t\t\tdisplay: flex;\n\t\t\t\t\talign-items: center;\n\t\t\t\t\tcolumn-gap: .25em;\n\t\t\t\t\ttext-decoration: none;\n\t\t\t\t\tcolor: #999;\n\t\t\t\t}\n\t\t\t\t\n\n\t\t\t\t.uix-demo-nav li>a>* {\n\t\t\t\t\tflex: none;\n\t\t\t\t}\n\t\t\t\t\n\t\t\t\t.uix-demo-nav li>a:focus {\n\t\t\t\t\toutline: none;\n\t\t\t\t}\n\t\t\t\t\n\t\t\t\t.uix-demo-nav>li>a {\n\t\t\t\t\tpadding: 5px 0;\n\t\t\t\t}\n\n\t\t\t\t.uix-demo-nav li.is-active > a {\n\t\t\t\t\tcolor: #333;\n\t\t\t\t}\n\t\t\t\t.uix-demo-nav li.is-active > a:after {\n\t\t\t\t\tcontent: '';\n\t\t\t\t\tdisplay: block;\n\t\t\t\t\twidth: 5px;\n\t\t\t\t\theight: 5px;\n\t\t\t\t\tposition: absolute;\n\t\t\t\t\ttop: 45%;\n\t\t\t\t\tleft: -1rem;\n\t\t\t\t\tbackground: #333;\n\t\t\t\t}\t\t\n\n\t\t\t\t@media all and (max-width: 768px) {\n\t\t\t\t\t.uix-demo-nav li {\n\t\t\t\t\t\tposition: relative;\n\t\t\t\t\t\tfloat: left;\n\t\t\t\t\t\tdisplay: inline-block;\n\t\t\t\t\t\tmargin: 0 1.2rem 0 0;\n\t\t\t\t\t}\n\n\t\t\t\t\t.uix-demo-nav-header {\n\t\t\t\t\t\twidth: 100%;\n\t\t\t\t\t}\t\n\n\t\t\t\t\t.uix-demo-nav li.is-active > a:after {\n\t\t\t\t\t\tleft: -.7rem;\n\t\t\t\t\t}\t\n\n\t\t\t\t}\n\t\t\t\t\n\t\t\t\t\n\t\t\t\t/*-- Main --*/\n\t\t\t\t.uix-demo-container {\n\t\t\t\t\tpadding-left: 15px;\n\t\t\t\t\tpadding-right: 15px;\n\t\t\t\t\tmax-width: 1000px;\n\t\t\t\t\tposition: relative;\n\t\t\t\t\tmargin-left: auto;\n\t\t\t\t\tmargin-right: auto;\n\t\t\t\t\tpadding-bottom: 70px;\n\t\t\t\t\ttransform: translateX(100px);\n\t\t\t\t}\n\t\t\t\t\n\t\t\t\t@media all and (max-width: 768px) {\n\t\t\t\t\t.uix-demo-container {\n\t\t\t\t\t\tpadding: 0;\t\n\t\t\t\t\t\tmax-width: 100%;\n\t\t\t\t\t\ttransform: translateX(0);\n\t\t\t\t\t}\n\t\t\t\t}\n\n\t\t\t\t@media all and (max-width: 1141px) {\n\t\t\t\t\t.uix-demo-container {\n\t\t\t\t\t\tmax-width: 700px;\n\t\t\t\t\t}\n\t\t\t\t}\n\t\t\n\t\t\t\t@media all and (min-width: 1430px) {\n\t\t\t\t\t.uix-demo-container {\n\t\t\t\t\t\tmax-width: 1140px;\n\t\t\t\t\t\ttransform: translateX(0);\n\t\t\t\t\t}\n\t\t\t\t}\n\n\t\t\t\t\n\t\t\t\t.uix-demo-section {\n\t\t\t\t\tdisplay: flow-root;\n\t\t\t\t\tbox-sizing: border-box;\n\t\t\t\t\tpadding-top: 40px;\n\t\t\t\t\tpadding-bottom: 40px;\n\t\t\t\t}\n\t\t\t\t\n\t\t\t";
+      }
     }
   }, {
     key: "render",

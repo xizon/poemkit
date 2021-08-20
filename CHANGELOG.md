@@ -1,8 +1,10 @@
 # Changelog
 
-#### = 0.0.7 (August 19, 2021) =
+#### = 0.0.8 (August 20, 2021) =
 
 * Fix: Fixed the error that may occur when axios asynchronous request. To avoid causing 502 Proxy Error errors when requesting from the express server.
+* Tweak: Optimize the demo experience with components.
+* Tweak: Optimized the performance of dynamically adding style and sidebar navigation.
 
 
 #### = 0.0.5 (August 16, 2021) =

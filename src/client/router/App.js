@@ -11,6 +11,10 @@ import { __ } from '@uixkit.react/components/_utils/_all';
 import customRoutesConfig from '@uixkit.react/router/RoutesConfig.js';
 import Header from '@uixkit.react/components/Header/index.tsx';
 
+//Create or Remove Sidebar Menu
+import { SidebarMenu } from '@uixkit.react/pages/ComponentsDemo/_SidebarMenu.js';
+
+
 //get project config
 import { rootDirectory } from '@uixkit.react/config/websiteConfig.js';
 
@@ -21,6 +25,11 @@ export default (props) => {
     const theLocation = useLocation();
     React.useEffect(() => {
 		
+
+		//Remove sidebar menu
+		//------------------------------------------
+		SidebarMenu();
+
 		
 		//change page title
 		//------------------------------------------
