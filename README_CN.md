@@ -333,6 +333,32 @@ resolve: {
 }
 ```
 
+`package.json` :
+
+```json
+{
+  "jest": {
+    "testEnvironment": "jsdom",
+    "moduleNameMapper": {
+      "\\.(css|less|scss|sass)$": "identity-obj-proxy",
+      "^@uixkit.react/config/(.*)": "<rootDir>/src/config/$1",
+      "^@uixkit.react/components/(.*)": "<rootDir>/src/client/components/$1",
+      "^@uixkit.react/router/(.*)": "<rootDir>/src/client/router/$1",
+      "^@uixkit.react/helpers/(.*)": "<rootDir>/src/client/helpers/$1",
+      "^@uixkit.react/services/(.*)": "<rootDir>/src/client/services/$1",
+      "^@uixkit.react/reducers/(.*)": "<rootDir>/src/client/reducers/$1",
+      "^@uixkit.react/pages/(.*)": "<rootDir>/src/client/views/_pages/$1",
+      "^@uixkit.react/actions/(.*)": "<rootDir>/src/client/actions/$1",
+      "^@uixkit.react/server/(.*)": "<rootDir>/src/server/$1",
+      "^@uixkit.react/store/(.*)": "<rootDir>/src/store/$1"
+    },
+    "transform": {
+      "^.+\\.(js|jsx)$": "babel-jest",
+      "^.+\\.(ts|tsx)?$": "ts-jest"
+    }
+  }
+}
+```
 
 
 
