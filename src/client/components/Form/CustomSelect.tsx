@@ -125,11 +125,11 @@ export default class CustomSelect extends Component<CustomSelectProps, CustomSel
 		let classes = '';
 		
 
-		//radius
+		//corners
 		if ( param.indexOf( 'pill' ) >= 0 ) classes += ' is-pill';
 		if ( param.indexOf( 'rounded' ) >= 0 ) classes += ' is-rounded';
 
-		//sizes
+		//size
 		if ( param.indexOf( 'fullwidth' ) >= 0 ) classes += ' is-fullwidth';
 
 		

@@ -676,7 +676,130 @@ export default () => {
 			</section>
 
 
+			{/*<!-- API 
+			====================================================== -->*/}
+			<section>
+				<div className="container">
+					<div className="row">
+						<div className="col-12">
+							<h3 className="app-header-title">API</h3>
+							<hr />
+
+							<article className="uix-spacing--s" itemProp="text">
+								<h4>Card</h4>
+								<div>
+									<pre>import Card from '@uixkit.react/components/Card/index.tsx';</pre>
+								</div>
+
+								<div className="table-responsive-md">
+									<table className="table table-bordered table-striped mb-5">
+										<thead>
+											<tr>
+												<th>Property</th>
+												<th>Type</th>
+												<th>Default</th>
+												<th>Description</th>
+											</tr>
+										</thead>
+										<tbody>
+											<tr>
+												<td><code>type</code></td>
+												<td><code>thumb</code> | <code>gallery-v-img</code> | <code>gallery-v-custom</code> | <code>gallery-h-img</code> | <code>gallery-full-info</code> | <code>gallery-icon</code> | <code>gallery-icon-abreast</code> | <code>authorcard-line</code> | <code>authorcard-detail</code> | <code>authorcard-stats</code></td>
+												<td>-</td>
+												<td>Card display style</td>
+											</tr>
+											<tr>
+												<td><code>btnIcon</code></td>
+												<td>ReactNode</td>
+												<td>-</td>
+												<td>Button Icon</td>
+											</tr>
+											<tr>
+												<td><code>title</code></td>
+												<td>string</td>
+												<td>-</td>
+												<td>Title of card</td>
+											</tr>
+											<tr>
+												<td><code>titleEllipsis</code></td>
+												<td>boolean</td>
+												<td>false</td>
+												<td>Omit overflowed title string</td>
+											</tr>
+											<tr>
+												<td><code>subTitle</code></td>
+												<td>ReactNode | string</td>
+												<td>-</td>
+												<td>Hyperlink or subtitle of card</td>
+											</tr>
+											<tr>
+												<td><code>bgConfig</code></td>
+												<td>JSON Object Literals</td>
+												<td>-</td>
+												<td>The attributes of the background image, use JSON string format. Such as:<br /><code className="text-wrap">{`{"src":"assets/images/demo.jpg"}`}</code>
+												<code className="text-wrap">{`{"src":"assets/images/demo.jpg","position":"center center","size":"cover","repeat":"no-repeat","fill":false}`}</code></td>
+											</tr>
+											<tr>
+												<td><code>contentRatio</code></td>
+												<td>number</td>
+												<td>-</td>
+												<td>The ratio of the content, used for horizontal gallery style. For <code>gallery-h-*</code>, <code>gallery-full-*</code></td>
+											</tr>
+											<tr>
+												<td><code>icon</code></td>
+												<td>ReactNode</td>
+												<td>-</td>
+												<td>Primary Icon. For <code>gallery-icon-*</code></td>
+											</tr>
+											<tr>
+												<td><code>overlayArea</code></td>
+												<td>ReactNode</td>
+												<td>-</td>
+												<td>Overlay the content on the card background. For <code>gallery-v-*</code></td>
+											</tr>
+											<tr>
+												<td><code>verticalCenter</code></td>
+												<td>boolean</td>
+												<td>false</td>
+												<td>Vertically center text. For <code>gallery-full-*</code></td>
+											</tr>
+											<tr>
+												<td><code>avatar</code></td>
+												<td>string</td>
+												<td>-</td>
+												<td>Avatar URL. For <code>thumb</code>, <code>authorcard-*</code></td>
+											</tr>
+											<tr>
+												<td><code>btnClickEvent</code></td>
+												<td>function</td>
+												<td>-</td>
+												<td>Handling events for button</td>
+											</tr>
+											<tr>
+												<td><code>btnHyperlinkClickEvent</code></td>
+												<td>function</td>
+												<td>-</td>
+												<td>Handling events for anchor link</td>
+											</tr>
+										</tbody>
+									</table>
+
+								</div>
 	
+						
+							</article>
+
+
+						</div>
+					</div>
+					{/*
+					<!-- .row end -->*/}
+
+
+				</div>
+				{/*
+				<!-- .container end -->*/}
+			</section>
 
 		
       </>

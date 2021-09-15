@@ -120,7 +120,7 @@ export default (props) => {
     return (
 	  <>
 
-		<Header headerOverlayEnabled="false" htmlString={
+		<Header headerOverlayEnabled="false" menu={
 			<>
 		
 					<li className={props.location.pathname === "/index" || props.location.pathname === '' ? 'is-active' : ''}>

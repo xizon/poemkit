@@ -6,9 +6,9 @@
  * ## Project Name        :  Uix Kit React
  * ## Project Description :  A free web kits with React for fast web design and development via SSR.
  * ## Project URL         :  https://uiux.cc
- * ## Version             :  0.0.8
+ * ## Version             :  0.0.9
  * ## Based on            :  Uix Kit React (https://github.com/xizon/uix-kit-react#readme)
- * ## Last Update         :  August 20, 2021
+ * ## Last Update         :  September 15, 2021
  * ## Created by          :  UIUX Lab (https://uiux.cc) (uiuxlab@gmail.com)
  * ## Released under the MIT license.
  *
@@ -582,7 +582,7 @@ module.exports = InterceptorManager;
 
 
 var isAbsoluteURL = __webpack_require__(1793);
-var combineURLs = __webpack_require__(7303);
+var combineURLs = __webpack_require__(9002);
 
 /**
  * Creates a new URL by combining the baseURL with the requestedURL,
@@ -1125,7 +1125,7 @@ module.exports = function buildURL(url, params, paramsSerializer) {
 
 /***/ }),
 
-/***/ 7303:
+/***/ 9002:
 /***/ ((module) => {
 
 "use strict";
@@ -31002,8 +31002,8 @@ var esm_typeof = __webpack_require__(484);
  * Core Shortcut
  *
  * @package: uix-kit-react
- * @version: 0.25
- * @last update: July 29, 2021
+ * @version: 0.27
+ * @last update: September 14, 2021
  * @license: MIT
  *
  *************************************
@@ -32099,7 +32099,6 @@ var __ = function () {
           case 9:
             //if Document
             return self.wrap([document.body]);
-            break;
 
           default:
             return [];
@@ -32582,23 +32581,43 @@ var __ = function () {
 
   __.prototype.find = function (s) {
     // The symbol ">" is not allowed at the beginning of the find() method.
-    var searchChildNode = __.trim(s);
+    if (/(^\s*|,\s*)>/.test(s)) {
+      var removeId;
 
-    if (searchChildNode.slice(0, 1) == '>') {
-      var _childNode = __.removeFirstLastStr(searchChildNode, '>');
-
-      var childrenList = this.children;
-
-      for (var i = 0; i < childrenList.length; i++) {
-        //the child node exists
-        if (childrenList[i].className.split(' ').indexOf(this.querySelector(_childNode).className) >= 0) {
-          var el = childrenList[i];
-          return __.prototype.wrap([el]);
-        }
+      if (!this.id) {
+        this.id = 'ID_' + new Date().getTime();
+        removeId = true;
       }
-    }
 
-    return __(s, this);
+      s = s.replace(/(^\s*|,\s*)>/g, '$1#' + this.id + ' >');
+      var result = document.querySelector(s);
+
+      if (removeId) {
+        this.id = null;
+      }
+
+      return result;
+    } else {
+      return __(s, this);
+    }
+    /*
+    const searchChildNode = __.trim(s);
+    if ( searchChildNode.slice(0,1) == '>' ){
+    		const _childNode = __.removeFirstLastStr( searchChildNode, '>' );
+    	const childrenList = this.children;
+    		for (let i = 0; i < childrenList.length; i++ ) {
+    		//the child node exists
+    		if( childrenList[i].className.split(' ').indexOf( this.querySelector( _childNode ).className ) >= 0 ) {
+    			const el = childrenList[i];
+    			return __.prototype.wrap( [el] );
+    		}
+    		
+    	}
+    	
+    }
+    	return __(s, this);
+    */
+
   };
   /*
    * Reduce the set of matched elements to the one at the specified index.
@@ -33283,19 +33302,15 @@ var __ = function () {
     switch (controlType) {
       case "input-textarea":
         return this.value;
-        break;
 
       case "checkbox":
         return this.checked ? 1 : 0;
-        break;
 
       case "radio":
         return this.value;
-        break;
 
       case "select":
         return this.value;
-        break;
 
       default:
         return this.value;
@@ -42257,7 +42272,7 @@ var Header = /*#__PURE__*/function (_Component) {
     key: "render",
     value: function render() {
       var _this$props = this.props,
-          htmlString = _this$props.htmlString,
+          menu = _this$props.menu,
           headerOverlayEnabled = _this$props.headerOverlayEnabled;
 
       var _headerOverlayEnabled = headerOverlayEnabled == 'true' ? true : false;
@@ -42276,7 +42291,7 @@ var Header = /*#__PURE__*/function (_Component) {
         src: "".concat(websiteConfig.rootDirectory, "/assets/images/logo.png"),
         alt: "Uix Kit React"
       }))), /*#__PURE__*/react.createElement(Navigation, {
-        htmlString: htmlString
+        htmlString: menu
       })), /*#__PURE__*/react.createElement("div", {
         className: "uix-clearfix"
       }))), headerOverlayEnabled === true ? /*#__PURE__*/react.createElement(react.Fragment, null) : /*#__PURE__*/react.createElement("div", {
@@ -42335,7 +42350,11 @@ function createSidebarMenu(navItems) {
   document.querySelectorAll('a[href^="#"]').forEach(function (anchor) {
     anchor.addEventListener('click', function (e) {
       e.preventDefault();
-      var targetEl = document.querySelector('#' + this.href.split('#')[1]);
+
+      var _href = this.getAttribute('href');
+
+      if (_href === '#') _href = '#demo';
+      var targetEl = document.querySelector('#' + _href.split('#')[1]);
 
       if (targetEl !== null) {
         var elTop = targetEl.offsetTop;
@@ -42416,16 +42435,20 @@ function SidebarMenu() {
     var allHeaderTitleLinks = [];
     var result = grabAllHeaderTitle.filter(function (node) {
       return node.textContent.trim().length > 1;
-    });
+    }); //get DOC anchor element HTML code
+
+    var docLink = document.querySelector('h1.uix-typo--h2');
+    var docLinkText = docLink.innerHTML.match(/<a.*?>(.*?)<\/a>/g)[0];
+    docLink.querySelector('a').style.display = 'none';
     result.forEach(function (node, index) {
       var linkID = 'app-header-title-' + index;
-      var linkTitle = node.textContent;
+      var linkTitle = node.innerHTML.replace(/<a\b[^>]*>(.*?)<\/a>/ig, '');
       var sectionID = linkID + '__section';
 
       if (document.querySelector('#' + linkID) === null) {
         //update ID
         node.id = linkID;
-        node.closest('section').id = sectionID; // Create anchor element.
+        node.closest('section').id = sectionID; //Create anchor element.
 
         var a = document.createElement('a');
         var link = document.createTextNode('#');
@@ -42433,7 +42456,11 @@ function SidebarMenu() {
         a.title = linkTitle;
         a.href = '#' + sectionID;
         a.setAttribute('style', 'float: left; margin-left: -20px; text-decoration: none; color: #9e9e9e;');
-        node.prepend(a); //
+        node.prepend(a); //Create DOC anchor element
+
+        var docLinkNode = document.createElement('div');
+        docLinkNode.innerHTML = docLinkText;
+        node.appendChild(docLinkNode.firstChild); //
 
         node.classList.add("app-header-title--sidebar");
       } //
@@ -42441,7 +42468,7 @@ function SidebarMenu() {
 
       allHeaderTitleLinks.push({
         href: '#' + sectionID,
-        text: linkTitle.replace('#', '')
+        text: linkTitle
       });
     }); //Create Sidebar Menu
 
@@ -42539,7 +42566,7 @@ function SidebarMenu() {
   });
   return /*#__PURE__*/react.createElement(react.Fragment, null, /*#__PURE__*/react.createElement(Header, {
     headerOverlayEnabled: "false",
-    htmlString: /*#__PURE__*/react.createElement(react.Fragment, null, /*#__PURE__*/react.createElement("li", {
+    menu: /*#__PURE__*/react.createElement(react.Fragment, null, /*#__PURE__*/react.createElement("li", {
       className: props.location.pathname === "/index" || props.location.pathname === '' ? 'is-active' : ''
     }, /*#__PURE__*/react.createElement(NavLink, {
       "data-route": "true",
@@ -44034,7 +44061,7 @@ function _objectWithoutProperties(source, excluded) {
 
   return target;
 }
-;// CONCATENATED MODULE: ./src/client/components/Button/index.tsx
+;// CONCATENATED MODULE: ./src/client/components/Button/Button.tsx
 
 
 
@@ -44042,17 +44069,12 @@ function _objectWithoutProperties(source, excluded) {
 
 
 
-var _excluded = ["href", "target", "className", "id", "children"];
+var _excluded = ["status", "border", "background", "spacing", "corners", "size", "iconPosition", "icon", "href", "target", "id", "children"];
 
 function Button_createSuper(Derived) { var hasNativeReflectConstruct = Button_isNativeReflectConstruct(); return function _createSuperInternal() { var Super = _getPrototypeOf(Derived), result; if (hasNativeReflectConstruct) { var NewTarget = _getPrototypeOf(this).constructor; result = Reflect.construct(Super, arguments, NewTarget); } else { result = Super.apply(this, arguments); } return _possibleConstructorReturn(this, result); }; }
 
 function Button_isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Reflect.construct) return false; if (Reflect.construct.sham) return false; if (typeof Proxy === "function") return true; try { Boolean.prototype.valueOf.call(Reflect.construct(Boolean, [], function () {})); return true; } catch (e) { return false; } }
 
-/* 
- *************************************
- * <!-- Button -->
- *************************************
- */
 
 /*-- Apply Third-party plugins (import location should be in front of "global scripts and styles") --*/
 
@@ -44078,34 +44100,201 @@ var Button = /*#__PURE__*/function (_Component) {
 
     return _super.call(this, props);
   }
+  /**
+   * Set the class names of different styles
+   */
+
 
   _createClass(Button, [{
+    key: "styleTransferStatus",
+    value: function styleTransferStatus(param) {
+      var classes = '';
+      if (typeof param === 'undefined' || param === false) param = ''; //status
+
+      if (param.indexOf('disabled') >= 0) classes += ' is-disabled';
+      if (param.indexOf('waiting') >= 0) classes += ' is-waiting';
+      return classes;
+    }
+  }, {
+    key: "styleTransferBorder",
+    value: function styleTransferBorder(param) {
+      var classes = '';
+      if (typeof param === 'undefined' || param === false) param = ''; //border
+
+      if (param.indexOf('thin') >= 0) classes += ' uix-btn__border--thin';
+      if (param.indexOf('medium') >= 0) classes += ' uix-btn__border--medium';
+      if (param.indexOf('thick') >= 0) classes += ' uix-btn__border--thick';
+      if (param.indexOf('white') >= 0) classes += ' uix-btn__border--white';
+      return classes;
+    }
+  }, {
+    key: "styleTransferBackground",
+    value: function styleTransferBackground(param) {
+      var classes = '';
+      if (typeof param === 'undefined' || param === false) param = ''; //background
+
+      if (param.indexOf('primary') >= 0) classes += ' uix-btn__bg--primary';
+      if (param.indexOf('secondary') >= 0) classes += ' uix-btn__bg--secondary';
+      if (param.indexOf('hyperlink') >= 0) classes += ' uix-btn__bg--hyperlink';
+      if (param.indexOf('hyperlink2') >= 0) classes += ' uix-btn__bg--hyperlink2';
+      if (param.indexOf('transparent') >= 0) classes += ' is-transparent';
+      if (param.indexOf('fillwhite') >= 0) classes += ' is-fill-white';
+      return classes;
+    }
+  }, {
+    key: "styleTransferSpacing",
+    value: function styleTransferSpacing(param) {
+      var classes = '';
+      if (typeof param === 'undefined' || param === false) param = ''; //margin
+
+      if (param.indexOf('bottom') >= 0) classes += ' uix-btn__margin--b';
+      if (param.indexOf('left') >= 0) classes += ' uix-btn__margin--l';
+      if (param.indexOf('right') >= 0) classes += ' uix-btn__margin--r';
+      return classes;
+    }
+  }, {
+    key: "styleTransferCorners",
+    value: function styleTransferCorners(param) {
+      var classes = '';
+      if (typeof param === 'undefined' || param === false) param = ''; //corners
+
+      if (param.indexOf('pill') >= 0) classes += ' is-pill';
+      if (param.indexOf('rounded') >= 0) classes += ' is-rounded';
+      return classes;
+    }
+  }, {
+    key: "styleTransferSize",
+    value: function styleTransferSize(param) {
+      var classes = '';
+      if (typeof param === 'undefined' || param === false) param = ''; //size
+
+      if (param.indexOf('fullwidth') >= 0) classes += ' is-fullwidth';
+      if (param.indexOf('tiny') >= 0) classes += ' uix-btn__size--t';
+      if (param.indexOf('small') >= 0) classes += ' uix-btn__size--s';
+      if (param.indexOf('medium') >= 0) classes += ' uix-btn__size--m';
+      if (param.indexOf('large') >= 0) classes += ' uix-btn__size--l';
+      return classes;
+    }
+  }, {
     key: "render",
     value: function render() {
       var _this$props = this.props,
+          status = _this$props.status,
+          border = _this$props.border,
+          background = _this$props.background,
+          spacing = _this$props.spacing,
+          corners = _this$props.corners,
+          size = _this$props.size,
+          iconPosition = _this$props.iconPosition,
+          icon = _this$props.icon,
           href = _this$props.href,
           target = _this$props.target,
-          className = _this$props.className,
           id = _this$props.id,
           children = _this$props.children,
           attributes = _objectWithoutProperties(_this$props, _excluded);
 
+      var _status = this.styleTransferStatus(status);
+
+      var _border = this.styleTransferBorder(border);
+
+      var _background = this.styleTransferBackground(background);
+
+      var _spacing = this.styleTransferSpacing(spacing);
+
+      var _corners = this.styleTransferCorners(corners);
+
+      var _size = this.styleTransferSize(size); //button icon
+
+
+      var _iconPosition = '';
+      if (iconPosition === 'left') _iconPosition = ' uix-btn__icon uix-btn__icon--left';
+      if (iconPosition === 'right') _iconPosition = ' uix-btn__icon uix-btn__icon--right';
+
+      var _icon = icon || '';
+
       return /*#__PURE__*/react.createElement(react.Fragment, null, href ? /*#__PURE__*/react.createElement("a", extends_extends({
         tabIndex: 0,
         href: href || '#',
-        className: className || '',
+        className: "uix-btn" + _status + _border + _background + _spacing + _corners + _size + _iconPosition,
         target: target || '_self',
         id: id || 'app-btn-' + shortcut.GUID.create()
-      }, attributes), children) : /*#__PURE__*/react.createElement("button", extends_extends({
-        className: className || '',
+      }, attributes), _icon !== '' ? /*#__PURE__*/react.createElement(react.Fragment, null, /*#__PURE__*/react.createElement("span", null, _icon)) : '', children) : /*#__PURE__*/react.createElement("button", extends_extends({
+        className: "uix-btn" + _status + _border + _background + _spacing + _corners + _size + _iconPosition,
         id: id ? id : 'app-btn-' + shortcut.GUID.create(),
         type: "button"
-      }, attributes), children));
+      }, attributes), _icon !== '' ? /*#__PURE__*/react.createElement(react.Fragment, null, /*#__PURE__*/react.createElement("span", null, _icon)) : '', children));
     }
   }]);
 
   return Button;
 }(react.Component);
+
+
+;// CONCATENATED MODULE: ./src/client/components/Button/ButtonGroup.tsx
+
+
+
+
+
+
+function ButtonGroup_createSuper(Derived) { var hasNativeReflectConstruct = ButtonGroup_isNativeReflectConstruct(); return function _createSuperInternal() { var Super = _getPrototypeOf(Derived), result; if (hasNativeReflectConstruct) { var NewTarget = _getPrototypeOf(this).constructor; result = Reflect.construct(Super, arguments, NewTarget); } else { result = Super.apply(this, arguments); } return _possibleConstructorReturn(this, result); }; }
+
+function ButtonGroup_isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Reflect.construct) return false; if (Reflect.construct.sham) return false; if (typeof Proxy === "function") return true; try { Boolean.prototype.valueOf.call(Reflect.construct(Boolean, [], function () {})); return true; } catch (e) { return false; } }
+
+
+
+var ButtonGroup = /*#__PURE__*/function (_Component) {
+  _inherits(ButtonGroup, _Component);
+
+  var _super = ButtonGroup_createSuper(ButtonGroup);
+
+  function ButtonGroup(props) {
+    _classCallCheck(this, ButtonGroup);
+
+    return _super.call(this, props);
+  }
+  /**
+   * Set the class names of different styles
+   */
+
+
+  _createClass(ButtonGroup, [{
+    key: "styleTransferSpacing",
+    value: function styleTransferSpacing(param) {
+      var classes = '';
+      if (typeof param === 'undefined' || param === false) param = ''; //margin
+
+      if (param.indexOf('bottom') >= 0) classes += ' uix-btn__margin--b';
+      if (param.indexOf('left') >= 0) classes += ' uix-btn__margin--l';
+      if (param.indexOf('right') >= 0) classes += ' uix-btn__margin--r';
+      return classes;
+    }
+  }, {
+    key: "render",
+    value: function render() {
+      var _this$props = this.props,
+          spacing = _this$props.spacing,
+          fullwidth = _this$props.fullwidth,
+          children = _this$props.children;
+
+      var _spacing = this.styleTransferSpacing(spacing);
+
+      return /*#__PURE__*/react.createElement(react.Fragment, null, /*#__PURE__*/react.createElement("div", {
+        className: "uix-btn__group" + _spacing + (fullwidth ? ' is-fullwidth' : '')
+      }, children));
+    }
+  }]);
+
+  return ButtonGroup;
+}(react.Component);
+
+
+;// CONCATENATED MODULE: ./src/client/components/Button/index.tsx
+/* 
+ *************************************
+ * <!-- Button -->
+ *************************************
+ */
 
 
 ;// CONCATENATED MODULE: ./src/client/views/_pages/ComponentsDemo/ButtonDemo.js
@@ -44179,18 +44368,26 @@ var Button = /*#__PURE__*/function (_Component) {
     className: "col-12",
     id: "my-ajax-demo-target-button"
   }, /*#__PURE__*/react.createElement(Button, {
+    border: "thin",
+    spacing: "bottom",
+    background: "primary",
+    corners: "pill",
+    size: "medium",
     id: "app-btn-1",
     href: "#",
     "data-title": "button",
-    className: "uix-btn uix-btn__border--thin uix-btn__margin--b uix-btn__size--m uix-btn__bg--primary is-pill",
     onClick: function onClick(e) {
       e.preventDefault();
       alert(e.target.id);
     }
   }, "Click me to view ID!"), /*#__PURE__*/react.createElement("br", null), /*#__PURE__*/react.createElement(Button, {
+    border: "thin",
+    spacing: "bottom",
+    background: "primary",
+    corners: "pill",
+    size: "medium",
     id: "app-btn-2",
     href: "#",
-    className: "uix-btn uix-btn__border--thin uix-btn__margin--b uix-btn__size--m uix-btn__bg--primary is-pill",
     onClick: function onClick(e) {
       e.preventDefault();
 
@@ -44206,7 +44403,7 @@ var Button = /*#__PURE__*/function (_Component) {
     className: "col-12"
   }, /*#__PURE__*/react.createElement("h3", {
     className: "app-header-title"
-  }, "Button"), /*#__PURE__*/react.createElement("p", null, "If you need to use multiple colors, you can add CSS styles yourself, such as: ", /*#__PURE__*/react.createElement("code", null, ".uix-btn__bg--blue"), ", ", /*#__PURE__*/react.createElement("code", null, ".uix-btn__bg--purple"), " ..."), /*#__PURE__*/react.createElement("hr", null))))), /*#__PURE__*/react.createElement("section", {
+  }, "Button"), /*#__PURE__*/react.createElement("hr", null))))), /*#__PURE__*/react.createElement("section", {
     className: "uix-spacing--s"
   }, /*#__PURE__*/react.createElement("div", {
     className: "container"
@@ -44215,230 +44412,476 @@ var Button = /*#__PURE__*/function (_Component) {
   }, /*#__PURE__*/react.createElement("div", {
     className: "col-12"
   }, /*#__PURE__*/react.createElement(Button, {
-    href: "#",
-    className: "uix-btn uix-btn__border--thin uix-btn__margin--b uix-btn__size--t uix-btn__bg--hyperlink"
+    border: "thin",
+    spacing: "bottom",
+    background: "hyperlink",
+    size: "tiny",
+    href: "#"
   }, "Tiny"), /*#__PURE__*/react.createElement(Button, {
-    href: "#",
-    className: "uix-btn uix-btn__border--thin uix-btn__margin--b uix-btn__size--s uix-btn__bg--hyperlink"
+    border: "thin",
+    spacing: "bottom",
+    background: "hyperlink",
+    size: "small",
+    href: "#"
   }, "Small"), /*#__PURE__*/react.createElement(Button, {
-    href: "#",
-    className: "uix-btn uix-btn__border--thin uix-btn__margin--b uix-btn__size--m uix-btn__bg--hyperlink"
+    border: "thin",
+    spacing: "bottom",
+    background: "hyperlink",
+    size: "medium",
+    href: "#"
   }, "Medium"), /*#__PURE__*/react.createElement(Button, {
-    href: "#",
-    className: "uix-btn uix-btn__border--thin uix-btn__margin--b uix-btn__size--l uix-btn__bg--hyperlink"
+    border: "thin",
+    spacing: "bottom",
+    background: "hyperlink",
+    size: "large",
+    href: "#"
   }, "Large"), /*#__PURE__*/react.createElement("br", null), /*#__PURE__*/react.createElement(Button, {
-    href: "#",
-    className: "uix-btn uix-btn__border--thin uix-btn__margin--b uix-btn__size--t uix-btn__bg--hyperlink2"
+    border: "thin",
+    spacing: "bottom",
+    background: "hyperlink2",
+    size: "tiny",
+    href: "#"
   }, "Tiny"), /*#__PURE__*/react.createElement(Button, {
-    href: "#",
-    className: "uix-btn uix-btn__border--thin uix-btn__margin--b uix-btn__size--s uix-btn__bg--hyperlink2"
+    border: "thin",
+    spacing: "bottom",
+    background: "hyperlink2",
+    size: "small",
+    href: "#"
   }, "Small"), /*#__PURE__*/react.createElement(Button, {
-    href: "#",
-    className: "uix-btn uix-btn__border--thin uix-btn__margin--b uix-btn__size--m uix-btn__bg--hyperlink2"
+    border: "thin",
+    spacing: "bottom",
+    background: "hyperlink2",
+    size: "medium",
+    href: "#"
   }, "Medium"), /*#__PURE__*/react.createElement(Button, {
-    href: "#",
-    className: "uix-btn uix-btn__border--thin uix-btn__margin--b uix-btn__size--l uix-btn__bg--hyperlink2"
+    border: "thin",
+    spacing: "bottom",
+    background: "hyperlink2",
+    size: "large",
+    href: "#"
   }, "Large"), /*#__PURE__*/react.createElement("br", null), /*#__PURE__*/react.createElement(Button, {
-    href: "#",
-    className: "uix-btn uix-btn__border--thin uix-btn__margin--b uix-btn__size--t uix-btn__bg--primary"
+    border: "thin",
+    spacing: "bottom",
+    background: "primary",
+    size: "tiny",
+    href: "#"
   }, /*#__PURE__*/react.createElement("i", {
     className: "fa fa-bullhorn",
     "aria-hidden": "true"
   }), "Tiny"), /*#__PURE__*/react.createElement(Button, {
-    href: "#",
-    className: "uix-btn uix-btn__border--thin uix-btn__margin--b uix-btn__size--s uix-btn__bg--primary"
+    border: "thin",
+    spacing: "bottom",
+    background: "primary",
+    size: "small",
+    href: "#"
   }, /*#__PURE__*/react.createElement("i", {
     className: "fa fa-bullhorn",
     "aria-hidden": "true"
   }), "Small"), /*#__PURE__*/react.createElement(Button, {
-    href: "#",
-    className: "uix-btn uix-btn__border--thin uix-btn__margin--b uix-btn__size--m uix-btn__bg--primary"
+    border: "thin",
+    spacing: "bottom",
+    background: "primary",
+    size: "medium",
+    href: "#"
   }, /*#__PURE__*/react.createElement("i", {
     className: "fa fa-cogs",
     "aria-hidden": "true"
   }), "Medium"), /*#__PURE__*/react.createElement(Button, {
-    href: "#",
-    className: "uix-btn uix-btn__border--thin uix-btn__margin--b uix-btn__size--l uix-btn__bg--primary"
+    border: "thin",
+    spacing: "bottom",
+    background: "primary",
+    size: "large",
+    href: "#"
   }, /*#__PURE__*/react.createElement("i", {
     className: "fa fa-flask",
     "aria-hidden": "true"
   }), "Large"), /*#__PURE__*/react.createElement("br", null), /*#__PURE__*/react.createElement(Button, {
-    href: "#",
-    className: "uix-btn uix-btn__border--thin uix-btn__margin--b uix-btn__size--t uix-btn__bg--primary"
+    border: "thin",
+    spacing: "bottom",
+    background: "primary",
+    size: "tiny",
+    href: "#"
   }, "Tiny", /*#__PURE__*/react.createElement("i", {
     className: "fa fa-bullhorn",
     "aria-hidden": "true"
   })), /*#__PURE__*/react.createElement(Button, {
-    href: "#",
-    className: "uix-btn uix-btn__border--thin uix-btn__margin--b uix-btn__size--s uix-btn__bg--primary"
+    border: "thin",
+    spacing: "bottom",
+    background: "primary",
+    size: "small",
+    href: "#"
   }, "Small", /*#__PURE__*/react.createElement("i", {
     className: "fa fa-bullhorn",
     "aria-hidden": "true"
   })), /*#__PURE__*/react.createElement(Button, {
-    href: "#",
-    className: "uix-btn uix-btn__border--thin uix-btn__margin--b uix-btn__size--m uix-btn__bg--primary"
+    border: "thin",
+    spacing: "bottom",
+    background: "primary",
+    size: "medium",
+    href: "#"
   }, "Medium", /*#__PURE__*/react.createElement("i", {
     className: "fa fa-cogs",
     "aria-hidden": "true"
   })), /*#__PURE__*/react.createElement(Button, {
-    href: "#",
-    className: "uix-btn uix-btn__border--thin uix-btn__margin--b uix-btn__size--l uix-btn__bg--primary"
+    border: "thin",
+    spacing: "bottom",
+    background: "primary",
+    size: "large",
+    href: "#"
   }, "Large", /*#__PURE__*/react.createElement("i", {
     className: "fa fa-flask",
     "aria-hidden": "true"
   })), /*#__PURE__*/react.createElement("br", null), /*#__PURE__*/react.createElement(Button, {
-    href: "#",
-    className: "uix-btn uix-btn__border--thin uix-btn__margin--b uix-btn__size--s uix-btn__bg--primary uix-btn__icon uix-btn__icon--right"
-  }, /*#__PURE__*/react.createElement("span", null, /*#__PURE__*/react.createElement("i", {
-    className: "fa fa-bullhorn",
-    "aria-hidden": "true"
-  })), "Icon Right"), /*#__PURE__*/react.createElement(Button, {
-    href: "#",
-    className: "uix-btn uix-btn__border--thin uix-btn__margin--b uix-btn__size--s uix-btn__bg--primary uix-btn__icon uix-btn__icon--left"
-  }, /*#__PURE__*/react.createElement("span", null, /*#__PURE__*/react.createElement("i", {
-    className: "fa fa-cogs",
-    "aria-hidden": "true"
-  })), "Icon Left"), /*#__PURE__*/react.createElement(Button, {
-    href: "#",
-    className: "uix-btn uix-btn__border--thin uix-btn__margin--b uix-btn__size--s uix-btn__bg--primary is-pill is-transparent uix-btn__icon uix-btn__icon--right"
-  }, /*#__PURE__*/react.createElement("span", null, /*#__PURE__*/react.createElement("i", {
-    className: "fa fa-bullhorn",
-    "aria-hidden": "true"
-  })), "Icon Left"), /*#__PURE__*/react.createElement(Button, {
-    href: "#",
-    className: "uix-btn uix-btn__border--thin uix-btn__margin--b uix-btn__size--s uix-btn__bg--primary is-pill is-transparent uix-btn__icon uix-btn__icon--left"
-  }, /*#__PURE__*/react.createElement("span", null, /*#__PURE__*/react.createElement("i", {
-    className: "fa fa-cogs",
-    "aria-hidden": "true"
-  })), "Icon Right"), /*#__PURE__*/react.createElement("br", null), /*#__PURE__*/react.createElement(Button, {
-    href: "#",
-    className: "uix-btn uix-btn__border--thin uix-btn__margin--b uix-btn__size--t uix-btn__bg--primary is-disabled"
+    border: "thin",
+    spacing: "bottom",
+    background: "primary",
+    size: "small",
+    icon: /*#__PURE__*/react.createElement(react.Fragment, null, /*#__PURE__*/react.createElement("i", {
+      className: "fa fa-bullhorn",
+      "aria-hidden": "true"
+    })),
+    iconPosition: "right",
+    href: "#"
+  }, "Icon Right"), /*#__PURE__*/react.createElement(Button, {
+    border: "thin",
+    spacing: "bottom",
+    background: "primary",
+    size: "small",
+    icon: /*#__PURE__*/react.createElement(react.Fragment, null, /*#__PURE__*/react.createElement("i", {
+      className: "fa fa-cogs",
+      "aria-hidden": "true"
+    })),
+    iconPosition: "left",
+    href: "#"
+  }, "Icon Left"), /*#__PURE__*/react.createElement(Button, {
+    border: "thin",
+    spacing: "bottom",
+    background: "primary transparent",
+    corners: "pill",
+    size: "small",
+    icon: /*#__PURE__*/react.createElement(react.Fragment, null, /*#__PURE__*/react.createElement("i", {
+      className: "fa fa-bullhorn",
+      "aria-hidden": "true"
+    })),
+    iconPosition: "left",
+    href: "#"
+  }, "Icon Left"), /*#__PURE__*/react.createElement(Button, {
+    border: "thin",
+    spacing: "bottom",
+    background: "primary transparent",
+    corners: "pill",
+    size: "small",
+    icon: /*#__PURE__*/react.createElement(react.Fragment, null, /*#__PURE__*/react.createElement("i", {
+      className: "fa fa-cogs",
+      "aria-hidden": "true"
+    })),
+    iconPosition: "right",
+    href: "#"
+  }, "Icon Right"), /*#__PURE__*/react.createElement("br", null), /*#__PURE__*/react.createElement(Button, {
+    status: "disabled",
+    border: "thin",
+    spacing: "bottom",
+    background: "primary",
+    size: "tiny",
+    href: "#"
   }, "Tiny"), /*#__PURE__*/react.createElement(Button, {
-    href: "#",
-    className: "uix-btn uix-btn__border--thin uix-btn__margin--b uix-btn__size--s uix-btn__bg--primary is-disabled"
+    status: "disabled",
+    border: "thin",
+    spacing: "bottom",
+    background: "primary",
+    size: "small",
+    href: "#"
   }, "Small"), /*#__PURE__*/react.createElement(Button, {
-    href: "#",
-    className: "uix-btn uix-btn__border--thin uix-btn__margin--b uix-btn__size--m uix-btn__bg--primary is-disabled"
+    status: "disabled",
+    border: "thin",
+    spacing: "bottom",
+    background: "primary",
+    size: "medium",
+    href: "#"
   }, "Medium"), /*#__PURE__*/react.createElement(Button, {
-    href: "#",
-    className: "uix-btn uix-btn__border--thin uix-btn__margin--b uix-btn__size--l uix-btn__bg--primary is-disabled"
+    status: "disabled",
+    border: "thin",
+    spacing: "bottom",
+    background: "primary",
+    size: "large",
+    href: "#"
   }, "Large"), /*#__PURE__*/react.createElement("br", null), /*#__PURE__*/react.createElement(Button, {
-    href: "#",
-    className: "uix-btn uix-btn__border--thin uix-btn__margin--b uix-btn__size--t uix-btn__bg--primary wait"
+    status: "waiting",
+    border: "thin",
+    spacing: "bottom",
+    background: "primary",
+    size: "tiny",
+    href: "#"
   }, "Tiny"), /*#__PURE__*/react.createElement(Button, {
-    href: "#",
-    className: "uix-btn uix-btn__border--thin uix-btn__margin--b uix-btn__size--s uix-btn__bg--primary wait"
+    status: "waiting",
+    border: "thin",
+    spacing: "bottom",
+    background: "primary",
+    size: "small",
+    href: "#"
   }, "Small"), /*#__PURE__*/react.createElement(Button, {
-    href: "#",
-    className: "uix-btn uix-btn__border--thin uix-btn__margin--b uix-btn__size--m uix-btn__bg--primary wait"
+    status: "waiting",
+    border: "thin",
+    spacing: "bottom",
+    background: "primary",
+    size: "medium",
+    href: "#"
   }, "Medium"), /*#__PURE__*/react.createElement(Button, {
-    href: "#",
-    className: "uix-btn uix-btn__border--thin uix-btn__margin--b uix-btn__size--l uix-btn__bg--primary wait"
+    status: "waiting",
+    border: "thin",
+    spacing: "bottom",
+    background: "primary",
+    size: "large",
+    href: "#"
   }, "Large"), /*#__PURE__*/react.createElement("br", null), /*#__PURE__*/react.createElement(Button, {
-    href: "#",
-    className: "uix-btn uix-btn__border--thin uix-btn__margin--b uix-btn__size--t uix-btn__bg--primary is-pill"
+    border: "thin",
+    spacing: "bottom",
+    background: "primary",
+    corners: "pill",
+    size: "tiny",
+    href: "#"
   }, "Tiny"), /*#__PURE__*/react.createElement(Button, {
-    href: "#",
-    className: "uix-btn uix-btn__border--thin uix-btn__margin--b uix-btn__size--s uix-btn__bg--primary is-pill"
+    border: "thin",
+    spacing: "bottom",
+    background: "primary",
+    corners: "pill",
+    size: "small",
+    href: "#"
   }, "Small"), /*#__PURE__*/react.createElement(Button, {
-    href: "#",
-    className: "uix-btn uix-btn__border--thin uix-btn__margin--b uix-btn__size--m uix-btn__bg--primary is-pill"
+    border: "thin",
+    spacing: "bottom",
+    background: "primary",
+    corners: "pill",
+    size: "medium",
+    href: "#"
   }, "Medium"), /*#__PURE__*/react.createElement(Button, {
-    href: "#",
-    className: "uix-btn uix-btn__border--thin uix-btn__margin--b uix-btn__size--l uix-btn__bg--primary is-pill"
+    border: "thin",
+    spacing: "bottom",
+    background: "primary",
+    corners: "pill",
+    size: "large",
+    href: "#"
   }, "Large"), /*#__PURE__*/react.createElement("br", null), /*#__PURE__*/react.createElement(Button, {
-    href: "#",
-    className: "uix-btn uix-btn__border--thin uix-btn__margin--b uix-btn__size--t uix-btn__bg--primary is-rounded"
+    border: "thin",
+    spacing: "bottom",
+    background: "primary",
+    corners: "rounded",
+    size: "tiny",
+    href: "#"
   }, "Tiny"), /*#__PURE__*/react.createElement(Button, {
-    href: "#",
-    className: "uix-btn uix-btn__border--thin uix-btn__margin--b uix-btn__size--s uix-btn__bg--primary is-rounded"
+    border: "thin",
+    spacing: "bottom",
+    background: "primary",
+    corners: "rounded",
+    size: "small",
+    href: "#"
   }, "Small"), /*#__PURE__*/react.createElement(Button, {
-    href: "#",
-    className: "uix-btn uix-btn__border--thin uix-btn__margin--b uix-btn__size--m uix-btn__bg--primary is-rounded"
+    border: "thin",
+    spacing: "bottom",
+    background: "primary",
+    corners: "rounded",
+    size: "medium",
+    href: "#"
   }, "Medium"), /*#__PURE__*/react.createElement(Button, {
-    href: "#",
-    className: "uix-btn uix-btn__border--thin uix-btn__margin--b uix-btn__size--l uix-btn__bg--primary is-rounded"
+    border: "thin",
+    spacing: "bottom",
+    background: "primary",
+    corners: "rounded",
+    size: "large",
+    href: "#"
   }, "Large"), /*#__PURE__*/react.createElement("br", null), /*#__PURE__*/react.createElement(Button, {
-    href: "#",
-    className: "uix-btn uix-btn__border--thin uix-btn__margin--b uix-btn__size--t uix-btn__bg--primary is-pill is-transparent"
+    border: "thin",
+    spacing: "bottom",
+    background: "primary transparent",
+    corners: "pill",
+    size: "tiny",
+    href: "#"
   }, "Tiny Radius"), /*#__PURE__*/react.createElement(Button, {
-    href: "#",
-    className: "uix-btn uix-btn__border--thin uix-btn__margin--b uix-btn__size--s uix-btn__bg--primary is-pill is-transparent"
+    border: "thin",
+    spacing: "bottom",
+    background: "primary transparent",
+    corners: "pill",
+    size: "small",
+    href: "#"
   }, "Small Radius"), /*#__PURE__*/react.createElement(Button, {
-    href: "#",
-    className: "uix-btn uix-btn__border--thin uix-btn__margin--b uix-btn__size--m uix-btn__bg--primary is-pill is-transparent"
+    border: "thin",
+    spacing: "bottom",
+    background: "primary transparent",
+    corners: "pill",
+    size: "medium",
+    href: "#"
   }, "Medium Radius"), /*#__PURE__*/react.createElement(Button, {
-    href: "#",
-    className: "uix-btn uix-btn__border--thin uix-btn__margin--b uix-btn__size--l uix-btn__bg--primary is-pill is-transparent"
-  }, "Large Radius"), /*#__PURE__*/react.createElement("hr", null), /*#__PURE__*/react.createElement("div", {
-    className: "uix-btn__group uix-btn__margin--b"
+    border: "thin",
+    spacing: "bottom",
+    background: "primary transparent",
+    corners: "pill",
+    size: "large",
+    href: "#"
+  }, "Large Radius"))))), /*#__PURE__*/react.createElement("section", {
+    className: "uix-spacing--s uix-spacing--no-bottom"
+  }, /*#__PURE__*/react.createElement("div", {
+    className: "container"
+  }, /*#__PURE__*/react.createElement("div", {
+    className: "row"
+  }, /*#__PURE__*/react.createElement("div", {
+    className: "col-12"
+  }, /*#__PURE__*/react.createElement("h3", {
+    className: "app-header-title"
+  }, "Full Width"), /*#__PURE__*/react.createElement("hr", null))))), /*#__PURE__*/react.createElement("section", {
+    className: "uix-spacing--s"
+  }, /*#__PURE__*/react.createElement("div", {
+    className: "container"
+  }, /*#__PURE__*/react.createElement("div", {
+    className: "row"
+  }, /*#__PURE__*/react.createElement("div", {
+    className: "col-12"
   }, /*#__PURE__*/react.createElement(Button, {
-    href: "#",
-    className: "uix-btn uix-btn__border--thin uix-btn__size--s uix-btn__bg--primary is-pill is-transparent"
-  }, "Group"), /*#__PURE__*/react.createElement(Button, {
-    href: "#",
-    className: "uix-btn uix-btn__border--thin uix-btn__size--s uix-btn__bg--primary is-pill is-transparent"
-  }, "Group"), /*#__PURE__*/react.createElement(Button, {
-    href: "#",
-    className: "uix-btn uix-btn__border--thin uix-btn__size--s uix-btn__bg--primary is-pill is-transparent"
-  }, "Group")), /*#__PURE__*/react.createElement("br", null), /*#__PURE__*/react.createElement("div", {
-    className: "uix-btn__group uix-btn__margin--b"
-  }, /*#__PURE__*/react.createElement(Button, {
-    href: "#",
-    className: "uix-btn uix-btn__border--thin uix-btn__size--s uix-btn__bg--primary"
-  }, "Group"), /*#__PURE__*/react.createElement(Button, {
-    href: "#",
-    className: "uix-btn uix-btn__border--thin uix-btn__size--s uix-btn__bg--primary"
-  }, "Group"), /*#__PURE__*/react.createElement(Button, {
-    href: "#",
-    className: "uix-btn uix-btn__border--thin uix-btn__size--s uix-btn__bg--primary"
-  }, "Group")), /*#__PURE__*/react.createElement("hr", null), /*#__PURE__*/react.createElement("div", {
-    className: "uix-btn__group is-fullwidth uix-btn__margin--b"
-  }, /*#__PURE__*/react.createElement(Button, {
-    href: "#",
-    className: "uix-btn uix-btn__border--thin uix-btn__size--s uix-btn__bg--primary is-pill is-transparent"
-  }, "Group"), /*#__PURE__*/react.createElement(Button, {
-    href: "#",
-    className: "uix-btn uix-btn__border--thin uix-btn__size--s uix-btn__bg--primary is-pill is-transparent"
-  }, "Group"), /*#__PURE__*/react.createElement(Button, {
-    href: "#",
-    className: "uix-btn uix-btn__border--thin uix-btn__size--s uix-btn__bg--primary is-pill is-transparent"
-  }, "Group")), /*#__PURE__*/react.createElement("br", null), /*#__PURE__*/react.createElement("div", {
-    className: "uix-btn__group is-fullwidth uix-btn__margin--b"
-  }, /*#__PURE__*/react.createElement(Button, {
-    href: "#",
-    className: "uix-btn uix-btn__border--thin uix-btn__size--s uix-btn__bg--primary"
-  }, "Group"), /*#__PURE__*/react.createElement(Button, {
-    href: "#",
-    className: "uix-btn uix-btn__border--thin uix-btn__size--s uix-btn__bg--primary"
-  }, "Group"), /*#__PURE__*/react.createElement(Button, {
-    href: "#",
-    className: "uix-btn uix-btn__border--thin uix-btn__size--s uix-btn__bg--primary"
-  }, "Group")), /*#__PURE__*/react.createElement("hr", null), /*#__PURE__*/react.createElement(Button, {
-    href: "#",
-    className: "uix-btn uix-btn__border--thin uix-btn__margin--b uix-btn__size--t uix-btn__bg--primary is-fullwidth"
+    border: "thin",
+    spacing: "bottom",
+    background: "primary",
+    size: "tiny fullwidth",
+    href: "#"
   }, "Tiny Full Width"), /*#__PURE__*/react.createElement(Button, {
-    href: "#",
-    className: "uix-btn uix-btn__border--thin uix-btn__margin--b uix-btn__size--s uix-btn__bg--primary is-fullwidth"
+    border: "thin",
+    spacing: "bottom",
+    background: "primary",
+    size: "small fullwidth",
+    href: "#"
   }, "Small Full Width"), /*#__PURE__*/react.createElement("br", null), /*#__PURE__*/react.createElement(Button, {
-    href: "#",
-    className: "uix-btn uix-btn__border--thin uix-btn__margin--b uix-btn__size--m uix-btn__bg--primary is-fullwidth"
+    border: "thin",
+    spacing: "bottom",
+    background: "primary",
+    size: "medium fullwidth",
+    href: "#"
   }, "Medium Full Width"), /*#__PURE__*/react.createElement("br", null), /*#__PURE__*/react.createElement(Button, {
-    href: "#",
-    className: "uix-btn uix-btn__border--thin uix-btn__margin--b uix-btn__size--l uix-btn__bg--primary is-fullwidth"
+    border: "thin",
+    spacing: "bottom",
+    background: "primary",
+    size: "large fullwidth",
+    href: "#"
   }, "Large Full Width"), /*#__PURE__*/react.createElement("br", null), /*#__PURE__*/react.createElement(Button, {
-    href: "#",
-    className: "uix-btn uix-btn__border--thin uix-btn__margin--b uix-btn__size--t uix-btn__bg--primary is-fullwidth is-pill"
+    border: "thin",
+    spacing: "bottom",
+    background: "primary",
+    corners: "pill",
+    size: "tiny fullwidth",
+    href: "#"
   }, "Tiny Full Width Radius"), /*#__PURE__*/react.createElement(Button, {
-    href: "#",
-    className: "uix-btn uix-btn__border--thin uix-btn__margin--b uix-btn__size--s uix-btn__bg--primary is-fullwidth is-pill"
+    border: "thin",
+    spacing: "bottom",
+    background: "primary",
+    corners: "pill",
+    size: "small fullwidth",
+    href: "#"
   }, "Small Full Width Radius"), /*#__PURE__*/react.createElement("br", null), /*#__PURE__*/react.createElement(Button, {
-    href: "#",
-    className: "uix-btn uix-btn__border--thin uix-btn__margin--b uix-btn__size--m uix-btn__bg--primary is-fullwidth is-pill"
+    border: "thin",
+    spacing: "bottom",
+    background: "primary",
+    corners: "pill",
+    size: "medium fullwidth",
+    href: "#"
   }, "Medium Full Width Radius"), /*#__PURE__*/react.createElement("br", null), /*#__PURE__*/react.createElement(Button, {
-    href: "#",
-    className: "uix-btn uix-btn__border--thin uix-btn__margin--b uix-btn__size--l uix-btn__bg--primary is-fullwidth is-pill"
+    border: "thin",
+    spacing: "bottom",
+    background: "primary",
+    corners: "pill",
+    size: "large fullwidth",
+    href: "#"
   }, "Large Full Width Radius ( More Text )"))))), /*#__PURE__*/react.createElement("section", {
+    className: "uix-spacing--s uix-spacing--no-bottom"
+  }, /*#__PURE__*/react.createElement("div", {
+    className: "container"
+  }, /*#__PURE__*/react.createElement("div", {
+    className: "row"
+  }, /*#__PURE__*/react.createElement("div", {
+    className: "col-12"
+  }, /*#__PURE__*/react.createElement("h3", {
+    className: "app-header-title"
+  }, "Button Group"), /*#__PURE__*/react.createElement("hr", null))))), /*#__PURE__*/react.createElement("section", {
+    className: "uix-spacing--s"
+  }, /*#__PURE__*/react.createElement("div", {
+    className: "container"
+  }, /*#__PURE__*/react.createElement("div", {
+    className: "row"
+  }, /*#__PURE__*/react.createElement("div", {
+    className: "col-12"
+  }, /*#__PURE__*/react.createElement(ButtonGroup, {
+    spacing: "bottom"
+  }, /*#__PURE__*/react.createElement(Button, {
+    border: "thin",
+    background: "primary transparent",
+    corners: "pill",
+    size: "small",
+    href: "#"
+  }, "Group"), /*#__PURE__*/react.createElement(Button, {
+    border: "thin",
+    background: "primary transparent",
+    corners: "pill",
+    size: "small",
+    href: "#"
+  }, "Group"), /*#__PURE__*/react.createElement(Button, {
+    border: "thin",
+    background: "primary transparent",
+    corners: "pill",
+    size: "small",
+    href: "#"
+  }, "Group")), /*#__PURE__*/react.createElement("br", null), /*#__PURE__*/react.createElement(ButtonGroup, {
+    spacing: "bottom"
+  }, /*#__PURE__*/react.createElement(Button, {
+    border: "thin",
+    background: "primary",
+    size: "small",
+    href: "#"
+  }, "Group"), /*#__PURE__*/react.createElement(Button, {
+    border: "thin",
+    background: "primary",
+    size: "small",
+    href: "#"
+  }, "Group"), /*#__PURE__*/react.createElement(Button, {
+    border: "thin",
+    background: "primary",
+    size: "small",
+    href: "#"
+  }, "Group")), /*#__PURE__*/react.createElement("hr", null), /*#__PURE__*/react.createElement(ButtonGroup, {
+    spacing: "bottom",
+    fullwidth: true
+  }, /*#__PURE__*/react.createElement(Button, {
+    border: "thin",
+    background: "primary transparent",
+    corners: "pill",
+    size: "small",
+    href: "#"
+  }, "Group"), /*#__PURE__*/react.createElement(Button, {
+    border: "thin",
+    background: "primary transparent",
+    corners: "pill",
+    size: "small",
+    href: "#"
+  }, "Group"), /*#__PURE__*/react.createElement(Button, {
+    border: "thin",
+    background: "primary transparent",
+    corners: "pill",
+    size: "small",
+    href: "#"
+  }, "Group")), /*#__PURE__*/react.createElement("br", null), /*#__PURE__*/react.createElement(ButtonGroup, {
+    spacing: "bottom",
+    fullwidth: true
+  }, /*#__PURE__*/react.createElement(Button, {
+    border: "thin",
+    background: "primary",
+    size: "small",
+    href: "#"
+  }, "Group"), /*#__PURE__*/react.createElement(Button, {
+    border: "thin",
+    background: "primary",
+    size: "small",
+    href: "#"
+  }, "Group"), /*#__PURE__*/react.createElement(Button, {
+    border: "thin",
+    background: "primary",
+    size: "small",
+    href: "#"
+  }, "Group")))))), /*#__PURE__*/react.createElement("section", {
     className: "uix-spacing--s uix-spacing--no-bottom"
   }, /*#__PURE__*/react.createElement("div", {
     className: "container"
@@ -44457,14 +44900,25 @@ var Button = /*#__PURE__*/function (_Component) {
   }, /*#__PURE__*/react.createElement("div", {
     className: "col-12"
   }, /*#__PURE__*/react.createElement(Button, {
-    href: "#",
-    className: "uix-btn uix-btn__border--thin uix-btn__margin--b uix-btn__size--s uix-btn__bg--secondary is-fill-white"
+    border: "thin",
+    spacing: "bottom",
+    background: "secondary fillwhite",
+    size: "small",
+    href: "#"
   }, "Secondary Button"), /*#__PURE__*/react.createElement(Button, {
-    href: "#",
-    className: "uix-btn uix-btn__border--thin uix-btn__margin--b uix-btn__size--s uix-btn__bg--secondary is-rounded is-fill-white"
+    border: "thin",
+    spacing: "bottom",
+    background: "secondary fillwhite",
+    corners: "rounded",
+    size: "small",
+    href: "#"
   }, "Secondary Button"), /*#__PURE__*/react.createElement(Button, {
-    href: "#",
-    className: "uix-btn uix-btn__border--thin uix-btn__margin--b uix-btn__size--s uix-btn__bg--secondary is-pill is-fill-white"
+    border: "thin",
+    spacing: "bottom",
+    background: "secondary fillwhite",
+    corners: "pill",
+    size: "small",
+    href: "#"
   }, "Secondary Button"), /*#__PURE__*/react.createElement("br", null), /*#__PURE__*/react.createElement("div", {
     className: "uix-t-c",
     style: {
@@ -44473,42 +44927,97 @@ var Button = /*#__PURE__*/function (_Component) {
       marginTop: "1rem"
     }
   }, /*#__PURE__*/react.createElement(Button, {
-    href: "#",
-    className: "uix-btn uix-btn__border--thin uix-btn__margin--b uix-btn__size--s uix-btn__bg--secondary is-fill-white"
+    border: "thin",
+    spacing: "bottom",
+    background: "secondary fillwhite",
+    size: "small",
+    href: "#"
   }, "White Button"), /*#__PURE__*/react.createElement(Button, {
-    href: "#",
-    className: "uix-btn uix-btn__border--thin uix-btn__margin--b uix-btn__size--s uix-btn__bg--secondary"
+    border: "thin",
+    spacing: "bottom",
+    background: "secondary",
+    size: "small",
+    href: "#"
   }, "White Button"), /*#__PURE__*/react.createElement("br", null), /*#__PURE__*/react.createElement(Button, {
-    href: "#",
-    className: "uix-btn uix-btn__border--thin uix-btn__margin--b uix-btn__size--s uix-btn__bg--secondary is-pill is-fill-white"
+    border: "thin",
+    spacing: "bottom",
+    background: "secondary fillwhite",
+    corners: "pill",
+    size: "small",
+    href: "#"
   }, "White Button"), /*#__PURE__*/react.createElement(Button, {
-    href: "#",
-    className: "uix-btn uix-btn__border--thin uix-btn__margin--b uix-btn__size--s uix-btn__bg--secondary is-pill"
+    border: "thin",
+    spacing: "bottom",
+    background: "secondary",
+    corners: "pill",
+    size: "small",
+    href: "#"
   }, "White Button"), /*#__PURE__*/react.createElement("br", null), /*#__PURE__*/react.createElement(Button, {
-    href: "#",
-    className: "uix-btn uix-btn__border--thin uix-btn__margin--b uix-btn__size--s uix-btn__bg--secondary is-fill-white uix-btn__icon uix-btn__icon--right"
-  }, /*#__PURE__*/react.createElement("span", null, /*#__PURE__*/react.createElement("i", {
-    className: "fa fa-bullhorn",
-    "aria-hidden": "true"
-  })), "Icon Right"), /*#__PURE__*/react.createElement(Button, {
-    href: "#",
-    className: "uix-btn uix-btn__border--thin uix-btn__margin--b uix-btn__size--s uix-btn__bg--secondary is-fill-white uix-btn__icon uix-btn__icon--left"
-  }, /*#__PURE__*/react.createElement("span", null, /*#__PURE__*/react.createElement("i", {
-    className: "fa fa-cogs",
-    "aria-hidden": "true"
-  })), "Icon Left"), /*#__PURE__*/react.createElement("br", null), /*#__PURE__*/react.createElement(Button, {
-    href: "#",
-    className: "uix-btn uix-btn__border--thin uix-btn__margin--b uix-btn__size--s uix-btn__bg--secondary uix-btn__icon uix-btn__icon--right"
-  }, /*#__PURE__*/react.createElement("span", null, /*#__PURE__*/react.createElement("i", {
-    className: "fa fa-bullhorn",
-    "aria-hidden": "true"
-  })), "Icon Right"), /*#__PURE__*/react.createElement(Button, {
-    href: "#",
-    className: "uix-btn uix-btn__border--thin uix-btn__margin--b uix-btn__size--s uix-btn__bg--secondary uix-btn__icon uix-btn__icon--left"
-  }, /*#__PURE__*/react.createElement("span", null, /*#__PURE__*/react.createElement("i", {
-    className: "fa fa-cogs",
-    "aria-hidden": "true"
-  })), "Icon Left"), /*#__PURE__*/react.createElement("br", null)))))));
+    border: "thin",
+    spacing: "bottom",
+    background: "secondary fillwhite",
+    size: "small",
+    icon: /*#__PURE__*/react.createElement(react.Fragment, null, /*#__PURE__*/react.createElement("i", {
+      className: "fa fa-bullhorn",
+      "aria-hidden": "true"
+    })),
+    iconPosition: "right",
+    href: "#"
+  }, "Icon Right"), /*#__PURE__*/react.createElement(Button, {
+    border: "thin",
+    spacing: "bottom",
+    background: "secondary fillwhite",
+    size: "small",
+    icon: /*#__PURE__*/react.createElement(react.Fragment, null, /*#__PURE__*/react.createElement("i", {
+      className: "fa fa-cogs",
+      "aria-hidden": "true"
+    })),
+    iconPosition: "left",
+    href: "#"
+  }, "Icon Left"), /*#__PURE__*/react.createElement("br", null), /*#__PURE__*/react.createElement(Button, {
+    border: "thin",
+    spacing: "bottom",
+    background: "secondary",
+    size: "small",
+    icon: /*#__PURE__*/react.createElement(react.Fragment, null, /*#__PURE__*/react.createElement("i", {
+      className: "fa fa-bullhorn",
+      "aria-hidden": "true"
+    })),
+    iconPosition: "right",
+    href: "#"
+  }, "Icon Right"), /*#__PURE__*/react.createElement(Button, {
+    border: "thin",
+    spacing: "bottom",
+    background: "secondary",
+    size: "small",
+    icon: /*#__PURE__*/react.createElement(react.Fragment, null, /*#__PURE__*/react.createElement("i", {
+      className: "fa fa-cogs",
+      "aria-hidden": "true"
+    })),
+    iconPosition: "left",
+    href: "#"
+  }, "Icon Left"), /*#__PURE__*/react.createElement("br", null)))))), /*#__PURE__*/react.createElement("section", null, /*#__PURE__*/react.createElement("div", {
+    className: "container"
+  }, /*#__PURE__*/react.createElement("div", {
+    className: "row"
+  }, /*#__PURE__*/react.createElement("div", {
+    className: "col-12"
+  }, /*#__PURE__*/react.createElement("h3", {
+    className: "app-header-title"
+  }, "API"), /*#__PURE__*/react.createElement("hr", null), /*#__PURE__*/react.createElement("article", {
+    className: "uix-spacing--s",
+    itemProp: "text"
+  }, /*#__PURE__*/react.createElement("h4", null, "Button"), /*#__PURE__*/react.createElement("div", null, /*#__PURE__*/react.createElement("pre", null, "import ", '{Button}', " from '@uixkit.react/components/Button/index.tsx';")), /*#__PURE__*/react.createElement("div", {
+    className: "table-responsive-md"
+  }, /*#__PURE__*/react.createElement("table", {
+    className: "table table-bordered table-striped"
+  }, /*#__PURE__*/react.createElement("thead", null, /*#__PURE__*/react.createElement("tr", null, /*#__PURE__*/react.createElement("th", null, "Property"), /*#__PURE__*/react.createElement("th", null, "Type"), /*#__PURE__*/react.createElement("th", null, "Default"), /*#__PURE__*/react.createElement("th", null, "Description"))), /*#__PURE__*/react.createElement("tbody", null, /*#__PURE__*/react.createElement("tr", null, /*#__PURE__*/react.createElement("td", null, /*#__PURE__*/react.createElement("code", null, "href")), /*#__PURE__*/react.createElement("td", null, "string"), /*#__PURE__*/react.createElement("td", null, "-"), /*#__PURE__*/react.createElement("td", null, "Providing a href will render an  element. Otherwise, it will be a  element")), /*#__PURE__*/react.createElement("tr", null, /*#__PURE__*/react.createElement("td", null, /*#__PURE__*/react.createElement("code", null, "status")), /*#__PURE__*/react.createElement("td", null, /*#__PURE__*/react.createElement("code", null, "disabled"), " | ", /*#__PURE__*/react.createElement("code", null, "waiting")), /*#__PURE__*/react.createElement("td", null, "-"), /*#__PURE__*/react.createElement("td", null, "The state of the button")), /*#__PURE__*/react.createElement("tr", null, /*#__PURE__*/react.createElement("td", null, /*#__PURE__*/react.createElement("code", null, "border")), /*#__PURE__*/react.createElement("td", null, /*#__PURE__*/react.createElement("code", null, "thin"), " | ", /*#__PURE__*/react.createElement("code", null, "medium"), " | ", /*#__PURE__*/react.createElement("code", null, "thick"), " | ", /*#__PURE__*/react.createElement("code", null, "white")), /*#__PURE__*/react.createElement("td", null, "-"), /*#__PURE__*/react.createElement("td", null, "The thickness and style of the border")), /*#__PURE__*/react.createElement("tr", null, /*#__PURE__*/react.createElement("td", null, /*#__PURE__*/react.createElement("code", null, "background")), /*#__PURE__*/react.createElement("td", null, /*#__PURE__*/react.createElement("code", null, "primary"), " | ", /*#__PURE__*/react.createElement("code", null, "secondary"), " | ", /*#__PURE__*/react.createElement("code", null, "hyperlink"), " | ", /*#__PURE__*/react.createElement("code", null, "hyperlink2"), " | ", /*#__PURE__*/react.createElement("code", null, "transparent"), " | ", /*#__PURE__*/react.createElement("code", null, "fillwhite")), /*#__PURE__*/react.createElement("td", null, "-"), /*#__PURE__*/react.createElement("td", null, "background color")), /*#__PURE__*/react.createElement("tr", null, /*#__PURE__*/react.createElement("td", null, /*#__PURE__*/react.createElement("code", null, "spacing")), /*#__PURE__*/react.createElement("td", null, /*#__PURE__*/react.createElement("code", null, "bottom"), " | ", /*#__PURE__*/react.createElement("code", null, "left"), " | ", /*#__PURE__*/react.createElement("code", null, "right")), /*#__PURE__*/react.createElement("td", null, "-"), /*#__PURE__*/react.createElement("td", null, "To create space around buttons")), /*#__PURE__*/react.createElement("tr", null, /*#__PURE__*/react.createElement("td", null, /*#__PURE__*/react.createElement("code", null, "corners")), /*#__PURE__*/react.createElement("td", null, /*#__PURE__*/react.createElement("code", null, "pill"), " | ", /*#__PURE__*/react.createElement("code", null, "rounded")), /*#__PURE__*/react.createElement("td", null, "-"), /*#__PURE__*/react.createElement("td", null, "Add rounded corners to button")), /*#__PURE__*/react.createElement("tr", null, /*#__PURE__*/react.createElement("td", null, /*#__PURE__*/react.createElement("code", null, "size")), /*#__PURE__*/react.createElement("td", null, /*#__PURE__*/react.createElement("code", null, "fullwidth"), " | ", /*#__PURE__*/react.createElement("code", null, "tiny"), " | ", /*#__PURE__*/react.createElement("code", null, "small"), " | ", /*#__PURE__*/react.createElement("code", null, "medium"), " | ", /*#__PURE__*/react.createElement("code", null, "large")), /*#__PURE__*/react.createElement("td", null, "-"), /*#__PURE__*/react.createElement("td", null, "Set the size of button")), /*#__PURE__*/react.createElement("tr", null, /*#__PURE__*/react.createElement("td", null, /*#__PURE__*/react.createElement("code", null, "iconPosition")), /*#__PURE__*/react.createElement("td", null, /*#__PURE__*/react.createElement("code", null, "left"), " | ", /*#__PURE__*/react.createElement("code", null, "right")), /*#__PURE__*/react.createElement("td", null, "-"), /*#__PURE__*/react.createElement("td", null, "Set the icon position")), /*#__PURE__*/react.createElement("tr", null, /*#__PURE__*/react.createElement("td", null, /*#__PURE__*/react.createElement("code", null, "icon")), /*#__PURE__*/react.createElement("td", null, "ReactNode"), /*#__PURE__*/react.createElement("td", null, "-"), /*#__PURE__*/react.createElement("td", null, "Set the icon component of button")), /*#__PURE__*/react.createElement("tr", null, /*#__PURE__*/react.createElement("td", null, /*#__PURE__*/react.createElement("code", null, "target")), /*#__PURE__*/react.createElement("td", null, "string"), /*#__PURE__*/react.createElement("td", null, "_self"), /*#__PURE__*/react.createElement("td", null, "The target attribute specifies where to open the linked document")), /*#__PURE__*/react.createElement("tr", null, /*#__PURE__*/react.createElement("td", null, /*#__PURE__*/react.createElement("code", null, "onClick")), /*#__PURE__*/react.createElement("td", null, "function"), /*#__PURE__*/react.createElement("td", null, "-"), /*#__PURE__*/react.createElement("td", null, "Set the handler to handle click event"))))), /*#__PURE__*/react.createElement("p", {
+    className: "mb-5"
+  }, "It accepts all props(include data-* attributes) which native buttons support."), /*#__PURE__*/react.createElement("h4", null, "ButtonGroup"), /*#__PURE__*/react.createElement("div", null, /*#__PURE__*/react.createElement("pre", null, "import ", '{ButtonGroup}', " from '@uixkit.react/components/Button/index.tsx';")), /*#__PURE__*/react.createElement("div", {
+    className: "table-responsive-md"
+  }, /*#__PURE__*/react.createElement("table", {
+    className: "table table-bordered table-striped mb-5"
+  }, /*#__PURE__*/react.createElement("thead", null, /*#__PURE__*/react.createElement("tr", null, /*#__PURE__*/react.createElement("th", null, "Property"), /*#__PURE__*/react.createElement("th", null, "Type"), /*#__PURE__*/react.createElement("th", null, "Default"), /*#__PURE__*/react.createElement("th", null, "Description"))), /*#__PURE__*/react.createElement("tbody", null, /*#__PURE__*/react.createElement("tr", null, /*#__PURE__*/react.createElement("td", null, /*#__PURE__*/react.createElement("code", null, "fullwidth")), /*#__PURE__*/react.createElement("td", null, "boolean"), /*#__PURE__*/react.createElement("td", null, "false"), /*#__PURE__*/react.createElement("td", null, "The button group has an automatic set width of 100%")), /*#__PURE__*/react.createElement("tr", null, /*#__PURE__*/react.createElement("td", null, /*#__PURE__*/react.createElement("code", null, "spacing")), /*#__PURE__*/react.createElement("td", null, /*#__PURE__*/react.createElement("code", null, "bottom"), " | ", /*#__PURE__*/react.createElement("code", null, "left"), " | ", /*#__PURE__*/react.createElement("code", null, "right")), /*#__PURE__*/react.createElement("td", null, "-"), /*#__PURE__*/react.createElement("td", null, "To create space around group")))))))))));
 });
 ;// CONCATENATED MODULE: ./node_modules/@babel/runtime/helpers/esm/defineProperty.js
 function _defineProperty(obj, key, value) {
@@ -44629,7 +45138,7 @@ var TabPanel = /*#__PURE__*/function (_Component) {
 
 
 
-var Tabs_excluded = ["type", "id", "children"];
+var Tabs_excluded = ["center", "fullwidth", "rotation", "rotationRadius", "rotationWrapperAngle", "id", "children"];
 
 function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) { symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); } keys.push.apply(keys, symbols); } return keys; }
 
@@ -44831,37 +45340,37 @@ var Tabs = /*#__PURE__*/function (_Component) {
       });
     }
   }, {
-    key: "typeSwitch",
-    value: function typeSwitch(param) {
-      switch (param) {
-        case 'normal':
-          return 'uix-tabs uix-tabs--normal';
-
-        case 'center':
-          return 'uix-tabs uix-tabs--center';
-
-        case 'fullwidth':
-          return 'uix-tabs';
-
-        case 'rotation':
-          return 'uix-tabs uix-tabs--rotation';
-
-        default:
-          return 'uix-tabs uix-tabs--normal';
-      }
-    }
-  }, {
     key: "render",
     value: function render() {
       var _this$props = this.props,
-          type = _this$props.type,
+          center = _this$props.center,
+          fullwidth = _this$props.fullwidth,
+          rotation = _this$props.rotation,
+          rotationRadius = _this$props.rotationRadius,
+          rotationWrapperAngle = _this$props.rotationWrapperAngle,
           id = _this$props.id,
           children = _this$props.children,
-          attributes = _objectWithoutProperties(_this$props, Tabs_excluded);
+          attributes = _objectWithoutProperties(_this$props, Tabs_excluded); //Get the total amount of items
+
+
+      var totalAmount = 0;
+
+      if (children != null) {
+        children.map(function (item, i) {
+          if (item.key.indexOf('tab-panel') >= 0) {
+            totalAmount++;
+          }
+        });
+      }
 
       return /*#__PURE__*/react.createElement(react.Fragment, null, /*#__PURE__*/react.createElement("div", extends_extends({
         id: id ? id : 'app-tabs-' + shortcut.GUID.create(),
-        className: this.typeSwitch(type)
+        className: "uix-tabs" + (!center && !rotation && !fullwidth ? ' uix-tabs--normal' : '') + (center ? ' uix-tabs--center' : '') + (rotation ? ' uix-tabs--rotation' : ''),
+        "data-fullwidth": fullwidth ? 1 : 0,
+        "data-rotation": rotation || false,
+        "data-rotation-display": totalAmount,
+        "data-rotation-radius": rotationRadius || 130,
+        "data-rotation-wrapper-angle": rotationWrapperAngle || 0
       }, attributes), /*#__PURE__*/react.createElement("div", {
         className: "uix-tabs__nav"
       }, /*#__PURE__*/react.createElement("ul", {
@@ -44972,8 +45481,30 @@ var Tabs = /*#__PURE__*/function (_Component) {
     className: "row"
   }, /*#__PURE__*/react.createElement("div", {
     className: "col-12"
+  }, /*#__PURE__*/react.createElement(Tabs, null, /*#__PURE__*/react.createElement(TabList, {
+    key: "tab-list-1",
+    defaultActive: true
+  }, "Tab 1"), /*#__PURE__*/react.createElement(TabList, {
+    key: "tab-list-2"
+  }, "Tab 2"), /*#__PURE__*/react.createElement(TabList, {
+    key: "tab-list-3"
+  }, "Tab 3"), /*#__PURE__*/react.createElement(TabPanel, {
+    key: "tab-panel-1",
+    defaultActive: true
+  }, /*#__PURE__*/react.createElement("p", null, "Hi, this is the first tab.")), /*#__PURE__*/react.createElement(TabPanel, {
+    key: "tab-panel-2"
+  }, /*#__PURE__*/react.createElement("p", null, "This is the 2nd tab."), /*#__PURE__*/react.createElement("p", null, "This is the 2nd tab."), /*#__PURE__*/react.createElement("p", null, "This is the 2nd tab.")), /*#__PURE__*/react.createElement(TabPanel, {
+    key: "tab-panel-3"
+  }, /*#__PURE__*/react.createElement("p", null, "And this is the 3rd tab."))))))), /*#__PURE__*/react.createElement("section", {
+    className: "uix-spacing--s"
+  }, /*#__PURE__*/react.createElement("div", {
+    className: "container"
+  }, /*#__PURE__*/react.createElement("div", {
+    className: "row"
+  }, /*#__PURE__*/react.createElement("div", {
+    className: "col-12"
   }, /*#__PURE__*/react.createElement(Tabs, {
-    type: "normal"
+    center: true
   }, /*#__PURE__*/react.createElement(TabList, {
     key: "tab-list-1",
     defaultActive: true
@@ -44997,32 +45528,7 @@ var Tabs = /*#__PURE__*/function (_Component) {
   }, /*#__PURE__*/react.createElement("div", {
     className: "col-12"
   }, /*#__PURE__*/react.createElement(Tabs, {
-    type: "center"
-  }, /*#__PURE__*/react.createElement(TabList, {
-    key: "tab-list-1",
-    defaultActive: true
-  }, "Tab 1"), /*#__PURE__*/react.createElement(TabList, {
-    key: "tab-list-2"
-  }, "Tab 2"), /*#__PURE__*/react.createElement(TabList, {
-    key: "tab-list-3"
-  }, "Tab 3"), /*#__PURE__*/react.createElement(TabPanel, {
-    key: "tab-panel-1",
-    defaultActive: true
-  }, /*#__PURE__*/react.createElement("p", null, "Hi, this is the first tab.")), /*#__PURE__*/react.createElement(TabPanel, {
-    key: "tab-panel-2"
-  }, /*#__PURE__*/react.createElement("p", null, "This is the 2nd tab."), /*#__PURE__*/react.createElement("p", null, "This is the 2nd tab."), /*#__PURE__*/react.createElement("p", null, "This is the 2nd tab.")), /*#__PURE__*/react.createElement(TabPanel, {
-    key: "tab-panel-3"
-  }, /*#__PURE__*/react.createElement("p", null, "And this is the 3rd tab."))))))), /*#__PURE__*/react.createElement("section", {
-    className: "uix-spacing--s"
-  }, /*#__PURE__*/react.createElement("div", {
-    className: "container"
-  }, /*#__PURE__*/react.createElement("div", {
-    className: "row"
-  }, /*#__PURE__*/react.createElement("div", {
-    className: "col-12"
-  }, /*#__PURE__*/react.createElement(Tabs, {
-    type: "fullwidth",
-    "data-fullwidth": "1"
+    fullwidth: true
   }, /*#__PURE__*/react.createElement(TabList, {
     key: "tab-list-1",
     defaultActive: true
@@ -45054,11 +45560,9 @@ var Tabs = /*#__PURE__*/function (_Component) {
   }, /*#__PURE__*/react.createElement("div", {
     className: "col-12"
   }, /*#__PURE__*/react.createElement(Tabs, {
-    type: "rotation",
-    "data-rotation": "true",
-    "data-rotation-display": "5",
-    "data-rotation-radius": "130",
-    "data-rotation-wrapper-angle": "0"
+    rotation: true,
+    rotationRadius: 130,
+    rotationWrapperAngle: 0
   }, /*#__PURE__*/react.createElement(TabList, {
     key: "tab-list-1",
     defaultActive: true
@@ -45118,11 +45622,9 @@ var Tabs = /*#__PURE__*/function (_Component) {
   }, /*#__PURE__*/react.createElement("div", {
     className: "col-12"
   }, /*#__PURE__*/react.createElement(Tabs, {
-    type: "rotation",
-    "data-rotation": "true",
-    "data-rotation-display": "4",
-    "data-rotation-radius": "130",
-    "data-rotation-wrapper-angle": "-45"
+    rotation: true,
+    rotationRadius: 130,
+    rotationWrapperAngle: -45
   }, /*#__PURE__*/react.createElement(TabList, {
     key: "tab-list-1",
     defaultActive: true
@@ -45157,7 +45659,32 @@ var Tabs = /*#__PURE__*/function (_Component) {
     style: {
       marginTop: "50px"
     }
-  }, /*#__PURE__*/react.createElement("p", null, "And this is the 4th tab."))))))));
+  }, /*#__PURE__*/react.createElement("p", null, "And this is the 4th tab."))))))), /*#__PURE__*/react.createElement("section", null, /*#__PURE__*/react.createElement("div", {
+    className: "container"
+  }, /*#__PURE__*/react.createElement("div", {
+    className: "row"
+  }, /*#__PURE__*/react.createElement("div", {
+    className: "col-12"
+  }, /*#__PURE__*/react.createElement("h3", {
+    className: "app-header-title"
+  }, "API"), /*#__PURE__*/react.createElement("hr", null), /*#__PURE__*/react.createElement("article", {
+    className: "uix-spacing--s",
+    itemProp: "text"
+  }, /*#__PURE__*/react.createElement("h4", null, "Tabs"), /*#__PURE__*/react.createElement("div", null, /*#__PURE__*/react.createElement("pre", null, "import ", "{Tabs}", " from '@uixkit.react/components/Tabs/index.tsx';")), /*#__PURE__*/react.createElement("div", {
+    className: "table-responsive-md"
+  }, /*#__PURE__*/react.createElement("table", {
+    className: "table table-bordered table-striped mb-5"
+  }, /*#__PURE__*/react.createElement("thead", null, /*#__PURE__*/react.createElement("tr", null, /*#__PURE__*/react.createElement("th", null, "Property"), /*#__PURE__*/react.createElement("th", null, "Type"), /*#__PURE__*/react.createElement("th", null, "Default"), /*#__PURE__*/react.createElement("th", null, "Description"))), /*#__PURE__*/react.createElement("tbody", null, /*#__PURE__*/react.createElement("tr", null, /*#__PURE__*/react.createElement("td", null, /*#__PURE__*/react.createElement("code", null, "center")), /*#__PURE__*/react.createElement("td", null, "boolean"), /*#__PURE__*/react.createElement("td", null, "false"), /*#__PURE__*/react.createElement("td", null, "If true, the navigation button of the component is centered")), /*#__PURE__*/react.createElement("tr", null, /*#__PURE__*/react.createElement("td", null, /*#__PURE__*/react.createElement("code", null, "fullwidth")), /*#__PURE__*/react.createElement("td", null, "boolean"), /*#__PURE__*/react.createElement("td", null, "false"), /*#__PURE__*/react.createElement("td", null, "If true, the navigation buttons of the component will be automatically filled in the 100% width area")), /*#__PURE__*/react.createElement("tr", null, /*#__PURE__*/react.createElement("td", null, /*#__PURE__*/react.createElement("code", null, "rotation")), /*#__PURE__*/react.createElement("td", null, "boolean"), /*#__PURE__*/react.createElement("td", null, "false"), /*#__PURE__*/react.createElement("td", null, "Set whether to enable the rotation layout of the component. When the value is true, the two properties of ", /*#__PURE__*/react.createElement("code", null, "rotationRadius"), " and ", /*#__PURE__*/react.createElement("code", null, "rotationWrapperAngle"), " are valid.")), /*#__PURE__*/react.createElement("tr", null, /*#__PURE__*/react.createElement("td", null, /*#__PURE__*/react.createElement("code", null, "rotationRadius")), /*#__PURE__*/react.createElement("td", null, "number"), /*#__PURE__*/react.createElement("td", null, "130"), /*#__PURE__*/react.createElement("td", null, "Set the radius of rotation")), /*#__PURE__*/react.createElement("tr", null, /*#__PURE__*/react.createElement("td", null, /*#__PURE__*/react.createElement("code", null, "rotationWrapperAngle")), /*#__PURE__*/react.createElement("td", null, "number"), /*#__PURE__*/react.createElement("td", null, "0"), /*#__PURE__*/react.createElement("td", null, "Set the rotation angle of the entire component"))))), /*#__PURE__*/react.createElement("h4", null, "Tab List"), /*#__PURE__*/react.createElement("div", null, /*#__PURE__*/react.createElement("pre", null, "import ", "{TabList}", " from '@uixkit.react/components/Tabs/index.tsx';")), /*#__PURE__*/react.createElement("div", {
+    className: "table-responsive-md"
+  }, /*#__PURE__*/react.createElement("table", {
+    className: "table table-bordered table-striped mb-5"
+  }, /*#__PURE__*/react.createElement("thead", null, /*#__PURE__*/react.createElement("tr", null, /*#__PURE__*/react.createElement("th", null, "Property"), /*#__PURE__*/react.createElement("th", null, "Type"), /*#__PURE__*/react.createElement("th", null, "Default"), /*#__PURE__*/react.createElement("th", null, "Description"))), /*#__PURE__*/react.createElement("tbody", null, /*#__PURE__*/react.createElement("tr", null, /*#__PURE__*/react.createElement("td", null, /*#__PURE__*/react.createElement("code", null, "key")), /*#__PURE__*/react.createElement("td", null, "string | ", /*#__PURE__*/react.createElement("code", null, "tab-list-*")), /*#__PURE__*/react.createElement("td", null, "-"), /*#__PURE__*/react.createElement("td", null, "A \u201Ckey\u201D is a special string attribute you need to include when creating lists of elements. Let\u2019s assign a key to our list of items. Must contain the string ", /*#__PURE__*/react.createElement("code", null, "tab-list"))), /*#__PURE__*/react.createElement("tr", null, /*#__PURE__*/react.createElement("td", null, /*#__PURE__*/react.createElement("code", null, "defaultActive")), /*#__PURE__*/react.createElement("td", null, "boolean"), /*#__PURE__*/react.createElement("td", null, "false"), /*#__PURE__*/react.createElement("td", null, "Set an item to activate by default"))))), /*#__PURE__*/react.createElement("h4", null, "Tab Panel"), /*#__PURE__*/react.createElement("div", null, /*#__PURE__*/react.createElement("pre", null, "import ", "{TabPanel}", " from '@uixkit.react/components/Tabs/index.tsx';")), /*#__PURE__*/react.createElement("div", {
+    className: "table-responsive-md"
+  }, /*#__PURE__*/react.createElement("table", {
+    className: "table table-bordered table-striped"
+  }, /*#__PURE__*/react.createElement("thead", null, /*#__PURE__*/react.createElement("tr", null, /*#__PURE__*/react.createElement("th", null, "Property"), /*#__PURE__*/react.createElement("th", null, "Type"), /*#__PURE__*/react.createElement("th", null, "Default"), /*#__PURE__*/react.createElement("th", null, "Description"))), /*#__PURE__*/react.createElement("tbody", null, /*#__PURE__*/react.createElement("tr", null, /*#__PURE__*/react.createElement("td", null, /*#__PURE__*/react.createElement("code", null, "key")), /*#__PURE__*/react.createElement("td", null, "string | ", /*#__PURE__*/react.createElement("code", null, "tab-panel-*")), /*#__PURE__*/react.createElement("td", null, "-"), /*#__PURE__*/react.createElement("td", null, "A \u201Ckey\u201D is a special string attribute you need to include when creating lists of elements. Let\u2019s assign a key to our list of items. Must contain the string ", /*#__PURE__*/react.createElement("code", null, "tab-panel"))), /*#__PURE__*/react.createElement("tr", null, /*#__PURE__*/react.createElement("td", null, /*#__PURE__*/react.createElement("code", null, "defaultActive")), /*#__PURE__*/react.createElement("td", null, "boolean"), /*#__PURE__*/react.createElement("td", null, "false"), /*#__PURE__*/react.createElement("td", null, "Set an item to activate by default")), /*#__PURE__*/react.createElement("tr", null, /*#__PURE__*/react.createElement("td", null, /*#__PURE__*/react.createElement("code", null, "tabpanelClass")), /*#__PURE__*/react.createElement("td", null, "string"), /*#__PURE__*/react.createElement("td", null, "-"), /*#__PURE__*/react.createElement("td", null, "Additional style name, such as ", /*#__PURE__*/react.createElement("code", null, "uix-outer-shadow--regular"))))), /*#__PURE__*/react.createElement("p", {
+    className: "mb-5"
+  }, "It accepts all props(include data-* attributes) which native div support."))))))));
 });
 ;// CONCATENATED MODULE: ./src/client/components/TabsAnimated/TabList.tsx
 
@@ -45484,7 +46011,32 @@ var TabsAnimated = /*#__PURE__*/function (_Component) {
     key: "tab-panel-2"
   }, /*#__PURE__*/react.createElement("p", null, "This is the 2nd tab."), /*#__PURE__*/react.createElement("p", null, "This is the 2nd tab."), /*#__PURE__*/react.createElement("p", null, "This is the 2nd tab.")), /*#__PURE__*/react.createElement(TabPanel_TabPanel, {
     key: "tab-panel-3"
-  }, /*#__PURE__*/react.createElement("p", null, "And this is the 3rd tab."))))))));
+  }, /*#__PURE__*/react.createElement("p", null, "And this is the 3rd tab."))))))), /*#__PURE__*/react.createElement("section", null, /*#__PURE__*/react.createElement("div", {
+    className: "container"
+  }, /*#__PURE__*/react.createElement("div", {
+    className: "row"
+  }, /*#__PURE__*/react.createElement("div", {
+    className: "col-12"
+  }, /*#__PURE__*/react.createElement("h3", {
+    className: "app-header-title"
+  }, "API"), /*#__PURE__*/react.createElement("hr", null), /*#__PURE__*/react.createElement("article", {
+    className: "uix-spacing--s",
+    itemProp: "text"
+  }, /*#__PURE__*/react.createElement("h4", null, "Tabs Animated"), /*#__PURE__*/react.createElement("div", null, /*#__PURE__*/react.createElement("pre", null, "import ", "{TabsAnimated}", " from '@uixkit.react/components/TabsAnimated/index.tsx';")), /*#__PURE__*/react.createElement("div", {
+    className: "table-responsive-md"
+  }, /*#__PURE__*/react.createElement("table", {
+    className: "table table-bordered table-striped mb-5"
+  }, /*#__PURE__*/react.createElement("thead", null, /*#__PURE__*/react.createElement("tr", null, /*#__PURE__*/react.createElement("th", null, "Property"), /*#__PURE__*/react.createElement("th", null, "Type"), /*#__PURE__*/react.createElement("th", null, "Default"), /*#__PURE__*/react.createElement("th", null, "Description"))), /*#__PURE__*/react.createElement("tbody", null, /*#__PURE__*/react.createElement("tr", null, /*#__PURE__*/react.createElement("td", null, "-"), /*#__PURE__*/react.createElement("td", null, "-"), /*#__PURE__*/react.createElement("td", null, "-"), /*#__PURE__*/react.createElement("td", null, "-"))))), /*#__PURE__*/react.createElement("h4", null, "Tab List"), /*#__PURE__*/react.createElement("div", null, /*#__PURE__*/react.createElement("pre", null, "import ", "{TabList}", " from '@uixkit.react/components/TabsAnimated/index.tsx';")), /*#__PURE__*/react.createElement("div", {
+    className: "table-responsive-md"
+  }, /*#__PURE__*/react.createElement("table", {
+    className: "table table-bordered table-striped mb-5"
+  }, /*#__PURE__*/react.createElement("thead", null, /*#__PURE__*/react.createElement("tr", null, /*#__PURE__*/react.createElement("th", null, "Property"), /*#__PURE__*/react.createElement("th", null, "Type"), /*#__PURE__*/react.createElement("th", null, "Default"), /*#__PURE__*/react.createElement("th", null, "Description"))), /*#__PURE__*/react.createElement("tbody", null, /*#__PURE__*/react.createElement("tr", null, /*#__PURE__*/react.createElement("td", null, /*#__PURE__*/react.createElement("code", null, "key")), /*#__PURE__*/react.createElement("td", null, "string | ", /*#__PURE__*/react.createElement("code", null, "tab-list-*")), /*#__PURE__*/react.createElement("td", null, "-"), /*#__PURE__*/react.createElement("td", null, "A \u201Ckey\u201D is a special string attribute you need to include when creating lists of elements. Let\u2019s assign a key to our list of items. Must contain the string ", /*#__PURE__*/react.createElement("code", null, "tab-list"))), /*#__PURE__*/react.createElement("tr", null, /*#__PURE__*/react.createElement("td", null, /*#__PURE__*/react.createElement("code", null, "defaultActive")), /*#__PURE__*/react.createElement("td", null, "boolean"), /*#__PURE__*/react.createElement("td", null, "false"), /*#__PURE__*/react.createElement("td", null, "Set an item to activate by default"))))), /*#__PURE__*/react.createElement("h4", null, "Tab Panel"), /*#__PURE__*/react.createElement("div", null, /*#__PURE__*/react.createElement("pre", null, "import ", "{TabPanel}", " from '@uixkit.react/components/TabsAnimated/index.tsx';")), /*#__PURE__*/react.createElement("div", {
+    className: "table-responsive-md"
+  }, /*#__PURE__*/react.createElement("table", {
+    className: "table table-bordered table-striped"
+  }, /*#__PURE__*/react.createElement("thead", null, /*#__PURE__*/react.createElement("tr", null, /*#__PURE__*/react.createElement("th", null, "Property"), /*#__PURE__*/react.createElement("th", null, "Type"), /*#__PURE__*/react.createElement("th", null, "Default"), /*#__PURE__*/react.createElement("th", null, "Description"))), /*#__PURE__*/react.createElement("tbody", null, /*#__PURE__*/react.createElement("tr", null, /*#__PURE__*/react.createElement("td", null, /*#__PURE__*/react.createElement("code", null, "key")), /*#__PURE__*/react.createElement("td", null, "string | ", /*#__PURE__*/react.createElement("code", null, "tab-panel-*")), /*#__PURE__*/react.createElement("td", null, "-"), /*#__PURE__*/react.createElement("td", null, "A \u201Ckey\u201D is a special string attribute you need to include when creating lists of elements. Let\u2019s assign a key to our list of items. Must contain the string ", /*#__PURE__*/react.createElement("code", null, "tab-panel"))), /*#__PURE__*/react.createElement("tr", null, /*#__PURE__*/react.createElement("td", null, /*#__PURE__*/react.createElement("code", null, "defaultActive")), /*#__PURE__*/react.createElement("td", null, "boolean"), /*#__PURE__*/react.createElement("td", null, "false"), /*#__PURE__*/react.createElement("td", null, "Set an item to activate by default")), /*#__PURE__*/react.createElement("tr", null, /*#__PURE__*/react.createElement("td", null, /*#__PURE__*/react.createElement("code", null, "tabpanelClass")), /*#__PURE__*/react.createElement("td", null, "string"), /*#__PURE__*/react.createElement("td", null, "-"), /*#__PURE__*/react.createElement("td", null, "Additional style name, such as ", /*#__PURE__*/react.createElement("code", null, "uix-outer-shadow--regular"))))), /*#__PURE__*/react.createElement("p", {
+    className: "mb-5"
+  }, "It accepts all props(include data-* attributes) which native div support."))))))));
 });
 ;// CONCATENATED MODULE: ./node_modules/@babel/runtime/helpers/esm/arrayLikeToArray.js
 function _arrayLikeToArray(arr, len) {
@@ -55078,7 +55630,7 @@ Plyr.defaults = cloneDeep(config_defaults);
 
 
 
-var Video_excluded = ["config", "src"];
+var Video_excluded = ["poster", "config", "src"];
 
 function Video_createSuper(Derived) { var hasNativeReflectConstruct = Video_isNativeReflectConstruct(); return function _createSuperInternal() { var Super = _getPrototypeOf(Derived), result; if (hasNativeReflectConstruct) { var NewTarget = _getPrototypeOf(this).constructor; result = Reflect.construct(Super, arguments, NewTarget); } else { result = Super.apply(this, arguments); } return _possibleConstructorReturn(this, result); }; }
 
@@ -55125,7 +55677,8 @@ var Video = /*#__PURE__*/function (_Component) {
           var player = new plyr('#' + videoID);
           player.on('ready', function (event) {
             var instance = event.detail.plyr;
-            var config = JSON.parse(instance.media.dataset.plyrConfig);
+            var getConfig = instance.media.dataset.plyrConfig;
+            var config = shortcut.validate.isJSON(getConfig) ? JSON.parse(getConfig) : getConfig;
             /* ---------  Video Modal initialize */
 
             instance.on('loadedmetadata', function (e) {
@@ -55181,6 +55734,7 @@ var Video = /*#__PURE__*/function (_Component) {
     key: "render",
     value: function render() {
       var _this$props = this.props,
+          poster = _this$props.poster,
           config = _this$props.config,
           src = _this$props.src,
           attributes = _objectWithoutProperties(_this$props, Video_excluded);
@@ -55188,6 +55742,7 @@ var Video = /*#__PURE__*/function (_Component) {
       return /*#__PURE__*/react.createElement(react.Fragment, null, /*#__PURE__*/react.createElement("video", extends_extends({
         playsInline: true,
         controls: true,
+        "data-poster": poster,
         src: src,
         "data-plyr-config": config || '{"muted":false,"autoplay":false,"controls":["play-large", "play", "progress", "current-time", "mute", "volume", "captions", "settings", "pip", "airplay", "fullscreen"],"loop":{"active":false}}'
       }, attributes)));
@@ -55271,7 +55826,7 @@ var Video = /*#__PURE__*/function (_Component) {
     className: "col-md-6"
   }, /*#__PURE__*/react.createElement(Video, {
     config: "{\"clickToPlay\":false,\"muted\":true,\"autoplay\":true,\"controls\":[\"\"],\"loop\":{\"active\":true},\"fullscreen\":{\"enabled\": false}}",
-    "data-poster": "".concat(websiteConfig.rootDirectory, "/assets/videos/480x270/demo.jpg"),
+    poster: "".concat(websiteConfig.rootDirectory, "/assets/videos/480x270/demo.jpg"),
     src: "".concat(websiteConfig.rootDirectory, "/assets/videos/480x270/demo.mp4")
   }))))), /*#__PURE__*/react.createElement("section", {
     className: "uix-spacing--s uix-spacing--no-bottom"
@@ -55294,7 +55849,36 @@ var Video = /*#__PURE__*/function (_Component) {
   }, /*#__PURE__*/react.createElement(Video, {
     config: "{\"muted\":false,\"autoplay\":false,\"controls\":[\"play-large\", \"play\", \"progress\", \"current-time\", \"mute\", \"volume\", \"captions\", \"settings\", \"pip\", \"airplay\", \"fullscreen\"],\"loop\":{\"active\":false}}",
     src: "".concat(websiteConfig.rootDirectory, "/assets/videos/1440x1050/demo.mp4")
-  }))))));
+  }))))), /*#__PURE__*/react.createElement("section", null, /*#__PURE__*/react.createElement("div", {
+    className: "container"
+  }, /*#__PURE__*/react.createElement("div", {
+    className: "row"
+  }, /*#__PURE__*/react.createElement("div", {
+    className: "col-12"
+  }, /*#__PURE__*/react.createElement("h3", {
+    className: "app-header-title"
+  }, "API"), /*#__PURE__*/react.createElement("hr", null), /*#__PURE__*/react.createElement("article", {
+    className: "uix-spacing--s",
+    itemProp: "text"
+  }, /*#__PURE__*/react.createElement("h4", null, "Video"), /*#__PURE__*/react.createElement("div", null, /*#__PURE__*/react.createElement("pre", null, "import Video from '@uixkit.react/components/Video/index.tsx';")), /*#__PURE__*/react.createElement("div", {
+    className: "table-responsive-md"
+  }, /*#__PURE__*/react.createElement("table", {
+    className: "table table-bordered table-striped mb-5"
+  }, /*#__PURE__*/react.createElement("thead", null, /*#__PURE__*/react.createElement("tr", null, /*#__PURE__*/react.createElement("th", null, "Property"), /*#__PURE__*/react.createElement("th", null, "Type"), /*#__PURE__*/react.createElement("th", null, "Default"), /*#__PURE__*/react.createElement("th", null, "Description"))), /*#__PURE__*/react.createElement("tbody", null, /*#__PURE__*/react.createElement("tr", null, /*#__PURE__*/react.createElement("td", null, /*#__PURE__*/react.createElement("code", null, "config")), /*#__PURE__*/react.createElement("td", null, "JSON Object Literals"), /*#__PURE__*/react.createElement("td", null, "-"), /*#__PURE__*/react.createElement("td", null, "Detailed animation parameters, using JSON string format.", /*#__PURE__*/react.createElement("br", null), /*#__PURE__*/react.createElement("strong", null, "default value:"), /*#__PURE__*/react.createElement("br", null), /*#__PURE__*/react.createElement("code", {
+    className: "text-wrap"
+  }, "{\"muted\":false,\"autoplay\":false,\"controls\":[\"play-large\", \"play\", \"progress\", \"current-time\", \"mute\", \"volume\", \"captions\", \"settings\", \"pip\", \"airplay\", \"fullscreen\"],\"loop\":{\"active\":false}}"), " ", /*#__PURE__*/react.createElement("br", null), /*#__PURE__*/react.createElement("strong", null, "other:"), /*#__PURE__*/react.createElement("br", null), /*#__PURE__*/react.createElement("code", {
+    className: "text-wrap"
+  }, "{\"clickToPlay\":false,\"muted\":true,\"autoplay\":true,\"controls\":[\"\"],\"loop\":{\"active\":true},\"fullscreen\":{\"enabled\": false}}"))), /*#__PURE__*/react.createElement("tr", null, /*#__PURE__*/react.createElement("td", null, /*#__PURE__*/react.createElement("code", null, "poster")), /*#__PURE__*/react.createElement("td", null, "string"), /*#__PURE__*/react.createElement("td", null, "-"), /*#__PURE__*/react.createElement("td", null, "The poster image should be specified.")), /*#__PURE__*/react.createElement("tr", null, /*#__PURE__*/react.createElement("td", null, /*#__PURE__*/react.createElement("code", null, "src")), /*#__PURE__*/react.createElement("td", null, "string"), /*#__PURE__*/react.createElement("td", null, "-"), /*#__PURE__*/react.createElement("td", null, "The URL of the video to embed."))))), /*#__PURE__*/react.createElement("p", null, "JSON configuration properties of the ", /*#__PURE__*/react.createElement("code", null, "config"), ":"), /*#__PURE__*/react.createElement("div", {
+    className: "table-responsive-md"
+  }, /*#__PURE__*/react.createElement("table", {
+    className: "table table-bordered table-striped mb-5"
+  }, /*#__PURE__*/react.createElement("thead", null, /*#__PURE__*/react.createElement("tr", null, /*#__PURE__*/react.createElement("th", null, "Property"), /*#__PURE__*/react.createElement("th", null, "Type"), /*#__PURE__*/react.createElement("th", null, "Default"), /*#__PURE__*/react.createElement("th", null, "Description"))), /*#__PURE__*/react.createElement("tbody", null, /*#__PURE__*/react.createElement("tr", null, /*#__PURE__*/react.createElement("td", null, /*#__PURE__*/react.createElement("code", null, "muted")), /*#__PURE__*/react.createElement("td", null, "boolean"), /*#__PURE__*/react.createElement("td", null, "false"), /*#__PURE__*/react.createElement("td", null, "Whether to start playback muted. If the ", /*#__PURE__*/react.createElement("code", null, "muted"), " attribute is present on a ", /*#__PURE__*/react.createElement("code", null, "<video>"), " or ", /*#__PURE__*/react.createElement("code", null, "<audio>"), " element, this will be automatically set to true.")), /*#__PURE__*/react.createElement("tr", null, /*#__PURE__*/react.createElement("td", null, /*#__PURE__*/react.createElement("code", null, "autoplay")), /*#__PURE__*/react.createElement("td", null, "boolean"), /*#__PURE__*/react.createElement("td", null, "false"), /*#__PURE__*/react.createElement("td", null, "Autoplay the media on load. If the ", /*#__PURE__*/react.createElement("code", null, "autoplay"), " attribute is present on a ", /*#__PURE__*/react.createElement("code", null, "<video>"), " or ", /*#__PURE__*/react.createElement("code", null, "<audio>"), " element, this will be automatically set to true.")), /*#__PURE__*/react.createElement("tr", null, /*#__PURE__*/react.createElement("td", null, /*#__PURE__*/react.createElement("code", null, "controls")), /*#__PURE__*/react.createElement("td", null, "array"), /*#__PURE__*/react.createElement("td", null, "-"), /*#__PURE__*/react.createElement("td", null, "When present, it specifies that video controls should be displayed. ", /*#__PURE__*/react.createElement("br", null), /*#__PURE__*/react.createElement("strong", null, "default value:"), /*#__PURE__*/react.createElement("br", null), /*#__PURE__*/react.createElement("code", {
+    className: "text-wrap"
+  }, "[\"play-large\", \"play\", \"progress\", \"current-time\", \"mute\", \"volume\", \"captions\", \"settings\", \"pip\", \"airplay\", \"fullscreen\"]"))), /*#__PURE__*/react.createElement("tr", null, /*#__PURE__*/react.createElement("td", null, /*#__PURE__*/react.createElement("code", null, "loop")), /*#__PURE__*/react.createElement("td", null, "JSON Object Literals"), /*#__PURE__*/react.createElement("td", null, "-"), /*#__PURE__*/react.createElement("td", null, /*#__PURE__*/react.createElement("code", null, "active"), ": Whether to loop the current video. If the ", /*#__PURE__*/react.createElement("code", null, "loop"), " attribute is present on a ", /*#__PURE__*/react.createElement("code", null, "<video>"), " or ", /*#__PURE__*/react.createElement("code", null, "<audio>"), " element, this will be automatically set to true This is an object to support future functionality. ", /*#__PURE__*/react.createElement("br", null), /*#__PURE__*/react.createElement("strong", null, "default value:"), /*#__PURE__*/react.createElement("br", null), /*#__PURE__*/react.createElement("code", {
+    className: "text-wrap"
+  }, "{ active: false }"))), /*#__PURE__*/react.createElement("tr", null, /*#__PURE__*/react.createElement("td", null, /*#__PURE__*/react.createElement("code", null, "clickToPlay")), /*#__PURE__*/react.createElement("td", null, "boolean"), /*#__PURE__*/react.createElement("td", null, "true"), /*#__PURE__*/react.createElement("td", null, "Click (or tap) of the video container will toggle play/pause.")), /*#__PURE__*/react.createElement("tr", null, /*#__PURE__*/react.createElement("td", null, /*#__PURE__*/react.createElement("code", null, "fullscreen")), /*#__PURE__*/react.createElement("td", null, "JSON Object Literals"), /*#__PURE__*/react.createElement("td", null, "-"), /*#__PURE__*/react.createElement("td", null, /*#__PURE__*/react.createElement("code", null, "enabled"), ": Toggles whether fullscreen should be enabled. ", /*#__PURE__*/react.createElement("code", null, "fallback"), ": Allow fallback to a full-window solution (true/false/", /*#__PURE__*/react.createElement("code", null, "'force'"), "). ", /*#__PURE__*/react.createElement("code", null, "iosNative"), ": whether to use native iOS fullscreen when entering fullscreen (no custom controls). ", /*#__PURE__*/react.createElement("code", null, "container"), ": A selector for an ancestor of the player element, allows contextual content to remain visual in fullscreen mode. Non-ancestors are ignored.", /*#__PURE__*/react.createElement("br", null), /*#__PURE__*/react.createElement("strong", null, "default value:"), /*#__PURE__*/react.createElement("br", null), /*#__PURE__*/react.createElement("code", {
+    className: "text-wrap"
+  }, "{ enabled: true, fallback: true, iosNative: false, container: null }"))))))))))));
 });
 ;// CONCATENATED MODULE: ./src/client/components/_plugins/Swiper/src/ssr-window/package/ssr-window.esm.js
 
@@ -66421,7 +67005,7 @@ var Swiper_Swiper = /*#__PURE__*/function (_Component) {
         id: id ? id : 'app-swiper-' + shortcut.GUID.create(),
         className: "uix-swiper"
       }, attributes), /*#__PURE__*/react.createElement("section", {
-        className: "uix-spacing--s"
+        className: "uix-spacing--s uix-spacing--no-top"
       }, /*#__PURE__*/react.createElement("div", {
         className: "container"
       }, /*#__PURE__*/react.createElement("div", {
@@ -66954,7 +67538,36 @@ var Swiper_Swiper = /*#__PURE__*/function (_Component) {
   }), /*#__PURE__*/react.createElement("path", {
     fill: "#d2d2d2",
     d: "M227.49,192.276c0,4.745,2.783,9.109,7.095,11.123l39.455,18.329l-39.455,18.33c-4.31,2.004-7.095,6.368-7.095,11.118v0.322c0,4.205,2.117,8.068,5.668,10.336c1.974,1.258,4.254,1.924,6.595,1.924c1.793,0,3.528-0.383,5.17-1.142l63.08-29.335c4.307-2.009,7.09-6.372,7.09-11.115v-0.877c0-4.748-2.783-9.113-7.094-11.117l-63.08-29.333c-1.591-0.74-3.373-1.131-5.152-1.131c-2.355,0-4.643,0.661-6.604,1.912c-3.551,2.263-5.67,6.127-5.67,10.337v0.318H227.49L227.49,192.276z"
-  }))))), "Docs on GitHub"))))))), /*#__PURE__*/react.createElement(Swiper_Swiper, null));
+  }))))), "Docs on GitHub"))))))), /*#__PURE__*/react.createElement("section", {
+    className: "uix-spacing--s"
+  }, /*#__PURE__*/react.createElement("div", {
+    className: "container"
+  }, /*#__PURE__*/react.createElement("div", {
+    className: "row"
+  }, /*#__PURE__*/react.createElement("div", {
+    className: "col-12"
+  }, /*#__PURE__*/react.createElement("h3", {
+    className: "app-header-title"
+  }, "Demos"), /*#__PURE__*/react.createElement("hr", null))))), /*#__PURE__*/react.createElement(Swiper_Swiper, null), /*#__PURE__*/react.createElement("section", {
+    className: "uix-spacing--s uix-spacing--no-bottom"
+  }, /*#__PURE__*/react.createElement("div", {
+    className: "container"
+  }, /*#__PURE__*/react.createElement("div", {
+    className: "row"
+  }, /*#__PURE__*/react.createElement("div", {
+    className: "col-12"
+  }, /*#__PURE__*/react.createElement("h3", {
+    className: "app-header-title"
+  }, "API"), /*#__PURE__*/react.createElement("hr", null), /*#__PURE__*/react.createElement("article", {
+    className: "uix-spacing--s",
+    itemProp: "text"
+  }, /*#__PURE__*/react.createElement("h4", null, "Swiper"), /*#__PURE__*/react.createElement("div", null, /*#__PURE__*/react.createElement("pre", null, "import Swiper from '@uixkit.react/components/Swiper/index.tsx';")), /*#__PURE__*/react.createElement("div", {
+    className: "table-responsive-md"
+  }, /*#__PURE__*/react.createElement("table", {
+    className: "table table-bordered table-striped mb-5"
+  }, /*#__PURE__*/react.createElement("thead", null, /*#__PURE__*/react.createElement("tr", null, /*#__PURE__*/react.createElement("th", null, "Property"), /*#__PURE__*/react.createElement("th", null, "Type"), /*#__PURE__*/react.createElement("th", null, "Default"), /*#__PURE__*/react.createElement("th", null, "Description"))), /*#__PURE__*/react.createElement("tbody", null, /*#__PURE__*/react.createElement("tr", null, /*#__PURE__*/react.createElement("td", null, "-"), /*#__PURE__*/react.createElement("td", null, "-"), /*#__PURE__*/react.createElement("td", null, "-"), /*#__PURE__*/react.createElement("td", null, "-")), /*#__PURE__*/react.createElement("tr", null, /*#__PURE__*/react.createElement("td", {
+    colSpan: "4"
+  }, "This is a ", /*#__PURE__*/react.createElement("strong", null, "Migrating Component"), ". There are not any properties and are used to quickly migrate some completed HTML code. You only need to directly modify the component source code.")))))))))));
 });
 ;// CONCATENATED MODULE: ./src/client/components/Table/index.tsx
 
@@ -66964,7 +67577,7 @@ var Swiper_Swiper = /*#__PURE__*/function (_Component) {
 
 
 
-var Table_excluded = ["data", "className", "id"];
+var Table_excluded = ["data", "bordered", "noborder", "horizontal", "alternantRow", "alternantCol", "perLine", "responsive", "responsiveWithScrollBar", "id"];
 
 function Table_createSuper(Derived) { var hasNativeReflectConstruct = Table_isNativeReflectConstruct(); return function _createSuperInternal() { var Super = _getPrototypeOf(Derived), result; if (hasNativeReflectConstruct) { var NewTarget = _getPrototypeOf(this).constructor; result = Reflect.construct(Super, arguments, NewTarget); } else { result = Super.apply(this, arguments); } return _possibleConstructorReturn(this, result); }; }
 
@@ -67246,22 +67859,39 @@ var Table = /*#__PURE__*/function (_Component6) {
     value: function render() {
       var _this$props = this.props,
           data = _this$props.data,
-          className = _this$props.className,
+          bordered = _this$props.bordered,
+          noborder = _this$props.noborder,
+          horizontal = _this$props.horizontal,
+          alternantRow = _this$props.alternantRow,
+          alternantCol = _this$props.alternantCol,
+          perLine = _this$props.perLine,
+          responsive = _this$props.responsive,
+          responsiveWithScrollBar = _this$props.responsiveWithScrollBar,
           id = _this$props.id,
           attributes = _objectWithoutProperties(_this$props, Table_excluded);
 
       var _headers = data.hasOwnProperty('headers') ? data.headers : false;
 
-      var _summaries = data.hasOwnProperty('summaries') ? data.summaries : false;
+      var _summaries = data.hasOwnProperty('summaries') ? data.summaries : false; //Set the class names of different styles
 
+
+      var classes = '';
+      if (bordered) classes += ' uix-table--bordered';
+      if (noborder) classes += ' uix-table--noborder';
+      if (horizontal) classes += ' is-horizontal';
+      if (alternantRow) classes += ' uix-table--alternant-row';
+      if (alternantCol) classes += ' uix-table--alternant-col';
+      if (perLine) classes += ' uix-table--per-line';
+      if (responsive && !responsiveWithScrollBar) classes += ' is-responsive js-uix-table--responsive';
+      if (responsiveWithScrollBar && !responsive) classes += ' js-uix-table--responsive-scrolled';
       return /*#__PURE__*/react.createElement(react.Fragment, null, /*#__PURE__*/react.createElement("div", extends_extends({
-        className: className || '',
+        className: "uix-table" + classes,
         id: id || 'app-table-' + shortcut.GUID.create()
       }, attributes), /*#__PURE__*/react.createElement("table", null, /*#__PURE__*/react.createElement(TableHeaders, {
         data: _headers
       }), /*#__PURE__*/react.createElement(TableSummaries, {
         data: _summaries
-      }), data.hasOwnProperty('fields') && className.indexOf('uix-table--alternant-col') >= 0 ? /*#__PURE__*/react.createElement(TableColgroup, {
+      }), data.hasOwnProperty('fields') && alternantCol ? /*#__PURE__*/react.createElement(TableColgroup, {
         data: data.fields
       }) : "", /*#__PURE__*/react.createElement("tbody", null, data.hasOwnProperty('fields') ? data.fields.map(function (item, i) {
         return /*#__PURE__*/react.createElement(TableRow, {
@@ -67677,28 +68307,29 @@ var data5 = {
   }, /*#__PURE__*/react.createElement("div", {
     className: "col-12"
   }, /*#__PURE__*/react.createElement(Table, {
-    className: "uix-table uix-table--bordered",
+    bordered: true,
     data: data1
   }), /*#__PURE__*/react.createElement("br", null), /*#__PURE__*/react.createElement("br", null), /*#__PURE__*/react.createElement(Table, {
-    className: "uix-table",
     data: data2
   }), /*#__PURE__*/react.createElement("br", null), /*#__PURE__*/react.createElement("br", null), /*#__PURE__*/react.createElement(Table, {
-    className: "uix-table is-horizontal",
+    horizontal: true,
     data: data3
   }), /*#__PURE__*/react.createElement("br", null), /*#__PURE__*/react.createElement("br", null), /*#__PURE__*/react.createElement(Table, {
-    className: "uix-table uix-table--noborder is-horizontal",
+    noborder: true,
+    horizontal: true,
     data: data3
   }), /*#__PURE__*/react.createElement("br", null), /*#__PURE__*/react.createElement("br", null), /*#__PURE__*/react.createElement(Table, {
-    className: "uix-table is-horizontal uix-table--alternant-row",
+    horizontal: true,
+    alternantRow: true,
     data: data3
   }), /*#__PURE__*/react.createElement("br", null), /*#__PURE__*/react.createElement("br", null), /*#__PURE__*/react.createElement(Table, {
-    className: "uix-table uix-table--per-line",
+    perLine: true,
     data: data3
   }), /*#__PURE__*/react.createElement("br", null), /*#__PURE__*/react.createElement("br", null), /*#__PURE__*/react.createElement(Table, {
-    className: "uix-table uix-table--per-line",
+    perLine: true,
     data: data4
   }), /*#__PURE__*/react.createElement("br", null), /*#__PURE__*/react.createElement("br", null), /*#__PURE__*/react.createElement(Table, {
-    className: "uix-table uix-table--alternant-col",
+    alternantCol: true,
     data: data5
   }))))), /*#__PURE__*/react.createElement("section", null, /*#__PURE__*/react.createElement("div", {
     className: "container"
@@ -67708,7 +68339,7 @@ var data5 = {
     className: "col-12"
   }, /*#__PURE__*/react.createElement("h3", {
     className: "app-header-title"
-  }, "Responsive Table"), /*#__PURE__*/react.createElement("p", null, "Change window size to watch. The class ", /*#__PURE__*/react.createElement("code", null, ".is-responsive.js-uix-table--responsive"), " used here will be applied ", /*#__PURE__*/react.createElement("code", null, ".uix-table")), /*#__PURE__*/react.createElement("hr", null))))), /*#__PURE__*/react.createElement("section", {
+  }, "Responsive Table"), /*#__PURE__*/react.createElement("hr", null))))), /*#__PURE__*/react.createElement("section", {
     className: "uix-spacing--s"
   }, /*#__PURE__*/react.createElement("div", {
     className: "container"
@@ -67717,7 +68348,9 @@ var data5 = {
   }, /*#__PURE__*/react.createElement("div", {
     className: "col-12"
   }, /*#__PURE__*/react.createElement(Table, {
-    className: "uix-table uix-table--noborder is-horizontal is-responsive js-uix-table--responsive",
+    noborder: true,
+    horizontal: true,
+    responsive: true,
     data: data3
   }), /*#__PURE__*/react.createElement("br", null), /*#__PURE__*/react.createElement("br", null))))), /*#__PURE__*/react.createElement("section", null, /*#__PURE__*/react.createElement("div", {
     className: "container"
@@ -67727,7 +68360,7 @@ var data5 = {
     className: "col-12"
   }, /*#__PURE__*/react.createElement("h3", {
     className: "app-header-title"
-  }, "Responsive Table with Scroll Bars"), /*#__PURE__*/react.createElement("p", null, "Change window size to watch. The class ", /*#__PURE__*/react.createElement("code", null, ".js-uix-table--responsive-scrolled"), " used here will be applied ", /*#__PURE__*/react.createElement("code", null, ".uix-table")), /*#__PURE__*/react.createElement("hr", null))))), /*#__PURE__*/react.createElement("section", {
+  }, "Responsive Table with Scroll Bars"), /*#__PURE__*/react.createElement("p", null, "The scroll bar is displayed when the response is triggered."), /*#__PURE__*/react.createElement("hr", null))))), /*#__PURE__*/react.createElement("section", {
     className: "uix-spacing--s"
   }, /*#__PURE__*/react.createElement("div", {
     className: "container"
@@ -67736,9 +68369,39 @@ var data5 = {
   }, /*#__PURE__*/react.createElement("div", {
     className: "col-12"
   }, /*#__PURE__*/react.createElement(Table, {
-    className: "uix-table uix-table--bordered js-uix-table--responsive-scrolled",
+    bordered: true,
+    responsiveWithScrollBar: true,
     data: data3
-  }), /*#__PURE__*/react.createElement("br", null), /*#__PURE__*/react.createElement("br", null))))));
+  }), /*#__PURE__*/react.createElement("br", null), /*#__PURE__*/react.createElement("br", null))))), /*#__PURE__*/react.createElement("section", null, /*#__PURE__*/react.createElement("div", {
+    className: "container"
+  }, /*#__PURE__*/react.createElement("div", {
+    className: "row"
+  }, /*#__PURE__*/react.createElement("div", {
+    className: "col-12"
+  }, /*#__PURE__*/react.createElement("h3", {
+    className: "app-header-title"
+  }, "API"), /*#__PURE__*/react.createElement("hr", null), /*#__PURE__*/react.createElement("article", {
+    className: "uix-spacing--s",
+    itemProp: "text"
+  }, /*#__PURE__*/react.createElement("h4", null, "Table"), /*#__PURE__*/react.createElement("div", null, /*#__PURE__*/react.createElement("pre", null, "import Table from '@uixkit.react/components/Table/index.tsx';")), /*#__PURE__*/react.createElement("div", {
+    className: "table-responsive-md"
+  }, /*#__PURE__*/react.createElement("table", {
+    className: "table table-bordered table-striped mb-5"
+  }, /*#__PURE__*/react.createElement("thead", null, /*#__PURE__*/react.createElement("tr", null, /*#__PURE__*/react.createElement("th", null, "Property"), /*#__PURE__*/react.createElement("th", null, "Type"), /*#__PURE__*/react.createElement("th", null, "Default"), /*#__PURE__*/react.createElement("th", null, "Description"))), /*#__PURE__*/react.createElement("tbody", null, /*#__PURE__*/react.createElement("tr", null, /*#__PURE__*/react.createElement("td", null, /*#__PURE__*/react.createElement("code", null, "data")), /*#__PURE__*/react.createElement("td", null, "JSON Object Literals"), /*#__PURE__*/react.createElement("td", null, "-"), /*#__PURE__*/react.createElement("td", null, "Specify data of Table as a JSON string format. Such as: ", /*#__PURE__*/react.createElement("br", null), /*#__PURE__*/react.createElement("strong", null, "usage 1:"), /*#__PURE__*/react.createElement("br", null), /*#__PURE__*/react.createElement("code", {
+    className: "text-wrap"
+  }, "{\"fields\":[[{\"cols\": 1, \"content\": \"01\" },{\"cols\": 1, \"content\": \"David Lin\" }],[{\"cols\": 1, \"content\": \"02\" },{\"cols\": 1, \"content\": \"Tom McFarlin\" }]]}"), " ", /*#__PURE__*/react.createElement("br", null), /*#__PURE__*/react.createElement("strong", null, "usage 2:"), /*#__PURE__*/react.createElement("br", null), /*#__PURE__*/react.createElement("code", {
+    className: "text-wrap"
+  }, "{\"headers\": [\"No.\",\"Name\"],\"fields\":[[{\"cols\": 1, \"content\": \"01\" },{\"cols\": 1, \"content\": \"David Lin\" }],[{\"cols\": 1, \"content\": \"02\" },{\"cols\": 1, \"content\": \"Tom McFarlin\" }]]}"), " ", /*#__PURE__*/react.createElement("br", null), /*#__PURE__*/react.createElement("strong", null, "usage 3:"), /*#__PURE__*/react.createElement("br", null), /*#__PURE__*/react.createElement("code", {
+    className: "text-wrap"
+  }, "{\"fields\":[[{\"cols\": 1, \"content\": \"01\" },{\"cols\": 1, \"content\": \"David Lin\" }],[{\"cols\": 1, \"content\": \"02\" },{\"cols\": 1, \"content\": \"Tom McFarlin\" }],[{\"cols\": 4, \"content\": <><strong style={{background:\"yellow\"}}>A table cell that spans <span style={{color:\"red\"}}>4</span> columns</strong></> }]]}"))), /*#__PURE__*/react.createElement("tr", null, /*#__PURE__*/react.createElement("td", null, /*#__PURE__*/react.createElement("code", null, "bordered")), /*#__PURE__*/react.createElement("td", null, "boolean"), /*#__PURE__*/react.createElement("td", null, "false"), /*#__PURE__*/react.createElement("td", null, "Adds borders on all sides of the table and cells")), /*#__PURE__*/react.createElement("tr", null, /*#__PURE__*/react.createElement("td", null, /*#__PURE__*/react.createElement("code", null, "noborder")), /*#__PURE__*/react.createElement("td", null, "boolean"), /*#__PURE__*/react.createElement("td", null, "false"), /*#__PURE__*/react.createElement("td", null, "Removes all borders on the table and cells, including table header")), /*#__PURE__*/react.createElement("tr", null, /*#__PURE__*/react.createElement("td", null, /*#__PURE__*/react.createElement("code", null, "horizontal")), /*#__PURE__*/react.createElement("td", null, "boolean"), /*#__PURE__*/react.createElement("td", null, "false"), /*#__PURE__*/react.createElement("td", null, "Use the horizontal split effect for each row. Includes a header cell(<th> tag) with this attribute.")), /*#__PURE__*/react.createElement("tr", null, /*#__PURE__*/react.createElement("td", null, /*#__PURE__*/react.createElement("code", null, "alternantRow")), /*#__PURE__*/react.createElement("td", null, "boolean"), /*#__PURE__*/react.createElement("td", null, "false"), /*#__PURE__*/react.createElement("td", null, "Apply alternating row color in dynamically created table")), /*#__PURE__*/react.createElement("tr", null, /*#__PURE__*/react.createElement("td", null, /*#__PURE__*/react.createElement("code", null, "alternantCol")), /*#__PURE__*/react.createElement("td", null, "boolean"), /*#__PURE__*/react.createElement("td", null, "false"), /*#__PURE__*/react.createElement("td", null, "Apply alternating column color in dynamically created table")), /*#__PURE__*/react.createElement("tr", null, /*#__PURE__*/react.createElement("td", null, /*#__PURE__*/react.createElement("code", null, "perLine")), /*#__PURE__*/react.createElement("td", null, "boolean"), /*#__PURE__*/react.createElement("td", null, "false"), /*#__PURE__*/react.createElement("td", null, "Only use the horizontal splitting effect for each row.")), /*#__PURE__*/react.createElement("tr", null, /*#__PURE__*/react.createElement("td", null, /*#__PURE__*/react.createElement("code", null, "responsive")), /*#__PURE__*/react.createElement("td", null, "boolean"), /*#__PURE__*/react.createElement("td", null, "false"), /*#__PURE__*/react.createElement("td", null, "Create responsive tables up to a particular breakpoint.")), /*#__PURE__*/react.createElement("tr", null, /*#__PURE__*/react.createElement("td", null, /*#__PURE__*/react.createElement("code", null, "responsiveWithScrollBar")), /*#__PURE__*/react.createElement("td", null, "boolean"), /*#__PURE__*/react.createElement("td", null, "false"), /*#__PURE__*/react.createElement("td", null, "Create responsive tables up to a particular breakpoint. This property allows scroll bars to be created automatically in the table.", /*#__PURE__*/react.createElement("br", null), /*#__PURE__*/react.createElement("strong", null, "Only one of the ", /*#__PURE__*/react.createElement("code", null, "responsive"), " and ", /*#__PURE__*/react.createElement("code", null, "responsiveWithScrollBar"), " properties is allowed, and both are invalid if set to true."))))), /*#__PURE__*/react.createElement("p", null, "JSON configuration properties of the ", /*#__PURE__*/react.createElement("code", null, "data"), ":"), /*#__PURE__*/react.createElement("div", {
+    className: "table-responsive-md"
+  }, /*#__PURE__*/react.createElement("table", {
+    className: "table table-bordered table-striped mb-5"
+  }, /*#__PURE__*/react.createElement("thead", null, /*#__PURE__*/react.createElement("tr", null, /*#__PURE__*/react.createElement("th", null, "Property"), /*#__PURE__*/react.createElement("th", null, "Type"), /*#__PURE__*/react.createElement("th", null, "Default"), /*#__PURE__*/react.createElement("th", null, "Description"))), /*#__PURE__*/react.createElement("tbody", null, /*#__PURE__*/react.createElement("tr", null, /*#__PURE__*/react.createElement("td", null, /*#__PURE__*/react.createElement("code", null, "fields")), /*#__PURE__*/react.createElement("td", null, "array"), /*#__PURE__*/react.createElement("td", null, "-"), /*#__PURE__*/react.createElement("td", null, "Table rows and columns. The key ", /*#__PURE__*/react.createElement("code", null, "cols"), " identifies the column (change the value if the column is merged). The key ", /*#__PURE__*/react.createElement("code", null, "content"), " to place the content of each cell. Eg. ", /*#__PURE__*/react.createElement("code", {
+    className: "text-wrap"
+  }, "[[{\"cols\": 1, \"content\": \"01\" },{\"cols\": 1, \"content\": \"David Lin\" }],[{\"cols\": 1, \"content\": \"02\" },{\"cols\": 1, \"content\": \"Tom McFarlin\" }]]"))), /*#__PURE__*/react.createElement("tr", null, /*#__PURE__*/react.createElement("td", null, /*#__PURE__*/react.createElement("code", null, "headers")), /*#__PURE__*/react.createElement("td", null, "array"), /*#__PURE__*/react.createElement("td", null, "-"), /*#__PURE__*/react.createElement("td", null, "Defines a header cell in an HTML table. Eg. ", /*#__PURE__*/react.createElement("code", {
+    className: "text-wrap"
+  }, "[\"No.\",\"Name\"]")))))))))))));
 });
 ;// CONCATENATED MODULE: ./src/client/components/TableGrid/index.tsx
 
@@ -67748,7 +68411,7 @@ var data5 = {
 
 
 
-var TableGrid_excluded = ["data", "className", "id"];
+var TableGrid_excluded = ["data", "id"];
 
 function TableGrid_createSuper(Derived) { var hasNativeReflectConstruct = TableGrid_isNativeReflectConstruct(); return function _createSuperInternal() { var Super = _getPrototypeOf(Derived), result; if (hasNativeReflectConstruct) { var NewTarget = _getPrototypeOf(this).constructor; result = Reflect.construct(Super, arguments, NewTarget); } else { result = Super.apply(this, arguments); } return _possibleConstructorReturn(this, result); }; }
 
@@ -67820,8 +68483,8 @@ var TableGridRow = /*#__PURE__*/function (_Component2) {
     key: "render",
     value: function render() {
       var _fields = this.props.data.data;
-      var _target = this.props.data.target;
-      var rowClasses = _target ? 'uix-table-grid__row is-drop-target' : 'uix-table-grid__row';
+      var _selected = this.props.data.selected;
+      var rowClasses = _selected ? 'uix-table-grid__row is-drop-target' : 'uix-table-grid__row';
 
       var fields = _fields.map(function (el, i) {
         return /*#__PURE__*/react.createElement(TableGridField, {
@@ -67903,14 +68566,13 @@ var TableGrid = /*#__PURE__*/function (_Component4) {
     value: function render() {
       var _this$props = this.props,
           data = _this$props.data,
-          className = _this$props.className,
           id = _this$props.id,
           attributes = _objectWithoutProperties(_this$props, TableGrid_excluded);
 
       var _headers = data.hasOwnProperty('headers') ? data.headers : false;
 
       return /*#__PURE__*/react.createElement(react.Fragment, null, /*#__PURE__*/react.createElement("div", extends_extends({
-        className: className || '',
+        className: "uix-table-grid",
         id: id || 'app-table-grid-' + shortcut.GUID.create()
       }, attributes, {
         role: "grid"
@@ -67941,7 +68603,7 @@ var TableGrid = /*#__PURE__*/function (_Component4) {
 var TableGridDemo_data1 = {
   "headers": ["COLUMN TITLE 1", "COLUMN TITLE 2", "COLUMN TITLE 3"],
   "fields": [{
-    "target": false,
+    "selected": false,
     "data": [{
       "cols": 1,
       "content": "Row Item Alpha"
@@ -67953,7 +68615,7 @@ var TableGridDemo_data1 = {
       "content": "Row Item Alpha"
     }]
   }, {
-    "target": true,
+    "selected": true,
     "data": [{
       "cols": 1,
       "content": "Row Item Bravo"
@@ -67965,7 +68627,7 @@ var TableGridDemo_data1 = {
       "content": "Row Item Bravo"
     }]
   }, {
-    "target": false,
+    "selected": false,
     "data": [{
       "cols": 1,
       "content": "Row Item Charlie"
@@ -67977,7 +68639,7 @@ var TableGridDemo_data1 = {
       "content": "Row Item Charlie"
     }]
   }, {
-    "target": false,
+    "selected": false,
     "data": [{
       "cols": 1,
       "content": "Row Item Delta"
@@ -68054,9 +68716,33 @@ var TableGridDemo_data1 = {
   }, /*#__PURE__*/react.createElement("div", {
     className: "col-12"
   }, /*#__PURE__*/react.createElement(TableGrid, {
-    className: "uix-table-grid",
     data: TableGridDemo_data1
-  }))))));
+  }))))), /*#__PURE__*/react.createElement("section", null, /*#__PURE__*/react.createElement("div", {
+    className: "container"
+  }, /*#__PURE__*/react.createElement("div", {
+    className: "row"
+  }, /*#__PURE__*/react.createElement("div", {
+    className: "col-12"
+  }, /*#__PURE__*/react.createElement("h3", {
+    className: "app-header-title"
+  }, "API"), /*#__PURE__*/react.createElement("hr", null), /*#__PURE__*/react.createElement("article", {
+    className: "uix-spacing--s",
+    itemProp: "text"
+  }, /*#__PURE__*/react.createElement("h4", null, "Table Grid"), /*#__PURE__*/react.createElement("div", null, /*#__PURE__*/react.createElement("pre", null, "import TableGrid from '@uixkit.react/components/TableGrid/index.tsx';")), /*#__PURE__*/react.createElement("div", {
+    className: "table-responsive-md"
+  }, /*#__PURE__*/react.createElement("table", {
+    className: "table table-bordered table-striped mb-5"
+  }, /*#__PURE__*/react.createElement("thead", null, /*#__PURE__*/react.createElement("tr", null, /*#__PURE__*/react.createElement("th", null, "Property"), /*#__PURE__*/react.createElement("th", null, "Type"), /*#__PURE__*/react.createElement("th", null, "Default"), /*#__PURE__*/react.createElement("th", null, "Description"))), /*#__PURE__*/react.createElement("tbody", null, /*#__PURE__*/react.createElement("tr", null, /*#__PURE__*/react.createElement("td", null, /*#__PURE__*/react.createElement("code", null, "data")), /*#__PURE__*/react.createElement("td", null, "JSON Object Literals"), /*#__PURE__*/react.createElement("td", null, "-"), /*#__PURE__*/react.createElement("td", null, "Specify data of Table as a JSON string format. Such as: ", /*#__PURE__*/react.createElement("strong", null, "usage:"), /*#__PURE__*/react.createElement("br", null), /*#__PURE__*/react.createElement("code", {
+    className: "text-wrap"
+  }, "{\"headers\": [\"COLUMN TITLE 1\",\"COLUMN TITLE 2\"],\"fields\":[{\"selected\": false,\"data\": [{\"cols\": 1, \"content\": \"Row Item Alpha\" },{\"cols\": 1, \"content\": \"Row Item Alpha\" }]},{\"selected\": true,\"data\": [{\"cols\": 1, \"content\": \"Row Item Bravo\" },{\"cols\": 1, \"content\": \"Row Item Bravo\" }]}]}"))))), /*#__PURE__*/react.createElement("p", null, "JSON configuration properties of the ", /*#__PURE__*/react.createElement("code", null, "data"), ":"), /*#__PURE__*/react.createElement("div", {
+    className: "table-responsive-md"
+  }, /*#__PURE__*/react.createElement("table", {
+    className: "table table-bordered table-striped mb-5"
+  }, /*#__PURE__*/react.createElement("thead", null, /*#__PURE__*/react.createElement("tr", null, /*#__PURE__*/react.createElement("th", null, "Property"), /*#__PURE__*/react.createElement("th", null, "Type"), /*#__PURE__*/react.createElement("th", null, "Default"), /*#__PURE__*/react.createElement("th", null, "Description"))), /*#__PURE__*/react.createElement("tbody", null, /*#__PURE__*/react.createElement("tr", null, /*#__PURE__*/react.createElement("td", null, /*#__PURE__*/react.createElement("code", null, "fields")), /*#__PURE__*/react.createElement("td", null, "array"), /*#__PURE__*/react.createElement("td", null, "-"), /*#__PURE__*/react.createElement("td", null, "Table rows and columns. The key ", /*#__PURE__*/react.createElement("code", null, "cols"), " identifies the column (change the value if the column is merged). The key ", /*#__PURE__*/react.createElement("code", null, "content"), " to place the content of each cell. The key ", /*#__PURE__*/react.createElement("code", null, "selected"), " is used to activate a row. The key ", /*#__PURE__*/react.createElement("code", null, "data"), " is used to load the data of each column in each row. Eg. ", /*#__PURE__*/react.createElement("code", {
+    className: "text-wrap"
+  }, "[{\"selected\": false,\"data\": [{\"cols\": 1, \"content\": \"Row Item Alpha\" },{\"cols\": 1, \"content\": \"Row Item Alpha\" }]},{\"selected\": true,\"data\": [{\"cols\": 1, \"content\": \"Row Item Bravo\" },{\"cols\": 1, \"content\": \"Row Item Bravo\" }]}]"))), /*#__PURE__*/react.createElement("tr", null, /*#__PURE__*/react.createElement("td", null, /*#__PURE__*/react.createElement("code", null, "headers")), /*#__PURE__*/react.createElement("td", null, "array"), /*#__PURE__*/react.createElement("td", null, "-"), /*#__PURE__*/react.createElement("td", null, "Defines a header cell in an HTML table. Eg. ", /*#__PURE__*/react.createElement("code", {
+    className: "text-wrap"
+  }, "[\"COLUMN TITLE 1\",\"COLUMN TITLE 2\"]")))))))))))));
 });
 ;// CONCATENATED MODULE: ./src/client/components/TableSorter/index.tsx
 
@@ -68066,7 +68752,7 @@ var TableGridDemo_data1 = {
 
 
 
-var TableSorter_excluded = ["data", "className", "id"];
+var TableSorter_excluded = ["data", "bordered", "noborder", "horizontal", "alternantRow", "alternantCol", "perLine", "responsive", "responsiveWithScrollBar", "id"];
 
 function TableSorter_createSuper(Derived) { var hasNativeReflectConstruct = TableSorter_isNativeReflectConstruct(); return function _createSuperInternal() { var Super = _getPrototypeOf(Derived), result; if (hasNativeReflectConstruct) { var NewTarget = _getPrototypeOf(this).constructor; result = Reflect.construct(Super, arguments, NewTarget); } else { result = Super.apply(this, arguments); } return _possibleConstructorReturn(this, result); }; }
 
@@ -68276,14 +68962,31 @@ var TableSorter = /*#__PURE__*/function (_Component4) {
     value: function render() {
       var _this$props = this.props,
           data = _this$props.data,
-          className = _this$props.className,
+          bordered = _this$props.bordered,
+          noborder = _this$props.noborder,
+          horizontal = _this$props.horizontal,
+          alternantRow = _this$props.alternantRow,
+          alternantCol = _this$props.alternantCol,
+          perLine = _this$props.perLine,
+          responsive = _this$props.responsive,
+          responsiveWithScrollBar = _this$props.responsiveWithScrollBar,
           id = _this$props.id,
           attributes = _objectWithoutProperties(_this$props, TableSorter_excluded);
 
-      var _headers = data.hasOwnProperty('headers') ? data.headers : false;
+      var _headers = data.hasOwnProperty('headers') ? data.headers : false; //Set the class names of different styles
 
+
+      var classes = '';
+      if (bordered) classes += ' uix-table--bordered';
+      if (noborder) classes += ' uix-table--noborder';
+      if (horizontal) classes += ' is-horizontal';
+      if (alternantRow) classes += ' uix-table--alternant-row';
+      if (alternantCol) classes += ' uix-table--alternant-col';
+      if (perLine) classes += ' uix-table--per-line';
+      if (responsive && !responsiveWithScrollBar) classes += ' is-responsive js-uix-table--responsive';
+      if (responsiveWithScrollBar && !responsive) classes += ' js-uix-table--responsive-scrolled';
       return /*#__PURE__*/react.createElement(react.Fragment, null, /*#__PURE__*/react.createElement("div", extends_extends({
-        className: className || '',
+        className: "uix-table" + classes + " js-uix-table-sorter",
         id: id || 'app-table-sorter-' + shortcut.GUID.create()
       }, attributes), /*#__PURE__*/react.createElement("table", null, /*#__PURE__*/react.createElement(TableSorterHeaders, {
         data: _headers
@@ -68500,9 +69203,35 @@ var TableSorterDemo_data1 = {
   }, /*#__PURE__*/react.createElement("div", {
     className: "col-12"
   }, /*#__PURE__*/react.createElement(TableSorter, {
-    className: "uix-table is-horizontal uix-table--alternant-row js-uix-table-sorter",
+    horizontal: true,
+    alternantRow: true,
     data: TableSorterDemo_data1
-  }))))));
+  }))))), /*#__PURE__*/react.createElement("section", null, /*#__PURE__*/react.createElement("div", {
+    className: "container"
+  }, /*#__PURE__*/react.createElement("div", {
+    className: "row"
+  }, /*#__PURE__*/react.createElement("div", {
+    className: "col-12"
+  }, /*#__PURE__*/react.createElement("h3", {
+    className: "app-header-title"
+  }, "API"), /*#__PURE__*/react.createElement("hr", null), /*#__PURE__*/react.createElement("article", {
+    className: "uix-spacing--s",
+    itemProp: "text"
+  }, /*#__PURE__*/react.createElement("h4", null, "Table Sorter"), /*#__PURE__*/react.createElement("div", null, /*#__PURE__*/react.createElement("pre", null, "import TableSorter from '@uixkit.react/components/TableSorter/index.tsx';")), /*#__PURE__*/react.createElement("div", {
+    className: "table-responsive-md"
+  }, /*#__PURE__*/react.createElement("table", {
+    className: "table table-bordered table-striped mb-5"
+  }, /*#__PURE__*/react.createElement("thead", null, /*#__PURE__*/react.createElement("tr", null, /*#__PURE__*/react.createElement("th", null, "Property"), /*#__PURE__*/react.createElement("th", null, "Type"), /*#__PURE__*/react.createElement("th", null, "Default"), /*#__PURE__*/react.createElement("th", null, "Description"))), /*#__PURE__*/react.createElement("tbody", null, /*#__PURE__*/react.createElement("tr", null, /*#__PURE__*/react.createElement("td", null, /*#__PURE__*/react.createElement("code", null, "data")), /*#__PURE__*/react.createElement("td", null, "JSON Object Literals"), /*#__PURE__*/react.createElement("td", null, "-"), /*#__PURE__*/react.createElement("td", null, "Specify data of Table as a JSON string format. Such as: ", /*#__PURE__*/react.createElement("br", null), /*#__PURE__*/react.createElement("strong", null, "usage:"), /*#__PURE__*/react.createElement("br", null), /*#__PURE__*/react.createElement("code", {
+    className: "text-wrap"
+  }, "{\"headers\": [{\"type\": false, \"content\": \"Index\" },{\"type\": \"number\", \"content\": \"Money\" },{\"type\": \"text\", \"content\": \"Name\" },{\"type\": \"number\", \"content\": \"No.\" },{\"type\": \"date\", \"content\": \"Date1\" },{\"type\": \"date\", \"content\": \"Date2\" }],\"fields\":[[{\"cols\":1,\"content\":\"1\"},{\"cols\":1,\"content\":\"$55.134\"},{\"cols\":1,\"content\":\"David Lin\"},{\"cols\":1,\"content\":\"3453434\"},{\"cols\":1,\"content\":\"2012-09-25T12:10:46+00:00\"},{\"cols\":1,\"content\":\"May 22, 2003\"}],[{\"cols\":1,\"content\":\"2\"},{\"cols\":1,\"content\":\"$255.12\"},{\"cols\":1,\"content\":\"Co Cheey\"},{\"cols\":1,\"content\":\"-2324.343\"},{\"cols\":1,\"content\":\"2013-09-10T12:10:46+00:00\"},{\"cols\":1,\"content\":\"September 13, 2013\"}]]}"))), /*#__PURE__*/react.createElement("tr", null, /*#__PURE__*/react.createElement("td", null, /*#__PURE__*/react.createElement("code", null, "bordered")), /*#__PURE__*/react.createElement("td", null, "boolean"), /*#__PURE__*/react.createElement("td", null, "false"), /*#__PURE__*/react.createElement("td", null, "Adds borders on all sides of the table and cells")), /*#__PURE__*/react.createElement("tr", null, /*#__PURE__*/react.createElement("td", null, /*#__PURE__*/react.createElement("code", null, "noborder")), /*#__PURE__*/react.createElement("td", null, "boolean"), /*#__PURE__*/react.createElement("td", null, "false"), /*#__PURE__*/react.createElement("td", null, "Removes all borders on the table and cells, including table header")), /*#__PURE__*/react.createElement("tr", null, /*#__PURE__*/react.createElement("td", null, /*#__PURE__*/react.createElement("code", null, "horizontal")), /*#__PURE__*/react.createElement("td", null, "boolean"), /*#__PURE__*/react.createElement("td", null, "false"), /*#__PURE__*/react.createElement("td", null, "Use the horizontal split effect for each row. Includes a header cell(<th> tag) with this attribute.")), /*#__PURE__*/react.createElement("tr", null, /*#__PURE__*/react.createElement("td", null, /*#__PURE__*/react.createElement("code", null, "alternantRow")), /*#__PURE__*/react.createElement("td", null, "boolean"), /*#__PURE__*/react.createElement("td", null, "false"), /*#__PURE__*/react.createElement("td", null, "Apply alternating row color in dynamically created table")), /*#__PURE__*/react.createElement("tr", null, /*#__PURE__*/react.createElement("td", null, /*#__PURE__*/react.createElement("code", null, "alternantCol")), /*#__PURE__*/react.createElement("td", null, "boolean"), /*#__PURE__*/react.createElement("td", null, "false"), /*#__PURE__*/react.createElement("td", null, "Apply alternating column color in dynamically created table")), /*#__PURE__*/react.createElement("tr", null, /*#__PURE__*/react.createElement("td", null, /*#__PURE__*/react.createElement("code", null, "perLine")), /*#__PURE__*/react.createElement("td", null, "boolean"), /*#__PURE__*/react.createElement("td", null, "false"), /*#__PURE__*/react.createElement("td", null, "Only use the horizontal splitting effect for each row.")), /*#__PURE__*/react.createElement("tr", null, /*#__PURE__*/react.createElement("td", null, /*#__PURE__*/react.createElement("code", null, "responsive")), /*#__PURE__*/react.createElement("td", null, "boolean"), /*#__PURE__*/react.createElement("td", null, "false"), /*#__PURE__*/react.createElement("td", null, "Create responsive tables up to a particular breakpoint.")), /*#__PURE__*/react.createElement("tr", null, /*#__PURE__*/react.createElement("td", null, /*#__PURE__*/react.createElement("code", null, "responsiveWithScrollBar")), /*#__PURE__*/react.createElement("td", null, "boolean"), /*#__PURE__*/react.createElement("td", null, "false"), /*#__PURE__*/react.createElement("td", null, "Create responsive tables up to a particular breakpoint. This property allows scroll bars to be created automatically in the table. ", /*#__PURE__*/react.createElement("br", null), /*#__PURE__*/react.createElement("strong", null, "Only one of the ", /*#__PURE__*/react.createElement("code", null, "responsive"), " and ", /*#__PURE__*/react.createElement("code", null, "responsiveWithScrollBar"), " properties is allowed, and both are invalid if set to true."))))), /*#__PURE__*/react.createElement("p", null, "JSON configuration properties of the ", /*#__PURE__*/react.createElement("code", null, "data"), ":"), /*#__PURE__*/react.createElement("div", {
+    className: "table-responsive-md"
+  }, /*#__PURE__*/react.createElement("table", {
+    className: "table table-bordered table-striped mb-5"
+  }, /*#__PURE__*/react.createElement("thead", null, /*#__PURE__*/react.createElement("tr", null, /*#__PURE__*/react.createElement("th", null, "Property"), /*#__PURE__*/react.createElement("th", null, "Type"), /*#__PURE__*/react.createElement("th", null, "Default"), /*#__PURE__*/react.createElement("th", null, "Description"))), /*#__PURE__*/react.createElement("tbody", null, /*#__PURE__*/react.createElement("tr", null, /*#__PURE__*/react.createElement("td", null, /*#__PURE__*/react.createElement("code", null, "fields")), /*#__PURE__*/react.createElement("td", null, "array"), /*#__PURE__*/react.createElement("td", null, "-"), /*#__PURE__*/react.createElement("td", null, "Table rows and columns. The key ", /*#__PURE__*/react.createElement("code", null, "cols"), " identifies the column (change the value if the column is merged). The key ", /*#__PURE__*/react.createElement("code", null, "content"), " to place the content of each cell. Eg. ", /*#__PURE__*/react.createElement("code", {
+    className: "text-wrap"
+  }, "[[{\"cols\":1,\"content\":\"1\"},{\"cols\":1,\"content\":\"$55.134\"},{\"cols\":1,\"content\":\"David Lin\"},{\"cols\":1,\"content\":\"3453434\"},{\"cols\":1,\"content\":\"2012-09-25T12:10:46+00:00\"},{\"cols\":1,\"content\":\"May 22, 2003\"}],[{\"cols\":1,\"content\":\"2\"},{\"cols\":1,\"content\":\"$255.12\"},{\"cols\":1,\"content\":\"Co Cheey\"},{\"cols\":1,\"content\":\"-2324.343\"},{\"cols\":1,\"content\":\"2013-09-10T12:10:46+00:00\"},{\"cols\":1,\"content\":\"September 13, 2013\"}]]"))), /*#__PURE__*/react.createElement("tr", null, /*#__PURE__*/react.createElement("td", null, /*#__PURE__*/react.createElement("code", null, "headers")), /*#__PURE__*/react.createElement("td", null, "array"), /*#__PURE__*/react.createElement("td", null, "-"), /*#__PURE__*/react.createElement("td", null, "Defines a header cell in an HTML table. The key ", /*#__PURE__*/react.createElement("code", null, "type"), " is used to specify the type of sorting for each column (Type of sorted values: ", /*#__PURE__*/react.createElement("code", null, "false"), ", ", /*#__PURE__*/react.createElement("code", null, "'number'"), ", ", /*#__PURE__*/react.createElement("code", null, "'text'"), " or ", /*#__PURE__*/react.createElement("code", null, "'date'"), "). The key ", /*#__PURE__*/react.createElement("code", null, "content"), " is the value of each field. Eg. ", /*#__PURE__*/react.createElement("code", {
+    className: "text-wrap"
+  }, "[{\"type\": false, \"content\": \"Index\" },{\"type\": \"number\", \"content\": \"Money\" },{\"type\": \"text\", \"content\": \"Name\" },{\"type\": \"number\", \"content\": \"No.\" },{\"type\": \"date\", \"content\": \"Date1\" },{\"type\": \"date\", \"content\": \"Date2\" }]")))))))))))));
 });
 ;// CONCATENATED MODULE: ./src/client/components/Form/Input.tsx
 
@@ -68513,7 +69242,7 @@ var TableSorterDemo_data1 = {
 
 
 
-var Input_excluded = ["theme", "type", "ui", "disabled", "required", "value", "label", "units", "name", "id", "maxLength", "iconLeft", "iconRight"];
+var Input_excluded = ["type", "theme", "ui", "disabled", "required", "value", "label", "units", "name", "id", "maxLength", "iconLeft", "iconRight"];
 
 function Input_createSuper(Derived) { var hasNativeReflectConstruct = Input_isNativeReflectConstruct(); return function _createSuperInternal() { var Super = _getPrototypeOf(Derived), result; if (hasNativeReflectConstruct) { var NewTarget = _getPrototypeOf(this).constructor; result = Reflect.construct(Super, arguments, NewTarget); } else { result = Super.apply(this, arguments); } return _possibleConstructorReturn(this, result); }; }
 
@@ -68588,10 +69317,10 @@ var Input = /*#__PURE__*/function (_Component) {
       var classes = ''; //status
 
       if (param.indexOf('error') >= 0) classes += ' is-error';
-      if (param.indexOf('success') >= 0) classes += ' is-success'; //radius
+      if (param.indexOf('success') >= 0) classes += ' is-success'; //corners
 
       if (param.indexOf('pill') >= 0) classes += ' is-pill';
-      if (param.indexOf('rounded') >= 0) classes += ' is-rounded'; //sizes
+      if (param.indexOf('rounded') >= 0) classes += ' is-rounded'; //size
 
       if (param.indexOf('fullwidth') >= 0) classes += ' is-fullwidth';
       if (param.indexOf('small') >= 0) classes += ' uix-controls__short-s';
@@ -68603,8 +69332,8 @@ var Input = /*#__PURE__*/function (_Component) {
     key: "render",
     value: function render() {
       var _this$props = this.props,
-          theme = _this$props.theme,
           type = _this$props.type,
+          theme = _this$props.theme,
           ui = _this$props.ui,
           disabled = _this$props.disabled,
           required = _this$props.required,
@@ -68742,10 +69471,10 @@ var Textarea = /*#__PURE__*/function (_Component) {
       var classes = ''; //status
 
       if (param.indexOf('error') >= 0) classes += ' is-error';
-      if (param.indexOf('success') >= 0) classes += ' is-success'; //radius
+      if (param.indexOf('success') >= 0) classes += ' is-success'; //corners
 
       if (param.indexOf('pill') >= 0) classes += ' is-pill';
-      if (param.indexOf('rounded') >= 0) classes += ' is-rounded'; //sizes
+      if (param.indexOf('rounded') >= 0) classes += ' is-rounded'; //size
 
       if (param.indexOf('fullwidth') >= 0) classes += ' is-fullwidth';
       return classes;
@@ -68886,10 +69615,10 @@ var Select = /*#__PURE__*/function (_Component) {
   }, {
     key: "uiSwitch",
     value: function uiSwitch(param) {
-      var classes = ''; //radius
+      var classes = ''; //corners
 
       if (param.indexOf('pill') >= 0) classes += ' is-pill';
-      if (param.indexOf('rounded') >= 0) classes += ' is-rounded'; //sizes
+      if (param.indexOf('rounded') >= 0) classes += ' is-rounded'; //size
 
       if (param.indexOf('fullwidth') >= 0) classes += ' is-fullwidth';
       return classes;
@@ -69079,10 +69808,10 @@ var CustomSelect = /*#__PURE__*/function (_Component) {
   }, {
     key: "uiSwitch",
     value: function uiSwitch(param) {
-      var classes = ''; //radius
+      var classes = ''; //corners
 
       if (param.indexOf('pill') >= 0) classes += ' is-pill';
-      if (param.indexOf('rounded') >= 0) classes += ' is-rounded'; //sizes
+      if (param.indexOf('rounded') >= 0) classes += ' is-rounded'; //size
 
       if (param.indexOf('fullwidth') >= 0) classes += ' is-fullwidth';
       return classes;
@@ -69227,7 +69956,7 @@ var Checkbox = /*#__PURE__*/function (_Component) {
 
     _this = _super.call(this, props);
     _this.state = {
-      isChecked: _this.props.value == 'true' ? true : false
+      isChecked: _this.props.value == 'true' || _this.props.value === true ? true : false
     }; // set this, because you need get methods from CheckBox 	
 
     _this.handleChange = _this.handleChange.bind(_assertThisInitialized(_this));
@@ -69448,7 +70177,7 @@ var Switch_Switch = /*#__PURE__*/function (_Component) {
 
     _defineProperty(_assertThisInitialized(_this), "targetDefaultStatus", false);
 
-    _this.targetDefaultStatus = _this.props.value == 'true' ? true : false;
+    _this.targetDefaultStatus = _this.props.value == 'true' || _this.props.value === true ? true : false;
     _this.state = {
       isChecked: _this.targetDefaultStatus
     }; // set this, because you need get methods from CheckBox 	
@@ -69483,7 +70212,7 @@ var Switch_Switch = /*#__PURE__*/function (_Component) {
   }, {
     key: "uiSwitch",
     value: function uiSwitch(param) {
-      var classes = ''; //radius
+      var classes = ''; //corners
 
       if (param.indexOf('pill') >= 0) classes += ' is-pill';
       if (param.indexOf('rounded') >= 0) classes += ' is-rounded';
@@ -69843,7 +70572,7 @@ var SingleSelect = /*#__PURE__*/function (_Component) {
   }, {
     key: "uiSwitch",
     value: function uiSwitch(param) {
-      var classes = ''; //radius
+      var classes = ''; //corners
 
       if (param.indexOf('pill') >= 0) classes += ' is-pill';
       if (param.indexOf('rounded') >= 0) classes += ' is-rounded';
@@ -70174,10 +70903,10 @@ var Date_Date = /*#__PURE__*/function (_Component) {
   }, {
     key: "uiSwitch",
     value: function uiSwitch(param) {
-      var classes = ''; //radius
+      var classes = ''; //corners
 
       if (param.indexOf('pill') >= 0) classes += ' is-pill';
-      if (param.indexOf('rounded') >= 0) classes += ' is-rounded'; //sizes
+      if (param.indexOf('rounded') >= 0) classes += ' is-rounded'; //size
 
       if (param.indexOf('fullwidth') >= 0) classes += ' is-fullwidth';
       if (param.indexOf('small') >= 0) classes += ' uix-controls__short-s';
@@ -70211,7 +70940,7 @@ var Date_Date = /*#__PURE__*/function (_Component) {
       var pattern = typeof time === 'undefined' ? '\\d{4}-\\d{2}-\\d{2}' : '[0-9]{4}-[0-9]{2}-[0-9]{2}T[0-9]{2}:[0-9]{2}';
       var today = typeof time === 'undefined' ? moment_default()().format('YYYY-MM-DD') : moment_default()().format('YYYY-MM-DDThh:mm');
       var defaultValue = value;
-      if (defaultNow == 'true') defaultValue = today;
+      if (defaultNow == 'true' || defaultNow === true) defaultValue = today;
       return /*#__PURE__*/react.createElement(react.Fragment, null, /*#__PURE__*/react.createElement("div", {
         className: "uix-controls uix-controls__date" + wrapperClassDisabled + wrapperClassUi + wrapperClassTheme
       }, /*#__PURE__*/react.createElement("input", extends_extends({
@@ -70752,7 +71481,7 @@ var MergeInput = /*#__PURE__*/function (_Component) {
       var classes = ''; //status
 
       if (param.indexOf('error') >= 0) classes += ' is-error';
-      if (param.indexOf('success') >= 0) classes += ' is-success'; //radius
+      if (param.indexOf('success') >= 0) classes += ' is-success'; //corners
 
       if (param.indexOf('pill') >= 0) classes += ' is-pill';
       if (param.indexOf('rounded') >= 0) classes += ' is-rounded';
@@ -70901,10 +71630,10 @@ var PasswordInput = /*#__PURE__*/function (_Component) {
       var classes = ''; //status
 
       if (param.indexOf('error') >= 0) classes += ' is-error';
-      if (param.indexOf('success') >= 0) classes += ' is-success'; //radius
+      if (param.indexOf('success') >= 0) classes += ' is-success'; //corners
 
       if (param.indexOf('pill') >= 0) classes += ' is-pill';
-      if (param.indexOf('rounded') >= 0) classes += ' is-rounded'; //sizes
+      if (param.indexOf('rounded') >= 0) classes += ' is-rounded'; //size
 
       if (param.indexOf('fullwidth') >= 0) classes += ' is-fullwidth';
       if (param.indexOf('small') >= 0) classes += ' uix-controls__short-s';
@@ -72023,7 +72752,116 @@ var PasswordInput = /*#__PURE__*/function (_Component) {
   }, /*#__PURE__*/react.createElement("div", null), /*#__PURE__*/react.createElement("div", null, /*#__PURE__*/react.createElement("button", {
     type: "submit",
     className: "uix-btn uix-btn__border--thin uix-btn__size--s uix-btn__bg--primary"
-  }, "Submit Your Info")))))))))));
+  }, "Submit Your Info")))))))))), /*#__PURE__*/react.createElement("section", null, /*#__PURE__*/react.createElement("div", {
+    className: "container"
+  }, /*#__PURE__*/react.createElement("div", {
+    className: "row"
+  }, /*#__PURE__*/react.createElement("div", {
+    className: "col-12"
+  }, /*#__PURE__*/react.createElement("h3", {
+    className: "app-header-title"
+  }, "API"), /*#__PURE__*/react.createElement("hr", null), /*#__PURE__*/react.createElement("article", {
+    className: "uix-spacing--s",
+    itemProp: "text"
+  }, /*#__PURE__*/react.createElement("h4", null, "Input"), /*#__PURE__*/react.createElement("div", null, /*#__PURE__*/react.createElement("pre", null, "import ", "{Input}", " from '@uixkit.react/components/Form/index.tsx';")), /*#__PURE__*/react.createElement("div", {
+    className: "table-responsive-md"
+  }, /*#__PURE__*/react.createElement("table", {
+    className: "table table-bordered table-striped"
+  }, /*#__PURE__*/react.createElement("thead", null, /*#__PURE__*/react.createElement("tr", null, /*#__PURE__*/react.createElement("th", null, "Property"), /*#__PURE__*/react.createElement("th", null, "Type"), /*#__PURE__*/react.createElement("th", null, "Default"), /*#__PURE__*/react.createElement("th", null, "Description"))), /*#__PURE__*/react.createElement("tbody", null, /*#__PURE__*/react.createElement("tr", null, /*#__PURE__*/react.createElement("td", null, /*#__PURE__*/react.createElement("code", null, "type")), /*#__PURE__*/react.createElement("td", null, "string"), /*#__PURE__*/react.createElement("td", null, "text"), /*#__PURE__*/react.createElement("td", null, "The type of input. Such as <input type=\"text\" name=\"name\"> gives a text box.")), /*#__PURE__*/react.createElement("tr", null, /*#__PURE__*/react.createElement("td", null, /*#__PURE__*/react.createElement("code", null, "theme")), /*#__PURE__*/react.createElement("td", null, "string | ", /*#__PURE__*/react.createElement("code", null, "line")), /*#__PURE__*/react.createElement("td", null, "-"), /*#__PURE__*/react.createElement("td", null, "The display style of the control")), /*#__PURE__*/react.createElement("tr", null, /*#__PURE__*/react.createElement("td", null, /*#__PURE__*/react.createElement("code", null, "ui")), /*#__PURE__*/react.createElement("td", null, "string"), /*#__PURE__*/react.createElement("td", null, "-"), /*#__PURE__*/react.createElement("td", null, "The overlay style of the control. Can be used at the same time, separated by spaces. The optional values are:", /*#__PURE__*/react.createElement("br", null), /*#__PURE__*/react.createElement("strong", null, "status:"), /*#__PURE__*/react.createElement("br", null), /*#__PURE__*/react.createElement("code", null, "error"), ", ", /*#__PURE__*/react.createElement("code", null, "success"), /*#__PURE__*/react.createElement("br", null), /*#__PURE__*/react.createElement("strong", null, "corners:"), /*#__PURE__*/react.createElement("br", null), /*#__PURE__*/react.createElement("code", null, "pill"), ", ", /*#__PURE__*/react.createElement("code", null, "rounded"), /*#__PURE__*/react.createElement("br", null), /*#__PURE__*/react.createElement("strong", null, "size:"), /*#__PURE__*/react.createElement("br", null), /*#__PURE__*/react.createElement("code", null, "fullwidth"), ", ", /*#__PURE__*/react.createElement("code", null, "small"), ", ", /*#__PURE__*/react.createElement("code", null, "medium"), ", ", /*#__PURE__*/react.createElement("code", null, "large"))), /*#__PURE__*/react.createElement("tr", null, /*#__PURE__*/react.createElement("td", null, /*#__PURE__*/react.createElement("code", null, "value")), /*#__PURE__*/react.createElement("td", null, "string"), /*#__PURE__*/react.createElement("td", null, "-"), /*#__PURE__*/react.createElement("td", null, "Set a default value for this control")), /*#__PURE__*/react.createElement("tr", null, /*#__PURE__*/react.createElement("td", null, /*#__PURE__*/react.createElement("code", null, "label")), /*#__PURE__*/react.createElement("td", null, "string | ReactNode"), /*#__PURE__*/react.createElement("td", null, "-"), /*#__PURE__*/react.createElement("td", null, "It is used to specify a label for an element of a form.")), /*#__PURE__*/react.createElement("tr", null, /*#__PURE__*/react.createElement("td", null, /*#__PURE__*/react.createElement("code", null, "units")), /*#__PURE__*/react.createElement("td", null, "string"), /*#__PURE__*/react.createElement("td", null, "-"), /*#__PURE__*/react.createElement("td", null, "Specify a unit identification string. Such as ", /*#__PURE__*/react.createElement("code", null, "em"), ", ", /*#__PURE__*/react.createElement("code", null, "px"), ", and so on.")), /*#__PURE__*/react.createElement("tr", null, /*#__PURE__*/react.createElement("td", null, /*#__PURE__*/react.createElement("code", null, "name")), /*#__PURE__*/react.createElement("td", null, "string"), /*#__PURE__*/react.createElement("td", null, "-"), /*#__PURE__*/react.createElement("td", null, "Name is not deprecated when used with form fields.")), /*#__PURE__*/react.createElement("tr", null, /*#__PURE__*/react.createElement("td", null, /*#__PURE__*/react.createElement("code", null, "maxLength")), /*#__PURE__*/react.createElement("td", null, "number"), /*#__PURE__*/react.createElement("td", null, "-"), /*#__PURE__*/react.createElement("td", null, "Defines the maximum number of characters")), /*#__PURE__*/react.createElement("tr", null, /*#__PURE__*/react.createElement("td", null, /*#__PURE__*/react.createElement("code", null, "disabled")), /*#__PURE__*/react.createElement("td", null, "boolean"), /*#__PURE__*/react.createElement("td", null, "false"), /*#__PURE__*/react.createElement("td", null, "Whether the input is disabled")), /*#__PURE__*/react.createElement("tr", null, /*#__PURE__*/react.createElement("td", null, /*#__PURE__*/react.createElement("code", null, "required")), /*#__PURE__*/react.createElement("td", null, "boolean"), /*#__PURE__*/react.createElement("td", null, "false"), /*#__PURE__*/react.createElement("td", null, "When present, it specifies that a field must be filled out before submitting the form.")), /*#__PURE__*/react.createElement("tr", null, /*#__PURE__*/react.createElement("td", null, /*#__PURE__*/react.createElement("code", null, "iconLeft")), /*#__PURE__*/react.createElement("td", null, "ReactNode"), /*#__PURE__*/react.createElement("td", null, "-"), /*#__PURE__*/react.createElement("td", null, "Set the left icon of this control")), /*#__PURE__*/react.createElement("tr", null, /*#__PURE__*/react.createElement("td", null, /*#__PURE__*/react.createElement("code", null, "iconRight")), /*#__PURE__*/react.createElement("td", null, "ReactNode"), /*#__PURE__*/react.createElement("td", null, "-"), /*#__PURE__*/react.createElement("td", null, "Set the right icon of this control"))))), /*#__PURE__*/react.createElement("p", {
+    className: "mb-5"
+  }, "It accepts all props which this control support."), /*#__PURE__*/react.createElement("h4", null, "Password Input"), /*#__PURE__*/react.createElement("div", null, /*#__PURE__*/react.createElement("pre", null, "import ", "{PasswordInput}", " from '@uixkit.react/components/Form/index.tsx';")), /*#__PURE__*/react.createElement("div", {
+    className: "table-responsive-md"
+  }, /*#__PURE__*/react.createElement("table", {
+    className: "table table-bordered table-striped"
+  }, /*#__PURE__*/react.createElement("thead", null, /*#__PURE__*/react.createElement("tr", null, /*#__PURE__*/react.createElement("th", null, "Property"), /*#__PURE__*/react.createElement("th", null, "Type"), /*#__PURE__*/react.createElement("th", null, "Default"), /*#__PURE__*/react.createElement("th", null, "Description"))), /*#__PURE__*/react.createElement("tbody", null, /*#__PURE__*/react.createElement("tr", null, /*#__PURE__*/react.createElement("td", null, /*#__PURE__*/react.createElement("code", null, "theme")), /*#__PURE__*/react.createElement("td", null, "string | ", /*#__PURE__*/react.createElement("code", null, "line")), /*#__PURE__*/react.createElement("td", null, "-"), /*#__PURE__*/react.createElement("td", null, "The display style of the control")), /*#__PURE__*/react.createElement("tr", null, /*#__PURE__*/react.createElement("td", null, /*#__PURE__*/react.createElement("code", null, "ui")), /*#__PURE__*/react.createElement("td", null, "string"), /*#__PURE__*/react.createElement("td", null, "-"), /*#__PURE__*/react.createElement("td", null, "The overlay style of the control. Can be used at the same time, separated by spaces. The optional values are:", /*#__PURE__*/react.createElement("br", null), /*#__PURE__*/react.createElement("strong", null, "status:"), /*#__PURE__*/react.createElement("br", null), /*#__PURE__*/react.createElement("code", null, "error"), ", ", /*#__PURE__*/react.createElement("code", null, "success"), /*#__PURE__*/react.createElement("br", null), /*#__PURE__*/react.createElement("strong", null, "corners:"), /*#__PURE__*/react.createElement("br", null), /*#__PURE__*/react.createElement("code", null, "pill"), ", ", /*#__PURE__*/react.createElement("code", null, "rounded"), /*#__PURE__*/react.createElement("br", null), /*#__PURE__*/react.createElement("strong", null, "size:"), /*#__PURE__*/react.createElement("br", null), /*#__PURE__*/react.createElement("code", null, "fullwidth"), ", ", /*#__PURE__*/react.createElement("code", null, "small"), ", ", /*#__PURE__*/react.createElement("code", null, "medium"), ", ", /*#__PURE__*/react.createElement("code", null, "large"))), /*#__PURE__*/react.createElement("tr", null, /*#__PURE__*/react.createElement("td", null, /*#__PURE__*/react.createElement("code", null, "value")), /*#__PURE__*/react.createElement("td", null, "string"), /*#__PURE__*/react.createElement("td", null, "-"), /*#__PURE__*/react.createElement("td", null, "Set a default value for this control")), /*#__PURE__*/react.createElement("tr", null, /*#__PURE__*/react.createElement("td", null, /*#__PURE__*/react.createElement("code", null, "label")), /*#__PURE__*/react.createElement("td", null, "string | ReactNode"), /*#__PURE__*/react.createElement("td", null, "-"), /*#__PURE__*/react.createElement("td", null, "It is used to specify a label for an element of a form.")), /*#__PURE__*/react.createElement("tr", null, /*#__PURE__*/react.createElement("td", null, /*#__PURE__*/react.createElement("code", null, "units")), /*#__PURE__*/react.createElement("td", null, "string"), /*#__PURE__*/react.createElement("td", null, "-"), /*#__PURE__*/react.createElement("td", null, "Specify a unit identification string. Such as ", /*#__PURE__*/react.createElement("code", null, "em"), ", ", /*#__PURE__*/react.createElement("code", null, "px"), ", and so on.")), /*#__PURE__*/react.createElement("tr", null, /*#__PURE__*/react.createElement("td", null, /*#__PURE__*/react.createElement("code", null, "name")), /*#__PURE__*/react.createElement("td", null, "string"), /*#__PURE__*/react.createElement("td", null, "-"), /*#__PURE__*/react.createElement("td", null, "Name is not deprecated when used with form fields.")), /*#__PURE__*/react.createElement("tr", null, /*#__PURE__*/react.createElement("td", null, /*#__PURE__*/react.createElement("code", null, "maxLength")), /*#__PURE__*/react.createElement("td", null, "number"), /*#__PURE__*/react.createElement("td", null, "-"), /*#__PURE__*/react.createElement("td", null, "Defines the maximum number of characters")), /*#__PURE__*/react.createElement("tr", null, /*#__PURE__*/react.createElement("td", null, /*#__PURE__*/react.createElement("code", null, "disabled")), /*#__PURE__*/react.createElement("td", null, "boolean"), /*#__PURE__*/react.createElement("td", null, "false"), /*#__PURE__*/react.createElement("td", null, "Whether the input is disabled")), /*#__PURE__*/react.createElement("tr", null, /*#__PURE__*/react.createElement("td", null, /*#__PURE__*/react.createElement("code", null, "required")), /*#__PURE__*/react.createElement("td", null, "boolean"), /*#__PURE__*/react.createElement("td", null, "false"), /*#__PURE__*/react.createElement("td", null, "When present, it specifies that a field must be filled out before submitting the form.")), /*#__PURE__*/react.createElement("tr", null, /*#__PURE__*/react.createElement("td", null, /*#__PURE__*/react.createElement("code", null, "iconLeft")), /*#__PURE__*/react.createElement("td", null, "ReactNode"), /*#__PURE__*/react.createElement("td", null, "-"), /*#__PURE__*/react.createElement("td", null, "Set the left icon of this control")), /*#__PURE__*/react.createElement("tr", null, /*#__PURE__*/react.createElement("td", null, /*#__PURE__*/react.createElement("code", null, "iconRight")), /*#__PURE__*/react.createElement("td", null, "ReactNode"), /*#__PURE__*/react.createElement("td", null, "-"), /*#__PURE__*/react.createElement("td", null, "Set the right icon of this control"))))), /*#__PURE__*/react.createElement("p", {
+    className: "mb-5"
+  }, "It accepts all props which this control support."), /*#__PURE__*/react.createElement("h4", null, "Merge Input"), /*#__PURE__*/react.createElement("div", null, /*#__PURE__*/react.createElement("pre", null, "import ", "{MergeInput}", " from '@uixkit.react/components/Form/index.tsx';")), /*#__PURE__*/react.createElement("div", {
+    className: "table-responsive-md"
+  }, /*#__PURE__*/react.createElement("table", {
+    className: "table table-bordered table-striped"
+  }, /*#__PURE__*/react.createElement("thead", null, /*#__PURE__*/react.createElement("tr", null, /*#__PURE__*/react.createElement("th", null, "Property"), /*#__PURE__*/react.createElement("th", null, "Type"), /*#__PURE__*/react.createElement("th", null, "Default"), /*#__PURE__*/react.createElement("th", null, "Description"))), /*#__PURE__*/react.createElement("tbody", null, /*#__PURE__*/react.createElement("tr", null, /*#__PURE__*/react.createElement("td", null, /*#__PURE__*/react.createElement("code", null, "type")), /*#__PURE__*/react.createElement("td", null, "string"), /*#__PURE__*/react.createElement("td", null, "text"), /*#__PURE__*/react.createElement("td", null, "The type of input. Such as <input type=\"text\" name=\"name\"> gives a text box.")), /*#__PURE__*/react.createElement("tr", null, /*#__PURE__*/react.createElement("td", null, /*#__PURE__*/react.createElement("code", null, "btnType")), /*#__PURE__*/react.createElement("td", null, "string"), /*#__PURE__*/react.createElement("td", null, "button"), /*#__PURE__*/react.createElement("td", null, "The type attribute specifies the type of button. Such as ", /*#__PURE__*/react.createElement("code", null, "submit"), ", ", /*#__PURE__*/react.createElement("code", null, "reset"), " or ", /*#__PURE__*/react.createElement("code", null, "button"))), /*#__PURE__*/react.createElement("tr", null, /*#__PURE__*/react.createElement("td", null, /*#__PURE__*/react.createElement("code", null, "ui")), /*#__PURE__*/react.createElement("td", null, "string"), /*#__PURE__*/react.createElement("td", null, "-"), /*#__PURE__*/react.createElement("td", null, "The overlay style of the control. Can be used at the same time, separated by spaces. The optional values are:", /*#__PURE__*/react.createElement("br", null), /*#__PURE__*/react.createElement("strong", null, "status:"), /*#__PURE__*/react.createElement("br", null), /*#__PURE__*/react.createElement("code", null, "error"), ", ", /*#__PURE__*/react.createElement("code", null, "success"), /*#__PURE__*/react.createElement("br", null), /*#__PURE__*/react.createElement("strong", null, "corners:"), /*#__PURE__*/react.createElement("br", null), /*#__PURE__*/react.createElement("code", null, "pill"), ", ", /*#__PURE__*/react.createElement("code", null, "rounded"))), /*#__PURE__*/react.createElement("tr", null, /*#__PURE__*/react.createElement("td", null, /*#__PURE__*/react.createElement("code", null, "value")), /*#__PURE__*/react.createElement("td", null, "string"), /*#__PURE__*/react.createElement("td", null, "-"), /*#__PURE__*/react.createElement("td", null, "Set a default value for this control")), /*#__PURE__*/react.createElement("tr", null, /*#__PURE__*/react.createElement("td", null, /*#__PURE__*/react.createElement("code", null, "label")), /*#__PURE__*/react.createElement("td", null, "string | ReactNode"), /*#__PURE__*/react.createElement("td", null, "-"), /*#__PURE__*/react.createElement("td", null, "It is used to specify a label for an element of a form.")), /*#__PURE__*/react.createElement("tr", null, /*#__PURE__*/react.createElement("td", null, /*#__PURE__*/react.createElement("code", null, "name")), /*#__PURE__*/react.createElement("td", null, "string"), /*#__PURE__*/react.createElement("td", null, "-"), /*#__PURE__*/react.createElement("td", null, "Name is not deprecated when used with form fields.")), /*#__PURE__*/react.createElement("tr", null, /*#__PURE__*/react.createElement("td", null, /*#__PURE__*/react.createElement("code", null, "maxLength")), /*#__PURE__*/react.createElement("td", null, "number"), /*#__PURE__*/react.createElement("td", null, "-"), /*#__PURE__*/react.createElement("td", null, "Defines the maximum number of characters")), /*#__PURE__*/react.createElement("tr", null, /*#__PURE__*/react.createElement("td", null, /*#__PURE__*/react.createElement("code", null, "disabled")), /*#__PURE__*/react.createElement("td", null, "boolean"), /*#__PURE__*/react.createElement("td", null, "false"), /*#__PURE__*/react.createElement("td", null, "Whether the input is disabled")), /*#__PURE__*/react.createElement("tr", null, /*#__PURE__*/react.createElement("td", null, /*#__PURE__*/react.createElement("code", null, "required")), /*#__PURE__*/react.createElement("td", null, "boolean"), /*#__PURE__*/react.createElement("td", null, "false"), /*#__PURE__*/react.createElement("td", null, "When present, it specifies that a field must be filled out before submitting the form.")), /*#__PURE__*/react.createElement("tr", null, /*#__PURE__*/react.createElement("td", null, /*#__PURE__*/react.createElement("code", null, "icon")), /*#__PURE__*/react.createElement("td", null, "ReactNode"), /*#__PURE__*/react.createElement("td", null, "-"), /*#__PURE__*/react.createElement("td", null, "Set the icon of this control"))))), /*#__PURE__*/react.createElement("p", {
+    className: "mb-5"
+  }, "It accepts all props which this control support."), /*#__PURE__*/react.createElement("h4", null, "Textarea"), /*#__PURE__*/react.createElement("div", null, /*#__PURE__*/react.createElement("pre", null, "import ", "{Textarea}", " from '@uixkit.react/components/Form/index.tsx';")), /*#__PURE__*/react.createElement("div", {
+    className: "table-responsive-md"
+  }, /*#__PURE__*/react.createElement("table", {
+    className: "table table-bordered table-striped"
+  }, /*#__PURE__*/react.createElement("thead", null, /*#__PURE__*/react.createElement("tr", null, /*#__PURE__*/react.createElement("th", null, "Property"), /*#__PURE__*/react.createElement("th", null, "Type"), /*#__PURE__*/react.createElement("th", null, "Default"), /*#__PURE__*/react.createElement("th", null, "Description"))), /*#__PURE__*/react.createElement("tbody", null, /*#__PURE__*/react.createElement("tr", null, /*#__PURE__*/react.createElement("td", null, /*#__PURE__*/react.createElement("code", null, "theme")), /*#__PURE__*/react.createElement("td", null, "string | ", /*#__PURE__*/react.createElement("code", null, "line")), /*#__PURE__*/react.createElement("td", null, "-"), /*#__PURE__*/react.createElement("td", null, "The display style of the control")), /*#__PURE__*/react.createElement("tr", null, /*#__PURE__*/react.createElement("td", null, /*#__PURE__*/react.createElement("code", null, "ui")), /*#__PURE__*/react.createElement("td", null, "string"), /*#__PURE__*/react.createElement("td", null, "-"), /*#__PURE__*/react.createElement("td", null, "The overlay style of the control. Can be used at the same time, separated by spaces. The optional values are:", /*#__PURE__*/react.createElement("br", null), /*#__PURE__*/react.createElement("strong", null, "status:"), /*#__PURE__*/react.createElement("br", null), /*#__PURE__*/react.createElement("code", null, "error"), ", ", /*#__PURE__*/react.createElement("code", null, "success"), /*#__PURE__*/react.createElement("br", null), /*#__PURE__*/react.createElement("strong", null, "corners:"), /*#__PURE__*/react.createElement("br", null), /*#__PURE__*/react.createElement("code", null, "pill"), ", ", /*#__PURE__*/react.createElement("code", null, "rounded"), /*#__PURE__*/react.createElement("br", null), /*#__PURE__*/react.createElement("strong", null, "size:"), /*#__PURE__*/react.createElement("br", null), /*#__PURE__*/react.createElement("code", null, "fullwidth"))), /*#__PURE__*/react.createElement("tr", null, /*#__PURE__*/react.createElement("td", null, /*#__PURE__*/react.createElement("code", null, "value")), /*#__PURE__*/react.createElement("td", null, "string"), /*#__PURE__*/react.createElement("td", null, "-"), /*#__PURE__*/react.createElement("td", null, "Set a default value for this control")), /*#__PURE__*/react.createElement("tr", null, /*#__PURE__*/react.createElement("td", null, /*#__PURE__*/react.createElement("code", null, "label")), /*#__PURE__*/react.createElement("td", null, "string | ReactNode"), /*#__PURE__*/react.createElement("td", null, "-"), /*#__PURE__*/react.createElement("td", null, "It is used to specify a label for an element of a form.")), /*#__PURE__*/react.createElement("tr", null, /*#__PURE__*/react.createElement("td", null, /*#__PURE__*/react.createElement("code", null, "units")), /*#__PURE__*/react.createElement("td", null, "string"), /*#__PURE__*/react.createElement("td", null, "-"), /*#__PURE__*/react.createElement("td", null, "Specify a unit identification string. Such as ", /*#__PURE__*/react.createElement("code", null, "em"), ", ", /*#__PURE__*/react.createElement("code", null, "px"), ", and so on.")), /*#__PURE__*/react.createElement("tr", null, /*#__PURE__*/react.createElement("td", null, /*#__PURE__*/react.createElement("code", null, "name")), /*#__PURE__*/react.createElement("td", null, "string"), /*#__PURE__*/react.createElement("td", null, "-"), /*#__PURE__*/react.createElement("td", null, "Name is not deprecated when used with form fields.")), /*#__PURE__*/react.createElement("tr", null, /*#__PURE__*/react.createElement("td", null, /*#__PURE__*/react.createElement("code", null, "maxLength")), /*#__PURE__*/react.createElement("td", null, "number"), /*#__PURE__*/react.createElement("td", null, "-"), /*#__PURE__*/react.createElement("td", null, "Defines the maximum number of characters")), /*#__PURE__*/react.createElement("tr", null, /*#__PURE__*/react.createElement("td", null, /*#__PURE__*/react.createElement("code", null, "cols")), /*#__PURE__*/react.createElement("td", null, "number"), /*#__PURE__*/react.createElement("td", null, "-"), /*#__PURE__*/react.createElement("td", null, "The cols attribute specifies the visible width of a text area.")), /*#__PURE__*/react.createElement("tr", null, /*#__PURE__*/react.createElement("td", null, /*#__PURE__*/react.createElement("code", null, "rows")), /*#__PURE__*/react.createElement("td", null, "number"), /*#__PURE__*/react.createElement("td", null, "-"), /*#__PURE__*/react.createElement("td", null, "The rows attribute specifies the visible height of a text area, in lines.")), /*#__PURE__*/react.createElement("tr", null, /*#__PURE__*/react.createElement("td", null, /*#__PURE__*/react.createElement("code", null, "disabled")), /*#__PURE__*/react.createElement("td", null, "boolean"), /*#__PURE__*/react.createElement("td", null, "false"), /*#__PURE__*/react.createElement("td", null, "Whether the input is disabled")), /*#__PURE__*/react.createElement("tr", null, /*#__PURE__*/react.createElement("td", null, /*#__PURE__*/react.createElement("code", null, "required")), /*#__PURE__*/react.createElement("td", null, "boolean"), /*#__PURE__*/react.createElement("td", null, "false"), /*#__PURE__*/react.createElement("td", null, "When present, it specifies that a field must be filled out before submitting the form."))))), /*#__PURE__*/react.createElement("p", {
+    className: "mb-5"
+  }, "It accepts all props which this control support."), /*#__PURE__*/react.createElement("h4", null, "Select"), /*#__PURE__*/react.createElement("div", null, /*#__PURE__*/react.createElement("pre", null, "import ", "{Select}", " from '@uixkit.react/components/Form/index.tsx';")), /*#__PURE__*/react.createElement("div", {
+    className: "table-responsive-md"
+  }, /*#__PURE__*/react.createElement("table", {
+    className: "table table-bordered table-striped"
+  }, /*#__PURE__*/react.createElement("thead", null, /*#__PURE__*/react.createElement("tr", null, /*#__PURE__*/react.createElement("th", null, "Property"), /*#__PURE__*/react.createElement("th", null, "Type"), /*#__PURE__*/react.createElement("th", null, "Default"), /*#__PURE__*/react.createElement("th", null, "Description"))), /*#__PURE__*/react.createElement("tbody", null, /*#__PURE__*/react.createElement("tr", null, /*#__PURE__*/react.createElement("td", null, /*#__PURE__*/react.createElement("code", null, "options")), /*#__PURE__*/react.createElement("td", null, "JSON Object Literals"), /*#__PURE__*/react.createElement("td", null, "-"), /*#__PURE__*/react.createElement("td", null, "Set the default value using JSON string format for menu of options, like this: ", /*#__PURE__*/react.createElement("code", {
+    className: "text-wrap"
+  }, "{\"Option 1\":\"value-1\",\"Option 2\":\"value-2\",\"Option 3\":\"value-3\"}"))), /*#__PURE__*/react.createElement("tr", null, /*#__PURE__*/react.createElement("td", null, /*#__PURE__*/react.createElement("code", null, "theme")), /*#__PURE__*/react.createElement("td", null, "string | ", /*#__PURE__*/react.createElement("code", null, "line")), /*#__PURE__*/react.createElement("td", null, "-"), /*#__PURE__*/react.createElement("td", null, "The display style of the control")), /*#__PURE__*/react.createElement("tr", null, /*#__PURE__*/react.createElement("td", null, /*#__PURE__*/react.createElement("code", null, "ui")), /*#__PURE__*/react.createElement("td", null, "string"), /*#__PURE__*/react.createElement("td", null, "-"), /*#__PURE__*/react.createElement("td", null, "The overlay style of the control. Can be used at the same time, separated by spaces. The optional values are:", /*#__PURE__*/react.createElement("br", null), /*#__PURE__*/react.createElement("strong", null, "corners:"), /*#__PURE__*/react.createElement("br", null), /*#__PURE__*/react.createElement("code", null, "pill"), ", ", /*#__PURE__*/react.createElement("code", null, "rounded"), /*#__PURE__*/react.createElement("br", null), /*#__PURE__*/react.createElement("strong", null, "size:"), /*#__PURE__*/react.createElement("br", null), /*#__PURE__*/react.createElement("code", null, "fullwidth"))), /*#__PURE__*/react.createElement("tr", null, /*#__PURE__*/react.createElement("td", null, /*#__PURE__*/react.createElement("code", null, "value")), /*#__PURE__*/react.createElement("td", null, "string"), /*#__PURE__*/react.createElement("td", null, "-"), /*#__PURE__*/react.createElement("td", null, "Set a default value for this control")), /*#__PURE__*/react.createElement("tr", null, /*#__PURE__*/react.createElement("td", null, /*#__PURE__*/react.createElement("code", null, "label")), /*#__PURE__*/react.createElement("td", null, "string | ReactNode"), /*#__PURE__*/react.createElement("td", null, "-"), /*#__PURE__*/react.createElement("td", null, "It is used to specify a label for an element of a form.")), /*#__PURE__*/react.createElement("tr", null, /*#__PURE__*/react.createElement("td", null, /*#__PURE__*/react.createElement("code", null, "name")), /*#__PURE__*/react.createElement("td", null, "string"), /*#__PURE__*/react.createElement("td", null, "-"), /*#__PURE__*/react.createElement("td", null, "Name is not deprecated when used with form fields.")), /*#__PURE__*/react.createElement("tr", null, /*#__PURE__*/react.createElement("td", null, /*#__PURE__*/react.createElement("code", null, "disabled")), /*#__PURE__*/react.createElement("td", null, "boolean"), /*#__PURE__*/react.createElement("td", null, "false"), /*#__PURE__*/react.createElement("td", null, "Whether the input is disabled")), /*#__PURE__*/react.createElement("tr", null, /*#__PURE__*/react.createElement("td", null, /*#__PURE__*/react.createElement("code", null, "required")), /*#__PURE__*/react.createElement("td", null, "boolean"), /*#__PURE__*/react.createElement("td", null, "false"), /*#__PURE__*/react.createElement("td", null, "When present, it specifies that a field must be filled out before submitting the form."))))), /*#__PURE__*/react.createElement("p", {
+    className: "mb-5"
+  }, "It accepts all props which this control support."), /*#__PURE__*/react.createElement("h4", null, "Custom Select"), /*#__PURE__*/react.createElement("div", null, /*#__PURE__*/react.createElement("pre", null, "import ", "{CustomSelect}", " from '@uixkit.react/components/Form/index.tsx';")), /*#__PURE__*/react.createElement("div", {
+    className: "table-responsive-md"
+  }, /*#__PURE__*/react.createElement("table", {
+    className: "table table-bordered table-striped mb-5"
+  }, /*#__PURE__*/react.createElement("thead", null, /*#__PURE__*/react.createElement("tr", null, /*#__PURE__*/react.createElement("th", null, "Property"), /*#__PURE__*/react.createElement("th", null, "Type"), /*#__PURE__*/react.createElement("th", null, "Default"), /*#__PURE__*/react.createElement("th", null, "Description"))), /*#__PURE__*/react.createElement("tbody", null, /*#__PURE__*/react.createElement("tr", null, /*#__PURE__*/react.createElement("td", null, /*#__PURE__*/react.createElement("code", null, "options")), /*#__PURE__*/react.createElement("td", null, "JSON Object Literals"), /*#__PURE__*/react.createElement("td", null, "-"), /*#__PURE__*/react.createElement("td", null, "Set the default value using JSON string format for menu of options, like this: ", /*#__PURE__*/react.createElement("code", {
+    className: "text-wrap"
+  }, "{\"Option 1\":\"value-1\",\"Option 2\":\"value-2\",\"Option 3\":\"value-3\"}"))), /*#__PURE__*/react.createElement("tr", null, /*#__PURE__*/react.createElement("td", null, /*#__PURE__*/react.createElement("code", null, "position")), /*#__PURE__*/react.createElement("td", null, "string | ", /*#__PURE__*/react.createElement("code", null, "top")), /*#__PURE__*/react.createElement("td", null, "-"), /*#__PURE__*/react.createElement("td", null, "The position of the menu, the default is the bottom")), /*#__PURE__*/react.createElement("tr", null, /*#__PURE__*/react.createElement("td", null, /*#__PURE__*/react.createElement("code", null, "theme")), /*#__PURE__*/react.createElement("td", null, "string | ", /*#__PURE__*/react.createElement("code", null, "line")), /*#__PURE__*/react.createElement("td", null, "-"), /*#__PURE__*/react.createElement("td", null, "The display style of the control")), /*#__PURE__*/react.createElement("tr", null, /*#__PURE__*/react.createElement("td", null, /*#__PURE__*/react.createElement("code", null, "ui")), /*#__PURE__*/react.createElement("td", null, "string"), /*#__PURE__*/react.createElement("td", null, "-"), /*#__PURE__*/react.createElement("td", null, "The overlay style of the control. Can be used at the same time, separated by spaces. The optional values are:", /*#__PURE__*/react.createElement("br", null), /*#__PURE__*/react.createElement("strong", null, "corners:"), /*#__PURE__*/react.createElement("br", null), /*#__PURE__*/react.createElement("code", null, "pill"), ", ", /*#__PURE__*/react.createElement("code", null, "rounded"), /*#__PURE__*/react.createElement("br", null), /*#__PURE__*/react.createElement("strong", null, "size:"), /*#__PURE__*/react.createElement("br", null), /*#__PURE__*/react.createElement("code", null, "fullwidth"))), /*#__PURE__*/react.createElement("tr", null, /*#__PURE__*/react.createElement("td", null, /*#__PURE__*/react.createElement("code", null, "value")), /*#__PURE__*/react.createElement("td", null, "string"), /*#__PURE__*/react.createElement("td", null, "-"), /*#__PURE__*/react.createElement("td", null, "Set a default value for this control")), /*#__PURE__*/react.createElement("tr", null, /*#__PURE__*/react.createElement("td", null, /*#__PURE__*/react.createElement("code", null, "label")), /*#__PURE__*/react.createElement("td", null, "string | ReactNode"), /*#__PURE__*/react.createElement("td", null, "-"), /*#__PURE__*/react.createElement("td", null, "It is used to specify a label for an element of a form.")), /*#__PURE__*/react.createElement("tr", null, /*#__PURE__*/react.createElement("td", null, /*#__PURE__*/react.createElement("code", null, "name")), /*#__PURE__*/react.createElement("td", null, "string"), /*#__PURE__*/react.createElement("td", null, "-"), /*#__PURE__*/react.createElement("td", null, "Name is not deprecated when used with form fields.")), /*#__PURE__*/react.createElement("tr", null, /*#__PURE__*/react.createElement("td", null, /*#__PURE__*/react.createElement("code", null, "disabled")), /*#__PURE__*/react.createElement("td", null, "boolean"), /*#__PURE__*/react.createElement("td", null, "false"), /*#__PURE__*/react.createElement("td", null, "Whether the input is disabled")), /*#__PURE__*/react.createElement("tr", null, /*#__PURE__*/react.createElement("td", null, /*#__PURE__*/react.createElement("code", null, "required")), /*#__PURE__*/react.createElement("td", null, "boolean"), /*#__PURE__*/react.createElement("td", null, "false"), /*#__PURE__*/react.createElement("td", null, "When present, it specifies that a field must be filled out before submitting the form."))))), /*#__PURE__*/react.createElement("h4", null, "Checkbox"), /*#__PURE__*/react.createElement("div", null, /*#__PURE__*/react.createElement("pre", null, "import ", "{Checkbox}", " from '@uixkit.react/components/Form/index.tsx';")), /*#__PURE__*/react.createElement("div", {
+    className: "table-responsive-md"
+  }, /*#__PURE__*/react.createElement("table", {
+    className: "table table-bordered table-striped"
+  }, /*#__PURE__*/react.createElement("thead", null, /*#__PURE__*/react.createElement("tr", null, /*#__PURE__*/react.createElement("th", null, "Property"), /*#__PURE__*/react.createElement("th", null, "Type"), /*#__PURE__*/react.createElement("th", null, "Default"), /*#__PURE__*/react.createElement("th", null, "Description"))), /*#__PURE__*/react.createElement("tbody", null, /*#__PURE__*/react.createElement("tr", null, /*#__PURE__*/react.createElement("td", null, /*#__PURE__*/react.createElement("code", null, "value")), /*#__PURE__*/react.createElement("td", null, "string | boolean"), /*#__PURE__*/react.createElement("td", null, "-"), /*#__PURE__*/react.createElement("td", null, "Set a default value for this control. If the value is ", /*#__PURE__*/react.createElement("code", null, "true"), ", it is selected by default")), /*#__PURE__*/react.createElement("tr", null, /*#__PURE__*/react.createElement("td", null, /*#__PURE__*/react.createElement("code", null, "label")), /*#__PURE__*/react.createElement("td", null, "string | ReactNode"), /*#__PURE__*/react.createElement("td", null, "-"), /*#__PURE__*/react.createElement("td", null, "It is used to specify a label for an element of a form.")), /*#__PURE__*/react.createElement("tr", null, /*#__PURE__*/react.createElement("td", null, /*#__PURE__*/react.createElement("code", null, "name")), /*#__PURE__*/react.createElement("td", null, "string"), /*#__PURE__*/react.createElement("td", null, "-"), /*#__PURE__*/react.createElement("td", null, "Name is not deprecated when used with form fields.")), /*#__PURE__*/react.createElement("tr", null, /*#__PURE__*/react.createElement("td", null, /*#__PURE__*/react.createElement("code", null, "disabled")), /*#__PURE__*/react.createElement("td", null, "boolean"), /*#__PURE__*/react.createElement("td", null, "false"), /*#__PURE__*/react.createElement("td", null, "Whether the input is disabled")), /*#__PURE__*/react.createElement("tr", null, /*#__PURE__*/react.createElement("td", null, /*#__PURE__*/react.createElement("code", null, "required")), /*#__PURE__*/react.createElement("td", null, "boolean"), /*#__PURE__*/react.createElement("td", null, "false"), /*#__PURE__*/react.createElement("td", null, "When present, it specifies that a field must be filled out before submitting the form."))))), /*#__PURE__*/react.createElement("p", {
+    className: "mb-5"
+  }, "It accepts all props which this control support."), /*#__PURE__*/react.createElement("h4", null, "Radio"), /*#__PURE__*/react.createElement("div", null, /*#__PURE__*/react.createElement("pre", null, "import ", "{Radio}", " from '@uixkit.react/components/Form/index.tsx';")), /*#__PURE__*/react.createElement("div", {
+    className: "table-responsive-md"
+  }, /*#__PURE__*/react.createElement("table", {
+    className: "table table-bordered table-striped mb-5"
+  }, /*#__PURE__*/react.createElement("thead", null, /*#__PURE__*/react.createElement("tr", null, /*#__PURE__*/react.createElement("th", null, "Property"), /*#__PURE__*/react.createElement("th", null, "Type"), /*#__PURE__*/react.createElement("th", null, "Default"), /*#__PURE__*/react.createElement("th", null, "Description"))), /*#__PURE__*/react.createElement("tbody", null, /*#__PURE__*/react.createElement("tr", null, /*#__PURE__*/react.createElement("td", null, /*#__PURE__*/react.createElement("code", null, "options")), /*#__PURE__*/react.createElement("td", null, "JSON Object Literals"), /*#__PURE__*/react.createElement("td", null, "-"), /*#__PURE__*/react.createElement("td", null, "Set the default value using JSON string format for menu of options, like this: ", /*#__PURE__*/react.createElement("code", {
+    className: "text-wrap"
+  }, "{\"Option 1\":\"value-1\",\"Option 2\":\"value-2\",\"Option 3\":\"value-3\"}"))), /*#__PURE__*/react.createElement("tr", null, /*#__PURE__*/react.createElement("td", null, /*#__PURE__*/react.createElement("code", null, "value")), /*#__PURE__*/react.createElement("td", null, "string"), /*#__PURE__*/react.createElement("td", null, "-"), /*#__PURE__*/react.createElement("td", null, "Set a default value for this control")), /*#__PURE__*/react.createElement("tr", null, /*#__PURE__*/react.createElement("td", null, /*#__PURE__*/react.createElement("code", null, "name")), /*#__PURE__*/react.createElement("td", null, "string"), /*#__PURE__*/react.createElement("td", null, "-"), /*#__PURE__*/react.createElement("td", null, "Name is not deprecated when used with form fields.")), /*#__PURE__*/react.createElement("tr", null, /*#__PURE__*/react.createElement("td", null, /*#__PURE__*/react.createElement("code", null, "disabled")), /*#__PURE__*/react.createElement("td", null, "boolean"), /*#__PURE__*/react.createElement("td", null, "false"), /*#__PURE__*/react.createElement("td", null, "Whether the input is disabled")), /*#__PURE__*/react.createElement("tr", null, /*#__PURE__*/react.createElement("td", null, /*#__PURE__*/react.createElement("code", null, "required")), /*#__PURE__*/react.createElement("td", null, "boolean"), /*#__PURE__*/react.createElement("td", null, "false"), /*#__PURE__*/react.createElement("td", null, "When present, it specifies that a field must be filled out before submitting the form."))))), /*#__PURE__*/react.createElement("h4", null, "Multiple Select"), /*#__PURE__*/react.createElement("div", null, /*#__PURE__*/react.createElement("pre", null, "import ", "{MultiSelect}", " from '@uixkit.react/components/Form/index.tsx';")), /*#__PURE__*/react.createElement("div", {
+    className: "table-responsive-md"
+  }, /*#__PURE__*/react.createElement("table", {
+    className: "table table-bordered table-striped mb-5"
+  }, /*#__PURE__*/react.createElement("thead", null, /*#__PURE__*/react.createElement("tr", null, /*#__PURE__*/react.createElement("th", null, "Property"), /*#__PURE__*/react.createElement("th", null, "Type"), /*#__PURE__*/react.createElement("th", null, "Default"), /*#__PURE__*/react.createElement("th", null, "Description"))), /*#__PURE__*/react.createElement("tbody", null, /*#__PURE__*/react.createElement("tr", null, /*#__PURE__*/react.createElement("td", null, /*#__PURE__*/react.createElement("code", null, "options")), /*#__PURE__*/react.createElement("td", null, "JSON Object Literals"), /*#__PURE__*/react.createElement("td", null, "-"), /*#__PURE__*/react.createElement("td", null, "Set the default value using JSON string format for menu of options, like this: ", /*#__PURE__*/react.createElement("code", {
+    className: "text-wrap"
+  }, "{\"Option 1\":\"value-1\",\"Option 2\":\"value-2\",\"Option 3\":\"value-3\"}"))), /*#__PURE__*/react.createElement("tr", null, /*#__PURE__*/react.createElement("td", null, /*#__PURE__*/react.createElement("code", null, "theme")), /*#__PURE__*/react.createElement("td", null, "string | ", /*#__PURE__*/react.createElement("code", null, "line")), /*#__PURE__*/react.createElement("td", null, "-"), /*#__PURE__*/react.createElement("td", null, "The display style of the control")), /*#__PURE__*/react.createElement("tr", null, /*#__PURE__*/react.createElement("td", null, /*#__PURE__*/react.createElement("code", null, "value")), /*#__PURE__*/react.createElement("td", null, "string"), /*#__PURE__*/react.createElement("td", null, "-"), /*#__PURE__*/react.createElement("td", null, "Set a default value for this control")), /*#__PURE__*/react.createElement("tr", null, /*#__PURE__*/react.createElement("td", null, /*#__PURE__*/react.createElement("code", null, "name")), /*#__PURE__*/react.createElement("td", null, "string"), /*#__PURE__*/react.createElement("td", null, "-"), /*#__PURE__*/react.createElement("td", null, "Name is not deprecated when used with form fields.")), /*#__PURE__*/react.createElement("tr", null, /*#__PURE__*/react.createElement("td", null, /*#__PURE__*/react.createElement("code", null, "required")), /*#__PURE__*/react.createElement("td", null, "boolean"), /*#__PURE__*/react.createElement("td", null, "false"), /*#__PURE__*/react.createElement("td", null, "When present, it specifies that a field must be filled out before submitting the form."))))), /*#__PURE__*/react.createElement("h4", null, "Single Select"), /*#__PURE__*/react.createElement("div", null, /*#__PURE__*/react.createElement("pre", null, "import ", "{SingleSelect}", " from '@uixkit.react/components/Form/index.tsx';")), /*#__PURE__*/react.createElement("div", {
+    className: "table-responsive-md"
+  }, /*#__PURE__*/react.createElement("table", {
+    className: "table table-bordered table-striped mb-5"
+  }, /*#__PURE__*/react.createElement("thead", null, /*#__PURE__*/react.createElement("tr", null, /*#__PURE__*/react.createElement("th", null, "Property"), /*#__PURE__*/react.createElement("th", null, "Type"), /*#__PURE__*/react.createElement("th", null, "Default"), /*#__PURE__*/react.createElement("th", null, "Description"))), /*#__PURE__*/react.createElement("tbody", null, /*#__PURE__*/react.createElement("tr", null, /*#__PURE__*/react.createElement("td", null, /*#__PURE__*/react.createElement("code", null, "options")), /*#__PURE__*/react.createElement("td", null, "JSON Object Literals"), /*#__PURE__*/react.createElement("td", null, "-"), /*#__PURE__*/react.createElement("td", null, "Set the default value using JSON string format for menu of options, like this: ", /*#__PURE__*/react.createElement("code", {
+    className: "text-wrap"
+  }, "{\"Option 1\":\"value-1\",\"Option 2\":\"value-2\",\"Option 3\":\"value-3\"}"))), /*#__PURE__*/react.createElement("tr", null, /*#__PURE__*/react.createElement("td", null, /*#__PURE__*/react.createElement("code", null, "targetID")), /*#__PURE__*/react.createElement("td", null, "string"), /*#__PURE__*/react.createElement("td", null, "-"), /*#__PURE__*/react.createElement("td", null, "Specify multiple IDs that does not require the prefix ", /*#__PURE__*/react.createElement("code", null, "#"), ", use the item to control its display or not. Each ID is separated by a comma")), /*#__PURE__*/react.createElement("tr", null, /*#__PURE__*/react.createElement("td", null, /*#__PURE__*/react.createElement("code", null, "theme")), /*#__PURE__*/react.createElement("td", null, "string | ", /*#__PURE__*/react.createElement("code", null, "line")), /*#__PURE__*/react.createElement("td", null, "-"), /*#__PURE__*/react.createElement("td", null, "The display style of the control")), /*#__PURE__*/react.createElement("tr", null, /*#__PURE__*/react.createElement("td", null, /*#__PURE__*/react.createElement("code", null, "ui")), /*#__PURE__*/react.createElement("td", null, "string"), /*#__PURE__*/react.createElement("td", null, "-"), /*#__PURE__*/react.createElement("td", null, "The overlay style of the control. Can be used at the same time, separated by spaces. The optional values are:", /*#__PURE__*/react.createElement("br", null), /*#__PURE__*/react.createElement("strong", null, "corners:"), /*#__PURE__*/react.createElement("br", null), /*#__PURE__*/react.createElement("code", null, "pill"), ", ", /*#__PURE__*/react.createElement("code", null, "rounded"))), /*#__PURE__*/react.createElement("tr", null, /*#__PURE__*/react.createElement("td", null, /*#__PURE__*/react.createElement("code", null, "value")), /*#__PURE__*/react.createElement("td", null, "string"), /*#__PURE__*/react.createElement("td", null, "-"), /*#__PURE__*/react.createElement("td", null, "Set a default value for this control")), /*#__PURE__*/react.createElement("tr", null, /*#__PURE__*/react.createElement("td", null, /*#__PURE__*/react.createElement("code", null, "name")), /*#__PURE__*/react.createElement("td", null, "string"), /*#__PURE__*/react.createElement("td", null, "-"), /*#__PURE__*/react.createElement("td", null, "Name is not deprecated when used with form fields.")), /*#__PURE__*/react.createElement("tr", null, /*#__PURE__*/react.createElement("td", null, /*#__PURE__*/react.createElement("code", null, "required")), /*#__PURE__*/react.createElement("td", null, "boolean"), /*#__PURE__*/react.createElement("td", null, "false"), /*#__PURE__*/react.createElement("td", null, "When present, it specifies that a field must be filled out before submitting the form."))))), /*#__PURE__*/react.createElement("h4", null, "Date"), /*#__PURE__*/react.createElement("div", null, /*#__PURE__*/react.createElement("pre", null, "import ", "{Date}", " from '@uixkit.react/components/Form/index.tsx';")), /*#__PURE__*/react.createElement("div", {
+    className: "table-responsive-md"
+  }, /*#__PURE__*/react.createElement("table", {
+    className: "table table-bordered table-striped"
+  }, /*#__PURE__*/react.createElement("thead", null, /*#__PURE__*/react.createElement("tr", null, /*#__PURE__*/react.createElement("th", null, "Property"), /*#__PURE__*/react.createElement("th", null, "Type"), /*#__PURE__*/react.createElement("th", null, "Default"), /*#__PURE__*/react.createElement("th", null, "Description"))), /*#__PURE__*/react.createElement("tbody", null, /*#__PURE__*/react.createElement("tr", null, /*#__PURE__*/react.createElement("td", null, /*#__PURE__*/react.createElement("code", null, "defaultNow")), /*#__PURE__*/react.createElement("td", null, "boolean"), /*#__PURE__*/react.createElement("td", null, "false"), /*#__PURE__*/react.createElement("td", null, "If the value is ", /*#__PURE__*/react.createElement("code", null, "true"), ", the current date and time are used")), /*#__PURE__*/react.createElement("tr", null, /*#__PURE__*/react.createElement("td", null, /*#__PURE__*/react.createElement("code", null, "time")), /*#__PURE__*/react.createElement("td", null, /*#__PURE__*/react.createElement("code", null, "date"), " | ", /*#__PURE__*/react.createElement("code", null, "datetime-local")), /*#__PURE__*/react.createElement("td", null, "-"), /*#__PURE__*/react.createElement("td", null, "To create input fields that let the user enter a date, either with a textbox that validates the input or a special date picker interface.")), /*#__PURE__*/react.createElement("tr", null, /*#__PURE__*/react.createElement("td", null, /*#__PURE__*/react.createElement("code", null, "theme")), /*#__PURE__*/react.createElement("td", null, "string | ", /*#__PURE__*/react.createElement("code", null, "line")), /*#__PURE__*/react.createElement("td", null, "-"), /*#__PURE__*/react.createElement("td", null, "The display style of the control")), /*#__PURE__*/react.createElement("tr", null, /*#__PURE__*/react.createElement("td", null, /*#__PURE__*/react.createElement("code", null, "ui")), /*#__PURE__*/react.createElement("td", null, "string"), /*#__PURE__*/react.createElement("td", null, "-"), /*#__PURE__*/react.createElement("td", null, "The overlay style of the control. Can be used at the same time, separated by spaces. The optional values are:", /*#__PURE__*/react.createElement("br", null), /*#__PURE__*/react.createElement("strong", null, "corners:"), /*#__PURE__*/react.createElement("br", null), /*#__PURE__*/react.createElement("code", null, "pill"), ", ", /*#__PURE__*/react.createElement("code", null, "rounded"), /*#__PURE__*/react.createElement("br", null), /*#__PURE__*/react.createElement("strong", null, "size:"), /*#__PURE__*/react.createElement("br", null), /*#__PURE__*/react.createElement("code", null, "fullwidth"), ", ", /*#__PURE__*/react.createElement("code", null, "small"), ", ", /*#__PURE__*/react.createElement("code", null, "medium"), ", ", /*#__PURE__*/react.createElement("code", null, "large"))), /*#__PURE__*/react.createElement("tr", null, /*#__PURE__*/react.createElement("td", null, /*#__PURE__*/react.createElement("code", null, "value")), /*#__PURE__*/react.createElement("td", null, "string"), /*#__PURE__*/react.createElement("td", null, "-"), /*#__PURE__*/react.createElement("td", null, "Set a default value for this control")), /*#__PURE__*/react.createElement("tr", null, /*#__PURE__*/react.createElement("td", null, /*#__PURE__*/react.createElement("code", null, "label")), /*#__PURE__*/react.createElement("td", null, "string | ReactNode"), /*#__PURE__*/react.createElement("td", null, "-"), /*#__PURE__*/react.createElement("td", null, "It is used to specify a label for an element of a form.")), /*#__PURE__*/react.createElement("tr", null, /*#__PURE__*/react.createElement("td", null, /*#__PURE__*/react.createElement("code", null, "name")), /*#__PURE__*/react.createElement("td", null, "string"), /*#__PURE__*/react.createElement("td", null, "-"), /*#__PURE__*/react.createElement("td", null, "Name is not deprecated when used with form fields.")), /*#__PURE__*/react.createElement("tr", null, /*#__PURE__*/react.createElement("td", null, /*#__PURE__*/react.createElement("code", null, "disabled")), /*#__PURE__*/react.createElement("td", null, "boolean"), /*#__PURE__*/react.createElement("td", null, "false"), /*#__PURE__*/react.createElement("td", null, "Whether the input is disabled")), /*#__PURE__*/react.createElement("tr", null, /*#__PURE__*/react.createElement("td", null, /*#__PURE__*/react.createElement("code", null, "required")), /*#__PURE__*/react.createElement("td", null, "boolean"), /*#__PURE__*/react.createElement("td", null, "false"), /*#__PURE__*/react.createElement("td", null, "When present, it specifies that a field must be filled out before submitting the form."))))), /*#__PURE__*/react.createElement("p", {
+    className: "mb-5"
+  }, "It accepts all props which this control support."), /*#__PURE__*/react.createElement("h4", null, "Number"), /*#__PURE__*/react.createElement("div", null, /*#__PURE__*/react.createElement("pre", null, "import ", "{Number}", " from '@uixkit.react/components/Form/index.tsx';")), /*#__PURE__*/react.createElement("div", {
+    className: "table-responsive-md"
+  }, /*#__PURE__*/react.createElement("table", {
+    className: "table table-bordered table-striped"
+  }, /*#__PURE__*/react.createElement("thead", null, /*#__PURE__*/react.createElement("tr", null, /*#__PURE__*/react.createElement("th", null, "Property"), /*#__PURE__*/react.createElement("th", null, "Type"), /*#__PURE__*/react.createElement("th", null, "Default"), /*#__PURE__*/react.createElement("th", null, "Description"))), /*#__PURE__*/react.createElement("tbody", null, /*#__PURE__*/react.createElement("tr", null, /*#__PURE__*/react.createElement("td", null, /*#__PURE__*/react.createElement("code", null, "min")), /*#__PURE__*/react.createElement("td", null, "number"), /*#__PURE__*/react.createElement("td", null, "-"), /*#__PURE__*/react.createElement("td", null, "The minimum value to accept")), /*#__PURE__*/react.createElement("tr", null, /*#__PURE__*/react.createElement("td", null, /*#__PURE__*/react.createElement("code", null, "max")), /*#__PURE__*/react.createElement("td", null, "number"), /*#__PURE__*/react.createElement("td", null, "-"), /*#__PURE__*/react.createElement("td", null, "The maximum value to accept")), /*#__PURE__*/react.createElement("tr", null, /*#__PURE__*/react.createElement("td", null, /*#__PURE__*/react.createElement("code", null, "decimals")), /*#__PURE__*/react.createElement("td", null, "number"), /*#__PURE__*/react.createElement("td", null, "0"), /*#__PURE__*/react.createElement("td", null, "Formats a number using fixed-point notation.")), /*#__PURE__*/react.createElement("tr", null, /*#__PURE__*/react.createElement("td", null, /*#__PURE__*/react.createElement("code", null, "btnStepMinus")), /*#__PURE__*/react.createElement("td", null, "number"), /*#__PURE__*/react.createElement("td", null, "1"), /*#__PURE__*/react.createElement("td", null, "The minimum minus value after the button is triggered")), /*#__PURE__*/react.createElement("tr", null, /*#__PURE__*/react.createElement("td", null, /*#__PURE__*/react.createElement("code", null, "btnStepPlus")), /*#__PURE__*/react.createElement("td", null, "number"), /*#__PURE__*/react.createElement("td", null, "1"), /*#__PURE__*/react.createElement("td", null, "The amount of plus value after the button is triggered")), /*#__PURE__*/react.createElement("tr", null, /*#__PURE__*/react.createElement("td", null, /*#__PURE__*/react.createElement("code", null, "step")), /*#__PURE__*/react.createElement("td", null, "number"), /*#__PURE__*/react.createElement("td", null, "0.01"), /*#__PURE__*/react.createElement("td", null, "A stepping interval to use when using up and down arrows to adjust the value, as well as for validation")), /*#__PURE__*/react.createElement("tr", null, /*#__PURE__*/react.createElement("td", null, /*#__PURE__*/react.createElement("code", null, "theme")), /*#__PURE__*/react.createElement("td", null, "string | ", /*#__PURE__*/react.createElement("code", null, "line")), /*#__PURE__*/react.createElement("td", null, "-"), /*#__PURE__*/react.createElement("td", null, "The display style of the control")), /*#__PURE__*/react.createElement("tr", null, /*#__PURE__*/react.createElement("td", null, /*#__PURE__*/react.createElement("code", null, "value")), /*#__PURE__*/react.createElement("td", null, "string"), /*#__PURE__*/react.createElement("td", null, "-"), /*#__PURE__*/react.createElement("td", null, "Set a default value for this control")), /*#__PURE__*/react.createElement("tr", null, /*#__PURE__*/react.createElement("td", null, /*#__PURE__*/react.createElement("code", null, "name")), /*#__PURE__*/react.createElement("td", null, "string"), /*#__PURE__*/react.createElement("td", null, "-"), /*#__PURE__*/react.createElement("td", null, "Name is not deprecated when used with form fields.")), /*#__PURE__*/react.createElement("tr", null, /*#__PURE__*/react.createElement("td", null, /*#__PURE__*/react.createElement("code", null, "disabled")), /*#__PURE__*/react.createElement("td", null, "boolean"), /*#__PURE__*/react.createElement("td", null, "false"), /*#__PURE__*/react.createElement("td", null, "Whether the input is disabled")), /*#__PURE__*/react.createElement("tr", null, /*#__PURE__*/react.createElement("td", null, /*#__PURE__*/react.createElement("code", null, "required")), /*#__PURE__*/react.createElement("td", null, "boolean"), /*#__PURE__*/react.createElement("td", null, "false"), /*#__PURE__*/react.createElement("td", null, "When present, it specifies that a field must be filled out before submitting the form."))))), /*#__PURE__*/react.createElement("p", {
+    className: "mb-5"
+  }, "It accepts all props which this control support."), /*#__PURE__*/react.createElement("h4", null, "Switch"), /*#__PURE__*/react.createElement("div", null, /*#__PURE__*/react.createElement("pre", null, "import ", "{Switch}", " from '@uixkit.react/components/Form/index.tsx';")), /*#__PURE__*/react.createElement("div", {
+    className: "table-responsive-md"
+  }, /*#__PURE__*/react.createElement("table", {
+    className: "table table-bordered table-striped"
+  }, /*#__PURE__*/react.createElement("thead", null, /*#__PURE__*/react.createElement("tr", null, /*#__PURE__*/react.createElement("th", null, "Property"), /*#__PURE__*/react.createElement("th", null, "Type"), /*#__PURE__*/react.createElement("th", null, "Default"), /*#__PURE__*/react.createElement("th", null, "Description"))), /*#__PURE__*/react.createElement("tbody", null, /*#__PURE__*/react.createElement("tr", null, /*#__PURE__*/react.createElement("td", null, /*#__PURE__*/react.createElement("code", null, "targetID")), /*#__PURE__*/react.createElement("td", null, "string"), /*#__PURE__*/react.createElement("td", null, "-"), /*#__PURE__*/react.createElement("td", null, "Specify an ID that does not require the prefix ", /*#__PURE__*/react.createElement("code", null, "#"), ", use the switch to control its display or not")), /*#__PURE__*/react.createElement("tr", null, /*#__PURE__*/react.createElement("td", null, /*#__PURE__*/react.createElement("code", null, "ui")), /*#__PURE__*/react.createElement("td", null, "string"), /*#__PURE__*/react.createElement("td", null, "-"), /*#__PURE__*/react.createElement("td", null, "The overlay style of the control. Can be used at the same time, separated by spaces. The optional values are:", /*#__PURE__*/react.createElement("br", null), /*#__PURE__*/react.createElement("strong", null, "corners:"), /*#__PURE__*/react.createElement("br", null), /*#__PURE__*/react.createElement("code", null, "pill"), ", ", /*#__PURE__*/react.createElement("code", null, "rounded"))), /*#__PURE__*/react.createElement("tr", null, /*#__PURE__*/react.createElement("td", null, /*#__PURE__*/react.createElement("code", null, "textOff")), /*#__PURE__*/react.createElement("td", null, "string"), /*#__PURE__*/react.createElement("td", null, "off"), /*#__PURE__*/react.createElement("td", null, "The content to be shown when the state is unchecked")), /*#__PURE__*/react.createElement("tr", null, /*#__PURE__*/react.createElement("td", null, /*#__PURE__*/react.createElement("code", null, "textOn")), /*#__PURE__*/react.createElement("td", null, "string"), /*#__PURE__*/react.createElement("td", null, "on"), /*#__PURE__*/react.createElement("td", null, "The content to be shown when the state is checked")), /*#__PURE__*/react.createElement("tr", null, /*#__PURE__*/react.createElement("td", null, /*#__PURE__*/react.createElement("code", null, "value")), /*#__PURE__*/react.createElement("td", null, "string | boolean"), /*#__PURE__*/react.createElement("td", null, "-"), /*#__PURE__*/react.createElement("td", null, "Set a default value for this control. If the value is ", /*#__PURE__*/react.createElement("code", null, "true"), ", it is selected by default")), /*#__PURE__*/react.createElement("tr", null, /*#__PURE__*/react.createElement("td", null, /*#__PURE__*/react.createElement("code", null, "label")), /*#__PURE__*/react.createElement("td", null, "string | ReactNode"), /*#__PURE__*/react.createElement("td", null, "-"), /*#__PURE__*/react.createElement("td", null, "It is used to specify a label for an element of a form.")), /*#__PURE__*/react.createElement("tr", null, /*#__PURE__*/react.createElement("td", null, /*#__PURE__*/react.createElement("code", null, "name")), /*#__PURE__*/react.createElement("td", null, "string"), /*#__PURE__*/react.createElement("td", null, "-"), /*#__PURE__*/react.createElement("td", null, "Name is not deprecated when used with form fields.")), /*#__PURE__*/react.createElement("tr", null, /*#__PURE__*/react.createElement("td", null, /*#__PURE__*/react.createElement("code", null, "disabled")), /*#__PURE__*/react.createElement("td", null, "boolean"), /*#__PURE__*/react.createElement("td", null, "false"), /*#__PURE__*/react.createElement("td", null, "Whether the input is disabled")), /*#__PURE__*/react.createElement("tr", null, /*#__PURE__*/react.createElement("td", null, /*#__PURE__*/react.createElement("code", null, "required")), /*#__PURE__*/react.createElement("td", null, "boolean"), /*#__PURE__*/react.createElement("td", null, "false"), /*#__PURE__*/react.createElement("td", null, "When present, it specifies that a field must be filled out before submitting the form."))))), /*#__PURE__*/react.createElement("p", {
+    className: "mb-5"
+  }, "It accepts all props which this control support."), /*#__PURE__*/react.createElement("h4", null, "Dynamic Fields"), /*#__PURE__*/react.createElement("div", null, /*#__PURE__*/react.createElement("pre", null, "import ", "{DynamicFields}", " from '@uixkit.react/components/Form/index.tsx';")), /*#__PURE__*/react.createElement("div", {
+    className: "table-responsive-md"
+  }, /*#__PURE__*/react.createElement("table", {
+    className: "table table-bordered table-striped mb-5"
+  }, /*#__PURE__*/react.createElement("thead", null, /*#__PURE__*/react.createElement("tr", null, /*#__PURE__*/react.createElement("th", null, "Property"), /*#__PURE__*/react.createElement("th", null, "Type"), /*#__PURE__*/react.createElement("th", null, "Default"), /*#__PURE__*/react.createElement("th", null, "Description"))), /*#__PURE__*/react.createElement("tbody", null, /*#__PURE__*/react.createElement("tr", null, /*#__PURE__*/react.createElement("td", null, /*#__PURE__*/react.createElement("code", null, "value")), /*#__PURE__*/react.createElement("td", null, "string"), /*#__PURE__*/react.createElement("td", null, "-"), /*#__PURE__*/react.createElement("td", null, "Set a default value for this control")), /*#__PURE__*/react.createElement("tr", null, /*#__PURE__*/react.createElement("td", null, /*#__PURE__*/react.createElement("code", null, "removeLabel")), /*#__PURE__*/react.createElement("td", null, "string"), /*#__PURE__*/react.createElement("td", null, "-"), /*#__PURE__*/react.createElement("td", null, "The label of the button to delete current item, if it is not set, only the X icon will be included")), /*#__PURE__*/react.createElement("tr", null, /*#__PURE__*/react.createElement("td", null, /*#__PURE__*/react.createElement("code", null, "addLabel")), /*#__PURE__*/react.createElement("td", null, "string"), /*#__PURE__*/react.createElement("td", null, "Add new"), /*#__PURE__*/react.createElement("td", null, "The label of the button to add a new item")), /*#__PURE__*/react.createElement("tr", null, /*#__PURE__*/react.createElement("td", null, /*#__PURE__*/react.createElement("code", null, "tempHtmlString")), /*#__PURE__*/react.createElement("td", null, "string | ReactNode"), /*#__PURE__*/react.createElement("td", null, "-"), /*#__PURE__*/react.createElement("td", null, "Control group are dynamically added after the button is triggered. Like this: ", /*#__PURE__*/react.createElement("br", null), /*#__PURE__*/react.createElement("code", {
+    className: "text-wrap"
+  }, "<><Input placeholder=\"Title\" name=\"your-title[]\" /> <Input ui=\"medium\" placeholder=\"URL\" name=\"your-url[]\" /></>"))), /*#__PURE__*/react.createElement("tr", null, /*#__PURE__*/react.createElement("td", null, /*#__PURE__*/react.createElement("code", null, "maxFields")), /*#__PURE__*/react.createElement("td", null, "number"), /*#__PURE__*/react.createElement("td", null, "10"), /*#__PURE__*/react.createElement("td", null, "Maximum number of control group allowed to be added"))))), /*#__PURE__*/react.createElement("h4", null, "File"), /*#__PURE__*/react.createElement("div", null, /*#__PURE__*/react.createElement("pre", null, "import ", "{File}", " from '@uixkit.react/components/Form/index.tsx';")), /*#__PURE__*/react.createElement("div", {
+    className: "table-responsive-md"
+  }, /*#__PURE__*/react.createElement("table", {
+    className: "table table-bordered table-striped"
+  }, /*#__PURE__*/react.createElement("thead", null, /*#__PURE__*/react.createElement("tr", null, /*#__PURE__*/react.createElement("th", null, "Property"), /*#__PURE__*/react.createElement("th", null, "Type"), /*#__PURE__*/react.createElement("th", null, "Default"), /*#__PURE__*/react.createElement("th", null, "Description"))), /*#__PURE__*/react.createElement("tbody", null, /*#__PURE__*/react.createElement("tr", null, /*#__PURE__*/react.createElement("td", null, /*#__PURE__*/react.createElement("code", null, "value")), /*#__PURE__*/react.createElement("td", null, "string"), /*#__PURE__*/react.createElement("td", null, "-"), /*#__PURE__*/react.createElement("td", null, "Set a default value for this control")), /*#__PURE__*/react.createElement("tr", null, /*#__PURE__*/react.createElement("td", null, /*#__PURE__*/react.createElement("code", null, "label")), /*#__PURE__*/react.createElement("td", null, "string | ReactNode"), /*#__PURE__*/react.createElement("td", null, "-"), /*#__PURE__*/react.createElement("td", null, "It is used to specify a label for an element of a form.")), /*#__PURE__*/react.createElement("tr", null, /*#__PURE__*/react.createElement("td", null, /*#__PURE__*/react.createElement("code", null, "name")), /*#__PURE__*/react.createElement("td", null, "string"), /*#__PURE__*/react.createElement("td", null, "-"), /*#__PURE__*/react.createElement("td", null, "Name is not deprecated when used with form fields.")), /*#__PURE__*/react.createElement("tr", null, /*#__PURE__*/react.createElement("td", null, /*#__PURE__*/react.createElement("code", null, "required")), /*#__PURE__*/react.createElement("td", null, "boolean"), /*#__PURE__*/react.createElement("td", null, "false"), /*#__PURE__*/react.createElement("td", null, "When present, it specifies that a field must be filled out before submitting the form."))))), /*#__PURE__*/react.createElement("p", {
+    className: "mb-5"
+  }, "It accepts all props which this control support."), /*#__PURE__*/react.createElement("h4", null, "File Field"), /*#__PURE__*/react.createElement("div", null, /*#__PURE__*/react.createElement("pre", null, "import ", "{FileField}", " from '@uixkit.react/components/Form/index.tsx';")), /*#__PURE__*/react.createElement("div", {
+    className: "table-responsive-md"
+  }, /*#__PURE__*/react.createElement("table", {
+    className: "table table-bordered table-striped"
+  }, /*#__PURE__*/react.createElement("thead", null, /*#__PURE__*/react.createElement("tr", null, /*#__PURE__*/react.createElement("th", null, "Property"), /*#__PURE__*/react.createElement("th", null, "Type"), /*#__PURE__*/react.createElement("th", null, "Default"), /*#__PURE__*/react.createElement("th", null, "Description"))), /*#__PURE__*/react.createElement("tbody", null, /*#__PURE__*/react.createElement("tr", null, /*#__PURE__*/react.createElement("td", null, /*#__PURE__*/react.createElement("code", null, "value")), /*#__PURE__*/react.createElement("td", null, "string"), /*#__PURE__*/react.createElement("td", null, "-"), /*#__PURE__*/react.createElement("td", null, "Set a default value for this control")), /*#__PURE__*/react.createElement("tr", null, /*#__PURE__*/react.createElement("td", null, /*#__PURE__*/react.createElement("code", null, "label")), /*#__PURE__*/react.createElement("td", null, "string | ReactNode"), /*#__PURE__*/react.createElement("td", null, "-"), /*#__PURE__*/react.createElement("td", null, "It is used to specify a label for an element of a form.")), /*#__PURE__*/react.createElement("tr", null, /*#__PURE__*/react.createElement("td", null, /*#__PURE__*/react.createElement("code", null, "name")), /*#__PURE__*/react.createElement("td", null, "string"), /*#__PURE__*/react.createElement("td", null, "-"), /*#__PURE__*/react.createElement("td", null, "Name is not deprecated when used with form fields.")), /*#__PURE__*/react.createElement("tr", null, /*#__PURE__*/react.createElement("td", null, /*#__PURE__*/react.createElement("code", null, "required")), /*#__PURE__*/react.createElement("td", null, "boolean"), /*#__PURE__*/react.createElement("td", null, "false"), /*#__PURE__*/react.createElement("td", null, "When present, it specifies that a field must be filled out before submitting the form."))))), /*#__PURE__*/react.createElement("p", {
+    className: "mb-5"
+  }, "It accepts all props which this control support.")))))));
 });
 ;// CONCATENATED MODULE: ./src/client/components/ScrollReveal/index.tsx
 
@@ -72307,9 +73145,17 @@ var ScrollReveal = /*#__PURE__*/function (_Component) {
   }), /*#__PURE__*/react.createElement("path", {
     fill: "#d2d2d2",
     d: "M227.49,192.276c0,4.745,2.783,9.109,7.095,11.123l39.455,18.329l-39.455,18.33c-4.31,2.004-7.095,6.368-7.095,11.118v0.322c0,4.205,2.117,8.068,5.668,10.336c1.974,1.258,4.254,1.924,6.595,1.924c1.793,0,3.528-0.383,5.17-1.142l63.08-29.335c4.307-2.009,7.09-6.372,7.09-11.115v-0.877c0-4.748-2.783-9.113-7.094-11.117l-63.08-29.333c-1.591-0.74-3.373-1.131-5.152-1.131c-2.355,0-4.643,0.661-6.604,1.912c-3.551,2.263-5.67,6.127-5.67,10.337v0.318H227.49L227.49,192.276z"
-  }))))), "Docs on GitHub"))))))), /*#__PURE__*/react.createElement("div", {
-    className: "uix-spacing--s uix-spacing--no-bottom"
-  }), /*#__PURE__*/react.createElement(ScrollReveal, {
+  }))))), "Docs on GitHub"))))))), /*#__PURE__*/react.createElement("section", {
+    className: "uix-spacing--s"
+  }, /*#__PURE__*/react.createElement("div", {
+    className: "container"
+  }, /*#__PURE__*/react.createElement("div", {
+    className: "row"
+  }, /*#__PURE__*/react.createElement("div", {
+    className: "col-12"
+  }, /*#__PURE__*/react.createElement("h3", {
+    className: "app-header-title"
+  }, "Demos"), /*#__PURE__*/react.createElement("hr", null))))), /*#__PURE__*/react.createElement(ScrollReveal, {
     className: "uix-spacing--s uix-height--50 uix-el--transparent",
     config: "{\"viewport\":\"100%\",\"from\":{\"opacity\":0,\"x\":100},\"to\":{\"opacity\":1,\"x\":0},\"ease\":\"Power2.easeOut\",\"duration\":0.8,\"delay\":0,\"infinite\":false}",
     style: {
@@ -72357,7 +73203,40 @@ var ScrollReveal = /*#__PURE__*/function (_Component) {
     }
   }, /*#__PURE__*/react.createElement("div", {
     className: "uix-v-align--relative uix-t-c"
-  }, /*#__PURE__*/react.createElement("h3", null, "Scale effect"))));
+  }, /*#__PURE__*/react.createElement("h3", null, "Scale effect"))), /*#__PURE__*/react.createElement("section", {
+    className: "uix-spacing--s uix-spacing--no-bottom"
+  }, /*#__PURE__*/react.createElement("div", {
+    className: "container"
+  }, /*#__PURE__*/react.createElement("div", {
+    className: "row"
+  }, /*#__PURE__*/react.createElement("div", {
+    className: "col-12"
+  }, /*#__PURE__*/react.createElement("h3", {
+    className: "app-header-title"
+  }, "API"), /*#__PURE__*/react.createElement("hr", null), /*#__PURE__*/react.createElement("article", {
+    className: "uix-spacing--s",
+    itemProp: "text"
+  }, /*#__PURE__*/react.createElement("h4", null, "Scroll Reveal"), /*#__PURE__*/react.createElement("div", null, /*#__PURE__*/react.createElement("pre", null, "import ScrollReveal from '@uixkit.react/components/ScrollReveal/index.tsx';")), /*#__PURE__*/react.createElement("div", {
+    className: "table-responsive-md"
+  }, /*#__PURE__*/react.createElement("table", {
+    className: "table table-bordered table-striped"
+  }, /*#__PURE__*/react.createElement("thead", null, /*#__PURE__*/react.createElement("tr", null, /*#__PURE__*/react.createElement("th", null, "Property"), /*#__PURE__*/react.createElement("th", null, "Type"), /*#__PURE__*/react.createElement("th", null, "Default"), /*#__PURE__*/react.createElement("th", null, "Description"))), /*#__PURE__*/react.createElement("tbody", null, /*#__PURE__*/react.createElement("tr", null, /*#__PURE__*/react.createElement("td", null, /*#__PURE__*/react.createElement("code", null, "config")), /*#__PURE__*/react.createElement("td", null, "JSON Object Literals"), /*#__PURE__*/react.createElement("td", null, "-"), /*#__PURE__*/react.createElement("td", null, "Detailed animation parameters, using JSON string format.", /*#__PURE__*/react.createElement("br", null), /*#__PURE__*/react.createElement("strong", null, "default value:"), /*#__PURE__*/react.createElement("br", null), /*#__PURE__*/react.createElement("code", {
+    className: "text-wrap"
+  }, "{\"from\": {\"opacity\":0,\"x\":70},\"to\":{\"opacity\":1,\"x\":0},\"ease\":\"Power2.easeOut\",\"duration\": 0.4,\"delay\": 0,\"infinite\" : false,\"viewport\" : '100%'}"), /*#__PURE__*/react.createElement("br", null), /*#__PURE__*/react.createElement("strong", null, "other:"), /*#__PURE__*/react.createElement("br", null), /*#__PURE__*/react.createElement("code", {
+    className: "text-wrap"
+  }, "{\"viewport\":\"100%\",\"from\":{\"opacity\":0,\"x\":100},\"to\":{\"opacity\":1,\"x\":0},\"ease\":\"Power2.easeOut\",\"duration\":0.8,\"delay\":0,\"infinite\":false}"), /*#__PURE__*/react.createElement("br", null), /*#__PURE__*/react.createElement("code", {
+    className: "text-wrap"
+  }, "{\"viewport\":\"100%\",\"from\":\"\",\"to\":\".demo-sr-active\",\"infinite\":true}")))))), /*#__PURE__*/react.createElement("p", {
+    className: "mb-5"
+  }, "It accepts all props(include data-* attributes) which native div support."), /*#__PURE__*/react.createElement("p", null, "JSON configuration properties of the ", /*#__PURE__*/react.createElement("code", null, "config"), ":"), /*#__PURE__*/react.createElement("div", {
+    className: "table-responsive-md"
+  }, /*#__PURE__*/react.createElement("table", {
+    className: "table table-bordered table-striped mb-5"
+  }, /*#__PURE__*/react.createElement("thead", null, /*#__PURE__*/react.createElement("tr", null, /*#__PURE__*/react.createElement("th", null, "Property"), /*#__PURE__*/react.createElement("th", null, "Type"), /*#__PURE__*/react.createElement("th", null, "Default"), /*#__PURE__*/react.createElement("th", null, "Description"))), /*#__PURE__*/react.createElement("tbody", null, /*#__PURE__*/react.createElement("tr", null, /*#__PURE__*/react.createElement("td", null, /*#__PURE__*/react.createElement("code", null, "viewport")), /*#__PURE__*/react.createElement("td", null, "string"), /*#__PURE__*/react.createElement("td", null, "100%"), /*#__PURE__*/react.createElement("td", null, "This attribute expands/contracts the active boundaries of the viewport when calculating element visibility. The default value is ", /*#__PURE__*/react.createElement("code", null, "100%"), ".  ", /*#__PURE__*/react.createElement("code", null, "20%"), " means 20% of an element must be visible for its reveal to occur.")), /*#__PURE__*/react.createElement("tr", null, /*#__PURE__*/react.createElement("td", null, /*#__PURE__*/react.createElement("code", null, "from")), /*#__PURE__*/react.createElement("td", null, "JSON Object Literals"), /*#__PURE__*/react.createElement("td", null, "{\"opacity\":0,\"x\":70}"), /*#__PURE__*/react.createElement("td", null, "Starting config using JSON string format, will transition from these values. Follow the parameter style of GSAP 2+. Eg. ", /*#__PURE__*/react.createElement("code", {
+    className: "text-wrap"
+  }, "{\"opacity\":0,\"scale\":0.5,\"transform\":\"translateX(50px) rotate(30deg)\"}"))), /*#__PURE__*/react.createElement("tr", null, /*#__PURE__*/react.createElement("td", null, /*#__PURE__*/react.createElement("code", null, "to")), /*#__PURE__*/react.createElement("td", null, "JSON Object Literals | string"), /*#__PURE__*/react.createElement("td", null, "{\"opacity\":1,\"x\":0}"), /*#__PURE__*/react.createElement("td", null, "Ending config using JSON string format, will transition from these values. Follow the parameter style of GSAP 2+. Eg. ", /*#__PURE__*/react.createElement("code", {
+    className: "text-wrap"
+  }, "{\"opacity\":1,\"scale\":1,\"transform\":\"translateX(0) rotate(0deg)\"}"), " ", /*#__PURE__*/react.createElement("br", null), "Can be a pure string, this style will be enabled when the viewport is specified, for example ", /*#__PURE__*/react.createElement("code", null, ".demo-sr-active"))), /*#__PURE__*/react.createElement("tr", null, /*#__PURE__*/react.createElement("td", null, /*#__PURE__*/react.createElement("code", null, "ease")), /*#__PURE__*/react.createElement("td", null, "string"), /*#__PURE__*/react.createElement("td", null, "Power2.easeOut"), /*#__PURE__*/react.createElement("td", null, "Accepts any valid GSAP 2+ easing, e.g. ", /*#__PURE__*/react.createElement("code", null, "Power2.easeOut"), ", etc.")), /*#__PURE__*/react.createElement("tr", null, /*#__PURE__*/react.createElement("td", null, /*#__PURE__*/react.createElement("code", null, "duration")), /*#__PURE__*/react.createElement("td", null, "number"), /*#__PURE__*/react.createElement("td", null, "0.4"), /*#__PURE__*/react.createElement("td", null, "This attribute controls how long animations take to complete.")), /*#__PURE__*/react.createElement("tr", null, /*#__PURE__*/react.createElement("td", null, /*#__PURE__*/react.createElement("code", null, "delay")), /*#__PURE__*/react.createElement("td", null, "number"), /*#__PURE__*/react.createElement("td", null, "0"), /*#__PURE__*/react.createElement("td", null, "This attribute is the time before reveal animations begin.")), /*#__PURE__*/react.createElement("tr", null, /*#__PURE__*/react.createElement("td", null, /*#__PURE__*/react.createElement("code", null, "infinite")), /*#__PURE__*/react.createElement("td", null, "boolean"), /*#__PURE__*/react.createElement("td", null, "false"), /*#__PURE__*/react.createElement("td", null, "This attribute enables/disables elements returning to their initialized position when they leave the viewport. When true elements reveal each time they enter the viewport instead of once.")))))))))));
 });
 ;// CONCATENATED MODULE: ./src/client/components/Card/index.tsx
 
@@ -73467,7 +74346,26 @@ var Card = /*#__PURE__*/function (_Component) {
   }, "$34,245"), /*#__PURE__*/react.createElement("hr", null), /*#__PURE__*/react.createElement("i", {
     className: "fa fa-calendar",
     "aria-hidden": "true"
-  }), " Last 24 Hours"))))))));
+  }), " Last 24 Hours"))))))), /*#__PURE__*/react.createElement("section", null, /*#__PURE__*/react.createElement("div", {
+    className: "container"
+  }, /*#__PURE__*/react.createElement("div", {
+    className: "row"
+  }, /*#__PURE__*/react.createElement("div", {
+    className: "col-12"
+  }, /*#__PURE__*/react.createElement("h3", {
+    className: "app-header-title"
+  }, "API"), /*#__PURE__*/react.createElement("hr", null), /*#__PURE__*/react.createElement("article", {
+    className: "uix-spacing--s",
+    itemProp: "text"
+  }, /*#__PURE__*/react.createElement("h4", null, "Card"), /*#__PURE__*/react.createElement("div", null, /*#__PURE__*/react.createElement("pre", null, "import Card from '@uixkit.react/components/Card/index.tsx';")), /*#__PURE__*/react.createElement("div", {
+    className: "table-responsive-md"
+  }, /*#__PURE__*/react.createElement("table", {
+    className: "table table-bordered table-striped mb-5"
+  }, /*#__PURE__*/react.createElement("thead", null, /*#__PURE__*/react.createElement("tr", null, /*#__PURE__*/react.createElement("th", null, "Property"), /*#__PURE__*/react.createElement("th", null, "Type"), /*#__PURE__*/react.createElement("th", null, "Default"), /*#__PURE__*/react.createElement("th", null, "Description"))), /*#__PURE__*/react.createElement("tbody", null, /*#__PURE__*/react.createElement("tr", null, /*#__PURE__*/react.createElement("td", null, /*#__PURE__*/react.createElement("code", null, "type")), /*#__PURE__*/react.createElement("td", null, /*#__PURE__*/react.createElement("code", null, "thumb"), " | ", /*#__PURE__*/react.createElement("code", null, "gallery-v-img"), " | ", /*#__PURE__*/react.createElement("code", null, "gallery-v-custom"), " | ", /*#__PURE__*/react.createElement("code", null, "gallery-h-img"), " | ", /*#__PURE__*/react.createElement("code", null, "gallery-full-info"), " | ", /*#__PURE__*/react.createElement("code", null, "gallery-icon"), " | ", /*#__PURE__*/react.createElement("code", null, "gallery-icon-abreast"), " | ", /*#__PURE__*/react.createElement("code", null, "authorcard-line"), " | ", /*#__PURE__*/react.createElement("code", null, "authorcard-detail"), " | ", /*#__PURE__*/react.createElement("code", null, "authorcard-stats")), /*#__PURE__*/react.createElement("td", null, "-"), /*#__PURE__*/react.createElement("td", null, "Card display style")), /*#__PURE__*/react.createElement("tr", null, /*#__PURE__*/react.createElement("td", null, /*#__PURE__*/react.createElement("code", null, "btnIcon")), /*#__PURE__*/react.createElement("td", null, "ReactNode"), /*#__PURE__*/react.createElement("td", null, "-"), /*#__PURE__*/react.createElement("td", null, "Button Icon")), /*#__PURE__*/react.createElement("tr", null, /*#__PURE__*/react.createElement("td", null, /*#__PURE__*/react.createElement("code", null, "title")), /*#__PURE__*/react.createElement("td", null, "string"), /*#__PURE__*/react.createElement("td", null, "-"), /*#__PURE__*/react.createElement("td", null, "Title of card")), /*#__PURE__*/react.createElement("tr", null, /*#__PURE__*/react.createElement("td", null, /*#__PURE__*/react.createElement("code", null, "titleEllipsis")), /*#__PURE__*/react.createElement("td", null, "boolean"), /*#__PURE__*/react.createElement("td", null, "false"), /*#__PURE__*/react.createElement("td", null, "Omit overflowed title string")), /*#__PURE__*/react.createElement("tr", null, /*#__PURE__*/react.createElement("td", null, /*#__PURE__*/react.createElement("code", null, "subTitle")), /*#__PURE__*/react.createElement("td", null, "ReactNode | string"), /*#__PURE__*/react.createElement("td", null, "-"), /*#__PURE__*/react.createElement("td", null, "Hyperlink or subtitle of card")), /*#__PURE__*/react.createElement("tr", null, /*#__PURE__*/react.createElement("td", null, /*#__PURE__*/react.createElement("code", null, "bgConfig")), /*#__PURE__*/react.createElement("td", null, "JSON Object Literals"), /*#__PURE__*/react.createElement("td", null, "-"), /*#__PURE__*/react.createElement("td", null, "The attributes of the background image, use JSON string format. Such as:", /*#__PURE__*/react.createElement("br", null), /*#__PURE__*/react.createElement("code", {
+    className: "text-wrap"
+  }, "{\"src\":\"assets/images/demo.jpg\"}"), /*#__PURE__*/react.createElement("code", {
+    className: "text-wrap"
+  }, "{\"src\":\"assets/images/demo.jpg\",\"position\":\"center center\",\"size\":\"cover\",\"repeat\":\"no-repeat\",\"fill\":false}"))), /*#__PURE__*/react.createElement("tr", null, /*#__PURE__*/react.createElement("td", null, /*#__PURE__*/react.createElement("code", null, "contentRatio")), /*#__PURE__*/react.createElement("td", null, "number"), /*#__PURE__*/react.createElement("td", null, "-"), /*#__PURE__*/react.createElement("td", null, "The ratio of the content, used for horizontal gallery style. For ", /*#__PURE__*/react.createElement("code", null, "gallery-h-*"), ", ", /*#__PURE__*/react.createElement("code", null, "gallery-full-*"))), /*#__PURE__*/react.createElement("tr", null, /*#__PURE__*/react.createElement("td", null, /*#__PURE__*/react.createElement("code", null, "icon")), /*#__PURE__*/react.createElement("td", null, "ReactNode"), /*#__PURE__*/react.createElement("td", null, "-"), /*#__PURE__*/react.createElement("td", null, "Primary Icon. For ", /*#__PURE__*/react.createElement("code", null, "gallery-icon-*"))), /*#__PURE__*/react.createElement("tr", null, /*#__PURE__*/react.createElement("td", null, /*#__PURE__*/react.createElement("code", null, "overlayArea")), /*#__PURE__*/react.createElement("td", null, "ReactNode"), /*#__PURE__*/react.createElement("td", null, "-"), /*#__PURE__*/react.createElement("td", null, "Overlay the content on the card background. For ", /*#__PURE__*/react.createElement("code", null, "gallery-v-*"))), /*#__PURE__*/react.createElement("tr", null, /*#__PURE__*/react.createElement("td", null, /*#__PURE__*/react.createElement("code", null, "verticalCenter")), /*#__PURE__*/react.createElement("td", null, "boolean"), /*#__PURE__*/react.createElement("td", null, "false"), /*#__PURE__*/react.createElement("td", null, "Vertically center text. For ", /*#__PURE__*/react.createElement("code", null, "gallery-full-*"))), /*#__PURE__*/react.createElement("tr", null, /*#__PURE__*/react.createElement("td", null, /*#__PURE__*/react.createElement("code", null, "avatar")), /*#__PURE__*/react.createElement("td", null, "string"), /*#__PURE__*/react.createElement("td", null, "-"), /*#__PURE__*/react.createElement("td", null, "Avatar URL. For ", /*#__PURE__*/react.createElement("code", null, "thumb"), ", ", /*#__PURE__*/react.createElement("code", null, "authorcard-*"))), /*#__PURE__*/react.createElement("tr", null, /*#__PURE__*/react.createElement("td", null, /*#__PURE__*/react.createElement("code", null, "btnClickEvent")), /*#__PURE__*/react.createElement("td", null, "function"), /*#__PURE__*/react.createElement("td", null, "-"), /*#__PURE__*/react.createElement("td", null, "Handling events for button")), /*#__PURE__*/react.createElement("tr", null, /*#__PURE__*/react.createElement("td", null, /*#__PURE__*/react.createElement("code", null, "btnHyperlinkClickEvent")), /*#__PURE__*/react.createElement("td", null, "function"), /*#__PURE__*/react.createElement("td", null, "-"), /*#__PURE__*/react.createElement("td", null, "Handling events for anchor link")))))))))));
 });
 ;// CONCATENATED MODULE: ./src/client/components/Parallax/parallax.tsx
 
@@ -73880,8 +74778,16 @@ var Parallax_Parallax = /*#__PURE__*/function (_Component) {
     fill: "#d2d2d2",
     d: "M227.49,192.276c0,4.745,2.783,9.109,7.095,11.123l39.455,18.329l-39.455,18.33c-4.31,2.004-7.095,6.368-7.095,11.118v0.322c0,4.205,2.117,8.068,5.668,10.336c1.974,1.258,4.254,1.924,6.595,1.924c1.793,0,3.528-0.383,5.17-1.142l63.08-29.335c4.307-2.009,7.09-6.372,7.09-11.115v-0.877c0-4.748-2.783-9.113-7.094-11.117l-63.08-29.333c-1.591-0.74-3.373-1.131-5.152-1.131c-2.355,0-4.643,0.661-6.604,1.912c-3.551,2.263-5.67,6.127-5.67,10.337v0.318H227.49L227.49,192.276z"
   }))))), "Docs on GitHub"))))))), /*#__PURE__*/react.createElement("section", {
-    className: "uix-spacing--s uix-spacing--no-bottom"
-  }, /*#__PURE__*/react.createElement(Parallax_Parallax, {
+    className: "uix-spacing--s"
+  }, /*#__PURE__*/react.createElement("div", {
+    className: "container"
+  }, /*#__PURE__*/react.createElement("div", {
+    className: "row"
+  }, /*#__PURE__*/react.createElement("div", {
+    className: "col-12"
+  }, /*#__PURE__*/react.createElement("h3", {
+    className: "app-header-title"
+  }, "Demos"), /*#__PURE__*/react.createElement("hr", null))))), /*#__PURE__*/react.createElement("section", null, /*#__PURE__*/react.createElement(Parallax_Parallax, {
     img: "".concat(websiteConfig.rootDirectory, "/assets/images/demo/spiral-galaxy-1920x1080.jpg"),
     heightClass: "uix-height--100",
     fullyVisible: false,
@@ -73991,7 +74897,1855 @@ var Parallax_Parallax = /*#__PURE__*/function (_Component) {
     }
   }, /*#__PURE__*/react.createElement("div", {
     className: "uix-v-align--absolute uix-t-c"
-  }, /*#__PURE__*/react.createElement("h2", null, "Element Parallax"), /*#__PURE__*/react.createElement("p", null, "Background without parallax"))))));
+  }, /*#__PURE__*/react.createElement("h2", null, "Element Parallax"), /*#__PURE__*/react.createElement("p", null, "Background without parallax"))))), /*#__PURE__*/react.createElement("section", {
+    className: "uix-spacing--s uix-spacing--no-bottom"
+  }, /*#__PURE__*/react.createElement("div", {
+    className: "container"
+  }, /*#__PURE__*/react.createElement("div", {
+    className: "row"
+  }, /*#__PURE__*/react.createElement("div", {
+    className: "col-12"
+  }, /*#__PURE__*/react.createElement("h3", {
+    className: "app-header-title"
+  }, "API"), /*#__PURE__*/react.createElement("hr", null), /*#__PURE__*/react.createElement("article", {
+    className: "uix-spacing--s",
+    itemProp: "text"
+  }, /*#__PURE__*/react.createElement("h4", null, "Parallax"), /*#__PURE__*/react.createElement("div", null, /*#__PURE__*/react.createElement("pre", null, "import Parallax from '@uixkit.react/components/Parallax/index.tsx';")), /*#__PURE__*/react.createElement("div", {
+    className: "table-responsive-md"
+  }, /*#__PURE__*/react.createElement("table", {
+    className: "table table-bordered table-striped mb-5"
+  }, /*#__PURE__*/react.createElement("thead", null, /*#__PURE__*/react.createElement("tr", null, /*#__PURE__*/react.createElement("th", null, "Property"), /*#__PURE__*/react.createElement("th", null, "Type"), /*#__PURE__*/react.createElement("th", null, "Default"), /*#__PURE__*/react.createElement("th", null, "Description"))), /*#__PURE__*/react.createElement("tbody", null, /*#__PURE__*/react.createElement("tr", null, /*#__PURE__*/react.createElement("td", null, /*#__PURE__*/react.createElement("code", null, "parallaxElements")), /*#__PURE__*/react.createElement("td", null, "boolean"), /*#__PURE__*/react.createElement("td", null, "false"), /*#__PURE__*/react.createElement("td", null, "Pure parallax scrolling effect without other embedded HTML elements")), /*#__PURE__*/react.createElement("tr", null, /*#__PURE__*/react.createElement("td", null, /*#__PURE__*/react.createElement("code", null, "parallaxElementsTransition")), /*#__PURE__*/react.createElement("td", null, "string"), /*#__PURE__*/react.createElement("td", null, "all 0.4s cubic-bezier(0, 0, 0.34, 0.96) 0s"), /*#__PURE__*/react.createElement("td", null, "Transition of parallax when ", /*#__PURE__*/react.createElement("code", null, "parallaxElements"), " is true")), /*#__PURE__*/react.createElement("tr", null, /*#__PURE__*/react.createElement("td", null, /*#__PURE__*/react.createElement("code", null, "img")), /*#__PURE__*/react.createElement("td", null, "string"), /*#__PURE__*/react.createElement("td", null, "-"), /*#__PURE__*/react.createElement("td", null, "Background image URL")), /*#__PURE__*/react.createElement("tr", null, /*#__PURE__*/react.createElement("td", null, /*#__PURE__*/react.createElement("code", null, "heightClass")), /*#__PURE__*/react.createElement("td", null, "string | ", /*#__PURE__*/react.createElement("code", null, "uix-height--100"), " | ", /*#__PURE__*/react.createElement("code", null, "uix-height--90"), " | ", /*#__PURE__*/react.createElement("code", null, "uix-height--80"), " | ", /*#__PURE__*/react.createElement("code", null, "uix-height--70"), " | ", /*#__PURE__*/react.createElement("code", null, "uix-height--60"), " | ", /*#__PURE__*/react.createElement("code", null, "uix-height--50"), " | ", /*#__PURE__*/react.createElement("code", null, "uix-height--40"), " | ", /*#__PURE__*/react.createElement("code", null, "uix-height--30"), " | ", /*#__PURE__*/react.createElement("code", null, "uix-height--20"), " | ", /*#__PURE__*/react.createElement("code", null, "uix-height--10")), /*#__PURE__*/react.createElement("td", null, "-"), /*#__PURE__*/react.createElement("td", null, "Class name of default height")), /*#__PURE__*/react.createElement("tr", null, /*#__PURE__*/react.createElement("td", null, /*#__PURE__*/react.createElement("code", null, "fullyVisible")), /*#__PURE__*/react.createElement("td", null, "boolean"), /*#__PURE__*/react.createElement("td", null, "false"), /*#__PURE__*/react.createElement("td", null, "Whether to display all pictures, including the edges")), /*#__PURE__*/react.createElement("tr", null, /*#__PURE__*/react.createElement("td", null, /*#__PURE__*/react.createElement("code", null, "offsetTop")), /*#__PURE__*/react.createElement("td", null, "number"), /*#__PURE__*/react.createElement("td", null, "0"), /*#__PURE__*/react.createElement("td", null, "Offset top of background")), /*#__PURE__*/react.createElement("tr", null, /*#__PURE__*/react.createElement("td", null, /*#__PURE__*/react.createElement("code", null, "overlay")), /*#__PURE__*/react.createElement("td", null, "boolean | string"), /*#__PURE__*/react.createElement("td", null, "false"), /*#__PURE__*/react.createElement("td", null, "Background overlay. You can set it to the color value, for example ", /*#__PURE__*/react.createElement("code", null, "rgba(0,0,0,.6)"))), /*#__PURE__*/react.createElement("tr", null, /*#__PURE__*/react.createElement("td", null, /*#__PURE__*/react.createElement("code", null, "skew")), /*#__PURE__*/react.createElement("td", null, "number"), /*#__PURE__*/react.createElement("td", null, "0"), /*#__PURE__*/react.createElement("td", null, "Skew of background")), /*#__PURE__*/react.createElement("tr", null, /*#__PURE__*/react.createElement("td", null, /*#__PURE__*/react.createElement("code", null, "speed")), /*#__PURE__*/react.createElement("td", null, "number"), /*#__PURE__*/react.createElement("td", null, "0"), /*#__PURE__*/react.createElement("td", null, "Speed of parallax animation")))))))))));
+});
+;// CONCATENATED MODULE: ./src/client/components/Grid/Grid.tsx
+
+
+
+
+
+
+function Grid_createSuper(Derived) { var hasNativeReflectConstruct = Grid_isNativeReflectConstruct(); return function _createSuperInternal() { var Super = _getPrototypeOf(Derived), result; if (hasNativeReflectConstruct) { var NewTarget = _getPrototypeOf(this).constructor; result = Reflect.construct(Super, arguments, NewTarget); } else { result = Super.apply(this, arguments); } return _possibleConstructorReturn(this, result); }; }
+
+function Grid_isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Reflect.construct) return false; if (Reflect.construct.sham) return false; if (typeof Proxy === "function") return true; try { Boolean.prototype.valueOf.call(Reflect.construct(Boolean, [], function () {})); return true; } catch (e) { return false; } }
+
+
+/*-- Apply Third-party plugins (import location should be in front of "global scripts and styles") --*/
+
+
+
+
+/*-- Apply global scripts and styles --*/
+
+
+
+
+var Grid = /*#__PURE__*/function (_Component) {
+  _inherits(Grid, _Component);
+
+  var _super = Grid_createSuper(Grid);
+
+  function Grid(props) {
+    _classCallCheck(this, Grid);
+
+    return _super.call(this, props);
+  }
+
+  _createClass(Grid, [{
+    key: "render",
+    value: function render() {
+      var _this$props = this.props,
+          noBreak = _this$props.noBreak,
+          noGutters = _this$props.noGutters,
+          equalWidth = _this$props.equalWidth,
+          loop = _this$props.loop,
+          id = _this$props.id,
+          children = _this$props.children;
+      return /*#__PURE__*/react.createElement(react.Fragment, null, /*#__PURE__*/react.createElement("div", {
+        className: "uix-core-grid",
+        id: id || 'app-grid-' + shortcut.GUID.create()
+      }, /*#__PURE__*/react.createElement("div", {
+        className: 'uix-core-grid__row' + (noBreak ? ' uix-core-grid__row--no-break' : '') + (loop ? ' uix-core-grid__row--loop' : '') + (equalWidth ? ' uix-core-grid__row--auto-width' : '') + (noGutters ? ' uix-core-grid__row--no-gutters' : '')
+      }, children)));
+    }
+  }]);
+
+  return Grid;
+}(react.Component);
+
+
+;// CONCATENATED MODULE: ./src/client/components/Grid/GridColumn.tsx
+
+
+
+
+
+
+function GridColumn_createSuper(Derived) { var hasNativeReflectConstruct = GridColumn_isNativeReflectConstruct(); return function _createSuperInternal() { var Super = _getPrototypeOf(Derived), result; if (hasNativeReflectConstruct) { var NewTarget = _getPrototypeOf(this).constructor; result = Reflect.construct(Super, arguments, NewTarget); } else { result = Super.apply(this, arguments); } return _possibleConstructorReturn(this, result); }; }
+
+function GridColumn_isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Reflect.construct) return false; if (Reflect.construct.sham) return false; if (typeof Proxy === "function") return true; try { Boolean.prototype.valueOf.call(Reflect.construct(Boolean, [], function () {})); return true; } catch (e) { return false; } }
+
+
+var gridColDivisions = ['1/1', '1/2', '1/3', '2/3', '1/4', '3/4', '1/5', '2/5', '3/5', '4/5', '1/6'];
+var gridWidths = [];
+gridColDivisions.forEach(function (item) {
+  var _fraction = item.split('/');
+
+  var _n1 = parseFloat(_fraction[0]);
+
+  var _n2 = parseFloat(_fraction[1]);
+
+  if (_n2 !== 5) {
+    switch (_n1) {
+      case 1:
+        gridWidths.push({
+          'ratio': item,
+          'class': "uix-core-grid__col-" + 12 / _n2
+        });
+        break;
+
+      case 2:
+      case 3:
+        gridWidths.push({
+          'ratio': item,
+          'class': "uix-core-grid__col-" + (12 - 12 / _n2)
+        });
+        break;
+    }
+  }
+});
+gridWidths.push({
+  'ratio': "1/5",
+  'class': "uix-core-grid__col-2"
+});
+gridWidths.push({
+  'ratio': "2/5",
+  'class': "uix-core-grid__col-5"
+});
+gridWidths.push({
+  'ratio': "3/5",
+  'class': "uix-core-grid__col-7"
+});
+gridWidths.push({
+  'ratio': "4/5",
+  'class': "uix-core-grid__col-10"
+});
+/*
+    {ratio: "1/1", class: "uix-core-grid__col-12"}
+    {ratio: "1/2", class: "uix-core-grid__col-6"}
+    {ratio: "1/3", class: "uix-core-grid__col-4"}
+    {ratio: "2/3", class: "uix-core-grid__col-8"}
+    {ratio: "1/4", class: "uix-core-grid__col-3"}
+    {ratio: "3/4", class: "uix-core-grid__col-9"}
+    {ratio: "1/6", class: "uix-core-grid__col-2"}
+    {ratio: "1/5", class: "uix-core-grid__col-2"}
+    {ratio: "2/5", class: "uix-core-grid__col-5"}
+    {ratio: "3/5", class: "uix-core-grid__col-7"}
+    {ratio: "4/5", class: "uix-core-grid__col-10"}
+*/
+
+var GridColumn = /*#__PURE__*/function (_Component) {
+  _inherits(GridColumn, _Component);
+
+  var _super = GridColumn_createSuper(GridColumn);
+
+  function GridColumn(props) {
+    _classCallCheck(this, GridColumn);
+
+    return _super.call(this, props);
+  }
+
+  _createClass(GridColumn, [{
+    key: "render",
+    value: function render() {
+      var _this$props = this.props,
+          ratio = _this$props.ratio,
+          stackRatio = _this$props.stackRatio,
+          stackSize = _this$props.stackSize,
+          inline = _this$props.inline,
+          children = _this$props.children;
+      var stackClassName = '';
+
+      for (var i = 0; i < gridWidths.length; i++) {
+        if (gridWidths[i].ratio === stackRatio) {
+          stackClassName = " ".concat(gridWidths[i]["class"], "--").concat(stackSize);
+          break;
+        }
+      } //
+
+
+      var inlineClassName = inline ? ' uix-core-grid__inline' : '';
+      return /*#__PURE__*/react.createElement(react.Fragment, null, !ratio ? /*#__PURE__*/react.createElement("div", {
+        className: "uix-core-grid__col"
+      }, children) : gridWidths.map(function (item, index) {
+        if (item.ratio === ratio) return /*#__PURE__*/react.createElement("div", {
+          key: index,
+          className: item["class"] + stackClassName + inlineClassName
+        }, children);
+      }));
+    }
+  }]);
+
+  return GridColumn;
+}(react.Component);
+
+
+;// CONCATENATED MODULE: ./src/client/components/Grid/index.tsx
+/* 
+ *************************************
+ * <!-- Grid -->
+ *************************************
+ */
+
+
+;// CONCATENATED MODULE: ./src/client/views/_pages/ComponentsDemo/GridDemo.js
+
+
+ //Create or Remove Sidebar Menu
+
+
+/* harmony default export */ const GridDemo = (function () {
+  react.useEffect(function () {
+    // Equivalent to componentDidMount and componentDidUpdate:
+    shortcut(document).ready(function () {
+      //Create sidebar menu
+      SidebarMenu();
+    });
+  });
+  return /*#__PURE__*/react.createElement(react.Fragment, null, /*#__PURE__*/react.createElement("section", null, /*#__PURE__*/react.createElement("div", {
+    className: "container"
+  }, /*#__PURE__*/react.createElement("div", {
+    className: "row"
+  }, /*#__PURE__*/react.createElement("div", {
+    className: "col-12"
+  }, /*#__PURE__*/react.createElement("h1", {
+    className: "uix-typo--h2"
+  }, "Grid", /*#__PURE__*/react.createElement("a", {
+    className: "uix-typo--h3 align-middle",
+    href: "https://github.com/xizon/uix-kit-react/tree/main/src/client/components/Grid",
+    target: "_blank"
+  }, /*#__PURE__*/react.createElement("span", {
+    className: "uix-dir--right",
+    style: {
+      fontSize: "0.75rem",
+      color: "#ababab",
+      margin: ".5rem .5rem 0 0"
+    }
+  }, /*#__PURE__*/react.createElement("svg", {
+    style: {
+      marginRight: ".5rem"
+    },
+    width: "15",
+    viewBox: "0 0 392.186 392.186"
+  }, /*#__PURE__*/react.createElement("g", null, /*#__PURE__*/react.createElement("g", null, /*#__PURE__*/react.createElement("g", null, /*#__PURE__*/react.createElement("path", {
+    fill: "#d2d2d2",
+    d: "M368.62,17.951H23.568C10.57,17.951,0,28.524,0,41.52v309.146c0,12.996,10.57,23.568,23.568,23.568h345.053c12.994,0,23.564-10.572,23.564-23.568V41.52C392.188,28.525,381.614,17.951,368.62,17.951z M297.56,57.528c0-4.806,3.896-8.703,8.701-8.703h8.703c4.808,0,8.701,3.896,8.701,8.703v9.863c0,4.806-3.896,8.702-8.701,8.702h-8.703c-4.805,0-8.701-3.896-8.701-8.702V57.528z M257.093,57.528c0-4.806,3.898-8.703,8.703-8.703h8.701c4.805,0,8.703,3.896,8.703,8.703v9.863c0,4.806-3.898,8.702-8.703,8.702h-8.701c-4.805,0-8.703-3.896-8.703-8.702V57.528z M363.903,345.951H28.282V102.235h335.621V345.951L363.903,345.951z M364.132,67.391c0,4.806-3.896,8.702-8.701,8.702h-8.703c-4.809,0-8.702-3.896-8.702-8.702v-9.863c0-4.806,3.896-8.703,8.702-8.703h8.703c4.806,0,8.701,3.896,8.701,8.703V67.391z"
+  }), /*#__PURE__*/react.createElement("path", {
+    fill: "#d2d2d2",
+    d: "M84.185,233.284l63.084,29.336c1.631,0.755,3.367,1.138,5.162,1.138c2.338,0,4.617-0.664,6.598-1.924c3.547-2.267,5.666-6.13,5.666-10.334v-0.322c0-4.752-2.785-9.116-7.096-11.118l-39.455-18.332l39.455-18.334c4.311-2.004,7.096-6.367,7.096-11.117v-0.319c0-4.21-2.119-8.075-5.666-10.334c-1.961-1.253-4.246-1.916-6.605-1.916c-1.779,0-3.563,0.391-5.16,1.133l-63.08,29.333c-4.307,2.004-7.09,6.369-7.09,11.117v0.877C77.093,226.909,79.874,231.272,84.185,233.284z"
+  }), /*#__PURE__*/react.createElement("path", {
+    fill: "#d2d2d2",
+    d: "M165.257,293.036c2.301,3.149,6.002,5.03,9.9,5.03h0.316c5.352,0,10.041-3.426,11.672-8.517L228.7,160.788c1.192-3.716,0.531-7.818-1.771-10.973c-2.301-3.15-6.002-5.03-9.901-5.03h-0.315c-5.354,0-10.048,3.425-11.679,8.516l-41.559,128.771C162.292,285.793,162.958,289.889,165.257,293.036z"
+  }), /*#__PURE__*/react.createElement("path", {
+    fill: "#d2d2d2",
+    d: "M227.49,192.276c0,4.745,2.783,9.109,7.095,11.123l39.455,18.329l-39.455,18.33c-4.31,2.004-7.095,6.368-7.095,11.118v0.322c0,4.205,2.117,8.068,5.668,10.336c1.974,1.258,4.254,1.924,6.595,1.924c1.793,0,3.528-0.383,5.17-1.142l63.08-29.335c4.307-2.009,7.09-6.372,7.09-11.115v-0.877c0-4.748-2.783-9.113-7.094-11.117l-63.08-29.333c-1.591-0.74-3.373-1.131-5.152-1.131c-2.355,0-4.643,0.661-6.604,1.912c-3.551,2.263-5.67,6.127-5.67,10.337v0.318H227.49L227.49,192.276z"
+  }))))), "Docs on GitHub"))))))), /*#__PURE__*/react.createElement("section", {
+    className: "uix-spacing--s uix-spacing--no-bottom"
+  }, /*#__PURE__*/react.createElement("div", {
+    className: "container"
+  }, /*#__PURE__*/react.createElement("div", {
+    className: "row"
+  }, /*#__PURE__*/react.createElement("div", {
+    className: "col-12"
+  }, /*#__PURE__*/react.createElement("h3", {
+    className: "app-header-title"
+  }, "Uix Grid"), /*#__PURE__*/react.createElement("p", null, "It can be used for fluid layout for multiple projects and ", /*#__PURE__*/react.createElement("strong", null, "Bootstrap"), " grid system. Its biggest feature is its support for ", /*#__PURE__*/react.createElement("strong", null, "loop"), " lists."), /*#__PURE__*/react.createElement("hr", null))))), /*#__PURE__*/react.createElement("section", {
+    className: "uix-spacing--s"
+  }, /*#__PURE__*/react.createElement("div", {
+    className: "container"
+  }, /*#__PURE__*/react.createElement("div", {
+    style: {
+      backgroundColor: "#000"
+    }
+  }, /*#__PURE__*/react.createElement(Grid, {
+    equalWidth: true
+  }, /*#__PURE__*/react.createElement(GridColumn, null, /*#__PURE__*/react.createElement("div", {
+    style: {
+      background: "fuchsia",
+      boxShadow: "inset 0px 0px 0px 1px rgba(0,0,0,.5)"
+    }
+  }, "1/5 (equal width)")), /*#__PURE__*/react.createElement(GridColumn, null, /*#__PURE__*/react.createElement("div", {
+    style: {
+      background: "fuchsia",
+      boxShadow: "inset 0px 0px 0px 1px rgba(0,0,0,.5)"
+    }
+  }, "1/5 (equal width)")), /*#__PURE__*/react.createElement(GridColumn, null, /*#__PURE__*/react.createElement("div", {
+    style: {
+      background: "fuchsia",
+      boxShadow: "inset 0px 0px 0px 1px rgba(0,0,0,.5)"
+    }
+  }, "1/5 (equal width)")), /*#__PURE__*/react.createElement(GridColumn, null, /*#__PURE__*/react.createElement("div", {
+    style: {
+      background: "fuchsia",
+      boxShadow: "inset 0px 0px 0px 1px rgba(0,0,0,.5)"
+    }
+  }, "1/5 (equal width)")), /*#__PURE__*/react.createElement(GridColumn, null, /*#__PURE__*/react.createElement("div", {
+    style: {
+      background: "fuchsia",
+      boxShadow: "inset 0px 0px 0px 1px rgba(0,0,0,.5)"
+    }
+  }, "1/5 (equal width)"))), /*#__PURE__*/react.createElement(Grid, null, /*#__PURE__*/react.createElement(GridColumn, {
+    ratio: "1/6"
+  }, /*#__PURE__*/react.createElement("div", {
+    style: {
+      background: "purple",
+      boxShadow: "inset 0px 0px 0px 1px rgba(0,0,0,.5)"
+    }
+  }, "1/6")), /*#__PURE__*/react.createElement(GridColumn, {
+    ratio: "1/6"
+  }, /*#__PURE__*/react.createElement("div", {
+    style: {
+      background: "purple",
+      boxShadow: "inset 0px 0px 0px 1px rgba(0,0,0,.5)"
+    }
+  }, "1/6")), /*#__PURE__*/react.createElement(GridColumn, {
+    ratio: "1/6"
+  }, /*#__PURE__*/react.createElement("div", {
+    style: {
+      background: "purple",
+      boxShadow: "inset 0px 0px 0px 1px rgba(0,0,0,.5)"
+    }
+  }, "1/6")), /*#__PURE__*/react.createElement(GridColumn, {
+    ratio: "1/6"
+  }, /*#__PURE__*/react.createElement("div", {
+    style: {
+      background: "purple",
+      boxShadow: "inset 0px 0px 0px 1px rgba(0,0,0,.5)"
+    }
+  }, "1/6")), /*#__PURE__*/react.createElement(GridColumn, {
+    ratio: "1/6"
+  }, /*#__PURE__*/react.createElement("div", {
+    style: {
+      background: "purple",
+      boxShadow: "inset 0px 0px 0px 1px rgba(0,0,0,.5)"
+    }
+  }, "1/6")), /*#__PURE__*/react.createElement(GridColumn, {
+    ratio: "1/6"
+  }, /*#__PURE__*/react.createElement("div", {
+    style: {
+      background: "purple",
+      boxShadow: "inset 0px 0px 0px 1px rgba(0,0,0,.5)"
+    }
+  }, "1/6"))), /*#__PURE__*/react.createElement(Grid, null, /*#__PURE__*/react.createElement(GridColumn, {
+    ratio: "1/6",
+    stackRatio: "1/2",
+    stackSize: "md"
+  }, /*#__PURE__*/react.createElement("div", {
+    style: {
+      background: "fuchsia",
+      boxShadow: "inset 0px 0px 0px 1px rgba(0,0,0,.5)"
+    }
+  }, "1/6 (min 2 cols)")), /*#__PURE__*/react.createElement(GridColumn, {
+    ratio: "1/6",
+    stackRatio: "1/2",
+    stackSize: "md"
+  }, /*#__PURE__*/react.createElement("div", {
+    style: {
+      background: "fuchsia",
+      boxShadow: "inset 0px 0px 0px 1px rgba(0,0,0,.5)"
+    }
+  }, "1/6 (min 2 cols)")), /*#__PURE__*/react.createElement(GridColumn, {
+    ratio: "1/6",
+    stackRatio: "1/2",
+    stackSize: "md"
+  }, /*#__PURE__*/react.createElement("div", {
+    style: {
+      background: "fuchsia",
+      boxShadow: "inset 0px 0px 0px 1px rgba(0,0,0,.5)"
+    }
+  }, "1/6 (min 2 cols)")), /*#__PURE__*/react.createElement(GridColumn, {
+    ratio: "1/6",
+    stackRatio: "1/2",
+    stackSize: "md"
+  }, /*#__PURE__*/react.createElement("div", {
+    style: {
+      background: "fuchsia",
+      boxShadow: "inset 0px 0px 0px 1px rgba(0,0,0,.5)"
+    }
+  }, "1/6 (min 2 cols)")), /*#__PURE__*/react.createElement(GridColumn, {
+    ratio: "1/6",
+    stackRatio: "1/2",
+    stackSize: "md"
+  }, /*#__PURE__*/react.createElement("div", {
+    style: {
+      background: "fuchsia",
+      boxShadow: "inset 0px 0px 0px 1px rgba(0,0,0,.5)"
+    }
+  }, "1/6 (min 2 cols)")), /*#__PURE__*/react.createElement(GridColumn, {
+    ratio: "1/6",
+    stackRatio: "1/2",
+    stackSize: "md"
+  }, /*#__PURE__*/react.createElement("div", {
+    style: {
+      background: "fuchsia",
+      boxShadow: "inset 0px 0px 0px 1px rgba(0,0,0,.5)"
+    }
+  }, "1/6 (min 2 cols)"))), /*#__PURE__*/react.createElement(Grid, {
+    loop: true
+  }, /*#__PURE__*/react.createElement(GridColumn, {
+    ratio: "1/6",
+    stackRatio: "1/2",
+    stackSize: "md"
+  }, /*#__PURE__*/react.createElement("div", {
+    style: {
+      background: "orange",
+      boxShadow: "inset 0px 0px 0px 1px rgba(0,0,0,.5)"
+    }
+  }, "1/6 (min 2 cols & loop)")), /*#__PURE__*/react.createElement(GridColumn, {
+    ratio: "1/6",
+    stackRatio: "1/2",
+    stackSize: "md"
+  }, /*#__PURE__*/react.createElement("div", {
+    style: {
+      background: "orange",
+      boxShadow: "inset 0px 0px 0px 1px rgba(0,0,0,.5)"
+    }
+  }, "1/6 (min 2 cols & loop)")), /*#__PURE__*/react.createElement(GridColumn, {
+    ratio: "1/6",
+    stackRatio: "1/2",
+    stackSize: "md"
+  }, /*#__PURE__*/react.createElement("div", {
+    style: {
+      background: "orange",
+      boxShadow: "inset 0px 0px 0px 1px rgba(0,0,0,.5)"
+    }
+  }, "1/6 (min 2 cols & loop)")), /*#__PURE__*/react.createElement(GridColumn, {
+    ratio: "1/6",
+    stackRatio: "1/2",
+    stackSize: "md"
+  }, /*#__PURE__*/react.createElement("div", {
+    style: {
+      background: "orange",
+      boxShadow: "inset 0px 0px 0px 1px rgba(0,0,0,.5)"
+    }
+  }, "1/6 (min 2 cols & loop)")), /*#__PURE__*/react.createElement(GridColumn, {
+    ratio: "1/6",
+    stackRatio: "1/2",
+    stackSize: "md"
+  }, /*#__PURE__*/react.createElement("div", {
+    style: {
+      background: "orange",
+      boxShadow: "inset 0px 0px 0px 1px rgba(0,0,0,.5)"
+    }
+  }, "1/6 (min 2 cols & loop)")), /*#__PURE__*/react.createElement(GridColumn, {
+    ratio: "1/6",
+    stackRatio: "1/2",
+    stackSize: "md"
+  }, /*#__PURE__*/react.createElement("div", {
+    style: {
+      background: "orange",
+      boxShadow: "inset 0px 0px 0px 1px rgba(0,0,0,.5)"
+    }
+  }, "1/6 (min 2 cols & loop)")), /*#__PURE__*/react.createElement(GridColumn, {
+    ratio: "1/6",
+    stackRatio: "1/2",
+    stackSize: "md"
+  }, /*#__PURE__*/react.createElement("div", {
+    style: {
+      background: "orange",
+      boxShadow: "inset 0px 0px 0px 1px rgba(0,0,0,.5)"
+    }
+  }, "1/6 (min 2 cols & loop)")), /*#__PURE__*/react.createElement(GridColumn, {
+    ratio: "1/6",
+    stackRatio: "1/2",
+    stackSize: "md"
+  }, /*#__PURE__*/react.createElement("div", {
+    style: {
+      background: "orange",
+      boxShadow: "inset 0px 0px 0px 1px rgba(0,0,0,.5)"
+    }
+  }, "1/6 (min 2 cols & loop)"))), /*#__PURE__*/react.createElement(Grid, {
+    loop: true
+  }, /*#__PURE__*/react.createElement(GridColumn, {
+    ratio: "1/6"
+  }, /*#__PURE__*/react.createElement("div", {
+    style: {
+      background: "blue",
+      boxShadow: "inset 0px 0px 0px 1px rgba(0,0,0,.5)"
+    }
+  }, "1/6 (loop)")), /*#__PURE__*/react.createElement(GridColumn, {
+    ratio: "1/6"
+  }, /*#__PURE__*/react.createElement("div", {
+    style: {
+      background: "blue",
+      boxShadow: "inset 0px 0px 0px 1px rgba(0,0,0,.5)"
+    }
+  }, "1/6 (loop)")), /*#__PURE__*/react.createElement(GridColumn, {
+    ratio: "1/6"
+  }, /*#__PURE__*/react.createElement("div", {
+    style: {
+      background: "blue",
+      boxShadow: "inset 0px 0px 0px 1px rgba(0,0,0,.5)"
+    }
+  }, "1/6 (loop)")), /*#__PURE__*/react.createElement(GridColumn, {
+    ratio: "1/6"
+  }, /*#__PURE__*/react.createElement("div", {
+    style: {
+      background: "blue",
+      boxShadow: "inset 0px 0px 0px 1px rgba(0,0,0,.5)"
+    }
+  }, "1/6 (loop)")), /*#__PURE__*/react.createElement(GridColumn, {
+    ratio: "1/6"
+  }, /*#__PURE__*/react.createElement("div", {
+    style: {
+      background: "blue",
+      boxShadow: "inset 0px 0px 0px 1px rgba(0,0,0,.5)"
+    }
+  }, "1/6 (loop)")), /*#__PURE__*/react.createElement(GridColumn, {
+    ratio: "1/6"
+  }, /*#__PURE__*/react.createElement("div", {
+    style: {
+      background: "blue",
+      boxShadow: "inset 0px 0px 0px 1px rgba(0,0,0,.5)"
+    }
+  }, "1/6 (loop)")), /*#__PURE__*/react.createElement(GridColumn, {
+    ratio: "1/6"
+  }, /*#__PURE__*/react.createElement("div", {
+    style: {
+      background: "blue",
+      boxShadow: "inset 0px 0px 0px 1px rgba(0,0,0,.5)"
+    }
+  }, "1/6 (loop)")), /*#__PURE__*/react.createElement(GridColumn, {
+    ratio: "1/6"
+  }, /*#__PURE__*/react.createElement("div", {
+    style: {
+      background: "blue",
+      boxShadow: "inset 0px 0px 0px 1px rgba(0,0,0,.5)"
+    }
+  }, "1/6 (loop)")), /*#__PURE__*/react.createElement(GridColumn, {
+    ratio: "1/6"
+  }, /*#__PURE__*/react.createElement("div", {
+    style: {
+      background: "blue",
+      boxShadow: "inset 0px 0px 0px 1px rgba(0,0,0,.5)"
+    }
+  }, "1/6 (loop)"))), /*#__PURE__*/react.createElement(Grid, null, /*#__PURE__*/react.createElement(GridColumn, {
+    ratio: "1/4"
+  }, /*#__PURE__*/react.createElement("div", {
+    style: {
+      background: "teal",
+      boxShadow: "inset 0px 0px 0px 1px rgba(0,0,0,.5)"
+    }
+  }, "1/4")), /*#__PURE__*/react.createElement(GridColumn, {
+    ratio: "1/4"
+  }, /*#__PURE__*/react.createElement("div", {
+    style: {
+      background: "teal",
+      boxShadow: "inset 0px 0px 0px 1px rgba(0,0,0,.5)"
+    }
+  }, "1/4")), /*#__PURE__*/react.createElement(GridColumn, {
+    ratio: "1/4"
+  }, /*#__PURE__*/react.createElement("div", {
+    style: {
+      background: "teal",
+      boxShadow: "inset 0px 0px 0px 1px rgba(0,0,0,.5)"
+    }
+  }, "1/4")), /*#__PURE__*/react.createElement(GridColumn, {
+    ratio: "1/4"
+  }, /*#__PURE__*/react.createElement("div", {
+    style: {
+      background: "teal",
+      boxShadow: "inset 0px 0px 0px 1px rgba(0,0,0,.5)"
+    }
+  }, "1/4"))), /*#__PURE__*/react.createElement(Grid, {
+    loop: true
+  }, /*#__PURE__*/react.createElement(GridColumn, {
+    ratio: "1/4"
+  }, /*#__PURE__*/react.createElement("div", {
+    style: {
+      background: "green",
+      boxShadow: "inset 0px 0px 0px 1px rgba(0,0,0,.5)"
+    }
+  }, "1/4 (loop)")), /*#__PURE__*/react.createElement(GridColumn, {
+    ratio: "1/4"
+  }, /*#__PURE__*/react.createElement("div", {
+    style: {
+      background: "green",
+      boxShadow: "inset 0px 0px 0px 1px rgba(0,0,0,.5)"
+    }
+  }, "1/4 (loop)")), /*#__PURE__*/react.createElement(GridColumn, {
+    ratio: "1/4"
+  }, /*#__PURE__*/react.createElement("div", {
+    style: {
+      background: "green",
+      boxShadow: "inset 0px 0px 0px 1px rgba(0,0,0,.5)"
+    }
+  }, "1/4 (loop)")), /*#__PURE__*/react.createElement(GridColumn, {
+    ratio: "1/4"
+  }, /*#__PURE__*/react.createElement("div", {
+    style: {
+      background: "green",
+      boxShadow: "inset 0px 0px 0px 1px rgba(0,0,0,.5)"
+    }
+  }, "1/4 (loop)")), /*#__PURE__*/react.createElement(GridColumn, {
+    ratio: "1/4"
+  }, /*#__PURE__*/react.createElement("div", {
+    style: {
+      background: "green",
+      boxShadow: "inset 0px 0px 0px 1px rgba(0,0,0,.5)"
+    }
+  }, "1/4 (loop)")), /*#__PURE__*/react.createElement(GridColumn, {
+    ratio: "1/4"
+  }, /*#__PURE__*/react.createElement("div", {
+    style: {
+      background: "green",
+      boxShadow: "inset 0px 0px 0px 1px rgba(0,0,0,.5)"
+    }
+  }, "1/4 (loop)")), /*#__PURE__*/react.createElement(GridColumn, {
+    ratio: "1/4"
+  }, /*#__PURE__*/react.createElement("div", {
+    style: {
+      background: "green",
+      boxShadow: "inset 0px 0px 0px 1px rgba(0,0,0,.5)"
+    }
+  }, "1/4 (loop)")), /*#__PURE__*/react.createElement(GridColumn, {
+    ratio: "1/4"
+  }, /*#__PURE__*/react.createElement("div", {
+    style: {
+      background: "green",
+      boxShadow: "inset 0px 0px 0px 1px rgba(0,0,0,.5)"
+    }
+  }, "1/4 (loop)")), /*#__PURE__*/react.createElement(GridColumn, {
+    ratio: "1/4"
+  }, /*#__PURE__*/react.createElement("div", {
+    style: {
+      background: "green",
+      boxShadow: "inset 0px 0px 0px 1px rgba(0,0,0,.5)"
+    }
+  }, "1/4 (loop)")), /*#__PURE__*/react.createElement(GridColumn, {
+    ratio: "1/4"
+  }, /*#__PURE__*/react.createElement("div", {
+    style: {
+      background: "green",
+      boxShadow: "inset 0px 0px 0px 1px rgba(0,0,0,.5)"
+    }
+  }, "1/4 (loop)"))), /*#__PURE__*/react.createElement(Grid, null, /*#__PURE__*/react.createElement(GridColumn, {
+    ratio: "1/4",
+    stackRatio: "1/2",
+    stackSize: "md"
+  }, /*#__PURE__*/react.createElement("div", {
+    style: {
+      background: "lime",
+      boxShadow: "inset 0px 0px 0px 1px rgba(0,0,0,.5)"
+    }
+  }, "1/4 (min 2 cols)")), /*#__PURE__*/react.createElement(GridColumn, {
+    ratio: "1/4",
+    stackRatio: "1/2",
+    stackSize: "md"
+  }, /*#__PURE__*/react.createElement("div", {
+    style: {
+      background: "lime",
+      boxShadow: "inset 0px 0px 0px 1px rgba(0,0,0,.5)"
+    }
+  }, "1/4 (min 2 cols)")), /*#__PURE__*/react.createElement(GridColumn, {
+    ratio: "1/4",
+    stackRatio: "1/2",
+    stackSize: "md"
+  }, /*#__PURE__*/react.createElement("div", {
+    style: {
+      background: "lime",
+      boxShadow: "inset 0px 0px 0px 1px rgba(0,0,0,.5)"
+    }
+  }, "1/4 (min 2 cols)")), /*#__PURE__*/react.createElement(GridColumn, {
+    ratio: "1/4",
+    stackRatio: "1/2",
+    stackSize: "md"
+  }, /*#__PURE__*/react.createElement("div", {
+    style: {
+      background: "lime",
+      boxShadow: "inset 0px 0px 0px 1px rgba(0,0,0,.5)"
+    }
+  }, "1/4 (min 2 cols)"))), /*#__PURE__*/react.createElement(Grid, {
+    loop: true
+  }, /*#__PURE__*/react.createElement(GridColumn, {
+    ratio: "1/4",
+    stackRatio: "1/2",
+    stackSize: "md"
+  }, /*#__PURE__*/react.createElement("div", {
+    style: {
+      background: "olive",
+      boxShadow: "inset 0px 0px 0px 1px rgba(0,0,0,.5)"
+    }
+  }, "1/4 (min 2 cols & loop)")), /*#__PURE__*/react.createElement(GridColumn, {
+    ratio: "1/4",
+    stackRatio: "1/2",
+    stackSize: "md"
+  }, /*#__PURE__*/react.createElement("div", {
+    style: {
+      background: "olive",
+      boxShadow: "inset 0px 0px 0px 1px rgba(0,0,0,.5)"
+    }
+  }, "1/4 (min 2 cols & loop)")), /*#__PURE__*/react.createElement(GridColumn, {
+    ratio: "1/4",
+    stackRatio: "1/2",
+    stackSize: "md"
+  }, /*#__PURE__*/react.createElement("div", {
+    style: {
+      background: "olive",
+      boxShadow: "inset 0px 0px 0px 1px rgba(0,0,0,.5)"
+    }
+  }, "1/4 (min 2 cols & loop)")), /*#__PURE__*/react.createElement(GridColumn, {
+    ratio: "1/4",
+    stackRatio: "1/2",
+    stackSize: "md"
+  }, /*#__PURE__*/react.createElement("div", {
+    style: {
+      background: "olive",
+      boxShadow: "inset 0px 0px 0px 1px rgba(0,0,0,.5)"
+    }
+  }, "1/4 (min 2 cols & loop)")), /*#__PURE__*/react.createElement(GridColumn, {
+    ratio: "1/4",
+    stackRatio: "1/2",
+    stackSize: "md"
+  }, /*#__PURE__*/react.createElement("div", {
+    style: {
+      background: "olive",
+      boxShadow: "inset 0px 0px 0px 1px rgba(0,0,0,.5)"
+    }
+  }, "1/4 (min 2 cols & loop)"))), /*#__PURE__*/react.createElement(Grid, null, /*#__PURE__*/react.createElement(GridColumn, {
+    ratio: "1/3"
+  }, /*#__PURE__*/react.createElement("div", {
+    style: {
+      background: "yellow",
+      boxShadow: "inset 0px 0px 0px 1px rgba(0,0,0,.5)"
+    }
+  }, "1/3")), /*#__PURE__*/react.createElement(GridColumn, {
+    ratio: "1/3"
+  }, /*#__PURE__*/react.createElement("div", {
+    style: {
+      background: "yellow",
+      boxShadow: "inset 0px 0px 0px 1px rgba(0,0,0,.5)"
+    }
+  }, "1/3")), /*#__PURE__*/react.createElement(GridColumn, {
+    ratio: "1/3"
+  }, /*#__PURE__*/react.createElement("div", {
+    style: {
+      background: "yellow",
+      boxShadow: "inset 0px 0px 0px 1px rgba(0,0,0,.5)"
+    }
+  }, "1/3"))), /*#__PURE__*/react.createElement(Grid, {
+    loop: true
+  }, /*#__PURE__*/react.createElement(GridColumn, {
+    ratio: "1/3"
+  }, /*#__PURE__*/react.createElement("div", {
+    style: {
+      background: "red",
+      boxShadow: "inset 0px 0px 0px 1px rgba(0,0,0,.5)"
+    }
+  }, "1/3 (loop)")), /*#__PURE__*/react.createElement(GridColumn, {
+    ratio: "1/3"
+  }, /*#__PURE__*/react.createElement("div", {
+    style: {
+      background: "red",
+      boxShadow: "inset 0px 0px 0px 1px rgba(0,0,0,.5)"
+    }
+  }, "1/3 (loop)")), /*#__PURE__*/react.createElement(GridColumn, {
+    ratio: "1/3"
+  }, /*#__PURE__*/react.createElement("div", {
+    style: {
+      background: "red",
+      boxShadow: "inset 0px 0px 0px 1px rgba(0,0,0,.5)"
+    }
+  }, "1/3 (loop)")), /*#__PURE__*/react.createElement(GridColumn, {
+    ratio: "1/3"
+  }, /*#__PURE__*/react.createElement("div", {
+    style: {
+      background: "red",
+      boxShadow: "inset 0px 0px 0px 1px rgba(0,0,0,.5)"
+    }
+  }, "1/3 (loop)")), /*#__PURE__*/react.createElement(GridColumn, {
+    ratio: "1/3"
+  }, /*#__PURE__*/react.createElement("div", {
+    style: {
+      background: "red",
+      boxShadow: "inset 0px 0px 0px 1px rgba(0,0,0,.5)"
+    }
+  }, "1/3 (loop)")), /*#__PURE__*/react.createElement(GridColumn, {
+    ratio: "1/3"
+  }, /*#__PURE__*/react.createElement("div", {
+    style: {
+      background: "red",
+      boxShadow: "inset 0px 0px 0px 1px rgba(0,0,0,.5)"
+    }
+  }, "1/3 (loop)")), /*#__PURE__*/react.createElement(GridColumn, {
+    ratio: "1/3"
+  }, /*#__PURE__*/react.createElement("div", {
+    style: {
+      background: "red",
+      boxShadow: "inset 0px 0px 0px 1px rgba(0,0,0,.5)"
+    }
+  }, "1/3 (loop)")), /*#__PURE__*/react.createElement(GridColumn, {
+    ratio: "1/3"
+  }, /*#__PURE__*/react.createElement("div", {
+    style: {
+      background: "red",
+      boxShadow: "inset 0px 0px 0px 1px rgba(0,0,0,.5)"
+    }
+  }, "1/3 (loop)"))), /*#__PURE__*/react.createElement(Grid, {
+    loop: true
+  }, /*#__PURE__*/react.createElement(GridColumn, {
+    ratio: "1/2"
+  }, /*#__PURE__*/react.createElement("div", {
+    style: {
+      background: "purple",
+      boxShadow: "inset 0px 0px 0px 1px rgba(0,0,0,.5)"
+    }
+  }, "1/2 (loop)")), /*#__PURE__*/react.createElement(GridColumn, {
+    ratio: "1/2"
+  }, /*#__PURE__*/react.createElement("div", {
+    style: {
+      background: "purple",
+      boxShadow: "inset 0px 0px 0px 1px rgba(0,0,0,.5)"
+    }
+  }, "1/2 (loop)")), /*#__PURE__*/react.createElement(GridColumn, {
+    ratio: "1/2"
+  }, /*#__PURE__*/react.createElement("div", {
+    style: {
+      background: "purple",
+      boxShadow: "inset 0px 0px 0px 1px rgba(0,0,0,.5)"
+    }
+  }, "1/2 (loop)"))), /*#__PURE__*/react.createElement(Grid, null, /*#__PURE__*/react.createElement(GridColumn, {
+    ratio: "1/2"
+  }, /*#__PURE__*/react.createElement("div", {
+    style: {
+      background: "fuchsia",
+      boxShadow: "inset 0px 0px 0px 1px rgba(0,0,0,.5)"
+    }
+  }, "1/2")), /*#__PURE__*/react.createElement(GridColumn, {
+    ratio: "1/2"
+  }, /*#__PURE__*/react.createElement("div", {
+    style: {
+      background: "fuchsia",
+      boxShadow: "inset 0px 0px 0px 1px rgba(0,0,0,.5)"
+    }
+  }, "1/2"))), /*#__PURE__*/react.createElement(Grid, null, /*#__PURE__*/react.createElement(GridColumn, {
+    ratio: "2/3"
+  }, /*#__PURE__*/react.createElement("div", {
+    style: {
+      background: "orange",
+      boxShadow: "inset 0px 0px 0px 1px rgba(0,0,0,.5)"
+    }
+  }, "2/3")), /*#__PURE__*/react.createElement(GridColumn, {
+    ratio: "1/3"
+  }, /*#__PURE__*/react.createElement("div", {
+    style: {
+      background: "orange",
+      boxShadow: "inset 0px 0px 0px 1px rgba(0,0,0,.5)"
+    }
+  }, "1/3"))), /*#__PURE__*/react.createElement(Grid, null, /*#__PURE__*/react.createElement(GridColumn, {
+    ratio: "3/4"
+  }, /*#__PURE__*/react.createElement("div", {
+    style: {
+      background: "blue",
+      boxShadow: "inset 0px 0px 0px 1px rgba(0,0,0,.5)"
+    }
+  }, "3/4")), /*#__PURE__*/react.createElement(GridColumn, {
+    ratio: "1/4"
+  }, /*#__PURE__*/react.createElement("div", {
+    style: {
+      background: "blue",
+      boxShadow: "inset 0px 0px 0px 1px rgba(0,0,0,.5)"
+    }
+  }, "1/4"))), /*#__PURE__*/react.createElement(Grid, null, /*#__PURE__*/react.createElement(GridColumn, {
+    ratio: "4/5"
+  }, /*#__PURE__*/react.createElement("div", {
+    style: {
+      background: "teal",
+      boxShadow: "inset 0px 0px 0px 1px rgba(0,0,0,.5)"
+    }
+  }, "4/5")), /*#__PURE__*/react.createElement(GridColumn, {
+    ratio: "1/5"
+  }, /*#__PURE__*/react.createElement("div", {
+    style: {
+      background: "teal",
+      boxShadow: "inset 0px 0px 0px 1px rgba(0,0,0,.5)"
+    }
+  }, "1/5"))), /*#__PURE__*/react.createElement(Grid, null, /*#__PURE__*/react.createElement(GridColumn, {
+    ratio: "3/5"
+  }, /*#__PURE__*/react.createElement("div", {
+    style: {
+      background: "aqua",
+      boxShadow: "inset 0px 0px 0px 1px rgba(0,0,0,.5)"
+    }
+  }, "3/5")), /*#__PURE__*/react.createElement(GridColumn, {
+    ratio: "2/5"
+  }, /*#__PURE__*/react.createElement("div", {
+    style: {
+      background: "aqua",
+      boxShadow: "inset 0px 0px 0px 1px rgba(0,0,0,.5)"
+    }
+  }, "2/5"))), /*#__PURE__*/react.createElement(Grid, null, /*#__PURE__*/react.createElement(GridColumn, {
+    ratio: "1/4"
+  }, /*#__PURE__*/react.createElement("div", {
+    style: {
+      background: "green",
+      boxShadow: "inset 0px 0px 0px 1px rgba(0,0,0,.5)"
+    }
+  }, "1/4")), /*#__PURE__*/react.createElement(GridColumn, {
+    ratio: "1/2"
+  }, /*#__PURE__*/react.createElement("div", {
+    style: {
+      background: "green",
+      boxShadow: "inset 0px 0px 0px 1px rgba(0,0,0,.5)"
+    }
+  }, "1/2")), /*#__PURE__*/react.createElement(GridColumn, {
+    ratio: "1/4"
+  }, /*#__PURE__*/react.createElement("div", {
+    style: {
+      background: "green",
+      boxShadow: "inset 0px 0px 0px 1px rgba(0,0,0,.5)"
+    }
+  }, "1/4"))), /*#__PURE__*/react.createElement(Grid, null, /*#__PURE__*/react.createElement(GridColumn, {
+    ratio: "1/3"
+  }, /*#__PURE__*/react.createElement("div", {
+    style: {
+      background: "aqua",
+      boxShadow: "inset 0px 0px 0px 1px rgba(0,0,0,.5)"
+    }
+  }, "1/3")), /*#__PURE__*/react.createElement(GridColumn, {
+    ratio: "1/2"
+  }, /*#__PURE__*/react.createElement("div", {
+    style: {
+      background: "aqua",
+      boxShadow: "inset 0px 0px 0px 1px rgba(0,0,0,.5)"
+    }
+  }, "1/2")), /*#__PURE__*/react.createElement(GridColumn, {
+    ratio: "1/6"
+  }, /*#__PURE__*/react.createElement("div", {
+    style: {
+      background: "aqua",
+      boxShadow: "inset 0px 0px 0px 1px rgba(0,0,0,.5)"
+    }
+  }, "1/6"))), /*#__PURE__*/react.createElement(Grid, null, /*#__PURE__*/react.createElement(GridColumn, {
+    ratio: "1/5"
+  }, /*#__PURE__*/react.createElement("div", {
+    style: {
+      background: "teal",
+      boxShadow: "inset 0px 0px 0px 1px rgba(0,0,0,.5)"
+    }
+  }, "1/5")), /*#__PURE__*/react.createElement(GridColumn, {
+    ratio: "2/5"
+  }, /*#__PURE__*/react.createElement("div", {
+    style: {
+      background: "teal",
+      boxShadow: "inset 0px 0px 0px 1px rgba(0,0,0,.5)"
+    }
+  }, "2/5")), /*#__PURE__*/react.createElement(GridColumn, {
+    ratio: "2/5"
+  }, /*#__PURE__*/react.createElement("div", {
+    style: {
+      background: "teal",
+      boxShadow: "inset 0px 0px 0px 1px rgba(0,0,0,.5)"
+    }
+  }, "2/5"))), /*#__PURE__*/react.createElement(Grid, null, /*#__PURE__*/react.createElement(GridColumn, {
+    ratio: "2/3"
+  }, /*#__PURE__*/react.createElement("div", {
+    style: {
+      background: "green",
+      boxShadow: "inset 0px 0px 0px 1px rgba(0,0,0,.5)"
+    }
+  }, "2/3")), /*#__PURE__*/react.createElement(GridColumn, {
+    ratio: "1/5"
+  }, /*#__PURE__*/react.createElement("div", {
+    style: {
+      background: "green",
+      boxShadow: "inset 0px 0px 0px 1px rgba(0,0,0,.5)"
+    }
+  }, "1/5")), /*#__PURE__*/react.createElement(GridColumn, {
+    ratio: "1/5"
+  }, /*#__PURE__*/react.createElement("div", {
+    style: {
+      background: "green",
+      boxShadow: "inset 0px 0px 0px 1px rgba(0,0,0,.5)"
+    }
+  }, "1/5")))))), /*#__PURE__*/react.createElement("section", null, /*#__PURE__*/react.createElement("div", {
+    className: "container"
+  }, /*#__PURE__*/react.createElement("div", {
+    className: "row"
+  }, /*#__PURE__*/react.createElement("div", {
+    className: "col-12"
+  }, /*#__PURE__*/react.createElement("h3", {
+    className: "app-header-title"
+  }, "No Gutter Column For Uix Grid"), /*#__PURE__*/react.createElement("p", null, "Set the ", /*#__PURE__*/react.createElement("code", null, "noGutters"), " attribute of ", /*#__PURE__*/react.createElement("code", null, "<Grid>"), " markup.", /*#__PURE__*/react.createElement("code", null, "true"), " will remove all the columns spacing."), /*#__PURE__*/react.createElement("hr", null))))), /*#__PURE__*/react.createElement("section", {
+    className: "uix-spacing--s"
+  }, /*#__PURE__*/react.createElement("div", {
+    className: "container"
+  }, /*#__PURE__*/react.createElement("div", {
+    style: {
+      backgroundColor: "#000"
+    }
+  }, /*#__PURE__*/react.createElement(Grid, {
+    noGutters: true,
+    equalWidth: true
+  }, /*#__PURE__*/react.createElement(GridColumn, null, /*#__PURE__*/react.createElement("div", {
+    style: {
+      background: "fuchsia",
+      boxShadow: "inset 0px 0px 0px 1px rgba(0,0,0,.5)"
+    }
+  }, "1/5 (equal width)")), /*#__PURE__*/react.createElement(GridColumn, null, /*#__PURE__*/react.createElement("div", {
+    style: {
+      background: "fuchsia",
+      boxShadow: "inset 0px 0px 0px 1px rgba(0,0,0,.5)"
+    }
+  }, "1/5 (equal width)")), /*#__PURE__*/react.createElement(GridColumn, null, /*#__PURE__*/react.createElement("div", {
+    style: {
+      background: "fuchsia",
+      boxShadow: "inset 0px 0px 0px 1px rgba(0,0,0,.5)"
+    }
+  }, "1/5 (equal width)")), /*#__PURE__*/react.createElement(GridColumn, null, /*#__PURE__*/react.createElement("div", {
+    style: {
+      background: "fuchsia",
+      boxShadow: "inset 0px 0px 0px 1px rgba(0,0,0,.5)"
+    }
+  }, "1/5 (equal width)")), /*#__PURE__*/react.createElement(GridColumn, null, /*#__PURE__*/react.createElement("div", {
+    style: {
+      background: "fuchsia",
+      boxShadow: "inset 0px 0px 0px 1px rgba(0,0,0,.5)"
+    }
+  }, "1/5 (equal width)"))), /*#__PURE__*/react.createElement(Grid, {
+    noGutters: true
+  }, /*#__PURE__*/react.createElement(GridColumn, {
+    ratio: "1/6"
+  }, /*#__PURE__*/react.createElement("div", {
+    style: {
+      background: "purple",
+      boxShadow: "inset 0px 0px 0px 1px rgba(0,0,0,.5)"
+    }
+  }, "1/6")), /*#__PURE__*/react.createElement(GridColumn, {
+    ratio: "1/6"
+  }, /*#__PURE__*/react.createElement("div", {
+    style: {
+      background: "purple",
+      boxShadow: "inset 0px 0px 0px 1px rgba(0,0,0,.5)"
+    }
+  }, "1/6")), /*#__PURE__*/react.createElement(GridColumn, {
+    ratio: "1/6"
+  }, /*#__PURE__*/react.createElement("div", {
+    style: {
+      background: "purple",
+      boxShadow: "inset 0px 0px 0px 1px rgba(0,0,0,.5)"
+    }
+  }, "1/6")), /*#__PURE__*/react.createElement(GridColumn, {
+    ratio: "1/6"
+  }, /*#__PURE__*/react.createElement("div", {
+    style: {
+      background: "purple",
+      boxShadow: "inset 0px 0px 0px 1px rgba(0,0,0,.5)"
+    }
+  }, "1/6")), /*#__PURE__*/react.createElement(GridColumn, {
+    ratio: "1/6"
+  }, /*#__PURE__*/react.createElement("div", {
+    style: {
+      background: "purple",
+      boxShadow: "inset 0px 0px 0px 1px rgba(0,0,0,.5)"
+    }
+  }, "1/6")), /*#__PURE__*/react.createElement(GridColumn, {
+    ratio: "1/6"
+  }, /*#__PURE__*/react.createElement("div", {
+    style: {
+      background: "purple",
+      boxShadow: "inset 0px 0px 0px 1px rgba(0,0,0,.5)"
+    }
+  }, "1/6"))), /*#__PURE__*/react.createElement(Grid, {
+    noGutters: true
+  }, /*#__PURE__*/react.createElement(GridColumn, {
+    ratio: "1/6",
+    stackRatio: "1/2",
+    stackSize: "md"
+  }, /*#__PURE__*/react.createElement("div", {
+    style: {
+      background: "fuchsia",
+      boxShadow: "inset 0px 0px 0px 1px rgba(0,0,0,.5)"
+    }
+  }, "1/6 (min 2 cols)")), /*#__PURE__*/react.createElement(GridColumn, {
+    ratio: "1/6",
+    stackRatio: "1/2",
+    stackSize: "md"
+  }, /*#__PURE__*/react.createElement("div", {
+    style: {
+      background: "fuchsia",
+      boxShadow: "inset 0px 0px 0px 1px rgba(0,0,0,.5)"
+    }
+  }, "1/6 (min 2 cols)")), /*#__PURE__*/react.createElement(GridColumn, {
+    ratio: "1/6",
+    stackRatio: "1/2",
+    stackSize: "md"
+  }, /*#__PURE__*/react.createElement("div", {
+    style: {
+      background: "fuchsia",
+      boxShadow: "inset 0px 0px 0px 1px rgba(0,0,0,.5)"
+    }
+  }, "1/6 (min 2 cols)")), /*#__PURE__*/react.createElement(GridColumn, {
+    ratio: "1/6",
+    stackRatio: "1/2",
+    stackSize: "md"
+  }, /*#__PURE__*/react.createElement("div", {
+    style: {
+      background: "fuchsia",
+      boxShadow: "inset 0px 0px 0px 1px rgba(0,0,0,.5)"
+    }
+  }, "1/6 (min 2 cols)")), /*#__PURE__*/react.createElement(GridColumn, {
+    ratio: "1/6",
+    stackRatio: "1/2",
+    stackSize: "md"
+  }, /*#__PURE__*/react.createElement("div", {
+    style: {
+      background: "fuchsia",
+      boxShadow: "inset 0px 0px 0px 1px rgba(0,0,0,.5)"
+    }
+  }, "1/6 (min 2 cols)")), /*#__PURE__*/react.createElement(GridColumn, {
+    ratio: "1/6",
+    stackRatio: "1/2",
+    stackSize: "md"
+  }, /*#__PURE__*/react.createElement("div", {
+    style: {
+      background: "fuchsia",
+      boxShadow: "inset 0px 0px 0px 1px rgba(0,0,0,.5)"
+    }
+  }, "1/6 (min 2 cols)"))), /*#__PURE__*/react.createElement(Grid, {
+    noGutters: true,
+    loop: true
+  }, /*#__PURE__*/react.createElement(GridColumn, {
+    ratio: "1/6",
+    stackRatio: "1/2",
+    stackSize: "md"
+  }, /*#__PURE__*/react.createElement("div", {
+    style: {
+      background: "orange",
+      boxShadow: "inset 0px 0px 0px 1px rgba(0,0,0,.5)"
+    }
+  }, "1/6 (min 2 cols & loop)")), /*#__PURE__*/react.createElement(GridColumn, {
+    ratio: "1/6",
+    stackRatio: "1/2",
+    stackSize: "md"
+  }, /*#__PURE__*/react.createElement("div", {
+    style: {
+      background: "orange",
+      boxShadow: "inset 0px 0px 0px 1px rgba(0,0,0,.5)"
+    }
+  }, "1/6 (min 2 cols & loop)")), /*#__PURE__*/react.createElement(GridColumn, {
+    ratio: "1/6",
+    stackRatio: "1/2",
+    stackSize: "md"
+  }, /*#__PURE__*/react.createElement("div", {
+    style: {
+      background: "orange",
+      boxShadow: "inset 0px 0px 0px 1px rgba(0,0,0,.5)"
+    }
+  }, "1/6 (min 2 cols & loop)")), /*#__PURE__*/react.createElement(GridColumn, {
+    ratio: "1/6",
+    stackRatio: "1/2",
+    stackSize: "md"
+  }, /*#__PURE__*/react.createElement("div", {
+    style: {
+      background: "orange",
+      boxShadow: "inset 0px 0px 0px 1px rgba(0,0,0,.5)"
+    }
+  }, "1/6 (min 2 cols & loop)")), /*#__PURE__*/react.createElement(GridColumn, {
+    ratio: "1/6",
+    stackRatio: "1/2",
+    stackSize: "md"
+  }, /*#__PURE__*/react.createElement("div", {
+    style: {
+      background: "orange",
+      boxShadow: "inset 0px 0px 0px 1px rgba(0,0,0,.5)"
+    }
+  }, "1/6 (min 2 cols & loop)")), /*#__PURE__*/react.createElement(GridColumn, {
+    ratio: "1/6",
+    stackRatio: "1/2",
+    stackSize: "md"
+  }, /*#__PURE__*/react.createElement("div", {
+    style: {
+      background: "orange",
+      boxShadow: "inset 0px 0px 0px 1px rgba(0,0,0,.5)"
+    }
+  }, "1/6 (min 2 cols & loop)")), /*#__PURE__*/react.createElement(GridColumn, {
+    ratio: "1/6",
+    stackRatio: "1/2",
+    stackSize: "md"
+  }, /*#__PURE__*/react.createElement("div", {
+    style: {
+      background: "orange",
+      boxShadow: "inset 0px 0px 0px 1px rgba(0,0,0,.5)"
+    }
+  }, "1/6 (min 2 cols & loop)")), /*#__PURE__*/react.createElement(GridColumn, {
+    ratio: "1/6",
+    stackRatio: "1/2",
+    stackSize: "md"
+  }, /*#__PURE__*/react.createElement("div", {
+    style: {
+      background: "orange",
+      boxShadow: "inset 0px 0px 0px 1px rgba(0,0,0,.5)"
+    }
+  }, "1/6 (min 2 cols & loop)"))), /*#__PURE__*/react.createElement(Grid, {
+    noGutters: true,
+    loop: true
+  }, /*#__PURE__*/react.createElement(GridColumn, {
+    ratio: "1/6"
+  }, /*#__PURE__*/react.createElement("div", {
+    style: {
+      background: "blue",
+      boxShadow: "inset 0px 0px 0px 1px rgba(0,0,0,.5)"
+    }
+  }, "1/6 (loop)")), /*#__PURE__*/react.createElement(GridColumn, {
+    ratio: "1/6"
+  }, /*#__PURE__*/react.createElement("div", {
+    style: {
+      background: "blue",
+      boxShadow: "inset 0px 0px 0px 1px rgba(0,0,0,.5)"
+    }
+  }, "1/6 (loop)")), /*#__PURE__*/react.createElement(GridColumn, {
+    ratio: "1/6"
+  }, /*#__PURE__*/react.createElement("div", {
+    style: {
+      background: "blue",
+      boxShadow: "inset 0px 0px 0px 1px rgba(0,0,0,.5)"
+    }
+  }, "1/6 (loop)")), /*#__PURE__*/react.createElement(GridColumn, {
+    ratio: "1/6"
+  }, /*#__PURE__*/react.createElement("div", {
+    style: {
+      background: "blue",
+      boxShadow: "inset 0px 0px 0px 1px rgba(0,0,0,.5)"
+    }
+  }, "1/6 (loop)")), /*#__PURE__*/react.createElement(GridColumn, {
+    ratio: "1/6"
+  }, /*#__PURE__*/react.createElement("div", {
+    style: {
+      background: "blue",
+      boxShadow: "inset 0px 0px 0px 1px rgba(0,0,0,.5)"
+    }
+  }, "1/6 (loop)")), /*#__PURE__*/react.createElement(GridColumn, {
+    ratio: "1/6"
+  }, /*#__PURE__*/react.createElement("div", {
+    style: {
+      background: "blue",
+      boxShadow: "inset 0px 0px 0px 1px rgba(0,0,0,.5)"
+    }
+  }, "1/6 (loop)")), /*#__PURE__*/react.createElement(GridColumn, {
+    ratio: "1/6"
+  }, /*#__PURE__*/react.createElement("div", {
+    style: {
+      background: "blue",
+      boxShadow: "inset 0px 0px 0px 1px rgba(0,0,0,.5)"
+    }
+  }, "1/6 (loop)")), /*#__PURE__*/react.createElement(GridColumn, {
+    ratio: "1/6"
+  }, /*#__PURE__*/react.createElement("div", {
+    style: {
+      background: "blue",
+      boxShadow: "inset 0px 0px 0px 1px rgba(0,0,0,.5)"
+    }
+  }, "1/6 (loop)")), /*#__PURE__*/react.createElement(GridColumn, {
+    ratio: "1/6"
+  }, /*#__PURE__*/react.createElement("div", {
+    style: {
+      background: "blue",
+      boxShadow: "inset 0px 0px 0px 1px rgba(0,0,0,.5)"
+    }
+  }, "1/6 (loop)"))), /*#__PURE__*/react.createElement(Grid, {
+    noGutters: true
+  }, /*#__PURE__*/react.createElement(GridColumn, {
+    ratio: "1/4"
+  }, /*#__PURE__*/react.createElement("div", {
+    style: {
+      background: "teal",
+      boxShadow: "inset 0px 0px 0px 1px rgba(0,0,0,.5)"
+    }
+  }, "1/4")), /*#__PURE__*/react.createElement(GridColumn, {
+    ratio: "1/4"
+  }, /*#__PURE__*/react.createElement("div", {
+    style: {
+      background: "teal",
+      boxShadow: "inset 0px 0px 0px 1px rgba(0,0,0,.5)"
+    }
+  }, "1/4")), /*#__PURE__*/react.createElement(GridColumn, {
+    ratio: "1/4"
+  }, /*#__PURE__*/react.createElement("div", {
+    style: {
+      background: "teal",
+      boxShadow: "inset 0px 0px 0px 1px rgba(0,0,0,.5)"
+    }
+  }, "1/4")), /*#__PURE__*/react.createElement(GridColumn, {
+    ratio: "1/4"
+  }, /*#__PURE__*/react.createElement("div", {
+    style: {
+      background: "teal",
+      boxShadow: "inset 0px 0px 0px 1px rgba(0,0,0,.5)"
+    }
+  }, "1/4"))), /*#__PURE__*/react.createElement(Grid, {
+    noGutters: true,
+    loop: true
+  }, /*#__PURE__*/react.createElement(GridColumn, {
+    ratio: "1/4"
+  }, /*#__PURE__*/react.createElement("div", {
+    style: {
+      background: "green",
+      boxShadow: "inset 0px 0px 0px 1px rgba(0,0,0,.5)"
+    }
+  }, "1/4 (loop)")), /*#__PURE__*/react.createElement(GridColumn, {
+    ratio: "1/4"
+  }, /*#__PURE__*/react.createElement("div", {
+    style: {
+      background: "green",
+      boxShadow: "inset 0px 0px 0px 1px rgba(0,0,0,.5)"
+    }
+  }, "1/4 (loop)")), /*#__PURE__*/react.createElement(GridColumn, {
+    ratio: "1/4"
+  }, /*#__PURE__*/react.createElement("div", {
+    style: {
+      background: "green",
+      boxShadow: "inset 0px 0px 0px 1px rgba(0,0,0,.5)"
+    }
+  }, "1/4 (loop)")), /*#__PURE__*/react.createElement(GridColumn, {
+    ratio: "1/4"
+  }, /*#__PURE__*/react.createElement("div", {
+    style: {
+      background: "green",
+      boxShadow: "inset 0px 0px 0px 1px rgba(0,0,0,.5)"
+    }
+  }, "1/4 (loop)")), /*#__PURE__*/react.createElement(GridColumn, {
+    ratio: "1/4"
+  }, /*#__PURE__*/react.createElement("div", {
+    style: {
+      background: "green",
+      boxShadow: "inset 0px 0px 0px 1px rgba(0,0,0,.5)"
+    }
+  }, "1/4 (loop)")), /*#__PURE__*/react.createElement(GridColumn, {
+    ratio: "1/4"
+  }, /*#__PURE__*/react.createElement("div", {
+    style: {
+      background: "green",
+      boxShadow: "inset 0px 0px 0px 1px rgba(0,0,0,.5)"
+    }
+  }, "1/4 (loop)")), /*#__PURE__*/react.createElement(GridColumn, {
+    ratio: "1/4"
+  }, /*#__PURE__*/react.createElement("div", {
+    style: {
+      background: "green",
+      boxShadow: "inset 0px 0px 0px 1px rgba(0,0,0,.5)"
+    }
+  }, "1/4 (loop)")), /*#__PURE__*/react.createElement(GridColumn, {
+    ratio: "1/4"
+  }, /*#__PURE__*/react.createElement("div", {
+    style: {
+      background: "green",
+      boxShadow: "inset 0px 0px 0px 1px rgba(0,0,0,.5)"
+    }
+  }, "1/4 (loop)")), /*#__PURE__*/react.createElement(GridColumn, {
+    ratio: "1/4"
+  }, /*#__PURE__*/react.createElement("div", {
+    style: {
+      background: "green",
+      boxShadow: "inset 0px 0px 0px 1px rgba(0,0,0,.5)"
+    }
+  }, "1/4 (loop)")), /*#__PURE__*/react.createElement(GridColumn, {
+    ratio: "1/4"
+  }, /*#__PURE__*/react.createElement("div", {
+    style: {
+      background: "green",
+      boxShadow: "inset 0px 0px 0px 1px rgba(0,0,0,.5)"
+    }
+  }, "1/4 (loop)"))), /*#__PURE__*/react.createElement(Grid, {
+    noGutters: true
+  }, /*#__PURE__*/react.createElement(GridColumn, {
+    ratio: "1/4",
+    stackRatio: "1/2",
+    stackSize: "md"
+  }, /*#__PURE__*/react.createElement("div", {
+    style: {
+      background: "lime",
+      boxShadow: "inset 0px 0px 0px 1px rgba(0,0,0,.5)"
+    }
+  }, "1/4 (min 2 cols)")), /*#__PURE__*/react.createElement(GridColumn, {
+    ratio: "1/4",
+    stackRatio: "1/2",
+    stackSize: "md"
+  }, /*#__PURE__*/react.createElement("div", {
+    style: {
+      background: "lime",
+      boxShadow: "inset 0px 0px 0px 1px rgba(0,0,0,.5)"
+    }
+  }, "1/4 (min 2 cols)")), /*#__PURE__*/react.createElement(GridColumn, {
+    ratio: "1/4",
+    stackRatio: "1/2",
+    stackSize: "md"
+  }, /*#__PURE__*/react.createElement("div", {
+    style: {
+      background: "lime",
+      boxShadow: "inset 0px 0px 0px 1px rgba(0,0,0,.5)"
+    }
+  }, "1/4 (min 2 cols)")), /*#__PURE__*/react.createElement(GridColumn, {
+    ratio: "1/4",
+    stackRatio: "1/2",
+    stackSize: "md"
+  }, /*#__PURE__*/react.createElement("div", {
+    style: {
+      background: "lime",
+      boxShadow: "inset 0px 0px 0px 1px rgba(0,0,0,.5)"
+    }
+  }, "1/4 (min 2 cols)"))), /*#__PURE__*/react.createElement(Grid, {
+    noGutters: true,
+    loop: true
+  }, /*#__PURE__*/react.createElement(GridColumn, {
+    ratio: "1/4",
+    stackRatio: "1/2",
+    stackSize: "md"
+  }, /*#__PURE__*/react.createElement("div", {
+    style: {
+      background: "olive",
+      boxShadow: "inset 0px 0px 0px 1px rgba(0,0,0,.5)"
+    }
+  }, "1/4 (min 2 cols & loop)")), /*#__PURE__*/react.createElement(GridColumn, {
+    ratio: "1/4",
+    stackRatio: "1/2",
+    stackSize: "md"
+  }, /*#__PURE__*/react.createElement("div", {
+    style: {
+      background: "olive",
+      boxShadow: "inset 0px 0px 0px 1px rgba(0,0,0,.5)"
+    }
+  }, "1/4 (min 2 cols & loop)")), /*#__PURE__*/react.createElement(GridColumn, {
+    ratio: "1/4",
+    stackRatio: "1/2",
+    stackSize: "md"
+  }, /*#__PURE__*/react.createElement("div", {
+    style: {
+      background: "olive",
+      boxShadow: "inset 0px 0px 0px 1px rgba(0,0,0,.5)"
+    }
+  }, "1/4 (min 2 cols & loop)")), /*#__PURE__*/react.createElement(GridColumn, {
+    ratio: "1/4",
+    stackRatio: "1/2",
+    stackSize: "md"
+  }, /*#__PURE__*/react.createElement("div", {
+    style: {
+      background: "olive",
+      boxShadow: "inset 0px 0px 0px 1px rgba(0,0,0,.5)"
+    }
+  }, "1/4 (min 2 cols & loop)")), /*#__PURE__*/react.createElement(GridColumn, {
+    ratio: "1/4",
+    stackRatio: "1/2",
+    stackSize: "md"
+  }, /*#__PURE__*/react.createElement("div", {
+    style: {
+      background: "olive",
+      boxShadow: "inset 0px 0px 0px 1px rgba(0,0,0,.5)"
+    }
+  }, "1/4 (min 2 cols & loop)"))), /*#__PURE__*/react.createElement(Grid, {
+    noGutters: true
+  }, /*#__PURE__*/react.createElement(GridColumn, {
+    ratio: "1/3"
+  }, /*#__PURE__*/react.createElement("div", {
+    style: {
+      background: "yellow",
+      boxShadow: "inset 0px 0px 0px 1px rgba(0,0,0,.5)"
+    }
+  }, "1/3")), /*#__PURE__*/react.createElement(GridColumn, {
+    ratio: "1/3"
+  }, /*#__PURE__*/react.createElement("div", {
+    style: {
+      background: "yellow",
+      boxShadow: "inset 0px 0px 0px 1px rgba(0,0,0,.5)"
+    }
+  }, "1/3")), /*#__PURE__*/react.createElement(GridColumn, {
+    ratio: "1/3"
+  }, /*#__PURE__*/react.createElement("div", {
+    style: {
+      background: "yellow",
+      boxShadow: "inset 0px 0px 0px 1px rgba(0,0,0,.5)"
+    }
+  }, "1/3"))), /*#__PURE__*/react.createElement(Grid, {
+    noGutters: true,
+    loop: true
+  }, /*#__PURE__*/react.createElement(GridColumn, {
+    ratio: "1/3"
+  }, /*#__PURE__*/react.createElement("div", {
+    style: {
+      background: "red",
+      boxShadow: "inset 0px 0px 0px 1px rgba(0,0,0,.5)"
+    }
+  }, "1/3 (loop)")), /*#__PURE__*/react.createElement(GridColumn, {
+    ratio: "1/3"
+  }, /*#__PURE__*/react.createElement("div", {
+    style: {
+      background: "red",
+      boxShadow: "inset 0px 0px 0px 1px rgba(0,0,0,.5)"
+    }
+  }, "1/3 (loop)")), /*#__PURE__*/react.createElement(GridColumn, {
+    ratio: "1/3"
+  }, /*#__PURE__*/react.createElement("div", {
+    style: {
+      background: "red",
+      boxShadow: "inset 0px 0px 0px 1px rgba(0,0,0,.5)"
+    }
+  }, "1/3 (loop)")), /*#__PURE__*/react.createElement(GridColumn, {
+    ratio: "1/3"
+  }, /*#__PURE__*/react.createElement("div", {
+    style: {
+      background: "red",
+      boxShadow: "inset 0px 0px 0px 1px rgba(0,0,0,.5)"
+    }
+  }, "1/3 (loop)")), /*#__PURE__*/react.createElement(GridColumn, {
+    ratio: "1/3"
+  }, /*#__PURE__*/react.createElement("div", {
+    style: {
+      background: "red",
+      boxShadow: "inset 0px 0px 0px 1px rgba(0,0,0,.5)"
+    }
+  }, "1/3 (loop)")), /*#__PURE__*/react.createElement(GridColumn, {
+    ratio: "1/3"
+  }, /*#__PURE__*/react.createElement("div", {
+    style: {
+      background: "red",
+      boxShadow: "inset 0px 0px 0px 1px rgba(0,0,0,.5)"
+    }
+  }, "1/3 (loop)")), /*#__PURE__*/react.createElement(GridColumn, {
+    ratio: "1/3"
+  }, /*#__PURE__*/react.createElement("div", {
+    style: {
+      background: "red",
+      boxShadow: "inset 0px 0px 0px 1px rgba(0,0,0,.5)"
+    }
+  }, "1/3 (loop)")), /*#__PURE__*/react.createElement(GridColumn, {
+    ratio: "1/3"
+  }, /*#__PURE__*/react.createElement("div", {
+    style: {
+      background: "red",
+      boxShadow: "inset 0px 0px 0px 1px rgba(0,0,0,.5)"
+    }
+  }, "1/3 (loop)"))), /*#__PURE__*/react.createElement(Grid, {
+    noGutters: true,
+    loop: true
+  }, /*#__PURE__*/react.createElement(GridColumn, {
+    ratio: "1/2"
+  }, /*#__PURE__*/react.createElement("div", {
+    style: {
+      background: "purple",
+      boxShadow: "inset 0px 0px 0px 1px rgba(0,0,0,.5)"
+    }
+  }, "1/2 (loop)")), /*#__PURE__*/react.createElement(GridColumn, {
+    ratio: "1/2"
+  }, /*#__PURE__*/react.createElement("div", {
+    style: {
+      background: "purple",
+      boxShadow: "inset 0px 0px 0px 1px rgba(0,0,0,.5)"
+    }
+  }, "1/2 (loop)")), /*#__PURE__*/react.createElement(GridColumn, {
+    ratio: "1/2"
+  }, /*#__PURE__*/react.createElement("div", {
+    style: {
+      background: "purple",
+      boxShadow: "inset 0px 0px 0px 1px rgba(0,0,0,.5)"
+    }
+  }, "1/2 (loop)"))), /*#__PURE__*/react.createElement(Grid, {
+    noGutters: true
+  }, /*#__PURE__*/react.createElement(GridColumn, {
+    ratio: "1/2"
+  }, /*#__PURE__*/react.createElement("div", {
+    style: {
+      background: "fuchsia",
+      boxShadow: "inset 0px 0px 0px 1px rgba(0,0,0,.5)"
+    }
+  }, "1/2")), /*#__PURE__*/react.createElement(GridColumn, {
+    ratio: "1/2"
+  }, /*#__PURE__*/react.createElement("div", {
+    style: {
+      background: "fuchsia",
+      boxShadow: "inset 0px 0px 0px 1px rgba(0,0,0,.5)"
+    }
+  }, "1/2"))), /*#__PURE__*/react.createElement(Grid, {
+    noGutters: true
+  }, /*#__PURE__*/react.createElement(GridColumn, {
+    ratio: "2/3"
+  }, /*#__PURE__*/react.createElement("div", {
+    style: {
+      background: "orange",
+      boxShadow: "inset 0px 0px 0px 1px rgba(0,0,0,.5)"
+    }
+  }, "2/3")), /*#__PURE__*/react.createElement(GridColumn, {
+    ratio: "1/3"
+  }, /*#__PURE__*/react.createElement("div", {
+    style: {
+      background: "orange",
+      boxShadow: "inset 0px 0px 0px 1px rgba(0,0,0,.5)"
+    }
+  }, "1/3"))), /*#__PURE__*/react.createElement(Grid, {
+    noGutters: true
+  }, /*#__PURE__*/react.createElement(GridColumn, {
+    ratio: "3/4"
+  }, /*#__PURE__*/react.createElement("div", {
+    style: {
+      background: "blue",
+      boxShadow: "inset 0px 0px 0px 1px rgba(0,0,0,.5)"
+    }
+  }, "3/4")), /*#__PURE__*/react.createElement(GridColumn, {
+    ratio: "1/4"
+  }, /*#__PURE__*/react.createElement("div", {
+    style: {
+      background: "blue",
+      boxShadow: "inset 0px 0px 0px 1px rgba(0,0,0,.5)"
+    }
+  }, "1/4"))), /*#__PURE__*/react.createElement(Grid, {
+    noGutters: true
+  }, /*#__PURE__*/react.createElement(GridColumn, {
+    ratio: "4/5"
+  }, /*#__PURE__*/react.createElement("div", {
+    style: {
+      background: "teal",
+      boxShadow: "inset 0px 0px 0px 1px rgba(0,0,0,.5)"
+    }
+  }, "4/5")), /*#__PURE__*/react.createElement(GridColumn, {
+    ratio: "1/5"
+  }, /*#__PURE__*/react.createElement("div", {
+    style: {
+      background: "teal",
+      boxShadow: "inset 0px 0px 0px 1px rgba(0,0,0,.5)"
+    }
+  }, "1/5"))), /*#__PURE__*/react.createElement(Grid, {
+    noGutters: true
+  }, /*#__PURE__*/react.createElement(GridColumn, {
+    ratio: "3/5"
+  }, /*#__PURE__*/react.createElement("div", {
+    style: {
+      background: "aqua",
+      boxShadow: "inset 0px 0px 0px 1px rgba(0,0,0,.5)"
+    }
+  }, "3/5")), /*#__PURE__*/react.createElement(GridColumn, {
+    ratio: "2/5"
+  }, /*#__PURE__*/react.createElement("div", {
+    style: {
+      background: "aqua",
+      boxShadow: "inset 0px 0px 0px 1px rgba(0,0,0,.5)"
+    }
+  }, "2/5"))), /*#__PURE__*/react.createElement(Grid, {
+    noGutters: true
+  }, /*#__PURE__*/react.createElement(GridColumn, {
+    ratio: "1/4"
+  }, /*#__PURE__*/react.createElement("div", {
+    style: {
+      background: "green",
+      boxShadow: "inset 0px 0px 0px 1px rgba(0,0,0,.5)"
+    }
+  }, "1/4")), /*#__PURE__*/react.createElement(GridColumn, {
+    ratio: "1/2"
+  }, /*#__PURE__*/react.createElement("div", {
+    style: {
+      background: "green",
+      boxShadow: "inset 0px 0px 0px 1px rgba(0,0,0,.5)"
+    }
+  }, "1/2")), /*#__PURE__*/react.createElement(GridColumn, {
+    ratio: "1/4"
+  }, /*#__PURE__*/react.createElement("div", {
+    style: {
+      background: "green",
+      boxShadow: "inset 0px 0px 0px 1px rgba(0,0,0,.5)"
+    }
+  }, "1/4"))), /*#__PURE__*/react.createElement(Grid, {
+    noGutters: true
+  }, /*#__PURE__*/react.createElement(GridColumn, {
+    ratio: "1/3"
+  }, /*#__PURE__*/react.createElement("div", {
+    style: {
+      background: "aqua",
+      boxShadow: "inset 0px 0px 0px 1px rgba(0,0,0,.5)"
+    }
+  }, "1/3")), /*#__PURE__*/react.createElement(GridColumn, {
+    ratio: "1/2"
+  }, /*#__PURE__*/react.createElement("div", {
+    style: {
+      background: "aqua",
+      boxShadow: "inset 0px 0px 0px 1px rgba(0,0,0,.5)"
+    }
+  }, "1/2")), /*#__PURE__*/react.createElement(GridColumn, {
+    ratio: "1/6"
+  }, /*#__PURE__*/react.createElement("div", {
+    style: {
+      background: "aqua",
+      boxShadow: "inset 0px 0px 0px 1px rgba(0,0,0,.5)"
+    }
+  }, "1/6"))), /*#__PURE__*/react.createElement(Grid, {
+    noGutters: true
+  }, /*#__PURE__*/react.createElement(GridColumn, {
+    ratio: "1/5"
+  }, /*#__PURE__*/react.createElement("div", {
+    style: {
+      background: "teal",
+      boxShadow: "inset 0px 0px 0px 1px rgba(0,0,0,.5)"
+    }
+  }, "1/5")), /*#__PURE__*/react.createElement(GridColumn, {
+    ratio: "2/5"
+  }, /*#__PURE__*/react.createElement("div", {
+    style: {
+      background: "teal",
+      boxShadow: "inset 0px 0px 0px 1px rgba(0,0,0,.5)"
+    }
+  }, "2/5")), /*#__PURE__*/react.createElement(GridColumn, {
+    ratio: "2/5"
+  }, /*#__PURE__*/react.createElement("div", {
+    style: {
+      background: "teal",
+      boxShadow: "inset 0px 0px 0px 1px rgba(0,0,0,.5)"
+    }
+  }, "2/5"))), /*#__PURE__*/react.createElement(Grid, {
+    noGutters: true
+  }, /*#__PURE__*/react.createElement(GridColumn, {
+    ratio: "2/3"
+  }, /*#__PURE__*/react.createElement("div", {
+    style: {
+      background: "green",
+      boxShadow: "inset 0px 0px 0px 1px rgba(0,0,0,.5)"
+    }
+  }, "2/3")), /*#__PURE__*/react.createElement(GridColumn, {
+    ratio: "1/5"
+  }, /*#__PURE__*/react.createElement("div", {
+    style: {
+      background: "green",
+      boxShadow: "inset 0px 0px 0px 1px rgba(0,0,0,.5)"
+    }
+  }, "1/5")), /*#__PURE__*/react.createElement(GridColumn, {
+    ratio: "1/5"
+  }, /*#__PURE__*/react.createElement("div", {
+    style: {
+      background: "green",
+      boxShadow: "inset 0px 0px 0px 1px rgba(0,0,0,.5)"
+    }
+  }, "1/5")))))), /*#__PURE__*/react.createElement("section", null, /*#__PURE__*/react.createElement("div", {
+    className: "container"
+  }, /*#__PURE__*/react.createElement("div", {
+    className: "row"
+  }, /*#__PURE__*/react.createElement("div", {
+    className: "col-12"
+  }, /*#__PURE__*/react.createElement("h3", {
+    className: "app-header-title"
+  }, "Uix Grid (No line breaks)"), /*#__PURE__*/react.createElement("p", null, "Set the ", /*#__PURE__*/react.createElement("code", null, "noBreak"), " attribute of ", /*#__PURE__*/react.createElement("code", null, "<Grid>"), " markup.", /*#__PURE__*/react.createElement("code", null, "true"), " will prevent the columns from automatically wrapping across multiple lines.", /*#__PURE__*/react.createElement("br", null), /*#__PURE__*/react.createElement("em", null, "Please simulate mobile viewing after zooming out your viewport.")), /*#__PURE__*/react.createElement("hr", null))))), /*#__PURE__*/react.createElement("section", {
+    className: "uix-spacing--s"
+  }, /*#__PURE__*/react.createElement("div", {
+    className: "container"
+  }, /*#__PURE__*/react.createElement("div", {
+    style: {
+      backgroundColor: "#000"
+    }
+  }, /*#__PURE__*/react.createElement(Grid, {
+    noBreak: true,
+    equalWidth: true
+  }, /*#__PURE__*/react.createElement(GridColumn, null, /*#__PURE__*/react.createElement("div", {
+    style: {
+      background: "fuchsia",
+      boxShadow: "inset 0px 0px 0px 1px rgba(0,0,0,.5)"
+    }
+  }, "1/5 (equal width)")), /*#__PURE__*/react.createElement(GridColumn, null, /*#__PURE__*/react.createElement("div", {
+    style: {
+      background: "fuchsia",
+      boxShadow: "inset 0px 0px 0px 1px rgba(0,0,0,.5)"
+    }
+  }, "1/5 (equal width)")), /*#__PURE__*/react.createElement(GridColumn, null, /*#__PURE__*/react.createElement("div", {
+    style: {
+      background: "fuchsia",
+      boxShadow: "inset 0px 0px 0px 1px rgba(0,0,0,.5)"
+    }
+  }, "1/5 (equal width)")), /*#__PURE__*/react.createElement(GridColumn, null, /*#__PURE__*/react.createElement("div", {
+    style: {
+      background: "fuchsia",
+      boxShadow: "inset 0px 0px 0px 1px rgba(0,0,0,.5)"
+    }
+  }, "1/5 (equal width)")), /*#__PURE__*/react.createElement(GridColumn, null, /*#__PURE__*/react.createElement("div", {
+    style: {
+      background: "fuchsia",
+      boxShadow: "inset 0px 0px 0px 1px rgba(0,0,0,.5)"
+    }
+  }, "1/5 (equal width)"))), /*#__PURE__*/react.createElement(Grid, {
+    noBreak: true
+  }, /*#__PURE__*/react.createElement(GridColumn, {
+    ratio: "3/4"
+  }, /*#__PURE__*/react.createElement("div", {
+    style: {
+      background: "olive",
+      boxShadow: "inset 0px 0px 0px 1px rgba(0,0,0,.5)"
+    }
+  }, "3/4")), /*#__PURE__*/react.createElement(GridColumn, {
+    ratio: "1/4"
+  }, /*#__PURE__*/react.createElement("div", {
+    style: {
+      background: "olive",
+      boxShadow: "inset 0px 0px 0px 1px rgba(0,0,0,.5)"
+    }
+  }, "1/4")))))), /*#__PURE__*/react.createElement("section", null, /*#__PURE__*/react.createElement("div", {
+    className: "container"
+  }, /*#__PURE__*/react.createElement("div", {
+    className: "row"
+  }, /*#__PURE__*/react.createElement("div", {
+    className: "col-12"
+  }, /*#__PURE__*/react.createElement("h3", {
+    className: "app-header-title"
+  }, "Inline Block"), /*#__PURE__*/react.createElement("p", null, "Only use ", /*#__PURE__*/react.createElement("code", null, "<GridColumn>"), "markup without using", /*#__PURE__*/react.createElement("code", null, "<Grid>"), " to wrap them."), /*#__PURE__*/react.createElement("hr", null))))), /*#__PURE__*/react.createElement("section", {
+    className: "uix-spacing--s"
+  }, /*#__PURE__*/react.createElement("div", {
+    className: "container"
+  }, /*#__PURE__*/react.createElement("div", {
+    style: {
+      backgroundColor: "#000"
+    }
+  }, /*#__PURE__*/react.createElement(GridColumn, {
+    ratio: "1/6"
+  }, /*#__PURE__*/react.createElement("div", {
+    style: {
+      background: "blue",
+      boxShadow: "inset 0px 0px 0px 1px rgba(0,0,0,.5)"
+    }
+  }, "1/6")), /*#__PURE__*/react.createElement("div", {
+    className: "uix-clearfix"
+  }), /*#__PURE__*/react.createElement("div", {
+    className: "text-center"
+  }, /*#__PURE__*/react.createElement(GridColumn, {
+    ratio: "2/5",
+    inline: true
+  }, /*#__PURE__*/react.createElement("div", {
+    style: {
+      background: "teal",
+      boxShadow: "inset 0px 0px 0px 1px rgba(0,0,0,.5)"
+    }
+  }, "2/5, Center alignment."))), /*#__PURE__*/react.createElement("div", {
+    className: "uix-clearfix"
+  }), /*#__PURE__*/react.createElement(GridColumn, {
+    ratio: "2/5",
+    stackRatio: "1/2",
+    stackSize: "md"
+  }, /*#__PURE__*/react.createElement("div", {
+    style: {
+      background: "green",
+      boxShadow: "inset 0px 0px 0px 1px rgba(0,0,0,.5)"
+    }
+  }, "2/5, The width becomes 50% on mobile.")), /*#__PURE__*/react.createElement("div", {
+    className: "uix-clearfix"
+  })))), /*#__PURE__*/react.createElement("section", null, /*#__PURE__*/react.createElement("div", {
+    className: "container"
+  }, /*#__PURE__*/react.createElement("div", {
+    className: "row"
+  }, /*#__PURE__*/react.createElement("div", {
+    className: "col-12"
+  }, /*#__PURE__*/react.createElement("h3", {
+    className: "app-header-title"
+  }, "API"), /*#__PURE__*/react.createElement("hr", null), /*#__PURE__*/react.createElement("article", {
+    className: "uix-spacing--s",
+    itemProp: "text"
+  }, /*#__PURE__*/react.createElement("h4", null, "Grid"), /*#__PURE__*/react.createElement("div", null, /*#__PURE__*/react.createElement("pre", null, "import ", "{Grid}", " from '@uixkit.react/components/Grid/index.tsx';")), /*#__PURE__*/react.createElement("div", {
+    className: "table-responsive-md"
+  }, /*#__PURE__*/react.createElement("table", {
+    className: "table table-bordered table-striped mb-5"
+  }, /*#__PURE__*/react.createElement("thead", null, /*#__PURE__*/react.createElement("tr", null, /*#__PURE__*/react.createElement("th", null, "Property"), /*#__PURE__*/react.createElement("th", null, "Type"), /*#__PURE__*/react.createElement("th", null, "Default"), /*#__PURE__*/react.createElement("th", null, "Description"))), /*#__PURE__*/react.createElement("tbody", null, /*#__PURE__*/react.createElement("tr", null, /*#__PURE__*/react.createElement("td", null, /*#__PURE__*/react.createElement("code", null, "noBreak")), /*#__PURE__*/react.createElement("td", null, "boolean"), /*#__PURE__*/react.createElement("td", null, "false"), /*#__PURE__*/react.createElement("td", null, "Permanent non-breaking all columns")), /*#__PURE__*/react.createElement("tr", null, /*#__PURE__*/react.createElement("td", null, /*#__PURE__*/react.createElement("code", null, "noGutters")), /*#__PURE__*/react.createElement("td", null, "boolean"), /*#__PURE__*/react.createElement("td", null, "false"), /*#__PURE__*/react.createElement("td", null, "Remove column spacing")), /*#__PURE__*/react.createElement("tr", null, /*#__PURE__*/react.createElement("td", null, /*#__PURE__*/react.createElement("code", null, "equalWidth")), /*#__PURE__*/react.createElement("td", null, "boolean"), /*#__PURE__*/react.createElement("td", null, "false"), /*#__PURE__*/react.createElement("td", null, "Per-column will be the same width automatically")), /*#__PURE__*/react.createElement("tr", null, /*#__PURE__*/react.createElement("td", null, /*#__PURE__*/react.createElement("code", null, "loop")), /*#__PURE__*/react.createElement("td", null, "boolean"), /*#__PURE__*/react.createElement("td", null, "false"), /*#__PURE__*/react.createElement("td", null, "Multi-line layout correction"))))), /*#__PURE__*/react.createElement("h4", null, "GridColumn"), /*#__PURE__*/react.createElement("div", null, /*#__PURE__*/react.createElement("pre", null, "import ", "{GridColumn}", " from '@uixkit.react/components/Grid/index.tsx';")), /*#__PURE__*/react.createElement("div", {
+    className: "table-responsive-md"
+  }, /*#__PURE__*/react.createElement("table", {
+    className: "table table-bordered table-striped mb-5"
+  }, /*#__PURE__*/react.createElement("thead", null, /*#__PURE__*/react.createElement("tr", null, /*#__PURE__*/react.createElement("th", null, "Property"), /*#__PURE__*/react.createElement("th", null, "Type"), /*#__PURE__*/react.createElement("th", null, "Default"), /*#__PURE__*/react.createElement("th", null, "Description"))), /*#__PURE__*/react.createElement("tbody", null, /*#__PURE__*/react.createElement("tr", null, /*#__PURE__*/react.createElement("td", null, /*#__PURE__*/react.createElement("code", null, "ratio")), /*#__PURE__*/react.createElement("td", null, /*#__PURE__*/react.createElement("code", null, "1/1"), " | ", /*#__PURE__*/react.createElement("code", null, "1/2"), " | ", /*#__PURE__*/react.createElement("code", null, "1/3"), " | ", /*#__PURE__*/react.createElement("code", null, "2/3"), " | ", /*#__PURE__*/react.createElement("code", null, "1/4"), " |", /*#__PURE__*/react.createElement("code", null, "3/4"), " | ", /*#__PURE__*/react.createElement("code", null, "1/5"), " | ", /*#__PURE__*/react.createElement("code", null, "2/5"), " | ", /*#__PURE__*/react.createElement("code", null, "3/5"), " | ", /*#__PURE__*/react.createElement("code", null, "4/5"), " |", /*#__PURE__*/react.createElement("code", null, "1/6"), " | boolean"), /*#__PURE__*/react.createElement("td", null, "-"), /*#__PURE__*/react.createElement("td", null, "The ratio of each column")), /*#__PURE__*/react.createElement("tr", null, /*#__PURE__*/react.createElement("td", null, /*#__PURE__*/react.createElement("code", null, "stackRatio")), /*#__PURE__*/react.createElement("td", null, /*#__PURE__*/react.createElement("code", null, "1/1"), " | ", /*#__PURE__*/react.createElement("code", null, "1/2"), " | ", /*#__PURE__*/react.createElement("code", null, "1/3"), " | ", /*#__PURE__*/react.createElement("code", null, "2/3"), " | ", /*#__PURE__*/react.createElement("code", null, "1/4"), " |", /*#__PURE__*/react.createElement("code", null, "3/4"), " | ", /*#__PURE__*/react.createElement("code", null, "1/5"), " | ", /*#__PURE__*/react.createElement("code", null, "2/5"), " | ", /*#__PURE__*/react.createElement("code", null, "3/5"), " | ", /*#__PURE__*/react.createElement("code", null, "4/5"), " |", /*#__PURE__*/react.createElement("code", null, "1/6"), " | boolean"), /*#__PURE__*/react.createElement("td", null, "-"), /*#__PURE__*/react.createElement("td", null, "The ratio of stacked breakpoints. ", /*#__PURE__*/react.createElement("br", null), " You can set breakpoints for the ", /*#__PURE__*/react.createElement("code", null, "stackSize"), "and ", /*#__PURE__*/react.createElement("code", null, "stackRatio"), " props that starts out stacked before becoming horizontal with at the small breakpoint. Setting it to a breakpoint (", /*#__PURE__*/react.createElement("code", null, "sm, md, lg, xl"), ") of the", /*#__PURE__*/react.createElement("code", null, "stackSize"), " prop will set the ", /*#__PURE__*/react.createElement("code", null, "<GridColumn>...</Grid>"), "as fluid until the specified breakpoint")), /*#__PURE__*/react.createElement("tr", null, /*#__PURE__*/react.createElement("td", null, /*#__PURE__*/react.createElement("code", null, "stackSize")), /*#__PURE__*/react.createElement("td", null, /*#__PURE__*/react.createElement("code", null, "sm"), " | ", /*#__PURE__*/react.createElement("code", null, "md"), " | ", /*#__PURE__*/react.createElement("code", null, "lg"), " | ", /*#__PURE__*/react.createElement("code", null, "xl"), " | boolean"), /*#__PURE__*/react.createElement("td", null, "-"), /*#__PURE__*/react.createElement("td", null, "The size of stacked breakpoints")), /*#__PURE__*/react.createElement("tr", null, /*#__PURE__*/react.createElement("td", null, /*#__PURE__*/react.createElement("code", null, "inline")), /*#__PURE__*/react.createElement("td", null, "boolean"), /*#__PURE__*/react.createElement("td", null, "false"), /*#__PURE__*/react.createElement("td", null, "This attribute will make the column in a separate block, there is no float, and its centering can be controlled")))))))))));
 });
 ;// CONCATENATED MODULE: ./src/client/views/_pages/ComponentsDemo/index.js
 
@@ -74007,6 +76761,7 @@ function ComponentsDemo_isNativeReflectConstruct() { if (typeof Reflect === "und
 
 
  //components list
+
 
 
 
@@ -74109,7 +76864,13 @@ function ComponentsDemo_HookContent() {
     "data-route": "true",
     to: "".concat(url, "/parallax"),
     activeClassName: "is-active"
-  }, "Parallax")))), /*#__PURE__*/react.createElement("div", {
+  }, "Parallax")), /*#__PURE__*/react.createElement("li", {
+    className: theLocation.pathname.indexOf('/grid') >= 0 ? 'is-active' : ''
+  }, /*#__PURE__*/react.createElement(NavLink, {
+    "data-route": "true",
+    to: "".concat(url, "/grid"),
+    activeClassName: "is-active"
+  }, "Grid")))), /*#__PURE__*/react.createElement("div", {
     className: "uix-demo-section"
   }, /*#__PURE__*/react.createElement("div", {
     className: "uix-demo-container"
@@ -74150,7 +76911,9 @@ function ComponentsDemo_HookContent() {
     path: "".concat(path, "/card")
   }, /*#__PURE__*/react.createElement(CardDemo, null)), /*#__PURE__*/react.createElement(Route, {
     path: "".concat(path, "/parallax")
-  }, /*#__PURE__*/react.createElement(ParallaxDemo, null)))))));
+  }, /*#__PURE__*/react.createElement(ParallaxDemo, null)), /*#__PURE__*/react.createElement(Route, {
+    path: "".concat(path, "/grid")
+  }, /*#__PURE__*/react.createElement(GridDemo, null)))))));
 }
 
 var ComponentsDemo = /*#__PURE__*/function (_Component) {

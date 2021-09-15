@@ -22,7 +22,7 @@ import '@testing-library/jest-dom';
 
 
 import React from 'react';
-import Button from '@uixkit.react/components/Button/index.tsx';
+import { Button } from '@uixkit.react/components/Button/index.tsx';
 
 
 

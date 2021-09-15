@@ -7,6 +7,35 @@
 => 0.0.1
 
 
+## API
+
+### Table
+```js
+import Table from '@uixkit.react/components/Table/index.tsx';
+```
+| Property | Type | Default | Description |
+| --- | --- | --- | --- |
+| `data` | JSON Object Literals | - | Specify data of Table as a JSON string format. Such as: <br />**usage 1:**<br />`{"fields":[[{"cols": 1, "content": "01" },{"cols": 1, "content": "David Lin" }],[{"cols": 1, "content": "02" },{"cols": 1, "content": "Tom McFarlin" }]]}` <br />**usage 2:**<br />`{"headers": ["No.","Name"],"fields":[[{"cols": 1, "content": "01" },{"cols": 1, "content": "David Lin" }],[{"cols": 1, "content": "02" },{"cols": 1, "content": "Tom McFarlin" }]]};` <br />**usage 3:**<br />`{"fields":[[{"cols": 1, "content": "01" },{"cols": 1, "content": "David Lin" }],[{"cols": 1, "content": "02" },{"cols": 1, "content": "Tom McFarlin" }],[{"cols": 4, "content": <><strong style={{background:"yellow"}}>A table cell that spans <span style={{color:"red"}}>4</span> columns</strong></> }]]}` |
+| `bordered` | boolean  | false | Adds borders on all sides of the table and cells |
+| `noborder` | boolean  | false | Removes all borders on the table and cells, including table header |
+| `horizontal` | boolean  | false | Use the horizontal split effect for each row. Includes a header cell(\<th\> tag) with this attribute. |
+| `alternantRow` | boolean  | false | Apply alternating row color in dynamically created table |
+| `alternantCol` | boolean  | false | Apply alternating column color in dynamically created table |
+| `perLine` | boolean  | false | Only use the horizontal splitting effect for each row. |
+| `responsive` | boolean  | false | Create responsive tables up to a particular breakpoint. |
+| `responsiveWithScrollBar` | boolean  | false | Create responsive tables up to a particular breakpoint. This property allows scroll bars to be created automatically in the table. <br />**Only one of the `responsive` and `responsiveWithScrollBar` properties is allowed, and both are invalid if set to true.** |
+
+
+
+JSON configuration properties of the `data`:
+
+| Property | Type | Default | Description |
+| --- | --- | --- | --- |
+| `fields` | array | - | Table rows and columns. The key `cols` identifies the column (change the value if the column is merged). The key `content` to place the content of each cell. Eg. `[[{"cols": 1, "content": "01" },{"cols": 1, "content": "David Lin" }],[{"cols": 1, "content": "02" },{"cols": 1, "content": "Tom McFarlin" }]]` |
+| `headers` | array | - | Defines a header cell in an HTML table. Eg. `["No.","Name"]` |
+
+
+
 ## Examples
 
 ```js
@@ -194,23 +223,21 @@ export default () => {
 		<h3>Table Series</h3>
 		<p>Provides some common styles of table.</p>
 		{/* ================================================================== */} 
+		<Table bordered={true} data={data1} />
+		
+		<Table data={data2} />
 
+		<Table horizontal={true} data={data3} />
 
-		<Table className="uix-table uix-table--bordered" data={data1} />
+		<Table noborder={true} horizontal={true} data={data3} />	
 
-		<Table className="uix-table" data={data2} />
+		<Table horizontal={true} alternantRow={true} data={data3} />
 
-		<Table className="uix-table is-horizontal" data={data3} />
+		<Table perLine={true} data={data3} />
 
-		<Table className="uix-table uix-table--noborder is-horizontal" data={data3} />	
+		<Table perLine={true} data={data4} />
 
-		<Table className="uix-table is-horizontal uix-table--alternant-row" data={data3} />
-
-		<Table className="uix-table uix-table--per-line" data={data3} />
-
-		<Table className="uix-table uix-table--per-line" data={data4} />
-
-		<Table className="uix-table uix-table--alternant-col" data={data5} />
+		<Table alternantCol={true} data={data5} />
 
 
 		<h3>Responsive Table</h3>
@@ -218,14 +245,14 @@ export default () => {
 		{/* ================================================================== */} 
 
 
-		<Table className="uix-table uix-table--noborder is-horizontal is-responsive js-uix-table--responsive" data={data3} />
+		<Table noborder={true} horizontal={true} responsive={true} data={data3} />
 
 
 		<h3>Responsive Table with Scroll Bars</h3>
 		<p>Change window size to watch. The class <code>.js-uix-table--responsive-scrolled</code> used here will be applied <code>.uix-table</code></p>
 		{/* ================================================================== */} 
 
-	   <Table className="uix-table uix-table--bordered js-uix-table--responsive-scrolled" data={data3} />
+	   <Table bordered={true} responsiveWithScrollBar={true} data={data3} />
 
 	  
 	  

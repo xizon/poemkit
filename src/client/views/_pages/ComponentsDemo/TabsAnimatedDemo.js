@@ -102,6 +102,143 @@ export default () => {
 
 
 
+ 
+		{/*<!-- API 
+		====================================================== -->*/}
+		<section>
+			<div className="container">
+				<div className="row">
+					<div className="col-12">
+						<h3 className="app-header-title">API</h3>
+						<hr />
+
+
+						<article className="uix-spacing--s" itemProp="text">
+							<h4>Tabs Animated</h4>
+							<div>
+								<pre>import {`{TabsAnimated}`} from '@uixkit.react/components/TabsAnimated/index.tsx';</pre>
+							</div>
+
+							<div className="table-responsive-md">
+
+								<table className="table table-bordered table-striped mb-5">
+									<thead>
+										<tr>
+											<th>Property</th>
+											<th>Type</th>
+											<th>Default</th>
+											<th>Description</th>
+										</tr>
+									</thead>
+									<tbody>
+										<tr>
+											<td>-</td>
+											<td>-</td>
+											<td>-</td>
+											<td>-</td>
+										</tr>
+										
+									</tbody>
+								</table>
+
+							</div>
+
+							{/*<!-- ++++++++ -->*/}
+
+							<h4>Tab List</h4>
+							<div>
+								<pre>import {`{TabList}`} from '@uixkit.react/components/TabsAnimated/index.tsx';</pre>
+							</div>
+
+							<div className="table-responsive-md">
+								<table className="table table-bordered table-striped mb-5">
+									<thead>
+										<tr>
+											<th>Property</th>
+											<th>Type</th>
+											<th>Default</th>
+											<th>Description</th>
+										</tr>
+									</thead>
+									<tbody>
+										<tr>
+											<td><code>key</code></td>
+											<td>string | <code>tab-list-*</code></td>
+											<td>-</td>
+											<td>A “key” is a special string attribute you need to include when creating lists of elements. Let’s assign a key to our list of items. Must contain the string <code>tab-list</code></td>
+										</tr>
+										<tr>
+											<td><code>defaultActive</code></td>
+											<td>boolean</td>
+											<td>false</td>
+											<td>Set an item to activate by default</td>
+										</tr>
+									</tbody>
+								</table>
+
+
+
+							</div>
+
+							{/*<!-- ++++++++ -->*/}
+
+							<h4>Tab Panel</h4>
+							<div>
+								<pre>import {`{TabPanel}`} from '@uixkit.react/components/TabsAnimated/index.tsx';</pre>
+							</div>
+
+							<div className="table-responsive-md">
+								<table className="table table-bordered table-striped">
+									<thead>
+										<tr>
+											<th>Property</th>
+											<th>Type</th>
+											<th>Default</th>
+											<th>Description</th>
+										</tr>
+									</thead>
+									<tbody>
+										<tr>
+											<td><code>key</code></td>
+											<td>string | <code>tab-panel-*</code></td>
+											<td>-</td>
+											<td>A “key” is a special string attribute you need to include when creating lists of elements. Let’s assign a key to our list of items. Must contain the string <code>tab-panel</code></td>
+										</tr>
+										<tr>
+											<td><code>defaultActive</code></td>
+											<td>boolean</td>
+											<td>false</td>
+											<td>Set an item to activate by default</td>
+										</tr>
+										<tr>
+											<td><code>tabpanelClass</code></td>
+											<td>string</td>
+											<td>-</td>
+											<td>Additional style name, such as <code>uix-outer-shadow--regular</code></td>
+										</tr>
+									</tbody>
+								</table>
+
+								<p className="mb-5">It accepts all props(include data-* attributes) which native div support.</p>
+
+
+							</div>
+
+
+
+						</article>
+
+
+					</div>
+				</div>
+				{/*<!-- .row end -->*/}
+
+
+			</div>
+			{/*<!-- .container end -->*/}
+		</section>
+
+
 
         
       </>

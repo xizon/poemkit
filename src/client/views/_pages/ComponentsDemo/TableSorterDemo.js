@@ -141,7 +141,7 @@ export default () => {
 						<div className="col-12">
 
 
-							<TableSorter className="uix-table is-horizontal uix-table--alternant-row js-uix-table-sorter" data={data1} />
+							<TableSorter horizontal={true} alternantRow={true} data={data1} />
 
 
 						</div>
@@ -155,7 +155,140 @@ export default () => {
 		</section>   
 
 
+ 
+		{/*<!-- API 
+		====================================================== -->*/}
+		<section>
+			<div className="container">
+				<div className="row">
+					<div className="col-12">
+						<h3 className="app-header-title">API</h3>
+						<hr />
 
+
+						<article className="uix-spacing--s" itemProp="text">
+							<h4>Table Sorter</h4>
+							<div>
+								<pre>import TableSorter from '@uixkit.react/components/TableSorter/index.tsx';</pre>
+							</div>
+							<div className="table-responsive-md">
+
+								<table className="table table-bordered table-striped mb-5">
+									<thead>
+										<tr>
+											<th>Property</th>
+											<th>Type</th>
+											<th>Default</th>
+											<th>Description</th>
+										</tr>
+									</thead>
+									<tbody>
+										<tr>
+											<td><code>data</code></td>
+											<td>JSON Object Literals</td>
+											<td>-</td>
+											<td>Specify data of Table as a JSON string format. Such as: <br /><strong>usage:</strong><br /><code className="text-wrap">{`{"headers": [{"type": false, "content": "Index" },{"type": "number", "content": "Money" },{"type": "text", "content": "Name" },{"type": "number", "content": "No." },{"type": "date", "content": "Date1" },{"type": "date", "content": "Date2" }],"fields":[[{"cols":1,"content":"1"},{"cols":1,"content":"$55.134"},{"cols":1,"content":"David Lin"},{"cols":1,"content":"3453434"},{"cols":1,"content":"2012-09-25T12:10:46+00:00"},{"cols":1,"content":"May 22, 2003"}],[{"cols":1,"content":"2"},{"cols":1,"content":"$255.12"},{"cols":1,"content":"Co Cheey"},{"cols":1,"content":"-2324.343"},{"cols":1,"content":"2013-09-10T12:10:46+00:00"},{"cols":1,"content":"September 13, 2013"}]]}`}</code></td>
+										</tr>
+										<tr>
+											<td><code>bordered</code></td>
+											<td>boolean</td>
+											<td>false</td>
+											<td>Adds borders on all sides of the table and cells</td>
+										</tr>
+										<tr>
+											<td><code>noborder</code></td>
+											<td>boolean</td>
+											<td>false</td>
+											<td>Removes all borders on the table and cells, including table header</td>
+										</tr>
+										<tr>
+											<td><code>horizontal</code></td>
+											<td>boolean</td>
+											<td>false</td>
+											<td>Use the horizontal split effect for each row. Includes a header cell(&lt;th&gt; tag) with this attribute.</td>
+										</tr>
+										<tr>
+											<td><code>alternantRow</code></td>
+											<td>boolean</td>
+											<td>false</td>
+											<td>Apply alternating row color in dynamically created table</td>
+										</tr>
+										<tr>
+											<td><code>alternantCol</code></td>
+											<td>boolean</td>
+											<td>false</td>
+											<td>Apply alternating column color in dynamically created table</td>
+										</tr>
+										<tr>
+											<td><code>perLine</code></td>
+											<td>boolean</td>
+											<td>false</td>
+											<td>Only use the horizontal splitting effect for each row.</td>
+										</tr>
+										<tr>
+											<td><code>responsive</code></td>
+											<td>boolean</td>
+											<td>false</td>
+											<td>Create responsive tables up to a particular breakpoint.</td>
+										</tr>
+										<tr>
+											<td><code>responsiveWithScrollBar</code></td>
+											<td>boolean</td>
+											<td>false</td>
+											<td>Create responsive tables up to a particular breakpoint. This property allows scroll bars to be created automatically in the table. <br /><strong>Only one of the <code>responsive</code> and <code>responsiveWithScrollBar</code> properties is allowed, and both are invalid if set to true.</strong></td>
+										</tr>
+									</tbody>
+								</table>
+
+
+
+
+								<p>JSON configuration properties of the <code>data</code>:</p>
+								<div className="table-responsive-md">
+
+									<table className="table table-bordered table-striped mb-5">
+										<thead>
+											<tr>
+												<th>Property</th>
+												<th>Type</th>
+												<th>Default</th>
+												<th>Description</th>
+											</tr>
+										</thead>
+										<tbody>
+											<tr>
+												<td><code>fields</code></td>
+												<td>array</td>
+												<td>-</td>
+												<td>Table rows and columns. The key <code>cols</code> identifies the column (change the value if the column is merged). The key <code>content</code> to place the content of each cell. Eg. <code className="text-wrap">{`[[{"cols":1,"content":"1"},{"cols":1,"content":"$55.134"},{"cols":1,"content":"David Lin"},{"cols":1,"content":"3453434"},{"cols":1,"content":"2012-09-25T12:10:46+00:00"},{"cols":1,"content":"May 22, 2003"}],[{"cols":1,"content":"2"},{"cols":1,"content":"$255.12"},{"cols":1,"content":"Co Cheey"},{"cols":1,"content":"-2324.343"},{"cols":1,"content":"2013-09-10T12:10:46+00:00"},{"cols":1,"content":"September 13, 2013"}]]`}</code></td>
+											</tr>
+											<tr>
+												<td><code>headers</code></td>
+												<td>array</td>
+												<td>-</td>
+												<td>Defines a header cell in an HTML table. The key <code>type</code> is used to specify the type of sorting for each column (Type of sorted values: <code>false</code>, <code>'number'</code>, <code>'text'</code> or <code>'date'</code>). The key <code>content</code> is the value of each field. Eg. <code className="text-wrap">{`[{"type": false, "content": "Index" },{"type": "number", "content": "Money" },{"type": "text", "content": "Name" },{"type": "number", "content": "No." },{"type": "date", "content": "Date1" },{"type": "date", "content": "Date2" }]`}</code></td>
+											</tr>
+										</tbody>
+									</table>
+
+								</div>
+
+
+							</div>
+
+
+
+						</article>
+
+
+					</div>
+				</div>
+				{/*<!-- .row end -->*/}
+
+
+			</div>
+			{/*<!-- .container end -->*/}
+		</section>
 
 		
       </>

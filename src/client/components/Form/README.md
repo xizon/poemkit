@@ -6,6 +6,304 @@
 
 => 0.0.1
 
+
+## API
+
+### Input
+```js
+import { Input } from '@uixkit.react/components/Form/index.tsx';
+```
+| Property | Type | Default | Description |
+| --- | --- | --- | --- |
+| `type` | string | text | The type of input. Such as \<input type="text" name="name"\> gives a text box. |
+| `theme` | string \| `line` | - | The display style of the control |
+| `ui` | string | - | The overlay style of the control. Can be used at the same time, separated by spaces. The optional values are:<br />**status:**<br />`error`, `success`<br />**corners:**<br />`pill`, `rounded`<br />**size:**<br />`fullwidth`, `small`, `medium`, `large` |
+| `value` | string | - | Set a default value for this control |
+| `label` | string \| ReactNode | - | It is used to specify a label for an element of a form. |
+| `units` | string | - | Specify a unit identification string. Such as `em`, `px`, and so on. |
+| `name` | string | - | Name is not deprecated when used with form fields. |
+| `maxLength` | number | - | Defines the maximum number of characters |
+| `disabled` | boolean | false | Whether the input is disabled |
+| `required` | boolean | false | When present, it specifies that a field must be filled out before submitting the form. |
+| `iconLeft` | ReactNode  | - | Set the left icon of this control |
+| `iconRight` | ReactNode  | - | Set the right icon of this control |
+
+
+It accepts all props which this control support.
+
+
+### Password Input
+```js
+import { PasswordInput } from '@uixkit.react/components/Form/index.tsx';
+```
+| Property | Type | Default | Description |
+| --- | --- | --- | --- |
+| `theme` | string \| `line` | - | The display style of the control |
+| `ui` | string | - | The overlay style of the control. Can be used at the same time, separated by spaces. The optional values are:<br />**status:**<br />`error`, `success`<br />**corners:**<br />`pill`, `rounded`<br />**size:**<br />`fullwidth`, `small`, `medium`, `large` |
+| `value` | string | - | Set a default value for this control |
+| `label` | string \| ReactNode | - | It is used to specify a label for an element of a form. |
+| `units` | string | - | Specify a unit identification string. Such as `em`, `px`, and so on. |
+| `name` | string | - | Name is not deprecated when used with form fields. |
+| `maxLength` | number | - | Defines the maximum number of characters |
+| `disabled` | boolean | false | Whether the input is disabled |
+| `required` | boolean | false | When present, it specifies that a field must be filled out before submitting the form. |
+| `iconLeft` | ReactNode  | - | Set the left icon of this control |
+| `iconRight` | ReactNode  | - | Set the right icon of this control |
+
+It accepts all props which this control support.
+
+
+
+
+### Merge Input
+```js
+import { MergeInput } from '@uixkit.react/components/Form/index.tsx';
+```
+| Property | Type | Default | Description |
+| --- | --- | --- | --- |
+| `type` | string | text | The type of input. Such as \<input type="text" name="name"\> gives a text box. |
+| `btnType` | string | button | The type attribute specifies the type of button. Such as `submit`, `reset` or `button` |
+| `ui` | string | - | The overlay style of the control. Can be used at the same time, separated by spaces. The optional values are:<br />**status:**<br />`error`, `success`<br />**corners:**<br />`pill`, `rounded` |
+| `value` | string | - | Set a default value for this control |
+| `label` | string \| ReactNode | - | It is used to specify a label for an element of a form. |
+| `name` | string | - | Name is not deprecated when used with form fields. |
+| `maxLength` | number | - | Defines the maximum number of characters |
+| `disabled` | boolean | false | Whether the input is disabled |
+| `required` | boolean | false | When present, it specifies that a field must be filled out before submitting the form. |
+| `icon` | ReactNode  | - | Set the icon of this control |
+
+
+It accepts all props which this control support.
+
+
+### Textarea
+```js
+import { Textarea } from '@uixkit.react/components/Form/index.tsx';
+```
+| Property | Type | Default | Description |
+| --- | --- | --- | --- |
+| `theme` | string \| `line` | - | The display style of the control |
+| `ui` | string | - | The overlay style of the control. Can be used at the same time, separated by spaces. The optional values are:<br />**status:**<br />`error`, `success`<br />**corners:**<br />`pill`, `rounded`<br />**size:**<br />`fullwidth` |
+| `value` | string | - | Set a default value for this control |
+| `label` | string \| ReactNode | - | It is used to specify a label for an element of a form. |
+| `units` | string | - | Specify a unit identification string. Such as `em`, `px`, and so on. |
+| `name` | string | - | Name is not deprecated when used with form fields. |
+| `maxLength` | number | - | Defines the maximum number of characters |
+| `cols` | number  | - | The cols attribute specifies the visible width of a text area. |
+| `rows` | number  | - | The rows attribute specifies the visible height of a text area, in lines. |
+| `disabled` | boolean | false | Whether the input is disabled |
+| `required` | boolean | false | When present, it specifies that a field must be filled out before submitting the form. |
+
+
+It accepts all props which this control support.
+
+
+
+### Select
+```js
+import { Select } from '@uixkit.react/components/Form/index.tsx';
+```
+| Property | Type | Default | Description |
+| --- | --- | --- | --- |
+| `options` | JSON Object Literals | - | Set the default value using JSON string format for menu of options, like this: `{"Option 1":"value-1","Option 2":"value-2","Option 3":"value-3"}`|
+| `theme` | string \| `line` | - | The display style of the control |
+| `ui` | string | - | The overlay style of the control. Can be used at the same time, separated by spaces. The optional values are:<br />**corners:**<br />`pill`, `rounded`<br />**size:**<br />`fullwidth` |
+| `value` | string | - | Set a default value for this control |
+| `label` | string \| ReactNode | - | It is used to specify a label for an element of a form. |
+| `name` | string | - | Name is not deprecated when used with form fields. |
+| `disabled` | boolean | false | Whether the input is disabled |
+| `required` | boolean | false | When present, it specifies that a field must be filled out before submitting the form. |
+
+
+It accepts all props which this control support.
+
+
+
+### Custom Select
+```js
+import { CustomSelect } from '@uixkit.react/components/Form/index.tsx';
+```
+| Property | Type | Default | Description |
+| --- | --- | --- | --- |
+| `options` | JSON Object Literals | - | Set the default value using JSON string format for menu of options, like this: `{"Option 1":"value-1","Option 2":"value-2","Option 3":"value-3"}`|
+| `position` | string \| `top` | - | The position of the menu, the default is the bottom |
+| `theme` | string \| `line` | - | The display style of the control |
+| `ui` | string | - | The overlay style of the control. Can be used at the same time, separated by spaces. The optional values are:<br />**corners:**<br />`pill`, `rounded`<br />**size:**<br />`fullwidth` |
+| `value` | string | - | Set a default value for this control |
+| `label` | string \| ReactNode | - | It is used to specify a label for an element of a form. |
+| `name` | string | - | Name is not deprecated when used with form fields. |
+| `disabled` | boolean | false | Whether the input is disabled |
+| `required` | boolean | false | When present, it specifies that a field must be filled out before submitting the form. |
+
+
+
+### Checkbox
+```js
+import { Checkbox } from '@uixkit.react/components/Form/index.tsx';
+```
+| Property | Type | Default | Description |
+| --- | --- | --- | --- |
+| `value` | string \| boolean | - | Set a default value for this control. If the value is `true`, it is selected by default  |
+| `label` | string \| ReactNode | - | It is used to specify a label for an element of a form. |
+| `name` | string | - | Name is not deprecated when used with form fields. |
+| `disabled` | boolean | false | Whether the input is disabled |
+| `required` | boolean | false | When present, it specifies that a field must be filled out before submitting the form. |
+
+
+It accepts all props which this control support.
+
+
+
+
+### Radio
+```js
+import { Radio } from '@uixkit.react/components/Form/index.tsx';
+```
+| Property | Type | Default | Description |
+| --- | --- | --- | --- |
+| `options` | JSON Object Literals | - | Set the default value using JSON string format for menu of options, like this: `{"Option 1":"value-1","Option 2":"value-2","Option 3":"value-3"}`|
+| `value` | string | - | Set a default value for this control |
+| `name` | string | - | Name is not deprecated when used with form fields. |
+| `disabled` | boolean | false | Whether the input is disabled |
+| `required` | boolean | false | When present, it specifies that a field must be filled out before submitting the form. |
+
+
+### Multiple Select
+```js
+import { MultiSelect } from '@uixkit.react/components/Form/index.tsx';
+```
+| Property | Type | Default | Description |
+| --- | --- | --- | --- |
+| `options` | JSON Object Literals | - | Set the default value using JSON string format for menu of options, like this: `{"Option 1":"value-1","Option 2":"value-2","Option 3":"value-3"}`|
+| `theme` | string \| `line` | - | The display style of the control |
+| `value` | string | - | Set a default value for this control |
+| `name` | string | - | Name is not deprecated when used with form fields. |
+| `required` | boolean | false | When present, it specifies that a field must be filled out before submitting the form. |
+
+
+
+### Single Select
+```js
+import { SingleSelect } from '@uixkit.react/components/Form/index.tsx';
+```
+| Property | Type | Default | Description |
+| --- | --- | --- | --- |
+| `options` | JSON Object Literals | - | Set the default value using JSON string format for menu of options, like this: `{"Option 1":"value-1","Option 2":"value-2","Option 3":"value-3"}`|
+| `targetID` | string | - | Specify multiple IDs that does not require the prefix `#`, use the item to control its display or not. Each ID is separated by a comma |
+| `theme` | string \| `line` | - | The display style of the control |
+| `ui` | string | - | The overlay style of the control. Can be used at the same time, separated by spaces. The optional values are:<br />**corners:**<br />`pill`, `rounded` |
+| `value` | string | - | Set a default value for this control |
+| `name` | string | - | Name is not deprecated when used with form fields. |
+| `required` | boolean | false | When present, it specifies that a field must be filled out before submitting the form. |
+
+
+### Date
+```js
+import { Date } from '@uixkit.react/components/Form/index.tsx';
+```
+| Property | Type | Default | Description |
+| --- | --- | --- | --- |
+| `defaultNow` | boolean | false | If the value is `true`, the current date and time are used |
+| `time` | `date` \| `datetime-local` | - | To create input fields that let the user enter a date, either with a textbox that validates the input or a special date picker interface. |
+| `theme` | string \| `line` | - | The display style of the control |
+| `ui` | string | - | The overlay style of the control. Can be used at the same time, separated by spaces. The optional values are:<br />**corners:**<br />`pill`, `rounded`<br />**size:**<br />`fullwidth`, `small`, `medium`, `large` |
+| `value` | string | - | Set a default value for this control |
+| `label` | string \| ReactNode | - | It is used to specify a label for an element of a form. |
+| `name` | string | - | Name is not deprecated when used with form fields. |
+| `disabled` | boolean | false | Whether the input is disabled |
+| `required` | boolean | false | When present, it specifies that a field must be filled out before submitting the form. |
+
+It accepts all props which this control support.
+
+
+
+
+### Number
+```js
+import { Number } from '@uixkit.react/components/Form/index.tsx';
+```
+| Property | Type | Default | Description |
+| --- | --- | --- | --- |
+| `min` | number | - | The minimum value to accept |
+| `max` | number | - | The maximum value to accept |
+| `decimals` | number | 0 | Formats a number using fixed-point notation. |
+| `btnStepMinus` | number | 1 | The minimum minus value after the button is triggered |
+| `btnStepPlus` | number | 1 | The amount of plus value after the button is triggered |
+| `step` | number | 0.01 | A stepping interval to use when using up and down arrows to adjust the value, as well as for validation |
+| `theme` | string \| `line` | - | The display style of the control |
+| `value` | string | - | Set a default value for this control |
+| `name` | string | - | Name is not deprecated when used with form fields. |
+| `disabled` | boolean | false | Whether the input is disabled |
+| `required` | boolean | false | When present, it specifies that a field must be filled out before submitting the form. |
+
+
+It accepts all props which this control support.
+
+
+
+
+### Switch
+```js
+import { Switch } from '@uixkit.react/components/Form/index.tsx';
+```
+| Property | Type | Default | Description |
+| --- | --- | --- | --- |
+| `targetID` | string | - | Specify an ID that does not require the prefix `#`, use the switch to control its display or not |
+| `ui` | string | - | The overlay style of the control. Can be used at the same time, separated by spaces. The optional values are:<br />**corners:**<br />`pill`, `rounded` |
+| `textOff` | string | off | The content to be shown when the state is unchecked |
+| `textOn` | string | on | The content to be shown when the state is checked |
+| `value` | string \| boolean | - | Set a default value for this control. If the value is `true`, it is selected by default  |
+| `label` | string \| ReactNode | - | It is used to specify a label for an element of a form. |
+| `name` | string | - | Name is not deprecated when used with form fields. |
+| `disabled` | boolean | false | Whether the input is disabled |
+| `required` | boolean | false | When present, it specifies that a field must be filled out before submitting the form. |
+
+
+It accepts all props which this control support.
+
+
+
+### Dynamic Fields
+```js
+import { DynamicFields } from '@uixkit.react/components/Form/index.tsx';
+```
+| Property | Type | Default | Description |
+| --- | --- | --- | --- |
+| `value` | string | - | Set a default value for this control |
+| `removeLabel` | string | - | The label of the button to delete current item, if it is not set, only the X icon will be included |
+| `addLabel` | string | Add new | The label of the button to add a new item |
+| `tempHtmlString` | string \| ReactNode | - | Control group are dynamically added after the button is triggered. Like this: <br />`<><Input placeholder="Title" name="your-title[]" /> <Input ui="medium" placeholder="URL" name="your-url[]" /></>` |
+| `maxFields` | number | 10 | Maximum number of control group allowed to be added |
+
+
+### File
+```js
+import { File } from '@uixkit.react/components/Form/index.tsx';
+```
+| Property | Type | Default | Description |
+| --- | --- | --- | --- |
+| `value` | string | - | Set a default value for this control |
+| `label` | string \| ReactNode | - | It is used to specify a label for an element of a form. |
+| `name` | string | - | Name is not deprecated when used with form fields. |
+| `required` | boolean | false | When present, it specifies that a field must be filled out before submitting the form. |
+
+It accepts all props which this control support.
+
+
+### File Field
+```js
+import { FileField } from '@uixkit.react/components/Form/index.tsx';
+```
+| Property | Type | Default | Description |
+| --- | --- | --- | --- |
+| `value` | string | - | Set a default value for this control |
+| `label` | string \| ReactNode | - | It is used to specify a label for an element of a form. |
+| `name` | string | - | Name is not deprecated when used with form fields. |
+| `required` | boolean | false | When present, it specifies that a field must be filled out before submitting the form. |
+
+It accepts all props which this control support.
+
+
 ## Examples
 
 ```js

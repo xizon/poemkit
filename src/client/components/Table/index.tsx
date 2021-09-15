@@ -191,8 +191,15 @@ class TableColgroup extends Component<TableColgroupProps, TableColgroupState> {
 /* Table Component 
 -------------------------------------------------*/			
 type TableProps = {
-	className: string;
 	data: any;
+	bordered?: boolean;
+	noborder?: boolean;
+	horizontal?: boolean;
+	alternantRow?: boolean;
+	alternantCol?: boolean;
+	perLine?: boolean;
+	responsive?: boolean;
+	responsiveWithScrollBar?: boolean;
 	/** -- */
 	id?: string;
 	attributes?: any;
@@ -315,7 +322,14 @@ export default class Table extends Component<TableProps, TableState> {
 		
 		const { 
 			data,
-			className,
+			bordered,
+			noborder,
+			horizontal,
+			alternantRow,
+			alternantCol,
+			perLine,
+			responsive,
+			responsiveWithScrollBar,
 			id,
 			...attributes
 		} = this.props;
@@ -323,19 +337,32 @@ export default class Table extends Component<TableProps, TableState> {
 		
 		const _headers = data.hasOwnProperty( 'headers' ) ? data.headers : false;
 		const _summaries = data.hasOwnProperty( 'summaries' ) ? data.summaries : false;
+
+
+		//Set the class names of different styles
+		let classes = '';
 		
+		if ( bordered ) classes += ' uix-table--bordered';
+		if ( noborder ) classes += ' uix-table--noborder';
+		if ( horizontal ) classes += ' is-horizontal';
+		if ( alternantRow ) classes += ' uix-table--alternant-row';
+		if ( alternantCol ) classes += ' uix-table--alternant-col';
+		if ( perLine ) classes += ' uix-table--per-line';
+		if ( responsive && !responsiveWithScrollBar ) classes += ' is-responsive js-uix-table--responsive';
+		if ( responsiveWithScrollBar && !responsive ) classes += ' js-uix-table--responsive-scrolled';
+
 		
 		return (
 		  <>
 			
-			<div className={className || ''} id={id || 'app-table-' + __.GUID.create()} {...attributes}>
+			<div className={"uix-table" + classes} id={id || 'app-table-' + __.GUID.create()} {...attributes}>
 				<table>
 			
 			        <TableHeaders data={_headers} />
                     <TableSummaries data={_summaries} />
 					
 				
-					{data.hasOwnProperty( 'fields' ) && className.indexOf( 'uix-table--alternant-col' ) >= 0 ? <TableColgroup data={data.fields} />  : ""
+					{data.hasOwnProperty( 'fields' ) && alternantCol ? <TableColgroup data={data.fields} />  : ""
 					}
 					
 

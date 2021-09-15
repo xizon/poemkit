@@ -75,7 +75,7 @@ export default () => {
 					<div className="row">
 						<div className="col-md-6">
 
-							<Video config='{"clickToPlay":false,"muted":true,"autoplay":true,"controls":[""],"loop":{"active":true},"fullscreen":{"enabled": false}}' data-poster={`${rootDirectory}/assets/videos/480x270/demo.jpg`} src={`${rootDirectory}/assets/videos/480x270/demo.mp4`} />
+							<Video config='{"clickToPlay":false,"muted":true,"autoplay":true,"controls":[""],"loop":{"active":true},"fullscreen":{"enabled": false}}' poster={`${rootDirectory}/assets/videos/480x270/demo.jpg`} src={`${rootDirectory}/assets/videos/480x270/demo.mp4`} />
 
 
 
@@ -145,6 +145,124 @@ export default () => {
 
 
 
+		</section>
+
+
+
+		{/*<!-- API 
+		====================================================== -->*/}
+		<section>
+			<div className="container">
+				<div className="row">
+					<div className="col-12">
+						<h3 className="app-header-title">API</h3>
+						<hr />
+
+
+						<article className="uix-spacing--s" itemProp="text">
+							<h4>Video</h4>
+							<div>
+								<pre>import Video from '@uixkit.react/components/Video/index.tsx';</pre>
+							</div>
+							<div className="table-responsive-md">
+								<table className="table table-bordered table-striped mb-5">
+									<thead>
+										<tr>
+											<th>Property</th>
+											<th>Type</th>
+											<th>Default</th>
+											<th>Description</th>
+										</tr>
+									</thead>
+									<tbody>
+										<tr>
+											<td><code>config</code></td>
+											<td>JSON Object Literals</td>
+											<td>-</td>
+											<td>Detailed animation parameters, using JSON string format.<br /><strong>default value:</strong><br /><code className="text-wrap">{`{"muted":false,"autoplay":false,"controls":["play-large", "play", "progress", "current-time", "mute", "volume", "captions", "settings", "pip", "airplay", "fullscreen"],"loop":{"active":false}}`}</code> <br /><strong>other:</strong><br /><code className="text-wrap">{`{"clickToPlay":false,"muted":true,"autoplay":true,"controls":[""],"loop":{"active":true},"fullscreen":{"enabled": false}}`}</code></td>
+										</tr>
+										<tr>
+											<td><code>poster</code></td>
+											<td>string</td>
+											<td>-</td>
+											<td>The poster image should be specified.</td>
+										</tr>
+										<tr>
+											<td><code>src</code></td>
+											<td>string</td>
+											<td>-</td>
+											<td>The URL of the video to embed.</td>
+										</tr>
+									</tbody>
+								</table>
+	
+							</div>
+
+							<p>JSON configuration properties of the <code>config</code>:</p>
+							<div className="table-responsive-md">
+								<table className="table table-bordered table-striped mb-5">
+									<thead>
+										<tr>
+											<th>Property</th>
+											<th>Type</th>
+											<th>Default</th>
+											<th>Description</th>
+										</tr>
+									</thead>
+									<tbody>
+										<tr>
+											<td><code>muted</code></td>
+											<td>boolean</td>
+											<td>false</td>
+											<td>Whether to start playback muted. If the <code>muted</code> attribute is present on a <code>&lt;video&gt;</code> or <code>&lt;audio&gt;</code> element, this will be automatically set to true.</td>
+										</tr>
+										<tr>
+											<td><code>autoplay</code></td>
+											<td>boolean</td>
+											<td>false</td>
+											<td>Autoplay the media on load. If the <code>autoplay</code> attribute is present on a <code>&lt;video&gt;</code> or <code>&lt;audio&gt;</code> element, this will be automatically set to true.</td>
+										</tr>
+										<tr>
+											<td><code>controls</code></td>
+											<td>array</td>
+											<td>-</td>
+											<td>When present, it specifies that video controls should be displayed. <br /><strong>default value:</strong><br /><code className="text-wrap">["play-large", "play", "progress", "current-time", "mute", "volume", "captions", "settings", "pip", "airplay", "fullscreen"]</code></td>
+										</tr>
+										<tr>
+											<td><code>loop</code></td>
+											<td>JSON Object Literals</td>
+											<td>-</td>
+											<td><code>active</code>: Whether to loop the current video. If the <code>loop</code> attribute is present on a <code>&lt;video&gt;</code> or <code>&lt;audio&gt;</code> element, this will be automatically set to true This is an object to support future functionality. <br /><strong>default value:</strong><br /><code className="text-wrap">{`{ active: false }`}</code></td>
+										</tr>
+										<tr>
+											<td><code>clickToPlay</code></td>
+											<td>boolean</td>
+											<td>true</td>
+											<td>Click (or tap) of the video container will toggle play/pause.</td>
+										</tr>
+										<tr>
+											<td><code>fullscreen</code></td>
+											<td>JSON Object Literals</td>
+											<td>-</td>
+											<td><code>enabled</code>: Toggles whether fullscreen should be enabled. <code>fallback</code>: Allow fallback to a full-window solution (true/false/<code>'force'</code>). <code>iosNative</code>: whether to use native iOS fullscreen when entering fullscreen (no custom controls). <code>container</code>: A selector for an ancestor of the player element, allows contextual content to remain visual in fullscreen mode. Non-ancestors are ignored.<br /><strong>default value:</strong><br /><code className="text-wrap">{`{ enabled: true, fallback: true, iosNative: false, container: null }`}</code></td>
+										</tr>
+									</tbody>
+								</table>
+	
+							</div>
+
+
+
+						</article>
+
+
+					</div>
+				</div>
+				{/*<!-- .row end -->*/}
+
+
+			</div>
+			{/*<!-- .container end -->*/}
 		</section>
 
 

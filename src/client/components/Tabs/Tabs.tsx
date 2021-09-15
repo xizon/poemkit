@@ -20,7 +20,11 @@ import TabPanel from '@uixkit.react/components/Tabs/TabPanel';
 
 
 type TabsProps = {
-	type: string;
+	center?: boolean;
+	fullwidth?: boolean;
+	rotation?: boolean;
+	rotationRadius?: number;
+	rotationWrapperAngle?: number;
 	/** -- */
 	id?: string;
 	children: any; /* required */
@@ -265,42 +269,47 @@ export default class Tabs extends Component<TabsProps, TabsState> {
 		
 	}
 	
-	
-	typeSwitch(param) {
-		
-		switch(param) {
-			case 'normal':
-				return 'uix-tabs uix-tabs--normal';
-			case 'center':
-				return 'uix-tabs uix-tabs--center';
-			case 'fullwidth':
-				return 'uix-tabs';
-			case 'rotation':
-				return 'uix-tabs uix-tabs--rotation';
-				
-			default:
-				return 'uix-tabs uix-tabs--normal';
-		}
-	}
-	
-	
-	
 
 	render() {
 		
 		const { 
-			type,
+			center,
+			fullwidth,
+			rotation,
+			rotationRadius,
+			rotationWrapperAngle,
 			id,
 			children, // the contents of the TabList and TabPanel in a loop
 			...attributes
 		} = this.props;
 		
-	
+
+
+
+		//Get the total amount of items
+		let totalAmount = 0;
+		if ( children != null ) {
+			children.map((item, i) => {
+				if ( item.key.indexOf( 'tab-panel' ) >= 0 ) {
+					totalAmount++;
+				}									
+			});
+		}
+
+
 		return (
 		  <>
  
 			
-				<div id={id ? id : 'app-tabs-' + __.GUID.create() } className={this.typeSwitch(type)} {...attributes}>
+				<div 
+					id={id ? id : 'app-tabs-' + __.GUID.create() } 
+					className={"uix-tabs" + (!center && !rotation && !fullwidth ? ' uix-tabs--normal' : '') + (center ? ' uix-tabs--center' : '') + (rotation ? ' uix-tabs--rotation' : '')} 
+					data-fullwidth={fullwidth ? 1 : 0}
+					data-rotation={rotation || false}
+					data-rotation-display={totalAmount}
+					data-rotation-radius={rotationRadius || 130}
+					data-rotation-wrapper-angle={rotationWrapperAngle || 0}
+					{...attributes}>
 					<div className="uix-tabs__nav">
 						<ul role="tablist">
 							

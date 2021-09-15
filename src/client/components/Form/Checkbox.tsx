@@ -20,7 +20,7 @@ import '@uixkit.react/components/Form/styles/rtl/_theme_material.scss';
 
 
 type CheckboxProps = {
-	value?: string;
+	value?: string | boolean;
 	label?: string | object;
 	name?: string;
 	disabled?: any;
@@ -41,7 +41,7 @@ export default class Checkbox extends Component<CheckboxProps, CheckboxState>  {
 		super(props);
 	
 		this.state = {
-			isChecked: this.props.value == 'true' ? true : false
+			isChecked: this.props.value == 'true' || this.props.value === true ? true : false
 		};
 		
 		
@@ -88,7 +88,7 @@ export default class Checkbox extends Component<CheckboxProps, CheckboxState>  {
 							  disabled={disabled || null}
 							  required={required || null}
                               onChange={ this.handleChange } 
-                              defaultValue={value || ''}
+                              defaultValue={value as string || ''}
 			                  defaultChecked
 							  {...attributes}
 							/>
@@ -101,7 +101,7 @@ export default class Checkbox extends Component<CheckboxProps, CheckboxState>  {
 							  disabled={disabled || null}
 							  required={required || null}
                               onChange={ this.handleChange } 
-                              defaultValue={value || ''}
+                              defaultValue={value as string || ''}
 							  {...attributes}
 							/>
 						)}

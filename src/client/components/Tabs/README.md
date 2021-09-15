@@ -6,6 +6,47 @@
 
 => 0.0.1
 
+## API
+
+### Tabs
+```js
+import { Tabs } from '@uixkit.react/components/Tabs/index.tsx';
+```
+| Property | Type | Default | Description |
+| --- | --- | --- | --- |
+| `center` | boolean | false | If true, the navigation button of the component is centered |
+| `fullwidth` | boolean | false | If true, the navigation buttons of the component will be automatically filled in the 100% width area |
+| `rotation` | boolean | false | Set whether to enable the rotation layout of the component. When the value is true, the two properties of `rotationRadius` and `rotationWrapperAngle` are valid.  |
+| `rotationRadius` | number | 130 | Set the radius of rotation |
+| `rotationWrapperAngle` | number | 0 | Set the rotation angle of the entire component |
+
+
+
+### Tab List
+```js
+import { TabList } from '@uixkit.react/components/Tabs/index.tsx';
+```
+| Property | Type | Default | Description |
+| --- | --- | --- | --- |
+| `key` | string \| `tab-list-*` | - |  A “key” is a special string attribute you need to include when creating lists of elements. Let’s assign a key to our list of items. Must contain the string `tab-list` |
+| `defaultActive` | boolean | false | Set an item to activate by default |
+
+
+### Tab Panel
+```js
+import { TabPanel } from '@uixkit.react/components/Tabs/index.tsx';
+```
+| Property | Type | Default | Description |
+| --- | --- | --- | --- |
+| `key` | string \| `tab-panel-*` | - |  A “key” is a special string attribute you need to include when creating lists of elements. Let’s assign a key to our list of items. Must contain the string `tab-panel` |
+| `defaultActive` | boolean | false | Set an item to activate by default |
+| `tabpanelClass` | string | - | Additional style name, such as `uix-outer-shadow--regular` |
+
+
+It accepts all props(include data-* attributes) which native div support.
+
+
+
 ## Examples
 
 ```js
@@ -20,7 +61,7 @@ export default () => {
 		<h3>Tab Normal</h3>
 		{/* ================================================================== */} 
 
-		<Tabs type="normal">
+		<Tabs>
 			<TabList key="tab-list-1" defaultActive>Tab 1</TabList>
 			<TabList key="tab-list-2">Tab 2</TabList>
 			<TabList key="tab-list-3">Tab 3</TabList>
@@ -40,7 +81,7 @@ export default () => {
 
 
 
-		<Tabs type="center">
+		<Tabs center={true}>
 			<TabList key="tab-list-1" defaultActive>Tab 1</TabList>
 			<TabList key="tab-list-2">Tab 2</TabList>
 			<TabList key="tab-list-3">Tab 3</TabList>
@@ -60,7 +101,7 @@ export default () => {
 
 
 
-		<Tabs type="fullwidth" data-fullwidth="1">
+		<Tabs fullwidth={true}>
 			<TabList key="tab-list-1" defaultActive>Tab 1</TabList>
 			<TabList key="tab-list-2">Tab 2</TabList>
 			<TabList key="tab-list-3">Tab 3</TabList>
@@ -84,7 +125,7 @@ export default () => {
 		{/* ================================================================== */} 
 
 
-		<Tabs type="rotation" data-rotation="true" data-rotation-display="5" data-rotation-radius="130" data-rotation-wrapper-angle="0">
+		<Tabs rotation={true} rotationRadius={130} rotationWrapperAngle={0}>
 			<TabList key="tab-list-1" defaultActive>Tab 1</TabList>
 			<TabList key="tab-list-2">Tab 2</TabList>
 			<TabList key="tab-list-3">Tab 3</TabList>
@@ -116,7 +157,7 @@ export default () => {
 		{/* ================================================================== */} 
 
 
-		<Tabs type="rotation" data-rotation="true" data-rotation-display="4" data-rotation-radius="130" data-rotation-wrapper-angle="-45">
+		<Tabs rotation={true} rotationRadius={130} rotationWrapperAngle={-45}>
 			<TabList key="tab-list-1" defaultActive>Tab 1</TabList>
 			<TabList key="tab-list-2">Tab 2</TabList>
 			<TabList key="tab-list-3">Tab 3</TabList>

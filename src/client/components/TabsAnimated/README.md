@@ -6,6 +6,40 @@
 
 => 0.0.1
 
+## API
+
+### Tabs Animated
+```js
+import { TabsAnimated } from '@uixkit.react/components/TabsAnimated/index.tsx';
+```
+| Property | Type | Default | Description |
+| --- | --- | --- | --- |
+| - | - | - | - |
+
+
+### Tab List
+```js
+import { TabList } from '@uixkit.react/components/TabsAnimated/index.tsx';
+```
+| Property | Type | Default | Description |
+| --- | --- | --- | --- |
+| `key` | string \| `tab-list-*` | - |  A “key” is a special string attribute you need to include when creating lists of elements. Let’s assign a key to our list of items. Must contain the string `tab-list` |
+| `defaultActive` | boolean | false | Set an item to activate by default |
+
+
+### Tab Panel
+```js
+import { TabPanel } from '@uixkit.react/components/TabsAnimated/index.tsx';
+```
+| Property | Type | Default | Description |
+| --- | --- | --- | --- |
+| `key` | string \| `tab-panel-*` | - |  A “key” is a special string attribute you need to include when creating lists of elements. Let’s assign a key to our list of items. Must contain the string `tab-panel` |
+| `defaultActive` | boolean | false | Set an item to activate by default |
+| `tabpanelClass` | string | - | Additional style name, such as `uix-outer-shadow--regular` |
+
+
+It accepts all props(include data-* attributes) which native div support.
+
 ## Examples
 
 ```js

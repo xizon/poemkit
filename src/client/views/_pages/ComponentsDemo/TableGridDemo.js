@@ -8,8 +8,8 @@ import { SidebarMenu } from '@uixkit.react/pages/ComponentsDemo/_SidebarMenu.js'
 const data1 = {
 	"headers": ["COLUMN TITLE 1","COLUMN TITLE 2","COLUMN TITLE 3"],
 	"fields": [
-		{
-			"target": false, 
+		{  
+			 "selected": false, 
 			 "data": [
 			   {"cols": 1, "content": "Row Item Alpha" },
 			   {"cols": 1, "content": "Row Item Alpha" },
@@ -17,7 +17,7 @@ const data1 = {
 			] 
 		},
 		{
-			"target": true, 
+			 "selected": true, 
 			 "data": [
 			   {"cols": 1, "content": "Row Item Bravo" },
 			   {"cols": 1, "content": "Row Item Bravo" },
@@ -25,7 +25,7 @@ const data1 = {
 			] 
 		},
 		{
-			"target": false, 
+			 "selected": false, 
 			 "data": [
 			   {"cols": 1, "content": "Row Item Charlie" },
 			   {"cols": 1, "content": "Row Item Charlie" },
@@ -33,7 +33,7 @@ const data1 = {
 			] 
 		},
 		{
-			"target": false, 
+			 "selected": false, 
 			 "data": [
 			   {"cols": 1, "content": "Row Item Delta" },
 			   {"cols": 1, "content": "Row Item Delta" },
@@ -42,6 +42,7 @@ const data1 = {
 		}
 	]
 };
+
 
 
 
@@ -114,7 +115,7 @@ export default () => {
 					<div className="row">
 						<div className="col-12">
 
-							<TableGrid className="uix-table-grid" data={data1} />
+							<TableGrid data={data1} />
 
 
 						</div>
@@ -128,7 +129,92 @@ export default () => {
 		</section>          
 
 
-   
+
+		{/*<!-- API 
+		====================================================== -->*/}
+		<section>
+			<div className="container">
+				<div className="row">
+					<div className="col-12">
+						<h3 className="app-header-title">API</h3>
+						<hr />
+
+
+						<article className="uix-spacing--s" itemProp="text">
+							<h4>Table Grid</h4>
+							<div>
+								<pre>import TableGrid from '@uixkit.react/components/TableGrid/index.tsx';</pre>
+							</div>
+							<div className="table-responsive-md">
+
+								<table className="table table-bordered table-striped mb-5">
+									<thead>
+										<tr>
+											<th>Property</th>
+											<th>Type</th>
+											<th>Default</th>
+											<th>Description</th>
+										</tr>
+									</thead>
+									<tbody>
+										<tr>
+											<td><code>data</code></td>
+											<td>JSON Object Literals</td>
+											<td>-</td>
+											<td>Specify data of Table as a JSON string format. Such as: <strong>usage:</strong><br /><code className="text-wrap">{`{"headers": ["COLUMN TITLE 1","COLUMN TITLE 2"],"fields":[{"selected": false,"data": [{"cols": 1, "content": "Row Item Alpha" },{"cols": 1, "content": "Row Item Alpha" }]},{"selected": true,"data": [{"cols": 1, "content": "Row Item Bravo" },{"cols": 1, "content": "Row Item Bravo" }]}]}`}</code></td>
+										</tr>
+									</tbody>
+								</table>
+
+
+								<p>JSON configuration properties of the <code>data</code>:</p>
+								<div className="table-responsive-md">
+
+									<table className="table table-bordered table-striped mb-5">
+										<thead>
+											<tr>
+												<th>Property</th>
+												<th>Type</th>
+												<th>Default</th>
+												<th>Description</th>
+											</tr>
+										</thead>
+										<tbody>
+											<tr>
+												<td><code>fields</code></td>
+												<td>array</td>
+												<td>-</td>
+												<td>Table rows and columns. The key <code>cols</code> identifies the column (change the value if the column is merged). The key <code>content</code> to place the content of each cell. The key <code>selected</code> is used to activate a row. The key <code>data</code> is used to load the data of each column in each row. Eg. <code className="text-wrap">{`[{"selected": false,"data": [{"cols": 1, "content": "Row Item Alpha" },{"cols": 1, "content": "Row Item Alpha" }]},{"selected": true,"data": [{"cols": 1, "content": "Row Item Bravo" },{"cols": 1, "content": "Row Item Bravo" }]}]`}</code></td>
+											</tr>
+											<tr>
+												<td><code>headers</code></td>
+												<td>array</td>
+												<td>-</td>
+												<td>Defines a header cell in an HTML table. Eg. <code className="text-wrap">["COLUMN TITLE 1","COLUMN TITLE 2"]</code></td>
+											</tr>
+										</tbody>
+									</table>
+
+
+								</div>
+
+
+							</div>
+
+
+
+						</article>
+
+
+					</div>
+				</div>
+				{/*<!-- .row end -->*/}
+
+
+			</div>
+			{/*<!-- .container end -->*/}
+		</section>
+
     
 		
       </>

@@ -49,7 +49,7 @@ class TableGridField extends Component<TableGridFieldProps, TableGridFieldState>
 -------------------------------------------------*/
 interface TableGridRowConfig {
     data: any[] | undefined;
-    target: string | undefined;
+    selected: string | undefined;
 }
 
 type TableGridRowProps = {
@@ -65,8 +65,8 @@ class TableGridRow extends Component<TableGridRowProps, TableGridRowState> {
 	render() {
 		
 		const _fields = this.props.data!.data!;
-		const _target = this.props.data!.target!;
-		const rowClasses = _target ? 'uix-table-grid__row is-drop-target' : 'uix-table-grid__row';
+		const _selected = this.props.data!.selected!;
+		const rowClasses = _selected ? 'uix-table-grid__row is-drop-target' : 'uix-table-grid__row';
 
 		
 		const fields = _fields.map((el, i) => {
@@ -125,7 +125,6 @@ class TableGridHeaders extends Component<TableGridHeadersProps, TableGridHeaders
 -------------------------------------------------*/				
 type TableGridProps = {
 	data: any;
-	className: string;
 	/** -- */
 	id?: string;
 	attributes?: any;
@@ -144,7 +143,6 @@ export default class TableGrid extends Component<TableGridProps, TableGridState>
 		
 		const { 
 			data,
-			className,
 			id,
 			...attributes
 		} = this.props;
@@ -156,7 +154,7 @@ export default class TableGrid extends Component<TableGridProps, TableGridState>
 		return (
 		  <>
 			
-			<div className={className || ''} id={id || 'app-table-grid-' + __.GUID.create()} {...attributes} role="grid">
+			<div className="uix-table-grid" id={id || 'app-table-grid-' + __.GUID.create()} {...attributes} role="grid">
 		
                 <TableGridHeaders data={_headers} />
 					

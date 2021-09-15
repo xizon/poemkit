@@ -66,7 +66,7 @@ export default () => {
 					<div className="row">
 						<div className="col-12">
 
-							<Tabs type="normal">
+							<Tabs>
 								<TabList key="tab-list-1" defaultActive>Tab 1</TabList>
 								<TabList key="tab-list-2">Tab 2</TabList>
 								<TabList key="tab-list-3">Tab 3</TabList>
@@ -104,7 +104,7 @@ export default () => {
 					<div className="row">
 						<div className="col-12">
 
-							<Tabs type="center">
+							<Tabs center={true}>
 								<TabList key="tab-list-1" defaultActive>Tab 1</TabList>
 								<TabList key="tab-list-2">Tab 2</TabList>
 								<TabList key="tab-list-3">Tab 3</TabList>
@@ -141,7 +141,7 @@ export default () => {
 					<div className="row">
 						<div className="col-12">
 
-							<Tabs type="fullwidth" data-fullwidth="1">
+							<Tabs fullwidth={true}>
 								<TabList key="tab-list-1" defaultActive>Tab 1</TabList>
 								<TabList key="tab-list-2">Tab 2</TabList>
 								<TabList key="tab-list-3">Tab 3</TabList>
@@ -200,8 +200,8 @@ export default () => {
 			<div className="container uix-t-c">
 					<div className="row">
 						<div className="col-12">
-
-							<Tabs type="rotation" data-rotation="true" data-rotation-display="5" data-rotation-radius="130" data-rotation-wrapper-angle="0">
+						
+							<Tabs rotation={true} rotationRadius={130} rotationWrapperAngle={0}>
 								<TabList key="tab-list-1" defaultActive>Tab 1</TabList>
 								<TabList key="tab-list-2">Tab 2</TabList>
 								<TabList key="tab-list-3">Tab 3</TabList>
@@ -270,8 +270,8 @@ export default () => {
 			<div className="container uix-t-c">
 					<div className="row">
 						<div className="col-12">
-
-							<Tabs type="rotation" data-rotation="true" data-rotation-display="4" data-rotation-radius="130" data-rotation-wrapper-angle="-45">
+						
+							<Tabs rotation={true} rotationRadius={130} rotationWrapperAngle={-45}>
 								<TabList key="tab-list-1" defaultActive>Tab 1</TabList>
 								<TabList key="tab-list-2">Tab 2</TabList>
 								<TabList key="tab-list-3">Tab 3</TabList>
@@ -307,6 +307,165 @@ export default () => {
 
 
   
+		{/*<!-- API 
+		====================================================== -->*/}
+		<section>
+			<div className="container">
+				<div className="row">
+					<div className="col-12">
+						<h3 className="app-header-title">API</h3>
+						<hr />
+
+
+						<article className="uix-spacing--s" itemProp="text">
+							<h4>Tabs</h4>
+							<div>
+								<pre>import {`{Tabs}`} from '@uixkit.react/components/Tabs/index.tsx';</pre>
+							</div>
+
+							<div className="table-responsive-md">
+
+								<table className="table table-bordered table-striped mb-5">
+									<thead>
+										<tr>
+											<th>Property</th>
+											<th>Type</th>
+											<th>Default</th>
+											<th>Description</th>
+										</tr>
+									</thead>
+									<tbody>
+										<tr>
+											<td><code>center</code></td>
+											<td>boolean</td>
+											<td>false</td>
+											<td>If true, the navigation button of the component is centered</td>
+										</tr>
+										<tr>
+											<td><code>fullwidth</code></td>
+											<td>boolean</td>
+											<td>false</td>
+											<td>If true, the navigation buttons of the component will be automatically filled in the 100% width area</td>
+										</tr>
+										<tr>
+											<td><code>rotation</code></td>
+											<td>boolean</td>
+											<td>false</td>
+											<td>Set whether to enable the rotation layout of the component. When the value is true, the two properties of <code>rotationRadius</code> and <code>rotationWrapperAngle</code> are valid.</td>
+										</tr>
+										<tr>
+											<td><code>rotationRadius</code></td>
+											<td>number</td>
+											<td>130</td>
+											<td>Set the radius of rotation</td>
+										</tr>
+										<tr>
+											<td><code>rotationWrapperAngle</code></td>
+											<td>number</td>
+											<td>0</td>
+											<td>Set the rotation angle of the entire component</td>
+										</tr>
+									</tbody>
+								</table>
+
+							</div>
+
+							{/*<!-- ++++++++ -->*/}
+
+							<h4>Tab List</h4>
+							<div>
+								<pre>import {`{TabList}`} from '@uixkit.react/components/Tabs/index.tsx';</pre>
+							</div>
+
+							<div className="table-responsive-md">
+								<table className="table table-bordered table-striped mb-5">
+									<thead>
+										<tr>
+											<th>Property</th>
+											<th>Type</th>
+											<th>Default</th>
+											<th>Description</th>
+										</tr>
+									</thead>
+									<tbody>
+										<tr>
+											<td><code>key</code></td>
+											<td>string | <code>tab-list-*</code></td>
+											<td>-</td>
+											<td>A “key” is a special string attribute you need to include when creating lists of elements. Let’s assign a key to our list of items. Must contain the string <code>tab-list</code></td>
+										</tr>
+										<tr>
+											<td><code>defaultActive</code></td>
+											<td>boolean</td>
+											<td>false</td>
+											<td>Set an item to activate by default</td>
+										</tr>
+									</tbody>
+								</table>
+
+
+
+							</div>
+
+							{/*<!-- ++++++++ -->*/}
+
+							<h4>Tab Panel</h4>
+							<div>
+								<pre>import {`{TabPanel}`} from '@uixkit.react/components/Tabs/index.tsx';</pre>
+							</div>
+
+							<div className="table-responsive-md">
+								<table className="table table-bordered table-striped">
+									<thead>
+										<tr>
+											<th>Property</th>
+											<th>Type</th>
+											<th>Default</th>
+											<th>Description</th>
+										</tr>
+									</thead>
+									<tbody>
+										<tr>
+											<td><code>key</code></td>
+											<td>string | <code>tab-panel-*</code></td>
+											<td>-</td>
+											<td>A “key” is a special string attribute you need to include when creating lists of elements. Let’s assign a key to our list of items. Must contain the string <code>tab-panel</code></td>
+										</tr>
+										<tr>
+											<td><code>defaultActive</code></td>
+											<td>boolean</td>
+											<td>false</td>
+											<td>Set an item to activate by default</td>
+										</tr>
+										<tr>
+											<td><code>tabpanelClass</code></td>
+											<td>string</td>
+											<td>-</td>
+											<td>Additional style name, such as <code>uix-outer-shadow--regular</code></td>
+										</tr>
+									</tbody>
+								</table>
+
+								<p className="mb-5">It accepts all props(include data-* attributes) which native div support.</p>
+
+
+							</div>
+
+
+
+						</article>
+
+
+					</div>
+				</div>
+				{/*<!-- .row end -->*/}
+
+
+			</div>
+			{/*<!-- .container end -->*/}
+		</section>
+
+
 
 
       </>

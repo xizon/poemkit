@@ -56,7 +56,7 @@ export default class MergeInput extends Component<MergeInputProps, MergeInputSta
 		if ( param.indexOf( 'error' ) >= 0 ) classes += ' is-error';
 		if ( param.indexOf( 'success' ) >= 0 ) classes += ' is-success';
 		
-		//radius
+		//corners
 		if ( param.indexOf( 'pill' ) >= 0 ) classes += ' is-pill';
 		if ( param.indexOf( 'rounded' ) >= 0 ) classes += ' is-rounded';
 

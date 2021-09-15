@@ -20,8 +20,8 @@ import '@uixkit.react/components/Form/styles/rtl/_theme_material.scss';
 
 
 type InputProps = {
-	theme?: string;
 	type?: string;
+	theme?: string;
 	ui?: string;
 	value?: string;
 	label?: string | object;
@@ -89,11 +89,11 @@ export default class Input extends Component<InputProps, InputState>  {
 		if ( param.indexOf( 'error' ) >= 0 ) classes += ' is-error';
 		if ( param.indexOf( 'success' ) >= 0 ) classes += ' is-success';
 		
-		//radius
+		//corners
 		if ( param.indexOf( 'pill' ) >= 0 ) classes += ' is-pill';
 		if ( param.indexOf( 'rounded' ) >= 0 ) classes += ' is-rounded';
 
-		//sizes
+		//size
 		if ( param.indexOf( 'fullwidth' ) >= 0 ) classes += ' is-fullwidth';
 		if ( param.indexOf( 'small' ) >= 0 ) classes += ' uix-controls__short-s';
 		if ( param.indexOf( 'medium' ) >= 0 ) classes += ' uix-controls__short-m';
@@ -109,8 +109,8 @@ export default class Input extends Component<InputProps, InputState>  {
 	render() {
 		
 		const { 
-			theme,
 			type,
+			theme,
 			ui,
 			disabled,
 			required,

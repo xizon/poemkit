@@ -6,6 +6,17 @@
 
 => 0.0.1
 
+## API
+
+### Header
+```js
+import Header from '@uixkit.react/components/Header/index.tsx';
+```
+| Property | Type | Default | Description |
+| --- | --- | --- | --- |
+| `htmlString` | ReactNode  | - | Set the HTML content of this component |
+
+
 ## Examples
 
 ```js

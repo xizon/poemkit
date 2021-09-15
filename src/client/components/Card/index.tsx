@@ -49,8 +49,8 @@ type CardProps = {
 	title?: string | null;
 	/** Omit overflowed title string */
 	titleEllipsis?: boolean | null;
-	/** Hyperlink of card */
-	subTitle?: React.ReactNode;
+	/** Hyperlink or subtitle of card */
+	subTitle?: React.ReactNode | string;
 	/** The attributes of the background image, use JSON string */
 	bgConfig?: string | null | CardBgConfig;
 
@@ -337,55 +337,53 @@ export default class Card extends Component<CardProps, CardState> {
 					 </>
 				 );
 				 break;
+			 case 'gallery-icon-abreast':
+				res = (
+					<>
 
+					<div  id={cid} className="uix-card--gallery uix-card--gallery--horizontal is-mobile-still" role="figure">
+						<div className="uix-card--gallery__preview" style={{padding: "25px", background: "#EAEAEA"}}>
+							{/*<!-- image begin -->*/}
+							{_icon}
+							{/*<!-- image end -->*/}
 
-				case 'gallery-icon-abreast':
-					res = (
-						<>
+						</div>
+						<div className="uix-card--gallery__body">
 
-						<div  id={cid} className="uix-card--gallery uix-card--gallery--horizontal is-mobile-still" role="figure">
-							<div className="uix-card--gallery__preview" style={{padding: "25px", background: "#EAEAEA"}}>
-								{/*<!-- image begin -->*/}
-								{_icon}
-								{/*<!-- image end -->*/}
-
-							</div>
-							<div className="uix-card--gallery__body">
-
-								<div className="uix-card--gallery__content">
-									<div className="uix-card--gallery__content__child">
-										<div className="uix-card--gallery__content__child--left">
-											<div>
-												{/*<!-- content begin -->*/}
-												<span style={{margin: "0 10px 10px", display: "block"}}>
-													<h5 className={ titleEllipsis ? 'uix-t-ellipsis': ''} style={{margin: "10px", marginLeft: 0, marginBottom: 0, paddingBottom: 0}}>{_title}</h5>
-												{_subTitle !== '' ? <><small className="uix-typo--color-sub">{_subTitle}</small></> : ''}
-												</span>
-												{/*<!-- content end -->*/}
-											</div>
+							<div className="uix-card--gallery__content">
+								<div className="uix-card--gallery__content__child">
+									<div className="uix-card--gallery__content__child--left">
+										<div>
+											{/*<!-- content begin -->*/}
+											<span style={{margin: "0 10px 10px", display: "block"}}>
+												<h5 className={ titleEllipsis ? 'uix-t-ellipsis': ''} style={{margin: "10px", marginLeft: 0, marginBottom: 0, paddingBottom: 0}}>{_title}</h5>
+											{_subTitle !== '' ? <><small className="uix-typo--color-sub">{_subTitle}</small></> : ''}
+											</span>
+											{/*<!-- content end -->*/}
 										</div>
-
-
-										{_btnIcon !== '' ? <>
-											<div className="uix-card--gallery__content__child--right" style={{ minWidth: "50px" }}>
-												{/*<!-- content begin -->*/}
-												<div className="uix-card--gallery__action" style={{ margin: "10px" }}>
-													<button aria-haspopup="true" onClick={btnClickEvent}>{_btnIcon}</button>
-												</div>
-												{/*<!-- content end -->*/}
-											</div>
-										</> : ''}
-
 									</div>
+
+
+									{_btnIcon !== '' ? <>
+										<div className="uix-card--gallery__content__child--right" style={{ minWidth: "50px" }}>
+											{/*<!-- content begin -->*/}
+											<div className="uix-card--gallery__action" style={{ margin: "10px" }}>
+												<button aria-haspopup="true" onClick={btnClickEvent}>{_btnIcon}</button>
+											</div>
+											{/*<!-- content end -->*/}
+										</div>
+									</> : ''}
 
 								</div>
 
 							</div>
-						</div>    
 
-						</>
-					);
-					break;
+						</div>
+					</div>    
+
+					</>
+				);
+				break;
 			 case 'authorcard-line':
 				 res = (
 					 <>

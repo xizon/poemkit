@@ -52,7 +52,10 @@ function createSidebarMenu( navItems ) {
 		anchor.addEventListener('click', function (e) {
 			e.preventDefault();
 
-			const targetEl = document.querySelector( '#' + this.href.split( '#' )[1] );
+			let _href = this.getAttribute('href');
+			if ( _href === '#' ) _href = '#demo';
+			
+			const targetEl = document.querySelector( '#' + _href.split( '#' )[1] );
 			if ( targetEl !== null ) {
 				const elTop = targetEl.offsetTop;
 				window.scrollTo({ top: elTop, behavior: 'smooth' });
@@ -210,19 +213,26 @@ export function SidebarMenu() {
 			return node.textContent.trim().length > 1;
 		});
 
+
+		//get DOC anchor element HTML code
+		const docLink = document.querySelector( 'h1.uix-typo--h2' );
+		const docLinkText = docLink.innerHTML.match(/<a.*?>(.*?)<\/a>/g)[0];
+		docLink.querySelector( 'a' ).style.display = 'none';
+
 		result.forEach( function(node, index) {
+
 			const linkID = 'app-header-title-' + index;
-			const linkTitle = node.textContent;
+			const linkTitle = node.innerHTML.replace(/<a\b[^>]*>(.*?)<\/a>/ig, '');
 			const sectionID = linkID + '__section';
 
+			
 			if ( document.querySelector( '#' + linkID ) === null ) {
 
 				//update ID
 				node.id = linkID;
 				node.closest( 'section' ).id = sectionID;
 				
-
-				// Create anchor element.
+				//Create anchor element.
 				const a = document.createElement('a'); 
 				const link = document.createTextNode( '#' );
 				a.appendChild(link); 
@@ -231,15 +241,27 @@ export function SidebarMenu() {
 				a.setAttribute('style', 'float: left; margin-left: -20px; text-decoration: none; color: #9e9e9e;');
 				node.prepend(a); 
 
+				//Create DOC anchor element
+				const docLinkNode = document.createElement('div');
+				docLinkNode.innerHTML = docLinkText;
+				node.appendChild(docLinkNode.firstChild);
+
+
 				//
 				node.classList.add("app-header-title--sidebar");
+
+				
 
 			}
 
 			//
-			allHeaderTitleLinks.push({href: '#' + sectionID, text: linkTitle.replace('#','')});
+			allHeaderTitleLinks.push({href: '#' + sectionID, text: linkTitle});
 
 		});
+
+
+
+
 		
 		
 		//Create Sidebar Menu

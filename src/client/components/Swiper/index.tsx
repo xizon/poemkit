@@ -623,7 +623,7 @@ export default class Swiper extends Component<SwiperProps, SwiperState> {
 
 				{/*<!-- Title
 				====================================================== -->*/}
-				<section className="uix-spacing--s">
+				<section className="uix-spacing--s uix-spacing--no-top">
 					<div className="container">
 						<div className="row">
 							<div className="col-12">

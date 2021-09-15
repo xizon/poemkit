@@ -110,7 +110,7 @@ export default class SingleSelect extends Component<SingleSelectProps, SingleSel
 		let classes = '';
 		
 
-		//radius
+		//corners
 		if ( param.indexOf( 'pill' ) >= 0 ) classes += ' is-pill';
 		if ( param.indexOf( 'rounded' ) >= 0 ) classes += ' is-rounded';
 

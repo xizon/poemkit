@@ -248,36 +248,38 @@ export default () => {
 					<div className="row">
 						<div className="col-12">
 
+			
 
-							<Table className="uix-table uix-table--bordered" data={data1} />
 
-							{/*<!-- //////////////////  -->*/}<br /><br />
-
-							<Table className="uix-table" data={data2} />
+							<Table bordered={true} data={data1} />
 
 							{/*<!-- //////////////////  -->*/}<br /><br />
 
-							<Table className="uix-table is-horizontal" data={data3} />
+							<Table data={data2} />
 
 							{/*<!-- //////////////////  -->*/}<br /><br />
 
-							<Table className="uix-table uix-table--noborder is-horizontal" data={data3} />	
+							<Table horizontal={true} data={data3} />
 
 							{/*<!-- //////////////////  -->*/}<br /><br />
 
-							<Table className="uix-table is-horizontal uix-table--alternant-row" data={data3} />
+							<Table noborder={true} horizontal={true} data={data3} />	
 
 							{/*<!-- //////////////////  -->*/}<br /><br />
 
-							<Table className="uix-table uix-table--per-line" data={data3} />
+							<Table horizontal={true} alternantRow={true} data={data3} />
 
 							{/*<!-- //////////////////  -->*/}<br /><br />
 
-							<Table className="uix-table uix-table--per-line" data={data4} />
+							<Table perLine={true} data={data3} />
 
 							{/*<!-- //////////////////  -->*/}<br /><br />
 
-							<Table className="uix-table uix-table--alternant-col" data={data5} />
+							<Table perLine={true} data={data4} />
+
+							{/*<!-- //////////////////  -->*/}<br /><br />
+
+							<Table alternantCol={true} data={data5} />
 
 
 						</div>
@@ -299,7 +301,6 @@ export default () => {
 				<div className="row">
 					<div className="col-12">
 						<h3 className="app-header-title">Responsive Table</h3>
-						<p>Change window size to watch. The class <code>.is-responsive.js-uix-table--responsive</code> used here will be applied <code>.uix-table</code></p>
 						<hr />
 
 
@@ -322,7 +323,7 @@ export default () => {
 					<div className="row">
 						<div className="col-12">
 
-							<Table className="uix-table uix-table--noborder is-horizontal is-responsive js-uix-table--responsive" data={data3} />
+							<Table noborder={true} horizontal={true} responsive={true} data={data3} />
 
 							{/*<!-- //////////////////  -->*/}<br /><br />
 
@@ -344,8 +345,7 @@ export default () => {
 				<div className="row">
 					<div className="col-12">
 						<h3 className="app-header-title">Responsive Table with Scroll Bars</h3>
-						<p>Change window size to watch. The class <code>.js-uix-table--responsive-scrolled</code> used here will be applied <code>.uix-table</code></p>
-
+						<p>The scroll bar is displayed when the response is triggered.</p>
 						<hr />
 
 
@@ -368,7 +368,7 @@ export default () => {
 					<div className="row">
 						<div className="col-12">
 
-							<Table className="uix-table uix-table--bordered js-uix-table--responsive-scrolled" data={data3} />
+							<Table bordered={true} responsiveWithScrollBar={true} data={data3} />
 
 							{/*<!-- //////////////////  -->*/}<br /><br />
 
@@ -385,6 +385,137 @@ export default () => {
 		</section>   
 
  
+		{/*<!-- API 
+		====================================================== -->*/}
+		<section>
+			<div className="container">
+				<div className="row">
+					<div className="col-12">
+						<h3 className="app-header-title">API</h3>
+						<hr />
+
+
+						<article className="uix-spacing--s" itemProp="text">
+							<h4>Table</h4>
+							<div>
+								<pre>import Table from '@uixkit.react/components/Table/index.tsx';</pre>
+							</div>
+							<div className="table-responsive-md">
+								<table className="table table-bordered table-striped mb-5">
+									<thead>
+										<tr>
+											<th>Property</th>
+											<th>Type</th>
+											<th>Default</th>
+											<th>Description</th>
+										</tr>
+									</thead>
+									<tbody>
+										<tr>
+											<td><code>data</code></td>
+											<td>JSON Object Literals</td>
+											<td>-</td>
+											<td>Specify data of Table as a JSON string format. Such as: <br /><strong>usage 1:</strong><br /><code className="text-wrap">{`{"fields":[[{"cols": 1, "content": "01" },{"cols": 1, "content": "David Lin" }],[{"cols": 1, "content": "02" },{"cols": 1, "content": "Tom McFarlin" }]]}`}</code> <br /><strong>usage 2:</strong><br /><code className="text-wrap">{`{"headers": ["No.","Name"],"fields":[[{"cols": 1, "content": "01" },{"cols": 1, "content": "David Lin" }],[{"cols": 1, "content": "02" },{"cols": 1, "content": "Tom McFarlin" }]]}`}</code> <br /><strong>usage 3:</strong><br /><code className="text-wrap">{`{"fields":[[{"cols": 1, "content": "01" },{"cols": 1, "content": "David Lin" }],[{"cols": 1, "content": "02" },{"cols": 1, "content": "Tom McFarlin" }],[{"cols": 4, "content": <><strong style={{background:"yellow"}}>A table cell that spans <span style={{color:"red"}}>4</span> columns</strong></> }]]}`}</code></td>
+										</tr>
+										<tr>
+											<td><code>bordered</code></td>
+											<td>boolean</td>
+											<td>false</td>
+											<td>Adds borders on all sides of the table and cells</td>
+										</tr>
+										<tr>
+											<td><code>noborder</code></td>
+											<td>boolean</td>
+											<td>false</td>
+											<td>Removes all borders on the table and cells, including table header</td>
+										</tr>
+										<tr>
+											<td><code>horizontal</code></td>
+											<td>boolean</td>
+											<td>false</td>
+											<td>Use the horizontal split effect for each row. Includes a header cell(&lt;th&gt; tag) with this attribute.</td>
+										</tr>
+										<tr>
+											<td><code>alternantRow</code></td>
+											<td>boolean</td>
+											<td>false</td>
+											<td>Apply alternating row color in dynamically created table</td>
+										</tr>
+										<tr>
+											<td><code>alternantCol</code></td>
+											<td>boolean</td>
+											<td>false</td>
+											<td>Apply alternating column color in dynamically created table</td>
+										</tr>
+										<tr>
+											<td><code>perLine</code></td>
+											<td>boolean</td>
+											<td>false</td>
+											<td>Only use the horizontal splitting effect for each row.</td>
+										</tr>
+										<tr>
+											<td><code>responsive</code></td>
+											<td>boolean</td>
+											<td>false</td>
+											<td>Create responsive tables up to a particular breakpoint.</td>
+										</tr>
+										<tr>
+											<td><code>responsiveWithScrollBar</code></td>
+											<td>boolean</td>
+											<td>false</td>
+											<td>Create responsive tables up to a particular breakpoint. This property allows scroll bars to be created automatically in the table.
+												<br />
+												<strong>Only one of the <code>responsive</code> and <code>responsiveWithScrollBar</code> properties is allowed, and both are invalid if set to true.</strong>
+
+											</td>
+										</tr>
+									</tbody>
+								</table>
+
+								<p>JSON configuration properties of the <code>data</code>:</p>
+								<div className="table-responsive-md">
+									<table className="table table-bordered table-striped mb-5">
+										<thead>
+											<tr>
+												<th>Property</th>
+												<th>Type</th>
+												<th>Default</th>
+												<th>Description</th>
+											</tr>
+										</thead>
+										<tbody>
+											<tr>
+												<td><code>fields</code></td>
+												<td>array</td>
+												<td>-</td>
+												<td>Table rows and columns. The key <code>cols</code> identifies the column (change the value if the column is merged). The key <code>content</code> to place the content of each cell. Eg. <code className="text-wrap">{`[[{"cols": 1, "content": "01" },{"cols": 1, "content": "David Lin" }],[{"cols": 1, "content": "02" },{"cols": 1, "content": "Tom McFarlin" }]]`}</code></td>
+											</tr>
+											<tr>
+												<td><code>headers</code></td>
+												<td>array</td>
+												<td>-</td>
+												<td>Defines a header cell in an HTML table. Eg. <code className="text-wrap">["No.","Name"]</code></td>
+											</tr>
+										</tbody>
+									</table>
+								</div>
+
+
+							</div>
+
+
+
+						</article>
+
+
+					</div>
+				</div>
+				{/*<!-- .row end -->*/}
+
+
+			</div>
+			{/*<!-- .container end -->*/}
+		</section>
 
 
 		

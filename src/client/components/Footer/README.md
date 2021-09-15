@@ -6,6 +6,17 @@
 
 => 0.0.1
 
+## API
+
+### Footer
+```js
+import Footer from '@uixkit.react/components/Footer/index.tsx';
+```
+| Property | Type | Default | Description |
+| --- | --- | --- | --- |
+| - | - | - | - |
+
+
 ## Examples
 
 ```js

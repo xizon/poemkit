@@ -7,249 +7,258 @@
 => 0.0.1
 
 
+## API
+
+### Button
+```js
+import { Button } from '@uixkit.react/components/Button/index.tsx';
+```
+| Property | Type | Default | Description |
+| --- | --- | --- | --- |
+| `href` | string | - | Providing a href will render an \<a\> element. Otherwise, it will be a \<button\> element |
+| `status` | `disabled` \| `waiting` | - | The state of the button |
+| `border` | `thin` \| `medium` \| `thick` \| `white` | - | The thickness and style of the border |
+| `background` | `primary` \| `secondary` \| `hyperlink` \| `hyperlink2` \| `transparent` \| `fillwhite` | - | background color |
+| `spacing` | `bottom` \| `left` \| `right` | - | To create space around buttons |
+| `corners` | `pill` \| `rounded` | - | Add rounded corners to button |
+| `size` | `fullwidth` \| `tiny` \| `small` \| `medium` \| `large` | - | Set the size of button |
+| `iconPosition` | `left` \| `right` | - | Set the icon position |
+| `icon` | ReactNode  | - | Set the icon component of button |
+| `target` | string | _self | The target attribute specifies where to open the linked document |
+| `onClick` | function | - | Set the handler to handle click event |
+
+
+It accepts all props(include data-* attributes) which native buttons support.
+
+
+
+### ButtonGroup
+```js
+import { ButtonGroup } from '@uixkit.react/components/Button/index.tsx';
+```
+| Property | Type | Default | Description |
+| --- | --- | --- | --- |
+| `fullwidth` | boolean | false | The button group has an automatic set width of 100% |
+| `spacing` | `bottom` \| `left` \| `right` | - | To create space around group |
+
+
 ## Examples
 
 ```js
 import React from 'react';
-import Button from '@uixkit.react/components/Button/index.tsx';
+import { Button, ButtonGroup } from '@uixkit.react/components/Button/index.tsx';
 
 
 export default () => {
   return (
     <>
 
-	    <h3>Click Event</h3>
-	    <p>Add onClick event to the button.</p>
+		<h3>Click Event</h3>
+		<p>Add onClick event to the button.</p>
 		{/* ================================================================== */} 
-	  
-		<Button id="app-btn-1" href="#" data-title="button" className="uix-btn uix-btn__border--thin uix-btn__margin--b uix-btn__size--m uix-btn__bg--primary is-pill" onClick={(e) => {e.preventDefault(); alert( e.target.id );} }>Click me to view ID!</Button>
+
+		<Button border="thin" spacing="bottom" background="primary" corners="pill" size="medium" id="app-btn-1" href="#" data-title="button" onClick={(e) => {e.preventDefault(); alert( e.target.id );} }>Click me to view ID!</Button>
 
 		<br />
-		<Button id="app-btn-2" href="#" className="uix-btn uix-btn__border--thin uix-btn__margin--b uix-btn__size--m uix-btn__bg--primary is-pill" onClick={(e) => {e.preventDefault(); __( '#app-btn-2' ).width( '50%' );} }>Click me to change the width!</Button>
+		<Button border="thin" spacing="bottom" background="primary" corners="pill" size="medium" id="app-btn-2" href="#" onClick={(e) => {e.preventDefault(); __( '#app-btn-2' ).width( '50%' );} }>Click me to change the width!</Button>
 
 		<h3>Button</h3>
-		<p>zIf you need to use multiple colors, you can add CSS styles yourself, such as: <code>.uix-btn__bg--blue</code>, <code>.uix-btn__bg--purple</code> ...</p>
 		{/* ================================================================== */} 
+		<Button border="thin" spacing="bottom" background="hyperlink" size="tiny" href="#">Tiny</Button>
 
+		<Button border="thin" spacing="bottom" background="hyperlink" size="small" href="#">Small</Button>
 
-		<Button href="#" className="uix-btn uix-btn__border--thin uix-btn__margin--b uix-btn__size--t uix-btn__bg--hyperlink">Tiny</Button>
+		<Button border="thin" spacing="bottom" background="hyperlink" size="medium" href="#">Medium</Button>
 
-		<Button href="#" className="uix-btn uix-btn__border--thin uix-btn__margin--b uix-btn__size--s uix-btn__bg--hyperlink">Small</Button>
-
-
-		<Button href="#" className="uix-btn uix-btn__border--thin uix-btn__margin--b uix-btn__size--m uix-btn__bg--hyperlink">Medium</Button>
-
-		<Button href="#" className="uix-btn uix-btn__border--thin uix-btn__margin--b uix-btn__size--l uix-btn__bg--hyperlink">Large</Button>
+		<Button border="thin" spacing="bottom" background="hyperlink" size="large" href="#">Large</Button>
 
 		<br />  
 
-		<Button href="#" className="uix-btn uix-btn__border--thin uix-btn__margin--b uix-btn__size--t uix-btn__bg--hyperlink2">Tiny</Button>
+		<Button border="thin" spacing="bottom" background="hyperlink2" size="tiny" href="#">Tiny</Button>
 
-		<Button href="#" className="uix-btn uix-btn__border--thin uix-btn__margin--b uix-btn__size--s uix-btn__bg--hyperlink2">Small</Button>
+		<Button border="thin" spacing="bottom" background="hyperlink2" size="small" href="#">Small</Button>
 
 
-		<Button href="#" className="uix-btn uix-btn__border--thin uix-btn__margin--b uix-btn__size--m uix-btn__bg--hyperlink2">Medium</Button>
+		<Button border="thin" spacing="bottom" background="hyperlink2" size="medium" href="#">Medium</Button>
 
-		<Button href="#" className="uix-btn uix-btn__border--thin uix-btn__margin--b uix-btn__size--l uix-btn__bg--hyperlink2">Large</Button>
+		<Button border="thin" spacing="bottom" background="hyperlink2" size="large" href="#">Large</Button>
 
 		<br />      
 
 
-		<Button href="#"  className="uix-btn uix-btn__border--thin uix-btn__margin--b uix-btn__size--t uix-btn__bg--primary"><i className="fa fa-bullhorn" aria-hidden="true"></i>Tiny</Button>
+		<Button border="thin" spacing="bottom" background="primary" size="tiny" href="#" ><i className="fa fa-bullhorn" aria-hidden="true"></i>Tiny</Button>
 
-		<Button href="#" className="uix-btn uix-btn__border--thin uix-btn__margin--b uix-btn__size--s uix-btn__bg--primary"><i className="fa fa-bullhorn" aria-hidden="true"></i>Small</Button>
-
-
-		<Button href="#" className="uix-btn uix-btn__border--thin uix-btn__margin--b uix-btn__size--m uix-btn__bg--primary"><i className="fa fa-cogs" aria-hidden="true"></i>Medium</Button>
-
-		<Button href="#" className="uix-btn uix-btn__border--thin uix-btn__margin--b uix-btn__size--l uix-btn__bg--primary"><i className="fa fa-flask" aria-hidden="true"></i>Large</Button>
-
-		<br />
-
-		<Button href="#" className="uix-btn uix-btn__border--thin uix-btn__margin--b uix-btn__size--t uix-btn__bg--primary">Tiny<i className="fa fa-bullhorn" aria-hidden="true"></i></Button>
-
-		<Button href="#" className="uix-btn uix-btn__border--thin uix-btn__margin--b uix-btn__size--s uix-btn__bg--primary">Small<i className="fa fa-bullhorn" aria-hidden="true"></i></Button>
+		<Button border="thin" spacing="bottom" background="primary" size="small" href="#"><i className="fa fa-bullhorn" aria-hidden="true"></i>Small</Button>
 
 
-		<Button href="#" className="uix-btn uix-btn__border--thin uix-btn__margin--b uix-btn__size--m uix-btn__bg--primary">Medium<i className="fa fa-cogs" aria-hidden="true"></i></Button>
+		<Button border="thin" spacing="bottom" background="primary" size="medium" href="#"><i className="fa fa-cogs" aria-hidden="true"></i>Medium</Button>
 
-		<Button href="#" className="uix-btn uix-btn__border--thin uix-btn__margin--b uix-btn__size--l uix-btn__bg--primary">Large<i className="fa fa-flask" aria-hidden="true"></i></Button>
+		<Button border="thin" spacing="bottom" background="primary" size="large" href="#"><i className="fa fa-flask" aria-hidden="true"></i>Large</Button>
 
 		<br />
 
+		<Button border="thin" spacing="bottom" background="primary" size="tiny" href="#">Tiny<i className="fa fa-bullhorn" aria-hidden="true"></i></Button>
 
-		<Button href="#" className="uix-btn uix-btn__border--thin uix-btn__margin--b uix-btn__size--s uix-btn__bg--primary uix-btn__icon uix-btn__icon--right"><span><i className="fa fa-bullhorn" aria-hidden="true"></i></span>Icon Right</Button>
-
-
-		<Button href="#" className="uix-btn uix-btn__border--thin uix-btn__margin--b uix-btn__size--s uix-btn__bg--primary uix-btn__icon uix-btn__icon--left"><span><i className="fa fa-cogs" aria-hidden="true"></i></span>Icon Left</Button>
+		<Button border="thin" spacing="bottom" background="primary" size="small" href="#">Small<i className="fa fa-bullhorn" aria-hidden="true"></i></Button>
 
 
-		<Button href="#" className="uix-btn uix-btn__border--thin uix-btn__margin--b uix-btn__size--s uix-btn__bg--primary is-pill is-transparent uix-btn__icon uix-btn__icon--right"><span><i className="fa fa-bullhorn" aria-hidden="true"></i></span>Icon Left</Button>
+		<Button border="thin" spacing="bottom" background="primary" size="medium" href="#">Medium<i className="fa fa-cogs" aria-hidden="true"></i></Button>
 
-
-		<Button href="#" className="uix-btn uix-btn__border--thin uix-btn__margin--b uix-btn__size--s uix-btn__bg--primary is-pill is-transparent uix-btn__icon uix-btn__icon--left"><span><i className="fa fa-cogs" aria-hidden="true"></i></span>Icon Right</Button>
-
-
-		<br />
-
-		<Button href="#" className="uix-btn uix-btn__border--thin uix-btn__margin--b uix-btn__size--t uix-btn__bg--primary is-disabled">Tiny</Button>
-
-		<Button href="#" className="uix-btn uix-btn__border--thin uix-btn__margin--b uix-btn__size--s uix-btn__bg--primary is-disabled">Small</Button>
-
-
-		<Button href="#" className="uix-btn uix-btn__border--thin uix-btn__margin--b uix-btn__size--m uix-btn__bg--primary is-disabled">Medium</Button>
-
-		<Button href="#" className="uix-btn uix-btn__border--thin uix-btn__margin--b uix-btn__size--l uix-btn__bg--primary is-disabled">Large</Button>
+		<Button border="thin" spacing="bottom" background="primary" size="large" href="#">Large<i className="fa fa-flask" aria-hidden="true"></i></Button>
 
 		<br />
 
 
-		<Button href="#" className="uix-btn uix-btn__border--thin uix-btn__margin--b uix-btn__size--t uix-btn__bg--primary wait">Tiny</Button>
-
-		<Button href="#" className="uix-btn uix-btn__border--thin uix-btn__margin--b uix-btn__size--s uix-btn__bg--primary wait">Small</Button>
+		<Button border="thin" spacing="bottom" background="primary" size="small" icon={<><i className="fa fa-bullhorn" aria-hidden="true"></i></>} iconPosition="right" href="#">Icon Right</Button>
 
 
-		<Button href="#" className="uix-btn uix-btn__border--thin uix-btn__margin--b uix-btn__size--m uix-btn__bg--primary wait">Medium</Button>
-
-		<Button href="#" className="uix-btn uix-btn__border--thin uix-btn__margin--b uix-btn__size--l uix-btn__bg--primary wait">Large</Button>
-
-		<br />
-
-		<Button href="#" className="uix-btn uix-btn__border--thin uix-btn__margin--b uix-btn__size--t uix-btn__bg--primary is-pill">Tiny</Button>
+		<Button border="thin" spacing="bottom" background="primary" size="small" icon={<><i className="fa fa-cogs" aria-hidden="true"></i></>} iconPosition="left" href="#">Icon Left</Button>
 
 
-		<Button href="#" className="uix-btn uix-btn__border--thin uix-btn__margin--b uix-btn__size--s uix-btn__bg--primary is-pill">Small</Button>
+		<Button border="thin" spacing="bottom" background="primary transparent" corners="pill" size="small" icon={<><i className="fa fa-bullhorn" aria-hidden="true"></i></>} iconPosition="left" href="#">Icon Left</Button>
 
 
-		<Button href="#" className="uix-btn uix-btn__border--thin uix-btn__margin--b uix-btn__size--m uix-btn__bg--primary is-pill">Medium</Button>
-
-		<Button href="#" className="uix-btn uix-btn__border--thin uix-btn__margin--b uix-btn__size--l uix-btn__bg--primary is-pill">Large</Button>
-
+		<Button border="thin" spacing="bottom" background="primary transparent" corners="pill" size="small" icon={<><i className="fa fa-cogs" aria-hidden="true"></i></>} iconPosition="right" href="#">Icon Right</Button>
 
 
 		<br />
 
+		<Button status="disabled" border="thin" spacing="bottom" background="primary" size="tiny" href="#">Tiny</Button>
 
-		<Button href="#" className="uix-btn uix-btn__border--thin uix-btn__margin--b uix-btn__size--t uix-btn__bg--primary is-rounded">Tiny</Button>
-
-
-
-		<Button href="#" className="uix-btn uix-btn__border--thin uix-btn__margin--b uix-btn__size--s uix-btn__bg--primary is-rounded">Small</Button>
+		<Button status="disabled" border="thin" spacing="bottom" background="primary" size="small" href="#">Small</Button>
 
 
-		<Button href="#" className="uix-btn uix-btn__border--thin uix-btn__margin--b uix-btn__size--m uix-btn__bg--primary is-rounded">Medium</Button>
+		<Button status="disabled" border="thin" spacing="bottom" background="primary" size="medium" href="#">Medium</Button>
 
-		<Button href="#" className="uix-btn uix-btn__border--thin uix-btn__margin--b uix-btn__size--l uix-btn__bg--primary is-rounded">Large</Button>
+		<Button status="disabled" border="thin" spacing="bottom" background="primary" size="large" href="#">Large</Button>
+
+		<br />
+
+
+		<Button status="waiting" border="thin" spacing="bottom" background="primary" size="tiny" href="#">Tiny</Button>
+
+		<Button status="waiting" border="thin" spacing="bottom" background="primary" size="small" href="#">Small</Button>
+
+
+		<Button status="waiting" border="thin" spacing="bottom" background="primary" size="medium" href="#">Medium</Button>
+
+		<Button status="waiting" border="thin" spacing="bottom" background="primary" size="large" href="#">Large</Button>
+
+		<br />
+
+		<Button border="thin" spacing="bottom" background="primary" corners="pill" size="tiny" href="#">Tiny</Button>
+
+
+		<Button border="thin" spacing="bottom" background="primary" corners="pill" size="small" href="#">Small</Button>
+
+
+		<Button border="thin" spacing="bottom" background="primary" corners="pill" size="medium" href="#">Medium</Button>
+
+		<Button border="thin" spacing="bottom" background="primary" corners="pill" size="large" href="#">Large</Button>
+
 
 
 		<br />
 
 
-		<Button href="#" className="uix-btn uix-btn__border--thin uix-btn__margin--b uix-btn__size--t uix-btn__bg--primary is-pill is-transparent">Tiny Radius</Button>
+		<Button border="thin" spacing="bottom" background="primary" corners="rounded" size="tiny" href="#">Tiny</Button>
 
 
-		<Button href="#" className="uix-btn uix-btn__border--thin uix-btn__margin--b uix-btn__size--s uix-btn__bg--primary is-pill is-transparent">Small Radius</Button>
+
+		<Button border="thin" spacing="bottom" background="primary" corners="rounded" size="small" href="#">Small</Button>
 
 
-		<Button href="#" className="uix-btn uix-btn__border--thin uix-btn__margin--b uix-btn__size--m uix-btn__bg--primary is-pill is-transparent">Medium Radius</Button>
+		<Button border="thin" spacing="bottom" background="primary" corners="rounded" size="medium" href="#">Medium</Button>
 
-		<Button href="#" className="uix-btn uix-btn__border--thin uix-btn__margin--b uix-btn__size--l uix-btn__bg--primary is-pill is-transparent">Large Radius</Button>
+		<Button border="thin" spacing="bottom" background="primary" corners="rounded" size="large" href="#">Large</Button>
 
 
+		<br />
+
+
+		<Button border="thin" spacing="bottom" background="primary transparent" corners="pill" size="tiny" href="#">Tiny Radius</Button>
+
+
+		<Button border="thin" spacing="bottom" background="primary transparent" corners="pill" size="small" href="#">Small Radius</Button>
+
+
+		<Button border="thin" spacing="bottom" background="primary transparent" corners="pill" size="medium" href="#">Medium Radius</Button>
+
+		<Button border="thin" spacing="bottom" background="primary transparent" corners="pill" size="large" href="#">Large Radius</Button>
+
+
+
+		<h3>Full Width</h3>
 		{/* ================================================================== */} 
-
-		<div className="uix-btn__group uix-btn__margin--b">
-			<Button href="#" className="uix-btn uix-btn__border--thin uix-btn__size--s uix-btn__bg--primary is-pill is-transparent">Group</Button>
+		<Button border="thin" spacing="bottom" background="primary" size="tiny fullwidth" href="#">Tiny Full Width</Button>
 
 
-			<Button href="#" className="uix-btn uix-btn__border--thin uix-btn__size--s uix-btn__bg--primary is-pill is-transparent">Group</Button>
+		<Button border="thin" spacing="bottom" background="primary" size="small fullwidth" href="#">Small Full Width</Button>
 
-			<Button href="#" className="uix-btn uix-btn__border--thin uix-btn__size--s uix-btn__bg--primary is-pill is-transparent">Group</Button>
-		</div>
+		<br />
 
-		 <br />
+		<Button border="thin" spacing="bottom" background="primary" size="medium fullwidth" href="#">Medium Full Width</Button>
+
+		<br />
+
+		<Button border="thin" spacing="bottom" background="primary" size="large fullwidth" href="#">Large Full Width</Button>
+
+		<br />
+
+		<Button border="thin" spacing="bottom" background="primary" corners="pill" size="tiny fullwidth" href="#">Tiny Full Width Radius</Button>
+
+		<Button border="thin" spacing="bottom" background="primary" corners="pill" size="small fullwidth" href="#">Small Full Width Radius</Button>
+
+		<br />
+
+		<Button border="thin" spacing="bottom" background="primary" corners="pill" size="medium fullwidth" href="#">Medium Full Width Radius</Button>
+
+		<br />
+
+		<Button border="thin" spacing="bottom" background="primary" corners="pill" size="large fullwidth" href="#">Large Full Width Radius ( More Text )</Button>
 
 
-		<div className="uix-btn__group uix-btn__margin--b">
-			<Button href="#" className="uix-btn uix-btn__border--thin uix-btn__size--s uix-btn__bg--primary">Group</Button>
 
-
-			<Button href="#" className="uix-btn uix-btn__border--thin uix-btn__size--s uix-btn__bg--primary">Group</Button>
-
-			<Button href="#" className="uix-btn uix-btn__border--thin uix-btn__size--s uix-btn__bg--primary">Group</Button>
-		</div>
-
-
-
-
-
+		<h3>Button Group</h3>
 		{/* ================================================================== */} 
+		<ButtonGroup spacing="bottom">
+			<Button border="thin" background="primary transparent" corners="pill" size="small" href="#">Group</Button>
+			<Button border="thin" background="primary transparent" corners="pill" size="small" href="#">Group</Button>
+			<Button border="thin" background="primary transparent" corners="pill" size="small" href="#">Group</Button>
+		</ButtonGroup>
 
 
-
-		<div className="uix-btn__group is-fullwidth uix-btn__margin--b">
-			<Button href="#" className="uix-btn uix-btn__border--thin uix-btn__size--s uix-btn__bg--primary is-pill is-transparent">Group</Button>
-
-
-			<Button href="#" className="uix-btn uix-btn__border--thin uix-btn__size--s uix-btn__bg--primary is-pill is-transparent">Group</Button>
-
-			<Button href="#" className="uix-btn uix-btn__border--thin uix-btn__size--s uix-btn__bg--primary is-pill is-transparent">Group</Button>
-		</div>
-
-		 <br />
+		<ButtonGroup spacing="bottom">
+			<Button border="thin" background="primary" size="small" href="#">Group</Button>
+			<Button border="thin" background="primary" size="small" href="#">Group</Button>
+			<Button border="thin" background="primary" size="small" href="#">Group</Button>
+		</ButtonGroup>
 
 
-		<div className="uix-btn__group is-fullwidth uix-btn__margin--b">
-			<Button href="#" className="uix-btn uix-btn__border--thin uix-btn__size--s uix-btn__bg--primary">Group</Button>
+		<ButtonGroup spacing="bottom" fullwidth={true}>
+			<Button border="thin" background="primary transparent" corners="pill" size="small" href="#">Group</Button>
+			<Button border="thin" background="primary transparent" corners="pill" size="small" href="#">Group</Button>
+			<Button border="thin" background="primary transparent" corners="pill" size="small" href="#">Group</Button>
+		</ButtonGroup>
 
 
-			<Button href="#" className="uix-btn uix-btn__border--thin uix-btn__size--s uix-btn__bg--primary">Group</Button>
-
-			<Button href="#" className="uix-btn uix-btn__border--thin uix-btn__size--s uix-btn__bg--primary">Group</Button>
-		</div>
-
-
-
+		<ButtonGroup spacing="bottom" fullwidth={true}>
+			<Button border="thin" background="primary" size="small" href="#">Group</Button>
+			<Button border="thin" background="primary" size="small" href="#">Group</Button>
+			<Button border="thin" background="primary" size="small" href="#">Group</Button>
+		</ButtonGroup>
 
 
-		{/* ================================================================== */} 
-
-		<Button href="#" className="uix-btn uix-btn__border--thin uix-btn__margin--b uix-btn__size--t uix-btn__bg--primary is-fullwidth">Tiny Full Width</Button>
-
-
-		<Button href="#" className="uix-btn uix-btn__border--thin uix-btn__margin--b uix-btn__size--s uix-btn__bg--primary is-fullwidth">Small Full Width</Button>
-
-		<br />
-
-		<Button href="#" className="uix-btn uix-btn__border--thin uix-btn__margin--b uix-btn__size--m uix-btn__bg--primary is-fullwidth">Medium Full Width</Button>
-
-		<br />
-
-		<Button href="#" className="uix-btn uix-btn__border--thin uix-btn__margin--b uix-btn__size--l uix-btn__bg--primary is-fullwidth">Large Full Width</Button>
-
-		<br />
-
-		<Button href="#" className="uix-btn uix-btn__border--thin uix-btn__margin--b uix-btn__size--t uix-btn__bg--primary is-fullwidth is-pill">Tiny Full Width Radius</Button>
-
-		<Button href="#" className="uix-btn uix-btn__border--thin uix-btn__margin--b uix-btn__size--s uix-btn__bg--primary is-fullwidth is-pill">Small Full Width Radius</Button>
-
-		<br />
-
-		<Button href="#" className="uix-btn uix-btn__border--thin uix-btn__margin--b uix-btn__size--m uix-btn__bg--primary is-fullwidth is-pill">Medium Full Width Radius</Button>
-
-		<br />
-
-		<Button href="#" className="uix-btn uix-btn__border--thin uix-btn__margin--b uix-btn__size--l uix-btn__bg--primary is-fullwidth is-pill">Large Full Width Radius ( More Text )</Button>
 
 
 		<h3>Secondary Button</h3>
 		{/* ================================================================== */} 
 
-		<Button href="#" className="uix-btn uix-btn__border--thin uix-btn__margin--b uix-btn__size--s uix-btn__bg--secondary is-fill-white">Secondary Button</Button>
+		<Button border="thin" spacing="bottom" background="secondary fillwhite" size="small" href="#">Secondary Button</Button>
 
-		<Button href="#" className="uix-btn uix-btn__border--thin uix-btn__margin--b uix-btn__size--s uix-btn__bg--secondary is-rounded is-fill-white">Secondary Button</Button>
+		<Button border="thin" spacing="bottom" background="secondary fillwhite" corners="rounded" size="small" href="#">Secondary Button</Button>
 
-		<Button href="#" className="uix-btn uix-btn__border--thin uix-btn__margin--b uix-btn__size--s uix-btn__bg--secondary is-pill is-fill-white">Secondary Button</Button>
+		<Button border="thin" spacing="bottom" background="secondary fillwhite" corners="pill" size="small" href="#">Secondary Button</Button>
 
 
 		<br /> 
@@ -257,34 +266,36 @@ export default () => {
 
 		<div className="uix-t-c" style={{background:"#333",padding:"1.5rem 0 0",marginTop:"1rem"}}>
 
-			<Button href="#" className="uix-btn uix-btn__border--thin uix-btn__margin--b uix-btn__size--s uix-btn__bg--secondary is-fill-white">White Button</Button>
+			<Button border="thin" spacing="bottom" background="secondary fillwhite" size="small" href="#">White Button</Button>
 
-			<Button href="#" className="uix-btn uix-btn__border--thin uix-btn__margin--b uix-btn__size--s uix-btn__bg--secondary">White Button</Button>
-
-			<br />
-
-			<Button href="#" className="uix-btn uix-btn__border--thin uix-btn__margin--b uix-btn__size--s uix-btn__bg--secondary is-pill is-fill-white">White Button</Button>
-
-			<Button href="#" className="uix-btn uix-btn__border--thin uix-btn__margin--b uix-btn__size--s uix-btn__bg--secondary is-pill">White Button</Button>
-
+			<Button border="thin" spacing="bottom" background="secondary" size="small" href="#">White Button</Button>
 
 			<br />
 
-			<Button href="#" className="uix-btn uix-btn__border--thin uix-btn__margin--b uix-btn__size--s uix-btn__bg--secondary is-fill-white uix-btn__icon uix-btn__icon--right"><span><i className="fa fa-bullhorn" aria-hidden="true"></i></span>Icon Right</Button>
+			<Button border="thin" spacing="bottom" background="secondary fillwhite" corners="pill" size="small" href="#">White Button</Button>
 
-
-			<Button href="#" className="uix-btn uix-btn__border--thin uix-btn__margin--b uix-btn__size--s uix-btn__bg--secondary is-fill-white uix-btn__icon uix-btn__icon--left"><span><i className="fa fa-cogs" aria-hidden="true"></i></span>Icon Left</Button>
+			<Button border="thin" spacing="bottom" background="secondary" corners="pill" size="small" href="#">White Button</Button>
 
 
 			<br />
 
-			<Button href="#" className="uix-btn uix-btn__border--thin uix-btn__margin--b uix-btn__size--s uix-btn__bg--secondary uix-btn__icon uix-btn__icon--right"><span><i className="fa fa-bullhorn" aria-hidden="true"></i></span>Icon Right</Button>
+			<Button border="thin" spacing="bottom" background="secondary fillwhite" size="small" icon={<><i className="fa fa-bullhorn" aria-hidden="true"></i></>} iconPosition="right" href="#">Icon Right</Button>
 
 
-			<Button href="#" className="uix-btn uix-btn__border--thin uix-btn__margin--b uix-btn__size--s uix-btn__bg--secondary uix-btn__icon uix-btn__icon--left"><span><i className="fa fa-cogs" aria-hidden="true"></i></span>Icon Left</Button>
+			<Button border="thin" spacing="bottom" background="secondary fillwhite" size="small" icon={<><i className="fa fa-cogs" aria-hidden="true"></i></>} iconPosition="left" href="#">Icon Left</Button>
 
 
-        </div>
+			<br />
+
+			<Button border="thin" spacing="bottom" background="secondary" size="small" icon={<><i className="fa fa-bullhorn" aria-hidden="true"></i></>} iconPosition="right" href="#">Icon Right</Button>
+
+
+			<Button border="thin" spacing="bottom" background="secondary" size="small" icon={<><i className="fa fa-cogs" aria-hidden="true"></i></>} iconPosition="left" href="#">Icon Left</Button>
+
+			<br />
+
+
+		</div>
 
 
 	  

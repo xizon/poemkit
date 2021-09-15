@@ -6,6 +6,25 @@
 
 => 0.0.1
 
+## API
+
+### Parallax
+```js
+import Parallax from '@uixkit.react/components/Parallax/index.tsx';
+```
+| Property | Type | Default | Description |
+| --- | --- | --- | --- |
+| `parallaxElements` | boolean | false | Pure parallax scrolling effect without other embedded HTML elements |
+| `parallaxElementsTransition` | string  | all 0.4s cubic-bezier(0, 0, 0.34, 0.96) 0s | Transition of parallax when `parallaxElements` is true |
+| `img` | string  | - | Background image URL |
+| `heightClass` | string \| `uix-height--100` \| `uix-height--90` \| `uix-height--80` \| `uix-height--70` \| `uix-height--60` \| `uix-height--50` \| `uix-height--40` \| `uix-height--30` \| `uix-height--20` \| `uix-height--10`  | - | Class name of default height |
+| `fullyVisible` | boolean  | false | Whether to display all pictures, including the edges |
+| `offsetTop` | number  | 0 | Offset top of background |
+| `overlay` | boolean \| string  | false | Background overlay. You can set it to the color value, for example `rgba(0,0,0,.6)` |
+| `skew` | number  | 0 | Skew of background |
+| `speed` | number  | 0 | Speed of parallax animation |
+
+
 
 ## Examples
 

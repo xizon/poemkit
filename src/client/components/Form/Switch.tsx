@@ -25,7 +25,7 @@ type SwitchProps = {
 	ui?: string;
 	textOff?: string;
 	textOn?: string;
-	value?: string;
+	value?: string | boolean;
 	label?: string | object;
 	name?: string;
 	disabled?: any;
@@ -48,7 +48,7 @@ export default class Switch extends Component<SwitchProps, SwitchState>  {
 		super(props);
 	
 		//the default status of target
-		this.targetDefaultStatus = this.props.value == 'true' ? true : false;
+		this.targetDefaultStatus = this.props.value == 'true' || this.props.value === true ? true : false;
 		
 		this.state = {
 			isChecked: this.targetDefaultStatus
@@ -92,7 +92,7 @@ export default class Switch extends Component<SwitchProps, SwitchState>  {
 		let classes = '';
 		
 
-		//radius
+		//corners
 		if ( param.indexOf( 'pill' ) >= 0 ) classes += ' is-pill';
 		if ( param.indexOf( 'rounded' ) >= 0 ) classes += ' is-rounded';
 

@@ -7,6 +7,34 @@
 => 0.0.1
 
 
+## API
+
+### Scroll Reveal
+```js
+import ScrollReveal from '@uixkit.react/components/ScrollReveal/index.tsx';
+```
+| Property | Type | Default | Description |
+| --- | --- | --- | --- |
+| `config` | JSON Object Literals  | - | Detailed animation parameters, using JSON string format.<br />**default value:**<br />`{"from": {"opacity":0,"x":70},"to":{"opacity":1,"x":0},"ease":"Power2.easeOut","duration": 0.4,"delay": 0,"infinite" : false,"viewport" : '100%'}` <br />**other:**<br />`{"viewport":"100%","from":{"opacity":0,"x":100},"to":{"opacity":1,"x":0},"ease":"Power2.easeOut","duration":0.8,"delay":0,"infinite":false}` <br />`{"viewport":"100%","from":"","to":".demo-sr-active","infinite":true}` |
+
+It accepts all props(include data-* attributes) which native div support.
+
+
+
+JSON configuration properties of the `config`:
+
+| Property | Type | Default | Description |
+| --- | --- | --- | --- |
+| `viewport` | string  | 100% | This attribute expands/contracts the active boundaries of the viewport when calculating element visibility. The default value is `100%`.  `20%` means 20% of an element must be visible for its reveal to occur. |
+| `from` | JSON Object Literals  | {"opacity":0,"x":70} | Starting config using JSON string format, will transition from these values. Follow the parameter style of GSAP 2+. Eg. `{"opacity":0,"scale":0.5,"transform":"translateX(50px) rotate(30deg)"}` |
+| `to` | JSON Object Literals \| string  | {"opacity":1,"x":0} | Ending config using JSON string format, will transition from these values. Follow the parameter style of GSAP 2+. Eg. `{"opacity":1,"scale":1,"transform":"translateX(0) rotate(0deg)"}` <br />Can be a pure string, this style will be enabled when the viewport is specified, for example `.demo-sr-active` |
+| `ease` | string  | Power2.easeOut | Accepts any valid GSAP 2+ easing, e.g. `Power2.easeOut`, etc. |
+| `duration` | number  | 0.4 | This attribute controls how long animations take to complete. |
+| `delay` | number  | 0 | This attribute is the time before reveal animations begin. |
+| `infinite` | boolean  | false | This attribute enables/disables elements returning to their initialized position when they leave the viewport. When true elements reveal each time they enter the viewport instead of once. |
+
+
+
 ## Examples
 
 ```js

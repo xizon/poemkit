@@ -17,12 +17,20 @@ import { __ } from '@uixkit.react/components/_utils/_all';
 
 
 interface ScrollRevealConfig {
+	/** This attribute expands/contracts the active boundaries of the viewport when calculating element visibility. */
     viewport?: string | undefined;
+	/** Starting config using JSON string format, will transition from these values. Follow the parameter style of GSAP 2+. */
     from?: object | undefined;
-	to?: object | undefined;
+	/** Ending config using JSON string format, will transition from these values. Follow the parameter style of GSAP 2+. Can be a pure string, this style will be enabled when the viewport is specified, for example `.demo-sr-active` */
+	to?: object | string | undefined;
+	/** Accepts any valid GSAP 2+ easing, e.g. `Power2.easeOut`, etc. */
 	ease?: string | undefined;
+	/** This attribute controls how long animations take to complete. */
 	duration?: number | undefined;
+	/** This attribute is the time before reveal animations begin. */
 	delay?: number | undefined;
+	/** This attribute enables/disables elements returning to their initialized position when they leave the viewport. When true elements reveal each time they enter the viewport instead of once.
+ */
 	infinite?: boolean | undefined;
 }
 

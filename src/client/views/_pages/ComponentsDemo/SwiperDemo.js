@@ -44,9 +44,85 @@ export default () => {
 
 
 
+
+		{/*<!-- Content   
+		====================================================== -->*/}
+		<section className="uix-spacing--s">
+			<div className="container">
+				<div className="row">
+					<div className="col-12">
+						<h3 className="app-header-title">Demos</h3>
+						<hr />
+					</div>
+				</div>
+				{/*<!-- .row end -->*/}
+
+			</div>
+			{/*<!-- .container end -->*/}
+
+		</section>
+		
+
+
 		{/*<!-- Content 
 		====================================================== -->*/}
 		<Swiper />
+
+
+
+
+		{/*<!-- API 
+		====================================================== -->*/}
+		<section className="uix-spacing--s uix-spacing--no-bottom">
+			<div className="container">
+				<div className="row">
+					<div className="col-12">
+						<h3 className="app-header-title">API</h3>
+						<hr />
+
+						<article className="uix-spacing--s" itemProp="text">
+							<h4>Swiper</h4>
+							<div>
+								<pre>import Swiper from '@uixkit.react/components/Swiper/index.tsx';</pre>
+							</div>
+							<div className="table-responsive-md">
+								<table className="table table-bordered table-striped mb-5">
+									<thead>
+										<tr>
+											<th>Property</th>
+											<th>Type</th>
+											<th>Default</th>
+											<th>Description</th>
+										</tr>
+									</thead>
+									<tbody>
+										<tr>
+											<td>-</td>
+											<td>-</td>
+											<td>-</td>
+											<td>-</td>
+										</tr> 
+										<tr>
+											<td colSpan="4">This is a <strong>Migrating Component</strong>. There are not any properties and are used to quickly
+												migrate some completed HTML code. You only need to directly modify the component source code.</td>
+										</tr>
+									</tbody>
+								</table>
+	
+							</div>
+
+
+						</article>
+
+
+					</div>
+				</div>
+				{/*<!-- .row end -->*/}
+
+
+			</div>
+			{/*<!-- .container end -->*/}
+		</section>
 
 
 

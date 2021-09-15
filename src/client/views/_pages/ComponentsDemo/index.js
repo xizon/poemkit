@@ -22,7 +22,7 @@ import FormDemo from '@uixkit.react/pages/ComponentsDemo/FormDemo.js';
 import ScrollRevealDemo from '@uixkit.react/pages/ComponentsDemo/ScrollRevealDemo.js';
 import CardDemo from '@uixkit.react/pages/ComponentsDemo/CardDemo.js';
 import ParallaxDemo from '@uixkit.react/pages/ComponentsDemo/ParallaxDemo.js';
-
+import GridDemo from '@uixkit.react/pages/ComponentsDemo/GridDemo.js';
 
 
 
@@ -85,6 +85,9 @@ function HookContent() {
 				</li>
 				<li className={theLocation.pathname.indexOf('/parallax') >= 0 ? 'is-active' : ''}>
 					<NavLink data-route="true" to={`${url}/parallax`} activeClassName="is-active">Parallax</NavLink>
+				</li>
+				<li className={theLocation.pathname.indexOf('/grid') >= 0 ? 'is-active' : ''}>
+					<NavLink data-route="true" to={`${url}/grid`} activeClassName="is-active">Grid</NavLink>
 				</li>
 			</ul>
 		</div>
@@ -159,8 +162,12 @@ function HookContent() {
 						<Route path={`${path}/parallax`}>
 							<ParallaxDemo />
 						</Route>
+						<Route path={`${path}/grid`}>
+							<GridDemo />
+						</Route>
 
 
+						
 
 					</Switch>
 

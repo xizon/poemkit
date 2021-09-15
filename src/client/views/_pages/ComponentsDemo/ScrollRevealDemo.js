@@ -62,7 +62,26 @@ export default () => {
 		</section>
 
 
-		<div className="uix-spacing--s uix-spacing--no-bottom"></div>
+
+
+		{/*<!-- Content   
+		====================================================== -->*/}
+		<section className="uix-spacing--s">
+			<div className="container">
+				<div className="row">
+					<div className="col-12">
+						<h3 className="app-header-title">Demos</h3>
+						<hr />
+					</div>
+				</div>
+				{/*<!-- .row end -->*/}
+
+			</div>
+			{/*<!-- .container end -->*/}
+
+		</section>
+		
+
 
 
 		{/*<!-- Scroll Reveal
@@ -117,6 +136,124 @@ export default () => {
 			</div>
 		</ScrollReveal>
 
+
+
+		{/*<!-- API 
+		====================================================== -->*/}
+			<section className="uix-spacing--s uix-spacing--no-bottom">
+				<div className="container">
+					<div className="row">
+						<div className="col-12">
+							<h3 className="app-header-title">API</h3>
+							<hr />
+
+
+							<article className="uix-spacing--s" itemProp="text">
+								<h4>Scroll Reveal</h4>
+								<div>
+									<pre>import ScrollReveal from '@uixkit.react/components/ScrollReveal/index.tsx';</pre>
+								</div>
+
+								<div className="table-responsive-md">
+									<table className="table table-bordered table-striped">
+										<thead>
+											<tr>
+												<th>Property</th>
+												<th>Type</th>
+												<th>Default</th>
+												<th>Description</th>
+											</tr>
+										</thead>
+										<tbody>
+											<tr>
+												<td><code>config</code></td>
+												<td>JSON Object Literals</td>
+												<td>-</td>
+												<td>Detailed animation parameters, using JSON string format.
+													<br /><strong>default value:</strong><br />
+													<code className="text-wrap">{`{"from": {"opacity":0,"x":70},"to":{"opacity":1,"x":0},"ease":"Power2.easeOut","duration": 0.4,"delay": 0,"infinite" : false,"viewport" : '100%'}`}</code>
+													<br /><strong>other:</strong><br />
+													<code className="text-wrap">{`{"viewport":"100%","from":{"opacity":0,"x":100},"to":{"opacity":1,"x":0},"ease":"Power2.easeOut","duration":0.8,"delay":0,"infinite":false}`}</code>
+													<br /><code className="text-wrap">{`{"viewport":"100%","from":"","to":".demo-sr-active","infinite":true}`}</code>
+												</td>
+											</tr>
+										</tbody>
+									</table>
+
+								</div>
+
+								<p className="mb-5">It accepts all props(include data-* attributes) which native div support.</p>
+
+								<p>JSON configuration properties of the <code>config</code>:</p>
+								<div className="table-responsive-md">
+									<table className="table table-bordered table-striped mb-5">
+										<thead>
+											<tr>
+												<th>Property</th>
+												<th>Type</th>
+												<th>Default</th>
+												<th>Description</th>
+											</tr>
+										</thead>
+										<tbody>
+											<tr>
+												<td><code>viewport</code></td>
+												<td>string</td>
+												<td>100%</td>
+												<td>This attribute expands/contracts the active boundaries of the viewport when calculating element visibility. The default value is <code>100%</code>.  <code>20%</code> means 20% of an element must be visible for its reveal to occur.</td>
+											</tr>
+											<tr>
+												<td><code>from</code></td>
+												<td>JSON Object Literals</td>
+												<td>{`{"opacity":0,"x":70}`}</td>
+												<td>Starting config using JSON string format, will transition from these values. Follow the parameter style of GSAP 2+. Eg. <code className="text-wrap">{`{"opacity":0,"scale":0.5,"transform":"translateX(50px) rotate(30deg)"}`}</code></td>
+											</tr>
+											<tr>
+												<td><code>to</code></td>
+												<td>JSON Object Literals | string</td>
+												<td>{`{"opacity":1,"x":0}`}</td>
+												<td>Ending config using JSON string format, will transition from these values. Follow the parameter style of GSAP 2+. Eg. <code className="text-wrap">{`{"opacity":1,"scale":1,"transform":"translateX(0) rotate(0deg)"}`}</code> <br />Can be a pure string, this style will be enabled when the viewport is specified, for example <code>.demo-sr-active</code></td>
+											</tr>
+											<tr>
+												<td><code>ease</code></td>
+												<td>string</td>
+												<td>Power2.easeOut</td>
+												<td>Accepts any valid GSAP 2+ easing, e.g. <code>Power2.easeOut</code>, etc.</td>
+											</tr>
+											<tr>
+												<td><code>duration</code></td>
+												<td>number</td>
+												<td>0.4</td>
+												<td>This attribute controls how long animations take to complete.</td>
+											</tr>
+											<tr>
+												<td><code>delay</code></td>
+												<td>number</td>
+												<td>0</td>
+												<td>This attribute is the time before reveal animations begin.</td>
+											</tr>
+											<tr>
+												<td><code>infinite</code></td>
+												<td>boolean</td>
+												<td>false</td>
+												<td>This attribute enables/disables elements returning to their initialized position when they leave the viewport. When true elements reveal each time they enter the viewport instead of once.</td>
+											</tr>
+										</tbody>
+									</table>
+
+								</div>
+
+							</article>
+
+
+						</div>
+					</div>
+					{/*<!-- .row end -->*/}
+
+
+				</div>
+				{/*<!-- .container end -->*/}
+			</section>
 
 
 

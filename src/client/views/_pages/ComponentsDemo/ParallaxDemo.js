@@ -45,10 +45,29 @@ export default () => {
 		</section>
 
 
+		{/*<!-- Content   
+		====================================================== -->*/}
+		<section className="uix-spacing--s">
+			<div className="container">
+				<div className="row">
+					<div className="col-12">
+						<h3 className="app-header-title">Demos</h3>
+						<hr />
+					</div>
+				</div>
+				{/*<!-- .row end -->*/}
+
+			</div>
+			{/*<!-- .container end -->*/}
+
+		</section>
+		
+		
+
 
 		{/*<!-- Parallax & Overlay 
 		============================================= -->*/} 
-		<section className="uix-spacing--s uix-spacing--no-bottom">
+		<section>
 			<Parallax img={`${rootDirectory}/assets/images/demo/spiral-galaxy-1920x1080.jpg`} heightClass="uix-height--100" fullyVisible={false} offsetTop={0} overlay={false} skew={0} speed={0.1}>
 				<h2>Fulscreen + Vertically Centered Text</h2>
 			</Parallax>
@@ -140,6 +159,106 @@ export default () => {
 
 		
 
+
+
+		{/*<!-- API 
+		====================================================== -->*/}
+		<section className="uix-spacing--s uix-spacing--no-bottom">
+			<div className="container">
+				<div className="row">
+					<div className="col-12">
+						<h3 className="app-header-title">API</h3>
+						<hr />
+
+
+						<article className="uix-spacing--s" itemProp="text">
+							<h4>Parallax</h4>
+							<div>
+								<pre>import Parallax from '@uixkit.react/components/Parallax/index.tsx';</pre>
+							</div>
+							<div className="table-responsive-md">
+								<table className="table table-bordered table-striped mb-5">
+									<thead>
+										<tr>
+											<th>Property</th>
+											<th>Type</th>
+											<th>Default</th>
+											<th>Description</th>
+										</tr>
+									</thead>
+									<tbody>
+										<tr>
+											<td><code>parallaxElements</code></td>
+											<td>boolean</td>
+											<td>false</td>
+											<td>Pure parallax scrolling effect without other embedded HTML elements</td>
+										</tr>
+										<tr>
+											<td><code>parallaxElementsTransition</code></td>
+											<td>string</td>
+											<td>all 0.4s cubic-bezier(0, 0, 0.34, 0.96) 0s</td>
+											<td>Transition of parallax when <code>parallaxElements</code> is true</td>
+										</tr>
+										<tr>
+											<td><code>img</code></td>
+											<td>string</td>
+											<td>-</td>
+											<td>Background image URL</td>
+										</tr>
+										<tr>
+											<td><code>heightClass</code></td>
+											<td>string | <code>uix-height--100</code> | <code>uix-height--90</code> | <code>uix-height--80</code> | <code>uix-height--70</code> | <code>uix-height--60</code> | <code>uix-height--50</code> | <code>uix-height--40</code> | <code>uix-height--30</code> | <code>uix-height--20</code> | <code>uix-height--10</code></td>
+											<td>-</td>
+											<td>Class name of default height</td>
+										</tr>
+										<tr>
+											<td><code>fullyVisible</code></td>
+											<td>boolean</td>
+											<td>false</td>
+											<td>Whether to display all pictures, including the edges</td>
+										</tr>
+										<tr>
+											<td><code>offsetTop</code></td>
+											<td>number</td>
+											<td>0</td>
+											<td>Offset top of background</td>
+										</tr>
+										<tr>
+											<td><code>overlay</code></td>
+											<td>boolean | string</td>
+											<td>false</td>
+											<td>Background overlay. You can set it to the color value, for example <code>rgba(0,0,0,.6)</code></td>
+										</tr>
+										<tr>
+											<td><code>skew</code></td>
+											<td>number</td>
+											<td>0</td>
+											<td>Skew of background</td>
+										</tr>
+										<tr>
+											<td><code>speed</code></td>
+											<td>number</td>
+											<td>0</td>
+											<td>Speed of parallax animation</td>
+										</tr>
+									</tbody>
+								</table>
+	
+							</div>
+
+
+
+						</article>
+
+
+					</div>
+				</div>
+				{/*<!-- .row end -->*/}
+
+
+			</div>
+			{/*<!-- .container end -->*/}
+		</section>
 
 
 

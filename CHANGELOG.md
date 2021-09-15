@@ -1,5 +1,13 @@
 # Changelog
 
+#### = 0.0.9 (September 14, 2021) =
+
+* New: Added API documentation for UI components.
+* New: Add new UI components `Grid`.
+* Tweak: Optimized UI component library.
+* Tweak: Optimized `find()` for the core shortcut.
+
+
 #### = 0.0.8 (August 20, 2021) =
 
 * Fix: Fixed the error that may occur when axios asynchronous request. To avoid causing 502 Proxy Error errors when requesting from the express server.

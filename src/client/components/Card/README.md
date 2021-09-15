@@ -7,6 +7,31 @@
 => 0.0.1
 
 
+## API
+
+### Card
+```js
+import Card from '@uixkit.react/components/Card/index.tsx';
+```
+| Property | Type | Default | Description |
+| --- | --- | --- | --- |
+| `type` | `thumb` \| `gallery-v-img` \| `gallery-v-custom` \| `gallery-h-img` \| `gallery-full-info` \| `gallery-icon` \| `gallery-icon-abreast` \| `authorcard-line` \| `authorcard-detail` \| `authorcard-stats` | - | Card display style |
+| `btnIcon` | ReactNode | - | Button Icon |
+| `title` | string | - | Title of card |
+| `titleEllipsis` | boolean | false | Omit overflowed title string |
+| `subTitle` | ReactNode \| string | - | Hyperlink or subtitle of card |
+| `bgConfig` | JSON Object Literals | - | The attributes of the background image, use JSON string format. Such as:<br />`{"src":"assets/images/demo.jpg"}`, <br />`{"src":"assets/images/demo.jpg","position":"center center","size":"cover","repeat":"no-repeat","fill":false}` |
+| `contentRatio` | number | - | The ratio of the content, used for horizontal gallery style. For `gallery-h-*`, `gallery-full-*` |
+| `icon` | ReactNode | - | Primary Icon. For `gallery-icon-*` |
+| `overlayArea` | ReactNode | - | Overlay the content on the card background. For `gallery-v-*` |
+| `verticalCenter` | boolean | false | Vertically center text. For `gallery-full-*` |
+| `avatar` | string | - | Avatar URL. For `thumb`, `authorcard-*` |
+| `btnClickEvent` | function | - | Handling events for button |
+| `btnHyperlinkClickEvent` | function | - | Handling events for anchor link |
+
+
+
+
 ## Examples
 
 ```js

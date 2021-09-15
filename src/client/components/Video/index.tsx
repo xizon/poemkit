@@ -32,6 +32,7 @@ interface VideoConfig {
 type VideoProps = {
 	config: string | VideoConfig;
 	src?: string;
+	poster?: string;
 	/** -- */
 	attributes?: any;
 };
@@ -60,7 +61,9 @@ export default class Video extends Component<VideoProps, VideoState> {
 				
 				player.on('ready', function( event ) {
 					const instance: any = event.detail.plyr;
-					const config = JSON.parse( instance.media.dataset.plyrConfig );
+					const getConfig = instance.media.dataset.plyrConfig;
+					const config = __.validate.isJSON( getConfig ) ? JSON.parse( getConfig ) : getConfig;
+					
 
 					/* ---------  Video Modal initialize */
 					instance.on( 'loadedmetadata', function( e ) {
@@ -145,6 +148,7 @@ export default class Video extends Component<VideoProps, VideoState> {
 		
 		
 		const {
+			poster,
 			config,
 			src,
 			...attributes
@@ -155,7 +159,7 @@ export default class Video extends Component<VideoProps, VideoState> {
 		  <>
 			{/* Note: data-* attributes are passed using props to 
 			avoid  `Warning: Invalid value for prop `poster` on <video> tag.` */}
-			<video playsInline controls src={src} data-plyr-config={config || '{"muted":false,"autoplay":false,"controls":["play-large", "play", "progress", "current-time", "mute", "volume", "captions", "settings", "pip", "airplay", "fullscreen"],"loop":{"active":false}}'}  {...attributes}></video>
+			<video playsInline controls data-poster={poster} src={src} data-plyr-config={config || '{"muted":false,"autoplay":false,"controls":["play-large", "play", "progress", "current-time", "mute", "volume", "captions", "settings", "pip", "airplay", "fullscreen"],"loop":{"active":false}}'}  {...attributes}></video>
 		
 		  </>
 		)

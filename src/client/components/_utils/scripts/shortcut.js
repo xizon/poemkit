@@ -1,11 +1,10 @@
-
 /* 
  *************************************
  * Core Shortcut
  *
  * @package: uix-kit-react
- * @version: 0.25
- * @last update: July 29, 2021
+ * @version: 0.27
+ * @last update: September 14, 2021
  * @license: MIT
  *
  *************************************
@@ -1223,7 +1222,6 @@ const __ = (function () {
 					 case 9:
 						//if Document
 						return self.wrap( [document.body] );
-						break;
 
 					 default:
 						return [];
@@ -1792,6 +1790,25 @@ const __ = (function () {
 		
 
 		// The symbol ">" is not allowed at the beginning of the find() method.
+		if (/(^\s*|,\s*)>/.test(s)) {
+			let removeId;
+			if (!this.id) {
+				this.id = 'ID_' + new Date().getTime();
+				removeId = true;
+			}
+			s = s.replace(/(^\s*|,\s*)>/g, '$1#' + this.id + ' >');
+			const result = document.querySelector(s);
+
+			if (removeId) {
+				this.id = null;
+			}
+
+			return result;
+		} else {
+			return __(s, this);
+		}
+
+		/*
 		const searchChildNode = __.trim(s);
 		if ( searchChildNode.slice(0,1) == '>' ){
 
@@ -1809,8 +1826,11 @@ const __ = (function () {
 			
 		}
 
-
 		return __(s, this);
+		*/
+
+
+		
 	};
 
 
@@ -2533,21 +2553,14 @@ const __ = (function () {
 		
 		switch (controlType) {
 			case "input-textarea":
-
 				return this.value;
-				break;
 			case "checkbox":
-
 				return this.checked ? 1 : 0;
-				break;
 			case "radio":
-
 				return this.value;
-				break;
 			case "select":
-
 				return this.value;
-				break;
+
 			default:
 				return this.value;
 

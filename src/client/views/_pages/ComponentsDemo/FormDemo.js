@@ -1595,8 +1595,1198 @@ export default () => {
 
 
 
+		{/*<!-- API 
+		====================================================== -->*/}
+		<section>
+			<div className="container">
+				<div className="row">
+					<div className="col-12">
+						<h3 className="app-header-title">API</h3>
+						<hr />
+
+
+						<article className="uix-spacing--s" itemProp="text">
+							<h4>Input</h4>
+							<div>
+								<pre>import {`{Input}`} from '@uixkit.react/components/Form/index.tsx';</pre>
+							</div>
+							<div className="table-responsive-md">
+								<table className="table table-bordered table-striped">
+									<thead>
+										<tr>
+											<th>Property</th>
+											<th>Type</th>
+											<th>Default</th>
+											<th>Description</th>
+										</tr>
+									</thead>
+									<tbody>
+										<tr>
+											<td><code>type</code></td>
+											<td>string</td>
+											<td>text</td>
+											<td>The type of input. Such as &lt;input type="text" name="name"&gt; gives a text box.</td>
+										</tr>
+										<tr>
+											<td><code>theme</code></td>
+											<td>string | <code>line</code></td>
+											<td>-</td>
+											<td>The display style of the control</td>
+										</tr>
+										<tr>
+											<td><code>ui</code></td>
+											<td>string</td>
+											<td>-</td>
+											<td>The overlay style of the control. Can be used at the same time, separated by spaces. The optional values are:<br /><strong>status:</strong><br /><code>error</code>, <code>success</code><br /><strong>corners:</strong><br /><code>pill</code>, <code>rounded</code><br /><strong>size:</strong><br /><code>fullwidth</code>, <code>small</code>, <code>medium</code>, <code>large</code></td>
+										</tr>
+										<tr>
+											<td><code>value</code></td>
+											<td>string</td>
+											<td>-</td>
+											<td>Set a default value for this control</td>
+										</tr>
+										<tr>
+											<td><code>label</code></td>
+											<td>string | ReactNode</td>
+											<td>-</td>
+											<td>It is used to specify a label for an element of a form.</td>
+										</tr>
+										<tr>
+											<td><code>units</code></td>
+											<td>string</td>
+											<td>-</td>
+											<td>Specify a unit identification string. Such as <code>em</code>, <code>px</code>, and so on.</td>
+										</tr>
+										<tr>
+											<td><code>name</code></td>
+											<td>string</td>
+											<td>-</td>
+											<td>Name is not deprecated when used with form fields.</td>
+										</tr>
+										<tr>
+											<td><code>maxLength</code></td>
+											<td>number</td>
+											<td>-</td>
+											<td>Defines the maximum number of characters</td>
+										</tr>
+										<tr>
+											<td><code>disabled</code></td>
+											<td>boolean</td>
+											<td>false</td>
+											<td>Whether the input is disabled</td>
+										</tr>
+										<tr>
+											<td><code>required</code></td>
+											<td>boolean</td>
+											<td>false</td>
+											<td>When present, it specifies that a field must be filled out before submitting the form.</td>
+										</tr>
+										<tr>
+											<td><code>iconLeft</code></td>
+											<td>ReactNode</td>
+											<td>-</td>
+											<td>Set the left icon of this control</td>
+										</tr>
+										<tr>
+											<td><code>iconRight</code></td>
+											<td>ReactNode</td>
+											<td>-</td>
+											<td>Set the right icon of this control</td>
+										</tr>
+									</tbody>
+								</table>
+
 	
+							</div>
+
+							<p className="mb-5">It accepts all props which this control support.</p>
+
+							{/*<!-- ++++++++ -->*/}
+
+							<h4>Password Input</h4>
+							<div>
+								<pre>import {`{PasswordInput}`} from '@uixkit.react/components/Form/index.tsx';</pre>
+							</div>
+							<div className="table-responsive-md">
+								<table className="table table-bordered table-striped">
+									<thead>
+										<tr>
+											<th>Property</th>
+											<th>Type</th>
+											<th>Default</th>
+											<th>Description</th>
+										</tr>
+									</thead>
+									<tbody>
+										<tr>
+											<td><code>theme</code></td>
+											<td>string | <code>line</code></td>
+											<td>-</td>
+											<td>The display style of the control</td>
+										</tr>
+										<tr>
+											<td><code>ui</code></td>
+											<td>string</td>
+											<td>-</td>
+											<td>The overlay style of the control. Can be used at the same time, separated by spaces. The optional values are:<br /><strong>status:</strong><br /><code>error</code>, <code>success</code><br /><strong>corners:</strong><br /><code>pill</code>, <code>rounded</code><br /><strong>size:</strong><br /><code>fullwidth</code>, <code>small</code>, <code>medium</code>, <code>large</code></td>
+										</tr>
+										<tr>
+											<td><code>value</code></td>
+											<td>string</td>
+											<td>-</td>
+											<td>Set a default value for this control</td>
+										</tr>
+										<tr>
+											<td><code>label</code></td>
+											<td>string | ReactNode</td>
+											<td>-</td>
+											<td>It is used to specify a label for an element of a form.</td>
+										</tr>
+										<tr>
+											<td><code>units</code></td>
+											<td>string</td>
+											<td>-</td>
+											<td>Specify a unit identification string. Such as <code>em</code>, <code>px</code>, and so on.</td>
+										</tr>
+										<tr>
+											<td><code>name</code></td>
+											<td>string</td>
+											<td>-</td>
+											<td>Name is not deprecated when used with form fields.</td>
+										</tr>
+										<tr>
+											<td><code>maxLength</code></td>
+											<td>number</td>
+											<td>-</td>
+											<td>Defines the maximum number of characters</td>
+										</tr>
+										<tr>
+											<td><code>disabled</code></td>
+											<td>boolean</td>
+											<td>false</td>
+											<td>Whether the input is disabled</td>
+										</tr>
+										<tr>
+											<td><code>required</code></td>
+											<td>boolean</td>
+											<td>false</td>
+											<td>When present, it specifies that a field must be filled out before submitting the form.</td>
+										</tr>
+										<tr>
+											<td><code>iconLeft</code></td>
+											<td>ReactNode</td>
+											<td>-</td>
+											<td>Set the left icon of this control</td>
+										</tr>
+										<tr>
+											<td><code>iconRight</code></td>
+											<td>ReactNode</td>
+											<td>-</td>
+											<td>Set the right icon of this control</td>
+										</tr>
+									</tbody>
+								</table>
 	
+							</div>
+
+
+							<p className="mb-5">It accepts all props which this control support.</p>
+
+							{/*<!-- ++++++++ -->*/}
+
+							<h4>Merge Input</h4>
+							<div>
+								<pre>import {`{MergeInput}`} from '@uixkit.react/components/Form/index.tsx';</pre>
+							</div>
+							<div className="table-responsive-md">
+								<table className="table table-bordered table-striped">
+									<thead>
+										<tr>
+											<th>Property</th>
+											<th>Type</th>
+											<th>Default</th>
+											<th>Description</th>
+										</tr>
+									</thead>
+									<tbody>
+										<tr>
+											<td><code>type</code></td>
+											<td>string</td>
+											<td>text</td>
+											<td>The type of input. Such as &lt;input type="text" name="name"&gt; gives a text box.</td>
+										</tr>
+										<tr>
+											<td><code>btnType</code></td>
+											<td>string</td>
+											<td>button</td>
+											<td>The type attribute specifies the type of button. Such as <code>submit</code>, <code>reset</code> or <code>button</code></td>
+										</tr>
+										<tr>
+											<td><code>ui</code></td>
+											<td>string</td>
+											<td>-</td>
+											<td>The overlay style of the control. Can be used at the same time, separated by spaces. The optional values are:<br /><strong>status:</strong><br /><code>error</code>, <code>success</code><br /><strong>corners:</strong><br /><code>pill</code>, <code>rounded</code></td>
+										</tr>
+										<tr>
+											<td><code>value</code></td>
+											<td>string</td>
+											<td>-</td>
+											<td>Set a default value for this control</td>
+										</tr>
+										<tr>
+											<td><code>label</code></td>
+											<td>string | ReactNode</td>
+											<td>-</td>
+											<td>It is used to specify a label for an element of a form.</td>
+										</tr>
+										<tr>
+											<td><code>name</code></td>
+											<td>string</td>
+											<td>-</td>
+											<td>Name is not deprecated when used with form fields.</td>
+										</tr>
+										<tr>
+											<td><code>maxLength</code></td>
+											<td>number</td>
+											<td>-</td>
+											<td>Defines the maximum number of characters</td>
+										</tr>
+										<tr>
+											<td><code>disabled</code></td>
+											<td>boolean</td>
+											<td>false</td>
+											<td>Whether the input is disabled</td>
+										</tr>
+										<tr>
+											<td><code>required</code></td>
+											<td>boolean</td>
+											<td>false</td>
+											<td>When present, it specifies that a field must be filled out before submitting the form.</td>
+										</tr>
+										<tr>
+											<td><code>icon</code></td>
+											<td>ReactNode</td>
+											<td>-</td>
+											<td>Set the icon of this control</td>
+										</tr>
+									</tbody>
+								</table>
+	
+							</div>
+
+
+							<p className="mb-5">It accepts all props which this control support.</p>
+
+							{/*<!-- ++++++++ -->*/}
+
+
+							<h4>Textarea</h4>
+							<div>
+								<pre>import {`{Textarea}`} from '@uixkit.react/components/Form/index.tsx';</pre>
+							</div>
+							<div className="table-responsive-md">
+								<table className="table table-bordered table-striped">
+									<thead>
+										<tr>
+											<th>Property</th>
+											<th>Type</th>
+											<th>Default</th>
+											<th>Description</th>
+										</tr>
+									</thead>
+									<tbody>
+										<tr>
+											<td><code>theme</code></td>
+											<td>string | <code>line</code></td>
+											<td>-</td>
+											<td>The display style of the control</td>
+										</tr>
+										<tr>
+											<td><code>ui</code></td>
+											<td>string</td>
+											<td>-</td>
+											<td>The overlay style of the control. Can be used at the same time, separated by spaces. The optional values are:<br /><strong>status:</strong><br /><code>error</code>, <code>success</code><br /><strong>corners:</strong><br /><code>pill</code>, <code>rounded</code><br /><strong>size:</strong><br /><code>fullwidth</code></td>
+										</tr>
+										<tr>
+											<td><code>value</code></td>
+											<td>string</td>
+											<td>-</td>
+											<td>Set a default value for this control</td>
+										</tr>
+										<tr>
+											<td><code>label</code></td>
+											<td>string | ReactNode</td>
+											<td>-</td>
+											<td>It is used to specify a label for an element of a form.</td>
+										</tr>
+										<tr>
+											<td><code>units</code></td>
+											<td>string</td>
+											<td>-</td>
+											<td>Specify a unit identification string. Such as <code>em</code>, <code>px</code>, and so on.</td>
+										</tr>
+										<tr>
+											<td><code>name</code></td>
+											<td>string</td>
+											<td>-</td>
+											<td>Name is not deprecated when used with form fields.</td>
+										</tr>
+										<tr>
+											<td><code>maxLength</code></td>
+											<td>number</td>
+											<td>-</td>
+											<td>Defines the maximum number of characters</td>
+										</tr>
+										<tr>
+											<td><code>cols</code></td>
+											<td>number</td>
+											<td>-</td>
+											<td>The cols attribute specifies the visible width of a text area.</td>
+										</tr>
+										<tr>
+											<td><code>rows</code></td>
+											<td>number</td>
+											<td>-</td>
+											<td>The rows attribute specifies the visible height of a text area, in lines.</td>
+										</tr>
+										<tr>
+											<td><code>disabled</code></td>
+											<td>boolean</td>
+											<td>false</td>
+											<td>Whether the input is disabled</td>
+										</tr>
+										<tr>
+											<td><code>required</code></td>
+											<td>boolean</td>
+											<td>false</td>
+											<td>When present, it specifies that a field must be filled out before submitting the form.</td>
+										</tr>
+									</tbody>
+								</table>
+
+	
+							</div>
+
+
+
+							<p className="mb-5">It accepts all props which this control support.</p>
+
+							{/*<!-- ++++++++ -->*/}
+
+
+							<h4>Select</h4>
+							<div>
+								<pre>import {`{Select}`} from '@uixkit.react/components/Form/index.tsx';</pre>
+							</div>
+							<div className="table-responsive-md">
+								<table className="table table-bordered table-striped">
+									<thead>
+										<tr>
+											<th>Property</th>
+											<th>Type</th>
+											<th>Default</th>
+											<th>Description</th>
+										</tr>
+									</thead>
+									<tbody>
+										<tr>
+											<td><code>options</code></td>
+											<td>JSON Object Literals</td>
+											<td>-</td>
+											<td>Set the default value using JSON string format for menu of options, like this: <code className="text-wrap">{`{"Option 1":"value-1","Option 2":"value-2","Option 3":"value-3"}`}</code></td>
+										</tr>
+										<tr>
+											<td><code>theme</code></td>
+											<td>string | <code>line</code></td>
+											<td>-</td>
+											<td>The display style of the control</td>
+										</tr>
+										<tr>
+											<td><code>ui</code></td>
+											<td>string</td>
+											<td>-</td>
+											<td>The overlay style of the control. Can be used at the same time, separated by spaces. The optional values are:<br /><strong>corners:</strong><br /><code>pill</code>, <code>rounded</code><br /><strong>size:</strong><br /><code>fullwidth</code></td>
+										</tr>
+										<tr>
+											<td><code>value</code></td>
+											<td>string</td>
+											<td>-</td>
+											<td>Set a default value for this control</td>
+										</tr>
+										<tr>
+											<td><code>label</code></td>
+											<td>string | ReactNode</td>
+											<td>-</td>
+											<td>It is used to specify a label for an element of a form.</td>
+										</tr>
+										<tr>
+											<td><code>name</code></td>
+											<td>string</td>
+											<td>-</td>
+											<td>Name is not deprecated when used with form fields.</td>
+										</tr>
+										<tr>
+											<td><code>disabled</code></td>
+											<td>boolean</td>
+											<td>false</td>
+											<td>Whether the input is disabled</td>
+										</tr>
+										<tr>
+											<td><code>required</code></td>
+											<td>boolean</td>
+											<td>false</td>
+											<td>When present, it specifies that a field must be filled out before submitting the form.</td>
+										</tr>
+									</tbody>
+								</table>
+
+							</div>
+
+
+							<p className="mb-5">It accepts all props which this control support.</p>
+
+							{/*<!-- ++++++++ -->*/}
+
+
+							<h4>Custom Select</h4>
+							<div>
+								<pre>import {`{CustomSelect}`} from '@uixkit.react/components/Form/index.tsx';</pre>
+							</div>
+							<div className="table-responsive-md">
+								<table className="table table-bordered table-striped mb-5">
+									<thead>
+										<tr>
+											<th>Property</th>
+											<th>Type</th>
+											<th>Default</th>
+											<th>Description</th>
+										</tr>
+									</thead>
+									<tbody>
+										<tr>
+											<td><code>options</code></td>
+											<td>JSON Object Literals</td>
+											<td>-</td>
+											<td>Set the default value using JSON string format for menu of options, like this: <code className="text-wrap">{`{"Option 1":"value-1","Option 2":"value-2","Option 3":"value-3"}`}</code></td>
+										</tr>
+										<tr>
+											<td><code>position</code></td>
+											<td>string | <code>top</code></td>
+											<td>-</td>
+											<td>The position of the menu, the default is the bottom</td>
+										</tr>
+										<tr>
+											<td><code>theme</code></td>
+											<td>string | <code>line</code></td>
+											<td>-</td>
+											<td>The display style of the control</td>
+										</tr>
+										<tr>
+											<td><code>ui</code></td>
+											<td>string</td>
+											<td>-</td>
+											<td>The overlay style of the control. Can be used at the same time, separated by spaces. The optional values are:<br /><strong>corners:</strong><br /><code>pill</code>, <code>rounded</code><br /><strong>size:</strong><br /><code>fullwidth</code></td>
+										</tr>
+										<tr>
+											<td><code>value</code></td>
+											<td>string</td>
+											<td>-</td>
+											<td>Set a default value for this control</td>
+										</tr>
+										<tr>
+											<td><code>label</code></td>
+											<td>string | ReactNode</td>
+											<td>-</td>
+											<td>It is used to specify a label for an element of a form.</td>
+										</tr>
+										<tr>
+											<td><code>name</code></td>
+											<td>string</td>
+											<td>-</td>
+											<td>Name is not deprecated when used with form fields.</td>
+										</tr>
+										<tr>
+											<td><code>disabled</code></td>
+											<td>boolean</td>
+											<td>false</td>
+											<td>Whether the input is disabled</td>
+										</tr>
+										<tr>
+											<td><code>required</code></td>
+											<td>boolean</td>
+											<td>false</td>
+											<td>When present, it specifies that a field must be filled out before submitting the form.</td>
+										</tr>
+									</tbody>
+								</table>
+	
+							</div>
+
+
+
+
+
+							{/*<!-- ++++++++ -->*/}
+
+
+							<h4>Checkbox</h4>
+							<div>
+								<pre>import {`{Checkbox}`} from '@uixkit.react/components/Form/index.tsx';</pre>
+							</div>
+							<div className="table-responsive-md">
+								<table className="table table-bordered table-striped">
+									<thead>
+										<tr>
+											<th>Property</th>
+											<th>Type</th>
+											<th>Default</th>
+											<th>Description</th>
+										</tr>
+									</thead>
+									<tbody>
+										<tr>
+											<td><code>value</code></td>
+											<td>string | boolean</td>
+											<td>-</td>
+											<td>Set a default value for this control. If the value is <code>true</code>, it is selected by default</td>
+										</tr>
+										<tr>
+											<td><code>label</code></td>
+											<td>string | ReactNode</td>
+											<td>-</td>
+											<td>It is used to specify a label for an element of a form.</td>
+										</tr>
+										<tr>
+											<td><code>name</code></td>
+											<td>string</td>
+											<td>-</td>
+											<td>Name is not deprecated when used with form fields.</td>
+										</tr>
+										<tr>
+											<td><code>disabled</code></td>
+											<td>boolean</td>
+											<td>false</td>
+											<td>Whether the input is disabled</td>
+										</tr>
+										<tr>
+											<td><code>required</code></td>
+											<td>boolean</td>
+											<td>false</td>
+											<td>When present, it specifies that a field must be filled out before submitting the form.</td>
+										</tr>
+									</tbody>
+								</table>
+	
+							</div>
+
+
+
+							<p className="mb-5">It accepts all props which this control support.</p>
+
+							{/*<!-- ++++++++ -->*/}
+
+
+							<h4>Radio</h4>
+							<div>
+								<pre>import {`{Radio}`} from '@uixkit.react/components/Form/index.tsx';</pre>
+							</div>
+							<div className="table-responsive-md">
+								<table className="table table-bordered table-striped mb-5">
+									<thead>
+										<tr>
+											<th>Property</th>
+											<th>Type</th>
+											<th>Default</th>
+											<th>Description</th>
+										</tr>
+									</thead>
+									<tbody>
+										<tr>
+											<td><code>options</code></td>
+											<td>JSON Object Literals</td>
+											<td>-</td>
+											<td>Set the default value using JSON string format for menu of options, like this: <code className="text-wrap">{`{"Option 1":"value-1","Option 2":"value-2","Option 3":"value-3"}`}</code></td>
+										</tr>
+										<tr>
+											<td><code>value</code></td>
+											<td>string</td>
+											<td>-</td>
+											<td>Set a default value for this control</td>
+										</tr>
+										<tr>
+											<td><code>name</code></td>
+											<td>string</td>
+											<td>-</td>
+											<td>Name is not deprecated when used with form fields.</td>
+										</tr>
+										<tr>
+											<td><code>disabled</code></td>
+											<td>boolean</td>
+											<td>false</td>
+											<td>Whether the input is disabled</td>
+										</tr>
+										<tr>
+											<td><code>required</code></td>
+											<td>boolean</td>
+											<td>false</td>
+											<td>When present, it specifies that a field must be filled out before submitting the form.</td>
+										</tr>
+									</tbody>
+								</table>
+	
+							</div>
+
+
+
+							{/*<!-- ++++++++ -->*/}
+
+
+							<h4>Multiple Select</h4>
+							<div>
+								<pre>import {`{MultiSelect}`} from '@uixkit.react/components/Form/index.tsx';</pre>
+							</div>
+							<div className="table-responsive-md">
+								<table className="table table-bordered table-striped mb-5">
+									<thead>
+										<tr>
+											<th>Property</th>
+											<th>Type</th>
+											<th>Default</th>
+											<th>Description</th>
+										</tr>
+									</thead>
+									<tbody>
+										<tr>
+											<td><code>options</code></td>
+											<td>JSON Object Literals</td>
+											<td>-</td>
+											<td>Set the default value using JSON string format for menu of options, like this: <code className="text-wrap">{`{"Option 1":"value-1","Option 2":"value-2","Option 3":"value-3"}`}</code></td>
+										</tr>
+										<tr>
+											<td><code>theme</code></td>
+											<td>string | <code>line</code></td>
+											<td>-</td>
+											<td>The display style of the control</td>
+										</tr>
+										<tr>
+											<td><code>value</code></td>
+											<td>string</td>
+											<td>-</td>
+											<td>Set a default value for this control</td>
+										</tr>
+										<tr>
+											<td><code>name</code></td>
+											<td>string</td>
+											<td>-</td>
+											<td>Name is not deprecated when used with form fields.</td>
+										</tr>
+										<tr>
+											<td><code>required</code></td>
+											<td>boolean</td>
+											<td>false</td>
+											<td>When present, it specifies that a field must be filled out before submitting the form.</td>
+										</tr>
+									</tbody>
+								</table>
+	
+							</div>
+
+
+
+							{/*<!-- ++++++++ -->*/}
+
+							<h4>Single Select</h4>
+							<div>
+								<pre>import {`{SingleSelect}`} from '@uixkit.react/components/Form/index.tsx';</pre>
+							</div>
+							<div className="table-responsive-md">
+								<table className="table table-bordered table-striped mb-5">
+									<thead>
+										<tr>
+											<th>Property</th>
+											<th>Type</th>
+											<th>Default</th>
+											<th>Description</th>
+										</tr>
+									</thead>
+									<tbody>
+										<tr>
+											<td><code>options</code></td>
+											<td>JSON Object Literals</td>
+											<td>-</td>
+											<td>Set the default value using JSON string format for menu of options, like this: <code className="text-wrap">{`{"Option 1":"value-1","Option 2":"value-2","Option 3":"value-3"}`}</code></td>
+										</tr>
+										<tr>
+											<td><code>targetID</code></td>
+											<td>string</td>
+											<td>-</td>
+											<td>Specify multiple IDs that does not require the prefix <code>#</code>, use the item to control its display or not. Each ID is separated by a comma</td>
+										</tr>
+										<tr>
+											<td><code>theme</code></td>
+											<td>string | <code>line</code></td>
+											<td>-</td>
+											<td>The display style of the control</td>
+										</tr>
+										<tr>
+											<td><code>ui</code></td>
+											<td>string</td>
+											<td>-</td>
+											<td>The overlay style of the control. Can be used at the same time, separated by spaces. The optional values are:<br /><strong>corners:</strong><br /><code>pill</code>, <code>rounded</code></td>
+										</tr>
+										<tr>
+											<td><code>value</code></td>
+											<td>string</td>
+											<td>-</td>
+											<td>Set a default value for this control</td>
+										</tr>
+										<tr>
+											<td><code>name</code></td>
+											<td>string</td>
+											<td>-</td>
+											<td>Name is not deprecated when used with form fields.</td>
+										</tr>
+										<tr>
+											<td><code>required</code></td>
+											<td>boolean</td>
+											<td>false</td>
+											<td>When present, it specifies that a field must be filled out before submitting the form.</td>
+										</tr>
+									</tbody>
+								</table>
+
+		
+							</div>
+
+
+							{/*<!-- ++++++++ -->*/}
+
+							<h4>Date</h4>
+							<div>
+								<pre>import {`{Date}`} from '@uixkit.react/components/Form/index.tsx';</pre>
+							</div>
+							<div className="table-responsive-md">
+								<table className="table table-bordered table-striped">
+									<thead>
+										<tr>
+											<th>Property</th>
+											<th>Type</th>
+											<th>Default</th>
+											<th>Description</th>
+										</tr>
+									</thead>
+									<tbody>
+										<tr>
+											<td><code>defaultNow</code></td>
+											<td>boolean</td>
+											<td>false</td>
+											<td>If the value is <code>true</code>, the current date and time are used</td>
+										</tr>
+										<tr>
+											<td><code>time</code></td>
+											<td><code>date</code> | <code>datetime-local</code></td>
+											<td>-</td>
+											<td>To create input fields that let the user enter a date, either with a textbox that validates the input or a special date picker interface.</td>
+										</tr>
+										<tr>
+											<td><code>theme</code></td>
+											<td>string | <code>line</code></td>
+											<td>-</td>
+											<td>The display style of the control</td>
+										</tr>
+										<tr>
+											<td><code>ui</code></td>
+											<td>string</td>
+											<td>-</td>
+											<td>The overlay style of the control. Can be used at the same time, separated by spaces. The optional values are:<br /><strong>corners:</strong><br /><code>pill</code>, <code>rounded</code><br /><strong>size:</strong><br /><code>fullwidth</code>, <code>small</code>, <code>medium</code>, <code>large</code></td>
+										</tr>
+										<tr>
+											<td><code>value</code></td>
+											<td>string</td>
+											<td>-</td>
+											<td>Set a default value for this control</td>
+										</tr>
+										<tr>
+											<td><code>label</code></td>
+											<td>string | ReactNode</td>
+											<td>-</td>
+											<td>It is used to specify a label for an element of a form.</td>
+										</tr>
+										<tr>
+											<td><code>name</code></td>
+											<td>string</td>
+											<td>-</td>
+											<td>Name is not deprecated when used with form fields.</td>
+										</tr>
+										<tr>
+											<td><code>disabled</code></td>
+											<td>boolean</td>
+											<td>false</td>
+											<td>Whether the input is disabled</td>
+										</tr>
+										<tr>
+											<td><code>required</code></td>
+											<td>boolean</td>
+											<td>false</td>
+											<td>When present, it specifies that a field must be filled out before submitting the form.</td>
+										</tr>
+									</tbody>
+								</table>
+	
+							</div>
+
+
+							<p className="mb-5">It accepts all props which this control support.</p>
+
+							{/*<!-- ++++++++ -->*/}
+
+
+							<h4>Number</h4>
+							<div>
+								<pre>import {`{Number}`} from '@uixkit.react/components/Form/index.tsx';</pre>
+							</div>
+							<div className="table-responsive-md">
+								<table className="table table-bordered table-striped">
+									<thead>
+										<tr>
+											<th>Property</th>
+											<th>Type</th>
+											<th>Default</th>
+											<th>Description</th>
+										</tr>
+									</thead>
+									<tbody>
+										<tr>
+											<td><code>min</code></td>
+											<td>number</td>
+											<td>-</td>
+											<td>The minimum value to accept</td>
+										</tr>
+										<tr>
+											<td><code>max</code></td>
+											<td>number</td>
+											<td>-</td>
+											<td>The maximum value to accept</td>
+										</tr>
+										<tr>
+											<td><code>decimals</code></td>
+											<td>number</td>
+											<td>0</td>
+											<td>Formats a number using fixed-point notation.</td>
+										</tr>
+										<tr>
+											<td><code>btnStepMinus</code></td>
+											<td>number</td>
+											<td>1</td>
+											<td>The minimum minus value after the button is triggered</td>
+										</tr>
+										<tr>
+											<td><code>btnStepPlus</code></td>
+											<td>number</td>
+											<td>1</td>
+											<td>The amount of plus value after the button is triggered</td>
+										</tr>
+										<tr>
+											<td><code>step</code></td>
+											<td>number</td>
+											<td>0.01</td>
+											<td>A stepping interval to use when using up and down arrows to adjust the value, as well as for validation</td>
+										</tr>
+										<tr>
+											<td><code>theme</code></td>
+											<td>string | <code>line</code></td>
+											<td>-</td>
+											<td>The display style of the control</td>
+										</tr>
+										<tr>
+											<td><code>value</code></td>
+											<td>string</td>
+											<td>-</td>
+											<td>Set a default value for this control</td>
+										</tr>
+										<tr>
+											<td><code>name</code></td>
+											<td>string</td>
+											<td>-</td>
+											<td>Name is not deprecated when used with form fields.</td>
+										</tr>
+										<tr>
+											<td><code>disabled</code></td>
+											<td>boolean</td>
+											<td>false</td>
+											<td>Whether the input is disabled</td>
+										</tr>
+										<tr>
+											<td><code>required</code></td>
+											<td>boolean</td>
+											<td>false</td>
+											<td>When present, it specifies that a field must be filled out before submitting the form.</td>
+										</tr>
+									</tbody>
+								</table>
+
+	
+							</div>
+
+
+							<p className="mb-5">It accepts all props which this control support.</p>
+
+							{/*<!-- ++++++++ -->*/}
+
+
+							<h4>Switch</h4>
+							<div>
+								<pre>import {`{Switch}`} from '@uixkit.react/components/Form/index.tsx';</pre>
+							</div>
+							<div className="table-responsive-md">
+								<table className="table table-bordered table-striped">
+									<thead>
+										<tr>
+											<th>Property</th>
+											<th>Type</th>
+											<th>Default</th>
+											<th>Description</th>
+										</tr>
+									</thead>
+									<tbody>
+										<tr>
+											<td><code>targetID</code></td>
+											<td>string</td>
+											<td>-</td>
+											<td>Specify an ID that does not require the prefix <code>#</code>, use the switch to control its display or not</td>
+										</tr>
+										<tr>
+											<td><code>ui</code></td>
+											<td>string</td>
+											<td>-</td>
+											<td>The overlay style of the control. Can be used at the same time, separated by spaces. The optional values are:<br /><strong>corners:</strong><br /><code>pill</code>, <code>rounded</code></td>
+										</tr>
+										<tr>
+											<td><code>textOff</code></td>
+											<td>string</td>
+											<td>off</td>
+											<td>The content to be shown when the state is unchecked</td>
+										</tr>
+										<tr>
+											<td><code>textOn</code></td>
+											<td>string</td>
+											<td>on</td>
+											<td>The content to be shown when the state is checked</td>
+										</tr>
+										<tr>
+											<td><code>value</code></td>
+											<td>string | boolean</td>
+											<td>-</td>
+											<td>Set a default value for this control. If the value is <code>true</code>, it is selected by default</td>
+										</tr>
+										<tr>
+											<td><code>label</code></td>
+											<td>string | ReactNode</td>
+											<td>-</td>
+											<td>It is used to specify a label for an element of a form.</td>
+										</tr>
+										<tr>
+											<td><code>name</code></td>
+											<td>string</td>
+											<td>-</td>
+											<td>Name is not deprecated when used with form fields.</td>
+										</tr>
+										<tr>
+											<td><code>disabled</code></td>
+											<td>boolean</td>
+											<td>false</td>
+											<td>Whether the input is disabled</td>
+										</tr>
+										<tr>
+											<td><code>required</code></td>
+											<td>boolean</td>
+											<td>false</td>
+											<td>When present, it specifies that a field must be filled out before submitting the form.</td>
+										</tr>
+									</tbody>
+								</table>
+
+		
+							</div>
+
+
+							<p className="mb-5">It accepts all props which this control support.</p>
+
+							{/*<!-- ++++++++ -->*/}
+
+
+							<h4>Dynamic Fields</h4>
+							<div>
+								<pre>import {`{DynamicFields}`} from '@uixkit.react/components/Form/index.tsx';</pre>
+							</div>
+							<div className="table-responsive-md">
+								<table className="table table-bordered table-striped mb-5">
+									<thead>
+										<tr>
+											<th>Property</th>
+											<th>Type</th>
+											<th>Default</th>
+											<th>Description</th>
+										</tr>
+									</thead>
+									<tbody>
+										<tr>
+											<td><code>value</code></td>
+											<td>string</td>
+											<td>-</td>
+											<td>Set a default value for this control</td>
+										</tr>
+										<tr>
+											<td><code>removeLabel</code></td>
+											<td>string</td>
+											<td>-</td>
+											<td>The label of the button to delete current item, if it is not set, only the X icon will be included</td>
+										</tr>
+										<tr>
+											<td><code>addLabel</code></td>
+											<td>string</td>
+											<td>Add new</td>
+											<td>The label of the button to add a new item</td>
+										</tr>
+										<tr>
+											<td><code>tempHtmlString</code></td>
+											<td>string | ReactNode</td>
+											<td>-</td>
+											<td>Control group are dynamically added after the button is triggered. Like this: <br /><code className="text-wrap">&lt;&gt;&lt;Input placeholder="Title" name="your-title[]" /&gt; &lt;Input ui="medium" placeholder="URL" name="your-url[]" /&gt;&lt;/&gt;</code></td>
+										</tr>
+										<tr>
+											<td><code>maxFields</code></td>
+											<td>number</td>
+											<td>10</td>
+											<td>Maximum number of control group allowed to be added</td>
+										</tr>
+									</tbody>
+								</table>
+
+	
+							</div>
+
+
+							{/*<!-- ++++++++ -->*/}
+
+
+							<h4>File</h4>
+							<div>
+								<pre>import {`{File}`} from '@uixkit.react/components/Form/index.tsx';</pre>
+							</div>
+							<div className="table-responsive-md">
+								<table className="table table-bordered table-striped">
+									<thead>
+										<tr>
+											<th>Property</th>
+											<th>Type</th>
+											<th>Default</th>
+											<th>Description</th>
+										</tr>
+									</thead>
+									<tbody>
+										<tr>
+											<td><code>value</code></td>
+											<td>string</td>
+											<td>-</td>
+											<td>Set a default value for this control</td>
+										</tr>
+										<tr>
+											<td><code>label</code></td>
+											<td>string | ReactNode</td>
+											<td>-</td>
+											<td>It is used to specify a label for an element of a form.</td>
+										</tr>
+										<tr>
+											<td><code>name</code></td>
+											<td>string</td>
+											<td>-</td>
+											<td>Name is not deprecated when used with form fields.</td>
+										</tr>
+										<tr>
+											<td><code>required</code></td>
+											<td>boolean</td>
+											<td>false</td>
+											<td>When present, it specifies that a field must be filled out before submitting the form.</td>
+										</tr>
+									</tbody>
+								</table>
+
+	
+							</div>
+
+							<p className="mb-5">It accepts all props which this control support.</p>
+
+							{/*<!-- ++++++++ -->*/}
+
+
+							<h4>File Field</h4>
+							<div>
+								<pre>import {`{FileField}`} from '@uixkit.react/components/Form/index.tsx';</pre>
+							</div>
+							<div className="table-responsive-md">
+								<table className="table table-bordered table-striped">
+									<thead>
+										<tr>
+											<th>Property</th>
+											<th>Type</th>
+											<th>Default</th>
+											<th>Description</th>
+										</tr>
+									</thead>
+									<tbody>
+										<tr>
+											<td><code>value</code></td>
+											<td>string</td>
+											<td>-</td>
+											<td>Set a default value for this control</td>
+										</tr>
+										<tr>
+											<td><code>label</code></td>
+											<td>string | ReactNode</td>
+											<td>-</td>
+											<td>It is used to specify a label for an element of a form.</td>
+										</tr>
+										<tr>
+											<td><code>name</code></td>
+											<td>string</td>
+											<td>-</td>
+											<td>Name is not deprecated when used with form fields.</td>
+										</tr>
+										<tr>
+											<td><code>required</code></td>
+											<td>boolean</td>
+											<td>false</td>
+											<td>When present, it specifies that a field must be filled out before submitting the form.</td>
+										</tr>
+									</tbody>
+								</table>
+	
+							</div>
+
+
+							<p className="mb-5">It accepts all props which this control support.</p>
+
+							{/*<!-- ++++++++ -->*/}
+
+
+
+
+						</article>
+
+
+					</div>
+				</div>
+				{/*
+			<!-- .row end -->*/}
+
+
+			</div>
+			{/*
+		<!-- .container end -->*/}
+		</section>
+
+			
 		
       </>
     );

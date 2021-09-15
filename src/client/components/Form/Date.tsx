@@ -23,7 +23,7 @@ import '@uixkit.react/components/Form/styles/rtl/_theme_material.scss';
 
 
 type DateProps = {
-	defaultNow?: string;
+	defaultNow?: string | boolean;
 	time?: string;
 	theme?: string;
 	ui?: string;
@@ -85,11 +85,11 @@ export default class Date extends Component<DateProps, DateState> {
 		let classes = '';
 		
 		
-		//radius
+		//corners
 		if ( param.indexOf( 'pill' ) >= 0 ) classes += ' is-pill';
 		if ( param.indexOf( 'rounded' ) >= 0 ) classes += ' is-rounded';
 
-		//sizes
+		//size
 		if ( param.indexOf( 'fullwidth' ) >= 0 ) classes += ' is-fullwidth';
 		if ( param.indexOf( 'small' ) >= 0 ) classes += ' uix-controls__short-s';
 		if ( param.indexOf( 'medium' ) >= 0 ) classes += ' uix-controls__short-m';
@@ -129,7 +129,7 @@ export default class Date extends Component<DateProps, DateState> {
 		const today = typeof(time) === 'undefined' ? moment().format('YYYY-MM-DD') : moment().format('YYYY-MM-DDThh:mm');
 		let defaultValue = value;
 		
-		if ( defaultNow == 'true' ) defaultValue = today;
+		if ( defaultNow == 'true' || defaultNow === true ) defaultValue = today;
 		
 		return (
 		  <>

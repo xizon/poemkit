@@ -25,7 +25,7 @@ import Navigation from '@uixkit.react/components/Navigation/index';
 
 type HeaderProps = {
 	headerOverlayEnabled: boolean | string | undefined;
-	htmlString?: string | object;
+	menu?: string | object;
 };
 type HeaderState = false;
 
@@ -136,7 +136,7 @@ export default class Header extends Component<HeaderProps, HeaderState> {
 	render() {
 		
 		const { 
-			htmlString,
+			menu,
 			headerOverlayEnabled,
 		} = this.props;
 		
@@ -161,7 +161,7 @@ export default class Header extends Component<HeaderProps, HeaderState> {
 							</div>
 							{/*<!-- .uix-brand end -->*/}
 
-							<Navigation htmlString={htmlString} />
+							<Navigation htmlString={menu} />
 
 
 					  </div>
