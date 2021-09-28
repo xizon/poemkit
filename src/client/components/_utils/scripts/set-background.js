@@ -41,118 +41,114 @@ export function setBG( config ) {
 		};
 	}
 
-	if ( config ) {
+	let dataH        = config.height,
+		dataW        = config.width,
+		dataImg       = config.src,
+		dataPos       = config.position,
+		dataSize      = config.size,
+		dataRepeat    = config.repeat,
+		dataEasing    = config.transition,
+		dataMove      = config.move;
 
-		let dataH        = config.height,
-			dataW        = config.width,
-			dataImg       = config.src,
-			dataPos       = config.position,
-			dataSize      = config.size,
-			dataRepeat    = config.repeat,
-			dataEasing    = config.transition,
-			dataMove      = config.move;
-
-		if ( typeof dataPos === typeof undefined ) dataPos = 'top left';
-		if ( typeof dataSize === typeof undefined ) dataSize = 'cover';
-		if ( typeof dataRepeat === typeof undefined ) dataRepeat = 'no-repeat';
-		if ( typeof dataEasing === typeof undefined ) dataEasing = 'none 0s ease 0s';
-		if ( typeof dataMove === typeof undefined ) dataMove = false;
+	if ( typeof dataPos === typeof undefined ) dataPos = 'top left';
+	if ( typeof dataSize === typeof undefined ) dataSize = 'cover';
+	if ( typeof dataRepeat === typeof undefined ) dataRepeat = 'no-repeat';
+	if ( typeof dataEasing === typeof undefined ) dataEasing = 'none 0s ease 0s';
+	if ( typeof dataMove === typeof undefined ) dataMove = false;
 
 
-		
-		//background animation
-		let moveAnim             = 'none',
-			moveAnimLoop         = 'infinite',
-			moveEasing           = 'linear',
-			moveKeyframesTop     = '@keyframes js-uix-cssanim--move-t{from{background-position:0 0;}to{background-position:0 -19999px;}',
-			moveKeyframesBottom  = '@keyframes js-uix-cssanim--move-b{from{background-position:0 0;}to{background-position:0 19999px;}',
-			moveKeyframesLeft    = '@keyframes js-uix-cssanim--move-l{from{background-position:0 0;}to{background-position:-19999px 0;}',
-			moveKeyframesRight   = '@keyframes js-uix-cssanim--move-r{from{background-position:0 0;}to{background-position:19999px 0;}';
+	
+	//background animation
+	let moveAnim             = 'none',
+		moveAnimLoop         = 'infinite',
+		moveEasing           = 'linear',
+		moveKeyframesTop     = '@keyframes js-uix-cssanim--move-t{from{background-position:0 0;}to{background-position:0 -19999px;}',
+		moveKeyframesBottom  = '@keyframes js-uix-cssanim--move-b{from{background-position:0 0;}to{background-position:0 19999px;}',
+		moveKeyframesLeft    = '@keyframes js-uix-cssanim--move-l{from{background-position:0 0;}to{background-position:-19999px 0;}',
+		moveKeyframesRight   = '@keyframes js-uix-cssanim--move-r{from{background-position:0 0;}to{background-position:19999px 0;}';
 
 
-		if ( dataMove && Object.prototype.toString.call( dataMove )=='[object Object]' ) {
+	if ( dataMove && Object.prototype.toString.call( dataMove )=='[object Object]' ) {
 
-			if ( ! dataMove.loop ) moveAnimLoop = '1 forwards';
+		if ( ! dataMove.loop ) moveAnimLoop = '1 forwards';
 
-			dataPos = '0 0';
-
-
-			switch (dataMove.dir) {
-				case 'top':
-					moveAnim = 'js-uix-cssanim--move-t '+parseInt(dataMove.speed)+'s '+moveEasing+' '+ moveAnimLoop;
-					break;
-				case 'bottom':
-					moveAnim = 'js-uix-cssanim--move-b '+parseInt(dataMove.speed)+'s '+moveEasing+' '+ moveAnimLoop;        
-					break;
-				case 'left':
-					moveAnim = 'js-uix-cssanim--move-l '+parseInt(dataMove.speed)+'s '+moveEasing+' '+ moveAnimLoop;    
-					break;
-				case 'right':
-					moveAnim = 'js-uix-cssanim--move-r '+parseInt(dataMove.speed)+'s '+moveEasing+' '+ moveAnimLoop;            
-					break;
-			}
+		dataPos = '0 0';
 
 
-			//  CSS3 animation keyframe attributes inline
-			const addStyles = function( id, s ) {
-				if ( typeof (document) !== "undefined" && document.querySelector(id) === null ) {
-					const $style = document.createElement("style");
-					document.head.appendChild($style);
-					$style.innerHTML = `${s}`;
-				}
-			}
-
-			addStyles( '#js-uix-cssanim--move-t', moveKeyframesTop );
-			addStyles( '#js-uix-cssanim--move-b', moveKeyframesBottom );
-			addStyles( '#js-uix-cssanim--move-l', moveKeyframesLeft );
-			addStyles( '#js-uix-cssanim--move-r', moveKeyframesRight );
-
-
+		switch (dataMove.dir) {
+			case 'top':
+				moveAnim = 'js-uix-cssanim--move-t '+parseInt(dataMove.speed)+'s '+moveEasing+' '+ moveAnimLoop;
+				break;
+			case 'bottom':
+				moveAnim = 'js-uix-cssanim--move-b '+parseInt(dataMove.speed)+'s '+moveEasing+' '+ moveAnimLoop;        
+				break;
+			case 'left':
+				moveAnim = 'js-uix-cssanim--move-l '+parseInt(dataMove.speed)+'s '+moveEasing+' '+ moveAnimLoop;    
+				break;
+			case 'right':
+				moveAnim = 'js-uix-cssanim--move-r '+parseInt(dataMove.speed)+'s '+moveEasing+' '+ moveAnimLoop;            
+				break;
 		}
 
-		
-		
-		//-----
-		if ( typeof dataImg != typeof undefined && dataImg != '' ) {
 
-			if ( config.fill ) {
-				//Show Image Under Text
-		
-				res = {
-					height                   : typeof dataH !== typeof undefined ? dataH : 'auto',
-					width                    : typeof dataW !== typeof undefined ? dataW : 'auto',
-					background               : 'url('+dataImg+') '+dataRepeat+'',
-					backgroundSize           : dataSize,
-					WebkitBackgroundClip     : 'text',
-					WebkitTextFillColor      : 'transparent',
-					animation                : moveAnim
-				};
-	
-
-			} else {
-				
-				res = {
-					height                   : typeof dataH !== typeof undefined ? dataH : 'auto',
-					width                    : typeof dataW !== typeof undefined ? dataW : 'auto',
-					backgroundImage          : 'url('+dataImg+')',
-					backgroundPosition       : dataPos,
-					backgroundSize           : dataSize,
-					backgroundRepeat         : dataRepeat,
-					animation                : moveAnim
-				};	
-				
+		//  CSS3 animation keyframe attributes inline
+		const addStyles = function( id, s ) {
+			if ( typeof (document) !== "undefined" && document.querySelector(id) === null ) {
+				const $style = document.createElement("style");
+				document.head.appendChild($style);
+				$style.innerHTML = `${s}`;
 			}
+		}
 
-			// Delete the width and height attributes to avoid being overwritten when using the grid system
-			if ( typeof dataH === typeof undefined ) delete res['height'];
-			if ( typeof dataW === typeof undefined ) delete res['width'];
-
-
-
-		}	
+		addStyles( '#js-uix-cssanim--move-t', moveKeyframesTop );
+		addStyles( '#js-uix-cssanim--move-b', moveKeyframesBottom );
+		addStyles( '#js-uix-cssanim--move-l', moveKeyframesLeft );
+		addStyles( '#js-uix-cssanim--move-r', moveKeyframesRight );
 
 
 	}
+
+	
+	
+	//-----
+	if ( typeof dataImg != typeof undefined && dataImg != '' ) {
+
+		if ( config.fill ) {
+			//Show Image Under Text
+	
+			res = {
+				height                   : typeof dataH !== typeof undefined ? dataH : 'auto',
+				width                    : typeof dataW !== typeof undefined ? dataW : 'auto',
+				background               : 'url('+dataImg+') '+dataRepeat+'',
+				backgroundSize           : dataSize,
+				WebkitBackgroundClip     : 'text',
+				WebkitTextFillColor      : 'transparent',
+				animation                : moveAnim
+			};
+
+
+		} else {
+			
+			res = {
+				height                   : typeof dataH !== typeof undefined ? dataH : 'auto',
+				width                    : typeof dataW !== typeof undefined ? dataW : 'auto',
+				backgroundImage          : 'url('+dataImg+')',
+				backgroundPosition       : dataPos,
+				backgroundSize           : dataSize,
+				backgroundRepeat         : dataRepeat,
+				animation                : moveAnim
+			};	
+			
+		}
+
+		// Delete the width and height attributes to avoid being overwritten when using the grid system
+		if ( typeof dataH === typeof undefined ) delete res['height'];
+		if ( typeof dataW === typeof undefined ) delete res['width'];
+
+
+
+	}	
+
 
 	return res;
 

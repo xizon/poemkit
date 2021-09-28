@@ -33,7 +33,6 @@ type FileFieldProps = {
 	required?: any;
 	/** -- */
 	id?: string;
-	attributes?: any;
 };
 type FileFieldState = false;
 

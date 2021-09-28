@@ -127,7 +127,6 @@ type TableGridProps = {
 	data: any;
 	/** -- */
 	id?: string;
-	attributes?: any;
 };
 type TableGridState = false;
 

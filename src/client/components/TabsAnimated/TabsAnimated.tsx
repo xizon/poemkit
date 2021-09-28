@@ -23,7 +23,6 @@ type TabsAnimatedProps = {
 	/** -- */
 	id?: string;
 	children: any; /* required */
-	attributes?: any;
 };
 type TabsAnimatedState = {
 	selected: number;
@@ -38,8 +37,33 @@ export default class TabsAnimated extends Component<TabsAnimatedProps, TabsAnima
 		this.state={
 			selected: 0
 		}	
+
+		this.handleClickItem = this.handleClickItem.bind(this);
 		
 	}
+
+
+	handleClickItem(itemIndex) {
+
+		const self = this;
+
+		return function (e) { // e is the event object that returned
+			e.preventDefault();
+
+			self.setSelected(itemIndex);
+
+			const animSpeed: any = __.cssProperty.getTransitionDuration( __( '.uix-tabs-animated .uix-tabs__content' )[0] );	
+
+			__( '.uix-tabs-animated .uix-tabs__content.is-active' ).removeClass('is-active').addClass('leave');							
+			setTimeout( function() {
+				__( '.uix-tabs-animated .uix-tabs__content' ).removeClass('leave').eq(itemIndex).addClass('is-active');								
+			}, animSpeed);
+		};
+
+
+	}
+
+
 	componentDidMount(){
 		
 
@@ -55,9 +79,7 @@ export default class TabsAnimated extends Component<TabsAnimatedProps, TabsAnima
 	}
 
 	
-	setSelected(e, index){
-		e.preventDefault();
-		
+	setSelected(index){
 		this.setState({
 			selected: index
 		});
@@ -83,27 +105,12 @@ export default class TabsAnimated extends Component<TabsAnimatedProps, TabsAnima
 							const childProps = { ...item.props };
 							const itemIndex = i;
 							const activeClass = (itemIndex === this.state.selected) ? 'is-active' : '';
-
+							
 							delete childProps.key;
+							delete childProps.defaultActive;
 
 							if ( item.key.indexOf( 'tab-list' ) >= 0 ) {
-								return <TabList className={activeClass} key={item.key} {...childProps} onClick={(e)=>{
-											this.setSelected(e, itemIndex);
-											const animSpeed: any = __.cssProperty.getTransitionDuration( __( '.uix-tabs-animated .uix-tabs__content' )[0] );	
-																		
-											//console.log('index: ', itemIndex);
-
-											__( '.uix-tabs-animated .uix-tabs__nav li.is-active, .uix-tabs-animated .uix-tabs__content.is-active' ).removeClass('is-active').addClass('leave');
-																							
-																					
-											setTimeout( function() {
-												__( '.uix-tabs-animated .uix-tabs__nav li' ).removeClass('leave').eq(itemIndex).addClass('is-active');	
-												__( '.uix-tabs-animated .uix-tabs__content' ).removeClass('leave').eq(itemIndex).addClass('is-active');		
-																												
-											}, animSpeed);
-
-										 }}
-										/>;
+								return <TabList className={activeClass} key={item.key} {...childProps} onClick={this.handleClickItem(itemIndex)} />;
 							}
 
 						})

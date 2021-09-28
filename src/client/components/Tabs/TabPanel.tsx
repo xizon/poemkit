@@ -1,10 +1,8 @@
 import React, { Component } from 'react';
 
 type TabPanelProps = {
-	defaultActive?: string | undefined;
+	defaultActive?: string | boolean | undefined;
 	tabpanelClass?: string;
-	/** -- */
-	attributes?: any;
 };
 type TabPanelState = false;
 
@@ -24,7 +22,7 @@ export default class TabPanel extends Component<TabPanelProps, TabPanelState> {
 			...attributes
 		} = this.props;
 		
-		const activedClassName = typeof(defaultActive) !== 'undefined' ? ' is-active' : '';
+		const activedClassName = typeof(defaultActive) !== 'undefined' && defaultActive !== false ? ' is-active' : '';
 
 		
 		return (

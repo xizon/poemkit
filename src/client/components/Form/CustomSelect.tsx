@@ -33,7 +33,6 @@ type CustomSelectProps = {
 	required?: any;
 	/** -- */
 	id?: string;
-	attributes?: any;
 };
 type CustomSelectState = false;
 

@@ -29,7 +29,6 @@ type ButtonProps = {
 	/** -- */
 	id?: string;
 	children?: any;
-	attributes?: any;
 };
 type ButtonState = false;
 

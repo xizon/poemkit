@@ -29,7 +29,6 @@ type MultiSelectProps = {
 	required?: any;
 	/** -- */
 	id?: string;
-	attributes?: any;
 };
 type MultiSelectState = false;
 

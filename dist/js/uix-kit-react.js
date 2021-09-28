@@ -6,9 +6,9 @@
  * ## Project Name        :  Uix Kit React
  * ## Project Description :  A free web kits with React for fast web design and development via SSR.
  * ## Project URL         :  https://uiux.cc
- * ## Version             :  0.0.9
+ * ## Version             :  0.1.0
  * ## Based on            :  Uix Kit React (https://github.com/xizon/uix-kit-react#readme)
- * ## Last Update         :  September 15, 2021
+ * ## Last Update         :  September 28, 2021
  * ## Created by          :  UIUX Lab (https://uiux.cc) (uiuxlab@gmail.com)
  * ## Released under the MIT license.
  *
@@ -582,7 +582,7 @@ module.exports = InterceptorManager;
 
 
 var isAbsoluteURL = __webpack_require__(1793);
-var combineURLs = __webpack_require__(9002);
+var combineURLs = __webpack_require__(7303);
 
 /**
  * Creates a new URL by combining the baseURL with the requestedURL,
@@ -1125,7 +1125,7 @@ module.exports = function buildURL(url, params, paramsSerializer) {
 
 /***/ }),
 
-/***/ 9002:
+/***/ 7303:
 /***/ ((module) => {
 
 "use strict";
@@ -30992,9 +30992,14 @@ function renderRoutes(routes, extraProps, switchProps) {
 
 //# sourceMappingURL=react-router-config.js.map
 
+;// CONCATENATED MODULE: ./node_modules/@babel/runtime/helpers/esm/readOnlyError.js
+function _readOnlyError(name) {
+  throw new TypeError("\"" + name + "\" is read-only");
+}
 // EXTERNAL MODULE: ./node_modules/@babel/runtime/helpers/esm/typeof.js
 var esm_typeof = __webpack_require__(484);
 ;// CONCATENATED MODULE: ./src/client/components/_utils/scripts/shortcut.js
+
 
 
 /* 
@@ -31002,8 +31007,8 @@ var esm_typeof = __webpack_require__(484);
  * Core Shortcut
  *
  * @package: uix-kit-react
- * @version: 0.27
- * @last update: September 14, 2021
+ * @version: 0.30
+ * @last update: September 26, 2021
  * @license: MIT
  *
  *************************************
@@ -31128,6 +31133,7 @@ __( document ).ready( function() {
 				__( this ).addClass( 'new-class' )
 			});
 
+			__( document ).off( 'click', '.menu li' );
 			__( document ).on( 'click', '.menu li', function( e ) {
 				console.log('e: ', e);
 				console.log('this: ', this);
@@ -31224,6 +31230,10 @@ __( document ).ready( function() {
 				},1000 );
 
 			});
+
+			__( '.menu' ).animate( 'marginLeft', 0, 100, 'px', 1500, 'ease-out' );
+			__( '.menu' ).animate( 'marginTop', 0, 200, 'px', 1500, 'ease-out' );
+
 			
 			
 			//+++++++++++++++++++++++++++++++++++++++++++
@@ -31341,16 +31351,38 @@ __( document ).ready( function() {
 		
 */
 var __ = function () {
-  'use strict'; //The default selector to search for or HTML element
+  'use strict'; // Traverse the counter of a selector, reset to 0 when calling 	`__(selector).XXX()`
 
-  __.prototype.defaultTargetSelector = null;
+  var traverseIndex = {
+    // for `each()`
+    each: 0,
+    // for `eq()`
+    eq: 0,
+    // for `first()`
+    first: 0,
+    // for `last()`
+    last: 0,
+    total_last: 0,
+    // for `filter()`
+    filter: 0,
+    // for `not()`
+    not: 0,
+    // for `maxDimension()`
+    maxDimension: 0,
+    total_maxDimension: 0,
+    elements_maxDimension: []
+  };
+  /*
+   * Wrap the selector
+   * @public
+   */
 
   function __(s, root) {
     return __.prototype.core(s, root);
   }
   /*
    * Get real style data
-   * @private method
+   * @private
    */
 
 
@@ -31389,7 +31421,7 @@ var __ = function () {
   }
   /*
    * Determine whether it is Child Node
-   * @private method
+   * @private
    */
 
 
@@ -31410,7 +31442,7 @@ var __ = function () {
   }
   /*
    * Determine whether it is in JSON format
-   * @private method
+   * @private
    */
 
 
@@ -31435,7 +31467,7 @@ var __ = function () {
   }
   /*
    * Delete elements in the array
-   * @private method
+   * @private
    */
 
 
@@ -31457,7 +31489,7 @@ var __ = function () {
   }
   /*
    * Convert string to camel case
-   * @private method
+   * @private
    */
 
 
@@ -31479,38 +31511,80 @@ var __ = function () {
     }
   }
   /*
-   * Returns the set of ID and classes of the current target element for use by the selector
-   * @private method
+   * Get CSS path from Dom element
+   * @private
    */
 
 
-  function elementToDomString(el) {
-    var idCheck = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : true;
-    var itemDomsStr = ''; //get ID
+  function elementPath(el) {
+    if (!(el instanceof Element)) return; //
 
-    var id = el.id;
+    var path = [];
+    var itemIndex = 0;
 
-    if (typeof id !== 'undefined' && id != '') {
-      itemDomsStr += "#".concat(id);
-    } //get all classes
+    while (el.nodeType === Node.ELEMENT_NODE) {
+      var oldSelector = el.nodeName.toLowerCase();
+      var selector = oldSelector;
 
-
-    var classes = el.classList;
-
-    if (typeof classes !== 'undefined') {
-      classes.forEach(function (value, key, listObj) {
-        itemDomsStr += ".".concat(value);
-      }, 'arg');
-    } //If the ID does not exist, return the current object
-
-
-    if (idCheck) {
-      if (typeof id === 'undefined' || id === '') {
-        itemDomsStr = '';
+      if (el.id) {
+        if (itemIndex > 0) selector += '#' + el.id;
       }
+
+      if (el.className) {
+        selector += '.' + el.className.replace(/\s+/g, ".");
+      }
+
+      selector = selector.replace(/\.\./g, "."); //Add one or more items to the start of an array's result set.
+
+      path.unshift(selector); //
+
+      el = el.parentNode; //
+
+      itemIndex++;
     }
 
-    return itemDomsStr;
+    return path.join(" > ");
+  }
+  /*
+  * Some easing functions
+  * @private
+  * @link: https://easings.net
+  * @param {Number} t   - time (Amount of time that has passed since the beginning of the animation. Usually starts at 0 and is slowly increased using a game loop or other update function.)
+  * @param {Number} b   - beginning value (The starting point of the animation. Usually it's a static value, you can start at 0 for example.)
+  * @param {Number} c   - change in value (The amount of change needed to go from starting point to end point. It's also usually a static value.)
+  * @param {Number} d   - duration (Amount of time the animation will take. Usually a static value aswell.)
+  * @return {Number}
+  */
+
+
+  function easeLinear(t, b, c, d) {
+    return c * t / d + b;
+  }
+
+  function easeInQuart(t, b, c, d) {
+    return c * (t /= d) * t * t * t + b;
+  }
+
+  function easeOutQuart(t, b, c, d) {
+    return -c * ((t = t / d - 1) * t * t * t - 1) + b;
+  }
+
+  function easeInOutQuart(t, b, c, d) {
+    if ((t /= d / 2) < 1) return c / 2 * t * t * t * t + b;
+    return -c / 2 * ((t -= 2) * t * t * t - 2) + b;
+  }
+
+  function easeInCubic(t, b, c, d) {
+    return c * (t /= d) * t * t + b;
+  }
+
+  function easeOutCubic(t, b, c, d) {
+    return c * ((t = t / d - 1) * t * t + 1) + b;
+  }
+
+  function easeInOutCubic(t, b, c, d) {
+    if ((t /= d / 2) < 1) return c / 2 * t * t * t + b;
+    return c / 2 * ((t -= 2) * t * t + 2) + b;
   }
   /* ------------- Independent Methods -------------- */
 
@@ -32078,9 +32152,7 @@ var __ = function () {
 
   __.prototype.core = function (s, root) {
     var self = this;
-    root = root || document; //update the default selector
-
-    __.prototype.defaultTargetSelector = s;
+    root = root || document;
 
     if (typeof s !== 'undefined') {
       if (typeof s === 'string') {
@@ -32590,34 +32662,16 @@ var __ = function () {
       }
 
       s = s.replace(/(^\s*|,\s*)>/g, '$1#' + this.id + ' >');
-      var result = document.querySelector(s);
+      var result = document.querySelectorAll(s);
 
       if (removeId) {
         this.id = null;
       }
 
-      return result;
+      return [].slice.call(result);
     } else {
-      return __(s, this);
+      return [].slice.call(this.querySelectorAll(s));
     }
-    /*
-    const searchChildNode = __.trim(s);
-    if ( searchChildNode.slice(0,1) == '>' ){
-    		const _childNode = __.removeFirstLastStr( searchChildNode, '>' );
-    	const childrenList = this.children;
-    		for (let i = 0; i < childrenList.length; i++ ) {
-    		//the child node exists
-    		if( childrenList[i].className.split(' ').indexOf( this.querySelector( _childNode ).className ) >= 0 ) {
-    			const el = childrenList[i];
-    			return __.prototype.wrap( [el] );
-    		}
-    		
-    	}
-    	
-    }
-    	return __(s, this);
-    */
-
   };
   /*
    * Reduce the set of matched elements to the one at the specified index.
@@ -32628,9 +32682,15 @@ var __ = function () {
 
 
   __.prototype.eq = function (index) {
-    var elements = __(__.prototype.defaultTargetSelector, document);
+    var res = [];
 
-    return elements[index];
+    if (traverseIndex.eq === index) {
+      res = this;
+    } // Traverse the counter of a selector, reset to 0 when calling 	`__(selector).XXX()`
+
+
+    traverseIndex.eq++;
+    return res;
   };
   /*
    * Returns the Element immediately prior to the specified one in its parent's children list, 
@@ -32642,7 +32702,7 @@ var __ = function () {
 
   __.prototype.prev = function () {
     var el = this.previousElementSibling;
-    if (el !== null) return __.prototype.wrap([el]);
+    if (el !== null) return el;
   };
   /*
       * Returns the element immediately following the specified one in its parent's children list, 
@@ -32654,7 +32714,7 @@ var __ = function () {
 
   __.prototype.next = function () {
     var el = this.nextElementSibling;
-    if (el !== null) return __.prototype.wrap([el]);
+    if (el !== null) return el;
   };
   /*
    * Returns the DOM node's parent Element, or null if the node either has no parent,
@@ -32666,20 +32726,21 @@ var __ = function () {
 
   __.prototype.parent = function () {
     var el = this.parentElement;
-    if (el !== null) return __.prototype.wrap([el]);
+    if (el !== null) return el;
   };
   /*
    * Get the ancestors of each element in the current set of matched elements.
    *
-   * @param  {Element} parentSelector   - A parent element.
+   * @param  {Element} s   - A parent element.
    * @return {Array}                    - Contains only a collection of HTML elements.
    */
 
 
-  __.prototype.parents = function (parentSelector) {
-    // If no parentSelector defined will bubble up all the way to *document*
+  __.prototype.parents = function (s) {
+    var parentSelector = document.querySelector(s); // If no parentSelector defined will bubble up all the way to *document*
+
     if (parentSelector === undefined) {
-      parentSelector = document;
+      document, _readOnlyError("parentSelector");
     }
 
     var parents = [];
@@ -32687,20 +32748,12 @@ var __ = function () {
 
     while (_parent !== parentSelector) {
       var _currentNode = _parent;
-      parents.push(_currentNode); //the child node exists
-
-      if (parentSelector !== undefined && parentSelector !== document) {
-        if (_currentNode.className.split(' ').indexOf(parentSelector.replace(/\./g, '')) >= 0) {
-          var el = _currentNode;
-          return __.prototype.wrap([el]);
-        }
-      }
-
+      parents.push(_currentNode);
       _parent = _currentNode.parentNode;
-    }
+    } // Push that parentSelector you wanted to stop at
 
-    parents.push(parentSelector); // Push that parentSelector you wanted to stop at
 
+    if (parentSelector !== null) parents.push(parentSelector);
     return parents;
   };
   /*
@@ -32722,9 +32775,9 @@ var __ = function () {
         res.push(childrenList[i]);
       }
 
-      return __.prototype.wrap(res);
+      return res;
     } else {
-      return __(s, self);
+      return [].slice.call(this.querySelectorAll(s));
     }
   };
   /*
@@ -32736,21 +32789,16 @@ var __ = function () {
 
 
   __.prototype.filter = function (s) {
-    var elements = __(__.prototype.defaultTargetSelector, document);
+    var res = [];
+    if (s === undefined) return res;
 
-    var targetEl = __(s, document);
+    if (this.classList.contains(s.replace(/\./g, ''))) {
+      res.push(this);
+    } // Traverse the counter of a selector, reset to 0 when calling 	`__(selector).XXX()`
 
-    var list = Array.from(elements);
 
-    for (var j = 0; j < targetEl.length; j++) {
-      for (var i = 0; i < list.length; i++) {
-        if (!list[i].classList.contains(s.replace(/\./g, ''))) {
-          removeArray(list, list[i]);
-        }
-      }
-    }
-
-    return __.prototype.wrap(list);
+    traverseIndex.filter++;
+    return res;
   };
   /*
    * Remove elements from the set of matched elements.
@@ -32761,21 +32809,16 @@ var __ = function () {
 
 
   __.prototype.not = function (s) {
-    var elements = __(__.prototype.defaultTargetSelector, document);
+    var res = [];
+    if (s === undefined) return res;
 
-    var targetEl = __(s, document);
+    if (!this.classList.contains(s.replace(/\./g, ''))) {
+      res.push(this);
+    } // Traverse the counter of a selector, reset to 0 when calling 	`__(selector).XXX()`
 
-    var list = Array.from(elements);
 
-    for (var j = 0; j < targetEl.length; j++) {
-      for (var i = 0; i < list.length; i++) {
-        if (list[i].classList.contains(s.replace(/\./g, ''))) {
-          removeArray(list, list[i]);
-        }
-      }
-    }
-
-    return __.prototype.wrap(list);
+    traverseIndex.not++;
+    return res;
   };
   /*
    * Get the siblings of each element in the set of matched elements
@@ -32804,7 +32847,7 @@ var __ = function () {
       sibling = sibling.nextSibling;
     }
 
-    return __.prototype.wrap(siblings);
+    return siblings;
   };
   /*
    * Reduce the set of matched elements to the first in the set.
@@ -32814,10 +32857,15 @@ var __ = function () {
 
 
   __.prototype.first = function () {
-    var elements = __(__.prototype.defaultTargetSelector, document);
+    var res = [];
 
-    var length = elements.length;
-    return elements[0];
+    if (traverseIndex.first === 0) {
+      res = this;
+    } // Traverse the counter of a selector, reset to 0 when calling 	`__(selector).XXX()`
+
+
+    traverseIndex.first++;
+    return res;
   };
   /*
    * Reduce the set of matched elements to the last in the set.
@@ -32827,10 +32875,15 @@ var __ = function () {
 
 
   __.prototype.last = function () {
-    var elements = __(__.prototype.defaultTargetSelector, document);
+    var res = [];
 
-    var length = elements.length;
-    return elements[length - 1];
+    if (traverseIndex.last === traverseIndex.total_last - 1) {
+      res = this;
+    } // Traverse the counter of a selector, reset to 0 when calling 	`__(selector).XXX()`
+
+
+    traverseIndex.last++;
+    return res;
   };
   /*
    * Traverses the Element and its parents (heading toward the document root) 
@@ -32843,9 +32896,8 @@ var __ = function () {
 
   __.prototype.closest = function (s) {
     //using recursivity
-    var el = this.closest(s); //console.log( __(el, this) );
-
-    return __(el, this);
+    var el = this.closest(s);
+    return el;
   };
   /*
    * Remove a previously-stored piece of data.
@@ -32967,7 +33019,7 @@ var __ = function () {
     if (selector) {
       //if string
       var fun = function fun(evt) {
-        __(selector, self).forEach(function (el) {
+        [].slice.call(this.querySelectorAll(selector)).forEach(function (el) {
           if (el === evt.target) {
             callBack.call(el, evt);
           } else if (isChild(evt.target, el)) {
@@ -32978,7 +33030,8 @@ var __ = function () {
 
       this.myListeners.push({
         eType: eventType,
-        callBack: fun
+        callBack: fun,
+        selector: selector
       });
       self.addEventListener(eventType, fun);
     } else {
@@ -32989,7 +33042,8 @@ var __ = function () {
 
       this.myListeners.push({
         eType: eventType,
-        callBack: _fun
+        callBack: _fun,
+        selector: selector
       });
       this.addEventListener(eventType, _fun, false);
     }
@@ -32997,15 +33051,22 @@ var __ = function () {
   /*
    * Remove an event handler.
    *
-   * @param  {?String}          - One event types and optional namespaces, such as "click"
+   * @param  {?String} eventType        - One event types and optional namespaces, such as "click"
+   * @param  {?String} selector         - A selector string to filter the descendants of the selected elements that trigger the event. 
    * @return {Void}      
    */
 
 
-  __.prototype.off = function () {
+  __.prototype.off = function (eventType, curSelector) {
     if (this.myListeners) {
       for (var i = 0; i < this.myListeners.length; i++) {
-        this.removeEventListener(this.myListeners[i].eType, this.myListeners[i].callBack);
+        if (typeof curSelector !== 'undefined') {
+          if (curSelector === this.myListeners[i].selector) {
+            this.removeEventListener(this.myListeners[i].eType, this.myListeners[i].callBack);
+          }
+        } else {
+          this.removeEventListener(this.myListeners[i].eType, this.myListeners[i].callBack);
+        }
       }
 
       ;
@@ -33187,23 +33248,19 @@ var __ = function () {
 
 
   __.prototype.each = function (fn) {
-    var elements = __(__.prototype.defaultTargetSelector, document); //
-
-
-    elements.map(function (item, index) {
+    if (fn && typeof fn == "function") {
       //If the ID does not exist, itemDomsStr cannot be obtained
-      if (item.id.length === 0) {
-        item.id = 'eachitem-' + __.GUID.create();
+      if (this.id.length === 0) {
+        this.id = 'eachitem-' + __.GUID.create();
       } //!import: The returned HTML element must be current, 
       //otherwise all HTML elements under document may be queried
 
 
-      var itemDomsStr = elementToDomString(item);
+      var itemDomsStr = '#' + this.id;
+      fn.call(this, traverseIndex.each, itemDomsStr); // Traverse the counter of a selector, reset to 0 when calling 	`__(selector).XXX()`
 
-      if (fn && typeof fn == "function") {
-        fn.call(item, index, itemDomsStr);
-      }
-    });
+      traverseIndex.each++;
+    }
   };
   /*
    * Traverse all the attribute names and values in an HTML element
@@ -33279,9 +33336,9 @@ var __ = function () {
           break;
 
         case "radio":
-          var elements = __(__.prototype.defaultTargetSelector, document);
-
-          elements.map(function (item, index) {
+          var currentSelectorDomsStr = elementPath(this);
+          var currentSelector = [].slice.call(document.querySelectorAll(currentSelectorDomsStr));
+          currentSelector.map(function (item, index) {
             if (item.value == v.toString()) {
               item.checked = true;
             }
@@ -33307,7 +33364,23 @@ var __ = function () {
         return this.checked ? 1 : 0;
 
       case "radio":
-        return this.value;
+        var _currentSelectorDomsStr = elementPath(this);
+
+        var _currentSelector = [].slice.call(document.querySelectorAll(_currentSelectorDomsStr));
+
+        var radios = _currentSelector;
+        var _value = null;
+
+        for (var i = 0; i < radios.length; i++) {
+          if (radios[i].checked) {
+            // do whatever you want with the checked radio
+            _value = radios[i].value; // only one radio can be logically checked, don't check the rest
+
+            break;
+          }
+        }
+
+        return _value;
 
       case "select":
         return this.value;
@@ -33481,20 +33554,74 @@ var __ = function () {
 
 
   __.prototype.maxDimension = function () {
-    var elements = __(__.prototype.defaultTargetSelector, document);
+    if (traverseIndex.maxDimension === traverseIndex.total_maxDimension - 1) {
+      var currentSelector = traverseIndex.elements_maxDimension;
+      var elementHeights = Array.prototype.map.call(currentSelector, function (el) {
+        return el.clientHeight;
+      });
+      var elementWidths = Array.prototype.map.call(currentSelector, function (el) {
+        return el.clientWidth;
+      });
+      var maxHeight = Math.max.apply(null, elementHeights);
+      var maxWidth = Math.max.apply(null, elementWidths);
+      return {
+        'height': maxHeight,
+        'width': maxWidth
+      };
+    } // Traverse the counter of a selector, reset to 0 when calling 	`__(selector).XXX()`
 
-    var elementHeights = Array.prototype.map.call(elements, function (el) {
-      return el.clientHeight;
-    });
-    var elementWidths = Array.prototype.map.call(elements, function (el) {
-      return el.clientWidth;
-    });
-    var maxHeight = Math.max.apply(null, elementHeights);
-    var maxWidth = Math.max.apply(null, elementWidths);
-    return {
-      'height': maxHeight,
-      'width': maxWidth
-    };
+
+    traverseIndex.maxDimension++;
+    traverseIndex.elements_maxDimension.push(this);
+  };
+  /*
+  * Create a new Animation, applies it to the element, then plays the animation
+  * @param  {String} prop         - The style property to be set.
+  * @param  {Number} from         - The initial offset of the object
+  * @param  {Number} to           - The end offset of the object
+  * @param  {String} unit         - Unit string, such as `px` and `%`, and so on.
+  * @param  {Number} duration     - The number of milliseconds each iteration of the animation takes to complete
+  * @param  {String} easing       - The rate of the animation's change over time. Accepts the pre-defined values "linear", "ease-in", "ease-out", and "ease-in-out"
+  * @return {Void}
+  */
+
+
+  __.prototype.animate = function (prop, from, to, unit, duration, easing) {
+    var el = this;
+    var start = new Date().getTime();
+    var timer = setInterval(function () {
+      var time = new Date().getTime() - start;
+      var val;
+
+      switch (easing) {
+        case "linear":
+          val = easeLinear(time, from, to - from, duration);
+          break;
+
+        case "ease-in":
+          val = easeInCubic(time, from, to - from, duration);
+          break;
+
+        case "ease-out":
+          val = easeOutCubic(time, from, to - from, duration);
+          break;
+
+        case "ease-in-out":
+          val = easeInOutCubic(time, from, to - from, duration);
+          break;
+
+        default:
+          val = easeLinear(time, from, to - from, duration);
+      } //
+
+
+      var res = val + unit;
+      el.style[prop] = res;
+
+      if (time >= duration) {
+        clearInterval(timer);
+      }
+    }, 1000 / 60);
   };
   /* ------------- Private Methods -------------- */
 
@@ -33505,17 +33632,17 @@ var __ = function () {
     closest: __.prototype.closest,
     prev: __.prototype.prev,
     next: __.prototype.next,
-    first: __.prototype.first,
-    last: __.prototype.last,
     parent: __.prototype.parent,
     parents: __.prototype.parents,
     children: __.prototype.children,
-    eq: __.prototype.eq,
-    not: __.prototype.not,
-    filter: __.prototype.filter,
     siblings: __.prototype.siblings,
-    //traverse 
+    //traverse with index
     each: __.prototype.each,
+    eq: __.prototype.eq,
+    first: __.prototype.first,
+    last: __.prototype.last,
+    filter: __.prototype.filter,
+    not: __.prototype.not,
     maxDimension: __.prototype.maxDimension,
     //functions
     ready: __.prototype.ready,
@@ -33560,7 +33687,8 @@ var __ = function () {
     fadeOut: __.prototype.fadeOut,
     serializeArray: __.prototype.serializeArray,
     index: __.prototype.index,
-    trigger: __.prototype.trigger
+    trigger: __.prototype.trigger,
+    animate: __.prototype.animate
   };
 
   __.prototype.wrap = function (list) {
@@ -33571,31 +33699,64 @@ var __ = function () {
         //You just bind the method to the object. The arguments inside a function is an example of an 'array-like object'.
         var args = arguments; //
 
-        var result;
-        var breakException = {};
+        var result; // ////////////////////
+        // Traverse the counter of a selector, reset to 0 when calling 	`__(selector).XXX()`
+        //----------------------	
+
+        switch (fn) {
+          case 'each':
+            // for `each()`
+            traverseIndex.each = 0;
+            break;
+
+          case 'eq':
+            // for `eq()`
+            traverseIndex.eq = 0;
+            break;
+
+          case 'first':
+            // for `first()`
+            traverseIndex.first = 0;
+            break;
+
+          case 'last':
+            // for `last()`
+            traverseIndex.last = 0;
+            traverseIndex.total_last = list.length;
+            break;
+
+          case 'filter':
+            // for `filter()`
+            traverseIndex.filter = 0;
+            break;
+
+          case 'not':
+            // for `not()`
+            traverseIndex.not = 0;
+            break;
+
+          case 'maxDimension':
+            // for `maxDimension()`
+            traverseIndex.maxDimension = 0;
+            traverseIndex.total_maxDimension = list.length;
+            traverseIndex.elements_maxDimension = [];
+            break;
+        } // ////////////////////
+        // Methods that return value is `DOM elements using selectors`
+        //----------------------
+
 
         if (Array.isArray(this)) {
           result = [];
+          this.forEach(function (root) {
+            var fnResult = API[fn].apply(root, [].slice.call(args));
 
-          try {
-            this.forEach(function (root) {
-              var fnResult = API[fn].apply(root, [].slice.call(args));
-
-              if (Array.isArray(fnResult)) {
-                result = result.concat(fnResult);
-              } else if (fnResult !== undefined) {
-                result.push(fnResult);
-              } // ////////////////////
-              // Break out of the loop of global retrieval of elements
-              //----------------------
-
-
-              if (fn === 'eq' || fn === 'first' || fn === 'last' || fn === 'each' || fn === 'maxDimension') throw breakException;
-            });
-          } catch (e) {} // ////////////////////
-          // Methods that return value is `DOM elements using selectors`
-          //----------------------
-
+            if (Array.isArray(fnResult)) {
+              result = result.concat(fnResult);
+            } else if (fnResult !== undefined) {
+              result.push(fnResult);
+            }
+          });
 
           if (fn === 'find' || fn === 'closest' || fn === 'prev' || fn === 'next' || fn === 'first' || fn === 'last' || fn === 'parent' || fn === 'parents' || fn === 'children' || fn === 'eq' || fn === 'filter' || fn === 'not' || fn === 'siblings') {
             self.wrap(result);
@@ -33706,95 +33867,93 @@ function setBG(config) {
     };
   }
 
-  if (config) {
-    var dataH = config.height,
-        dataW = config.width,
-        dataImg = config.src,
-        dataPos = config.position,
-        dataSize = config.size,
-        dataRepeat = config.repeat,
-        dataEasing = config.transition,
-        dataMove = config.move;
-    if ((0,esm_typeof/* default */.Z)(dataPos) === ( true ? "undefined" : 0)) dataPos = 'top left';
-    if ((0,esm_typeof/* default */.Z)(dataSize) === ( true ? "undefined" : 0)) dataSize = 'cover';
-    if ((0,esm_typeof/* default */.Z)(dataRepeat) === ( true ? "undefined" : 0)) dataRepeat = 'no-repeat';
-    if ((0,esm_typeof/* default */.Z)(dataEasing) === ( true ? "undefined" : 0)) dataEasing = 'none 0s ease 0s';
-    if ((0,esm_typeof/* default */.Z)(dataMove) === ( true ? "undefined" : 0)) dataMove = false; //background animation
+  var dataH = config.height,
+      dataW = config.width,
+      dataImg = config.src,
+      dataPos = config.position,
+      dataSize = config.size,
+      dataRepeat = config.repeat,
+      dataEasing = config.transition,
+      dataMove = config.move;
+  if ((0,esm_typeof/* default */.Z)(dataPos) === ( true ? "undefined" : 0)) dataPos = 'top left';
+  if ((0,esm_typeof/* default */.Z)(dataSize) === ( true ? "undefined" : 0)) dataSize = 'cover';
+  if ((0,esm_typeof/* default */.Z)(dataRepeat) === ( true ? "undefined" : 0)) dataRepeat = 'no-repeat';
+  if ((0,esm_typeof/* default */.Z)(dataEasing) === ( true ? "undefined" : 0)) dataEasing = 'none 0s ease 0s';
+  if ((0,esm_typeof/* default */.Z)(dataMove) === ( true ? "undefined" : 0)) dataMove = false; //background animation
 
-    var moveAnim = 'none',
-        moveAnimLoop = 'infinite',
-        moveEasing = 'linear',
-        moveKeyframesTop = '@keyframes js-uix-cssanim--move-t{from{background-position:0 0;}to{background-position:0 -19999px;}',
-        moveKeyframesBottom = '@keyframes js-uix-cssanim--move-b{from{background-position:0 0;}to{background-position:0 19999px;}',
-        moveKeyframesLeft = '@keyframes js-uix-cssanim--move-l{from{background-position:0 0;}to{background-position:-19999px 0;}',
-        moveKeyframesRight = '@keyframes js-uix-cssanim--move-r{from{background-position:0 0;}to{background-position:19999px 0;}';
+  var moveAnim = 'none',
+      moveAnimLoop = 'infinite',
+      moveEasing = 'linear',
+      moveKeyframesTop = '@keyframes js-uix-cssanim--move-t{from{background-position:0 0;}to{background-position:0 -19999px;}',
+      moveKeyframesBottom = '@keyframes js-uix-cssanim--move-b{from{background-position:0 0;}to{background-position:0 19999px;}',
+      moveKeyframesLeft = '@keyframes js-uix-cssanim--move-l{from{background-position:0 0;}to{background-position:-19999px 0;}',
+      moveKeyframesRight = '@keyframes js-uix-cssanim--move-r{from{background-position:0 0;}to{background-position:19999px 0;}';
 
-    if (dataMove && Object.prototype.toString.call(dataMove) == '[object Object]') {
-      if (!dataMove.loop) moveAnimLoop = '1 forwards';
-      dataPos = '0 0';
+  if (dataMove && Object.prototype.toString.call(dataMove) == '[object Object]') {
+    if (!dataMove.loop) moveAnimLoop = '1 forwards';
+    dataPos = '0 0';
 
-      switch (dataMove.dir) {
-        case 'top':
-          moveAnim = 'js-uix-cssanim--move-t ' + parseInt(dataMove.speed) + 's ' + moveEasing + ' ' + moveAnimLoop;
-          break;
+    switch (dataMove.dir) {
+      case 'top':
+        moveAnim = 'js-uix-cssanim--move-t ' + parseInt(dataMove.speed) + 's ' + moveEasing + ' ' + moveAnimLoop;
+        break;
 
-        case 'bottom':
-          moveAnim = 'js-uix-cssanim--move-b ' + parseInt(dataMove.speed) + 's ' + moveEasing + ' ' + moveAnimLoop;
-          break;
+      case 'bottom':
+        moveAnim = 'js-uix-cssanim--move-b ' + parseInt(dataMove.speed) + 's ' + moveEasing + ' ' + moveAnimLoop;
+        break;
 
-        case 'left':
-          moveAnim = 'js-uix-cssanim--move-l ' + parseInt(dataMove.speed) + 's ' + moveEasing + ' ' + moveAnimLoop;
-          break;
+      case 'left':
+        moveAnim = 'js-uix-cssanim--move-l ' + parseInt(dataMove.speed) + 's ' + moveEasing + ' ' + moveAnimLoop;
+        break;
 
-        case 'right':
-          moveAnim = 'js-uix-cssanim--move-r ' + parseInt(dataMove.speed) + 's ' + moveEasing + ' ' + moveAnimLoop;
-          break;
-      } //  CSS3 animation keyframe attributes inline
+      case 'right':
+        moveAnim = 'js-uix-cssanim--move-r ' + parseInt(dataMove.speed) + 's ' + moveEasing + ' ' + moveAnimLoop;
+        break;
+    } //  CSS3 animation keyframe attributes inline
 
 
-      var addStyles = function addStyles(id, s) {
-        if (typeof document !== "undefined" && document.querySelector(id) === null) {
-          var $style = document.createElement("style");
-          document.head.appendChild($style);
-          $style.innerHTML = "".concat(s);
-        }
+    var addStyles = function addStyles(id, s) {
+      if (typeof document !== "undefined" && document.querySelector(id) === null) {
+        var $style = document.createElement("style");
+        document.head.appendChild($style);
+        $style.innerHTML = "".concat(s);
+      }
+    };
+
+    addStyles('#js-uix-cssanim--move-t', moveKeyframesTop);
+    addStyles('#js-uix-cssanim--move-b', moveKeyframesBottom);
+    addStyles('#js-uix-cssanim--move-l', moveKeyframesLeft);
+    addStyles('#js-uix-cssanim--move-r', moveKeyframesRight);
+  } //-----
+
+
+  if ((0,esm_typeof/* default */.Z)(dataImg) != ( true ? "undefined" : 0) && dataImg != '') {
+    if (config.fill) {
+      //Show Image Under Text
+      res = {
+        height: (0,esm_typeof/* default */.Z)(dataH) !== ( true ? "undefined" : 0) ? dataH : 'auto',
+        width: (0,esm_typeof/* default */.Z)(dataW) !== ( true ? "undefined" : 0) ? dataW : 'auto',
+        background: 'url(' + dataImg + ') ' + dataRepeat + '',
+        backgroundSize: dataSize,
+        WebkitBackgroundClip: 'text',
+        WebkitTextFillColor: 'transparent',
+        animation: moveAnim
       };
-
-      addStyles('#js-uix-cssanim--move-t', moveKeyframesTop);
-      addStyles('#js-uix-cssanim--move-b', moveKeyframesBottom);
-      addStyles('#js-uix-cssanim--move-l', moveKeyframesLeft);
-      addStyles('#js-uix-cssanim--move-r', moveKeyframesRight);
-    } //-----
-
-
-    if ((0,esm_typeof/* default */.Z)(dataImg) != ( true ? "undefined" : 0) && dataImg != '') {
-      if (config.fill) {
-        //Show Image Under Text
-        res = {
-          height: (0,esm_typeof/* default */.Z)(dataH) !== ( true ? "undefined" : 0) ? dataH : 'auto',
-          width: (0,esm_typeof/* default */.Z)(dataW) !== ( true ? "undefined" : 0) ? dataW : 'auto',
-          background: 'url(' + dataImg + ') ' + dataRepeat + '',
-          backgroundSize: dataSize,
-          WebkitBackgroundClip: 'text',
-          WebkitTextFillColor: 'transparent',
-          animation: moveAnim
-        };
-      } else {
-        res = {
-          height: (0,esm_typeof/* default */.Z)(dataH) !== ( true ? "undefined" : 0) ? dataH : 'auto',
-          width: (0,esm_typeof/* default */.Z)(dataW) !== ( true ? "undefined" : 0) ? dataW : 'auto',
-          backgroundImage: 'url(' + dataImg + ')',
-          backgroundPosition: dataPos,
-          backgroundSize: dataSize,
-          backgroundRepeat: dataRepeat,
-          animation: moveAnim
-        };
-      } // Delete the width and height attributes to avoid being overwritten when using the grid system
+    } else {
+      res = {
+        height: (0,esm_typeof/* default */.Z)(dataH) !== ( true ? "undefined" : 0) ? dataH : 'auto',
+        width: (0,esm_typeof/* default */.Z)(dataW) !== ( true ? "undefined" : 0) ? dataW : 'auto',
+        backgroundImage: 'url(' + dataImg + ')',
+        backgroundPosition: dataPos,
+        backgroundSize: dataSize,
+        backgroundRepeat: dataRepeat,
+        animation: moveAnim
+      };
+    } // Delete the width and height attributes to avoid being overwritten when using the grid system
 
 
-      if ((0,esm_typeof/* default */.Z)(dataH) === ( true ? "undefined" : 0)) delete res['height'];
-      if ((0,esm_typeof/* default */.Z)(dataW) === ( true ? "undefined" : 0)) delete res['width'];
-    }
+    if ((0,esm_typeof/* default */.Z)(dataH) === ( true ? "undefined" : 0)) delete res['height'];
+    if ((0,esm_typeof/* default */.Z)(dataW) === ( true ? "undefined" : 0)) delete res['width'];
   }
 
   return res;
@@ -41763,8 +41922,8 @@ var Navigation = /*#__PURE__*/function (_Component) {
           });
 
           if (w > 768) {
-            $menuWrap.find('li.multi-column').each(function (index, curSelector) {
-              var $rootLi = shortcut(curSelector),
+            $menuWrap.find('li.multi-column').each(function (index) {
+              var $rootLi = shortcut(this),
                   colTotal = $rootLi.find('> ul > li').length,
                   $megaDiv = $rootLi.find('> ul.sub-menu');
 
@@ -41857,8 +42016,8 @@ var Navigation = /*#__PURE__*/function (_Component) {
 
 
           if (w <= 768) {
-            shortcut('.uix-menu__container.is-mobile .uix-menu > li').each(function (index, curSelector) {
-              var $rootLi = shortcut(curSelector);
+            shortcut('.uix-menu__container.is-mobile .uix-menu > li').each(function () {
+              var $rootLi = shortcut(this);
 
               if ($rootLi.find('ul').length > 0) {
                 if ($rootLi.find('.uix-menu__arrow-mobile').length < 1) $rootLi.prepend('<em class="uix-menu__arrow-mobile"></em>');
@@ -41919,9 +42078,11 @@ var Navigation = /*#__PURE__*/function (_Component) {
         }); // Fires drop-menu event 
 
 
-        shortcut('.uix-menu__container.is-mobile ul li > a').off('click');
+        var btn = '.uix-menu__container.is-mobile ul li > a';
 
-        shortcut(document).on('click', '.uix-menu__container.is-mobile ul li > a', function (e) {
+        shortcut(document).off('click', btn);
+
+        shortcut(document).on('click', btn, function (e) {
           var $sub = shortcut(this).next();
 
           if ($sub.length > 0) {
@@ -42348,22 +42509,25 @@ function createSidebarMenu(navItems) {
   document.body.appendChild(navElem); // Smooth scrolling when clicking an anchor link
 
   document.querySelectorAll('a[href^="#"]').forEach(function (anchor) {
-    anchor.addEventListener('click', function (e) {
-      e.preventDefault();
+    //only sidebar
+    if (anchor.closest('.app-sidebar-menu') !== null || anchor.closest('.app-header-title') !== null) {
+      anchor.addEventListener('click', function (e) {
+        e.preventDefault();
 
-      var _href = this.getAttribute('href');
+        var _href = this.getAttribute('href');
 
-      if (_href === '#') _href = '#demo';
-      var targetEl = document.querySelector('#' + _href.split('#')[1]);
+        if (_href === '#') _href = '#demo';
+        var targetEl = document.querySelector('#' + _href.split('#')[1]);
 
-      if (targetEl !== null) {
-        var elTop = targetEl.offsetTop;
-        window.scrollTo({
-          top: elTop,
-          behavior: 'smooth'
-        });
-      }
-    });
+        if (targetEl !== null) {
+          var elTop = targetEl.offsetTop;
+          window.scrollTo({
+            top: elTop,
+            behavior: 'smooth'
+          });
+        }
+      });
+    }
   });
 }
 
@@ -42389,10 +42553,13 @@ function highlightNavigation() {
 
           if (curID === _url) {
             document.querySelectorAll('a[href^="#"]').forEach(function (anchor) {
-              var _parent = anchor.parentNode;
+              //only sidebar
+              if (anchor.closest('.app-sidebar-menu') !== null || anchor.closest('.app-header-title') !== null) {
+                var _parent = anchor.parentNode;
 
-              if (_parent) {
-                _parent.classList.remove('is-active');
+                if (_parent) {
+                  _parent.classList.remove('is-active');
+                }
               }
             });
             var _parentCur = item.parentNode;
@@ -43558,6 +43725,7 @@ var LoginPage = /*#__PURE__*/function (_Component) {
     _this.handleUserChange = _this.handleUserChange.bind(_assertThisInitialized(_this));
     _this.handleSubmit = _this.handleSubmit.bind(_assertThisInitialized(_this));
     _this.dismissError = _this.dismissError.bind(_assertThisInitialized(_this));
+    _this.signOut = _this.signOut.bind(_assertThisInitialized(_this));
     return _this;
   }
 
@@ -43578,8 +43746,8 @@ var LoginPage = /*#__PURE__*/function (_Component) {
     }
   }, {
     key: "handleSubmit",
-    value: function handleSubmit(evt) {
-      evt.preventDefault();
+    value: function handleSubmit(e) {
+      e.preventDefault();
       var self = this;
       var root = react_dom.findDOMNode(self.wrapperRef.current);
 
@@ -43666,16 +43834,16 @@ var LoginPage = /*#__PURE__*/function (_Component) {
     }
   }, {
     key: "handleUserChange",
-    value: function handleUserChange(evt) {
+    value: function handleUserChange(e) {
       this.setState({
-        username: evt.target.value
+        username: e.target.value
       });
     }
   }, {
     key: "handlePassChange",
-    value: function handlePassChange(evt) {
+    value: function handlePassChange(e) {
       this.setState({
-        password: evt.target.value
+        password: e.target.value
       });
     } // App "actions" (functions that modify state)
 
@@ -43693,7 +43861,8 @@ var LoginPage = /*#__PURE__*/function (_Component) {
     }
   }, {
     key: "signOut",
-    value: function signOut() {
+    value: function signOut(e) {
+      e.preventDefault();
       auth_service.logout(); //update state
 
       this.setState({
@@ -43720,9 +43889,10 @@ var LoginPage = /*#__PURE__*/function (_Component) {
     value: function render() {
       // NOTE: I use data-attributes for easier E2E testing
       // but you don't need to target those (any css-selector will work)
+      var self = this;
       return /*#__PURE__*/react.createElement(react.Fragment, null, this.state.loginOk ? /*#__PURE__*/react.createElement("div", null, "Welcome to this page! | ", /*#__PURE__*/react.createElement("a", {
-        href: "javascript:;",
-        onClick: this.signOut.bind(this)
+        href: "#",
+        onClick: this.signOut
       }, "Sign out")) : /*#__PURE__*/react.createElement("div", {
         ref: this.wrapperRef
       }, /*#__PURE__*/react.createElement("p", null, "Test Account: ", /*#__PURE__*/react.createElement("code", null, "admin"), " Password: ", /*#__PURE__*/react.createElement("code", null, "admin")), /*#__PURE__*/react.createElement("form", {
@@ -45068,7 +45238,7 @@ var TabList = /*#__PURE__*/function (_Component) {
           defaultActive = _this$props.defaultActive,
           attributes = _objectWithoutProperties(_this$props, TabList_excluded);
 
-      var activedClassName = typeof defaultActive !== 'undefined' ? ' is-active' : '';
+      var activedClassName = typeof defaultActive !== 'undefined' && defaultActive !== false ? ' is-active' : '';
       return /*#__PURE__*/react.createElement(react.Fragment, null, /*#__PURE__*/react.createElement("li", {
         role: "presentation",
         className: activedClassName
@@ -45117,7 +45287,7 @@ var TabPanel = /*#__PURE__*/function (_Component) {
           tabpanelClass = _this$props.tabpanelClass,
           attributes = _objectWithoutProperties(_this$props, TabPanel_excluded);
 
-      var activedClassName = typeof defaultActive !== 'undefined' ? ' is-active' : '';
+      var activedClassName = typeof defaultActive !== 'undefined' && defaultActive !== false ? ' is-active' : '';
       return /*#__PURE__*/react.createElement(react.Fragment, null, /*#__PURE__*/react.createElement("div", extends_extends({
         role: "tabpanel",
         className: tabpanelClass ? "uix-tabs__content ".concat(tabpanelClass, " ").concat(activedClassName) : "uix-tabs__content ".concat(activedClassName)
@@ -45216,9 +45386,9 @@ var Tabs = /*#__PURE__*/function (_Component) {
 
 
           shortcut(curSelector).find('.uix-tabs__nav ul > li').each(function (index) {
-            shortcut(this).find('a').attr('href', 'javascript:').attr('id', tabBoxID + '-tablist-link' + index);
+            shortcut(this).find('a').attr('href', 'javascript:');
 
-            shortcut(this).attr('data-tab', tabBoxID + '-tabs-show' + index).attr('id', tabBoxID + '-tablist' + index);
+            shortcut(this).attr('data-tab', tabBoxID + '-tabs-show' + index);
           }); //Initialize tab panel
 
 
@@ -45694,7 +45864,7 @@ var Tabs = /*#__PURE__*/function (_Component) {
 
 
 
-var TabsAnimated_TabList_excluded = ["defaultActive"];
+var TabsAnimated_TabList_excluded = ["defaultActive", "children"];
 
 function TabsAnimated_TabList_createSuper(Derived) { var hasNativeReflectConstruct = TabsAnimated_TabList_isNativeReflectConstruct(); return function _createSuperInternal() { var Super = _getPrototypeOf(Derived), result; if (hasNativeReflectConstruct) { var NewTarget = _getPrototypeOf(this).constructor; result = Reflect.construct(Super, arguments, NewTarget); } else { result = Super.apply(this, arguments); } return _possibleConstructorReturn(this, result); }; }
 
@@ -45718,15 +45888,16 @@ var TabList_TabList = /*#__PURE__*/function (_Component) {
     value: function render() {
       var _this$props = this.props,
           defaultActive = _this$props.defaultActive,
+          children = _this$props.children,
           attributes = _objectWithoutProperties(_this$props, TabsAnimated_TabList_excluded);
 
-      var activedClassName = typeof defaultActive !== 'undefined' ? ' is-active' : '';
-      return /*#__PURE__*/react.createElement(react.Fragment, null, /*#__PURE__*/react.createElement("li", {
+      var activedClassName = typeof defaultActive !== 'undefined' && defaultActive !== false ? ' is-active' : '';
+      return /*#__PURE__*/react.createElement(react.Fragment, null, /*#__PURE__*/react.createElement("li", extends_extends({
         role: "presentation",
         className: activedClassName
-      }, /*#__PURE__*/react.createElement("a", extends_extends({
+      }, attributes), /*#__PURE__*/react.createElement("a", {
         href: "#"
-      }, attributes))));
+      }, children)));
     }
   }]);
 
@@ -45769,7 +45940,7 @@ var TabPanel_TabPanel = /*#__PURE__*/function (_Component) {
           tabpanelClass = _this$props.tabpanelClass,
           attributes = _objectWithoutProperties(_this$props, TabsAnimated_TabPanel_excluded);
 
-      var activedClassName = typeof defaultActive !== 'undefined' ? ' is-active' : '';
+      var activedClassName = typeof defaultActive !== 'undefined' && defaultActive !== false ? ' is-active' : '';
       return /*#__PURE__*/react.createElement(react.Fragment, null, /*#__PURE__*/react.createElement("div", extends_extends({
         role: "tabpanel",
         className: tabpanelClass ? "uix-tabs__content ".concat(tabpanelClass, " ").concat(activedClassName) : "uix-tabs__content ".concat(activedClassName)
@@ -45782,6 +45953,7 @@ var TabPanel_TabPanel = /*#__PURE__*/function (_Component) {
 
 
 ;// CONCATENATED MODULE: ./src/client/components/TabsAnimated/TabsAnimated.tsx
+
 
 
 
@@ -45831,10 +46003,29 @@ var TabsAnimated = /*#__PURE__*/function (_Component) {
     _this.state = {
       selected: 0
     };
+    _this.handleClickItem = _this.handleClickItem.bind(_assertThisInitialized(_this));
     return _this;
   }
 
   _createClass(TabsAnimated, [{
+    key: "handleClickItem",
+    value: function handleClickItem(itemIndex) {
+      var self = this;
+      return function (e) {
+        // e is the event object that returned
+        e.preventDefault();
+        self.setSelected(itemIndex);
+
+        var animSpeed = shortcut.cssProperty.getTransitionDuration(shortcut('.uix-tabs-animated .uix-tabs__content')[0]);
+
+        shortcut('.uix-tabs-animated .uix-tabs__content.is-active').removeClass('is-active').addClass('leave');
+
+        setTimeout(function () {
+          shortcut('.uix-tabs-animated .uix-tabs__content').removeClass('leave').eq(itemIndex).addClass('is-active');
+        }, animSpeed);
+      };
+    }
+  }, {
     key: "componentDidMount",
     value: function componentDidMount() {
       shortcut(document).ready(function () {
@@ -45848,8 +46039,7 @@ var TabsAnimated = /*#__PURE__*/function (_Component) {
     }
   }, {
     key: "setSelected",
-    value: function setSelected(e, index) {
-      e.preventDefault();
+    value: function setSelected(index) {
       this.setState({
         selected: index
       });
@@ -45877,26 +46067,14 @@ var TabsAnimated = /*#__PURE__*/function (_Component) {
         var itemIndex = i;
         var activeClass = itemIndex === _this2.state.selected ? 'is-active' : '';
         delete childProps.key;
+        delete childProps.defaultActive;
 
         if (item.key.indexOf('tab-list') >= 0) {
           return /*#__PURE__*/react.createElement(TabList_TabList, extends_extends({
             className: activeClass,
             key: item.key
           }, childProps, {
-            onClick: function onClick(e) {
-              _this2.setSelected(e, itemIndex);
-
-              var animSpeed = shortcut.cssProperty.getTransitionDuration(shortcut('.uix-tabs-animated .uix-tabs__content')[0]); //console.log('index: ', itemIndex);
-
-
-              shortcut('.uix-tabs-animated .uix-tabs__nav li.is-active, .uix-tabs-animated .uix-tabs__content.is-active').removeClass('is-active').addClass('leave');
-
-              setTimeout(function () {
-                shortcut('.uix-tabs-animated .uix-tabs__nav li').removeClass('leave').eq(itemIndex).addClass('is-active');
-
-                shortcut('.uix-tabs-animated .uix-tabs__content').removeClass('leave').eq(itemIndex).addClass('is-active');
-              }, animSpeed);
-            }
+            onClick: _this2.handleClickItem(itemIndex)
           }));
         }
       }) : "")), /*#__PURE__*/react.createElement("div", {
@@ -67781,20 +67959,26 @@ var Table = /*#__PURE__*/function (_Component6) {
          /////////////////////   Duplicate title    /////////////////
          ////////////////////////////////////////////////////////////
          */
-        shortcut('.js-uix-table--responsive').each(function (index, curSelector) {
-          shortcut(curSelector + ' thead th').each(function (index, curSelector) {
+        shortcut('.js-uix-table--responsive').each(function () {
+          var $th = shortcut(this).find('thead th');
+
+          var $tr = shortcut(this).find('tbody > tr');
+
+          var thArr = [];
+          $th.each(function () {
             var data = shortcut(this).html().replace(/<span[^>]*>[\s\S]+<\/span>/g, '');
+
+            thArr.push(data);
 
             if (shortcut(this).data('table') === null) {
               shortcut(this).data('table', data);
             }
           });
+          $tr.each(function () {
+            var $td = shortcut(this).find('> td');
 
-          shortcut(curSelector + ' tbody tr').each(function (index, trSelectors) {
-            shortcut(trSelectors + '> td').each(function (index) {
-              var data = shortcut(curSelector + ' thead th').eq(index).data('table');
-
-              shortcut(this).data('table', data);
+            $td.each(function (tdIndex) {
+              shortcut(this).data('table', thArr[tdIndex]);
             });
           });
         });
@@ -67810,25 +67994,33 @@ var Table = /*#__PURE__*/function (_Component6) {
 
         function tableDataScrolledInit(w) {
           //Add an identifier so that the mobile terminal can compare by row
-          shortcut('.js-uix-table--responsive-scrolled').each(function (index, curSelector) {
-            shortcut(curSelector + ' tbody tr').each(function (index, tdSelectors) {
-              shortcut(tdSelectors + '> td').each(function (index) {
-                shortcut(curSelector + ' thead th').eq(index).data('table-row', index);
+          shortcut('.js-uix-table--responsive-scrolled').each(function () {
+            var $th = shortcut(this).find('thead th');
 
-                shortcut(this).data('table-row', index);
+            var $tr = shortcut(this).find('tbody > tr');
+
+            $tr.each(function () {
+              var $td = shortcut(this).find('> td');
+
+              $td.each(function (tdIndex) {
+                $th.eq(tdIndex).data('table-row', tdIndex);
+
+                shortcut(this).data('table-row', tdIndex);
               });
             });
           });
 
           if (w <= 768) {
             //get maxHeight of per row
-            shortcut('.js-uix-table--responsive-scrolled').each(function (index, curSelector) {
-              var len = shortcut(curSelector + ' tbody tr').length;
+            shortcut('.js-uix-table--responsive-scrolled').each(function () {
+              var $tr = shortcut(this).find('tbody > tr');
+
+              var len = $tr.length;
 
               for (var i = 0; i < len; i++) {
-                var maxHeight = shortcut(curSelector + ' [data-table-row="' + i + '"]').maxDimension().height;
+                var maxHeight = shortcut(this).find('[data-table-row="' + i + '"]').maxDimension().height;
 
-                shortcut(curSelector + ' [data-table-row="' + i + '"]').css({
+                shortcut(this).find('[data-table-row="' + i + '"]').css({
                   'height': maxHeight + 'px'
                 });
               }
@@ -68752,6 +68944,8 @@ var TableGridDemo_data1 = {
 
 
 
+
+
 var TableSorter_excluded = ["data", "bordered", "noborder", "horizontal", "alternantRow", "alternantCol", "perLine", "responsive", "responsiveWithScrollBar", "id"];
 
 function TableSorter_createSuper(Derived) { var hasNativeReflectConstruct = TableSorter_isNativeReflectConstruct(); return function _createSuperInternal() { var Super = _getPrototypeOf(Derived), result; if (hasNativeReflectConstruct) { var NewTarget = _getPrototypeOf(this).constructor; result = Reflect.construct(Super, arguments, NewTarget); } else { result = Super.apply(this, arguments); } return _possibleConstructorReturn(this, result); }; }
@@ -68763,6 +68957,7 @@ function TableSorter_isNativeReflectConstruct() { if (typeof Reflect === "undefi
  * <!-- Table Sorter-->
  *************************************
  */
+
 
 /*-- Apply Third-party plugins (import location should be in front of "global scripts and styles") --*/
 
@@ -68853,13 +69048,17 @@ var TableSorterHeaders = /*#__PURE__*/function (_Component3) {
   _createClass(TableSorterHeaders, [{
     key: "render",
     value: function render() {
+      var _this = this;
+
       if (this.props.data) {
         return /*#__PURE__*/react.createElement(react.Fragment, null, /*#__PURE__*/react.createElement("thead", null, /*#__PURE__*/react.createElement("tr", {
           id: "app-table-sorter-header-tr" + shortcut.GUID.create()
         }, this.props.data.map(function (item, i) {
           return /*#__PURE__*/react.createElement("th", {
             "data-sort-type": item.type,
-            key: "header" + i
+            "data-table-row": i,
+            key: "header" + i,
+            onClick: _this.props.clickEv
           }, item.content);
         }))));
       } else {
@@ -68879,22 +69078,83 @@ var TableSorter = /*#__PURE__*/function (_Component4) {
 
   var _super4 = TableSorter_createSuper(TableSorter);
 
+  //Refs are commonly assigned to an instance property when a component 
+  //is constructed so they can be referenced throughout the component.
   function TableSorter(props) {
+    var _this2;
+
     _classCallCheck(this, TableSorter);
 
-    return _super4.call(this, props);
+    _this2 = _super4.call(this, props);
+
+    _defineProperty(_assertThisInitialized(_this2), "wrapperRef", /*#__PURE__*/react.createRef());
+
+    _defineProperty(_assertThisInitialized(_this2), "inverse", void 0);
+
+    _this2.handleSortType = _this2.handleSortType.bind(_assertThisInitialized(_this2));
+    _this2.inverse = false;
+    return _this2;
   }
 
   _createClass(TableSorter, [{
+    key: "handleSortType",
+    value: function handleSortType(e) {
+      e.preventDefault();
+      var self = this;
+      var wrapper = react_dom.findDOMNode(self.wrapperRef.current);
+
+      var el = shortcut(e.target);
+
+      var thType = el.data('sort-type');
+      var curIndex = el.data('table-row');
+
+      var targetComparator = shortcut(wrapper).find('tbody [data-table-row="' + curIndex + '"]');
+
+      var root = shortcut(wrapper).find('tbody');
+
+      if (thType === false) return false; //sort of HTML elements
+
+      var sortBy = function sortBy(a, b) {
+        var txt1 = a.innerHTML.replace(/(<([^>]+)>)/ig, '').toLowerCase(),
+            txt2 = b.innerHTML.replace(/(<([^>]+)>)/ig, '').toLowerCase(); //type of number
+
+        if (thType == 'number') {
+          txt1 = Number(txt1.replace(/[^0-9.-]+/g, ''));
+          txt2 = Number(txt2.replace(/[^0-9.-]+/g, ''));
+        } //type of date
+
+
+        if (thType == 'date') {
+          txt1 = new Date(txt1);
+          txt2 = new Date(txt2);
+        } //add filter class
+
+
+        shortcut(wrapper).find('tbody tr').addClass('js-uix-newsort');
+
+        self.inverse = !self.inverse;
+        return txt2 < txt1 ? -1 : txt2 > txt1 ? 1 : 0;
+      };
+
+      targetComparator.sort(sortBy); //console.log( 'targetComparator:', targetComparator );
+      //console.log( 'inverse:', self.inverse );
+
+      if (!self.inverse) targetComparator.reverse();
+      root.empty();
+
+      for (var i = 0; i < targetComparator.length; i++) {
+        var curRow = targetComparator[i].parentNode;
+        root[0].appendChild(curRow);
+      }
+    }
+  }, {
     key: "componentDidMount",
     value: function componentDidMount() {
       shortcut(document).ready(function () {
         shortcut('.js-uix-table-sorter').each(function (index, curSelector) {
           //Add an identifier so that the mobile terminal can compare by row
-          shortcut(curSelector + ' tbody tr').each(function (index, tdSelectors) {
-            shortcut(tdSelectors + '> td').each(function (index) {
-              shortcut(curSelector + ' thead th').eq(index).data('table-row', index);
-
+          shortcut(curSelector + ' tbody tr').each(function (index) {
+            shortcut(this).find('> td').each(function (index) {
               shortcut(this).data('table-row', index);
             });
           }); //Filter functions
@@ -68903,55 +69163,9 @@ var TableSorter = /*#__PURE__*/function (_Component4) {
           shortcut(curSelector + ' thead tr [data-sort-type]').each(function () {
             //add arrows
             if (shortcut(this).find('.uix-table-sorter').length == 0 && shortcut(this).data('sort-type') !== false) {
-              shortcut(this).wrapInner('<span class="uix-table-sorter" />');
-            }
-          }); //Click event
+              shortcut(this).css('cursor', 'pointer');
 
-
-          var inverse = false;
-
-          shortcut(curSelector + ' thead tr [data-sort-type]').off('click').on('click', function () {
-            var thType = shortcut(this).data('sort-type');
-
-            var curIndex = shortcut(this).index();
-
-            var targetComparator = shortcut(curSelector + ' tbody [data-table-row="' + curIndex + '"]');
-
-            var root = shortcut(curSelector + ' tbody');
-
-            if (thType === false) return false; //sort of HTML elements
-
-            var sortBy = function sortBy(a, b) {
-              var txt1 = a.innerHTML.replace(/(<([^>]+)>)/ig, '').toLowerCase(),
-                  txt2 = b.innerHTML.replace(/(<([^>]+)>)/ig, '').toLowerCase(); //type of number
-
-              if (thType == 'number') {
-                txt1 = Number(txt1.replace(/[^0-9.-]+/g, ''));
-                txt2 = Number(txt2.replace(/[^0-9.-]+/g, ''));
-              } //type of date
-
-
-              if (thType == 'date') {
-                txt1 = new Date(txt1);
-                txt2 = new Date(txt2);
-              } //add filter class
-
-
-              shortcut(curSelector + ' tbody tr').addClass('js-uix-newsort');
-
-              inverse = !inverse;
-              return txt2 < txt1 ? -1 : txt2 > txt1 ? 1 : 0;
-            };
-
-            targetComparator.sort(sortBy); //console.log( 'targetComparator:', targetComparator );
-            //console.log( 'inverse:', inverse );
-
-            if (!inverse) targetComparator.reverse();
-            root.empty();
-
-            for (var i = 0; i < targetComparator.length; i++) {
-              var curRow = targetComparator[i].parentNode;
-              root[0].appendChild(curRow);
+              shortcut(this).wrapInner('<span class="uix-table-sorter" style="pointer-events: none;" />');
             }
           });
         });
@@ -68986,10 +69200,12 @@ var TableSorter = /*#__PURE__*/function (_Component4) {
       if (responsive && !responsiveWithScrollBar) classes += ' is-responsive js-uix-table--responsive';
       if (responsiveWithScrollBar && !responsive) classes += ' js-uix-table--responsive-scrolled';
       return /*#__PURE__*/react.createElement(react.Fragment, null, /*#__PURE__*/react.createElement("div", extends_extends({
+        ref: this.wrapperRef,
         className: "uix-table" + classes + " js-uix-table-sorter",
         id: id || 'app-table-sorter-' + shortcut.GUID.create()
       }, attributes), /*#__PURE__*/react.createElement("table", null, /*#__PURE__*/react.createElement(TableSorterHeaders, {
-        data: _headers
+        data: _headers,
+        clickEv: this.handleSortType
       }), /*#__PURE__*/react.createElement("tbody", null, data.hasOwnProperty('fields') ? data.fields.map(function (item, i) {
         return /*#__PURE__*/react.createElement(TableSorterRow, {
           key: "row" + i,
@@ -73049,7 +73265,7 @@ var ScrollReveal = /*#__PURE__*/function (_Component) {
               if (type == 'show') {
                 _imgIds.forEach(function (element) {
                   shortcut(element).each(function (index) {
-                    var $el = shortcut(self);
+                    var $el = shortcut(this);
 
                     var t = setTimeout(function () {
                       $el.addClass('is-active');
@@ -74372,12 +74588,6 @@ var Card = /*#__PURE__*/function (_Component) {
 
 function parallax_parallax(curElement, config) {
   if ((0,esm_typeof/* default */.Z)(config) === ( true ? "undefined" : 0)) {
-    /*
-    * @param  {Number} speed       - The speed of movement between elements.
-    * @param  {String} transition  - Transition time can simulate easing effect.
-    * @param  {Object} bg            - Specify the background display. Default value: { enable: true, xPos: '50%' }
-    * @return {Void}
-    */
     config = {
       "speed": 0.25,
       "offsetTop": 0,
@@ -74389,61 +74599,59 @@ function parallax_parallax(curElement, config) {
     };
   }
 
-  if (config) {
-    var bgEff = config.bg,
-        $el = curElement,
-        bgXpos = '50%',
-        offsetTop = config.offsetTop,
-        speed = -config.speed;
-    if ((0,esm_typeof/* default */.Z)(offsetTop) === ( true ? "undefined" : 0)) offsetTop = 0;
-    if ((0,esm_typeof/* default */.Z)(speed) === ( true ? "undefined" : 0)) speed = 0;
+  var bgEff = config.bg,
+      $el = curElement,
+      bgXpos = '50%',
+      offsetTop = config.offsetTop,
+      speed = -config.speed;
+  if ((0,esm_typeof/* default */.Z)(offsetTop) === ( true ? "undefined" : 0)) offsetTop = 0;
+  if ((0,esm_typeof/* default */.Z)(speed) === ( true ? "undefined" : 0)) speed = 0;
 
-    if (bgEff) {
-      bgEff = config.bg.enable;
-      bgXpos = config.bg.xPos;
-    } //Prohibit transition delay
+  if (bgEff) {
+    bgEff = config.bg.enable;
+    bgXpos = config.bg.xPos;
+  } //Prohibit transition delay
 
 
-    $el.css({
-      'transition': 'none'
-    }); //Initialize the position of the background
+  $el.css({
+    'transition': 'none'
+  }); //Initialize the position of the background
+
+  if (bgEff) {
+    //background parallax
+    $el.css('background-position', bgXpos + ' ' + (-$el[0].getBoundingClientRect().top * speed + -offsetTop) + 'px');
+  } else {
+    //element parallax
+    $el.css('transform', 'matrix(1, 0, 0, 1, 0, 0)');
+  } //
+
+
+  var scrollUpdate = function scrollUpdate() {
+    var spyTop = $el[0].getBoundingClientRect().top;
 
     if (bgEff) {
       //background parallax
-      $el.css('background-position', bgXpos + ' ' + (-$el[0].getBoundingClientRect().top * speed + -offsetTop) + 'px');
+      $el.css({
+        'background-position': bgXpos + ' ' + (0 - (spyTop * speed + offsetTop)) + 'px',
+        'transition': config.transition
+      });
     } else {
       //element parallax
-      $el.css('transform', 'matrix(1, 0, 0, 1, 0, 0)');
-    } //
+      $el.css({
+        'transform': 'matrix(1, 0, 0, 1, 0, ' + (0 - (spyTop * speed + offsetTop)) + ')',
+        'transition': config.transition
+      });
+    }
+  };
 
+  var throttleFunc = shortcut.throttle(scrollUpdate, 5);
 
-    var scrollUpdate = function scrollUpdate() {
-      var spyTop = $el[0].getBoundingClientRect().top;
+  window.removeEventListener('scroll', throttleFunc);
+  window.removeEventListener('touchmove', throttleFunc); // Please do not use scroll's off method in each
 
-      if (bgEff) {
-        //background parallax
-        $el.css({
-          'background-position': bgXpos + ' ' + (0 - (spyTop * speed + offsetTop)) + 'px',
-          'transition': config.transition
-        });
-      } else {
-        //element parallax
-        $el.css({
-          'transform': 'matrix(1, 0, 0, 1, 0, ' + (0 - (spyTop * speed + offsetTop)) + ')',
-          'transition': config.transition
-        });
-      }
-    };
-
-    var throttleFunc = shortcut.throttle(scrollUpdate, 5);
-
-    window.removeEventListener('scroll', throttleFunc);
-    window.removeEventListener('touchmove', throttleFunc); // Please do not use scroll's off method in each
-
-    window.addEventListener('scroll', throttleFunc);
-    window.addEventListener('touchmove', throttleFunc);
-    throttleFunc();
-  }
+  window.addEventListener('scroll', throttleFunc);
+  window.addEventListener('touchmove', throttleFunc);
+  throttleFunc();
 }
 /* harmony default export */ const Parallax_parallax = ({
   parallax: parallax_parallax
@@ -76747,6 +76955,2497 @@ var GridColumn = /*#__PURE__*/function (_Component) {
     className: "table table-bordered table-striped mb-5"
   }, /*#__PURE__*/react.createElement("thead", null, /*#__PURE__*/react.createElement("tr", null, /*#__PURE__*/react.createElement("th", null, "Property"), /*#__PURE__*/react.createElement("th", null, "Type"), /*#__PURE__*/react.createElement("th", null, "Default"), /*#__PURE__*/react.createElement("th", null, "Description"))), /*#__PURE__*/react.createElement("tbody", null, /*#__PURE__*/react.createElement("tr", null, /*#__PURE__*/react.createElement("td", null, /*#__PURE__*/react.createElement("code", null, "ratio")), /*#__PURE__*/react.createElement("td", null, /*#__PURE__*/react.createElement("code", null, "1/1"), " | ", /*#__PURE__*/react.createElement("code", null, "1/2"), " | ", /*#__PURE__*/react.createElement("code", null, "1/3"), " | ", /*#__PURE__*/react.createElement("code", null, "2/3"), " | ", /*#__PURE__*/react.createElement("code", null, "1/4"), " |", /*#__PURE__*/react.createElement("code", null, "3/4"), " | ", /*#__PURE__*/react.createElement("code", null, "1/5"), " | ", /*#__PURE__*/react.createElement("code", null, "2/5"), " | ", /*#__PURE__*/react.createElement("code", null, "3/5"), " | ", /*#__PURE__*/react.createElement("code", null, "4/5"), " |", /*#__PURE__*/react.createElement("code", null, "1/6"), " | boolean"), /*#__PURE__*/react.createElement("td", null, "-"), /*#__PURE__*/react.createElement("td", null, "The ratio of each column")), /*#__PURE__*/react.createElement("tr", null, /*#__PURE__*/react.createElement("td", null, /*#__PURE__*/react.createElement("code", null, "stackRatio")), /*#__PURE__*/react.createElement("td", null, /*#__PURE__*/react.createElement("code", null, "1/1"), " | ", /*#__PURE__*/react.createElement("code", null, "1/2"), " | ", /*#__PURE__*/react.createElement("code", null, "1/3"), " | ", /*#__PURE__*/react.createElement("code", null, "2/3"), " | ", /*#__PURE__*/react.createElement("code", null, "1/4"), " |", /*#__PURE__*/react.createElement("code", null, "3/4"), " | ", /*#__PURE__*/react.createElement("code", null, "1/5"), " | ", /*#__PURE__*/react.createElement("code", null, "2/5"), " | ", /*#__PURE__*/react.createElement("code", null, "3/5"), " | ", /*#__PURE__*/react.createElement("code", null, "4/5"), " |", /*#__PURE__*/react.createElement("code", null, "1/6"), " | boolean"), /*#__PURE__*/react.createElement("td", null, "-"), /*#__PURE__*/react.createElement("td", null, "The ratio of stacked breakpoints. ", /*#__PURE__*/react.createElement("br", null), " You can set breakpoints for the ", /*#__PURE__*/react.createElement("code", null, "stackSize"), "and ", /*#__PURE__*/react.createElement("code", null, "stackRatio"), " props that starts out stacked before becoming horizontal with at the small breakpoint. Setting it to a breakpoint (", /*#__PURE__*/react.createElement("code", null, "sm, md, lg, xl"), ") of the", /*#__PURE__*/react.createElement("code", null, "stackSize"), " prop will set the ", /*#__PURE__*/react.createElement("code", null, "<GridColumn>...</Grid>"), "as fluid until the specified breakpoint")), /*#__PURE__*/react.createElement("tr", null, /*#__PURE__*/react.createElement("td", null, /*#__PURE__*/react.createElement("code", null, "stackSize")), /*#__PURE__*/react.createElement("td", null, /*#__PURE__*/react.createElement("code", null, "sm"), " | ", /*#__PURE__*/react.createElement("code", null, "md"), " | ", /*#__PURE__*/react.createElement("code", null, "lg"), " | ", /*#__PURE__*/react.createElement("code", null, "xl"), " | boolean"), /*#__PURE__*/react.createElement("td", null, "-"), /*#__PURE__*/react.createElement("td", null, "The size of stacked breakpoints")), /*#__PURE__*/react.createElement("tr", null, /*#__PURE__*/react.createElement("td", null, /*#__PURE__*/react.createElement("code", null, "inline")), /*#__PURE__*/react.createElement("td", null, "boolean"), /*#__PURE__*/react.createElement("td", null, "false"), /*#__PURE__*/react.createElement("td", null, "This attribute will make the column in a separate block, there is no float, and its centering can be controlled")))))))))));
 });
+;// CONCATENATED MODULE: ./src/client/components/Accordion/AccordionItem.tsx
+
+
+
+
+
+
+
+var AccordionItem_excluded = ["defaultActive", "title", "children"];
+
+function AccordionItem_createSuper(Derived) { var hasNativeReflectConstruct = AccordionItem_isNativeReflectConstruct(); return function _createSuperInternal() { var Super = _getPrototypeOf(Derived), result; if (hasNativeReflectConstruct) { var NewTarget = _getPrototypeOf(this).constructor; result = Reflect.construct(Super, arguments, NewTarget); } else { result = Super.apply(this, arguments); } return _possibleConstructorReturn(this, result); }; }
+
+function AccordionItem_isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Reflect.construct) return false; if (Reflect.construct.sham) return false; if (typeof Proxy === "function") return true; try { Boolean.prototype.valueOf.call(Reflect.construct(Boolean, [], function () {})); return true; } catch (e) { return false; } }
+
+
+
+var AccordionItem = /*#__PURE__*/function (_Component) {
+  _inherits(AccordionItem, _Component);
+
+  var _super = AccordionItem_createSuper(AccordionItem);
+
+  function AccordionItem(props) {
+    _classCallCheck(this, AccordionItem);
+
+    return _super.call(this, props);
+  }
+
+  _createClass(AccordionItem, [{
+    key: "render",
+    value: function render() {
+      var _this$props = this.props,
+          defaultActive = _this$props.defaultActive,
+          title = _this$props.title,
+          children = _this$props.children,
+          attributes = _objectWithoutProperties(_this$props, AccordionItem_excluded);
+
+      var activedClassName = typeof defaultActive !== 'undefined' && defaultActive !== false ? ' is-active' : '';
+      var tabpanelHeight = activedClassName != '' ? 'auto' : 0;
+      return /*#__PURE__*/react.createElement(react.Fragment, null, /*#__PURE__*/react.createElement("dl", extends_extends({
+        className: activedClassName,
+        "aria-expanded": defaultActive ? 'true' : 'false'
+      }, attributes), /*#__PURE__*/react.createElement("dt", {
+        role: "presentation"
+      }, /*#__PURE__*/react.createElement("a", {
+        href: "#"
+      }, title)), /*#__PURE__*/react.createElement("dd", {
+        role: "tabpanel",
+        style: {
+          height: tabpanelHeight
+        }
+      }, /*#__PURE__*/react.createElement("div", null, children))));
+    }
+  }]);
+
+  return AccordionItem;
+}(react.Component);
+
+
+;// CONCATENATED MODULE: ./src/client/components/Accordion/Accordion.tsx
+
+
+
+
+
+
+
+
+var Accordion_excluded = ["triggerType", "displayTheFirstItem", "id", "children"];
+
+function Accordion_ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) { symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); } keys.push.apply(keys, symbols); } return keys; }
+
+function Accordion_objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { Accordion_ownKeys(Object(source), true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { Accordion_ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
+
+function Accordion_createSuper(Derived) { var hasNativeReflectConstruct = Accordion_isNativeReflectConstruct(); return function _createSuperInternal() { var Super = _getPrototypeOf(Derived), result; if (hasNativeReflectConstruct) { var NewTarget = _getPrototypeOf(this).constructor; result = Reflect.construct(Super, arguments, NewTarget); } else { result = Super.apply(this, arguments); } return _possibleConstructorReturn(this, result); }; }
+
+function Accordion_isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Reflect.construct) return false; if (Reflect.construct.sham) return false; if (typeof Proxy === "function") return true; try { Boolean.prototype.valueOf.call(Reflect.construct(Boolean, [], function () {})); return true; } catch (e) { return false; } }
+
+
+/*-- Apply Third-party plugins (import location should be in front of "global scripts and styles") --*/
+
+
+
+
+/*-- Apply global scripts and styles --*/
+
+
+
+
+/*-- Apply this component styles --*/
+
+ //
+
+
+
+var Accordion = /*#__PURE__*/function (_Component) {
+  _inherits(Accordion, _Component);
+
+  var _super = Accordion_createSuper(Accordion);
+
+  function Accordion(props) {
+    _classCallCheck(this, Accordion);
+
+    return _super.call(this, props);
+  }
+
+  _createClass(Accordion, [{
+    key: "componentDidMount",
+    value: function componentDidMount() {
+      shortcut(document).ready(function () {
+        shortcut('.uix-accordion').each(function (index) {
+          var $this = shortcut(this);
+
+          var $li = $this.children('dl');
+          var aEvent = $this.data('event');
+
+          var openItem = function openItem(obj) {
+            //to open
+            // - temporarilty set height:auto
+            // - tween from height:0
+            TweenMax_TweenMax.set(obj, {
+              height: 'auto'
+            });
+            TweenMax_TweenMax.from(obj, 0.5, {
+              height: 0
+            });
+          };
+
+          if (aEvent === null) {
+            aEvent = 'click';
+          } //Initialize accordion items
+
+
+          $li.each(function (index) {
+            shortcut(this).find('a').attr('href', 'javascript:');
+          });
+          $li.off(aEvent).on(aEvent, function (e) {
+            //Prevents further propagation of the current event in the capturing and bubbling phases.
+            e.stopPropagation(); //Its value is not a boolean but a string
+
+            var expanded = shortcut(this).attr('aria-expanded') === true ? false : true,
+                $content = shortcut(this).find('dd');
+
+            if (expanded) {
+              //Hide other all sibling <dt> of the selected element
+              var $e = shortcut(this).siblings();
+
+              $e.removeClass('is-active').attr('aria-expanded', false);
+
+              shortcut(this).addClass('is-active').attr('aria-expanded', true);
+
+              TweenMax_TweenMax.to($e.find('dd'), 0.5, {
+                height: 0
+              }); //to open
+
+              openItem($content);
+            } else {
+              if (e.type == 'click') {
+                shortcut(this).removeClass('is-active').attr('aria-expanded', false); //to close
+
+
+                TweenMax_TweenMax.to($content, 0.5, {
+                  height: 0
+                });
+              }
+            }
+          });
+        });
+      });
+    }
+  }, {
+    key: "render",
+    value: function render() {
+      var _this$props = this.props,
+          triggerType = _this$props.triggerType,
+          displayTheFirstItem = _this$props.displayTheFirstItem,
+          id = _this$props.id,
+          children = _this$props.children,
+          attributes = _objectWithoutProperties(_this$props, Accordion_excluded);
+
+      return /*#__PURE__*/react.createElement(react.Fragment, null, /*#__PURE__*/react.createElement("div", extends_extends({
+        id: id ? id : 'app-accordion-' + shortcut.GUID.create(),
+        className: "uix-accordion",
+        "data-event": triggerType || 'click',
+        "data-first-show": displayTheFirstItem,
+        role: "tablist"
+      }, attributes), children != null ? children.map(function (item, i) {
+        var childProps = Accordion_objectSpread({}, item.props);
+
+        delete childProps.key;
+        if (i === 0 && displayTheFirstItem) childProps.defaultActive = true;
+        return /*#__PURE__*/react.createElement(AccordionItem, extends_extends({
+          key: "item" + i
+        }, childProps));
+      }) : ""));
+    }
+  }]);
+
+  return Accordion;
+}(react.Component);
+
+
+;// CONCATENATED MODULE: ./src/client/components/Accordion/index.tsx
+/* 
+ *************************************
+ * <!-- Accordion -->
+ *************************************
+ */
+
+
+;// CONCATENATED MODULE: ./src/client/views/_pages/ComponentsDemo/AccordionDemo.js
+
+
+ //Create or Remove Sidebar Menu
+
+
+/* harmony default export */ const AccordionDemo = (function () {
+  react.useEffect(function () {
+    // Equivalent to componentDidMount and componentDidUpdate:
+    shortcut(document).ready(function () {
+      //Create sidebar menu
+      SidebarMenu();
+    });
+  });
+  return /*#__PURE__*/react.createElement(react.Fragment, null, /*#__PURE__*/react.createElement("section", null, /*#__PURE__*/react.createElement("div", {
+    className: "container"
+  }, /*#__PURE__*/react.createElement("div", {
+    className: "row"
+  }, /*#__PURE__*/react.createElement("div", {
+    className: "col-12"
+  }, /*#__PURE__*/react.createElement("h1", {
+    className: "uix-typo--h2"
+  }, "Accordion", /*#__PURE__*/react.createElement("a", {
+    className: "uix-typo--h3 align-middle",
+    href: "https://github.com/xizon/uix-kit-react/tree/main/src/client/components/Accordion",
+    target: "_blank"
+  }, /*#__PURE__*/react.createElement("span", {
+    className: "uix-dir--right",
+    style: {
+      fontSize: "0.75rem",
+      color: "#ababab",
+      margin: ".5rem .5rem 0 0"
+    }
+  }, /*#__PURE__*/react.createElement("svg", {
+    style: {
+      marginRight: ".5rem"
+    },
+    width: "15",
+    viewBox: "0 0 392.186 392.186"
+  }, /*#__PURE__*/react.createElement("g", null, /*#__PURE__*/react.createElement("g", null, /*#__PURE__*/react.createElement("g", null, /*#__PURE__*/react.createElement("path", {
+    fill: "#d2d2d2",
+    d: "M368.62,17.951H23.568C10.57,17.951,0,28.524,0,41.52v309.146c0,12.996,10.57,23.568,23.568,23.568h345.053c12.994,0,23.564-10.572,23.564-23.568V41.52C392.188,28.525,381.614,17.951,368.62,17.951z M297.56,57.528c0-4.806,3.896-8.703,8.701-8.703h8.703c4.808,0,8.701,3.896,8.701,8.703v9.863c0,4.806-3.896,8.702-8.701,8.702h-8.703c-4.805,0-8.701-3.896-8.701-8.702V57.528z M257.093,57.528c0-4.806,3.898-8.703,8.703-8.703h8.701c4.805,0,8.703,3.896,8.703,8.703v9.863c0,4.806-3.898,8.702-8.703,8.702h-8.701c-4.805,0-8.703-3.896-8.703-8.702V57.528z M363.903,345.951H28.282V102.235h335.621V345.951L363.903,345.951z M364.132,67.391c0,4.806-3.896,8.702-8.701,8.702h-8.703c-4.809,0-8.702-3.896-8.702-8.702v-9.863c0-4.806,3.896-8.703,8.702-8.703h8.703c4.806,0,8.701,3.896,8.701,8.703V67.391z"
+  }), /*#__PURE__*/react.createElement("path", {
+    fill: "#d2d2d2",
+    d: "M84.185,233.284l63.084,29.336c1.631,0.755,3.367,1.138,5.162,1.138c2.338,0,4.617-0.664,6.598-1.924c3.547-2.267,5.666-6.13,5.666-10.334v-0.322c0-4.752-2.785-9.116-7.096-11.118l-39.455-18.332l39.455-18.334c4.311-2.004,7.096-6.367,7.096-11.117v-0.319c0-4.21-2.119-8.075-5.666-10.334c-1.961-1.253-4.246-1.916-6.605-1.916c-1.779,0-3.563,0.391-5.16,1.133l-63.08,29.333c-4.307,2.004-7.09,6.369-7.09,11.117v0.877C77.093,226.909,79.874,231.272,84.185,233.284z"
+  }), /*#__PURE__*/react.createElement("path", {
+    fill: "#d2d2d2",
+    d: "M165.257,293.036c2.301,3.149,6.002,5.03,9.9,5.03h0.316c5.352,0,10.041-3.426,11.672-8.517L228.7,160.788c1.192-3.716,0.531-7.818-1.771-10.973c-2.301-3.15-6.002-5.03-9.901-5.03h-0.315c-5.354,0-10.048,3.425-11.679,8.516l-41.559,128.771C162.292,285.793,162.958,289.889,165.257,293.036z"
+  }), /*#__PURE__*/react.createElement("path", {
+    fill: "#d2d2d2",
+    d: "M227.49,192.276c0,4.745,2.783,9.109,7.095,11.123l39.455,18.329l-39.455,18.33c-4.31,2.004-7.095,6.368-7.095,11.118v0.322c0,4.205,2.117,8.068,5.668,10.336c1.974,1.258,4.254,1.924,6.595,1.924c1.793,0,3.528-0.383,5.17-1.142l63.08-29.335c4.307-2.009,7.09-6.372,7.09-11.115v-0.877c0-4.748-2.783-9.113-7.094-11.117l-63.08-29.333c-1.591-0.74-3.373-1.131-5.152-1.131c-2.355,0-4.643,0.661-6.604,1.912c-3.551,2.263-5.67,6.127-5.67,10.337v0.318H227.49L227.49,192.276z"
+  }))))), "Docs on GitHub"))))))), /*#__PURE__*/react.createElement("section", {
+    className: "uix-spacing--s uix-spacing--no-bottom"
+  }, /*#__PURE__*/react.createElement("div", {
+    className: "container"
+  }, /*#__PURE__*/react.createElement("div", {
+    className: "row"
+  }, /*#__PURE__*/react.createElement("div", {
+    className: "col-12"
+  }, /*#__PURE__*/react.createElement("h3", {
+    className: "app-header-title"
+  }, "Accordion 1"), /*#__PURE__*/react.createElement("p", null, "Show hidden divs on click."), /*#__PURE__*/react.createElement("hr", null))))), /*#__PURE__*/react.createElement("section", {
+    className: "uix-spacing--s"
+  }, /*#__PURE__*/react.createElement("div", {
+    className: "container"
+  }, /*#__PURE__*/react.createElement("div", {
+    className: "row"
+  }, /*#__PURE__*/react.createElement("div", {
+    className: "col-12"
+  }, /*#__PURE__*/react.createElement(Accordion, {
+    triggerType: "click",
+    displayTheFirstItem: true
+  }, /*#__PURE__*/react.createElement(AccordionItem, {
+    title: /*#__PURE__*/react.createElement(react.Fragment, null, "Item 1")
+  }, /*#__PURE__*/react.createElement("h4", null, "Usage:"), "Click on an item to open."), /*#__PURE__*/react.createElement(AccordionItem, {
+    title: /*#__PURE__*/react.createElement(react.Fragment, null, "Item 2")
+  }, "Duis mollis, est non commodo luctus, nisi erat porttitor ligula, eget lacinia odio sem nec elit. Cras mattis consectetur purus sit amet fermentum. Morbi leo risus, porta ac consectetur ac, vestibulum at eros. Praesent commodo cursus magna, vel scelerisque nisl consectetur et."), /*#__PURE__*/react.createElement(AccordionItem, {
+    title: /*#__PURE__*/react.createElement(react.Fragment, null, "Item 3")
+  }, /*#__PURE__*/react.createElement("p", null, "Duis mollis, est non commodo luctus, nisi erat porttitor ligula, eget lacinia odio sem nec elit. Cras mattis consectetur purus sit amet fermentum. Morbi leo risus, porta ac consectetur ac."), /*#__PURE__*/react.createElement("p", null, "People think focus means saying yes to the thing you\u2019ve got to focus on. But that\u2019s not what it means at all. It means saying no to the hundred other good ideas that there are. You have to pick carefully. I\u2019m actually as proud of the things we haven\u2019t done as the things I have done. Innovation is saying no to 1,000 things. ", /*#__PURE__*/react.createElement("cite", null, "Steve Jobs \u2013 Apple Worldwide Developers\u2019 Conference, 1997")), /*#__PURE__*/react.createElement("p", null, "Nullam id dolor id nibh ultricies vehicula ut id elit. Curabitur blandit tempus porttitor. Integer posuere erat a ante venenatis dapibus posuere velit aliquet. Cras justo odio, dapibus ac facilisis in, egestas eget quam. Vestibulum id ligula porta felis euismod semper. Donec id elit non mi porta gravida at eget metus. Vestibulum id ligula porta felis euismod semper."), /*#__PURE__*/react.createElement("p", null, "Duis mollis, est non commodo luctus, nisi erat porttitor ligula, eget lacinia odio sem nec elit. Cras mattis consectetur purus sit amet fermentum. Morbi leo risus, porta ac consectetur ac.")), /*#__PURE__*/react.createElement(AccordionItem, {
+    title: /*#__PURE__*/react.createElement(react.Fragment, null, "Item 4")
+  }, "Morbi leo risus, porta ac consectetur ac, vestibulum at eros. Praesent commodo cursus magna, vel scelerisque nisl consectetur et.")))))), /*#__PURE__*/react.createElement("section", null, /*#__PURE__*/react.createElement("div", {
+    className: "container"
+  }, /*#__PURE__*/react.createElement("div", {
+    className: "row"
+  }, /*#__PURE__*/react.createElement("div", {
+    className: "col-12"
+  }, /*#__PURE__*/react.createElement("h3", {
+    className: "app-header-title"
+  }, "Accordion 2"), /*#__PURE__*/react.createElement("p", null, "Show hidden divs on mouseover."), /*#__PURE__*/react.createElement("hr", null))))), /*#__PURE__*/react.createElement("section", {
+    className: "uix-spacing--s"
+  }, /*#__PURE__*/react.createElement("div", {
+    className: "container"
+  }, /*#__PURE__*/react.createElement("div", {
+    className: "row"
+  }, /*#__PURE__*/react.createElement("div", {
+    className: "col-12"
+  }, /*#__PURE__*/react.createElement(Accordion, {
+    triggerType: "mouseenter"
+  }, /*#__PURE__*/react.createElement(AccordionItem, {
+    title: /*#__PURE__*/react.createElement(react.Fragment, null, "Item 1")
+  }, /*#__PURE__*/react.createElement("h4", null, "Usage:"), "Click on an item to open."), /*#__PURE__*/react.createElement(AccordionItem, {
+    title: /*#__PURE__*/react.createElement(react.Fragment, null, "Item 2")
+  }, "Duis mollis, est non commodo luctus, nisi erat porttitor ligula, eget lacinia odio sem nec elit. Cras mattis consectetur purus sit amet fermentum. Morbi leo risus, porta ac consectetur ac, vestibulum at eros. Praesent commodo cursus magna, vel scelerisque nisl consectetur et."), /*#__PURE__*/react.createElement(AccordionItem, {
+    title: /*#__PURE__*/react.createElement(react.Fragment, null, "Item 3")
+  }, /*#__PURE__*/react.createElement("p", null, "Duis mollis, est non commodo luctus, nisi erat porttitor ligula, eget lacinia odio sem nec elit. Cras mattis consectetur purus sit amet fermentum. Morbi leo risus, porta ac consectetur ac."), /*#__PURE__*/react.createElement("p", null, "People think focus means saying yes to the thing you\u2019ve got to focus on. But that\u2019s not what it means at all. It means saying no to the hundred other good ideas that there are. You have to pick carefully. I\u2019m actually as proud of the things we haven\u2019t done as the things I have done. Innovation is saying no to 1,000 things. ", /*#__PURE__*/react.createElement("cite", null, "Steve Jobs \u2013 Apple Worldwide Developers\u2019 Conference, 1997")), /*#__PURE__*/react.createElement("p", null, "Nullam id dolor id nibh ultricies vehicula ut id elit. Curabitur blandit tempus porttitor. Integer posuere erat a ante venenatis dapibus posuere velit aliquet. Cras justo odio, dapibus ac facilisis in, egestas eget quam. Vestibulum id ligula porta felis euismod semper. Donec id elit non mi porta gravida at eget metus. Vestibulum id ligula porta felis euismod semper."), /*#__PURE__*/react.createElement("p", null, "Duis mollis, est non commodo luctus, nisi erat porttitor ligula, eget lacinia odio sem nec elit. Cras mattis consectetur purus sit amet fermentum. Morbi leo risus, porta ac consectetur ac.")), /*#__PURE__*/react.createElement(AccordionItem, {
+    title: /*#__PURE__*/react.createElement(react.Fragment, null, "Item 4")
+  }, "Morbi leo risus, porta ac consectetur ac, vestibulum at eros. Praesent commodo cursus magna, vel scelerisque nisl consectetur et.")))))), /*#__PURE__*/react.createElement("section", null, /*#__PURE__*/react.createElement("div", {
+    className: "container"
+  }, /*#__PURE__*/react.createElement("div", {
+    className: "row"
+  }, /*#__PURE__*/react.createElement("div", {
+    className: "col-12"
+  }, /*#__PURE__*/react.createElement("h3", {
+    className: "app-header-title"
+  }, "API"), /*#__PURE__*/react.createElement("hr", null), /*#__PURE__*/react.createElement("article", {
+    className: "uix-spacing--s",
+    itemProp: "text"
+  }, /*#__PURE__*/react.createElement("h4", null, "Accordion"), /*#__PURE__*/react.createElement("div", null, /*#__PURE__*/react.createElement("pre", null, "import ", "{Accordion}", " from '@uixkit.react/components/Accordion/index.tsx';")), /*#__PURE__*/react.createElement("div", {
+    className: "table-responsive-md"
+  }, /*#__PURE__*/react.createElement("table", {
+    className: "table table-bordered table-striped mb-5"
+  }, /*#__PURE__*/react.createElement("thead", null, /*#__PURE__*/react.createElement("tr", null, /*#__PURE__*/react.createElement("th", null, "Property"), /*#__PURE__*/react.createElement("th", null, "Type"), /*#__PURE__*/react.createElement("th", null, "Default"), /*#__PURE__*/react.createElement("th", null, "Description"))), /*#__PURE__*/react.createElement("tbody", null, /*#__PURE__*/react.createElement("tr", null, /*#__PURE__*/react.createElement("td", null, /*#__PURE__*/react.createElement("code", null, "triggerType")), /*#__PURE__*/react.createElement("td", null, "string | ", /*#__PURE__*/react.createElement("code", null, "click"), " | ", /*#__PURE__*/react.createElement("code", null, "mouseenter")), /*#__PURE__*/react.createElement("td", null, "click"), /*#__PURE__*/react.createElement("td", null, "One event type, such as ", /*#__PURE__*/react.createElement("code", null, "click"), " or ", /*#__PURE__*/react.createElement("code", null, "mouseenter"))), /*#__PURE__*/react.createElement("tr", null, /*#__PURE__*/react.createElement("td", null, /*#__PURE__*/react.createElement("code", null, "displayTheFirstItem")), /*#__PURE__*/react.createElement("td", null, "boolean"), /*#__PURE__*/react.createElement("td", null, "false"), /*#__PURE__*/react.createElement("td", null, "Display the only first item of a list"))))), /*#__PURE__*/react.createElement("h4", null, "Accordion Item"), /*#__PURE__*/react.createElement("div", null, /*#__PURE__*/react.createElement("pre", null, "import ", "{AccordionItem}", " from '@uixkit.react/components/Accordion/index.tsx';")), /*#__PURE__*/react.createElement("div", {
+    className: "table-responsive-md"
+  }, /*#__PURE__*/react.createElement("table", {
+    className: "table table-bordered table-striped mb-5"
+  }, /*#__PURE__*/react.createElement("thead", null, /*#__PURE__*/react.createElement("tr", null, /*#__PURE__*/react.createElement("th", null, "Property"), /*#__PURE__*/react.createElement("th", null, "Type"), /*#__PURE__*/react.createElement("th", null, "Default"), /*#__PURE__*/react.createElement("th", null, "Description"))), /*#__PURE__*/react.createElement("tbody", null, /*#__PURE__*/react.createElement("tr", null, /*#__PURE__*/react.createElement("td", null, /*#__PURE__*/react.createElement("code", null, "defaultActive")), /*#__PURE__*/react.createElement("td", null, "boolean"), /*#__PURE__*/react.createElement("td", null, "false"), /*#__PURE__*/react.createElement("td", null, "Set an item to activate by default")), /*#__PURE__*/react.createElement("tr", null, /*#__PURE__*/react.createElement("td", null, /*#__PURE__*/react.createElement("code", null, "title")), /*#__PURE__*/react.createElement("td", null, "string"), /*#__PURE__*/react.createElement("td", null, "-"), /*#__PURE__*/react.createElement("td", null, "Set a title for each item")))))))))));
+});
+;// CONCATENATED MODULE: ./src/client/components/AccordionSlider/AccordionSliderItem.tsx
+
+
+
+
+
+
+
+var AccordionSliderItem_excluded = ["defaultActive", "bg", "children"];
+
+function AccordionSliderItem_createSuper(Derived) { var hasNativeReflectConstruct = AccordionSliderItem_isNativeReflectConstruct(); return function _createSuperInternal() { var Super = _getPrototypeOf(Derived), result; if (hasNativeReflectConstruct) { var NewTarget = _getPrototypeOf(this).constructor; result = Reflect.construct(Super, arguments, NewTarget); } else { result = Super.apply(this, arguments); } return _possibleConstructorReturn(this, result); }; }
+
+function AccordionSliderItem_isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Reflect.construct) return false; if (Reflect.construct.sham) return false; if (typeof Proxy === "function") return true; try { Boolean.prototype.valueOf.call(Reflect.construct(Boolean, [], function () {})); return true; } catch (e) { return false; } }
+
+
+
+var AccordionSliderItem = /*#__PURE__*/function (_Component) {
+  _inherits(AccordionSliderItem, _Component);
+
+  var _super = AccordionSliderItem_createSuper(AccordionSliderItem);
+
+  function AccordionSliderItem(props) {
+    _classCallCheck(this, AccordionSliderItem);
+
+    return _super.call(this, props);
+  }
+
+  _createClass(AccordionSliderItem, [{
+    key: "render",
+    value: function render() {
+      var _this$props = this.props,
+          defaultActive = _this$props.defaultActive,
+          bg = _this$props.bg,
+          children = _this$props.children,
+          attributes = _objectWithoutProperties(_this$props, AccordionSliderItem_excluded);
+
+      var activedClassName = typeof defaultActive !== 'undefined' && defaultActive !== false ? ' is-active' : '';
+      var bgAttrs = /([a-z\-_0-9\/\:\.]*\.(jpg|jpeg|png|gif|svg|webp))/i.test(bg) ? {
+        backgroundImage: "url(".concat(bg, ")")
+      } : {
+        backgroundColor: "".concat(bg)
+      };
+      return /*#__PURE__*/react.createElement(react.Fragment, null, /*#__PURE__*/react.createElement("li", extends_extends({
+        style: bgAttrs,
+        className: activedClassName
+      }, attributes), /*#__PURE__*/react.createElement("div", {
+        className: "uix-accordion-slider__content"
+      }, children)));
+    }
+  }]);
+
+  return AccordionSliderItem;
+}(react.Component);
+
+
+;// CONCATENATED MODULE: ./src/client/components/AccordionSlider/AccordionSlider.tsx
+
+
+
+
+
+
+
+
+
+var AccordionSlider_excluded = ["triggerType", "displayTheFirstItem", "autoReset", "displayRatio", "direction", "closeBtn", "id", "children"];
+
+function AccordionSlider_ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) { symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); } keys.push.apply(keys, symbols); } return keys; }
+
+function AccordionSlider_objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { AccordionSlider_ownKeys(Object(source), true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { AccordionSlider_ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
+
+function AccordionSlider_createSuper(Derived) { var hasNativeReflectConstruct = AccordionSlider_isNativeReflectConstruct(); return function _createSuperInternal() { var Super = _getPrototypeOf(Derived), result; if (hasNativeReflectConstruct) { var NewTarget = _getPrototypeOf(this).constructor; result = Reflect.construct(Super, arguments, NewTarget); } else { result = Super.apply(this, arguments); } return _possibleConstructorReturn(this, result); }; }
+
+function AccordionSlider_isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Reflect.construct) return false; if (Reflect.construct.sham) return false; if (typeof Proxy === "function") return true; try { Boolean.prototype.valueOf.call(Reflect.construct(Boolean, [], function () {})); return true; } catch (e) { return false; } }
+
+
+/*-- Apply Third-party plugins (import location should be in front of "global scripts and styles") --*/
+
+
+
+
+/*-- Apply global scripts and styles --*/
+
+
+
+/*-- Apply this component styles --*/
+
+ //
+
+
+
+var AccordionSlider = /*#__PURE__*/function (_Component) {
+  _inherits(AccordionSlider, _Component);
+
+  var _super = AccordionSlider_createSuper(AccordionSlider);
+
+  function AccordionSlider(props) {
+    _classCallCheck(this, AccordionSlider);
+
+    return _super.call(this, props);
+  }
+
+  _createClass(AccordionSlider, [{
+    key: "componentDidMount",
+    value: function componentDidMount() {
+      shortcut(document).ready(function () {
+        shortcut('.uix-accordion-slider').each(function (index) {
+          var $this = shortcut(this);
+
+          var aEvent = $this.data('event'),
+              outReset = $this.data('out-reset'),
+              activeIndex = $this.data('actived-item'),
+              offsetVal = $this.data('offset'),
+              dir = $this.data('direction'),
+              closeBtn = $this.data('close-btn'),
+              $li = $this.find('> ul').children('li'),
+              total = $li.length;
+
+          if (activeIndex === null) {
+            activeIndex = false;
+          }
+
+          if (aEvent === null) {
+            aEvent = 'click';
+          }
+
+          if (outReset === null) {
+            outReset = true;
+          }
+
+          if (offsetVal === null) {
+            offsetVal = '60%';
+          } //Initialize the width or height of each item
+
+
+          itemInit();
+          $li.on(aEvent, function (e) {
+            //Prevents further propagation of the current event in the capturing and bubbling phases.
+            e.stopPropagation(); //Apply click method to outer div but not inner div
+
+            if (e.target.className == 'uix-accordion-slider__content__info' || e.target.className == 'uix-accordion-slider__content') {
+              if (shortcut(this).hasClass('is-active')) {
+                shortcut(this).addClass('is-active');
+              } else {
+                $li.addClass('active-sub');
+
+                shortcut(this).addClass('is-active');
+
+                shortcut(this).siblings().removeClass('is-active');
+
+                if (dir == 'verticle') {
+                  $li.css('height', (100 - parseFloat(offsetVal)) / (total - 1) + '%');
+
+                  shortcut(this).css('height', offsetVal);
+                } else {
+                  $li.css('width', (100 - parseFloat(offsetVal)) / (total - 1) + '%');
+
+                  shortcut(this).css('width', offsetVal);
+                }
+              }
+            }
+          });
+
+          if (outReset) {
+            $this.on('mouseleave', function (e) {
+              itemInit();
+            });
+          }
+
+          if ((0,esm_typeof/* default */.Z)(closeBtn) != ( true ? "undefined" : 0) && closeBtn != false && closeBtn != '') {
+            shortcut(closeBtn).off('click').on('click', function (e) {
+              e.preventDefault();
+              itemInit();
+            });
+          }
+          /*
+           * Active the target item
+           *
+           * @param  {Number} index     - The index value of the item to be activated.
+           * @return {Void}
+           */
+
+
+          function itemActiveItem(index) {
+            if (index >= 0) {
+              if (dir == 'verticle') {
+                $li.css('height', (100 - parseFloat(offsetVal)) / (total - 1) + '%');
+                $li.eq(index).css('height', offsetVal).addClass('is-active');
+              } else {
+                $li.css('width', (100 - parseFloat(offsetVal)) / (total - 1) + '%');
+                $li.eq(index).css('width', offsetVal).addClass('is-active');
+              }
+            }
+          }
+
+          itemActiveItem(parseFloat(activeIndex));
+          /*
+           * Initialize the width or height of each item
+           *
+           * @return {Void}
+           */
+
+          function itemInit() {
+            if (dir == 'verticle') {
+              $li.removeClass('is-active active-sub').css('height', 100 / total + '%');
+            } else {
+              $li.removeClass('is-active active-sub').css('width', 100 / total + '%');
+            }
+          }
+        });
+      });
+    }
+  }, {
+    key: "render",
+    value: function render() {
+      var _this$props = this.props,
+          triggerType = _this$props.triggerType,
+          displayTheFirstItem = _this$props.displayTheFirstItem,
+          autoReset = _this$props.autoReset,
+          displayRatio = _this$props.displayRatio,
+          direction = _this$props.direction,
+          closeBtn = _this$props.closeBtn,
+          id = _this$props.id,
+          children = _this$props.children,
+          attributes = _objectWithoutProperties(_this$props, AccordionSlider_excluded);
+
+      return /*#__PURE__*/react.createElement(react.Fragment, null, /*#__PURE__*/react.createElement("div", extends_extends({
+        id: id ? id : 'app-accordion-slider-' + shortcut.GUID.create(),
+        className: "uix-accordion-slider",
+        "data-actived-item": displayTheFirstItem ? 0 : false,
+        "data-event": triggerType || 'click',
+        "data-out-reset": autoReset,
+        "data-offset": displayRatio || '60%',
+        "data-direction": direction || 'horizontal',
+        "data-close-btn": closeBtn || false
+      }, attributes), /*#__PURE__*/react.createElement("ul", null, children != null ? children.map(function (item, i) {
+        var childProps = AccordionSlider_objectSpread({}, item.props);
+
+        delete childProps.key;
+        if (i === 0 && displayTheFirstItem) childProps.defaultActive = true;
+        return /*#__PURE__*/react.createElement(AccordionSliderItem, extends_extends({
+          key: "item" + i
+        }, childProps));
+      }) : "")));
+    }
+  }]);
+
+  return AccordionSlider;
+}(react.Component);
+
+
+;// CONCATENATED MODULE: ./src/client/components/AccordionSlider/index.tsx
+/* 
+ *************************************
+ * <!-- Accordion Slider -->
+ *************************************
+ */
+
+
+;// CONCATENATED MODULE: ./src/client/views/_pages/ComponentsDemo/AccordionSliderDemo.js
+
+
+ //Create or Remove Sidebar Menu
+
+ //get project config
+
+
+/* harmony default export */ const AccordionSliderDemo = (function () {
+  react.useEffect(function () {
+    // Equivalent to componentDidMount and componentDidUpdate:
+    shortcut(document).ready(function () {
+      //Create sidebar menu
+      SidebarMenu();
+    });
+  });
+  return /*#__PURE__*/react.createElement(react.Fragment, null, /*#__PURE__*/react.createElement("section", null, /*#__PURE__*/react.createElement("div", {
+    className: "container"
+  }, /*#__PURE__*/react.createElement("div", {
+    className: "row"
+  }, /*#__PURE__*/react.createElement("div", {
+    className: "col-12"
+  }, /*#__PURE__*/react.createElement("h1", {
+    className: "uix-typo--h2"
+  }, "AccordionSlider Slider", /*#__PURE__*/react.createElement("a", {
+    className: "uix-typo--h3 align-middle",
+    href: "https://github.com/xizon/uix-kit-react/tree/main/src/client/components/AccordionSliderSlider",
+    target: "_blank"
+  }, /*#__PURE__*/react.createElement("span", {
+    className: "uix-dir--right",
+    style: {
+      fontSize: "0.75rem",
+      color: "#ababab",
+      margin: ".5rem .5rem 0 0"
+    }
+  }, /*#__PURE__*/react.createElement("svg", {
+    style: {
+      marginRight: ".5rem"
+    },
+    width: "15",
+    viewBox: "0 0 392.186 392.186"
+  }, /*#__PURE__*/react.createElement("g", null, /*#__PURE__*/react.createElement("g", null, /*#__PURE__*/react.createElement("g", null, /*#__PURE__*/react.createElement("path", {
+    fill: "#d2d2d2",
+    d: "M368.62,17.951H23.568C10.57,17.951,0,28.524,0,41.52v309.146c0,12.996,10.57,23.568,23.568,23.568h345.053c12.994,0,23.564-10.572,23.564-23.568V41.52C392.188,28.525,381.614,17.951,368.62,17.951z M297.56,57.528c0-4.806,3.896-8.703,8.701-8.703h8.703c4.808,0,8.701,3.896,8.701,8.703v9.863c0,4.806-3.896,8.702-8.701,8.702h-8.703c-4.805,0-8.701-3.896-8.701-8.702V57.528z M257.093,57.528c0-4.806,3.898-8.703,8.703-8.703h8.701c4.805,0,8.703,3.896,8.703,8.703v9.863c0,4.806-3.898,8.702-8.703,8.702h-8.701c-4.805,0-8.703-3.896-8.703-8.702V57.528z M363.903,345.951H28.282V102.235h335.621V345.951L363.903,345.951z M364.132,67.391c0,4.806-3.896,8.702-8.701,8.702h-8.703c-4.809,0-8.702-3.896-8.702-8.702v-9.863c0-4.806,3.896-8.703,8.702-8.703h8.703c4.806,0,8.701,3.896,8.701,8.703V67.391z"
+  }), /*#__PURE__*/react.createElement("path", {
+    fill: "#d2d2d2",
+    d: "M84.185,233.284l63.084,29.336c1.631,0.755,3.367,1.138,5.162,1.138c2.338,0,4.617-0.664,6.598-1.924c3.547-2.267,5.666-6.13,5.666-10.334v-0.322c0-4.752-2.785-9.116-7.096-11.118l-39.455-18.332l39.455-18.334c4.311-2.004,7.096-6.367,7.096-11.117v-0.319c0-4.21-2.119-8.075-5.666-10.334c-1.961-1.253-4.246-1.916-6.605-1.916c-1.779,0-3.563,0.391-5.16,1.133l-63.08,29.333c-4.307,2.004-7.09,6.369-7.09,11.117v0.877C77.093,226.909,79.874,231.272,84.185,233.284z"
+  }), /*#__PURE__*/react.createElement("path", {
+    fill: "#d2d2d2",
+    d: "M165.257,293.036c2.301,3.149,6.002,5.03,9.9,5.03h0.316c5.352,0,10.041-3.426,11.672-8.517L228.7,160.788c1.192-3.716,0.531-7.818-1.771-10.973c-2.301-3.15-6.002-5.03-9.901-5.03h-0.315c-5.354,0-10.048,3.425-11.679,8.516l-41.559,128.771C162.292,285.793,162.958,289.889,165.257,293.036z"
+  }), /*#__PURE__*/react.createElement("path", {
+    fill: "#d2d2d2",
+    d: "M227.49,192.276c0,4.745,2.783,9.109,7.095,11.123l39.455,18.329l-39.455,18.33c-4.31,2.004-7.095,6.368-7.095,11.118v0.322c0,4.205,2.117,8.068,5.668,10.336c1.974,1.258,4.254,1.924,6.595,1.924c1.793,0,3.528-0.383,5.17-1.142l63.08-29.335c4.307-2.009,7.09-6.372,7.09-11.115v-0.877c0-4.748-2.783-9.113-7.094-11.117l-63.08-29.333c-1.591-0.74-3.373-1.131-5.152-1.131c-2.355,0-4.643,0.661-6.604,1.912c-3.551,2.263-5.67,6.127-5.67,10.337v0.318H227.49L227.49,192.276z"
+  }))))), "Docs on GitHub"))))))), /*#__PURE__*/react.createElement("section", {
+    className: "uix-spacing--s uix-spacing--no-bottom"
+  }, /*#__PURE__*/react.createElement("div", {
+    className: "container"
+  }, /*#__PURE__*/react.createElement("div", {
+    className: "row"
+  }, /*#__PURE__*/react.createElement("div", {
+    className: "col-12"
+  }, /*#__PURE__*/react.createElement("h3", {
+    className: "app-header-title"
+  }, "Accordion Slider 1"), /*#__PURE__*/react.createElement("p", null, "Show hidden divs on mouse event."), /*#__PURE__*/react.createElement("hr", null))))), /*#__PURE__*/react.createElement("section", {
+    className: "uix-spacing--s"
+  }, /*#__PURE__*/react.createElement("div", {
+    className: "container"
+  }, /*#__PURE__*/react.createElement("div", {
+    className: "row"
+  }, /*#__PURE__*/react.createElement("div", {
+    className: "col-12"
+  }, /*#__PURE__*/react.createElement(AccordionSlider, {
+    triggerType: "mouseover",
+    displayTheFirstItem: true,
+    autoReset: true,
+    displayRatio: "50%",
+    direction: "horizontal",
+    closeBtn: false
+  }, /*#__PURE__*/react.createElement(AccordionSliderItem, {
+    bg: "".concat(websiteConfig.rootDirectory, "/assets/images/demo/test-img-big-1.jpg")
+  }, /*#__PURE__*/react.createElement("h3", {
+    className: "uix-typo--color-white"
+  }, "Lorem Ipsum"), /*#__PURE__*/react.createElement("p", {
+    className: "uix-typo--color-white"
+  }, "Lorem ipsum dolor sit amet, consectetur adipiscing elit, Lorem ipsum dolor sit amet, consectetur adipiscing elit")), /*#__PURE__*/react.createElement(AccordionSliderItem, {
+    bg: "".concat(websiteConfig.rootDirectory, "/assets/images/demo/test-img-big-2.jpg")
+  }, /*#__PURE__*/react.createElement("h3", {
+    className: "uix-typo--color-white"
+  }, "Lorem Ipsum"), /*#__PURE__*/react.createElement("p", {
+    className: "uix-typo--color-white"
+  }, "Lorem ipsum dolor sit amet, consectetur adipiscing elit")), /*#__PURE__*/react.createElement(AccordionSliderItem, {
+    bg: "".concat(websiteConfig.rootDirectory, "/assets/images/demo/test-img-big-4.jpg")
+  }, /*#__PURE__*/react.createElement("h3", {
+    className: "uix-typo--color-white"
+  }, "Lorem Ipsum"), /*#__PURE__*/react.createElement("p", {
+    className: "uix-typo--color-white"
+  }, "Lorem ipsum dolor sit amet, consectetur adipiscing elit"))))))), /*#__PURE__*/react.createElement("section", null, /*#__PURE__*/react.createElement("div", {
+    className: "container"
+  }, /*#__PURE__*/react.createElement("div", {
+    className: "row"
+  }, /*#__PURE__*/react.createElement("div", {
+    className: "col-12"
+  }, /*#__PURE__*/react.createElement("h3", {
+    className: "app-header-title"
+  }, "Accordion Slider 2"), /*#__PURE__*/react.createElement("p", null, "Click the item to show it. Hidden divs when you click the close button."), /*#__PURE__*/react.createElement("hr", null))))), /*#__PURE__*/react.createElement("section", {
+    className: "uix-spacing--s"
+  }, /*#__PURE__*/react.createElement("div", {
+    className: "container"
+  }, /*#__PURE__*/react.createElement("div", {
+    className: "row"
+  }, /*#__PURE__*/react.createElement("div", {
+    className: "col-12"
+  }, /*#__PURE__*/react.createElement(AccordionSlider, {
+    triggerType: "click",
+    displayTheFirstItem: false,
+    autoReset: false,
+    displayRatio: "60%",
+    direction: "horizontal",
+    closeBtn: ".uix-accordion-slider__close"
+  }, /*#__PURE__*/react.createElement(AccordionSliderItem, {
+    bg: "".concat(websiteConfig.rootDirectory, "/assets/images/demo/test-img-big-1.jpg")
+  }, /*#__PURE__*/react.createElement("h3", {
+    className: "uix-typo--color-white"
+  }, "Lorem Ipsum"), /*#__PURE__*/react.createElement("p", {
+    className: "uix-typo--color-white"
+  }, "Lorem ipsum dolor sit amet, consectetur adipiscing elit, Lorem ipsum dolor sit amet, consectetur adipiscing elit"), /*#__PURE__*/react.createElement("a", {
+    className: "uix-accordion-slider__close",
+    href: "#"
+  }, "Close")), /*#__PURE__*/react.createElement(AccordionSliderItem, {
+    bg: "".concat(websiteConfig.rootDirectory, "/assets/images/demo/test-img-big-2.jpg")
+  }, /*#__PURE__*/react.createElement("h3", {
+    className: "uix-typo--color-white"
+  }, "Lorem Ipsum"), /*#__PURE__*/react.createElement("p", {
+    className: "uix-typo--color-white"
+  }, "Lorem ipsum dolor sit amet, consectetur adipiscing elit"), /*#__PURE__*/react.createElement("a", {
+    className: "uix-accordion-slider__close",
+    href: "#"
+  }, "Close")), /*#__PURE__*/react.createElement(AccordionSliderItem, {
+    bg: "".concat(websiteConfig.rootDirectory, "/assets/images/demo/test-img-big-4.jpg")
+  }, /*#__PURE__*/react.createElement("h3", {
+    className: "uix-typo--color-white"
+  }, "Lorem Ipsum"), /*#__PURE__*/react.createElement("p", {
+    className: "uix-typo--color-white"
+  }, "Lorem ipsum dolor sit amet, consectetur adipiscing elit"), /*#__PURE__*/react.createElement("a", {
+    className: "uix-accordion-slider__close",
+    href: "#"
+  }, "Close")), /*#__PURE__*/react.createElement(AccordionSliderItem, {
+    bg: "".concat(websiteConfig.rootDirectory, "/assets/images/demo/test-img-big-5.jpg")
+  }, /*#__PURE__*/react.createElement("h3", {
+    className: "uix-typo--color-white"
+  }, "Lorem Ipsum"), /*#__PURE__*/react.createElement("p", {
+    className: "uix-typo--color-white"
+  }, "Lorem ipsum dolor sit amet, consectetur adipiscing elit"), /*#__PURE__*/react.createElement("a", {
+    className: "uix-accordion-slider__close",
+    href: "#"
+  }, "Close"))))))), /*#__PURE__*/react.createElement("section", null, /*#__PURE__*/react.createElement("div", {
+    className: "container"
+  }, /*#__PURE__*/react.createElement("div", {
+    className: "row"
+  }, /*#__PURE__*/react.createElement("div", {
+    className: "col-12"
+  }, /*#__PURE__*/react.createElement("h3", {
+    className: "app-header-title"
+  }, "API"), /*#__PURE__*/react.createElement("hr", null), /*#__PURE__*/react.createElement("article", {
+    className: "uix-spacing--s",
+    itemProp: "text"
+  }, /*#__PURE__*/react.createElement("h4", null, "Accordion Slider"), /*#__PURE__*/react.createElement("div", null, /*#__PURE__*/react.createElement("pre", null, "import ", "{AccordionSlider}", " from '@uixkit.react/components/AccordionSlider/index.tsx';")), /*#__PURE__*/react.createElement("div", {
+    className: "table-responsive-md"
+  }, /*#__PURE__*/react.createElement("table", {
+    className: "table table-bordered table-striped mb-5"
+  }, /*#__PURE__*/react.createElement("thead", null, /*#__PURE__*/react.createElement("tr", null, /*#__PURE__*/react.createElement("th", null, "Property"), /*#__PURE__*/react.createElement("th", null, "Type"), /*#__PURE__*/react.createElement("th", null, "Default"), /*#__PURE__*/react.createElement("th", null, "Description"))), /*#__PURE__*/react.createElement("tbody", null, /*#__PURE__*/react.createElement("tr", null, /*#__PURE__*/react.createElement("td", null, /*#__PURE__*/react.createElement("code", null, "triggerType")), /*#__PURE__*/react.createElement("td", null, "string | ", /*#__PURE__*/react.createElement("code", null, "click"), " | ", /*#__PURE__*/react.createElement("code", null, "mouseenter")), /*#__PURE__*/react.createElement("td", null, "click"), /*#__PURE__*/react.createElement("td", null, "One event type, such as ", /*#__PURE__*/react.createElement("code", null, "click"), " or ", /*#__PURE__*/react.createElement("code", null, "mouseenter"))), /*#__PURE__*/react.createElement("tr", null, /*#__PURE__*/react.createElement("td", null, /*#__PURE__*/react.createElement("code", null, "displayTheFirstItem")), /*#__PURE__*/react.createElement("td", null, "boolean"), /*#__PURE__*/react.createElement("td", null, "false"), /*#__PURE__*/react.createElement("td", null, "Display the only first item of a list")), /*#__PURE__*/react.createElement("tr", null, /*#__PURE__*/react.createElement("td", null, /*#__PURE__*/react.createElement("code", null, "autoReset")), /*#__PURE__*/react.createElement("td", null, "boolean"), /*#__PURE__*/react.createElement("td", null, "true"), /*#__PURE__*/react.createElement("td", null, "Reset the initial state when the mouse moves out of the component area")), /*#__PURE__*/react.createElement("tr", null, /*#__PURE__*/react.createElement("td", null, /*#__PURE__*/react.createElement("code", null, "displayRatio")), /*#__PURE__*/react.createElement("td", null, "string"), /*#__PURE__*/react.createElement("td", null, "60%"), /*#__PURE__*/react.createElement("td", null, "Display ratio measures the activated item's percentage of the component in the entire area")), /*#__PURE__*/react.createElement("tr", null, /*#__PURE__*/react.createElement("td", null, /*#__PURE__*/react.createElement("code", null, "direction")), /*#__PURE__*/react.createElement("td", null, /*#__PURE__*/react.createElement("code", null, "horizontal"), " | ", /*#__PURE__*/react.createElement("code", null, "verticle")), /*#__PURE__*/react.createElement("td", null, "horizontal"), /*#__PURE__*/react.createElement("td", null, "The direction of the slider animation, if it is ", /*#__PURE__*/react.createElement("code", null, "horizontal"), ", it means changing the width, otherwise changing the height")), /*#__PURE__*/react.createElement("tr", null, /*#__PURE__*/react.createElement("td", null, /*#__PURE__*/react.createElement("code", null, "closeBtn")), /*#__PURE__*/react.createElement("td", null, "string | boolean"), /*#__PURE__*/react.createElement("td", null, "false"), /*#__PURE__*/react.createElement("td", null, "The button that triggers the restoration of the initial state, represented by class, such as ", /*#__PURE__*/react.createElement("code", null, ".uix-accordion-img__close")))))), /*#__PURE__*/react.createElement("h4", null, "Accordion Slider Item"), /*#__PURE__*/react.createElement("div", null, /*#__PURE__*/react.createElement("pre", null, "import ", "{AccordionSliderItem}", " from '@uixkit.react/components/AccordionSlider/index.tsx';")), /*#__PURE__*/react.createElement("div", {
+    className: "table-responsive-md"
+  }, /*#__PURE__*/react.createElement("table", {
+    className: "table table-bordered table-striped mb-5"
+  }, /*#__PURE__*/react.createElement("thead", null, /*#__PURE__*/react.createElement("tr", null, /*#__PURE__*/react.createElement("th", null, "Property"), /*#__PURE__*/react.createElement("th", null, "Type"), /*#__PURE__*/react.createElement("th", null, "Default"), /*#__PURE__*/react.createElement("th", null, "Description"))), /*#__PURE__*/react.createElement("tbody", null, /*#__PURE__*/react.createElement("tr", null, /*#__PURE__*/react.createElement("td", null, /*#__PURE__*/react.createElement("code", null, "defaultActive")), /*#__PURE__*/react.createElement("td", null, "boolean"), /*#__PURE__*/react.createElement("td", null, "false"), /*#__PURE__*/react.createElement("td", null, "Set an item to activate by default")), /*#__PURE__*/react.createElement("tr", null, /*#__PURE__*/react.createElement("td", null, /*#__PURE__*/react.createElement("code", null, "bg")), /*#__PURE__*/react.createElement("td", null, "string"), /*#__PURE__*/react.createElement("td", null, "-"), /*#__PURE__*/react.createElement("td", null, "The URL or color of the background image. Eg. ", /*#__PURE__*/react.createElement("code", null, "http://example/demo.jpg"), ", ", /*#__PURE__*/react.createElement("code", null, "#f60"))))))))))));
+});
+;// CONCATENATED MODULE: ./src/client/components/Counter/count-to.tsx
+function countTo(curElement) {
+  var config = {
+    "from": curElement.data('counter-start') === null ? 0 : curElement.data('counter-start'),
+    "to": curElement.data('counter-number') === null ? 0 : curElement.data('counter-number'),
+    "fixed": curElement.data('counter-fixed') === null ? 0 : curElement.data('counter-fixed'),
+    "speed": curElement.data('counter-duration') === null ? 500 : curElement.data('counter-duration'),
+    "refreshInterval": curElement.data('counter-refresh-interval') === null ? 1 : curElement.data('counter-refresh-interval'),
+    "dilimiter": curElement.data('counter-dilimiter') === null ? false : curElement.data('counter-dilimiter'),
+    "doubleDigits": curElement.data('counter-double-digits') === null ? false : curElement.data('counter-double-digits'),
+    "onUpdate": null,
+    "onComplete": null
+  }; // how many times to update the value, and how much to increment the value on each update
+
+  var _speed = config.speed;
+  var _refreshInterval = config.refreshInterval;
+  var _numberEnd = config.to;
+  var _numberStart = config.from;
+  var loops = Math.ceil(_speed / _refreshInterval),
+      increment = (_numberEnd - _numberStart) / loops; // references & variables that will change with each update
+
+  var loopCount = 0,
+      value = _numberStart,
+      data = curElement.data('count-to') || {};
+  curElement.data('count-to', data); // if an existing interval can be found, clear it first
+
+  if (data.interval) {
+    clearInterval(data.interval);
+  }
+
+  data.interval = setInterval(updateTimer, _refreshInterval); // initialize the element with the starting value
+
+  render(value);
+
+  function updateTimer() {
+    value += increment;
+    loopCount++;
+    render(value);
+
+    if (typeof config.onUpdate == 'function') {
+      config.onUpdate.call(curElement[0], value);
+    }
+
+    if (loopCount >= loops) {
+      // remove the interval
+      curElement.removeData('count-to');
+      clearInterval(data.interval);
+      value = _numberEnd;
+
+      if (typeof config.onComplete == 'function') {
+        config.onComplete.call(curElement[0], value);
+      }
+    }
+  }
+
+  function render(value) {
+    var formattedValue = Number(value).toFixed(config.fixed);
+
+    if (config.dilimiter && formattedValue > 0) {
+      formattedValue = formattedValue.toString().replace(/\B(?=(?:\d{3})+\b)/g, ',');
+    }
+
+    if (config.doubleDigits) {
+      if (formattedValue < 10) {
+        formattedValue = '0' + formattedValue;
+      }
+    }
+
+    curElement.html(formattedValue);
+  }
+}
+/* harmony default export */ const count_to = ({
+  countTo: countTo
+});
+;// CONCATENATED MODULE: ./src/client/components/Counter/index.tsx
+
+
+
+
+
+
+
+var Counter_excluded = ["start", "stop", "fixed", "speed", "dilimiter", "doubleDigits", "displayNumber", "id"];
+
+function Counter_createSuper(Derived) { var hasNativeReflectConstruct = Counter_isNativeReflectConstruct(); return function _createSuperInternal() { var Super = _getPrototypeOf(Derived), result; if (hasNativeReflectConstruct) { var NewTarget = _getPrototypeOf(this).constructor; result = Reflect.construct(Super, arguments, NewTarget); } else { result = Super.apply(this, arguments); } return _possibleConstructorReturn(this, result); }; }
+
+function Counter_isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Reflect.construct) return false; if (Reflect.construct.sham) return false; if (typeof Proxy === "function") return true; try { Boolean.prototype.valueOf.call(Reflect.construct(Boolean, [], function () {})); return true; } catch (e) { return false; } }
+
+/* 
+ *************************************
+ * <!-- Counter -->
+ *************************************
+ */
+
+/*-- Apply Third-party plugins (import location should be in front of "global scripts and styles") --*/
+
+
+
+
+/*-- Apply global scripts and styles --*/
+
+
+
+// CountTo Effect
+
+
+var Counter = /*#__PURE__*/function (_Component) {
+  _inherits(Counter, _Component);
+
+  var _super = Counter_createSuper(Counter);
+
+  function Counter(props) {
+    _classCallCheck(this, Counter);
+
+    return _super.call(this, props);
+  }
+
+  _createClass(Counter, [{
+    key: "componentDidMount",
+    value: function componentDidMount() {
+      shortcut(document).ready(function () {
+        shortcut('[data-counter-number]').each(function (index) {
+          var viewport = 1;
+
+          var $el = shortcut(this); //
+
+
+          var scrollUpdate = function scrollUpdate() {
+            var spyTop = $el[0].getBoundingClientRect().top; //Prevent asynchronous loading of repeated calls
+
+            var actived = $el.data('activated');
+
+            if (spyTop < window.innerHeight * viewport) {
+              if (actived === null) {
+                countTo($el); //Prevents front-end javascripts that are activated in the background to repeat loading.
+
+                $el.data('activated', 1);
+              } //endif actived
+
+            }
+          };
+
+          var throttleFunc = shortcut.throttle(scrollUpdate, 5);
+
+          window.removeEventListener('scroll', throttleFunc);
+          window.removeEventListener('touchmove', throttleFunc); // Please do not use scroll's off method in each
+
+          window.addEventListener('scroll', throttleFunc);
+          window.addEventListener('touchmove', throttleFunc);
+          throttleFunc();
+        });
+      });
+    }
+  }, {
+    key: "render",
+    value: function render() {
+      var _this$props = this.props,
+          start = _this$props.start,
+          stop = _this$props.stop,
+          fixed = _this$props.fixed,
+          speed = _this$props.speed,
+          dilimiter = _this$props.dilimiter,
+          doubleDigits = _this$props.doubleDigits,
+          displayNumber = _this$props.displayNumber,
+          id = _this$props.id,
+          attributes = _objectWithoutProperties(_this$props, Counter_excluded);
+
+      return /*#__PURE__*/react.createElement(react.Fragment, null, /*#__PURE__*/react.createElement("span", extends_extends({
+        id: id || 'app-counter-' + shortcut.GUID.create(),
+        "data-counter-fixed": fixed || 0,
+        "data-counter-start": start || 0,
+        "data-counter-number": stop || 0,
+        "data-counter-double-digits": doubleDigits,
+        "data-counter-dilimiter": dilimiter,
+        "data-counter-duration": speed || 200
+      }, attributes), displayNumber));
+    }
+  }]);
+
+  return Counter;
+}(react.Component);
+
+
+;// CONCATENATED MODULE: ./src/client/views/_pages/ComponentsDemo/CounterDemo.js
+
+
+ //Create or Remove Sidebar Menu
+
+
+/* harmony default export */ const CounterDemo = (function () {
+  react.useEffect(function () {
+    // Equivalent to componentDidMount and componentDidUpdate:
+    shortcut(document).ready(function () {
+      //Create sidebar menu
+      SidebarMenu();
+    });
+  });
+  return /*#__PURE__*/react.createElement(react.Fragment, null, /*#__PURE__*/react.createElement("section", null, /*#__PURE__*/react.createElement("div", {
+    className: "container"
+  }, /*#__PURE__*/react.createElement("div", {
+    className: "row"
+  }, /*#__PURE__*/react.createElement("div", {
+    className: "col-12"
+  }, /*#__PURE__*/react.createElement("h1", {
+    className: "uix-typo--h2"
+  }, "Counter", /*#__PURE__*/react.createElement("a", {
+    className: "uix-typo--h3 align-middle",
+    href: "https://github.com/xizon/uix-kit-react/tree/main/src/client/components/Counter",
+    target: "_blank"
+  }, /*#__PURE__*/react.createElement("span", {
+    className: "uix-dir--right",
+    style: {
+      fontSize: "0.75rem",
+      color: "#ababab",
+      margin: ".5rem .5rem 0 0"
+    }
+  }, /*#__PURE__*/react.createElement("svg", {
+    style: {
+      marginRight: ".5rem"
+    },
+    width: "15",
+    viewBox: "0 0 392.186 392.186"
+  }, /*#__PURE__*/react.createElement("g", null, /*#__PURE__*/react.createElement("g", null, /*#__PURE__*/react.createElement("g", null, /*#__PURE__*/react.createElement("path", {
+    fill: "#d2d2d2",
+    d: "M368.62,17.951H23.568C10.57,17.951,0,28.524,0,41.52v309.146c0,12.996,10.57,23.568,23.568,23.568h345.053c12.994,0,23.564-10.572,23.564-23.568V41.52C392.188,28.525,381.614,17.951,368.62,17.951z M297.56,57.528c0-4.806,3.896-8.703,8.701-8.703h8.703c4.808,0,8.701,3.896,8.701,8.703v9.863c0,4.806-3.896,8.702-8.701,8.702h-8.703c-4.805,0-8.701-3.896-8.701-8.702V57.528z M257.093,57.528c0-4.806,3.898-8.703,8.703-8.703h8.701c4.805,0,8.703,3.896,8.703,8.703v9.863c0,4.806-3.898,8.702-8.703,8.702h-8.701c-4.805,0-8.703-3.896-8.703-8.702V57.528z M363.903,345.951H28.282V102.235h335.621V345.951L363.903,345.951z M364.132,67.391c0,4.806-3.896,8.702-8.701,8.702h-8.703c-4.809,0-8.702-3.896-8.702-8.702v-9.863c0-4.806,3.896-8.703,8.702-8.703h8.703c4.806,0,8.701,3.896,8.701,8.703V67.391z"
+  }), /*#__PURE__*/react.createElement("path", {
+    fill: "#d2d2d2",
+    d: "M84.185,233.284l63.084,29.336c1.631,0.755,3.367,1.138,5.162,1.138c2.338,0,4.617-0.664,6.598-1.924c3.547-2.267,5.666-6.13,5.666-10.334v-0.322c0-4.752-2.785-9.116-7.096-11.118l-39.455-18.332l39.455-18.334c4.311-2.004,7.096-6.367,7.096-11.117v-0.319c0-4.21-2.119-8.075-5.666-10.334c-1.961-1.253-4.246-1.916-6.605-1.916c-1.779,0-3.563,0.391-5.16,1.133l-63.08,29.333c-4.307,2.004-7.09,6.369-7.09,11.117v0.877C77.093,226.909,79.874,231.272,84.185,233.284z"
+  }), /*#__PURE__*/react.createElement("path", {
+    fill: "#d2d2d2",
+    d: "M165.257,293.036c2.301,3.149,6.002,5.03,9.9,5.03h0.316c5.352,0,10.041-3.426,11.672-8.517L228.7,160.788c1.192-3.716,0.531-7.818-1.771-10.973c-2.301-3.15-6.002-5.03-9.901-5.03h-0.315c-5.354,0-10.048,3.425-11.679,8.516l-41.559,128.771C162.292,285.793,162.958,289.889,165.257,293.036z"
+  }), /*#__PURE__*/react.createElement("path", {
+    fill: "#d2d2d2",
+    d: "M227.49,192.276c0,4.745,2.783,9.109,7.095,11.123l39.455,18.329l-39.455,18.33c-4.31,2.004-7.095,6.368-7.095,11.118v0.322c0,4.205,2.117,8.068,5.668,10.336c1.974,1.258,4.254,1.924,6.595,1.924c1.793,0,3.528-0.383,5.17-1.142l63.08-29.335c4.307-2.009,7.09-6.372,7.09-11.115v-0.877c0-4.748-2.783-9.113-7.094-11.117l-63.08-29.333c-1.591-0.74-3.373-1.131-5.152-1.131c-2.355,0-4.643,0.661-6.604,1.912c-3.551,2.263-5.67,6.127-5.67,10.337v0.318H227.49L227.49,192.276z"
+  }))))), "Docs on GitHub"))))))), /*#__PURE__*/react.createElement("section", {
+    className: "uix-spacing--s uix-spacing--no-bottom"
+  }, /*#__PURE__*/react.createElement("div", {
+    className: "container"
+  }, /*#__PURE__*/react.createElement("div", {
+    className: "row"
+  }, /*#__PURE__*/react.createElement("div", {
+    className: "col-12"
+  }, /*#__PURE__*/react.createElement("h3", {
+    className: "app-header-title"
+  }, "Counter"), /*#__PURE__*/react.createElement("p", null, "Scroll the page down to preview"), /*#__PURE__*/react.createElement("hr", null))))), /*#__PURE__*/react.createElement("section", {
+    className: "uix-spacing--s"
+  }, /*#__PURE__*/react.createElement("div", {
+    className: "container uix-t-c"
+  }, /*#__PURE__*/react.createElement("div", {
+    className: "row"
+  }, /*#__PURE__*/react.createElement("div", {
+    className: "col-12 uix-trans"
+  }, /*#__PURE__*/react.createElement("div", {
+    className: "row"
+  }, /*#__PURE__*/react.createElement("div", {
+    className: "col-lg-3 col-md-3"
+  }, /*#__PURE__*/react.createElement("h3", {
+    className: "uix-spacing--no uix-outer-shadow--regular"
+  }, /*#__PURE__*/react.createElement(Counter, {
+    displayNumber: "00",
+    start: 0,
+    stop: 23,
+    fixed: 1,
+    speed: 200,
+    dilimiter: false,
+    doubleDigits: false
+  }))), /*#__PURE__*/react.createElement("div", {
+    className: "col-lg-3 col-md-3"
+  }, /*#__PURE__*/react.createElement("h3", {
+    className: "uix-spacing--no uix-outer-shadow--regular"
+  }, /*#__PURE__*/react.createElement(Counter, {
+    displayNumber: "00",
+    start: 0,
+    stop: 30,
+    fixed: 1,
+    speed: 200,
+    dilimiter: false,
+    doubleDigits: false
+  }))), /*#__PURE__*/react.createElement("div", {
+    className: "col-lg-3 col-md-3"
+  }, /*#__PURE__*/react.createElement("h3", {
+    className: "uix-spacing--no uix-outer-shadow--regular"
+  }, /*#__PURE__*/react.createElement(Counter, {
+    displayNumber: "00",
+    start: 0,
+    stop: 6,
+    fixed: 1,
+    speed: 200,
+    dilimiter: false,
+    doubleDigits: false
+  }))), /*#__PURE__*/react.createElement("div", {
+    className: "col-lg-3 col-md-3"
+  }, /*#__PURE__*/react.createElement("h3", {
+    className: "uix-spacing--no uix-outer-shadow--regular"
+  }, /*#__PURE__*/react.createElement(Counter, {
+    displayNumber: "00",
+    start: 0,
+    stop: 3454,
+    fixed: 1,
+    speed: 200,
+    dilimiter: false,
+    doubleDigits: false
+  })))))))), /*#__PURE__*/react.createElement("section", {
+    className: "uix-spacing--s"
+  }, /*#__PURE__*/react.createElement("div", {
+    className: "container uix-t-c"
+  }, /*#__PURE__*/react.createElement("div", {
+    className: "row"
+  }, /*#__PURE__*/react.createElement("div", {
+    className: "col-12 uix-trans"
+  }, /*#__PURE__*/react.createElement("div", {
+    className: "row"
+  }, /*#__PURE__*/react.createElement("div", {
+    className: "col-lg-3 col-md-3"
+  }, /*#__PURE__*/react.createElement("h3", {
+    className: "uix-spacing--no uix-outer-shadow--regular"
+  }, /*#__PURE__*/react.createElement(Counter, {
+    displayNumber: "00",
+    start: 0,
+    stop: 1023,
+    fixed: 0,
+    speed: 200,
+    dilimiter: true,
+    doubleDigits: true
+  }))), /*#__PURE__*/react.createElement("div", {
+    className: "col-lg-3 col-md-3"
+  }, /*#__PURE__*/react.createElement("h3", {
+    className: "uix-spacing--no uix-outer-shadow--regular"
+  }, /*#__PURE__*/react.createElement(Counter, {
+    displayNumber: "00",
+    start: 0,
+    stop: 2230,
+    fixed: 0,
+    speed: 200,
+    dilimiter: true,
+    doubleDigits: true
+  }))), /*#__PURE__*/react.createElement("div", {
+    className: "col-lg-3 col-md-3"
+  }, /*#__PURE__*/react.createElement("h3", {
+    className: "uix-spacing--no uix-outer-shadow--regular"
+  }, /*#__PURE__*/react.createElement(Counter, {
+    displayNumber: "00",
+    start: 0,
+    stop: 156,
+    fixed: 0,
+    speed: 200,
+    dilimiter: true,
+    doubleDigits: true
+  }))), /*#__PURE__*/react.createElement("div", {
+    className: "col-lg-3 col-md-3"
+  }, /*#__PURE__*/react.createElement("h3", {
+    className: "uix-spacing--no uix-outer-shadow--regular"
+  }, /*#__PURE__*/react.createElement(Counter, {
+    displayNumber: "00",
+    start: 0,
+    stop: 1344,
+    fixed: 0,
+    speed: 200,
+    dilimiter: true,
+    doubleDigits: true
+  })))))))), /*#__PURE__*/react.createElement("div", {
+    style: {
+      height: "300px"
+    }
+  }, /*#__PURE__*/react.createElement("span", {
+    style: {
+      display: "block",
+      margin: "0 auto",
+      height: "100%",
+      width: "1px",
+      background: "#000"
+    }
+  })), /*#__PURE__*/react.createElement("section", {
+    className: "uix-spacing--s"
+  }, /*#__PURE__*/react.createElement("div", {
+    className: "container uix-t-c"
+  }, /*#__PURE__*/react.createElement("div", {
+    className: "row"
+  }, /*#__PURE__*/react.createElement("div", {
+    className: "col-12 uix-trans"
+  }, /*#__PURE__*/react.createElement("div", {
+    className: "row"
+  }, /*#__PURE__*/react.createElement("div", {
+    className: "col-lg-3 col-md-3"
+  }, /*#__PURE__*/react.createElement("h3", {
+    className: "uix-spacing--no uix-outer-shadow--regular"
+  }, /*#__PURE__*/react.createElement(Counter, {
+    displayNumber: "00",
+    start: 0,
+    stop: 55,
+    fixed: 2,
+    speed: 200,
+    dilimiter: true,
+    doubleDigits: true
+  }))), /*#__PURE__*/react.createElement("div", {
+    className: "col-lg-3 col-md-3"
+  }, /*#__PURE__*/react.createElement("h3", {
+    className: "uix-spacing--no uix-outer-shadow--regular"
+  }, /*#__PURE__*/react.createElement(Counter, {
+    displayNumber: "00",
+    start: 0,
+    stop: 1245,
+    fixed: 2,
+    speed: 200,
+    dilimiter: true,
+    doubleDigits: true
+  }))), /*#__PURE__*/react.createElement("div", {
+    className: "col-lg-3 col-md-3"
+  }, /*#__PURE__*/react.createElement("h3", {
+    className: "uix-spacing--no uix-outer-shadow--regular"
+  }, /*#__PURE__*/react.createElement(Counter, {
+    displayNumber: "00",
+    start: 0,
+    stop: 556,
+    fixed: 2,
+    speed: 200,
+    dilimiter: true,
+    doubleDigits: true
+  }))), /*#__PURE__*/react.createElement("div", {
+    className: "col-lg-3 col-md-3"
+  }, /*#__PURE__*/react.createElement("h3", {
+    className: "uix-spacing--no uix-outer-shadow--regular"
+  }, /*#__PURE__*/react.createElement(Counter, {
+    displayNumber: "00",
+    start: 0,
+    stop: 8,
+    fixed: 2,
+    speed: 200,
+    dilimiter: true,
+    doubleDigits: true
+  })))))))), /*#__PURE__*/react.createElement("section", null, /*#__PURE__*/react.createElement("div", {
+    className: "container"
+  }, /*#__PURE__*/react.createElement("div", {
+    className: "row"
+  }, /*#__PURE__*/react.createElement("div", {
+    className: "col-12"
+  }, /*#__PURE__*/react.createElement("h3", {
+    className: "app-header-title"
+  }, "API"), /*#__PURE__*/react.createElement("hr", null), /*#__PURE__*/react.createElement("article", {
+    className: "uix-spacing--s",
+    itemProp: "text"
+  }, /*#__PURE__*/react.createElement("h4", null, "Counter"), /*#__PURE__*/react.createElement("div", null, /*#__PURE__*/react.createElement("pre", null, "import Counter from '@uixkit.react/components/Counter/index.tsx';")), /*#__PURE__*/react.createElement("div", {
+    className: "table-responsive-md"
+  }, /*#__PURE__*/react.createElement("table", {
+    className: "table table-bordered table-striped mb-5"
+  }, /*#__PURE__*/react.createElement("thead", null, /*#__PURE__*/react.createElement("tr", null, /*#__PURE__*/react.createElement("th", null, "Property"), /*#__PURE__*/react.createElement("th", null, "Type"), /*#__PURE__*/react.createElement("th", null, "Default"), /*#__PURE__*/react.createElement("th", null, "Description"))), /*#__PURE__*/react.createElement("tbody", null, /*#__PURE__*/react.createElement("tr", null, /*#__PURE__*/react.createElement("td", null, /*#__PURE__*/react.createElement("code", null, "start")), /*#__PURE__*/react.createElement("td", null, "number"), /*#__PURE__*/react.createElement("td", null, "0"), /*#__PURE__*/react.createElement("td", null, "The number the element should start at")), /*#__PURE__*/react.createElement("tr", null, /*#__PURE__*/react.createElement("td", null, /*#__PURE__*/react.createElement("code", null, "stop")), /*#__PURE__*/react.createElement("td", null, "number"), /*#__PURE__*/react.createElement("td", null, "0"), /*#__PURE__*/react.createElement("td", null, "The number the element should end at")), /*#__PURE__*/react.createElement("tr", null, /*#__PURE__*/react.createElement("td", null, /*#__PURE__*/react.createElement("code", null, "fixed")), /*#__PURE__*/react.createElement("td", null, "number"), /*#__PURE__*/react.createElement("td", null, "0"), /*#__PURE__*/react.createElement("td", null, "Formats a number using fixed-point notation.")), /*#__PURE__*/react.createElement("tr", null, /*#__PURE__*/react.createElement("td", null, /*#__PURE__*/react.createElement("code", null, "speed")), /*#__PURE__*/react.createElement("td", null, "number"), /*#__PURE__*/react.createElement("td", null, "200"), /*#__PURE__*/react.createElement("td", null, "How long it should take to count between the target numbers")), /*#__PURE__*/react.createElement("tr", null, /*#__PURE__*/react.createElement("td", null, /*#__PURE__*/react.createElement("code", null, "dilimiter")), /*#__PURE__*/react.createElement("td", null, "boolean"), /*#__PURE__*/react.createElement("td", null, "false"), /*#__PURE__*/react.createElement("td", null, "The number of decimal places to show")), /*#__PURE__*/react.createElement("tr", null, /*#__PURE__*/react.createElement("td", null, /*#__PURE__*/react.createElement("code", null, "doubleDigits")), /*#__PURE__*/react.createElement("td", null, "boolean"), /*#__PURE__*/react.createElement("td", null, "false"), /*#__PURE__*/react.createElement("td", null, "Two digits are used by default, if it is a number ", /*#__PURE__*/react.createElement("code", null, "2"), " it should be displayed ", /*#__PURE__*/react.createElement("code", null, "02"))), /*#__PURE__*/react.createElement("tr", null, /*#__PURE__*/react.createElement("td", null, /*#__PURE__*/react.createElement("code", null, "displayNumber")), /*#__PURE__*/react.createElement("td", null, "string | number"), /*#__PURE__*/react.createElement("td", null, "-"), /*#__PURE__*/react.createElement("td", null, "String displayed by default")))))))))));
+});
+;// CONCATENATED MODULE: ./src/client/components/DropdownMenu/Option.tsx
+
+
+
+
+
+
+
+function Option_createSuper(Derived) { var hasNativeReflectConstruct = Option_isNativeReflectConstruct(); return function _createSuperInternal() { var Super = _getPrototypeOf(Derived), result; if (hasNativeReflectConstruct) { var NewTarget = _getPrototypeOf(this).constructor; result = Reflect.construct(Super, arguments, NewTarget); } else { result = Super.apply(this, arguments); } return _possibleConstructorReturn(this, result); }; }
+
+function Option_isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Reflect.construct) return false; if (Reflect.construct.sham) return false; if (typeof Proxy === "function") return true; try { Boolean.prototype.valueOf.call(Reflect.construct(Boolean, [], function () {})); return true; } catch (e) { return false; } }
+
+
+
+var Option = /*#__PURE__*/function (_Component) {
+  _inherits(Option, _Component);
+
+  var _super = Option_createSuper(Option);
+
+  function Option(props) {
+    var _this;
+
+    _classCallCheck(this, Option);
+
+    _this = _super.call(this, props);
+    _this.handleSelect = _this.handleSelect.bind(_assertThisInitialized(_this));
+    return _this;
+  }
+
+  _createClass(Option, [{
+    key: "handleSelect",
+    value: function handleSelect(e) {
+      e.preventDefault();
+      var fn = this.props.onSelect;
+      fn(this.props.option);
+    }
+  }, {
+    key: "render",
+    value: function render() {
+      var _this$props$option, _this$props$option2;
+
+      return /*#__PURE__*/react.createElement("li", null, /*#__PURE__*/react.createElement("a", {
+        "data-value": (_this$props$option = this.props.option) === null || _this$props$option === void 0 ? void 0 : _this$props$option.value,
+        href: "#",
+        onClick: this.handleSelect
+      }, (_this$props$option2 = this.props.option) === null || _this$props$option2 === void 0 ? void 0 : _this$props$option2.label));
+    }
+  }]);
+
+  return Option;
+}(react.Component);
+
+
+;// CONCATENATED MODULE: ./src/client/components/DropdownMenu/index.tsx
+
+
+
+
+
+
+
+
+var DropdownMenu_excluded = ["name", "defaultLabel", "options", "id"];
+
+function DropdownMenu_createSuper(Derived) { var hasNativeReflectConstruct = DropdownMenu_isNativeReflectConstruct(); return function _createSuperInternal() { var Super = _getPrototypeOf(Derived), result; if (hasNativeReflectConstruct) { var NewTarget = _getPrototypeOf(this).constructor; result = Reflect.construct(Super, arguments, NewTarget); } else { result = Super.apply(this, arguments); } return _possibleConstructorReturn(this, result); }; }
+
+function DropdownMenu_isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Reflect.construct) return false; if (Reflect.construct.sham) return false; if (typeof Proxy === "function") return true; try { Boolean.prototype.valueOf.call(Reflect.construct(Boolean, [], function () {})); return true; } catch (e) { return false; } }
+
+/* 
+ *************************************
+ * <!-- Dropdown Menu -->
+ *************************************
+ */
+
+/*-- Apply Third-party plugins (import location should be in front of "global scripts and styles") --*/
+
+
+
+
+/*-- Apply global scripts and styles --*/
+
+
+
+/*-- Apply this component styles --*/
+
+
+ //
+
+
+
+var DropdownMenu = /*#__PURE__*/function (_Component) {
+  _inherits(DropdownMenu, _Component);
+
+  var _super = DropdownMenu_createSuper(DropdownMenu);
+
+  function DropdownMenu(props) {
+    var _this;
+
+    _classCallCheck(this, DropdownMenu);
+
+    _this = _super.call(this, props);
+    _this.handleClose = _this.handleClose.bind(_assertThisInitialized(_this));
+    _this.handleClick = _this.handleClick.bind(_assertThisInitialized(_this));
+    _this.handleSelect = _this.handleSelect.bind(_assertThisInitialized(_this));
+    _this.state = {
+      selected: null,
+      opened: false
+    };
+    return _this;
+  }
+
+  _createClass(DropdownMenu, [{
+    key: "handleClose",
+    value: function handleClose(e) {
+      if (e.target.closest('.uix-dropdown-menu') === null) {
+        this.setState({
+          opened: false
+        });
+      }
+    }
+  }, {
+    key: "handleClick",
+    value: function handleClick() {
+      this.setState({
+        opened: !this.state.opened
+      });
+    }
+  }, {
+    key: "handleSelect",
+    value: function handleSelect(option) {
+      this.setState({
+        selected: option,
+        opened: false
+      });
+    }
+  }, {
+    key: "componentDidMount",
+    value: function componentDidMount() {
+      document.body.removeEventListener('mousedown', this.handleClose);
+      document.body.addEventListener('mousedown', this.handleClose);
+    }
+  }, {
+    key: "render",
+    value: function render() {
+      var _this2 = this,
+          _this$state$selected;
+
+      var _this$props = this.props,
+          name = _this$props.name,
+          defaultLabel = _this$props.defaultLabel,
+          options = _this$props.options,
+          id = _this$props.id,
+          attributes = _objectWithoutProperties(_this$props, DropdownMenu_excluded);
+
+      var cid = id || 'app-dropdown-menu-' + shortcut.GUID.create();
+
+      var selectedLabel = this.state.selected ? this.state.selected.label : defaultLabel === undefined ? 'Select' : defaultLabel;
+      var selectOptionsListPresentation = options === null || options === void 0 ? void 0 : options.map(function (selectOption, index) {
+        return /*#__PURE__*/react.createElement(Option, {
+          key: index,
+          option: selectOption,
+          onSelect: _this2.handleSelect
+        });
+      });
+      return /*#__PURE__*/react.createElement(react.Fragment, null, /*#__PURE__*/react.createElement("div", extends_extends({
+        className: "uix-dropdown-menu" + (this.state.opened ? ' is-opened' : ''),
+        id: cid
+      }, attributes, {
+        onClick: this.handleClick
+      }), /*#__PURE__*/react.createElement("span", null, /*#__PURE__*/react.createElement("i", {
+        className: "fa fa-cog",
+        "aria-hidden": "true"
+      }), " ", /*#__PURE__*/react.createElement("span", null, selectedLabel)), /*#__PURE__*/react.createElement("input", {
+        name: name || '',
+        type: "hidden",
+        value: (_this$state$selected = this.state.selected) === null || _this$state$selected === void 0 ? void 0 : _this$state$selected.value
+      }), /*#__PURE__*/react.createElement("ul", null, selectOptionsListPresentation)));
+    }
+  }]);
+
+  return DropdownMenu;
+}(react.Component);
+
+
+;// CONCATENATED MODULE: ./src/client/views/_pages/ComponentsDemo/DropdownMenuDemo.js
+
+
+ //Create or Remove Sidebar Menu
+
+
+var DropdownMenuDemo_data1 = [{
+  label: "Option 1",
+  value: "option-1"
+}, {
+  label: "Option 2",
+  value: "option-2"
+}, {
+  label: "Option 3",
+  value: "option-3"
+}];
+/* harmony default export */ const DropdownMenuDemo = (function () {
+  react.useEffect(function () {
+    // Equivalent to componentDidMount and componentDidUpdate:
+    shortcut(document).ready(function () {
+      //Create sidebar menu
+      SidebarMenu();
+    });
+  });
+  return /*#__PURE__*/react.createElement(react.Fragment, null, /*#__PURE__*/react.createElement("section", null, /*#__PURE__*/react.createElement("div", {
+    className: "container"
+  }, /*#__PURE__*/react.createElement("div", {
+    className: "row"
+  }, /*#__PURE__*/react.createElement("div", {
+    className: "col-12"
+  }, /*#__PURE__*/react.createElement("h1", {
+    className: "uix-typo--h2"
+  }, "Dropdown Menu", /*#__PURE__*/react.createElement("a", {
+    className: "uix-typo--h3 align-middle",
+    href: "https://github.com/xizon/uix-kit-react/tree/main/src/client/components/DropdownMenu",
+    target: "_blank"
+  }, /*#__PURE__*/react.createElement("span", {
+    className: "uix-dir--right",
+    style: {
+      fontSize: "0.75rem",
+      color: "#ababab",
+      margin: ".5rem .5rem 0 0"
+    }
+  }, /*#__PURE__*/react.createElement("svg", {
+    style: {
+      marginRight: ".5rem"
+    },
+    width: "15",
+    viewBox: "0 0 392.186 392.186"
+  }, /*#__PURE__*/react.createElement("g", null, /*#__PURE__*/react.createElement("g", null, /*#__PURE__*/react.createElement("g", null, /*#__PURE__*/react.createElement("path", {
+    fill: "#d2d2d2",
+    d: "M368.62,17.951H23.568C10.57,17.951,0,28.524,0,41.52v309.146c0,12.996,10.57,23.568,23.568,23.568h345.053c12.994,0,23.564-10.572,23.564-23.568V41.52C392.188,28.525,381.614,17.951,368.62,17.951z M297.56,57.528c0-4.806,3.896-8.703,8.701-8.703h8.703c4.808,0,8.701,3.896,8.701,8.703v9.863c0,4.806-3.896,8.702-8.701,8.702h-8.703c-4.805,0-8.701-3.896-8.701-8.702V57.528z M257.093,57.528c0-4.806,3.898-8.703,8.703-8.703h8.701c4.805,0,8.703,3.896,8.703,8.703v9.863c0,4.806-3.898,8.702-8.703,8.702h-8.701c-4.805,0-8.703-3.896-8.703-8.702V57.528z M363.903,345.951H28.282V102.235h335.621V345.951L363.903,345.951z M364.132,67.391c0,4.806-3.896,8.702-8.701,8.702h-8.703c-4.809,0-8.702-3.896-8.702-8.702v-9.863c0-4.806,3.896-8.703,8.702-8.703h8.703c4.806,0,8.701,3.896,8.701,8.703V67.391z"
+  }), /*#__PURE__*/react.createElement("path", {
+    fill: "#d2d2d2",
+    d: "M84.185,233.284l63.084,29.336c1.631,0.755,3.367,1.138,5.162,1.138c2.338,0,4.617-0.664,6.598-1.924c3.547-2.267,5.666-6.13,5.666-10.334v-0.322c0-4.752-2.785-9.116-7.096-11.118l-39.455-18.332l39.455-18.334c4.311-2.004,7.096-6.367,7.096-11.117v-0.319c0-4.21-2.119-8.075-5.666-10.334c-1.961-1.253-4.246-1.916-6.605-1.916c-1.779,0-3.563,0.391-5.16,1.133l-63.08,29.333c-4.307,2.004-7.09,6.369-7.09,11.117v0.877C77.093,226.909,79.874,231.272,84.185,233.284z"
+  }), /*#__PURE__*/react.createElement("path", {
+    fill: "#d2d2d2",
+    d: "M165.257,293.036c2.301,3.149,6.002,5.03,9.9,5.03h0.316c5.352,0,10.041-3.426,11.672-8.517L228.7,160.788c1.192-3.716,0.531-7.818-1.771-10.973c-2.301-3.15-6.002-5.03-9.901-5.03h-0.315c-5.354,0-10.048,3.425-11.679,8.516l-41.559,128.771C162.292,285.793,162.958,289.889,165.257,293.036z"
+  }), /*#__PURE__*/react.createElement("path", {
+    fill: "#d2d2d2",
+    d: "M227.49,192.276c0,4.745,2.783,9.109,7.095,11.123l39.455,18.329l-39.455,18.33c-4.31,2.004-7.095,6.368-7.095,11.118v0.322c0,4.205,2.117,8.068,5.668,10.336c1.974,1.258,4.254,1.924,6.595,1.924c1.793,0,3.528-0.383,5.17-1.142l63.08-29.335c4.307-2.009,7.09-6.372,7.09-11.115v-0.877c0-4.748-2.783-9.113-7.094-11.117l-63.08-29.333c-1.591-0.74-3.373-1.131-5.152-1.131c-2.355,0-4.643,0.661-6.604,1.912c-3.551,2.263-5.67,6.127-5.67,10.337v0.318H227.49L227.49,192.276z"
+  }))))), "Docs on GitHub"))))))), /*#__PURE__*/react.createElement("section", {
+    className: "uix-spacing--s uix-spacing--no-bottom"
+  }, /*#__PURE__*/react.createElement("div", {
+    className: "container"
+  }, /*#__PURE__*/react.createElement("div", {
+    className: "row"
+  }, /*#__PURE__*/react.createElement("div", {
+    className: "col-12"
+  }, /*#__PURE__*/react.createElement("h3", {
+    className: "app-header-title"
+  }, "Dropdown Menu"), /*#__PURE__*/react.createElement("p", null, "Click the hyperlink to display the drop-down menu"), /*#__PURE__*/react.createElement("hr", null))))), /*#__PURE__*/react.createElement("section", {
+    className: "uix-spacing--s"
+  }, /*#__PURE__*/react.createElement("div", {
+    className: "container"
+  }, /*#__PURE__*/react.createElement("div", {
+    className: "row"
+  }, /*#__PURE__*/react.createElement("div", {
+    className: "col-12"
+  }, /*#__PURE__*/react.createElement(DropdownMenu, {
+    name: "app-ddmenu-1",
+    options: [{
+      label: "Option 1",
+      value: "option-1"
+    }, {
+      label: "Option 2",
+      value: "option-2"
+    }, {
+      label: "Option 3",
+      value: "option-3"
+    }]
+  }), /*#__PURE__*/react.createElement("br", null), /*#__PURE__*/react.createElement("br", null), /*#__PURE__*/react.createElement(DropdownMenu, {
+    name: "app-ddmenu-2",
+    defaultLabel: "Click Me",
+    options: [{
+      label: "Boy",
+      value: "boy"
+    }, {
+      label: "Girl",
+      value: "girl"
+    }]
+  }))))), /*#__PURE__*/react.createElement("section", null, /*#__PURE__*/react.createElement("div", {
+    className: "container"
+  }, /*#__PURE__*/react.createElement("div", {
+    className: "row"
+  }, /*#__PURE__*/react.createElement("div", {
+    className: "col-12"
+  }, /*#__PURE__*/react.createElement("h3", {
+    className: "app-header-title"
+  }, "API"), /*#__PURE__*/react.createElement("hr", null), /*#__PURE__*/react.createElement("article", {
+    className: "uix-spacing--s",
+    itemProp: "text"
+  }, /*#__PURE__*/react.createElement("h4", null, "Dropdown Menu"), /*#__PURE__*/react.createElement("div", null, /*#__PURE__*/react.createElement("pre", null, "import DropdownMenu from '@uixkit.react/components/DropdownMenu/index.tsx';")), /*#__PURE__*/react.createElement("div", {
+    className: "table-responsive-md"
+  }, /*#__PURE__*/react.createElement("table", {
+    className: "table table-bordered table-striped mb-5"
+  }, /*#__PURE__*/react.createElement("thead", null, /*#__PURE__*/react.createElement("tr", null, /*#__PURE__*/react.createElement("th", null, "Property"), /*#__PURE__*/react.createElement("th", null, "Type"), /*#__PURE__*/react.createElement("th", null, "Default"), /*#__PURE__*/react.createElement("th", null, "Description"))), /*#__PURE__*/react.createElement("tbody", null, /*#__PURE__*/react.createElement("tr", null, /*#__PURE__*/react.createElement("td", null, /*#__PURE__*/react.createElement("code", null, "name")), /*#__PURE__*/react.createElement("td", null, "string"), /*#__PURE__*/react.createElement("td", null, "-"), /*#__PURE__*/react.createElement("td", null, "Set a name for the form field for this component. Name is not deprecated when used with form fields.")), /*#__PURE__*/react.createElement("tr", null, /*#__PURE__*/react.createElement("td", null, /*#__PURE__*/react.createElement("code", null, "defaultLabel")), /*#__PURE__*/react.createElement("td", null, "string"), /*#__PURE__*/react.createElement("td", null, "-"), /*#__PURE__*/react.createElement("td", null, "Specify a default label text")), /*#__PURE__*/react.createElement("tr", null, /*#__PURE__*/react.createElement("td", null, /*#__PURE__*/react.createElement("code", null, "options")), /*#__PURE__*/react.createElement("td", null, "array"), /*#__PURE__*/react.createElement("td", null, "-"), /*#__PURE__*/react.createElement("td", null, "Specify data of Dropdown Menu as a JSON string format. Such as: ", /*#__PURE__*/react.createElement("br", null), " ", /*#__PURE__*/react.createElement("code", {
+    className: "text-wrap"
+  }, "[{\"label\":\"Option 1\",\"value\":\"option-1\"},{\"label\":\"Option 2\",\"value\":\"option-2\"}]"))))))))))));
+});
+;// CONCATENATED MODULE: ./src/client/components/_plugins/BSL/lib/bodyScrollLock.es6.js
+
+// Older browsers don't support event options, feature detect it.
+// Adopted and modified solution from Bohdan Didukh (2017)
+// https://stackoverflow.com/questions/41594997/ios-10-safari-prevent-scrolling-behind-a-fixed-overlay-and-maintain-scroll-posi
+var hasPassiveEvents = false;
+
+if (typeof window !== 'undefined') {
+  var passiveTestOptions = {
+    get passive() {
+      hasPassiveEvents = true;
+      return undefined;
+    }
+
+  };
+  window.addEventListener('testPassive', null, passiveTestOptions);
+  window.removeEventListener('testPassive', null, passiveTestOptions);
+}
+
+var isIosDevice = typeof window !== 'undefined' && window.navigator && window.navigator.platform && (/iP(ad|hone|od)/.test(window.navigator.platform) || window.navigator.platform === 'MacIntel' && window.navigator.maxTouchPoints > 1);
+var locks = [];
+var documentListenerAdded = false;
+var initialClientY = -1;
+var previousBodyOverflowSetting;
+var previousBodyPosition;
+var previousBodyPaddingRight; // returns true if `el` should be allowed to receive touchmove events.
+
+var allowTouchMove = function allowTouchMove(el) {
+  return locks.some(function (lock) {
+    if (lock.options.allowTouchMove && lock.options.allowTouchMove(el)) {
+      return true;
+    }
+
+    return false;
+  });
+};
+
+var preventDefault = function preventDefault(rawEvent) {
+  var e = rawEvent || window.event; // For the case whereby consumers adds a touchmove event listener to document.
+  // Recall that we do document.addEventListener('touchmove', preventDefault, { passive: false })
+  // in disableBodyScroll - so if we provide this opportunity to allowTouchMove, then
+  // the touchmove event on document will break.
+
+  if (allowTouchMove(e.target)) {
+    return true;
+  } // Do not prevent if the event has more than one touch (usually meaning this is a multi touch gesture like pinch to zoom).
+
+
+  if (e.touches.length > 1) return true;
+  if (e.preventDefault) e.preventDefault();
+  return false;
+};
+
+var setOverflowHidden = function setOverflowHidden(options) {
+  // If previousBodyPaddingRight is already set, don't set it again.
+  if (previousBodyPaddingRight === undefined) {
+    var reserveScrollBarGap = !!options && options.reserveScrollBarGap === true;
+    var scrollBarGap = window.innerWidth - document.documentElement.clientWidth;
+
+    if (reserveScrollBarGap && scrollBarGap > 0) {
+      var computedBodyPaddingRight = parseInt(window.getComputedStyle(document.body).getPropertyValue('padding-right'), 10);
+      previousBodyPaddingRight = document.body.style.paddingRight;
+      document.body.style.paddingRight = "".concat(computedBodyPaddingRight + scrollBarGap, "px");
+    }
+  } // If previousBodyOverflowSetting is already set, don't set it again.
+
+
+  if (previousBodyOverflowSetting === undefined) {
+    previousBodyOverflowSetting = document.body.style.overflow;
+    document.body.style.overflow = 'hidden';
+  }
+};
+
+var restoreOverflowSetting = function restoreOverflowSetting() {
+  if (previousBodyPaddingRight !== undefined) {
+    document.body.style.paddingRight = previousBodyPaddingRight; // Restore previousBodyPaddingRight to undefined so setOverflowHidden knows it
+    // can be set again.
+
+    previousBodyPaddingRight = undefined;
+  }
+
+  if (previousBodyOverflowSetting !== undefined) {
+    document.body.style.overflow = previousBodyOverflowSetting; // Restore previousBodyOverflowSetting to undefined
+    // so setOverflowHidden knows it can be set again.
+
+    previousBodyOverflowSetting = undefined;
+  }
+};
+
+var setPositionFixed = function setPositionFixed() {
+  return window.requestAnimationFrame(function () {
+    // If previousBodyPosition is already set, don't set it again.
+    if (previousBodyPosition === undefined) {
+      previousBodyPosition = {
+        position: document.body.style.position,
+        top: document.body.style.top,
+        left: document.body.style.left
+      }; // Update the dom inside an animation frame
+
+      var _window = window,
+          scrollY = _window.scrollY,
+          scrollX = _window.scrollX,
+          innerHeight = _window.innerHeight;
+      document.body.style.position = 'fixed';
+      document.body.style.top = "".concat(-scrollY, "px");
+      document.body.style.left = "".concat(-scrollX, "px");
+      setTimeout(function () {
+        return window.requestAnimationFrame(function () {
+          // Attempt to check if the bottom bar appeared due to the position change
+          var bottomBarHeight = innerHeight - window.innerHeight;
+
+          if (bottomBarHeight && scrollY >= innerHeight) {
+            // Move the content further up so that the bottom bar doesn't hide it
+            document.body.style.top = -(scrollY + bottomBarHeight);
+          }
+        });
+      }, 300);
+    }
+  });
+};
+
+var restorePositionSetting = function restorePositionSetting() {
+  if (previousBodyPosition !== undefined) {
+    // Convert the position from "px" to Int
+    var y = -parseInt(document.body.style.top, 10);
+    var x = -parseInt(document.body.style.left, 10); // Restore styles
+
+    document.body.style.position = previousBodyPosition.position;
+    document.body.style.top = previousBodyPosition.top;
+    document.body.style.left = previousBodyPosition.left; // Restore scroll
+
+    window.scrollTo(x, y);
+    previousBodyPosition = undefined;
+  }
+}; // https://developer.mozilla.org/en-US/docs/Web/API/Element/scrollHeight#Problems_and_solutions
+
+
+var isTargetElementTotallyScrolled = function isTargetElementTotallyScrolled(targetElement) {
+  return targetElement ? targetElement.scrollHeight - targetElement.scrollTop <= targetElement.clientHeight : false;
+};
+
+var handleScroll = function handleScroll(event, targetElement) {
+  var clientY = event.targetTouches[0].clientY - initialClientY;
+
+  if (allowTouchMove(event.target)) {
+    return false;
+  }
+
+  if (targetElement && targetElement.scrollTop === 0 && clientY > 0) {
+    // element is at the top of its scroll.
+    return preventDefault(event);
+  }
+
+  if (isTargetElementTotallyScrolled(targetElement) && clientY < 0) {
+    // element is at the bottom of its scroll.
+    return preventDefault(event);
+  }
+
+  event.stopPropagation();
+  return true;
+};
+
+var disableBodyScroll = function disableBodyScroll(targetElement, options) {
+  // targetElement must be provided
+  if (!targetElement) {
+    // eslint-disable-next-line no-console
+    console.error('disableBodyScroll unsuccessful - targetElement must be provided when calling disableBodyScroll on IOS devices.');
+    return;
+  } // disableBodyScroll must not have been called on this targetElement before
+
+
+  if (locks.some(function (lock) {
+    return lock.targetElement === targetElement;
+  })) {
+    return;
+  }
+
+  var lock = {
+    targetElement: targetElement,
+    options: options || {}
+  };
+  locks = [].concat(_toConsumableArray(locks), [lock]);
+
+  if (isIosDevice) {
+    setPositionFixed();
+  } else {
+    setOverflowHidden(options);
+  }
+
+  if (isIosDevice) {
+    targetElement.ontouchstart = function (event) {
+      if (event.targetTouches.length === 1) {
+        // detect single touch.
+        initialClientY = event.targetTouches[0].clientY;
+      }
+    };
+
+    targetElement.ontouchmove = function (event) {
+      if (event.targetTouches.length === 1) {
+        // detect single touch.
+        handleScroll(event, targetElement);
+      }
+    };
+
+    if (!documentListenerAdded) {
+      document.addEventListener('touchmove', preventDefault, hasPassiveEvents ? {
+        passive: false
+      } : undefined);
+      documentListenerAdded = true;
+    }
+  }
+};
+var clearAllBodyScrollLocks = function clearAllBodyScrollLocks() {
+  if (isIosDevice) {
+    // Clear all locks ontouchstart/ontouchmove handlers, and the references.
+    locks.forEach(function (lock) {
+      lock.targetElement.ontouchstart = null;
+      lock.targetElement.ontouchmove = null;
+    });
+
+    if (documentListenerAdded) {
+      document.removeEventListener('touchmove', preventDefault, hasPassiveEvents ? {
+        passive: false
+      } : undefined);
+      documentListenerAdded = false;
+    } // Reset initial clientY.
+
+
+    initialClientY = -1;
+  }
+
+  if (isIosDevice) {
+    restorePositionSetting();
+  } else {
+    restoreOverflowSetting();
+  }
+
+  locks = [];
+};
+var enableBodyScroll = function enableBodyScroll(targetElement) {
+  if (!targetElement) {
+    // eslint-disable-next-line no-console
+    console.error('enableBodyScroll unsuccessful - targetElement must be provided when calling enableBodyScroll on IOS devices.');
+    return;
+  }
+
+  locks = locks.filter(function (lock) {
+    return lock.targetElement !== targetElement;
+  });
+
+  if (isIosDevice) {
+    targetElement.ontouchstart = null;
+    targetElement.ontouchmove = null;
+
+    if (documentListenerAdded && locks.length === 0) {
+      document.removeEventListener('touchmove', preventDefault, hasPassiveEvents ? {
+        passive: false
+      } : undefined);
+      documentListenerAdded = false;
+    }
+  }
+
+  if (isIosDevice) {
+    restorePositionSetting();
+  } else {
+    restoreOverflowSetting();
+  }
+};
+;// CONCATENATED MODULE: ./src/client/components/_plugins/_lib-scrolllock.ts
+/*
+  Body Scroll Lock
+  ------------- 
+*/
+
+;// CONCATENATED MODULE: ./src/client/components/ModalDialog/close-modal-dialog.tsx
+
+
+/*-- Apply Third-party plugins --*/
+
+
+
+function closeModalDialog(config) {
+  if ((0,esm_typeof/* default */.Z)(config) === ( true ? "undefined" : 0)) {
+    config = {
+      "target": '.uix-modal-box'
+    };
+  }
+
+  var curElement = shortcut(config.target); //Enable mask to close the window.
+
+
+  shortcut('.uix-modal-mask').removeClass('js-uix-disabled');
+
+  curElement.removeClass('is-active');
+  TweenMax_TweenMax.to('.uix-modal-mask', 0.3, {
+    css: {
+      opacity: 0,
+      display: 'none'
+    }
+  });
+  curElement.find('.uix-modal-box__content').removeClass('js-uix-no-fullscreen'); // Unlocks the page
+
+  enableBodyScroll(document.querySelector('body')); //Remove class for body
+  //When scrollLock is used, scrollTop value will change
+
+  shortcut('body').removeClass('scrollLock'); //Prevent automatic close from affecting new fire effects
+
+
+  clearTimeout(window.setCloseModalDialog);
+}
+/* harmony default export */ const close_modal_dialog = ({
+  closeModalDialog: closeModalDialog
+});
+;// CONCATENATED MODULE: ./src/client/components/ModalDialog/fire-modal-dialog.tsx
+
+
+/*-- Apply Third-party plugins --*/
+
+
+ //
+
+
+function fireModalDialog(config) {
+  if ((0,esm_typeof/* default */.Z)(config) === ( true ? "undefined" : 0)) {
+    config = {
+      "target": '#modal-open-demo',
+      "height": false,
+      "width": false,
+      "speed": 500,
+      "btn": false,
+      "lightbox": true,
+      "autoClose": false,
+      "closeOnlyBtn": false
+    };
+  }
+
+  var curElement = shortcut(config.target); //Prevent automatic close from affecting new fire effects
+
+
+  clearTimeout(window.setCloseModalDialog); //Add modal mask to stage
+
+  if (shortcut('.uix-modal-mask').length == 0) {
+    shortcut('body').prepend('<div className="uix-modal-mask"></div>');
+  }
+
+  if (config.closeOnlyBtn) {
+    shortcut('.uix-modal-mask').addClass('js-uix-disabled');
+  } else {
+    shortcut('.uix-modal-mask').removeClass('js-uix-disabled');
+  }
+
+  var dataH = config.height,
+      dataW = config.width,
+      linkBtn = config.btn,
+      closeTime = config.autoClose; // Initializate modal
+
+  if (linkBtn) {
+    linkBtn.attr('href', 'javascript:void(0)');
+    curElement.find('.uix-modal-box__content').addClass('js-uix-no-fullscreen');
+
+    if (linkBtn.data('video-win')) {
+      curElement.find('.uix-modal-box__content > .uix-modal-box__body').css('overflow-y', 'hidden');
+    }
+  }
+
+  if (curElement.length > 0) {
+    // Locks the page
+    //
+    // Get a target element that you want to persist scrolling for (such as a modal/lightbox/flyout/nav).
+    // Specifically, the target element is the one we would like to allow scroll on (NOT a parent of that element).
+    // This is also the element to apply the CSS '-webkit-overflow-scrolling: touch;' if desired.
+    disableBodyScroll(document.querySelector('body')); //Add class for body
+    //When scrollLock is used, scrollTop value will change
+
+    shortcut('body').addClass('scrollLock');
+
+    if ((0,esm_typeof/* default */.Z)(dataH) != ( true ? "undefined" : 0) && dataH != '' && dataH) {
+      curElement.css({
+        'height': dataH
+      });
+    }
+
+    if ((0,esm_typeof/* default */.Z)(dataW) != ( true ? "undefined" : 0) && dataW != '' && dataW) {
+      curElement.css({
+        'width': dataW
+      });
+    } //Enable the lightbox effect.
+
+
+    if (config.lightbox) {
+      TweenMax_TweenMax.set('.uix-modal-mask', {
+        css: {
+          opacity: 0,
+          display: 'none'
+        },
+        onComplete: function onComplete() {
+          TweenMax_TweenMax.to(this.target, 0.3, {
+            css: {
+              opacity: 1,
+              display: 'block'
+            }
+          });
+        }
+      });
+    }
+
+    curElement.addClass('is-active'); //auto close
+
+    if (closeTime && !isNaN(closeTime)) {
+      window.setCloseModalDialog = setTimeout(function () {
+        closeModalDialog({
+          target: '.uix-modal-box'
+        });
+      }, closeTime);
+    }
+  }
+
+  if (curElement.hasClass('is-fullscreen')) {
+    setTimeout(function () {
+      if (!curElement.hasClass('is-video')) {
+        curElement.find('.uix-modal-box__content > .uix-modal-box__body').css('overflow-y', 'scroll');
+      } else {
+        curElement.find('.uix-modal-box__content > .uix-modal-box__body').css('overflow-y', 'hidden');
+      }
+    }, config.speed);
+  }
+}
+/* harmony default export */ const fire_modal_dialog = ({
+  fireModalDialog: fireModalDialog
+});
+;// CONCATENATED MODULE: ./src/client/components/ModalDialog/index.tsx
+
+
+
+
+
+
+
+
+var ModalDialog_excluded = ["height", "width", "lightbox", "autoClose", "closeOnlyBtn", "fullscreen", "heading", "triggerTagName", "triggerClassName", "triggerContent", "autoOpen", "enableVideo", "id", "children"];
+
+function ModalDialog_createSuper(Derived) { var hasNativeReflectConstruct = ModalDialog_isNativeReflectConstruct(); return function _createSuperInternal() { var Super = _getPrototypeOf(Derived), result; if (hasNativeReflectConstruct) { var NewTarget = _getPrototypeOf(this).constructor; result = Reflect.construct(Super, arguments, NewTarget); } else { result = Super.apply(this, arguments); } return _possibleConstructorReturn(this, result); }; }
+
+function ModalDialog_isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Reflect.construct) return false; if (Reflect.construct.sham) return false; if (typeof Proxy === "function") return true; try { Boolean.prototype.valueOf.call(Reflect.construct(Boolean, [], function () {})); return true; } catch (e) { return false; } }
+
+/* 
+ *************************************
+ * <!-- Modal Dialog -->
+ *************************************
+ */
+
+/*-- Apply Third-party plugins (import location should be in front of "global scripts and styles") --*/
+
+
+
+
+/*-- Apply global scripts and styles --*/
+
+
+
+/*-- Apply this component styles --*/
+
+
+ //Enables body scroll locking
+
+ // 
+
+
+
+
+var ModalDialog = /*#__PURE__*/function (_Component) {
+  _inherits(ModalDialog, _Component);
+
+  var _super = ModalDialog_createSuper(ModalDialog);
+
+  function ModalDialog(props) {
+    var _this;
+
+    _classCallCheck(this, ModalDialog);
+
+    _this = _super.call(this, props);
+    _this.handleCloseModal = _this.handleCloseModal.bind(_assertThisInitialized(_this));
+    _this.handleOpenModal = _this.handleOpenModal.bind(_assertThisInitialized(_this));
+    return _this;
+  }
+
+  _createClass(ModalDialog, [{
+    key: "handleCloseModal",
+    value: function handleCloseModal(e) {
+      e.preventDefault();
+      this.closeAction();
+    }
+  }, {
+    key: "handleOpenModal",
+    value: function handleOpenModal(e, obj) {
+      e.preventDefault();
+      this.openAction(obj);
+    }
+  }, {
+    key: "closeAction",
+    value: function closeAction() {
+      // pause video without controls
+      //------------------------------------------
+      if (window.curVideo !== null) window.curVideo.pause(); // close Modal Dialog
+      //------------------------------------------
+
+      closeModalDialog({
+        target: '.uix-modal-box'
+      });
+    }
+  }, {
+    key: "openAction",
+    value: function openAction(obj) {
+      var self = this;
+      var curModalID = '#' + obj.data('modal-id'); //Delay Time when Full Screen Effect is fired.
+
+      var modalSpeed = shortcut.cssProperty.getTransitionDuration(shortcut('.uix-modal-box:first-child')[0]);
+
+      var dataH = obj.data('modal-height'),
+          dataW = obj.data('modal-width'),
+          dataLightbox = obj.data('modal-lightbox'),
+          dataCloseTime = obj.data('modal-close-time'),
+          dataCloseOnlyBtn = obj.data('modal-close-onlybtn');
+
+      if (dataH === null) {
+        dataH = false;
+      }
+
+      if (dataW === null) {
+        dataW = false;
+      }
+
+      if (dataLightbox === null) {
+        dataLightbox = true;
+      }
+
+      if (dataCloseTime === null) {
+        dataCloseTime = false;
+      }
+
+      if (dataCloseOnlyBtn === null) {
+        dataCloseOnlyBtn = false;
+      } // Video PopUp Interaction
+      //------------------------------------------
+
+
+      var hasVideo = shortcut(curModalID).hasClass('is-video') ? true : false;
+
+      if (hasVideo) {
+        var windowWidth = window.innerWidth;
+        var windowHeight = window.innerHeight;
+
+        var $videoWrapper = shortcut(curModalID).find('.uix-modal-box__video-container');
+
+        var isIframe = $videoWrapper.find('iframe').length > 0 ? true : false;
+        var $video = isIframe ? $videoWrapper.find('iframe') : $videoWrapper.find('video'); //
+
+        var setVideo = function setVideo(currentWidth, currentHeight, obj) {
+          var newMaxW = windowWidth - 80,
+              newMaxH = windowHeight - 80;
+          var newW = currentWidth,
+              newH = currentHeight;
+
+          if (currentHeight > newMaxH) {
+            newH = newMaxH; //Scaled/Proportional Content 
+
+            newW = currentWidth * (newH / currentHeight);
+          }
+
+          if (newW > newMaxW) {
+            newW = newMaxW; //Scaled/Proportional Content 
+
+            newH = currentHeight * (newW / currentWidth);
+          }
+
+          obj.css({
+            'left': (newMaxW - newW) / 2 + 'px',
+            'top': (newMaxH - newH) / 2 + 'px',
+            'height': newH + 'px',
+            'width': newW + 'px'
+          });
+
+          if (windowWidth <= 768) {
+            obj.css({
+              'top': 0
+            }).parent().css({
+              'top': (newMaxH - newH) / 2 + 'px'
+            });
+          }
+        };
+
+        if (isIframe) {
+          setVideo($video.width(), $video.height(), $video);
+        } else {
+          var _sources = $video[0].getElementsByTagName('source');
+
+          var _src = _sources.length > 0 ? _sources[0].src : $video[0].src;
+
+          self.getVideoDimensions(_src).then(function (res) {
+            setVideo(res.width, res.height, $video);
+          });
+        } //Set current video when the tag is <video>
+
+
+        window.curVideo = $video[0].tagName === 'VIDEO' ? $video[0] : null;
+      } // fire Modal Dialog
+      //------------------------------------------
+
+
+      fireModalDialog({
+        target: curModalID,
+        height: dataH,
+        width: dataW,
+        speed: modalSpeed,
+        btn: obj,
+        lightbox: dataLightbox,
+        autoClose: dataCloseTime,
+        closeOnlyBtn: dataCloseOnlyBtn
+      });
+    }
+  }, {
+    key: "createTrigger",
+    value: function createTrigger(id, closeOnlyBtn, autoClose, tagName, classes, content, width, height, autoOpen) {
+      switch (tagName) {
+        case 'a':
+          return /*#__PURE__*/react.createElement(react.Fragment, null, /*#__PURE__*/react.createElement("a", {
+            role: "button",
+            href: "#",
+            "data-modal-width": width,
+            "data-modal-height": height,
+            "data-modal-auto-open": autoOpen,
+            className: classes,
+            "data-modal-id": id,
+            "data-modal-close-onlybtn": closeOnlyBtn,
+            "data-modal-close-time": autoClose
+          }, content));
+
+        case 'button':
+          return /*#__PURE__*/react.createElement(react.Fragment, null, /*#__PURE__*/react.createElement("button", {
+            type: "button",
+            "data-modal-width": width,
+            "data-modal-height": height,
+            "data-modal-auto-open": autoOpen,
+            className: classes,
+            "data-modal-id": id,
+            "data-modal-close-onlybtn": closeOnlyBtn,
+            "data-modal-close-time": autoClose
+          }, content));
+
+        case 'div':
+          return /*#__PURE__*/react.createElement(react.Fragment, null, /*#__PURE__*/react.createElement("div", {
+            role: "button",
+            "data-modal-width": width,
+            "data-modal-height": height,
+            "data-modal-auto-open": autoOpen,
+            className: classes,
+            "data-modal-id": id,
+            "data-modal-close-onlybtn": closeOnlyBtn,
+            "data-modal-close-time": autoClose
+          }, content));
+
+        case 'span':
+          return /*#__PURE__*/react.createElement(react.Fragment, null, /*#__PURE__*/react.createElement("span", {
+            role: "button",
+            "data-modal-width": width,
+            "data-modal-height": height,
+            "data-modal-auto-open": autoOpen,
+            className: classes,
+            "data-modal-id": id,
+            "data-modal-close-onlybtn": closeOnlyBtn,
+            "data-modal-close-time": autoClose
+          }, content));
+      }
+    } //Returns the dimensions of a video asynchrounsly.
+
+  }, {
+    key: "getVideoDimensions",
+    value: function getVideoDimensions(url) {
+      return new Promise(function (resolve) {
+        // create the video element
+        var video = document.createElement('video'); // place a listener on it
+
+        video.addEventListener("loadedmetadata", function () {
+          // retrieve dimensions
+          var height = this.videoHeight;
+          var width = this.videoWidth; // send back result
+
+          resolve({
+            height: height,
+            width: width
+          });
+        }, false); // start download meta-datas
+
+        video.src = url;
+      });
+    }
+  }, {
+    key: "componentDidMount",
+    value: function componentDidMount() {
+      var self = this;
+      window.curVideo = null;
+
+      shortcut(document).ready(function () {
+        //Add modal mask to stage
+        if (shortcut('.uix-modal-mask').length == 0) {
+          shortcut('body').prepend('<div class="uix-modal-mask"></div>');
+        }
+
+        var btnClose = '.uix-modal-box [data-modal-close-trigger], .uix-modal-mask:not(.js-uix-disabled)';
+
+        shortcut(document).off('click', btnClose);
+
+        shortcut(document).on('click', btnClose, function (e) {
+          self.handleCloseModal(e);
+        }); //move Modal Dialog template to tag end body </body>
+
+
+        Array.prototype.forEach.call(document.querySelectorAll('.uix-modal-box'), function (node) {
+          document.body.appendChild(node);
+        }); //click to open Modal Dialog 
+
+        var btnOpen = '[data-modal-id]';
+
+        shortcut(btnOpen).off('click').on('click', function (e) {
+          self.handleOpenModal(e, shortcut(this));
+        }); //automatically open Modal Dialog 
+
+
+        shortcut(btnOpen).each(function () {
+          var dataAutoOpen = shortcut(this).data('modal-auto-open');
+
+          if (dataAutoOpen === null) {
+            dataAutoOpen = false;
+          }
+
+          if (dataAutoOpen) self.openAction(shortcut(this));
+        });
+      });
+    }
+  }, {
+    key: "componentWillUnmount",
+    value: function componentWillUnmount() {
+      clearAllBodyScrollLocks();
+    }
+  }, {
+    key: "render",
+    value: function render() {
+      var _this$props = this.props,
+          height = _this$props.height,
+          width = _this$props.width,
+          lightbox = _this$props.lightbox,
+          autoClose = _this$props.autoClose,
+          closeOnlyBtn = _this$props.closeOnlyBtn,
+          fullscreen = _this$props.fullscreen,
+          heading = _this$props.heading,
+          triggerTagName = _this$props.triggerTagName,
+          triggerClassName = _this$props.triggerClassName,
+          triggerContent = _this$props.triggerContent,
+          autoOpen = _this$props.autoOpen,
+          enableVideo = _this$props.enableVideo,
+          id = _this$props.id,
+          children = _this$props.children,
+          attributes = _objectWithoutProperties(_this$props, ModalDialog_excluded);
+
+      var cid = id || 'app-modal-' + shortcut.GUID.create();
+
+      var fullClassName = fullscreen ? 'is-fullscreen' : '';
+      return /*#__PURE__*/react.createElement(react.Fragment, null, this.createTrigger(cid, closeOnlyBtn, autoClose, triggerTagName, triggerClassName, triggerContent, width, height, autoOpen), !enableVideo ? /*#__PURE__*/react.createElement("div", extends_extends({
+        className: "uix-modal-box ".concat(fullClassName),
+        role: "dialog",
+        tabIndex: -1,
+        "aria-hidden": "true",
+        id: cid
+      }, attributes), /*#__PURE__*/react.createElement("button", {
+        type: "button",
+        className: "uix-modal-box__close",
+        "data-modal-close-trigger": "true"
+      }), /*#__PURE__*/react.createElement("div", {
+        className: "uix-modal-box__content",
+        role: "document"
+      }, /*#__PURE__*/react.createElement("div", {
+        className: "uix-modal-box__head"
+      }, heading || ''), /*#__PURE__*/react.createElement("div", {
+        className: "uix-modal-box__body"
+      }, /*#__PURE__*/react.createElement("div", {
+        role: "note"
+      }, children)))) : /*#__PURE__*/react.createElement("div", extends_extends({
+        className: "uix-modal-box is-fullscreen is-video",
+        role: "dialog",
+        tabIndex: -1,
+        "aria-hidden": "true",
+        id: cid
+      }, attributes), /*#__PURE__*/react.createElement("button", {
+        type: "button",
+        className: "uix-modal-box__close",
+        "data-modal-close-trigger": "true"
+      }), /*#__PURE__*/react.createElement("div", {
+        className: "uix-modal-box__content",
+        role: "document"
+      }, /*#__PURE__*/react.createElement("div", {
+        className: "uix-modal-box__video-waiting"
+      }), /*#__PURE__*/react.createElement("div", {
+        className: "uix-modal-box__video-container"
+      }, /*#__PURE__*/react.createElement("div", {
+        className: "embed-responsive embed-responsive-16by9"
+      }, children)))));
+    }
+  }]);
+
+  return ModalDialog;
+}(react.Component);
+
+
+;// CONCATENATED MODULE: ./src/client/views/_pages/ComponentsDemo/ModalDialogDemo.js
+
+
+ //Create or Remove Sidebar Menu
+
+ //get project config
+
+
+/* harmony default export */ const ModalDialogDemo = (function () {
+  react.useEffect(function () {
+    // Equivalent to componentDidMount and componentDidUpdate:
+    shortcut(document).ready(function () {
+      //Create sidebar menu
+      SidebarMenu();
+    });
+  });
+  return /*#__PURE__*/react.createElement(react.Fragment, null, /*#__PURE__*/react.createElement("section", null, /*#__PURE__*/react.createElement("div", {
+    className: "container"
+  }, /*#__PURE__*/react.createElement("div", {
+    className: "row"
+  }, /*#__PURE__*/react.createElement("div", {
+    className: "col-12"
+  }, /*#__PURE__*/react.createElement("h1", {
+    className: "uix-typo--h2"
+  }, "Modal Dialog", /*#__PURE__*/react.createElement("a", {
+    className: "uix-typo--h3 align-middle",
+    href: "https://github.com/xizon/uix-kit-react/tree/main/src/client/components/ModalDialog",
+    target: "_blank"
+  }, /*#__PURE__*/react.createElement("span", {
+    className: "uix-dir--right",
+    style: {
+      fontSize: "0.75rem",
+      color: "#ababab",
+      margin: ".5rem .5rem 0 0"
+    }
+  }, /*#__PURE__*/react.createElement("svg", {
+    style: {
+      marginRight: ".5rem"
+    },
+    width: "15",
+    viewBox: "0 0 392.186 392.186"
+  }, /*#__PURE__*/react.createElement("g", null, /*#__PURE__*/react.createElement("g", null, /*#__PURE__*/react.createElement("g", null, /*#__PURE__*/react.createElement("path", {
+    fill: "#d2d2d2",
+    d: "M368.62,17.951H23.568C10.57,17.951,0,28.524,0,41.52v309.146c0,12.996,10.57,23.568,23.568,23.568h345.053c12.994,0,23.564-10.572,23.564-23.568V41.52C392.188,28.525,381.614,17.951,368.62,17.951z M297.56,57.528c0-4.806,3.896-8.703,8.701-8.703h8.703c4.808,0,8.701,3.896,8.701,8.703v9.863c0,4.806-3.896,8.702-8.701,8.702h-8.703c-4.805,0-8.701-3.896-8.701-8.702V57.528z M257.093,57.528c0-4.806,3.898-8.703,8.703-8.703h8.701c4.805,0,8.703,3.896,8.703,8.703v9.863c0,4.806-3.898,8.702-8.703,8.702h-8.701c-4.805,0-8.703-3.896-8.703-8.702V57.528z M363.903,345.951H28.282V102.235h335.621V345.951L363.903,345.951z M364.132,67.391c0,4.806-3.896,8.702-8.701,8.702h-8.703c-4.809,0-8.702-3.896-8.702-8.702v-9.863c0-4.806,3.896-8.703,8.702-8.703h8.703c4.806,0,8.701,3.896,8.701,8.703V67.391z"
+  }), /*#__PURE__*/react.createElement("path", {
+    fill: "#d2d2d2",
+    d: "M84.185,233.284l63.084,29.336c1.631,0.755,3.367,1.138,5.162,1.138c2.338,0,4.617-0.664,6.598-1.924c3.547-2.267,5.666-6.13,5.666-10.334v-0.322c0-4.752-2.785-9.116-7.096-11.118l-39.455-18.332l39.455-18.334c4.311-2.004,7.096-6.367,7.096-11.117v-0.319c0-4.21-2.119-8.075-5.666-10.334c-1.961-1.253-4.246-1.916-6.605-1.916c-1.779,0-3.563,0.391-5.16,1.133l-63.08,29.333c-4.307,2.004-7.09,6.369-7.09,11.117v0.877C77.093,226.909,79.874,231.272,84.185,233.284z"
+  }), /*#__PURE__*/react.createElement("path", {
+    fill: "#d2d2d2",
+    d: "M165.257,293.036c2.301,3.149,6.002,5.03,9.9,5.03h0.316c5.352,0,10.041-3.426,11.672-8.517L228.7,160.788c1.192-3.716,0.531-7.818-1.771-10.973c-2.301-3.15-6.002-5.03-9.901-5.03h-0.315c-5.354,0-10.048,3.425-11.679,8.516l-41.559,128.771C162.292,285.793,162.958,289.889,165.257,293.036z"
+  }), /*#__PURE__*/react.createElement("path", {
+    fill: "#d2d2d2",
+    d: "M227.49,192.276c0,4.745,2.783,9.109,7.095,11.123l39.455,18.329l-39.455,18.33c-4.31,2.004-7.095,6.368-7.095,11.118v0.322c0,4.205,2.117,8.068,5.668,10.336c1.974,1.258,4.254,1.924,6.595,1.924c1.793,0,3.528-0.383,5.17-1.142l63.08-29.335c4.307-2.009,7.09-6.372,7.09-11.115v-0.877c0-4.748-2.783-9.113-7.094-11.117l-63.08-29.333c-1.591-0.74-3.373-1.131-5.152-1.131c-2.355,0-4.643,0.661-6.604,1.912c-3.551,2.263-5.67,6.127-5.67,10.337v0.318H227.49L227.49,192.276z"
+  }))))), "Docs on GitHub"))))))), /*#__PURE__*/react.createElement("section", {
+    className: "uix-spacing--s uix-spacing--no-bottom"
+  }, /*#__PURE__*/react.createElement("div", {
+    className: "container"
+  }, /*#__PURE__*/react.createElement("div", {
+    className: "row"
+  }, /*#__PURE__*/react.createElement("div", {
+    className: "col-12"
+  }, /*#__PURE__*/react.createElement("h3", {
+    className: "app-header-title"
+  }, "Modal Dialog"), /*#__PURE__*/react.createElement("p", null, "A modal dialog is a pop-window that forces the user to interact with it before they can go back to using the parent application."), /*#__PURE__*/react.createElement("hr", null))))), /*#__PURE__*/react.createElement("section", {
+    className: "uix-spacing--s"
+  }, /*#__PURE__*/react.createElement("div", {
+    className: "container"
+  }, /*#__PURE__*/react.createElement("div", {
+    className: "row"
+  }, /*#__PURE__*/react.createElement("div", {
+    className: "col-12"
+  }, /*#__PURE__*/react.createElement(ModalDialog, {
+    autoOpen: false,
+    triggerTagName: "a",
+    triggerClassName: "uix-btn uix-btn__border--thin uix-btn__margin--b uix-btn__size--s uix-btn__bg--primary",
+    triggerContent: /*#__PURE__*/react.createElement(react.Fragment, null, "Click Here to Open Modal")
+  }, /*#__PURE__*/react.createElement("h2", null, "Holy Crap!!!"), /*#__PURE__*/react.createElement("p", null, "p.s. Sorry for calling you a dingus earlier."), /*#__PURE__*/react.createElement("p", null, "p.s. Sorry for calling you a dingus earlier."), /*#__PURE__*/react.createElement("p", null, "p.s. Sorry for calling you a dingus earlier."), /*#__PURE__*/react.createElement("p", null, "p.s. Sorry for calling you a dingus earlier."), /*#__PURE__*/react.createElement("p", null, "p.s. Sorry for calling you a dingus earlier."), /*#__PURE__*/react.createElement("p", null, "p.s. Sorry for calling you a dingus earlier."), /*#__PURE__*/react.createElement("p", null, "p.s. Sorry for calling you a dingus earlier."), /*#__PURE__*/react.createElement("p", null, "p.s. Sorry for calling you a dingus earlier."), /*#__PURE__*/react.createElement("p", null, "p.s. Sorry for calling you a dingus earlier.")), /*#__PURE__*/react.createElement("br", null), /*#__PURE__*/react.createElement(ModalDialog, {
+    fullscreen: true,
+    triggerTagName: "a",
+    triggerClassName: "uix-btn uix-btn__border--thin uix-btn__margin--b uix-btn__size--s uix-btn__bg--primary",
+    triggerContent: /*#__PURE__*/react.createElement(react.Fragment, null, "Click Here to Open Modal (Fullscreen)")
+  }, /*#__PURE__*/react.createElement("h2", null, "Full Screen Here"), /*#__PURE__*/react.createElement("p", null, "p.s. Sorry for calling you a dingus earlier.")), /*#__PURE__*/react.createElement("br", null), /*#__PURE__*/react.createElement(ModalDialog, {
+    width: "300px",
+    height: "200px",
+    triggerTagName: "a",
+    triggerClassName: "uix-btn uix-btn__border--thin uix-btn__margin--b uix-btn__size--s uix-btn__bg--primary",
+    triggerContent: /*#__PURE__*/react.createElement(react.Fragment, null, "Click Here to Open Modal (Custom)")
+  }, /*#__PURE__*/react.createElement("h2", null, "Holy Crap!!!"), /*#__PURE__*/react.createElement("p", null, "p.s. Sorry for calling you a dingus earlier.")), /*#__PURE__*/react.createElement("br", null), /*#__PURE__*/react.createElement(ModalDialog, {
+    autoOpen: true,
+    autoClose: 3000,
+    width: "600px",
+    height: "300px",
+    triggerTagName: "a",
+    triggerClassName: "d-none",
+    triggerContent: /*#__PURE__*/react.createElement(react.Fragment, null)
+  }, /*#__PURE__*/react.createElement("h4", null, "This window will automatically close after 3 seconds :)"), /*#__PURE__*/react.createElement("p", null, "You can click the button on the page to trigger the pop-up window.")), /*#__PURE__*/react.createElement("br", null))))), /*#__PURE__*/react.createElement("section", {
+    className: "uix-spacing--s uix-spacing--no-bottom"
+  }, /*#__PURE__*/react.createElement("div", {
+    className: "container"
+  }, /*#__PURE__*/react.createElement("div", {
+    className: "row"
+  }, /*#__PURE__*/react.createElement("div", {
+    className: "col-12"
+  }, /*#__PURE__*/react.createElement("h3", {
+    className: "app-header-title"
+  }, "Modal Dialog (Video)"), /*#__PURE__*/react.createElement("p", null, "Use the following HTML code to fire video."), /*#__PURE__*/react.createElement("hr", null))))), /*#__PURE__*/react.createElement("section", {
+    className: "uix-spacing--s"
+  }, /*#__PURE__*/react.createElement("div", {
+    className: "container"
+  }, /*#__PURE__*/react.createElement("div", {
+    className: "row"
+  }, /*#__PURE__*/react.createElement("div", {
+    className: "col-12"
+  }, /*#__PURE__*/react.createElement(ModalDialog, {
+    enableVideo: true,
+    triggerTagName: "a",
+    triggerClassName: "uix-btn uix-btn__border--thin uix-btn__margin--b uix-btn__size--s uix-btn__bg--primary",
+    triggerContent: /*#__PURE__*/react.createElement(react.Fragment, null, "Click Here to Open MP4 file")
+  }, /*#__PURE__*/react.createElement("video", {
+    playsInline: true,
+    controls: true,
+    poster: "".concat(websiteConfig.rootDirectory, "/assets/videos/480x270/demo.jpg"),
+    src: "".concat(websiteConfig.rootDirectory, "/assets/videos/480x270/demo.mp4")
+  })), /*#__PURE__*/react.createElement("br", null), /*#__PURE__*/react.createElement(ModalDialog, {
+    enableVideo: true,
+    triggerTagName: "a",
+    triggerClassName: "uix-btn uix-btn__border--thin uix-btn__margin--b uix-btn__size--s uix-btn__bg--primary",
+    triggerContent: /*#__PURE__*/react.createElement(react.Fragment, null, "Click Here to Open Youtube Video")
+  }, /*#__PURE__*/react.createElement("iframe", {
+    width: "560",
+    height: "315",
+    src: "https://www.youtube.com/embed/ckYJBMfPtBs",
+    frameBorder: "0",
+    allow: "autoplay; encrypted-media",
+    allowFullScreen: true
+  })), /*#__PURE__*/react.createElement("br", null))))), /*#__PURE__*/react.createElement("section", null, /*#__PURE__*/react.createElement("div", {
+    className: "container"
+  }, /*#__PURE__*/react.createElement("div", {
+    className: "row"
+  }, /*#__PURE__*/react.createElement("div", {
+    className: "col-12"
+  }, /*#__PURE__*/react.createElement("h3", {
+    className: "app-header-title"
+  }, "API"), /*#__PURE__*/react.createElement("hr", null), /*#__PURE__*/react.createElement("article", {
+    className: "uix-spacing--s",
+    itemProp: "text"
+  }, /*#__PURE__*/react.createElement("h4", null, "Modal Dialog"), /*#__PURE__*/react.createElement("div", null, /*#__PURE__*/react.createElement("pre", null, "import ModalDialog from '@uixkit.react/components/ModalDialog/index.tsx';")), /*#__PURE__*/react.createElement("div", {
+    className: "table-responsive-md"
+  }, /*#__PURE__*/react.createElement("table", {
+    className: "table table-bordered table-striped mb-5"
+  }, /*#__PURE__*/react.createElement("thead", null, /*#__PURE__*/react.createElement("tr", null, /*#__PURE__*/react.createElement("th", null, "Property"), /*#__PURE__*/react.createElement("th", null, "Type"), /*#__PURE__*/react.createElement("th", null, "Default"), /*#__PURE__*/react.createElement("th", null, "Description"))), /*#__PURE__*/react.createElement("tbody", null, /*#__PURE__*/react.createElement("tr", null, /*#__PURE__*/react.createElement("td", null, /*#__PURE__*/react.createElement("code", null, "height")), /*#__PURE__*/react.createElement("td", null, "number | string | boolean"), /*#__PURE__*/react.createElement("td", null, "false"), /*#__PURE__*/react.createElement("td", null, "Custom modal height whick need a unit string. Such as: ", /*#__PURE__*/react.createElement("code", null, "200px"))), /*#__PURE__*/react.createElement("tr", null, /*#__PURE__*/react.createElement("td", null, /*#__PURE__*/react.createElement("code", null, "width")), /*#__PURE__*/react.createElement("td", null, "number | string | boolean"), /*#__PURE__*/react.createElement("td", null, "false"), /*#__PURE__*/react.createElement("td", null, "Custom modal width whick need a unit string. Such as: ", /*#__PURE__*/react.createElement("code", null, "200px"))), /*#__PURE__*/react.createElement("tr", null, /*#__PURE__*/react.createElement("td", null, /*#__PURE__*/react.createElement("code", null, "lightbox")), /*#__PURE__*/react.createElement("td", null, "boolean"), /*#__PURE__*/react.createElement("td", null, "true"), /*#__PURE__*/react.createElement("td", null, "Whether to enable the lightbox effect")), /*#__PURE__*/react.createElement("tr", null, /*#__PURE__*/react.createElement("td", null, /*#__PURE__*/react.createElement("code", null, "closeOnlyBtn")), /*#__PURE__*/react.createElement("td", null, "boolean"), /*#__PURE__*/react.createElement("td", null, "false"), /*#__PURE__*/react.createElement("td", null, "Disable mask to close the window")), /*#__PURE__*/react.createElement("tr", null, /*#__PURE__*/react.createElement("td", null, /*#__PURE__*/react.createElement("code", null, "fullscreen")), /*#__PURE__*/react.createElement("td", null, "boolean"), /*#__PURE__*/react.createElement("td", null, "false"), /*#__PURE__*/react.createElement("td", null, "Toggles whether fullscreen should be enabled")), /*#__PURE__*/react.createElement("tr", null, /*#__PURE__*/react.createElement("td", null, /*#__PURE__*/react.createElement("code", null, "heading")), /*#__PURE__*/react.createElement("td", null, "React.ReactNode"), /*#__PURE__*/react.createElement("td", null, "-"), /*#__PURE__*/react.createElement("td", null, "Set a window title")), /*#__PURE__*/react.createElement("tr", null, /*#__PURE__*/react.createElement("td", null, /*#__PURE__*/react.createElement("code", null, "triggerTagName")), /*#__PURE__*/react.createElement("td", null, /*#__PURE__*/react.createElement("code", null, "a"), " | ", /*#__PURE__*/react.createElement("code", null, "button"), " | ", /*#__PURE__*/react.createElement("code", null, "div"), " | ", /*#__PURE__*/react.createElement("code", null, "span")), /*#__PURE__*/react.createElement("td", null, "-"), /*#__PURE__*/react.createElement("td", null, "Tag name of the trigger.")), /*#__PURE__*/react.createElement("tr", null, /*#__PURE__*/react.createElement("td", null, /*#__PURE__*/react.createElement("code", null, "triggerClassName")), /*#__PURE__*/react.createElement("td", null, "string"), /*#__PURE__*/react.createElement("td", null, "-"), /*#__PURE__*/react.createElement("td", null, "Specify a class for this Node")), /*#__PURE__*/react.createElement("tr", null, /*#__PURE__*/react.createElement("td", null, /*#__PURE__*/react.createElement("code", null, "triggerContent")), /*#__PURE__*/react.createElement("td", null, "React.ReactNode"), /*#__PURE__*/react.createElement("td", null, "-"), /*#__PURE__*/react.createElement("td", null, "Set a piece of text or HTML code for the trigger")), /*#__PURE__*/react.createElement("tr", null, /*#__PURE__*/react.createElement("td", null, /*#__PURE__*/react.createElement("code", null, "autoClose")), /*#__PURE__*/react.createElement("td", null, "number | boolean"), /*#__PURE__*/react.createElement("td", null, "false"), /*#__PURE__*/react.createElement("td", null, "Specify auto-close time. This function is not enabled when this value is false. If the value is ", /*#__PURE__*/react.createElement("code", null, "2000"), ", it will automatically close after 2 seconds.")), /*#__PURE__*/react.createElement("tr", null, /*#__PURE__*/react.createElement("td", null, /*#__PURE__*/react.createElement("code", null, "autoOpen")), /*#__PURE__*/react.createElement("td", null, "boolean"), /*#__PURE__*/react.createElement("td", null, "false"), /*#__PURE__*/react.createElement("td", null, "Automatically open the component, you can use it with the ", /*#__PURE__*/react.createElement("code", null, "autoClose"), " property at the same time")), /*#__PURE__*/react.createElement("tr", null, /*#__PURE__*/react.createElement("td", null, /*#__PURE__*/react.createElement("code", null, "enableVideo")), /*#__PURE__*/react.createElement("td", null, "boolean"), /*#__PURE__*/react.createElement("td", null, "false"), /*#__PURE__*/react.createElement("td", null, "Adapt the video to the window. For example, the content of the component can be written as: ", /*#__PURE__*/react.createElement("code", {
+    className: "text-wrap"
+  }, "<iframe width=\"560\" height=\"315\" src=\"https://www.youtube.com/xxx\" frameBorder=\"0\" allow=\"autoplay; encrypted-media\" allowFullScreen></iframe>"), " ", /*#__PURE__*/react.createElement("br", null), " or ", /*#__PURE__*/react.createElement("br", null), /*#__PURE__*/react.createElement("code", {
+    className: "text-wrap"
+  }, "<video playsInline controls poster=\"/assets/videos/480x270/demo.jpg\" src=\"/assets/videos/480x270/demo.mp4\"></video>"))))))))))));
+});
 ;// CONCATENATED MODULE: ./src/client/views/_pages/ComponentsDemo/index.js
 
 
@@ -76761,6 +79460,11 @@ function ComponentsDemo_isNativeReflectConstruct() { if (typeof Reflect === "und
 
 
  //components list
+
+
+
+
+
 
 
 
@@ -76870,7 +79574,37 @@ function ComponentsDemo_HookContent() {
     "data-route": "true",
     to: "".concat(url, "/grid"),
     activeClassName: "is-active"
-  }, "Grid")))), /*#__PURE__*/react.createElement("div", {
+  }, "Grid")), /*#__PURE__*/react.createElement("li", {
+    className: theLocation.pathname.indexOf('/accordion') >= 0 && theLocation.pathname.indexOf('/accordion-slider') < 0 ? 'is-active' : ''
+  }, /*#__PURE__*/react.createElement(NavLink, {
+    "data-route": "true",
+    to: "".concat(url, "/accordion"),
+    activeClassName: "is-active"
+  }, "Accordion")), /*#__PURE__*/react.createElement("li", {
+    className: theLocation.pathname.indexOf('/accordion-slider') >= 0 ? 'is-active' : ''
+  }, /*#__PURE__*/react.createElement(NavLink, {
+    "data-route": "true",
+    to: "".concat(url, "/accordion-slider"),
+    activeClassName: "is-active"
+  }, "Accordion Slider")), /*#__PURE__*/react.createElement("li", {
+    className: theLocation.pathname.indexOf('/counter') >= 0 ? 'is-active' : ''
+  }, /*#__PURE__*/react.createElement(NavLink, {
+    "data-route": "true",
+    to: "".concat(url, "/counter"),
+    activeClassName: "is-active"
+  }, "Counter")), /*#__PURE__*/react.createElement("li", {
+    className: theLocation.pathname.indexOf('/dropdown-menu') >= 0 ? 'is-active' : ''
+  }, /*#__PURE__*/react.createElement(NavLink, {
+    "data-route": "true",
+    to: "".concat(url, "/dropdown-menu"),
+    activeClassName: "is-active"
+  }, "Dropdown Menu")), /*#__PURE__*/react.createElement("li", {
+    className: theLocation.pathname.indexOf('/modal-dialog') >= 0 ? 'is-active' : ''
+  }, /*#__PURE__*/react.createElement(NavLink, {
+    "data-route": "true",
+    to: "".concat(url, "/modal-dialog"),
+    activeClassName: "is-active"
+  }, "Modal Dialog")))), /*#__PURE__*/react.createElement("div", {
     className: "uix-demo-section"
   }, /*#__PURE__*/react.createElement("div", {
     className: "uix-demo-container"
@@ -76913,7 +79647,17 @@ function ComponentsDemo_HookContent() {
     path: "".concat(path, "/parallax")
   }, /*#__PURE__*/react.createElement(ParallaxDemo, null)), /*#__PURE__*/react.createElement(Route, {
     path: "".concat(path, "/grid")
-  }, /*#__PURE__*/react.createElement(GridDemo, null)))))));
+  }, /*#__PURE__*/react.createElement(GridDemo, null)), /*#__PURE__*/react.createElement(Route, {
+    path: "".concat(path, "/accordion")
+  }, /*#__PURE__*/react.createElement(AccordionDemo, null)), /*#__PURE__*/react.createElement(Route, {
+    path: "".concat(path, "/accordion-slider")
+  }, /*#__PURE__*/react.createElement(AccordionSliderDemo, null)), /*#__PURE__*/react.createElement(Route, {
+    path: "".concat(path, "/counter")
+  }, /*#__PURE__*/react.createElement(CounterDemo, null)), /*#__PURE__*/react.createElement(Route, {
+    path: "".concat(path, "/dropdown-menu")
+  }, /*#__PURE__*/react.createElement(DropdownMenuDemo, null)), /*#__PURE__*/react.createElement(Route, {
+    path: "".concat(path, "/modal-dialog")
+  }, /*#__PURE__*/react.createElement(ModalDialogDemo, null)))))));
 }
 
 var ComponentsDemo = /*#__PURE__*/function (_Component) {

@@ -33,7 +33,6 @@ type MergeInputProps = {
 	icon?: object;
 	/** -- */
 	id?: string;
-	attributes?: any;
 };
 type MergeInputState = false;
 

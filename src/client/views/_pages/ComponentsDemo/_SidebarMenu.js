@@ -45,23 +45,26 @@ function createSidebarMenu( navItems ) {
 	// Add list to body (or anywhere else)
 	document.body.appendChild(navElem);
 
-
+	
 	// Smooth scrolling when clicking an anchor link
 	document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+		//only sidebar
+		if ( anchor.closest( '.app-sidebar-menu' ) !== null || anchor.closest( '.app-header-title' ) !== null ) {
+			anchor.addEventListener('click', function (e) {
+				e.preventDefault();
+				
+				let _href = this.getAttribute('href');
+				if ( _href === '#' ) _href = '#demo';
+				
+				const targetEl = document.querySelector( '#' + _href.split( '#' )[1] );
+				if ( targetEl !== null ) {
+					const elTop = targetEl.offsetTop;
+					window.scrollTo({ top: elTop, behavior: 'smooth' });
+				}
 
-		anchor.addEventListener('click', function (e) {
-			e.preventDefault();
+			});
+		}
 
-			let _href = this.getAttribute('href');
-			if ( _href === '#' ) _href = '#demo';
-			
-			const targetEl = document.querySelector( '#' + _href.split( '#' )[1] );
-			if ( targetEl !== null ) {
-				const elTop = targetEl.offsetTop;
-				window.scrollTo({ top: elTop, behavior: 'smooth' });
-			}
-
-		});
 	});
 
 	
@@ -93,10 +96,15 @@ function highlightNavigation() {
 
                 if (curID === _url) {
                     document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-                        const _parent = anchor.parentNode;
-                        if ( _parent ) {
-                            _parent.classList.remove( 'is-active' );
-                        }
+
+						//only sidebar
+						if ( anchor.closest( '.app-sidebar-menu' ) !== null || anchor.closest( '.app-header-title' ) !== null ) {
+							const _parent = anchor.parentNode;
+							if ( _parent ) {
+								_parent.classList.remove( 'is-active' );
+							}
+						}
+
                     });
         
                     const _parentCur = item.parentNode;

@@ -32,7 +32,6 @@ type SwitchProps = {
 	required?: any;
 	/** -- */
 	id?: string;
-	attributes?: any;
 };
 type SwitchState = {
 	isChecked?: boolean;

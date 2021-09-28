@@ -1,5 +1,24 @@
 # Changelog
 
+
+#### = 0.1.0 (September 27, 2021) =
+
+* New: Add new UI components `Accordion`.
+* New: Add new UI components `Accordion Slider`.
+* New: Add new UI components `Counter`.
+* New: Add new UI components `Dropdown Menu`.
+* New: Add new UI components `Modal Dialog`.
+* New: Added animate() method for the core shortcut.
+* Fix: Fixed some issues with the `__()` selector.
+* Fix: Fixed the display problem of some UI components.
+* Fix: Fixed off() method for the core shortcut.
+* Tweak: Optimized selectors for the core shortcut.
+* Tweak: Refactored some Vanilla JS general tool scripts.
+* Tweak: Improved the performance and stability of the Vanilla JavsScript tool library, and fixed possible problems in some methods.
+* Tweak: Optimized the documentation of UI components.
+
+
+
 #### = 0.0.9 (September 14, 2021) =
 
 * New: Added API documentation for UI components.

@@ -29,7 +29,6 @@ type FileProps = {
 	required?: any;
 	/** -- */
 	id?: string;
-	attributes?: any;
 };
 type FileState = false;
 

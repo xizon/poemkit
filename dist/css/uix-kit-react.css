@@ -6,9 +6,9 @@
  * ## Project Name        :  Uix Kit React
  * ## Project Description :  A free web kits with React for fast web design and development via SSR.
  * ## Project URL         :  https://uiux.cc
- * ## Version             :  0.0.9
+ * ## Version             :  0.1.0
  * ## Based on            :  Uix Kit React (https://github.com/xizon/uix-kit-react#readme)
- * ## Last Update         :  September 15, 2021
+ * ## Last Update         :  September 28, 2021
  * ## Created by          :  UIUX Lab (https://uiux.cc) (uiuxlab@gmail.com)
  * ## Released under the MIT license.
  *
@@ -24786,7 +24786,7 @@ body.rtl {
   height: 80px;
   background: none;
   z-index: 2;
-  top: 42px;
+  top: 0;
   left: 50%;
   min-width: inherit;
   /* Required */
@@ -31578,6 +31578,549 @@ input[type="datetime-local"].is-active::-webkit-datetime-edit {
 
 .uix-parallax .uix-parallax__img {
   visibility: hidden;
+}
+
+/* ======================================================
+    <!-- Accordion -->
+/* ====================================================== */
+.uix-accordion dl {
+  position: relative;
+  background: white;
+  transition: .1s ease-in-out;
+  /* Actived status */
+}
+
+.uix-accordion dl dt {
+  padding: 1rem;
+  cursor: pointer;
+}
+
+.uix-accordion dl dt a {
+  display: block;
+}
+
+.uix-accordion dl dt::before {
+  position: absolute;
+  display: block;
+  font-family: 'Font Awesome 5 Free';
+  font-weight: 600;
+  content: "\f105";
+  font-size: 1rem;
+  right: 1rem;
+  top: 1rem;
+  transition: .1s ease-in-out;
+  color: rgba(0, 0, 0, 0.54);
+}
+
+.uix-accordion dl dd {
+  width: calc(100% - 2rem);
+  overflow: hidden;
+  height: 0;
+  font-size: 0.875rem;
+}
+
+.uix-accordion dl dd > div {
+  padding: 1rem;
+}
+
+.uix-accordion dl::before {
+  content: '';
+  position: absolute;
+  display: block;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  pointer-events: none;
+  border: 1px solid rgba(0, 0, 0, 0.01);
+  box-shadow: rgba(0, 0, 0, 0.1) 0px 2px 4px 0px;
+}
+
+.uix-accordion dl.is-active {
+  height: auto;
+  margin: 1rem 0;
+  box-shadow: rgba(0, 0, 0, 0.07) 0px 5px 15px 0px, rgba(50, 50, 93, 0.1) 0px 15px 35px 0px;
+}
+
+.uix-accordion dl.is-active dt {
+  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+.uix-accordion dl.is-active dt::before {
+  transform: rotate(90deg);
+}
+
+/* ======================================================
+    <!-- Accordion Slider -->
+/* ====================================================== */
+.uix-accordion-slider {
+  width: 100%;
+  height: 250px;
+  overflow: hidden;
+}
+
+.uix-accordion-slider > ul {
+  width: 100%;
+  display: table;
+  table-layout: fixed;
+  margin: 0;
+  padding: 0;
+  font-size: 0;
+  /*Fighting the Space Between Inline Block Elements*/
+}
+
+.uix-accordion-slider > ul > li {
+  display: table-cell;
+  vertical-align: bottom;
+  position: relative;
+  width: 16.66666666666667%;
+  height: 250px;
+  font-size: 1rem;
+  /*Fighting the Space Between Inline Block Elements*/
+  z-index: 1;
+  background-position: center center;
+  background-repeat: no-repeat;
+  transition: all 0.3s ease;
+}
+
+.uix-accordion-slider > ul > li > img {
+  position: absolute;
+  left: 0;
+  top: 0;
+}
+
+.uix-accordion-slider > ul > li > .uix-accordion-slider__content {
+  display: block;
+  height: 250px;
+  width: 100%;
+  vertical-align: bottom;
+  padding: 1rem 2.5rem;
+  box-sizing: border-box;
+  color: #fff;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.uix-accordion-slider > ul > li > .uix-accordion-slider__content h3,
+.uix-accordion-slider > ul > li > .uix-accordion-slider__content p {
+  position: relative;
+  z-index: -1;
+  word-break: break-all;
+}
+
+.uix-accordion-slider > ul > li > .uix-accordion-slider__content .uix-accordion-slider__close {
+  position: absolute;
+  right: 10px;
+  top: 10px;
+  z-index: 2;
+  display: inline-block;
+  background: rgba(255, 255, 255, 0.2);
+  color: #fff;
+  border-radius: 15px;
+  width: auto;
+  font-size: 0.75rem;
+  padding: 0 1rem;
+}
+
+.uix-accordion-slider > ul > li.is-active {
+  width: 60%;
+}
+
+.uix-accordion-slider > ul > li.is-active.active-sub > .outer h3,
+.uix-accordion-slider > ul > li.is-active.active-sub > .outer p {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  width: 100%;
+  white-space: nowrap;
+}
+
+@media all and (max-width: 768px) {
+  .uix-accordion-slider {
+    height: auto;
+  }
+  .uix-accordion-slider > ul > li,
+  .uix-accordion-slider > ul > li:hover,
+  .uix-accordion-slider > ul:hover > li,
+  .uix-accordion-slider > ul:hover > li:hover {
+    position: relative;
+    display: table;
+    table-layout: fixed;
+    width: 100%;
+    transition: none;
+  }
+}
+
+/* ======================================================
+   <!-- Dropdown Menu -->
+/* ====================================================== */
+/* Do not use <a> tag */
+.uix-dropdown-menu {
+  display: inline-block;
+  cursor: pointer;
+  position: relative;
+}
+
+.uix-dropdown-menu > ul {
+  display: none;
+  position: absolute;
+  top: 100%;
+  left: 0;
+  margin-top: 8px;
+  min-width: 170px;
+  border-radius: 4px;
+  text-align: left;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease;
+}
+
+.uix-dropdown-menu > ul::before {
+  content: '';
+  position: absolute;
+  top: -6px;
+  left: 20px;
+  width: 0;
+  height: 0;
+  box-shadow: 2px -2px 6px rgba(0, 0, 0, 0.05);
+  border-top: 6px solid #fff;
+  border-right: 6px solid #fff;
+  border-bottom: 6px solid transparent;
+  border-left: 6px solid transparent;
+  transform: rotate(-45deg);
+}
+
+.uix-dropdown-menu > ul li {
+  z-index: 1;
+  position: relative;
+  background: #fff;
+  padding: 0 .75rem;
+  color: #AEAEAE;
+}
+
+.uix-dropdown-menu > ul li:hover {
+  background: #FAFAFA;
+}
+
+.uix-dropdown-menu > ul li a {
+  display: block;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+  padding: .75rem 0;
+  color: inherit;
+  font-size: 0.75rem;
+  text-decoration: none;
+}
+
+.uix-dropdown-menu > ul li:first-child {
+  border-radius: 4px 4px 0 0;
+}
+
+.uix-dropdown-menu > ul li:last-child {
+  border-radius: 0 0 4px 4px;
+}
+
+.uix-dropdown-menu > ul li:last-child a {
+  border-bottom: 0;
+}
+
+.uix-dropdown-menu.is-opened > ul {
+  animation: uix-cssAnim--dropdown-display 0.4s cubic-bezier(0.73, 0.005, 0.22, 1);
+  display: block !important;
+}
+
+@keyframes uix-cssAnim--dropdown-display {
+  0% {
+    opacity: 0;
+    transform: scale(0.98) translateY(-0.6em);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+  }
+}
+
+/* ======================================================
+   <!-- Dropdown Menu -->
+/* ====================================================== */
+/* Do not use <a> tag */
+.rtl .uix-dropdown-menu > ul {
+  left: auto;
+  right: 0;
+}
+
+.rtl .uix-dropdown-menu > ul::before {
+  left: auto;
+  right: 20px;
+}
+
+/* ======================================================
+    <!-- Modal Dialog -->
+/* ====================================================== */
+.uix-modal-mask {
+  background: rgba(0, 0, 0, 0);
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  position: fixed;
+  z-index: 99997;
+  display: none;
+  content: '';
+  background: rgba(0, 0, 0, 0.7);
+}
+
+.uix-modal-box {
+  position: fixed;
+  top: calc( -100vh - 71px);
+  /* For compatibility with mobile devices, do not use percentages "%" */
+  z-index: 99998;
+  pointer-events: none;
+  transition: all .5s ease-out;
+  width: 850px;
+  height: 60vh;
+  border-radius: 8px;
+  background: #fff;
+  box-shadow: 0px 0px 71px 0px rgba(0, 0, 0, 0.47);
+  left: 50%;
+  transform: translate(-50%, -50%);
+  /* Video container */
+  /* Video */
+}
+
+.uix-modal-box:not(.is-fullscreen) {
+  max-width: calc(100vw - 100px);
+  max-height: calc(100vh - 100px);
+}
+
+.uix-modal-box .uix-modal-box__video-container > div.video-js {
+  margin: 0 auto;
+  transform: translateY(15px);
+}
+
+.uix-modal-box .uix-modal-box__video-waiting {
+  display: none;
+  position: fixed;
+  left: 50%;
+  top: 50%;
+  z-index: 99998;
+  margin-left: -1rem;
+}
+
+.uix-modal-box .uix-modal-box__video-waiting::after {
+  font-family: 'Font Awesome 5 Free';
+  font-weight: 600;
+  content: "\f110";
+  color: #fff;
+  font-size: 2rem;
+  text-shadow: 0 0 1px rgba(0, 0, 0, 0.1);
+  display: inline-block;
+  animation: fa-spin 2s infinite linear;
+}
+
+.uix-modal-box .uix-modal-box__video-waiting.is-active {
+  display: block;
+}
+
+.uix-modal-box .uix-modal-box__content {
+  word-wrap: break-word;
+  height: 100%;
+  /* content header */
+  /* content body */
+}
+
+.uix-modal-box .uix-modal-box__content > [class*="uix-modal-box__video-"],
+.uix-modal-box .uix-modal-box__content > .uix-modal-box__body {
+  position: relative;
+  height: 100%;
+  padding: 1.5rem 1.625rem 1.5rem 1.5rem;
+}
+
+.uix-modal-box .uix-modal-box__content > .uix-modal-box__head {
+  position: relative;
+  padding: 0 55px 0 1.5rem;
+}
+
+.uix-modal-box .uix-modal-box__content > .uix-modal-box__body > [role="note"] {
+  overflow: hidden;
+  height: 100%;
+}
+
+.uix-modal-box .uix-modal-box__content img {
+  transition: all 0.3s ease;
+  opacity: 0;
+}
+
+.uix-modal-box .uix-modal-box__close {
+  box-shadow: 2.5px 4.33px 16px 0px rgba(204, 23, 30, 0.31);
+  border-radius: 50%;
+  background: #cc171e;
+  width: 36px;
+  height: 36px;
+  display: inline-block;
+  text-align: center;
+  line-height: 34px;
+  overflow: hidden;
+  position: absolute;
+  right: 12px;
+  top: 12px;
+  z-index: 1;
+  pointer-events: auto;
+  border: none;
+  outline: none;
+  cursor: pointer;
+}
+
+.uix-modal-box .uix-modal-box__close::after {
+  font-family: 'Font Awesome 5 Free';
+  font-weight: 600;
+  content: "\f00d";
+  color: #fff;
+  font-size: 16px;
+  margin: 0;
+}
+
+.uix-modal-box .uix-modal-box__close:hover {
+  background: #b50d14;
+}
+
+.uix-modal-box .uix-modal-box__close:focus {
+  outline: 3px auto -webkit-focus-ring-color;
+}
+
+.uix-modal-box.is-video {
+  background: none;
+  box-shadow: none;
+  opacity: 0;
+}
+
+.uix-modal-box.is-video .uix-modal-box__close::after {
+  font-size: 2rem !important;
+}
+
+.uix-modal-box.is-active, .uix-modal-box.is-fullscreen.is-active {
+  pointer-events: auto;
+}
+
+.uix-modal-box.is-active {
+  top: 50vh;
+  /* For compatibility with mobile devices, do not use percentages "%" */
+}
+
+.uix-modal-box.is-fullscreen.is-active {
+  top: 0;
+}
+
+.uix-modal-box.is-fullscreen.is-video.is-active {
+  pointer-events: none;
+  opacity: 1;
+}
+
+.uix-modal-box.is-fullscreen.is-video.is-active .uix-modal-box__video-container video,
+.uix-modal-box.is-fullscreen.is-video.is-active .uix-modal-box__video-container > div.video-js,
+.uix-modal-box.is-fullscreen.is-video.is-active .uix-modal-box__video-container iframe {
+  pointer-events: auto;
+}
+
+.uix-modal-box.is-active .uix-modal-box__content img,
+.uix-modal-box.is-fullscreen.is-active .uix-modal-box__content img {
+  opacity: 1;
+}
+
+.uix-modal-box.is-active .uix-modal-box__content > .uix-modal-box__body > [role="note"] {
+  overflow-y: auto;
+}
+
+.uix-modal-box.is-fullscreen {
+  left: 0;
+  width: 100% !important;
+  height: 100% !important;
+  transform: translateY(0);
+  border-radius: 0;
+}
+
+.uix-modal-box.is-fullscreen .uix-modal-box__close::after {
+  font-size: 1rem;
+}
+
+.uix-modal-box.is-fullscreen.is-video .uix-modal-box__close {
+  box-shadow: none;
+  background: none;
+}
+
+.uix-modal-box__content > .uix-modal-box__body > [role="note"]::-webkit-scrollbar-track {
+  border-radius: 0px;
+  background-color: #e9ecee;
+}
+
+.uix-modal-box__content > .uix-modal-box__body > [role="note"]::-webkit-scrollbar-corner {
+  background-color: transparent;
+}
+
+.uix-modal-box__content > .uix-modal-box__body > [role="note"]::-webkit-scrollbar-button {
+  width: 0;
+  height: 0;
+  display: none;
+}
+
+.uix-modal-box__content > .uix-modal-box__body > [role="note"]::-webkit-scrollbar {
+  width: 8px;
+}
+
+.uix-modal-box__content > .uix-modal-box__body > [role="note"]::-webkit-scrollbar-thumb {
+  border-radius: 0px;
+  background-color: rgba(0, 0, 0, 0.2);
+  box-shadow: inset 1px 1px 0 rgba(0, 0, 0, 0.1), inset 0 -1px 0 rgba(0, 0, 0, 0.07);
+}
+
+.uix-modal-box__content > .uix-modal-box__body > [role="note"]::-webkit-scrollbar-thumb:hover {
+  background-color: rgba(0, 0, 0, 0.3);
+}
+
+@media all and (max-width: 991px) {
+  .uix-modal-box:not(.is-fullscreen) {
+    width: 850px !important;
+  }
+}
+
+@media all and (max-width: 768px) {
+  .uix-modal-box:not(.is-fullscreen) {
+    width: 90% !important;
+    height: 60vh !important;
+  }
+}
+
+/* ======================================================
+    <!-- Modal Dialog -->
+/* ====================================================== */
+.rtl .uix-modal-box {
+  left: auto;
+  right: 50%;
+  /* Video container */
+}
+
+.rtl .uix-modal-box .uix-modal-box__video-waiting {
+  left: auto;
+  right: 50%;
+  margin-left: auto;
+  margin-right: -1rem;
+}
+
+.rtl .uix-modal-box .uix-modal-box__close {
+  right: auto;
+  left: 12px;
+}
+
+.rtl .uix-modal-box.is-fullscreen {
+  left: auto;
+  right: 0;
+}
+
+.rtl .uix-modal-box.is-fullscreen .uix-modal-box__close {
+  right: auto;
+  left: 26px;
+}
+
+.rtl .uix-modal-mask {
+  left: auto;
+  right: 0;
 }
 
 

@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
 
 type TabListProps = {
-	defaultActive?: string | undefined;
+	defaultActive?: string | boolean | undefined;
 	/** -- */
-	attributes?: any;
+	children?: any;
 };
 type TabListState = false;
 
@@ -18,16 +18,17 @@ export default class TabList extends Component<TabListProps, TabListState> {
 		
 		const { 
             defaultActive,
+			children,
 			...attributes
 		} = this.props;
 		
-		const activedClassName = typeof(defaultActive) !== 'undefined' ? ' is-active' : '';
+		const activedClassName = typeof(defaultActive) !== 'undefined' && defaultActive !== false ? ' is-active' : '';
 	
 		
 		return (
 		  <>
  
-				<li role="presentation" className={activedClassName}><a href="#" {...attributes}></a></li>
+				<li role="presentation" className={activedClassName} {...attributes}><a href="#">{children}</a></li>
 	
 		  </>
 		)

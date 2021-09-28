@@ -23,8 +23,11 @@ import ScrollRevealDemo from '@uixkit.react/pages/ComponentsDemo/ScrollRevealDem
 import CardDemo from '@uixkit.react/pages/ComponentsDemo/CardDemo.js';
 import ParallaxDemo from '@uixkit.react/pages/ComponentsDemo/ParallaxDemo.js';
 import GridDemo from '@uixkit.react/pages/ComponentsDemo/GridDemo.js';
-
-
+import AccordionDemo from '@uixkit.react/pages/ComponentsDemo/AccordionDemo.js';
+import AccordionSliderDemo from '@uixkit.react/pages/ComponentsDemo/AccordionSliderDemo.js';
+import CounterDemo from '@uixkit.react/pages/ComponentsDemo/CounterDemo.js';
+import DropdownMenuDemo from '@uixkit.react/pages/ComponentsDemo/DropdownMenuDemo.js';
+import ModalDialogDemo from '@uixkit.react/pages/ComponentsDemo/ModalDialogDemo.js';
 
 //Might have mismatching versions of React and the renderer (such as React DOM)
 function HookContent() {
@@ -89,6 +92,22 @@ function HookContent() {
 				<li className={theLocation.pathname.indexOf('/grid') >= 0 ? 'is-active' : ''}>
 					<NavLink data-route="true" to={`${url}/grid`} activeClassName="is-active">Grid</NavLink>
 				</li>
+				<li className={theLocation.pathname.indexOf('/accordion') >= 0 && theLocation.pathname.indexOf('/accordion-slider') < 0 ? 'is-active' : ''}>
+					<NavLink data-route="true" to={`${url}/accordion`} activeClassName="is-active">Accordion</NavLink>
+				</li>
+				<li className={theLocation.pathname.indexOf('/accordion-slider') >= 0 ? 'is-active' : ''}>
+					<NavLink data-route="true" to={`${url}/accordion-slider`} activeClassName="is-active">Accordion Slider</NavLink>
+				</li>
+				<li className={theLocation.pathname.indexOf('/counter') >= 0 ? 'is-active' : ''}>
+					<NavLink data-route="true" to={`${url}/counter`} activeClassName="is-active">Counter</NavLink>
+				</li>
+				<li className={theLocation.pathname.indexOf('/dropdown-menu') >= 0 ? 'is-active' : ''}>
+					<NavLink data-route="true" to={`${url}/dropdown-menu`} activeClassName="is-active">Dropdown Menu</NavLink>
+				</li>
+				<li className={theLocation.pathname.indexOf('/modal-dialog') >= 0 ? 'is-active' : ''}>
+					<NavLink data-route="true" to={`${url}/modal-dialog`} activeClassName="is-active">Modal Dialog</NavLink>
+				</li>
+
 			</ul>
 		</div>
 
@@ -165,9 +184,23 @@ function HookContent() {
 						<Route path={`${path}/grid`}>
 							<GridDemo />
 						</Route>
+						<Route path={`${path}/accordion`}>
+							<AccordionDemo />
+						</Route>
+						<Route path={`${path}/accordion-slider`}>
+							<AccordionSliderDemo />
+						</Route>
+						<Route path={`${path}/counter`}>
+							<CounterDemo />
+						</Route>
+						<Route path={`${path}/dropdown-menu`}>
+							<DropdownMenuDemo />
+						</Route>
+						<Route path={`${path}/modal-dialog`}>
+							<ModalDialogDemo />
+						</Route>
 
 
-						
 
 					</Switch>
 

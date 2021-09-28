@@ -33,7 +33,6 @@ type NumberProps = {
 	required?: any;
 	/** -- */
 	id?: string;
-	attributes?: any;
 };
 type NumberState = {
 	count?: any;

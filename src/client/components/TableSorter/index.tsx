@@ -4,6 +4,7 @@
  *************************************
  */
 import React, { Component } from 'react';
+import ReactDOM from 'react-dom';
 
 /*-- Apply Third-party plugins (import location should be in front of "global scripts and styles") --*/
 import '@uixkit.react/components/_plugins/_lib-bootstrap';
@@ -80,6 +81,7 @@ class TableSorterRow extends Component<TableSorterRowProps, TableSorterRowState>
 -------------------------------------------------*/		
 type TableSorterHeadersProps = {
 	data: any[];
+	clickEv?: React.MouseEventHandler<HTMLElement>;
 };
 type TableSorterHeadersState = false;
 
@@ -96,7 +98,7 @@ class TableSorterHeaders extends Component<TableSorterHeadersProps, TableSorterH
 				<thead>
 					<tr id={"app-table-sorter-header-tr" + __.GUID.create()}>
 						{this.props.data!.map((item, i) => {
-							return <th data-sort-type={item.type} key={"header" + i}>{item.content}</th>;
+							return <th data-sort-type={item.type} data-table-row={i} key={"header" + i} onClick={this.props.clickEv}>{item.content}</th>;
 						})
 						}
 					</tr>
@@ -129,13 +131,81 @@ type TableSorterProps = {
 	responsiveWithScrollBar?: boolean;
 	/** -- */
 	id?: string;
-	attributes?: any;
 };
 type TableSorterState = false;
 
 export default class TableSorter extends Component<TableSorterProps, TableSorterState> {
+
+	//Refs are commonly assigned to an instance property when a component 
+	//is constructed so they can be referenced throughout the component.
+	private wrapperRef = React.createRef<HTMLDivElement>();
+	inverse: boolean;
+
+
 	constructor(props) {
 		super(props);
+
+		this.handleSortType = this.handleSortType.bind(this);
+		this.inverse = false;
+		
+	}
+
+	handleSortType(e) {
+		e.preventDefault();
+
+		const self = this;
+		const wrapper = ReactDOM.findDOMNode(self.wrapperRef.current);
+		const el = __( e.target );
+
+		const thType  = el.data( 'sort-type' );
+		const curIndex = el.data( 'table-row' );
+		const targetComparator = __( wrapper ).find( 'tbody [data-table-row="'+curIndex+'"]' );
+		const root = __( wrapper ).find( 'tbody' );
+	
+		if ( thType === false ) return false;
+
+
+		//sort of HTML elements
+		const sortBy = function(a, b) {
+
+			let txt1 = a.innerHTML.replace(/(<([^>]+)>)/ig, '').toLowerCase(),
+				txt2 = b.innerHTML.replace(/(<([^>]+)>)/ig, '').toLowerCase();	
+
+			//type of number
+			if ( thType == 'number' ) {
+				txt1 = Number( txt1.replace(/[^0-9.-]+/g, '' ) );
+				txt2 = Number( txt2.replace(/[^0-9.-]+/g, '' ) );
+			}
+
+			//type of date
+			if ( thType == 'date' ) {
+				txt1 = new Date( txt1 );
+				txt2 = new Date( txt2 );	
+			}	
+
+			//add filter class
+			__( wrapper ).find( 'tbody tr' ).addClass( 'js-uix-newsort' );
+
+			self.inverse = !self.inverse;
+
+			return txt2<txt1 ? -1 : txt2>txt1 ? 1 : 0;
+		}
+
+		targetComparator.sort(sortBy);
+
+		//console.log( 'targetComparator:', targetComparator );
+		//console.log( 'inverse:', self.inverse );
+
+		if ( !self.inverse ) targetComparator.reverse();
+
+
+		root.empty();
+		for (let i = 0; i < targetComparator.length; i++) {
+			const curRow = targetComparator[i].parentNode;
+			root[0].appendChild(curRow);
+		}
+
+
 	}
 	
 	componentDidMount(){
@@ -148,9 +218,8 @@ export default class TableSorter extends Component<TableSorterProps, TableSorter
 			
 
 				//Add an identifier so that the mobile terminal can compare by row
-				__( curSelector + ' tbody tr' ).each(function(this: any, index: number, tdSelectors: string ) {
-					__( tdSelectors + '> td' ).each( function(this: any, index: number ) {
-						__( curSelector + ' thead th' ).eq(index).data( 'table-row', index );
+				__( curSelector + ' tbody tr' ).each(function(this: any, index: number ) {
+					__( this ).find( '> td' ).each( function(this: any, index: number ) {
 						__( this ).data( 'table-row', index );
 					});
 				});
@@ -159,70 +228,15 @@ export default class TableSorter extends Component<TableSorterProps, TableSorter
 
 				//Filter functions
 				__( curSelector + ' thead tr [data-sort-type]' ).each( function(this: any)  {
+					
 					//add arrows
 					if ( __( this ).find( '.uix-table-sorter' ).length == 0 && __( this ).data( 'sort-type' ) !== false ) {
-						__( this ).wrapInner( '<span class="uix-table-sorter" />' );
+						__( this ).css( 'cursor', 'pointer' );
+						__( this ).wrapInner( '<span class="uix-table-sorter" style="pointer-events: none;" />' );
 					}
 				});
 
 
-				//Click event
-				let	inverse = false;
-				__( curSelector + ' thead tr [data-sort-type]' ).off( 'click' ).on( 'click', function(this: any) {
-
-					const thType  = __( this ).data( 'sort-type' );
-					const curIndex = __( this ).index();
-					const targetComparator = __( curSelector + ' tbody [data-table-row="'+curIndex+'"]' );
-					const root = __( curSelector + ' tbody' );
-
-
-					if ( thType === false ) return false;
-
-
-					//sort of HTML elements
-					const sortBy = function(a, b) {
-
-						let txt1 = a.innerHTML.replace(/(<([^>]+)>)/ig, '').toLowerCase(),
-							txt2 = b.innerHTML.replace(/(<([^>]+)>)/ig, '').toLowerCase();	
-
-						//type of number
-						if ( thType == 'number' ) {
-							txt1 = Number( txt1.replace(/[^0-9.-]+/g, '' ) );
-							txt2 = Number( txt2.replace(/[^0-9.-]+/g, '' ) );
-						}
-
-						//type of date
-						if ( thType == 'date' ) {
-							txt1 = new Date( txt1 );
-							txt2 = new Date( txt2 );	
-						}	
-
-						//add filter class
-						__( curSelector + ' tbody tr' ).addClass( 'js-uix-newsort' );
-
-						inverse = !inverse;
-
-						return txt2<txt1 ? -1 : txt2>txt1 ? 1 : 0;
-					}
-
-					targetComparator.sort(sortBy);
-
-					//console.log( 'targetComparator:', targetComparator );
-					//console.log( 'inverse:', inverse );
-
-					if ( !inverse ) targetComparator.reverse();
-
-
-					root.empty();
-					for (let i = 0; i < targetComparator.length; i++) {
-						const curRow = targetComparator[i].parentNode;
-						root[0].appendChild(curRow);
-					}
-
-
-				});
-	
-				
 				
 			});
 			
@@ -271,10 +285,10 @@ export default class TableSorter extends Component<TableSorterProps, TableSorter
 		return (
 		  <>
 			
-			<div className={"uix-table" + classes + " js-uix-table-sorter"} id={id || 'app-table-sorter-' + __.GUID.create()} {...attributes}>
+			<div ref={this.wrapperRef} className={"uix-table" + classes + " js-uix-table-sorter"} id={id || 'app-table-sorter-' + __.GUID.create()} {...attributes}>
 				<table>
 			
-			        <TableSorterHeaders data={_headers} />
+			        <TableSorterHeaders data={_headers} clickEv={this.handleSortType} />
               
 					<tbody>
 			

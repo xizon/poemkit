@@ -3,8 +3,8 @@
  * Core Shortcut
  *
  * @package: uix-kit-react
- * @version: 0.27
- * @last update: September 14, 2021
+ * @version: 0.30
+ * @last update: September 26, 2021
  * @license: MIT
  *
  *************************************
@@ -128,6 +128,7 @@ __( document ).ready( function() {
 				__( this ).addClass( 'new-class' )
 			});
 
+			__( document ).off( 'click', '.menu li' );
 			__( document ).on( 'click', '.menu li', function( e ) {
 				console.log('e: ', e);
 				console.log('this: ', this);
@@ -224,6 +225,10 @@ __( document ).ready( function() {
 				},1000 );
 
 			});
+
+			__( '.menu' ).animate( 'marginLeft', 0, 100, 'px', 1500, 'ease-out' );
+			__( '.menu' ).animate( 'marginTop', 0, 200, 'px', 1500, 'ease-out' );
+
 			
 			
 			//+++++++++++++++++++++++++++++++++++++++++++
@@ -345,11 +350,32 @@ const __ = (function () {
 	
 	'use strict';
 	
-	
-	//The default selector to search for or HTML element
-	__.prototype.defaultTargetSelector = null;
-	
-	
+	// Traverse the counter of a selector, reset to 0 when calling 	`__(selector).XXX()`
+	const traverseIndex = {
+		// for `each()`
+		each: 0, 
+		// for `eq()`
+		eq: 0, 
+		// for `first()`
+		first: 0, 
+		// for `last()`
+		last: 0, 
+		total_last: 0, 
+		// for `filter()`
+		filter: 0, 
+		// for `not()`
+		not: 0, 
+		// for `maxDimension()`
+		maxDimension: 0, 
+		total_maxDimension: 0, 
+		elements_maxDimension: [] 
+	};
+
+
+	/*
+	 * Wrap the selector
+	 * @public
+	 */
 	function __(s, root) {
 	    return __.prototype.core(s, root);
 	}
@@ -358,7 +384,7 @@ const __ = (function () {
 	
 	/*
 	 * Get real style data
-	 * @private method
+	 * @private
 	 */
     function getStyle( el, attr ) {
 		const self = el;
@@ -407,7 +433,7 @@ const __ = (function () {
 	
 	/*
 	 * Determine whether it is Child Node
-	 * @private method
+	 * @private
 	 */
 	function isChild( el, p ) {
 		if (!el || !p || !p.childNodes || !p.childNodes.length) {
@@ -426,7 +452,7 @@ const __ = (function () {
 	
 	/*
 	 * Determine whether it is in JSON format
-	 * @private method
+	 * @private
 	 */
 	function isJSON( str ){
 		
@@ -469,7 +495,7 @@ const __ = (function () {
 	
 	/*
 	 * Delete elements in the array
-	 * @private method
+	 * @private
 	 */
 	function removeArray(arr) {
 		let what, 
@@ -489,7 +515,7 @@ const __ = (function () {
 	
 	/*
 	 * Convert string to camel case
-	 * @private method
+	 * @private
 	 */
 	function toCamelCase(s) {
 		
@@ -509,44 +535,91 @@ const __ = (function () {
 		}
 	}
 	
+
 	
-	
+
 	/*
-	 * Returns the set of ID and classes of the current target element for use by the selector
-	 * @private method
+	 * Get CSS path from Dom element
+	 * @private
 	 */
-	function elementToDomString(el, idCheck = true) {
-		
-		let itemDomsStr = '';
+	function elementPath(el) {
 
-		//get ID
-		let id = el.id;
-		if ( typeof(id) !== 'undefined' && id != '' ) {
-			itemDomsStr += `#${id}`;
-		}	
+		if (!(el instanceof Element)) return;
 
-		//get all classes
-		let classes = el.classList;
-		if ( typeof(classes) !== 'undefined' ) {
-			classes.forEach(
-				function(value, key, listObj) {
-					itemDomsStr += `.${value}`;
-				}, 'arg' );	
+		//
+		const path = [];
+		let itemIndex = 0;
+		while (el.nodeType === Node.ELEMENT_NODE) {
+			const oldSelector = el.nodeName.toLowerCase();
+			let selector = oldSelector;
 
+			if (el.id) {
+				if ( itemIndex > 0 ) selector += '#' + el.id;
+			} 
+			if (el.className) {
+				selector += '.' + el.className.replace(/\s+/g, ".");
+			} 
+			
+			selector = selector.replace(/\.\./g, ".");
+
+
+			//Add one or more items to the start of an array's result set.
+			path.unshift(selector);
+
+
+			//
+			el = el.parentNode;
+
+			//
+			itemIndex++;
 		}
-		
-		//If the ID does not exist, return the current object
-		if ( idCheck ) {
-			if ( typeof(id) === 'undefined' || id === '' ) {
-				itemDomsStr = '';
-			}	
-		}
 
-		
-		
-		return itemDomsStr;
+
+		return path.join(" > ");
 	}
-	
+
+
+	/*
+	* Some easing functions
+	* @private
+	* @link: https://easings.net
+	* @param {Number} t   - time (Amount of time that has passed since the beginning of the animation. Usually starts at 0 and is slowly increased using a game loop or other update function.)
+	* @param {Number} b   - beginning value (The starting point of the animation. Usually it's a static value, you can start at 0 for example.)
+	* @param {Number} c   - change in value (The amount of change needed to go from starting point to end point. It's also usually a static value.)
+	* @param {Number} d   - duration (Amount of time the animation will take. Usually a static value aswell.)
+	* @return {Number}
+	*/
+	function easeLinear (t, b, c, d) {
+		return c * t / d + b;
+	}
+
+	function easeInQuart (t, b, c, d) {
+		return c * (t /= d) * t * t * t + b;
+	}
+
+	function easeOutQuart (t, b, c, d) {
+		return -c * ((t = t / d - 1) * t * t * t - 1) + b;
+	}
+
+	function easeInOutQuart (t, b, c, d) {
+		if ((t /= d / 2) < 1) return c / 2 * t * t * t * t + b;
+		return -c / 2 * ((t -= 2) * t * t * t - 2) + b;
+	}
+
+	function easeInCubic (t, b, c, d) {
+		return c * (t /= d) * t * t + b;
+	}
+
+	function easeOutCubic (t, b, c, d) {
+		return c * ((t = t / d - 1) * t * t + 1) + b;
+	}
+
+	function easeInOutCubic (t, b, c, d) {
+		if ((t /= d / 2) < 1) return c / 2 * t * t * t + b;
+		return c / 2 * ((t -= 2) * t * t + 2) + b;
+	}
+
+
 	
 	/* ------------- Independent Methods -------------- */
 	
@@ -1198,9 +1271,6 @@ const __ = (function () {
 		root = root || document;
 
 		
-		//update the default selector
-		__.prototype.defaultTargetSelector = s;
-		
 		if ( typeof (s) !== 'undefined' ) {
 
 			if (typeof(s) === 'string') {
@@ -1797,38 +1867,16 @@ const __ = (function () {
 				removeId = true;
 			}
 			s = s.replace(/(^\s*|,\s*)>/g, '$1#' + this.id + ' >');
-			const result = document.querySelector(s);
-
+			const result = document.querySelectorAll(s);
+			
 			if (removeId) {
 				this.id = null;
 			}
 
-			return result;
+			return [].slice.call( result );
 		} else {
-			return __(s, this);
+			return [].slice.call( this.querySelectorAll(s) );
 		}
-
-		/*
-		const searchChildNode = __.trim(s);
-		if ( searchChildNode.slice(0,1) == '>' ){
-
-			const _childNode = __.removeFirstLastStr( searchChildNode, '>' );
-			const childrenList = this.children;
-
-			for (let i = 0; i < childrenList.length; i++ ) {
-				//the child node exists
-				if( childrenList[i].className.split(' ').indexOf( this.querySelector( _childNode ).className ) >= 0 ) {
-					const el = childrenList[i];
-					return __.prototype.wrap( [el] );
-				}
-				
-			}
-			
-		}
-
-		return __(s, this);
-		*/
-
 
 		
 	};
@@ -1842,9 +1890,16 @@ const __ = (function () {
 	 * @return {Array}          - Contains only a collection of HTML elements.
 	 */
 	__.prototype.eq = function(index) {
-		const elements = __(__.prototype.defaultTargetSelector, document);
-	
-		return elements[ index ];
+		let res = [];
+
+		if ( traverseIndex.eq === index ) {
+			res = this;
+		}
+
+		// Traverse the counter of a selector, reset to 0 when calling 	`__(selector).XXX()`
+		traverseIndex.eq++;
+
+		return res;
 	};
 
 	
@@ -1857,7 +1912,7 @@ const __ = (function () {
     __.prototype.prev = function() {
 
 		const el = this.previousElementSibling;
-		if ( el !== null ) return __.prototype.wrap( [el] );
+		if ( el !== null ) return el;
 		
     }
 	
@@ -1871,7 +1926,7 @@ const __ = (function () {
     __.prototype.next = function() {
 
 		const el = this.nextElementSibling;
-		if ( el !== null ) return __.prototype.wrap( [el] );
+		if ( el !== null ) return el;
 		
     }
 
@@ -1884,17 +1939,19 @@ const __ = (function () {
     __.prototype.parent = function() {
 
 		const el = this.parentElement;
-		if ( el !== null ) return __.prototype.wrap( [el] );
+		if ( el !== null ) return el;
     }
 
 
 	/*
 	 * Get the ancestors of each element in the current set of matched elements.
 	 *
-	 * @param  {Element} parentSelector   - A parent element.
+	 * @param  {Element} s   - A parent element.
 	 * @return {Array}                    - Contains only a collection of HTML elements.
 	 */
-	 __.prototype.parents = function( parentSelector ) {
+	 __.prototype.parents = function(s) {
+
+		const parentSelector = document.querySelector(s);
 
 		// If no parentSelector defined will bubble up all the way to *document*
 		if (parentSelector === undefined) {
@@ -1903,26 +1960,19 @@ const __ = (function () {
 
 		const parents = [];
 		let _parent = this.parentNode;
-	
-
-		while (_parent !== parentSelector) {
 		
+		while (_parent !== parentSelector) {
 			const _currentNode = _parent;
-			parents.push( _currentNode );
-
-			//the child node exists
-			if ( parentSelector !== undefined && parentSelector !== document ) {
-				if( _currentNode.className.split(' ').indexOf( parentSelector.replace(/\./g,'') ) >= 0 ) {
-					const el = _currentNode;
-					return __.prototype.wrap( [el] );
-				}
-			}
-
+			parents.push(_currentNode);
 			_parent = _currentNode.parentNode;
 		}
-		parents.push(parentSelector); // Push that parentSelector you wanted to stop at
-
+		
+		// Push that parentSelector you wanted to stop at
+		if ( parentSelector !== null ) parents.push(parentSelector); 
+		
+		
 		return parents;
+
 	}
 	
 	/*
@@ -1943,9 +1993,9 @@ const __ = (function () {
 			for (let i = 0; i < childrenList.length; i++ ) {
 				res.push(childrenList[i]);	
 			}
-			return __.prototype.wrap( res );
+			return res;
 		} else {
-			return __(s, self);
+			return [].slice.call( this.querySelectorAll(s) );
 		}
 
     }
@@ -1958,20 +2008,18 @@ const __ = (function () {
 	 * @return {Array}              -  The collection of elements
 	 */
     __.prototype.filter = function(s) {
-		const elements = __(__.prototype.defaultTargetSelector, document);
-		const targetEl = __(s, document);
-		const list = Array.from(elements);
-		
-		for (let j = 0; j < targetEl.length; j++ ) {
-			for (let i = 0; i < list.length; i++ ) {
-				if ( ! list[i].classList.contains( s.replace(/\./g,'') ) ) {
-					removeArray(list, list[i]);
-				}
-			}	
+		let res = [];
 
-		}	
+		if (s === undefined) return res;
 
-		return __.prototype.wrap( list );	
+		if ( this.classList.contains( s.replace(/\./g,'') ) ) {
+			res.push( this );
+		}
+
+		// Traverse the counter of a selector, reset to 0 when calling 	`__(selector).XXX()`
+		traverseIndex.filter++;
+
+		return res;
     }
 	
 	
@@ -1982,20 +2030,19 @@ const __ = (function () {
 	 * @return {Array}              -  The collection of elements
 	 */
     __.prototype.not = function(s) {
-		const elements = __(__.prototype.defaultTargetSelector, document);
-		const targetEl = __(s, document);
-		const list = Array.from(elements);
-		
-		for (let j = 0; j < targetEl.length; j++ ) {
-			for (let i = 0; i < list.length; i++ ) {
-				if ( list[i].classList.contains( s.replace(/\./g,'') ) ) {
-					removeArray(list, list[i]);
-				}
-			}	
+		let res = [];
 
-		}	
+		if (s === undefined) return res;
 
-		return __.prototype.wrap( list );
+		if ( ! this.classList.contains( s.replace(/\./g,'') ) ) {
+			res.push( this );
+		}
+
+		// Traverse the counter of a selector, reset to 0 when calling 	`__(selector).XXX()`
+		traverseIndex.not++;
+
+		return res;
+
     }
 	
 	
@@ -2027,7 +2074,7 @@ const __ = (function () {
 		}
 		
 		
-        return __.prototype.wrap( siblings );
+        return siblings;
     }
 
 
@@ -2038,9 +2085,16 @@ const __ = (function () {
 	 * @return {Array}          - Contains only a collection of HTML elements.
 	 */
     __.prototype.first = function() {
-		const elements = __(__.prototype.defaultTargetSelector, document);
-		const length = elements.length;
-		return elements[ 0 ];
+		let res = [];
+
+		if ( traverseIndex.first === 0 ) {
+			res = this;
+		}
+
+		// Traverse the counter of a selector, reset to 0 when calling 	`__(selector).XXX()`
+		traverseIndex.first++;
+
+		return res;
     }
 	
 	
@@ -2050,9 +2104,17 @@ const __ = (function () {
 	 * @return {Array}          - Contains only a collection of HTML elements.
 	 */
     __.prototype.last = function() {
-		const elements = __(__.prototype.defaultTargetSelector, document);
-		const length = elements.length;
-		return elements[ length-1 ];
+		let res = [];
+
+		if ( traverseIndex.last === traverseIndex.total_last-1 ) {
+			res = this;
+		}
+
+		// Traverse the counter of a selector, reset to 0 when calling 	`__(selector).XXX()`
+		traverseIndex.last++;
+
+		return res;
+
     }
 	
 	
@@ -2067,9 +2129,7 @@ const __ = (function () {
 	__.prototype.closest = function(s) {
 		//using recursivity
 		const el = this.closest( s );
-		//console.log( __(el, this) );
-		return __(el, this);
-
+		return el;
 	}
 	
 
@@ -2191,7 +2251,8 @@ const __ = (function () {
 		if (selector) {
 			//if string
 			const fun = function(evt) {
-				__(selector, self).forEach(function(el) {
+				
+				[].slice.call( this.querySelectorAll(selector) ).forEach(function(el) {
 					if (el === evt.target) {
 						callBack.call(el, evt);
 					} else if (isChild(evt.target, el)) {
@@ -2202,7 +2263,8 @@ const __ = (function () {
 
 			this.myListeners.push({
 				eType: eventType,
-				callBack: fun
+				callBack: fun,
+				selector: selector
 			});
 										   
 			self.addEventListener(eventType, fun);
@@ -2217,29 +2279,38 @@ const __ = (function () {
 			
 			this.myListeners.push({
 				eType: eventType,
-				callBack: fun
+				callBack: fun,
+				selector: selector
 			});
 			
 			this.addEventListener(eventType, fun, false);
 
 		}
-		
 
-		
+	
 		
 	};
 	
 	/*
 	 * Remove an event handler.
 	 *
-	 * @param  {?String}          - One event types and optional namespaces, such as "click"
+	 * @param  {?String} eventType        - One event types and optional namespaces, such as "click"
+	 * @param  {?String} selector         - A selector string to filter the descendants of the selected elements that trigger the event. 
 	 * @return {Void}      
 	 */
-	__.prototype.off = function() {
-		
+	__.prototype.off = function(eventType, curSelector) {
+
 		if (this.myListeners) {
 			for (let i = 0; i < this.myListeners.length; i++) {
-				this.removeEventListener(this.myListeners[i].eType, this.myListeners[i].callBack);
+
+				if ( typeof (curSelector) !== 'undefined' ) {
+					if ( curSelector === this.myListeners[i].selector ) {
+						this.removeEventListener(this.myListeners[i].eType, this.myListeners[i].callBack);
+					}
+				} else {
+					this.removeEventListener(this.myListeners[i].eType, this.myListeners[i].callBack);
+				}			
+				
 			};
 			delete this.myListeners;
 		};
@@ -2418,30 +2489,25 @@ const __ = (function () {
 	 * @param  {Function} fn         - A function to execute for each matched element.
 	 * @return {Void} 
 	 */  
-
     __.prototype.each = function(fn) {
-		
-		let elements = __(__.prototype.defaultTargetSelector, document);
-		
-		//
-		elements.map((item, index) => {
 
-
+		if (fn && (typeof fn == "function")) {
 			//If the ID does not exist, itemDomsStr cannot be obtained
-			if ( item.id.length === 0 ) {
-				item.id = 'eachitem-' + __.GUID.create();
+			if ( this.id.length === 0 ) {
+				this.id = 'eachitem-' + __.GUID.create();
 			}
-			
+
 			//!import: The returned HTML element must be current, 
 			//otherwise all HTML elements under document may be queried
-			const itemDomsStr = elementToDomString( item );
-			
-			if (fn && (typeof fn == "function")) {
-				fn.call(item, index, itemDomsStr);
-			}
-		});
-		
-		
+			const itemDomsStr = '#' + this.id;
+
+			fn.call(this, traverseIndex.each, itemDomsStr);
+
+			// Traverse the counter of a selector, reset to 0 when calling 	`__(selector).XXX()`
+			traverseIndex.each++;
+
+		}
+
 
     }	
 	
@@ -2519,6 +2585,7 @@ const __ = (function () {
 		//
 		if ( typeof (v) !== 'undefined' ) {
 			
+			
 			switch (controlType) {
 				case "input-textarea":
 					
@@ -2530,8 +2597,10 @@ const __ = (function () {
 					break;
 				case "radio":
 					
-					let elements = __(__.prototype.defaultTargetSelector, document);
-					elements.map((item, index) => {
+					const currentSelectorDomsStr = elementPath( this );
+					const currentSelector = [].slice.call( document.querySelectorAll(currentSelectorDomsStr) );
+
+					currentSelector.map((item, index) => {
 						if(item.value == v.toString()) {
 							item.checked = true;
 						}	
@@ -2557,7 +2626,22 @@ const __ = (function () {
 			case "checkbox":
 				return this.checked ? 1 : 0;
 			case "radio":
-				return this.value;
+
+			
+				const currentSelectorDomsStr = elementPath( this );
+				const currentSelector = [].slice.call( document.querySelectorAll(currentSelectorDomsStr) );
+				const radios = currentSelector;
+				let _value = null;
+				for (let i = 0; i < radios.length; i++) {
+					if (radios[i].checked) {
+						// do whatever you want with the checked radio
+						_value = radios[i].value;
+						// only one radio can be logically checked, don't check the rest
+						break;
+					}
+				}
+
+				return _value;
 			case "select":
 				return this.value;
 
@@ -2746,24 +2830,83 @@ const __ = (function () {
 	 * @return {Json}      - An object containing the properties width and height.
 	 */
 	__.prototype.maxDimension = function() {
-		
-		let elements = __(__.prototype.defaultTargetSelector, document);
-		
-		const elementHeights = Array.prototype.map.call(elements, function(el)  {
-			return el.clientHeight;
-		});
-		
-		const elementWidths = Array.prototype.map.call(elements, function(el)  {
-			return el.clientWidth;
-		});
 
-		const maxHeight = Math.max.apply(null, elementHeights);
-		const maxWidth = Math.max.apply(null, elementWidths);
+		if ( traverseIndex.maxDimension === traverseIndex.total_maxDimension-1 ) {
+
+			const currentSelector = traverseIndex.elements_maxDimension;
+
+			const elementHeights = Array.prototype.map.call(currentSelector, function (el) {
+				return el.clientHeight;
+			});
+
+			const elementWidths = Array.prototype.map.call(currentSelector, function (el) {
+				return el.clientWidth;
+			});
+
+			const maxHeight = Math.max.apply(null, elementHeights);
+			const maxWidth = Math.max.apply(null, elementWidths);
+
+
+			return {
+				'height': maxHeight,
+				'width': maxWidth
+			};
+
+		}
+
+		// Traverse the counter of a selector, reset to 0 when calling 	`__(selector).XXX()`
+		traverseIndex.maxDimension++;
+		traverseIndex.elements_maxDimension.push( this );
+
 	
-		return {
-			'height': maxHeight,
-			'width': maxWidth
-		};
+
+	}
+
+	
+	/*
+	* Create a new Animation, applies it to the element, then plays the animation
+	* @param  {String} prop         - The style property to be set.
+	* @param  {Number} from         - The initial offset of the object
+	* @param  {Number} to           - The end offset of the object
+	* @param  {String} unit         - Unit string, such as `px` and `%`, and so on.
+	* @param  {Number} duration     - The number of milliseconds each iteration of the animation takes to complete
+	* @param  {String} easing       - The rate of the animation's change over time. Accepts the pre-defined values "linear", "ease-in", "ease-out", and "ease-in-out"
+	* @return {Void}
+	*/
+	 __.prototype.animate = function(prop, from, to, unit, duration, easing) {
+		const el = this;
+		const start = new Date().getTime();
+		const timer = setInterval(function () {
+			const time = new Date().getTime() - start;
+			let val;
+
+			switch (easing) {
+				case "linear":
+					val = easeLinear(time, from, to - from, duration);
+					break;
+				case "ease-in":
+					val = easeInCubic(time, from, to - from, duration);
+					break;
+				case "ease-out":
+					val = easeOutCubic(time, from, to - from, duration);
+					break;
+				case "ease-in-out":
+					val = easeInOutCubic(time, from, to - from, duration);
+					break;
+
+				default:
+					val = easeLinear(time, from, to - from, duration);
+			}
+
+
+			//
+			const res = val + unit;
+			el.style[prop] = res;
+			
+			if (time >= duration) {
+				clearInterval(timer);
+			}
+		}, 1000 / 60);
 
 	}
 
@@ -2777,20 +2920,21 @@ const __ = (function () {
 		closest: __.prototype.closest,
 		prev: __.prototype.prev,
 		next: __.prototype.next,
-		first: __.prototype.first,
-		last: __.prototype.last,
 		parent: __.prototype.parent,
 		parents: __.prototype.parents,
 		children: __.prototype.children,
-		eq: __.prototype.eq,
-		not: __.prototype.not,
-		filter: __.prototype.filter,
 		siblings: __.prototype.siblings,
-		
-		//traverse 
+
+        //traverse with index
 		each: __.prototype.each,
+		eq: __.prototype.eq,
+		first: __.prototype.first,
+		last: __.prototype.last,
+		filter: __.prototype.filter,
+		not: __.prototype.not,
 		maxDimension: __.prototype.maxDimension,
-		
+				
+
 		//functions
 		ready: __.prototype.ready,
 		loader: __.prototype.loader,
@@ -2835,6 +2979,7 @@ const __ = (function () {
 		serializeArray: __.prototype.serializeArray,
 		index: __.prototype.index,
 		trigger: __.prototype.trigger,
+		animate: __.prototype.animate
 		
 	};
 
@@ -2843,47 +2988,73 @@ const __ = (function () {
 	__.prototype.wrap = function(list) {
 		const self = this;
 		Object.keys(API).forEach(function(fn) {
+
+
 			list[fn] = function() {
-				
+
 				//slice method can also be called to convert Array-like objects/collections to a new Array. 
 				//You just bind the method to the object. The arguments inside a function is an example of an 'array-like object'.
 				const args = arguments;
 				
 				//
 				let result;
-				const breakException = {};
-			
+
+
+				// ////////////////////
+				// Traverse the counter of a selector, reset to 0 when calling 	`__(selector).XXX()`
+				//----------------------	
+				switch (fn) {
+					case 'each':
+						// for `each()`
+						traverseIndex.each = 0;
+						break;
+					case 'eq':
+						// for `eq()`
+						traverseIndex.eq = 0;
+						break;
+					case 'first':
+						// for `first()`
+						traverseIndex.first = 0;
+						break;
+					case 'last':
+						// for `last()`
+						traverseIndex.last = 0;
+						traverseIndex.total_last = list.length;
+						break;
+					case 'filter':
+						// for `filter()`
+						traverseIndex.filter = 0;
+						break;
+					case 'not':
+						// for `not()`
+						traverseIndex.not = 0;
+						break;
+					case 'maxDimension':
+						// for `maxDimension()`
+						traverseIndex.maxDimension = 0;
+						traverseIndex.total_maxDimension = list.length;
+						traverseIndex.elements_maxDimension = [];
+						break;
+				}
 				
+
+				// ////////////////////
+				// Methods that return value is `DOM elements using selectors`
+				//----------------------
 				if (Array.isArray(this)) {
 					result = [];
-					
-					try {
-						this.forEach(function(root) {
+					this.forEach(function (root) {
 
-							const fnResult = API[fn].apply(root, [].slice.call(args)); 
-							if (Array.isArray(fnResult)) {
-								result = result.concat(fnResult);
-							} else if (fnResult !== undefined) {
-								result.push(fnResult);
-							}
+						const fnResult = API[fn].apply(root, [].slice.call(args));
+						if (Array.isArray(fnResult)) {
+							result = result.concat(fnResult);
+						} else if (fnResult !== undefined) {
+							result.push(fnResult);
+						}
 
-							// ////////////////////
-							// Break out of the loop of global retrieval of elements
-							//----------------------
-							if ( fn === 'eq' ||
-								 fn === 'first' ||
-								 fn === 'last' ||
-							 	 fn === 'each' ||
-						         fn === 'maxDimension'
-							   ) throw breakException;
-						});
-					} catch (e) {}	
-					
+					});
 
 
-					// ////////////////////
-					// Methods that return value is `DOM elements using selectors`
-					//----------------------
 					if (
 						fn === 'find' || 
 						fn === 'closest' ||
@@ -2903,15 +3074,16 @@ const __ = (function () {
 					) {
 						self.wrap(result);
 						
-						
 					} else {
 						result = (result.length && result) || undefined;
 					}
+					
 				} else {
 					result = API[fn].apply(this, [].slice.call(args));
 				}//end Array.isArray(this)
 
 				
+
 				
 				// ////////////////////
 				// Methods that return value is `JSON`, `Boolean` or `Number`

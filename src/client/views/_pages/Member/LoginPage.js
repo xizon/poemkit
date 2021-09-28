@@ -32,6 +32,8 @@ class LoginPage extends Component {
         this.handleUserChange = this.handleUserChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
         this.dismissError = this.dismissError.bind(this);
+        this.signOut = this.signOut.bind(this);
+        
     }
 
     dismissError() {
@@ -46,8 +48,8 @@ class LoginPage extends Component {
     }
 
     
-    handleSubmit(evt) {
-        evt.preventDefault();
+    handleSubmit(e) {
+        e.preventDefault();
 		
 		const self = this;
 		const root = ReactDOM.findDOMNode(self.wrapperRef.current);
@@ -142,15 +144,15 @@ class LoginPage extends Component {
        
     }
 
-    handleUserChange(evt) {
+    handleUserChange(e) {
         this.setState({
-            username: evt.target.value,
+            username: e.target.value,
         });
     };
 
-    handlePassChange(evt) {
+    handlePassChange(e) {
         this.setState({
-            password: evt.target.value,
+            password: e.target.value,
         });
     }
 
@@ -167,7 +169,8 @@ class LoginPage extends Component {
         })
     }
 
-    signOut() {
+    signOut(e) {
+        e.preventDefault();
 		
 		AuthService.logout();
 		
@@ -197,8 +200,12 @@ class LoginPage extends Component {
 
     
     render() {
-    // NOTE: I use data-attributes for easier E2E testing
-    // but you don't need to target those (any css-selector will work)
+        // NOTE: I use data-attributes for easier E2E testing
+        // but you don't need to target those (any css-selector will work)
+
+
+        const self = this;
+
         return (
           <>
 
@@ -207,7 +214,7 @@ class LoginPage extends Component {
                   (this.state.loginOk) ? 
 					<div>
 						Welcome to this page!
-						| <a href="javascript:;" onClick={this.signOut.bind(this)}>Sign out</a>
+						| <a href="#" onClick={this.signOut}>Sign out</a>
 					</div>	
                   :
                     <div ref={this.wrapperRef}>

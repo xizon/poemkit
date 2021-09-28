@@ -31,7 +31,6 @@ type SingleSelectProps = {
 	required?: any;
 	/** -- */
 	id?: string;
-	attributes?: any;
 };
 type SingleSelectState = false;
 

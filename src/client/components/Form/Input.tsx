@@ -34,7 +34,6 @@ type InputProps = {
 	iconRight?: object;
 	/** -- */
 	id?: string;
-	attributes?: any;
 };
 type InputState = false;
 

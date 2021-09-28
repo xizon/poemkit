@@ -28,7 +28,6 @@ type TabsProps = {
 	/** -- */
 	id?: string;
 	children: any; /* required */
-	attributes?: any;
 };
 type TabsState = false;
 
@@ -93,12 +92,8 @@ export default class Tabs extends Component<TabsProps, TabsState> {
 				
 				//Initialize tab list
 				__( curSelector ).find( '.uix-tabs__nav ul > li' ).each( function(this: any, index: number ) {
-					__( this ).find( 'a' )
-										.attr( 'href', 'javascript:' )
-										.attr( 'id', tabBoxID + '-tablist-link' + index );
-					__( this )
-							.attr( 'data-tab', tabBoxID + '-tabs-show' + index )
-							.attr( 'id', tabBoxID + '-tablist' + index );
+					__( this ).find( 'a' ).attr( 'href', 'javascript:' );
+					__( this ).attr( 'data-tab', tabBoxID + '-tabs-show' + index );
 		
 				});
 
@@ -111,7 +106,7 @@ export default class Tabs extends Component<TabsProps, TabsState> {
 			
 				// Tab Rotation Effect
 				if ( rotation ) {
-					
+
 					$this.find( '.uix-tabs__nav' ).css( {
 						'width'      : rotationRadius * 2 + 'px'
 					} );

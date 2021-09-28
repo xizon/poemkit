@@ -202,7 +202,6 @@ type TableProps = {
 	responsiveWithScrollBar?: boolean;
 	/** -- */
 	id?: string;
-	attributes?: any;
 };
 type TableState = false;
 
@@ -225,23 +224,28 @@ export default class Table extends Component<TableProps, TableState> {
 			 /////////////////////   Duplicate title    /////////////////
 			 ////////////////////////////////////////////////////////////
 			 */
-			__( '.js-uix-table--responsive' ).each(function(this: any, index: number, curSelector: string ) {
-				__( curSelector + ' thead th' ).each(function(this: any, index: number, curSelector: string ) {
-					const data = __( this ).html().replace(/<span[^>]*>[\s\S]+<\/span>/g, '');
-					if( __( this ).data( 'table' ) === null ) {
-						__( this ).data( 'table', data );
+			 __('.js-uix-table--responsive').each(function ( this: any  ) {
+	
+				const $th = __( this ).find( 'thead th' );
+				const $tr = __( this ).find( 'tbody > tr' );
+				const thArr:string[] = [];
+				
+				$th.each(function ( this: any  ) {
+					const data = __(this).html().replace(/<span[^>]*>[\s\S]+<\/span>/g, '');
+					thArr.push(data);
+					if (__( this ).data('table') === null) {
+						__( this ).data('table', data);
 					}
 				});
-
-				__( curSelector + ' tbody tr' ).each(function(this: any, index: number, trSelectors: string ) {
-					__( trSelectors + '> td' ).each( function( this: any, index: number ) {
-						const data = __( curSelector + ' thead th' ).eq(index).data( 'table' );
-						__( this ).data( 'table', data );
-
+				
+				$tr.each(function ( this: any ) {
+					const $td = __( this ).find( '> td' );
+					$td.each(function ( this: any, tdIndex: number ) {
+						__( this ).data('table', thArr[tdIndex]);
 					});
-
+				
 				});
-	
+		
 			});
 			
 
@@ -260,11 +264,16 @@ export default class Table extends Component<TableProps, TableState> {
 
 					
 				//Add an identifier so that the mobile terminal can compare by row
-				__( '.js-uix-table--responsive-scrolled' ).each(function( this: any, index: number, curSelector: string ) {
-					__( curSelector + ' tbody tr' ).each(function( index, tdSelectors ) {
-						__( tdSelectors + '> td' ).each( function( this: any, index: number ) {
-							__( curSelector + ' thead th' ).eq(index).data( 'table-row', index );
-							__( this ).data( 'table-row', index );
+				__( '.js-uix-table--responsive-scrolled' ).each(function( this: any ) {
+
+					const $th = __( this ).find( 'thead th' );
+					const $tr = __( this ).find( 'tbody > tr' );
+
+					$tr.each(function( this: any ) {
+						const $td = __( this ).find( '> td' );
+						$td.each( function( this: any, tdIndex: number ) {
+							$th.eq(tdIndex).data( 'table-row', tdIndex );
+							__( this ).data( 'table-row', tdIndex );
 						});
 					});
 				});
@@ -275,12 +284,13 @@ export default class Table extends Component<TableProps, TableState> {
 
 
 					//get maxHeight of per row
-					__( '.js-uix-table--responsive-scrolled' ).each(function( this: any, index: number, curSelector: string ) {
+					__( '.js-uix-table--responsive-scrolled' ).each(function( this: any ) {
 					
-						const len = __( curSelector + ' tbody tr' ).length;
+						const $tr = __( this ).find( 'tbody > tr' );
+						const len = $tr.length;
 						for (let i=0; i<len; i++ ) {
-							const maxHeight = __( curSelector + ' [data-table-row="'+i+'"]' ).maxDimension().height;
-							__( curSelector + ' [data-table-row="'+i+'"]' ).css({'height': maxHeight + 'px'});
+							const maxHeight = __( this ).find( '[data-table-row="'+i+'"]' ).maxDimension().height;
+							__( this ).find( '[data-table-row="'+i+'"]' ).css({'height': maxHeight + 'px'});
 						}
 					});
 

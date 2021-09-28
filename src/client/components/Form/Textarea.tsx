@@ -33,7 +33,6 @@ type TextareaProps = {
 	required?: any;
 	/** -- */
 	id?: string;
-	attributes?: any;
 };
 type TextareaState = false;
 

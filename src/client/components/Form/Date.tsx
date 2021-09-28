@@ -34,7 +34,6 @@ type DateProps = {
 	required?: any;
 	/** -- */
 	id?: string;
-	attributes?: any;
 };
 type DateState = false;
 

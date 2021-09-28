@@ -28,7 +28,6 @@ type RadioProps = {
 	required?: any;
 	/** -- */
 	id?: string;
-	attributes?: any;
 };
 type RadioState = false;
 

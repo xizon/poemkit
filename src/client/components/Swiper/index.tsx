@@ -31,7 +31,6 @@ import { rootDirectory } from '@uixkit.react/config/websiteConfig.js';
 type SwiperProps = {
 	/** -- */
 	id?: string;
-	attributes?: any;
 };
 type SwiperState = false;
 

@@ -102,7 +102,7 @@ export default class Navigation extends Component<NavigationProps, NavigationSta
 			
 			
 			// Add Sub-menu Arrow
-			__( ulForDesktop + ' li' ).each( function(this: any)  {
+			__( ulForDesktop + ' li' ).each( function( this: any )  {
 				if ( __( this ).find( 'ul' ).length > 0 ) {
 					__( this ).prepend( '<span class="uix-menu__arrow"></span>' );
 				}
@@ -149,7 +149,7 @@ export default class Navigation extends Component<NavigationProps, NavigationSta
 				
 				
 				// Remove the html tag for mega menu item
-				$menuWrap.find('li.multi-column  > ul .multi-column-title').each(function (this: any) {
+				$menuWrap.find('li.multi-column  > ul .multi-column-title').each(function ( this: any ) {
 					const mega_old_item = __(this).html();
 					if (mega_old_item != '') {
 						__(this).html(mega_old_item.replace(/<[^>]+>/g, ''));
@@ -159,8 +159,8 @@ export default class Navigation extends Component<NavigationProps, NavigationSta
 				
 				if ( w > 768 ){
 				
-					$menuWrap.find( 'li.multi-column' ).each( function( index, curSelector ) {
-						const $rootLi       = __( curSelector ),
+					$menuWrap.find( 'li.multi-column' ).each( function( this: any, index: number ) {
+						const $rootLi       = __( this ),
 							colTotal        = $rootLi.find( '> ul > li' ).length,
 							$megaDiv        = $rootLi.find( '> ul.sub-menu' );
 
@@ -295,8 +295,8 @@ export default class Navigation extends Component<NavigationProps, NavigationSta
 				// Initialize mobile menu
 				if ( w <= 768 ) {
 				
-					__( '.uix-menu__container.is-mobile .uix-menu > li' ).each( function( index, curSelector )  {
-						const $rootLi = __( curSelector );
+					__( '.uix-menu__container.is-mobile .uix-menu > li' ).each( function( this: any )  {
+						const $rootLi = __( this );
 
 						if ( $rootLi.find( 'ul' ).length > 0 ) {
 							if ( $rootLi.find( '.uix-menu__arrow-mobile' ).length < 1 ) $rootLi.prepend( '<em class="uix-menu__arrow-mobile"></em>' );
@@ -374,8 +374,9 @@ export default class Navigation extends Component<NavigationProps, NavigationSta
 	
 	
 			// Fires drop-menu event 
-			__( '.uix-menu__container.is-mobile ul li > a' ).off( 'click' );
-			__( document ).on( 'click', '.uix-menu__container.is-mobile ul li > a', function(this: any, e: any ) {
+			const btn = '.uix-menu__container.is-mobile ul li > a';
+			__( document ).off( 'click', btn );
+			__( document ).on( 'click', btn, function(this: any, e: any ) {
 				
 			
 				const $sub = __( this ).next();

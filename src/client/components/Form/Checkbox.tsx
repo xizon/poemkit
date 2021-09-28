@@ -27,7 +27,6 @@ type CheckboxProps = {
 	required?: any;
 	/** -- */
 	id?: string;
-	attributes?: any;
 };
 type CheckboxState = {
 	isChecked?: boolean;

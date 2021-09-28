@@ -33,8 +33,6 @@ type VideoProps = {
 	config: string | VideoConfig;
 	src?: string;
 	poster?: string;
-	/** -- */
-	attributes?: any;
 };
 type VideoState = false;
 

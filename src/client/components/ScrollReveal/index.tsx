@@ -39,7 +39,6 @@ type ScrollRevealProps = {
 	/** -- */
 	id?: string;
 	children?: any;
-	attributes?: any;
 };
 type ScrollRevealState = false;
 
@@ -242,8 +241,8 @@ export default class ScrollReveal extends Component<ScrollRevealProps, ScrollRev
 						//add
 						if ( type == 'show' ) {
 							_imgIds.forEach( function( element ) {
-								__( element ).each( function( index )  {
-									const $el = __( self );
+								__( element ).each( function( this: any, index: number )  {
+									const $el = __( this );
 									const t = setTimeout( function() {
 										$el.addClass( 'is-active' );
 									}, 50*index);

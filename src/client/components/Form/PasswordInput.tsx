@@ -34,7 +34,6 @@ type PasswordInputProps = {
 	iconRight?: object;
 	/** -- */
 	id?: string;
-	attributes?: any;
 };
 type PasswordInputState = {
 	type?: string;

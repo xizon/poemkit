@@ -30,7 +30,6 @@ type SelectProps = {
 	required?: any;
 	/** -- */
 	id?: string;
-	attributes?: any;
 };
 type SelectState = false;
 
