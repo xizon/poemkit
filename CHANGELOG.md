@@ -1,6 +1,13 @@
 # Changelog
 
 
+
+#### = 0.1.2 (October 13, 2021) =
+
+* Fix: Fixed the wrong width, height and position of the large image triggered by the Lightbox component.
+* Fix: Fixed the result of the closest() prototype chain method for the core helpers.
+
+
 #### = 0.1.1 (October 12, 2021) =
 
 * New: Add new UI components `Slideshow`.

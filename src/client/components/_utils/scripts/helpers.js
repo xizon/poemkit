@@ -3,8 +3,8 @@
  * Core Helpers
  *
  * @package: uix-kit-react
- * @version: 0.35
- * @last update: October 11, 2021
+ * @version: 0.36
+ * @last update: October 13, 2021
  * @author: UIUX Lab <uiuxlab@gmail.com>
  * @license: MIT
  *
@@ -2241,7 +2241,14 @@ const __ = (function () {
 	__.prototype.closest = function(s) {
 		//using recursivity
 		const el = this.closest( s );
-		return el;
+
+		//Must judge the result of closest()
+		if ( el === null ) {
+			return [];
+		} else {
+			return el;
+		}
+
 	}
 	
 
@@ -3271,7 +3278,6 @@ const __ = (function () {
 	
     return __;
 })();
-
 
 
 export default __;

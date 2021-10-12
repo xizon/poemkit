@@ -6,9 +6,9 @@
  * ## Project Name        :  Uix Kit React
  * ## Project Description :  A free web kits with React for fast web design and development via SSR.
  * ## Project URL         :  https://uiux.cc
- * ## Version             :  0.1.1
+ * ## Version             :  0.1.2
  * ## Based on            :  Uix Kit React (https://github.com/xizon/uix-kit-react#readme)
- * ## Last Update         :  October 12, 2021
+ * ## Last Update         :  October 13, 2021
  * ## Created by          :  UIUX Lab (https://uiux.cc) (uiuxlab@gmail.com)
  * ## Released under the MIT license.
  *
@@ -31007,8 +31007,8 @@ var esm_typeof = __webpack_require__(484);
  * Core Helpers
  *
  * @package: uix-kit-react
- * @version: 0.35
- * @last update: October 11, 2021
+ * @version: 0.36
+ * @last update: October 13, 2021
  * @author: UIUX Lab <uiuxlab@gmail.com>
  * @license: MIT
  *
@@ -33000,8 +33000,13 @@ var __ = function () {
 
   __.prototype.closest = function (s) {
     //using recursivity
-    var el = this.closest(s);
-    return el;
+    var el = this.closest(s); //Must judge the result of closest()
+
+    if (el === null) {
+      return [];
+    } else {
+      return el;
+    }
   };
   /*
    * Set one or more attributes for the set of matched elements.
