@@ -14,8 +14,6 @@ declare global {
 }
 
 interface fireModalDialogConfig {
-    /** Modal dialog ID to be opened */
-    target?: string | undefined;
     /** Custom modal height whick need a unit string.  
      * This attribute "data-modal-height" may not exist. Such as: 200px
     */
@@ -37,24 +35,29 @@ interface fireModalDialogConfig {
 }
 
 
-export function fireModalDialog(config: fireModalDialogConfig) {
+export function fireModalDialog(curElement: any, config: fireModalDialogConfig) {
+    if ( typeof curElement === typeof undefined ) return;
+    
+    // Set a default configuration
+    config = __.setDefaultOptions({
+        "height"       : false,
+        "width"        : false,
+        "speed"        : 500,
+        "btn"          : false,
+        "lightbox"     : true,
+        "autoClose"    : false,
+        "closeOnlyBtn" : false
+    }, config);
 
-	if ( typeof config === typeof undefined ) {
-
-        config = {
-            "target"       : '#modal-open-demo',
-            "height"       : false,
-            "width"        : false,
-            "speed"        : 500,
-            "btn"          : false,
-            "lightbox"     : true,
-            "autoClose"    : false,
-            "closeOnlyBtn" : false
-        };
-
-	}
-
-    const curElement = __( config.target );
+    //
+    const dataH                 = config.height,
+          dataW                 = config.width,
+          closeTime             = config.autoClose,
+          lightBoxEnabled       = config.lightbox,
+          animDelay             = config.speed,
+          closeOnlyBtnEnabled   = config.closeOnlyBtn,
+          linkBtn: any          = config.btn;
+          
 
     //Prevent automatic close from affecting new fire effects
     clearTimeout( window.setCloseModalDialog );	
@@ -63,16 +66,12 @@ export function fireModalDialog(config: fireModalDialogConfig) {
     if ( __( '.uix-modal-mask' ).length == 0 ) {
         __( 'body' ).prepend( '<div className="uix-modal-mask"></div>' );
     }
-    if ( config.closeOnlyBtn ) {
+    if ( closeOnlyBtnEnabled ) {
         __( '.uix-modal-mask' ).addClass( 'js-uix-disabled' );
     } else {
         __( '.uix-modal-mask' ).removeClass( 'js-uix-disabled' );
     }
 
-    const dataH: any         = config.height,
-          dataW: any         = config.width,
-          linkBtn: any       = config.btn,
-          closeTime: any     = config.autoClose;
 
     // Initializate modal
     if ( linkBtn ) {
@@ -104,17 +103,17 @@ export function fireModalDialog(config: fireModalDialogConfig) {
         __( 'body' ).addClass( 'scrollLock' );
         
 
-        if ( typeof dataH != typeof undefined && dataH != '' && dataH ) {
+        if ( dataH && dataH != '' ) {
             curElement.css( {'height': dataH } );
         }
 
-        if ( typeof dataW != typeof undefined && dataW != '' && dataW ) {
+        if ( dataW && dataW != '' ) {
             curElement.css( {'width': dataW } );
         }
 
         
         //Enable the lightbox effect.
-        if ( config.lightbox ) {
+        if ( lightBoxEnabled ) {
             TweenMax.set( '.uix-modal-mask', {
                 css: {
                     opacity : 0,
@@ -138,10 +137,10 @@ export function fireModalDialog(config: fireModalDialogConfig) {
         
         
         //auto close
-        if ( closeTime && !isNaN( closeTime ) ) {
+        if ( closeTime && !isNaN( closeTime as number ) ) {
             window.setCloseModalDialog = setTimeout( function() {
-                closeModalDialog({target: '.uix-modal-box'});
-            }, closeTime );
+                closeModalDialog( __( '.uix-modal-box' ) );
+            }, closeTime as number );
         }
         
         
@@ -157,7 +156,7 @@ export function fireModalDialog(config: fireModalDialogConfig) {
                 curElement.find( '.uix-modal-box__content > .uix-modal-box__body' ).css( 'overflow-y', 'hidden' );
             }
 
-        }, config.speed );
+        }, animDelay );
 
     }	
 

@@ -30,8 +30,43 @@ type NavigationState = false;
 
 export default class Navigation extends Component<NavigationProps, NavigationState> {
 
+    windowScrollUpdate: () => void;
+    
+    constructor(props) {
+        super(props);
+
+        // Add a scroll event listener to window
+        this.handleScrollEvent = this.handleScrollEvent.bind(this);
+        this.windowScrollUpdate = __.throttle(this.handleScrollEvent, 5);
+
+    }
+
+    handleScrollEvent() {
+		const $elMenuContainer = __( '.uix-menu__container:not(.is-mobile)' );
+		const $elMobileToggle = __( '.admin-bar .uix-menu-mobile__toggle' );
+		const scrolled = __( window ).scrollTop();
+
+		// Primary Menu
+		//Sticky primary navigation
+		if ( scrolled >= 220 ) {
+			$elMenuContainer.addClass( 'is-fixed' );
+		} else {
+			$elMenuContainer.removeClass( 'is-fixed' );	
+		}
+
+		// Mobile Menu
+		//Show Toolbar when viewing site for WordPress
+		if ( scrolled >= 46 ) {
+			$elMobileToggle.addClass( 'is-fixed' );
+		} else {
+			$elMobileToggle.removeClass( 'is-fixed' );	
+		}
+    }
+
+
 	componentDidMount(){
 		
+		const self = this;
 		
 		__( document ).ready( function() {
 
@@ -150,9 +185,9 @@ export default class Navigation extends Component<NavigationProps, NavigationSta
 				
 				// Remove the html tag for mega menu item
 				$menuWrap.find('li.multi-column  > ul .multi-column-title').each(function ( this: any ) {
-					const mega_old_item = __(this).html();
+					const mega_old_item = __( this ).html();
 					if (mega_old_item != '') {
-						__(this).html(mega_old_item.replace(/<[^>]+>/g, ''));
+						__( this ).html(mega_old_item.replace(/<[^>]+>/g, ''));
 					}
 				});
 				
@@ -344,9 +379,9 @@ export default class Navigation extends Component<NavigationProps, NavigationSta
 				//Prevents further propagation of the current event in the capturing and bubbling phases.
 				e.stopPropagation();
 
-				__(this).toggleClass('is-opened');
+				__( this ).toggleClass('is-opened');
 
-				if (__(this).hasClass('is-opened')) {
+				if (__( this ).hasClass('is-opened')) {
 
 					//Add mobile brand
 					const logoURL = __('.uix-brand--mobile img').attr('src');
@@ -374,9 +409,7 @@ export default class Navigation extends Component<NavigationProps, NavigationSta
 	
 	
 			// Fires drop-menu event 
-			const btn = '.uix-menu__container.is-mobile ul li > a';
-			__( document ).off( 'click', btn );
-			__( document ).on( 'click', btn, function(this: any, e: any ) {
+			__( '.uix-menu__container.is-mobile ul li > a' ).off( 'click' ).on( 'click', function(this: any, e: any ) {
 				
 			
 				const $sub = __( this ).next();
@@ -441,47 +474,12 @@ export default class Navigation extends Component<NavigationProps, NavigationSta
 			 */
 			 
 			// Sticky primary navigation & WordPress Toolbar
-			//Note: Don't use Waypoint, because the Offset is wrong on calculating height of fixed element
-			const $elMenuContainer = __( '.uix-menu__container:not(.is-mobile)' );
-			const $elMobileToggle = __( '.admin-bar .uix-menu-mobile__toggle' );
-
-			const scrollUpdate = function() {
-
-				const scrolled = __( window ).scrollTop();
-
-				// Primary Menu
-				//Sticky primary navigation
-				if ( scrolled >= 220 ) {
-					$elMenuContainer.addClass( 'is-fixed' );
-				} else {
-					$elMenuContainer.removeClass( 'is-fixed' );	
-				}
-
-				// Mobile Menu
-				//Show Toolbar when viewing site for WordPress
-				if ( scrolled >= 46 ) {
-					$elMobileToggle.addClass( 'is-fixed' );
-				} else {
-					$elMobileToggle.removeClass( 'is-fixed' );	
-				}
-				
-
-			};
-
-
-			const throttleFunc = __.throttle(scrollUpdate, 50);
-			window.removeEventListener('scroll', throttleFunc);
-			window.removeEventListener('touchmove', throttleFunc);
-			
-			// Please do not use scroll's off method in each
-			window.addEventListener('scroll', throttleFunc);
-			window.addEventListener('touchmove', throttleFunc);
-			
-			
-			throttleFunc();
-			
-
-
+            // Add function to the element that should be used as the scrollable area.
+            window.removeEventListener('scroll', self.windowScrollUpdate);
+            window.removeEventListener('touchmove', self.windowScrollUpdate);
+            window.addEventListener('scroll', self.windowScrollUpdate);
+            window.addEventListener('touchmove', self.windowScrollUpdate);
+            self.windowScrollUpdate();
 
 
 		});
@@ -489,6 +487,18 @@ export default class Navigation extends Component<NavigationProps, NavigationSta
 		
 	}
 	
+    /** Remove the global list of events, especially as scroll and interval. */
+    componentWillUnmount() {
+		
+        // Remove scroll events from window
+        window.removeEventListener('scroll', this.windowScrollUpdate);
+        window.removeEventListener('touchmove', this.windowScrollUpdate);  
+
+		// Kill all aniamtions
+		TweenMax.killAll();
+
+    }
+
 
 	render() {
 	

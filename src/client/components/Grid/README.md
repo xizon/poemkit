@@ -4,7 +4,7 @@
 
 ## Version
 
-=> 0.0.1
+=> 0.0.1 (October 10, 2021)
 
 ## API
 
@@ -442,10 +442,7 @@ export default () => {
 
         <h3>Uix Grid (No line breaks)</h3>
         <p>
-        Set the <code>noBreak</code> attribute of <code>&lt;Grid&gt;</code> markup.<code>true</code> will prevent the columns from automatically wrapping across multiple lines.
-          
-          <br />
-          <em>Please simulate mobile viewing after zooming out your viewport.</em>
+        Set the <code>noBreak</code> attribute of <code>&lt;Grid&gt;</code> markup.<code>true</code> will prevent the columns from automatically wrapping across multiple lines. <em>Please simulate mobile viewing after zooming out your viewport.</em> 
         </p>
         {/* ================================================================== */} 
     

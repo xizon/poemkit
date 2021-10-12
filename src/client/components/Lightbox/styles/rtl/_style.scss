@@ -1,0 +1,11 @@
+/* ======================================================
+   <!-- LightBox -->
+/* ====================================================== */
+@import '@uixkit.react/components/_utils/styles/_variable-and-mixin.scss';
+
+
+.rtl .uix-lightbox__close {
+	right: auto;
+	left: 15px;
+
+}

@@ -4,7 +4,7 @@
 
 ## Version
 
-=> 0.0.1
+=> 0.0.1 (October 10, 2021)
 
 
 ## API
@@ -608,8 +608,6 @@ export default () => {
 			disabled />	
 		
 
-
-
 		<CustomSelect 
 			value="value-2"
 			options='{
@@ -738,24 +736,13 @@ export default () => {
 		{/* ================================================================== */}      
 		
 		<Switch textOff="off" textOn="on" name="switch-name-1" />
-		
-
 		<Switch textOff="off" textOn="on" name="switch-name-2" value="true" />
-		
-
 		<Switch textOff="off" textOn="on" name="switch-name-3" disabled />
-		
-
 		<Switch ui="pill" textOff="off" textOn="on" name="switch-name-4" />
-		
-
 		<Switch ui="rounded" textOff="off" textOn="on" name="switch-name-5" />
-			
-
 		<Switch targetID="my-toggle-name-1" textOff="hide" textOn="show" name="switch-name-6" />
 		<div id="my-toggle-name-1" style={{padding:"10px",borderRadius:"3px",background:"#f7f7f7",border:"1px solid #efefef",margin:"5px 0 15px 0",width:"300px"}}>content here...</div>
-			
-			
+	
 																
 																	
 		<h3>Radio</h3>
@@ -772,7 +759,6 @@ export default () => {
 			disabled />	
 	
 
-
 		<Radio 
 			value="value-2"
 			options='{
@@ -782,8 +768,6 @@ export default () => {
 			}'
 			name="radio-name-2" />
 		
-
-
 
 		<Radio 
 			options='{
@@ -795,39 +779,27 @@ export default () => {
 			required />
 		
 
-										
-										
-																	
-
+				
 		<h3>Date</h3>
 		{/* ================================================================== */}      
 
 		<Date theme="line" ui="large" label="Date" name="date-name-1" autoComplete="off" min="1950-01-01" max="2021-12-31"  />
-
 		<Date ui="small" label="Date" name="date-name-2" autoComplete="off" min="1950-01-01" max="2021-12-31" value="2018-07-22" />
-
 		<Date ui="medium" label="Date" name="date-name-3" autoComplete="off" min="1950-01-01" max="2021-12-31" defaultNow="true" />
-
 		<Date ui="large" label="Date" name="date-name-4" autoComplete="off" time="true" min="1950-01-01T08:30" max="2017-06-30T16:30" value="" />
-
-		<Date ui="large" label="Date" name="date-name-5" autoComplete="off" time="true" min="1950-01-01T08:30" max="2017-06-30T16:30" disabled />	
-
+		<Date ui="large" label="Date" name="date-name-5" autoComplete="off" time="true" min="1950-01-01T08:30" max="2017-06-30T16:30" disabled />
 		<Date ui="fullwidth" label="Date" name="date-name-6" autoComplete="off" time="true" min="1950-01-01T08:30" max="2017-06-30T16:30" defaultNow="true" />
-
 		<Date ui="fullwidth rounded" label="Date" name="date-name-7" autoComplete="off" time="true" min="1950-01-01T08:30" max="2017-06-30T16:30" />
-
 		<Date ui="fullwidth pill" label="Date" name="date-name-8" autoComplete="off" time="true" min="1950-01-01T08:30" max="2017-06-30T16:30" />
 
 																	
-																	
+																
 																	
 		<h3>Checkbox</h3>
 		{/* ================================================================== */}      
 					
 		<Checkbox label="Checkbox" name="checkbox-name-1" />
-
 		<Checkbox label="Checkbox" name="checkbox-name-2" value="true" />
-
 		<Checkbox label="Checkbox" name="checkbox-name-3" disabled />
 
 																	
@@ -836,9 +808,7 @@ export default () => {
 		{/* ================================================================== */}      
 
 		<Number theme="line" step="0.01" name="number-name-line" btnStepMinus="1" btnStepPlus="1" decimals="0" />
-
 		<Number name="number-name-2" value="5" btnStepMinus="15" btnStepPlus="15" decimals="2" min="0" max="200" />
-
 		<Number name="number-name-3" value="1" btnStepMinus="15" btnStepPlus="15" decimals="2" disabled/>		
 																	
 																	
@@ -873,8 +843,7 @@ export default () => {
 
         <File label="Upload File" name="file-name-1" />
 
-																	
-																	
+																															
 																	
 		<h3>File Field</h3>
 		{/* ================================================================== */}      
@@ -886,26 +855,11 @@ export default () => {
 		{/* ================================================================== */}      
 
 		<MergeInput btnType="button" placeholder="Enter your search term..." label={<><i className="fa fa-search" aria-hidden="true"></i> Icon Label</>} name="mergeInput-name-1-btnicon" />
-		<br />
-
 		<MergeInput btnType="button" placeholder="Enter your search term..." label="Search" name="mergeInput-name-1" />
-		<br />
-
 		<MergeInput btnType="submit" ui="pill" placeholder="Enter your search term..." label="Search" name="mergeInput-name-2" />
-		<br />	
-
 		<MergeInput btnType="submit" ui="rounded" placeholder="Enter your search term..." label="Search" name="mergeInput-name-2_2" />
-		<br />					
-
-
-		<MergeInput btnType="button" placeholder="Enter your Email" type="email" label="Subscribe" name="mergeInput-name-4" icon={<i className="fa fa-envelope" aria-hidden="true"></i>} />
-		<br />																			
-
-
-		<MergeInput btnType="button" ui="pill" placeholder="Enter your Email" type="email" label="Subscribe" name="mergeInput-name-5" icon={<i className="fa fa-envelope" aria-hidden="true"></i>} />
-		<br />																			
-
-
+		<MergeInput btnType="button" placeholder="Enter your Email" type="email" label="Subscribe" name="mergeInput-name-4" icon={<i className="fa fa-envelope" aria-hidden="true"></i>} />															
+		<MergeInput btnType="button" ui="pill" placeholder="Enter your Email" type="email" label="Subscribe" name="mergeInput-name-5" icon={<i className="fa fa-envelope" aria-hidden="true"></i>} />																		
 		<MergeInput btnType="button" ui="rounded" placeholder="Enter your Email" type="email" label="Subscribe" name="mergeInput-name-5_2" icon={<i className="fa fa-envelope" aria-hidden="true"></i>} />
 
 	

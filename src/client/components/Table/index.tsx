@@ -66,7 +66,7 @@ class TableRow extends Component<TableRowProps, TableRowState> {
 												
 		return (
 		  <>
-			<tr id={"app-table-field-tr" + __.GUID.create()}>
+			<tr id={'app-table-field-tr' + __.GUID.create()}>
 				{fields}
 			</tr>
 	
@@ -96,7 +96,7 @@ class TableHeaders extends Component<TableHeadersProps, TableHeadersState> {
 			  <>
 
 				<thead>
-					<tr id={"app-table-header-tr" + __.GUID.create()}>
+					<tr id={'app-table-header-tr' + __.GUID.create()}>
 						{this.props.data.map((item, i) => {
 							return <th key={"header" + i}>{item}</th>;
 						})
@@ -134,7 +134,7 @@ class TableSummaries extends Component<TableSummariesProps, TableSummariesState>
 			  <>
 
 				<tfoot>
-					<tr id={"app-table-summary-tr" + __.GUID.create()}>
+					<tr id={'app-table-summary-tr' + __.GUID.create()}>
 						{this.props.data!.map((item, i) => {
 							return <th key={"summary" + i}>{item}</th>;
 						})
@@ -207,31 +207,35 @@ type TableState = false;
 
 
 export default class Table extends Component<TableProps, TableState> {
+
+	private wrapperRef = React.createRef<HTMLDivElement>();
+
 	constructor(props) {
 		super(props);
 	}
 	
 	componentDidMount(){
-		
+
+		const self = this;
 		
 		__( document ).ready( function() {
 
+			const reactDomEl: any = self.wrapperRef.current;
+			const $el = __( reactDomEl );			
 
-			
-
+		
 			/*
 			 ////////////////////////////////////////////////////////////
 			 /////////////////////   Duplicate title    /////////////////
 			 ////////////////////////////////////////////////////////////
 			 */
-			 __('.js-uix-table--responsive').each(function ( this: any  ) {
-	
-				const $th = __( this ).find( 'thead th' );
-				const $tr = __( this ).find( 'tbody > tr' );
+			if ( $el.hasClass( 'js-uix-table--responsive' ) ) {
+				const $th = $el.find( 'thead th' );
+				const $tr = $el.find( 'tbody > tr' );
 				const thArr:string[] = [];
 				
 				$th.each(function ( this: any  ) {
-					const data = __(this).html().replace(/<span[^>]*>[\s\S]+<\/span>/g, '');
+					const data = __( this ).html().replace(/<span[^>]*>[\s\S]+<\/span>/g, '');
 					thArr.push(data);
 					if (__( this ).data('table') === null) {
 						__( this ).data('table', data);
@@ -245,9 +249,7 @@ export default class Table extends Component<TableProps, TableState> {
 					});
 				
 				});
-		
-			});
-			
+			}
 
 
 			/*
@@ -256,18 +258,17 @@ export default class Table extends Component<TableProps, TableState> {
 			 ////////////////////////////////////////////////////////////
 			 */
 		
-			let	windowWidth = window.innerWidth;
-			tableDataScrolledInit( windowWidth );
+			if ( $el.hasClass( 'js-uix-table--responsive-scrolled' ) ) {
 
-			function tableDataScrolledInit( w ) {
-				
+				let	windowWidth = window.innerWidth;
+				tableDataScrolledInit( windowWidth );
 
+				function tableDataScrolledInit( w ) {
 					
-				//Add an identifier so that the mobile terminal can compare by row
-				__( '.js-uix-table--responsive-scrolled' ).each(function( this: any ) {
 
-					const $th = __( this ).find( 'thead th' );
-					const $tr = __( this ).find( 'tbody > tr' );
+					//Add an identifier so that the mobile terminal can compare by row
+					const $th = $el.find( 'thead th' );
+					const $tr = $el.find( 'tbody > tr' );
 
 					$tr.each(function( this: any ) {
 						const $td = __( this ).find( '> td' );
@@ -276,51 +277,48 @@ export default class Table extends Component<TableProps, TableState> {
 							__( this ).data( 'table-row', tdIndex );
 						});
 					});
-				});
-			
+				
+				
+					if ( w <= 768 ) {
 
-				if ( w <= 768 ) {
-
-
-
-					//get maxHeight of per row
-					__( '.js-uix-table--responsive-scrolled' ).each(function( this: any ) {
-					
-						const $tr = __( this ).find( 'tbody > tr' );
+						//get maxHeight of per row
+						const $tr = $el.find( 'tbody > tr' );
 						const len = $tr.length;
 						for (let i=0; i<len; i++ ) {
-							const maxHeight = __( this ).find( '[data-table-row="'+i+'"]' ).maxDimension().height;
-							__( this ).find( '[data-table-row="'+i+'"]' ).css({'height': maxHeight + 'px'});
+							const maxHeight = $el.find( '[data-table-row="'+i+'"]' ).maxDimension().height;
+							$el.find( '[data-table-row="'+i+'"]' ).css({'height': maxHeight + 'px'});
 						}
-					});
-
 				
-				} else {
-					__( '.js-uix-table--responsive-scrolled tbody td, .js-uix-table--responsive-scrolled thead th' ).removeAttr( 'style') ;
-				}
-
-			}	
-			
-			
-			function windowUpdate() {
-				// Check window width has actually changed and it's not just iOS triggering a resize event on scroll
-				if ( window.innerWidth != windowWidth ) {
+				
 					
-					// Update the window width for next time
-					windowWidth = window.innerWidth;
+					} else {
+						$el.find( 'tbody td, thead th' ).removeAttr( 'style');
+					}
 
-					// Do stuff here
-					tableDataScrolledInit( windowWidth );
+				}	
+				
+				
+				function windowUpdate() {
+					// Check window width has actually changed and it's not just iOS triggering a resize event on scroll
+					if ( window.innerWidth != windowWidth ) {
+						
+						// Update the window width for next time
+						windowWidth = window.innerWidth;
+
+						// Do stuff here
+						tableDataScrolledInit( windowWidth );
 
 
+					}
 				}
-			}
-			
-			const debounceFunc = __.debounce(windowUpdate, 50);
-			window.removeEventListener('resize', debounceFunc);
-			window.addEventListener('resize', debounceFunc);
-			
-			
+				
+				const debounceFunc = __.debounce(windowUpdate, 50);
+				window.removeEventListener('resize', debounceFunc);
+				window.addEventListener('resize', debounceFunc);	
+
+			 }
+
+
 
 		});
 
@@ -365,7 +363,7 @@ export default class Table extends Component<TableProps, TableState> {
 		return (
 		  <>
 			
-			<div className={"uix-table" + classes} id={id || 'app-table-' + __.GUID.create()} {...attributes}>
+			<div ref={this.wrapperRef} className={"uix-table" + classes} id={id || 'app-table-' + __.GUID.create()} {...attributes}>
 				<table>
 			
 			        <TableHeaders data={_headers} />

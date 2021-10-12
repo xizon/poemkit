@@ -85,8 +85,16 @@ export default class DropdownMenu extends Component<DropdownMenuProps, DropdownM
 	}
 
     componentDidMount() {
-        document.body.removeEventListener('mousedown', this.handleClose);
-        document.body.addEventListener('mousedown', this.handleClose);
+        document.removeEventListener('mousedown', this.handleClose);
+        document.addEventListener('mousedown', this.handleClose);
+    }
+
+
+     /** Remove the global list of events, especially as scroll and interval. */
+     componentWillUnmount() {
+        // Remove URL change events from window
+        window.removeEventListener('mousedown', this.handleClose);
+
     }
 
   

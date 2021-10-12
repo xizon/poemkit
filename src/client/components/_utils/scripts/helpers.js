@@ -1,10 +1,11 @@
 /* 
  *************************************
- * Core Shortcut
+ * Core Helpers
  *
  * @package: uix-kit-react
- * @version: 0.30
- * @last update: September 26, 2021
+ * @version: 0.35
+ * @last update: October 11, 2021
+ * @author: UIUX Lab <uiuxlab@gmail.com>
  * @license: MIT
  *
  *************************************
@@ -88,7 +89,7 @@ __( document ).ready( function() {
 			__( '.menu li' ).first().before( '<li style="color:green">(first)before</li>');
 			__( '.menu li' ).last().after( '<li style="color:red">(last)after</li>');
 			__( 'h1' ).wrapInner( '<span class="new-div" />' );
-			__( 'h1' ).html( '<span style="color:red">New H1</span>' );
+			√√
 			__( 'h1' ).text( 'New H1' );
 			__( '.demo1' ).prev().addClass( 'prev' );
 			__( '.demo2' ).next().addClass( 'next' );
@@ -128,6 +129,7 @@ __( document ).ready( function() {
 				__( this ).addClass( 'new-class' )
 			});
 
+			
 			__( document ).off( 'click', '.menu li' );
 			__( document ).on( 'click', '.menu li', function( e ) {
 				console.log('e: ', e);
@@ -136,6 +138,13 @@ __( document ).ready( function() {
 				console.log('attr(class): ', __( this ).attr( 'class' ));
 				__( this ).addClass( 'new-class' )
 			});
+
+
+			__( '#imghere' ).off( 'click', imgFn);
+			__( '#imghere' ).on( 'click', imgFn);
+			function imgFn() {
+				console.log( 'imgFn' );
+			}
 
 
 			
@@ -235,7 +244,7 @@ __( document ).ready( function() {
 			// AJAX demos
 			//+++++++++++++++++++++++++++++++++++++++++++
 			__.ajax({
-				url: 'https://restcountries.eu/rest/v2/name/Argentina',
+				url: 'http://api.countrylayer.com/v2/name/Argentina?access_key=8ef27495767eb3ea58cc0eabf66068e9',
 				method: 'GET',
 				complete: function( data ) {
 					console.log( '=> ajax ok!' );
@@ -283,6 +292,7 @@ __( document ).ready( function() {
 			//+++++++++++++++++++++++++++++++++++++++++++
 			// Utilities demos
 			//+++++++++++++++++++++++++++++++++++++++++++
+			console.log( __.isTouchCapable() );  //true or false
 			console.log( __.browser.isIE );  //.isMobile, .isAndroid, .isPC, .isSafari, .isIE, .supportsPassive
 			console.log( __.GUID.create() );
 			console.log( __.math.evaluate( '100/3' ) );
@@ -328,11 +338,28 @@ __( document ).ready( function() {
 			window.addEventListener('resize', debounceFuncWindow);
 
 
-			
-			
+			// Deep clone an element
 			let a = [1,2,3,4], b = __.deepClone(a);
 			let demo = document.querySelector( '#demo' ), demoCopy = __.deepClone(demo);
 
+
+			// Set a default configuration
+			function myFun(curElement, config) {
+				if ( typeof curElement === typeof undefined ) return;
+				config = __.setDefaultOptions({
+					"src"          : false,
+					"htmlID"       : false,
+					"fixed"        : false,
+					"ajax"         : false
+				}, config);
+
+				console.log( config ); //{src: 'https://google.com', htmlID: true, fixed: false, ajax: false}
+
+			}
+			myFun( __( '.demo-trigger' ), {
+				src: 'https://google.com',
+				htmlID: true
+			});
 
 
 
@@ -456,7 +483,6 @@ const __ = (function () {
 	 */
 	function isJSON( str ){
 		
-		
 		if ( typeof(str) === 'string' && str.length > 0 ) {
 
 			if ( str.replace( /\"\"/g, '' ).replace( /\,/g, '' ) == '[{}]' ) {
@@ -479,7 +505,7 @@ const __ = (function () {
 			
 			if ( 
 				typeof(str) === 'object' && 
-				Object.prototype.toString.call(str).toLowerCase() === '[object object]' &&
+				Object.prototype.toString.call(str) === '[object Object]' &&
 			    ! str.length
 			   ) {
 				return true;
@@ -578,6 +604,39 @@ const __ = (function () {
 		return path.join(" > ");
 	}
 
+	/*
+	* Check if a string is a valid number
+	* @private
+	*/
+	function isValidNumeric(str) {
+		if (typeof str != "string") return false // we only process strings!  
+		if ( 
+			!isNaN(str) && // use type coercion to parse the _entirety_ of the string (`parseFloat` alone does not do this)
+			!isNaN(parseFloat(str)) // ensure strings of whitespace fail
+		) {
+			return true;
+		} else {
+			return false;
+		}
+	}
+
+
+	/*
+	* Convert string to hump naming
+	* @private
+	*/
+	function stringlineToHump(str) {
+		if ( typeof str === 'string' && str.length > 0 ) {
+			const re=/-(\w)/g;
+			str=str.replace(re,function($0,$1){
+				return $1.toUpperCase();
+			});
+			return str;
+		} else {
+			return str;
+		}
+	}
+
 
 	/*
 	* Some easing functions
@@ -668,6 +727,19 @@ const __ = (function () {
 		
 	})();
 	
+
+	
+	/*
+	 * To determine if it is a touch screen.
+	 *
+	 * @return {Boolean} 
+	 */  
+	__.isTouchCapable = function() {
+		return 'ontouchstart' in window ||
+				window.DocumentTouch && document instanceof window.DocumentTouch ||
+				window.navigator.maxTouchPoints > 0;  
+	};					
+
 	
 	
 	/*
@@ -701,7 +773,7 @@ const __ = (function () {
 
 	})();
 	
-	
+
 	
 	/*
 	 * Create GUID / UUID
@@ -1255,6 +1327,46 @@ const __ = (function () {
 		return res;
 
 	};
+
+	/*
+	 *  Set a default JSON format configuration
+	 *
+	 * @param  {Json} props         - Set some default keys and values.
+	 * @param  {Json} options       - A JSON variable passed in from outside, including key and value.
+	 * @return {Json}               - Merge the new and old values.
+	 */
+	 __.setDefaultOptions = function(props, options) {
+		if ( typeof options === typeof undefined || options === null || options === false ) options = {};
+		//Set a default configuration
+		if ( isJSON(props) ) {
+
+			const defaultConfigValues = Object.values(props);
+			Object.keys(props).forEach(function(prop,index) {
+
+				// Well-formed string type
+				Object.keys(options).forEach(function(prop2, index2) {
+					if ( prop2 === prop ) {
+						let _v = options[prop2];
+						if ( _v == 'true' ) _v = true;
+						if ( _v == 'false' ) _v = false;
+						if ( isValidNumeric(_v) ) _v = parseFloat(_v);
+						if ( isJSON(_v) ) _v = Object.prototype.toString.call(_v) === '[object Object]' ? _v : JSON.parse(_v);
+
+						options[prop2] = _v;
+					}
+					
+				});
+
+				//
+				if ( typeof options[prop] === typeof undefined || options[prop] === null ) options[prop] = defaultConfigValues[index];
+			});
+		}
+		return options;
+	};
+
+
+
+	
 	
 	/* ---------------- API methods ----------------- */
 	
@@ -2133,17 +2245,6 @@ const __ = (function () {
 	}
 	
 
-	/*
-	 * Remove a previously-stored piece of data.
-	 *
-	 * @param  {String} a                 - A string naming the piece of data to delete.
-	 * @return {Void} 
-	 */
-    __.prototype.removeData = function(a) {
-		a = a || '';
-		this.removeAttribute('data-' + a);
-    }
-	
 	
 	/*
 	 * Set one or more attributes for the set of matched elements.
@@ -2152,15 +2253,12 @@ const __ = (function () {
 	 * @param  {String} v               - A value to set for the attribute. 
 	 * @return {Void|String}              - Get the value of an attribute for the first element in the set of matched elements.
 	 */
-	__.prototype.attr = function(a, v) {
+	 __.prototype.attr = function(a, v) {
 		a = a || '';
 		if (v === undefined) {
 
 			let res = this.getAttribute(a);
-			if ( res == 'true' ) res = true;
-			if ( res == 'false' ) res = false;
-			if ( isJSON(res) ) res = JSON.parse(res);
-			// Non-existent attributes return null, we normalize to undefined
+			// Non-existent attributes
 			return res == null ? null : res;
 		} else {
 			this.setAttribute(a, v);
@@ -2178,16 +2276,19 @@ const __ = (function () {
 	 */
 	__.prototype.data = function(a, v) {
 		a = a || '';
+		const _s = stringlineToHump( a );
+
 		if (v === undefined) {
-			
-			let res = this.getAttribute('data-' + a);
+			let res = this.dataset[_s];
 			if ( res == 'true' ) res = true;
 			if ( res == 'false' ) res = false;
-			if ( isJSON(res) ) res = JSON.parse(res);
-			// Non-existent attributes return null, we normalize to undefined
-			return res == null ? null : res;
+			if ( isValidNumeric(res) ) res = parseFloat(res);
+			if ( isJSON(res) ) res = Object.prototype.toString.call(res) === '[object Object]' ? res : JSON.parse(res);
+			
+			// Non-existent attributes
+			return res == undefined ? null : res;
 		} else {
-			this.setAttribute('data-' + a, v);
+			this.dataset[_s] = v;
 		}
 	};
 
@@ -2206,9 +2307,11 @@ const __ = (function () {
 			let res = this[a];
 			if ( res == 'true' ) res = true;
 			if ( res == 'false' ) res = false;
-			if ( isJSON(res) ) res = JSON.parse(res);
-			// Non-existent attributes return null, we normalize to undefined
-			return res == null ? null : res;
+			if ( isValidNumeric(res) ) res = parseFloat(res);
+			if ( isJSON(res) ) res = Object.prototype.toString.call(res) === '[object Object]' ? res : JSON.parse(res);
+
+			// Non-existent attributes
+			return res == undefined ? null : res;
 		} else {
 			this[a] = v;
 		}
@@ -2227,20 +2330,33 @@ const __ = (function () {
 		this.removeAttribute(a);
     }
 
+
+	/*
+	 * Remove a previously-stored piece of data.
+	 *
+	 * @param  {String} a                 - A string naming the piece of data to delete.
+	 * @return {Void} 
+	 */
+    __.prototype.removeData = function(a) {
+		a = a || '';
+		const _s = stringlineToHump( a );
+		delete this.dataset[_s];
+    }
+		
 	
 	/*
 	 * Attach an event handler function for one or more events to the selected elements.
 	 *
 	 * @param  {String} eventType         - One event types and optional namespaces, such as "click" 
 	 * @param  {?String} selector         - A selector string to filter the descendants of the selected elements that trigger the event. 
-	 * @param  {Function} callBack        - A function to execute when the event is triggered. 
+	 * @param  {Function} fn              - A function to execute when the event is triggered. 
 	 * @return {Void}      
 	 */
-	__.prototype.on = function(eventType, selector, callBack) {
+	__.prototype.on = function(eventType, selector, fn) {
 		const self = this;
 		
-		if (typeof(callBack) !== 'function') {
-			callBack = selector;
+		if (typeof(fn) !== 'function') {
+			fn = selector;
 			selector = null;
 		}
 		
@@ -2250,40 +2366,42 @@ const __ = (function () {
 		
 		if (selector) {
 			//if string
-			const fun = function(evt) {
+			const _curFun = function(evt) {
 				
 				[].slice.call( this.querySelectorAll(selector) ).forEach(function(el) {
 					if (el === evt.target) {
-						callBack.call(el, evt);
+						fn.call(el, evt);
 					} else if (isChild(evt.target, el)) {
-						callBack.call(el, evt);
+						fn.call(el, evt);
 					}
 				});
 			};
 
 			this.myListeners.push({
 				eType: eventType,
-				callBack: fun,
+				callBack: _curFun,
+				function: fn,
 				selector: selector
 			});
 										   
-			self.addEventListener(eventType, fun);
+			self.addEventListener(eventType, _curFun);
 			
 		} else {
 		
 			//if HTML element
-			const fun = function(evt) {
-				callBack.call(this, evt);
+			const _curFun = function(evt) {
+				fn.call(this, evt);
 			};
 			
 			
 			this.myListeners.push({
 				eType: eventType,
-				callBack: fun,
+				callBack: _curFun,
+				function: fn,
 				selector: selector
 			});
 			
-			this.addEventListener(eventType, fun, false);
+			this.addEventListener(eventType, _curFun, false);
 
 		}
 
@@ -2294,8 +2412,8 @@ const __ = (function () {
 	/*
 	 * Remove an event handler.
 	 *
-	 * @param  {?String} eventType        - One event types and optional namespaces, such as "click"
-	 * @param  {?String} selector         - A selector string to filter the descendants of the selected elements that trigger the event. 
+	 * @param  {?String} eventType             - One event types and optional namespaces, such as "click"
+	 * @param  {?String|Function} curSelector  - A selector string or function to filter the descendants of the selected elements that trigger the event. 
 	 * @return {Void}      
 	 */
 	__.prototype.off = function(eventType, curSelector) {
@@ -2304,9 +2422,16 @@ const __ = (function () {
 			for (let i = 0; i < this.myListeners.length; i++) {
 
 				if ( typeof (curSelector) !== 'undefined' ) {
-					if ( curSelector === this.myListeners[i].selector ) {
-						this.removeEventListener(this.myListeners[i].eType, this.myListeners[i].callBack);
+					
+					if (typeof curSelector === "function") {
+						//is function
+						if ( curSelector === this.myListeners[i].function ) this.removeEventListener(this.myListeners[i].eType, this.myListeners[i].callBack);
+					} else {
+						//is string
+						if ( curSelector === this.myListeners[i].selector ) this.removeEventListener(this.myListeners[i].eType, this.myListeners[i].callBack);
 					}
+
+
 				} else {
 					this.removeEventListener(this.myListeners[i].eType, this.myListeners[i].callBack);
 				}			

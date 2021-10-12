@@ -10,7 +10,7 @@ export const PrivateRoute = ({ component: Component, ...attributes }) => (
 		{...attributes}
 		render={(props) => {
 	 
-			if (typeof (localStorage) !== "undefined") {
+			if (typeof(localStorage) !== 'undefined') {
 				if ( localStorage.getItem('user') ) {
 					return <Component {...props} />;
 				} else {

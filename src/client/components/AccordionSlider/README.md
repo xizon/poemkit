@@ -4,7 +4,7 @@
 
 ## Version
 
-=> 0.0.1
+=> 0.0.1 (October 10, 2021)
 
 ## API
 
@@ -40,8 +40,6 @@ import { AccordionSliderItem } from '@uixkit.react/components/AccordionSlider/in
 import React from 'react';
 import { AccordionSlider, AccordionSliderItem } from '@uixkit.react/components/AccordionSlider/index.tsx';
 
-//get project config
-import { rootDirectory } from '@uixkit.react/config/websiteConfig.js';
 
 export default () => {
   return (
@@ -52,15 +50,15 @@ export default () => {
       <p>Show hidden divs on mouse event.</p>
       {/* ================================================================== */}
       <AccordionSlider triggerType="mouseover" displayTheFirstItem={true} autoReset={true} displayRatio="50%" direction="horizontal" closeBtn={false}>
-        <AccordionSliderItem bg={`${rootDirectory}/assets/images/demo/test-img-big-1.jpg`}>
+        <AccordionSliderItem bg={`/assets/images/demo/test-img-big-1.jpg`}>
           <h3 className="uix-typo--color-white">Lorem Ipsum</h3>
           <p className="uix-typo--color-white">Lorem ipsum dolor sit amet, consectetur adipiscing elit, Lorem ipsum dolor sit amet, consectetur adipiscing elit</p>
         </AccordionSliderItem>
-        <AccordionSliderItem bg={`${rootDirectory}/assets/images/demo/test-img-big-2.jpg`}>
+        <AccordionSliderItem bg={`/assets/images/demo/test-img-big-2.jpg`}>
           <h3 className="uix-typo--color-white">Lorem Ipsum</h3>
           <p className="uix-typo--color-white">Lorem ipsum dolor sit amet, consectetur adipiscing elit</p>
         </AccordionSliderItem>
-        <AccordionSliderItem bg={`${rootDirectory}/assets/images/demo/test-img-big-4.jpg`}>
+        <AccordionSliderItem bg={`/assets/images/demo/test-img-big-4.jpg`}>
           <h3 className="uix-typo--color-white">Lorem Ipsum</h3>
           <p className="uix-typo--color-white">Lorem ipsum dolor sit amet, consectetur adipiscing elit</p>
         </AccordionSliderItem>
@@ -71,22 +69,22 @@ export default () => {
       <p>Click the item to show it. Hidden divs when you click the close button.</p>
       {/* ================================================================== */}
       <AccordionSlider triggerType="click" displayTheFirstItem={false} autoReset={false} displayRatio="60%" direction="horizontal" closeBtn=".uix-accordion-slider__close">
-        <AccordionSliderItem bg={`${rootDirectory}/assets/images/demo/test-img-big-1.jpg`}>
+        <AccordionSliderItem bg={`/assets/images/demo/test-img-big-1.jpg`}>
           <h3 className="uix-typo--color-white">Lorem Ipsum</h3>
           <p className="uix-typo--color-white">Lorem ipsum dolor sit amet, consectetur adipiscing elit, Lorem ipsum dolor sit amet, consectetur adipiscing elit</p>
           <a className="uix-accordion-slider__close" href="#">Close</a>
         </AccordionSliderItem>
-        <AccordionSliderItem bg={`${rootDirectory}/assets/images/demo/test-img-big-2.jpg`}>
+        <AccordionSliderItem bg={`/assets/images/demo/test-img-big-2.jpg`}>
           <h3 className="uix-typo--color-white">Lorem Ipsum</h3>
           <p className="uix-typo--color-white">Lorem ipsum dolor sit amet, consectetur adipiscing elit</p>
           <a className="uix-accordion-slider__close" href="#">Close</a>
         </AccordionSliderItem>
-        <AccordionSliderItem bg={`${rootDirectory}/assets/images/demo/test-img-big-4.jpg`}>
+        <AccordionSliderItem bg={`/assets/images/demo/test-img-big-4.jpg`}>
           <h3 className="uix-typo--color-white">Lorem Ipsum</h3>
           <p className="uix-typo--color-white">Lorem ipsum dolor sit amet, consectetur adipiscing elit</p>
           <a className="uix-accordion-slider__close" href="#">Close</a>
         </AccordionSliderItem>
-        <AccordionSliderItem bg={`${rootDirectory}/assets/images/demo/test-img-big-5.jpg`}>
+        <AccordionSliderItem bg={`/assets/images/demo/test-img-big-5.jpg`}>
           <h3 className="uix-typo--color-white">Lorem Ipsum</h3>
           <p className="uix-typo--color-white">Lorem ipsum dolor sit amet, consectetur adipiscing elit</p>
           <a className="uix-accordion-slider__close" href="#">Close</a>

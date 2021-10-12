@@ -75,19 +75,16 @@ type ModalDialogState = false;
 export default class ModalDialog extends Component<ModalDialogProps, ModalDialogState> {
     constructor(props) {
         super(props);
-
-        this.handleCloseModal = this.handleCloseModal.bind(this);
-        this.handleOpenModal = this.handleOpenModal.bind(this);
     }
 
 
-    handleCloseModal(e) {
+    closeWin(e) {
         e.preventDefault();
         this.closeAction();
     }
 
 
-    handleOpenModal(e, obj) {
+    openWin(e, obj) {
         e.preventDefault();
         this.openAction(obj);
 
@@ -102,7 +99,7 @@ export default class ModalDialog extends Component<ModalDialogProps, ModalDialog
 
         // close Modal Dialog
         //------------------------------------------
-        closeModalDialog({ target: '.uix-modal-box' });
+        closeModalDialog( __( '.uix-modal-box' ) );
     }
 
 
@@ -121,34 +118,23 @@ export default class ModalDialog extends Component<ModalDialogProps, ModalDialog
             dataCloseOnlyBtn = obj.data('modal-close-onlybtn');
 
 
-        if (dataH === null) {
-            dataH = false;
-        }
-
-        if (dataW === null) {
-            dataW = false;
-        }
-        if (dataLightbox === null) {
-            dataLightbox = true;
-        }
-        if (dataCloseTime === null) {
-            dataCloseTime = false;
-        }
-        if (dataCloseOnlyBtn === null) {
-            dataCloseOnlyBtn = false;
-        }
+        if (dataH === null) dataH = false;
+        if (dataW === null) dataW = false;
+        if (dataLightbox === null) dataLightbox = true;
+        if (dataCloseTime === null) dataCloseTime = false;
+        if (dataCloseOnlyBtn === null) dataCloseOnlyBtn = false;
 
 
 
         // Video PopUp Interaction
         //------------------------------------------
-        const hasVideo = __(curModalID).hasClass('is-video') ? true : false;
+        const hasVideo = __( curModalID ).hasClass('is-video') ? true : false;
 
         if (hasVideo) {
 
             const windowWidth = window.innerWidth;
             const windowHeight = window.innerHeight;
-            const $videoWrapper = __(curModalID).find('.uix-modal-box__video-container');
+            const $videoWrapper = __( curModalID ).find('.uix-modal-box__video-container');
             const isIframe = $videoWrapper.find('iframe').length > 0 ? true : false;
             let $video: any = isIframe ? $videoWrapper.find('iframe') : $videoWrapper.find('video');
 
@@ -217,56 +203,56 @@ export default class ModalDialog extends Component<ModalDialogProps, ModalDialog
 
         // fire Modal Dialog
         //------------------------------------------
-        fireModalDialog({
-            target: curModalID,
-            height: dataH,
-            width: dataW,
-            speed: modalSpeed,
-            btn: obj,
-            lightbox: dataLightbox,
-            autoClose: dataCloseTime,
-            closeOnlyBtn: dataCloseOnlyBtn
+        fireModalDialog( __( curModalID ), {
+            height       : dataH,
+            width        : dataW,
+            speed        : modalSpeed,
+            btn          : obj,
+            lightbox     : dataLightbox,
+            autoClose    : dataCloseTime,
+            closeOnlyBtn : dataCloseOnlyBtn
         });
+        
 
     }
 
 
-
-    createTrigger(id, closeOnlyBtn, autoClose, tagName, classes, content, width, height, autoOpen) {
+    createTrigger(tagName, classes, content, dataID, dataCloseOnlyBtn, dataAutoClose, dataWidth, dataHeight, dataAutoOpen, dataLightbox) {
 
         switch (tagName) {
-
+    
             case 'a':
                 return (
                     <>
-                        <a role="button" href="#" data-modal-width={width} data-modal-height={height} data-modal-auto-open={autoOpen} className={classes} data-modal-id={id} data-modal-close-onlybtn={closeOnlyBtn} data-modal-close-time={autoClose}>{content}</a>
+                        <a role="button" href="#" className={classes} data-modal-width={dataWidth} data-modal-height={dataHeight} data-modal-auto-open={dataAutoOpen} data-modal-id={dataID} data-modal-close-onlybtn={dataCloseOnlyBtn} data-modal-close-time={dataAutoClose} data-modal-lightbox={dataLightbox}>{content}</a>
                     </>
                 )
-
+    
             case 'button':
                 return (
                     <>
-                        <button type="button" data-modal-width={width} data-modal-height={height} data-modal-auto-open={autoOpen} className={classes} data-modal-id={id} data-modal-close-onlybtn={closeOnlyBtn} data-modal-close-time={autoClose}>{content}</button>
+                        <button type="button" className={classes} data-modal-width={dataWidth} data-modal-height={dataHeight} data-modal-auto-open={dataAutoOpen} data-modal-id={dataID} data-modal-close-onlybtn={dataCloseOnlyBtn} data-modal-close-time={dataAutoClose} data-modal-lightbox={dataLightbox}>{content}</button>
                     </>
                 )
-
+    
             case 'div':
                 return (
                     <>
-                        <div role="button" data-modal-width={width} data-modal-height={height} data-modal-auto-open={autoOpen} className={classes} data-modal-id={id} data-modal-close-onlybtn={closeOnlyBtn} data-modal-close-time={autoClose}>{content}</div>
+                        <div role="button" className={classes} data-modal-width={dataWidth} data-modal-height={dataHeight} data-modal-auto-open={dataAutoOpen} data-modal-id={dataID} data-modal-close-onlybtn={dataCloseOnlyBtn} data-modal-close-time={dataAutoClose} data-modal-lightbox={dataLightbox}>{content}</div>
                     </>
                 )
-
+    
             case 'span':
                 return (
                     <>
-                        <span role="button" data-modal-width={width} data-modal-height={height} data-modal-auto-open={autoOpen} className={classes} data-modal-id={id} data-modal-close-onlybtn={closeOnlyBtn} data-modal-close-time={autoClose}>{content}</span>
+                        <span role="button" className={classes} data-modal-width={dataWidth} data-modal-height={dataHeight} data-modal-auto-open={dataAutoOpen} data-modal-id={dataID} data-modal-close-onlybtn={dataCloseOnlyBtn} data-modal-close-time={dataAutoClose} data-modal-lightbox={dataLightbox}>{content}</span>
                     </>
                 )
-
+    
         }
-
+    
     }
+    
 
 
     //Returns the dimensions of a video asynchrounsly.
@@ -306,35 +292,31 @@ export default class ModalDialog extends Component<ModalDialogProps, ModalDialog
             }
 
             const btnClose = '.uix-modal-box [data-modal-close-trigger], .uix-modal-mask:not(.js-uix-disabled)';
-            __(document).off('click', btnClose);
-            __(document).on('click', btnClose, function (this: any, e: any) {
-                self.handleCloseModal(e);
+            __( btnClose ).off( 'click' ).on( 'click', function (this: any, e: any) {
+                self.closeWin(e);
             });
 
 
-            //move Modal Dialog template to tag end body </body>
-            Array.prototype.forEach.call(document.querySelectorAll('.uix-modal-box'), function (node) {
+            // Move HTML templates to tag end body </body>
+            Array.prototype.forEach.call(document.querySelectorAll('.uix-modal-box:not(.is-loaded)'), function (node) {
+                node.classList.add( 'is-loaded' );
                 document.body.appendChild(node);
-            });
-
+            });   
 
 
             //click to open Modal Dialog 
             const btnOpen = '[data-modal-id]';
-            __(btnOpen).off('click').on('click', function (this: any, e: any) {
-                self.handleOpenModal(e, __(this));
+            __( btnOpen ).off( 'click' ).on( 'click', function (this: any, e: any) {
+                self.openWin(e, __( this ));
             });
 
 
             //automatically open Modal Dialog 
-            __(btnOpen).each(function (this: any) {
+            __( btnOpen ).each(function (this: any) {
 
-                let dataAutoOpen = __(this).data('modal-auto-open');
-
-                if (dataAutoOpen === null) {
-                    dataAutoOpen = false;
-                }
-                if (dataAutoOpen) self.openAction(__(this));
+                let dataAutoOpen = __( this ).data('modal-auto-open');
+                if (dataAutoOpen === null) dataAutoOpen = false;
+                if (dataAutoOpen) self.openAction(__( this ));
 
             });
 
@@ -345,8 +327,14 @@ export default class ModalDialog extends Component<ModalDialogProps, ModalDialog
 
     }
 
+    /** Remove the global list of events, especially as scroll and interval. */
     componentWillUnmount() {
-        clearAllBodyScrollLocks();
+        clearAllBodyScrollLocks();  
+
+		// Kill all aniamtions
+		TweenMax.killAll();  
+
+
     }
 
 
@@ -366,22 +354,20 @@ export default class ModalDialog extends Component<ModalDialogProps, ModalDialog
             autoOpen,
             enableVideo,
             id,
-            children,
-            ...attributes
+            children
         } = this.props;
 
         const cid = id || 'app-modal-' + __.GUID.create();
         const fullClassName = fullscreen ? 'is-fullscreen' : '';
-
-
+        const lightboxEnabled = (lightbox === null || lightbox === undefined) ? true : lightbox;
 
         return (
             <>
 
-                {this.createTrigger(cid, closeOnlyBtn, autoClose, triggerTagName, triggerClassName, triggerContent, width, height, autoOpen)}
+                {this.createTrigger(triggerTagName, triggerClassName, triggerContent, cid, closeOnlyBtn, autoClose, width, height, autoOpen, lightboxEnabled)}
 
                 {!enableVideo ? (
-                    <div className={`uix-modal-box ${fullClassName}`} role="dialog" tabIndex={-1} aria-hidden="true" id={cid} {...attributes}>
+                    <div className={`uix-modal-box ${fullClassName}`} role="dialog" tabIndex={-1} aria-hidden="true" id={cid}>
                         <button type="button" className="uix-modal-box__close" data-modal-close-trigger="true"></button>
                         <div className="uix-modal-box__content" role="document">
                             <div className="uix-modal-box__head">
@@ -399,7 +385,7 @@ export default class ModalDialog extends Component<ModalDialogProps, ModalDialog
                         </div>
                     </div>
                 ) : (
-                    <div className="uix-modal-box is-fullscreen is-video" role="dialog" tabIndex={-1} aria-hidden="true" id={cid} {...attributes}>
+                    <div className="uix-modal-box is-fullscreen is-video" role="dialog" tabIndex={-1} aria-hidden="true" id={cid}>
                         <button type="button" className="uix-modal-box__close" data-modal-close-trigger="true"></button>
                         <div className="uix-modal-box__content" role="document">
                             <div className="uix-modal-box__video-waiting"></div>

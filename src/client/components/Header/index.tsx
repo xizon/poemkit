@@ -31,8 +31,33 @@ type HeaderState = false;
 
 export default class Header extends Component<HeaderProps, HeaderState> {
 
+    windowScrollUpdate: () => void;
+    
+    constructor(props) {
+        super(props);
+
+
+        // Add a scroll event listener to window
+        this.handleScrollEvent = this.handleScrollEvent.bind(this);
+        this.windowScrollUpdate = __.throttle(this.handleScrollEvent, 5);
+
+    }
+
+    handleScrollEvent() {
+		const $el = __( '.uix-header__container, .uix-header__placeholder' );
+		const scrolled = __( window ).scrollTop();
+
+		if ( scrolled >= 220 ) {
+			$el.addClass( 'is-fixed' );
+		} else {
+			$el.removeClass( 'is-fixed' );	
+		}
+
+    }
+
 	componentDidMount(){
 		
+		const self = this;
 	
 		__( document ).ready( function() {
 		
@@ -93,32 +118,12 @@ export default class Header extends Component<HeaderProps, HeaderState> {
 
 					//Sticky Header Area
 					//------------------------------------------
-					const $el = __( '.uix-header__container, .uix-header__placeholder' );
-					const scrollUpdate = function() {
-
-						const scrolled = __( window ).scrollTop();
-		
-						if ( scrolled >= 220 ) {
-							$el.addClass( 'is-fixed' );
-						} else {
-							$el.removeClass( 'is-fixed' );	
-						}
-		
-		
-					};
-		
-		
-					const throttleFunc = __.throttle(scrollUpdate, 50);
-					window.removeEventListener('scroll', throttleFunc);
-					window.removeEventListener('touchmove', throttleFunc);
-					
-					// Please do not use scroll's off method in each
-					window.addEventListener('scroll', throttleFunc);
-					window.addEventListener('touchmove', throttleFunc);
-					
-					
-					throttleFunc();
-					
+					// Add function to the element that should be used as the scrollable area.
+					window.removeEventListener('scroll', self.windowScrollUpdate);
+					window.removeEventListener('touchmove', self.windowScrollUpdate);
+					window.addEventListener('scroll', self.windowScrollUpdate);
+					window.addEventListener('touchmove', self.windowScrollUpdate);
+					self.windowScrollUpdate();
 
 
 
@@ -132,6 +137,17 @@ export default class Header extends Component<HeaderProps, HeaderState> {
 		
 		
 	}
+
+    /** Remove the global list of events, especially as scroll and interval. */
+    componentWillUnmount() {
+		
+        // Remove scroll events from window
+        window.removeEventListener('scroll', this.windowScrollUpdate);
+        window.removeEventListener('touchmove', this.windowScrollUpdate);  
+
+
+    }
+
 	
 	render() {
 		

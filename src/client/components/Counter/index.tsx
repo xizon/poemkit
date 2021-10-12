@@ -42,69 +42,85 @@ import { countTo } from '@uixkit.react/components/Counter/count-to';
 
 
 export default class Counter extends Component<CounterProps, CounterState> {
+
+    private wrapperRef = React.createRef<HTMLDivElement>();
+    
+    windowScrollUpdate: () => void;
+    
     constructor(props) {
         super(props);
+
+        // Add a scroll event listener to window
+        this.handleScrollEvent = this.handleScrollEvent.bind(this);
+        this.windowScrollUpdate = __.throttle(this.handleScrollEvent, 5);
+
+    }
+
+    handleScrollEvent() {
+
+        const reactDomEl: any = this.wrapperRef.current;
+        const viewport = 1;
+        const spyTop = reactDomEl.getBoundingClientRect().top;
+
+        //Prevent asynchronous loading of repeated calls
+        const actived = reactDomEl.dataset.activated;
+
+
+        if (spyTop < (window.innerHeight * viewport)) {
+
+            if (actived === undefined) {
+
+                countTo( reactDomEl, {
+                    from: reactDomEl.dataset.counterStart,
+                    to: reactDomEl.dataset.counterNumber,
+                    fixed: reactDomEl.dataset.counterFixed,
+                    speed: reactDomEl.dataset.counterDuration,
+                    refreshInterval: reactDomEl.dataset.counterRefreshInterval,
+                    dilimiter: reactDomEl.dataset.counterDilimiter,
+                    doubleDigits: reactDomEl.dataset.counterDoubleDigits,
+                    onUpdate: null,
+                    onComplete: null     
+                });
+
+                //Prevents front-end javascripts that are activated in the background to repeat loading.
+                reactDomEl.dataset.activated = 1;
+
+
+            }//endif actived
+
+
+        }
+
     }
 
 
     componentDidMount() {
 
+        const self = this;
 
         __(document).ready(function () {
 
-
-            __('[data-counter-number]').each(function (this: any, index: number) {
-
-                const viewport = 1;
-                const $el = __(this);
-
-                //
-                const scrollUpdate = function () {
-
-                    const spyTop = $el[0].getBoundingClientRect().top;
-
-                    //Prevent asynchronous loading of repeated calls
-                    const actived = $el.data('activated');
-
-
-                    if (spyTop < (window.innerHeight * viewport)) {
-
-                        if (actived === null) {
-
-                            countTo($el);
-
-                            //Prevents front-end javascripts that are activated in the background to repeat loading.
-                            $el.data('activated', 1);
-
-
-                        }//endif actived
-
-
-                    }
-
-                };
-
-
-                const throttleFunc = __.throttle(scrollUpdate, 5);
-                window.removeEventListener('scroll', throttleFunc);
-                window.removeEventListener('touchmove', throttleFunc);
-
-                // Please do not use scroll's off method in each
-                window.addEventListener('scroll', throttleFunc);
-                window.addEventListener('touchmove', throttleFunc);
-
-
-                throttleFunc();
-
-            });
-
-
-
-
+            
+            // Add function to the element that should be used as the scrollable area.
+            window.removeEventListener('scroll', self.windowScrollUpdate);
+            window.removeEventListener('touchmove', self.windowScrollUpdate);
+            window.addEventListener('scroll', self.windowScrollUpdate);
+            window.addEventListener('touchmove', self.windowScrollUpdate);
+            self.windowScrollUpdate();
 
 
         });
 
+
+    }
+
+
+    /** Remove the global list of events, especially as scroll and interval. */
+    componentWillUnmount() {
+		
+        // Remove scroll events from window
+        window.removeEventListener('scroll', this.windowScrollUpdate);
+        window.removeEventListener('touchmove', this.windowScrollUpdate);  
 
     }
 
@@ -127,6 +143,7 @@ export default class Counter extends Component<CounterProps, CounterState> {
             <>
 
                 <span
+                    ref={this.wrapperRef}
                     id={id || 'app-counter-' + __.GUID.create()}
                     data-counter-fixed={fixed || 0}
                     data-counter-start={start as number || 0}

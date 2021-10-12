@@ -126,12 +126,13 @@ function highlightNavigation() {
 
 export function SidebarMenu() { 
 
-	if ( typeof (document) === "undefined" ) return;
+	if ( typeof(document) === 'undefined' ) return;
 
 	//-----
 	Array.prototype.forEach.call( document.querySelectorAll( '.app-sidebar-menu' ), function( node ) {
 		node.parentNode.removeChild( node );
 	});
+
 
 
 	//-----

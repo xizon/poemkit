@@ -1,8 +1,8 @@
 import { __ } from '@uixkit.react/components/_utils/_all';
 
- /*-- Apply Third-party plugins --*/
- import { enableBodyScroll } from '@uixkit.react/components/_plugins/_lib-scrolllock';
- import TweenMax from '@uixkit.react/components/_plugins/_lib-gsap';
+/*-- Apply Third-party plugins --*/
+import { enableBodyScroll } from '@uixkit.react/components/_plugins/_lib-scrolllock';
+import TweenMax from '@uixkit.react/components/_plugins/_lib-gsap';
 
 
 declare global {
@@ -11,23 +11,9 @@ declare global {
     }
 }
 
-interface closeModalDialogConfig {
-    /** Modal dialog ID to be closed */
-     target?: string | undefined;
-}
 
-
-export function closeModalDialog(config: closeModalDialogConfig) {
-
-	if ( typeof config === typeof undefined ) {
-
-        config = {
-            "target": '.uix-modal-box'
-        };
-
-	}
-
-    const curElement = __( config.target );
+export function closeModalDialog(curElement: any) {
+    if ( typeof curElement === typeof undefined ) return;
 
     //Enable mask to close the window.
     __( '.uix-modal-mask' ).removeClass( 'js-uix-disabled' );
@@ -41,8 +27,6 @@ export function closeModalDialog(config: closeModalDialogConfig) {
     });
         
     curElement.find( '.uix-modal-box__content' ).removeClass( 'js-uix-no-fullscreen' );
-
-
 
 
     // Unlocks the page

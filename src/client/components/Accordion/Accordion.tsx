@@ -31,6 +31,8 @@ type AccordionState = false;
 
 
 export default class Accordion extends Component<AccordionProps, AccordionState> {
+
+	private wrapperRef = React.createRef<HTMLDivElement>();
 	
 	constructor(props) {
 		super(props);
@@ -38,88 +40,88 @@ export default class Accordion extends Component<AccordionProps, AccordionState>
 	
 	componentDidMount(){
 		
+		const self = this;
 		
 		__( document ).ready( function() {
 
+			const reactDomEl: any = self.wrapperRef.current;
+			const $el = __( reactDomEl );
+			const $li = $el.children( 'dl' );
+			let	aEvent = $el.data( 'event' );
 			
-			__( '.uix-accordion' ).each( function(this: any, index: number) {
-				const $this           = __( this );
+			if ( aEvent === null ) aEvent = 'click';
+
+
+			const openItem = function( obj ) {
+
+				//to open
+				// - temporarilty set height:auto
+				// - tween from height:0
+				TweenMax.set( obj, { height: 'auto' } );
+				TweenMax.from( obj, 0.5, { height:0 } );		
+			};
 			
-				const $li = $this.children( 'dl' );
-
-				let	aEvent          = $this.data( 'event' );
-				
-	
-				const openItem = function( obj ) {
-
-					//to open
-					// - temporarilty set height:auto
-					// - tween from height:0
-					TweenMax.set( obj, { height: 'auto' } );
-					TweenMax.from( obj, 0.5, { height:0 } );		
-				};
-				
-				if ( aEvent === null ) {
-					aEvent = 'click';
-				}	
-		
-				//Initialize accordion items
-				$li.each( function(this: any, index: number ) {
-					__( this ).find( 'a' ).attr( 'href', 'javascript:' );
-				});
-
-	
-				$li.off( aEvent ).on( aEvent, function( this: any, e: any ) {
-
-
-					//Prevents further propagation of the current event in the capturing and bubbling phases.
-					e.stopPropagation();
-					
-				
-					//Its value is not a boolean but a string
-					const expanded = ( __( this ).attr( 'aria-expanded' ) === true ) ? false : true,
-						  $content = __( this ).find( 'dd' );
-					
-					if ( expanded ) {
-						//Hide other all sibling <dt> of the selected element
-						const $e = __( this ).siblings();
-						$e.removeClass( 'is-active' ).attr( 'aria-expanded', false );
-						
-						__( this ).addClass( 'is-active' ).attr( 'aria-expanded', true );
-						
-						TweenMax.to( $e.find( 'dd' ), 0.5, { 
-							height: 0
-						} );
-						
-						//to open
-						openItem( $content );
-	
-	
-						
-					} else {
-						if ( e.type == 'click' ) {
-							__( this ).removeClass( 'is-active' ).attr( 'aria-expanded', false );
-							
-							//to close
-							TweenMax.to( $content, 0.5, { height: 0 } );
-	
-						}
-						
-					}
-					
-	
-				}); 
-							
-				
-				
+			
+			//Initialize accordion items
+			$li.each( function(this: any, index: number ) {
+				__( this ).find( 'a' ).attr( 'href', 'javascript:' );
 			});
 
+
+			$li.off( aEvent ).on( aEvent, function( this: any, e: any ) {
+
+
+				//Prevents further propagation of the current event in the capturing and bubbling phases.
+				e.stopPropagation();
+				
+			
+				//Its value is not a boolean but a string
+				const expanded = ( __( this ).attr( 'aria-expanded' ) === true ) ? false : true,
+					$content = __( this ).find( 'dd' );
+				
+				if ( expanded ) {
+					//Hide other all sibling <dt> of the selected element
+					const $e = __( this ).siblings();
+					$e.removeClass( 'is-active' ).attr( 'aria-expanded', false );
+					
+					__( this ).addClass( 'is-active' ).attr( 'aria-expanded', true );
+					
+					TweenMax.to( $e.find( 'dd' ), 0.5, { 
+						height: 0
+					} );
+					
+					//to open
+					openItem( $content );
+
+
+					
+				} else {
+					if ( e.type == 'click' ) {
+						__( this ).removeClass( 'is-active' ).attr( 'aria-expanded', false );
+						
+						//to close
+						TweenMax.to( $content, 0.5, { height: 0 } );
+
+					}
+					
+				}
+				
+
+			}); 
+						
 		
 		});
 
 		
 	}
 	
+     /** Remove the global list of events, especially as scroll and interval. */
+     componentWillUnmount() {
+		// Kill all aniamtions
+		TweenMax.killAll();
+    }
+
+
 
 	render() {
 		
@@ -137,6 +139,7 @@ export default class Accordion extends Component<AccordionProps, AccordionState>
 
 	 
 				<div 
+				    ref={this.wrapperRef}
 					id={id ? id : 'app-accordion-' + __.GUID.create() } 
 					className="uix-accordion" 
 					data-event={triggerType || 'click'}

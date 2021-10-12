@@ -895,10 +895,7 @@ export default () => {
 						<div className="col-12">
 							<h3 className="app-header-title">Uix Grid (No line breaks)</h3>
 							<p>
-							Set the <code>noBreak</code> attribute of <code>&lt;Grid&gt;</code> markup.<code>true</code> will prevent the columns from automatically wrapping across multiple lines.
-								
-								<br />
-								<em>Please simulate mobile viewing after zooming out your viewport.</em>
+							Set the <code>noBreak</code> attribute of <code>&lt;Grid&gt;</code> markup.<code>true</code> will prevent the columns from automatically wrapping across multiple lines. <em>Please simulate mobile viewing after zooming out your viewport.</em>
 							</p>
 							<hr />
 							

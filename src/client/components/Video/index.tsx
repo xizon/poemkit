@@ -33,6 +33,8 @@ type VideoProps = {
 	config: string | VideoConfig;
 	src?: string;
 	poster?: string;
+	/** -- */
+	id?: string;
 };
 type VideoState = false;
 
@@ -40,101 +42,101 @@ type VideoState = false;
 
 export default class Video extends Component<VideoProps, VideoState> {
 
+	private wrapperRef = React.createRef<HTMLVideoElement>();
+
 	constructor(props) {
 		super(props);
 	}
 	
 	componentDidMount(){
 		
+		const self = this;
 
 		__( document ).ready( function() {
 
+			const reactDomEl: any = self.wrapperRef.current;
+
+			const videoID = reactDomEl.id;
+			const player = new Plyr('#' + videoID);	
 			
+			
+			player.on('ready', function( event ) {
+				const instance: any = event.detail.plyr;
+				const getConfig = instance.media.dataset.plyrConfig;
+				let config: any = (getConfig === null || getConfig === undefined) ? false : getConfig;
+
+				if ( __.validate.isJSON(config) ) {
+					config = (Object.prototype.toString.call(config) === '[object Object]') ? config : JSON.parse(config as string);
+				}
 		
-			__( '[data-plyr-config]' ).each( function(this: any, index: number, curSelector: string ) {
-				const videoID = 'app-video-' + __.GUID.create();
-				__( this ).attr( 'id', videoID );
-				const player = new Plyr('#' + videoID);	
-				
-				
-				player.on('ready', function( event ) {
-					const instance: any = event.detail.plyr;
-					const getConfig = instance.media.dataset.plyrConfig;
-					const config = __.validate.isJSON( getConfig ) ? JSON.parse( getConfig ) : getConfig;
-					
-
-					/* ---------  Video Modal initialize */
-					instance.on( 'loadedmetadata', function( e ) {
-
-						const obj = instance.media,
-							  clientHeight =  obj.clientHeight,
-							  clientWidth =  obj.clientWidth,
-
-							  //retrieve the dimensions (height and width)
-							  videoWidth = obj.videoWidth,
-							  videoHeight = obj.videoHeight;
+				if ( !config ) return;
 
 
-						console.log('video#'+videoID+' : ', {
-							'clientHeight: ': clientHeight,
-							'clientWidth: ': clientWidth,
-							'videoHeight: ': videoHeight,
-							'videoWidth: ': videoWidth
-						});
+				/* ---------  Video Modal initialize */
+				instance.on( 'loadedmetadata', function( e ) {
+
+					const obj = instance.media,
+							clientHeight =  obj.clientHeight,
+							clientWidth =  obj.clientWidth,
+
+							//retrieve the dimensions (height and width)
+							videoWidth = obj.videoWidth,
+							videoHeight = obj.videoHeight;
 
 
-
-
+					console.log('video#'+videoID+' : ', {
+						'clientHeight: ': clientHeight,
+						'clientWidth: ': clientWidth,
+						'videoHeight: ': videoHeight,
+						'videoWidth: ': videoWidth
 					});
 
 
-					/* ---------  Default settings  */
-					if ( typeof(config.muted) !== 'undefined' ) {
-						instance.media.muted = config.muted;
-					}
-				
 
-
-					/* ---------  Fix an error of Video auto play is not working in browser  */
-					if ( config.autoplay ) {
-						instance.media.muted = true;
-						instance.media.play();
-					}
-
-
-
-
-					/* ---------  Display video playback progress  */
-					let autoPlayOK = false;
-					instance.on( 'timeupdate', function() {
-
-						//The currentTime attribute has been updated. Again.
-						autoPlayOK = true;
-						if ( instance.currentTime >= instance.duration ) {
-							autoPlayOK = true;
-							instance.off( 'timeupdate' );
-
-							console.log( 'replay ready...' );
-						} 
-
-					});
-
-					/* ---------  Callback for when a video has ended */
-					instance.on( 'ended', function() {
-						console.log( 'video is done!' );
-					});
-
-					
 
 				});
-				
-				
+
+
+				/* ---------  Default settings  */
+				if ( typeof(config.muted) !== 'undefined' ) {
+					instance.media.muted = config.muted;
+				}
+			
+
+
+				/* ---------  Fix an error of Video auto play is not working in browser  */
+				if ( config.autoplay ) {
+					instance.media.muted = true;
+					instance.media.play();
+				}
+
+
+
+
+				/* ---------  Display video playback progress  */
+				let autoPlayOK = false;
+				instance.on( 'timeupdate', function() {
+
+					//The currentTime attribute has been updated. Again.
+					autoPlayOK = true;
+					if ( instance.currentTime >= instance.duration ) {
+						autoPlayOK = true;
+						instance.off( 'timeupdate' );
+
+						console.log( 'replay ready...' );
+					} 
+
+				});
+
+				/* ---------  Callback for when a video has ended */
+				instance.on( 'ended', function() {
+					console.log( 'video is done!' );
+				});
 
 				
-				
-				
-				
+
 			});
+			
 			
 
 		});
@@ -149,6 +151,7 @@ export default class Video extends Component<VideoProps, VideoState> {
 			poster,
 			config,
 			src,
+			id,
 			...attributes
 		} = this.props;
 		
@@ -157,7 +160,16 @@ export default class Video extends Component<VideoProps, VideoState> {
 		  <>
 			{/* Note: data-* attributes are passed using props to 
 			avoid  `Warning: Invalid value for prop `poster` on <video> tag.` */}
-			<video playsInline controls data-poster={poster} src={src} data-plyr-config={config || '{"muted":false,"autoplay":false,"controls":["play-large", "play", "progress", "current-time", "mute", "volume", "captions", "settings", "pip", "airplay", "fullscreen"],"loop":{"active":false}}'}  {...attributes}></video>
+			
+			<video 
+			ref={this.wrapperRef} 
+			id={id || 'app-video-' + __.GUID.create()}
+			playsInline 
+			controls 
+			data-poster={poster} 
+			src={src} 
+			data-plyr-config={config || '{"muted":false,"autoplay":false,"controls":["play-large", "play", "progress", "current-time", "mute", "volume", "captions", "settings", "pip", "airplay", "fullscreen"],"loop":{"active":false}}'} 
+			{...attributes}></video>
 		
 		  </>
 		)

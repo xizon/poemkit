@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import ReactDOM from 'react-dom';
 
 /*-- Apply Third-party plugins (import location should be in front of "global scripts and styles") --*/
 import '@uixkit.react/components/_plugins/_lib-bootstrap';
@@ -35,8 +34,6 @@ type MultiSelectState = false;
 
 export default class MultiSelect extends Component<MultiSelectProps, MultiSelectState> {
 	
-	//Refs are commonly assigned to an instance property when a component 
-	//is constructed so they can be referenced throughout the component.
 	private wrapperRef = React.createRef<HTMLDivElement>();
 	private resRef = React.createRef<HTMLInputElement>();
 	
@@ -57,8 +54,8 @@ export default class MultiSelect extends Component<MultiSelectProps, MultiSelect
 		event.preventDefault();
 		
 		const el = __( event.target );
-		const root = ReactDOM.findDOMNode(this.wrapperRef.current);
-		const resInput = ReactDOM.findDOMNode(this.resRef.current);
+		const root = this.wrapperRef.current;
+		const resInput = this.resRef.current;
 		
 		const $multiSelWrapper = __( root ),
 			  curVal = el.data( 'value' ),

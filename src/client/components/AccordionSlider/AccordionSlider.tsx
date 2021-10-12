@@ -39,6 +39,8 @@ type AccordionSliderState = false;
 
 
 export default class AccordionSlider extends Component<AccordionSliderProps, AccordionSliderState> {
+
+	private wrapperRef = React.createRef<HTMLDivElement>();
 	
 	constructor(props) {
 		super(props);
@@ -46,141 +48,123 @@ export default class AccordionSlider extends Component<AccordionSliderProps, Acc
 	
 	componentDidMount(){
 		
+		const self = this;
 		
 		__( document ).ready( function() {
 
+			const reactDomEl: any = self.wrapperRef.current;
+			const $el = __( reactDomEl );
+		
+			let	aEvent          = $el.data( 'event' ),
+				outReset        = $el.data( 'out-reset' ),
+				activeIndex     = $el.data( 'actived-item' ),
+				offsetVal       = $el.data( 'offset' ),
+				dir             = $el.data( 'direction' ),
+				closeBtn        = $el.data( 'close-btn' ),
+				$li             = $el.find( '> ul' ).children( 'li' ),
+				total           = $li.length;
+			
+			
+			if ( activeIndex === null ) activeIndex = false;
+			if ( aEvent === null ) aEvent = 'click';
+			if ( outReset === null ) outReset = true;
+			if ( offsetVal === null ) offsetVal = '60%';
+			
+			
+			//Initialize the width or height of each item
+			itemInit();
+			
 			
 
-		
-			__( '.uix-accordion-slider' ).each( function( this: any, index: number ) {
-				const $this           = __( this );
+			$li.on( aEvent, function( this: any, e: any ) {
+				//Prevents further propagation of the current event in the capturing and bubbling phases.
+				e.stopPropagation();
+			
 				
-				let	aEvent          = $this.data( 'event' ),
-					outReset        = $this.data( 'out-reset' ),
-					activeIndex     = $this.data( 'actived-item' ),
-					offsetVal       = $this.data( 'offset' ),
-					dir             = $this.data( 'direction' ),
-					closeBtn        = $this.data( 'close-btn' ),
-					$li             = $this.find( '> ul' ).children( 'li' ),
-					total           = $li.length;
-				
-				
-				
-				if ( activeIndex === null ) {
-					activeIndex = false;
-				}			
-				
-				if ( aEvent === null ) {
-					aEvent = 'click';
-				}	
-				
-				if ( outReset === null ) {
-					outReset = true;
-				}	
-				
-				if ( offsetVal === null ) {
-					offsetVal = '60%';
-				}		
-				
-				//Initialize the width or height of each item
-				itemInit();
-				
-				
-	
-				$li.on( aEvent, function( this: any, e: any ) {
-					//Prevents further propagation of the current event in the capturing and bubbling phases.
-					e.stopPropagation();
-				
+				//Apply click method to outer div but not inner div
+				if ( e.target.className == 'uix-accordion-slider__content__info' || e.target.className == 'uix-accordion-slider__content' ) {
 					
-					//Apply click method to outer div but not inner div
-					if ( e.target.className == 'uix-accordion-slider__content__info' || e.target.className == 'uix-accordion-slider__content' ) {
+					if ( __( this ).hasClass( 'is-active' ) ) {
+						__( this ).addClass( 'is-active' );
+
+					} else {
 						
-						if ( __( this ).hasClass( 'is-active' ) ) {
-							__( this ).addClass( 'is-active' );
-	
-						} else {
-							
-							$li.addClass( 'active-sub' );
-							__( this ).addClass( 'is-active' );
-							__( this ).siblings().removeClass( 'is-active' );
-	
-							if ( dir == 'verticle' ) {
-								$li.css( 'height', ( 100 - parseFloat( offsetVal ) )/(total - 1) + '%' );
-								__( this ).css( 'height', offsetVal );	
-							} else {
-								$li.css( 'width', ( 100 - parseFloat( offsetVal ) )/(total - 1) + '%' );
-								__( this ).css( 'width', offsetVal );	
-							}
-							
-							
-	
-	
-						}	
-					}
-				
-				}); 
-				
-				if ( outReset ) {
-					$this.on( 'mouseleave', function( this: any, e: any ) {
-						itemInit();
-					}); 	
-				}
-				
-				if ( typeof closeBtn != typeof undefined && closeBtn != false && closeBtn != '' ) {
-					__( closeBtn ).off( 'click' ).on( 'click', function( this: any, e: any ) {
-						e.preventDefault();
-						itemInit();
-					}); 		
-					
-				}	
-				
-				/*
-				 * Active the target item
-				 *
-				 * @param  {Number} index     - The index value of the item to be activated.
-				 * @return {Void}
-				 */
-				function itemActiveItem( index ) {
-					
-					if ( index >= 0 ) {
-						
-	
+						$li.addClass( 'active-sub' );
+						__( this ).addClass( 'is-active' );
+						__( this ).siblings().removeClass( 'is-active' );
+
 						if ( dir == 'verticle' ) {
 							$li.css( 'height', ( 100 - parseFloat( offsetVal ) )/(total - 1) + '%' );
-							$li.eq( index ).css( 'height', offsetVal ).addClass( 'is-active' );	
+							__( this ).css( 'height', offsetVal );	
 						} else {
 							$li.css( 'width', ( 100 - parseFloat( offsetVal ) )/(total - 1) + '%' );
-							$li.eq( index ).css( 'width', offsetVal ).addClass( 'is-active' );	
+							__( this ).css( 'width', offsetVal );	
 						}
-	
-					}
-	
+						
+						
+
+
+					}	
 				}
+			
+			}); 
+			
+			if ( outReset ) {
+				$el.on( 'mouseleave', function( this: any, e: any ) {
+					itemInit();
+				}); 	
+			}
+			
+			if ( closeBtn !== null && closeBtn != false && closeBtn != '' ) {
+				__( closeBtn ).off( 'click' ).on( 'click', function( this: any, e: any ) {
+					e.preventDefault();
+					itemInit();
+				}); 		
 				
-				itemActiveItem( parseFloat( activeIndex ) );
+			}	
+			
+			/*
+				* Active the target item
+				*
+				* @param  {Number} index     - The index value of the item to be activated.
+				* @return {Void}
+				*/
+			function itemActiveItem( index ) {
 				
-				
-		
-				/*
-				 * Initialize the width or height of each item
-				 *
-				 * @return {Void}
-				 */
-				function itemInit() {
+				if ( index >= 0 ) {
 					
-	
+
 					if ( dir == 'verticle' ) {
-						$li.removeClass( 'is-active active-sub' ).css( 'height', 100/total + '%' );
+						$li.css( 'height', ( 100 - parseFloat( offsetVal ) )/(total - 1) + '%' );
+						$li.eq( index ).css( 'height', offsetVal ).addClass( 'is-active' );	
 					} else {
-						$li.removeClass( 'is-active active-sub' ).css( 'width', 100/total + '%' );
+						$li.css( 'width', ( 100 - parseFloat( offsetVal ) )/(total - 1) + '%' );
+						$li.eq( index ).css( 'width', offsetVal ).addClass( 'is-active' );	
 					}
-					
+
+				}
+
+			}
+			
+			itemActiveItem( parseFloat( activeIndex ) );
+			
+			
+	
+			/*
+				* Initialize the width or height of each item
+				*
+				* @return {Void}
+				*/
+			function itemInit() {
+				
+
+				if ( dir == 'verticle' ) {
+					$li.removeClass( 'is-active active-sub' ).css( 'height', 100/total + '%' );
+				} else {
+					$li.removeClass( 'is-active active-sub' ).css( 'width', 100/total + '%' );
 				}
 				
-				
-				
-				
-			});
+			}
 			
 
 		
@@ -210,6 +194,7 @@ export default class AccordionSlider extends Component<AccordionSliderProps, Acc
 
 	 
 				<div 
+				    ref={this.wrapperRef}
 					id={id ? id : 'app-accordion-slider-' + __.GUID.create() } 
 					className="uix-accordion-slider" 
 					data-actived-item={displayTheFirstItem ? 0 : false}

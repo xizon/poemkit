@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import ReactDOM from 'react-dom';
 
 
 /*-- Apply Third-party plugins (import location should be in front of "global scripts and styles") --*/
@@ -37,9 +36,6 @@ type DynamicFieldsState = {
 
 export default class DynamicFields extends Component<DynamicFieldsProps, DynamicFieldsState> {
 
-	
-	//Refs are commonly assigned to an instance property when a component 
-	//is constructed so they can be referenced throughout the component.
 	private wrapperRef = React.createRef<HTMLDivElement>();
 	private addBtnRef = React.createRef<HTMLAnchorElement>();
 
@@ -60,13 +56,13 @@ export default class DynamicFields extends Component<DynamicFieldsProps, Dynamic
 	handleClickAdd(event){
 		event.preventDefault();
 		
-		const root = ReactDOM.findDOMNode(this.wrapperRef.current);
+		const root = this.wrapperRef.current;
 		const curVal = this.state.elVals;
 		
 	
 		//button status
-		if ( curVal.length >= parseFloat(this.props.maxFields) && ReactDOM.findDOMNode(this.addBtnRef.current) != null ) {
-			ReactDOM.findDOMNode(this.addBtnRef.current).style.display = 'none';
+		if ( curVal.length >= parseFloat(this.props.maxFields) && this.addBtnRef.current != null ) {
+			this.addBtnRef.current.style.display = 'none';
 		}
 
 
@@ -83,14 +79,14 @@ export default class DynamicFields extends Component<DynamicFieldsProps, Dynamic
 	
 	handleClickRemove(param) { // param is the argument you passed to the function
 		
-		const root = ReactDOM.findDOMNode(this.wrapperRef.current);
+		const root = this.wrapperRef.current;
 		const self = this;
 		const curVal = this.state.elVals;
 		
 	
 		//button status
-		if ( curVal.length <= parseFloat(this.props.maxFields) && ReactDOM.findDOMNode(this.addBtnRef.current) != null ) {
-			ReactDOM.findDOMNode(this.addBtnRef.current).style.display = 'inherit';
+		if ( curVal.length <= parseFloat(this.props.maxFields) && this.addBtnRef.current != null ) {
+			this.addBtnRef.current.style.display = 'inherit';
 		}
 		
 		
@@ -131,7 +127,7 @@ export default class DynamicFields extends Component<DynamicFieldsProps, Dynamic
 	
 		
 		//update values for all displayed controls
-		const root = ReactDOM.findDOMNode(this.wrapperRef.current);
+		const root = this.wrapperRef.current;
 		const controls = __( root ).find( '.uix-controls__dynamic-fields__append' ).find( '[name]' );
 		
 		let n = 0;

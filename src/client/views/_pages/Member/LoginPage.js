@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import ReactDOM from 'react-dom';
+
 import { __ } from '@uixkit.react/components/_utils/_all';
 
 import AuthService from "@uixkit.react/services/auth-service.js";
@@ -7,12 +7,7 @@ import AuthService from "@uixkit.react/services/auth-service.js";
 class LoginPage extends Component {
 	
     constructor(props) {
-		//You are extending the React.Component class, and per the ES2015 spec, 
-		//a child class constructor cannot make use of this until super() has 
-		//been called; also, ES2015 class constructors have to call super() 
-		//if they are subclasses.
 		super(props);
-		
 		
         this.state = {
 			loginOk: null,
@@ -23,8 +18,6 @@ class LoginPage extends Component {
         };
 
 		
-		//Refs are commonly assigned to an instance property when a component 
-		//is constructed so they can be referenced throughout the component.
 		this.wrapperRef = React.createRef();
 		
 		
@@ -52,7 +45,7 @@ class LoginPage extends Component {
         e.preventDefault();
 		
 		const self = this;
-		const root = ReactDOM.findDOMNode(self.wrapperRef.current);
+		const root = self.wrapperRef.current;
 		const $selectWrapper = __( root );
 
 	

@@ -68,7 +68,7 @@ export default () => {
 		<section className="uix-spacing--s">
 			<div className="container uix-t-c">
 					<div className="row">
-						<div className="col-12 uix-trans">
+						<div className="col-12">
 
 							<div className="row">
 								<div className="col-lg-3 col-md-3">
@@ -116,7 +116,7 @@ export default () => {
 		<section className="uix-spacing--s">
 			<div className="container uix-t-c">
 					<div className="row">
-						<div className="col-12 uix-trans">
+						<div className="col-12">
 
 							<div className="row">
 								<div className="col-lg-3 col-md-3">
@@ -156,7 +156,7 @@ export default () => {
 		</section>
 
 
-		<div style={{height:"300px"}}><span style={{display:"block",margin:"0 auto",height:"100%",width:"1px",background:"#000"}}></span></div>
+		<div style={{height:"600px"}}><span style={{display:"block",margin:"0 auto",height:"100%",width:"1px",background:"#000"}}></span></div>
 
 
 		{/*<!-- Content 
@@ -164,7 +164,7 @@ export default () => {
 		<section className="uix-spacing--s">
 			<div className="container uix-t-c">
 					<div className="row">
-						<div className="col-12 uix-trans">
+						<div className="col-12">
 
 							<div className="row">
 								<div className="col-lg-3 col-md-3">

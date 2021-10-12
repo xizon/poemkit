@@ -4,7 +4,6 @@
  *************************************
  */
 import React, { Component } from 'react';
-import ReactDOM from 'react-dom';
 
 /*-- Apply Third-party plugins (import location should be in front of "global scripts and styles") --*/
 import '@uixkit.react/components/_plugins/_lib-bootstrap';
@@ -67,7 +66,7 @@ class TableSorterRow extends Component<TableSorterRowProps, TableSorterRowState>
 												
 		return (
 		  <>
-			<tr id={"app-table-sorter-field-tr" + __.GUID.create()}>
+			<tr id={'app-table-sorter-field-tr' + __.GUID.create()}>
 				{fields}
 			</tr>
 	
@@ -96,7 +95,7 @@ class TableSorterHeaders extends Component<TableSorterHeadersProps, TableSorterH
 			  <>
 
 				<thead>
-					<tr id={"app-table-sorter-header-tr" + __.GUID.create()}>
+					<tr id={'app-table-sorter-header-tr' + __.GUID.create()}>
 						{this.props.data!.map((item, i) => {
 							return <th data-sort-type={item.type} data-table-row={i} key={"header" + i} onClick={this.props.clickEv}>{item.content}</th>;
 						})
@@ -136,9 +135,8 @@ type TableSorterState = false;
 
 export default class TableSorter extends Component<TableSorterProps, TableSorterState> {
 
-	//Refs are commonly assigned to an instance property when a component 
-	//is constructed so they can be referenced throughout the component.
 	private wrapperRef = React.createRef<HTMLDivElement>();
+
 	inverse: boolean;
 
 
@@ -154,7 +152,7 @@ export default class TableSorter extends Component<TableSorterProps, TableSorter
 		e.preventDefault();
 
 		const self = this;
-		const wrapper = ReactDOM.findDOMNode(self.wrapperRef.current);
+		const wrapper = self.wrapperRef.current;
 		const el = __( e.target );
 
 		const thType  = el.data( 'sort-type' );
@@ -210,34 +208,29 @@ export default class TableSorter extends Component<TableSorterProps, TableSorter
 	
 	componentDidMount(){
 		
-		
+		const self = this;
+
 		__( document ).ready( function() {
 
+			const reactDomEl: any = self.wrapperRef.current;
+			const $el = __( reactDomEl );
 			
-			__( '.js-uix-table-sorter' ).each(function(this: any, index: number, curSelector: string ) {
-			
-
-				//Add an identifier so that the mobile terminal can compare by row
-				__( curSelector + ' tbody tr' ).each(function(this: any, index: number ) {
-					__( this ).find( '> td' ).each( function(this: any, index: number ) {
-						__( this ).data( 'table-row', index );
-					});
+			//Add an identifier so that the mobile terminal can compare by row
+			$el.find( 'tbody tr' ).each(function(this: any, index: number ) {
+				__( this ).find( '> td' ).each( function(this: any, index: number ) {
+					__( this ).data( 'table-row', index );
 				});
+			});
 
 
 
-				//Filter functions
-				__( curSelector + ' thead tr [data-sort-type]' ).each( function(this: any)  {
-					
-					//add arrows
-					if ( __( this ).find( '.uix-table-sorter' ).length == 0 && __( this ).data( 'sort-type' ) !== false ) {
-						__( this ).css( 'cursor', 'pointer' );
-						__( this ).wrapInner( '<span class="uix-table-sorter" style="pointer-events: none;" />' );
-					}
-				});
-
-
-				
+			//Filter functions
+			$el.find( 'thead tr [data-sort-type]' ).each( function(this: any)  {	
+				//add arrows
+				if ( __( this ).find( '.uix-table-sorter' ).length == 0 && __( this ).data( 'sort-type' ) !== false ) {
+					__( this ).css( 'cursor', 'pointer' );
+					__( this ).wrapInner( '<span class="uix-table-sorter" style="pointer-events: none;" />' );
+				}
 			});
 			
 

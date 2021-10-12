@@ -26,8 +26,8 @@ import { setBG } from '@uixkit.react/components/_utils/_all';
 
 interface CardBgConfig {
 	scr?: string | undefined;
-	height?: string | undefined;
-	width?: string | undefined;
+	height?: string | boolean | undefined;
+	width?: string | boolean | undefined;
 	position?: string | undefined;
 	size?: string | undefined;
 	repeat?: string | undefined;
@@ -111,7 +111,11 @@ export default class Card extends Component<CardProps, CardState> {
 		const _btnIcon = btnIcon || '';
 
 		//get background config
-		const _bgConfig = bgConfig === null || bgConfig === undefined ? false : __.validate.isJSON(bgConfig) ? bgConfig : JSON.parse(bgConfig as string);
+		let _bgConfig: any = (bgConfig === null || bgConfig === undefined) ? false : bgConfig;
+		if ( __.validate.isJSON(_bgConfig) ) {
+			_bgConfig = (Object.prototype.toString.call(_bgConfig) === '[object Object]') ? _bgConfig : JSON.parse(_bgConfig as string);
+		}
+		
 		const _bgStyles = setBG(_bgConfig);
 
 		//avatar (`thumb`, `authorcard-*`)

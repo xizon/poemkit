@@ -4,7 +4,7 @@
 
 ## Version
 
-=> 0.0.1
+=> 0.0.1 (October 10, 2021)
 
 
 ## API
@@ -38,8 +38,6 @@ import Card from '@uixkit.react/components/Card/index.tsx';
 import React from 'react';
 import Card from '@uixkit.react/components/Card/index.tsx';
 
-//get project config
-import { rootDirectory } from '@uixkit.react/config/websiteConfig.js';
 
 export default () => {
   return (
@@ -49,21 +47,21 @@ export default () => {
       <p>The following is a Thumbnail style card using flex.</p>
       {/* ================================================================== */} 
 
-      <Card type="thumb" avatar={`${rootDirectory}/assets/images/demo/avatar.jpg`} bgConfig={null} title="Long title Long title Long title Long title Long title Long title Long title Long title" titleEllipsis={false} subTitle={null} btnIcon={<i className="fa fa-ellipsis-h" aria-hidden="true"></i>} btnClickEvent={(e) => {e.preventDefault(); alert('click event');} }>Harum, ad porro molestiae corporis natus aut non fugit. Recusandae, reprehenderit, voluptate voluptas reiciendis voluptatum tempora vero vel libero facere fuga maiores ratione eaque ad illum porro dignissimos sit eos.</Card>
+      <Card type="thumb" avatar={`/assets/images/demo/avatar.jpg`} bgConfig={null} title="Long title Long title Long title Long title Long title Long title Long title Long title" titleEllipsis={false} subTitle={null} btnIcon={<i className="fa fa-ellipsis-h" aria-hidden="true"></i>} btnClickEvent={(e) => {e.preventDefault(); alert('click event');} }>Harum, ad porro molestiae corporis natus aut non fugit. Recusandae, reprehenderit, voluptate voluptas reiciendis voluptatum tempora vero vel libero facere fuga maiores ratione eaque ad illum porro dignissimos sit eos.</Card>
 
 
-      <Card type="thumb" avatar={`${rootDirectory}/assets/images/demo/avatar.jpg`} bgConfig={null} title="Title" titleEllipsis={true} subTitle={<a href="https://uiux.cc" target="_blank">@https://uiux.cc</a>} btnIcon={<i className="fa fa-ellipsis-h" aria-hidden="true"></i>}>Harum, ad porro molestiae corporis natus aut non fugit. Recusandae, reprehenderit, voluptate voluptas reiciendis voluptatum tempora vero vel libero facere fuga maiores ratione eaque ad illum porro dignissimos sit eos.</Card>
+      <Card type="thumb" avatar={`/assets/images/demo/avatar.jpg`} bgConfig={null} title="Title" titleEllipsis={true} subTitle={<a href="https://uiux.cc" target="_blank">@https://uiux.cc</a>} btnIcon={<i className="fa fa-ellipsis-h" aria-hidden="true"></i>}>Harum, ad porro molestiae corporis natus aut non fugit. Recusandae, reprehenderit, voluptate voluptas reiciendis voluptatum tempora vero vel libero facere fuga maiores ratione eaque ad illum porro dignissimos sit eos.</Card>
 
                       
 
-      <Card type="thumb" avatar={`${rootDirectory}/assets/images/demo/avatar.jpg`} bgConfig={null} title="Long title Long title Long title Long title Long title Long title Long title Long title" titleEllipsis={true} subTitle={<a href="https://uiux.cc" target="_blank">@https://uiux.cc</a>}>Harum, ad porro molestiae corporis natus aut non fugit. Recusandae, reprehenderit, voluptate voluptas reiciendis voluptatum tempora vero vel libero facere fuga maiores ratione eaque ad illum porro dignissimos sit eos.</Card>
+      <Card type="thumb" avatar={`/assets/images/demo/avatar.jpg`} bgConfig={null} title="Long title Long title Long title Long title Long title Long title Long title Long title" titleEllipsis={true} subTitle={<a href="https://uiux.cc" target="_blank">@https://uiux.cc</a>}>Harum, ad porro molestiae corporis natus aut non fugit. Recusandae, reprehenderit, voluptate voluptas reiciendis voluptatum tempora vero vel libero facere fuga maiores ratione eaque ad illum porro dignissimos sit eos.</Card>
 
 							 
       <h3>Gallery Card</h3>
       <p>The following is a gallery style card using flex.</p>
       {/* ================================================================== */} 
 
-      <Card type="gallery-v-img" avatar={null} bgConfig={{ "src": `${rootDirectory}/assets/images/demo/spiral-galaxy-1920x1080.jpg` }} title="Name" titleEllipsis={false} subTitle="0/15/18" btnIcon={<i className="fa fa-ellipsis-h" aria-hidden="true"></i>} btnClickEvent={(e) => { e.preventDefault(); alert('click event'); }} overlayArea={<>
+      <Card type="gallery-v-img" avatar={null} bgConfig={{ "src": `/assets/images/demo/spiral-galaxy-1920x1080.jpg` }} title="Name" titleEllipsis={false} subTitle="0/15/18" btnIcon={<i className="fa fa-ellipsis-h" aria-hidden="true"></i>} btnClickEvent={(e) => { e.preventDefault(); alert('click event'); }} overlayArea={<>
         <div className="uix-card--gallery__status">
           <div className="uix-card--gallery__status__item">
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 469.33 469.33" fill="currentColor">
@@ -92,11 +90,11 @@ export default () => {
 
 
 
-      <Card type="gallery-v-img" avatar={null} bgConfig={{ "src": `${rootDirectory}/assets/images/demo/spiral-galaxy-1920x1080.jpg` }} title="Long title Long title Long title Long title Long title Long title Long title Long title Long title Long title Long title Long title Long title Long title" titleEllipsis={false} subTitle="0/15/18" btnIcon={<i className="fa fa-ellipsis-h" aria-hidden="true"></i>} />
+      <Card type="gallery-v-img" avatar={null} bgConfig={{ "src": `/assets/images/demo/spiral-galaxy-1920x1080.jpg` }} title="Long title Long title Long title Long title Long title Long title Long title Long title Long title Long title Long title Long title Long title Long title" titleEllipsis={false} subTitle="0/15/18" btnIcon={<i className="fa fa-ellipsis-h" aria-hidden="true"></i>} />
 
 
 
-      <Card type="gallery-v-img" avatar={null} bgConfig={{ "src": `${rootDirectory}/assets/images/demo/spiral-galaxy-1920x1080.jpg` }} title="Long title Long title Long title Long title Long title Long title Long title Long title Long title Long title Long title Long title Long title Long title" titleEllipsis={true} subTitle="0/15/18" btnIcon={<i className="fa fa-ellipsis-h" aria-hidden="true"></i>} />
+      <Card type="gallery-v-img" avatar={null} bgConfig={{ "src": `/assets/images/demo/spiral-galaxy-1920x1080.jpg` }} title="Long title Long title Long title Long title Long title Long title Long title Long title Long title Long title Long title Long title Long title Long title" titleEllipsis={true} subTitle="0/15/18" btnIcon={<i className="fa fa-ellipsis-h" aria-hidden="true"></i>} />
 
 
 
@@ -190,7 +188,7 @@ export default () => {
       {/*    /////////////////////////   */} 
 
 
-      <Card type="gallery-h-img" contentRatio={8} bgConfig={{ "src": `${rootDirectory}/assets/images/demo/spiral-galaxy-1920x1080.jpg`, "position": "center center", "size": "cover", "repeat": "no-repeat", "fill": false }}>
+      <Card type="gallery-h-img" contentRatio={8} bgConfig={{ "src": `/assets/images/demo/spiral-galaxy-1920x1080.jpg`, "position": "center center", "size": "cover", "repeat": "no-repeat", "fill": false }}>
         <span className="d-block m-4">
           <small className="uix-typo--color-sub">Categories</small>
           <h3>Full-stack Designer</h3>
@@ -199,7 +197,7 @@ export default () => {
       </Card>
 
 
-      <Card type="gallery-h-img" contentRatio={4} bgConfig={{ "src": `${rootDirectory}/assets/images/demo/spiral-galaxy-1920x600.jpg`, "position": "center center", "size": "cover", "repeat": "no-repeat", "fill": false }}>
+      <Card type="gallery-h-img" contentRatio={4} bgConfig={{ "src": `/assets/images/demo/spiral-galaxy-1920x600.jpg`, "position": "center center", "size": "cover", "repeat": "no-repeat", "fill": false }}>
         <span className="d-block m-4">
           <small className="uix-typo--color-sub">Categories</small>
           <h3>Full-stack Designer</h3>
@@ -212,7 +210,7 @@ export default () => {
       {/*    /////////////////////////   */} 
 
 
-      <Card type="gallery-v-custom" bgConfig={{ "src": `${rootDirectory}/assets/images/demo/spiral-galaxy-1920x600.jpg`, "position": "center center", "size": "cover", "repeat": "no-repeat", "fill": false }}>
+      <Card type="gallery-v-custom" bgConfig={{ "src": `/assets/images/demo/spiral-galaxy-1920x600.jpg`, "position": "center center", "size": "cover", "repeat": "no-repeat", "fill": false }}>
         <span className="d-block m-4">
           <small className="uix-typo--color-sub">Categories</small>
           <h3>Full-stack Designer</h3>
@@ -223,7 +221,7 @@ export default () => {
 
 
 
-      <Card type="gallery-v-custom" bgConfig={{ "src": `${rootDirectory}/assets/images/demo/spiral-galaxy-1920x309.jpg`, "position": "center center", "size": "cover", "repeat": "no-repeat", "fill": false }} overlayArea={<>
+      <Card type="gallery-v-custom" bgConfig={{ "src": `/assets/images/demo/spiral-galaxy-1920x309.jpg`, "position": "center center", "size": "cover", "repeat": "no-repeat", "fill": false }} overlayArea={<>
         <div className="uix-card--gallery__status">
           <div className="uix-card--gallery__status__item">
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 469.33 469.33" fill="currentColor">
@@ -255,11 +253,11 @@ export default () => {
 
 
 
-      <Card type="gallery-v-custom" bgConfig={{ "src": `${rootDirectory}/assets/images/demo/spiral-galaxy-1920x309.jpg`, "position": "center center", "size": "cover", "repeat": "no-repeat", "fill": false }}>
+      <Card type="gallery-v-custom" bgConfig={{ "src": `/assets/images/demo/spiral-galaxy-1920x309.jpg`, "position": "center center", "size": "cover", "repeat": "no-repeat", "fill": false }}>
         {/*<!-- menu group begin -->*/}
         <div className="uix-card--gallery__menu">
           <div className="uix-card--gallery__menu__avatar">
-            <img src={`${rootDirectory}/assets/images/demo/avatar.jpg`} alt="" className="uix-border--circle" />
+            <img src={`/assets/images/demo/avatar.jpg`} alt="" className="uix-border--circle" />
             <span>UIUX Lab</span>
           </div>
 
@@ -286,7 +284,7 @@ export default () => {
 
 
 
-      <Card type="gallery-full-info" verticalCenter={false} contentRatio={12} bgConfig={{ "src": `${rootDirectory}/assets/images/demo/spiral-galaxy-1920x1080.jpg`, "position": "center center", "size": "cover", "repeat": "no-repeat", "fill": false }}>
+      <Card type="gallery-full-info" verticalCenter={false} contentRatio={12} bgConfig={{ "src": `/assets/images/demo/spiral-galaxy-1920x1080.jpg`, "position": "center center", "size": "cover", "repeat": "no-repeat", "fill": false }}>
         <span className="d-block m-4 uix-typo--color-white">
           <small className="uix-typo--color-sub">Categories</small>
           <h4 className="uix-spacing--no">Full-stack Designer</h4>
@@ -296,7 +294,7 @@ export default () => {
 
 
 
-      <Card type="gallery-full-info" verticalCenter={false} contentRatio={5} bgConfig={{ "src": `${rootDirectory}/assets/images/demo/spiral-galaxy-1920x1080.jpg`, "position": "center center", "size": "cover", "repeat": "no-repeat", "fill": false }}>
+      <Card type="gallery-full-info" verticalCenter={false} contentRatio={5} bgConfig={{ "src": `/assets/images/demo/spiral-galaxy-1920x1080.jpg`, "position": "center center", "size": "cover", "repeat": "no-repeat", "fill": false }}>
         <span className="d-block m-4 uix-typo--color-white">
           <small className="uix-typo--color-sub">Categories</small>
           <h4 className="uix-spacing--no">Content ratio is 5:7 (12 grid system)</h4>
@@ -306,7 +304,7 @@ export default () => {
 
       
 
-      <Card type="gallery-full-info" verticalCenter={true} contentRatio={6} bgConfig={{ "src": `${rootDirectory}/assets/images/demo/spiral-galaxy-1920x1080.jpg`, "position": "center center", "size": "cover", "repeat": "no-repeat", "fill": false }}>
+      <Card type="gallery-full-info" verticalCenter={true} contentRatio={6} bgConfig={{ "src": `/assets/images/demo/spiral-galaxy-1920x1080.jpg`, "position": "center center", "size": "cover", "repeat": "no-repeat", "fill": false }}>
         <span className="d-block m-4 uix-typo--color-white">
           <h4 className="uix-spacing--no">Vertically center content ratio is 1:1 (12 grid system)</h4>
           <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit.</p>
@@ -321,13 +319,13 @@ export default () => {
       <p>Author Card is a very popular used web page element that can display a lot of key information.</p>
       {/* ================================================================== */} 
       
-      <Card type="authorcard-line" avatar={`${rootDirectory}/assets/images/demo/avatar.jpg`} title="Full-stack Designer" titleEllipsis={false} subTitle={<a href="https://uiux.cc" target="_blank">@https://uiux.cc</a>} btnIcon={<i className="fa fa-external-link" aria-hidden="true"></i>} btnHyperlinkClickEvent={(e) => { e.preventDefault(); alert('click event'); const tempwindow = window.open('_blank'); tempwindow.location = 'https://uiux.cc'; }}>Hi. I'm a full-stack designer on the way of pursuing the dream. Focus on user interface, user experience, awesome websites, front-end and WordPress development. I want to build things I can be proud of. I approach some awesome design challenges with an eye on the latest trends and strive to align my work the industry current best practices, while leveraging the acquired experience on the field. I have been working so hard to build up self. My personal website: https://uiux.cc</Card>
+      <Card type="authorcard-line" avatar={`/assets/images/demo/avatar.jpg`} title="Full-stack Designer" titleEllipsis={false} subTitle={<a href="https://uiux.cc" target="_blank">@https://uiux.cc</a>} btnIcon={<i className="fa fa-external-link" aria-hidden="true"></i>} btnHyperlinkClickEvent={(e) => { e.preventDefault(); alert('click event'); const tempwindow = window.open('_blank'); tempwindow.location = 'https://uiux.cc'; }}>Hi. I'm a full-stack designer on the way of pursuing the dream. Focus on user interface, user experience, awesome websites, front-end and WordPress development. I want to build things I can be proud of. I approach some awesome design challenges with an eye on the latest trends and strive to align my work the industry current best practices, while leveraging the acquired experience on the field. I have been working so hard to build up self. My personal website: https://uiux.cc</Card>
 
 
       {/*    /////////////////////////   */} 
 
 
-      <Card type="authorcard-detail" avatar={`${rootDirectory}/assets/images/demo/avatar.jpg`} title="Full-stack Designer" titleEllipsis={false} subTitle={<a href="https://uiux.cc" target="_blank">@https://uiux.cc</a>} >
+      <Card type="authorcard-detail" avatar={`/assets/images/demo/avatar.jpg`} title="Full-stack Designer" titleEllipsis={false} subTitle={<a href="https://uiux.cc" target="_blank">@https://uiux.cc</a>} >
 
         <ul className="mt-4">
           <li><h3>223</h3><span>Web Design</span></li>
@@ -343,7 +341,7 @@ export default () => {
       {/*    /////////////////////////   */} 
 
 
-      <Card type="authorcard-stats" avatar={`${rootDirectory}/assets/images/demo/avatar.jpg`} >
+      <Card type="authorcard-stats" avatar={`/assets/images/demo/avatar.jpg`} >
         <div className="uix-card--author__tagline">Revenue</div>
         <h4 className="uix-typo--style-normal">$34,245</h4>
 

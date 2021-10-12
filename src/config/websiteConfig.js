@@ -13,13 +13,13 @@ const config = {
 	   ------------------------------------------
        Corresponding to folder `./src/client/actions/*`
 	  */
-	  "RECEIVE_DEMO_LIST": "https://restcountries.eu/rest/v2",
-	  "RECEIVE_DEMO_LISTDETAIL": "https://restcountries.eu/rest/v2/name/{id}",
+	  "RECEIVE_DEMO_LIST": "http://api.countrylayer.com/v2/all?access_key=8ef27495767eb3ea58cc0eabf66068e9",
+	  "RECEIVE_DEMO_LISTDETAIL": "http://api.countrylayer.com/v2/name/{id}?access_key=8ef27495767eb3ea58cc0eabf66068e9",
 
 	  //"RECEIVE_DEMO_LIST": `https://uiux.cc${ROOT_DIR}/assets/json/Posts.json`,
 	  //"RECEIVE_DEMO_LISTDETAIL": `https://uiux.cc${ROOT_DIR}/assets/json/PostDetail.json`,
 
-
+	  
 	  /*
 	   TYPE: User
 	   ------------------------------------------

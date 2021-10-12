@@ -26,38 +26,48 @@ interface countToConfig {
 }
 
 
-export function countTo(curElement: any) {
+export function countTo(curElement: any, config: countToConfig) {
+    if ( typeof curElement === typeof undefined ) return;
+    
+    // Set a default configuration
+    config = __.setDefaultOptions({
+        "from"             : 0,
+        "to"               : 0,
+        "fixed"            : 0,
+        "speed"            : 500,
+        "refreshInterval"  : 1,
+        "dilimiter"        : false,
+        "doubleDigits"     : false,
+        "onUpdate"         : null,
+        "onComplete"       : null
+    }, config);
 
-    const config: countToConfig = {
-        "from": curElement.data('counter-start') === null ? 0 : curElement.data('counter-start'),
-        "to": curElement.data('counter-number') === null ? 0 : curElement.data('counter-number'),
-        "fixed": curElement.data('counter-fixed') === null ? 0 : curElement.data('counter-fixed'),
-        "speed": curElement.data('counter-duration') === null ? 500 : curElement.data('counter-duration'),
-        "refreshInterval": curElement.data('counter-refresh-interval') === null ? 1 : curElement.data('counter-refresh-interval'),
-        "dilimiter": curElement.data('counter-dilimiter') === null ? false : curElement.data('counter-dilimiter'),
-        "doubleDigits": curElement.data('counter-double-digits') === null ? false : curElement.data('counter-double-digits'),
-        "onUpdate": null,
-        "onComplete": null
-    };
+
+    //
+    const _speed             = config.speed!,
+          _refreshInterval   = config.refreshInterval!,
+          _numberEnd         = config.to!,
+          _numberStart       = config.from!,
+          _dilimiter         = config.dilimiter,
+          _doubleDigits      = config.doubleDigits,
+          _fixed             = config.fixed,
+          _update            = config.onUpdate,
+          _complete          = config.onComplete;
+          
+    const $el = __( curElement );
 
 
     // how many times to update the value, and how much to increment the value on each update
-    const _speed: any = config.speed;
-    const _refreshInterval: any = config.refreshInterval;
-    const _numberEnd: any = config.to;
-    const _numberStart: any = config.from;
-
     let loops = Math.ceil(_speed / _refreshInterval),
         increment = (_numberEnd - _numberStart) / loops;
 
 
-
     // references & variables that will change with each update
-    let loopCount: number = 0,
-        value: any = _numberStart,
-        data: any = curElement.data('count-to') || {};
+    let loopCount = 0,
+        value = _numberStart,
+        data = $el.data('count-to') || {};
 
-    curElement.data('count-to', data);
+    $el.data('count-to', data);
 
     // if an existing interval can be found, clear it first
     if (data.interval) {
@@ -74,37 +84,37 @@ export function countTo(curElement: any) {
 
         render(value);
 
-        if (typeof (config.onUpdate) == 'function') {
-            config.onUpdate.call(curElement[0], value);
+        if (typeof(_update) == 'function') {
+            _update.call($el[0], value);
         }
 
         if (loopCount >= loops) {
             // remove the interval
-            curElement.removeData('count-to');
+            $el.removeData('count-to');
             clearInterval(data.interval);
             value = _numberEnd;
 
-            if (typeof (config.onComplete) == 'function') {
-                config.onComplete.call(curElement[0], value);
+            if (typeof(_complete) == 'function') {
+                _complete.call($el[0], value);
             }
         }
     }
 
     function render(value) {
-        let formattedValue: any = Number(value).toFixed(config.fixed);
+        let formattedValue: any = Number(value).toFixed(_fixed);
 
 
-        if (config.dilimiter && formattedValue > 0) {
+        if (_dilimiter && formattedValue > 0) {
             formattedValue = formattedValue.toString().replace(/\B(?=(?:\d{3})+\b)/g, ',');
         }
 
-        if (config.doubleDigits) {
+        if (_doubleDigits) {
             if (formattedValue < 10) {
                 formattedValue = '0' + formattedValue;
             }
         }
 
-        curElement.html(formattedValue);
+        $el.html(formattedValue);
 
     }
 

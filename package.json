@@ -5,7 +5,7 @@
   "projectName": "Uix Kit React",
   "createdInfo": "UIUX Lab (https://uiux.cc)",
   "projectURL": "https://uiux.cc",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "A free web kits with React for fast web design and development via SSR.",
   "main": "index.js",
   "directories": {

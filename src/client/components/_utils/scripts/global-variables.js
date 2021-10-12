@@ -21,7 +21,7 @@ let
 	ajaxUrl;
 
 
-if ( typeof APP_ROOTPATH === 'undefined' ) {
+if ( typeof(APP_ROOTPATH) === 'undefined' ) {
 	templateUrl = '';
 	homeUrl     = '';
 	ajaxUrl     = '';

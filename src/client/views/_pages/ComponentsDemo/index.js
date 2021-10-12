@@ -11,23 +11,31 @@ import { __ } from '@uixkit.react/components/_utils/_all';
 
 //components list
 import ButtonDemo from '@uixkit.react/pages/ComponentsDemo/ButtonDemo.js';
+import FormDemo from '@uixkit.react/pages/ComponentsDemo/FormDemo.js';
+import GridDemo from '@uixkit.react/pages/ComponentsDemo/GridDemo.js';
 import TabsDemo from '@uixkit.react/pages/ComponentsDemo/TabsDemo.js';
 import TabsAnimatedDemo from '@uixkit.react/pages/ComponentsDemo/TabsAnimatedDemo.js';
 import VideoDemo from '@uixkit.react/pages/ComponentsDemo/VideoDemo.js';
-import SwiperDemo from '@uixkit.react/pages/ComponentsDemo/SwiperDemo.js';
 import TableDemo from '@uixkit.react/pages/ComponentsDemo/TableDemo.js';
 import TableGridDemo from '@uixkit.react/pages/ComponentsDemo/TableGridDemo.js';
 import TableSorterDemo from '@uixkit.react/pages/ComponentsDemo/TableSorterDemo.js';
-import FormDemo from '@uixkit.react/pages/ComponentsDemo/FormDemo.js';
 import ScrollRevealDemo from '@uixkit.react/pages/ComponentsDemo/ScrollRevealDemo.js';
 import CardDemo from '@uixkit.react/pages/ComponentsDemo/CardDemo.js';
 import ParallaxDemo from '@uixkit.react/pages/ComponentsDemo/ParallaxDemo.js';
-import GridDemo from '@uixkit.react/pages/ComponentsDemo/GridDemo.js';
 import AccordionDemo from '@uixkit.react/pages/ComponentsDemo/AccordionDemo.js';
 import AccordionSliderDemo from '@uixkit.react/pages/ComponentsDemo/AccordionSliderDemo.js';
 import CounterDemo from '@uixkit.react/pages/ComponentsDemo/CounterDemo.js';
 import DropdownMenuDemo from '@uixkit.react/pages/ComponentsDemo/DropdownMenuDemo.js';
 import ModalDialogDemo from '@uixkit.react/pages/ComponentsDemo/ModalDialogDemo.js';
+import SlideshowDemo from '@uixkit.react/pages/ComponentsDemo/SlideshowDemo.js';
+import SwiperDemo from '@uixkit.react/pages/ComponentsDemo/SwiperDemo.js';
+import BackToTopDemo from '@uixkit.react/pages/ComponentsDemo/BackToTopDemo.js';
+import LightboxDemo from '@uixkit.react/pages/ComponentsDemo/LightboxDemo.js';
+import ProgressBarDemo from '@uixkit.react/pages/ComponentsDemo/ProgressBarDemo.js';
+import StickyElementsDemo from '@uixkit.react/pages/ComponentsDemo/StickyElementsDemo.js';
+
+
+
 
 //Might have mismatching versions of React and the renderer (such as React DOM)
 function HookContent() {
@@ -39,8 +47,12 @@ function HookContent() {
 
 	//
 	const theLocation = useLocation();
-
 	
+	//
+	const urlChk = function( str ) {
+		return theLocation.pathname.indexOf( str ) >= 0 ? true : false;
+	};
+
 	return (
 		<>
 		
@@ -53,59 +65,74 @@ function HookContent() {
 			<h4>Components</h4>
 			<ul className="uix-demo-nav">
 				<li className="uix-demo-nav-header">Getting started</li>
-				<li className={theLocation.pathname.indexOf('/button') >= 0 ? 'is-active' : ''}>
+				<li className={urlChk('/button') ? 'is-active' : ''}>
 					<NavLink data-route="true" to={`${url}/button`} activeClassName="is-active">Button</NavLink>
 				</li>
-				<li className={theLocation.pathname.indexOf('/tabs') >= 0 && theLocation.pathname.indexOf('/tabs-animated') < 0 ? 'is-active' : ''}>
-					<NavLink data-route="true" to={`${url}/tabs`} activeClassName="is-active">Tabs</NavLink>
-				</li>
-				<li className={theLocation.pathname.indexOf('/tabs-animated') >= 0 ? 'is-active' : ''}>
-					<NavLink data-route="true" to={`${url}/tabs-animated`} activeClassName="is-active">Tabs Animated</NavLink>
-				</li>
-				<li className={theLocation.pathname.indexOf('/video') >= 0 ? 'is-active' : ''}>
-					<NavLink data-route="true" to={`${url}/video`} activeClassName="is-active">Video</NavLink>
-				</li>
-				<li className={theLocation.pathname.indexOf('/swiper') >= 0 ? 'is-active' : ''}>
-					<NavLink data-route="true" to={`${url}/swiper`} activeClassName="is-active">Swiper</NavLink>
-				</li>
-				<li className={theLocation.pathname.indexOf('/table') >= 0 && theLocation.pathname.indexOf('/table-grid') < 0 && theLocation.pathname.indexOf('/table-sorter') < 0 ? 'is-active' : ''}>
-					<NavLink data-route="true" to={`${url}/table`} activeClassName="is-active">Table</NavLink>
-				</li>
-				<li className={theLocation.pathname.indexOf('/table-grid') >= 0 ? 'is-active' : ''}>
-					<NavLink data-route="true" to={`${url}/table-grid`} activeClassName="is-active">Table Grid</NavLink>
-				</li>
-				<li className={theLocation.pathname.indexOf('/table-sorter') >= 0 ? 'is-active' : ''}>
-					<NavLink data-route="true" to={`${url}/table-sorter`} activeClassName="is-active">Table Sorter</NavLink>
-				</li>
-				<li className={theLocation.pathname.indexOf('/form') >= 0 ? 'is-active' : ''}>
+				<li className={urlChk('/form') ? 'is-active' : ''}>
 					<NavLink data-route="true" to={`${url}/form`} activeClassName="is-active">Form</NavLink>
 				</li>
-				<li className={theLocation.pathname.indexOf('/scroll-reveal') >= 0 ? 'is-active' : ''}>
-					<NavLink data-route="true" to={`${url}/scroll-reveal`} activeClassName="is-active">Scroll Reveal</NavLink>
-				</li>
-				<li className={theLocation.pathname.indexOf('/card') >= 0 ? 'is-active' : ''}>
-					<NavLink data-route="true" to={`${url}/card`} activeClassName="is-active">Card</NavLink>
-				</li>
-				<li className={theLocation.pathname.indexOf('/parallax') >= 0 ? 'is-active' : ''}>
-					<NavLink data-route="true" to={`${url}/parallax`} activeClassName="is-active">Parallax</NavLink>
-				</li>
-				<li className={theLocation.pathname.indexOf('/grid') >= 0 ? 'is-active' : ''}>
+				<li className={urlChk('/grid') ? 'is-active' : ''}>
 					<NavLink data-route="true" to={`${url}/grid`} activeClassName="is-active">Grid</NavLink>
 				</li>
-				<li className={theLocation.pathname.indexOf('/accordion') >= 0 && theLocation.pathname.indexOf('/accordion-slider') < 0 ? 'is-active' : ''}>
+				<li className={urlChk('/tabs') && !urlChk('/tabs-animated') ? 'is-active' : ''}>
+					<NavLink data-route="true" to={`${url}/tabs`} activeClassName="is-active">Tabs</NavLink>
+				</li>
+				<li className={urlChk('/tabs-animated') ? 'is-active' : ''}>
+					<NavLink data-route="true" to={`${url}/tabs-animated`} activeClassName="is-active">Tabs Animated</NavLink>
+				</li>
+				<li className={urlChk('/video') ? 'is-active' : ''}>
+					<NavLink data-route="true" to={`${url}/video`} activeClassName="is-active">Video</NavLink>
+				</li>
+				<li className={urlChk('/table') && !urlChk('/table-grid') && !urlChk('/table-sorter') ? 'is-active' : ''}>
+					<NavLink data-route="true" to={`${url}/table`} activeClassName="is-active">Table</NavLink>
+				</li>
+				<li className={urlChk('/table-grid') ? 'is-active' : ''}>
+					<NavLink data-route="true" to={`${url}/table-grid`} activeClassName="is-active">Table Grid</NavLink>
+				</li>
+				<li className={urlChk('/table-sorter') ? 'is-active' : ''}>
+					<NavLink data-route="true" to={`${url}/table-sorter`} activeClassName="is-active">Table Sorter</NavLink>
+				</li>
+				<li className={urlChk('/scroll-reveal') ? 'is-active' : ''}>
+					<NavLink data-route="true" to={`${url}/scroll-reveal`} activeClassName="is-active">Scroll Reveal</NavLink>
+				</li>
+				<li className={urlChk('/card') ? 'is-active' : ''}>
+					<NavLink data-route="true" to={`${url}/card`} activeClassName="is-active">Card</NavLink>
+				</li>
+				<li className={urlChk('/parallax') ? 'is-active' : ''}>
+					<NavLink data-route="true" to={`${url}/parallax`} activeClassName="is-active">Parallax</NavLink>
+				</li>
+				<li className={urlChk('/accordion') && !urlChk('/accordion-slider') ? 'is-active' : ''}>
 					<NavLink data-route="true" to={`${url}/accordion`} activeClassName="is-active">Accordion</NavLink>
 				</li>
-				<li className={theLocation.pathname.indexOf('/accordion-slider') >= 0 ? 'is-active' : ''}>
+				<li className={urlChk('/accordion-slider') ? 'is-active' : ''}>
 					<NavLink data-route="true" to={`${url}/accordion-slider`} activeClassName="is-active">Accordion Slider</NavLink>
 				</li>
-				<li className={theLocation.pathname.indexOf('/counter') >= 0 ? 'is-active' : ''}>
+				<li className={urlChk('/counter') ? 'is-active' : ''}>
 					<NavLink data-route="true" to={`${url}/counter`} activeClassName="is-active">Counter</NavLink>
 				</li>
-				<li className={theLocation.pathname.indexOf('/dropdown-menu') >= 0 ? 'is-active' : ''}>
+				<li className={urlChk('/dropdown-menu') ? 'is-active' : ''}>
 					<NavLink data-route="true" to={`${url}/dropdown-menu`} activeClassName="is-active">Dropdown Menu</NavLink>
 				</li>
-				<li className={theLocation.pathname.indexOf('/modal-dialog') >= 0 ? 'is-active' : ''}>
+				<li className={urlChk('/modal-dialog') ? 'is-active' : ''}>
 					<NavLink data-route="true" to={`${url}/modal-dialog`} activeClassName="is-active">Modal Dialog</NavLink>
+				</li>
+				<li className={urlChk('/slideshow') ? 'is-active' : ''}>
+					<NavLink data-route="true" to={`${url}/slideshow`} activeClassName="is-active">Slideshow</NavLink>
+				</li>
+				<li className={urlChk('/swiper') ? 'is-active' : ''}>
+					<NavLink data-route="true" to={`${url}/swiper`} activeClassName="is-active">Swiper</NavLink>
+				</li>
+				<li className={urlChk('/back-to-top') ? 'is-active' : ''}>
+					<NavLink data-route="true" to={`${url}/back-to-top`} activeClassName="is-active">Back To Top</NavLink>
+				</li>
+				<li className={urlChk('/lightbox') ? 'is-active' : ''}>
+					<NavLink data-route="true" to={`${url}/lightbox`} activeClassName="is-active">Lightbox</NavLink>
+				</li>
+				<li className={urlChk('/progress-bar') ? 'is-active' : ''}>
+					<NavLink data-route="true" to={`${url}/progress-bar`} activeClassName="is-active">Progress Bar</NavLink>
+				</li>
+				<li className={urlChk('/sticky-elements') ? 'is-active' : ''}>
+					<NavLink data-route="true" to={`${url}/sticky-elements`} activeClassName="is-active">Sticky Elements</NavLink>
 				</li>
 
 			</ul>
@@ -145,62 +172,30 @@ function HookContent() {
 
 
 						</Route>
-						<Route path={`${path}/button`}>
-							<ButtonDemo />
-						</Route>
-						<Route path={`${path}/tabs`}>
-							<TabsDemo />
-						</Route>
-						<Route path={`${path}/tabs-animated`}>
-							<TabsAnimatedDemo />
-						</Route>
-						<Route path={`${path}/video`}>
-							<VideoDemo />
-						</Route>
-						<Route path={`${path}/swiper`}>
-							<SwiperDemo />
-						</Route>
-						<Route path={`${path}/table`}>
-							<TableDemo />
-						</Route>
-						<Route path={`${path}/table-grid`}>
-							<TableGridDemo />
-						</Route>
-						<Route path={`${path}/table-sorter`}>
-							<TableSorterDemo />
-						</Route>
-						<Route path={`${path}/form`}>
-							<FormDemo />
-						</Route>
-						<Route path={`${path}/scroll-reveal`}>
-							<ScrollRevealDemo />
-						</Route>
-						<Route path={`${path}/card`}>
-							<CardDemo />
-						</Route>
-						<Route path={`${path}/parallax`}>
-							<ParallaxDemo />
-						</Route>
-						<Route path={`${path}/grid`}>
-							<GridDemo />
-						</Route>
-						<Route path={`${path}/accordion`}>
-							<AccordionDemo />
-						</Route>
-						<Route path={`${path}/accordion-slider`}>
-							<AccordionSliderDemo />
-						</Route>
-						<Route path={`${path}/counter`}>
-							<CounterDemo />
-						</Route>
-						<Route path={`${path}/dropdown-menu`}>
-							<DropdownMenuDemo />
-						</Route>
-						<Route path={`${path}/modal-dialog`}>
-							<ModalDialogDemo />
-						</Route>
-
-
+								
+						<Route path={`${path}/button`}><ButtonDemo/></Route>
+						<Route path={`${path}/form`}><FormDemo/></Route>
+						<Route path={`${path}/grid`}><GridDemo/></Route>
+						<Route path={`${path}/tabs`}><TabsDemo/></Route>
+						<Route path={`${path}/tabs-animated`}><TabsAnimatedDemo/></Route>
+						<Route path={`${path}/video`}><VideoDemo/></Route>
+						<Route path={`${path}/table`}><TableDemo/></Route>
+						<Route path={`${path}/table-grid`}><TableGridDemo/></Route>
+						<Route path={`${path}/table-sorter`}><TableSorterDemo/></Route>
+						<Route path={`${path}/scroll-reveal`}><ScrollRevealDemo/></Route>
+						<Route path={`${path}/card`}><CardDemo/></Route>
+						<Route path={`${path}/parallax`}><ParallaxDemo/></Route>
+						<Route path={`${path}/accordion`}><AccordionDemo/></Route>
+						<Route path={`${path}/accordion-slider`}><AccordionSliderDemo/></Route>
+						<Route path={`${path}/counter`}><CounterDemo/></Route>
+						<Route path={`${path}/dropdown-menu`}><DropdownMenuDemo/></Route>
+						<Route path={`${path}/modal-dialog`}><ModalDialogDemo/></Route>
+						<Route path={`${path}/slideshow`}><SlideshowDemo/></Route>
+						<Route path={`${path}/swiper`}><SwiperDemo/></Route>
+						<Route path={`${path}/back-to-top`}><BackToTopDemo/></Route>
+						<Route path={`${path}/lightbox`}><LightboxDemo/></Route>
+						<Route path={`${path}/progress-bar`}><ProgressBarDemo/></Route>
+						<Route path={`${path}/sticky-elements`}><StickyElementsDemo/></Route>								
 
 					</Switch>
 
@@ -219,25 +214,9 @@ function HookContent() {
 
 class ComponentsDemo extends Component {
 	constructor(props) {
-
-		//You are extending the React.Component class, and per the ES2015 spec, 
-		//a child class constructor cannot make use of this until super() has 
-		//been called; also, ES2015 class constructors have to call super() 
-		//if they are subclasses.
 		super(props);
-		//console.log(this.props) //props will get logged.
-
-   
 	}
 
-
-    /**
-     * componentDidMount() is invoked immediately after a component 
-     * is mounted (inserted into the tree). 
-     * Initialization that requires DOM nodes should go here. 
-     * If you need to load data from a remote endpoint, this 
-     * is a good place to instantiate the network request.
-     */
     componentDidMount() {
         //do shmething
 
@@ -351,27 +330,35 @@ class ComponentsDemo extends Component {
 					margin-left: auto;
 					margin-right: auto;
 					padding-bottom: 70px;
-					transform: translateX(100px);
+					/* Do not use "transform", it will affect the "position:fixed" effect of the child */
+					left: 100px;
 				}
 				
 				@media all and (max-width: 768px) {
 					.uix-demo-container {
 						padding: 0;	
 						max-width: 100%;
-						transform: translateX(0);
+						left: 0;
 					}
 				}
 
-				@media all and (max-width: 1141px) {
+				@media all and (max-width: 1024px) and (min-width: 769px) {
 					.uix-demo-container {
 						max-width: 700px;
 					}
 				}
 		
-				@media all and (min-width: 1430px) {
+				@media all and (max-width: 1440px) and (min-width: 1025px) {
+					.uix-demo-container {
+						max-width: 1000px;
+					}
+				}
+
+
+				@media all and (min-width: 1441px) {
 					.uix-demo-container {
 						max-width: 1140px;
-						transform: translateX(0);
+						left: 0;
 					}
 				}
 

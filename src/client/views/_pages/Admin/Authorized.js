@@ -5,10 +5,6 @@ import UserService from "@uixkit.react/services/user-service.js";
 class Authorized extends Component {
 	
     constructor(props) {
-		//You are extending the React.Component class, and per the ES2015 spec, 
-		//a child class constructor cannot make use of this until super() has 
-		//been called; also, ES2015 class constructors have to call super() 
-		//if they are subclasses.
 		super(props);
 		
 		

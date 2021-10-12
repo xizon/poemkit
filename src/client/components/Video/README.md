@@ -4,7 +4,7 @@
 
 ## Version
 
-=> 0.0.1
+=> 0.0.1 (October 10, 2021)
 
 ## API
 
@@ -46,8 +46,7 @@ export default () => {
 		<h3>Autoplay, No controls</h3>
 		<p>Must be muted</p>
 		{/* ================================================================== */} 
-
-	  
+		
 		<Video config='{"clickToPlay":false,"muted":true,"autoplay":true,"controls":[""],"loop":{"active":true},"fullscreen":{"enabled": false}}' poster="/assets/videos/480x270/demo.jpg" src="/assets/videos/480x270/demo.mp4" />
 
 

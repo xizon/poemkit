@@ -27,34 +27,35 @@
  */
 
 export function setBG( config ) {
+	if ( typeof config === typeof undefined || config === null || config === false ) config = {};
+
+	//Set a default configuration
+	const defaultConfig = {
+		"height"     : false,
+		"width"      : false,
+		"src"        : "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7",
+		"position"   : "top left",
+		"size"       : "cover",
+		"repeat"     : "no-repeat",
+		"fill"       : false,
+		"move"       : false  // {"dir":"left","duration":"10s","easing":"linear","loop":true}
+    };
+	
+	const defaultConfigValues = Object.values(defaultConfig);
+	Object.keys(defaultConfig).forEach(function(prop,index) {
+		if ( typeof config[prop] === typeof undefined || config[prop] === null ) config[prop] = defaultConfigValues[index];
+	});
+	
+	//
 	let res = {};
-
-	if ( typeof config === typeof undefined ) {
-		config = {
-			"src"        : "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7",
-			"position"   : "top left",
-			"size"       : "cover",
-			"repeat"     : "no-repeat",
-			"fill"       : false,
-			"transition" : "none 0s ease 0s",
-			"move"       : false  // {"dir":"left","duration":"10s","easing":"linear","loop":true}
-		};
-	}
-
-	let dataH        = config.height,
-		dataW        = config.width,
+	let dataH         = config.height,
+		dataW         = config.width,
 		dataImg       = config.src,
 		dataPos       = config.position,
 		dataSize      = config.size,
 		dataRepeat    = config.repeat,
-		dataEasing    = config.transition,
+		dataFill      = config.fill,
 		dataMove      = config.move;
-
-	if ( typeof dataPos === typeof undefined ) dataPos = 'top left';
-	if ( typeof dataSize === typeof undefined ) dataSize = 'cover';
-	if ( typeof dataRepeat === typeof undefined ) dataRepeat = 'no-repeat';
-	if ( typeof dataEasing === typeof undefined ) dataEasing = 'none 0s ease 0s';
-	if ( typeof dataMove === typeof undefined ) dataMove = false;
 
 
 	
@@ -93,7 +94,7 @@ export function setBG( config ) {
 
 		//  CSS3 animation keyframe attributes inline
 		const addStyles = function( id, s ) {
-			if ( typeof (document) !== "undefined" && document.querySelector(id) === null ) {
+			if ( typeof(document) !== 'undefined' && document.querySelector(id) === null ) {
 				const $style = document.createElement("style");
 				document.head.appendChild($style);
 				$style.innerHTML = `${s}`;
@@ -111,14 +112,14 @@ export function setBG( config ) {
 	
 	
 	//-----
-	if ( typeof dataImg != typeof undefined && dataImg != '' ) {
+	if ( dataImg != '' ) {
 
-		if ( config.fill ) {
+		if ( dataFill ) {
 			//Show Image Under Text
 	
 			res = {
-				height                   : typeof dataH !== typeof undefined ? dataH : 'auto',
-				width                    : typeof dataW !== typeof undefined ? dataW : 'auto',
+				height                   : dataH ? dataH : 'auto',
+				width                    : dataW ? dataW : 'auto',
 				background               : 'url('+dataImg+') '+dataRepeat+'',
 				backgroundSize           : dataSize,
 				WebkitBackgroundClip     : 'text',
@@ -130,8 +131,8 @@ export function setBG( config ) {
 		} else {
 			
 			res = {
-				height                   : typeof dataH !== typeof undefined ? dataH : 'auto',
-				width                    : typeof dataW !== typeof undefined ? dataW : 'auto',
+				height                   : dataH ? dataH : 'auto',
+				width                    : dataW ? dataW : 'auto',
 				backgroundImage          : 'url('+dataImg+')',
 				backgroundPosition       : dataPos,
 				backgroundSize           : dataSize,
@@ -142,8 +143,8 @@ export function setBG( config ) {
 		}
 
 		// Delete the width and height attributes to avoid being overwritten when using the grid system
-		if ( typeof dataH === typeof undefined ) delete res['height'];
-		if ( typeof dataW === typeof undefined ) delete res['width'];
+		if ( !dataH ) delete res['height'];
+		if ( !dataW ) delete res['width'];
 
 
 

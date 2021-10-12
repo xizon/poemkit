@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import ReactDOM from 'react-dom';
 
 /*-- Apply Third-party plugins (import location should be in front of "global scripts and styles") --*/
 import '@uixkit.react/components/_plugins/_lib-bootstrap';
@@ -39,8 +38,6 @@ type CustomSelectState = false;
 
 export default class CustomSelect extends Component<CustomSelectProps, CustomSelectState> {
 	
-	//Refs are commonly assigned to an instance property when a component 
-	//is constructed so they can be referenced throughout the component.
 	private wrapperRef = React.createRef<HTMLDivElement>();
 
 	constructor(props) {
@@ -74,7 +71,7 @@ export default class CustomSelect extends Component<CustomSelectProps, CustomSel
     handleClick(event) {
 		event.preventDefault();
 		
-		const root = ReactDOM.findDOMNode(this.wrapperRef.current);
+		const root = this.wrapperRef.current;
 		const $selectWrapper = __( root ),
 			$selectCurWrapper = $selectWrapper.find( '.uix-controls__select.js-uix-new' );
 
@@ -91,7 +88,7 @@ export default class CustomSelect extends Component<CustomSelectProps, CustomSel
 		event.preventDefault();
 		
 		const el = __( event.target );
-		const root = ReactDOM.findDOMNode(this.wrapperRef.current);
+		const root = this.wrapperRef.current;
 		
 		const $selectWrapper  = __( root ),
 			$selectCurWrapper = $selectWrapper.find( '.uix-controls__select.js-uix-new' ),
@@ -139,7 +136,7 @@ export default class CustomSelect extends Component<CustomSelectProps, CustomSel
 	
 	componentDidMount(){
 
-		document.body.addEventListener( 'click', this.handleClickOutside );
+		document.addEventListener( 'click', this.handleClickOutside );
 	}
 
 	render() {
@@ -167,8 +164,7 @@ export default class CustomSelect extends Component<CustomSelectProps, CustomSel
 		const wrapperClassTheme = theme === 'line' ? ' uix-controls--line' : '';
 		const wrapperClassPosition = position === 'top' ? ' uix-controls__select--top' : '';
 		
-		
-		
+
 		// Get all options from option prop
 		const selectOptions = __.validate.isJSON( options ) ? JSON.parse( options ) : {};
 		const optionKeys = Object.keys(selectOptions);

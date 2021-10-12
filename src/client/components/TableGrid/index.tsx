@@ -75,7 +75,7 @@ class TableGridRow extends Component<TableGridRowProps, TableGridRowState> {
 												
 		return (
 		  <>
-			<div className={rowClasses} role="row" id={"app-table-grid-field-row" + __.GUID.create()}>
+			<div className={rowClasses} role="row" id={'app-table-grid-field-row' + __.GUID.create()}>
 				{fields}
 			</div>
 	
@@ -103,7 +103,7 @@ class TableGridHeaders extends Component<TableGridHeadersProps, TableGridHeaders
 			return (
 			  <>
 
-				<div className="uix-table-grid__head" role="row" id={"app-table-grid-columnheader" + __.GUID.create()}>
+				<div className="uix-table-grid__head" role="row" id={'app-table-grid-columnheader' + __.GUID.create()}>
 					{this.props.data!.map((item, i) => {
 						return <div key={"columnheader" + i} className="uix-table-grid__head-cell" style={{flex:1}} role="columnheader" tabIndex={0}>{item}</div>;
 					})

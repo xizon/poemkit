@@ -1,6 +1,29 @@
 # Changelog
 
 
+#### = 0.1.1 (October 12, 2021) =
+
+* New: Add new UI components `Slideshow`.
+* New: Add new UI components `Back To Top`.
+* New: Add new UI components `Lightbox`.
+* New: Add new UI components `Progress Bar`.
+* New: Add new UI components `Sticky Elements`.
+* Fix: Optimized the click event in the component to avoid repeated triggering.
+* Fix: Fixed the JSON judgment in the script.
+* Fix: Fixed the effect of the child `position:fixed` containing the `transform` attribute in the parent Tag.
+* Refactor: Some UI component traversal performance adjustments, delete unnecessary events.
+* Tweak: Changed some descriptions of this Github project.
+* Tweak: Optimized off() method for the core helpers.
+* Tweak: Removed some unneeded style files in UI components.
+* Tweak: Adjusted the undefined and null judgment of variables.
+* Tweak: Refactored the traversal judgment of the default configuration in the function.
+* Tweak: Modified the remote API interface of POSTS test.
+* Tweak: Use `componentWillUnmount()` to optimize the performance of scroll listening components.
+* Tweak: Optimized the mounting performance of all components.
+* Tweak: Rename the tool `shortcut.js` to `helpers.js`  in the component library.
+* Tweak: Enhanced touch performance of mobile devices.
+
+
 #### = 0.1.0 (September 27, 2021) =
 
 * New: Add new UI components `Accordion`.
@@ -8,11 +31,11 @@
 * New: Add new UI components `Counter`.
 * New: Add new UI components `Dropdown Menu`.
 * New: Add new UI components `Modal Dialog`.
-* New: Added animate() method for the core shortcut.
+* New: Added animate() method for the core helpers.
 * Fix: Fixed some issues with the `__()` selector.
 * Fix: Fixed the display problem of some UI components.
-* Fix: Fixed off() method for the core shortcut.
-* Tweak: Optimized selectors for the core shortcut.
+* Fix: Fixed off() method for the core helpers.
+* Tweak: Optimized selectors for the core helpers.
 * Tweak: Refactored some Vanilla JS general tool scripts.
 * Tweak: Improved the performance and stability of the Vanilla JavsScript tool library, and fixed possible problems in some methods.
 * Tweak: Optimized the documentation of UI components.
@@ -24,7 +47,7 @@
 * New: Added API documentation for UI components.
 * New: Add new UI components `Grid`.
 * Tweak: Optimized UI component library.
-* Tweak: Optimized `find()` for the core shortcut.
+* Tweak: Optimized `find()` for the core helpers.
 
 
 #### = 0.0.8 (August 20, 2021) =
@@ -39,7 +62,7 @@
 * New: TypeScript Support.
 * New: Add new UI components `Card`.
 * New: Add new UI components `Parallax`.
-* New: Added some new methods `prependTo()`, `appendTo()`, `text()`, `clone()` and `parents()` to Core Shortcut.
+* New: Added some new methods `prependTo()`, `appendTo()`, `text()`, `clone()` and `parents()` to core helpers.
 * New: Upgrade webpack 4 to 5. Compilation speed and performance are greatly improved.
 * New: Update and compatible debugging of Node related dependencies
 * Fix: Fixed some issues with the `__()` selector.
@@ -48,7 +71,7 @@
 * Tweak: Convert core files to TypeScript.
 * Tweak: Optimized the command script.
 * Tweak: Optimized mobile and desktop navigation.
-* Tweak: Added a new method to Core Shortcut.
+* Tweak: Added a new method to core helpers.
 * Tweak: Optimized some component related codes.
 * Tweak: Optimized part of the naming of the component library.
 * Tweak: Optimization and review of overall code and comments.
@@ -86,7 +109,7 @@
 #### = 0.0.37 (June 8, 2021) =
 
 
-* New: Added `throttle()` and `debounce()` to the core shortcut.
+* New: Added `throttle()` and `debounce()` to the core helpers.
 * New: Add new UI components `Scroll Reveal`.
 * New: Added new form controls: `Password Input`, `Merge Input`, `File Field`.
 * Tweak: Added default assignments for some controls.
@@ -113,11 +136,11 @@ Tweak: Optimize commands for node.
 #### = 0.0.33 (May 14, 2021) =
 
 * New: Added new demo `Form` controls. It contains the following controls: 	`Input`.
-* New: Added a new method `toSlug()` to Core Shortcut.
+* New: Added a new method `toSlug()` to core helpers.
 * Tweak: Optimized the scripts of some demo components.
 * Doc: Added the key description of the product.
 * Fix: Fixed the problem of each traversal of the `Table` component script.
-* Fix: Fixed loop errors by nesting other methods in each() method via Core Shortcut.
+* Fix: Fixed loop errors by nesting other methods in each() method via core helpers.
 * Security: Upgrade serialize-javascript to version 4.0.0 or later.
 
 
@@ -125,15 +148,15 @@ Tweak: Optimize commands for node.
 #### = 0.0.32 (May 12, 2021) =
 
 * New: Added new demo `Table`, `Table Sorter` and `Table Grid` using json for rendering data.
-* New: Added a new method `wrapInner()` to Core Shortcut.
+* New: Added a new method `wrapInner()` to core helpers.
 * Doc: The document has been optimized in some details.
-* Fix: Fixed the `html()` method in Core Shortcut.
+* Fix: Fixed the `html()` method in core helpers.
 
 
 #### = 0.0.31 (April 29, 2021) =
 
 * Tweak: `webpack.config.js` optimization.
-* Tweak: Added a new method to Core Shortcut.
+* Tweak: Added a new method to core helpers.
 * Tweak: Optimized some scripts.
 
 
@@ -160,12 +183,12 @@ Tweak: Optimize commands for node.
 
 #### = 0.0.27 (April 26, 2021) =
 
-* New: The loader of the shortcut function adds the judgment condition of the video loading.
+* New: The loader of the helpers function adds the judgment condition of the video loading.
 * New: Integrate the video playback function into the UI component through the plyr plug-in.
 * Tweak: Component detail optimization and debugging.
-* Tweak: Modify the method name of the shortcut function `imagesloaded` to `loader`.
+* Tweak: Modify the method name of the helpers function `imagesloaded` to `loader`.
 * Tweak: Adjusted the introduction of third-party plug-ins.
-* Fix: Fixed some mouse event issues for Core Shortcut.
+* Fix: Fixed some mouse event issues for core helpers.
 
 
 
@@ -184,7 +207,7 @@ Tweak: Optimize commands for node.
 * New: Add new UI components `Tabs`.
 * Tweak: Detail optimization.
 * Tweak: Refine the README documents.
-* Fix: Fixed some issues for Core Shortcut.
+* Fix: Fixed some issues for core helpers.
 
 
 
@@ -220,7 +243,7 @@ Tweak: Optimize commands for node.
 #### = 0.0.16 (April 13, 2021) =
 
 * Adjustment of the resource directory structure.
-* Refactor the shortcut tool library and refactor the selector function.
+* Refactor the helpers tool library and refactor the selector function.
 
 
 #### = 0.0.15beta (April 7, 2021) =

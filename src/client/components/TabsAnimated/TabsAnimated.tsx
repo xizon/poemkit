@@ -104,13 +104,13 @@ export default class TabsAnimated extends Component<TabsAnimatedProps, TabsAnima
 						{( children != null ) ? children.map((item, i) => {
 							const childProps = { ...item.props };
 							const itemIndex = i;
-							const activeClass = (itemIndex === this.state.selected) ? 'is-active' : '';
+							const activeClassName = (itemIndex === this.state.selected) ? 'is-active' : '';
 							
 							delete childProps.key;
 							delete childProps.defaultActive;
 
 							if ( item.key.indexOf( 'tab-list' ) >= 0 ) {
-								return <TabList className={activeClass} key={item.key} {...childProps} onClick={this.handleClickItem(itemIndex)} />;
+								return <TabList className={activeClassName} key={item.key} {...childProps} onClick={this.handleClickItem(itemIndex)} />;
 							}
 
 						})

@@ -44,26 +44,6 @@ export default () => {
 
 
 
-
-		{/*<!-- Content   
-		====================================================== -->*/}
-		<section className="uix-spacing--s">
-			<div className="container">
-				<div className="row">
-					<div className="col-12">
-						<h3 className="app-header-title">Demos</h3>
-						<hr />
-					</div>
-				</div>
-				{/*<!-- .row end -->*/}
-
-			</div>
-			{/*<!-- .container end -->*/}
-
-		</section>
-		
-
-
 		{/*<!-- Content 
 		====================================================== -->*/}
 		<Swiper />
@@ -103,8 +83,9 @@ export default () => {
 											<td>-</td>
 										</tr> 
 										<tr>
-											<td colSpan="4">This is a <strong>Migrating Component</strong>. There are not any properties and are used to quickly
-												migrate some completed HTML code. You only need to directly modify the component source code.</td>
+											<td colSpan="4">
+											This component uses the Swiper plug-in, and the source code is in <code>componentDidMount()</code>. There are not any properties.	
+											</td>
 										</tr>
 									</tbody>
 								</table>

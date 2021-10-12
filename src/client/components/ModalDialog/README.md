@@ -4,7 +4,7 @@
 
 ## Version
 
-=> 0.0.1
+=> 0.0.1 (October 10, 2021)
 
 ## API
 
@@ -76,6 +76,19 @@ export default () => {
         <p>p.s. Sorry for calling you a dingus earlier.</p>
       </ModalDialog>
       
+
+      <ModalDialog 
+      lightbox={false}
+      width="300px"
+      height="200px"
+      triggerTagName="a" 
+      triggerClassName="uix-btn uix-btn__border--thin uix-btn__margin--b uix-btn__size--s uix-btn__bg--primary" 
+      triggerContent={<>
+        Click Here to Open Modal (No mask)
+      </>}>
+        <h2>No Mask</h2>
+        <p>Content here...</p>
+      </ModalDialog>
 
 
       <h3>Modal Dialog (Video)</h3>

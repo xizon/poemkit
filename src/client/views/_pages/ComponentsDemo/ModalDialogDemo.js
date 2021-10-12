@@ -110,7 +110,22 @@ export default () => {
 							</ModalDialog>
 							<br />
 
-							
+
+							<ModalDialog 
+							lightbox={false}
+							width="300px"
+							height="200px"
+							triggerTagName="a" 
+							triggerClassName="uix-btn uix-btn__border--thin uix-btn__margin--b uix-btn__size--s uix-btn__bg--primary" 
+							triggerContent={<>
+								Click Here to Open Modal (No mask)
+							</>}>
+								<h2>No Mask</h2>
+								<p>Content here...</p>
+							</ModalDialog>
+							<br />
+
+
 							<ModalDialog 
 							autoOpen={true}
 							autoClose={3000}

@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import ReactDOM from 'react-dom';
 
 
 /*-- Apply Third-party plugins (import location should be in front of "global scripts and styles") --*/
@@ -40,8 +39,6 @@ type FileFieldState = false;
 
 export default class FileField extends Component<FileFieldProps, FileFieldState> {
 	
-	//Refs are commonly assigned to an instance property when a component 
-	//is constructed so they can be referenced throughout the component.
 	private dropZoneRef = React.createRef<HTMLInputElement>();
 
 
@@ -62,7 +59,7 @@ export default class FileField extends Component<FileFieldProps, FileFieldState>
 	 */
     handleDragOver(event) {
 		event.preventDefault();
-		const $dropZone = __( ReactDOM.findDOMNode(this.dropZoneRef.current) );
+		const $dropZone = __( this.dropZoneRef.current );
 	
 		const timeout = window.dropZoneTimeout;
 		if (!timeout) {
@@ -117,7 +114,7 @@ export default class FileField extends Component<FileFieldProps, FileFieldState>
 	
 	componentDidMount(){
 
-		document.body.addEventListener( 'dragover', this.handleDragOver );
+		document.addEventListener( 'dragover', this.handleDragOver );
 	}
 
 	

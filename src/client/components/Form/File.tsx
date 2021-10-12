@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import ReactDOM from 'react-dom';
 
 
 /*-- Apply Third-party plugins (import location should be in front of "global scripts and styles") --*/
@@ -35,8 +34,6 @@ type FileState = false;
 
 export default class File extends Component<FileProps, FileState>  {
 	
-	//Refs are commonly assigned to an instance property when a component 
-	//is constructed so they can be referenced throughout the component.
 	private fileRef = React.createRef<HTMLDivElement>();
 
 	constructor(props) {
@@ -54,7 +51,7 @@ export default class File extends Component<FileProps, FileState>  {
     handleChange(event) {
 		const val = event.target.value;
 		
-		const $filePath = __( ReactDOM.findDOMNode(this.fileRef.current) );
+		const $filePath = __( this.fileRef.current );
 		$filePath.html( val );
 	
     }
