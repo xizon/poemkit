@@ -22,15 +22,15 @@ import '@testing-library/jest-dom';
 
 
 import React from 'react';
-import { Tabs, TabList, TabPanel } from '@uixkit.react/components/Tabs/index.tsx';
+import { TabsAnimated, TabList, TabPanel } from '@uixkit.react/components/TabsAnimated/index.tsx';
 
 
 describe('Tabs', () => {
 
     const codeConstructor = (
-        <Tabs data-testid="test-element" type="normal">
-            <TabList key="tab-list-1" defaultActive>Tab 1</TabList>
-            <TabList key="tab-list-2">Tab 2</TabList>
+        <TabsAnimated>
+            <TabList data-testid="test-element-first-item" key="tab-list-1" defaultActive>Tab 1</TabList>
+            <TabList data-testid="test-element-to-click" key="tab-list-2">Tab 2</TabList>
             <TabList key="tab-list-3">Tab 3</TabList>
 
             <TabPanel key="tab-panel-1" defaultActive>
@@ -44,7 +44,7 @@ describe('Tabs', () => {
             <TabPanel key="tab-panel-3">
                 <p>And this is the 3rd tab.</p>
             </TabPanel>
-        </Tabs>
+        </TabsAnimated>
     );
 
     const renderer = ReactTestRenderer.create(
@@ -57,19 +57,12 @@ describe('Tabs', () => {
     //
     test('renders initial tabs to <Tabs>...</Tabs>', () => {
 
-        const { container } = render(codeConstructor);
+        const { getByTestId } = render(codeConstructor);
 
-
-        // Received value must be an HTMLElement or an SVGElement.
-        // .toBeInTheDocument() is an assertion that comes from jest-dom
-        //------------------------------------------
-        expect(container).toBeInTheDocument();
-
-
+       
         // The default style of the first item is `is-active`
         //------------------------------------------
-        const $tabsItemFirst = container.querySelectorAll(`[data-testid="test-element"] [role="tablist"] > li`)[0];
-        let firstItemClassName = $tabsItemFirst.className;
+        let firstItemClassName = getByTestId( 'test-element-first-item' ).className;
         expect( firstItemClassName).toMatch( 'is-active' );
 
 
@@ -78,14 +71,13 @@ describe('Tabs', () => {
         // When the second item is clicked, the activation style of the first item is removed,
         // and the second is assigned the value `is-active`
         //------------------------------------------
-        const $tabsItemSecond = container.querySelectorAll(`[data-testid="test-element"] [role="tablist"] > li`)[1];
-        fireEvent.click($tabsItemSecond);
+        fireEvent.click(getByTestId( 'test-element-to-click' ));
 
-        const $tabsContentSecond = container.querySelectorAll(`[data-testid="test-element"] [role="tabpanel"]`)[1];
-        let secondContentClassName = $tabsContentSecond.className;
-        let firstItemClassName_clicked = $tabsItemFirst.className;
-        expect( firstItemClassName_clicked).not.toMatch( 'is-active' );
-        expect( secondContentClassName).toMatch( 'is-active' );
+        //
+        let afterClick_firstItemClassName = getByTestId( 'test-element-first-item' ).className;
+        let afterClick_secondItemClassName = getByTestId( 'test-element-to-click' ).className;
+        expect( afterClick_firstItemClassName).not.toMatch( 'is-active' );
+        expect( afterClick_secondItemClassName).toMatch( 'is-active' );
 
     });
 
