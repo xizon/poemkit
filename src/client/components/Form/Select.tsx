@@ -18,6 +18,7 @@ import '@uixkit.react/components/Form/styles/rtl/_basic.scss';
 import '@uixkit.react/components/Form/styles/rtl/_layout.scss';
 import '@uixkit.react/components/Form/styles/rtl/_theme_material.scss';
 
+type OptionChangeFnType = (arg1: any) => void;
 
 type SelectProps = {
 	options: string;
@@ -28,6 +29,10 @@ type SelectProps = {
 	name?: string;
 	disabled?: any;
 	required?: any;
+    /** This function is called whenever the data is updated.
+     *  Exposes the JSON format data about the option as an argument.
+     */
+	optionChangeCallback?: OptionChangeFnType | null;
 	/** -- */
 	id?: string;
 };
@@ -36,26 +41,43 @@ type SelectState = false;
 
 
 export default class Select extends Component<SelectProps, SelectState>  {
+
+	uniqueID: string;
 	
 	constructor(props) {
 		super(props);
 	
+		this.uniqueID = 'app-' + __.GUID.create();
+
         this.handleFocus = this.handleFocus.bind(this);
-        this.handleBlurChange = this.handleBlurChange.bind(this);
+        this.handleBlur = this.handleBlur.bind(this);
+		this.handleChange = this.handleChange.bind(this);
 		
 	}
 
     handleFocus(event) {
 		const el = __( event.target );
-		
 		el.closest( 'div' ).find( 'label, .uix-controls__bar' ).addClass( 'is-active' );
     }
 
-    handleBlurChange(event) {
-		const el = __( event.target );
-		const val = event.target.value;
-		
+    handleBlur(event) {
+		this.valueChangeEvent( event );
+    }
 
+    handleChange(event) {
+		this.valueChangeEvent( event );
+
+		if ( typeof(this.props.optionChangeCallback) === 'function' ) {
+			this.props.optionChangeCallback({
+				"value": event.target.value
+			});
+		}
+    }
+
+	valueChangeEvent(e) {
+		const el = __( e.target );
+		const val = e.target.value;
+		
 		//----
 		//remove focus style
 		if( val === '' || val === 'blank' ) {
@@ -70,7 +92,7 @@ export default class Select extends Component<SelectProps, SelectState>  {
 		) {
 			el.closest( 'div' ).find( '.uix-controls__bar' ).removeClass( 'is-active' );
 		}	
-    }
+	}
 	
 	
     /**
@@ -112,7 +134,7 @@ export default class Select extends Component<SelectProps, SelectState>  {
 		
 		const uiRes = typeof(ui) === 'undefined' ? '' : ui;
 		const nameRes = typeof(name) === 'undefined' ? ( typeof(label) !== 'undefined' ? __.toSlug( label ) : '' )  : name;
-		const idRes = id ? id : 'app-control-' + __.GUID.create();
+		const idRes = id || this.uniqueID;
 		const wrapperClassDisabled = disabled ? ' is-disabled' : '';
 		const wrapperClassUi = this.uiSwitch(uiRes);
 		const wrapperClassTheme = theme === 'line' ? ' uix-controls--line' : '';
@@ -141,8 +163,8 @@ export default class Select extends Component<SelectProps, SelectState>  {
 					  name={nameRes}
 					  defaultValue={value || ''}
 			          onFocus={this.handleFocus}
-					  onBlur={this.handleBlurChange}
-			          onChange={this.handleBlurChange}
+					  onBlur={this.handleBlur}
+			          onChange={this.handleChange}
 			          disabled={disabled || null}
 					  required={required || null}
                       {...attributes}

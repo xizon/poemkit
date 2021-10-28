@@ -36,13 +36,16 @@ type DynamicFieldsState = {
 
 export default class DynamicFields extends Component<DynamicFieldsProps, DynamicFieldsState> {
 
-	private wrapperRef = React.createRef<HTMLDivElement>();
+	private rootRef = React.createRef<HTMLDivElement>();
 	private addBtnRef = React.createRef<HTMLAnchorElement>();
+
+	uniqueID: string;
 
 	constructor(props) {
 		super(props);
-	
-	
+
+		this.uniqueID = 'app-' + __.GUID.create();
+
 		this.state = {
 			elVals: this.props.value ? [...Array( JSON.parse( '[' + this.props.value + ']' ).length-1 )].map(() => [""]) : [] 
 		};
@@ -56,7 +59,7 @@ export default class DynamicFields extends Component<DynamicFieldsProps, Dynamic
 	handleClickAdd(event){
 		event.preventDefault();
 		
-		const root = this.wrapperRef.current;
+		const root = this.rootRef.current;
 		const curVal = this.state.elVals;
 		
 	
@@ -79,7 +82,7 @@ export default class DynamicFields extends Component<DynamicFieldsProps, Dynamic
 	
 	handleClickRemove(param) { // param is the argument you passed to the function
 		
-		const root = this.wrapperRef.current;
+		const root = this.rootRef.current;
 		const self = this;
 		const curVal = this.state.elVals;
 		
@@ -120,14 +123,14 @@ export default class DynamicFields extends Component<DynamicFieldsProps, Dynamic
 		)
 	}
 
-	componentDidMount(){
+	componentDidMount() {
 
 		const _val = this.props.value ? JSON.parse( '[' + this.props.value + ']' ) : [];
 	
 	
 		
 		//update values for all displayed controls
-		const root = this.wrapperRef.current;
+		const root = this.rootRef.current;
 		const controls = __( root ).find( '.uix-controls__dynamic-fields__append' ).find( '[name]' );
 		
 		let n = 0;
@@ -160,13 +163,13 @@ export default class DynamicFields extends Component<DynamicFieldsProps, Dynamic
 		} = this.props;
 		
 
-		const idRes = id ? id : 'app-control-' + __.GUID.create();
+		const idRes = id || this.uniqueID;
 
 		
 		return (
 		  <>
 
-				<div ref={this.wrapperRef} className="uix-controls__dynamic-fields-container" data-max-fields={maxFields || 10} id={idRes}>
+				<div ref={this.rootRef} className="uix-controls__dynamic-fields-container" data-max-fields={maxFields || 10} id={idRes}>
 					<div className="uix-controls__dynamic-fields__append">
 			            {tempHtmlString}
 			            {this.createUI()}

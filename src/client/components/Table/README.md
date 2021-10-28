@@ -241,7 +241,7 @@ export default () => {
 
 
 		<h3>Responsive Table</h3>
-		<p>Change window size to watch. The class <code>.is-responsive.js-uix-table--responsive</code> used here will be applied <code>.uix-table</code></p>
+		<p>Change window size to watch.</p>
 		{/* ================================================================== */} 
 
 
@@ -249,7 +249,7 @@ export default () => {
 
 
 		<h3>Responsive Table with Scroll Bars</h3>
-		<p>Change window size to watch. The class <code>.js-uix-table--responsive-scrolled</code> used here will be applied <code>.uix-table</code></p>
+		<p>The scroll bar is displayed when the response is triggered.</p>
 		{/* ================================================================== */} 
 
 	   <Table bordered={true} responsiveWithScrollBar={true} data={data3} />

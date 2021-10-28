@@ -15,7 +15,7 @@ import Card from '@uixkit.react/components/Card/index.tsx';
 ```
 | Property | Type | Default | Description |
 | --- | --- | --- | --- |
-| `type` | `thumb` \| `gallery-v-img` \| `gallery-v-custom` \| `gallery-h-img` \| `gallery-full-info` \| `gallery-icon` \| `gallery-icon-abreast` \| `authorcard-line` \| `authorcard-detail` \| `authorcard-stats` | - | Card display style |
+| `type` | `thumb` \| `gallery-v-img` \| `gallery-v-custom` \| `gallery-h-img` \| `gallery-full-info` \| `gallery-icon` \| `gallery-icon-abreast` \| `authorcard-line` \| `authorcard-detail` \| `authorcard-stats` | - | <strong>(Required)</strong> Card display style |
 | `btnIcon` | ReactNode | - | Button Icon |
 | `title` | string | - | Title of card |
 | `titleEllipsis` | boolean | false | Omit overflowed title string |
@@ -47,14 +47,14 @@ export default () => {
       <p>The following is a Thumbnail style card using flex.</p>
       {/* ================================================================== */} 
 
-      <Card type="thumb" avatar={`/assets/images/demo/avatar.jpg`} bgConfig={null} title="Long title Long title Long title Long title Long title Long title Long title Long title" titleEllipsis={false} subTitle={null} btnIcon={<i className="fa fa-ellipsis-h" aria-hidden="true"></i>} btnClickEvent={(e) => {e.preventDefault(); alert('click event');} }>Harum, ad porro molestiae corporis natus aut non fugit. Recusandae, reprehenderit, voluptate voluptas reiciendis voluptatum tempora vero vel libero facere fuga maiores ratione eaque ad illum porro dignissimos sit eos.</Card>
+      <Card type="thumb" avatar={`/path/demo.png`} bgConfig={null} title="Long title Long title Long title Long title Long title Long title Long title Long title" titleEllipsis={false} subTitle={null} btnIcon={<i className="fa fa-ellipsis-h" aria-hidden="true"></i>} btnClickEvent={(e) => {e.preventDefault(); alert('click event');} }>Harum, ad porro molestiae corporis natus aut non fugit. Recusandae, reprehenderit, voluptate voluptas reiciendis voluptatum tempora vero vel libero facere fuga maiores ratione eaque ad illum porro dignissimos sit eos.</Card>
 
 
-      <Card type="thumb" avatar={`/assets/images/demo/avatar.jpg`} bgConfig={null} title="Title" titleEllipsis={true} subTitle={<a href="https://uiux.cc" target="_blank">@https://uiux.cc</a>} btnIcon={<i className="fa fa-ellipsis-h" aria-hidden="true"></i>}>Harum, ad porro molestiae corporis natus aut non fugit. Recusandae, reprehenderit, voluptate voluptas reiciendis voluptatum tempora vero vel libero facere fuga maiores ratione eaque ad illum porro dignissimos sit eos.</Card>
+      <Card type="thumb" avatar={`/path/demo.png`} bgConfig={null} title="Title" titleEllipsis={true} subTitle={<a href="https://uiux.cc" target="_blank">@https://uiux.cc</a>} btnIcon={<i className="fa fa-ellipsis-h" aria-hidden="true"></i>}>Harum, ad porro molestiae corporis natus aut non fugit. Recusandae, reprehenderit, voluptate voluptas reiciendis voluptatum tempora vero vel libero facere fuga maiores ratione eaque ad illum porro dignissimos sit eos.</Card>
 
                       
 
-      <Card type="thumb" avatar={`/assets/images/demo/avatar.jpg`} bgConfig={null} title="Long title Long title Long title Long title Long title Long title Long title Long title" titleEllipsis={true} subTitle={<a href="https://uiux.cc" target="_blank">@https://uiux.cc</a>}>Harum, ad porro molestiae corporis natus aut non fugit. Recusandae, reprehenderit, voluptate voluptas reiciendis voluptatum tempora vero vel libero facere fuga maiores ratione eaque ad illum porro dignissimos sit eos.</Card>
+      <Card type="thumb" avatar={`/path/demo.png`} bgConfig={null} title="Long title Long title Long title Long title Long title Long title Long title Long title" titleEllipsis={true} subTitle={<a href="https://uiux.cc" target="_blank">@https://uiux.cc</a>}>Harum, ad porro molestiae corporis natus aut non fugit. Recusandae, reprehenderit, voluptate voluptas reiciendis voluptatum tempora vero vel libero facere fuga maiores ratione eaque ad illum porro dignissimos sit eos.</Card>
 
 							 
       <h3>Gallery Card</h3>
@@ -257,7 +257,7 @@ export default () => {
         {/*<!-- menu group begin -->*/}
         <div className="uix-card--gallery__menu">
           <div className="uix-card--gallery__menu__avatar">
-            <img src={`/assets/images/demo/avatar.jpg`} alt="" className="uix-border--circle" />
+            <img src={`/path/demo.png`} alt="" className="uix-border--circle" />
             <span>UIUX Lab</span>
           </div>
 
@@ -319,13 +319,13 @@ export default () => {
       <p>Author Card is a very popular used web page element that can display a lot of key information.</p>
       {/* ================================================================== */} 
       
-      <Card type="authorcard-line" avatar={`/assets/images/demo/avatar.jpg`} title="Full-stack Designer" titleEllipsis={false} subTitle={<a href="https://uiux.cc" target="_blank">@https://uiux.cc</a>} btnIcon={<i className="fa fa-external-link" aria-hidden="true"></i>} btnHyperlinkClickEvent={(e) => { e.preventDefault(); alert('click event'); const tempwindow = window.open('_blank'); tempwindow.location = 'https://uiux.cc'; }}>Hi. I'm a full-stack designer on the way of pursuing the dream. Focus on user interface, user experience, awesome websites, front-end and WordPress development. I want to build things I can be proud of. I approach some awesome design challenges with an eye on the latest trends and strive to align my work the industry current best practices, while leveraging the acquired experience on the field. I have been working so hard to build up self. My personal website: https://uiux.cc</Card>
+      <Card type="authorcard-line" avatar={`/path/demo.png`} title="Full-stack Designer" titleEllipsis={false} subTitle={<a href="https://uiux.cc" target="_blank">@https://uiux.cc</a>} btnIcon={<i className="fa fa-external-link" aria-hidden="true"></i>} btnHyperlinkClickEvent={(e) => { e.preventDefault(); alert('click event'); const tempwindow = window.open('_blank'); tempwindow.location = 'https://uiux.cc'; }}>Hi. I'm a full-stack designer on the way of pursuing the dream. Focus on user interface, user experience, awesome websites, front-end and WordPress development. I want to build things I can be proud of. I approach some awesome design challenges with an eye on the latest trends and strive to align my work the industry current best practices, while leveraging the acquired experience on the field. I have been working so hard to build up self. My personal website: https://uiux.cc</Card>
 
 
       {/*    /////////////////////////   */} 
 
 
-      <Card type="authorcard-detail" avatar={`/assets/images/demo/avatar.jpg`} title="Full-stack Designer" titleEllipsis={false} subTitle={<a href="https://uiux.cc" target="_blank">@https://uiux.cc</a>} >
+      <Card type="authorcard-detail" avatar={`/path/demo.png`} title="Full-stack Designer" titleEllipsis={false} subTitle={<a href="https://uiux.cc" target="_blank">@https://uiux.cc</a>} >
 
         <ul className="mt-4">
           <li><h3>223</h3><span>Web Design</span></li>
@@ -341,7 +341,7 @@ export default () => {
       {/*    /////////////////////////   */} 
 
 
-      <Card type="authorcard-stats" avatar={`/assets/images/demo/avatar.jpg`} >
+      <Card type="authorcard-stats" avatar={`/path/demo.png`} >
         <div className="uix-card--author__tagline">Revenue</div>
         <h4 className="uix-typo--style-normal">$34,245</h4>
 

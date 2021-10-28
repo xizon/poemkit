@@ -3,20 +3,20 @@ import { NavLink } from 'react-router-dom';
 import { __ } from '@uixkit.react/components/_utils/_all';
 
 
-export default ({ name, flag })  => {
-    
-    return (
-	  <>
-		
-          <div style={{padding: "10px 10px 0 10px", margin: "10px", display: "inline-block", border: "1px solid #ddd", width: "120px", height: "120px", textAlign: "center", position: "relative"}}>
-            <NavLink data-route="true" to={`/posts/${name}`} className="item">
-                <img src={flag} alt="" style={{width: "100px", height: "80px",  display: "inline-block" }} />
-                <h4 style={{position:"absolute", background:"rgba(0, 0, 0, .8)", bottom:"0", left:"0", color:"#fff", padding:"5px", fontSize:"12px", overflow:"hidden", textOverflow:"ellipsis", width:"calc(100% - 10px)", whiteSpace:"nowrap", margin: "0"}}>{name}</h4>
-            </NavLink>
+export default ({ name, flag }) => {
 
-          </div>
-          
-      </>
+    return (
+        <>
+
+            <div style={{ padding: "10px 10px 0 10px", margin: "10px", display: "inline-block", border: "1px solid #ddd", width: "120px", height: "120px", textAlign: "center", position: "relative" }}>
+                <NavLink data-route="true" to={`/posts/${name}`} className="item">
+                    <img src={flag} alt="" style={{ width: "100px", height: "80px", display: "inline-block" }} />
+                    <h4 style={{ position: "absolute", background: "rgba(0, 0, 0, .8)", bottom: "0", left: "0", color: "#fff", padding: "5px", fontSize: "12px", overflow: "hidden", textOverflow: "ellipsis", width: "calc(100% - 10px)", whiteSpace: "nowrap", margin: "0" }}>{name}</h4>
+                </NavLink>
+
+            </div>
+
+        </>
 
     );
 };

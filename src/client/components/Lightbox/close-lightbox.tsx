@@ -66,4 +66,4 @@ export function closeLightbox(config: closeLightboxConfig) {
 
 }
 
-export default { closeLightbox };
+export default closeLightbox;

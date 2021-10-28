@@ -105,7 +105,7 @@ import { Select } from '@uixkit.react/components/Form/index.tsx';
 ```
 | Property | Type | Default | Description |
 | --- | --- | --- | --- |
-| `options` | JSON Object Literals | - | Set the default value using JSON string format for menu of options, like this: `{"Option 1":"value-1","Option 2":"value-2","Option 3":"value-3"}`|
+| `options` | JSON Object Literals | - | <strong>(Required)</strong> Set the default value using JSON string format for menu of options, like this: `{"Option 1":"value-1","Option 2":"value-2","Option 3":"value-3"}`|
 | `theme` | string \| `line` | - | The display style of the control |
 | `ui` | string | - | The overlay style of the control. Can be used at the same time, separated by spaces. The optional values are:<br />**corners:**<br />`pill`, `rounded`<br />**size:**<br />`fullwidth` |
 | `value` | string | - | Set a default value for this control |
@@ -113,9 +113,11 @@ import { Select } from '@uixkit.react/components/Form/index.tsx';
 | `name` | string | - | Name is not deprecated when used with form fields. |
 | `disabled` | boolean | false | Whether the input is disabled |
 | `required` | boolean | false | When present, it specifies that a field must be filled out before submitting the form. |
+| `optionChangeCallback` | function \| null  | - | This function is called whenever the data is updated. Exposes the JSON format data about the option as an argument. You can use it like this: `(res) => console.log(res.value)` |
 
 
 It accepts all props which this control support.
+
 
 
 
@@ -125,7 +127,7 @@ import { CustomSelect } from '@uixkit.react/components/Form/index.tsx';
 ```
 | Property | Type | Default | Description |
 | --- | --- | --- | --- |
-| `options` | JSON Object Literals | - | Set the default value using JSON string format for menu of options, like this: `{"Option 1":"value-1","Option 2":"value-2","Option 3":"value-3"}`|
+| `options` | JSON Object Literals | - | <strong>(Required)</strong> Set the default value using JSON string format for menu of options, like this: `{"Option 1":"value-1","Option 2":"value-2","Option 3":"value-3"}`|
 | `position` | string \| `top` | - | The position of the menu, the default is the bottom |
 | `theme` | string \| `line` | - | The display style of the control |
 | `ui` | string | - | The overlay style of the control. Can be used at the same time, separated by spaces. The optional values are:<br />**corners:**<br />`pill`, `rounded`<br />**size:**<br />`fullwidth` |
@@ -134,6 +136,7 @@ import { CustomSelect } from '@uixkit.react/components/Form/index.tsx';
 | `name` | string | - | Name is not deprecated when used with form fields. |
 | `disabled` | boolean | false | Whether the input is disabled |
 | `required` | boolean | false | When present, it specifies that a field must be filled out before submitting the form. |
+| `optionChangeCallback` | function \| null  | - | This function is called whenever the data is updated. Exposes the JSON format data about the option as an argument. You can use it like this: `(res) => console.log(res.value)` |
 
 
 
@@ -161,7 +164,7 @@ import { Radio } from '@uixkit.react/components/Form/index.tsx';
 ```
 | Property | Type | Default | Description |
 | --- | --- | --- | --- |
-| `options` | JSON Object Literals | - | Set the default value using JSON string format for menu of options, like this: `{"Option 1":"value-1","Option 2":"value-2","Option 3":"value-3"}`|
+| `options` | JSON Object Literals | - | <strong>(Required)</strong> Set the default value using JSON string format for menu of options, like this: `{"Option 1":"value-1","Option 2":"value-2","Option 3":"value-3"}`|
 | `value` | string | - | Set a default value for this control |
 | `name` | string | - | Name is not deprecated when used with form fields. |
 | `disabled` | boolean | false | Whether the input is disabled |
@@ -174,7 +177,7 @@ import { MultiSelect } from '@uixkit.react/components/Form/index.tsx';
 ```
 | Property | Type | Default | Description |
 | --- | --- | --- | --- |
-| `options` | JSON Object Literals | - | Set the default value using JSON string format for menu of options, like this: `{"Option 1":"value-1","Option 2":"value-2","Option 3":"value-3"}`|
+| `options` | JSON Object Literals | - | <strong>(Required)</strong> Set the default value using JSON string format for menu of options, like this: `{"Option 1":"value-1","Option 2":"value-2","Option 3":"value-3"}`|
 | `theme` | string \| `line` | - | The display style of the control |
 | `value` | string | - | Set a default value for this control |
 | `name` | string | - | Name is not deprecated when used with form fields. |
@@ -188,7 +191,7 @@ import { SingleSelect } from '@uixkit.react/components/Form/index.tsx';
 ```
 | Property | Type | Default | Description |
 | --- | --- | --- | --- |
-| `options` | JSON Object Literals | - | Set the default value using JSON string format for menu of options, like this: `{"Option 1":"value-1","Option 2":"value-2","Option 3":"value-3"}`|
+| `options` | JSON Object Literals | - | <strong>(Required)</strong> Set the default value using JSON string format for menu of options, like this: `{"Option 1":"value-1","Option 2":"value-2","Option 3":"value-3"}`|
 | `targetID` | string | - | Specify multiple IDs that does not require the prefix `#`, use the item to control its display or not. Each ID is separated by a comma |
 | `theme` | string \| `line` | - | The display style of the control |
 | `ui` | string | - | The overlay style of the control. Can be used at the same time, separated by spaces. The optional values are:<br />**corners:**<br />`pill`, `rounded` |
@@ -832,7 +835,7 @@ export default () => {
 				<Input ui="medium" placeholder="URL" name="appnotice-url[]" />
 			</>
 		}  
-		value='["title 1","https://google.com/pa1"],["title 2","https://uiux.cc"],["title 3","https://youtube.com"]'
+		value='["title 1","https://example.com/pa1"],["title 2","https://uiux.cc"],["title 3","https://youtube.com"]'
 		/>
 
 			

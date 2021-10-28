@@ -23,6 +23,7 @@ declare global {
     interface Window {
         dragEvents?: any[any];
         intervalEvents?: any[any];
+        windowResizeEvents?: any[any];
     }
 }
 
@@ -49,17 +50,20 @@ type SlideshowProps = {
 	draggableCursor?: string | boolean;   
     /** -- */
     id?: string;
-    children: any; /* required */
 };
 type SlideshowState = false;
 
 
 export default class Slideshow extends Component<SlideshowProps, SlideshowState> {
 
-    private wrapperRef = React.createRef<HTMLDivElement>();
+    private rootRef = React.createRef<HTMLDivElement>();
+
+    uniqueID: string;
 
     constructor(props) {
         super(props);
+
+        this.uniqueID = 'app-' + __.GUID.create();
     }
 
 
@@ -69,7 +73,7 @@ export default class Slideshow extends Component<SlideshowProps, SlideshowState>
 
         __(document).ready(function () {
 
-			const reactDomEl: any = self.wrapperRef.current;
+			const reactDomEl: any = self.rootRef.current;
 			const $el = __( reactDomEl );
 
             //Get parameter configuration from the data-* attribute of HTML
@@ -115,6 +119,15 @@ export default class Slideshow extends Component<SlideshowProps, SlideshowState>
         }
 
 
+		// Remove resize events from window
+        if ( Array.isArray( window.windowResizeEvents ) ) {
+            window.windowResizeEvents.forEach( function(fn){
+                clearInterval( fn );
+            });
+            window.windowResizeEvents = [];
+        }
+
+
     }
 
 
@@ -135,7 +148,7 @@ export default class Slideshow extends Component<SlideshowProps, SlideshowState>
             children
         } = this.props;
 
-        const cid = id || 'app-slideshow-' + __.GUID.create();
+        const cid = id || this.uniqueID;
 
 
         return (
@@ -143,7 +156,7 @@ export default class Slideshow extends Component<SlideshowProps, SlideshowState>
 
 
             <div role="banner" className="uix-slideshow__wrapper" id={cid}>
-                <div ref={this.wrapperRef}
+                <div ref={this.rootRef}
                     className={"uix-slideshow__outline uix-slideshow uix-slideshow--eff-" + effect}
                     data-draggable={draggable}
                     data-draggable-cursor={draggableCursor || 'move'}
@@ -156,7 +169,7 @@ export default class Slideshow extends Component<SlideshowProps, SlideshowState>
                     data-controls-arrows={".app-slider-arrows-" + cid}>
                     <div className="uix-slideshow__inner">
 
-                        {(children != null) ? children.map((item, i) => {
+                        {(children != null) ? (children as any[]).map((item, i) => {
                             const childProps = { ...item.props };
                             return <Item key={i} {...childProps} />;
 

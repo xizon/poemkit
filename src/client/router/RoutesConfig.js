@@ -3,6 +3,7 @@ import App from '@uixkit.react/router/App.js';
 import Home from '@uixkit.react/pages/Home/index.js';
 import Posts from '@uixkit.react/pages/Posts/index.js';
 import PostDetail from '@uixkit.react/pages/Posts/PostDetail.js';
+import PostsPagination from '@uixkit.react/pages/PostsPagination/index.js';
 import Member from '@uixkit.react/pages/Member/index.js';
 import NoMatch from '@uixkit.react/pages/404/index.js';
 import NestedRoutes from '@uixkit.react/pages/NestedRoutes/index.js';
@@ -56,17 +57,20 @@ const routesConfig = [
         exact: true
       },
       {
-        path: "/member",
-        component: Member,
-        pageTitle: 'Member'
-      },
-
-      {
         path: "/posts/:post_id",
         component: PostDetail,
         pageTitle: ''
       },
-
+      {
+        path: "/member",
+        component: Member,
+        pageTitle: 'Member'
+      },
+      {
+        path: "/posts-pagination/:page_number",
+        component: PostsPagination,
+        pageTitle: 'Posts Pagination'
+      },
       {
         path: "/admin",
         component: Admin,

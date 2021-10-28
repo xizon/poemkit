@@ -42,10 +42,14 @@ type SwitchState = {
 export default class Switch extends Component<SwitchProps, SwitchState>  {
 	
 	private targetDefaultStatus: boolean | undefined = false;
+
+	uniqueID: string;
 	
 	constructor(props) {
 		super(props);
 	
+		this.uniqueID = 'app-' + __.GUID.create();
+
 		//the default status of target
 		this.targetDefaultStatus = this.props.value == 'true' || this.props.value === true ? true : false;
 		
@@ -99,7 +103,7 @@ export default class Switch extends Component<SwitchProps, SwitchState>  {
 		return classes;
 	}
 
-	componentDidMount(){
+	componentDidMount() {
 
 		//hide or display target
 		this.targetStatus( this.targetDefaultStatus );
@@ -127,7 +131,7 @@ export default class Switch extends Component<SwitchProps, SwitchState>  {
 		const uiRes = typeof(ui) === 'undefined' ? '' : ui;
 		const checkedStatus = this.state.isChecked === true ? true : false;
 		const nameRes = typeof(name) === 'undefined' ? ( typeof(label) !== 'undefined' ? __.toSlug( label ) : '' )  : name;
-		const idRes = id ? id : 'app-control-' + __.GUID.create();
+		const idRes = id || this.uniqueID;
 		const wrapperClassDisabled = disabled ? ' is-disabled' : '';
 		const wrapperClassUi = this.uiSwitch(uiRes);
 		const wrapperClassActive = checkedStatus ? ' is-active' : '';

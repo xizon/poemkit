@@ -18,7 +18,7 @@ import '@uixkit.react/components/Form/styles/rtl/_basic.scss';
 import '@uixkit.react/components/Form/styles/rtl/_layout.scss';
 import '@uixkit.react/components/Form/styles/rtl/_theme_material.scss';
 
-
+type OptionChangeFnType = (arg1: any) => void;
 
 type CustomSelectProps = {
 	options: string;
@@ -30,6 +30,10 @@ type CustomSelectProps = {
 	name?: string;
 	disabled?: any;
 	required?: any;
+    /** This function is called whenever the data is updated.
+     *  Exposes the JSON format data about the option as an argument.
+     */
+	 optionChangeCallback?: OptionChangeFnType | null;
 	/** -- */
 	id?: string;
 };
@@ -38,10 +42,14 @@ type CustomSelectState = false;
 
 export default class CustomSelect extends Component<CustomSelectProps, CustomSelectState> {
 	
-	private wrapperRef = React.createRef<HTMLDivElement>();
+	private rootRef = React.createRef<HTMLDivElement>();
+
+	uniqueID: string;
 
 	constructor(props) {
 		super(props);
+
+		this.uniqueID = 'app-' + __.GUID.create();
 	
         this.handleClick = this.handleClick.bind(this);
 		this.handleClickItem = this.handleClickItem.bind(this);
@@ -71,7 +79,7 @@ export default class CustomSelect extends Component<CustomSelectProps, CustomSel
     handleClick(event) {
 		event.preventDefault();
 		
-		const root = this.wrapperRef.current;
+		const root = this.rootRef.current;
 		const $selectWrapper = __( root ),
 			$selectCurWrapper = $selectWrapper.find( '.uix-controls__select.js-uix-new' );
 
@@ -88,7 +96,7 @@ export default class CustomSelect extends Component<CustomSelectProps, CustomSel
 		event.preventDefault();
 		
 		const el = __( event.target );
-		const root = this.wrapperRef.current;
+		const root = this.rootRef.current;
 		
 		const $selectWrapper  = __( root ),
 			$selectCurWrapper = $selectWrapper.find( '.uix-controls__select.js-uix-new' ),
@@ -109,6 +117,13 @@ export default class CustomSelect extends Component<CustomSelectProps, CustomSel
 		$selectWrapper.find( 'select' )[0].value = curVal;
 		$selectWrapper.find( 'select' )[0].dispatchEvent(new Event('change'));
 		
+		//callback
+		if ( typeof(this.props.optionChangeCallback) === 'function' ) {
+			this.props.optionChangeCallback({
+				"value": curVal
+			});
+		}
+
 
     }
 	
@@ -134,10 +149,21 @@ export default class CustomSelect extends Component<CustomSelectProps, CustomSel
 	
 		
 	
-	componentDidMount(){
+	componentDidMount() {
 
-		document.addEventListener( 'click', this.handleClickOutside );
+		document.removeEventListener('click', this.handleClickOutside);
+		document.addEventListener('click', this.handleClickOutside);
 	}
+
+
+	/** Remove the global list of events, especially as scroll and interval. */
+	componentWillUnmount() {
+
+		// Remove scroll events from document
+		document.removeEventListener('click', this.handleClickOutside);
+
+	}
+
 
 	render() {
 		
@@ -158,7 +184,7 @@ export default class CustomSelect extends Component<CustomSelectProps, CustomSel
 		
 		const uiRes = typeof(ui) === 'undefined' ? '' : ui;
 		const nameRes = typeof(name) === 'undefined' ? ( typeof(label) !== 'undefined' ? __.toSlug( label ) : '' )  : name;
-		const idRes = id ? id : 'app-control-' + __.GUID.create();
+		const idRes = id || this.uniqueID;
 		const wrapperClassDisabled = disabled ? ' is-disabled' : '';
 		const wrapperClassUi = this.uiSwitch(uiRes);
 		const wrapperClassTheme = theme === 'line' ? ' uix-controls--line' : '';
@@ -189,7 +215,7 @@ export default class CustomSelect extends Component<CustomSelectProps, CustomSel
 		  <>
 
 			
-				<div ref={this.wrapperRef} className={"uix-controls__select-wrapper" + wrapperClassPosition + wrapperClassDisabled + wrapperClassUi + wrapperClassTheme} id={idRes + "__wrapper"}>
+				<div ref={this.rootRef} className={"uix-controls__select-wrapper" + wrapperClassPosition + wrapperClassDisabled + wrapperClassUi + wrapperClassTheme} id={idRes + "__wrapper"}>
 					<div className={"uix-controls uix-controls__select" + wrapperClassPosition + wrapperClassDisabled + wrapperClassUi + wrapperClassTheme} style={{display:"none"}}>
 						<label htmlFor={idRes}>
 						  <select  

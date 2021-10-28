@@ -19,7 +19,7 @@ import AccordionSliderItem from '@uixkit.react/components/AccordionSlider/Accord
 
 
 type AccordionSliderProps = {
-	/** One event type, such as `click` or `mouseenter` */
+	/** One event type, such as `click` or `mouseover` */
 	triggerType?: string;
 	/** Display the only first item of a list */
 	displayTheFirstItem?: boolean;
@@ -31,148 +31,175 @@ type AccordionSliderProps = {
 	direction?: string;
 	/** The button that triggers the restoration of the initial state, represented by class, such as `.uix-accordion-img__close` */
 	closeBtn?: string | boolean;
+	/** The number of milliseconds(ms) each iteration of the animation takes to complete */
+	duration?: number;
 	/** -- */
 	id?: string;
-	children: any; /* required */
 };
 type AccordionSliderState = false;
 
 
 export default class AccordionSlider extends Component<AccordionSliderProps, AccordionSliderState> {
 
-	private wrapperRef = React.createRef<HTMLDivElement>();
-	
+	private rootRef = React.createRef<HTMLDivElement>();
+
+	uniqueID: string;
+	animOK: boolean;
+
 	constructor(props) {
 		super(props);
+
+		this.uniqueID = 'app-' + __.GUID.create();
+		this.animOK = false;
+
+		this.handleClickItem = this.handleClickItem.bind(this);
+		
 	}
-	
-	componentDidMount(){
+
+	handleClickItem(e) {
+		e.preventDefault();
+		//Prevents further propagation of the current event in the capturing and bubbling phases(if use `e.target`).
+		e.stopPropagation();
+
+		if ( this.animOK ) return;
+
+		//
+		const reactDomWrapperEl: any = this.rootRef.current;
+		const reactDomEl: any = e.currentTarget;
+		const animSpeed = this.props.duration || 200;
+		const $li = reactDomWrapperEl.querySelectorAll( 'ul > li' );
+		const total = $li.length;
+		const offsetVal = this.props.displayRatio || '60%';
+		const dir = this.props.direction || 'horizontal';
 		
-		const self = this;
+
+		//Apply click method to outer div but not inner div
+		if ( e.target.className == 'uix-accordion-slider__content__info' || e.target.className == 'uix-accordion-slider__content' ) {
+			
+			this.animOK = true;
+			setTimeout( () => {
+				this.animOK = false;
+			}, animSpeed);
+
+
+			//set other all sibling <li> of the selected element
+			Array.prototype.forEach.call($li, (node) => {
+				node.classList.add( 'active-sub' );
+				if ( node.clientHeight > 0 ) {
+					this.animateStyles(node, {
+						direction        : dir,
+						startPercentage  : 100 / total,
+						endPercentage    : (100 - parseFloat(offsetVal)) / (total-1),
+						speed            : animSpeed
+					});				
+				}	
+			});
+				
+
+			//
+			reactDomEl.classList.add('is-active');
+			this.animateStyles(reactDomEl, {
+				direction        : dir,
+				startPercentage  : 100 / total,
+				endPercentage    : parseFloat(offsetVal),
+				speed            : animSpeed
+			});
+
+
+		}
 		
-		__( document ).ready( function() {
+	}
 
-			const reactDomEl: any = self.wrapperRef.current;
-			const $el = __( reactDomEl );
-		
-			let	aEvent          = $el.data( 'event' ),
-				outReset        = $el.data( 'out-reset' ),
-				activeIndex     = $el.data( 'actived-item' ),
-				offsetVal       = $el.data( 'offset' ),
-				dir             = $el.data( 'direction' ),
-				closeBtn        = $el.data( 'close-btn' ),
-				$li             = $el.find( '> ul' ).children( 'li' ),
-				total           = $li.length;
-			
-			
-			if ( activeIndex === null ) activeIndex = false;
-			if ( aEvent === null ) aEvent = 'click';
-			if ( outReset === null ) outReset = true;
-			if ( offsetVal === null ) offsetVal = '60%';
-			
-			
-			//Initialize the width or height of each item
-			itemInit();
-			
-			
+	// Initialize the width or height of each item
+	handleResetItems() {
 
-			$li.on( aEvent, function( this: any, e: any ) {
-				//Prevents further propagation of the current event in the capturing and bubbling phases.
-				e.stopPropagation();
-			
-				
-				//Apply click method to outer div but not inner div
-				if ( e.target.className == 'uix-accordion-slider__content__info' || e.target.className == 'uix-accordion-slider__content' ) {
-					
-					if ( __( this ).hasClass( 'is-active' ) ) {
-						__( this ).addClass( 'is-active' );
+		const reactDomWrapperEl: any = this.rootRef.current;
+		const $li = reactDomWrapperEl.querySelectorAll( 'ul > li' );
+		const total = $li.length;
+		const animSpeed = this.props.duration || 200;
 
-					} else {
-						
-						$li.addClass( 'active-sub' );
-						__( this ).addClass( 'is-active' );
-						__( this ).siblings().removeClass( 'is-active' );
-
-						if ( dir == 'verticle' ) {
-							$li.css( 'height', ( 100 - parseFloat( offsetVal ) )/(total - 1) + '%' );
-							__( this ).css( 'height', offsetVal );	
-						} else {
-							$li.css( 'width', ( 100 - parseFloat( offsetVal ) )/(total - 1) + '%' );
-							__( this ).css( 'width', offsetVal );	
-						}
-						
-						
-
-
-					}	
-				}
-			
-			}); 
-			
-			if ( outReset ) {
-				$el.on( 'mouseleave', function( this: any, e: any ) {
-					itemInit();
-				}); 	
-			}
-			
-			if ( closeBtn !== null && closeBtn != false && closeBtn != '' ) {
-				__( closeBtn ).off( 'click' ).on( 'click', function( this: any, e: any ) {
-					e.preventDefault();
-					itemInit();
-				}); 		
-				
-			}	
-			
-			/*
-				* Active the target item
-				*
-				* @param  {Number} index     - The index value of the item to be activated.
-				* @return {Void}
-				*/
-			function itemActiveItem( index ) {
-				
-				if ( index >= 0 ) {
-					
-
-					if ( dir == 'verticle' ) {
-						$li.css( 'height', ( 100 - parseFloat( offsetVal ) )/(total - 1) + '%' );
-						$li.eq( index ).css( 'height', offsetVal ).addClass( 'is-active' );	
-					} else {
-						$li.css( 'width', ( 100 - parseFloat( offsetVal ) )/(total - 1) + '%' );
-						$li.eq( index ).css( 'width', offsetVal ).addClass( 'is-active' );	
-					}
-
-				}
-
-			}
-			
-			itemActiveItem( parseFloat( activeIndex ) );
-			
-			
-	
-			/*
-				* Initialize the width or height of each item
-				*
-				* @return {Void}
-				*/
-			function itemInit() {
-				
-
-				if ( dir == 'verticle' ) {
-					$li.removeClass( 'is-active active-sub' ).css( 'height', 100/total + '%' );
-				} else {
-					$li.removeClass( 'is-active active-sub' ).css( 'width', 100/total + '%' );
-				}
-				
-			}
-			
-
-		
+		Array.prototype.forEach.call($li, (node) => {
+			node.classList.remove('is-active', 'active-sub');
+			this.animateStyles(node, {
+				direction        : this.props.direction,
+				startPercentage  : this.props.direction === 'verticle' ? (node.scrollHeight / reactDomWrapperEl.clientHeight) * 100 : (node.scrollWidth / reactDomWrapperEl.clientWidth) * 100,
+				endPercentage    : 100 / total,
+				speed            : animSpeed
+			});
 		});
 
-		
+
 	}
+
+	animateStyles( curElement, config ) {
+		if ( typeof curElement === typeof undefined ) return;
+		
+		// Set a default configuration
+		config = __.setDefaultOptions({
+			"direction"        : "horizontal", // `horizontal` or `verticle`
+			"startPercentage"  : 0,
+			"endPercentage"    : 0,
+			"speed"            : 200, //ms
+			"fps"              : 1000/60 // 60FPS
+		}, config);
 	
+		//
+		const _direction       = config.direction,
+			  _endPercentage   = config.endPercentage,
+			  _speed           = config.speed,
+			  _fps             = config.fps;
+	
+		let _startPercentage = config.startPercentage;
+		let timer: any = null;
+		const startTime = Date.now();
+		const deltaPercentage = config.startPercentage < _endPercentage ? (_endPercentage / _speed) * _fps : (_startPercentage / _speed) * _fps;
+	
+		timer = setInterval( () => {
+			const elapsed = Date.now() - startTime; //Work out the elapsed time
+			
+			//If the elapsed time is less than the speed (ms)
+			if (elapsed < _speed) {
+				if (config.startPercentage < _endPercentage) {
+					_startPercentage = _startPercentage + deltaPercentage;
+				} else {
+					_startPercentage = _startPercentage - deltaPercentage;
+				}
+				if (_direction === 'horizontal') {
+					curElement.style.width = _startPercentage + '%';
+				} else {
+					curElement.style.height = _startPercentage + '%';
+				}
+				
+			} else {
+				if (_direction === 'horizontal') {
+					curElement.style.width = _endPercentage + '%';
+				} else {
+					curElement.style.height = _endPercentage + '%';
+				}
+				
+				clearInterval(timer);
+			}
+		},  _fps); 
+			
+	}
+
+
+
+    componentDidMount() {
+		//Initialize the width or height of each item
+		this.handleResetItems();
+
+		//auto close
+		const closeBtn = this.props.closeBtn || false;
+		if ( closeBtn !== null && closeBtn != false && closeBtn != '' ) {
+			__( closeBtn ).off( 'click' ).on( 'click', (e) => {
+				e.preventDefault();
+				this.handleResetItems();
+			}); 		
+			
+		}			
+    }
+
 
 	render() {
 		
@@ -180,12 +207,8 @@ export default class AccordionSlider extends Component<AccordionSliderProps, Acc
 			triggerType,
 			displayTheFirstItem,
 			autoReset,
-			displayRatio,
-			direction,
-			closeBtn,
 			id,
-			children, // the contents of the AccordionSliderList and AccordionSliderPanel in a loop
-			...attributes
+			children // the contents of the AccordionSliderList and AccordionSliderPanel in a loop
 		} = this.props;
 		
 
@@ -194,26 +217,22 @@ export default class AccordionSlider extends Component<AccordionSliderProps, Acc
 
 	 
 				<div 
-				    ref={this.wrapperRef}
-					id={id ? id : 'app-accordion-slider-' + __.GUID.create() } 
-					className="uix-accordion-slider" 
-					data-actived-item={displayTheFirstItem ? 0 : false}
-					data-event={triggerType || 'click'}
-					data-out-reset={ autoReset}
-					data-offset={displayRatio || '60%'}
-					data-direction={direction || 'horizontal'}
-					data-close-btn={closeBtn || false}
-					{...attributes}>
-
+				    ref={this.rootRef}
+					id={id || this.uniqueID}
+					className="uix-accordion-slider">
 					<ul>
 
-						{( children != null ) ? children.map((item, i) => {
+						{( children != null ) ? (children as any[]).map((item, i) => {
 							const childProps = { ...item.props };
-
-							delete childProps.key;
-
-							if ( i === 0 && displayTheFirstItem ) childProps.defaultActive = true;
-							return <AccordionSliderItem key={"item" + i} {...childProps} />;
+							const _defaultActive = i === 0 && displayTheFirstItem ? true : false;
+							return <AccordionSliderItem
+										key={"item" + i}
+										defaultActive={_defaultActive}
+										triggerType={triggerType || 'click'}
+										boxToggleEv={this.handleClickItem}
+										boxAnimLeaveEv={autoReset ? ()=>{this.handleResetItems();} : ()=>{} }
+										{...childProps}
+										/>;		
 
 						})
 							: ""

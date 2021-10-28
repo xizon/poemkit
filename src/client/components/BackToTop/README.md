@@ -16,9 +16,9 @@ import BackToTop from '@uixkit.react/components/BackToTop/index.tsx';
 | --- | --- | --- | --- |
 | `speed` | number  | 500| Speed of scrolling up. Amount of time measured in milliseconds. |
 | `easing` | `easeIn` \| `easeOut` \| `easeInOut` | - | Types of easing animation |
-| `btnIcon` | React.ReactNode  | - | Button Icon |
+| `btnIcon` | ReactNode  | - | Button Icon |
 
-It accepts all props(include data-* attributes) which native div support. Scroll the page down to preview. The button is in the bottom right corner of the screen.
+Scroll the page down to preview. The button is in the bottom right corner of the screen.
 
 
 

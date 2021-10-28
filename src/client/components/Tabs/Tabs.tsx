@@ -27,229 +27,204 @@ type TabsProps = {
 	rotationWrapperAngle?: number;
 	/** -- */
 	id?: string;
-	children: any; /* required */
 };
 type TabsState = false;
 
 
 export default class Tabs extends Component<TabsProps, TabsState> {
 
-	private wrapperRef = React.createRef<HTMLDivElement>();
+	private rootRef = React.createRef<HTMLDivElement>();
+
+	uniqueID: string;
+	rotationEnabled: boolean;
+	lastAngel: number;
+	rotationRadius: number;
+	rotationWapperDeg: number;
 	
 	constructor(props) {
 		super(props);
+
+		this.uniqueID = 'app-' + __.GUID.create();
+
+		// for rotation tabs
+		this.rotationEnabled = this.props.rotation || false;
+		this.lastAngel = 0;
+		this.rotationRadius = this.props.rotationRadius || 130,
+		this.rotationWapperDeg = this.props.rotationWrapperAngle || 0;
+
+		//
+		this.handleClickItem = this.handleClickItem.bind(this);
+		
 	}
+
+	handleClickItem(e) {
+		e.preventDefault();
+		this.itemInit(e.currentTarget, false);
+	}
+
+
+	itemInit(targetEl, itemsInit) {
 	
-	componentDidMount(){
+		const reactDomWrapperEl: any = this.rootRef.current;
+		const currentIndex = Array.prototype.slice.call(targetEl.parentElement.children).indexOf(targetEl);
+		const $li               = reactDomWrapperEl.querySelectorAll( '.uix-tabs__nav ul > li' ),
+	          $allContent       = reactDomWrapperEl.querySelectorAll( '.uix-tabs__content' ),
+			  liWidth           = $li[0].offsetWidth, //element height + padding width + borders width
+			  liHeight          = $li[0].offsetHeight, //element width + padding width + borders width
+			  itemTotal         = $li.length;
+
+
+		//
+		const tabID = targetEl.dataset.tab;
+
+		Array.prototype.forEach.call($li, (node) => {
+			node.classList.remove( 'is-active' );
+		});
+
+		Array.prototype.forEach.call($allContent, (node) => {
+			node.classList.remove( 'is-active' );
+		});
 		
-		const self = this;
-		
-		__( document ).ready( function() {
+		targetEl.classList.add( 'is-active' );
+		if ( tabID !== undefined ) document.getElementById( tabID )!.classList.add( 'is-active' );
 
-			const reactDomEl: any = self.wrapperRef.current;
-			const $el = __( reactDomEl );
 
-			const $li               = $el.find( '.uix-tabs__nav ul > li' ),
-					liWidth           = $li.first().outerWidth(),
-					liHeight          = $li.first().outerHeight(),
-					liNum             = $li.length,
-					isNumeric         = /^[-+]?(\d+|\d+\.\d*|\d*\.\d+)$/,
-					tabBoxID          = $el.attr( 'id' );
+		/*
+		////////////////////////////////////////////////////////////
+		////////////////////   Default Events   ////////////////////
+		////////////////////////////////////////////////////////////
+		*/
 
-			
-			
-			let	ulWidth           = $el.data( 'width' ),
-				fullwidth         = $el.data( 'fullwidth' ),
-				rotation          = $el.data( 'rotation' ),
-				rotationRadius    = $el.data( 'rotation-radius' ),
-				rotationWapperDeg = $el.data( 'rotation-wrapper-angle' ),
-				rotationDisplay   = $el.data( 'rotation-display' );
-
-			//console.log( '$el.data( rotation ): ', $el.data( 'rotation' ));
-
-			if ( fullwidth != null && fullwidth == 1 ) {
-				$li.css( {
-					'width': ( 100 / liNum ) + '%'
-				} );
-				
+		if ( !this.rotationEnabled ) {
+			if ( this.props.fullwidth ) {
+				Array.prototype.forEach.call($li, (node) => {
+					node.style.width = ( 100 / itemTotal ) + '%'
+				});
 			}
 
+			//sliding marker
+			const translateX = currentIndex * 100,
+				translateY = currentIndex * liHeight;
 
-			if ( rotation === null ) rotation = false;
-			if ( rotationWapperDeg === null ) rotationWapperDeg = 0;
-			if ( rotationDisplay === null ) rotationDisplay = 5;
-	
-			
-			
-			//Initialize tab list
-			$el.find( '.uix-tabs__nav ul > li' ).each( function(this: any, index: number ) {
-				__( this ).find( 'a' ).attr( 'href', 'javascript:' );
-				__( this ).attr( 'data-tab', tabBoxID + '-tabs-show' + index );
-	
-			});
-
-			//Initialize tab panel
-			$el.find( '.uix-tabs__content' ).each( function(this: any, index: number ) {
-				__( this ).attr( 'id', tabBoxID + '-tabs-show' + index );
-			});
-			
-			
-		
-			// Tab Rotation Effect
-			if ( rotation ) {
-
-				$el.find( '.uix-tabs__nav' ).css( {
-					'width'      : rotationRadius * 2 + 'px'
-				} );
-
-
-				$el.find( '.uix-tabs__nav ul' ).css( {
-					'width'     : rotationRadius * 2 + 'px',
-					'height'    : rotationRadius * 2 + 'px',
-					'transform' : 'rotate('+parseFloat(rotationWapperDeg)+'deg)'
-				} );
-
-
-
-				//Layout components in a circle layout
-				const step            = 2 * Math.PI / rotationDisplay,
-						pad             = $el.find( '.uix-tabs__nav ul' ).width();
-
-				let angle             = 0,
-					transitionDelay   = 0;
+			if ( window.innerWidth <= 768 ) {
+				reactDomWrapperEl.querySelector( '.uix-tabs__marker' ).style.transform = 'translateY( '+translateY+'px )';
+			} else {
+				reactDomWrapperEl.querySelector( '.uix-tabs__marker' ).style.transform = 'translateX( '+translateX+'% )';
+			}
+		}
 
 		
-				for (let k = 0; k <= liNum; k++) {
-					const el          = $el.find( '.uix-tabs__nav ul > li' ).eq(k),
-							elLink      = $el.find( '.uix-tabs__nav ul > li:nth-child('+k+') > a' ),
-							x           = rotationRadius * Math.cos(angle) - liWidth / 2,
-							y           = rotationRadius * Math.sin(angle) - liHeight / 2;
 
+		/*
+		////////////////////////////////////////////////////////////
+		//////////////////   Rotation Effect   /////////////////////
+		////////////////////////////////////////////////////////////
+		*/
+		// angle = rad / ( Math.PI / 180 )  = rad * ( 180/Math.PI );
+		// rad = Math.PI / 180 * 30 ;
 
+		if ( this.rotationEnabled ) {
 
-					el.css({
-						'transform'        : 'translate('+x+'px,'+( pad/2 + y )+'px)',
-						'transition-delay' : transitionDelay + "s"
-					});
+			const step = 2 * Math.PI / itemTotal;
+			const pad = reactDomWrapperEl.querySelector( '.uix-tabs__nav ul' ).clientWidth;		
+	
+			if ( itemsInit ) {
+				reactDomWrapperEl.querySelector( '.uix-tabs__nav' ).style.width = this.rotationRadius * 2 + 'px';
+				reactDomWrapperEl.querySelector( '.uix-tabs__nav ul' ).style.width = this.rotationRadius * 2 + 'px';
+				reactDomWrapperEl.querySelector( '.uix-tabs__nav ul' ).style.height = this.rotationRadius * 2 + 'px';
+				reactDomWrapperEl.querySelector( '.uix-tabs__nav ul' ).style.transform = 'rotate('+this.rotationWapperDeg+'deg)';
 
-					elLink.css({
-						'transform'        : 'rotate('+(-rotationWapperDeg)+'deg)'
-					});	
+				let angle = 0;
+				let transitionDelay = 0;
+
+				Array.prototype.forEach.call($li, (node) => {
+
+					const x  = this.rotationRadius * Math.cos(angle) - liWidth / 2,
+						y  = this.rotationRadius * Math.sin(angle) - liHeight / 2;
+
+					node.style.transform = 'translate('+x+'px,'+( pad/2 + y )+'px)';
+					//node.style.transition = 'all 1s ease';
+					node.style.transitionDelay = transitionDelay + "s";
+					node.querySelector( 'a' ).style.transform = 'rotate('+(-this.rotationWapperDeg)+'deg)';
+		
 
 
 					angle += step;
 					transitionDelay += 0.15;
-					
 
+					// Update the angle after animated
+					this.lastAngel = angle;
 
-					//Click on the rotation effect
-					//----------------------- begin ----------------------
-					el.off( 'click' ).on( 'click', function(this: any, e: any ) {
-						
-						const increase   = Math.PI * 2 / rotationDisplay,
-								n          = __( this ).index(),
-								endAngle   = n % rotationDisplay * increase; 
+				});
 
-
-						( function turn() {
-							if (Math.abs(endAngle - angle) > 1 / 8) {
-								const sign = endAngle > angle ? 1 : -1;
-								angle = angle + sign / 8;
-								setTimeout(turn, 20);
-							} else {
-								angle = endAngle;
-							}
-
-
-		
-							for (let j = 0; j <= liNum; j++) {
-								
-								const el           = $el.find( '.uix-tabs__nav ul > li' ).eq(j),
-										elLink       = $el.find( '.uix-tabs__nav ul > li:nth-child('+j+') > a' ),
-										x2           = Math.cos( - Math.PI / 2 + j * increase - angle) * rotationRadius - liWidth / 2,
-										y2           = Math.sin( - Math.PI / 2 + j * increase - angle) * rotationRadius + liHeight;
-
-
-								el.css({
-									'transform'        : 'translate('+x2+'px,'+y2+'px)',
-									'transition'       : 'none',
-									'transition-delay' : 0
-								});
-								
-							
-								elLink.css({
-									'transform'        : 'rotate('+(-rotationWapperDeg)+'deg)'
-								});
-
-							}//end for
-							
-							
-
-						})();	
-
-					});
-					//----------------------- end ----------------------	
-
-
-				}//end for
-				
-				
-
-				// Init
-				$el.find( '.uix-tabs__nav ul > li.is-active' ).trigger( 'click' );
-
-
-			}//end rotation
-
-
-			// Tab Sliding Effext
-			if ( $el.find( '.uix-tabs__nav ul > li:first-child .uix-tabs__marker' ).length == 0 ) {
-				$el.find( '.uix-tabs__nav ul > li:first-child' ).prepend( '<div class="uix-tabs__marker"></div>' );
 			}
 
-			// Tab Fade Effect
-			$el.off( 'click' ).on( 'click', '.uix-tabs__nav ul > li', function(this: any, e: any ) {
-				
+			this.changeAngleAnim(targetEl, this.rotationRadius, this.rotationWapperDeg);
+
 			
-				const tabID = __( this ).attr( 'data-tab' ),
-						index = __( this ).index() - 1;
+		}//end rotation
 
 
-				$el.find( '.uix-tabs__nav ul > li' ).removeClass( 'is-active' );
-				$el.find( '.uix-tabs__content' ).removeClass( 'is-active' );
-
-				__( this ).addClass( 'is-active' );
-				__( '#' + tabID ).addClass( 'is-active' );
+	}
 
 
-				//sliding marker
-				const translateX = __( this ).index() * 100,
-						liHeight   = $el.find( '.uix-tabs__nav ul > li:first-child' ).outerHeight(),
-						translateY = __( this ).index() * liHeight;
+	changeAngleAnim(targetEl, rotationRadius, rotationWapperDeg) {
 
-				if ( window.innerWidth <= 768 ) {
-					$el.find( '.uix-tabs__marker' ).css({
-						'transform'          : 'translateY( '+translateY+'px )'	
-					});	
-				} else {
-					$el.find( '.uix-tabs__marker' ).css({
-						'transform'          : 'translateX( '+translateX+'% )'	
-					});	
-				}
+		const self = this;
+		const reactDomWrapperEl: any = this.rootRef.current;
+		const currentIndex = Array.prototype.slice.call(targetEl.parentElement.children).indexOf(targetEl);
+		const $li               = reactDomWrapperEl.querySelectorAll( '.uix-tabs__nav ul > li' ),
+			  liWidth           = $li[0].offsetWidth, //element height + padding width + borders width
+			  liHeight          = $li[0].offsetHeight, //element width + padding width + borders width
+			  itemTotal         = $li.length;
+
+		let curAngle = self.lastAngel;	
+
+		const increase = Math.PI * 2 / itemTotal,
+				endAngle = currentIndex % itemTotal * increase; 
+
+		( function turn() {
+			if (Math.abs(endAngle - curAngle) > 1 / 8) {
+				const sign = endAngle > curAngle ? 1 : -1;
+				curAngle = curAngle + sign / 8;
+
+				// Update the angle after animated
+				self.lastAngel = curAngle;
+
+				setTimeout(turn, 20);
+			} else {
+				curAngle = endAngle;
+
+				// Update the angle after animated
+				self.lastAngel = curAngle;	
+			}
+
+			Array.prototype.forEach.call($li, (node, index) => {
+				const x2 = Math.cos( - Math.PI / 2 + index * increase - curAngle) * rotationRadius - liWidth / 2,
+					y2 = Math.sin( - Math.PI / 2 + index * increase - curAngle) * rotationRadius + liHeight;
 
 
-
-				return false;
-
+				node.style.transform = 'translate('+x2+'px,'+y2+'px)';
+				node.style.transition = 'none';
+				node.style.transitionDelay = 0;
+				node.querySelector( 'a' ).style.transform = 'rotate('+(-rotationWapperDeg)+'deg)';
 
 			});
 
 
-		
-		});
+		})();	
 
-		
 	}
+
+
+	componentDidMount() {
+		
+		// Initialize tabs
+		const reactDomWrapperEl: any = this.rootRef.current;
+		const $li = reactDomWrapperEl.querySelectorAll( '.uix-tabs__nav ul > li' );
+		this.itemInit($li[0], true);
+	}
+	
 	
 
 	render() {
@@ -258,77 +233,70 @@ export default class Tabs extends Component<TabsProps, TabsState> {
 			center,
 			fullwidth,
 			rotation,
-			rotationRadius,
-			rotationWrapperAngle,
 			id,
-			children, // the contents of the TabList and TabPanel in a loop
-			...attributes
+			children // the contents of the TabList and TabPanel in a loop
 		} = this.props;
 		
-
-
-
-		//Get the total amount of items
-		let totalAmount = 0;
-		if ( children != null ) {
-			children.map((item, i) => {
-				if ( item.key.indexOf( 'tab-panel' ) >= 0 ) {
-					totalAmount++;
-				}									
-			});
-		}
-
 
 		return (
 		  <>
  
 			
 				<div 
-				    ref={this.wrapperRef}
-					id={id ? id : 'app-tabs-' + __.GUID.create() } 
+				    ref={this.rootRef}
+					id={id || this.uniqueID} 
 					className={"uix-tabs" + (!center && !rotation && !fullwidth ? ' uix-tabs--normal' : '') + (center ? ' uix-tabs--center' : '') + (rotation ? ' uix-tabs--rotation' : '')} 
-					data-fullwidth={fullwidth ? 1 : 0}
-					data-rotation={rotation || false}
-					data-rotation-display={totalAmount}
-					data-rotation-radius={rotationRadius || 130}
-					data-rotation-wrapper-angle={rotationWrapperAngle || 0}
-					{...attributes}>
+					>
 					<div className="uix-tabs__nav">
 						<ul role="tablist">
 							
-							{( children != null ) ? children.map((item, i) => {
-								const childProps = { ...item.props };
-
-								delete childProps.key;
-
-								if ( item.key.indexOf( 'tab-list' ) >= 0 ) {
-									return <TabList key={item.key} {...childProps} />;
+							{(() => {
+								if ( children != null ) {
+									let tabListIndex = 0;
+									return (children as any[]).map((item, i) => {
+										const childProps = { ...item.props };
+										delete childProps.key;
+		
+										if ( item.key.indexOf( 'tab-list' ) >= 0 ) {
+											tabListIndex++;
+											return <TabList 
+														key={item.key} 
+														index={tabListIndex} 
+														switchEv={this.handleClickItem}
+														targetID={`${this.uniqueID}-tabs-show-${tabListIndex}`} 
+														{...childProps} />;
+										}
+										
+										
+									});		
 								}
+							})()}
 
-							})
-							 : ""
-							}
 							
 						</ul>
 					</div>
 					{/*<!-- /.uix-tabs__nav -->*/}
 
-					{( children != null ) ? children.map((item, i) => {
+					{(() => {
+						if ( children != null ) {
+							let tabPanelIndex = 0;
+							return (children as any[]).map((item, i) => {
+								const childProps = { ...item.props };
+								delete childProps.key;
 
-					    const childProps = { ...item.props };
-						
-						delete childProps.key;
-						
-						if ( item.key.indexOf( 'tab-panel' ) >= 0 ) {
-							return <TabPanel key={item.key} {...childProps} />;
-						}					
-					    								
-					 })
-					 : ""
-					}
+								if ( item.key.indexOf( 'tab-panel' ) >= 0 ) {
+									tabPanelIndex++;
+									return <TabPanel 
+												key={item.key} 
+												targetID={`${this.uniqueID}-tabs-show-${tabPanelIndex}`} 
+												{...childProps} />;
+								}
 
-
-
+								
+								
+							});		
+						}
+					})()}
 
 				</div>
 				{/*<!-- .uix-tabs end -->*/}     

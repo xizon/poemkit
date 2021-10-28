@@ -36,8 +36,12 @@ type CheckboxState = {
 
 export default class Checkbox extends Component<CheckboxProps, CheckboxState>  {
 	
+	uniqueID: string;
+
 	constructor(props) {
 		super(props);
+
+		this.uniqueID = 'app-' + __.GUID.create();
 	
 		this.state = {
 			isChecked: this.props.value == 'true' || this.props.value === true ? true : false
@@ -68,7 +72,7 @@ export default class Checkbox extends Component<CheckboxProps, CheckboxState>  {
 		
 		const checkedStatus = this.state.isChecked === true ? true : false;
 		const nameRes = typeof(name) === 'undefined' ? ( typeof(label) !== 'undefined' ? __.toSlug( label ) : '' )  : name;
-		const idRes = id ? id : 'app-control-' + __.GUID.create();
+		const idRes = id || this.uniqueID;
 		const wrapperClassDisabled = disabled ? ' is-disabled' : '';
 		const wrapperClassActive = checkedStatus ? ' is-active' : '';
 		

@@ -20,176 +20,14 @@ import '@uixkit.react/components/Table/styles/_style.scss';
 import '@uixkit.react/components/Table/styles/rtl/_style.scss';
 
 
-/* Table Field
--------------------------------------------------*/
-type TableFieldProps = {
-	cols?: number;
-	content?: any;
-};
-type TableFieldState = false;
+//
+import TableRow from '@uixkit.react/components/Table/TableRow';
+import TableHeaders from '@uixkit.react/components/Table/TableHeaders';
+import TableSummaries from '@uixkit.react/components/Table/TableSummaries';
+import TableColgroup from '@uixkit.react/components/Table/TableColgroup';
 
 
-class TableField extends Component<TableFieldProps, TableFieldState> {
-	constructor(props) {
-		super(props);
-	}
-	render() {
-		
-		return (
-		  <>
-			<td colSpan={this.props.cols}>{this.props.content}</td>
-		  </>
-		)
-	}
-}
-
-
-
-/* Table Row
--------------------------------------------------*/
-type TableRowProps = {
-	data?: any[];
-};
-type TableRowState = false;
-
-
-class TableRow extends Component<TableRowProps, TableRowState> {
-	constructor(props) {
-		super(props);
-	}
-	render() {
-		
-
-		const fields = this.props.data!.map((el, i) => {
-			return <TableField key={"field" + i} cols={el.cols} content={el.content}  />
-		});
-												
-		return (
-		  <>
-			<tr id={'app-table-field-tr' + __.GUID.create()}>
-				{fields}
-			</tr>
 	
-		  </>
-		)
-	}
-}
-		
-
-/* Table Headers
--------------------------------------------------*/			
-type TableHeadersProps = {
-	data: any[];
-};
-type TableHeadersState = false;
-
-
-
-class TableHeaders extends Component<TableHeadersProps, TableHeadersState> {
-	constructor(props) {
-		super(props);
-	}
-	render() {
-		if ( this.props.data ) {
-			
-			return (
-			  <>
-
-				<thead>
-					<tr id={'app-table-header-tr' + __.GUID.create()}>
-						{this.props.data.map((item, i) => {
-							return <th key={"header" + i}>{item}</th>;
-						})
-						}
-					</tr>
-				</thead>
-
-			  </>
-			)	
-		} else {
-			return (
-				<></>
-			)
-		}
-	}
-}
-	
-
-/* Table Summaries
--------------------------------------------------*/		
-type TableSummariesProps = {
-	data: any[];
-};
-type TableSummariesState = false;
-
-
-class TableSummaries extends Component<TableSummariesProps, TableSummariesState> {
-	constructor(props) {
-		super(props);
-	}
-	render() {
-		if ( this.props.data ) {
-			
-			return (
-			  <>
-
-				<tfoot>
-					<tr id={'app-table-summary-tr' + __.GUID.create()}>
-						{this.props.data!.map((item, i) => {
-							return <th key={"summary" + i}>{item}</th>;
-						})
-						}
-					</tr>
-				</tfoot>
-
-			  </>
-			)	
-		} else {
-			return (
-				<></>
-			)
-		}
-	}
-}
-
-
-
-/* Table Colgroup
--------------------------------------------------*/		
-type TableColgroupProps = {
-	data?: any[];
-};
-type TableColgroupState = false;
-
-
-class TableColgroup extends Component<TableColgroupProps, TableColgroupState> {
-	constructor(props) {
-		super(props);
-	}
-	render() {
-		
-	
-		const fieldPlaceholders = this.props.data!.map((el, i) => {
-			return <col key={"colgroup-placeholder" + i}></col>;
-		});
-			
-		
-		return (
-		  <>
-			<colgroup>
-			    <col></col>
-				{fieldPlaceholders}
-			</colgroup>
-	
-		  </>
-		)
-	}
-}
-	
-
-
-/* Table Component 
--------------------------------------------------*/			
 type TableProps = {
 	data: any;
 	bordered?: boolean;
@@ -208,50 +46,30 @@ type TableState = false;
 
 export default class Table extends Component<TableProps, TableState> {
 
-	private wrapperRef = React.createRef<HTMLDivElement>();
+	private rootRef = React.createRef<HTMLDivElement>();
+
+	windowResizeUpdate: () => void;
+	uniqueID: string;
 
 	constructor(props) {
 		super(props);
+
+		// Add a resize event listener to window
+		this.windowResizeUpdate = ()=>{};
+
+		this.uniqueID = 'app-' + __.GUID.create();
 	}
 	
-	componentDidMount(){
+	componentDidMount() {
 
 		const self = this;
 		
 		__( document ).ready( function() {
 
-			const reactDomEl: any = self.wrapperRef.current;
+			const reactDomEl: any = self.rootRef.current;
 			const $el = __( reactDomEl );			
 
-		
-			/*
-			 ////////////////////////////////////////////////////////////
-			 /////////////////////   Duplicate title    /////////////////
-			 ////////////////////////////////////////////////////////////
-			 */
-			if ( $el.hasClass( 'js-uix-table--responsive' ) ) {
-				const $th = $el.find( 'thead th' );
-				const $tr = $el.find( 'tbody > tr' );
-				const thArr:string[] = [];
-				
-				$th.each(function ( this: any  ) {
-					const data = __( this ).html().replace(/<span[^>]*>[\s\S]+<\/span>/g, '');
-					thArr.push(data);
-					if (__( this ).data('table') === null) {
-						__( this ).data('table', data);
-					}
-				});
-				
-				$tr.each(function ( this: any ) {
-					const $td = __( this ).find( '> td' );
-					$td.each(function ( this: any, tdIndex: number ) {
-						__( this ).data('table', thArr[tdIndex]);
-					});
-				
-				});
-			}
-
-
+	
 			/*
 			 ////////////////////////////////////////////////////////////
 			 /////////////////////  With scroll bars   //////////////////
@@ -265,32 +83,15 @@ export default class Table extends Component<TableProps, TableState> {
 
 				function tableDataScrolledInit( w ) {
 					
-
-					//Add an identifier so that the mobile terminal can compare by row
-					const $th = $el.find( 'thead th' );
-					const $tr = $el.find( 'tbody > tr' );
-
-					$tr.each(function( this: any ) {
-						const $td = __( this ).find( '> td' );
-						$td.each( function( this: any, tdIndex: number ) {
-							$th.eq(tdIndex).data( 'table-row', tdIndex );
-							__( this ).data( 'table-row', tdIndex );
-						});
-					});
-				
-				
 					if ( w <= 768 ) {
 
 						//get maxHeight of per row
 						const $tr = $el.find( 'tbody > tr' );
-						const len = $tr.length;
-						for (let i=0; i<len; i++ ) {
+						for (let i=0; i<$tr.length; i++ ) {
 							const maxHeight = $el.find( '[data-table-row="'+i+'"]' ).maxDimension().height;
 							$el.find( '[data-table-row="'+i+'"]' ).css({'height': maxHeight + 'px'});
 						}
 				
-				
-					
 					} else {
 						$el.find( 'tbody td, thead th' ).removeAttr( 'style');
 					}
@@ -312,9 +113,10 @@ export default class Table extends Component<TableProps, TableState> {
 					}
 				}
 				
-				const debounceFunc = __.debounce(windowUpdate, 50);
-				window.removeEventListener('resize', debounceFunc);
-				window.addEventListener('resize', debounceFunc);	
+				// Add function to the window that should be resized
+				self.windowResizeUpdate = __.debounce(windowUpdate, 50) as unknown as () => void;
+				window.removeEventListener('resize', self.windowResizeUpdate);
+				window.addEventListener('resize', self.windowResizeUpdate);
 
 			 }
 
@@ -324,6 +126,17 @@ export default class Table extends Component<TableProps, TableState> {
 
 		
 	}
+
+ 
+     /** Remove the global list of events, especially as scroll and interval. */
+     componentWillUnmount() {
+		 
+	   // Remove resize events from window
+	   window.removeEventListener('resize', this.windowResizeUpdate);   
+
+	}
+
+
 	
 	
 	render() {
@@ -338,8 +151,7 @@ export default class Table extends Component<TableProps, TableState> {
 			perLine,
 			responsive,
 			responsiveWithScrollBar,
-			id,
-			...attributes
+			id
 		} = this.props;
 
 		
@@ -363,7 +175,7 @@ export default class Table extends Component<TableProps, TableState> {
 		return (
 		  <>
 			
-			<div ref={this.wrapperRef} className={"uix-table" + classes} id={id || 'app-table-' + __.GUID.create()} {...attributes}>
+			<div ref={this.rootRef} className={"uix-table" + classes} id={id || this.uniqueID}>
 				<table>
 			
 			        <TableHeaders data={_headers} />
@@ -377,7 +189,7 @@ export default class Table extends Component<TableProps, TableState> {
 					<tbody>
 			
 						{data.hasOwnProperty( 'fields' ) ? data.fields.map((item, i) => {
-							return <TableRow key={"row" + i} data={item} />;
+							return <TableRow key={"row" + i} headerLabel={_headers} data={item} />;
 						}) : ""
 						}
 						

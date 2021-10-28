@@ -38,12 +38,15 @@ type ProgressBarState = false;
 
 export default class ProgressBar extends Component<ProgressBarProps, ProgressBarState> {
 
-    private wrapperRef = React.createRef<HTMLDivElement>();
+    private rootRef = React.createRef<HTMLDivElement>();
 
     windowScrollUpdate: () => void;
+    uniqueID: string;
     
     constructor(props) {
         super(props);
+
+        this.uniqueID = 'app-' + __.GUID.create();
 
         // Add a scroll event listener to window
         this.handleScrollEvent = this.handleScrollEvent.bind(this);
@@ -53,7 +56,7 @@ export default class ProgressBar extends Component<ProgressBarProps, ProgressBar
 
     handleScrollEvent() {
 
-        const reactDomEl: any = this.wrapperRef.current;
+        const reactDomEl: any = this.rootRef.current;
         const viewport = 1;
 
         //
@@ -104,19 +107,16 @@ export default class ProgressBar extends Component<ProgressBarProps, ProgressBar
 
     componentDidMount() {
 
-        const self = this;
+        // Add function to the element that should be used as the scrollable area.
+        window.removeEventListener('scroll', this.windowScrollUpdate);
+        window.removeEventListener('touchmove', this.windowScrollUpdate);
+        window.addEventListener('scroll', this.windowScrollUpdate);
+        window.addEventListener('touchmove', this.windowScrollUpdate);
 
-        __(document).ready(function () {
-
-            // Add function to the element that should be used as the scrollable area.
-            window.removeEventListener('scroll', self.windowScrollUpdate);
-            window.removeEventListener('touchmove', self.windowScrollUpdate);
-            window.addEventListener('scroll', self.windowScrollUpdate);
-            window.addEventListener('touchmove', self.windowScrollUpdate);
-            self.windowScrollUpdate();
-
+        // Prevent calculation errors caused by unloaded completion
+        __( document ).ready( () => {
+            this.windowScrollUpdate();
         });
-
 
     }
 
@@ -156,8 +156,8 @@ export default class ProgressBar extends Component<ProgressBarProps, ProgressBar
             <>
             
                 <div 
-                ref={this.wrapperRef}
-                id={id || 'app-progress-bar-' + __.GUID.create()}
+                ref={this.rootRef}
+                id={id || this.uniqueID}
                 className={`${shapeClassName} uix-progressbar--progress-0`} 
                 data-progressbar-percent={value || 0} 
                 data-progressbar-unit={unit}> 

@@ -42,10 +42,12 @@ type NumberState = {
 
 export default class Number extends Component<NumberProps, NumberState>  {
 	
+	uniqueID: string;
 
 	constructor(props) {
 		super(props);
 	
+		this.uniqueID = 'app-' + __.GUID.create();
 	
 		this.state = {
 			count: this.props.value ? this.props.value : 0
@@ -123,7 +125,7 @@ export default class Number extends Component<NumberProps, NumberState>  {
 		} = this.props;
 		
 		const nameRes = typeof(name) === 'undefined' ? '' : name;
-		const idRes = id ? id : 'app-control-' + __.GUID.create();
+		const idRes = id || this.uniqueID;
 		const wrapperClassDisabled = disabled ? ' is-disabled' : '';
 		const wrapperClassTheme = theme === 'line' ? ' uix-controls--line' : '';
 		const dp = decimals || 0;

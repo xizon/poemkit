@@ -14,7 +14,7 @@ import Video from '@uixkit.react/components/Video/index.tsx';
 ```
 | Property | Type | Default | Description |
 | --- | --- | --- | --- |
-| `config` | JSON Object Literals  | - | Detailed animation parameters, using JSON string format.<br />**default value:**<br />`{"muted":false,"autoplay":false,"controls":["play-large", "play", "progress", "current-time", "mute", "volume", "captions", "settings", "pip", "airplay", "fullscreen"],"loop":{"active":false}}` <br />**other:**<br />`{"clickToPlay":false,"muted":true,"autoplay":true,"controls":[""],"loop":{"active":true},"fullscreen":{"enabled": false}}` |
+| `config` | JSON Object Literals  | - | <strong>(Required)</strong>  Detailed animation parameters, using JSON string format.<br />**default value:**<br />`{"muted":false,"autoplay":false,"controls":["play-large", "play", "progress", "current-time", "mute", "volume", "captions", "settings", "pip", "airplay", "fullscreen"],"loop":{"active":false}}` <br />**other:**<br />`{"clickToPlay":false,"muted":true,"autoplay":true,"controls":[""],"loop":{"active":true},"fullscreen":{"enabled": false}}` |
 | `poster` | string  | - | The poster image should be specified. |
 | `src` | string  | - | The URL of the video to embed. |
 

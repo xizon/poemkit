@@ -38,9 +38,13 @@ type MergeInputState = false;
 
 
 export default class MergeInput extends Component<MergeInputProps, MergeInputState> {
+
+	uniqueID: string;
 	
 	constructor(props) {
 		super(props);
+
+		this.uniqueID = 'app-' + __.GUID.create();
 	}
 
   
@@ -87,7 +91,7 @@ export default class MergeInput extends Component<MergeInputProps, MergeInputSta
 		const typeRes = typeof(type) === 'undefined' ? 'text' : type;
 		const uiRes = typeof(ui) === 'undefined' ? '' : ui;
 		const nameRes = typeof(name) === 'undefined' ? ( typeof(label) !== 'undefined' ? __.toSlug( label ) : '' )  : name;
-		const idRes = id ? id : 'app-control-' + __.GUID.create();
+		const idRes = id || this.uniqueID;
 		const wrapperClassDisabled = disabled ? ' is-disabled' : '';
 		const wrapperClassIcon = icon ? ' is-iconic' : '';
 		const wrapperClassUi = this.uiSwitch(uiRes);

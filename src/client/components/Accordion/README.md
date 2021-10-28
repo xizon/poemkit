@@ -14,8 +14,9 @@ import { Accordion } from '@uixkit.react/components/Accordion/index.tsx';
 ```
 | Property | Type | Default | Description |
 | --- | --- | --- | --- |
-| `triggerType` | string \| `click` \| `mouseenter`  | click | One event type, such as `click` or `mouseenter` |
 | `displayTheFirstItem` | boolean | false | Display the only first item of a list |
+| `triggerType` | `click` \| `mouseover`  | click | One event type |
+| `duration` | number | 200 | The number of milliseconds(ms) each iteration of the animation takes to complete |
 
 
 
@@ -27,6 +28,9 @@ import { AccordionItem } from '@uixkit.react/components/Accordion/index.tsx';
 | --- | --- | --- | --- |
 | `defaultActive` | boolean | false | Set an item to activate by default |
 | `title` | string | - | Set a title for each item |
+| `boxToggleEv` | function | - | Handling events for collapsing item |
+| `boxAnimEndEv` | function | - | Handling events when the animation execution is complete |
+| `triggerType` | `click` \| `mouseover`  | click | One event type |
 
 
 
@@ -68,7 +72,7 @@ export default () => {
       <h3>Accordion 2</h3>
       <p>Show hidden divs on mouseover.</p>
       {/* ================================================================== */}
-      <Accordion triggerType="mouseenter">
+      <Accordion triggerType="mouseover">
           <AccordionItem title={<>Item 1</>}>
             <h4>Usage:</h4>Click on an item to open.
           </AccordionItem>

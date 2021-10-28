@@ -2,10 +2,16 @@ import React, { Component } from 'react';
 
 
 type AccordionItemProps = {
+	/** Set an item to activate by default */
 	defaultActive?: string | boolean | undefined;
+	/** Specify a title */
 	title?: React.ReactNode;
-	/** -- */
-	children?: any;
+	/** Handling events for collapsing item */
+	boxToggleEv?: React.MouseEventHandler<HTMLElement>;
+	/** Handling events when the animation execution is complete */
+	boxAnimEndEv?: React.TransitionEventHandler<HTMLElement>;
+	/** One event type, such as `click` or `mouseover` */
+	triggerType?: string;
 };
 type AccordionItemState = false;
 
@@ -21,26 +27,56 @@ export default class AccordionItem extends Component<AccordionItemProps, Accordi
 		const { 
             defaultActive,
 			title,
-			children,
-			...attributes
+			boxToggleEv,
+			boxAnimEndEv,
+			triggerType,
+			children
 		} = this.props;
 		
 		const activedClassName = typeof(defaultActive) !== 'undefined' && defaultActive !== false ? ' is-active' : '';
-		const tabpanelHeight = activedClassName != '' ? 'auto' : 0;
 
 		
 		return (
 		  <>
 
-				<dl className={activedClassName} aria-expanded={defaultActive ? 'true' : 'false'} {...attributes}>
-					<dt role="presentation"><a href="#">{title}</a></dt>
-					<dd role="tabpanel" style={{height: tabpanelHeight}}>
-						<div>
-							{children}
-						</div>
-					</dd>
+				{ triggerType === 'click' ? (
+					<dl 
+					onClick={boxToggleEv} 
+					onTransitionEnd={boxAnimEndEv} 
+					className={activedClassName} 
+					aria-expanded={defaultActive ? 'true' : 'false'}>
+						<dt role="presentation"><a href="#">{title}</a></dt>
+						<dd role="tabpanel" 
+							style={{
+								height: defaultActive ? 'auto' : '0px'
+							}}>
+							<div>
+								{children}
+							</div>
+						</dd>
 
-				</dl>
+					</dl>
+				) : ''}
+
+				{ triggerType === 'mouseover' ? (
+					<dl 
+					onMouseOver={boxToggleEv} 
+					onTransitionEnd={boxAnimEndEv} 
+					className={activedClassName} 
+					aria-expanded={defaultActive ? 'true' : 'false'}>
+						<dt role="presentation"><a href="#">{title}</a></dt>
+						<dd role="tabpanel" 
+							style={{
+								height: defaultActive ? 'auto' : '0px'
+							}}>
+							<div>
+								{children}
+							</div>
+						</dd>
+
+					</dl>
+				) : ''}		
+
 
 		  </>
 		)

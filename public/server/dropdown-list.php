@@ -1,0 +1,115 @@
+<?php
+header('Access-Control-Allow-Origin: *');
+header('Access-Control-Allow-Headers: Content-Type');
+header('Content-type: application/json');
+
+
+$RESTful_res = '{
+"code":200,
+"data":[
+	{
+		"id": 1, 
+		"name": "Text 1", 
+		"children": [
+			{
+				"id": "1_1", 
+				"name": "Text 1_1", 
+				"children": [
+					{
+						"id": "1_1_1", 
+						"name": "Text 1_1_1"
+					},
+					{
+						"id": "1_1_2", 
+						"name": "Text 1_1_2"
+					},
+					{
+						"id": "1_1_3", 
+						"name": "Text 1_1_3"
+					}
+				]
+			}, 
+			{
+				"id": "1_2", 
+				"name": "Text 1_2", 
+				"children": [
+					{
+						"id": "1_2_1", 
+						"name": "Text 1_2_1", 
+						"children": [
+							{
+								"id": "1_2_1_1", 
+								"name": "Text 1_2_1_1"
+							},
+							{
+								"id": "1_2_1_2", 
+								"name": "Text 1_2_1_2"
+							}
+						]
+					}
+				]
+			}
+		]
+	}, 
+	{
+		"id": 2, 
+		"name": "Text 2", 
+		"children": [
+			{
+				"id": "2_1", 
+				"name": "Text 2_1", 
+				"children": [
+					{
+						"id": "2_1_1", 
+						"name": "Text 2_1_1"
+					}
+				]
+			}, 
+			{
+				"id": "2_2", 
+				"name": "Text 2_2", 
+				"children": [
+					{
+						"id": "2_2_1", 
+						"name": "Text 2_2_1"
+					}
+				]
+			}
+		]
+	}, 
+	{
+		"id": 3, 
+		"name": "Text 3", 
+		"children": [
+			{
+				"id": "3_1", 
+				"name": "Text 3_1"
+			}, 
+			{
+				"id": "3_2", 
+				"name": "Text 3_2"
+			}, 
+			{
+				"id": "3_3", 
+				"name": "Text 3_3"
+			}
+		]
+	},
+    {
+        "id": 4, 
+        "name": "Text 4"
+    },
+    {
+        "id": 5, 
+        "name": "Text 5"
+    },
+    {
+        "id": 6, 
+        "name": "Text 6"
+    }
+]
+}';
+
+
+echo $RESTful_res;
+

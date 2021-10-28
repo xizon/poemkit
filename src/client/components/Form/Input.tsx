@@ -40,10 +40,14 @@ type InputState = false;
 
 
 export default class Input extends Component<InputProps, InputState>  {
+
+	uniqueID: string;
 	
 	constructor(props) {
 		super(props);
 	
+		this.uniqueID = 'app-' + __.GUID.create();
+
         this.handleFocus = this.handleFocus.bind(this);
         this.handleBlurChange = this.handleBlurChange.bind(this);
 		
@@ -128,7 +132,7 @@ export default class Input extends Component<InputProps, InputState>  {
 		const typeRes = typeof(type) === 'undefined' ? 'text' : type;
 		const uiRes = typeof(ui) === 'undefined' ? '' : ui;
 		const nameRes = typeof(name) === 'undefined' ? ( typeof(label) !== 'undefined' ? __.toSlug( label ) : '' )  : name;
-		const idRes = id ? id : 'app-control-' + __.GUID.create();
+		const idRes = id || this.uniqueID;
 		const wrapperClassDisabled = disabled ? ' is-disabled' : '';
 		const wrapperClassIconLeft = iconLeft ? ' is-iconic' : '';
 		const wrapperClassIconRight = iconRight ? ' is-iconic is-reversed' : '';

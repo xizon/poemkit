@@ -17,7 +17,7 @@ import ProgressBar from '@uixkit.react/components/ProgressBar/index.tsx';
 | `shape` | `circle` \| `annulus` \| `rectangle`  | - | Set a shape that circle, annulus or rectangle shaped progress bar |
 | `unit` | string  | - | Set a unit that is percentage for progress bar, such as `%` |
 | `value` | number  | 0 | Set a percentage you want to show |
-| `label` | React.ReactNode  | 0 | Reference to div element which presents the text label for progress bar. Returns empty if text is not defined. |
+| `label` | ReactNode  | 0 | Reference to div element which presents the text label for progress bar. Returns empty if text is not defined. |
 | `displayPercentage` | boolean  | false | Whether to display percentage |
 
 

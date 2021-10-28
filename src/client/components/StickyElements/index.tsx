@@ -39,19 +39,21 @@ type StickyProps = {
     stopTriggerOffset?: string | boolean;
     /** -- */
     id?: string;
-    children?: any;
 };
 type StickyState = false;
 
 
 export default class Sticky extends Component<StickyProps, StickyState> {
 
-    private wrapperRef = React.createRef<HTMLDivElement>();
+    private rootRef = React.createRef<HTMLDivElement>();
     
     windowScrollUpdate: () => void;
+    uniqueID: string;
     
     constructor(props) {
         super(props);
+
+        this.uniqueID = 'app-' + __.GUID.create();
 
          // Add a scroll event listener to window
          this.windowScrollUpdate = ()=>{};
@@ -63,7 +65,7 @@ export default class Sticky extends Component<StickyProps, StickyState> {
     stickyInit() {
         
         const self = this;
-        const reactDomEl: any = this.wrapperRef.current;
+        const reactDomEl: any = this.rootRef.current;
 
         //Set placeholder height
         //------------------------------------------
@@ -86,29 +88,21 @@ export default class Sticky extends Component<StickyProps, StickyState> {
         self.windowScrollUpdate = sticky( reactDomEl, {
             placeholderEl : $placeholder as HTMLElement,
             topSpacing    : topSpacing
-        }) as () => void;
+        }) as unknown as () => void;
 
     }
 
     componentDidMount() {
 
-        const self = this;
-
-        __(document).ready(function () {
-
-            TweenMax.to( window, 0.5, {
-                scrollTo: {
-                    y: 0, //y: "max" -->*/} vertical scroll to bottom
-                    autoKill: false
-                },
-                ease: EasingList.easeOut,
-                onComplete: function() {
-                    self.stickyInit();
-                }
-            });
-            
-			
-            
+        TweenMax.to( window, 0.5, {
+            scrollTo: {
+                y: 0, //y: "max" -->*/} vertical scroll to bottom
+                autoKill: false
+            },
+            ease: EasingList.easeOut,
+            onComplete: () => {
+                this.stickyInit();
+            }
         });
 
 
@@ -133,11 +127,10 @@ export default class Sticky extends Component<StickyProps, StickyState> {
             stopTrigger,
             stopTriggerOffset,
             id,
-            children,
-            ...attributes
+            children
         } = this.props;
 
-        const cid = id || 'app-sticky-' + __.GUID.create();
+        const cid = id || this.uniqueID;
 
         return (
             <>
@@ -145,13 +138,13 @@ export default class Sticky extends Component<StickyProps, StickyState> {
                <div data-sticky-id={cid + '-sticky'} className="is-placeholder" style={{display:"none",width:"100%",visibility:"hidden"}}></div>
 
                <div 
-               ref={this.wrapperRef}
+               ref={this.rootRef}
                id={cid}
                data-sticky-id={cid + '-sticky'}
                className="js-uix-sticky-el" 
                data-stop-trigger={stopTrigger || false}
                data-stop-trigger-offset={stopTriggerOffset || 0}
-               {...attributes}>
+               >
                    {children}
                </div>
 

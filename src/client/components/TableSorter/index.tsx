@@ -20,104 +20,12 @@ import '@uixkit.react/components/TableSorter/styles/_style.scss';
 import '@uixkit.react/components/TableSorter/styles/rtl/_style.scss';
 
 
-/* Table Sorter Field
--------------------------------------------------*/
-type TableSorterFieldProps = {
-	cols?: number;
-	content?: any;
-};
-type TableSorterFieldState = false;
-
-
-class TableSorterField extends Component<TableSorterFieldProps, TableSorterFieldState> {
-	constructor(props) {
-		super(props);
-	}
-	render() {
-		
-		return (
-		  <>
-			<td colSpan={this.props.cols}>{this.props.content}</td>
-		  </>
-		)
-	}
-}
+//
+import TableSorterRow from '@uixkit.react/components/TableSorter/TableSorterRow';
+import TableSorterHeaders from '@uixkit.react/components/TableSorter/TableSorterHeaders';
 
 
 
-/* Table Sorter Row
--------------------------------------------------*/
-type TableSorterRowProps = {
-	data?: any[];
-};
-type TableSorterRowState = false;
-
-
-class TableSorterRow extends Component<TableSorterRowProps, TableSorterRowState>  {
-	constructor(props) {
-		super(props);
-	}
-	render() {
-		
-
-		const fields = this.props.data!.map((el, i) => {
-			return <TableSorterField key={"field" + i} cols={el.cols} content={el.content}  />
-		});
-												
-		return (
-		  <>
-			<tr id={'app-table-sorter-field-tr' + __.GUID.create()}>
-				{fields}
-			</tr>
-	
-		  </>
-		)
-	}
-}
-		
-
-/* Table Sorter Headers
--------------------------------------------------*/		
-type TableSorterHeadersProps = {
-	data: any[];
-	clickEv?: React.MouseEventHandler<HTMLElement>;
-};
-type TableSorterHeadersState = false;
-
-class TableSorterHeaders extends Component<TableSorterHeadersProps, TableSorterHeadersState>  {
-	constructor(props) {
-		super(props);
-	}
-	render() {
-		if ( this.props.data ) {
-			
-			return (
-			  <>
-
-				<thead>
-					<tr id={'app-table-sorter-header-tr' + __.GUID.create()}>
-						{this.props.data!.map((item, i) => {
-							return <th data-sort-type={item.type} data-table-row={i} key={"header" + i} onClick={this.props.clickEv}>{item.content}</th>;
-						})
-						}
-					</tr>
-				</thead>
-
-			  </>
-			)	
-		} else {
-			return (
-				<></>
-			)
-		}
-	}
-}
-
-
-
-
-/* Table Sorter Component 
--------------------------------------------------*/			
 type TableSorterProps = {
 	data: any;
 	bordered?: boolean;
@@ -135,13 +43,15 @@ type TableSorterState = false;
 
 export default class TableSorter extends Component<TableSorterProps, TableSorterState> {
 
-	private wrapperRef = React.createRef<HTMLDivElement>();
+	private rootRef = React.createRef<HTMLDivElement>();
 
 	inverse: boolean;
-
+	uniqueID: string;
 
 	constructor(props) {
 		super(props);
+
+		this.uniqueID = 'app-' + __.GUID.create();
 
 		this.handleSortType = this.handleSortType.bind(this);
 		this.inverse = false;
@@ -152,7 +62,7 @@ export default class TableSorter extends Component<TableSorterProps, TableSorter
 		e.preventDefault();
 
 		const self = this;
-		const wrapper = self.wrapperRef.current;
+		const wrapper = self.rootRef.current;
 		const el = __( e.target );
 
 		const thType  = el.data( 'sort-type' );
@@ -206,40 +116,6 @@ export default class TableSorter extends Component<TableSorterProps, TableSorter
 
 	}
 	
-	componentDidMount(){
-		
-		const self = this;
-
-		__( document ).ready( function() {
-
-			const reactDomEl: any = self.wrapperRef.current;
-			const $el = __( reactDomEl );
-			
-			//Add an identifier so that the mobile terminal can compare by row
-			$el.find( 'tbody tr' ).each(function(this: any, index: number ) {
-				__( this ).find( '> td' ).each( function(this: any, index: number ) {
-					__( this ).data( 'table-row', index );
-				});
-			});
-
-
-
-			//Filter functions
-			$el.find( 'thead tr [data-sort-type]' ).each( function(this: any)  {	
-				//add arrows
-				if ( __( this ).find( '.uix-table-sorter' ).length == 0 && __( this ).data( 'sort-type' ) !== false ) {
-					__( this ).css( 'cursor', 'pointer' );
-					__( this ).wrapInner( '<span class="uix-table-sorter" style="pointer-events: none;" />' );
-				}
-			});
-			
-
-		});
-
-		
-	}
-	
-	
 	
 	render() {
 		
@@ -253,8 +129,7 @@ export default class TableSorter extends Component<TableSorterProps, TableSorter
 			perLine,
 			responsive,
 			responsiveWithScrollBar,
-			id,
-			...attributes
+			id
 		} = this.props;
 
 		
@@ -278,7 +153,7 @@ export default class TableSorter extends Component<TableSorterProps, TableSorter
 		return (
 		  <>
 			
-			<div ref={this.wrapperRef} className={"uix-table" + classes + " js-uix-table-sorter"} id={id || 'app-table-sorter-' + __.GUID.create()} {...attributes}>
+			<div ref={this.rootRef} className={"uix-table" + classes + " js-uix-table-sorter"} id={id || this.uniqueID}>
 				<table>
 			
 			        <TableSorterHeaders data={_headers} clickEv={this.handleSortType} />

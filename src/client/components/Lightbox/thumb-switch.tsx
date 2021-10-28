@@ -138,4 +138,4 @@ export function thumbSwitch(curElement: any, config: thumbSwitchConfig) {
 
 }
 
-export default { thumbSwitch };
+export default thumbSwitch;

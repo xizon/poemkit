@@ -38,7 +38,6 @@ type ScrollRevealProps = {
 	config: string | ScrollRevealConfig;
 	/** -- */
 	id?: string;
-	children?: any;
 };
 type ScrollRevealState = false;
 
@@ -46,13 +45,16 @@ type ScrollRevealState = false;
 
 export default class ScrollReveal extends Component<ScrollRevealProps, ScrollRevealState> {
 
-	private wrapperRef = React.createRef<HTMLDivElement>();
+	private rootRef = React.createRef<HTMLDivElement>();
 
 	windowScrollUpdate: () => void;
 	tl: any;
+	uniqueID: string;
 
 	constructor(props) {
 		super(props);
+
+		this.uniqueID = 'app-' + __.GUID.create();
 
 		this.tl = new TimelineMax({paused: true});
 
@@ -64,7 +66,7 @@ export default class ScrollReveal extends Component<ScrollRevealProps, ScrollRev
     }
 
 	getAnimConfiguration() {
-		const reactDomEl: any = this.wrapperRef.current;
+		const reactDomEl: any = this.rootRef.current;
 
 		let config = reactDomEl.dataset.uixAnim;
 		config = __.validate.isJSON( config ) ? JSON.parse( config ) : {};
@@ -88,7 +90,7 @@ export default class ScrollReveal extends Component<ScrollRevealProps, ScrollRev
 		const self = this;
 		
 		//
-		const reactDomEl: any = self.wrapperRef.current;
+		const reactDomEl: any = self.rootRef.current;
 		const config = self.getAnimConfiguration();
 	
 		//
@@ -250,53 +252,50 @@ export default class ScrollReveal extends Component<ScrollRevealProps, ScrollRev
 
 	}
 
-	componentDidMount(){
+	componentDidMount() {
 
-		const self = this;
-		
-		__( document ).ready( function() {
+		/*
+			!!!important:
+			Remember not to use `#${yourcid}` directly, the target of TweenMax will not be found. Please use `#${self.rootRef.current.id}`
+		*/
+		const reactDomEl: any = this.rootRef.current;
+		const config = this.getAnimConfiguration();
 
-
-			/*
-			 !!!important:
-			 Remember not to use `#${yourcid}` directly, the target of TweenMax will not be found. Please use `#${self.wrapperRef.current.id}`
-			*/
-			const reactDomEl: any = self.wrapperRef.current;
-			const config = self.getAnimConfiguration();
-
-		
-			//
-			//get attributes to tweenMax
-			let fromCSS     = config.from,
-				toCSS       = config.to,
-				myEase      = config.ease,
-				myDuration  = config.duration,
-				myDelay     = config.delay;
-		
-
-			self.tl.to( reactDomEl, myDuration, {
-				css    : toCSS,
-				ease   : myEase,
-				delay  : myDelay
-			});
-
-
-
-			//Initialize the default style
-			TweenMax.set( reactDomEl, {
-				css : fromCSS
-			});
-
-			
 	
-			// Add function to the element that should be used as the scrollable area.
-            window.removeEventListener('scroll', self.windowScrollUpdate);
-            window.removeEventListener('touchmove', self.windowScrollUpdate);
-            window.addEventListener('scroll', self.windowScrollUpdate);
-            window.addEventListener('touchmove', self.windowScrollUpdate);
-            self.windowScrollUpdate();
+		//
+		//get attributes to tweenMax
+		let fromCSS     = config.from,
+			toCSS       = config.to,
+			myEase      = config.ease,
+			myDuration  = config.duration,
+			myDelay     = config.delay;
+	
 
+			this.tl.to( reactDomEl, myDuration, {
+			css    : toCSS,
+			ease   : myEase,
+			delay  : myDelay
 		});
+
+
+
+		//Initialize the default style
+		TweenMax.set( reactDomEl, {
+			css : fromCSS
+		});
+
+		
+
+		// Add function to the element that should be used as the scrollable area.
+		window.removeEventListener('scroll', this.windowScrollUpdate);
+		window.removeEventListener('touchmove', this.windowScrollUpdate);
+		window.addEventListener('scroll', this.windowScrollUpdate);
+		window.addEventListener('touchmove', this.windowScrollUpdate);
+
+        // Prevent calculation errors caused by unloaded completion
+        __( document ).ready( () => {
+            this.windowScrollUpdate();
+        });
 
 		
 	}
@@ -326,8 +325,8 @@ export default class ScrollReveal extends Component<ScrollRevealProps, ScrollRev
 		  <>
 			
 			<div 
-			ref={this.wrapperRef} 
-			id={id || 'app-app-scroll-reveal-' + __.GUID.create()}
+			ref={this.rootRef} 
+			id={id || this.uniqueID}
 			data-uix-anim={config || '{"viewport":"80%","from":{"opacity":0,"y":150},"to":{"opacity":1,"y":0},"ease":"Power2.easeOut","duration":0.8,"delay":0,"infinite":true}'}
 			{...attributes}>
 			    {children}

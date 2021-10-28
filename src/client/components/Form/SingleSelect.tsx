@@ -36,12 +36,16 @@ type SingleSelectState = false;
 
 export default class SingleSelect extends Component<SingleSelectProps, SingleSelectState> {
 
-	private wrapperRef = React.createRef<HTMLDivElement>();
+	private rootRef = React.createRef<HTMLDivElement>();
 	private resRef = React.createRef<HTMLInputElement>();
+
+	uniqueID: string;
 
 	constructor(props) {
 		super(props);
 	
+		this.uniqueID = 'app-' + __.GUID.create();
+
         this.handleClickItem = this.handleClickItem.bind(this);
 		
 	}
@@ -73,7 +77,7 @@ export default class SingleSelect extends Component<SingleSelectProps, SingleSel
 		event.preventDefault();
 		
 		const el = __( event.target );
-		const root = this.wrapperRef.current;
+		const root = this.rootRef.current;
 		const resInput = this.resRef.current;
 		
 		const $singleSelWrapper = __( root ),
@@ -115,10 +119,10 @@ export default class SingleSelect extends Component<SingleSelectProps, SingleSel
 	}
 	
 	
-	componentDidMount(){
+	componentDidMount() {
 		
 		if ( this.props.value ) {
-			const root = this.wrapperRef.current;
+			const root = this.rootRef.current;
 			const $singleSelWrapper = __( root );
 
 			//hide or display target
@@ -148,7 +152,7 @@ export default class SingleSelect extends Component<SingleSelectProps, SingleSel
 		
 		const uiRes = typeof(ui) === 'undefined' ? '' : ui;
 		const nameRes = typeof(name) === 'undefined' ? '' : name;
-		const idRes = id ? id : 'app-control-' + __.GUID.create();
+		const idRes = id || this.uniqueID;
 		const wrapperClassTheme = theme === 'line' ? ' uix-controls--line' : '';
 		const wrapperClassUi = this.uiSwitch(uiRes);
 		
@@ -183,7 +187,7 @@ export default class SingleSelect extends Component<SingleSelectProps, SingleSel
 		return (
 		  <>
 
-				<div ref={this.wrapperRef} className={"uix-controls uix-controls__single-sel" + wrapperClassUi + wrapperClassTheme} id={idRes + "__wrapper"}>
+				<div ref={this.rootRef} className={"uix-controls uix-controls__single-sel" + wrapperClassUi + wrapperClassTheme} id={idRes + "__wrapper"}>
 				  {singleSelOptionsList}
 				</div>
 			    <input 

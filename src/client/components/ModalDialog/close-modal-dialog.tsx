@@ -46,4 +46,4 @@ export function closeModalDialog(curElement: any) {
 
 }
 
-export default { closeModalDialog };
+export default closeModalDialog;

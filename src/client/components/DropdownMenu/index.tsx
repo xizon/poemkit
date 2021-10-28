@@ -23,6 +23,7 @@ import '@uixkit.react/components/DropdownMenu/styles/rtl/_style.scss';
 //
 import Option from '@uixkit.react/components/DropdownMenu/Option';
 
+type OptionChangeFnType = (arg1: any) => void;
 
 interface OptionConfig {
 	value?: string | undefined;
@@ -37,6 +38,12 @@ type DropdownMenuProps = {
     /** Specify data of Dropdown Menu as a JSON string format. 
      * Such as: `[{"label":"Option 1","value":"option-1"},{"label":"Option 2","value":"option-2"}]` */
     options?: OptionConfig[];
+	/** Button Icon */
+	btnIcon?: React.ReactNode;
+    /** This function is called whenever the data is updated.
+     *  Exposes the JSON format data about the option as an argument.
+     */
+     optionChangeCallback?: OptionChangeFnType | null;
     /** -- */
     id?: string;
 };
@@ -49,8 +56,13 @@ type DropdownMenuState = {
 
 
 export default class DropdownMenu extends Component<DropdownMenuProps, DropdownMenuState> {
+
+    uniqueID: string;
+
 	constructor(props) {
 		super(props);
+
+        this.uniqueID = 'app-' + __.GUID.create();
         
 		this.handleClose = this.handleClose.bind(this);
         this.handleClick = this.handleClick.bind(this);
@@ -82,6 +94,13 @@ export default class DropdownMenu extends Component<DropdownMenuProps, DropdownM
 			selected: option,
 			opened: false
 		});
+
+		if ( typeof(this.props.optionChangeCallback) === 'function' ) {
+			this.props.optionChangeCallback({
+				"value": option
+			});
+		}
+
 	}
 
     componentDidMount() {
@@ -92,8 +111,9 @@ export default class DropdownMenu extends Component<DropdownMenuProps, DropdownM
 
      /** Remove the global list of events, especially as scroll and interval. */
      componentWillUnmount() {
-        // Remove URL change events from window
-        window.removeEventListener('mousedown', this.handleClose);
+         
+        // Remove URL change events from document
+        document.removeEventListener('mousedown', this.handleClose);
 
     }
 
@@ -104,11 +124,11 @@ export default class DropdownMenu extends Component<DropdownMenuProps, DropdownM
             name,
             defaultLabel,
             options,
-            id,
-            ...attributes
+            btnIcon,
+            id
         } = this.props;
 
-        const cid = id || 'app-dropdown-menu-' + __.GUID.create();
+        const cid = id || this.uniqueID;
         const selectedLabel = this.state.selected ? this.state.selected.label : (defaultLabel === undefined ? 'Select' : defaultLabel);
 
 		const selectOptionsListPresentation = options?.map((selectOption, index) => {
@@ -118,8 +138,11 @@ export default class DropdownMenu extends Component<DropdownMenuProps, DropdownM
         return (
             <>
 
-                <div className={"uix-dropdown-menu" + (this.state.opened ? ' is-opened' : '')} id={cid} {...attributes} onClick={this.handleClick}>
-                    <span><i className="fa fa-cog" aria-hidden="true"></i> <span>{selectedLabel}</span></span>
+                <div className={"uix-dropdown-menu" + (this.state.opened ? ' is-opened' : '')} id={cid} onClick={this.handleClick}>
+                    <span>
+                        {btnIcon || null}
+                        <span>{selectedLabel}</span>
+                    </span>
                     <input name={name || ''} type="hidden" value={this.state.selected?.value} />
                     <ul>
                         {selectOptionsListPresentation}

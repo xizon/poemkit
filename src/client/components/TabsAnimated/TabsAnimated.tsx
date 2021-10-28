@@ -22,7 +22,6 @@ import TabPanel from '@uixkit.react/components/TabsAnimated/TabPanel';
 type TabsAnimatedProps = {
 	/** -- */
 	id?: string;
-	children: any; /* required */
 };
 type TabsAnimatedState = {
 	selected: number;
@@ -30,9 +29,13 @@ type TabsAnimatedState = {
 
 
 export default class TabsAnimated extends Component<TabsAnimatedProps, TabsAnimatedState> {
+
+	uniqueID: string;
 	
 	constructor(props) {
 		super(props);
+
+		this.uniqueID = 'app-' + __.GUID.create();
 		
 		this.state={
 			selected: 0
@@ -45,12 +48,10 @@ export default class TabsAnimated extends Component<TabsAnimatedProps, TabsAnima
 
 	handleClickItem(itemIndex) {
 
-		const self = this;
-
-		return function (e) { // e is the event object that returned
+		return (e) => { // e is the event object that returned
 			e.preventDefault();
 
-			self.setSelected(itemIndex);
+			this.setSelected(itemIndex);
 
 			const animSpeed: any = __.cssProperty.getTransitionDuration( __( '.uix-tabs-animated .uix-tabs__content' )[0] );	
 
@@ -64,7 +65,7 @@ export default class TabsAnimated extends Component<TabsAnimatedProps, TabsAnima
 	}
 
 
-	componentDidMount(){
+	componentDidMount() {
 		
 
 		__( document ).ready( function() {
@@ -90,18 +91,17 @@ export default class TabsAnimated extends Component<TabsAnimatedProps, TabsAnima
 		
 		const { 
 			id,
-			children, // the contents of the TabList and TabPanel in a loop
-			...attributes
+			children // the contents of the TabList and TabPanel in a loop
 		} = this.props;
 
 		
 		return (
 		  <>
  
-			  <div id={id ? id : 'app-tabs-animated-' + __.GUID.create() } className="uix-tabs-animated" {...attributes}>
+			  <div id={id || this.uniqueID} className="uix-tabs-animated">
 				<div className="uix-tabs__nav">
 					<ul role="tablist">
-						{( children != null ) ? children.map((item, i) => {
+						{( children != null ) ? (children as any[]).map((item, i) => {
 							const childProps = { ...item.props };
 							const itemIndex = i;
 							const activeClassName = (itemIndex === this.state.selected) ? 'is-active' : '';
@@ -122,7 +122,7 @@ export default class TabsAnimated extends Component<TabsAnimatedProps, TabsAnima
 
 				<div className="uix-tabs__contentWrapper">
 
-					{( children != null ) ? children.map((item, i) => {
+					{( children != null ) ? (children as any[]).map((item, i) => {
 
 					    const childProps = { ...item.props };
 						

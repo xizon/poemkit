@@ -13,6 +13,7 @@ import { __ } from '@uixkit.react/components/_utils/_all';
 import ButtonDemo from '@uixkit.react/pages/ComponentsDemo/ButtonDemo.js';
 import FormDemo from '@uixkit.react/pages/ComponentsDemo/FormDemo.js';
 import GridDemo from '@uixkit.react/pages/ComponentsDemo/GridDemo.js';
+import PaginationDemo from '@uixkit.react/pages/ComponentsDemo/PaginationDemo.js';
 import TabsDemo from '@uixkit.react/pages/ComponentsDemo/TabsDemo.js';
 import TabsAnimatedDemo from '@uixkit.react/pages/ComponentsDemo/TabsAnimatedDemo.js';
 import VideoDemo from '@uixkit.react/pages/ComponentsDemo/VideoDemo.js';
@@ -33,7 +34,11 @@ import BackToTopDemo from '@uixkit.react/pages/ComponentsDemo/BackToTopDemo.js';
 import LightboxDemo from '@uixkit.react/pages/ComponentsDemo/LightboxDemo.js';
 import ProgressBarDemo from '@uixkit.react/pages/ComponentsDemo/ProgressBarDemo.js';
 import StickyElementsDemo from '@uixkit.react/pages/ComponentsDemo/StickyElementsDemo.js';
-
+import MultilevelDropdownMenuDemo from '@uixkit.react/pages/ComponentsDemo/MultilevelDropdownMenuDemo.js';
+import CascadingDropDownListDemo from '@uixkit.react/pages/ComponentsDemo/CascadingDropDownListDemo.js';
+import GalleryDemo from '@uixkit.react/pages/ComponentsDemo/GalleryDemo.js';
+import InfiniteScrollDemo from '@uixkit.react/pages/ComponentsDemo/InfiniteScrollDemo.js';
+import NavigationDemo from '@uixkit.react/pages/ComponentsDemo/NavigationDemo.js';
 
 
 
@@ -50,7 +55,11 @@ function HookContent() {
 	
 	//
 	const urlChk = function( str ) {
-		return theLocation.pathname.indexOf( str ) >= 0 ? true : false;
+		if ( str.indexOf( '#' ) >= 0 ) {
+			return theLocation.hash.indexOf( str ) >= 0 ? true : false;
+		} else {
+			return theLocation.pathname.indexOf( str ) >= 0 ? true : false;
+		}
 	};
 
 	return (
@@ -64,24 +73,19 @@ function HookContent() {
 		<div className="uix-demo-sidebar-left">
 			<h4>Components</h4>
 			<ul className="uix-demo-nav">
-				<li className="uix-demo-nav-header">Getting started</li>
+				{/*    /////////////////////////   */} 
+				<li className="uix-demo-nav-header">WEB ELEMENTS</li>
 				<li className={urlChk('/button') ? 'is-active' : ''}>
 					<NavLink data-route="true" to={`${url}/button`} activeClassName="is-active">Button</NavLink>
 				</li>
-				<li className={urlChk('/form') ? 'is-active' : ''}>
-					<NavLink data-route="true" to={`${url}/form`} activeClassName="is-active">Form</NavLink>
-				</li>
-				<li className={urlChk('/grid') ? 'is-active' : ''}>
-					<NavLink data-route="true" to={`${url}/grid`} activeClassName="is-active">Grid</NavLink>
+				<li className={urlChk('/pagination') ? 'is-active' : ''}>
+					<NavLink data-route="true" to={`${url}/pagination`} activeClassName="is-active">Pagination</NavLink>
 				</li>
 				<li className={urlChk('/tabs') && !urlChk('/tabs-animated') ? 'is-active' : ''}>
 					<NavLink data-route="true" to={`${url}/tabs`} activeClassName="is-active">Tabs</NavLink>
 				</li>
 				<li className={urlChk('/tabs-animated') ? 'is-active' : ''}>
 					<NavLink data-route="true" to={`${url}/tabs-animated`} activeClassName="is-active">Tabs Animated</NavLink>
-				</li>
-				<li className={urlChk('/video') ? 'is-active' : ''}>
-					<NavLink data-route="true" to={`${url}/video`} activeClassName="is-active">Video</NavLink>
 				</li>
 				<li className={urlChk('/table') && !urlChk('/table-grid') && !urlChk('/table-sorter') ? 'is-active' : ''}>
 					<NavLink data-route="true" to={`${url}/table`} activeClassName="is-active">Table</NavLink>
@@ -92,14 +96,8 @@ function HookContent() {
 				<li className={urlChk('/table-sorter') ? 'is-active' : ''}>
 					<NavLink data-route="true" to={`${url}/table-sorter`} activeClassName="is-active">Table Sorter</NavLink>
 				</li>
-				<li className={urlChk('/scroll-reveal') ? 'is-active' : ''}>
-					<NavLink data-route="true" to={`${url}/scroll-reveal`} activeClassName="is-active">Scroll Reveal</NavLink>
-				</li>
 				<li className={urlChk('/card') ? 'is-active' : ''}>
 					<NavLink data-route="true" to={`${url}/card`} activeClassName="is-active">Card</NavLink>
-				</li>
-				<li className={urlChk('/parallax') ? 'is-active' : ''}>
-					<NavLink data-route="true" to={`${url}/parallax`} activeClassName="is-active">Parallax</NavLink>
 				</li>
 				<li className={urlChk('/accordion') && !urlChk('/accordion-slider') ? 'is-active' : ''}>
 					<NavLink data-route="true" to={`${url}/accordion`} activeClassName="is-active">Accordion</NavLink>
@@ -110,9 +108,6 @@ function HookContent() {
 				<li className={urlChk('/counter') ? 'is-active' : ''}>
 					<NavLink data-route="true" to={`${url}/counter`} activeClassName="is-active">Counter</NavLink>
 				</li>
-				<li className={urlChk('/dropdown-menu') ? 'is-active' : ''}>
-					<NavLink data-route="true" to={`${url}/dropdown-menu`} activeClassName="is-active">Dropdown Menu</NavLink>
-				</li>
 				<li className={urlChk('/modal-dialog') ? 'is-active' : ''}>
 					<NavLink data-route="true" to={`${url}/modal-dialog`} activeClassName="is-active">Modal Dialog</NavLink>
 				</li>
@@ -122,18 +117,122 @@ function HookContent() {
 				<li className={urlChk('/swiper') ? 'is-active' : ''}>
 					<NavLink data-route="true" to={`${url}/swiper`} activeClassName="is-active">Swiper</NavLink>
 				</li>
-				<li className={urlChk('/back-to-top') ? 'is-active' : ''}>
-					<NavLink data-route="true" to={`${url}/back-to-top`} activeClassName="is-active">Back To Top</NavLink>
-				</li>
+
 				<li className={urlChk('/lightbox') ? 'is-active' : ''}>
 					<NavLink data-route="true" to={`${url}/lightbox`} activeClassName="is-active">Lightbox</NavLink>
 				</li>
 				<li className={urlChk('/progress-bar') ? 'is-active' : ''}>
 					<NavLink data-route="true" to={`${url}/progress-bar`} activeClassName="is-active">Progress Bar</NavLink>
 				</li>
+				<li className={urlChk('/back-to-top') ? 'is-active' : ''}>
+					<NavLink data-route="true" to={`${url}/back-to-top`} activeClassName="is-active">Back To Top</NavLink>
+				</li>
+
+
+
+                {/*    /////////////////////////   */} 
+				<li className="uix-demo-nav-header">FORMS</li>
+				<li className={urlChk('#app-goto__input__section') ? 'is-active' : ''}>
+					<NavLink data-route="true" to={`${url}/form#app-goto__input__section`} activeClassName="is-active">Input</NavLink>
+				</li>
+				<li className={urlChk('#app-goto__password-input__section') ? 'is-active' : ''}>
+					<NavLink data-route="true" to={`${url}/form#app-goto__password-input__section`} activeClassName="is-active">Password Input</NavLink>
+				</li>
+				<li className={urlChk('#app-goto__textarea__section') ? 'is-active' : ''}>
+					<NavLink data-route="true" to={`${url}/form#app-goto__textarea__section`} activeClassName="is-active">Textarea</NavLink>
+				</li>
+				<li className={urlChk('#app-goto__select-normal__section') ? 'is-active' : ''}>
+					<NavLink data-route="true" to={`${url}/form#app-goto__select-normal__section`} activeClassName="is-active">Select (normal)</NavLink>
+				</li>
+				<li className={urlChk('#app-goto__custom-select__section') ? 'is-active' : ''}>
+					<NavLink data-route="true" to={`${url}/form#app-goto__custom-select__section`} activeClassName="is-active">Custom Select</NavLink>
+				</li>
+				<li className={urlChk('#app-goto__multiple-select__section') ? 'is-active' : ''}>
+					<NavLink data-route="true" to={`${url}/form#app-goto__multiple-select__section`} activeClassName="is-active">Multiple Select</NavLink>
+				</li>
+				<li className={urlChk('#app-goto__single-select__section') ? 'is-active' : ''}>
+					<NavLink data-route="true" to={`${url}/form#app-goto__single-select__section`} activeClassName="is-active">Single Select</NavLink>
+				</li>
+				<li className={urlChk('/forform#app-goto__switch__section') ? 'is-active' : ''}>
+					<NavLink data-route="true" to={`${url}/form#app-goto__switch__section`} activeClassName="is-active">Switch</NavLink>
+				</li>
+				<li className={urlChk('#app-goto__radio__section') ? 'is-active' : ''}>
+					<NavLink data-route="true" to={`${url}/form#app-goto__radio__section`} activeClassName="is-active">Radio</NavLink>
+				</li>
+				<li className={urlChk('#app-goto__date__section') ? 'is-active' : ''}>
+					<NavLink data-route="true" to={`${url}/form#app-goto__date__section`} activeClassName="is-active">Date</NavLink>
+				</li>
+				<li className={urlChk('#app-goto__checkbox__section') ? 'is-active' : ''}>
+					<NavLink data-route="true" to={`${url}/form#app-goto__checkbox__section`} activeClassName="is-active">Checkbox</NavLink>
+				</li>
+				<li className={urlChk('#app-goto__number__section') ? 'is-active' : ''}>
+					<NavLink data-route="true" to={`${url}/form#app-goto__number__section`} activeClassName="is-active">Number</NavLink>
+				</li>
+				<li className={urlChk('#app-goto__dynamic-fields__section') ? 'is-active' : ''}>
+					<NavLink data-route="true" to={`${url}/form#app-goto__dynamic-fields__section`} activeClassName="is-active">Dynamic Fields</NavLink>
+				</li>
+				<li className={urlChk('#app-goto__file__section') ? 'is-active' : ''}>
+					<NavLink data-route="true" to={`${url}/form#app-goto__file__section`} activeClassName="is-active">File</NavLink>
+				</li>
+				<li className={urlChk('#app-goto__file-field__section') ? 'is-active' : ''}>
+					<NavLink data-route="true" to={`${url}/form#app-goto__file-field__section`} activeClassName="is-active">File Field</NavLink>
+				</li>
+				<li className={urlChk('#app-goto__merge-input__section') ? 'is-active' : ''}>
+					<NavLink data-route="true" to={`${url}/form#app-goto__merge-input__section`} activeClassName="is-active">Merge Input</NavLink>
+				</li>
+				<li className={urlChk('#app-goto__flex-layout__section') ? 'is-active' : ''}>
+					<NavLink data-route="true" to={`${url}/form#app-goto__flex-layout__section`} activeClassName="is-active">Flex Layout</NavLink>
+				</li>
+								
+
+				{/*    /////////////////////////   */} 
+				<li className="uix-demo-nav-header">INTERACTION</li>
+				<li className={urlChk('/scroll-reveal') ? 'is-active' : ''}>
+					<NavLink data-route="true" to={`${url}/scroll-reveal`} activeClassName="is-active">Scroll Reveal</NavLink>
+				</li>
+				<li className={urlChk('/parallax') ? 'is-active' : ''}>
+					<NavLink data-route="true" to={`${url}/parallax`} activeClassName="is-active">Parallax</NavLink>
+				</li>
 				<li className={urlChk('/sticky-elements') ? 'is-active' : ''}>
 					<NavLink data-route="true" to={`${url}/sticky-elements`} activeClassName="is-active">Sticky Elements</NavLink>
 				</li>
+				<li className={urlChk('/infinite-scroll') ? 'is-active' : ''}>
+					<NavLink data-route="true" to={`${url}/infinite-scroll`} activeClassName="is-active">Infinite Scroll</NavLink>
+				</li>
+
+
+				{/*    /////////////////////////   */} 
+				<li className="uix-demo-nav-header">LAYOUT</li>
+				<li className={urlChk('/grid') ? 'is-active' : ''}>
+					<NavLink data-route="true" to={`${url}/grid`} activeClassName="is-active">Grid</NavLink>
+				</li>
+				<li className={urlChk('/gallery') ? 'is-active' : ''}>
+					<NavLink data-route="true" to={`${url}/gallery`} activeClassName="is-active">Gallery</NavLink>
+				</li>
+
+
+				{/*    /////////////////////////   */} 
+				<li className="uix-demo-nav-header">NAVIGATION</li>
+				<li className={urlChk('/navigation') ? 'is-active' : ''}>
+					<NavLink data-route="true" to={`${url}/navigation`} activeClassName="is-active">Navigation</NavLink>
+				</li>
+				<li className={urlChk('/dropdown-menu') ? 'is-active' : ''}>
+					<NavLink data-route="true" to={`${url}/dropdown-menu`} activeClassName="is-active">Dropdown Menu</NavLink>
+				</li>
+				<li className={urlChk('/multilevel-dropdown-menu') ? 'is-active' : ''}>
+					<NavLink data-route="true" to={`${url}/multilevel-dropdown-menu`} activeClassName="is-active">Multiple-Level Dropdown Menu</NavLink>
+				</li>
+				<li className={urlChk('/cascading-dropDown-list') ? 'is-active' : ''}>
+					<NavLink data-route="true" to={`${url}/cascading-dropDown-list`} activeClassName="is-active">Cascading DropDown List</NavLink>
+				</li>
+
+
+				{/*    /////////////////////////   */} 
+				<li className="uix-demo-nav-header">MEDIA</li>
+				<li className={urlChk('/video') ? 'is-active' : ''}>
+					<NavLink data-route="true" to={`${url}/video`} activeClassName="is-active">Video</NavLink>
+				</li>
+
 
 			</ul>
 		</div>
@@ -176,6 +275,7 @@ function HookContent() {
 						<Route path={`${path}/button`}><ButtonDemo/></Route>
 						<Route path={`${path}/form`}><FormDemo/></Route>
 						<Route path={`${path}/grid`}><GridDemo/></Route>
+						<Route path={`${path}/pagination`}><PaginationDemo/></Route>
 						<Route path={`${path}/tabs`}><TabsDemo/></Route>
 						<Route path={`${path}/tabs-animated`}><TabsAnimatedDemo/></Route>
 						<Route path={`${path}/video`}><VideoDemo/></Route>
@@ -195,7 +295,15 @@ function HookContent() {
 						<Route path={`${path}/back-to-top`}><BackToTopDemo/></Route>
 						<Route path={`${path}/lightbox`}><LightboxDemo/></Route>
 						<Route path={`${path}/progress-bar`}><ProgressBarDemo/></Route>
-						<Route path={`${path}/sticky-elements`}><StickyElementsDemo/></Route>								
+						<Route path={`${path}/sticky-elements`}><StickyElementsDemo/></Route>
+						<Route path={`${path}/multilevel-dropdown-menu`}><MultilevelDropdownMenuDemo/></Route>
+						<Route path={`${path}/cascading-dropDown-list`}><CascadingDropDownListDemo/></Route>
+						<Route path={`${path}/gallery`}><GalleryDemo/></Route>
+						<Route path={`${path}/infinite-scroll`}><InfiniteScrollDemo/></Route>
+						<Route path={`${path}/navigation`}><NavigationDemo/></Route>
+
+
+						
 
 					</Switch>
 
@@ -231,7 +339,7 @@ class ComponentsDemo extends Component {
 					top: 70px;
 					bottom: 0;
 					box-sizing: border-box;
-					width: 240px;
+					width: 300px;
 					padding: 40px 40px 60px 40px;
 					border-right: 1px #e5e5e5 solid;
 					overflow: auto;
@@ -259,6 +367,10 @@ class ComponentsDemo extends Component {
 				.uix-demo-nav-header {
 					padding: 8px 0;
 					border-bottom: 1px solid #e5e5e5;
+					font-weight: 500;
+					opacity: .7;
+					letter-spacing: 0.5px;
+					padding-top: 1rem;
 				}
 
 				.uix-demo-nav li {
@@ -331,7 +443,7 @@ class ComponentsDemo extends Component {
 					margin-right: auto;
 					padding-bottom: 70px;
 					/* Do not use "transform", it will affect the "position:fixed" effect of the child */
-					left: 100px;
+					left: 160px;
 				}
 				
 				@media all and (max-width: 768px) {
@@ -358,7 +470,7 @@ class ComponentsDemo extends Component {
 				@media all and (min-width: 1441px) {
 					.uix-demo-container {
 						max-width: 1140px;
-						left: 0;
+						left: 60px;
 					}
 				}
 

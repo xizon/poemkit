@@ -18,7 +18,7 @@ class LoginPage extends Component {
         };
 
 		
-		this.wrapperRef = React.createRef();
+		this.rootRef = React.createRef();
 		
 		
         this.handlePassChange = this.handlePassChange.bind(this);
@@ -45,7 +45,7 @@ class LoginPage extends Component {
         e.preventDefault();
 		
 		const self = this;
-		const root = self.wrapperRef.current;
+		const root = self.rootRef.current;
 		const $selectWrapper = __( root );
 
 	
@@ -210,7 +210,7 @@ class LoginPage extends Component {
 						| <a href="#" onClick={this.signOut}>Sign out</a>
 					</div>	
                   :
-                    <div ref={this.wrapperRef}>
+                    <div ref={this.rootRef}>
 						<p>Test Account: <code>admin</code> Password: <code>admin</code></p>
                         <form onSubmit={this.handleSubmit.bind(this)}>
 

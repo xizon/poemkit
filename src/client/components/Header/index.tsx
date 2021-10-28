@@ -15,6 +15,11 @@ import '@uixkit.react/components/_utils/styles/_all.scss';
 import '@uixkit.react/components/_utils/styles/rtl/_all.scss';
 import { __ } from '@uixkit.react/components/_utils/_all';
 
+/*-- Apply this component styles --*/
+import '@uixkit.react/components/Header/styles/_style.scss';
+import '@uixkit.react/components/Header/styles/rtl/_style.scss';
+
+
 //get project config
 import { rootDirectory } from '@uixkit.react/config/websiteConfig.js';
 
@@ -23,15 +28,24 @@ import { rootDirectory } from '@uixkit.react/config/websiteConfig.js';
 import Navigation from '@uixkit.react/components/Navigation/index';
 
 
+
 type HeaderProps = {
+	/** `true` will set the Header to overlay the top of the page. 
+	 * The header is the element at the top of the web page. This element appears on every 
+	 * single page of the site and usually contains a logo, a menu to access different sections 
+	 * of the site, a search bar, and contact information. */
 	headerOverlayEnabled: boolean | string | undefined;
-	menu?: string | object;
+	/** Specify data of Navigation List as a JSON string format. Please refer to the `data` attribute of the component <Navigation /> */
+	menu?: any[any];
+	/** Specify a LOGO via HTML Element */
+	logo?: React.ReactNode;
 };
 type HeaderState = false;
 
 export default class Header extends Component<HeaderProps, HeaderState> {
 
     windowScrollUpdate: () => void;
+	windowResizeUpdate: () => void;
     
     constructor(props) {
         super(props);
@@ -40,6 +54,9 @@ export default class Header extends Component<HeaderProps, HeaderState> {
         // Add a scroll event listener to window
         this.handleScrollEvent = this.handleScrollEvent.bind(this);
         this.windowScrollUpdate = __.throttle(this.handleScrollEvent, 5);
+
+		// Add a resize event listener to window
+		this.windowResizeUpdate = ()=>{};
 
     }
 
@@ -55,7 +72,7 @@ export default class Header extends Component<HeaderProps, HeaderState> {
 
     }
 
-	componentDidMount(){
+	componentDidMount() {
 		
 		const self = this;
 	
@@ -110,9 +127,10 @@ export default class Header extends Component<HeaderProps, HeaderState> {
 						}
 					}
 					
-					const debounceFunc = __.debounce(windowUpdate, 50);
-					window.removeEventListener('resize', debounceFunc);
-					window.addEventListener('resize', debounceFunc);
+					// Add function to the window that should be resized
+					self.windowResizeUpdate = __.debounce(windowUpdate, 50) as unknown as () => void;
+					window.removeEventListener('resize', self.windowResizeUpdate);
+					window.addEventListener('resize', self.windowResizeUpdate);
 					
 
 
@@ -145,6 +163,9 @@ export default class Header extends Component<HeaderProps, HeaderState> {
         window.removeEventListener('scroll', this.windowScrollUpdate);
         window.removeEventListener('touchmove', this.windowScrollUpdate);  
 
+		// Remove resize events from window
+		window.removeEventListener('resize', this.windowResizeUpdate);
+
 
     }
 
@@ -154,6 +175,7 @@ export default class Header extends Component<HeaderProps, HeaderState> {
 		const { 
 			menu,
 			headerOverlayEnabled,
+			logo
 		} = this.props;
 		
 		
@@ -171,13 +193,24 @@ export default class Header extends Component<HeaderProps, HeaderState> {
 				 <div className="uix-header">
 					 <div className="container">
 
-			
-							<div className="uix-brand">
-								<a href={`${rootDirectory}/index`}><img src={`${rootDirectory}/assets/images/logo.png`} alt="Uix Kit React" /></a>             
-							</div>
-							{/*<!-- .uix-brand end -->*/}
-
-							<Navigation htmlString={menu} />
+							{logo ? <><div className="uix-brand">{logo}</div></> : null}
+					
+							<Navigation 
+							    displayMobileNav={true}
+								data={menu} 
+								label="Uix Kit React" 
+								mobileLogo={`${rootDirectory}/assets/images/logo-colorful.png`} 
+								tools={<>
+									<a className="uix-social-btn uix-social-btn--small uix-social-btn--circle uix-social-btn--thin" title="Follow us on Twitter" href="https://twitter.com/uiux_lab" target="_blank">
+										<i className="fa fa-twitter"></i>
+									</a>
+									<a className="uix-social-btn uix-social-btn--small uix-social-btn--circle uix-social-btn--thin" title="Follow us on Facebook" href="https://www.facebook.com/uiuxlabhome" target="_blank">
+										<i className="fa fa-facebook"></i>
+									</a>
+									<a className="uix-social-btn uix-social-btn--small uix-social-btn--circle uix-social-btn--thin" title="Fork on Github" href="https://github.com/xizon/uix-kit-react" target="_blank">
+										<i className="fa fa-github"></i>
+									</a>
+							</>}/>	
 
 
 					  </div>

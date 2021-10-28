@@ -11,7 +11,7 @@ class PostDetail extends Component {
 		super(props);
 	}
 
-	
+
 	//Static properties/methords are the properties of the class. 
 	//@link to: `src/server/app.js`
 	/*
@@ -24,7 +24,7 @@ class PostDetail extends Component {
 		}	
 	
 	*/
-	
+
 	/*
 	Dispatch an async function. The `redux-thunk` middleware handles running this function.
 	Implementation principle:
@@ -43,7 +43,7 @@ class PostDetail extends Component {
 					axios({
 						timeout: 15000,
 						method: 'get',
-						url: `http://api.countrylayer.com/v2/name/${currentID}?access_key=8ef27495767eb3ea58cc0eabf66068e9`,
+						url: `https://restcountries.com/v2/name/${currentID}`,
 						responseType: 'json'
 					}).then(function (response) {
 						resolve( response );
@@ -90,152 +90,160 @@ class PostDetail extends Component {
 
 	
 	*/
-    static appSyncRequestFetching( storeAPI ) {
+	static appSyncRequestFetching(storeAPI) {
 		const AppDispatch = storeAPI.dispatch;
 		const AppPath = storeAPI.path;
-		
+
 		//
-		const currentID = AppPath.split( '/' ).pop();
+		const currentID = AppPath.split('/').pop();
 		const data = actionCreators(currentID);
-		
-		return [ AppDispatch(data) ];
-    } 
-	
+
+		return [AppDispatch(data)];
+	}
 
 
-    componentDidMount() {
 
-		//Receive contentInformation redux from the parent page
-		console.log('[detail of post]this.props:' );
+	componentDidMount() {
+
+		//Receive redux from the parent page
+		console.log('[detail of post]this.props:');
 		console.log(this.props);
-		
-		
-		
-		const { contentInformation } = this.props;
-
-		// Request data
-        contentInformation(actionCreators( this.props.match.params.post_id ));
-		
-		
-        
-    }
 
 
-	
-  render() {
-    // Bind data and display
-    const preloadedState = this.props.currentData;
-	  
-	//loader
-	let isLoaded = false;
- 
-    if ( preloadedState == null ) {
-        console.log( 'preloadedState: null' );
-    } else {
-        console.log( 'preloadedState: Return an Array' );
-		isLoaded = true;
-		
-		
-		//change page title
-		//------------------------------------------
-		if (typeof(document) !== 'undefined') {
-			
-			// update page title
-			document.title =  `${preloadedState[0].name} - ${customRoutesConfig[0].routes[0].pageTitle}`;
+		//from `mapDispatchToProps()`
+		this.props.actionCreators(this.props.match.params.post_id);
+
+
+	}
+
+
+
+	render() {
+
+		//from `mapStateToProps()`
+		const preloadedState = this.props.currentData;
+
+		//loader
+		let isLoaded = false;
+
+		if (preloadedState == null) {
+			console.log('preloadedState: null');
+		} else {
+			console.log('preloadedState: Return an Array');
+			isLoaded = true;
+
+
+			//change page title
+			//------------------------------------------
+			if (typeof (document) !== 'undefined') {
+
+				// update page title
+				document.title = `${preloadedState[0].name} - ${customRoutesConfig[0].routes[0].pageTitle}`;
+			}
+
+
 		}
-		
-		
-    }
-	  
-	  
-    
-    return (
-	  <>
-   
-		
-            <main id="uix-maincontent">
-		
-				{/*
-				<!-- Content   
-				====================================================== -->	
-				*/}
-				<section className="uix-spacing--s">
-					<div className="container">
+
+
+
+		return (
+			<>
+
+
+				<main id="uix-maincontent">
+
+					{/*
+					<!-- Content   
+					====================================================== -->	
+					*/}
+					<section className="uix-spacing--s">
+						<div className="container">
 							<div className="row">
 								<div className="col-12">
 
 									<div className="alert alert-warning" role="alert">
-									If the API asynchronous request failed (usually a 403 permission error), the error report <strong>`502 Proxy Error`</strong> of the Express Server will be skipped, and cannot use server-side rendering (SSR) features.<br />
-									The test on the local server is correct, this error usually occurs on the cloud server.
+										If the API asynchronous request failed (usually a 403 permission error), the error report <strong>`502 Proxy Error`</strong> of the Express Server will be skipped, and cannot use server-side rendering (SSR) features.<br />
+										The test on the local server is correct, this error usually occurs on the cloud server.
 									</div>
 
-		
-									{ isLoaded ? (
 
-										( preloadedState != null ) ? preloadedState.map((item, i) => 
+									{isLoaded ? (
 
-											  <div key={"detail"+i} style={{padding: "15px", margin: "10px", display: "inline-block", border: "1px solid #ddd", width: "420px", textAlign: "left", position: "relative"}}>
+										(preloadedState != null) ? preloadedState.map((item, i) =>
 
-													<img src={item.flag} alt="" style={{width: "400px", display: "inline-block" }} />
-													<hr />
-													<p><strong>Name: </strong>{item.name}</p>
-													<p><strong>Capital: </strong>{item.capital}</p>
-													<p><strong>Population: </strong>{item.population}</p>
-													<p><strong>Subregion: </strong>{item.subregion}</p>
+											<div key={"detail" + i} style={{ padding: "15px", margin: "10px", display: "inline-block", border: "1px solid #ddd", width: "420px", textAlign: "left", position: "relative" }}>
 
-											  </div>  )
-										 : ""
+												<img src={item.flag} alt="" style={{ width: "400px", display: "inline-block" }} />
+												<hr />
+												<p><strong>Name: </strong>{item.name}</p>
+												<p><strong>Capital: </strong>{item.capital}</p>
+												<p><strong>Population: </strong>{item.population}</p>
+												<p><strong>Subregion: </strong>{item.subregion}</p>
+
+											</div>)
+											: ""
 
 									) : (
-									  <div>Loading...</div>
+										<div>Loading...</div>
 									)}
-		
-		
+
+
 								</div>
 							</div>
 							{/*<!-- .row end -->*/}
 
 
-					</div>
-					{/*<!-- .container end -->*/}
-				</section>
-		
-
-            </main>
+						</div>
+						{/*<!-- .container end -->*/}
+					</section>
 
 
-             <Footer />
-          
-      </>
+				</main>
 
-    );
-  }
+
+				<Footer />
+
+			</>
+
+		);
+	}
 
 }
 
-    
-// Subscribe to the required state in the reducers is bound 
-// here (for details of the data structure: initState)
-const mapStateToProps = (storeState) => {
-    return {
-        currentData: storeState.listDetailData.detail   //Receive redux
-    }
+
+// Subscribe to the required state in the reducers is bound here (for details of the data structure: initState)
+// You can call it in `this.props`
+const mapStateToProps = (state) => {
+	const { listDetailData } = state; //Receive redux
+
+	return {
+		currentData: listDetailData.detail
+	}
 };
 
-// Bind the introduced Actions
-const mapDispatchToProps = (storeDispatch) => {
-    return {
-        contentInformation: storeDispatch   //Throw redux
-    }
-};
+// Bind the introduced Actions. You will normally make use of this by returning new functions that call `dispatch()` inside themselves
+// You can call it in `this.props`
+/*
+Like this:
+const mapDispatchToProps = (dispatch) => {
+	return {
+		increment: () => dispatch({ type: 'INCREMENT' }),
+		decrement: () => dispatch({ type: 'DECREMENT' }),
+	}
+}
+*/
+const mapDispatchToProps = {
+	actionCreators
+}
+
 
 
 // The most important step is to bind the required Reducer and Actions to the current page 
 // through the connect function provided by react-redux
 
 export default connect(
-    mapStateToProps, 
-    mapDispatchToProps
+	mapStateToProps,
+	mapDispatchToProps
 )(PostDetail);
 
 

@@ -79,7 +79,11 @@ export function parallax( curElement: any, config: parallaxConfig ) {
     window.removeEventListener('touchmove', throttleFunc);
     window.addEventListener('scroll', throttleFunc);
     window.addEventListener('touchmove', throttleFunc);
-    throttleFunc();
+    
+    // Prevent calculation errors caused by unloaded completion
+    __( document ).ready( () => {
+        throttleFunc();
+    });
 
 
     return throttleFunc;
@@ -87,4 +91,4 @@ export function parallax( curElement: any, config: parallaxConfig ) {
 
 }
 
-export default { parallax };
+export default parallax;

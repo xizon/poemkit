@@ -588,4 +588,4 @@ export function fireLightbox(curElement: any, config: fireLightboxConfig) {
 
 }
 
-export default { fireLightbox };
+export default fireLightbox;

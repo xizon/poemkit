@@ -4,8 +4,6 @@ import React, { Component } from 'react';
 type ItemProps = {
     /** Specify URL each item. Support image and video.  */
     url?: string | undefined;
-    /** -- */
-    children?: any;
 };
 type ItemState = false;
 

@@ -2,8 +2,6 @@ import React, { Component } from 'react';
 
 type TabListProps = {
 	defaultActive?: string | boolean | undefined;
-	/** -- */
-	children?: any;
 };
 type TabListState = false;
 

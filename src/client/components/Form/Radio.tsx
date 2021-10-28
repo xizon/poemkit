@@ -33,10 +33,13 @@ type RadioState = false;
 
 
 export default class Radio extends Component<RadioProps, RadioState> {
+
+	uniqueID: string;
 	
 	constructor(props) {
 		super(props);
 		
+		this.uniqueID = 'app-' + __.GUID.create();
 	}
 
 
@@ -54,7 +57,7 @@ export default class Radio extends Component<RadioProps, RadioState> {
 		
 		
 		const nameRes = typeof(name) === 'undefined' ? '' : name;
-		const idRes = id ? id : 'app-control-' + __.GUID.create();
+		const idRes = id || this.uniqueID;
 		const wrapperClassDisabled = disabled ? ' is-disabled' : '';
 		
 		// Get all options from option prop

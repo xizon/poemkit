@@ -11,8 +11,8 @@ class Posts extends Component {
 	constructor(props) {
 		super(props);
 	}
-    
-	
+
+
 	//Static properties/methords are the properties of the class. 
 	//@link to: `src/server/app.js`
 	/*
@@ -25,7 +25,7 @@ class Posts extends Component {
 		}	
 	
 	*/
-	
+
 	/*
 	Dispatch an async function. The `redux-thunk` middleware handles running this function.
 	Implementation principle:
@@ -41,7 +41,7 @@ class Posts extends Component {
 				axios({
 					timeout: 15000,
 					method: 'get',
-					url: `http://api.countrylayer.com/v2/all?access_key=8ef27495767eb3ea58cc0eabf66068e9`,
+					url: `https://examples.com`,
 					responseType: 'json'
 				}).then(function (response) {
 					resolve( response );
@@ -85,115 +85,126 @@ class Posts extends Component {
 
 	
 	*/
-    static appSyncRequestFetching( storeAPI ) {
+	static appSyncRequestFetching(storeAPI) {
 		const AppDispatch = storeAPI.dispatch;
-		
+
 		//
 		const data = actionCreators();
-		return [ AppDispatch(data) ];
-    } 
+		return [AppDispatch(data)];
+	}
 
-	
-    componentDidMount() {
-   
-		//Receive contentInformation redux from the parent page
-		console.log('[posts list]this.props:' );
+
+	componentDidMount() {
+
+		//Receive redux from the parent page
+		console.log('[posts list]this.props:');
 		console.log(this.props);
-		
+
 		const { contentInformation } = this.props;
 
-		// Request data
-        contentInformation(actionCreators());
-		
-   
-        
-    }
+		//from `mapDispatchToProps()`
+		this.props.actionCreators();
 
-	
-	
-	
 
-  render() {
-    // Bind data and display
-    const preloadedState = this.props.currentData;
-	  
-	//loader
-	let isLoaded = false;
 
-    if ( preloadedState == null ) {
-        console.log( 'preloadedState: null' );
-    } else {
-        console.log( 'preloadedState: Return an Array' );
-		isLoaded = true;
-    }
-    
-    return (
-	  <>
-   
-		
-            <main id="uix-maincontent">
-		
-				{/*
-				<!-- Content   
-				====================================================== -->	
-				*/}
-				<section className="uix-spacing--s">
-					<div className="container">
+	}
+
+
+
+
+
+	render() {
+
+		//from `mapStateToProps()`
+		const preloadedState = this.props.currentData;
+
+		//loader
+		let isLoaded = false;
+
+		if (preloadedState == null) {
+			console.log('preloadedState: null');
+		} else {
+			console.log('preloadedState: Return an Array');
+			isLoaded = true;
+		}
+
+		return (
+			<>
+
+
+				<main id="uix-maincontent">
+
+					{/*
+					<!-- Content   
+					====================================================== -->	
+					*/}
+					<section className="uix-spacing--s">
+						<div className="container">
 							<div className="row">
 								<div className="col-12">
 
 
 									<div className="alert alert-warning" role="alert">
-									If the API asynchronous request failed (usually a 403 permission error), the error report <strong>`502 Proxy Error`</strong> of the Express Server will be skipped, and cannot use server-side rendering (SSR) features.<br />
-									The test on the local server is correct, this error usually occurs on the cloud server.
+										If the API asynchronous request failed (usually a 403 permission error), the error report <strong>`502 Proxy Error`</strong> of the Express Server will be skipped, and cannot use server-side rendering (SSR) features.<br />
+										The test on the local server is correct, this error usually occurs on the cloud server.
 									</div>
 
-									{ isLoaded ? (
+									{isLoaded ? (
 
-								      ( preloadedState != null ) ? preloadedState.map((item, i) => <PostItem key={i} {...item} />) : ""
+										(preloadedState != null) ? preloadedState.map((item, i) => <PostItem key={i} {...item} />) : ""
 
 									) : (
-									  <div>Loading...</div>
+										<div>Loading...</div>
 									)}
-		
+
 								</div>
 							</div>
 							{/*<!-- .row end -->*/}
 
 
-					</div>
-					{/*<!-- .container end -->*/}
-				</section>
-		
+						</div>
+						{/*<!-- .container end -->*/}
+					</section>
 
-            </main>
-																   
-			<Footer />											   
-																   
-       
-          
-      </>
 
-    );
-  }
+				</main>
+
+				<Footer />
+
+
+
+			</>
+
+		);
+	}
 
 }
 
-    
-// Subscribe to the required state in the reducers is bound 
-// here (for details of the data structure: initState)
-const mapStateToProps = (storeState) => {
-    return {
-        currentData: storeState.listData.items  //Receive redux
-    }
+
+// Subscribe to the required state in the reducers is bound here (for details of the data structure: initState)
+// You can call it in `this.props`
+const mapStateToProps = (state) => {
+	const { listData } = state; //Receive redux
+
+	return {
+		currentData: listData.items
+	}
 };
 
-// Bind the introduced Actions
-const mapDispatchToProps = (storeDispatch) => {
-    return {
-        contentInformation: storeDispatch  //Throw redux
-    }
-};
+// Bind the introduced Actions. You will normally make use of this by returning new functions that call `dispatch()` inside themselves
+// You can call it in `this.props`
+/*
+Like this:
+const mapDispatchToProps = (dispatch) => {
+	return {
+		increment: () => dispatch({ type: 'INCREMENT' }),
+		decrement: () => dispatch({ type: 'DECREMENT' }),
+	}
+}
+*/
+const mapDispatchToProps = {
+	actionCreators
+}
 
 
 
@@ -201,8 +212,8 @@ const mapDispatchToProps = (storeDispatch) => {
 // through the connect function provided by react-redux
 
 export default connect(
-    mapStateToProps, 
-    mapDispatchToProps
+	mapStateToProps,
+	mapDispatchToProps
 )(Posts);
 
 

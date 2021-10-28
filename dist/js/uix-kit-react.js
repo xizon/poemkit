@@ -6,9 +6,9 @@
  * ## Project Name        :  Uix Kit React
  * ## Project Description :  A free web kits with React for fast web design and development via SSR.
  * ## Project URL         :  https://uiux.cc
- * ## Version             :  0.1.2
+ * ## Version             :  0.1.3
  * ## Based on            :  Uix Kit React (https://github.com/xizon/uix-kit-react#readme)
- * ## Last Update         :  October 13, 2021
+ * ## Last Update         :  October 28, 2021
  * ## Created by          :  UIUX Lab (https://uiux.cc) (uiuxlab@gmail.com)
  * ## Released under the MIT license.
  *
@@ -4357,6 +4357,9 @@ var EventDispatcher = nonGlobals.events.EventDispatcher;
 /***/ 1929:
 /***/ ((module) => {
 
+/**
+ * Corresponding to folder `./src/client/actions/*`
+ */
 var ROOT_DIR = "";
 var config = {
   // If the file is in the root directory, you can leave it empty. If in another directory, 
@@ -4366,17 +4369,27 @@ var config = {
     /*
      TYPE: Posts
      ------------------------------------------
-        Corresponding to folder `./src/client/actions/*`
     */
-    "RECEIVE_DEMO_LIST": "http://api.countrylayer.com/v2/all?access_key=8ef27495767eb3ea58cc0eabf66068e9",
-    "RECEIVE_DEMO_LISTDETAIL": "http://api.countrylayer.com/v2/name/{id}?access_key=8ef27495767eb3ea58cc0eabf66068e9",
+    "RECEIVE_DEMO_LIST": "https://restcountries.com/v2/all",
+    "RECEIVE_DEMO_LISTDETAIL": "https://restcountries.com/v2/name/{id}",
     //"RECEIVE_DEMO_LIST": `https://uiux.cc${ROOT_DIR}/assets/json/Posts.json`,
-    //"RECEIVE_DEMO_LISTDETAIL": `https://uiux.cc${ROOT_DIR}/assets/json/PostDetail.json`,
+    //"RECEIVE_DEMO_LISTDETAIL": `https://uiux.cc${ROOT_DIR}/assets/json/PostDetail.json?id={id}`,
+
+    /*
+     TYPE: Posts Pagination
+     ------------------------------------------
+    */
+    "RECEIVE_PAGE_LIST": "https://uiux.cc/server/posts-pagination.php?page={page}",
+
+    /*
+     TYPE: DropDown List
+     ------------------------------------------
+    */
+    "RECEIVE_DROPDOWN_LIST": "https://uiux.cc/server/dropdown-list.php",
 
     /*
      TYPE: User
      ------------------------------------------
-        Corresponding to folder `./src/client/services/*`
     */
     "LOGIN_REQUEST": "https://uiux.cc/server/sessions-create.php",
     "USER_AUTHENTICATE": "https://uiux.cc/server/authenticate.php",
@@ -4395,15 +4408,25 @@ var configTest = {
     /*
      TYPE: Posts
      ------------------------------------------
-        Corresponding to folder `./src/client/actions/*`
     */
     "RECEIVE_DEMO_LIST": "http://localhost:8888/uix-kit-react/public/assets/json/Posts.json",
-    "RECEIVE_DEMO_LISTDETAIL": "http://localhost:8888/uix-kit-react/public/assets/json/PostDetail.json",
+    "RECEIVE_DEMO_LISTDETAIL": "http://localhost:8888/uix-kit-react/public/assets/json/PostDetail.json?id={id}",
+
+    /*
+     TYPE: Posts Pagination
+     ------------------------------------------
+    */
+    "RECEIVE_PAGE_LIST": "http://localhost:8888/uix-kit-react/public/assets/json/pagination/page-{page}.json",
+
+    /*
+     TYPE: DropDown List
+     ------------------------------------------
+    */
+    "RECEIVE_DROPDOWN_LIST": "http://localhost:8888/uix-kit-react/public/assets/json/DropDownList.json",
 
     /*
      TYPE: User
      ------------------------------------------
-        Corresponding to folder `./src/client/services/*`
     */
     "LOGIN_REQUEST": "http://localhost:8888/uix-kit-react/public/server/sessions-create.php",
     "USER_AUTHENTICATE": "http://localhost:8888/uix-kit-react/public/server/authenticate.php",
@@ -31007,8 +31030,8 @@ var esm_typeof = __webpack_require__(484);
  * Core Helpers
  *
  * @package: uix-kit-react
- * @version: 0.36
- * @last update: October 13, 2021
+ * @version: 0.40
+ * @last update: October 23, 2021
  * @author: UIUX Lab <uiuxlab@gmail.com>
  * @license: MIT
  *
@@ -31096,16 +31119,25 @@ __( document ).ready( function() {
 			__( 'h1' ).wrapInner( '<span class="new-div" />' );
 			√√
 			__( 'h1' ).text( 'New H1' );
+
 			__( '.demo1' ).prev().addClass( 'prev' );
 			__( '.demo2' ).next().addClass( 'next' );
 			__( '.demo3' ).parent().addClass( 'parent' );
 			__( '.menu' ).parents().addClass( 'all-parents' );
-			__( '.menu' ).parents( '.menu__inner' ).addClass( 'parent-target' );
 			__( '.demo' ).children().addClass( 'children-all' );
+			__( '.class-1' ).siblings().addClass( 'class-siblings' );
+
+			__( '.demo1' ).prev( 'ul' ).addClass( 'prev' );
+			__( '.demo2' ).next( 'ul' ).addClass( 'next' );
+			__( '.demo3' ).parent( 'ul' ).addClass( 'parent' );
+			__( '.menu' ).parents( 'ul' ).addClass( 'all-parents' );
 			__( '.demo' ).children( '.demo-children2' ).addClass( 'children-single' );
+			__( '.class-1' ).siblings( 'ul' ).addClass( 'class-siblings' );
+
+
 			__( '.class-1' ).not( '.class-2' ).addClass( 'class-not' );
 			__( '.class-1' ).filter( '.class-2' ).addClass( 'class-filter' );
-			__( '.class-1' ).siblings().addClass( 'class-siblings' );
+			
 			__( '.demo' ).trigger( 'click' );
 			__( '.demo' ).toggleClass( 'class-toggle-1 class-toggle-2' );
 
@@ -31249,7 +31281,7 @@ __( document ).ready( function() {
 			// AJAX demos
 			//+++++++++++++++++++++++++++++++++++++++++++
 			__.ajax({
-				url: 'http://api.countrylayer.com/v2/name/Argentina?access_key=8ef27495767eb3ea58cc0eabf66068e9',
+				url: 'https://restcountries.com/v2/name/Argentina',
 				method: 'GET',
 				complete: function( data ) {
 					console.log( '=> ajax ok!' );
@@ -31438,9 +31470,14 @@ var __ = function () {
       if (computedStyle) {
         // This will be true on nearly all browsers
         _val = computedStyle[attr]; //return ??px
-      }
+      } // if getComputedStyle return 'auto'
 
-      var newVal = /\d+/.exec(_val);
+
+      if (attr === 'height' && _val === 'auto') return actualPropertyValue(self, 'height');
+      if (attr === 'width' && _val === 'auto') return actualPropertyValue(self, 'width'); //
+
+      var newVal = /\d+/.exec(_val); // Array ["123"]
+
       return parseFloat(newVal);
     } else {
       return 0;
@@ -31605,6 +31642,80 @@ var __ = function () {
     } else {
       return str;
     }
+  }
+  /*
+  * Get the actual value with user specific methed
+  * it can be 'width', 'height', 'outerWidth', 'outerHeight'
+  * @private
+  * @param {Element} el           - A DOM node containing one selector to match against.
+  * @param {String} prop          - A string naming the property of style.
+  * @param {?Json} config         - Whether or not margin is included. The key `includeMargin` 
+                                    takes effect when set to true
+  * @return {Number}              - Returns a pure number.
+  */
+
+
+  function actualPropertyValue(el, prop, config) {
+    var style = window.getComputedStyle ? window.getComputedStyle(el) : el.currentStyle,
+        display = style.display,
+        position = style.position,
+        visibility = style.visibility;
+    var marginWidth = 0;
+    var marginHeight = 0;
+    var maxVal;
+    var actualVal;
+
+    if (config && config.includeMargin === true) {
+      marginWidth = parseFloat(style.marginLeft) + parseFloat(style.marginRight);
+      marginHeight = parseFloat(style.marginTop) + parseFloat(style.marginBottom);
+    }
+
+    if (prop === 'width') {
+      maxVal = parseFloat(style.maxWidth); // if its not hidden we just return normal height
+
+      if (display !== 'none' && maxVal !== '0') {
+        return el.clientWidth;
+      }
+    }
+
+    if (prop === 'height') {
+      maxVal = parseFloat(style.maxHeight);
+
+      if (display !== 'none' && maxVal !== '0') {
+        return el.clientHeight;
+      }
+    }
+
+    if (prop === 'outerWidth') {
+      maxVal = parseFloat(style.maxWidth);
+
+      if (display !== 'none' && maxVal !== '0') {
+        return el.offsetWidth + marginWidth;
+      }
+    }
+
+    if (prop === 'outerHeight') {
+      maxVal = parseFloat(style.maxHeight);
+
+      if (display !== 'none' && maxVal !== '0') {
+        return el.offsetHeight + marginHeight;
+      }
+    } // the element is hidden so:
+    // making the el block so we can meassure its height but still be hidden
+
+
+    el.style.position = 'absolute';
+    el.style.visibility = 'hidden';
+    el.style.display = 'block';
+    if (prop === 'width') actualVal = el.clientWidth;
+    if (prop === 'height') actualVal = el.clientHeight;
+    if (prop === 'outerWidth') actualVal = el.offsetWidth + marginWidth;
+    if (prop === 'outerHeight') actualVal = el.offsetHeight + marginHeight; // reverting to the original values
+
+    el.style.display = display;
+    el.style.position = position;
+    el.style.visibility = visibility;
+    return actualVal;
   }
   /*
   * Some easing functions
@@ -31896,7 +32007,7 @@ var __ = function () {
     /*
      * Get the -webkit-transition-duration property
      *
-     * @param {Element} el - A DOMString containing one selector to match against.
+     * @param {Element} el - A DOM node containing one selector to match against.
      * @return {Number}    - Returns a pure number.
      */
     t.getTransitionDuration = function (el) {
@@ -31920,7 +32031,7 @@ var __ = function () {
     /*
      * Get an object's absolute position on the page
      *
-     * @param {Element} el - A DOMString containing one selector to match against.
+     * @param {Element} el - A DOM node containing one selector to match against.
      * @return {Json}    - An object containing the properties top and left. 
      */
     t.getAbsoluteCoordinates = function (el) {
@@ -31933,7 +32044,7 @@ var __ = function () {
         topPos = el.offsetTop == 0 ? el.parentElement.offsetTop : el.offsetTop;
       } else {
         // width and height in pixels, including padding and border
-        // Corresponds to jQuery outerWidth(), outerHeight()
+        // Corresponds to outerWidth(), outerHeight()
         leftPos = el.offsetLeft == 0 ? windowWidth - (el.parentElement.offsetLeft + el.parentElement.offsetWidth) : windowWidth - (el.offsetLeft + el.offsetWidth);
         topPos = el.offsetTop == 0 ? windowWidth - (el.parentElement.offsetTop + el.parentElement.offsetHeight) : windowWidth - (el.offsetTop + el.offsetHeight);
       }
@@ -32190,10 +32301,21 @@ var __ = function () {
 
 
   __.htmlEncode = function (str) {
-    var div = document.createElement('div'); //Creates a new Text node. This method can be used to escape HTML characters.
+    var res = '';
 
-    div.appendChild(document.createTextNode(str));
-    var res = div.innerHTML;
+    if (typeof document === 'undefined') {
+      res = str.replace(/[\u00A0-\u9999<>\&]/g, function (i) {
+        return '&#' + i.charCodeAt(0) + ';';
+      });
+    } else {
+      var div = document.createElement('div'); //Creates a new Text node. This method can be used to escape HTML characters.
+
+      div.appendChild(document.createTextNode(str));
+      res = div.innerHTML;
+    } //Convert single and double quotes
+
+
+    res = res.replace(/"/g, '&quot;').replace(/'/g, '&#39;');
     return res;
   };
   /*
@@ -32205,9 +32327,22 @@ var __ = function () {
 
 
   __.htmlDecode = function (str) {
-    var txt = document.createElement('textarea');
-    txt.innerHTML = str;
-    var res = txt.value;
+    var res = '';
+
+    if (typeof document === 'undefined') {
+      var entities = [['amp', '&'], ['apos', '\''], ['#x27', '\''], ['#x2F', '/'], ['#39', '\''], ['#47', '/'], ['lt', '<'], ['gt', '>'], ['nbsp', ' '], ['quot', '"'], ['#60', '<'], ['#62', '>']];
+
+      for (var i = 0, max = entities.length; i < max; i++) {
+        str = str.replace(new RegExp('&' + entities[i][0] + ';', 'g'), entities[i][1]);
+      }
+
+      res = str;
+    } else {
+      var txt = document.createElement('textarea');
+      txt.innerHTML = str;
+      res = txt.value;
+    }
+
     return res;
   };
   /*
@@ -32245,7 +32380,7 @@ var __ = function () {
   };
   /* ---------------- API methods ----------------- */
 
-  /**
+  /*
    * Core method
    *
    * @param  {String|Element} s       - The selector to search for or HTML element to wrap with functionality
@@ -32527,7 +32662,7 @@ var __ = function () {
   /*
    * Insert an element as the first child node of another
    *
-   * @param  {Element} el  - Element to insert
+   * @param  {Element} el  - A DOM node containing one selector to match against.
    */
 
 
@@ -32539,7 +32674,7 @@ var __ = function () {
   /*
    * Insert an element to the end of the target
    *
-   * @param  {Element} el  - Element to insert
+   * @param  {Element} el  - A DOM node containing one selector to match against.
    */
 
 
@@ -32750,7 +32885,7 @@ var __ = function () {
   /*
    * Get the descendants of each element in the current set of matched elements
    *
-   * @param  {String|Element} s   - A string or element containing a selector expression to match elements against.
+   * @param  {String} s           - A string containing a selector expression to match elements against.
    * @return {Array}              - The collection of elements
    */
 
@@ -32780,7 +32915,7 @@ var __ = function () {
   /*
    * Reduce the set of matched elements to the one at the specified index.
    *
-   * @param  {Number} index   - A string or element containing a selector expression to match elements against.
+   * @param  {Number} index   - A number for index.
    * @return {Array}          - Contains only a collection of HTML elements.
    */
 
@@ -32800,42 +32935,72 @@ var __ = function () {
    * Returns the Element immediately prior to the specified one in its parent's children list, 
    * or null if the specified element is the first one in the list.
    *
+   * @param  {String} s       - A string containing a selector expression to match elements against.
    * @return {Array}          - Contains only a collection of HTML elements.
    */
 
 
-  __.prototype.prev = function () {
+  __.prototype.prev = function (s) {
     var el = this.previousElementSibling;
-    if (el !== null) return el;
+
+    if (s === undefined) {
+      if (el !== null) return el;
+    } else {
+      if (el !== null && (el.nodeName.toLowerCase() === s || el.classList.contains(s.replace(/\./g, '')) || '#' + el.id === s)) {
+        return el;
+      } else {
+        return [];
+      }
+    }
   };
   /*
       * Returns the element immediately following the specified one in its parent's children list, 
       * or null if the specified element is the last one in the list.
    *
+   * @param  {String} s       - A string containing a selector expression to match elements against.
    * @return {Array}          - Contains only a collection of HTML elements.
    */
 
 
-  __.prototype.next = function () {
+  __.prototype.next = function (s) {
     var el = this.nextElementSibling;
-    if (el !== null) return el;
+
+    if (s === undefined) {
+      if (el !== null) return el;
+    } else {
+      if (el !== null && (el.nodeName.toLowerCase() === s || el.classList.contains(s.replace(/\./g, '')) || '#' + el.id === s)) {
+        return el;
+      } else {
+        return [];
+      }
+    }
   };
   /*
    * Returns the DOM node's parent Element, or null if the node either has no parent,
    * or its parent isn't a DOM Element.
    *
+   * @param  {String} s       - A string containing a selector expression to match elements against.
    * @return {Array}          - Contains only a collection of HTML elements.
    */
 
 
-  __.prototype.parent = function () {
+  __.prototype.parent = function (s) {
     var el = this.parentElement;
-    if (el !== null) return el;
+
+    if (s === undefined) {
+      if (el !== null) return el;
+    } else {
+      if (el !== null && (el.nodeName.toLowerCase() === s || el.classList.contains(s.replace(/\./g, '')) || '#' + el.id === s)) {
+        return el;
+      } else {
+        return [];
+      }
+    }
   };
   /*
    * Get the ancestors of each element in the current set of matched elements.
    *
-   * @param  {Element} s   - A parent element.
+   * @param  {String} s                 - A string containing a selector expression to match elements against.
    * @return {Array}                    - Contains only a collection of HTML elements.
    */
 
@@ -32851,8 +33016,17 @@ var __ = function () {
     var _parent = this.parentNode;
 
     while (_parent !== parentSelector) {
-      var _currentNode = _parent;
-      parents.push(_currentNode);
+      var _currentNode = _parent; //Determine whether the ID, class and HTML nodes match
+
+      if (s !== undefined) {
+        if (_currentNode.nodeName.toLowerCase() === s || _currentNode.classList.contains(s.replace(/\./g, '')) || '#' + _currentNode.id === s) {
+          parents.push(_currentNode);
+        }
+      } else {
+        parents.push(_currentNode);
+      } //
+
+
       _parent = _currentNode.parentNode;
     } // Push that parentSelector you wanted to stop at
 
@@ -32864,8 +33038,9 @@ var __ = function () {
    * Returns a live HTMLCollection which contains all of the child elements 
    * of the node upon which it was called.
    *
-   * @param  {?String|?Element} s   - The selector that needs to be filtered.
-   * @return {Array}                -  The collection of elements
+   * @param  {Element} s         - The selector that needs to be filtered. A DOMstring containing 
+   *                               one selector to match against.
+   * @return {Array}              -  The collection of elements
    */
 
 
@@ -32874,20 +33049,26 @@ var __ = function () {
     var childrenList = self.children;
     var res = [];
 
-    if (s === undefined) {
+    if (childrenList) {
       for (var i = 0; i < childrenList.length; i++) {
-        res.push(childrenList[i]);
-      }
+        var _currentNode = childrenList[i]; //Determine whether the ID, class and HTML nodes match
 
-      return res;
-    } else {
-      return [].slice.call(this.querySelectorAll(s));
+        if (s !== undefined) {
+          if (_currentNode.nodeName.toLowerCase() === s || _currentNode.classList.contains(s.replace(/\./g, '')) || '#' + _currentNode.id === s) {
+            res.push(_currentNode);
+          }
+        } else {
+          res.push(_currentNode);
+        }
+      }
     }
+
+    return res;
   };
   /*
    * Reduce the set of matched elements to those that match the selector or pass the function's test.
    *
-   * @param  {String|Element} s   - The selector that needs to be filtered.
+   * @param  {String} s           - A string containing a selector expression to match elements against.
    * @return {Array}              -  The collection of elements
    */
 
@@ -32907,7 +33088,7 @@ var __ = function () {
   /*
    * Remove elements from the set of matched elements.
    *
-   * @param  {String|Element} s   - The selector that needs to be filtered.
+   * @param  {String} s           - A string containing a selector expression to match elements against.
    * @return {Array}              -  The collection of elements
    */
 
@@ -32927,11 +33108,12 @@ var __ = function () {
   /*
    * Get the siblings of each element in the set of matched elements
    *
+   * @param  {String} s                 - A string containing a selector expression to match elements against.
    * @return {Array}              -  The collection of elements
    */
 
 
-  __.prototype.siblings = function () {
+  __.prototype.siblings = function (s) {
     var self = this; // for collecting siblings
 
     var siblings = []; // if no parent, return no sibling
@@ -32945,8 +33127,16 @@ var __ = function () {
 
     while (sibling) {
       if (sibling.nodeType === 1 && sibling !== self) {
-        siblings.push(sibling);
-      }
+        //Determine whether the ID, class and HTML nodes match
+        if (s !== undefined) {
+          if (sibling.nodeName.toLowerCase() === s || sibling.classList.contains(s.replace(/\./g, '')) || '#' + sibling.id === s) {
+            siblings.push(sibling);
+          }
+        } else {
+          siblings.push(sibling);
+        }
+      } //
+
 
       sibling = sibling.nextSibling;
     }
@@ -32993,7 +33183,7 @@ var __ = function () {
    * Traverses the Element and its parents (heading toward the document root) 
    * until it finds a node that matches the provided selector string. 
    *
-   * @param  {String|Element} s   - The selector that needs to be filtered.
+   * @param  {String} s           - A string containing a selector expression to match elements against.
    * @return {Array}              - Contains only a collection of HTML elements.
    */
 
@@ -33627,7 +33817,7 @@ var __ = function () {
    * Search for a given element from among the matched elements.
    *
    * @return {Number}     - The return value is an integer indicating the position of the 
-   *                        first element within the jQuery object relative to its sibling elements.
+   *                        first element within the object relative to its sibling elements.
    */
 
 
@@ -34076,9 +34266,7 @@ function setBG(config) {
 
   return res;
 }
-/* harmony default export */ const set_background = ({
-  setBG: setBG
-});
+/* harmony default export */ const set_background = ((/* unused pure expression or super */ null && (setBG)));
 ;// CONCATENATED MODULE: ./src/client/components/_utils/_all.ts
 /**
 
@@ -42129,7 +42317,7 @@ TweenMax_TweenMax._autoActivated = [TimelineLite, TimelineMax, CSSPlugin, AttrPl
 
 
 
-;// CONCATENATED MODULE: ./src/client/components/Navigation/index.tsx
+;// CONCATENATED MODULE: ./src/client/components/Navigation/MenuList.tsx
 
 
 
@@ -42141,6 +42329,398 @@ TweenMax_TweenMax._autoActivated = [TimelineLite, TimelineMax, CSSPlugin, AttrPl
 function _createSuper(Derived) { var hasNativeReflectConstruct = _isNativeReflectConstruct(); return function _createSuperInternal() { var Super = _getPrototypeOf(Derived), result; if (hasNativeReflectConstruct) { var NewTarget = _getPrototypeOf(this).constructor; result = Reflect.construct(Super, arguments, NewTarget); } else { result = Super.apply(this, arguments); } return _possibleConstructorReturn(this, result); }; }
 
 function _isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Reflect.construct) return false; if (Reflect.construct.sham) return false; if (typeof Proxy === "function") return true; try { Boolean.prototype.valueOf.call(Reflect.construct(Boolean, [], function () {})); return true; } catch (e) { return false; } }
+
+
+
+
+/* Recursively nested components to traverse nodes
+-------------------------------------------------*/
+
+var MenuList = /*#__PURE__*/function (_Component) {
+  _inherits(MenuList, _Component);
+
+  var _super = _createSuper(MenuList);
+
+  function MenuList(props) {
+    var _this;
+
+    _classCallCheck(this, MenuList);
+
+    _this = _super.call(this, props); // for desktop
+
+    _defineProperty(_assertThisInitialized(_this), "animMarginTop", void 0);
+
+    _this.animMarginTop = 15;
+    _this.handleMouseEnter = _this.handleMouseEnter.bind(_assertThisInitialized(_this));
+    _this.handleMouseLeave = _this.handleMouseLeave.bind(_assertThisInitialized(_this)); // for mobile
+
+    _this.handleCollapseMobileMenuList = _this.handleCollapseMobileMenuList.bind(_assertThisInitialized(_this));
+    return _this;
+  }
+
+  _createClass(MenuList, [{
+    key: "handleMouseEnter",
+    value: function handleMouseEnter(e) {
+      /*
+      ////////////////////////////////////////////////////////////
+      //////////////  Not Mobile (item event)   //////////////////
+      ////////////////////////////////////////////////////////////
+      */
+      var menuContainer = e.currentTarget.closest('.uix-menu__container');
+      if (menuContainer !== null && menuContainer.classList.contains('is-mobile')) return; //
+
+      var self = this;
+      TweenMax_TweenMax.set([e.currentTarget.querySelector('ul.sub-menu'), e.currentTarget.querySelector('.uix-menu__arrow-mega')], {
+        css: {
+          opacity: 0,
+          display: 'block',
+          marginTop: self.animMarginTop + 'px'
+        },
+        onComplete: function onComplete() {
+          TweenMax_TweenMax.to(this.target, 0.3, {
+            css: {
+              opacity: 1,
+              marginTop: 0
+            },
+            ease: 'Power2.easeOut'
+          });
+        }
+      });
+    }
+  }, {
+    key: "handleMouseLeave",
+    value: function handleMouseLeave(e) {
+      /*
+      ////////////////////////////////////////////////////////////
+      /////////////////  Not Mobile  (item event)  ///////////////
+      ////////////////////////////////////////////////////////////
+      */
+      var menuContainer = e.currentTarget.closest('.uix-menu__container');
+      if (menuContainer !== null && menuContainer.classList.contains('is-mobile')) return; //
+
+      var self = this;
+      TweenMax_TweenMax.to([e.currentTarget.querySelector('ul.sub-menu'), e.currentTarget.querySelector('.uix-menu__arrow-mega')], 0.3, {
+        css: {
+          opacity: 0,
+          marginTop: self.animMarginTop + 'px'
+        },
+        onComplete: function onComplete() {
+          TweenMax_TweenMax.set(this.target, {
+            css: {
+              display: 'none'
+            }
+          });
+        }
+      });
+    }
+  }, {
+    key: "handleCollapseMobileMenuList",
+    value: function handleCollapseMobileMenuList(e) {
+      /*
+      ////////////////////////////////////////////////////////////
+      ////////////////  Mobile Menu  (item event)  ///////////////
+      ////////////////////////////////////////////////////////////
+      */
+      if (this.props.mobile) {
+        var el = helpers(e.target);
+
+        var $sub = el.next('ul');
+
+        if ($sub.length > 0) {
+          e.preventDefault();
+
+          if (el.attr('aria-expanded') === 'false' || el.attr('aria-expanded') === null) {
+            //Hide other all sibling <ul> of the selected element
+            var $siblingsItems = el.parent().siblings();
+
+            if ($siblingsItems.length > 0) {
+              $siblingsItems.each(function () {
+                var _link = helpers(this).find('> a');
+
+                _link.removeClass('is-active').attr('aria-expanded', false);
+
+                TweenMax_TweenMax.to(_link.next('ul'), 0.5, {
+                  height: 0
+                });
+              });
+            }
+
+            el.addClass('is-active').attr('aria-expanded', true);
+            el.parent('li').addClass('is-active'); //to open
+            // - temporarilty set height:auto
+            // - tween from height:0
+
+            TweenMax_TweenMax.set($sub, {
+              height: 'auto'
+            });
+            TweenMax_TweenMax.from($sub, 0.5, {
+              height: 0
+            });
+          } else {
+            el.removeClass('is-active').attr('aria-expanded', false);
+            el.parent('li').removeClass('is-active'); //to close
+
+            TweenMax_TweenMax.to($sub, 0.5, {
+              height: 0
+            });
+          }
+        }
+      }
+    }
+  }, {
+    key: "componentDidMount",
+    value: function componentDidMount() {
+      /*
+      ////////////////////////////////////////////////////////////
+      ////////////  Mega Menu  (initial adjustment)  /////////////
+      ////////////////////////////////////////////////////////////
+      */
+      var w = window.innerWidth;
+      var megaMenuRootLi = document.querySelectorAll('.uix-menu__container:not(.is-mobile) li.multi-column'); //This value is equal to the $nav-mega-li-w variable in the SCSS
+
+      var perDefaultW = 270; //Default width of each column
+      //The maximum width of the mega menu wrapper
+
+      var maxWidth = 1140; //New XL container for Bootstrap 4.x
+
+      if (w > 1430) maxWidth = 1278; //Full width container
+
+      maxWidth = w - 15;
+
+      if (w > 768) {
+        Array.prototype.forEach.call(megaMenuRootLi, function (node) {
+          var allLinks = node.querySelector('a').nextElementSibling.querySelectorAll('li'),
+              colTotal = node.querySelector('a').nextElementSibling.children.length,
+              megaDiv = node.querySelector('a').nextElementSibling;
+          var megaPerWidth = null,
+              rootLiLeft = null; // Get width or other style data of element when Not Visible (Display: None)
+          // megaDiv.width() it may return 0, so it automatically enables the 
+          // `actualPropertyValue()` that returns real width or height
+
+          var megaDivWidth = helpers(megaDiv).width(); // Detecting if the right or left of the div is touching the browser window edge.
+
+
+          if (colTotal > 0) {
+            if (!document.body.classList.contains('rtl')) {
+              rootLiLeft = megaDiv.offsetLeft == 0 ? megaDiv.parentElement.offsetLeft : megaDiv.offsetLeft;
+            } else {
+              // width and height in pixels, including padding and border
+              // Corresponds to outerWidth(), outerHeight()
+              rootLiLeft = megaDiv.offsetLeft == 0 ? w - (megaDiv.parentElement.offsetLeft + megaDiv.parentElement.offsetWidth) : w - (megaDiv.offsetLeft + megaDiv.offsetWidth);
+            } //Determine the mega menu wrapper within document width, in order to limit the width of each column for mega menu
+
+
+            if (maxWidth > w) maxWidth = w;
+
+            if (megaDivWidth + 20 > maxWidth) {
+              megaDivWidth = maxWidth;
+              megaPerWidth = maxWidth / colTotal - 2.888; //Resetting the width of each column and <li> tag
+
+              Array.prototype.forEach.call(allLinks, function (node) {
+                node.style.width = megaPerWidth + 'px';
+              });
+
+              if (!document.body.classList.contains('rtl')) {
+                megaDiv.style.marginLeft = -rootLiLeft + (w - megaDivWidth) / 2 + 'px';
+              } else {
+                megaDiv.style.marginRight = -rootLiLeft + (w - megaDivWidth) / 2 + 'px';
+              }
+            } else {
+              //Resetting the width of each column and <li> tag
+              Array.prototype.forEach.call(allLinks, function (node) {
+                node.style.width = perDefaultW + 'px';
+              });
+              var chkWidth = rootLiLeft + megaDivWidth;
+
+              if (chkWidth > w) {
+                if (!document.body.classList.contains('rtl')) {
+                  megaDiv.style.marginLeft = -(chkWidth - w) + 'px';
+                } else {
+                  megaDiv.style.marginRight = -(chkWidth - w) + 'px';
+                } //If the CSS sets the offset of ul::before
+
+                /*
+                const megaDivOffset = megaDivWidth/2 - 0;
+                
+                if ( !document.body.classList.contains( 'rtl' ) ) {
+                    megaDiv.style.marginLeft = - ( chkWidth - w ) + megaDivOffset + 'px';
+                } else {
+                    megaDiv.style.marginRight = - ( chkWidth - w ) + megaDivOffset + 'px';
+                }	
+                */
+
+              }
+            }
+          }
+        });
+      } // endif (w > 768)  
+
+    }
+    /** Remove the global list of events, especially as scroll and interval. */
+
+  }, {
+    key: "componentWillUnmount",
+    value: function componentWillUnmount() {
+      // Kill all aniamtions
+      TweenMax_TweenMax.killAll();
+    }
+  }, {
+    key: "render",
+    value: function render() {
+      var _this2 = this;
+
+      var _this$props = this.props,
+          menuListData = _this$props.menuListData,
+          submenu = _this$props.submenu,
+          mobile = _this$props.mobile;
+      var options = menuListData.map(function (item, i) {
+        // if it is Route Link
+        if (typeof item.title === 'string') {
+          return /*#__PURE__*/react.createElement("li", {
+            key: i,
+            className: item.mega ? 'multi-column' : '',
+            onMouseEnter: _this2.handleMouseEnter,
+            onMouseLeave: _this2.handleMouseLeave
+          }, item.mega && !mobile ? /*#__PURE__*/react.createElement("span", {
+            className: "uix-menu__arrow-mega"
+          }) : '', (item.children || item.mega) && !mobile ? /*#__PURE__*/react.createElement("span", {
+            className: "uix-menu__arrow"
+          }) : '', mobile && (item.mega || item.children) ? /*#__PURE__*/react.createElement("em", {
+            className: "uix-menu__arrow-mobile"
+          }) : '', /*#__PURE__*/react.createElement("a", {
+            href: item.link || '#',
+            onClick: _this2.handleCollapseMobileMenuList
+          }, item.title), !item.mega && item.children && /*#__PURE__*/react.createElement(MenuList, {
+            menuListData: item.children,
+            submenu: true
+          }), item.mega ? /*#__PURE__*/react.createElement(react.Fragment, null, /*#__PURE__*/react.createElement("ul", {
+            className: "sub-menu",
+            style: {
+              marginTop: "".concat(_this2.animMarginTop, "px")
+            }
+          }, item.mega.columnLists ? item.mega.columnLists.map(function (perColItem, i) {
+            return /*#__PURE__*/react.createElement("li", {
+              key: i
+            }, perColItem.heading ? /*#__PURE__*/react.createElement("span", {
+              className: "multi-column-title"
+            }, perColItem.heading) : '', /*#__PURE__*/react.createElement("ul", {
+              className: "sub-menu multi",
+              style: {
+                marginTop: "".concat(_this2.animMarginTop, "px")
+              }
+            }, perColItem.list ? perColItem.list.map(function (item, i) {
+              return /*#__PURE__*/react.createElement("li", {
+                key: i
+              }, /*#__PURE__*/react.createElement("a", {
+                href: item.link || '#'
+              }, item.title));
+            }) : ''));
+          }) : '')) : '');
+        } else {
+          return /*#__PURE__*/react.createElement(react.Fragment, {
+            key: i
+          }, item.title);
+        }
+      });
+
+      if (submenu && submenu === true) {
+        return /*#__PURE__*/react.createElement("ul", {
+          className: "sub-menu",
+          style: {
+            marginTop: "".concat(this.animMarginTop, "px")
+          }
+        }, options);
+      }
+
+      return /*#__PURE__*/react.createElement("ul", {
+        className: "uix-menu"
+      }, options);
+    }
+  }]);
+
+  return MenuList;
+}(react.Component);
+/*
+Mega Menu Construction:
+
+
+render() {
+	
+    return (
+      <>
+                
+      <nav className="uix-menu__container">
+        <div className="uix-menu__inner">
+            <span className="uix-brand--mobile"><img src="" /></span>
+            <ul className="uix-menu">
+                <li className="multi-column"><a href="#">Components</a>
+                    <ul className="sub-menu">
+
+                        <li>
+                            <span className="multi-column-title">Mega Menu 1</span>
+                            <ul className="sub-menu multi">
+                                <li><a href="#">Menu Text</a></li>
+                                <li><a href="#">Menu Text</a></li>
+                                <li><a href="#">Menu Text</a></li>
+                                <li><a href="#">Menu Text</a><span className="uix-bubble">new</span></li>
+                            </ul>
+                        </li>
+
+
+                        <li>
+                            <span className="multi-column-title">Mega Menu 2</span>
+                            <ul className="sub-menu multi">
+                                <li><a href="#">Menu Text</a></li>
+                                <li><a href="#">Menu Text</a></li>
+                            </ul>
+                        </li>
+
+
+                    </ul>
+
+                </li>
+                <li><a href="#">Menu</a>
+                    <ul className="sub-menu">
+                        <li><a href="#">Menu Text</a></li>
+                        <li><a href="#">Menu Text</a>
+							<ul className="sub-menu">
+								<li><a href="#">Menu Text</a></li>
+								<li><a href="#">Menu Text</a></li>
+							</ul>
+						</li>
+                    </ul>
+
+                </li>
+                <li className="is-active"><a href="#">Actived Menu</a></li>
+				<li><a href="#">Menu</a></li>
+
+            </ul>
+
+        </div>
+
+    </nav>
+
+
+      </>
+    )
+}
+
+*/
+
+
+
+;// CONCATENATED MODULE: ./src/client/components/Navigation/index.tsx
+
+
+
+
+
+
+
+
+function Navigation_createSuper(Derived) { var hasNativeReflectConstruct = Navigation_isNativeReflectConstruct(); return function _createSuperInternal() { var Super = _getPrototypeOf(Derived), result; if (hasNativeReflectConstruct) { var NewTarget = _getPrototypeOf(this).constructor; result = Reflect.construct(Super, arguments, NewTarget); } else { result = Super.apply(this, arguments); } return _possibleConstructorReturn(this, result); }; }
+
+function Navigation_isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Reflect.construct) return false; if (Reflect.construct.sham) return false; if (typeof Proxy === "function") return true; try { Boolean.prototype.valueOf.call(Reflect.construct(Boolean, [], function () {})); return true; } catch (e) { return false; } }
 
 /* 
  *************************************
@@ -42157,14 +42737,19 @@ function _isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Re
 
 
 
- //get project config
+/*-- Apply this component styles --*/
+
+
+
+
+ //
 
 
 
 var Navigation = /*#__PURE__*/function (_Component) {
   _inherits(Navigation, _Component);
 
-  var _super = _createSuper(Navigation);
+  var _super = Navigation_createSuper(Navigation);
 
   function Navigation(props) {
     var _this;
@@ -42173,10 +42758,17 @@ var Navigation = /*#__PURE__*/function (_Component) {
 
     _this = _super.call(this, props); // Add a scroll event listener to window
 
+    _defineProperty(_assertThisInitialized(_this), "mobileToggleRef", /*#__PURE__*/react.createRef());
+
+    _defineProperty(_assertThisInitialized(_this), "mobileMaskRef", /*#__PURE__*/react.createRef());
+
     _defineProperty(_assertThisInitialized(_this), "windowScrollUpdate", void 0);
 
     _this.handleScrollEvent = _this.handleScrollEvent.bind(_assertThisInitialized(_this));
-    _this.windowScrollUpdate = helpers.throttle(_this.handleScrollEvent, 5);
+    _this.windowScrollUpdate = helpers.throttle(_this.handleScrollEvent, 5); // for mobile
+
+    _this.handleClickMobileToggle = _this.handleClickMobileToggle.bind(_assertThisInitialized(_this));
+    _this.handleClickMobileClose = _this.handleClickMobileClose.bind(_assertThisInitialized(_this));
     return _this;
   }
 
@@ -42206,334 +42798,39 @@ var Navigation = /*#__PURE__*/function (_Component) {
       }
     }
   }, {
+    key: "handleClickMobileToggle",
+    value: function handleClickMobileToggle(e) {
+      e.preventDefault(); //Prevents further propagation of the current event in the capturing and bubbling phases.
+
+      e.stopPropagation();
+      var el = e.currentTarget;
+      el.classList.toggle('is-active');
+
+      if (el.classList.contains('is-active')) {
+        document.body.classList.add('js-uix-menu-opened');
+      } else {
+        document.body.classList.remove('js-uix-menu-opened');
+      }
+    }
+  }, {
+    key: "handleClickMobileClose",
+    value: function handleClickMobileClose() {
+      this.mobileToggleRef.current.classList.remove('is-active');
+      document.body.classList.remove('js-uix-menu-opened');
+    }
+  }, {
     key: "componentDidMount",
     value: function componentDidMount() {
-      var self = this;
+      var _this2 = this;
+
+      // Add function to the element that should be used as the scrollable area.
+      window.removeEventListener('scroll', this.windowScrollUpdate);
+      window.removeEventListener('touchmove', this.windowScrollUpdate);
+      window.addEventListener('scroll', this.windowScrollUpdate);
+      window.addEventListener('touchmove', this.windowScrollUpdate); // Prevent calculation errors caused by unloaded completion
 
       helpers(document).ready(function () {
-        /*
-         ////////////////////////////////////////////////////////////
-         /////////////////////  (1) Primary Menu ////////////////////
-         ////////////////////////////////////////////////////////////
-         */
-        var ulForDesktop = '.uix-menu__container:not(.is-mobile) ul.uix-menu'; // Menu Hover
-
-        var mTop = 15;
-
-        helpers(ulForDesktop + ' > li.multi-column > ul li ul').addClass('multi');
-
-        helpers(ulForDesktop + ' > li:not(.multi-column) ul').css({
-          'margin-top': mTop + 'px'
-        });
-
-        helpers('.uix-menu__container:not(.is-mobile) li.multi-column > ul.sub-menu > li > ul').css({
-          'margin-top': mTop + 'px'
-        });
-
-        helpers(ulForDesktop + ' li.multi-column > ul').css({
-          'margin-top': mTop + 'px'
-        });
-
-        helpers(ulForDesktop + ' li').on('mouseenter', function () {
-          TweenMax_TweenMax.set([helpers(this).find('> ul.sub-menu:not(.multi)'), helpers(this).find('.uix-menu__arrow-mega')], {
-            css: {
-              opacity: 0,
-              display: 'block',
-              marginTop: mTop + 'px'
-            },
-            onComplete: function onComplete() {
-              TweenMax_TweenMax.to(this.target, 0.3, {
-                css: {
-                  opacity: 1,
-                  marginTop: 0
-                },
-                ease: 'Power2.easeOut'
-              });
-            }
-          });
-        }).on('mouseleave', function () {
-          TweenMax_TweenMax.to([helpers(this).find('> ul.sub-menu:not(.multi)'), helpers(this).find('.uix-menu__arrow-mega')], 0.3, {
-            css: {
-              opacity: 0,
-              marginTop: mTop + 'px'
-            },
-            onComplete: function onComplete() {
-              TweenMax_TweenMax.set(this.target, {
-                css: {
-                  display: 'none'
-                }
-              });
-            }
-          });
-        }); // Add Sub-menu Arrow
-
-
-        helpers(ulForDesktop + ' li').each(function () {
-          if (helpers(this).find('ul').length > 0) {
-            helpers(this).prepend('<span class="uix-menu__arrow"></span>');
-          }
-        });
-        /*
-         ////////////////////////////////////////////////////////////
-         ////////////////   (2) Mega/Mobile Menu   //////////////////
-         ////////////////////////////////////////////////////////////
-         */
-
-
-        var $toggle = helpers('.uix-menu-mobile__toggle'),
-            $toggleBody = helpers('body');
-
-        var windowWidth = window.innerWidth; // Using delay is for more accurate calculation
-
-        setTimeout(function () {
-          menuInit(windowWidth);
-        }, 1000);
-
-        function menuInit(w) {
-          // Mega Menu
-          //------------------------------------------
-          var $menuWrap = helpers('.uix-menu__container:not(.is-mobile)'),
-              maxWidth = 1140,
-              //The maximum width of the mega menu wrapper
-          //This value is equal to the $nav-mega-li-w variable in the SCSS
-          perDefaultW = 270; //Default width of each column
-          //New XL container for Bootstrap 4.x
-
-
-          if (w > 1430) maxWidth = 1278; //Full width container
-
-          maxWidth = windowWidth - 15; // Remove the html tag for mega menu item
-
-          $menuWrap.find('li.multi-column  > ul .multi-column-title').each(function () {
-            var mega_old_item = helpers(this).html();
-
-            if (mega_old_item != '') {
-              helpers(this).html(mega_old_item.replace(/<[^>]+>/g, ''));
-            }
-          });
-
-          if (w > 768) {
-            $menuWrap.find('li.multi-column').each(function (index) {
-              var $rootLi = helpers(this),
-                  colTotal = $rootLi.find('> ul > li').length,
-                  $megaDiv = $rootLi.find('> ul.sub-menu');
-
-              var megaDivWidth = $megaDiv.width(),
-                  megaPerWidth = null,
-                  rootLiLeft = null; // Add mega arrow
-
-              if ($rootLi.find('.uix-menu__arrow-mega').length < 1) $rootLi.prepend('<span class="uix-menu__arrow-mega"></span>'); // Detecting if the right or left of the div is touching the browser window edge.
-
-              if (colTotal > 0) {
-                rootLiLeft = helpers.cssProperty.getAbsoluteCoordinates($megaDiv[0]).left; //Determine the mega menu wrapper within document width, in order to limit the width of each column for mega menu
-
-                if (maxWidth > w) maxWidth = w;
-
-                if (parseFloat(megaDivWidth + 20) > maxWidth) {
-                  megaDivWidth = maxWidth;
-                  megaPerWidth = maxWidth / colTotal - 2.888; //Resetting the width of each column
-
-                  $megaDiv.find('> li').css({
-                    'width': megaPerWidth + 'px'
-                  }); //Resetting the width of each <li> tag
-
-                  $megaDiv.find('> li ul li').css({
-                    'width': megaPerWidth + 'px'
-                  });
-
-                  if (!helpers('body').hasClass('rtl')) {
-                    $megaDiv.css({
-                      'margin-left': -rootLiLeft + (w - megaDivWidth) / 2 + 'px'
-                    });
-                  } else {
-                    $megaDiv.css({
-                      'margin-right': -rootLiLeft + (w - megaDivWidth) / 2 + 'px'
-                    });
-                  }
-                } else {
-                  //Resetting the width of each column
-                  $megaDiv.find('> li').css({
-                    'width': perDefaultW + 'px'
-                  }); //Resetting the width of each <li> tag
-
-                  $megaDiv.find('> li ul li').css({
-                    'width': perDefaultW + 'px'
-                  });
-                  var chkWidth = parseFloat(rootLiLeft + megaDivWidth);
-
-                  if (chkWidth > w) {
-                    if (!helpers('body').hasClass('rtl')) {
-                      $megaDiv.css({
-                        'margin-left': -(chkWidth - w) + 'px'
-                      });
-                    } else {
-                      $megaDiv.css({
-                        'margin-right': -(chkWidth - w) + 'px'
-                      });
-                    } //If the CSS sets the offset of ul::before
-
-                    /*
-                    const megaDivOffset = megaDivWidth/2 - 0;
-                    
-                    if ( ! __( 'body' ).hasClass( 'rtl' ) ) {
-                    	$megaDiv.css( {
-                    		'margin-left' : - ( chkWidth - w ) + megaDivOffset + 'px'
-                    	} );
-                    } else {
-                    	$megaDiv.css( {
-                    		'margin-right' : - ( chkWidth - w ) + megaDivOffset + 'px'
-                    	} );
-                    }	
-                    */
-
-                  }
-                }
-              }
-            });
-          } // endif (w > 768)
-          // Mobile Menu
-          //------------------------------------------
-          //clone the primary menu
-          //----
-
-
-          if (helpers('.uix-menu__container.is-mobile').length === 0) {
-            var cloneHTML = helpers('.uix-menu__container').clone();
-
-            helpers(cloneHTML).addClass('is-mobile');
-
-            helpers('body').appendTo(cloneHTML);
-          } // Initialize mobile menu
-
-
-          if (w <= 768) {
-            helpers('.uix-menu__container.is-mobile .uix-menu > li').each(function () {
-              var $rootLi = helpers(this);
-
-              if ($rootLi.find('ul').length > 0) {
-                if ($rootLi.find('.uix-menu__arrow-mobile').length < 1) $rootLi.prepend('<em class="uix-menu__arrow-mobile"></em>');
-                $rootLi.find('ul ul').addClass('sub-sub');
-                $rootLi.find(' > a').attr('href', 'javascript:void(0);');
-              }
-            });
-          } // endif (w <= 768)
-
-        }
-
-        function windowUpdate() {
-          // Check window width has actually changed and it's not just iOS triggering a resize event on scroll
-          if (window.innerWidth != windowWidth) {
-            // Update the window width for next time
-            windowWidth = window.innerWidth; // Do stuff here
-
-            helpers('body').removeClass('js-uix-menu-opened');
-
-            $toggle.removeClass('is-opened');
-            menuInit(windowWidth);
-          }
-        }
-
-        var debounceFunc = helpers.debounce(windowUpdate, 50);
-
-        window.removeEventListener('resize', debounceFunc);
-        window.addEventListener('resize', debounceFunc); // Mobile Menu
-        //------------------------------------------
-
-        $toggle.off('click').on('click', function (e) {
-          e.preventDefault(); //Prevents further propagation of the current event in the capturing and bubbling phases.
-
-          e.stopPropagation();
-
-          helpers(this).toggleClass('is-opened');
-
-          if (helpers(this).hasClass('is-opened')) {
-            //Add mobile brand
-            var logoURL = helpers('.uix-brand--mobile img').attr('src');
-
-            if (logoURL !== null && logoURL != '') {
-              if (logoURL.indexOf('blank.gif') >= 0) helpers('.mobile-inner').css({
-                'margin-top': '-70px'
-              });
-            } //Toggle effect
-
-
-            $toggleBody.addClass('js-uix-menu-opened');
-          } else {
-            $toggleBody.removeClass('js-uix-menu-opened');
-          }
-        }); //Mobile menu mask event
-
-        helpers('.uix-menu-mobile__mask').off('click').on('click', function () {
-          $toggle.removeClass('is-opened');
-          $toggleBody.removeClass('js-uix-menu-opened');
-        }); // Fires drop-menu event 
-
-
-        helpers('.uix-menu__container.is-mobile ul li > a').off('click').on('click', function (e) {
-          var $sub = helpers(this).next();
-
-          if ($sub.length > 0) {
-            e.preventDefault(); //Its value is not a boolean but a string
-
-            var expanded = helpers(this).attr('aria-expanded') === true ? false : true;
-
-            if (expanded) {
-              //Hide other all sibling <ul> of the selected element
-              var $e = helpers(this).parent().siblings().find('> a');
-
-              $e.removeClass('is-opened').attr('aria-expanded', false);
-              $e.parent().find('.uix-menu__arrow-mobile').removeClass('is-opened');
-              $e.parent().removeClass('is-opened');
-
-              helpers(this).addClass('is-opened').attr('aria-expanded', true);
-
-              helpers(this).parent().find('.uix-menu__arrow-mobile').addClass('is-opened');
-
-              helpers(this).parent().addClass('is-opened');
-
-              TweenMax_TweenMax.to($e.next(), 0.5, {
-                height: 0
-              }); //to open
-              // - temporarilty set height:auto
-              // - tween from height:0
-
-              TweenMax_TweenMax.set($sub, {
-                height: 'auto'
-              });
-              TweenMax_TweenMax.from($sub, 0.5, {
-                height: 0
-              });
-            } else {
-              helpers(this).removeClass('is-opened').attr('aria-expanded', false);
-
-              helpers(this).parent().find('.uix-menu__arrow-mobile').removeClass('is-opened');
-
-              helpers(this).parent().removeClass('is-opened'); //to close
-
-
-              TweenMax_TweenMax.to($sub, 0.5, {
-                height: 0
-              });
-            }
-
-            return false;
-          } //endif $sub.length
-
-        });
-        /*
-         ////////////////////////////////////////////////////////////
-         ////////////////////  (3) Sticky Menu   ////////////////////
-         ////////////////////////////////////////////////////////////
-         */
-        // Sticky primary navigation & WordPress Toolbar
-        // Add function to the element that should be used as the scrollable area.
-
-
-        window.removeEventListener('scroll', self.windowScrollUpdate);
-        window.removeEventListener('touchmove', self.windowScrollUpdate);
-        window.addEventListener('scroll', self.windowScrollUpdate);
-        window.addEventListener('touchmove', self.windowScrollUpdate);
-        self.windowScrollUpdate();
+        _this2.windowScrollUpdate();
       });
     }
     /** Remove the global list of events, especially as scroll and interval. */
@@ -42543,145 +42840,58 @@ var Navigation = /*#__PURE__*/function (_Component) {
     value: function componentWillUnmount() {
       // Remove scroll events from window
       window.removeEventListener('scroll', this.windowScrollUpdate);
-      window.removeEventListener('touchmove', this.windowScrollUpdate); // Kill all aniamtions
-
-      TweenMax_TweenMax.killAll();
+      window.removeEventListener('touchmove', this.windowScrollUpdate);
+    }
+  }, {
+    key: "createMenu",
+    value: function createMenu(mobileEnabled) {
+      var _this$props = this.props,
+          data = _this$props.data,
+          position = _this$props.position,
+          tools = _this$props.tools,
+          mobileLogo = _this$props.mobileLogo,
+          label = _this$props.label,
+          displayMobileNav = _this$props.displayMobileNav;
+      return /*#__PURE__*/react.createElement(react.Fragment, null, /*#__PURE__*/react.createElement("nav", {
+        className: mobileEnabled ? 'uix-menu__container is-mobile' : 'uix-menu__container',
+        ref: function ref(node) {
+          if (node) {
+            if (position === 'left') node.style.setProperty("float", "left", "important");
+            if (!displayMobileNav) node.style.setProperty("display", "block", "important");
+          }
+        }
+      }, /*#__PURE__*/react.createElement("div", {
+        className: "uix-menu__inner"
+      }, mobileLogo ? /*#__PURE__*/react.createElement(react.Fragment, null, /*#__PURE__*/react.createElement("span", {
+        className: "uix-brand--mobile"
+      }, /*#__PURE__*/react.createElement("img", {
+        src: mobileLogo,
+        alt: label
+      }))) : '', /*#__PURE__*/react.createElement(MenuList, {
+        menuListData: data,
+        mobile: mobileEnabled
+      }), tools ? /*#__PURE__*/react.createElement(react.Fragment, null, /*#__PURE__*/react.createElement("div", {
+        className: "uix-menu__right-box"
+      }, tools)) : '')));
     }
   }, {
     key: "render",
     value: function render() {
-      var htmlString = this.props.htmlString;
-      return /*#__PURE__*/react.createElement(react.Fragment, null, /*#__PURE__*/react.createElement("div", {
-        className: "uix-menu-mobile__toggle"
+      var displayMobileNav = this.props.displayMobileNav;
+      return /*#__PURE__*/react.createElement(react.Fragment, null, displayMobileNav ? /*#__PURE__*/react.createElement(react.Fragment, null, /*#__PURE__*/react.createElement("div", {
+        ref: this.mobileToggleRef,
+        className: "uix-menu-mobile__toggle",
+        onClick: this.handleClickMobileToggle
       }, /*#__PURE__*/react.createElement("span", null), /*#__PURE__*/react.createElement("span", null), /*#__PURE__*/react.createElement("span", null)), /*#__PURE__*/react.createElement("div", {
-        className: "uix-menu-mobile__mask"
-      }), /*#__PURE__*/react.createElement("nav", {
-        className: "uix-menu__container"
-      }, /*#__PURE__*/react.createElement("div", {
-        className: "uix-menu__inner"
-      }, /*#__PURE__*/react.createElement("span", {
-        className: "uix-brand--mobile"
-      }, /*#__PURE__*/react.createElement("img", {
-        src: "".concat(websiteConfig.rootDirectory, "/assets/images/logo-colorful.png"),
-        alt: "Uix Kit React"
-      })), /*#__PURE__*/react.createElement("ul", {
-        className: "uix-menu"
-      }, htmlString), /*#__PURE__*/react.createElement("div", {
-        className: "uix-menu__right-box"
-      }, /*#__PURE__*/react.createElement("a", {
-        className: "uix-social-btn uix-social-btn--small uix-social-btn--circle uix-social-btn--thin",
-        title: "Follow us on Twitter",
-        href: "https://twitter.com/uiux_lab",
-        target: "_blank"
-      }, /*#__PURE__*/react.createElement("i", {
-        className: "fa fa-twitter"
-      })), /*#__PURE__*/react.createElement("a", {
-        className: "uix-social-btn uix-social-btn--small uix-social-btn--circle uix-social-btn--thin",
-        title: "Follow us on Facebook",
-        href: "https://www.facebook.com/uiuxlabhome",
-        target: "_blank"
-      }, /*#__PURE__*/react.createElement("i", {
-        className: "fa fa-facebook"
-      })), /*#__PURE__*/react.createElement("a", {
-        className: "uix-social-btn uix-social-btn--small uix-social-btn--circle uix-social-btn--thin",
-        title: "Fork on Github",
-        href: "https://github.com/xizon/uix-kit-react",
-        target: "_blank"
-      }, /*#__PURE__*/react.createElement("i", {
-        className: "fa fa-github"
-      }))))));
+        ref: this.mobileMaskRef,
+        className: "uix-menu-mobile__mask",
+        onClick: this.handleClickMobileClose
+      })) : '', this.createMenu(false), displayMobileNav ? this.createMenu(true) : null);
     }
   }]);
 
   return Navigation;
 }(react.Component);
-/*
-Mega Menu Demo:
-
-
-render() {
-	
-    return (
-      <>
-                
-      <nav className="uix-menu__container">
-        <div className="uix-menu__inner">
-            <span className="uix-brand--mobile"><img src={`${rootDirectory}/assets/images/logo-colorful.png`}
-                    alt="Uix Kit React" /></span>
-            <ul className="uix-menu">
-                <li className="multi-column current-menu-item is-active"><a href="#">Components</a>
-                    <ul className="sub-menu">
-
-                        <li>
-                            <span className="multi-column-title">Mega Menu 1</span>
-                            <ul className="sub-menu">
-                                <li><a href="#">Menu Text</a></li>
-                                <li><a href="#">Menu Text</a></li>
-                                <li><a href="#">Menu Text</a></li>
-                                <li><a href="#">Menu Text</a><span className="uix-bubble">new</span></li>
-                            </ul>
-                        </li>
-
-
-                        <li>
-                            <span className="multi-column-title">Mega Menu 2</span>
-                            <ul className="sub-menu">
-                                <li><a href="#">Menu Text</a></li>
-                                <li><a href="#">Menu Text</a></li>
-                            </ul>
-                        </li>
-
-
-                        <li>
-                            <span className="multi-column-title">Mega Menu 3</span>
-                            <ul className="sub-menu">
-                                <li><a href="#">Menu Text</a></li>
-                                <li><a href="#">Menu Text</a></li>
-                            </ul>
-                        </li>
-
-                        <li>
-                            <span className="multi-column-title">Mega Menu 4</span>
-                            <ul className="sub-menu">
-                                <li><a href="#">Menu Text</a></li>
-                                <li><a href="#">Menu Text</a></li>
-                            </ul>
-                        </li>
-
-                        <li>
-                            <span className="multi-column-title">Mega Menu 5</span>
-                            <ul className="sub-menu">
-                                <li><a href="#">Menu Text</a></li>
-                                <li><a href="#">Menu Text</a></li>
-                            </ul>
-                        </li>
-
-                    </ul>
-
-                </li>
-                <li><a href="#">Menu</a>
-                    <ul className="sub-menu">
-                        <li><a href="#">Menu Text</a></li>
-                        <li><a href="#">Menu Text</a></li>
-                        <li><a href="#">Menu Text</a></li>
-                    </ul>
-
-                </li>
-                <li><a href="typography.html">Menu</a></li>
-
-            </ul>
-
-        </div>
-
-    </nav>
-
-
-      </>
-    )
-}
-
-*/
-
 
 
 ;// CONCATENATED MODULE: ./src/client/components/Header/index.tsx
@@ -42711,6 +42921,10 @@ function Header_isNativeReflectConstruct() { if (typeof Reflect === "undefined" 
 /*-- Apply global scripts and styles --*/
 
 
+
+/*-- Apply this component styles --*/
+
+
  //get project config
 
  //get navigation
@@ -42731,8 +42945,13 @@ var Header = /*#__PURE__*/function (_Component) {
 
     _defineProperty(_assertThisInitialized(_this), "windowScrollUpdate", void 0);
 
+    _defineProperty(_assertThisInitialized(_this), "windowResizeUpdate", void 0);
+
     _this.handleScrollEvent = _this.handleScrollEvent.bind(_assertThisInitialized(_this));
-    _this.windowScrollUpdate = helpers.throttle(_this.handleScrollEvent, 5);
+    _this.windowScrollUpdate = helpers.throttle(_this.handleScrollEvent, 5); // Add a resize event listener to window
+
+    _this.windowResizeUpdate = function () {};
+
     return _this;
   }
 
@@ -42793,12 +43012,12 @@ var Header = /*#__PURE__*/function (_Component) {
 
                 headerInit(windowWidth);
               }
-            }
+            } // Add function to the window that should be resized
 
-            var debounceFunc = helpers.debounce(windowUpdate, 50);
 
-            window.removeEventListener('resize', debounceFunc);
-            window.addEventListener('resize', debounceFunc); //Sticky Header Area
+            self.windowResizeUpdate = helpers.debounce(windowUpdate, 50);
+            window.removeEventListener('resize', self.windowResizeUpdate);
+            window.addEventListener('resize', self.windowResizeUpdate); //Sticky Header Area
             //------------------------------------------
             // Add function to the element that should be used as the scrollable area.
 
@@ -42818,14 +43037,17 @@ var Header = /*#__PURE__*/function (_Component) {
     value: function componentWillUnmount() {
       // Remove scroll events from window
       window.removeEventListener('scroll', this.windowScrollUpdate);
-      window.removeEventListener('touchmove', this.windowScrollUpdate);
+      window.removeEventListener('touchmove', this.windowScrollUpdate); // Remove resize events from window
+
+      window.removeEventListener('resize', this.windowResizeUpdate);
     }
   }, {
     key: "render",
     value: function render() {
       var _this$props = this.props,
           menu = _this$props.menu,
-          headerOverlayEnabled = _this$props.headerOverlayEnabled;
+          headerOverlayEnabled = _this$props.headerOverlayEnabled,
+          logo = _this$props.logo;
 
       var _headerOverlayEnabled = headerOverlayEnabled == 'true' ? true : false;
 
@@ -42835,15 +43057,35 @@ var Header = /*#__PURE__*/function (_Component) {
         className: "uix-header"
       }, /*#__PURE__*/react.createElement("div", {
         className: "container"
-      }, /*#__PURE__*/react.createElement("div", {
+      }, logo ? /*#__PURE__*/react.createElement(react.Fragment, null, /*#__PURE__*/react.createElement("div", {
         className: "uix-brand"
-      }, /*#__PURE__*/react.createElement("a", {
-        href: "".concat(websiteConfig.rootDirectory, "/index")
-      }, /*#__PURE__*/react.createElement("img", {
-        src: "".concat(websiteConfig.rootDirectory, "/assets/images/logo.png"),
-        alt: "Uix Kit React"
-      }))), /*#__PURE__*/react.createElement(Navigation, {
-        htmlString: menu
+      }, logo)) : null, /*#__PURE__*/react.createElement(Navigation, {
+        displayMobileNav: true,
+        data: menu,
+        label: "Uix Kit React",
+        mobileLogo: "".concat(websiteConfig.rootDirectory, "/assets/images/logo-colorful.png"),
+        tools: /*#__PURE__*/react.createElement(react.Fragment, null, /*#__PURE__*/react.createElement("a", {
+          className: "uix-social-btn uix-social-btn--small uix-social-btn--circle uix-social-btn--thin",
+          title: "Follow us on Twitter",
+          href: "https://twitter.com/uiux_lab",
+          target: "_blank"
+        }, /*#__PURE__*/react.createElement("i", {
+          className: "fa fa-twitter"
+        })), /*#__PURE__*/react.createElement("a", {
+          className: "uix-social-btn uix-social-btn--small uix-social-btn--circle uix-social-btn--thin",
+          title: "Follow us on Facebook",
+          href: "https://www.facebook.com/uiuxlabhome",
+          target: "_blank"
+        }, /*#__PURE__*/react.createElement("i", {
+          className: "fa fa-facebook"
+        })), /*#__PURE__*/react.createElement("a", {
+          className: "uix-social-btn uix-social-btn--small uix-social-btn--circle uix-social-btn--thin",
+          title: "Fork on Github",
+          href: "https://github.com/xizon/uix-kit-react",
+          target: "_blank"
+        }, /*#__PURE__*/react.createElement("i", {
+          className: "fa fa-github"
+        })))
       })), /*#__PURE__*/react.createElement("div", {
         className: "uix-clearfix"
       }))), headerOverlayEnabled === true ? /*#__PURE__*/react.createElement(react.Fragment, null) : /*#__PURE__*/react.createElement("div", {
@@ -42874,6 +43116,15 @@ function throttle(fn, limit) {
       }, limit);
     }
   };
+} // Convert a string to slug.
+
+
+function toSlug(str) {
+  if (typeof str == 'string' && str.length > 0) {
+    return str.toString().replace(/[^\w\s\-！￥【】\u4e00-\u9eff]/gi, '').replace(/\s/g, '-').replace(/(\-){2,}/g, '-').replace(/\-\s*$/, '').toLowerCase();
+  } else {
+    return str;
+  }
 }
 
 function createSidebarMenu(navItems) {
@@ -42919,7 +43170,23 @@ function createSidebarMenu(navItems) {
         }
       });
     }
-  });
+  }); // Page automatically slide to jump to the corresponding position
+
+  var browserURL = window.location.href;
+
+  if (browserURL.indexOf('#') >= 0 && document.querySelectorAll('.app-header-title').length > 0) {
+    if (browserURL.split('#')[1] !== '') {
+      var targetEl = document.querySelector('#' + browserURL.split('#')[1]);
+
+      if (targetEl !== null) {
+        var elTop = targetEl.offsetTop;
+        window.scrollTo({
+          top: elTop,
+          behavior: 'smooth'
+        });
+      }
+    }
+  }
 }
 
 function highlightNavigation() {
@@ -42982,7 +43249,7 @@ function SidebarMenu() {
     var $style = document.createElement("style");
     $style.id = 'app-sidebar-menu-style';
     document.head.appendChild($style);
-    $style.innerHTML = "\n\n\t\t\t/*-- Sidebar Menu --*/\n\t\t\t.app-sidebar-menu {\n\t\t\t\tposition: fixed;\n\t\t\t\ttop: 100px;\n\t\t\t\tright: 40px;\n\t\t\t\tbox-sizing: border-box;\n\t\t\t\tmax-width: 200px;\n\t\t\t\toverflow: auto;\n\t\t\t\tmax-height: calc(95vh - 100px);\n\t\t\t\tborder-left: 1px #e5e5e5 solid;\n\t\t\t\tpadding: 15px;\n\t\t\t}\n\t\t\t\n\t\t\t.app-sidebar-menu ul {\n\t\t\t\tmargin: 0;\n\t\t\t\tpadding: 0;\n\t\t\t\tlist-style: none;\n\t\t\t\tfont-size: .75rem;\n\t\t\t}\n\t\t\t\n\t\t\t.app-sidebar-menu-header {\n\t\t\t\tpadding: 8px 0;\n\t\t\t\tborder-bottom: 1px solid #e5e5e5;\n\t\t\t}\n\t\t\t\n\t\t\t.app-sidebar-menu li {\n\t\t\t\tposition: relative;\n\t\t\t\tmargin-bottom: .3rem;\n\t\t\t}\n\t\t\t\n\t\t\t.app-sidebar-menu li>a {\n\t\t\t\tdisplay: flex;\n\t\t\t\talign-items: center;\n\t\t\t\tcolumn-gap: .25em;\n\t\t\t\ttext-decoration: none;\n\t\t\t\tcolor: #999;\n\t\t\t}\n\t\t\t\n\t\t\t.app-sidebar-menu li>a>* {\n\t\t\t\tflex: none;\n\t\t\t}\n\t\t\t\n\t\t\t.app-sidebar-menu li>a:focus {\n\t\t\t\toutline: none;\n\t\t\t}\n\t\t\t\n\t\t\t.app-sidebar-menu>li>a {\n\t\t\t\tpadding: 5px 0;\n\t\t\t}\n\t\t\t\n\t\t\t.app-sidebar-menu li.is-active > a {\n\t\t\t\tcolor: #333;\n\t\t\t}\n\n\t\t\t@media all and (max-width: 768px) {\n\t\t\t\t.app-sidebar-menu {\n\t\t\t\t\tdisplay: none;\n\t\t\t\t}\n\t\t\t\t\n\t\t\t\t.app-header-title--sidebar > a[href^=\"#\"] {\n\t\t\t\t\tdisplay: none;\n\t\t\t\t}\n\t\t\t}\n\t\t\t\n\t\t";
+    $style.innerHTML = "\n\n\t\t\t/*-- Sidebar Menu --*/\n\t\t\t.app-sidebar-menu {\n\t\t\t\tposition: fixed;\n\t\t\t\ttop: 100px;\n\t\t\t\tright: 40px;\n\t\t\t\tbox-sizing: border-box;\n\t\t\t\tmax-width: 180px;\n\t\t\t\toverflow: auto;\n\t\t\t\tmax-height: calc(95vh - 100px);\n\t\t\t\tborder-left: 1px #e5e5e5 solid;\n\t\t\t\tpadding: 15px;\n\t\t\t}\n\t\t\t\n\t\t\t.app-sidebar-menu ul {\n\t\t\t\tmargin: 0;\n\t\t\t\tpadding: 0;\n\t\t\t\tlist-style: none;\n\t\t\t\tfont-size: .75rem;\n\t\t\t}\n\t\t\t\n\t\t\t.app-sidebar-menu-header {\n\t\t\t\tpadding: 8px 0;\n\t\t\t\tborder-bottom: 1px solid #e5e5e5;\n\t\t\t}\n\t\t\t\n\t\t\t.app-sidebar-menu li {\n\t\t\t\tposition: relative;\n\t\t\t\tmargin-bottom: .3rem;\n\t\t\t}\n\t\t\t\n\t\t\t.app-sidebar-menu li>a {\n\t\t\t\tdisplay: flex;\n\t\t\t\talign-items: center;\n\t\t\t\tcolumn-gap: .25em;\n\t\t\t\ttext-decoration: none;\n\t\t\t\tcolor: #999;\n\t\t\t}\n\t\t\t\n\t\t\t.app-sidebar-menu li>a>* {\n\t\t\t\tflex: none;\n\t\t\t}\n\t\t\t\n\t\t\t.app-sidebar-menu li>a:focus {\n\t\t\t\toutline: none;\n\t\t\t}\n\t\t\t\n\t\t\t.app-sidebar-menu>li>a {\n\t\t\t\tpadding: 5px 0;\n\t\t\t}\n\t\t\t\n\t\t\t.app-sidebar-menu li.is-active > a {\n\t\t\t\tcolor: #333;\n\t\t\t}\n\n\t\t\t@media all and (max-width: 768px) {\n\t\t\t\t.app-sidebar-menu {\n\t\t\t\t\tdisplay: none;\n\t\t\t\t}\n\t\t\t\t\n\t\t\t\t.app-header-title--sidebar > a[href^=\"#\"] {\n\t\t\t\t\tdisplay: none;\n\t\t\t\t}\n\t\t\t}\n\t\t\t\n\t\t";
   } //-----
 
 
@@ -42999,8 +43266,8 @@ function SidebarMenu() {
     var docLinkText = docLink.innerHTML.match(/<a.*?>(.*?)<\/a>/g)[0];
     docLink.querySelector('a').style.display = 'none';
     result.forEach(function (node, index) {
-      var linkID = 'app-header-title-' + index;
       var linkTitle = node.innerHTML.replace(/<a\b[^>]*>(.*?)<\/a>/ig, '');
+      var linkID = 'app-goto__' + toSlug(linkTitle);
       var sectionID = linkID + '__section';
 
       if (document.querySelector('#' + linkID) === null) {
@@ -43037,9 +43304,7 @@ function SidebarMenu() {
     window.addEventListener('scroll', throttleFunc);
   }
 }
-/* harmony default export */ const _SidebarMenu = ({
-  SidebarMenu: SidebarMenu
-});
+/* harmony default export */ const _SidebarMenu = ((/* unused pure expression or super */ null && (SidebarMenu)));
 ;// CONCATENATED MODULE: ./src/client/router/App.js
 
 
@@ -43121,52 +43386,124 @@ function SidebarMenu() {
     } else {
       document.title = "".concat(pageTitle);
     }
-  });
-  return /*#__PURE__*/react.createElement(react.Fragment, null, /*#__PURE__*/react.createElement(Header, {
-    headerOverlayEnabled: "false",
-    menu: /*#__PURE__*/react.createElement(react.Fragment, null, /*#__PURE__*/react.createElement("li", {
+  }); //
+
+  var urlChk = function urlChk(str) {
+    if (str.indexOf('#') >= 0) {
+      return theLocation.hash.indexOf(str) >= 0 ? true : false;
+    } else {
+      return theLocation.pathname.indexOf(str) >= 0 ? true : false;
+    }
+  };
+
+  var mobileClickEv = function mobileClickEv() {
+    //close navigation mask
+    if (typeof document !== 'undefined' && document.querySelector('.uix-menu-mobile__toggle') !== null) {
+      document.body.classList.remove('js-uix-menu-opened');
+      document.querySelector('.uix-menu-mobile__toggle').classList.remove('is-active');
+    }
+  };
+
+  var menuListData = [{
+    "title": /*#__PURE__*/react.createElement(react.Fragment, null, /*#__PURE__*/react.createElement("li", {
+      onTouchStart: mobileClickEv(),
       className: props.location.pathname === "/index" || props.location.pathname === '' ? 'is-active' : ''
     }, /*#__PURE__*/react.createElement(NavLink, {
       "data-route": "true",
       to: "/index",
       activeClassName: "is-active"
-    }, "Home")), /*#__PURE__*/react.createElement("li", {
-      className: props.location.pathname === "/components-demo" ? 'is-active' : ''
+    }, "Home"))),
+    "link": "#",
+    "mega": false
+  }, {
+    "title": /*#__PURE__*/react.createElement(react.Fragment, null, /*#__PURE__*/react.createElement("li", {
+      onTouchStart: mobileClickEv(),
+      className: urlChk("/components-demo") ? 'is-active' : ''
     }, /*#__PURE__*/react.createElement(NavLink, {
       "data-route": "true",
       to: "/components-demo",
       activeClassName: "is-active"
-    }, "Components")), /*#__PURE__*/react.createElement("li", {
-      className: props.location.pathname.indexOf("/posts") >= 0 ? 'is-active' : ''
+    }, "Components"))),
+    "link": "#",
+    "mega": false
+  }, {
+    "title": /*#__PURE__*/react.createElement(react.Fragment, null, /*#__PURE__*/react.createElement("li", {
+      onTouchStart: mobileClickEv(),
+      className: urlChk("/posts") && !urlChk("/posts-pagination") ? 'is-active' : ''
     }, /*#__PURE__*/react.createElement(NavLink, {
       "data-route": "true",
       to: "/posts",
       activeClassName: "is-active"
-    }, "Posts")), /*#__PURE__*/react.createElement("li", {
-      className: props.location.pathname === "/errorpage" ? 'is-active' : ''
+    }, "Posts"))),
+    "link": "#",
+    "mega": false
+  }, {
+    "title": /*#__PURE__*/react.createElement(react.Fragment, null, /*#__PURE__*/react.createElement("li", {
+      onTouchStart: mobileClickEv(),
+      className: urlChk("/posts-pagination") ? 'is-active' : ''
+    }, /*#__PURE__*/react.createElement(NavLink, {
+      "data-route": "true",
+      to: "/posts-pagination/1",
+      activeClassName: "is-active"
+    }, "Posts Pagination"))),
+    "link": "#",
+    "mega": false
+  }, {
+    "title": /*#__PURE__*/react.createElement(react.Fragment, null, /*#__PURE__*/react.createElement("li", {
+      onTouchStart: mobileClickEv(),
+      className: urlChk("/errorpage") ? 'is-active' : ''
     }, /*#__PURE__*/react.createElement(NavLink, {
       "data-route": "true",
       to: "/errorpage",
       activeClassName: "is-active"
-    }, "404")), /*#__PURE__*/react.createElement("li", {
-      className: props.location.pathname.indexOf("/nested-routes") >= 0 ? 'is-active' : ''
+    }, "404"))),
+    "link": "#",
+    "mega": false
+  }, {
+    "title": /*#__PURE__*/react.createElement(react.Fragment, null, /*#__PURE__*/react.createElement("li", {
+      onTouchStart: mobileClickEv(),
+      className: urlChk("/nested-routes") ? 'is-active' : ''
     }, /*#__PURE__*/react.createElement(NavLink, {
       "data-route": "true",
       to: "/nested-routes",
       activeClassName: "is-active"
-    }, "Nested Routes")), /*#__PURE__*/react.createElement("li", {
-      className: props.location.pathname === "/member" ? 'is-active' : ''
+    }, "Nested Routes"))),
+    "link": "#",
+    "mega": false
+  }, {
+    "title": /*#__PURE__*/react.createElement(react.Fragment, null, /*#__PURE__*/react.createElement("li", {
+      onTouchStart: mobileClickEv(),
+      className: urlChk("/member") ? 'is-active' : ''
     }, /*#__PURE__*/react.createElement(NavLink, {
       "data-route": "true",
       to: "/member",
       activeClassName: "is-active"
-    }, "Member")), /*#__PURE__*/react.createElement("li", {
-      className: props.location.pathname.indexOf("/admin") >= 0 ? 'is-active' : ''
+    }, "Member"))),
+    "link": "#",
+    "mega": false
+  }, {
+    "title": /*#__PURE__*/react.createElement(react.Fragment, null, /*#__PURE__*/react.createElement("li", {
+      onTouchStart: mobileClickEv(),
+      className: urlChk("/admin") ? 'is-active' : ''
     }, /*#__PURE__*/react.createElement(NavLink, {
       "data-route": "true",
       to: "/admin",
       activeClassName: "is-active"
-    }, "Admin")))
+    }, "Admin"))),
+    "link": "#",
+    "mega": false
+  }];
+  return /*#__PURE__*/react.createElement(react.Fragment, null, /*#__PURE__*/react.createElement(Header, {
+    headerOverlayEnabled: "false",
+    menu: menuListData,
+    logo: /*#__PURE__*/react.createElement(react.Fragment, null, /*#__PURE__*/react.createElement(NavLink, {
+      "data-route": "true",
+      to: "/index",
+      activeClassName: "is-active"
+    }, /*#__PURE__*/react.createElement("img", {
+      src: "".concat(websiteConfig.rootDirectory, "/assets/images/logo.png"),
+      alt: "Uix Kit React"
+    })))
   }), /*#__PURE__*/react.createElement(Switch, null, /*#__PURE__*/react.createElement(Route, {
     exact: true,
     path: "/",
@@ -43208,6 +43545,9 @@ function Footer_isNativeReflectConstruct() { if (typeof Reflect === "undefined" 
 
 /*-- Apply global scripts and styles --*/
 
+
+
+/*-- Apply this component styles --*/
 
 
 var Footer = /*#__PURE__*/function (_Component) {
@@ -43284,7 +43624,7 @@ var Footer = /*#__PURE__*/function (_Component) {
   }, /*#__PURE__*/react.createElement("img", {
     src: "".concat(websiteConfig.rootDirectory, "/assets/images/logo-colorful.png"),
     alt: "Uix Kit React"
-  }), /*#__PURE__*/react.createElement("p", null, "A free web kits with React for fast web design and development via SSR. Using react, redux, router, axios and express. This project was bootstrapped with nodejs library. Project supports automatic deployments from a number of repository hosting services via pm2."), /*#__PURE__*/react.createElement("p", null, "It contains some Migrating UI Components. The core interactive script is invoked immediately after a component is mounted without React Hooks and State Lifecycle, even use this script completely (this is very useful for quickly creating a demo module)."), /*#__PURE__*/react.createElement("p", null, /*#__PURE__*/react.createElement(NavLink, {
+  }), /*#__PURE__*/react.createElement("p", null, "A free web kits with React for fast web design and development via SSR. Using react, redux, router, axios and express. This project was bootstrapped with nodejs library. Project supports automatic deployments from a number of repository hosting services via pm2."), /*#__PURE__*/react.createElement("p", null, /*#__PURE__*/react.createElement(NavLink, {
     "data-route": "true",
     to: "/components-demo",
     style: {
@@ -43348,7 +43688,7 @@ var actionCreators = function actionCreators() {
   // The function defined by async will return the value of a `Promise()` object resolve by default, 
   // so the `then()` can be used directly, and the returned value is the params of the `then()`
   return /*#__PURE__*/function () {
-    var _ref = _asyncToGenerator( /*#__PURE__*/regenerator_default().mark(function _callee(storeDispatch) {
+    var _ref = _asyncToGenerator( /*#__PURE__*/regenerator_default().mark(function _callee(dispatchFunction) {
       var res, action;
       return regenerator_default().wrap(function _callee$(_context) {
         while (1) {
@@ -43364,7 +43704,7 @@ var actionCreators = function actionCreators() {
                 type: 'RECEIVE_DEMO_LIST',
                 payload: res.data
               };
-              storeDispatch(action);
+              dispatchFunction(action);
 
             case 5:
             case "end":
@@ -43502,7 +43842,7 @@ var Posts = /*#__PURE__*/function (_Component) {
   			axios({
   				timeout: 15000,
   				method: 'get',
-  				url: `http://api.countrylayer.com/v2/all?access_key=8ef27495767eb3ea58cc0eabf66068e9`,
+  				url: `https://examples.com`,
   				responseType: 'json'
   			}).then(function (response) {
   				resolve( response );
@@ -43543,17 +43883,17 @@ var Posts = /*#__PURE__*/function (_Component) {
   _createClass(Posts, [{
     key: "componentDidMount",
     value: function componentDidMount() {
-      //Receive contentInformation redux from the parent page
+      //Receive redux from the parent page
       console.log('[posts list]this.props:');
       console.log(this.props);
-      var contentInformation = this.props.contentInformation; // Request data
+      var contentInformation = this.props.contentInformation; //from `mapDispatchToProps()`
 
-      contentInformation(demoListActions());
+      this.props.actionCreators();
     }
   }, {
     key: "render",
     value: function render() {
-      // Bind data and display
+      //from `mapStateToProps()`
       var preloadedState = this.props.currentData; //loader
 
       var isLoaded = false;
@@ -43595,26 +43935,34 @@ var Posts = /*#__PURE__*/function (_Component) {
   }]);
 
   return Posts;
-}(react.Component); // Subscribe to the required state in the reducers is bound 
-// here (for details of the data structure: initState)
+}(react.Component); // Subscribe to the required state in the reducers is bound here (for details of the data structure: initState)
+// You can call it in `this.props`
 
 
-var Posts_mapStateToProps = function mapStateToProps(storeState) {
+var Posts_mapStateToProps = function mapStateToProps(state) {
+  var listData = state.listData; //Receive redux
+
   return {
-    currentData: storeState.listData.items //Receive redux
-
+    currentData: listData.items
   };
-}; // Bind the introduced Actions
+}; // Bind the introduced Actions. You will normally make use of this by returning new functions that call `dispatch()` inside themselves
+// You can call it in `this.props`
+
+/*
+Like this:
+const mapDispatchToProps = (dispatch) => {
+	return {
+		increment: () => dispatch({ type: 'INCREMENT' }),
+		decrement: () => dispatch({ type: 'DECREMENT' }),
+	}
+}
+*/
 
 
-var Posts_mapDispatchToProps = function mapDispatchToProps(storeDispatch) {
-  return {
-    contentInformation: storeDispatch //Throw redux
-
-  };
+var Posts_mapDispatchToProps = {
+  actionCreators: demoListActions
 }; // The most important step is to bind the required Reducer and Actions to the current page 
 // through the connect function provided by react-redux
-
 
 /* harmony default export */ const _pages_Posts = (connect(Posts_mapStateToProps, Posts_mapDispatchToProps)(Posts));
 ;// CONCATENATED MODULE: ./src/client/actions/demoListDetailActions.js
@@ -43628,7 +43976,7 @@ var demoListDetailActions_actionCreators = function actionCreators(id) {
   // The function defined by async will return the value of a `Promise()` object resolve by default, 
   // so the `then()` can be used directly, and the returned value is the params of the `then()`
   return /*#__PURE__*/function () {
-    var _ref = _asyncToGenerator( /*#__PURE__*/regenerator_default().mark(function _callee(storeDispatch) {
+    var _ref = _asyncToGenerator( /*#__PURE__*/regenerator_default().mark(function _callee(dispatchFunction) {
       var res, action;
       return regenerator_default().wrap(function _callee$(_context) {
         while (1) {
@@ -43644,7 +43992,7 @@ var demoListDetailActions_actionCreators = function actionCreators(id) {
                 type: 'RECEIVE_DEMO_LISTDETAIL',
                 payload: res.data
               };
-              storeDispatch(action);
+              dispatchFunction(action);
 
             case 5:
             case "end":
@@ -43754,7 +44102,7 @@ var PostDetail = /*#__PURE__*/function (_Component) {
   				axios({
   					timeout: 15000,
   					method: 'get',
-  					url: `http://api.countrylayer.com/v2/name/${currentID}?access_key=8ef27495767eb3ea58cc0eabf66068e9`,
+  					url: `https://restcountries.com/v2/name/${currentID}`,
   					responseType: 'json'
   				}).then(function (response) {
   					resolve( response );
@@ -43799,17 +44147,16 @@ var PostDetail = /*#__PURE__*/function (_Component) {
   _createClass(PostDetail, [{
     key: "componentDidMount",
     value: function componentDidMount() {
-      //Receive contentInformation redux from the parent page
+      //Receive redux from the parent page
       console.log('[detail of post]this.props:');
-      console.log(this.props);
-      var contentInformation = this.props.contentInformation; // Request data
+      console.log(this.props); //from `mapDispatchToProps()`
 
-      contentInformation(demoListDetailActions(this.props.match.params.post_id));
+      this.props.actionCreators(this.props.match.params.post_id);
     }
   }, {
     key: "render",
     value: function render() {
-      // Bind data and display
+      //from `mapStateToProps()`
       var preloadedState = this.props.currentData; //loader
 
       var isLoaded = false;
@@ -43875,28 +44222,713 @@ var PostDetail = /*#__PURE__*/function (_Component) {
   }]);
 
   return PostDetail;
-}(react.Component); // Subscribe to the required state in the reducers is bound 
-// here (for details of the data structure: initState)
+}(react.Component); // Subscribe to the required state in the reducers is bound here (for details of the data structure: initState)
+// You can call it in `this.props`
 
 
-var PostDetail_mapStateToProps = function mapStateToProps(storeState) {
+var PostDetail_mapStateToProps = function mapStateToProps(state) {
+  var listDetailData = state.listDetailData; //Receive redux
+
   return {
-    currentData: storeState.listDetailData.detail //Receive redux
-
+    currentData: listDetailData.detail
   };
-}; // Bind the introduced Actions
+}; // Bind the introduced Actions. You will normally make use of this by returning new functions that call `dispatch()` inside themselves
+// You can call it in `this.props`
+
+/*
+Like this:
+const mapDispatchToProps = (dispatch) => {
+	return {
+		increment: () => dispatch({ type: 'INCREMENT' }),
+		decrement: () => dispatch({ type: 'DECREMENT' }),
+	}
+}
+*/
 
 
-var PostDetail_mapDispatchToProps = function mapDispatchToProps(storeDispatch) {
-  return {
-    contentInformation: storeDispatch //Throw redux
-
-  };
+var PostDetail_mapDispatchToProps = {
+  actionCreators: demoListDetailActions
 }; // The most important step is to bind the required Reducer and Actions to the current page 
 // through the connect function provided by react-redux
 
-
 /* harmony default export */ const Posts_PostDetail = (connect(PostDetail_mapStateToProps, PostDetail_mapDispatchToProps)(PostDetail));
+;// CONCATENATED MODULE: ./src/client/actions/demoListPostsPaginationActions.js
+
+
+ //get project config
+
+
+function actionCreatorOfGetDataInitial() {
+  // The function defined by async will return the value of a `Promise()` object resolve by default, 
+  // so the `then()` can be used directly, and the returned value is the params of the `then()`
+  return /*#__PURE__*/function () {
+    var _ref = _asyncToGenerator( /*#__PURE__*/regenerator_default().mark(function _callee(dispatchFunction) {
+      var res, action;
+      return regenerator_default().wrap(function _callee$(_context) {
+        while (1) {
+          switch (_context.prev = _context.next) {
+            case 0:
+              _context.next = 2;
+              return axios_default().get(websiteConfig.API.RECEIVE_PAGE_LIST);
+
+            case 2:
+              res = _context.sent;
+              //The Redux store has a method called `store.dispatch()`.
+              action = {
+                type: 'RECEIVE_PAGE_LIST',
+                payload: res.data
+              };
+              dispatchFunction(action);
+
+            case 5:
+            case "end":
+              return _context.stop();
+          }
+        }
+      }, _callee);
+    }));
+
+    return function (_x) {
+      return _ref.apply(this, arguments);
+    };
+  }();
+}
+function actionCreatorOfGetDataByPage(page) {
+  // The function defined by async will return the value of a `Promise()` object resolve by default, 
+  // so the `then()` can be used directly, and the returned value is the params of the `then()`
+  return /*#__PURE__*/function () {
+    var _ref2 = _asyncToGenerator( /*#__PURE__*/regenerator_default().mark(function _callee2(dispatchFunction) {
+      var res, action;
+      return regenerator_default().wrap(function _callee2$(_context2) {
+        while (1) {
+          switch (_context2.prev = _context2.next) {
+            case 0:
+              _context2.next = 2;
+              return axios_default().get(websiteConfig.API.RECEIVE_PAGE_LIST.replace('{page}', page));
+
+            case 2:
+              res = _context2.sent;
+              //The Redux store has a method called `store.dispatch()`.
+              action = {
+                type: 'RECEIVE_PAGE_LIST',
+                payload: res.data
+              };
+              dispatchFunction(action);
+
+            case 5:
+            case "end":
+              return _context2.stop();
+          }
+        }
+      }, _callee2);
+    }));
+
+    return function (_x2) {
+      return _ref2.apply(this, arguments);
+    };
+  }();
+}
+/** //////////////////////////////////////// */
+
+/*
+	If the API asynchronous request failed asynchronously (usually a 403 permission error), the error report `502 Proxy Error` of the Express Server will be skipped, and cannot use server-side rendering (SSR) features.
+	The test on the local server is correct, this error usually occurs on the cloud server.
+*/
+
+/*
+let res = {data: []};
+
+// You should catch your potential promise rejection to avoid causing `502 Proxy Error` 
+// errors when requesting from the express server
+try {
+	res = await axios.get( API.RECEIVE_DEMO_LIST );
+} catch (err) {
+	console.warn(err);
+}
+
+*/
+;// CONCATENATED MODULE: ./src/client/components/Pagination/pagination-navigators.tsx
+/*
+* Generate page navigators
+*
+* @param  {Number} visibleNavigators    - The range of pages displayed.
+* @param  {Number} totalPages           - The total number of pages.
+* @param  {Number} activePage           - The currently selected page number.
+* @param  {Boolean} adjustmentEnabled   - Whether to complete the page number range.
+* @return {Array}                       - Return an array.
+*/
+function paginationNavigators(visibleNavigators, totalPages, activePage, adjustmentEnabled) {
+  // Generate a sequence of numbers
+  // Since the array is initialized with `undefined` on each position,
+  // the value of `v` below will be `undefined`
+  var result = [];
+
+  if (activePage + visibleNavigators - 1 < totalPages) {
+    result = Array.from({
+      length: visibleNavigators
+    }, function (v, k) {
+      return k + activePage;
+    });
+  } else {
+    var diff = totalPages - activePage;
+
+    if (diff >= 0) {
+      result = Array.from({
+        length: diff + 1
+      }, function (v, k) {
+        return k + activePage;
+      });
+    }
+  } //Shift the elements forward to complete the display range
+
+
+  var adjustmentResult = function adjustmentResult(arr) {
+    if (arr.length < totalPages) {
+      var adjustment = visibleNavigators - arr.length;
+
+      for (var i = 1; i <= adjustment; i++) {
+        arr.unshift(activePage - i);
+      }
+    }
+
+    return arr;
+  };
+
+  if (adjustmentEnabled) result = adjustmentResult(result);
+  return result;
+}
+/* harmony default export */ const pagination_navigators = ((/* unused pure expression or super */ null && (paginationNavigators)));
+;// CONCATENATED MODULE: ./src/client/components/Pagination/index.tsx
+
+
+
+
+
+
+
+function Pagination_createSuper(Derived) { var hasNativeReflectConstruct = Pagination_isNativeReflectConstruct(); return function _createSuperInternal() { var Super = _getPrototypeOf(Derived), result; if (hasNativeReflectConstruct) { var NewTarget = _getPrototypeOf(this).constructor; result = Reflect.construct(Super, arguments, NewTarget); } else { result = Super.apply(this, arguments); } return _possibleConstructorReturn(this, result); }; }
+
+function Pagination_isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Reflect.construct) return false; if (Reflect.construct.sham) return false; if (typeof Proxy === "function") return true; try { Boolean.prototype.valueOf.call(Reflect.construct(Boolean, [], function () {})); return true; } catch (e) { return false; } }
+
+/* 
+ *************************************
+ * <!-- Pagination -->
+ *************************************
+ */
+
+/*-- Apply Third-party plugins (import location should be in front of "global scripts and styles") --*/
+
+
+
+
+/*-- Apply global scripts and styles --*/
+
+
+
+/*-- Apply this component styles --*/
+ //
+
+
+
+var Pagination = /*#__PURE__*/function (_Component) {
+  _inherits(Pagination, _Component);
+
+  var _super = Pagination_createSuper(Pagination);
+
+  function Pagination(props) {
+    var _this;
+
+    _classCallCheck(this, Pagination);
+
+    _this = _super.call(this, props);
+    _this.handleNavigateClick = _this.handleNavigateClick.bind(_assertThisInitialized(_this));
+    return _this;
+  }
+
+  _createClass(Pagination, [{
+    key: "handleNavigateClick",
+    value: function handleNavigateClick(parameter) {
+      var _this$props = this.props,
+          gotoPageClickEvent = _this$props.gotoPageClickEvent,
+          activePage = _this$props.activePage,
+          totalPages = _this$props.totalPages;
+
+      switch (parameter) {
+        case "prev":
+          gotoPageClickEvent(activePage - 1);
+          break;
+
+        case "next":
+          gotoPageClickEvent(activePage + 1);
+          break;
+
+        case "first":
+          gotoPageClickEvent(1);
+          break;
+
+        case "last":
+          gotoPageClickEvent(totalPages);
+          break;
+
+        default:
+          gotoPageClickEvent(1);
+          break;
+      }
+    }
+  }, {
+    key: "render",
+    value: function render() {
+      var _this2 = this;
+
+      var _this$props2 = this.props,
+          gotoPageClickEvent = _this$props2.gotoPageClickEvent,
+          pageRangeDisplayed = _this$props2.pageRangeDisplayed,
+          activePage = _this$props2.activePage,
+          totalPages = _this$props2.totalPages,
+          previousLabel = _this$props2.previousLabel,
+          nextLabel = _this$props2.nextLabel,
+          firstLabel = _this$props2.firstLabel,
+          lastLabel = _this$props2.lastLabel,
+          breakLabel = _this$props2.breakLabel,
+          align = _this$props2.align,
+          onlyPrevNext = _this$props2.onlyPrevNext,
+          activeClass = _this$props2.activeClass,
+          previousClass = _this$props2.previousClass,
+          nextClass = _this$props2.nextClass,
+          firstClass = _this$props2.firstClass,
+          lastClass = _this$props2.lastClass,
+          disabledClass = _this$props2.disabledClass;
+      var visibleNavigators = pageRangeDisplayed ? pageRangeDisplayed : 3;
+      var alignClassName = '';
+
+      switch (align) {
+        case 'left':
+          alignClassName = ' uix-t-l';
+          break;
+
+        case 'right':
+          alignClassName = ' uix-t-r';
+          break;
+
+        case 'center':
+          alignClassName = ' uix-t-c';
+          break;
+      }
+
+      var _activeClassName = activeClass ? activeClass : 'is-active',
+          _previousClassName = previousClass ? previousClass : 'prev',
+          _nextClassName = nextClass ? nextClass : 'next',
+          _firstClassName = firstClass ? firstClass : 'first',
+          _lastClassName = lastClass ? lastClass : 'last',
+          _disabledClassName = disabledClass ? disabledClass : 'is-disabled',
+          _onlyPrevNextButtons = typeof onlyPrevNext === 'undefined' ? false : onlyPrevNext; //get navigation array
+      //------------------------------------------
+
+
+      var navArr = paginationNavigators(visibleNavigators, totalPages, activePage, true); // Use ellipsis to extend page numbers
+      //------------------------------------------
+
+      var _ellipsis = breakLabel ? breakLabel : '';
+
+      var _ellipsisArr = [];
+      var _ellipsisEnabled = false;
+      if (_ellipsis !== '') _ellipsisArr = [totalPages - 1, totalPages];
+
+      if (activePage + 2 >= totalPages) {
+        _ellipsisArr = [];
+        _ellipsis = '';
+      }
+
+      var _ellipsisElements = _ellipsisArr.map(function (item) {
+        if (item > 0 && item <= totalPages && !_onlyPrevNextButtons) {
+          //Delete values whose display range is more than the total
+          if (navArr.indexOf(item) === -1) {
+            _ellipsisEnabled = true;
+            return /*#__PURE__*/react.createElement("li", {
+              key: item,
+              className: activePage === item ? _activeClassName : ''
+            }, /*#__PURE__*/react.createElement("a", {
+              href: "#",
+              onClick: function onClick(e) {
+                e.preventDefault();
+                gotoPageClickEvent(item);
+              }
+            }, item));
+          }
+        }
+      });
+
+      return /*#__PURE__*/react.createElement(react.Fragment, null, /*#__PURE__*/react.createElement("nav", {
+        "aria-label": "Page navigation",
+        className: "uix-pagination__container" + alignClassName
+      }, /*#__PURE__*/react.createElement("ul", null, firstLabel ? /*#__PURE__*/react.createElement("li", {
+        className: activePage > 1 ? _firstClassName : "".concat(_firstClassName, " ").concat(_disabledClassName)
+      }, /*#__PURE__*/react.createElement("a", {
+        href: "#",
+        onClick: function onClick(e) {
+          e.preventDefault();
+
+          _this2.handleNavigateClick('first');
+        }
+      }, firstLabel || null)) : '', previousLabel ? /*#__PURE__*/react.createElement("li", {
+        className: activePage > 1 ? _previousClassName : "".concat(_previousClassName, " ").concat(_disabledClassName)
+      }, /*#__PURE__*/react.createElement("a", {
+        href: "#",
+        onClick: function onClick(e) {
+          e.preventDefault();
+
+          _this2.handleNavigateClick('prev');
+        }
+      }, previousLabel || null)) : '', navArr.map(function (item) {
+        if (item > 0 && item <= totalPages && !_onlyPrevNextButtons) {
+          return /*#__PURE__*/react.createElement("li", {
+            key: item,
+            className: activePage === item ? _activeClassName : ''
+          }, /*#__PURE__*/react.createElement("a", {
+            href: "#",
+            onClick: function onClick(e) {
+              e.preventDefault();
+              gotoPageClickEvent(item);
+            }
+          }, item));
+        }
+      }), _ellipsis !== '' && _ellipsisEnabled ? /*#__PURE__*/react.createElement(react.Fragment, null, /*#__PURE__*/react.createElement("li", null, /*#__PURE__*/react.createElement("span", null, _ellipsis))) : '', _ellipsisElements, nextLabel ? /*#__PURE__*/react.createElement("li", {
+        className: activePage < totalPages ? _nextClassName : "".concat(_nextClassName, " ").concat(_disabledClassName)
+      }, /*#__PURE__*/react.createElement("a", {
+        href: "#",
+        onClick: function onClick(e) {
+          e.preventDefault();
+
+          _this2.handleNavigateClick('next');
+        }
+      }, nextLabel || null)) : '', lastLabel ? /*#__PURE__*/react.createElement("li", {
+        className: activePage < totalPages ? _lastClassName : "".concat(_lastClassName, " ").concat(_disabledClassName)
+      }, /*#__PURE__*/react.createElement("a", {
+        href: "#",
+        onClick: function onClick(e) {
+          e.preventDefault();
+
+          _this2.handleNavigateClick('last');
+        }
+      }, lastLabel || null)) : '')));
+    }
+  }]);
+
+  return Pagination;
+}(react.Component);
+
+
+;// CONCATENATED MODULE: ./src/client/views/_pages/PostsPagination/Item.js
+
+/* harmony default export */ const Item = (function (_ref) {
+  var id = _ref.id,
+      img = _ref.img,
+      title = _ref.title,
+      email = _ref.email;
+  return /*#__PURE__*/react.createElement(react.Fragment, null, /*#__PURE__*/react.createElement("div", {
+    className: "row text-center text-md-left align-items-center"
+  }, /*#__PURE__*/react.createElement("div", {
+    className: "col-lg-2 col-md-2"
+  }, /*#__PURE__*/react.createElement("img", {
+    className: "rounded mb-3",
+    src: img,
+    alt: title
+  })), /*#__PURE__*/react.createElement("div", {
+    className: "col-lg-10 col-md-10 justify-content-center"
+  }, /*#__PURE__*/react.createElement("h4", {
+    className: "uix-spacing--no"
+  }, title, " (ID:", id, ")"), /*#__PURE__*/react.createElement("span", null, "Email: ", email))), /*#__PURE__*/react.createElement("hr", null));
+});
+;// CONCATENATED MODULE: ./src/client/views/_pages/PostsPagination/index.js
+
+
+
+
+
+
+
+function PostsPagination_createSuper(Derived) { var hasNativeReflectConstruct = PostsPagination_isNativeReflectConstruct(); return function _createSuperInternal() { var Super = _getPrototypeOf(Derived), result; if (hasNativeReflectConstruct) { var NewTarget = _getPrototypeOf(this).constructor; result = Reflect.construct(Super, arguments, NewTarget); } else { result = Super.apply(this, arguments); } return _possibleConstructorReturn(this, result); }; }
+
+function PostsPagination_isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Reflect.construct) return false; if (Reflect.construct.sham) return false; if (typeof Proxy === "function") return true; try { Boolean.prototype.valueOf.call(Reflect.construct(Boolean, [], function () {})); return true; } catch (e) { return false; } }
+
+
+
+
+
+
+
+
+ //get project config
+
+
+
+var PostsPagination = /*#__PURE__*/function (_Component) {
+  _inherits(PostsPagination, _Component);
+
+  var _super = PostsPagination_createSuper(PostsPagination);
+
+  function PostsPagination(props) {
+    var _this;
+
+    _classCallCheck(this, PostsPagination);
+
+    _this = _super.call(this, props);
+
+    _this.urlChange = function () {};
+
+    _this.state = {
+      currentPage: 1,
+      getDataStart: false
+    };
+    _this.handleGotoPageNumber = _this.handleGotoPageNumber.bind(_assertThisInitialized(_this));
+    _this.handleGetData = _this.handleGetData.bind(_assertThisInitialized(_this));
+    return _this;
+  }
+
+  _createClass(PostsPagination, [{
+    key: "handleGotoPageNumber",
+    value: function handleGotoPageNumber(number) {
+      //`number` comes from the public parameter thrown by the component `<Pagination />`
+      //console.log( 'number: ', number );
+      //Change URL without refresh the page
+      var url = window.location.href;
+      url = url.replace(/[^\/]+$/, ''); //get part of string before the last forward slash
+
+      history.pushState(null, '', url + number); // from `mapDispatchToProps()`
+
+      this.props.actionCreatorOfGetDataByPage(number); //
+
+      this.setState({
+        currentPage: number
+      });
+    }
+  }, {
+    key: "handleGetData",
+    value: function handleGetData() {
+      // from `mapDispatchToProps()`
+      this.props.actionCreatorOfGetDataInitial(); //
+
+      this.setState({
+        getDataStart: true
+      });
+    } //Static properties/methords are the properties of the class. 
+    //@link to: `src/server/app.js`
+
+    /*
+     * When requesting from the server, the program will look for the react component with 
+     * the `appSyncRequestFetching` function (this function is named by the developer) to complete the 
+     * initial update and rendering of the data(SSR).
+     
+    	if ( typeof route.component.appSyncRequestFetching !== typeof undefined ) {
+    		//...
+    	}	
+    
+    */
+
+    /*
+    Dispatch an async function. The `redux-thunk` middleware handles running this function.
+    Implementation principle:
+    (put the following code in the app.get('*', (req, res) => {...} code snippet in `src/server/app.js`):
+    
+    -------------------
+    	store.dispatch(async function(dispatch) {
+    		// Wait for all the `httpRequest` functions, if they are resolved, run 'store.dispatch()'
+    	const httpRequest = () => {
+    		return new Promise( (resolve,reject) => {
+    			axios({
+    				timeout: 15000,
+    				method: 'get',
+    				url: `https://examples.com`,
+    				responseType: 'json'
+    			}).then(function (response) {
+    				resolve( response );
+    			})
+    			.catch(function (error) {
+    				console.log( error );
+    			});
+    		});
+    	};
+    
+    	const getApiData = await httpRequest();
+    	const action = {
+    		type: 'RECEIVE_PAGE_LIST',
+    		payload: getApiData.data
+    	}
+    	dispatch( action );
+    
+    		// Send the rendered html to browser.
+    	const indexFile = path.join(__dirname,'../../public/index.html');
+    	fs.readFile(indexFile, 'utf8', (err, data) => {
+    		if (err) {
+    			console.error('Something went wrong:', err);
+    			return res.status(500).send('Oops, better luck next time!');
+    		} 
+    			//
+    		const context = {};
+    		const content = render(req.path, store, context, data);
+    			if (context.notFound) {
+    			res.status(404);
+    		}
+    			res.send(content);
+    	});
+    	});
+    	
+    */
+
+  }, {
+    key: "componentDidMount",
+    value: function componentDidMount() {
+      var _this2 = this;
+
+      //Receive redux from the parent page
+      console.log('[posts pagination list]this.props:');
+      console.log(this.props); //from `mapDispatchToProps()`
+
+      this.props.actionCreatorOfGetDataByPage(this.props.match.params.page_number); //Initialize URL
+
+      var paged = window.location.href.split('/').pop();
+      this.setState({
+        currentPage: parseFloat(paged)
+      }); //Detect URL change & Fire click event
+
+      this.urlChange = function () {
+        var pagedNew = window.location.href.split('/').pop();
+
+        _this2.props.actionCreatorOfGetDataByPage(pagedNew);
+
+        _this2.setState({
+          currentPage: parseFloat(pagedNew)
+        });
+      };
+
+      window.addEventListener('popstate', this.urlChange);
+    }
+    /** Remove the global list of events, especially as scroll and interval. */
+
+  }, {
+    key: "componentWillUnmount",
+    value: function componentWillUnmount() {
+      // Remove URL change events from window
+      window.removeEventListener('popstate', this.urlChange);
+    }
+  }, {
+    key: "render",
+    value: function render() {
+      //from `mapStateToProps()`
+      var preloadedState = this.props.currentData; //loader
+
+      var isLoaded = false;
+
+      if (preloadedState == null) {
+        console.log('preloadedState: null');
+      } else {
+        console.log('preloadedState: Return an Array');
+        isLoaded = true; //change page title
+        //------------------------------------------
+
+        if (typeof document !== 'undefined') {
+          // update page title
+          RoutesConfig[0].routes.forEach(function (item, index) {
+            var _path = item.path.replace("".concat(websiteConfig.rootDirectory), '');
+
+            var pathname = '/posts-pagination';
+
+            if (_path === pathname || _path.indexOf("/".concat(pathname.replace(/^\/([^\/]*).*$/, '$1'))) >= 0 && _path != "/") {
+              document.title = "".concat(item.pageTitle, " (page ").concat(preloadedState.page, ") - ").concat(RoutesConfig[0].routes[0].pageTitle);
+            }
+          });
+        }
+      }
+
+      return /*#__PURE__*/react.createElement(react.Fragment, null, /*#__PURE__*/react.createElement("main", {
+        id: "uix-maincontent"
+      }, /*#__PURE__*/react.createElement("section", {
+        className: "uix-spacing--s"
+      }, /*#__PURE__*/react.createElement("div", {
+        className: "container"
+      }, /*#__PURE__*/react.createElement("div", {
+        className: "row"
+      }, /*#__PURE__*/react.createElement("div", {
+        className: "col-12"
+      }, /*#__PURE__*/react.createElement("div", {
+        className: "alert alert-warning",
+        role: "alert"
+      }, "If the API asynchronous request failed (usually a 403 permission error), the error report ", /*#__PURE__*/react.createElement("strong", null, "`502 Proxy Error`"), " of the Express Server will be skipped, and cannot use server-side rendering (SSR) features.", /*#__PURE__*/react.createElement("br", null), "The test on the local server is correct, this error usually occurs on the cloud server."), /*#__PURE__*/react.createElement("p", null, isLoaded ? preloadedState != null ? preloadedState.data.map(function (item, i) {
+        return /*#__PURE__*/react.createElement(Item, {
+          key: i,
+          id: item.id,
+          img: item.avatar,
+          title: "".concat(item.name),
+          email: item.email
+        });
+      }) : "" : /*#__PURE__*/react.createElement("div", null, "Loading...")), /*#__PURE__*/react.createElement("p", null, isLoaded && preloadedState != null ? /*#__PURE__*/react.createElement(Pagination, {
+        gotoPageClickEvent: this.handleGotoPageNumber,
+        pageRangeDisplayed: 2,
+        activePage: this.state.currentPage,
+        totalPages: preloadedState.total_pages,
+        previousLabel: /*#__PURE__*/react.createElement(react.Fragment, null, /*#__PURE__*/react.createElement("i", {
+          className: "fa fa-angle-left",
+          "aria-hidden": "true"
+        })),
+        nextLabel: /*#__PURE__*/react.createElement(react.Fragment, null, /*#__PURE__*/react.createElement("i", {
+          className: "fa fa-angle-right",
+          "aria-hidden": "true"
+        })),
+        firstLabel: /*#__PURE__*/react.createElement(react.Fragment, null, /*#__PURE__*/react.createElement("i", {
+          className: "fa fa-angle-double-left",
+          "aria-hidden": "true"
+        })),
+        lastLabel: /*#__PURE__*/react.createElement(react.Fragment, null, /*#__PURE__*/react.createElement("i", {
+          className: "fa fa-angle-double-right",
+          "aria-hidden": "true"
+        })),
+        align: "center"
+      }) : null)))))), /*#__PURE__*/react.createElement(Footer, null));
+    }
+  }], [{
+    key: "appSyncRequestFetching",
+    value: function appSyncRequestFetching(storeAPI) {
+      var AppDispatch = storeAPI.dispatch;
+      var AppPath = storeAPI.path; //
+
+      var currentID = AppPath.split('/').pop();
+      var data = actionCreatorOfGetDataByPage(currentID);
+      return [AppDispatch(data)];
+    }
+  }]);
+
+  return PostsPagination;
+}(react.Component); // Subscribe to the required state in the reducers is bound here (for details of the data structure: initState)
+// You can call it in `this.props`
+
+
+var PostsPagination_mapStateToProps = function mapStateToProps(state) {
+  var listPostsPaginationData = state.listPostsPaginationData; //Receive redux
+
+  return {
+    currentData: listPostsPaginationData.getData
+  };
+}; // Bind the introduced Actions. You will normally make use of this by returning new functions that call `dispatch()` inside themselves
+// You can call it in `this.props`
+
+/*
+Like this:
+const mapDispatchToProps = (dispatch) => {
+	return {
+		increment: () => dispatch({ type: 'INCREMENT' }),
+		decrement: () => dispatch({ type: 'DECREMENT' }),
+	}
+}
+*/
+
+
+var PostsPagination_mapDispatchToProps = {
+  actionCreatorOfGetDataInitial: actionCreatorOfGetDataInitial,
+  actionCreatorOfGetDataByPage: actionCreatorOfGetDataByPage
+}; // The most important step is to bind the required Reducer and Actions to the current page 
+// through the connect function provided by react-redux
+
+/* harmony default export */ const _pages_PostsPagination = (connect(PostsPagination_mapStateToProps, PostsPagination_mapDispatchToProps)(PostsPagination));
 ;// CONCATENATED MODULE: ./src/client/services/auth-service.js
 
 
@@ -44077,7 +45109,7 @@ var LoginPage = /*#__PURE__*/function (_Component) {
       password: '',
       error: ''
     };
-    _this.wrapperRef = /*#__PURE__*/react.createRef();
+    _this.rootRef = /*#__PURE__*/react.createRef();
     _this.handlePassChange = _this.handlePassChange.bind(_assertThisInitialized(_this));
     _this.handleUserChange = _this.handleUserChange.bind(_assertThisInitialized(_this));
     _this.handleSubmit = _this.handleSubmit.bind(_assertThisInitialized(_this));
@@ -44106,7 +45138,7 @@ var LoginPage = /*#__PURE__*/function (_Component) {
     value: function handleSubmit(e) {
       e.preventDefault();
       var self = this;
-      var root = self.wrapperRef.current;
+      var root = self.rootRef.current;
 
       var $selectWrapper = helpers(root);
 
@@ -44251,7 +45283,7 @@ var LoginPage = /*#__PURE__*/function (_Component) {
         href: "#",
         onClick: this.signOut
       }, "Sign out")) : /*#__PURE__*/react.createElement("div", {
-        ref: this.wrapperRef
+        ref: this.rootRef
       }, /*#__PURE__*/react.createElement("p", null, "Test Account: ", /*#__PURE__*/react.createElement("code", null, "admin"), " Password: ", /*#__PURE__*/react.createElement("code", null, "admin")), /*#__PURE__*/react.createElement("form", {
         onSubmit: this.handleSubmit.bind(this)
       }, /*#__PURE__*/react.createElement("div", {
@@ -44580,6 +45612,8 @@ function _objectWithoutProperties(source, excluded) {
 
 
 
+
+
 var _excluded = ["status", "border", "background", "spacing", "corners", "size", "iconPosition", "icon", "href", "target", "id", "children"];
 
 function Button_createSuper(Derived) { var hasNativeReflectConstruct = Button_isNativeReflectConstruct(); return function _createSuperInternal() { var Super = _getPrototypeOf(Derived), result; if (hasNativeReflectConstruct) { var NewTarget = _getPrototypeOf(this).constructor; result = Reflect.construct(Super, arguments, NewTarget); } else { result = Super.apply(this, arguments); } return _possibleConstructorReturn(this, result); }; }
@@ -44607,9 +45641,16 @@ var Button = /*#__PURE__*/function (_Component) {
   var _super = Button_createSuper(Button);
 
   function Button(props) {
+    var _this;
+
     _classCallCheck(this, Button);
 
-    return _super.call(this, props);
+    _this = _super.call(this, props);
+
+    _defineProperty(_assertThisInitialized(_this), "uniqueID", void 0);
+
+    _this.uniqueID = 'app-' + helpers.GUID.create();
+    return _this;
   }
   /**
    * Set the class names of different styles
@@ -44728,10 +45769,10 @@ var Button = /*#__PURE__*/function (_Component) {
         href: href || '#',
         className: "uix-btn" + _status + _border + _background + _spacing + _corners + _size + _iconPosition,
         target: target || '_self',
-        id: id || 'app-btn-' + helpers.GUID.create()
+        id: id || this.uniqueID
       }, attributes), _icon !== '' ? /*#__PURE__*/react.createElement(react.Fragment, null, /*#__PURE__*/react.createElement("span", null, _icon)) : '', children) : /*#__PURE__*/react.createElement("button", extends_extends({
         className: "uix-btn" + _status + _border + _background + _spacing + _corners + _size + _iconPosition,
-        id: id ? id : 'app-btn-' + helpers.GUID.create(),
+        id: id || this.uniqueID,
         type: "button"
       }, attributes), _icon !== '' ? /*#__PURE__*/react.createElement(react.Fragment, null, /*#__PURE__*/react.createElement("span", null, _icon)) : '', children));
     }
@@ -44845,21 +45886,12 @@ var ButtonGroup = /*#__PURE__*/function (_Component) {
     style: {
       marginRight: ".5rem"
     },
-    width: "15",
-    viewBox: "0 0 392.186 392.186"
-  }, /*#__PURE__*/react.createElement("g", null, /*#__PURE__*/react.createElement("g", null, /*#__PURE__*/react.createElement("g", null, /*#__PURE__*/react.createElement("path", {
+    width: "16",
+    viewBox: "0 0 122.88 91.26"
+  }, /*#__PURE__*/react.createElement("path", {
     fill: "#d2d2d2",
-    d: "M368.62,17.951H23.568C10.57,17.951,0,28.524,0,41.52v309.146c0,12.996,10.57,23.568,23.568,23.568h345.053c12.994,0,23.564-10.572,23.564-23.568V41.52C392.188,28.525,381.614,17.951,368.62,17.951z M297.56,57.528c0-4.806,3.896-8.703,8.701-8.703h8.703c4.808,0,8.701,3.896,8.701,8.703v9.863c0,4.806-3.896,8.702-8.701,8.702h-8.703c-4.805,0-8.701-3.896-8.701-8.702V57.528z M257.093,57.528c0-4.806,3.898-8.703,8.703-8.703h8.701c4.805,0,8.703,3.896,8.703,8.703v9.863c0,4.806-3.898,8.702-8.703,8.702h-8.701c-4.805,0-8.703-3.896-8.703-8.702V57.528z M363.903,345.951H28.282V102.235h335.621V345.951L363.903,345.951z M364.132,67.391c0,4.806-3.896,8.702-8.701,8.702h-8.703c-4.809,0-8.702-3.896-8.702-8.702v-9.863c0-4.806,3.896-8.703,8.702-8.703h8.703c4.806,0,8.701,3.896,8.701,8.703V67.391z"
-  }), /*#__PURE__*/react.createElement("path", {
-    fill: "#d2d2d2",
-    d: "M84.185,233.284l63.084,29.336c1.631,0.755,3.367,1.138,5.162,1.138c2.338,0,4.617-0.664,6.598-1.924c3.547-2.267,5.666-6.13,5.666-10.334v-0.322c0-4.752-2.785-9.116-7.096-11.118l-39.455-18.332l39.455-18.334c4.311-2.004,7.096-6.367,7.096-11.117v-0.319c0-4.21-2.119-8.075-5.666-10.334c-1.961-1.253-4.246-1.916-6.605-1.916c-1.779,0-3.563,0.391-5.16,1.133l-63.08,29.333c-4.307,2.004-7.09,6.369-7.09,11.117v0.877C77.093,226.909,79.874,231.272,84.185,233.284z"
-  }), /*#__PURE__*/react.createElement("path", {
-    fill: "#d2d2d2",
-    d: "M165.257,293.036c2.301,3.149,6.002,5.03,9.9,5.03h0.316c5.352,0,10.041-3.426,11.672-8.517L228.7,160.788c1.192-3.716,0.531-7.818-1.771-10.973c-2.301-3.15-6.002-5.03-9.901-5.03h-0.315c-5.354,0-10.048,3.425-11.679,8.516l-41.559,128.771C162.292,285.793,162.958,289.889,165.257,293.036z"
-  }), /*#__PURE__*/react.createElement("path", {
-    fill: "#d2d2d2",
-    d: "M227.49,192.276c0,4.745,2.783,9.109,7.095,11.123l39.455,18.329l-39.455,18.33c-4.31,2.004-7.095,6.368-7.095,11.118v0.322c0,4.205,2.117,8.068,5.668,10.336c1.974,1.258,4.254,1.924,6.595,1.924c1.793,0,3.528-0.383,5.17-1.142l63.08-29.335c4.307-2.009,7.09-6.372,7.09-11.115v-0.877c0-4.748-2.783-9.113-7.094-11.117l-63.08-29.333c-1.591-0.74-3.373-1.131-5.152-1.131c-2.355,0-4.643,0.661-6.604,1.912c-3.551,2.263-5.67,6.127-5.67,10.337v0.318H227.49L227.49,192.276z"
-  }))))), "Docs on GitHub"))))))), /*#__PURE__*/react.createElement("section", {
+    d: "M8.32,0h106.24c4.58,0,8.32,3.74,8.32,8.32v74.62c0,4.57-3.74,8.32-8.32,8.32H8.32C3.74,91.26,0,87.51,0,82.94 V8.32C0,3.74,3.74,0,8.32,0L8.32,0z M54.46,72.22L32,58.61v-8.63l22.46-13.61v10.26l-13.65,7.69l13.65,7.7V72.22L54.46,72.22z M68.42,72.22l22.46-13.61v-8.63L68.42,36.37v10.26l13.65,7.69l-13.65,7.7V72.22L68.42,72.22z M117.97,23.29H5.29v60.46 c0,0.64,0.25,1.2,0.67,1.63c0.42,0.42,0.99,0.67,1.63,0.67h108.04c0.64,0,1.2-0.25,1.63-0.67c0.43-0.43,0.67-0.99,0.67-1.63V23.29 H117.97L117.97,23.29z M106.64,9.35c2.27,0,4.11,1.84,4.11,4.11c0,2.27-1.84,4.11-4.11,4.11c-2.27,0-4.11-1.84-4.11-4.11 C102.54,11.19,104.38,9.35,106.64,9.35L106.64,9.35z M78.8,9.35c2.27,0,4.11,1.84,4.11,4.11c0,2.27-1.84,4.11-4.11,4.11 c-2.27,0-4.11-1.84-4.11-4.11C74.69,11.19,76.53,9.35,78.8,9.35L78.8,9.35z M92.72,9.35c2.27,0,4.11,1.84,4.11,4.11 c0,2.27-1.84,4.11-4.11,4.11c-2.27,0-4.11-1.84-4.11-4.11C88.61,11.19,90.45,9.35,92.72,9.35L92.72,9.35z"
+  })), "Docs on GitHub"))))))), /*#__PURE__*/react.createElement("section", {
     className: "uix-spacing--s uix-spacing--no-bottom"
   }, /*#__PURE__*/react.createElement("div", {
     className: "container"
@@ -45539,6 +46571,7 @@ var ButtonGroup = /*#__PURE__*/function (_Component) {
 
 
 
+
 var Input_excluded = ["type", "theme", "ui", "disabled", "required", "value", "label", "units", "name", "id", "maxLength", "iconLeft", "iconRight"];
 
 function Input_createSuper(Derived) { var hasNativeReflectConstruct = Input_isNativeReflectConstruct(); return function _createSuperInternal() { var Super = _getPrototypeOf(Derived), result; if (hasNativeReflectConstruct) { var NewTarget = _getPrototypeOf(this).constructor; result = Reflect.construct(Super, arguments, NewTarget); } else { result = Super.apply(this, arguments); } return _possibleConstructorReturn(this, result); }; }
@@ -45575,6 +46608,10 @@ var Input = /*#__PURE__*/function (_Component) {
     _classCallCheck(this, Input);
 
     _this = _super.call(this, props);
+
+    _defineProperty(_assertThisInitialized(_this), "uniqueID", void 0);
+
+    _this.uniqueID = 'app-' + helpers.GUID.create();
     _this.handleFocus = _this.handleFocus.bind(_assertThisInitialized(_this));
     _this.handleBlurChange = _this.handleBlurChange.bind(_assertThisInitialized(_this));
     return _this;
@@ -45647,7 +46684,7 @@ var Input = /*#__PURE__*/function (_Component) {
       var typeRes = typeof type === 'undefined' ? 'text' : type;
       var uiRes = typeof ui === 'undefined' ? '' : ui;
       var nameRes = typeof name === 'undefined' ? typeof label !== 'undefined' ? helpers.toSlug(label) : '' : name;
-      var idRes = id ? id : 'app-control-' + helpers.GUID.create();
+      var idRes = id || this.uniqueID;
       var wrapperClassDisabled = disabled ? ' is-disabled' : '';
       var wrapperClassIconLeft = iconLeft ? ' is-iconic' : '';
       var wrapperClassIconRight = iconRight ? ' is-iconic is-reversed' : '';
@@ -45693,6 +46730,7 @@ var Input = /*#__PURE__*/function (_Component) {
 
 
 
+
 var Textarea_excluded = ["theme", "cols", "rows", "ui", "disabled", "required", "value", "label", "name", "id", "maxLength"];
 
 function Textarea_createSuper(Derived) { var hasNativeReflectConstruct = Textarea_isNativeReflectConstruct(); return function _createSuperInternal() { var Super = _getPrototypeOf(Derived), result; if (hasNativeReflectConstruct) { var NewTarget = _getPrototypeOf(this).constructor; result = Reflect.construct(Super, arguments, NewTarget); } else { result = Super.apply(this, arguments); } return _possibleConstructorReturn(this, result); }; }
@@ -45729,6 +46767,10 @@ var Textarea = /*#__PURE__*/function (_Component) {
     _classCallCheck(this, Textarea);
 
     _this = _super.call(this, props);
+
+    _defineProperty(_assertThisInitialized(_this), "uniqueID", void 0);
+
+    _this.uniqueID = 'app-' + helpers.GUID.create();
     _this.handleFocus = _this.handleFocus.bind(_assertThisInitialized(_this));
     _this.handleBlurChange = _this.handleBlurChange.bind(_assertThisInitialized(_this));
     return _this;
@@ -45795,7 +46837,7 @@ var Textarea = /*#__PURE__*/function (_Component) {
 
       var uiRes = typeof ui === 'undefined' ? '' : ui;
       var nameRes = typeof name === 'undefined' ? typeof label !== 'undefined' ? helpers.toSlug(label) : '' : name;
-      var idRes = id ? id : 'app-control-' + helpers.GUID.create();
+      var idRes = id || this.uniqueID;
       var wrapperClassDisabled = disabled ? ' is-disabled' : '';
       var wrapperClassUi = this.uiSwitch(uiRes);
       var wrapperClassTheme = theme === 'line' ? ' uix-controls--line' : '';
@@ -45840,6 +46882,7 @@ var Textarea = /*#__PURE__*/function (_Component) {
 
 
 
+
 var Select_excluded = ["theme", "ui", "options", "disabled", "required", "value", "label", "name", "id"];
 
 function Select_createSuper(Derived) { var hasNativeReflectConstruct = Select_isNativeReflectConstruct(); return function _createSuperInternal() { var Super = _getPrototypeOf(Derived), result; if (hasNativeReflectConstruct) { var NewTarget = _getPrototypeOf(this).constructor; result = Reflect.construct(Super, arguments, NewTarget); } else { result = Super.apply(this, arguments); } return _possibleConstructorReturn(this, result); }; }
@@ -45876,8 +46919,13 @@ var Select = /*#__PURE__*/function (_Component) {
     _classCallCheck(this, Select);
 
     _this = _super.call(this, props);
+
+    _defineProperty(_assertThisInitialized(_this), "uniqueID", void 0);
+
+    _this.uniqueID = 'app-' + helpers.GUID.create();
     _this.handleFocus = _this.handleFocus.bind(_assertThisInitialized(_this));
-    _this.handleBlurChange = _this.handleBlurChange.bind(_assertThisInitialized(_this));
+    _this.handleBlur = _this.handleBlur.bind(_assertThisInitialized(_this));
+    _this.handleChange = _this.handleChange.bind(_assertThisInitialized(_this));
     return _this;
   }
 
@@ -45889,11 +46937,27 @@ var Select = /*#__PURE__*/function (_Component) {
       el.closest('div').find('label, .uix-controls__bar').addClass('is-active');
     }
   }, {
-    key: "handleBlurChange",
-    value: function handleBlurChange(event) {
-      var el = helpers(event.target);
+    key: "handleBlur",
+    value: function handleBlur(event) {
+      this.valueChangeEvent(event);
+    }
+  }, {
+    key: "handleChange",
+    value: function handleChange(event) {
+      this.valueChangeEvent(event);
 
-      var val = event.target.value; //----
+      if (typeof this.props.optionChangeCallback === 'function') {
+        this.props.optionChangeCallback({
+          "value": event.target.value
+        });
+      }
+    }
+  }, {
+    key: "valueChangeEvent",
+    value: function valueChangeEvent(e) {
+      var el = helpers(e.target);
+
+      var val = e.target.value; //----
       //remove focus style
 
       if (val === '' || val === 'blank') {
@@ -45937,7 +47001,7 @@ var Select = /*#__PURE__*/function (_Component) {
 
       var uiRes = typeof ui === 'undefined' ? '' : ui;
       var nameRes = typeof name === 'undefined' ? typeof label !== 'undefined' ? helpers.toSlug(label) : '' : name;
-      var idRes = id ? id : 'app-control-' + helpers.GUID.create();
+      var idRes = id || this.uniqueID;
       var wrapperClassDisabled = disabled ? ' is-disabled' : '';
       var wrapperClassUi = this.uiSwitch(uiRes);
       var wrapperClassTheme = theme === 'line' ? ' uix-controls--line' : ''; // Get all options from option prop
@@ -45964,8 +47028,8 @@ var Select = /*#__PURE__*/function (_Component) {
         name: nameRes,
         defaultValue: value || '',
         onFocus: this.handleFocus,
-        onBlur: this.handleBlurChange,
-        onChange: this.handleBlurChange,
+        onBlur: this.handleBlur,
+        onChange: this.handleChange,
         disabled: disabled || null,
         required: required || null
       }, attributes), selectOptionsList), /*#__PURE__*/react.createElement("label", {
@@ -46032,8 +47096,11 @@ var CustomSelect = /*#__PURE__*/function (_Component) {
 
     _this = _super.call(this, props);
 
-    _defineProperty(_assertThisInitialized(_this), "wrapperRef", /*#__PURE__*/react.createRef());
+    _defineProperty(_assertThisInitialized(_this), "rootRef", /*#__PURE__*/react.createRef());
 
+    _defineProperty(_assertThisInitialized(_this), "uniqueID", void 0);
+
+    _this.uniqueID = 'app-' + helpers.GUID.create();
     _this.handleClick = _this.handleClick.bind(_assertThisInitialized(_this));
     _this.handleClickItem = _this.handleClickItem.bind(_assertThisInitialized(_this));
     _this.handleClickOutside = _this.handleClickOutside.bind(_assertThisInitialized(_this));
@@ -46059,7 +47126,7 @@ var CustomSelect = /*#__PURE__*/function (_Component) {
     key: "handleClick",
     value: function handleClick(event) {
       event.preventDefault();
-      var root = this.wrapperRef.current;
+      var root = this.rootRef.current;
 
       var $selectWrapper = helpers(root),
           $selectCurWrapper = $selectWrapper.find('.uix-controls__select.js-uix-new');
@@ -46078,7 +47145,7 @@ var CustomSelect = /*#__PURE__*/function (_Component) {
 
       var el = helpers(event.target);
 
-      var root = this.wrapperRef.current;
+      var root = this.rootRef.current;
 
       var $selectWrapper = helpers(root),
           $selectCurWrapper = $selectWrapper.find('.uix-controls__select.js-uix-new'),
@@ -46093,7 +47160,13 @@ var CustomSelect = /*#__PURE__*/function (_Component) {
       el.addClass('is-active'); //Change <select>'s option and trigger events
 
       $selectWrapper.find('select')[0].value = curVal;
-      $selectWrapper.find('select')[0].dispatchEvent(new Event('change'));
+      $selectWrapper.find('select')[0].dispatchEvent(new Event('change')); //callback
+
+      if (typeof this.props.optionChangeCallback === 'function') {
+        this.props.optionChangeCallback({
+          "value": curVal
+        });
+      }
     }
     /**
      * Set the class names of different styles
@@ -46113,7 +47186,16 @@ var CustomSelect = /*#__PURE__*/function (_Component) {
   }, {
     key: "componentDidMount",
     value: function componentDidMount() {
+      document.removeEventListener('click', this.handleClickOutside);
       document.addEventListener('click', this.handleClickOutside);
+    }
+    /** Remove the global list of events, especially as scroll and interval. */
+
+  }, {
+    key: "componentWillUnmount",
+    value: function componentWillUnmount() {
+      // Remove scroll events from document
+      document.removeEventListener('click', this.handleClickOutside);
     }
   }, {
     key: "render",
@@ -46135,7 +47217,7 @@ var CustomSelect = /*#__PURE__*/function (_Component) {
 
       var uiRes = typeof ui === 'undefined' ? '' : ui;
       var nameRes = typeof name === 'undefined' ? typeof label !== 'undefined' ? helpers.toSlug(label) : '' : name;
-      var idRes = id ? id : 'app-control-' + helpers.GUID.create();
+      var idRes = id || this.uniqueID;
       var wrapperClassDisabled = disabled ? ' is-disabled' : '';
       var wrapperClassUi = this.uiSwitch(uiRes);
       var wrapperClassTheme = theme === 'line' ? ' uix-controls--line' : '';
@@ -46164,7 +47246,7 @@ var CustomSelect = /*#__PURE__*/function (_Component) {
         }, selectOption);
       });
       return /*#__PURE__*/react.createElement(react.Fragment, null, /*#__PURE__*/react.createElement("div", {
-        ref: this.wrapperRef,
+        ref: this.rootRef,
         className: "uix-controls__select-wrapper" + wrapperClassPosition + wrapperClassDisabled + wrapperClassUi + wrapperClassTheme,
         id: idRes + "__wrapper"
       }, /*#__PURE__*/react.createElement("div", {
@@ -46213,6 +47295,7 @@ var CustomSelect = /*#__PURE__*/function (_Component) {
 
 
 
+
 var Checkbox_excluded = ["disabled", "required", "value", "label", "name", "id"];
 
 function Checkbox_createSuper(Derived) { var hasNativeReflectConstruct = Checkbox_isNativeReflectConstruct(); return function _createSuperInternal() { var Super = _getPrototypeOf(Derived), result; if (hasNativeReflectConstruct) { var NewTarget = _getPrototypeOf(this).constructor; result = Reflect.construct(Super, arguments, NewTarget); } else { result = Super.apply(this, arguments); } return _possibleConstructorReturn(this, result); }; }
@@ -46249,6 +47332,10 @@ var Checkbox = /*#__PURE__*/function (_Component) {
     _classCallCheck(this, Checkbox);
 
     _this = _super.call(this, props);
+
+    _defineProperty(_assertThisInitialized(_this), "uniqueID", void 0);
+
+    _this.uniqueID = 'app-' + helpers.GUID.create();
     _this.state = {
       isChecked: _this.props.value == 'true' || _this.props.value === true ? true : false
     }; // set this, because you need get methods from CheckBox 	
@@ -46278,7 +47365,7 @@ var Checkbox = /*#__PURE__*/function (_Component) {
 
       var checkedStatus = this.state.isChecked === true ? true : false;
       var nameRes = typeof name === 'undefined' ? typeof label !== 'undefined' ? helpers.toSlug(label) : '' : name;
-      var idRes = id ? id : 'app-control-' + helpers.GUID.create();
+      var idRes = id || this.uniqueID;
       var wrapperClassDisabled = disabled ? ' is-disabled' : '';
       var wrapperClassActive = checkedStatus ? ' is-active' : '';
       return /*#__PURE__*/react.createElement(react.Fragment, null, /*#__PURE__*/react.createElement("div", {
@@ -46323,6 +47410,8 @@ var Checkbox = /*#__PURE__*/function (_Component) {
 
 
 
+
+
 var Radio_excluded = ["options", "disabled", "required", "value", "name", "id"];
 
 function Radio_createSuper(Derived) { var hasNativeReflectConstruct = Radio_isNativeReflectConstruct(); return function _createSuperInternal() { var Super = _getPrototypeOf(Derived), result; if (hasNativeReflectConstruct) { var NewTarget = _getPrototypeOf(this).constructor; result = Reflect.construct(Super, arguments, NewTarget); } else { result = Super.apply(this, arguments); } return _possibleConstructorReturn(this, result); }; }
@@ -46354,9 +47443,16 @@ var Radio = /*#__PURE__*/function (_Component) {
   var _super = Radio_createSuper(Radio);
 
   function Radio(props) {
+    var _this;
+
     _classCallCheck(this, Radio);
 
-    return _super.call(this, props);
+    _this = _super.call(this, props);
+
+    _defineProperty(_assertThisInitialized(_this), "uniqueID", void 0);
+
+    _this.uniqueID = 'app-' + helpers.GUID.create();
+    return _this;
   }
 
   _createClass(Radio, [{
@@ -46372,7 +47468,7 @@ var Radio = /*#__PURE__*/function (_Component) {
           attributes = _objectWithoutProperties(_this$props, Radio_excluded);
 
       var nameRes = typeof name === 'undefined' ? '' : name;
-      var idRes = id ? id : 'app-control-' + helpers.GUID.create();
+      var idRes = id || this.uniqueID;
       var wrapperClassDisabled = disabled ? ' is-disabled' : ''; // Get all options from option prop
 
       var radioOptions = helpers.validate.isJSON(options) ? JSON.parse(options) : {};
@@ -46467,9 +47563,13 @@ var Switch_Switch = /*#__PURE__*/function (_Component) {
 
     _classCallCheck(this, Switch);
 
-    _this = _super.call(this, props); //the default status of target
+    _this = _super.call(this, props);
 
     _defineProperty(_assertThisInitialized(_this), "targetDefaultStatus", false);
+
+    _defineProperty(_assertThisInitialized(_this), "uniqueID", void 0);
+
+    _this.uniqueID = 'app-' + helpers.GUID.create(); //the default status of target
 
     _this.targetDefaultStatus = _this.props.value == 'true' || _this.props.value === true ? true : false;
     _this.state = {
@@ -46537,7 +47637,7 @@ var Switch_Switch = /*#__PURE__*/function (_Component) {
       var uiRes = typeof ui === 'undefined' ? '' : ui;
       var checkedStatus = this.state.isChecked === true ? true : false;
       var nameRes = typeof name === 'undefined' ? typeof label !== 'undefined' ? helpers.toSlug(label) : '' : name;
-      var idRes = id ? id : 'app-control-' + helpers.GUID.create();
+      var idRes = id || this.uniqueID;
       var wrapperClassDisabled = disabled ? ' is-disabled' : '';
       var wrapperClassUi = this.uiSwitch(uiRes);
       var wrapperClassActive = checkedStatus ? ' is-active' : '';
@@ -46625,10 +47725,13 @@ var MultiSelect = /*#__PURE__*/function (_Component) {
 
     _this = _super.call(this, props);
 
-    _defineProperty(_assertThisInitialized(_this), "wrapperRef", /*#__PURE__*/react.createRef());
+    _defineProperty(_assertThisInitialized(_this), "rootRef", /*#__PURE__*/react.createRef());
 
     _defineProperty(_assertThisInitialized(_this), "resRef", /*#__PURE__*/react.createRef());
 
+    _defineProperty(_assertThisInitialized(_this), "uniqueID", void 0);
+
+    _this.uniqueID = 'app-' + helpers.GUID.create();
     _this.handleClickItem = _this.handleClickItem.bind(_assertThisInitialized(_this));
     return _this;
   }
@@ -46645,7 +47748,7 @@ var MultiSelect = /*#__PURE__*/function (_Component) {
 
       var el = helpers(event.target);
 
-      var root = this.wrapperRef.current;
+      var root = this.rootRef.current;
       var resInput = this.resRef.current;
 
       var $multiSelWrapper = helpers(root),
@@ -46698,7 +47801,7 @@ var MultiSelect = /*#__PURE__*/function (_Component) {
           attributes = _objectWithoutProperties(_this$props, MultiSelect_excluded);
 
       var nameRes = typeof name === 'undefined' ? '' : name;
-      var idRes = id ? id : 'app-control-' + helpers.GUID.create();
+      var idRes = id || this.uniqueID;
       var wrapperClassTheme = theme === 'line' ? ' uix-controls--line' : ''; // Get all options from option prop
 
       var multiSelOptions = helpers.validate.isJSON(options) ? JSON.parse(options) : {};
@@ -46736,7 +47839,7 @@ var MultiSelect = /*#__PURE__*/function (_Component) {
         })));
       });
       return /*#__PURE__*/react.createElement(react.Fragment, null, /*#__PURE__*/react.createElement("div", {
-        ref: this.wrapperRef,
+        ref: this.rootRef,
         className: "uix-controls uix-controls__multi-sel" + wrapperClassTheme,
         id: idRes + "__wrapper"
       }, multiSelOptionsList), /*#__PURE__*/react.createElement("input", extends_extends({
@@ -46801,10 +47904,13 @@ var SingleSelect = /*#__PURE__*/function (_Component) {
 
     _this = _super.call(this, props);
 
-    _defineProperty(_assertThisInitialized(_this), "wrapperRef", /*#__PURE__*/react.createRef());
+    _defineProperty(_assertThisInitialized(_this), "rootRef", /*#__PURE__*/react.createRef());
 
     _defineProperty(_assertThisInitialized(_this), "resRef", /*#__PURE__*/react.createRef());
 
+    _defineProperty(_assertThisInitialized(_this), "uniqueID", void 0);
+
+    _this.uniqueID = 'app-' + helpers.GUID.create();
     _this.handleClickItem = _this.handleClickItem.bind(_assertThisInitialized(_this));
     return _this;
   }
@@ -46836,7 +47942,7 @@ var SingleSelect = /*#__PURE__*/function (_Component) {
 
       var el = helpers(event.target);
 
-      var root = this.wrapperRef.current;
+      var root = this.rootRef.current;
       var resInput = this.resRef.current;
 
       var $singleSelWrapper = helpers(root),
@@ -46870,7 +47976,7 @@ var SingleSelect = /*#__PURE__*/function (_Component) {
     key: "componentDidMount",
     value: function componentDidMount() {
       if (this.props.value) {
-        var root = this.wrapperRef.current;
+        var root = this.rootRef.current;
 
         var $singleSelWrapper = helpers(root); //hide or display target
 
@@ -46896,7 +48002,7 @@ var SingleSelect = /*#__PURE__*/function (_Component) {
 
       var uiRes = typeof ui === 'undefined' ? '' : ui;
       var nameRes = typeof name === 'undefined' ? '' : name;
-      var idRes = id ? id : 'app-control-' + helpers.GUID.create();
+      var idRes = id || this.uniqueID;
       var wrapperClassTheme = theme === 'line' ? ' uix-controls--line' : '';
       var wrapperClassUi = this.uiSwitch(uiRes); // Get all options from option prop
 
@@ -46928,7 +48034,7 @@ var SingleSelect = /*#__PURE__*/function (_Component) {
         })) : '', selectOption));
       });
       return /*#__PURE__*/react.createElement(react.Fragment, null, /*#__PURE__*/react.createElement("div", {
-        ref: this.wrapperRef,
+        ref: this.rootRef,
         className: "uix-controls uix-controls__single-sel" + wrapperClassUi + wrapperClassTheme,
         id: idRes + "__wrapper"
       }, singleSelOptionsList), /*#__PURE__*/react.createElement("input", extends_extends({
@@ -46947,6 +48053,7 @@ var SingleSelect = /*#__PURE__*/function (_Component) {
 
 
 ;// CONCATENATED MODULE: ./src/client/components/Form/Number.tsx
+
 
 
 
@@ -46991,6 +48098,10 @@ var Number_Number = /*#__PURE__*/function (_Component) {
     _classCallCheck(this, Number);
 
     _this = _super.call(this, props);
+
+    _defineProperty(_assertThisInitialized(_this), "uniqueID", void 0);
+
+    _this.uniqueID = 'app-' + helpers.GUID.create();
     _this.state = {
       count: _this.props.value ? _this.props.value : 0
     };
@@ -47063,7 +48174,7 @@ var Number_Number = /*#__PURE__*/function (_Component) {
           attributes = _objectWithoutProperties(_this$props, Number_excluded);
 
       var nameRes = typeof name === 'undefined' ? '' : name;
-      var idRes = id ? id : 'app-control-' + helpers.GUID.create();
+      var idRes = id || this.uniqueID;
       var wrapperClassDisabled = disabled ? ' is-disabled' : '';
       var wrapperClassTheme = theme === 'line' ? ' uix-controls--line' : '';
       var dp = decimals || 0;
@@ -47118,6 +48229,7 @@ var moment_default = /*#__PURE__*/__webpack_require__.n(moment);
 
 
 
+
 var Date_excluded = ["defaultNow", "time", "theme", "ui", "disabled", "required", "value", "label", "name", "id"];
 
 function Date_createSuper(Derived) { var hasNativeReflectConstruct = Date_isNativeReflectConstruct(); return function _createSuperInternal() { var Super = _getPrototypeOf(Derived), result; if (hasNativeReflectConstruct) { var NewTarget = _getPrototypeOf(this).constructor; result = Reflect.construct(Super, arguments, NewTarget); } else { result = Super.apply(this, arguments); } return _possibleConstructorReturn(this, result); }; }
@@ -47155,6 +48267,10 @@ var Date_Date = /*#__PURE__*/function (_Component) {
     _classCallCheck(this, Date);
 
     _this = _super.call(this, props);
+
+    _defineProperty(_assertThisInitialized(_this), "uniqueID", void 0);
+
+    _this.uniqueID = 'app-' + helpers.GUID.create();
     _this.handleFocus = _this.handleFocus.bind(_assertThisInitialized(_this));
     _this.handleBlurChange = _this.handleBlurChange.bind(_assertThisInitialized(_this));
     return _this;
@@ -47221,7 +48337,7 @@ var Date_Date = /*#__PURE__*/function (_Component) {
       var typeRes = typeof time === 'undefined' ? 'date' : 'datetime-local';
       var uiRes = typeof ui === 'undefined' ? '' : ui;
       var nameRes = typeof name === 'undefined' ? typeof label !== 'undefined' ? helpers.toSlug(label) : '' : name;
-      var idRes = id ? id : 'app-control-' + helpers.GUID.create();
+      var idRes = id || this.uniqueID;
       var wrapperClassDisabled = disabled ? ' is-disabled' : '';
       var wrapperClassUi = this.uiSwitch(uiRes);
       var wrapperClassTheme = theme === 'line' ? ' uix-controls--line' : '';
@@ -47346,10 +48462,13 @@ var DynamicFields = /*#__PURE__*/function (_Component) {
 
     _this = _super.call(this, props);
 
-    _defineProperty(_assertThisInitialized(_this), "wrapperRef", /*#__PURE__*/react.createRef());
+    _defineProperty(_assertThisInitialized(_this), "rootRef", /*#__PURE__*/react.createRef());
 
     _defineProperty(_assertThisInitialized(_this), "addBtnRef", /*#__PURE__*/react.createRef());
 
+    _defineProperty(_assertThisInitialized(_this), "uniqueID", void 0);
+
+    _this.uniqueID = 'app-' + helpers.GUID.create();
     _this.state = {
       elVals: _this.props.value ? _toConsumableArray(Array(JSON.parse('[' + _this.props.value + ']').length - 1)).map(function () {
         return [""];
@@ -47364,7 +48483,7 @@ var DynamicFields = /*#__PURE__*/function (_Component) {
     key: "handleClickAdd",
     value: function handleClickAdd(event) {
       event.preventDefault();
-      var root = this.wrapperRef.current;
+      var root = this.rootRef.current;
       var curVal = this.state.elVals; //button status
 
       if (curVal.length >= parseFloat(this.props.maxFields) && this.addBtnRef.current != null) {
@@ -47382,7 +48501,7 @@ var DynamicFields = /*#__PURE__*/function (_Component) {
     key: "handleClickRemove",
     value: function handleClickRemove(param) {
       // param is the argument you passed to the function
-      var root = this.wrapperRef.current;
+      var root = this.rootRef.current;
       var self = this;
       var curVal = this.state.elVals; //button status
 
@@ -47433,7 +48552,7 @@ var DynamicFields = /*#__PURE__*/function (_Component) {
       var _val = this.props.value ? JSON.parse('[' + this.props.value + ']') : []; //update values for all displayed controls
 
 
-      var root = this.wrapperRef.current;
+      var root = this.rootRef.current;
 
       var controls = helpers(root).find('.uix-controls__dynamic-fields__append').find('[name]');
 
@@ -47455,9 +48574,9 @@ var DynamicFields = /*#__PURE__*/function (_Component) {
           tempHtmlString = _this$props.tempHtmlString,
           maxFields = _this$props.maxFields,
           id = _this$props.id;
-      var idRes = id ? id : 'app-control-' + helpers.GUID.create();
+      var idRes = id || this.uniqueID;
       return /*#__PURE__*/react.createElement(react.Fragment, null, /*#__PURE__*/react.createElement("div", {
-        ref: this.wrapperRef,
+        ref: this.rootRef,
         className: "uix-controls__dynamic-fields-container",
         "data-max-fields": maxFields || 10,
         id: idRes
@@ -47528,6 +48647,9 @@ var File = /*#__PURE__*/function (_Component) {
 
     _defineProperty(_assertThisInitialized(_this), "fileRef", /*#__PURE__*/react.createRef());
 
+    _defineProperty(_assertThisInitialized(_this), "uniqueID", void 0);
+
+    _this.uniqueID = 'app-' + helpers.GUID.create();
     _this.handleChange = _this.handleChange.bind(_assertThisInitialized(_this));
     return _this;
   }
@@ -47558,7 +48680,7 @@ var File = /*#__PURE__*/function (_Component) {
           attributes = _objectWithoutProperties(_this$props, File_excluded);
 
       var nameRes = typeof name === 'undefined' ? typeof label !== 'undefined' ? helpers.toSlug(label) : '' : name;
-      var idRes = id ? id : 'app-control-' + helpers.GUID.create();
+      var idRes = id || this.uniqueID;
       return /*#__PURE__*/react.createElement(react.Fragment, null, /*#__PURE__*/react.createElement("div", {
         className: "uix-controls__file-container"
       }, /*#__PURE__*/react.createElement("input", extends_extends({
@@ -47636,6 +48758,9 @@ var FileField = /*#__PURE__*/function (_Component) {
 
     _defineProperty(_assertThisInitialized(_this), "dropZoneRef", /*#__PURE__*/react.createRef());
 
+    _defineProperty(_assertThisInitialized(_this), "uniqueID", void 0);
+
+    _this.uniqueID = 'app-' + helpers.GUID.create();
     _this.handleDragOver = _this.handleDragOver.bind(_assertThisInitialized(_this));
     _this.handleChange = _this.handleChange.bind(_assertThisInitialized(_this));
     return _this;
@@ -47710,7 +48835,16 @@ var FileField = /*#__PURE__*/function (_Component) {
   }, {
     key: "componentDidMount",
     value: function componentDidMount() {
+      document.removeEventListener('dragover', this.handleDragOver);
       document.addEventListener('dragover', this.handleDragOver);
+    }
+    /** Remove the global list of events, especially as scroll and interval. */
+
+  }, {
+    key: "componentWillUnmount",
+    value: function componentWillUnmount() {
+      // Remove scroll events from document
+      document.removeEventListener('dragover', this.handleDragOver);
     }
   }, {
     key: "render",
@@ -47724,7 +48858,7 @@ var FileField = /*#__PURE__*/function (_Component) {
           attributes = _objectWithoutProperties(_this$props, FileField_excluded);
 
       var nameRes = typeof name === 'undefined' ? typeof label !== 'undefined' ? helpers.toSlug(label) : '' : name;
-      var idRes = id ? id : 'app-control-' + helpers.GUID.create();
+      var idRes = id || this.uniqueID;
       return /*#__PURE__*/react.createElement(react.Fragment, null, /*#__PURE__*/react.createElement("div", {
         className: "uix-controls__file-field-container"
       }, /*#__PURE__*/react.createElement("div", {
@@ -47748,6 +48882,8 @@ var FileField = /*#__PURE__*/function (_Component) {
 
 
 ;// CONCATENATED MODULE: ./src/client/components/Form/MergeInput.tsx
+
+
 
 
 
@@ -47786,9 +48922,16 @@ var MergeInput = /*#__PURE__*/function (_Component) {
   var _super = MergeInput_createSuper(MergeInput);
 
   function MergeInput(props) {
+    var _this;
+
     _classCallCheck(this, MergeInput);
 
-    return _super.call(this, props);
+    _this = _super.call(this, props);
+
+    _defineProperty(_assertThisInitialized(_this), "uniqueID", void 0);
+
+    _this.uniqueID = 'app-' + helpers.GUID.create();
+    return _this;
   }
   /**
    * Set the class names of different styles
@@ -47827,7 +48970,7 @@ var MergeInput = /*#__PURE__*/function (_Component) {
       var typeRes = typeof type === 'undefined' ? 'text' : type;
       var uiRes = typeof ui === 'undefined' ? '' : ui;
       var nameRes = typeof name === 'undefined' ? typeof label !== 'undefined' ? helpers.toSlug(label) : '' : name;
-      var idRes = id ? id : 'app-control-' + helpers.GUID.create();
+      var idRes = id || this.uniqueID;
       var wrapperClassDisabled = disabled ? ' is-disabled' : '';
       var wrapperClassIcon = icon ? ' is-iconic' : '';
       var wrapperClassUi = this.uiSwitch(uiRes);
@@ -47854,6 +48997,7 @@ var MergeInput = /*#__PURE__*/function (_Component) {
 
 
 ;// CONCATENATED MODULE: ./src/client/components/Form/PasswordInput.tsx
+
 
 
 
@@ -47898,6 +49042,10 @@ var PasswordInput = /*#__PURE__*/function (_Component) {
     _classCallCheck(this, PasswordInput);
 
     _this = _super.call(this, props);
+
+    _defineProperty(_assertThisInitialized(_this), "uniqueID", void 0);
+
+    _this.uniqueID = 'app-' + helpers.GUID.create();
     _this.state = {
       type: _this.props.type ? _this.props.type : 'password'
     };
@@ -47981,7 +49129,7 @@ var PasswordInput = /*#__PURE__*/function (_Component) {
 
       var uiRes = typeof ui === 'undefined' ? '' : ui;
       var nameRes = typeof name === 'undefined' ? typeof label !== 'undefined' ? helpers.toSlug(label) : '' : name;
-      var idRes = id ? id : 'app-control-' + helpers.GUID.create();
+      var idRes = id || this.uniqueID;
       var wrapperClassDisabled = disabled ? ' is-disabled' : '';
       var wrapperClassIconLeft = iconLeft ? ' is-iconic' : '';
       var wrapperClassIconRight = iconRight ? ' is-iconic is-reversed' : '';
@@ -48086,21 +49234,12 @@ var PasswordInput = /*#__PURE__*/function (_Component) {
     style: {
       marginRight: ".5rem"
     },
-    width: "15",
-    viewBox: "0 0 392.186 392.186"
-  }, /*#__PURE__*/react.createElement("g", null, /*#__PURE__*/react.createElement("g", null, /*#__PURE__*/react.createElement("g", null, /*#__PURE__*/react.createElement("path", {
+    width: "16",
+    viewBox: "0 0 122.88 91.26"
+  }, /*#__PURE__*/react.createElement("path", {
     fill: "#d2d2d2",
-    d: "M368.62,17.951H23.568C10.57,17.951,0,28.524,0,41.52v309.146c0,12.996,10.57,23.568,23.568,23.568h345.053c12.994,0,23.564-10.572,23.564-23.568V41.52C392.188,28.525,381.614,17.951,368.62,17.951z M297.56,57.528c0-4.806,3.896-8.703,8.701-8.703h8.703c4.808,0,8.701,3.896,8.701,8.703v9.863c0,4.806-3.896,8.702-8.701,8.702h-8.703c-4.805,0-8.701-3.896-8.701-8.702V57.528z M257.093,57.528c0-4.806,3.898-8.703,8.703-8.703h8.701c4.805,0,8.703,3.896,8.703,8.703v9.863c0,4.806-3.898,8.702-8.703,8.702h-8.701c-4.805,0-8.703-3.896-8.703-8.702V57.528z M363.903,345.951H28.282V102.235h335.621V345.951L363.903,345.951z M364.132,67.391c0,4.806-3.896,8.702-8.701,8.702h-8.703c-4.809,0-8.702-3.896-8.702-8.702v-9.863c0-4.806,3.896-8.703,8.702-8.703h8.703c4.806,0,8.701,3.896,8.701,8.703V67.391z"
-  }), /*#__PURE__*/react.createElement("path", {
-    fill: "#d2d2d2",
-    d: "M84.185,233.284l63.084,29.336c1.631,0.755,3.367,1.138,5.162,1.138c2.338,0,4.617-0.664,6.598-1.924c3.547-2.267,5.666-6.13,5.666-10.334v-0.322c0-4.752-2.785-9.116-7.096-11.118l-39.455-18.332l39.455-18.334c4.311-2.004,7.096-6.367,7.096-11.117v-0.319c0-4.21-2.119-8.075-5.666-10.334c-1.961-1.253-4.246-1.916-6.605-1.916c-1.779,0-3.563,0.391-5.16,1.133l-63.08,29.333c-4.307,2.004-7.09,6.369-7.09,11.117v0.877C77.093,226.909,79.874,231.272,84.185,233.284z"
-  }), /*#__PURE__*/react.createElement("path", {
-    fill: "#d2d2d2",
-    d: "M165.257,293.036c2.301,3.149,6.002,5.03,9.9,5.03h0.316c5.352,0,10.041-3.426,11.672-8.517L228.7,160.788c1.192-3.716,0.531-7.818-1.771-10.973c-2.301-3.15-6.002-5.03-9.901-5.03h-0.315c-5.354,0-10.048,3.425-11.679,8.516l-41.559,128.771C162.292,285.793,162.958,289.889,165.257,293.036z"
-  }), /*#__PURE__*/react.createElement("path", {
-    fill: "#d2d2d2",
-    d: "M227.49,192.276c0,4.745,2.783,9.109,7.095,11.123l39.455,18.329l-39.455,18.33c-4.31,2.004-7.095,6.368-7.095,11.118v0.322c0,4.205,2.117,8.068,5.668,10.336c1.974,1.258,4.254,1.924,6.595,1.924c1.793,0,3.528-0.383,5.17-1.142l63.08-29.335c4.307-2.009,7.09-6.372,7.09-11.115v-0.877c0-4.748-2.783-9.113-7.094-11.117l-63.08-29.333c-1.591-0.74-3.373-1.131-5.152-1.131c-2.355,0-4.643,0.661-6.604,1.912c-3.551,2.263-5.67,6.127-5.67,10.337v0.318H227.49L227.49,192.276z"
-  }))))), "Docs on GitHub"))))))), /*#__PURE__*/react.createElement("form", {
+    d: "M8.32,0h106.24c4.58,0,8.32,3.74,8.32,8.32v74.62c0,4.57-3.74,8.32-8.32,8.32H8.32C3.74,91.26,0,87.51,0,82.94 V8.32C0,3.74,3.74,0,8.32,0L8.32,0z M54.46,72.22L32,58.61v-8.63l22.46-13.61v10.26l-13.65,7.69l13.65,7.7V72.22L54.46,72.22z M68.42,72.22l22.46-13.61v-8.63L68.42,36.37v10.26l13.65,7.69l-13.65,7.7V72.22L68.42,72.22z M117.97,23.29H5.29v60.46 c0,0.64,0.25,1.2,0.67,1.63c0.42,0.42,0.99,0.67,1.63,0.67h108.04c0.64,0,1.2-0.25,1.63-0.67c0.43-0.43,0.67-0.99,0.67-1.63V23.29 H117.97L117.97,23.29z M106.64,9.35c2.27,0,4.11,1.84,4.11,4.11c0,2.27-1.84,4.11-4.11,4.11c-2.27,0-4.11-1.84-4.11-4.11 C102.54,11.19,104.38,9.35,106.64,9.35L106.64,9.35z M78.8,9.35c2.27,0,4.11,1.84,4.11,4.11c0,2.27-1.84,4.11-4.11,4.11 c-2.27,0-4.11-1.84-4.11-4.11C74.69,11.19,76.53,9.35,78.8,9.35L78.8,9.35z M92.72,9.35c2.27,0,4.11,1.84,4.11,4.11 c0,2.27-1.84,4.11-4.11,4.11c-2.27,0-4.11-1.84-4.11-4.11C88.61,11.19,90.45,9.35,92.72,9.35L92.72,9.35z"
+  })), "Docs on GitHub"))))))), /*#__PURE__*/react.createElement("form", {
     method: "post",
     action: "#",
     id: "app-my-form"
@@ -48824,7 +49963,7 @@ var PasswordInput = /*#__PURE__*/function (_Component) {
       placeholder: "URL",
       name: "appnotice-url[]"
     })),
-    value: "[\"title 1\",\"https://google.com/pa1\"],[\"title 2\",\"https://uiux.cc\"],[\"title 3\",\"https://youtube.com\"]"
+    value: "[\"title 1\",\"https://example.com/pa1\"],[\"title 2\",\"https://uiux.cc\"],[\"title 3\",\"https://youtube.com\"]"
   }))))), /*#__PURE__*/react.createElement("section", null, /*#__PURE__*/react.createElement("div", {
     className: "container"
   }, /*#__PURE__*/react.createElement("div", {
@@ -49111,17 +50250,21 @@ var PasswordInput = /*#__PURE__*/function (_Component) {
     className: "table-responsive-md"
   }, /*#__PURE__*/react.createElement("table", {
     className: "table table-bordered table-striped"
-  }, /*#__PURE__*/react.createElement("thead", null, /*#__PURE__*/react.createElement("tr", null, /*#__PURE__*/react.createElement("th", null, "Property"), /*#__PURE__*/react.createElement("th", null, "Type"), /*#__PURE__*/react.createElement("th", null, "Default"), /*#__PURE__*/react.createElement("th", null, "Description"))), /*#__PURE__*/react.createElement("tbody", null, /*#__PURE__*/react.createElement("tr", null, /*#__PURE__*/react.createElement("td", null, /*#__PURE__*/react.createElement("code", null, "options")), /*#__PURE__*/react.createElement("td", null, "JSON Object Literals"), /*#__PURE__*/react.createElement("td", null, "-"), /*#__PURE__*/react.createElement("td", null, "Set the default value using JSON string format for menu of options, like this: ", /*#__PURE__*/react.createElement("code", {
+  }, /*#__PURE__*/react.createElement("thead", null, /*#__PURE__*/react.createElement("tr", null, /*#__PURE__*/react.createElement("th", null, "Property"), /*#__PURE__*/react.createElement("th", null, "Type"), /*#__PURE__*/react.createElement("th", null, "Default"), /*#__PURE__*/react.createElement("th", null, "Description"))), /*#__PURE__*/react.createElement("tbody", null, /*#__PURE__*/react.createElement("tr", null, /*#__PURE__*/react.createElement("td", null, /*#__PURE__*/react.createElement("code", null, "options")), /*#__PURE__*/react.createElement("td", null, "JSON Object Literals"), /*#__PURE__*/react.createElement("td", null, "-"), /*#__PURE__*/react.createElement("td", null, /*#__PURE__*/react.createElement("strong", null, "(Required)"), " Set the default value using JSON string format for menu of options, like this: ", /*#__PURE__*/react.createElement("code", {
     className: "text-wrap"
-  }, "{\"Option 1\":\"value-1\",\"Option 2\":\"value-2\",\"Option 3\":\"value-3\"}"))), /*#__PURE__*/react.createElement("tr", null, /*#__PURE__*/react.createElement("td", null, /*#__PURE__*/react.createElement("code", null, "theme")), /*#__PURE__*/react.createElement("td", null, "string | ", /*#__PURE__*/react.createElement("code", null, "line")), /*#__PURE__*/react.createElement("td", null, "-"), /*#__PURE__*/react.createElement("td", null, "The display style of the control")), /*#__PURE__*/react.createElement("tr", null, /*#__PURE__*/react.createElement("td", null, /*#__PURE__*/react.createElement("code", null, "ui")), /*#__PURE__*/react.createElement("td", null, "string"), /*#__PURE__*/react.createElement("td", null, "-"), /*#__PURE__*/react.createElement("td", null, "The overlay style of the control. Can be used at the same time, separated by spaces. The optional values are:", /*#__PURE__*/react.createElement("br", null), /*#__PURE__*/react.createElement("strong", null, "corners:"), /*#__PURE__*/react.createElement("br", null), /*#__PURE__*/react.createElement("code", null, "pill"), ", ", /*#__PURE__*/react.createElement("code", null, "rounded"), /*#__PURE__*/react.createElement("br", null), /*#__PURE__*/react.createElement("strong", null, "size:"), /*#__PURE__*/react.createElement("br", null), /*#__PURE__*/react.createElement("code", null, "fullwidth"))), /*#__PURE__*/react.createElement("tr", null, /*#__PURE__*/react.createElement("td", null, /*#__PURE__*/react.createElement("code", null, "value")), /*#__PURE__*/react.createElement("td", null, "string"), /*#__PURE__*/react.createElement("td", null, "-"), /*#__PURE__*/react.createElement("td", null, "Set a default value for this control")), /*#__PURE__*/react.createElement("tr", null, /*#__PURE__*/react.createElement("td", null, /*#__PURE__*/react.createElement("code", null, "label")), /*#__PURE__*/react.createElement("td", null, "string | ReactNode"), /*#__PURE__*/react.createElement("td", null, "-"), /*#__PURE__*/react.createElement("td", null, "It is used to specify a label for an element of a form.")), /*#__PURE__*/react.createElement("tr", null, /*#__PURE__*/react.createElement("td", null, /*#__PURE__*/react.createElement("code", null, "name")), /*#__PURE__*/react.createElement("td", null, "string"), /*#__PURE__*/react.createElement("td", null, "-"), /*#__PURE__*/react.createElement("td", null, "Name is not deprecated when used with form fields.")), /*#__PURE__*/react.createElement("tr", null, /*#__PURE__*/react.createElement("td", null, /*#__PURE__*/react.createElement("code", null, "disabled")), /*#__PURE__*/react.createElement("td", null, "boolean"), /*#__PURE__*/react.createElement("td", null, "false"), /*#__PURE__*/react.createElement("td", null, "Whether the input is disabled")), /*#__PURE__*/react.createElement("tr", null, /*#__PURE__*/react.createElement("td", null, /*#__PURE__*/react.createElement("code", null, "required")), /*#__PURE__*/react.createElement("td", null, "boolean"), /*#__PURE__*/react.createElement("td", null, "false"), /*#__PURE__*/react.createElement("td", null, "When present, it specifies that a field must be filled out before submitting the form."))))), /*#__PURE__*/react.createElement("p", {
+  }, "{\"Option 1\":\"value-1\",\"Option 2\":\"value-2\",\"Option 3\":\"value-3\"}"))), /*#__PURE__*/react.createElement("tr", null, /*#__PURE__*/react.createElement("td", null, /*#__PURE__*/react.createElement("code", null, "theme")), /*#__PURE__*/react.createElement("td", null, "string | ", /*#__PURE__*/react.createElement("code", null, "line")), /*#__PURE__*/react.createElement("td", null, "-"), /*#__PURE__*/react.createElement("td", null, "The display style of the control")), /*#__PURE__*/react.createElement("tr", null, /*#__PURE__*/react.createElement("td", null, /*#__PURE__*/react.createElement("code", null, "ui")), /*#__PURE__*/react.createElement("td", null, "string"), /*#__PURE__*/react.createElement("td", null, "-"), /*#__PURE__*/react.createElement("td", null, "The overlay style of the control. Can be used at the same time, separated by spaces. The optional values are:", /*#__PURE__*/react.createElement("br", null), /*#__PURE__*/react.createElement("strong", null, "corners:"), /*#__PURE__*/react.createElement("br", null), /*#__PURE__*/react.createElement("code", null, "pill"), ", ", /*#__PURE__*/react.createElement("code", null, "rounded"), /*#__PURE__*/react.createElement("br", null), /*#__PURE__*/react.createElement("strong", null, "size:"), /*#__PURE__*/react.createElement("br", null), /*#__PURE__*/react.createElement("code", null, "fullwidth"))), /*#__PURE__*/react.createElement("tr", null, /*#__PURE__*/react.createElement("td", null, /*#__PURE__*/react.createElement("code", null, "value")), /*#__PURE__*/react.createElement("td", null, "string"), /*#__PURE__*/react.createElement("td", null, "-"), /*#__PURE__*/react.createElement("td", null, "Set a default value for this control")), /*#__PURE__*/react.createElement("tr", null, /*#__PURE__*/react.createElement("td", null, /*#__PURE__*/react.createElement("code", null, "label")), /*#__PURE__*/react.createElement("td", null, "string | ReactNode"), /*#__PURE__*/react.createElement("td", null, "-"), /*#__PURE__*/react.createElement("td", null, "It is used to specify a label for an element of a form.")), /*#__PURE__*/react.createElement("tr", null, /*#__PURE__*/react.createElement("td", null, /*#__PURE__*/react.createElement("code", null, "name")), /*#__PURE__*/react.createElement("td", null, "string"), /*#__PURE__*/react.createElement("td", null, "-"), /*#__PURE__*/react.createElement("td", null, "Name is not deprecated when used with form fields.")), /*#__PURE__*/react.createElement("tr", null, /*#__PURE__*/react.createElement("td", null, /*#__PURE__*/react.createElement("code", null, "disabled")), /*#__PURE__*/react.createElement("td", null, "boolean"), /*#__PURE__*/react.createElement("td", null, "false"), /*#__PURE__*/react.createElement("td", null, "Whether the input is disabled")), /*#__PURE__*/react.createElement("tr", null, /*#__PURE__*/react.createElement("td", null, /*#__PURE__*/react.createElement("code", null, "required")), /*#__PURE__*/react.createElement("td", null, "boolean"), /*#__PURE__*/react.createElement("td", null, "false"), /*#__PURE__*/react.createElement("td", null, "When present, it specifies that a field must be filled out before submitting the form.")), /*#__PURE__*/react.createElement("tr", null, /*#__PURE__*/react.createElement("td", null, /*#__PURE__*/react.createElement("code", null, "optionChangeCallback")), /*#__PURE__*/react.createElement("td", null, "function | null"), /*#__PURE__*/react.createElement("td", null, "-"), /*#__PURE__*/react.createElement("td", null, "This function is called whenever the data is updated. Exposes the JSON format data about the option as an argument. You can use it like this: ", /*#__PURE__*/react.createElement("br", null), /*#__PURE__*/react.createElement("code", {
+    className: "text-wrap"
+  }, "(res) => console.log(res.value)")))))), /*#__PURE__*/react.createElement("p", {
     className: "mb-5"
   }, "It accepts all props which this control support."), /*#__PURE__*/react.createElement("h4", null, "Custom Select"), /*#__PURE__*/react.createElement("div", null, /*#__PURE__*/react.createElement("pre", null, "import ", "{CustomSelect}", " from '@uixkit.react/components/Form/index.tsx';")), /*#__PURE__*/react.createElement("div", {
     className: "table-responsive-md"
   }, /*#__PURE__*/react.createElement("table", {
     className: "table table-bordered table-striped mb-5"
-  }, /*#__PURE__*/react.createElement("thead", null, /*#__PURE__*/react.createElement("tr", null, /*#__PURE__*/react.createElement("th", null, "Property"), /*#__PURE__*/react.createElement("th", null, "Type"), /*#__PURE__*/react.createElement("th", null, "Default"), /*#__PURE__*/react.createElement("th", null, "Description"))), /*#__PURE__*/react.createElement("tbody", null, /*#__PURE__*/react.createElement("tr", null, /*#__PURE__*/react.createElement("td", null, /*#__PURE__*/react.createElement("code", null, "options")), /*#__PURE__*/react.createElement("td", null, "JSON Object Literals"), /*#__PURE__*/react.createElement("td", null, "-"), /*#__PURE__*/react.createElement("td", null, "Set the default value using JSON string format for menu of options, like this: ", /*#__PURE__*/react.createElement("code", {
+  }, /*#__PURE__*/react.createElement("thead", null, /*#__PURE__*/react.createElement("tr", null, /*#__PURE__*/react.createElement("th", null, "Property"), /*#__PURE__*/react.createElement("th", null, "Type"), /*#__PURE__*/react.createElement("th", null, "Default"), /*#__PURE__*/react.createElement("th", null, "Description"))), /*#__PURE__*/react.createElement("tbody", null, /*#__PURE__*/react.createElement("tr", null, /*#__PURE__*/react.createElement("td", null, /*#__PURE__*/react.createElement("code", null, "options")), /*#__PURE__*/react.createElement("td", null, "JSON Object Literals"), /*#__PURE__*/react.createElement("td", null, "-"), /*#__PURE__*/react.createElement("td", null, /*#__PURE__*/react.createElement("strong", null, "(Required)"), " Set the default value using JSON string format for menu of options, like this: ", /*#__PURE__*/react.createElement("code", {
     className: "text-wrap"
-  }, "{\"Option 1\":\"value-1\",\"Option 2\":\"value-2\",\"Option 3\":\"value-3\"}"))), /*#__PURE__*/react.createElement("tr", null, /*#__PURE__*/react.createElement("td", null, /*#__PURE__*/react.createElement("code", null, "position")), /*#__PURE__*/react.createElement("td", null, "string | ", /*#__PURE__*/react.createElement("code", null, "top")), /*#__PURE__*/react.createElement("td", null, "-"), /*#__PURE__*/react.createElement("td", null, "The position of the menu, the default is the bottom")), /*#__PURE__*/react.createElement("tr", null, /*#__PURE__*/react.createElement("td", null, /*#__PURE__*/react.createElement("code", null, "theme")), /*#__PURE__*/react.createElement("td", null, "string | ", /*#__PURE__*/react.createElement("code", null, "line")), /*#__PURE__*/react.createElement("td", null, "-"), /*#__PURE__*/react.createElement("td", null, "The display style of the control")), /*#__PURE__*/react.createElement("tr", null, /*#__PURE__*/react.createElement("td", null, /*#__PURE__*/react.createElement("code", null, "ui")), /*#__PURE__*/react.createElement("td", null, "string"), /*#__PURE__*/react.createElement("td", null, "-"), /*#__PURE__*/react.createElement("td", null, "The overlay style of the control. Can be used at the same time, separated by spaces. The optional values are:", /*#__PURE__*/react.createElement("br", null), /*#__PURE__*/react.createElement("strong", null, "corners:"), /*#__PURE__*/react.createElement("br", null), /*#__PURE__*/react.createElement("code", null, "pill"), ", ", /*#__PURE__*/react.createElement("code", null, "rounded"), /*#__PURE__*/react.createElement("br", null), /*#__PURE__*/react.createElement("strong", null, "size:"), /*#__PURE__*/react.createElement("br", null), /*#__PURE__*/react.createElement("code", null, "fullwidth"))), /*#__PURE__*/react.createElement("tr", null, /*#__PURE__*/react.createElement("td", null, /*#__PURE__*/react.createElement("code", null, "value")), /*#__PURE__*/react.createElement("td", null, "string"), /*#__PURE__*/react.createElement("td", null, "-"), /*#__PURE__*/react.createElement("td", null, "Set a default value for this control")), /*#__PURE__*/react.createElement("tr", null, /*#__PURE__*/react.createElement("td", null, /*#__PURE__*/react.createElement("code", null, "label")), /*#__PURE__*/react.createElement("td", null, "string | ReactNode"), /*#__PURE__*/react.createElement("td", null, "-"), /*#__PURE__*/react.createElement("td", null, "It is used to specify a label for an element of a form.")), /*#__PURE__*/react.createElement("tr", null, /*#__PURE__*/react.createElement("td", null, /*#__PURE__*/react.createElement("code", null, "name")), /*#__PURE__*/react.createElement("td", null, "string"), /*#__PURE__*/react.createElement("td", null, "-"), /*#__PURE__*/react.createElement("td", null, "Name is not deprecated when used with form fields.")), /*#__PURE__*/react.createElement("tr", null, /*#__PURE__*/react.createElement("td", null, /*#__PURE__*/react.createElement("code", null, "disabled")), /*#__PURE__*/react.createElement("td", null, "boolean"), /*#__PURE__*/react.createElement("td", null, "false"), /*#__PURE__*/react.createElement("td", null, "Whether the input is disabled")), /*#__PURE__*/react.createElement("tr", null, /*#__PURE__*/react.createElement("td", null, /*#__PURE__*/react.createElement("code", null, "required")), /*#__PURE__*/react.createElement("td", null, "boolean"), /*#__PURE__*/react.createElement("td", null, "false"), /*#__PURE__*/react.createElement("td", null, "When present, it specifies that a field must be filled out before submitting the form."))))), /*#__PURE__*/react.createElement("h4", null, "Checkbox"), /*#__PURE__*/react.createElement("div", null, /*#__PURE__*/react.createElement("pre", null, "import ", "{Checkbox}", " from '@uixkit.react/components/Form/index.tsx';")), /*#__PURE__*/react.createElement("div", {
+  }, "{\"Option 1\":\"value-1\",\"Option 2\":\"value-2\",\"Option 3\":\"value-3\"}"))), /*#__PURE__*/react.createElement("tr", null, /*#__PURE__*/react.createElement("td", null, /*#__PURE__*/react.createElement("code", null, "position")), /*#__PURE__*/react.createElement("td", null, "string | ", /*#__PURE__*/react.createElement("code", null, "top")), /*#__PURE__*/react.createElement("td", null, "-"), /*#__PURE__*/react.createElement("td", null, "The position of the menu, the default is the bottom")), /*#__PURE__*/react.createElement("tr", null, /*#__PURE__*/react.createElement("td", null, /*#__PURE__*/react.createElement("code", null, "theme")), /*#__PURE__*/react.createElement("td", null, "string | ", /*#__PURE__*/react.createElement("code", null, "line")), /*#__PURE__*/react.createElement("td", null, "-"), /*#__PURE__*/react.createElement("td", null, "The display style of the control")), /*#__PURE__*/react.createElement("tr", null, /*#__PURE__*/react.createElement("td", null, /*#__PURE__*/react.createElement("code", null, "ui")), /*#__PURE__*/react.createElement("td", null, "string"), /*#__PURE__*/react.createElement("td", null, "-"), /*#__PURE__*/react.createElement("td", null, "The overlay style of the control. Can be used at the same time, separated by spaces. The optional values are:", /*#__PURE__*/react.createElement("br", null), /*#__PURE__*/react.createElement("strong", null, "corners:"), /*#__PURE__*/react.createElement("br", null), /*#__PURE__*/react.createElement("code", null, "pill"), ", ", /*#__PURE__*/react.createElement("code", null, "rounded"), /*#__PURE__*/react.createElement("br", null), /*#__PURE__*/react.createElement("strong", null, "size:"), /*#__PURE__*/react.createElement("br", null), /*#__PURE__*/react.createElement("code", null, "fullwidth"))), /*#__PURE__*/react.createElement("tr", null, /*#__PURE__*/react.createElement("td", null, /*#__PURE__*/react.createElement("code", null, "value")), /*#__PURE__*/react.createElement("td", null, "string"), /*#__PURE__*/react.createElement("td", null, "-"), /*#__PURE__*/react.createElement("td", null, "Set a default value for this control")), /*#__PURE__*/react.createElement("tr", null, /*#__PURE__*/react.createElement("td", null, /*#__PURE__*/react.createElement("code", null, "label")), /*#__PURE__*/react.createElement("td", null, "string | ReactNode"), /*#__PURE__*/react.createElement("td", null, "-"), /*#__PURE__*/react.createElement("td", null, "It is used to specify a label for an element of a form.")), /*#__PURE__*/react.createElement("tr", null, /*#__PURE__*/react.createElement("td", null, /*#__PURE__*/react.createElement("code", null, "name")), /*#__PURE__*/react.createElement("td", null, "string"), /*#__PURE__*/react.createElement("td", null, "-"), /*#__PURE__*/react.createElement("td", null, "Name is not deprecated when used with form fields.")), /*#__PURE__*/react.createElement("tr", null, /*#__PURE__*/react.createElement("td", null, /*#__PURE__*/react.createElement("code", null, "disabled")), /*#__PURE__*/react.createElement("td", null, "boolean"), /*#__PURE__*/react.createElement("td", null, "false"), /*#__PURE__*/react.createElement("td", null, "Whether the input is disabled")), /*#__PURE__*/react.createElement("tr", null, /*#__PURE__*/react.createElement("td", null, /*#__PURE__*/react.createElement("code", null, "required")), /*#__PURE__*/react.createElement("td", null, "boolean"), /*#__PURE__*/react.createElement("td", null, "false"), /*#__PURE__*/react.createElement("td", null, "When present, it specifies that a field must be filled out before submitting the form.")), /*#__PURE__*/react.createElement("tr", null, /*#__PURE__*/react.createElement("td", null, /*#__PURE__*/react.createElement("code", null, "optionChangeCallback")), /*#__PURE__*/react.createElement("td", null, "function | null"), /*#__PURE__*/react.createElement("td", null, "-"), /*#__PURE__*/react.createElement("td", null, "This function is called whenever the data is updated. Exposes the JSON format data about the option as an argument. You can use it like this: ", /*#__PURE__*/react.createElement("br", null), /*#__PURE__*/react.createElement("code", {
+    className: "text-wrap"
+  }, "(res) => console.log(res.value)")))))), /*#__PURE__*/react.createElement("h4", null, "Checkbox"), /*#__PURE__*/react.createElement("div", null, /*#__PURE__*/react.createElement("pre", null, "import ", "{Checkbox}", " from '@uixkit.react/components/Form/index.tsx';")), /*#__PURE__*/react.createElement("div", {
     className: "table-responsive-md"
   }, /*#__PURE__*/react.createElement("table", {
     className: "table table-bordered table-striped"
@@ -49131,19 +50274,19 @@ var PasswordInput = /*#__PURE__*/function (_Component) {
     className: "table-responsive-md"
   }, /*#__PURE__*/react.createElement("table", {
     className: "table table-bordered table-striped mb-5"
-  }, /*#__PURE__*/react.createElement("thead", null, /*#__PURE__*/react.createElement("tr", null, /*#__PURE__*/react.createElement("th", null, "Property"), /*#__PURE__*/react.createElement("th", null, "Type"), /*#__PURE__*/react.createElement("th", null, "Default"), /*#__PURE__*/react.createElement("th", null, "Description"))), /*#__PURE__*/react.createElement("tbody", null, /*#__PURE__*/react.createElement("tr", null, /*#__PURE__*/react.createElement("td", null, /*#__PURE__*/react.createElement("code", null, "options")), /*#__PURE__*/react.createElement("td", null, "JSON Object Literals"), /*#__PURE__*/react.createElement("td", null, "-"), /*#__PURE__*/react.createElement("td", null, "Set the default value using JSON string format for menu of options, like this: ", /*#__PURE__*/react.createElement("code", {
+  }, /*#__PURE__*/react.createElement("thead", null, /*#__PURE__*/react.createElement("tr", null, /*#__PURE__*/react.createElement("th", null, "Property"), /*#__PURE__*/react.createElement("th", null, "Type"), /*#__PURE__*/react.createElement("th", null, "Default"), /*#__PURE__*/react.createElement("th", null, "Description"))), /*#__PURE__*/react.createElement("tbody", null, /*#__PURE__*/react.createElement("tr", null, /*#__PURE__*/react.createElement("td", null, /*#__PURE__*/react.createElement("code", null, "options")), /*#__PURE__*/react.createElement("td", null, "JSON Object Literals"), /*#__PURE__*/react.createElement("td", null, "-"), /*#__PURE__*/react.createElement("td", null, /*#__PURE__*/react.createElement("strong", null, "(Required)"), " Set the default value using JSON string format for menu of options, like this: ", /*#__PURE__*/react.createElement("code", {
     className: "text-wrap"
   }, "{\"Option 1\":\"value-1\",\"Option 2\":\"value-2\",\"Option 3\":\"value-3\"}"))), /*#__PURE__*/react.createElement("tr", null, /*#__PURE__*/react.createElement("td", null, /*#__PURE__*/react.createElement("code", null, "value")), /*#__PURE__*/react.createElement("td", null, "string"), /*#__PURE__*/react.createElement("td", null, "-"), /*#__PURE__*/react.createElement("td", null, "Set a default value for this control")), /*#__PURE__*/react.createElement("tr", null, /*#__PURE__*/react.createElement("td", null, /*#__PURE__*/react.createElement("code", null, "name")), /*#__PURE__*/react.createElement("td", null, "string"), /*#__PURE__*/react.createElement("td", null, "-"), /*#__PURE__*/react.createElement("td", null, "Name is not deprecated when used with form fields.")), /*#__PURE__*/react.createElement("tr", null, /*#__PURE__*/react.createElement("td", null, /*#__PURE__*/react.createElement("code", null, "disabled")), /*#__PURE__*/react.createElement("td", null, "boolean"), /*#__PURE__*/react.createElement("td", null, "false"), /*#__PURE__*/react.createElement("td", null, "Whether the input is disabled")), /*#__PURE__*/react.createElement("tr", null, /*#__PURE__*/react.createElement("td", null, /*#__PURE__*/react.createElement("code", null, "required")), /*#__PURE__*/react.createElement("td", null, "boolean"), /*#__PURE__*/react.createElement("td", null, "false"), /*#__PURE__*/react.createElement("td", null, "When present, it specifies that a field must be filled out before submitting the form."))))), /*#__PURE__*/react.createElement("h4", null, "Multiple Select"), /*#__PURE__*/react.createElement("div", null, /*#__PURE__*/react.createElement("pre", null, "import ", "{MultiSelect}", " from '@uixkit.react/components/Form/index.tsx';")), /*#__PURE__*/react.createElement("div", {
     className: "table-responsive-md"
   }, /*#__PURE__*/react.createElement("table", {
     className: "table table-bordered table-striped mb-5"
-  }, /*#__PURE__*/react.createElement("thead", null, /*#__PURE__*/react.createElement("tr", null, /*#__PURE__*/react.createElement("th", null, "Property"), /*#__PURE__*/react.createElement("th", null, "Type"), /*#__PURE__*/react.createElement("th", null, "Default"), /*#__PURE__*/react.createElement("th", null, "Description"))), /*#__PURE__*/react.createElement("tbody", null, /*#__PURE__*/react.createElement("tr", null, /*#__PURE__*/react.createElement("td", null, /*#__PURE__*/react.createElement("code", null, "options")), /*#__PURE__*/react.createElement("td", null, "JSON Object Literals"), /*#__PURE__*/react.createElement("td", null, "-"), /*#__PURE__*/react.createElement("td", null, "Set the default value using JSON string format for menu of options, like this: ", /*#__PURE__*/react.createElement("code", {
+  }, /*#__PURE__*/react.createElement("thead", null, /*#__PURE__*/react.createElement("tr", null, /*#__PURE__*/react.createElement("th", null, "Property"), /*#__PURE__*/react.createElement("th", null, "Type"), /*#__PURE__*/react.createElement("th", null, "Default"), /*#__PURE__*/react.createElement("th", null, "Description"))), /*#__PURE__*/react.createElement("tbody", null, /*#__PURE__*/react.createElement("tr", null, /*#__PURE__*/react.createElement("td", null, /*#__PURE__*/react.createElement("code", null, "options")), /*#__PURE__*/react.createElement("td", null, "JSON Object Literals"), /*#__PURE__*/react.createElement("td", null, "-"), /*#__PURE__*/react.createElement("td", null, /*#__PURE__*/react.createElement("strong", null, "(Required)"), " Set the default value using JSON string format for menu of options, like this: ", /*#__PURE__*/react.createElement("code", {
     className: "text-wrap"
   }, "{\"Option 1\":\"value-1\",\"Option 2\":\"value-2\",\"Option 3\":\"value-3\"}"))), /*#__PURE__*/react.createElement("tr", null, /*#__PURE__*/react.createElement("td", null, /*#__PURE__*/react.createElement("code", null, "theme")), /*#__PURE__*/react.createElement("td", null, "string | ", /*#__PURE__*/react.createElement("code", null, "line")), /*#__PURE__*/react.createElement("td", null, "-"), /*#__PURE__*/react.createElement("td", null, "The display style of the control")), /*#__PURE__*/react.createElement("tr", null, /*#__PURE__*/react.createElement("td", null, /*#__PURE__*/react.createElement("code", null, "value")), /*#__PURE__*/react.createElement("td", null, "string"), /*#__PURE__*/react.createElement("td", null, "-"), /*#__PURE__*/react.createElement("td", null, "Set a default value for this control")), /*#__PURE__*/react.createElement("tr", null, /*#__PURE__*/react.createElement("td", null, /*#__PURE__*/react.createElement("code", null, "name")), /*#__PURE__*/react.createElement("td", null, "string"), /*#__PURE__*/react.createElement("td", null, "-"), /*#__PURE__*/react.createElement("td", null, "Name is not deprecated when used with form fields.")), /*#__PURE__*/react.createElement("tr", null, /*#__PURE__*/react.createElement("td", null, /*#__PURE__*/react.createElement("code", null, "required")), /*#__PURE__*/react.createElement("td", null, "boolean"), /*#__PURE__*/react.createElement("td", null, "false"), /*#__PURE__*/react.createElement("td", null, "When present, it specifies that a field must be filled out before submitting the form."))))), /*#__PURE__*/react.createElement("h4", null, "Single Select"), /*#__PURE__*/react.createElement("div", null, /*#__PURE__*/react.createElement("pre", null, "import ", "{SingleSelect}", " from '@uixkit.react/components/Form/index.tsx';")), /*#__PURE__*/react.createElement("div", {
     className: "table-responsive-md"
   }, /*#__PURE__*/react.createElement("table", {
     className: "table table-bordered table-striped mb-5"
-  }, /*#__PURE__*/react.createElement("thead", null, /*#__PURE__*/react.createElement("tr", null, /*#__PURE__*/react.createElement("th", null, "Property"), /*#__PURE__*/react.createElement("th", null, "Type"), /*#__PURE__*/react.createElement("th", null, "Default"), /*#__PURE__*/react.createElement("th", null, "Description"))), /*#__PURE__*/react.createElement("tbody", null, /*#__PURE__*/react.createElement("tr", null, /*#__PURE__*/react.createElement("td", null, /*#__PURE__*/react.createElement("code", null, "options")), /*#__PURE__*/react.createElement("td", null, "JSON Object Literals"), /*#__PURE__*/react.createElement("td", null, "-"), /*#__PURE__*/react.createElement("td", null, "Set the default value using JSON string format for menu of options, like this: ", /*#__PURE__*/react.createElement("code", {
+  }, /*#__PURE__*/react.createElement("thead", null, /*#__PURE__*/react.createElement("tr", null, /*#__PURE__*/react.createElement("th", null, "Property"), /*#__PURE__*/react.createElement("th", null, "Type"), /*#__PURE__*/react.createElement("th", null, "Default"), /*#__PURE__*/react.createElement("th", null, "Description"))), /*#__PURE__*/react.createElement("tbody", null, /*#__PURE__*/react.createElement("tr", null, /*#__PURE__*/react.createElement("td", null, /*#__PURE__*/react.createElement("code", null, "options")), /*#__PURE__*/react.createElement("td", null, "JSON Object Literals"), /*#__PURE__*/react.createElement("td", null, "-"), /*#__PURE__*/react.createElement("td", null, /*#__PURE__*/react.createElement("strong", null, "(Required)"), " Set the default value using JSON string format for menu of options, like this: ", /*#__PURE__*/react.createElement("code", {
     className: "text-wrap"
   }, "{\"Option 1\":\"value-1\",\"Option 2\":\"value-2\",\"Option 3\":\"value-3\"}"))), /*#__PURE__*/react.createElement("tr", null, /*#__PURE__*/react.createElement("td", null, /*#__PURE__*/react.createElement("code", null, "targetID")), /*#__PURE__*/react.createElement("td", null, "string"), /*#__PURE__*/react.createElement("td", null, "-"), /*#__PURE__*/react.createElement("td", null, "Specify multiple IDs that does not require the prefix ", /*#__PURE__*/react.createElement("code", null, "#"), ", use the item to control its display or not. Each ID is separated by a comma")), /*#__PURE__*/react.createElement("tr", null, /*#__PURE__*/react.createElement("td", null, /*#__PURE__*/react.createElement("code", null, "theme")), /*#__PURE__*/react.createElement("td", null, "string | ", /*#__PURE__*/react.createElement("code", null, "line")), /*#__PURE__*/react.createElement("td", null, "-"), /*#__PURE__*/react.createElement("td", null, "The display style of the control")), /*#__PURE__*/react.createElement("tr", null, /*#__PURE__*/react.createElement("td", null, /*#__PURE__*/react.createElement("code", null, "ui")), /*#__PURE__*/react.createElement("td", null, "string"), /*#__PURE__*/react.createElement("td", null, "-"), /*#__PURE__*/react.createElement("td", null, "The overlay style of the control. Can be used at the same time, separated by spaces. The optional values are:", /*#__PURE__*/react.createElement("br", null), /*#__PURE__*/react.createElement("strong", null, "corners:"), /*#__PURE__*/react.createElement("br", null), /*#__PURE__*/react.createElement("code", null, "pill"), ", ", /*#__PURE__*/react.createElement("code", null, "rounded"))), /*#__PURE__*/react.createElement("tr", null, /*#__PURE__*/react.createElement("td", null, /*#__PURE__*/react.createElement("code", null, "value")), /*#__PURE__*/react.createElement("td", null, "string"), /*#__PURE__*/react.createElement("td", null, "-"), /*#__PURE__*/react.createElement("td", null, "Set a default value for this control")), /*#__PURE__*/react.createElement("tr", null, /*#__PURE__*/react.createElement("td", null, /*#__PURE__*/react.createElement("code", null, "name")), /*#__PURE__*/react.createElement("td", null, "string"), /*#__PURE__*/react.createElement("td", null, "-"), /*#__PURE__*/react.createElement("td", null, "Name is not deprecated when used with form fields.")), /*#__PURE__*/react.createElement("tr", null, /*#__PURE__*/react.createElement("td", null, /*#__PURE__*/react.createElement("code", null, "required")), /*#__PURE__*/react.createElement("td", null, "boolean"), /*#__PURE__*/react.createElement("td", null, "false"), /*#__PURE__*/react.createElement("td", null, "When present, it specifies that a field must be filled out before submitting the form."))))), /*#__PURE__*/react.createElement("h4", null, "Date"), /*#__PURE__*/react.createElement("div", null, /*#__PURE__*/react.createElement("pre", null, "import ", "{Date}", " from '@uixkit.react/components/Form/index.tsx';")), /*#__PURE__*/react.createElement("div", {
     className: "table-responsive-md"
@@ -49190,6 +50333,8 @@ var PasswordInput = /*#__PURE__*/function (_Component) {
 
 
 
+
+
 function Grid_createSuper(Derived) { var hasNativeReflectConstruct = Grid_isNativeReflectConstruct(); return function _createSuperInternal() { var Super = _getPrototypeOf(Derived), result; if (hasNativeReflectConstruct) { var NewTarget = _getPrototypeOf(this).constructor; result = Reflect.construct(Super, arguments, NewTarget); } else { result = Super.apply(this, arguments); } return _possibleConstructorReturn(this, result); }; }
 
 function Grid_isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Reflect.construct) return false; if (Reflect.construct.sham) return false; if (typeof Proxy === "function") return true; try { Boolean.prototype.valueOf.call(Reflect.construct(Boolean, [], function () {})); return true; } catch (e) { return false; } }
@@ -49211,9 +50356,16 @@ var Grid = /*#__PURE__*/function (_Component) {
   var _super = Grid_createSuper(Grid);
 
   function Grid(props) {
+    var _this;
+
     _classCallCheck(this, Grid);
 
-    return _super.call(this, props);
+    _this = _super.call(this, props);
+
+    _defineProperty(_assertThisInitialized(_this), "uniqueID", void 0);
+
+    _this.uniqueID = 'app-' + helpers.GUID.create();
+    return _this;
   }
 
   _createClass(Grid, [{
@@ -49228,7 +50380,7 @@ var Grid = /*#__PURE__*/function (_Component) {
           children = _this$props.children;
       return /*#__PURE__*/react.createElement(react.Fragment, null, /*#__PURE__*/react.createElement("div", {
         className: "uix-core-grid",
-        id: id || 'app-grid-' + helpers.GUID.create()
+        id: id || this.uniqueID
       }, /*#__PURE__*/react.createElement("div", {
         className: 'uix-core-grid__row' + (noBreak ? ' uix-core-grid__row--no-break' : '') + (loop ? ' uix-core-grid__row--loop' : '') + (equalWidth ? ' uix-core-grid__row--auto-width' : '') + (noGutters ? ' uix-core-grid__row--no-gutters' : '')
       }, children)));
@@ -49400,21 +50552,12 @@ var GridColumn = /*#__PURE__*/function (_Component) {
     style: {
       marginRight: ".5rem"
     },
-    width: "15",
-    viewBox: "0 0 392.186 392.186"
-  }, /*#__PURE__*/react.createElement("g", null, /*#__PURE__*/react.createElement("g", null, /*#__PURE__*/react.createElement("g", null, /*#__PURE__*/react.createElement("path", {
+    width: "16",
+    viewBox: "0 0 122.88 91.26"
+  }, /*#__PURE__*/react.createElement("path", {
     fill: "#d2d2d2",
-    d: "M368.62,17.951H23.568C10.57,17.951,0,28.524,0,41.52v309.146c0,12.996,10.57,23.568,23.568,23.568h345.053c12.994,0,23.564-10.572,23.564-23.568V41.52C392.188,28.525,381.614,17.951,368.62,17.951z M297.56,57.528c0-4.806,3.896-8.703,8.701-8.703h8.703c4.808,0,8.701,3.896,8.701,8.703v9.863c0,4.806-3.896,8.702-8.701,8.702h-8.703c-4.805,0-8.701-3.896-8.701-8.702V57.528z M257.093,57.528c0-4.806,3.898-8.703,8.703-8.703h8.701c4.805,0,8.703,3.896,8.703,8.703v9.863c0,4.806-3.898,8.702-8.703,8.702h-8.701c-4.805,0-8.703-3.896-8.703-8.702V57.528z M363.903,345.951H28.282V102.235h335.621V345.951L363.903,345.951z M364.132,67.391c0,4.806-3.896,8.702-8.701,8.702h-8.703c-4.809,0-8.702-3.896-8.702-8.702v-9.863c0-4.806,3.896-8.703,8.702-8.703h8.703c4.806,0,8.701,3.896,8.701,8.703V67.391z"
-  }), /*#__PURE__*/react.createElement("path", {
-    fill: "#d2d2d2",
-    d: "M84.185,233.284l63.084,29.336c1.631,0.755,3.367,1.138,5.162,1.138c2.338,0,4.617-0.664,6.598-1.924c3.547-2.267,5.666-6.13,5.666-10.334v-0.322c0-4.752-2.785-9.116-7.096-11.118l-39.455-18.332l39.455-18.334c4.311-2.004,7.096-6.367,7.096-11.117v-0.319c0-4.21-2.119-8.075-5.666-10.334c-1.961-1.253-4.246-1.916-6.605-1.916c-1.779,0-3.563,0.391-5.16,1.133l-63.08,29.333c-4.307,2.004-7.09,6.369-7.09,11.117v0.877C77.093,226.909,79.874,231.272,84.185,233.284z"
-  }), /*#__PURE__*/react.createElement("path", {
-    fill: "#d2d2d2",
-    d: "M165.257,293.036c2.301,3.149,6.002,5.03,9.9,5.03h0.316c5.352,0,10.041-3.426,11.672-8.517L228.7,160.788c1.192-3.716,0.531-7.818-1.771-10.973c-2.301-3.15-6.002-5.03-9.901-5.03h-0.315c-5.354,0-10.048,3.425-11.679,8.516l-41.559,128.771C162.292,285.793,162.958,289.889,165.257,293.036z"
-  }), /*#__PURE__*/react.createElement("path", {
-    fill: "#d2d2d2",
-    d: "M227.49,192.276c0,4.745,2.783,9.109,7.095,11.123l39.455,18.329l-39.455,18.33c-4.31,2.004-7.095,6.368-7.095,11.118v0.322c0,4.205,2.117,8.068,5.668,10.336c1.974,1.258,4.254,1.924,6.595,1.924c1.793,0,3.528-0.383,5.17-1.142l63.08-29.335c4.307-2.009,7.09-6.372,7.09-11.115v-0.877c0-4.748-2.783-9.113-7.094-11.117l-63.08-29.333c-1.591-0.74-3.373-1.131-5.152-1.131c-2.355,0-4.643,0.661-6.604,1.912c-3.551,2.263-5.67,6.127-5.67,10.337v0.318H227.49L227.49,192.276z"
-  }))))), "Docs on GitHub"))))))), /*#__PURE__*/react.createElement("section", {
+    d: "M8.32,0h106.24c4.58,0,8.32,3.74,8.32,8.32v74.62c0,4.57-3.74,8.32-8.32,8.32H8.32C3.74,91.26,0,87.51,0,82.94 V8.32C0,3.74,3.74,0,8.32,0L8.32,0z M54.46,72.22L32,58.61v-8.63l22.46-13.61v10.26l-13.65,7.69l13.65,7.7V72.22L54.46,72.22z M68.42,72.22l22.46-13.61v-8.63L68.42,36.37v10.26l13.65,7.69l-13.65,7.7V72.22L68.42,72.22z M117.97,23.29H5.29v60.46 c0,0.64,0.25,1.2,0.67,1.63c0.42,0.42,0.99,0.67,1.63,0.67h108.04c0.64,0,1.2-0.25,1.63-0.67c0.43-0.43,0.67-0.99,0.67-1.63V23.29 H117.97L117.97,23.29z M106.64,9.35c2.27,0,4.11,1.84,4.11,4.11c0,2.27-1.84,4.11-4.11,4.11c-2.27,0-4.11-1.84-4.11-4.11 C102.54,11.19,104.38,9.35,106.64,9.35L106.64,9.35z M78.8,9.35c2.27,0,4.11,1.84,4.11,4.11c0,2.27-1.84,4.11-4.11,4.11 c-2.27,0-4.11-1.84-4.11-4.11C74.69,11.19,76.53,9.35,78.8,9.35L78.8,9.35z M92.72,9.35c2.27,0,4.11,1.84,4.11,4.11 c0,2.27-1.84,4.11-4.11,4.11c-2.27,0-4.11-1.84-4.11-4.11C88.61,11.19,90.45,9.35,92.72,9.35L92.72,9.35z"
+  })), "Docs on GitHub"))))))), /*#__PURE__*/react.createElement("section", {
     className: "uix-spacing--s uix-spacing--no-bottom"
   }, /*#__PURE__*/react.createElement("div", {
     className: "container"
@@ -51014,6 +52157,286 @@ var GridColumn = /*#__PURE__*/function (_Component) {
     className: "table table-bordered table-striped mb-5"
   }, /*#__PURE__*/react.createElement("thead", null, /*#__PURE__*/react.createElement("tr", null, /*#__PURE__*/react.createElement("th", null, "Property"), /*#__PURE__*/react.createElement("th", null, "Type"), /*#__PURE__*/react.createElement("th", null, "Default"), /*#__PURE__*/react.createElement("th", null, "Description"))), /*#__PURE__*/react.createElement("tbody", null, /*#__PURE__*/react.createElement("tr", null, /*#__PURE__*/react.createElement("td", null, /*#__PURE__*/react.createElement("code", null, "ratio")), /*#__PURE__*/react.createElement("td", null, /*#__PURE__*/react.createElement("code", null, "1/1"), " | ", /*#__PURE__*/react.createElement("code", null, "1/2"), " | ", /*#__PURE__*/react.createElement("code", null, "1/3"), " | ", /*#__PURE__*/react.createElement("code", null, "2/3"), " | ", /*#__PURE__*/react.createElement("code", null, "1/4"), " |", /*#__PURE__*/react.createElement("code", null, "3/4"), " | ", /*#__PURE__*/react.createElement("code", null, "1/5"), " | ", /*#__PURE__*/react.createElement("code", null, "2/5"), " | ", /*#__PURE__*/react.createElement("code", null, "3/5"), " | ", /*#__PURE__*/react.createElement("code", null, "4/5"), " |", /*#__PURE__*/react.createElement("code", null, "1/6"), " | boolean"), /*#__PURE__*/react.createElement("td", null, "-"), /*#__PURE__*/react.createElement("td", null, "The ratio of each column")), /*#__PURE__*/react.createElement("tr", null, /*#__PURE__*/react.createElement("td", null, /*#__PURE__*/react.createElement("code", null, "stackRatio")), /*#__PURE__*/react.createElement("td", null, /*#__PURE__*/react.createElement("code", null, "1/1"), " | ", /*#__PURE__*/react.createElement("code", null, "1/2"), " | ", /*#__PURE__*/react.createElement("code", null, "1/3"), " | ", /*#__PURE__*/react.createElement("code", null, "2/3"), " | ", /*#__PURE__*/react.createElement("code", null, "1/4"), " |", /*#__PURE__*/react.createElement("code", null, "3/4"), " | ", /*#__PURE__*/react.createElement("code", null, "1/5"), " | ", /*#__PURE__*/react.createElement("code", null, "2/5"), " | ", /*#__PURE__*/react.createElement("code", null, "3/5"), " | ", /*#__PURE__*/react.createElement("code", null, "4/5"), " |", /*#__PURE__*/react.createElement("code", null, "1/6"), " | boolean"), /*#__PURE__*/react.createElement("td", null, "-"), /*#__PURE__*/react.createElement("td", null, "The ratio of stacked breakpoints. ", /*#__PURE__*/react.createElement("br", null), " You can set breakpoints for the ", /*#__PURE__*/react.createElement("code", null, "stackSize"), "and ", /*#__PURE__*/react.createElement("code", null, "stackRatio"), " props that starts out stacked before becoming horizontal with at the small breakpoint. Setting it to a breakpoint (", /*#__PURE__*/react.createElement("code", null, "sm, md, lg, xl"), ") of the", /*#__PURE__*/react.createElement("code", null, "stackSize"), " prop will set the ", /*#__PURE__*/react.createElement("code", null, "<GridColumn>...</Grid>"), "as fluid until the specified breakpoint")), /*#__PURE__*/react.createElement("tr", null, /*#__PURE__*/react.createElement("td", null, /*#__PURE__*/react.createElement("code", null, "stackSize")), /*#__PURE__*/react.createElement("td", null, /*#__PURE__*/react.createElement("code", null, "sm"), " | ", /*#__PURE__*/react.createElement("code", null, "md"), " | ", /*#__PURE__*/react.createElement("code", null, "lg"), " | ", /*#__PURE__*/react.createElement("code", null, "xl"), " | boolean"), /*#__PURE__*/react.createElement("td", null, "-"), /*#__PURE__*/react.createElement("td", null, "The size of stacked breakpoints")), /*#__PURE__*/react.createElement("tr", null, /*#__PURE__*/react.createElement("td", null, /*#__PURE__*/react.createElement("code", null, "inline")), /*#__PURE__*/react.createElement("td", null, "boolean"), /*#__PURE__*/react.createElement("td", null, "false"), /*#__PURE__*/react.createElement("td", null, "This attribute will make the column in a separate block, there is no float, and its centering can be controlled")))))))))));
 });
+;// CONCATENATED MODULE: ./src/client/views/_pages/ComponentsDemo/PaginationDemo.js
+
+
+ //Create or Remove Sidebar Menu
+
+
+
+function gotoPageNumber(number) {
+  //`number` comes from the public parameter thrown by the component `<Pagination />`
+  alert("page number: ".concat(number));
+}
+
+/* harmony default export */ const PaginationDemo = (function () {
+  react.useEffect(function () {
+    // Equivalent to componentDidMount and componentDidUpdate:
+    helpers(document).ready(function () {
+      //Create sidebar menu
+      SidebarMenu();
+    });
+  });
+  return /*#__PURE__*/react.createElement(react.Fragment, null, /*#__PURE__*/react.createElement("section", null, /*#__PURE__*/react.createElement("div", {
+    className: "container"
+  }, /*#__PURE__*/react.createElement("div", {
+    className: "row"
+  }, /*#__PURE__*/react.createElement("div", {
+    className: "col-12"
+  }, /*#__PURE__*/react.createElement("h1", {
+    className: "uix-typo--h2"
+  }, "Pagination", /*#__PURE__*/react.createElement("a", {
+    className: "uix-typo--h3 align-middle",
+    href: "https://github.com/xizon/uix-kit-react/tree/main/src/client/components/Pagination",
+    target: "_blank"
+  }, /*#__PURE__*/react.createElement("span", {
+    className: "uix-dir--right",
+    style: {
+      fontSize: "0.75rem",
+      color: "#ababab",
+      margin: ".5rem .5rem 0 0"
+    }
+  }, /*#__PURE__*/react.createElement("svg", {
+    style: {
+      marginRight: ".5rem"
+    },
+    width: "16",
+    viewBox: "0 0 122.88 91.26"
+  }, /*#__PURE__*/react.createElement("path", {
+    fill: "#d2d2d2",
+    d: "M8.32,0h106.24c4.58,0,8.32,3.74,8.32,8.32v74.62c0,4.57-3.74,8.32-8.32,8.32H8.32C3.74,91.26,0,87.51,0,82.94 V8.32C0,3.74,3.74,0,8.32,0L8.32,0z M54.46,72.22L32,58.61v-8.63l22.46-13.61v10.26l-13.65,7.69l13.65,7.7V72.22L54.46,72.22z M68.42,72.22l22.46-13.61v-8.63L68.42,36.37v10.26l13.65,7.69l-13.65,7.7V72.22L68.42,72.22z M117.97,23.29H5.29v60.46 c0,0.64,0.25,1.2,0.67,1.63c0.42,0.42,0.99,0.67,1.63,0.67h108.04c0.64,0,1.2-0.25,1.63-0.67c0.43-0.43,0.67-0.99,0.67-1.63V23.29 H117.97L117.97,23.29z M106.64,9.35c2.27,0,4.11,1.84,4.11,4.11c0,2.27-1.84,4.11-4.11,4.11c-2.27,0-4.11-1.84-4.11-4.11 C102.54,11.19,104.38,9.35,106.64,9.35L106.64,9.35z M78.8,9.35c2.27,0,4.11,1.84,4.11,4.11c0,2.27-1.84,4.11-4.11,4.11 c-2.27,0-4.11-1.84-4.11-4.11C74.69,11.19,76.53,9.35,78.8,9.35L78.8,9.35z M92.72,9.35c2.27,0,4.11,1.84,4.11,4.11 c0,2.27-1.84,4.11-4.11,4.11c-2.27,0-4.11-1.84-4.11-4.11C88.61,11.19,90.45,9.35,92.72,9.35L92.72,9.35z"
+  })), "Docs on GitHub"))))))), /*#__PURE__*/react.createElement("section", null, /*#__PURE__*/react.createElement("div", {
+    className: "container"
+  }, /*#__PURE__*/react.createElement("div", {
+    className: "row"
+  }, /*#__PURE__*/react.createElement("div", {
+    className: "col-12"
+  }, /*#__PURE__*/react.createElement("h3", {
+    className: "app-header-title"
+  }, "Basic"), /*#__PURE__*/react.createElement("hr", null))))), /*#__PURE__*/react.createElement("section", {
+    className: "uix-spacing--s"
+  }, /*#__PURE__*/react.createElement("div", {
+    className: "container"
+  }, /*#__PURE__*/react.createElement("div", {
+    className: "row"
+  }, /*#__PURE__*/react.createElement("div", {
+    className: "col-12"
+  }, /*#__PURE__*/react.createElement(Pagination, {
+    gotoPageClickEvent: gotoPageNumber,
+    pageRangeDisplayed: 3,
+    activePage: 2,
+    totalPages: 5,
+    previousLabel: "prev",
+    nextLabel: "next",
+    firstLabel: "first",
+    lastLabel: "last"
+  }))))), /*#__PURE__*/react.createElement("section", null, /*#__PURE__*/react.createElement("div", {
+    className: "container"
+  }, /*#__PURE__*/react.createElement("div", {
+    className: "row"
+  }, /*#__PURE__*/react.createElement("div", {
+    className: "col-12"
+  }, /*#__PURE__*/react.createElement("h3", {
+    className: "app-header-title"
+  }, "Custom Icon"), /*#__PURE__*/react.createElement("hr", null))))), /*#__PURE__*/react.createElement("section", {
+    className: "uix-spacing--s"
+  }, /*#__PURE__*/react.createElement("div", {
+    className: "container"
+  }, /*#__PURE__*/react.createElement("div", {
+    className: "row"
+  }, /*#__PURE__*/react.createElement("div", {
+    className: "col-12"
+  }, /*#__PURE__*/react.createElement(Pagination, {
+    gotoPageClickEvent: gotoPageNumber,
+    pageRangeDisplayed: 3,
+    activePage: 2,
+    totalPages: 3,
+    onlyPrevNext: true,
+    previousLabel: /*#__PURE__*/react.createElement(react.Fragment, null, /*#__PURE__*/react.createElement("i", {
+      className: "fa fa-angle-left",
+      "aria-hidden": "true"
+    })),
+    nextLabel: /*#__PURE__*/react.createElement(react.Fragment, null, /*#__PURE__*/react.createElement("i", {
+      className: "fa fa-angle-right",
+      "aria-hidden": "true"
+    }))
+  }), /*#__PURE__*/react.createElement("br", null), /*#__PURE__*/react.createElement(Pagination, {
+    gotoPageClickEvent: gotoPageNumber,
+    pageRangeDisplayed: 3,
+    activePage: 2,
+    totalPages: 3,
+    onlyPrevNext: true,
+    previousLabel: /*#__PURE__*/react.createElement(react.Fragment, null, /*#__PURE__*/react.createElement("i", {
+      className: "fa fa-angle-left",
+      "aria-hidden": "true"
+    })),
+    nextLabel: /*#__PURE__*/react.createElement(react.Fragment, null, /*#__PURE__*/react.createElement("i", {
+      className: "fa fa-angle-right",
+      "aria-hidden": "true"
+    })),
+    previousClass: "previous uix-f-l",
+    nextClass: "next uix-f-r"
+  }))))), /*#__PURE__*/react.createElement("section", null, /*#__PURE__*/react.createElement("div", {
+    className: "container"
+  }, /*#__PURE__*/react.createElement("div", {
+    className: "row"
+  }, /*#__PURE__*/react.createElement("div", {
+    className: "col-12"
+  }, /*#__PURE__*/react.createElement("h3", {
+    className: "app-header-title"
+  }, "Centered Buttons"), /*#__PURE__*/react.createElement("hr", null))))), /*#__PURE__*/react.createElement("section", {
+    className: "uix-spacing--s"
+  }, /*#__PURE__*/react.createElement("div", {
+    className: "container"
+  }, /*#__PURE__*/react.createElement("div", {
+    className: "row"
+  }, /*#__PURE__*/react.createElement("div", {
+    className: "col-12"
+  }, /*#__PURE__*/react.createElement(Pagination, {
+    gotoPageClickEvent: gotoPageNumber,
+    pageRangeDisplayed: 3,
+    activePage: 1,
+    totalPages: 5,
+    previousLabel: /*#__PURE__*/react.createElement(react.Fragment, null, /*#__PURE__*/react.createElement("i", {
+      className: "fa fa-angle-left",
+      "aria-hidden": "true"
+    })),
+    nextLabel: /*#__PURE__*/react.createElement(react.Fragment, null, /*#__PURE__*/react.createElement("i", {
+      className: "fa fa-angle-right",
+      "aria-hidden": "true"
+    })),
+    firstLabel: /*#__PURE__*/react.createElement(react.Fragment, null, /*#__PURE__*/react.createElement("i", {
+      className: "fa fa-angle-double-left",
+      "aria-hidden": "true"
+    })),
+    lastLabel: /*#__PURE__*/react.createElement(react.Fragment, null, /*#__PURE__*/react.createElement("i", {
+      className: "fa fa-angle-double-right",
+      "aria-hidden": "true"
+    })),
+    align: "center"
+  }), /*#__PURE__*/react.createElement("br", null), /*#__PURE__*/react.createElement(Pagination, {
+    gotoPageClickEvent: gotoPageNumber,
+    pageRangeDisplayed: 3,
+    activePage: 5,
+    totalPages: 5,
+    previousLabel: /*#__PURE__*/react.createElement(react.Fragment, null, /*#__PURE__*/react.createElement("i", {
+      className: "fa fa-angle-left",
+      "aria-hidden": "true"
+    })),
+    nextLabel: /*#__PURE__*/react.createElement(react.Fragment, null, /*#__PURE__*/react.createElement("i", {
+      className: "fa fa-angle-right",
+      "aria-hidden": "true"
+    })),
+    firstLabel: /*#__PURE__*/react.createElement(react.Fragment, null, /*#__PURE__*/react.createElement("i", {
+      className: "fa fa-angle-double-left",
+      "aria-hidden": "true"
+    })),
+    lastLabel: /*#__PURE__*/react.createElement(react.Fragment, null, /*#__PURE__*/react.createElement("i", {
+      className: "fa fa-angle-double-right",
+      "aria-hidden": "true"
+    })),
+    align: "center"
+  }))))), /*#__PURE__*/react.createElement("section", null, /*#__PURE__*/react.createElement("div", {
+    className: "container"
+  }, /*#__PURE__*/react.createElement("div", {
+    className: "row"
+  }, /*#__PURE__*/react.createElement("div", {
+    className: "col-12"
+  }, /*#__PURE__*/react.createElement("h3", {
+    className: "app-header-title"
+  }, "Use Ellipsis"), /*#__PURE__*/react.createElement("hr", null))))), /*#__PURE__*/react.createElement("section", {
+    className: "uix-spacing--s"
+  }, /*#__PURE__*/react.createElement("div", {
+    className: "container"
+  }, /*#__PURE__*/react.createElement("div", {
+    className: "row"
+  }, /*#__PURE__*/react.createElement("div", {
+    className: "col-12"
+  }, /*#__PURE__*/react.createElement(Pagination, {
+    gotoPageClickEvent: gotoPageNumber,
+    pageRangeDisplayed: 10,
+    activePage: 1,
+    totalPages: 1999,
+    previousLabel: /*#__PURE__*/react.createElement(react.Fragment, null, /*#__PURE__*/react.createElement("i", {
+      className: "fa fa-angle-left",
+      "aria-hidden": "true"
+    })),
+    nextLabel: /*#__PURE__*/react.createElement(react.Fragment, null, /*#__PURE__*/react.createElement("i", {
+      className: "fa fa-angle-right",
+      "aria-hidden": "true"
+    })),
+    firstLabel: /*#__PURE__*/react.createElement(react.Fragment, null, /*#__PURE__*/react.createElement("i", {
+      className: "fa fa-angle-double-left",
+      "aria-hidden": "true"
+    })),
+    lastLabel: /*#__PURE__*/react.createElement(react.Fragment, null, /*#__PURE__*/react.createElement("i", {
+      className: "fa fa-angle-double-right",
+      "aria-hidden": "true"
+    })),
+    align: "center",
+    breakLabel: "..."
+  }), /*#__PURE__*/react.createElement("br", null), /*#__PURE__*/react.createElement(Pagination, {
+    gotoPageClickEvent: gotoPageNumber,
+    pageRangeDisplayed: 10,
+    activePage: 1996,
+    totalPages: 1999,
+    previousLabel: /*#__PURE__*/react.createElement(react.Fragment, null, /*#__PURE__*/react.createElement("i", {
+      className: "fa fa-angle-left",
+      "aria-hidden": "true"
+    })),
+    nextLabel: /*#__PURE__*/react.createElement(react.Fragment, null, /*#__PURE__*/react.createElement("i", {
+      className: "fa fa-angle-right",
+      "aria-hidden": "true"
+    })),
+    align: "center",
+    breakLabel: "..."
+  }), /*#__PURE__*/react.createElement("br", null), /*#__PURE__*/react.createElement(Pagination, {
+    gotoPageClickEvent: gotoPageNumber,
+    pageRangeDisplayed: 10,
+    activePage: 1996,
+    totalPages: 2006,
+    previousLabel: /*#__PURE__*/react.createElement(react.Fragment, null, /*#__PURE__*/react.createElement("i", {
+      className: "fa fa-angle-left",
+      "aria-hidden": "true"
+    })),
+    nextLabel: /*#__PURE__*/react.createElement(react.Fragment, null, /*#__PURE__*/react.createElement("i", {
+      className: "fa fa-angle-right",
+      "aria-hidden": "true"
+    })),
+    align: "center",
+    breakLabel: "..."
+  }), /*#__PURE__*/react.createElement("br", null), /*#__PURE__*/react.createElement(Pagination, {
+    gotoPageClickEvent: gotoPageNumber,
+    pageRangeDisplayed: 10,
+    activePage: 1997,
+    totalPages: 1999,
+    previousLabel: /*#__PURE__*/react.createElement(react.Fragment, null, /*#__PURE__*/react.createElement("i", {
+      className: "fa fa-angle-left",
+      "aria-hidden": "true"
+    })),
+    nextLabel: /*#__PURE__*/react.createElement(react.Fragment, null, /*#__PURE__*/react.createElement("i", {
+      className: "fa fa-angle-right",
+      "aria-hidden": "true"
+    })),
+    align: "center",
+    breakLabel: "..."
+  }))))), /*#__PURE__*/react.createElement("section", null, /*#__PURE__*/react.createElement("div", {
+    className: "container"
+  }, /*#__PURE__*/react.createElement("div", {
+    className: "row"
+  }, /*#__PURE__*/react.createElement("div", {
+    className: "col-12"
+  }, /*#__PURE__*/react.createElement("h3", {
+    className: "app-header-title"
+  }, "API"), /*#__PURE__*/react.createElement("hr", null), /*#__PURE__*/react.createElement("article", {
+    className: "uix-spacing--s",
+    itemProp: "text"
+  }, /*#__PURE__*/react.createElement("h4", null, "Pagination"), /*#__PURE__*/react.createElement("div", null, /*#__PURE__*/react.createElement("pre", null, "import Pagination from '@uixkit.react/components/Pagination/index.tsx';")), /*#__PURE__*/react.createElement("div", {
+    className: "table-responsive-md"
+  }, /*#__PURE__*/react.createElement("table", {
+    className: "table table-bordered table-striped mb-5"
+  }, /*#__PURE__*/react.createElement("thead", null, /*#__PURE__*/react.createElement("tr", null, /*#__PURE__*/react.createElement("th", null, "Property"), /*#__PURE__*/react.createElement("th", null, "Type"), /*#__PURE__*/react.createElement("th", null, "Default"), /*#__PURE__*/react.createElement("th", null, "Description"))), /*#__PURE__*/react.createElement("tbody", null, /*#__PURE__*/react.createElement("tr", null, /*#__PURE__*/react.createElement("td", null, /*#__PURE__*/react.createElement("code", null, "pageRangeDisplayed")), /*#__PURE__*/react.createElement("td", null, "number"), /*#__PURE__*/react.createElement("td", null, "3"), /*#__PURE__*/react.createElement("td", null, /*#__PURE__*/react.createElement("strong", null, "(Required)"), " The range of pages displayed")), /*#__PURE__*/react.createElement("tr", null, /*#__PURE__*/react.createElement("td", null, /*#__PURE__*/react.createElement("code", null, "activePage")), /*#__PURE__*/react.createElement("td", null, "number"), /*#__PURE__*/react.createElement("td", null, "-"), /*#__PURE__*/react.createElement("td", null, /*#__PURE__*/react.createElement("strong", null, "(Required)"), " The currently selected page number.")), /*#__PURE__*/react.createElement("tr", null, /*#__PURE__*/react.createElement("td", null, /*#__PURE__*/react.createElement("code", null, "totalPages")), /*#__PURE__*/react.createElement("td", null, "number"), /*#__PURE__*/react.createElement("td", null, "-"), /*#__PURE__*/react.createElement("td", null, /*#__PURE__*/react.createElement("strong", null, "(Required)"), " The total number of pages")), /*#__PURE__*/react.createElement("tr", null, /*#__PURE__*/react.createElement("td", null, /*#__PURE__*/react.createElement("code", null, "gotoPageClickEvent")), /*#__PURE__*/react.createElement("td", null, "function"), /*#__PURE__*/react.createElement("td", null, "-"), /*#__PURE__*/react.createElement("td", null, "The method to call when a page is clicked. Exposes the current page number as an argument.")), /*#__PURE__*/react.createElement("tr", null, /*#__PURE__*/react.createElement("td", null, /*#__PURE__*/react.createElement("code", null, "previousLabel")), /*#__PURE__*/react.createElement("td", null, "ReactNode"), /*#__PURE__*/react.createElement("td", null, "-"), /*#__PURE__*/react.createElement("td", null, "Label for the previous button")), /*#__PURE__*/react.createElement("tr", null, /*#__PURE__*/react.createElement("td", null, /*#__PURE__*/react.createElement("code", null, "nextLabel")), /*#__PURE__*/react.createElement("td", null, "ReactNode"), /*#__PURE__*/react.createElement("td", null, "-"), /*#__PURE__*/react.createElement("td", null, "Label for the next button")), /*#__PURE__*/react.createElement("tr", null, /*#__PURE__*/react.createElement("td", null, /*#__PURE__*/react.createElement("code", null, "firstLabel")), /*#__PURE__*/react.createElement("td", null, "ReactNode"), /*#__PURE__*/react.createElement("td", null, "-"), /*#__PURE__*/react.createElement("td", null, "Label for the first button")), /*#__PURE__*/react.createElement("tr", null, /*#__PURE__*/react.createElement("td", null, /*#__PURE__*/react.createElement("code", null, "lastLabel")), /*#__PURE__*/react.createElement("td", null, "ReactNode"), /*#__PURE__*/react.createElement("td", null, "-"), /*#__PURE__*/react.createElement("td", null, "Label for the last button")), /*#__PURE__*/react.createElement("tr", null, /*#__PURE__*/react.createElement("td", null, /*#__PURE__*/react.createElement("code", null, "breakLabel")), /*#__PURE__*/react.createElement("td", null, "ReactNode"), /*#__PURE__*/react.createElement("td", null, "-"), /*#__PURE__*/react.createElement("td", null, "Label for ellipsis")), /*#__PURE__*/react.createElement("tr", null, /*#__PURE__*/react.createElement("td", null, /*#__PURE__*/react.createElement("code", null, "align")), /*#__PURE__*/react.createElement("td", null, "null | '' | ", /*#__PURE__*/react.createElement("code", null, "left"), " | ", /*#__PURE__*/react.createElement("code", null, "right"), " | ", /*#__PURE__*/react.createElement("code", null, "center")), /*#__PURE__*/react.createElement("td", null, "-"), /*#__PURE__*/react.createElement("td", null, "Set the alignment of the control")), /*#__PURE__*/react.createElement("tr", null, /*#__PURE__*/react.createElement("td", null, /*#__PURE__*/react.createElement("code", null, "onlyPrevNext")), /*#__PURE__*/react.createElement("td", null, "boolean"), /*#__PURE__*/react.createElement("td", null, "false"), /*#__PURE__*/react.createElement("td", null, "Only display the previous and next buttons")), /*#__PURE__*/react.createElement("tr", null, /*#__PURE__*/react.createElement("td", null, /*#__PURE__*/react.createElement("code", null, "activeClass")), /*#__PURE__*/react.createElement("td", null, "string"), /*#__PURE__*/react.createElement("td", null, "is-active"), /*#__PURE__*/react.createElement("td", null, "The classname for the active page")), /*#__PURE__*/react.createElement("tr", null, /*#__PURE__*/react.createElement("td", null, /*#__PURE__*/react.createElement("code", null, "previousClass")), /*#__PURE__*/react.createElement("td", null, "string"), /*#__PURE__*/react.createElement("td", null, "prev"), /*#__PURE__*/react.createElement("td", null, "The classname on tag li of the previous button")), /*#__PURE__*/react.createElement("tr", null, /*#__PURE__*/react.createElement("td", null, /*#__PURE__*/react.createElement("code", null, "nextClass")), /*#__PURE__*/react.createElement("td", null, "string"), /*#__PURE__*/react.createElement("td", null, "next"), /*#__PURE__*/react.createElement("td", null, "The classname on tag li of the next button")), /*#__PURE__*/react.createElement("tr", null, /*#__PURE__*/react.createElement("td", null, /*#__PURE__*/react.createElement("code", null, "firstClass")), /*#__PURE__*/react.createElement("td", null, "string"), /*#__PURE__*/react.createElement("td", null, "first"), /*#__PURE__*/react.createElement("td", null, "The classname on tag li of the first button")), /*#__PURE__*/react.createElement("tr", null, /*#__PURE__*/react.createElement("td", null, /*#__PURE__*/react.createElement("code", null, "lastClass")), /*#__PURE__*/react.createElement("td", null, "string"), /*#__PURE__*/react.createElement("td", null, "last"), /*#__PURE__*/react.createElement("td", null, "The classname on tag li of the last button")), /*#__PURE__*/react.createElement("tr", null, /*#__PURE__*/react.createElement("td", null, /*#__PURE__*/react.createElement("code", null, "disabledClass")), /*#__PURE__*/react.createElement("td", null, "string"), /*#__PURE__*/react.createElement("td", null, "is-disabled"), /*#__PURE__*/react.createElement("td", null, "The classname for disabled buttons")))))))))));
+});
 ;// CONCATENATED MODULE: ./src/client/components/Tabs/TabList.tsx
 
 
@@ -51022,7 +52445,7 @@ var GridColumn = /*#__PURE__*/function (_Component) {
 
 
 
-var TabList_excluded = ["defaultActive"];
+var TabList_excluded = ["defaultActive", "targetID", "index", "switchEv", "children"];
 
 function TabList_createSuper(Derived) { var hasNativeReflectConstruct = TabList_isNativeReflectConstruct(); return function _createSuperInternal() { var Super = _getPrototypeOf(Derived), result; if (hasNativeReflectConstruct) { var NewTarget = _getPrototypeOf(this).constructor; result = Reflect.construct(Super, arguments, NewTarget); } else { result = Super.apply(this, arguments); } return _possibleConstructorReturn(this, result); }; }
 
@@ -51046,15 +52469,23 @@ var TabList = /*#__PURE__*/function (_Component) {
     value: function render() {
       var _this$props = this.props,
           defaultActive = _this$props.defaultActive,
+          targetID = _this$props.targetID,
+          index = _this$props.index,
+          switchEv = _this$props.switchEv,
+          children = _this$props.children,
           attributes = _objectWithoutProperties(_this$props, TabList_excluded);
 
       var activedClassName = typeof defaultActive !== 'undefined' && defaultActive !== false ? ' is-active' : '';
       return /*#__PURE__*/react.createElement(react.Fragment, null, /*#__PURE__*/react.createElement("li", {
+        onClick: switchEv,
         role: "presentation",
-        className: activedClassName
-      }, /*#__PURE__*/react.createElement("a", extends_extends({
+        className: activedClassName,
+        "data-tab": targetID
+      }, index === 1 ? /*#__PURE__*/react.createElement(react.Fragment, null, /*#__PURE__*/react.createElement("div", {
+        className: "uix-tabs__marker"
+      })) : '', /*#__PURE__*/react.createElement("a", extends_extends({
         href: "#"
-      }, attributes))));
+      }, attributes), children)));
     }
   }]);
 
@@ -51070,7 +52501,7 @@ var TabList = /*#__PURE__*/function (_Component) {
 
 
 
-var TabPanel_excluded = ["defaultActive", "tabpanelClass"];
+var TabPanel_excluded = ["defaultActive", "tabpanelClass", "targetID"];
 
 function TabPanel_createSuper(Derived) { var hasNativeReflectConstruct = TabPanel_isNativeReflectConstruct(); return function _createSuperInternal() { var Super = _getPrototypeOf(Derived), result; if (hasNativeReflectConstruct) { var NewTarget = _getPrototypeOf(this).constructor; result = Reflect.construct(Super, arguments, NewTarget); } else { result = Super.apply(this, arguments); } return _possibleConstructorReturn(this, result); }; }
 
@@ -51095,11 +52526,13 @@ var TabPanel = /*#__PURE__*/function (_Component) {
       var _this$props = this.props,
           defaultActive = _this$props.defaultActive,
           tabpanelClass = _this$props.tabpanelClass,
+          targetID = _this$props.targetID,
           attributes = _objectWithoutProperties(_this$props, TabPanel_excluded);
 
       var activedClassName = typeof defaultActive !== 'undefined' && defaultActive !== false ? ' is-active' : '';
       return /*#__PURE__*/react.createElement(react.Fragment, null, /*#__PURE__*/react.createElement("div", extends_extends({
         role: "tabpanel",
+        id: targetID,
         className: tabpanelClass ? "uix-tabs__content ".concat(tabpanelClass, " ").concat(activedClassName) : "uix-tabs__content ".concat(activedClassName)
       }, attributes)));
     }
@@ -51118,8 +52551,6 @@ var TabPanel = /*#__PURE__*/function (_Component) {
 
 
 
-
-var Tabs_excluded = ["center", "fullwidth", "rotation", "rotationRadius", "rotationWrapperAngle", "id", "children"];
 
 function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) { symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); } keys.push.apply(keys, symbols); } return keys; }
 
@@ -51158,222 +52589,222 @@ var Tabs = /*#__PURE__*/function (_Component) {
 
     _this = _super.call(this, props);
 
-    _defineProperty(_assertThisInitialized(_this), "wrapperRef", /*#__PURE__*/react.createRef());
+    _defineProperty(_assertThisInitialized(_this), "rootRef", /*#__PURE__*/react.createRef());
 
+    _defineProperty(_assertThisInitialized(_this), "uniqueID", void 0);
+
+    _defineProperty(_assertThisInitialized(_this), "rotationEnabled", void 0);
+
+    _defineProperty(_assertThisInitialized(_this), "lastAngel", void 0);
+
+    _defineProperty(_assertThisInitialized(_this), "rotationRadius", void 0);
+
+    _defineProperty(_assertThisInitialized(_this), "rotationWapperDeg", void 0);
+
+    _this.uniqueID = 'app-' + helpers.GUID.create(); // for rotation tabs
+
+    _this.rotationEnabled = _this.props.rotation || false;
+    _this.lastAngel = 0;
+    _this.rotationRadius = _this.props.rotationRadius || 130, _this.rotationWapperDeg = _this.props.rotationWrapperAngle || 0; //
+
+    _this.handleClickItem = _this.handleClickItem.bind(_assertThisInitialized(_this));
     return _this;
   }
 
   _createClass(Tabs, [{
-    key: "componentDidMount",
-    value: function componentDidMount() {
-      var self = this;
+    key: "handleClickItem",
+    value: function handleClickItem(e) {
+      e.preventDefault();
+      this.itemInit(e.currentTarget, false);
+    }
+  }, {
+    key: "itemInit",
+    value: function itemInit(targetEl, itemsInit) {
+      var _this2 = this;
 
-      helpers(document).ready(function () {
-        var reactDomEl = self.wrapperRef.current;
+      var reactDomWrapperEl = this.rootRef.current;
+      var currentIndex = Array.prototype.slice.call(targetEl.parentElement.children).indexOf(targetEl);
+      var $li = reactDomWrapperEl.querySelectorAll('.uix-tabs__nav ul > li'),
+          $allContent = reactDomWrapperEl.querySelectorAll('.uix-tabs__content'),
+          liWidth = $li[0].offsetWidth,
+          //element height + padding width + borders width
+      liHeight = $li[0].offsetHeight,
+          //element width + padding width + borders width
+      itemTotal = $li.length; //
 
-        var $el = helpers(reactDomEl);
+      var tabID = targetEl.dataset.tab;
+      Array.prototype.forEach.call($li, function (node) {
+        node.classList.remove('is-active');
+      });
+      Array.prototype.forEach.call($allContent, function (node) {
+        node.classList.remove('is-active');
+      });
+      targetEl.classList.add('is-active');
+      if (tabID !== undefined) document.getElementById(tabID).classList.add('is-active');
+      /*
+      ////////////////////////////////////////////////////////////
+      ////////////////////   Default Events   ////////////////////
+      ////////////////////////////////////////////////////////////
+      */
 
-        var $li = $el.find('.uix-tabs__nav ul > li'),
-            liWidth = $li.first().outerWidth(),
-            liHeight = $li.first().outerHeight(),
-            liNum = $li.length,
-            isNumeric = /^[-+]?(\d+|\d+\.\d*|\d*\.\d+)$/,
-            tabBoxID = $el.attr('id');
-        var ulWidth = $el.data('width'),
-            fullwidth = $el.data('fullwidth'),
-            rotation = $el.data('rotation'),
-            rotationRadius = $el.data('rotation-radius'),
-            rotationWapperDeg = $el.data('rotation-wrapper-angle'),
-            rotationDisplay = $el.data('rotation-display'); //console.log( '$el.data( rotation ): ', $el.data( 'rotation' ));
+      if (!this.rotationEnabled) {
+        if (this.props.fullwidth) {
+          Array.prototype.forEach.call($li, function (node) {
+            node.style.width = 100 / itemTotal + '%';
+          });
+        } //sliding marker
 
-        if (fullwidth != null && fullwidth == 1) {
-          $li.css({
-            'width': 100 / liNum + '%'
+
+        var translateX = currentIndex * 100,
+            translateY = currentIndex * liHeight;
+
+        if (window.innerWidth <= 768) {
+          reactDomWrapperEl.querySelector('.uix-tabs__marker').style.transform = 'translateY( ' + translateY + 'px )';
+        } else {
+          reactDomWrapperEl.querySelector('.uix-tabs__marker').style.transform = 'translateX( ' + translateX + '% )';
+        }
+      }
+      /*
+      ////////////////////////////////////////////////////////////
+      //////////////////   Rotation Effect   /////////////////////
+      ////////////////////////////////////////////////////////////
+      */
+      // angle = rad / ( Math.PI / 180 )  = rad * ( 180/Math.PI );
+      // rad = Math.PI / 180 * 30 ;
+
+
+      if (this.rotationEnabled) {
+        var step = 2 * Math.PI / itemTotal;
+        var pad = reactDomWrapperEl.querySelector('.uix-tabs__nav ul').clientWidth;
+
+        if (itemsInit) {
+          reactDomWrapperEl.querySelector('.uix-tabs__nav').style.width = this.rotationRadius * 2 + 'px';
+          reactDomWrapperEl.querySelector('.uix-tabs__nav ul').style.width = this.rotationRadius * 2 + 'px';
+          reactDomWrapperEl.querySelector('.uix-tabs__nav ul').style.height = this.rotationRadius * 2 + 'px';
+          reactDomWrapperEl.querySelector('.uix-tabs__nav ul').style.transform = 'rotate(' + this.rotationWapperDeg + 'deg)';
+          var angle = 0;
+          var transitionDelay = 0;
+          Array.prototype.forEach.call($li, function (node) {
+            var x = _this2.rotationRadius * Math.cos(angle) - liWidth / 2,
+                y = _this2.rotationRadius * Math.sin(angle) - liHeight / 2;
+            node.style.transform = 'translate(' + x + 'px,' + (pad / 2 + y) + 'px)'; //node.style.transition = 'all 1s ease';
+
+            node.style.transitionDelay = transitionDelay + "s";
+            node.querySelector('a').style.transform = 'rotate(' + -_this2.rotationWapperDeg + 'deg)';
+            angle += step;
+            transitionDelay += 0.15; // Update the angle after animated
+
+            _this2.lastAngel = angle;
           });
         }
 
-        if (rotation === null) rotation = false;
-        if (rotationWapperDeg === null) rotationWapperDeg = 0;
-        if (rotationDisplay === null) rotationDisplay = 5; //Initialize tab list
+        this.changeAngleAnim(targetEl, this.rotationRadius, this.rotationWapperDeg);
+      } //end rotation
 
-        $el.find('.uix-tabs__nav ul > li').each(function (index) {
-          helpers(this).find('a').attr('href', 'javascript:');
+    }
+  }, {
+    key: "changeAngleAnim",
+    value: function changeAngleAnim(targetEl, rotationRadius, rotationWapperDeg) {
+      var self = this;
+      var reactDomWrapperEl = this.rootRef.current;
+      var currentIndex = Array.prototype.slice.call(targetEl.parentElement.children).indexOf(targetEl);
+      var $li = reactDomWrapperEl.querySelectorAll('.uix-tabs__nav ul > li'),
+          liWidth = $li[0].offsetWidth,
+          //element height + padding width + borders width
+      liHeight = $li[0].offsetHeight,
+          //element width + padding width + borders width
+      itemTotal = $li.length;
+      var curAngle = self.lastAngel;
+      var increase = Math.PI * 2 / itemTotal,
+          endAngle = currentIndex % itemTotal * increase;
 
-          helpers(this).attr('data-tab', tabBoxID + '-tabs-show' + index);
-        }); //Initialize tab panel
+      (function turn() {
+        if (Math.abs(endAngle - curAngle) > 1 / 8) {
+          var sign = endAngle > curAngle ? 1 : -1;
+          curAngle = curAngle + sign / 8; // Update the angle after animated
 
-        $el.find('.uix-tabs__content').each(function (index) {
-          helpers(this).attr('id', tabBoxID + '-tabs-show' + index);
-        }); // Tab Rotation Effect
+          self.lastAngel = curAngle;
+          setTimeout(turn, 20);
+        } else {
+          curAngle = endAngle; // Update the angle after animated
 
-        if (rotation) {
-          (function () {
-            $el.find('.uix-tabs__nav').css({
-              'width': rotationRadius * 2 + 'px'
-            });
-            $el.find('.uix-tabs__nav ul').css({
-              'width': rotationRadius * 2 + 'px',
-              'height': rotationRadius * 2 + 'px',
-              'transform': 'rotate(' + parseFloat(rotationWapperDeg) + 'deg)'
-            }); //Layout components in a circle layout
+          self.lastAngel = curAngle;
+        }
 
-            var step = 2 * Math.PI / rotationDisplay,
-                pad = $el.find('.uix-tabs__nav ul').width();
-            var angle = 0,
-                transitionDelay = 0;
-
-            for (var k = 0; k <= liNum; k++) {
-              var el = $el.find('.uix-tabs__nav ul > li').eq(k),
-                  elLink = $el.find('.uix-tabs__nav ul > li:nth-child(' + k + ') > a'),
-                  x = rotationRadius * Math.cos(angle) - liWidth / 2,
-                  y = rotationRadius * Math.sin(angle) - liHeight / 2;
-              el.css({
-                'transform': 'translate(' + x + 'px,' + (pad / 2 + y) + 'px)',
-                'transition-delay': transitionDelay + "s"
-              });
-              elLink.css({
-                'transform': 'rotate(' + -rotationWapperDeg + 'deg)'
-              });
-              angle += step;
-              transitionDelay += 0.15; //Click on the rotation effect
-              //----------------------- begin ----------------------
-
-              el.off('click').on('click', function (e) {
-                var increase = Math.PI * 2 / rotationDisplay,
-                    n = helpers(this).index(),
-                    endAngle = n % rotationDisplay * increase;
-
-                (function turn() {
-                  if (Math.abs(endAngle - angle) > 1 / 8) {
-                    var sign = endAngle > angle ? 1 : -1;
-                    angle = angle + sign / 8;
-                    setTimeout(turn, 20);
-                  } else {
-                    angle = endAngle;
-                  }
-
-                  for (var j = 0; j <= liNum; j++) {
-                    var _el = $el.find('.uix-tabs__nav ul > li').eq(j),
-                        _elLink = $el.find('.uix-tabs__nav ul > li:nth-child(' + j + ') > a'),
-                        x2 = Math.cos(-Math.PI / 2 + j * increase - angle) * rotationRadius - liWidth / 2,
-                        y2 = Math.sin(-Math.PI / 2 + j * increase - angle) * rotationRadius + liHeight;
-
-                    _el.css({
-                      'transform': 'translate(' + x2 + 'px,' + y2 + 'px)',
-                      'transition': 'none',
-                      'transition-delay': 0
-                    });
-
-                    _elLink.css({
-                      'transform': 'rotate(' + -rotationWapperDeg + 'deg)'
-                    });
-                  } //end for
-
-                })();
-              }); //----------------------- end ----------------------	
-            } //end for
-            // Init
-
-
-            $el.find('.uix-tabs__nav ul > li.is-active').trigger('click');
-          })();
-        } //end rotation
-        // Tab Sliding Effext
-
-
-        if ($el.find('.uix-tabs__nav ul > li:first-child .uix-tabs__marker').length == 0) {
-          $el.find('.uix-tabs__nav ul > li:first-child').prepend('<div class="uix-tabs__marker"></div>');
-        } // Tab Fade Effect
-
-
-        $el.off('click').on('click', '.uix-tabs__nav ul > li', function (e) {
-          var tabID = helpers(this).attr('data-tab'),
-              index = helpers(this).index() - 1;
-
-          $el.find('.uix-tabs__nav ul > li').removeClass('is-active');
-          $el.find('.uix-tabs__content').removeClass('is-active');
-
-          helpers(this).addClass('is-active');
-
-          helpers('#' + tabID).addClass('is-active'); //sliding marker
-
-
-          var translateX = helpers(this).index() * 100,
-              liHeight = $el.find('.uix-tabs__nav ul > li:first-child').outerHeight(),
-              translateY = helpers(this).index() * liHeight;
-
-          if (window.innerWidth <= 768) {
-            $el.find('.uix-tabs__marker').css({
-              'transform': 'translateY( ' + translateY + 'px )'
-            });
-          } else {
-            $el.find('.uix-tabs__marker').css({
-              'transform': 'translateX( ' + translateX + '% )'
-            });
-          }
-
-          return false;
+        Array.prototype.forEach.call($li, function (node, index) {
+          var x2 = Math.cos(-Math.PI / 2 + index * increase - curAngle) * rotationRadius - liWidth / 2,
+              y2 = Math.sin(-Math.PI / 2 + index * increase - curAngle) * rotationRadius + liHeight;
+          node.style.transform = 'translate(' + x2 + 'px,' + y2 + 'px)';
+          node.style.transition = 'none';
+          node.style.transitionDelay = 0;
+          node.querySelector('a').style.transform = 'rotate(' + -rotationWapperDeg + 'deg)';
         });
-      });
+      })();
+    }
+  }, {
+    key: "componentDidMount",
+    value: function componentDidMount() {
+      // Initialize tabs
+      var reactDomWrapperEl = this.rootRef.current;
+      var $li = reactDomWrapperEl.querySelectorAll('.uix-tabs__nav ul > li');
+      this.itemInit($li[0], true);
     }
   }, {
     key: "render",
     value: function render() {
+      var _this3 = this;
+
       var _this$props = this.props,
           center = _this$props.center,
           fullwidth = _this$props.fullwidth,
           rotation = _this$props.rotation,
-          rotationRadius = _this$props.rotationRadius,
-          rotationWrapperAngle = _this$props.rotationWrapperAngle,
           id = _this$props.id,
-          children = _this$props.children,
-          attributes = _objectWithoutProperties(_this$props, Tabs_excluded); //Get the total amount of items
-
-
-      var totalAmount = 0;
-
-      if (children != null) {
-        children.map(function (item, i) {
-          if (item.key.indexOf('tab-panel') >= 0) {
-            totalAmount++;
-          }
-        });
-      }
-
-      return /*#__PURE__*/react.createElement(react.Fragment, null, /*#__PURE__*/react.createElement("div", extends_extends({
-        ref: this.wrapperRef,
-        id: id ? id : 'app-tabs-' + helpers.GUID.create(),
-        className: "uix-tabs" + (!center && !rotation && !fullwidth ? ' uix-tabs--normal' : '') + (center ? ' uix-tabs--center' : '') + (rotation ? ' uix-tabs--rotation' : ''),
-        "data-fullwidth": fullwidth ? 1 : 0,
-        "data-rotation": rotation || false,
-        "data-rotation-display": totalAmount,
-        "data-rotation-radius": rotationRadius || 130,
-        "data-rotation-wrapper-angle": rotationWrapperAngle || 0
-      }, attributes), /*#__PURE__*/react.createElement("div", {
+          children = _this$props.children;
+      return /*#__PURE__*/react.createElement(react.Fragment, null, /*#__PURE__*/react.createElement("div", {
+        ref: this.rootRef,
+        id: id || this.uniqueID,
+        className: "uix-tabs" + (!center && !rotation && !fullwidth ? ' uix-tabs--normal' : '') + (center ? ' uix-tabs--center' : '') + (rotation ? ' uix-tabs--rotation' : '')
+      }, /*#__PURE__*/react.createElement("div", {
         className: "uix-tabs__nav"
       }, /*#__PURE__*/react.createElement("ul", {
         role: "tablist"
-      }, children != null ? children.map(function (item, i) {
-        var childProps = _objectSpread({}, item.props);
+      }, function () {
+        if (children != null) {
+          var tabListIndex = 0;
+          return children.map(function (item, i) {
+            var childProps = _objectSpread({}, item.props);
 
-        delete childProps.key;
+            delete childProps.key;
 
-        if (item.key.indexOf('tab-list') >= 0) {
-          return /*#__PURE__*/react.createElement(TabList, extends_extends({
-            key: item.key
-          }, childProps));
+            if (item.key.indexOf('tab-list') >= 0) {
+              tabListIndex++;
+              return /*#__PURE__*/react.createElement(TabList, extends_extends({
+                key: item.key,
+                index: tabListIndex,
+                switchEv: _this3.handleClickItem,
+                targetID: "".concat(_this3.uniqueID, "-tabs-show-").concat(tabListIndex)
+              }, childProps));
+            }
+          });
         }
-      }) : "")), children != null ? children.map(function (item, i) {
-        var childProps = _objectSpread({}, item.props);
+      }())), function () {
+        if (children != null) {
+          var tabPanelIndex = 0;
+          return children.map(function (item, i) {
+            var childProps = _objectSpread({}, item.props);
 
-        delete childProps.key;
+            delete childProps.key;
 
-        if (item.key.indexOf('tab-panel') >= 0) {
-          return /*#__PURE__*/react.createElement(TabPanel, extends_extends({
-            key: item.key
-          }, childProps));
+            if (item.key.indexOf('tab-panel') >= 0) {
+              tabPanelIndex++;
+              return /*#__PURE__*/react.createElement(TabPanel, extends_extends({
+                key: item.key,
+                targetID: "".concat(_this3.uniqueID, "-tabs-show-").concat(tabPanelIndex)
+              }, childProps));
+            }
+          });
         }
-      }) : ""));
+      }()));
     }
   }]);
 
@@ -51427,21 +52858,12 @@ var Tabs = /*#__PURE__*/function (_Component) {
     style: {
       marginRight: ".5rem"
     },
-    width: "15",
-    viewBox: "0 0 392.186 392.186"
-  }, /*#__PURE__*/react.createElement("g", null, /*#__PURE__*/react.createElement("g", null, /*#__PURE__*/react.createElement("g", null, /*#__PURE__*/react.createElement("path", {
+    width: "16",
+    viewBox: "0 0 122.88 91.26"
+  }, /*#__PURE__*/react.createElement("path", {
     fill: "#d2d2d2",
-    d: "M368.62,17.951H23.568C10.57,17.951,0,28.524,0,41.52v309.146c0,12.996,10.57,23.568,23.568,23.568h345.053c12.994,0,23.564-10.572,23.564-23.568V41.52C392.188,28.525,381.614,17.951,368.62,17.951z M297.56,57.528c0-4.806,3.896-8.703,8.701-8.703h8.703c4.808,0,8.701,3.896,8.701,8.703v9.863c0,4.806-3.896,8.702-8.701,8.702h-8.703c-4.805,0-8.701-3.896-8.701-8.702V57.528z M257.093,57.528c0-4.806,3.898-8.703,8.703-8.703h8.701c4.805,0,8.703,3.896,8.703,8.703v9.863c0,4.806-3.898,8.702-8.703,8.702h-8.701c-4.805,0-8.703-3.896-8.703-8.702V57.528z M363.903,345.951H28.282V102.235h335.621V345.951L363.903,345.951z M364.132,67.391c0,4.806-3.896,8.702-8.701,8.702h-8.703c-4.809,0-8.702-3.896-8.702-8.702v-9.863c0-4.806,3.896-8.703,8.702-8.703h8.703c4.806,0,8.701,3.896,8.701,8.703V67.391z"
-  }), /*#__PURE__*/react.createElement("path", {
-    fill: "#d2d2d2",
-    d: "M84.185,233.284l63.084,29.336c1.631,0.755,3.367,1.138,5.162,1.138c2.338,0,4.617-0.664,6.598-1.924c3.547-2.267,5.666-6.13,5.666-10.334v-0.322c0-4.752-2.785-9.116-7.096-11.118l-39.455-18.332l39.455-18.334c4.311-2.004,7.096-6.367,7.096-11.117v-0.319c0-4.21-2.119-8.075-5.666-10.334c-1.961-1.253-4.246-1.916-6.605-1.916c-1.779,0-3.563,0.391-5.16,1.133l-63.08,29.333c-4.307,2.004-7.09,6.369-7.09,11.117v0.877C77.093,226.909,79.874,231.272,84.185,233.284z"
-  }), /*#__PURE__*/react.createElement("path", {
-    fill: "#d2d2d2",
-    d: "M165.257,293.036c2.301,3.149,6.002,5.03,9.9,5.03h0.316c5.352,0,10.041-3.426,11.672-8.517L228.7,160.788c1.192-3.716,0.531-7.818-1.771-10.973c-2.301-3.15-6.002-5.03-9.901-5.03h-0.315c-5.354,0-10.048,3.425-11.679,8.516l-41.559,128.771C162.292,285.793,162.958,289.889,165.257,293.036z"
-  }), /*#__PURE__*/react.createElement("path", {
-    fill: "#d2d2d2",
-    d: "M227.49,192.276c0,4.745,2.783,9.109,7.095,11.123l39.455,18.329l-39.455,18.33c-4.31,2.004-7.095,6.368-7.095,11.118v0.322c0,4.205,2.117,8.068,5.668,10.336c1.974,1.258,4.254,1.924,6.595,1.924c1.793,0,3.528-0.383,5.17-1.142l63.08-29.335c4.307-2.009,7.09-6.372,7.09-11.115v-0.877c0-4.748-2.783-9.113-7.094-11.117l-63.08-29.333c-1.591-0.74-3.373-1.131-5.152-1.131c-2.355,0-4.643,0.661-6.604,1.912c-3.551,2.263-5.67,6.127-5.67,10.337v0.318H227.49L227.49,192.276z"
-  }))))), "Docs on GitHub"))))))), /*#__PURE__*/react.createElement("section", {
+    d: "M8.32,0h106.24c4.58,0,8.32,3.74,8.32,8.32v74.62c0,4.57-3.74,8.32-8.32,8.32H8.32C3.74,91.26,0,87.51,0,82.94 V8.32C0,3.74,3.74,0,8.32,0L8.32,0z M54.46,72.22L32,58.61v-8.63l22.46-13.61v10.26l-13.65,7.69l13.65,7.7V72.22L54.46,72.22z M68.42,72.22l22.46-13.61v-8.63L68.42,36.37v10.26l13.65,7.69l-13.65,7.7V72.22L68.42,72.22z M117.97,23.29H5.29v60.46 c0,0.64,0.25,1.2,0.67,1.63c0.42,0.42,0.99,0.67,1.63,0.67h108.04c0.64,0,1.2-0.25,1.63-0.67c0.43-0.43,0.67-0.99,0.67-1.63V23.29 H117.97L117.97,23.29z M106.64,9.35c2.27,0,4.11,1.84,4.11,4.11c0,2.27-1.84,4.11-4.11,4.11c-2.27,0-4.11-1.84-4.11-4.11 C102.54,11.19,104.38,9.35,106.64,9.35L106.64,9.35z M78.8,9.35c2.27,0,4.11,1.84,4.11,4.11c0,2.27-1.84,4.11-4.11,4.11 c-2.27,0-4.11-1.84-4.11-4.11C74.69,11.19,76.53,9.35,78.8,9.35L78.8,9.35z M92.72,9.35c2.27,0,4.11,1.84,4.11,4.11 c0,2.27-1.84,4.11-4.11,4.11c-2.27,0-4.11-1.84-4.11-4.11C88.61,11.19,90.45,9.35,92.72,9.35L92.72,9.35z"
+  })), "Docs on GitHub"))))))), /*#__PURE__*/react.createElement("section", {
     className: "uix-spacing--s uix-spacing--no-bottom"
   }, /*#__PURE__*/react.createElement("div", {
     className: "container"
@@ -51770,8 +53192,6 @@ var TabPanel_TabPanel = /*#__PURE__*/function (_Component) {
 
 
 
-var TabsAnimated_excluded = ["id", "children"];
-
 function TabsAnimated_ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) { symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); } keys.push.apply(keys, symbols); } return keys; }
 
 function TabsAnimated_objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { TabsAnimated_ownKeys(Object(source), true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { TabsAnimated_ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
@@ -51808,6 +53228,10 @@ var TabsAnimated = /*#__PURE__*/function (_Component) {
     _classCallCheck(this, TabsAnimated);
 
     _this = _super.call(this, props);
+
+    _defineProperty(_assertThisInitialized(_this), "uniqueID", void 0);
+
+    _this.uniqueID = 'app-' + helpers.GUID.create();
     _this.state = {
       selected: 0
     };
@@ -51818,11 +53242,13 @@ var TabsAnimated = /*#__PURE__*/function (_Component) {
   _createClass(TabsAnimated, [{
     key: "handleClickItem",
     value: function handleClickItem(itemIndex) {
-      var self = this;
+      var _this2 = this;
+
       return function (e) {
         // e is the event object that returned
         e.preventDefault();
-        self.setSelected(itemIndex);
+
+        _this2.setSelected(itemIndex);
 
         var animSpeed = helpers.cssProperty.getTransitionDuration(helpers('.uix-tabs-animated .uix-tabs__content')[0]);
 
@@ -51855,17 +53281,15 @@ var TabsAnimated = /*#__PURE__*/function (_Component) {
   }, {
     key: "render",
     value: function render() {
-      var _this2 = this;
+      var _this3 = this;
 
       var _this$props = this.props,
           id = _this$props.id,
-          children = _this$props.children,
-          attributes = _objectWithoutProperties(_this$props, TabsAnimated_excluded);
-
-      return /*#__PURE__*/react.createElement(react.Fragment, null, /*#__PURE__*/react.createElement("div", extends_extends({
-        id: id ? id : 'app-tabs-animated-' + helpers.GUID.create(),
+          children = _this$props.children;
+      return /*#__PURE__*/react.createElement(react.Fragment, null, /*#__PURE__*/react.createElement("div", {
+        id: id || this.uniqueID,
         className: "uix-tabs-animated"
-      }, attributes), /*#__PURE__*/react.createElement("div", {
+      }, /*#__PURE__*/react.createElement("div", {
         className: "uix-tabs__nav"
       }, /*#__PURE__*/react.createElement("ul", {
         role: "tablist"
@@ -51873,7 +53297,7 @@ var TabsAnimated = /*#__PURE__*/function (_Component) {
         var childProps = TabsAnimated_objectSpread({}, item.props);
 
         var itemIndex = i;
-        var activeClassName = itemIndex === _this2.state.selected ? 'is-active' : '';
+        var activeClassName = itemIndex === _this3.state.selected ? 'is-active' : '';
         delete childProps.key;
         delete childProps.defaultActive;
 
@@ -51882,7 +53306,7 @@ var TabsAnimated = /*#__PURE__*/function (_Component) {
             className: activeClassName,
             key: item.key
           }, childProps, {
-            onClick: _this2.handleClickItem(itemIndex)
+            onClick: _this3.handleClickItem(itemIndex)
           }));
         }
       }) : "")), /*#__PURE__*/react.createElement("div", {
@@ -51951,21 +53375,12 @@ var TabsAnimated = /*#__PURE__*/function (_Component) {
     style: {
       marginRight: ".5rem"
     },
-    width: "15",
-    viewBox: "0 0 392.186 392.186"
-  }, /*#__PURE__*/react.createElement("g", null, /*#__PURE__*/react.createElement("g", null, /*#__PURE__*/react.createElement("g", null, /*#__PURE__*/react.createElement("path", {
+    width: "16",
+    viewBox: "0 0 122.88 91.26"
+  }, /*#__PURE__*/react.createElement("path", {
     fill: "#d2d2d2",
-    d: "M368.62,17.951H23.568C10.57,17.951,0,28.524,0,41.52v309.146c0,12.996,10.57,23.568,23.568,23.568h345.053c12.994,0,23.564-10.572,23.564-23.568V41.52C392.188,28.525,381.614,17.951,368.62,17.951z M297.56,57.528c0-4.806,3.896-8.703,8.701-8.703h8.703c4.808,0,8.701,3.896,8.701,8.703v9.863c0,4.806-3.896,8.702-8.701,8.702h-8.703c-4.805,0-8.701-3.896-8.701-8.702V57.528z M257.093,57.528c0-4.806,3.898-8.703,8.703-8.703h8.701c4.805,0,8.703,3.896,8.703,8.703v9.863c0,4.806-3.898,8.702-8.703,8.702h-8.701c-4.805,0-8.703-3.896-8.703-8.702V57.528z M363.903,345.951H28.282V102.235h335.621V345.951L363.903,345.951z M364.132,67.391c0,4.806-3.896,8.702-8.701,8.702h-8.703c-4.809,0-8.702-3.896-8.702-8.702v-9.863c0-4.806,3.896-8.703,8.702-8.703h8.703c4.806,0,8.701,3.896,8.701,8.703V67.391z"
-  }), /*#__PURE__*/react.createElement("path", {
-    fill: "#d2d2d2",
-    d: "M84.185,233.284l63.084,29.336c1.631,0.755,3.367,1.138,5.162,1.138c2.338,0,4.617-0.664,6.598-1.924c3.547-2.267,5.666-6.13,5.666-10.334v-0.322c0-4.752-2.785-9.116-7.096-11.118l-39.455-18.332l39.455-18.334c4.311-2.004,7.096-6.367,7.096-11.117v-0.319c0-4.21-2.119-8.075-5.666-10.334c-1.961-1.253-4.246-1.916-6.605-1.916c-1.779,0-3.563,0.391-5.16,1.133l-63.08,29.333c-4.307,2.004-7.09,6.369-7.09,11.117v0.877C77.093,226.909,79.874,231.272,84.185,233.284z"
-  }), /*#__PURE__*/react.createElement("path", {
-    fill: "#d2d2d2",
-    d: "M165.257,293.036c2.301,3.149,6.002,5.03,9.9,5.03h0.316c5.352,0,10.041-3.426,11.672-8.517L228.7,160.788c1.192-3.716,0.531-7.818-1.771-10.973c-2.301-3.15-6.002-5.03-9.901-5.03h-0.315c-5.354,0-10.048,3.425-11.679,8.516l-41.559,128.771C162.292,285.793,162.958,289.889,165.257,293.036z"
-  }), /*#__PURE__*/react.createElement("path", {
-    fill: "#d2d2d2",
-    d: "M227.49,192.276c0,4.745,2.783,9.109,7.095,11.123l39.455,18.329l-39.455,18.33c-4.31,2.004-7.095,6.368-7.095,11.118v0.322c0,4.205,2.117,8.068,5.668,10.336c1.974,1.258,4.254,1.924,6.595,1.924c1.793,0,3.528-0.383,5.17-1.142l63.08-29.335c4.307-2.009,7.09-6.372,7.09-11.115v-0.877c0-4.748-2.783-9.113-7.094-11.117l-63.08-29.333c-1.591-0.74-3.373-1.131-5.152-1.131c-2.355,0-4.643,0.661-6.604,1.912c-3.551,2.263-5.67,6.127-5.67,10.337v0.318H227.49L227.49,192.276z"
-  }))))), "Docs on GitHub"))))))), /*#__PURE__*/react.createElement("section", {
+    d: "M8.32,0h106.24c4.58,0,8.32,3.74,8.32,8.32v74.62c0,4.57-3.74,8.32-8.32,8.32H8.32C3.74,91.26,0,87.51,0,82.94 V8.32C0,3.74,3.74,0,8.32,0L8.32,0z M54.46,72.22L32,58.61v-8.63l22.46-13.61v10.26l-13.65,7.69l13.65,7.7V72.22L54.46,72.22z M68.42,72.22l22.46-13.61v-8.63L68.42,36.37v10.26l13.65,7.69l-13.65,7.7V72.22L68.42,72.22z M117.97,23.29H5.29v60.46 c0,0.64,0.25,1.2,0.67,1.63c0.42,0.42,0.99,0.67,1.63,0.67h108.04c0.64,0,1.2-0.25,1.63-0.67c0.43-0.43,0.67-0.99,0.67-1.63V23.29 H117.97L117.97,23.29z M106.64,9.35c2.27,0,4.11,1.84,4.11,4.11c0,2.27-1.84,4.11-4.11,4.11c-2.27,0-4.11-1.84-4.11-4.11 C102.54,11.19,104.38,9.35,106.64,9.35L106.64,9.35z M78.8,9.35c2.27,0,4.11,1.84,4.11,4.11c0,2.27-1.84,4.11-4.11,4.11 c-2.27,0-4.11-1.84-4.11-4.11C74.69,11.19,76.53,9.35,78.8,9.35L78.8,9.35z M92.72,9.35c2.27,0,4.11,1.84,4.11,4.11 c0,2.27-1.84,4.11-4.11,4.11c-2.27,0-4.11-1.84-4.11-4.11C88.61,11.19,90.45,9.35,92.72,9.35L92.72,9.35z"
+  })), "Docs on GitHub"))))))), /*#__PURE__*/react.createElement("section", {
     className: "uix-spacing--s uix-spacing--no-bottom"
   }, /*#__PURE__*/react.createElement("div", {
     className: "container"
@@ -61576,9 +62991,6 @@ Plyr.defaults = cloneDeep(config_defaults);
 
 
 
-
-var Video_excluded = ["poster", "config", "src", "id"];
-
 function Video_createSuper(Derived) { var hasNativeReflectConstruct = Video_isNativeReflectConstruct(); return function _createSuperInternal() { var Super = _getPrototypeOf(Derived), result; if (hasNativeReflectConstruct) { var NewTarget = _getPrototypeOf(this).constructor; result = Reflect.construct(Super, arguments, NewTarget); } else { result = Super.apply(this, arguments); } return _possibleConstructorReturn(this, result); }; }
 
 function Video_isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Reflect.construct) return false; if (Reflect.construct.sham) return false; if (typeof Proxy === "function") return true; try { Boolean.prototype.valueOf.call(Reflect.construct(Boolean, [], function () {})); return true; } catch (e) { return false; } }
@@ -61613,77 +63025,76 @@ var Video = /*#__PURE__*/function (_Component) {
 
     _this = _super.call(this, props);
 
-    _defineProperty(_assertThisInitialized(_this), "wrapperRef", /*#__PURE__*/react.createRef());
+    _defineProperty(_assertThisInitialized(_this), "rootRef", /*#__PURE__*/react.createRef());
 
+    _defineProperty(_assertThisInitialized(_this), "uniqueID", void 0);
+
+    _this.uniqueID = 'app-' + helpers.GUID.create();
     return _this;
   }
 
   _createClass(Video, [{
     key: "componentDidMount",
     value: function componentDidMount() {
-      var self = this;
+      var reactDomEl = this.rootRef.current;
+      var videoID = reactDomEl.id;
+      var player = new plyr('#' + videoID);
+      player.on('ready', function (event) {
+        var instance = event.detail.plyr;
+        var getConfig = instance.media.dataset.plyrConfig;
+        var config = getConfig === null || getConfig === undefined ? false : getConfig;
 
-      helpers(document).ready(function () {
-        var reactDomEl = self.wrapperRef.current;
-        var videoID = reactDomEl.id;
-        var player = new plyr('#' + videoID);
-        player.on('ready', function (event) {
-          var instance = event.detail.plyr;
-          var getConfig = instance.media.dataset.plyrConfig;
-          var config = getConfig === null || getConfig === undefined ? false : getConfig;
+        if (helpers.validate.isJSON(config)) {
+          config = Object.prototype.toString.call(config) === '[object Object]' ? config : JSON.parse(config);
+        }
 
-          if (helpers.validate.isJSON(config)) {
-            config = Object.prototype.toString.call(config) === '[object Object]' ? config : JSON.parse(config);
-          }
+        if (!config) return;
+        /* ---------  Video Modal initialize */
 
-          if (!config) return;
-          /* ---------  Video Modal initialize */
-
-          instance.on('loadedmetadata', function (e) {
-            var obj = instance.media,
-                clientHeight = obj.clientHeight,
-                clientWidth = obj.clientWidth,
-                //retrieve the dimensions (height and width)
-            videoWidth = obj.videoWidth,
-                videoHeight = obj.videoHeight;
-            console.log('video#' + videoID + ' : ', {
-              'clientHeight: ': clientHeight,
-              'clientWidth: ': clientWidth,
-              'videoHeight: ': videoHeight,
-              'videoWidth: ': videoWidth
-            });
+        instance.on('loadedmetadata', function (e) {
+          var obj = instance.media,
+              clientHeight = obj.clientHeight,
+              clientWidth = obj.clientWidth,
+              //retrieve the dimensions (height and width)
+          videoWidth = obj.videoWidth,
+              videoHeight = obj.videoHeight;
+          console.log('video#' + videoID + ' : ', {
+            'clientHeight: ': clientHeight,
+            'clientWidth: ': clientWidth,
+            'videoHeight: ': videoHeight,
+            'videoWidth: ': videoWidth
           });
-          /* ---------  Default settings  */
+        });
+        /* ---------  Default settings  */
 
-          if (typeof config.muted !== 'undefined') {
-            instance.media.muted = config.muted;
-          }
-          /* ---------  Fix an error of Video auto play is not working in browser  */
-
-
-          if (config.autoplay) {
-            instance.media.muted = true;
-            instance.media.play();
-          }
-          /* ---------  Display video playback progress  */
+        if (typeof config.muted !== 'undefined') {
+          instance.media.muted = config.muted;
+        }
+        /* ---------  Fix an error of Video auto play is not working in browser  */
 
 
-          var autoPlayOK = false;
-          instance.on('timeupdate', function () {
-            //The currentTime attribute has been updated. Again.
+        if (config.autoplay) {
+          instance.media.muted = true;
+          instance.media.play();
+        }
+        /* ---------  Display video playback progress  */
+
+
+        var autoPlayOK = false;
+        instance.on('timeupdate', function () {
+          //The currentTime attribute has been updated. Again.
+          autoPlayOK = true;
+
+          if (instance.currentTime >= instance.duration) {
             autoPlayOK = true;
+            instance.off('timeupdate');
+            console.log('replay ready...');
+          }
+        });
+        /* ---------  Callback for when a video has ended */
 
-            if (instance.currentTime >= instance.duration) {
-              autoPlayOK = true;
-              instance.off('timeupdate');
-              console.log('replay ready...');
-            }
-          });
-          /* ---------  Callback for when a video has ended */
-
-          instance.on('ended', function () {
-            console.log('video is done!');
-          });
+        instance.on('ended', function () {
+          console.log('video is done!');
         });
       });
     }
@@ -61694,18 +63105,16 @@ var Video = /*#__PURE__*/function (_Component) {
           poster = _this$props.poster,
           config = _this$props.config,
           src = _this$props.src,
-          id = _this$props.id,
-          attributes = _objectWithoutProperties(_this$props, Video_excluded);
-
-      return /*#__PURE__*/react.createElement(react.Fragment, null, /*#__PURE__*/react.createElement("video", extends_extends({
-        ref: this.wrapperRef,
-        id: id || 'app-video-' + helpers.GUID.create(),
+          id = _this$props.id;
+      return /*#__PURE__*/react.createElement(react.Fragment, null, /*#__PURE__*/react.createElement("video", {
+        ref: this.rootRef,
+        id: id || this.uniqueID,
         playsInline: true,
         controls: true,
         "data-poster": poster,
         src: src,
         "data-plyr-config": config || '{"muted":false,"autoplay":false,"controls":["play-large", "play", "progress", "current-time", "mute", "volume", "captions", "settings", "pip", "airplay", "fullscreen"],"loop":{"active":false}}'
-      }, attributes)));
+      }));
     }
   }]);
 
@@ -61752,21 +63161,12 @@ var Video = /*#__PURE__*/function (_Component) {
     style: {
       marginRight: ".5rem"
     },
-    width: "15",
-    viewBox: "0 0 392.186 392.186"
-  }, /*#__PURE__*/react.createElement("g", null, /*#__PURE__*/react.createElement("g", null, /*#__PURE__*/react.createElement("g", null, /*#__PURE__*/react.createElement("path", {
+    width: "16",
+    viewBox: "0 0 122.88 91.26"
+  }, /*#__PURE__*/react.createElement("path", {
     fill: "#d2d2d2",
-    d: "M368.62,17.951H23.568C10.57,17.951,0,28.524,0,41.52v309.146c0,12.996,10.57,23.568,23.568,23.568h345.053c12.994,0,23.564-10.572,23.564-23.568V41.52C392.188,28.525,381.614,17.951,368.62,17.951z M297.56,57.528c0-4.806,3.896-8.703,8.701-8.703h8.703c4.808,0,8.701,3.896,8.701,8.703v9.863c0,4.806-3.896,8.702-8.701,8.702h-8.703c-4.805,0-8.701-3.896-8.701-8.702V57.528z M257.093,57.528c0-4.806,3.898-8.703,8.703-8.703h8.701c4.805,0,8.703,3.896,8.703,8.703v9.863c0,4.806-3.898,8.702-8.703,8.702h-8.701c-4.805,0-8.703-3.896-8.703-8.702V57.528z M363.903,345.951H28.282V102.235h335.621V345.951L363.903,345.951z M364.132,67.391c0,4.806-3.896,8.702-8.701,8.702h-8.703c-4.809,0-8.702-3.896-8.702-8.702v-9.863c0-4.806,3.896-8.703,8.702-8.703h8.703c4.806,0,8.701,3.896,8.701,8.703V67.391z"
-  }), /*#__PURE__*/react.createElement("path", {
-    fill: "#d2d2d2",
-    d: "M84.185,233.284l63.084,29.336c1.631,0.755,3.367,1.138,5.162,1.138c2.338,0,4.617-0.664,6.598-1.924c3.547-2.267,5.666-6.13,5.666-10.334v-0.322c0-4.752-2.785-9.116-7.096-11.118l-39.455-18.332l39.455-18.334c4.311-2.004,7.096-6.367,7.096-11.117v-0.319c0-4.21-2.119-8.075-5.666-10.334c-1.961-1.253-4.246-1.916-6.605-1.916c-1.779,0-3.563,0.391-5.16,1.133l-63.08,29.333c-4.307,2.004-7.09,6.369-7.09,11.117v0.877C77.093,226.909,79.874,231.272,84.185,233.284z"
-  }), /*#__PURE__*/react.createElement("path", {
-    fill: "#d2d2d2",
-    d: "M165.257,293.036c2.301,3.149,6.002,5.03,9.9,5.03h0.316c5.352,0,10.041-3.426,11.672-8.517L228.7,160.788c1.192-3.716,0.531-7.818-1.771-10.973c-2.301-3.15-6.002-5.03-9.901-5.03h-0.315c-5.354,0-10.048,3.425-11.679,8.516l-41.559,128.771C162.292,285.793,162.958,289.889,165.257,293.036z"
-  }), /*#__PURE__*/react.createElement("path", {
-    fill: "#d2d2d2",
-    d: "M227.49,192.276c0,4.745,2.783,9.109,7.095,11.123l39.455,18.329l-39.455,18.33c-4.31,2.004-7.095,6.368-7.095,11.118v0.322c0,4.205,2.117,8.068,5.668,10.336c1.974,1.258,4.254,1.924,6.595,1.924c1.793,0,3.528-0.383,5.17-1.142l63.08-29.335c4.307-2.009,7.09-6.372,7.09-11.115v-0.877c0-4.748-2.783-9.113-7.094-11.117l-63.08-29.333c-1.591-0.74-3.373-1.131-5.152-1.131c-2.355,0-4.643,0.661-6.604,1.912c-3.551,2.263-5.67,6.127-5.67,10.337v0.318H227.49L227.49,192.276z"
-  }))))), "Docs on GitHub"))))))), /*#__PURE__*/react.createElement("section", {
+    d: "M8.32,0h106.24c4.58,0,8.32,3.74,8.32,8.32v74.62c0,4.57-3.74,8.32-8.32,8.32H8.32C3.74,91.26,0,87.51,0,82.94 V8.32C0,3.74,3.74,0,8.32,0L8.32,0z M54.46,72.22L32,58.61v-8.63l22.46-13.61v10.26l-13.65,7.69l13.65,7.7V72.22L54.46,72.22z M68.42,72.22l22.46-13.61v-8.63L68.42,36.37v10.26l13.65,7.69l-13.65,7.7V72.22L68.42,72.22z M117.97,23.29H5.29v60.46 c0,0.64,0.25,1.2,0.67,1.63c0.42,0.42,0.99,0.67,1.63,0.67h108.04c0.64,0,1.2-0.25,1.63-0.67c0.43-0.43,0.67-0.99,0.67-1.63V23.29 H117.97L117.97,23.29z M106.64,9.35c2.27,0,4.11,1.84,4.11,4.11c0,2.27-1.84,4.11-4.11,4.11c-2.27,0-4.11-1.84-4.11-4.11 C102.54,11.19,104.38,9.35,106.64,9.35L106.64,9.35z M78.8,9.35c2.27,0,4.11,1.84,4.11,4.11c0,2.27-1.84,4.11-4.11,4.11 c-2.27,0-4.11-1.84-4.11-4.11C74.69,11.19,76.53,9.35,78.8,9.35L78.8,9.35z M92.72,9.35c2.27,0,4.11,1.84,4.11,4.11 c0,2.27-1.84,4.11-4.11,4.11c-2.27,0-4.11-1.84-4.11-4.11C88.61,11.19,90.45,9.35,92.72,9.35L92.72,9.35z"
+  })), "Docs on GitHub"))))))), /*#__PURE__*/react.createElement("section", {
     className: "uix-spacing--s uix-spacing--no-bottom"
   }, /*#__PURE__*/react.createElement("div", {
     className: "container"
@@ -61824,7 +63224,7 @@ var Video = /*#__PURE__*/function (_Component) {
     className: "table-responsive-md"
   }, /*#__PURE__*/react.createElement("table", {
     className: "table table-bordered table-striped mb-5"
-  }, /*#__PURE__*/react.createElement("thead", null, /*#__PURE__*/react.createElement("tr", null, /*#__PURE__*/react.createElement("th", null, "Property"), /*#__PURE__*/react.createElement("th", null, "Type"), /*#__PURE__*/react.createElement("th", null, "Default"), /*#__PURE__*/react.createElement("th", null, "Description"))), /*#__PURE__*/react.createElement("tbody", null, /*#__PURE__*/react.createElement("tr", null, /*#__PURE__*/react.createElement("td", null, /*#__PURE__*/react.createElement("code", null, "config")), /*#__PURE__*/react.createElement("td", null, "JSON Object Literals"), /*#__PURE__*/react.createElement("td", null, "-"), /*#__PURE__*/react.createElement("td", null, "Detailed animation parameters, using JSON string format.", /*#__PURE__*/react.createElement("br", null), /*#__PURE__*/react.createElement("strong", null, "default value:"), /*#__PURE__*/react.createElement("br", null), /*#__PURE__*/react.createElement("code", {
+  }, /*#__PURE__*/react.createElement("thead", null, /*#__PURE__*/react.createElement("tr", null, /*#__PURE__*/react.createElement("th", null, "Property"), /*#__PURE__*/react.createElement("th", null, "Type"), /*#__PURE__*/react.createElement("th", null, "Default"), /*#__PURE__*/react.createElement("th", null, "Description"))), /*#__PURE__*/react.createElement("tbody", null, /*#__PURE__*/react.createElement("tr", null, /*#__PURE__*/react.createElement("td", null, /*#__PURE__*/react.createElement("code", null, "config")), /*#__PURE__*/react.createElement("td", null, "JSON Object Literals"), /*#__PURE__*/react.createElement("td", null, "-"), /*#__PURE__*/react.createElement("td", null, /*#__PURE__*/react.createElement("strong", null, "(Required)"), " Detailed animation parameters, using JSON string format.", /*#__PURE__*/react.createElement("br", null), /*#__PURE__*/react.createElement("strong", null, "default value:"), /*#__PURE__*/react.createElement("br", null), /*#__PURE__*/react.createElement("code", {
     className: "text-wrap"
   }, "{\"muted\":false,\"autoplay\":false,\"controls\":[\"play-large\", \"play\", \"progress\", \"current-time\", \"mute\", \"volume\", \"captions\", \"settings\", \"pip\", \"airplay\", \"fullscreen\"],\"loop\":{\"active\":false}}"), " ", /*#__PURE__*/react.createElement("br", null), /*#__PURE__*/react.createElement("strong", null, "other:"), /*#__PURE__*/react.createElement("br", null), /*#__PURE__*/react.createElement("code", {
     className: "text-wrap"
@@ -61840,6 +63240,268 @@ var Video = /*#__PURE__*/function (_Component) {
     className: "text-wrap"
   }, "{ enabled: true, fallback: true, iosNative: false, container: null }"))))))))))));
 });
+;// CONCATENATED MODULE: ./src/client/components/Table/TableField.tsx
+
+
+
+
+
+
+function TableField_createSuper(Derived) { var hasNativeReflectConstruct = TableField_isNativeReflectConstruct(); return function _createSuperInternal() { var Super = _getPrototypeOf(Derived), result; if (hasNativeReflectConstruct) { var NewTarget = _getPrototypeOf(this).constructor; result = Reflect.construct(Super, arguments, NewTarget); } else { result = Super.apply(this, arguments); } return _possibleConstructorReturn(this, result); }; }
+
+function TableField_isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Reflect.construct) return false; if (Reflect.construct.sham) return false; if (typeof Proxy === "function") return true; try { Boolean.prototype.valueOf.call(Reflect.construct(Boolean, [], function () {})); return true; } catch (e) { return false; } }
+
+
+/* Table Field
+-------------------------------------------------*/
+
+var TableField = /*#__PURE__*/function (_Component) {
+  _inherits(TableField, _Component);
+
+  var _super = TableField_createSuper(TableField);
+
+  function TableField(props) {
+    _classCallCheck(this, TableField);
+
+    return _super.call(this, props);
+  }
+
+  _createClass(TableField, [{
+    key: "render",
+    value: function render() {
+      return /*#__PURE__*/react.createElement(react.Fragment, null, /*#__PURE__*/react.createElement("td", {
+        colSpan: this.props.cols,
+        "data-table": this.props.columnHeader,
+        "data-table-row": this.props.index
+      }, this.props.content));
+    }
+  }]);
+
+  return TableField;
+}(react.Component);
+
+
+;// CONCATENATED MODULE: ./src/client/components/Table/TableRow.tsx
+
+
+
+
+
+
+
+
+function TableRow_createSuper(Derived) { var hasNativeReflectConstruct = TableRow_isNativeReflectConstruct(); return function _createSuperInternal() { var Super = _getPrototypeOf(Derived), result; if (hasNativeReflectConstruct) { var NewTarget = _getPrototypeOf(this).constructor; result = Reflect.construct(Super, arguments, NewTarget); } else { result = Super.apply(this, arguments); } return _possibleConstructorReturn(this, result); }; }
+
+function TableRow_isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Reflect.construct) return false; if (Reflect.construct.sham) return false; if (typeof Proxy === "function") return true; try { Boolean.prototype.valueOf.call(Reflect.construct(Boolean, [], function () {})); return true; } catch (e) { return false; } }
+
+
+
+
+/* Table Row
+-------------------------------------------------*/
+
+var TableRow = /*#__PURE__*/function (_Component) {
+  _inherits(TableRow, _Component);
+
+  var _super = TableRow_createSuper(TableRow);
+
+  function TableRow(props) {
+    var _this;
+
+    _classCallCheck(this, TableRow);
+
+    _this = _super.call(this, props);
+
+    _defineProperty(_assertThisInitialized(_this), "uniqueID", void 0);
+
+    _this.uniqueID = 'app-' + helpers.GUID.create();
+    return _this;
+  }
+
+  _createClass(TableRow, [{
+    key: "render",
+    value: function render() {
+      var _this2 = this;
+
+      var fields = this.props.data.map(function (el, i) {
+        var label = _this2.props.headerLabel[i];
+        if (label === undefined) label = '';
+        return /*#__PURE__*/react.createElement(TableField, {
+          key: "field" + i,
+          columnHeader: label.replace(/<span[^>]*>[\s\S]+<\/span>/g, ''),
+          cols: el.cols,
+          content: el.content,
+          index: i
+        });
+      });
+      return /*#__PURE__*/react.createElement(react.Fragment, null, /*#__PURE__*/react.createElement("tr", {
+        id: this.uniqueID
+      }, fields));
+    }
+  }]);
+
+  return TableRow;
+}(react.Component);
+
+
+;// CONCATENATED MODULE: ./src/client/components/Table/TableHeaders.tsx
+
+
+
+
+
+
+
+
+function TableHeaders_createSuper(Derived) { var hasNativeReflectConstruct = TableHeaders_isNativeReflectConstruct(); return function _createSuperInternal() { var Super = _getPrototypeOf(Derived), result; if (hasNativeReflectConstruct) { var NewTarget = _getPrototypeOf(this).constructor; result = Reflect.construct(Super, arguments, NewTarget); } else { result = Super.apply(this, arguments); } return _possibleConstructorReturn(this, result); }; }
+
+function TableHeaders_isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Reflect.construct) return false; if (Reflect.construct.sham) return false; if (typeof Proxy === "function") return true; try { Boolean.prototype.valueOf.call(Reflect.construct(Boolean, [], function () {})); return true; } catch (e) { return false; } }
+
+
+
+/* Table Headers
+-------------------------------------------------*/
+
+var TableHeaders = /*#__PURE__*/function (_Component) {
+  _inherits(TableHeaders, _Component);
+
+  var _super = TableHeaders_createSuper(TableHeaders);
+
+  function TableHeaders(props) {
+    var _this;
+
+    _classCallCheck(this, TableHeaders);
+
+    _this = _super.call(this, props);
+
+    _defineProperty(_assertThisInitialized(_this), "uniqueID", void 0);
+
+    _this.uniqueID = 'app-' + helpers.GUID.create();
+    return _this;
+  }
+
+  _createClass(TableHeaders, [{
+    key: "render",
+    value: function render() {
+      if (this.props.data) {
+        return /*#__PURE__*/react.createElement(react.Fragment, null, /*#__PURE__*/react.createElement("thead", null, /*#__PURE__*/react.createElement("tr", {
+          id: this.uniqueID
+        }, this.props.data.map(function (item, i) {
+          return /*#__PURE__*/react.createElement("th", {
+            key: "header" + i,
+            "data-table": item.replace(/<span[^>]*>[\s\S]+<\/span>/g, ''),
+            "data-table-row": i
+          }, item);
+        }))));
+      } else {
+        return /*#__PURE__*/react.createElement(react.Fragment, null);
+      }
+    }
+  }]);
+
+  return TableHeaders;
+}(react.Component);
+
+
+;// CONCATENATED MODULE: ./src/client/components/Table/TableSummaries.tsx
+
+
+
+
+
+
+
+
+function TableSummaries_createSuper(Derived) { var hasNativeReflectConstruct = TableSummaries_isNativeReflectConstruct(); return function _createSuperInternal() { var Super = _getPrototypeOf(Derived), result; if (hasNativeReflectConstruct) { var NewTarget = _getPrototypeOf(this).constructor; result = Reflect.construct(Super, arguments, NewTarget); } else { result = Super.apply(this, arguments); } return _possibleConstructorReturn(this, result); }; }
+
+function TableSummaries_isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Reflect.construct) return false; if (Reflect.construct.sham) return false; if (typeof Proxy === "function") return true; try { Boolean.prototype.valueOf.call(Reflect.construct(Boolean, [], function () {})); return true; } catch (e) { return false; } }
+
+
+
+/* Table Summaries
+-------------------------------------------------*/
+
+var TableSummaries = /*#__PURE__*/function (_Component) {
+  _inherits(TableSummaries, _Component);
+
+  var _super = TableSummaries_createSuper(TableSummaries);
+
+  function TableSummaries(props) {
+    var _this;
+
+    _classCallCheck(this, TableSummaries);
+
+    _this = _super.call(this, props);
+
+    _defineProperty(_assertThisInitialized(_this), "uniqueID", void 0);
+
+    _this.uniqueID = 'app-' + helpers.GUID.create();
+    return _this;
+  }
+
+  _createClass(TableSummaries, [{
+    key: "render",
+    value: function render() {
+      if (this.props.data) {
+        return /*#__PURE__*/react.createElement(react.Fragment, null, /*#__PURE__*/react.createElement("tfoot", null, /*#__PURE__*/react.createElement("tr", {
+          id: this.uniqueID
+        }, this.props.data.map(function (item, i) {
+          return /*#__PURE__*/react.createElement("th", {
+            key: "summary" + i
+          }, item);
+        }))));
+      } else {
+        return /*#__PURE__*/react.createElement(react.Fragment, null);
+      }
+    }
+  }]);
+
+  return TableSummaries;
+}(react.Component);
+
+
+;// CONCATENATED MODULE: ./src/client/components/Table/TableColgroup.tsx
+
+
+
+
+
+
+function TableColgroup_createSuper(Derived) { var hasNativeReflectConstruct = TableColgroup_isNativeReflectConstruct(); return function _createSuperInternal() { var Super = _getPrototypeOf(Derived), result; if (hasNativeReflectConstruct) { var NewTarget = _getPrototypeOf(this).constructor; result = Reflect.construct(Super, arguments, NewTarget); } else { result = Super.apply(this, arguments); } return _possibleConstructorReturn(this, result); }; }
+
+function TableColgroup_isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Reflect.construct) return false; if (Reflect.construct.sham) return false; if (typeof Proxy === "function") return true; try { Boolean.prototype.valueOf.call(Reflect.construct(Boolean, [], function () {})); return true; } catch (e) { return false; } }
+
+
+/* Table Colgroup
+-------------------------------------------------*/
+
+var TableColgroup = /*#__PURE__*/function (_Component) {
+  _inherits(TableColgroup, _Component);
+
+  var _super = TableColgroup_createSuper(TableColgroup);
+
+  function TableColgroup(props) {
+    _classCallCheck(this, TableColgroup);
+
+    return _super.call(this, props);
+  }
+
+  _createClass(TableColgroup, [{
+    key: "render",
+    value: function render() {
+      var fieldPlaceholders = this.props.data.map(function (el, i) {
+        return /*#__PURE__*/react.createElement("col", {
+          key: "colgroup-placeholder" + i
+        });
+      });
+      return /*#__PURE__*/react.createElement(react.Fragment, null, /*#__PURE__*/react.createElement("colgroup", null, /*#__PURE__*/react.createElement("col", null), fieldPlaceholders));
+    }
+  }]);
+
+  return TableColgroup;
+}(react.Component);
+
+
 ;// CONCATENATED MODULE: ./src/client/components/Table/index.tsx
 
 
@@ -61848,9 +63510,6 @@ var Video = /*#__PURE__*/function (_Component) {
 
 
 
-
-
-var Table_excluded = ["data", "bordered", "noborder", "horizontal", "alternantRow", "alternantCol", "perLine", "responsive", "responsiveWithScrollBar", "id"];
 
 function Table_createSuper(Derived) { var hasNativeReflectConstruct = Table_isNativeReflectConstruct(); return function _createSuperInternal() { var Super = _getPrototypeOf(Derived), result; if (hasNativeReflectConstruct) { var NewTarget = _getPrototypeOf(this).constructor; result = Reflect.construct(Super, arguments, NewTarget); } else { result = Super.apply(this, arguments); } return _possibleConstructorReturn(this, result); }; }
 
@@ -61874,180 +63533,34 @@ function Table_isNativeReflectConstruct() { if (typeof Reflect === "undefined" |
 /*-- Apply this component styles --*/
 
 
-
-/* Table Field
--------------------------------------------------*/
-
-var TableField = /*#__PURE__*/function (_Component) {
-  _inherits(TableField, _Component);
-
-  var _super = Table_createSuper(TableField);
-
-  function TableField(props) {
-    _classCallCheck(this, TableField);
-
-    return _super.call(this, props);
-  }
-
-  _createClass(TableField, [{
-    key: "render",
-    value: function render() {
-      return /*#__PURE__*/react.createElement(react.Fragment, null, /*#__PURE__*/react.createElement("td", {
-        colSpan: this.props.cols
-      }, this.props.content));
-    }
-  }]);
-
-  return TableField;
-}(react.Component);
-/* Table Row
--------------------------------------------------*/
+ //
 
 
-var TableRow = /*#__PURE__*/function (_Component2) {
-  _inherits(TableRow, _Component2);
-
-  var _super2 = Table_createSuper(TableRow);
-
-  function TableRow(props) {
-    _classCallCheck(this, TableRow);
-
-    return _super2.call(this, props);
-  }
-
-  _createClass(TableRow, [{
-    key: "render",
-    value: function render() {
-      var fields = this.props.data.map(function (el, i) {
-        return /*#__PURE__*/react.createElement(TableField, {
-          key: "field" + i,
-          cols: el.cols,
-          content: el.content
-        });
-      });
-      return /*#__PURE__*/react.createElement(react.Fragment, null, /*#__PURE__*/react.createElement("tr", {
-        id: 'app-table-field-tr' + helpers.GUID.create()
-      }, fields));
-    }
-  }]);
-
-  return TableRow;
-}(react.Component);
-/* Table Headers
--------------------------------------------------*/
 
 
-var TableHeaders = /*#__PURE__*/function (_Component3) {
-  _inherits(TableHeaders, _Component3);
-
-  var _super3 = Table_createSuper(TableHeaders);
-
-  function TableHeaders(props) {
-    _classCallCheck(this, TableHeaders);
-
-    return _super3.call(this, props);
-  }
-
-  _createClass(TableHeaders, [{
-    key: "render",
-    value: function render() {
-      if (this.props.data) {
-        return /*#__PURE__*/react.createElement(react.Fragment, null, /*#__PURE__*/react.createElement("thead", null, /*#__PURE__*/react.createElement("tr", {
-          id: 'app-table-header-tr' + helpers.GUID.create()
-        }, this.props.data.map(function (item, i) {
-          return /*#__PURE__*/react.createElement("th", {
-            key: "header" + i
-          }, item);
-        }))));
-      } else {
-        return /*#__PURE__*/react.createElement(react.Fragment, null);
-      }
-    }
-  }]);
-
-  return TableHeaders;
-}(react.Component);
-/* Table Summaries
--------------------------------------------------*/
 
 
-var TableSummaries = /*#__PURE__*/function (_Component4) {
-  _inherits(TableSummaries, _Component4);
+var Table = /*#__PURE__*/function (_Component) {
+  _inherits(Table, _Component);
 
-  var _super4 = Table_createSuper(TableSummaries);
-
-  function TableSummaries(props) {
-    _classCallCheck(this, TableSummaries);
-
-    return _super4.call(this, props);
-  }
-
-  _createClass(TableSummaries, [{
-    key: "render",
-    value: function render() {
-      if (this.props.data) {
-        return /*#__PURE__*/react.createElement(react.Fragment, null, /*#__PURE__*/react.createElement("tfoot", null, /*#__PURE__*/react.createElement("tr", {
-          id: 'app-table-summary-tr' + helpers.GUID.create()
-        }, this.props.data.map(function (item, i) {
-          return /*#__PURE__*/react.createElement("th", {
-            key: "summary" + i
-          }, item);
-        }))));
-      } else {
-        return /*#__PURE__*/react.createElement(react.Fragment, null);
-      }
-    }
-  }]);
-
-  return TableSummaries;
-}(react.Component);
-/* Table Colgroup
--------------------------------------------------*/
-
-
-var TableColgroup = /*#__PURE__*/function (_Component5) {
-  _inherits(TableColgroup, _Component5);
-
-  var _super5 = Table_createSuper(TableColgroup);
-
-  function TableColgroup(props) {
-    _classCallCheck(this, TableColgroup);
-
-    return _super5.call(this, props);
-  }
-
-  _createClass(TableColgroup, [{
-    key: "render",
-    value: function render() {
-      var fieldPlaceholders = this.props.data.map(function (el, i) {
-        return /*#__PURE__*/react.createElement("col", {
-          key: "colgroup-placeholder" + i
-        });
-      });
-      return /*#__PURE__*/react.createElement(react.Fragment, null, /*#__PURE__*/react.createElement("colgroup", null, /*#__PURE__*/react.createElement("col", null), fieldPlaceholders));
-    }
-  }]);
-
-  return TableColgroup;
-}(react.Component);
-/* Table Component 
--------------------------------------------------*/
-
-
-var Table = /*#__PURE__*/function (_Component6) {
-  _inherits(Table, _Component6);
-
-  var _super6 = Table_createSuper(Table);
+  var _super = Table_createSuper(Table);
 
   function Table(props) {
     var _this;
 
     _classCallCheck(this, Table);
 
-    _this = _super6.call(this, props);
+    _this = _super.call(this, props); // Add a resize event listener to window
 
-    _defineProperty(_assertThisInitialized(_this), "wrapperRef", /*#__PURE__*/react.createRef());
+    _defineProperty(_assertThisInitialized(_this), "rootRef", /*#__PURE__*/react.createRef());
 
+    _defineProperty(_assertThisInitialized(_this), "windowResizeUpdate", void 0);
+
+    _defineProperty(_assertThisInitialized(_this), "uniqueID", void 0);
+
+    _this.windowResizeUpdate = function () {};
+
+    _this.uniqueID = 'app-' + helpers.GUID.create();
     return _this;
   }
 
@@ -62057,37 +63570,9 @@ var Table = /*#__PURE__*/function (_Component6) {
       var self = this;
 
       helpers(document).ready(function () {
-        var reactDomEl = self.wrapperRef.current;
+        var reactDomEl = self.rootRef.current;
 
         var $el = helpers(reactDomEl);
-        /*
-         ////////////////////////////////////////////////////////////
-         /////////////////////   Duplicate title    /////////////////
-         ////////////////////////////////////////////////////////////
-         */
-
-
-        if ($el.hasClass('js-uix-table--responsive')) {
-          var $th = $el.find('thead th');
-          var $tr = $el.find('tbody > tr');
-          var thArr = [];
-          $th.each(function () {
-            var data = helpers(this).html().replace(/<span[^>]*>[\s\S]+<\/span>/g, '');
-
-            thArr.push(data);
-
-            if (helpers(this).data('table') === null) {
-              helpers(this).data('table', data);
-            }
-          });
-          $tr.each(function () {
-            var $td = helpers(this).find('> td');
-
-            $td.each(function (tdIndex) {
-              helpers(this).data('table', thArr[tdIndex]);
-            });
-          });
-        }
         /*
          ////////////////////////////////////////////////////////////
          /////////////////////  With scroll bars   //////////////////
@@ -62097,26 +63582,11 @@ var Table = /*#__PURE__*/function (_Component6) {
 
         if ($el.hasClass('js-uix-table--responsive-scrolled')) {
           var tableDataScrolledInit = function tableDataScrolledInit(w) {
-            //Add an identifier so that the mobile terminal can compare by row
-            var $th = $el.find('thead th');
-            var $tr = $el.find('tbody > tr');
-            $tr.each(function () {
-              var $td = helpers(this).find('> td');
-
-              $td.each(function (tdIndex) {
-                $th.eq(tdIndex).data('table-row', tdIndex);
-
-                helpers(this).data('table-row', tdIndex);
-              });
-            });
-
             if (w <= 768) {
               //get maxHeight of per row
-              var _$tr = $el.find('tbody > tr');
+              var $tr = $el.find('tbody > tr');
 
-              var len = _$tr.length;
-
-              for (var i = 0; i < len; i++) {
+              for (var i = 0; i < $tr.length; i++) {
                 var maxHeight = $el.find('[data-table-row="' + i + '"]').maxDimension().height;
                 $el.find('[data-table-row="' + i + '"]').css({
                   'height': maxHeight + 'px'
@@ -62135,17 +63605,24 @@ var Table = /*#__PURE__*/function (_Component6) {
 
               tableDataScrolledInit(windowWidth);
             }
-          };
+          }; // Add function to the window that should be resized
+
 
           var windowWidth = window.innerWidth;
           tableDataScrolledInit(windowWidth);
-
-          var debounceFunc = helpers.debounce(windowUpdate, 50);
-
-          window.removeEventListener('resize', debounceFunc);
-          window.addEventListener('resize', debounceFunc);
+          self.windowResizeUpdate = helpers.debounce(windowUpdate, 50);
+          window.removeEventListener('resize', self.windowResizeUpdate);
+          window.addEventListener('resize', self.windowResizeUpdate);
         }
       });
+    }
+    /** Remove the global list of events, especially as scroll and interval. */
+
+  }, {
+    key: "componentWillUnmount",
+    value: function componentWillUnmount() {
+      // Remove resize events from window
+      window.removeEventListener('resize', this.windowResizeUpdate);
     }
   }, {
     key: "render",
@@ -62160,8 +63637,7 @@ var Table = /*#__PURE__*/function (_Component6) {
           perLine = _this$props.perLine,
           responsive = _this$props.responsive,
           responsiveWithScrollBar = _this$props.responsiveWithScrollBar,
-          id = _this$props.id,
-          attributes = _objectWithoutProperties(_this$props, Table_excluded);
+          id = _this$props.id;
 
       var _headers = data.hasOwnProperty('headers') ? data.headers : false;
 
@@ -62177,11 +63653,11 @@ var Table = /*#__PURE__*/function (_Component6) {
       if (perLine) classes += ' uix-table--per-line';
       if (responsive && !responsiveWithScrollBar) classes += ' is-responsive js-uix-table--responsive';
       if (responsiveWithScrollBar && !responsive) classes += ' js-uix-table--responsive-scrolled';
-      return /*#__PURE__*/react.createElement(react.Fragment, null, /*#__PURE__*/react.createElement("div", extends_extends({
-        ref: this.wrapperRef,
+      return /*#__PURE__*/react.createElement(react.Fragment, null, /*#__PURE__*/react.createElement("div", {
+        ref: this.rootRef,
         className: "uix-table" + classes,
-        id: id || 'app-table-' + helpers.GUID.create()
-      }, attributes), /*#__PURE__*/react.createElement("table", null, /*#__PURE__*/react.createElement(TableHeaders, {
+        id: id || this.uniqueID
+      }, /*#__PURE__*/react.createElement("table", null, /*#__PURE__*/react.createElement(TableHeaders, {
         data: _headers
       }), /*#__PURE__*/react.createElement(TableSummaries, {
         data: _summaries
@@ -62190,6 +63666,7 @@ var Table = /*#__PURE__*/function (_Component6) {
       }) : "", /*#__PURE__*/react.createElement("tbody", null, data.hasOwnProperty('fields') ? data.fields.map(function (item, i) {
         return /*#__PURE__*/react.createElement(TableRow, {
           key: "row" + i,
+          headerLabel: _headers,
           data: item
         });
       }) : ""))));
@@ -62568,21 +64045,12 @@ var data5 = {
     style: {
       marginRight: ".5rem"
     },
-    width: "15",
-    viewBox: "0 0 392.186 392.186"
-  }, /*#__PURE__*/react.createElement("g", null, /*#__PURE__*/react.createElement("g", null, /*#__PURE__*/react.createElement("g", null, /*#__PURE__*/react.createElement("path", {
+    width: "16",
+    viewBox: "0 0 122.88 91.26"
+  }, /*#__PURE__*/react.createElement("path", {
     fill: "#d2d2d2",
-    d: "M368.62,17.951H23.568C10.57,17.951,0,28.524,0,41.52v309.146c0,12.996,10.57,23.568,23.568,23.568h345.053c12.994,0,23.564-10.572,23.564-23.568V41.52C392.188,28.525,381.614,17.951,368.62,17.951z M297.56,57.528c0-4.806,3.896-8.703,8.701-8.703h8.703c4.808,0,8.701,3.896,8.701,8.703v9.863c0,4.806-3.896,8.702-8.701,8.702h-8.703c-4.805,0-8.701-3.896-8.701-8.702V57.528z M257.093,57.528c0-4.806,3.898-8.703,8.703-8.703h8.701c4.805,0,8.703,3.896,8.703,8.703v9.863c0,4.806-3.898,8.702-8.703,8.702h-8.701c-4.805,0-8.703-3.896-8.703-8.702V57.528z M363.903,345.951H28.282V102.235h335.621V345.951L363.903,345.951z M364.132,67.391c0,4.806-3.896,8.702-8.701,8.702h-8.703c-4.809,0-8.702-3.896-8.702-8.702v-9.863c0-4.806,3.896-8.703,8.702-8.703h8.703c4.806,0,8.701,3.896,8.701,8.703V67.391z"
-  }), /*#__PURE__*/react.createElement("path", {
-    fill: "#d2d2d2",
-    d: "M84.185,233.284l63.084,29.336c1.631,0.755,3.367,1.138,5.162,1.138c2.338,0,4.617-0.664,6.598-1.924c3.547-2.267,5.666-6.13,5.666-10.334v-0.322c0-4.752-2.785-9.116-7.096-11.118l-39.455-18.332l39.455-18.334c4.311-2.004,7.096-6.367,7.096-11.117v-0.319c0-4.21-2.119-8.075-5.666-10.334c-1.961-1.253-4.246-1.916-6.605-1.916c-1.779,0-3.563,0.391-5.16,1.133l-63.08,29.333c-4.307,2.004-7.09,6.369-7.09,11.117v0.877C77.093,226.909,79.874,231.272,84.185,233.284z"
-  }), /*#__PURE__*/react.createElement("path", {
-    fill: "#d2d2d2",
-    d: "M165.257,293.036c2.301,3.149,6.002,5.03,9.9,5.03h0.316c5.352,0,10.041-3.426,11.672-8.517L228.7,160.788c1.192-3.716,0.531-7.818-1.771-10.973c-2.301-3.15-6.002-5.03-9.901-5.03h-0.315c-5.354,0-10.048,3.425-11.679,8.516l-41.559,128.771C162.292,285.793,162.958,289.889,165.257,293.036z"
-  }), /*#__PURE__*/react.createElement("path", {
-    fill: "#d2d2d2",
-    d: "M227.49,192.276c0,4.745,2.783,9.109,7.095,11.123l39.455,18.329l-39.455,18.33c-4.31,2.004-7.095,6.368-7.095,11.118v0.322c0,4.205,2.117,8.068,5.668,10.336c1.974,1.258,4.254,1.924,6.595,1.924c1.793,0,3.528-0.383,5.17-1.142l63.08-29.335c4.307-2.009,7.09-6.372,7.09-11.115v-0.877c0-4.748-2.783-9.113-7.094-11.117l-63.08-29.333c-1.591-0.74-3.373-1.131-5.152-1.131c-2.355,0-4.643,0.661-6.604,1.912c-3.551,2.263-5.67,6.127-5.67,10.337v0.318H227.49L227.49,192.276z"
-  }))))), "Docs on GitHub"))))))), /*#__PURE__*/react.createElement("section", {
+    d: "M8.32,0h106.24c4.58,0,8.32,3.74,8.32,8.32v74.62c0,4.57-3.74,8.32-8.32,8.32H8.32C3.74,91.26,0,87.51,0,82.94 V8.32C0,3.74,3.74,0,8.32,0L8.32,0z M54.46,72.22L32,58.61v-8.63l22.46-13.61v10.26l-13.65,7.69l13.65,7.7V72.22L54.46,72.22z M68.42,72.22l22.46-13.61v-8.63L68.42,36.37v10.26l13.65,7.69l-13.65,7.7V72.22L68.42,72.22z M117.97,23.29H5.29v60.46 c0,0.64,0.25,1.2,0.67,1.63c0.42,0.42,0.99,0.67,1.63,0.67h108.04c0.64,0,1.2-0.25,1.63-0.67c0.43-0.43,0.67-0.99,0.67-1.63V23.29 H117.97L117.97,23.29z M106.64,9.35c2.27,0,4.11,1.84,4.11,4.11c0,2.27-1.84,4.11-4.11,4.11c-2.27,0-4.11-1.84-4.11-4.11 C102.54,11.19,104.38,9.35,106.64,9.35L106.64,9.35z M78.8,9.35c2.27,0,4.11,1.84,4.11,4.11c0,2.27-1.84,4.11-4.11,4.11 c-2.27,0-4.11-1.84-4.11-4.11C74.69,11.19,76.53,9.35,78.8,9.35L78.8,9.35z M92.72,9.35c2.27,0,4.11,1.84,4.11,4.11 c0,2.27-1.84,4.11-4.11,4.11c-2.27,0-4.11-1.84-4.11-4.11C88.61,11.19,90.45,9.35,92.72,9.35L92.72,9.35z"
+  })), "Docs on GitHub"))))))), /*#__PURE__*/react.createElement("section", {
     className: "uix-spacing--s uix-spacing--no-bottom"
   }, /*#__PURE__*/react.createElement("div", {
     className: "container"
@@ -62633,7 +64101,7 @@ var data5 = {
     className: "col-12"
   }, /*#__PURE__*/react.createElement("h3", {
     className: "app-header-title"
-  }, "Responsive Table"), /*#__PURE__*/react.createElement("hr", null))))), /*#__PURE__*/react.createElement("section", {
+  }, "Responsive Table"), /*#__PURE__*/react.createElement("p", null, "Change window size to watch."), /*#__PURE__*/react.createElement("hr", null))))), /*#__PURE__*/react.createElement("section", {
     className: "uix-spacing--s"
   }, /*#__PURE__*/react.createElement("div", {
     className: "container"
@@ -62687,7 +64155,7 @@ var data5 = {
     className: "text-wrap"
   }, "{\"headers\": [\"No.\",\"Name\"],\"fields\":[[{\"cols\": 1, \"content\": \"01\" },{\"cols\": 1, \"content\": \"David Lin\" }],[{\"cols\": 1, \"content\": \"02\" },{\"cols\": 1, \"content\": \"Tom McFarlin\" }]]}"), " ", /*#__PURE__*/react.createElement("br", null), /*#__PURE__*/react.createElement("strong", null, "usage 3:"), /*#__PURE__*/react.createElement("br", null), /*#__PURE__*/react.createElement("code", {
     className: "text-wrap"
-  }, "{\"fields\":[[{\"cols\": 1, \"content\": \"01\" },{\"cols\": 1, \"content\": \"David Lin\" }],[{\"cols\": 1, \"content\": \"02\" },{\"cols\": 1, \"content\": \"Tom McFarlin\" }],[{\"cols\": 4, \"content\": <><strong style={{background:\"yellow\"}}>A table cell that spans <span style={{color:\"red\"}}>4</span> columns</strong></> }]]}"))), /*#__PURE__*/react.createElement("tr", null, /*#__PURE__*/react.createElement("td", null, /*#__PURE__*/react.createElement("code", null, "bordered")), /*#__PURE__*/react.createElement("td", null, "boolean"), /*#__PURE__*/react.createElement("td", null, "false"), /*#__PURE__*/react.createElement("td", null, "Adds borders on all sides of the table and cells")), /*#__PURE__*/react.createElement("tr", null, /*#__PURE__*/react.createElement("td", null, /*#__PURE__*/react.createElement("code", null, "noborder")), /*#__PURE__*/react.createElement("td", null, "boolean"), /*#__PURE__*/react.createElement("td", null, "false"), /*#__PURE__*/react.createElement("td", null, "Removes all borders on the table and cells, including table header")), /*#__PURE__*/react.createElement("tr", null, /*#__PURE__*/react.createElement("td", null, /*#__PURE__*/react.createElement("code", null, "horizontal")), /*#__PURE__*/react.createElement("td", null, "boolean"), /*#__PURE__*/react.createElement("td", null, "false"), /*#__PURE__*/react.createElement("td", null, "Use the horizontal split effect for each row. Includes a header cell(<th> tag) with this attribute.")), /*#__PURE__*/react.createElement("tr", null, /*#__PURE__*/react.createElement("td", null, /*#__PURE__*/react.createElement("code", null, "alternantRow")), /*#__PURE__*/react.createElement("td", null, "boolean"), /*#__PURE__*/react.createElement("td", null, "false"), /*#__PURE__*/react.createElement("td", null, "Apply alternating row color in dynamically created table")), /*#__PURE__*/react.createElement("tr", null, /*#__PURE__*/react.createElement("td", null, /*#__PURE__*/react.createElement("code", null, "alternantCol")), /*#__PURE__*/react.createElement("td", null, "boolean"), /*#__PURE__*/react.createElement("td", null, "false"), /*#__PURE__*/react.createElement("td", null, "Apply alternating column color in dynamically created table")), /*#__PURE__*/react.createElement("tr", null, /*#__PURE__*/react.createElement("td", null, /*#__PURE__*/react.createElement("code", null, "perLine")), /*#__PURE__*/react.createElement("td", null, "boolean"), /*#__PURE__*/react.createElement("td", null, "false"), /*#__PURE__*/react.createElement("td", null, "Only use the horizontal splitting effect for each row.")), /*#__PURE__*/react.createElement("tr", null, /*#__PURE__*/react.createElement("td", null, /*#__PURE__*/react.createElement("code", null, "responsive")), /*#__PURE__*/react.createElement("td", null, "boolean"), /*#__PURE__*/react.createElement("td", null, "false"), /*#__PURE__*/react.createElement("td", null, "Create responsive tables up to a particular breakpoint.")), /*#__PURE__*/react.createElement("tr", null, /*#__PURE__*/react.createElement("td", null, /*#__PURE__*/react.createElement("code", null, "responsiveWithScrollBar")), /*#__PURE__*/react.createElement("td", null, "boolean"), /*#__PURE__*/react.createElement("td", null, "false"), /*#__PURE__*/react.createElement("td", null, "Create responsive tables up to a particular breakpoint. This property allows scroll bars to be created automatically in the table.", /*#__PURE__*/react.createElement("br", null), /*#__PURE__*/react.createElement("strong", null, "Only one of the ", /*#__PURE__*/react.createElement("code", null, "responsive"), " and ", /*#__PURE__*/react.createElement("code", null, "responsiveWithScrollBar"), " properties is allowed, and both are invalid if set to true."))))), /*#__PURE__*/react.createElement("p", null, "JSON configuration properties of the ", /*#__PURE__*/react.createElement("code", null, "data"), ":"), /*#__PURE__*/react.createElement("div", {
+  }, "{\"fields\":[[{\"cols\": 1, \"content\": \"01\" },{\"cols\": 1, \"content\": \"David Lin\" }],[{\"cols\": 1, \"content\": \"02\" },{\"cols\": 1, \"content\": \"Tom McFarlin\" }],[{\"cols\": 4, \"content\": <><strong style={{background:\"yellow\"}}>A table cell that spans <span style={{color:\"red\"}}>4</span> columns</strong></> }]]}"))), /*#__PURE__*/react.createElement("tr", null, /*#__PURE__*/react.createElement("td", null, /*#__PURE__*/react.createElement("code", null, "bordered")), /*#__PURE__*/react.createElement("td", null, "boolean"), /*#__PURE__*/react.createElement("td", null, "false"), /*#__PURE__*/react.createElement("td", null, "Adds borders on all sides of the table and cells")), /*#__PURE__*/react.createElement("tr", null, /*#__PURE__*/react.createElement("td", null, /*#__PURE__*/react.createElement("code", null, "noborder")), /*#__PURE__*/react.createElement("td", null, "boolean"), /*#__PURE__*/react.createElement("td", null, "false"), /*#__PURE__*/react.createElement("td", null, "Removes all borders on the table and cells, including table header")), /*#__PURE__*/react.createElement("tr", null, /*#__PURE__*/react.createElement("td", null, /*#__PURE__*/react.createElement("code", null, "horizontal")), /*#__PURE__*/react.createElement("td", null, "boolean"), /*#__PURE__*/react.createElement("td", null, "false"), /*#__PURE__*/react.createElement("td", null, "Use the horizontal split effect for each row. Includes a header cell(<th> tag) with this attribute.")), /*#__PURE__*/react.createElement("tr", null, /*#__PURE__*/react.createElement("td", null, /*#__PURE__*/react.createElement("code", null, "alternantRow")), /*#__PURE__*/react.createElement("td", null, "boolean"), /*#__PURE__*/react.createElement("td", null, "false"), /*#__PURE__*/react.createElement("td", null, "Apply alternating row color in dynamically created table")), /*#__PURE__*/react.createElement("tr", null, /*#__PURE__*/react.createElement("td", null, /*#__PURE__*/react.createElement("code", null, "alternantCol")), /*#__PURE__*/react.createElement("td", null, "boolean"), /*#__PURE__*/react.createElement("td", null, "false"), /*#__PURE__*/react.createElement("td", null, "Apply alternating column color in dynamically created table")), /*#__PURE__*/react.createElement("tr", null, /*#__PURE__*/react.createElement("td", null, /*#__PURE__*/react.createElement("code", null, "perLine")), /*#__PURE__*/react.createElement("td", null, "boolean"), /*#__PURE__*/react.createElement("td", null, "false"), /*#__PURE__*/react.createElement("td", null, "Only use the horizontal splitting effect for each row.")), /*#__PURE__*/react.createElement("tr", null, /*#__PURE__*/react.createElement("td", null, /*#__PURE__*/react.createElement("code", null, "responsive")), /*#__PURE__*/react.createElement("td", null, "boolean"), /*#__PURE__*/react.createElement("td", null, "false"), /*#__PURE__*/react.createElement("td", null, "Create responsive tables up to a particular breakpoint.")), /*#__PURE__*/react.createElement("tr", null, /*#__PURE__*/react.createElement("td", null, /*#__PURE__*/react.createElement("code", null, "responsiveWithScrollBar")), /*#__PURE__*/react.createElement("td", null, "boolean"), /*#__PURE__*/react.createElement("td", null, "false"), /*#__PURE__*/react.createElement("td", null, "Create responsive tables up to a particular breakpoint. This property allows scroll bars to be created automatically in the table.", /*#__PURE__*/react.createElement("br", null), /*#__PURE__*/react.createElement("strong", null, "Only one of the ", /*#__PURE__*/react.createElement("code", null, "responsive"), " and ", /*#__PURE__*/react.createElement("code", null, "responsiveWithScrollBar"), " properties is allowed, and both are invalid if set to true.")))))), /*#__PURE__*/react.createElement("p", null, "JSON configuration properties of the ", /*#__PURE__*/react.createElement("code", null, "data"), ":"), /*#__PURE__*/react.createElement("div", {
     className: "table-responsive-md"
   }, /*#__PURE__*/react.createElement("table", {
     className: "table table-bordered table-striped mb-5"
@@ -62695,38 +64163,18 @@ var data5 = {
     className: "text-wrap"
   }, "[[{\"cols\": 1, \"content\": \"01\" },{\"cols\": 1, \"content\": \"David Lin\" }],[{\"cols\": 1, \"content\": \"02\" },{\"cols\": 1, \"content\": \"Tom McFarlin\" }]]"))), /*#__PURE__*/react.createElement("tr", null, /*#__PURE__*/react.createElement("td", null, /*#__PURE__*/react.createElement("code", null, "headers")), /*#__PURE__*/react.createElement("td", null, "array"), /*#__PURE__*/react.createElement("td", null, "-"), /*#__PURE__*/react.createElement("td", null, "Defines a header cell in an HTML table. Eg. ", /*#__PURE__*/react.createElement("code", {
     className: "text-wrap"
-  }, "[\"No.\",\"Name\"]")))))))))))));
+  }, "[\"No.\",\"Name\"]"))))))))))));
 });
-;// CONCATENATED MODULE: ./src/client/components/TableGrid/index.tsx
+;// CONCATENATED MODULE: ./src/client/components/TableGrid/TableGridField.tsx
 
 
 
 
 
 
+function TableGridField_createSuper(Derived) { var hasNativeReflectConstruct = TableGridField_isNativeReflectConstruct(); return function _createSuperInternal() { var Super = _getPrototypeOf(Derived), result; if (hasNativeReflectConstruct) { var NewTarget = _getPrototypeOf(this).constructor; result = Reflect.construct(Super, arguments, NewTarget); } else { result = Super.apply(this, arguments); } return _possibleConstructorReturn(this, result); }; }
 
-var TableGrid_excluded = ["data", "id"];
-
-function TableGrid_createSuper(Derived) { var hasNativeReflectConstruct = TableGrid_isNativeReflectConstruct(); return function _createSuperInternal() { var Super = _getPrototypeOf(Derived), result; if (hasNativeReflectConstruct) { var NewTarget = _getPrototypeOf(this).constructor; result = Reflect.construct(Super, arguments, NewTarget); } else { result = Super.apply(this, arguments); } return _possibleConstructorReturn(this, result); }; }
-
-function TableGrid_isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Reflect.construct) return false; if (Reflect.construct.sham) return false; if (typeof Proxy === "function") return true; try { Boolean.prototype.valueOf.call(Reflect.construct(Boolean, [], function () {})); return true; } catch (e) { return false; } }
-
-/* 
- *************************************
- * <!-- Table Grid -->
- *************************************
- */
-
-/*-- Apply Third-party plugins (import location should be in front of "global scripts and styles") --*/
-
-
-
-
-/*-- Apply global scripts and styles --*/
-
-
-
-/*-- Apply this component styles --*/
+function TableGridField_isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Reflect.construct) return false; if (Reflect.construct.sham) return false; if (typeof Proxy === "function") return true; try { Boolean.prototype.valueOf.call(Reflect.construct(Boolean, [], function () {})); return true; } catch (e) { return false; } }
 
 
 /* Table Grid Field
@@ -62735,7 +64183,7 @@ function TableGrid_isNativeReflectConstruct() { if (typeof Reflect === "undefine
 var TableGridField = /*#__PURE__*/function (_Component) {
   _inherits(TableGridField, _Component);
 
-  var _super = TableGrid_createSuper(TableGridField);
+  var _super = TableGridField_createSuper(TableGridField);
 
   function TableGridField(props) {
     _classCallCheck(this, TableGridField);
@@ -62758,19 +64206,43 @@ var TableGridField = /*#__PURE__*/function (_Component) {
 
   return TableGridField;
 }(react.Component);
+
+
+;// CONCATENATED MODULE: ./src/client/components/TableGrid/TableGridRow.tsx
+
+
+
+
+
+
+
+
+function TableGridRow_createSuper(Derived) { var hasNativeReflectConstruct = TableGridRow_isNativeReflectConstruct(); return function _createSuperInternal() { var Super = _getPrototypeOf(Derived), result; if (hasNativeReflectConstruct) { var NewTarget = _getPrototypeOf(this).constructor; result = Reflect.construct(Super, arguments, NewTarget); } else { result = Super.apply(this, arguments); } return _possibleConstructorReturn(this, result); }; }
+
+function TableGridRow_isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Reflect.construct) return false; if (Reflect.construct.sham) return false; if (typeof Proxy === "function") return true; try { Boolean.prototype.valueOf.call(Reflect.construct(Boolean, [], function () {})); return true; } catch (e) { return false; } }
+
+
+
+
 /* Table Grid Row
 -------------------------------------------------*/
 
+var TableGridRow = /*#__PURE__*/function (_Component) {
+  _inherits(TableGridRow, _Component);
 
-var TableGridRow = /*#__PURE__*/function (_Component2) {
-  _inherits(TableGridRow, _Component2);
-
-  var _super2 = TableGrid_createSuper(TableGridRow);
+  var _super = TableGridRow_createSuper(TableGridRow);
 
   function TableGridRow(props) {
+    var _this;
+
     _classCallCheck(this, TableGridRow);
 
-    return _super2.call(this, props);
+    _this = _super.call(this, props);
+
+    _defineProperty(_assertThisInitialized(_this), "uniqueID", void 0);
+
+    _this.uniqueID = 'app-' + helpers.GUID.create();
+    return _this;
   }
 
   _createClass(TableGridRow, [{
@@ -62791,26 +64263,49 @@ var TableGridRow = /*#__PURE__*/function (_Component2) {
       return /*#__PURE__*/react.createElement(react.Fragment, null, /*#__PURE__*/react.createElement("div", {
         className: rowClasses,
         role: "row",
-        id: 'app-table-grid-field-row' + helpers.GUID.create()
+        id: this.uniqueID
       }, fields));
     }
   }]);
 
   return TableGridRow;
 }(react.Component);
+
+
+;// CONCATENATED MODULE: ./src/client/components/TableGrid/TableGridHeaders.tsx
+
+
+
+
+
+
+
+
+function TableGridHeaders_createSuper(Derived) { var hasNativeReflectConstruct = TableGridHeaders_isNativeReflectConstruct(); return function _createSuperInternal() { var Super = _getPrototypeOf(Derived), result; if (hasNativeReflectConstruct) { var NewTarget = _getPrototypeOf(this).constructor; result = Reflect.construct(Super, arguments, NewTarget); } else { result = Super.apply(this, arguments); } return _possibleConstructorReturn(this, result); }; }
+
+function TableGridHeaders_isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Reflect.construct) return false; if (Reflect.construct.sham) return false; if (typeof Proxy === "function") return true; try { Boolean.prototype.valueOf.call(Reflect.construct(Boolean, [], function () {})); return true; } catch (e) { return false; } }
+
+
+
 /* Table Grid Headers
 -------------------------------------------------*/
 
+var TableGridHeaders = /*#__PURE__*/function (_Component) {
+  _inherits(TableGridHeaders, _Component);
 
-var TableGridHeaders = /*#__PURE__*/function (_Component3) {
-  _inherits(TableGridHeaders, _Component3);
-
-  var _super3 = TableGrid_createSuper(TableGridHeaders);
+  var _super = TableGridHeaders_createSuper(TableGridHeaders);
 
   function TableGridHeaders(props) {
+    var _this;
+
     _classCallCheck(this, TableGridHeaders);
 
-    return _super3.call(this, props);
+    _this = _super.call(this, props);
+
+    _defineProperty(_assertThisInitialized(_this), "uniqueID", void 0);
+
+    _this.uniqueID = 'app-' + helpers.GUID.create();
+    return _this;
   }
 
   _createClass(TableGridHeaders, [{
@@ -62820,7 +64315,7 @@ var TableGridHeaders = /*#__PURE__*/function (_Component3) {
         return /*#__PURE__*/react.createElement(react.Fragment, null, /*#__PURE__*/react.createElement("div", {
           className: "uix-table-grid__head",
           role: "row",
-          id: 'app-table-grid-columnheader' + helpers.GUID.create()
+          id: this.uniqueID
         }, this.props.data.map(function (item, i) {
           return /*#__PURE__*/react.createElement("div", {
             key: "columnheader" + i,
@@ -62840,19 +64335,59 @@ var TableGridHeaders = /*#__PURE__*/function (_Component3) {
 
   return TableGridHeaders;
 }(react.Component);
-/* Table Grid Grid Component 
--------------------------------------------------*/
 
 
-var TableGrid = /*#__PURE__*/function (_Component4) {
-  _inherits(TableGrid, _Component4);
+;// CONCATENATED MODULE: ./src/client/components/TableGrid/index.tsx
 
-  var _super4 = TableGrid_createSuper(TableGrid);
+
+
+
+
+
+
+
+function TableGrid_createSuper(Derived) { var hasNativeReflectConstruct = TableGrid_isNativeReflectConstruct(); return function _createSuperInternal() { var Super = _getPrototypeOf(Derived), result; if (hasNativeReflectConstruct) { var NewTarget = _getPrototypeOf(this).constructor; result = Reflect.construct(Super, arguments, NewTarget); } else { result = Super.apply(this, arguments); } return _possibleConstructorReturn(this, result); }; }
+
+function TableGrid_isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Reflect.construct) return false; if (Reflect.construct.sham) return false; if (typeof Proxy === "function") return true; try { Boolean.prototype.valueOf.call(Reflect.construct(Boolean, [], function () {})); return true; } catch (e) { return false; } }
+
+/* 
+ *************************************
+ * <!-- Table Grid -->
+ *************************************
+ */
+
+/*-- Apply Third-party plugins (import location should be in front of "global scripts and styles") --*/
+
+
+
+
+/*-- Apply global scripts and styles --*/
+
+
+
+/*-- Apply this component styles --*/
+
+ //
+
+
+
+
+var TableGrid = /*#__PURE__*/function (_Component) {
+  _inherits(TableGrid, _Component);
+
+  var _super = TableGrid_createSuper(TableGrid);
 
   function TableGrid(props) {
+    var _this;
+
     _classCallCheck(this, TableGrid);
 
-    return _super4.call(this, props);
+    _this = _super.call(this, props);
+
+    _defineProperty(_assertThisInitialized(_this), "uniqueID", void 0);
+
+    _this.uniqueID = 'app-' + helpers.GUID.create();
+    return _this;
   }
 
   _createClass(TableGrid, [{
@@ -62860,17 +64395,15 @@ var TableGrid = /*#__PURE__*/function (_Component4) {
     value: function render() {
       var _this$props = this.props,
           data = _this$props.data,
-          id = _this$props.id,
-          attributes = _objectWithoutProperties(_this$props, TableGrid_excluded);
+          id = _this$props.id;
 
       var _headers = data.hasOwnProperty('headers') ? data.headers : false;
 
-      return /*#__PURE__*/react.createElement(react.Fragment, null, /*#__PURE__*/react.createElement("div", extends_extends({
+      return /*#__PURE__*/react.createElement(react.Fragment, null, /*#__PURE__*/react.createElement("div", {
         className: "uix-table-grid",
-        id: id || 'app-table-grid-' + helpers.GUID.create()
-      }, attributes, {
+        id: id || this.uniqueID,
         role: "grid"
-      }), /*#__PURE__*/react.createElement(TableGridHeaders, {
+      }, /*#__PURE__*/react.createElement(TableGridHeaders, {
         data: _headers
       }), /*#__PURE__*/react.createElement("div", {
         className: "uix-table-grid__body",
@@ -62977,21 +64510,12 @@ var TableGridDemo_data1 = {
     style: {
       marginRight: ".5rem"
     },
-    width: "15",
-    viewBox: "0 0 392.186 392.186"
-  }, /*#__PURE__*/react.createElement("g", null, /*#__PURE__*/react.createElement("g", null, /*#__PURE__*/react.createElement("g", null, /*#__PURE__*/react.createElement("path", {
+    width: "16",
+    viewBox: "0 0 122.88 91.26"
+  }, /*#__PURE__*/react.createElement("path", {
     fill: "#d2d2d2",
-    d: "M368.62,17.951H23.568C10.57,17.951,0,28.524,0,41.52v309.146c0,12.996,10.57,23.568,23.568,23.568h345.053c12.994,0,23.564-10.572,23.564-23.568V41.52C392.188,28.525,381.614,17.951,368.62,17.951z M297.56,57.528c0-4.806,3.896-8.703,8.701-8.703h8.703c4.808,0,8.701,3.896,8.701,8.703v9.863c0,4.806-3.896,8.702-8.701,8.702h-8.703c-4.805,0-8.701-3.896-8.701-8.702V57.528z M257.093,57.528c0-4.806,3.898-8.703,8.703-8.703h8.701c4.805,0,8.703,3.896,8.703,8.703v9.863c0,4.806-3.898,8.702-8.703,8.702h-8.701c-4.805,0-8.703-3.896-8.703-8.702V57.528z M363.903,345.951H28.282V102.235h335.621V345.951L363.903,345.951z M364.132,67.391c0,4.806-3.896,8.702-8.701,8.702h-8.703c-4.809,0-8.702-3.896-8.702-8.702v-9.863c0-4.806,3.896-8.703,8.702-8.703h8.703c4.806,0,8.701,3.896,8.701,8.703V67.391z"
-  }), /*#__PURE__*/react.createElement("path", {
-    fill: "#d2d2d2",
-    d: "M84.185,233.284l63.084,29.336c1.631,0.755,3.367,1.138,5.162,1.138c2.338,0,4.617-0.664,6.598-1.924c3.547-2.267,5.666-6.13,5.666-10.334v-0.322c0-4.752-2.785-9.116-7.096-11.118l-39.455-18.332l39.455-18.334c4.311-2.004,7.096-6.367,7.096-11.117v-0.319c0-4.21-2.119-8.075-5.666-10.334c-1.961-1.253-4.246-1.916-6.605-1.916c-1.779,0-3.563,0.391-5.16,1.133l-63.08,29.333c-4.307,2.004-7.09,6.369-7.09,11.117v0.877C77.093,226.909,79.874,231.272,84.185,233.284z"
-  }), /*#__PURE__*/react.createElement("path", {
-    fill: "#d2d2d2",
-    d: "M165.257,293.036c2.301,3.149,6.002,5.03,9.9,5.03h0.316c5.352,0,10.041-3.426,11.672-8.517L228.7,160.788c1.192-3.716,0.531-7.818-1.771-10.973c-2.301-3.15-6.002-5.03-9.901-5.03h-0.315c-5.354,0-10.048,3.425-11.679,8.516l-41.559,128.771C162.292,285.793,162.958,289.889,165.257,293.036z"
-  }), /*#__PURE__*/react.createElement("path", {
-    fill: "#d2d2d2",
-    d: "M227.49,192.276c0,4.745,2.783,9.109,7.095,11.123l39.455,18.329l-39.455,18.33c-4.31,2.004-7.095,6.368-7.095,11.118v0.322c0,4.205,2.117,8.068,5.668,10.336c1.974,1.258,4.254,1.924,6.595,1.924c1.793,0,3.528-0.383,5.17-1.142l63.08-29.335c4.307-2.009,7.09-6.372,7.09-11.115v-0.877c0-4.748-2.783-9.113-7.094-11.117l-63.08-29.333c-1.591-0.74-3.373-1.131-5.152-1.131c-2.355,0-4.643,0.661-6.604,1.912c-3.551,2.263-5.67,6.127-5.67,10.337v0.318H227.49L227.49,192.276z"
-  }))))), "Docs on GitHub"))))))), /*#__PURE__*/react.createElement("section", {
+    d: "M8.32,0h106.24c4.58,0,8.32,3.74,8.32,8.32v74.62c0,4.57-3.74,8.32-8.32,8.32H8.32C3.74,91.26,0,87.51,0,82.94 V8.32C0,3.74,3.74,0,8.32,0L8.32,0z M54.46,72.22L32,58.61v-8.63l22.46-13.61v10.26l-13.65,7.69l13.65,7.7V72.22L54.46,72.22z M68.42,72.22l22.46-13.61v-8.63L68.42,36.37v10.26l13.65,7.69l-13.65,7.7V72.22L68.42,72.22z M117.97,23.29H5.29v60.46 c0,0.64,0.25,1.2,0.67,1.63c0.42,0.42,0.99,0.67,1.63,0.67h108.04c0.64,0,1.2-0.25,1.63-0.67c0.43-0.43,0.67-0.99,0.67-1.63V23.29 H117.97L117.97,23.29z M106.64,9.35c2.27,0,4.11,1.84,4.11,4.11c0,2.27-1.84,4.11-4.11,4.11c-2.27,0-4.11-1.84-4.11-4.11 C102.54,11.19,104.38,9.35,106.64,9.35L106.64,9.35z M78.8,9.35c2.27,0,4.11,1.84,4.11,4.11c0,2.27-1.84,4.11-4.11,4.11 c-2.27,0-4.11-1.84-4.11-4.11C74.69,11.19,76.53,9.35,78.8,9.35L78.8,9.35z M92.72,9.35c2.27,0,4.11,1.84,4.11,4.11 c0,2.27-1.84,4.11-4.11,4.11c-2.27,0-4.11-1.84-4.11-4.11C88.61,11.19,90.45,9.35,92.72,9.35L92.72,9.35z"
+  })), "Docs on GitHub"))))))), /*#__PURE__*/react.createElement("section", {
     className: "uix-spacing--s uix-spacing--no-bottom"
   }, /*#__PURE__*/react.createElement("div", {
     className: "container"
@@ -63028,7 +64552,7 @@ var TableGridDemo_data1 = {
     className: "table table-bordered table-striped mb-5"
   }, /*#__PURE__*/react.createElement("thead", null, /*#__PURE__*/react.createElement("tr", null, /*#__PURE__*/react.createElement("th", null, "Property"), /*#__PURE__*/react.createElement("th", null, "Type"), /*#__PURE__*/react.createElement("th", null, "Default"), /*#__PURE__*/react.createElement("th", null, "Description"))), /*#__PURE__*/react.createElement("tbody", null, /*#__PURE__*/react.createElement("tr", null, /*#__PURE__*/react.createElement("td", null, /*#__PURE__*/react.createElement("code", null, "data")), /*#__PURE__*/react.createElement("td", null, "JSON Object Literals"), /*#__PURE__*/react.createElement("td", null, "-"), /*#__PURE__*/react.createElement("td", null, "Specify data of Table as a JSON string format. Such as: ", /*#__PURE__*/react.createElement("strong", null, "usage:"), /*#__PURE__*/react.createElement("br", null), /*#__PURE__*/react.createElement("code", {
     className: "text-wrap"
-  }, "{\"headers\": [\"COLUMN TITLE 1\",\"COLUMN TITLE 2\"],\"fields\":[{\"selected\": false,\"data\": [{\"cols\": 1, \"content\": \"Row Item Alpha\" },{\"cols\": 1, \"content\": \"Row Item Alpha\" }]},{\"selected\": true,\"data\": [{\"cols\": 1, \"content\": \"Row Item Bravo\" },{\"cols\": 1, \"content\": \"Row Item Bravo\" }]}]}"))))), /*#__PURE__*/react.createElement("p", null, "JSON configuration properties of the ", /*#__PURE__*/react.createElement("code", null, "data"), ":"), /*#__PURE__*/react.createElement("div", {
+  }, "{\"headers\": [\"COLUMN TITLE 1\",\"COLUMN TITLE 2\"],\"fields\":[{\"selected\": false,\"data\": [{\"cols\": 1, \"content\": \"Row Item Alpha\" },{\"cols\": 1, \"content\": \"Row Item Alpha\" }]},{\"selected\": true,\"data\": [{\"cols\": 1, \"content\": \"Row Item Bravo\" },{\"cols\": 1, \"content\": \"Row Item Bravo\" }]}]}")))))), /*#__PURE__*/react.createElement("p", null, "JSON configuration properties of the ", /*#__PURE__*/react.createElement("code", null, "data"), ":"), /*#__PURE__*/react.createElement("div", {
     className: "table-responsive-md"
   }, /*#__PURE__*/react.createElement("table", {
     className: "table table-bordered table-striped mb-5"
@@ -63036,8 +64560,176 @@ var TableGridDemo_data1 = {
     className: "text-wrap"
   }, "[{\"selected\": false,\"data\": [{\"cols\": 1, \"content\": \"Row Item Alpha\" },{\"cols\": 1, \"content\": \"Row Item Alpha\" }]},{\"selected\": true,\"data\": [{\"cols\": 1, \"content\": \"Row Item Bravo\" },{\"cols\": 1, \"content\": \"Row Item Bravo\" }]}]"))), /*#__PURE__*/react.createElement("tr", null, /*#__PURE__*/react.createElement("td", null, /*#__PURE__*/react.createElement("code", null, "headers")), /*#__PURE__*/react.createElement("td", null, "array"), /*#__PURE__*/react.createElement("td", null, "-"), /*#__PURE__*/react.createElement("td", null, "Defines a header cell in an HTML table. Eg. ", /*#__PURE__*/react.createElement("code", {
     className: "text-wrap"
-  }, "[\"COLUMN TITLE 1\",\"COLUMN TITLE 2\"]")))))))))))));
+  }, "[\"COLUMN TITLE 1\",\"COLUMN TITLE 2\"]"))))))))))));
 });
+;// CONCATENATED MODULE: ./src/client/components/TableSorter/TableSorterField.tsx
+
+
+
+
+
+
+function TableSorterField_createSuper(Derived) { var hasNativeReflectConstruct = TableSorterField_isNativeReflectConstruct(); return function _createSuperInternal() { var Super = _getPrototypeOf(Derived), result; if (hasNativeReflectConstruct) { var NewTarget = _getPrototypeOf(this).constructor; result = Reflect.construct(Super, arguments, NewTarget); } else { result = Super.apply(this, arguments); } return _possibleConstructorReturn(this, result); }; }
+
+function TableSorterField_isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Reflect.construct) return false; if (Reflect.construct.sham) return false; if (typeof Proxy === "function") return true; try { Boolean.prototype.valueOf.call(Reflect.construct(Boolean, [], function () {})); return true; } catch (e) { return false; } }
+
+
+/* Table Sorter Field
+-------------------------------------------------*/
+
+var TableSorterField = /*#__PURE__*/function (_Component) {
+  _inherits(TableSorterField, _Component);
+
+  var _super = TableSorterField_createSuper(TableSorterField);
+
+  function TableSorterField(props) {
+    _classCallCheck(this, TableSorterField);
+
+    return _super.call(this, props);
+  }
+
+  _createClass(TableSorterField, [{
+    key: "render",
+    value: function render() {
+      return /*#__PURE__*/react.createElement(react.Fragment, null, /*#__PURE__*/react.createElement("td", {
+        colSpan: this.props.cols,
+        "data-table-row": this.props.index
+      }, this.props.content));
+    }
+  }]);
+
+  return TableSorterField;
+}(react.Component);
+
+
+;// CONCATENATED MODULE: ./src/client/components/TableSorter/TableSorterRow.tsx
+
+
+
+
+
+
+
+
+function TableSorterRow_createSuper(Derived) { var hasNativeReflectConstruct = TableSorterRow_isNativeReflectConstruct(); return function _createSuperInternal() { var Super = _getPrototypeOf(Derived), result; if (hasNativeReflectConstruct) { var NewTarget = _getPrototypeOf(this).constructor; result = Reflect.construct(Super, arguments, NewTarget); } else { result = Super.apply(this, arguments); } return _possibleConstructorReturn(this, result); }; }
+
+function TableSorterRow_isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Reflect.construct) return false; if (Reflect.construct.sham) return false; if (typeof Proxy === "function") return true; try { Boolean.prototype.valueOf.call(Reflect.construct(Boolean, [], function () {})); return true; } catch (e) { return false; } }
+
+
+
+
+/* Table Sorter Row
+-------------------------------------------------*/
+
+var TableSorterRow = /*#__PURE__*/function (_Component) {
+  _inherits(TableSorterRow, _Component);
+
+  var _super = TableSorterRow_createSuper(TableSorterRow);
+
+  function TableSorterRow(props) {
+    var _this;
+
+    _classCallCheck(this, TableSorterRow);
+
+    _this = _super.call(this, props);
+
+    _defineProperty(_assertThisInitialized(_this), "uniqueID", void 0);
+
+    _this.uniqueID = 'app-' + helpers.GUID.create();
+    return _this;
+  }
+
+  _createClass(TableSorterRow, [{
+    key: "render",
+    value: function render() {
+      var fields = this.props.data.map(function (el, i) {
+        return /*#__PURE__*/react.createElement(TableSorterField, {
+          key: "field" + i,
+          index: i,
+          cols: el.cols,
+          content: el.content
+        });
+      });
+      return /*#__PURE__*/react.createElement(react.Fragment, null, /*#__PURE__*/react.createElement("tr", {
+        id: this.uniqueID
+      }, fields));
+    }
+  }]);
+
+  return TableSorterRow;
+}(react.Component);
+
+
+;// CONCATENATED MODULE: ./src/client/components/TableSorter/TableSorterHeaders.tsx
+
+
+
+
+
+
+
+
+function TableSorterHeaders_createSuper(Derived) { var hasNativeReflectConstruct = TableSorterHeaders_isNativeReflectConstruct(); return function _createSuperInternal() { var Super = _getPrototypeOf(Derived), result; if (hasNativeReflectConstruct) { var NewTarget = _getPrototypeOf(this).constructor; result = Reflect.construct(Super, arguments, NewTarget); } else { result = Super.apply(this, arguments); } return _possibleConstructorReturn(this, result); }; }
+
+function TableSorterHeaders_isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Reflect.construct) return false; if (Reflect.construct.sham) return false; if (typeof Proxy === "function") return true; try { Boolean.prototype.valueOf.call(Reflect.construct(Boolean, [], function () {})); return true; } catch (e) { return false; } }
+
+
+
+/* Table Sorter Headers
+-------------------------------------------------*/
+
+var TableSorterHeaders = /*#__PURE__*/function (_Component) {
+  _inherits(TableSorterHeaders, _Component);
+
+  var _super = TableSorterHeaders_createSuper(TableSorterHeaders);
+
+  function TableSorterHeaders(props) {
+    var _this;
+
+    _classCallCheck(this, TableSorterHeaders);
+
+    _this = _super.call(this, props);
+
+    _defineProperty(_assertThisInitialized(_this), "uniqueID", void 0);
+
+    _this.uniqueID = 'app-' + helpers.GUID.create();
+    return _this;
+  }
+
+  _createClass(TableSorterHeaders, [{
+    key: "render",
+    value: function render() {
+      var _this2 = this;
+
+      if (this.props.data) {
+        return /*#__PURE__*/react.createElement(react.Fragment, null, /*#__PURE__*/react.createElement("thead", null, /*#__PURE__*/react.createElement("tr", {
+          id: this.uniqueID
+        }, this.props.data.map(function (item, i) {
+          return /*#__PURE__*/react.createElement("th", {
+            "data-sort-type": item.type,
+            "data-table-row": i,
+            key: "header" + i,
+            onClick: _this2.props.clickEv,
+            style: item.type ? {
+              cursor: "pointer"
+            } : {}
+          }, item.type ? /*#__PURE__*/react.createElement(react.Fragment, null, /*#__PURE__*/react.createElement("span", {
+            className: "uix-table-sorter",
+            style: {
+              pointerEvents: "none"
+            }
+          }, item.content)) : /*#__PURE__*/react.createElement(react.Fragment, null, item.content));
+        }))));
+      } else {
+        return /*#__PURE__*/react.createElement(react.Fragment, null);
+      }
+    }
+  }]);
+
+  return TableSorterHeaders;
+}(react.Component);
+
+
 ;// CONCATENATED MODULE: ./src/client/components/TableSorter/index.tsx
 
 
@@ -63046,9 +64738,6 @@ var TableGridDemo_data1 = {
 
 
 
-
-
-var TableSorter_excluded = ["data", "bordered", "noborder", "horizontal", "alternantRow", "alternantCol", "perLine", "responsive", "responsiveWithScrollBar", "id"];
 
 function TableSorter_createSuper(Derived) { var hasNativeReflectConstruct = TableSorter_isNativeReflectConstruct(); return function _createSuperInternal() { var Super = _getPrototypeOf(Derived), result; if (hasNativeReflectConstruct) { var NewTarget = _getPrototypeOf(this).constructor; result = Reflect.construct(Super, arguments, NewTarget); } else { result = Super.apply(this, arguments); } return _possibleConstructorReturn(this, result); }; }
 
@@ -63072,127 +64761,33 @@ function TableSorter_isNativeReflectConstruct() { if (typeof Reflect === "undefi
 /*-- Apply this component styles --*/
 
 
-
-/* Table Sorter Field
--------------------------------------------------*/
-
-var TableSorterField = /*#__PURE__*/function (_Component) {
-  _inherits(TableSorterField, _Component);
-
-  var _super = TableSorter_createSuper(TableSorterField);
-
-  function TableSorterField(props) {
-    _classCallCheck(this, TableSorterField);
-
-    return _super.call(this, props);
-  }
-
-  _createClass(TableSorterField, [{
-    key: "render",
-    value: function render() {
-      return /*#__PURE__*/react.createElement(react.Fragment, null, /*#__PURE__*/react.createElement("td", {
-        colSpan: this.props.cols
-      }, this.props.content));
-    }
-  }]);
-
-  return TableSorterField;
-}(react.Component);
-/* Table Sorter Row
--------------------------------------------------*/
+ //
 
 
-var TableSorterRow = /*#__PURE__*/function (_Component2) {
-  _inherits(TableSorterRow, _Component2);
-
-  var _super2 = TableSorter_createSuper(TableSorterRow);
-
-  function TableSorterRow(props) {
-    _classCallCheck(this, TableSorterRow);
-
-    return _super2.call(this, props);
-  }
-
-  _createClass(TableSorterRow, [{
-    key: "render",
-    value: function render() {
-      var fields = this.props.data.map(function (el, i) {
-        return /*#__PURE__*/react.createElement(TableSorterField, {
-          key: "field" + i,
-          cols: el.cols,
-          content: el.content
-        });
-      });
-      return /*#__PURE__*/react.createElement(react.Fragment, null, /*#__PURE__*/react.createElement("tr", {
-        id: 'app-table-sorter-field-tr' + helpers.GUID.create()
-      }, fields));
-    }
-  }]);
-
-  return TableSorterRow;
-}(react.Component);
-/* Table Sorter Headers
--------------------------------------------------*/
 
 
-var TableSorterHeaders = /*#__PURE__*/function (_Component3) {
-  _inherits(TableSorterHeaders, _Component3);
+var TableSorter = /*#__PURE__*/function (_Component) {
+  _inherits(TableSorter, _Component);
 
-  var _super3 = TableSorter_createSuper(TableSorterHeaders);
-
-  function TableSorterHeaders(props) {
-    _classCallCheck(this, TableSorterHeaders);
-
-    return _super3.call(this, props);
-  }
-
-  _createClass(TableSorterHeaders, [{
-    key: "render",
-    value: function render() {
-      var _this = this;
-
-      if (this.props.data) {
-        return /*#__PURE__*/react.createElement(react.Fragment, null, /*#__PURE__*/react.createElement("thead", null, /*#__PURE__*/react.createElement("tr", {
-          id: 'app-table-sorter-header-tr' + helpers.GUID.create()
-        }, this.props.data.map(function (item, i) {
-          return /*#__PURE__*/react.createElement("th", {
-            "data-sort-type": item.type,
-            "data-table-row": i,
-            key: "header" + i,
-            onClick: _this.props.clickEv
-          }, item.content);
-        }))));
-      } else {
-        return /*#__PURE__*/react.createElement(react.Fragment, null);
-      }
-    }
-  }]);
-
-  return TableSorterHeaders;
-}(react.Component);
-/* Table Sorter Component 
--------------------------------------------------*/
-
-
-var TableSorter = /*#__PURE__*/function (_Component4) {
-  _inherits(TableSorter, _Component4);
-
-  var _super4 = TableSorter_createSuper(TableSorter);
+  var _super = TableSorter_createSuper(TableSorter);
 
   function TableSorter(props) {
-    var _this2;
+    var _this;
 
     _classCallCheck(this, TableSorter);
 
-    _this2 = _super4.call(this, props);
+    _this = _super.call(this, props);
 
-    _defineProperty(_assertThisInitialized(_this2), "wrapperRef", /*#__PURE__*/react.createRef());
+    _defineProperty(_assertThisInitialized(_this), "rootRef", /*#__PURE__*/react.createRef());
 
-    _defineProperty(_assertThisInitialized(_this2), "inverse", void 0);
+    _defineProperty(_assertThisInitialized(_this), "inverse", void 0);
 
-    _this2.handleSortType = _this2.handleSortType.bind(_assertThisInitialized(_this2));
-    _this2.inverse = false;
-    return _this2;
+    _defineProperty(_assertThisInitialized(_this), "uniqueID", void 0);
+
+    _this.uniqueID = 'app-' + helpers.GUID.create();
+    _this.handleSortType = _this.handleSortType.bind(_assertThisInitialized(_this));
+    _this.inverse = false;
+    return _this;
   }
 
   _createClass(TableSorter, [{
@@ -63200,7 +64795,7 @@ var TableSorter = /*#__PURE__*/function (_Component4) {
     value: function handleSortType(e) {
       e.preventDefault();
       var self = this;
-      var wrapper = self.wrapperRef.current;
+      var wrapper = self.rootRef.current;
 
       var el = helpers(e.target);
 
@@ -63247,33 +64842,6 @@ var TableSorter = /*#__PURE__*/function (_Component4) {
       }
     }
   }, {
-    key: "componentDidMount",
-    value: function componentDidMount() {
-      var self = this;
-
-      helpers(document).ready(function () {
-        var reactDomEl = self.wrapperRef.current;
-
-        var $el = helpers(reactDomEl); //Add an identifier so that the mobile terminal can compare by row
-
-
-        $el.find('tbody tr').each(function (index) {
-          helpers(this).find('> td').each(function (index) {
-            helpers(this).data('table-row', index);
-          });
-        }); //Filter functions
-
-        $el.find('thead tr [data-sort-type]').each(function () {
-          //add arrows
-          if (helpers(this).find('.uix-table-sorter').length == 0 && helpers(this).data('sort-type') !== false) {
-            helpers(this).css('cursor', 'pointer');
-
-            helpers(this).wrapInner('<span class="uix-table-sorter" style="pointer-events: none;" />');
-          }
-        });
-      });
-    }
-  }, {
     key: "render",
     value: function render() {
       var _this$props = this.props,
@@ -63286,8 +64854,7 @@ var TableSorter = /*#__PURE__*/function (_Component4) {
           perLine = _this$props.perLine,
           responsive = _this$props.responsive,
           responsiveWithScrollBar = _this$props.responsiveWithScrollBar,
-          id = _this$props.id,
-          attributes = _objectWithoutProperties(_this$props, TableSorter_excluded);
+          id = _this$props.id;
 
       var _headers = data.hasOwnProperty('headers') ? data.headers : false; //Set the class names of different styles
 
@@ -63301,11 +64868,11 @@ var TableSorter = /*#__PURE__*/function (_Component4) {
       if (perLine) classes += ' uix-table--per-line';
       if (responsive && !responsiveWithScrollBar) classes += ' is-responsive js-uix-table--responsive';
       if (responsiveWithScrollBar && !responsive) classes += ' js-uix-table--responsive-scrolled';
-      return /*#__PURE__*/react.createElement(react.Fragment, null, /*#__PURE__*/react.createElement("div", extends_extends({
-        ref: this.wrapperRef,
+      return /*#__PURE__*/react.createElement(react.Fragment, null, /*#__PURE__*/react.createElement("div", {
+        ref: this.rootRef,
         className: "uix-table" + classes + " js-uix-table-sorter",
-        id: id || 'app-table-sorter-' + helpers.GUID.create()
-      }, attributes), /*#__PURE__*/react.createElement("table", null, /*#__PURE__*/react.createElement(TableSorterHeaders, {
+        id: id || this.uniqueID
+      }, /*#__PURE__*/react.createElement("table", null, /*#__PURE__*/react.createElement(TableSorterHeaders, {
         data: _headers,
         clickEv: this.handleSortType
       }), /*#__PURE__*/react.createElement("tbody", null, data.hasOwnProperty('fields') ? data.fields.map(function (item, i) {
@@ -63488,21 +65055,12 @@ var TableSorterDemo_data1 = {
     style: {
       marginRight: ".5rem"
     },
-    width: "15",
-    viewBox: "0 0 392.186 392.186"
-  }, /*#__PURE__*/react.createElement("g", null, /*#__PURE__*/react.createElement("g", null, /*#__PURE__*/react.createElement("g", null, /*#__PURE__*/react.createElement("path", {
+    width: "16",
+    viewBox: "0 0 122.88 91.26"
+  }, /*#__PURE__*/react.createElement("path", {
     fill: "#d2d2d2",
-    d: "M368.62,17.951H23.568C10.57,17.951,0,28.524,0,41.52v309.146c0,12.996,10.57,23.568,23.568,23.568h345.053c12.994,0,23.564-10.572,23.564-23.568V41.52C392.188,28.525,381.614,17.951,368.62,17.951z M297.56,57.528c0-4.806,3.896-8.703,8.701-8.703h8.703c4.808,0,8.701,3.896,8.701,8.703v9.863c0,4.806-3.896,8.702-8.701,8.702h-8.703c-4.805,0-8.701-3.896-8.701-8.702V57.528z M257.093,57.528c0-4.806,3.898-8.703,8.703-8.703h8.701c4.805,0,8.703,3.896,8.703,8.703v9.863c0,4.806-3.898,8.702-8.703,8.702h-8.701c-4.805,0-8.703-3.896-8.703-8.702V57.528z M363.903,345.951H28.282V102.235h335.621V345.951L363.903,345.951z M364.132,67.391c0,4.806-3.896,8.702-8.701,8.702h-8.703c-4.809,0-8.702-3.896-8.702-8.702v-9.863c0-4.806,3.896-8.703,8.702-8.703h8.703c4.806,0,8.701,3.896,8.701,8.703V67.391z"
-  }), /*#__PURE__*/react.createElement("path", {
-    fill: "#d2d2d2",
-    d: "M84.185,233.284l63.084,29.336c1.631,0.755,3.367,1.138,5.162,1.138c2.338,0,4.617-0.664,6.598-1.924c3.547-2.267,5.666-6.13,5.666-10.334v-0.322c0-4.752-2.785-9.116-7.096-11.118l-39.455-18.332l39.455-18.334c4.311-2.004,7.096-6.367,7.096-11.117v-0.319c0-4.21-2.119-8.075-5.666-10.334c-1.961-1.253-4.246-1.916-6.605-1.916c-1.779,0-3.563,0.391-5.16,1.133l-63.08,29.333c-4.307,2.004-7.09,6.369-7.09,11.117v0.877C77.093,226.909,79.874,231.272,84.185,233.284z"
-  }), /*#__PURE__*/react.createElement("path", {
-    fill: "#d2d2d2",
-    d: "M165.257,293.036c2.301,3.149,6.002,5.03,9.9,5.03h0.316c5.352,0,10.041-3.426,11.672-8.517L228.7,160.788c1.192-3.716,0.531-7.818-1.771-10.973c-2.301-3.15-6.002-5.03-9.901-5.03h-0.315c-5.354,0-10.048,3.425-11.679,8.516l-41.559,128.771C162.292,285.793,162.958,289.889,165.257,293.036z"
-  }), /*#__PURE__*/react.createElement("path", {
-    fill: "#d2d2d2",
-    d: "M227.49,192.276c0,4.745,2.783,9.109,7.095,11.123l39.455,18.329l-39.455,18.33c-4.31,2.004-7.095,6.368-7.095,11.118v0.322c0,4.205,2.117,8.068,5.668,10.336c1.974,1.258,4.254,1.924,6.595,1.924c1.793,0,3.528-0.383,5.17-1.142l63.08-29.335c4.307-2.009,7.09-6.372,7.09-11.115v-0.877c0-4.748-2.783-9.113-7.094-11.117l-63.08-29.333c-1.591-0.74-3.373-1.131-5.152-1.131c-2.355,0-4.643,0.661-6.604,1.912c-3.551,2.263-5.67,6.127-5.67,10.337v0.318H227.49L227.49,192.276z"
-  }))))), "Docs on GitHub"))))))), /*#__PURE__*/react.createElement("section", {
+    d: "M8.32,0h106.24c4.58,0,8.32,3.74,8.32,8.32v74.62c0,4.57-3.74,8.32-8.32,8.32H8.32C3.74,91.26,0,87.51,0,82.94 V8.32C0,3.74,3.74,0,8.32,0L8.32,0z M54.46,72.22L32,58.61v-8.63l22.46-13.61v10.26l-13.65,7.69l13.65,7.7V72.22L54.46,72.22z M68.42,72.22l22.46-13.61v-8.63L68.42,36.37v10.26l13.65,7.69l-13.65,7.7V72.22L68.42,72.22z M117.97,23.29H5.29v60.46 c0,0.64,0.25,1.2,0.67,1.63c0.42,0.42,0.99,0.67,1.63,0.67h108.04c0.64,0,1.2-0.25,1.63-0.67c0.43-0.43,0.67-0.99,0.67-1.63V23.29 H117.97L117.97,23.29z M106.64,9.35c2.27,0,4.11,1.84,4.11,4.11c0,2.27-1.84,4.11-4.11,4.11c-2.27,0-4.11-1.84-4.11-4.11 C102.54,11.19,104.38,9.35,106.64,9.35L106.64,9.35z M78.8,9.35c2.27,0,4.11,1.84,4.11,4.11c0,2.27-1.84,4.11-4.11,4.11 c-2.27,0-4.11-1.84-4.11-4.11C74.69,11.19,76.53,9.35,78.8,9.35L78.8,9.35z M92.72,9.35c2.27,0,4.11,1.84,4.11,4.11 c0,2.27-1.84,4.11-4.11,4.11c-2.27,0-4.11-1.84-4.11-4.11C88.61,11.19,90.45,9.35,92.72,9.35L92.72,9.35z"
+  })), "Docs on GitHub"))))))), /*#__PURE__*/react.createElement("section", {
     className: "uix-spacing--s uix-spacing--no-bottom"
   }, /*#__PURE__*/react.createElement("div", {
     className: "container"
@@ -63541,7 +65099,7 @@ var TableSorterDemo_data1 = {
     className: "table table-bordered table-striped mb-5"
   }, /*#__PURE__*/react.createElement("thead", null, /*#__PURE__*/react.createElement("tr", null, /*#__PURE__*/react.createElement("th", null, "Property"), /*#__PURE__*/react.createElement("th", null, "Type"), /*#__PURE__*/react.createElement("th", null, "Default"), /*#__PURE__*/react.createElement("th", null, "Description"))), /*#__PURE__*/react.createElement("tbody", null, /*#__PURE__*/react.createElement("tr", null, /*#__PURE__*/react.createElement("td", null, /*#__PURE__*/react.createElement("code", null, "data")), /*#__PURE__*/react.createElement("td", null, "JSON Object Literals"), /*#__PURE__*/react.createElement("td", null, "-"), /*#__PURE__*/react.createElement("td", null, "Specify data of Table as a JSON string format. Such as: ", /*#__PURE__*/react.createElement("br", null), /*#__PURE__*/react.createElement("strong", null, "usage:"), /*#__PURE__*/react.createElement("br", null), /*#__PURE__*/react.createElement("code", {
     className: "text-wrap"
-  }, "{\"headers\": [{\"type\": false, \"content\": \"Index\" },{\"type\": \"number\", \"content\": \"Money\" },{\"type\": \"text\", \"content\": \"Name\" },{\"type\": \"number\", \"content\": \"No.\" },{\"type\": \"date\", \"content\": \"Date1\" },{\"type\": \"date\", \"content\": \"Date2\" }],\"fields\":[[{\"cols\":1,\"content\":\"1\"},{\"cols\":1,\"content\":\"$55.134\"},{\"cols\":1,\"content\":\"David Lin\"},{\"cols\":1,\"content\":\"3453434\"},{\"cols\":1,\"content\":\"2012-09-25T12:10:46+00:00\"},{\"cols\":1,\"content\":\"May 22, 2003\"}],[{\"cols\":1,\"content\":\"2\"},{\"cols\":1,\"content\":\"$255.12\"},{\"cols\":1,\"content\":\"Co Cheey\"},{\"cols\":1,\"content\":\"-2324.343\"},{\"cols\":1,\"content\":\"2013-09-10T12:10:46+00:00\"},{\"cols\":1,\"content\":\"September 13, 2013\"}]]}"))), /*#__PURE__*/react.createElement("tr", null, /*#__PURE__*/react.createElement("td", null, /*#__PURE__*/react.createElement("code", null, "bordered")), /*#__PURE__*/react.createElement("td", null, "boolean"), /*#__PURE__*/react.createElement("td", null, "false"), /*#__PURE__*/react.createElement("td", null, "Adds borders on all sides of the table and cells")), /*#__PURE__*/react.createElement("tr", null, /*#__PURE__*/react.createElement("td", null, /*#__PURE__*/react.createElement("code", null, "noborder")), /*#__PURE__*/react.createElement("td", null, "boolean"), /*#__PURE__*/react.createElement("td", null, "false"), /*#__PURE__*/react.createElement("td", null, "Removes all borders on the table and cells, including table header")), /*#__PURE__*/react.createElement("tr", null, /*#__PURE__*/react.createElement("td", null, /*#__PURE__*/react.createElement("code", null, "horizontal")), /*#__PURE__*/react.createElement("td", null, "boolean"), /*#__PURE__*/react.createElement("td", null, "false"), /*#__PURE__*/react.createElement("td", null, "Use the horizontal split effect for each row. Includes a header cell(<th> tag) with this attribute.")), /*#__PURE__*/react.createElement("tr", null, /*#__PURE__*/react.createElement("td", null, /*#__PURE__*/react.createElement("code", null, "alternantRow")), /*#__PURE__*/react.createElement("td", null, "boolean"), /*#__PURE__*/react.createElement("td", null, "false"), /*#__PURE__*/react.createElement("td", null, "Apply alternating row color in dynamically created table")), /*#__PURE__*/react.createElement("tr", null, /*#__PURE__*/react.createElement("td", null, /*#__PURE__*/react.createElement("code", null, "alternantCol")), /*#__PURE__*/react.createElement("td", null, "boolean"), /*#__PURE__*/react.createElement("td", null, "false"), /*#__PURE__*/react.createElement("td", null, "Apply alternating column color in dynamically created table")), /*#__PURE__*/react.createElement("tr", null, /*#__PURE__*/react.createElement("td", null, /*#__PURE__*/react.createElement("code", null, "perLine")), /*#__PURE__*/react.createElement("td", null, "boolean"), /*#__PURE__*/react.createElement("td", null, "false"), /*#__PURE__*/react.createElement("td", null, "Only use the horizontal splitting effect for each row.")), /*#__PURE__*/react.createElement("tr", null, /*#__PURE__*/react.createElement("td", null, /*#__PURE__*/react.createElement("code", null, "responsive")), /*#__PURE__*/react.createElement("td", null, "boolean"), /*#__PURE__*/react.createElement("td", null, "false"), /*#__PURE__*/react.createElement("td", null, "Create responsive tables up to a particular breakpoint.")), /*#__PURE__*/react.createElement("tr", null, /*#__PURE__*/react.createElement("td", null, /*#__PURE__*/react.createElement("code", null, "responsiveWithScrollBar")), /*#__PURE__*/react.createElement("td", null, "boolean"), /*#__PURE__*/react.createElement("td", null, "false"), /*#__PURE__*/react.createElement("td", null, "Create responsive tables up to a particular breakpoint. This property allows scroll bars to be created automatically in the table. ", /*#__PURE__*/react.createElement("br", null), /*#__PURE__*/react.createElement("strong", null, "Only one of the ", /*#__PURE__*/react.createElement("code", null, "responsive"), " and ", /*#__PURE__*/react.createElement("code", null, "responsiveWithScrollBar"), " properties is allowed, and both are invalid if set to true."))))), /*#__PURE__*/react.createElement("p", null, "JSON configuration properties of the ", /*#__PURE__*/react.createElement("code", null, "data"), ":"), /*#__PURE__*/react.createElement("div", {
+  }, "{\"headers\": [{\"type\": false, \"content\": \"Index\" },{\"type\": \"number\", \"content\": \"Money\" },{\"type\": \"text\", \"content\": \"Name\" },{\"type\": \"number\", \"content\": \"No.\" },{\"type\": \"date\", \"content\": \"Date1\" },{\"type\": \"date\", \"content\": \"Date2\" }],\"fields\":[[{\"cols\":1,\"content\":\"1\"},{\"cols\":1,\"content\":\"$55.134\"},{\"cols\":1,\"content\":\"David Lin\"},{\"cols\":1,\"content\":\"3453434\"},{\"cols\":1,\"content\":\"2012-09-25T12:10:46+00:00\"},{\"cols\":1,\"content\":\"May 22, 2003\"}],[{\"cols\":1,\"content\":\"2\"},{\"cols\":1,\"content\":\"$255.12\"},{\"cols\":1,\"content\":\"Co Cheey\"},{\"cols\":1,\"content\":\"-2324.343\"},{\"cols\":1,\"content\":\"2013-09-10T12:10:46+00:00\"},{\"cols\":1,\"content\":\"September 13, 2013\"}]]}"))), /*#__PURE__*/react.createElement("tr", null, /*#__PURE__*/react.createElement("td", null, /*#__PURE__*/react.createElement("code", null, "bordered")), /*#__PURE__*/react.createElement("td", null, "boolean"), /*#__PURE__*/react.createElement("td", null, "false"), /*#__PURE__*/react.createElement("td", null, "Adds borders on all sides of the table and cells")), /*#__PURE__*/react.createElement("tr", null, /*#__PURE__*/react.createElement("td", null, /*#__PURE__*/react.createElement("code", null, "noborder")), /*#__PURE__*/react.createElement("td", null, "boolean"), /*#__PURE__*/react.createElement("td", null, "false"), /*#__PURE__*/react.createElement("td", null, "Removes all borders on the table and cells, including table header")), /*#__PURE__*/react.createElement("tr", null, /*#__PURE__*/react.createElement("td", null, /*#__PURE__*/react.createElement("code", null, "horizontal")), /*#__PURE__*/react.createElement("td", null, "boolean"), /*#__PURE__*/react.createElement("td", null, "false"), /*#__PURE__*/react.createElement("td", null, "Use the horizontal split effect for each row. Includes a header cell(<th> tag) with this attribute.")), /*#__PURE__*/react.createElement("tr", null, /*#__PURE__*/react.createElement("td", null, /*#__PURE__*/react.createElement("code", null, "alternantRow")), /*#__PURE__*/react.createElement("td", null, "boolean"), /*#__PURE__*/react.createElement("td", null, "false"), /*#__PURE__*/react.createElement("td", null, "Apply alternating row color in dynamically created table")), /*#__PURE__*/react.createElement("tr", null, /*#__PURE__*/react.createElement("td", null, /*#__PURE__*/react.createElement("code", null, "alternantCol")), /*#__PURE__*/react.createElement("td", null, "boolean"), /*#__PURE__*/react.createElement("td", null, "false"), /*#__PURE__*/react.createElement("td", null, "Apply alternating column color in dynamically created table")), /*#__PURE__*/react.createElement("tr", null, /*#__PURE__*/react.createElement("td", null, /*#__PURE__*/react.createElement("code", null, "perLine")), /*#__PURE__*/react.createElement("td", null, "boolean"), /*#__PURE__*/react.createElement("td", null, "false"), /*#__PURE__*/react.createElement("td", null, "Only use the horizontal splitting effect for each row.")), /*#__PURE__*/react.createElement("tr", null, /*#__PURE__*/react.createElement("td", null, /*#__PURE__*/react.createElement("code", null, "responsive")), /*#__PURE__*/react.createElement("td", null, "boolean"), /*#__PURE__*/react.createElement("td", null, "false"), /*#__PURE__*/react.createElement("td", null, "Create responsive tables up to a particular breakpoint.")), /*#__PURE__*/react.createElement("tr", null, /*#__PURE__*/react.createElement("td", null, /*#__PURE__*/react.createElement("code", null, "responsiveWithScrollBar")), /*#__PURE__*/react.createElement("td", null, "boolean"), /*#__PURE__*/react.createElement("td", null, "false"), /*#__PURE__*/react.createElement("td", null, "Create responsive tables up to a particular breakpoint. This property allows scroll bars to be created automatically in the table. ", /*#__PURE__*/react.createElement("br", null), /*#__PURE__*/react.createElement("strong", null, "Only one of the ", /*#__PURE__*/react.createElement("code", null, "responsive"), " and ", /*#__PURE__*/react.createElement("code", null, "responsiveWithScrollBar"), " properties is allowed, and both are invalid if set to true.")))))), /*#__PURE__*/react.createElement("p", null, "JSON configuration properties of the ", /*#__PURE__*/react.createElement("code", null, "data"), ":"), /*#__PURE__*/react.createElement("div", {
     className: "table-responsive-md"
   }, /*#__PURE__*/react.createElement("table", {
     className: "table table-bordered table-striped mb-5"
@@ -63549,7 +65107,7 @@ var TableSorterDemo_data1 = {
     className: "text-wrap"
   }, "[[{\"cols\":1,\"content\":\"1\"},{\"cols\":1,\"content\":\"$55.134\"},{\"cols\":1,\"content\":\"David Lin\"},{\"cols\":1,\"content\":\"3453434\"},{\"cols\":1,\"content\":\"2012-09-25T12:10:46+00:00\"},{\"cols\":1,\"content\":\"May 22, 2003\"}],[{\"cols\":1,\"content\":\"2\"},{\"cols\":1,\"content\":\"$255.12\"},{\"cols\":1,\"content\":\"Co Cheey\"},{\"cols\":1,\"content\":\"-2324.343\"},{\"cols\":1,\"content\":\"2013-09-10T12:10:46+00:00\"},{\"cols\":1,\"content\":\"September 13, 2013\"}]]"))), /*#__PURE__*/react.createElement("tr", null, /*#__PURE__*/react.createElement("td", null, /*#__PURE__*/react.createElement("code", null, "headers")), /*#__PURE__*/react.createElement("td", null, "array"), /*#__PURE__*/react.createElement("td", null, "-"), /*#__PURE__*/react.createElement("td", null, "Defines a header cell in an HTML table. The key ", /*#__PURE__*/react.createElement("code", null, "type"), " is used to specify the type of sorting for each column (Type of sorted values: ", /*#__PURE__*/react.createElement("code", null, "false"), ", ", /*#__PURE__*/react.createElement("code", null, "'number'"), ", ", /*#__PURE__*/react.createElement("code", null, "'text'"), " or ", /*#__PURE__*/react.createElement("code", null, "'date'"), "). The key ", /*#__PURE__*/react.createElement("code", null, "content"), " is the value of each field. Eg. ", /*#__PURE__*/react.createElement("code", {
     className: "text-wrap"
-  }, "[{\"type\": false, \"content\": \"Index\" },{\"type\": \"number\", \"content\": \"Money\" },{\"type\": \"text\", \"content\": \"Name\" },{\"type\": \"number\", \"content\": \"No.\" },{\"type\": \"date\", \"content\": \"Date1\" },{\"type\": \"date\", \"content\": \"Date2\" }]")))))))))))));
+  }, "[{\"type\": false, \"content\": \"Index\" },{\"type\": \"number\", \"content\": \"Money\" },{\"type\": \"text\", \"content\": \"Name\" },{\"type\": \"number\", \"content\": \"No.\" },{\"type\": \"date\", \"content\": \"Date1\" },{\"type\": \"date\", \"content\": \"Date2\" }]"))))))))))));
 });
 ;// CONCATENATED MODULE: ./src/client/components/ScrollReveal/index.tsx
 
@@ -63596,12 +65154,15 @@ var ScrollReveal = /*#__PURE__*/function (_Component) {
 
     _this = _super.call(this, props);
 
-    _defineProperty(_assertThisInitialized(_this), "wrapperRef", /*#__PURE__*/react.createRef());
+    _defineProperty(_assertThisInitialized(_this), "rootRef", /*#__PURE__*/react.createRef());
 
     _defineProperty(_assertThisInitialized(_this), "windowScrollUpdate", void 0);
 
     _defineProperty(_assertThisInitialized(_this), "tl", void 0);
 
+    _defineProperty(_assertThisInitialized(_this), "uniqueID", void 0);
+
+    _this.uniqueID = 'app-' + helpers.GUID.create();
     _this.tl = new TimelineMax({
       paused: true
     }); // Add a scroll event listener to window
@@ -63614,7 +65175,7 @@ var ScrollReveal = /*#__PURE__*/function (_Component) {
   _createClass(ScrollReveal, [{
     key: "getAnimConfiguration",
     value: function getAnimConfiguration() {
-      var reactDomEl = this.wrapperRef.current;
+      var reactDomEl = this.rootRef.current;
       var config = reactDomEl.dataset.uixAnim;
       config = helpers.validate.isJSON(config) ? JSON.parse(config) : {}; // Set a default configuration
 
@@ -63641,7 +65202,7 @@ var ScrollReveal = /*#__PURE__*/function (_Component) {
     value: function handleScrollEvent() {
       var self = this; //
 
-      var reactDomEl = self.wrapperRef.current;
+      var reactDomEl = self.rootRef.current;
       var config = self.getAnimConfiguration(); //
       //get attributes to tweenMax
 
@@ -63766,37 +65327,38 @@ var ScrollReveal = /*#__PURE__*/function (_Component) {
   }, {
     key: "componentDidMount",
     value: function componentDidMount() {
-      var self = this;
+      var _this2 = this;
+
+      /*
+      	!!!important:
+      	Remember not to use `#${yourcid}` directly, the target of TweenMax will not be found. Please use `#${self.rootRef.current.id}`
+      */
+      var reactDomEl = this.rootRef.current;
+      var config = this.getAnimConfiguration(); //
+      //get attributes to tweenMax
+
+      var fromCSS = config.from,
+          toCSS = config.to,
+          myEase = config.ease,
+          myDuration = config.duration,
+          myDelay = config.delay;
+      this.tl.to(reactDomEl, myDuration, {
+        css: toCSS,
+        ease: myEase,
+        delay: myDelay
+      }); //Initialize the default style
+
+      TweenMax_TweenMax.set(reactDomEl, {
+        css: fromCSS
+      }); // Add function to the element that should be used as the scrollable area.
+
+      window.removeEventListener('scroll', this.windowScrollUpdate);
+      window.removeEventListener('touchmove', this.windowScrollUpdate);
+      window.addEventListener('scroll', this.windowScrollUpdate);
+      window.addEventListener('touchmove', this.windowScrollUpdate); // Prevent calculation errors caused by unloaded completion
 
       helpers(document).ready(function () {
-        /*
-         !!!important:
-         Remember not to use `#${yourcid}` directly, the target of TweenMax will not be found. Please use `#${self.wrapperRef.current.id}`
-        */
-        var reactDomEl = self.wrapperRef.current;
-        var config = self.getAnimConfiguration(); //
-        //get attributes to tweenMax
-
-        var fromCSS = config.from,
-            toCSS = config.to,
-            myEase = config.ease,
-            myDuration = config.duration,
-            myDelay = config.delay;
-        self.tl.to(reactDomEl, myDuration, {
-          css: toCSS,
-          ease: myEase,
-          delay: myDelay
-        }); //Initialize the default style
-
-        TweenMax_TweenMax.set(reactDomEl, {
-          css: fromCSS
-        }); // Add function to the element that should be used as the scrollable area.
-
-        window.removeEventListener('scroll', self.windowScrollUpdate);
-        window.removeEventListener('touchmove', self.windowScrollUpdate);
-        window.addEventListener('scroll', self.windowScrollUpdate);
-        window.addEventListener('touchmove', self.windowScrollUpdate);
-        self.windowScrollUpdate();
+        _this2.windowScrollUpdate();
       });
     }
     /** Remove the global list of events, especially as scroll and interval. */
@@ -63818,8 +65380,8 @@ var ScrollReveal = /*#__PURE__*/function (_Component) {
           attributes = _objectWithoutProperties(_this$props, ScrollReveal_excluded);
 
       return /*#__PURE__*/react.createElement(react.Fragment, null, /*#__PURE__*/react.createElement("div", extends_extends({
-        ref: this.wrapperRef,
-        id: id || 'app-app-scroll-reveal-' + helpers.GUID.create(),
+        ref: this.rootRef,
+        id: id || this.uniqueID,
         "data-uix-anim": config || '{"viewport":"80%","from":{"opacity":0,"y":150},"to":{"opacity":1,"y":0},"ease":"Power2.easeOut","duration":0.8,"delay":0,"infinite":true}'
       }, attributes), children));
     }
@@ -63873,21 +65435,12 @@ var ScrollReveal = /*#__PURE__*/function (_Component) {
     style: {
       marginRight: ".5rem"
     },
-    width: "15",
-    viewBox: "0 0 392.186 392.186"
-  }, /*#__PURE__*/react.createElement("g", null, /*#__PURE__*/react.createElement("g", null, /*#__PURE__*/react.createElement("g", null, /*#__PURE__*/react.createElement("path", {
+    width: "16",
+    viewBox: "0 0 122.88 91.26"
+  }, /*#__PURE__*/react.createElement("path", {
     fill: "#d2d2d2",
-    d: "M368.62,17.951H23.568C10.57,17.951,0,28.524,0,41.52v309.146c0,12.996,10.57,23.568,23.568,23.568h345.053c12.994,0,23.564-10.572,23.564-23.568V41.52C392.188,28.525,381.614,17.951,368.62,17.951z M297.56,57.528c0-4.806,3.896-8.703,8.701-8.703h8.703c4.808,0,8.701,3.896,8.701,8.703v9.863c0,4.806-3.896,8.702-8.701,8.702h-8.703c-4.805,0-8.701-3.896-8.701-8.702V57.528z M257.093,57.528c0-4.806,3.898-8.703,8.703-8.703h8.701c4.805,0,8.703,3.896,8.703,8.703v9.863c0,4.806-3.898,8.702-8.703,8.702h-8.701c-4.805,0-8.703-3.896-8.703-8.702V57.528z M363.903,345.951H28.282V102.235h335.621V345.951L363.903,345.951z M364.132,67.391c0,4.806-3.896,8.702-8.701,8.702h-8.703c-4.809,0-8.702-3.896-8.702-8.702v-9.863c0-4.806,3.896-8.703,8.702-8.703h8.703c4.806,0,8.701,3.896,8.701,8.703V67.391z"
-  }), /*#__PURE__*/react.createElement("path", {
-    fill: "#d2d2d2",
-    d: "M84.185,233.284l63.084,29.336c1.631,0.755,3.367,1.138,5.162,1.138c2.338,0,4.617-0.664,6.598-1.924c3.547-2.267,5.666-6.13,5.666-10.334v-0.322c0-4.752-2.785-9.116-7.096-11.118l-39.455-18.332l39.455-18.334c4.311-2.004,7.096-6.367,7.096-11.117v-0.319c0-4.21-2.119-8.075-5.666-10.334c-1.961-1.253-4.246-1.916-6.605-1.916c-1.779,0-3.563,0.391-5.16,1.133l-63.08,29.333c-4.307,2.004-7.09,6.369-7.09,11.117v0.877C77.093,226.909,79.874,231.272,84.185,233.284z"
-  }), /*#__PURE__*/react.createElement("path", {
-    fill: "#d2d2d2",
-    d: "M165.257,293.036c2.301,3.149,6.002,5.03,9.9,5.03h0.316c5.352,0,10.041-3.426,11.672-8.517L228.7,160.788c1.192-3.716,0.531-7.818-1.771-10.973c-2.301-3.15-6.002-5.03-9.901-5.03h-0.315c-5.354,0-10.048,3.425-11.679,8.516l-41.559,128.771C162.292,285.793,162.958,289.889,165.257,293.036z"
-  }), /*#__PURE__*/react.createElement("path", {
-    fill: "#d2d2d2",
-    d: "M227.49,192.276c0,4.745,2.783,9.109,7.095,11.123l39.455,18.329l-39.455,18.33c-4.31,2.004-7.095,6.368-7.095,11.118v0.322c0,4.205,2.117,8.068,5.668,10.336c1.974,1.258,4.254,1.924,6.595,1.924c1.793,0,3.528-0.383,5.17-1.142l63.08-29.335c4.307-2.009,7.09-6.372,7.09-11.115v-0.877c0-4.748-2.783-9.113-7.094-11.117l-63.08-29.333c-1.591-0.74-3.373-1.131-5.152-1.131c-2.355,0-4.643,0.661-6.604,1.912c-3.551,2.263-5.67,6.127-5.67,10.337v0.318H227.49L227.49,192.276z"
-  }))))), "Docs on GitHub"))))))), /*#__PURE__*/react.createElement("section", {
+    d: "M8.32,0h106.24c4.58,0,8.32,3.74,8.32,8.32v74.62c0,4.57-3.74,8.32-8.32,8.32H8.32C3.74,91.26,0,87.51,0,82.94 V8.32C0,3.74,3.74,0,8.32,0L8.32,0z M54.46,72.22L32,58.61v-8.63l22.46-13.61v10.26l-13.65,7.69l13.65,7.7V72.22L54.46,72.22z M68.42,72.22l22.46-13.61v-8.63L68.42,36.37v10.26l13.65,7.69l-13.65,7.7V72.22L68.42,72.22z M117.97,23.29H5.29v60.46 c0,0.64,0.25,1.2,0.67,1.63c0.42,0.42,0.99,0.67,1.63,0.67h108.04c0.64,0,1.2-0.25,1.63-0.67c0.43-0.43,0.67-0.99,0.67-1.63V23.29 H117.97L117.97,23.29z M106.64,9.35c2.27,0,4.11,1.84,4.11,4.11c0,2.27-1.84,4.11-4.11,4.11c-2.27,0-4.11-1.84-4.11-4.11 C102.54,11.19,104.38,9.35,106.64,9.35L106.64,9.35z M78.8,9.35c2.27,0,4.11,1.84,4.11,4.11c0,2.27-1.84,4.11-4.11,4.11 c-2.27,0-4.11-1.84-4.11-4.11C74.69,11.19,76.53,9.35,78.8,9.35L78.8,9.35z M92.72,9.35c2.27,0,4.11,1.84,4.11,4.11 c0,2.27-1.84,4.11-4.11,4.11c-2.27,0-4.11-1.84-4.11-4.11C88.61,11.19,90.45,9.35,92.72,9.35L92.72,9.35z"
+  })), "Docs on GitHub"))))))), /*#__PURE__*/react.createElement("section", {
     className: "uix-spacing--s"
   }, /*#__PURE__*/react.createElement("div", {
     className: "container"
@@ -63962,7 +65515,7 @@ var ScrollReveal = /*#__PURE__*/function (_Component) {
     className: "table-responsive-md"
   }, /*#__PURE__*/react.createElement("table", {
     className: "table table-bordered table-striped"
-  }, /*#__PURE__*/react.createElement("thead", null, /*#__PURE__*/react.createElement("tr", null, /*#__PURE__*/react.createElement("th", null, "Property"), /*#__PURE__*/react.createElement("th", null, "Type"), /*#__PURE__*/react.createElement("th", null, "Default"), /*#__PURE__*/react.createElement("th", null, "Description"))), /*#__PURE__*/react.createElement("tbody", null, /*#__PURE__*/react.createElement("tr", null, /*#__PURE__*/react.createElement("td", null, /*#__PURE__*/react.createElement("code", null, "config")), /*#__PURE__*/react.createElement("td", null, "JSON Object Literals"), /*#__PURE__*/react.createElement("td", null, "-"), /*#__PURE__*/react.createElement("td", null, "Detailed animation parameters, using JSON string format.", /*#__PURE__*/react.createElement("br", null), /*#__PURE__*/react.createElement("strong", null, "default value:"), /*#__PURE__*/react.createElement("br", null), /*#__PURE__*/react.createElement("code", {
+  }, /*#__PURE__*/react.createElement("thead", null, /*#__PURE__*/react.createElement("tr", null, /*#__PURE__*/react.createElement("th", null, "Property"), /*#__PURE__*/react.createElement("th", null, "Type"), /*#__PURE__*/react.createElement("th", null, "Default"), /*#__PURE__*/react.createElement("th", null, "Description"))), /*#__PURE__*/react.createElement("tbody", null, /*#__PURE__*/react.createElement("tr", null, /*#__PURE__*/react.createElement("td", null, /*#__PURE__*/react.createElement("code", null, "config")), /*#__PURE__*/react.createElement("td", null, "JSON Object Literals"), /*#__PURE__*/react.createElement("td", null, "-"), /*#__PURE__*/react.createElement("td", null, /*#__PURE__*/react.createElement("strong", null, "(Required)"), " Detailed animation parameters, using JSON string format.", /*#__PURE__*/react.createElement("br", null), /*#__PURE__*/react.createElement("strong", null, "default value:"), /*#__PURE__*/react.createElement("br", null), /*#__PURE__*/react.createElement("code", {
     className: "text-wrap"
   }, "{\"from\": {\"opacity\":0,\"x\":70},\"to\":{\"opacity\":1,\"x\":0},\"ease\":\"Power2.easeOut\",\"duration\": 0.4,\"delay\": 0,\"infinite\" : false,\"viewport\" : '100%'}"), /*#__PURE__*/react.createElement("br", null), /*#__PURE__*/react.createElement("strong", null, "other:"), /*#__PURE__*/react.createElement("br", null), /*#__PURE__*/react.createElement("code", {
     className: "text-wrap"
@@ -63981,6 +65534,8 @@ var ScrollReveal = /*#__PURE__*/function (_Component) {
   }, "{\"opacity\":1,\"scale\":1,\"transform\":\"translateX(0) rotate(0deg)\"}"), " ", /*#__PURE__*/react.createElement("br", null), "Can be a pure string, this style will be enabled when the viewport is specified, for example ", /*#__PURE__*/react.createElement("code", null, ".demo-sr-active"))), /*#__PURE__*/react.createElement("tr", null, /*#__PURE__*/react.createElement("td", null, /*#__PURE__*/react.createElement("code", null, "ease")), /*#__PURE__*/react.createElement("td", null, "string"), /*#__PURE__*/react.createElement("td", null, "Power2.easeOut"), /*#__PURE__*/react.createElement("td", null, "Accepts any valid GSAP 2+ easing, e.g. ", /*#__PURE__*/react.createElement("code", null, "Power2.easeOut"), ", etc.")), /*#__PURE__*/react.createElement("tr", null, /*#__PURE__*/react.createElement("td", null, /*#__PURE__*/react.createElement("code", null, "duration")), /*#__PURE__*/react.createElement("td", null, "number"), /*#__PURE__*/react.createElement("td", null, "0.4"), /*#__PURE__*/react.createElement("td", null, "This attribute controls how long animations take to complete.")), /*#__PURE__*/react.createElement("tr", null, /*#__PURE__*/react.createElement("td", null, /*#__PURE__*/react.createElement("code", null, "delay")), /*#__PURE__*/react.createElement("td", null, "number"), /*#__PURE__*/react.createElement("td", null, "0"), /*#__PURE__*/react.createElement("td", null, "This attribute is the time before reveal animations begin.")), /*#__PURE__*/react.createElement("tr", null, /*#__PURE__*/react.createElement("td", null, /*#__PURE__*/react.createElement("code", null, "infinite")), /*#__PURE__*/react.createElement("td", null, "boolean"), /*#__PURE__*/react.createElement("td", null, "false"), /*#__PURE__*/react.createElement("td", null, "This attribute enables/disables elements returning to their initialized position when they leave the viewport. When true elements reveal each time they enter the viewport instead of once.")))))))))));
 });
 ;// CONCATENATED MODULE: ./src/client/components/Card/index.tsx
+
+
 
 
 
@@ -64018,9 +65573,16 @@ var Card = /*#__PURE__*/function (_Component) {
   var _super = Card_createSuper(Card);
 
   function Card(props) {
+    var _this;
+
     _classCallCheck(this, Card);
 
-    return _super.call(this, props);
+    _this = _super.call(this, props);
+
+    _defineProperty(_assertThisInitialized(_this), "uniqueID", void 0);
+
+    _this.uniqueID = 'app-' + helpers.GUID.create();
+    return _this;
   }
 
   _createClass(Card, [{
@@ -64043,8 +65605,7 @@ var Card = /*#__PURE__*/function (_Component) {
           id = _this$props.id,
           children = _this$props.children; //set ID
 
-      var cid = id || 'app-card-' + helpers.GUID.create(); //title
-
+      var cid = id || this.uniqueID; //title
 
       var _title = title || ''; //sub title
 
@@ -64415,21 +65976,12 @@ var Card = /*#__PURE__*/function (_Component) {
     style: {
       marginRight: ".5rem"
     },
-    width: "15",
-    viewBox: "0 0 392.186 392.186"
-  }, /*#__PURE__*/react.createElement("g", null, /*#__PURE__*/react.createElement("g", null, /*#__PURE__*/react.createElement("g", null, /*#__PURE__*/react.createElement("path", {
+    width: "16",
+    viewBox: "0 0 122.88 91.26"
+  }, /*#__PURE__*/react.createElement("path", {
     fill: "#d2d2d2",
-    d: "M368.62,17.951H23.568C10.57,17.951,0,28.524,0,41.52v309.146c0,12.996,10.57,23.568,23.568,23.568h345.053c12.994,0,23.564-10.572,23.564-23.568V41.52C392.188,28.525,381.614,17.951,368.62,17.951z M297.56,57.528c0-4.806,3.896-8.703,8.701-8.703h8.703c4.808,0,8.701,3.896,8.701,8.703v9.863c0,4.806-3.896,8.702-8.701,8.702h-8.703c-4.805,0-8.701-3.896-8.701-8.702V57.528z M257.093,57.528c0-4.806,3.898-8.703,8.703-8.703h8.701c4.805,0,8.703,3.896,8.703,8.703v9.863c0,4.806-3.898,8.702-8.703,8.702h-8.701c-4.805,0-8.703-3.896-8.703-8.702V57.528z M363.903,345.951H28.282V102.235h335.621V345.951L363.903,345.951z M364.132,67.391c0,4.806-3.896,8.702-8.701,8.702h-8.703c-4.809,0-8.702-3.896-8.702-8.702v-9.863c0-4.806,3.896-8.703,8.702-8.703h8.703c4.806,0,8.701,3.896,8.701,8.703V67.391z"
-  }), /*#__PURE__*/react.createElement("path", {
-    fill: "#d2d2d2",
-    d: "M84.185,233.284l63.084,29.336c1.631,0.755,3.367,1.138,5.162,1.138c2.338,0,4.617-0.664,6.598-1.924c3.547-2.267,5.666-6.13,5.666-10.334v-0.322c0-4.752-2.785-9.116-7.096-11.118l-39.455-18.332l39.455-18.334c4.311-2.004,7.096-6.367,7.096-11.117v-0.319c0-4.21-2.119-8.075-5.666-10.334c-1.961-1.253-4.246-1.916-6.605-1.916c-1.779,0-3.563,0.391-5.16,1.133l-63.08,29.333c-4.307,2.004-7.09,6.369-7.09,11.117v0.877C77.093,226.909,79.874,231.272,84.185,233.284z"
-  }), /*#__PURE__*/react.createElement("path", {
-    fill: "#d2d2d2",
-    d: "M165.257,293.036c2.301,3.149,6.002,5.03,9.9,5.03h0.316c5.352,0,10.041-3.426,11.672-8.517L228.7,160.788c1.192-3.716,0.531-7.818-1.771-10.973c-2.301-3.15-6.002-5.03-9.901-5.03h-0.315c-5.354,0-10.048,3.425-11.679,8.516l-41.559,128.771C162.292,285.793,162.958,289.889,165.257,293.036z"
-  }), /*#__PURE__*/react.createElement("path", {
-    fill: "#d2d2d2",
-    d: "M227.49,192.276c0,4.745,2.783,9.109,7.095,11.123l39.455,18.329l-39.455,18.33c-4.31,2.004-7.095,6.368-7.095,11.118v0.322c0,4.205,2.117,8.068,5.668,10.336c1.974,1.258,4.254,1.924,6.595,1.924c1.793,0,3.528-0.383,5.17-1.142l63.08-29.335c4.307-2.009,7.09-6.372,7.09-11.115v-0.877c0-4.748-2.783-9.113-7.094-11.117l-63.08-29.333c-1.591-0.74-3.373-1.131-5.152-1.131c-2.355,0-4.643,0.661-6.604,1.912c-3.551,2.263-5.67,6.127-5.67,10.337v0.318H227.49L227.49,192.276z"
-  }))))), "Docs on GitHub"))))))), /*#__PURE__*/react.createElement("section", {
+    d: "M8.32,0h106.24c4.58,0,8.32,3.74,8.32,8.32v74.62c0,4.57-3.74,8.32-8.32,8.32H8.32C3.74,91.26,0,87.51,0,82.94 V8.32C0,3.74,3.74,0,8.32,0L8.32,0z M54.46,72.22L32,58.61v-8.63l22.46-13.61v10.26l-13.65,7.69l13.65,7.7V72.22L54.46,72.22z M68.42,72.22l22.46-13.61v-8.63L68.42,36.37v10.26l13.65,7.69l-13.65,7.7V72.22L68.42,72.22z M117.97,23.29H5.29v60.46 c0,0.64,0.25,1.2,0.67,1.63c0.42,0.42,0.99,0.67,1.63,0.67h108.04c0.64,0,1.2-0.25,1.63-0.67c0.43-0.43,0.67-0.99,0.67-1.63V23.29 H117.97L117.97,23.29z M106.64,9.35c2.27,0,4.11,1.84,4.11,4.11c0,2.27-1.84,4.11-4.11,4.11c-2.27,0-4.11-1.84-4.11-4.11 C102.54,11.19,104.38,9.35,106.64,9.35L106.64,9.35z M78.8,9.35c2.27,0,4.11,1.84,4.11,4.11c0,2.27-1.84,4.11-4.11,4.11 c-2.27,0-4.11-1.84-4.11-4.11C74.69,11.19,76.53,9.35,78.8,9.35L78.8,9.35z M92.72,9.35c2.27,0,4.11,1.84,4.11,4.11 c0,2.27-1.84,4.11-4.11,4.11c-2.27,0-4.11-1.84-4.11-4.11C88.61,11.19,90.45,9.35,92.72,9.35L92.72,9.35z"
+  })), "Docs on GitHub"))))))), /*#__PURE__*/react.createElement("section", {
     className: "uix-spacing--s uix-spacing--no-bottom"
   }, /*#__PURE__*/react.createElement("div", {
     className: "container"
@@ -65107,7 +66659,7 @@ var Card = /*#__PURE__*/function (_Component) {
     className: "table-responsive-md"
   }, /*#__PURE__*/react.createElement("table", {
     className: "table table-bordered table-striped mb-5"
-  }, /*#__PURE__*/react.createElement("thead", null, /*#__PURE__*/react.createElement("tr", null, /*#__PURE__*/react.createElement("th", null, "Property"), /*#__PURE__*/react.createElement("th", null, "Type"), /*#__PURE__*/react.createElement("th", null, "Default"), /*#__PURE__*/react.createElement("th", null, "Description"))), /*#__PURE__*/react.createElement("tbody", null, /*#__PURE__*/react.createElement("tr", null, /*#__PURE__*/react.createElement("td", null, /*#__PURE__*/react.createElement("code", null, "type")), /*#__PURE__*/react.createElement("td", null, /*#__PURE__*/react.createElement("code", null, "thumb"), " | ", /*#__PURE__*/react.createElement("code", null, "gallery-v-img"), " | ", /*#__PURE__*/react.createElement("code", null, "gallery-v-custom"), " | ", /*#__PURE__*/react.createElement("code", null, "gallery-h-img"), " | ", /*#__PURE__*/react.createElement("code", null, "gallery-full-info"), " | ", /*#__PURE__*/react.createElement("code", null, "gallery-icon"), " | ", /*#__PURE__*/react.createElement("code", null, "gallery-icon-abreast"), " | ", /*#__PURE__*/react.createElement("code", null, "authorcard-line"), " | ", /*#__PURE__*/react.createElement("code", null, "authorcard-detail"), " | ", /*#__PURE__*/react.createElement("code", null, "authorcard-stats")), /*#__PURE__*/react.createElement("td", null, "-"), /*#__PURE__*/react.createElement("td", null, "Card display style")), /*#__PURE__*/react.createElement("tr", null, /*#__PURE__*/react.createElement("td", null, /*#__PURE__*/react.createElement("code", null, "btnIcon")), /*#__PURE__*/react.createElement("td", null, "ReactNode"), /*#__PURE__*/react.createElement("td", null, "-"), /*#__PURE__*/react.createElement("td", null, "Button Icon")), /*#__PURE__*/react.createElement("tr", null, /*#__PURE__*/react.createElement("td", null, /*#__PURE__*/react.createElement("code", null, "title")), /*#__PURE__*/react.createElement("td", null, "string"), /*#__PURE__*/react.createElement("td", null, "-"), /*#__PURE__*/react.createElement("td", null, "Title of card")), /*#__PURE__*/react.createElement("tr", null, /*#__PURE__*/react.createElement("td", null, /*#__PURE__*/react.createElement("code", null, "titleEllipsis")), /*#__PURE__*/react.createElement("td", null, "boolean"), /*#__PURE__*/react.createElement("td", null, "false"), /*#__PURE__*/react.createElement("td", null, "Omit overflowed title string")), /*#__PURE__*/react.createElement("tr", null, /*#__PURE__*/react.createElement("td", null, /*#__PURE__*/react.createElement("code", null, "subTitle")), /*#__PURE__*/react.createElement("td", null, "ReactNode | string"), /*#__PURE__*/react.createElement("td", null, "-"), /*#__PURE__*/react.createElement("td", null, "Hyperlink or subtitle of card")), /*#__PURE__*/react.createElement("tr", null, /*#__PURE__*/react.createElement("td", null, /*#__PURE__*/react.createElement("code", null, "bgConfig")), /*#__PURE__*/react.createElement("td", null, "JSON Object Literals"), /*#__PURE__*/react.createElement("td", null, "-"), /*#__PURE__*/react.createElement("td", null, "The attributes of the background image, use JSON string format. Such as:", /*#__PURE__*/react.createElement("br", null), /*#__PURE__*/react.createElement("code", {
+  }, /*#__PURE__*/react.createElement("thead", null, /*#__PURE__*/react.createElement("tr", null, /*#__PURE__*/react.createElement("th", null, "Property"), /*#__PURE__*/react.createElement("th", null, "Type"), /*#__PURE__*/react.createElement("th", null, "Default"), /*#__PURE__*/react.createElement("th", null, "Description"))), /*#__PURE__*/react.createElement("tbody", null, /*#__PURE__*/react.createElement("tr", null, /*#__PURE__*/react.createElement("td", null, /*#__PURE__*/react.createElement("code", null, "type")), /*#__PURE__*/react.createElement("td", null, /*#__PURE__*/react.createElement("code", null, "thumb"), " | ", /*#__PURE__*/react.createElement("code", null, "gallery-v-img"), " | ", /*#__PURE__*/react.createElement("code", null, "gallery-v-custom"), " | ", /*#__PURE__*/react.createElement("code", null, "gallery-h-img"), " | ", /*#__PURE__*/react.createElement("code", null, "gallery-full-info"), " | ", /*#__PURE__*/react.createElement("code", null, "gallery-icon"), " | ", /*#__PURE__*/react.createElement("code", null, "gallery-icon-abreast"), " | ", /*#__PURE__*/react.createElement("code", null, "authorcard-line"), " | ", /*#__PURE__*/react.createElement("code", null, "authorcard-detail"), " | ", /*#__PURE__*/react.createElement("code", null, "authorcard-stats")), /*#__PURE__*/react.createElement("td", null, "-"), /*#__PURE__*/react.createElement("td", null, /*#__PURE__*/react.createElement("strong", null, "(Required)"), " Card display style")), /*#__PURE__*/react.createElement("tr", null, /*#__PURE__*/react.createElement("td", null, /*#__PURE__*/react.createElement("code", null, "btnIcon")), /*#__PURE__*/react.createElement("td", null, "ReactNode"), /*#__PURE__*/react.createElement("td", null, "-"), /*#__PURE__*/react.createElement("td", null, "Button Icon")), /*#__PURE__*/react.createElement("tr", null, /*#__PURE__*/react.createElement("td", null, /*#__PURE__*/react.createElement("code", null, "title")), /*#__PURE__*/react.createElement("td", null, "string"), /*#__PURE__*/react.createElement("td", null, "-"), /*#__PURE__*/react.createElement("td", null, "Title of card")), /*#__PURE__*/react.createElement("tr", null, /*#__PURE__*/react.createElement("td", null, /*#__PURE__*/react.createElement("code", null, "titleEllipsis")), /*#__PURE__*/react.createElement("td", null, "boolean"), /*#__PURE__*/react.createElement("td", null, "false"), /*#__PURE__*/react.createElement("td", null, "Omit overflowed title string")), /*#__PURE__*/react.createElement("tr", null, /*#__PURE__*/react.createElement("td", null, /*#__PURE__*/react.createElement("code", null, "subTitle")), /*#__PURE__*/react.createElement("td", null, "ReactNode | string"), /*#__PURE__*/react.createElement("td", null, "-"), /*#__PURE__*/react.createElement("td", null, "Hyperlink or subtitle of card")), /*#__PURE__*/react.createElement("tr", null, /*#__PURE__*/react.createElement("td", null, /*#__PURE__*/react.createElement("code", null, "bgConfig")), /*#__PURE__*/react.createElement("td", null, "JSON Object Literals"), /*#__PURE__*/react.createElement("td", null, "-"), /*#__PURE__*/react.createElement("td", null, "The attributes of the background image, use JSON string format. Such as:", /*#__PURE__*/react.createElement("br", null), /*#__PURE__*/react.createElement("code", {
     className: "text-wrap"
   }, "{\"src\":\"assets/images/demo.jpg\"}"), /*#__PURE__*/react.createElement("code", {
     className: "text-wrap"
@@ -65175,13 +66727,15 @@ function parallax(curElement, config) {
   window.removeEventListener('scroll', throttleFunc);
   window.removeEventListener('touchmove', throttleFunc);
   window.addEventListener('scroll', throttleFunc);
-  window.addEventListener('touchmove', throttleFunc);
-  throttleFunc();
+  window.addEventListener('touchmove', throttleFunc); // Prevent calculation errors caused by unloaded completion
+
+  helpers(document).ready(function () {
+    throttleFunc();
+  });
+
   return throttleFunc;
 }
-/* harmony default export */ const Parallax_parallax = ({
-  parallax: parallax
-});
+/* harmony default export */ const Parallax_parallax = ((/* unused pure expression or super */ null && (parallax)));
 ;// CONCATENATED MODULE: ./src/client/components/Parallax/index.tsx
 
 
@@ -65191,9 +66745,6 @@ function parallax(curElement, config) {
 
 
 
-
-
-var Parallax_excluded = ["parallaxElements", "parallaxElementsTransition", "img", "heightClass", "fullyVisible", "offsetTop", "overlay", "skew", "speed", "id", "children"];
 
 function Parallax_createSuper(Derived) { var hasNativeReflectConstruct = Parallax_isNativeReflectConstruct(); return function _createSuperInternal() { var Super = _getPrototypeOf(Derived), result; if (hasNativeReflectConstruct) { var NewTarget = _getPrototypeOf(this).constructor; result = Reflect.construct(Super, arguments, NewTarget); } else { result = Super.apply(this, arguments); } return _possibleConstructorReturn(this, result); }; }
 
@@ -65230,13 +66781,22 @@ var Parallax = /*#__PURE__*/function (_Component) {
 
     _classCallCheck(this, Parallax);
 
-    _this = _super.call(this, props); // Add a scroll event listener to window
+    _this = _super.call(this, props);
 
-    _defineProperty(_assertThisInitialized(_this), "wrapperRef", /*#__PURE__*/react.createRef());
+    _defineProperty(_assertThisInitialized(_this), "rootRef", /*#__PURE__*/react.createRef());
 
     _defineProperty(_assertThisInitialized(_this), "windowScrollUpdate", void 0);
 
-    _this.windowScrollUpdate = function () {};
+    _defineProperty(_assertThisInitialized(_this), "windowResizeUpdate", void 0);
+
+    _defineProperty(_assertThisInitialized(_this), "uniqueID", void 0);
+
+    _this.uniqueID = 'app-' + helpers.GUID.create(); // Add a scroll event listener to window
+
+    _this.windowScrollUpdate = function () {}; // Add a resize event listener to window
+
+
+    _this.windowResizeUpdate = function () {};
 
     _this.parallaxInit = _this.parallaxInit.bind(_assertThisInitialized(_this));
     return _this;
@@ -65246,7 +66806,7 @@ var Parallax = /*#__PURE__*/function (_Component) {
     key: "parallaxInit",
     value: function parallaxInit(w) {
       var self = this;
-      var reactDomEl = self.wrapperRef.current; // Pure parallax scrolling effect without other embedded HTML elements
+      var reactDomEl = self.rootRef.current; // Pure parallax scrolling effect without other embedded HTML elements
       //------------------------------------------
 
       if (reactDomEl.classList.contains('uix-parallax--el')) {
@@ -65370,27 +66930,25 @@ var Parallax = /*#__PURE__*/function (_Component) {
   }, {
     key: "componentDidMount",
     value: function componentDidMount() {
-      var self = this;
+      var _this2 = this;
 
-      helpers(document).ready(function () {
-        var windowWidth = window.innerWidth;
-        self.parallaxInit(windowWidth);
+      var windowWidth = window.innerWidth;
+      this.parallaxInit(windowWidth);
 
-        function windowUpdate() {
-          // Check window width has actually changed and it's not just iOS triggering a resize event on scroll
-          if (window.innerWidth != windowWidth) {
-            // Update the window width for next time
-            windowWidth = window.innerWidth; // Do stuff here
+      var windowUpdate = function windowUpdate() {
+        // Check window width has actually changed and it's not just iOS triggering a resize event on scroll
+        if (window.innerWidth != windowWidth) {
+          // Update the window width for next time
+          windowWidth = window.innerWidth; // Do stuff here
 
-            self.parallaxInit(windowWidth);
-          }
+          _this2.parallaxInit(windowWidth);
         }
+      }; // Add function to the window that should be resized
 
-        var debounceFunc = helpers.debounce(windowUpdate, 50);
 
-        window.removeEventListener('resize', debounceFunc);
-        window.addEventListener('resize', debounceFunc);
-      });
+      this.windowResizeUpdate = helpers.debounce(windowUpdate, 50);
+      window.removeEventListener('resize', this.windowResizeUpdate);
+      window.addEventListener('resize', this.windowResizeUpdate);
     }
     /** Remove the global list of events, especially as scroll and interval. */
 
@@ -65399,7 +66957,9 @@ var Parallax = /*#__PURE__*/function (_Component) {
     value: function componentWillUnmount() {
       // Remove scroll events from window
       window.removeEventListener('scroll', this.windowScrollUpdate);
-      window.removeEventListener('touchmove', this.windowScrollUpdate);
+      window.removeEventListener('touchmove', this.windowScrollUpdate); // Remove resize events from window
+
+      window.removeEventListener('resize', this.windowResizeUpdate);
     }
   }, {
     key: "render",
@@ -65415,33 +66975,32 @@ var Parallax = /*#__PURE__*/function (_Component) {
           skew = _this$props.skew,
           speed = _this$props.speed,
           id = _this$props.id,
-          children = _this$props.children,
-          attributes = _objectWithoutProperties(_this$props, Parallax_excluded);
+          children = _this$props.children;
 
       var _parallaxElements = (0,esm_typeof/* default */.Z)(parallaxElements) === ( true ? "undefined" : 0) ? false : parallaxElements;
 
-      return /*#__PURE__*/react.createElement(react.Fragment, null, !_parallaxElements ? /*#__PURE__*/react.createElement("div", extends_extends({
-        ref: this.wrapperRef,
-        id: id || 'app-parallax-' + helpers.GUID.create(),
+      return /*#__PURE__*/react.createElement(react.Fragment, null, !_parallaxElements ? /*#__PURE__*/react.createElement("div", {
+        ref: this.rootRef,
+        id: id || this.uniqueID,
         className: "uix-parallax ".concat(heightClass || ''),
         "data-fully-visible": fullyVisible || false,
         "data-offset-top": offsetTop || 0,
         "data-overlay-bg": overlay || false,
         "data-skew": skew || 0,
         "data-speed": speed || 0.1
-      }, attributes), /*#__PURE__*/react.createElement("img", {
+      }, /*#__PURE__*/react.createElement("img", {
         className: "uix-parallax__img",
         src: img,
         alt: ""
       }), /*#__PURE__*/react.createElement("div", {
         className: "uix-v-align--absolute uix-t-c"
-      }, children)) : /*#__PURE__*/react.createElement("div", extends_extends({
-        ref: this.wrapperRef,
-        id: id || 'app-parallaxEl-' + helpers.GUID.create(),
+      }, children)) : /*#__PURE__*/react.createElement("div", {
+        ref: this.rootRef,
+        id: id || this.uniqueID,
         className: "uix-parallax--el ".concat(heightClass || ''),
         "data-transition": parallaxElementsTransition || 'all 0.4s cubic-bezier(0, 0, 0.34, 0.96) 0s',
         "data-speed": speed || 0.1
-      }, attributes), children));
+      }, children));
     }
   }]);
 
@@ -65488,21 +67047,12 @@ var Parallax = /*#__PURE__*/function (_Component) {
     style: {
       marginRight: ".5rem"
     },
-    width: "15",
-    viewBox: "0 0 392.186 392.186"
-  }, /*#__PURE__*/react.createElement("g", null, /*#__PURE__*/react.createElement("g", null, /*#__PURE__*/react.createElement("g", null, /*#__PURE__*/react.createElement("path", {
+    width: "16",
+    viewBox: "0 0 122.88 91.26"
+  }, /*#__PURE__*/react.createElement("path", {
     fill: "#d2d2d2",
-    d: "M368.62,17.951H23.568C10.57,17.951,0,28.524,0,41.52v309.146c0,12.996,10.57,23.568,23.568,23.568h345.053c12.994,0,23.564-10.572,23.564-23.568V41.52C392.188,28.525,381.614,17.951,368.62,17.951z M297.56,57.528c0-4.806,3.896-8.703,8.701-8.703h8.703c4.808,0,8.701,3.896,8.701,8.703v9.863c0,4.806-3.896,8.702-8.701,8.702h-8.703c-4.805,0-8.701-3.896-8.701-8.702V57.528z M257.093,57.528c0-4.806,3.898-8.703,8.703-8.703h8.701c4.805,0,8.703,3.896,8.703,8.703v9.863c0,4.806-3.898,8.702-8.703,8.702h-8.701c-4.805,0-8.703-3.896-8.703-8.702V57.528z M363.903,345.951H28.282V102.235h335.621V345.951L363.903,345.951z M364.132,67.391c0,4.806-3.896,8.702-8.701,8.702h-8.703c-4.809,0-8.702-3.896-8.702-8.702v-9.863c0-4.806,3.896-8.703,8.702-8.703h8.703c4.806,0,8.701,3.896,8.701,8.703V67.391z"
-  }), /*#__PURE__*/react.createElement("path", {
-    fill: "#d2d2d2",
-    d: "M84.185,233.284l63.084,29.336c1.631,0.755,3.367,1.138,5.162,1.138c2.338,0,4.617-0.664,6.598-1.924c3.547-2.267,5.666-6.13,5.666-10.334v-0.322c0-4.752-2.785-9.116-7.096-11.118l-39.455-18.332l39.455-18.334c4.311-2.004,7.096-6.367,7.096-11.117v-0.319c0-4.21-2.119-8.075-5.666-10.334c-1.961-1.253-4.246-1.916-6.605-1.916c-1.779,0-3.563,0.391-5.16,1.133l-63.08,29.333c-4.307,2.004-7.09,6.369-7.09,11.117v0.877C77.093,226.909,79.874,231.272,84.185,233.284z"
-  }), /*#__PURE__*/react.createElement("path", {
-    fill: "#d2d2d2",
-    d: "M165.257,293.036c2.301,3.149,6.002,5.03,9.9,5.03h0.316c5.352,0,10.041-3.426,11.672-8.517L228.7,160.788c1.192-3.716,0.531-7.818-1.771-10.973c-2.301-3.15-6.002-5.03-9.901-5.03h-0.315c-5.354,0-10.048,3.425-11.679,8.516l-41.559,128.771C162.292,285.793,162.958,289.889,165.257,293.036z"
-  }), /*#__PURE__*/react.createElement("path", {
-    fill: "#d2d2d2",
-    d: "M227.49,192.276c0,4.745,2.783,9.109,7.095,11.123l39.455,18.329l-39.455,18.33c-4.31,2.004-7.095,6.368-7.095,11.118v0.322c0,4.205,2.117,8.068,5.668,10.336c1.974,1.258,4.254,1.924,6.595,1.924c1.793,0,3.528-0.383,5.17-1.142l63.08-29.335c4.307-2.009,7.09-6.372,7.09-11.115v-0.877c0-4.748-2.783-9.113-7.094-11.117l-63.08-29.333c-1.591-0.74-3.373-1.131-5.152-1.131c-2.355,0-4.643,0.661-6.604,1.912c-3.551,2.263-5.67,6.127-5.67,10.337v0.318H227.49L227.49,192.276z"
-  }))))), "Docs on GitHub"))))))), /*#__PURE__*/react.createElement("section", {
+    d: "M8.32,0h106.24c4.58,0,8.32,3.74,8.32,8.32v74.62c0,4.57-3.74,8.32-8.32,8.32H8.32C3.74,91.26,0,87.51,0,82.94 V8.32C0,3.74,3.74,0,8.32,0L8.32,0z M54.46,72.22L32,58.61v-8.63l22.46-13.61v10.26l-13.65,7.69l13.65,7.7V72.22L54.46,72.22z M68.42,72.22l22.46-13.61v-8.63L68.42,36.37v10.26l13.65,7.69l-13.65,7.7V72.22L68.42,72.22z M117.97,23.29H5.29v60.46 c0,0.64,0.25,1.2,0.67,1.63c0.42,0.42,0.99,0.67,1.63,0.67h108.04c0.64,0,1.2-0.25,1.63-0.67c0.43-0.43,0.67-0.99,0.67-1.63V23.29 H117.97L117.97,23.29z M106.64,9.35c2.27,0,4.11,1.84,4.11,4.11c0,2.27-1.84,4.11-4.11,4.11c-2.27,0-4.11-1.84-4.11-4.11 C102.54,11.19,104.38,9.35,106.64,9.35L106.64,9.35z M78.8,9.35c2.27,0,4.11,1.84,4.11,4.11c0,2.27-1.84,4.11-4.11,4.11 c-2.27,0-4.11-1.84-4.11-4.11C74.69,11.19,76.53,9.35,78.8,9.35L78.8,9.35z M92.72,9.35c2.27,0,4.11,1.84,4.11,4.11 c0,2.27-1.84,4.11-4.11,4.11c-2.27,0-4.11-1.84-4.11-4.11C88.61,11.19,90.45,9.35,92.72,9.35L92.72,9.35z"
+  })), "Docs on GitHub"))))))), /*#__PURE__*/react.createElement("section", {
     className: "uix-spacing--s"
   }, /*#__PURE__*/react.createElement("div", {
     className: "container"
@@ -65639,7 +67189,7 @@ var Parallax = /*#__PURE__*/function (_Component) {
     className: "table-responsive-md"
   }, /*#__PURE__*/react.createElement("table", {
     className: "table table-bordered table-striped mb-5"
-  }, /*#__PURE__*/react.createElement("thead", null, /*#__PURE__*/react.createElement("tr", null, /*#__PURE__*/react.createElement("th", null, "Property"), /*#__PURE__*/react.createElement("th", null, "Type"), /*#__PURE__*/react.createElement("th", null, "Default"), /*#__PURE__*/react.createElement("th", null, "Description"))), /*#__PURE__*/react.createElement("tbody", null, /*#__PURE__*/react.createElement("tr", null, /*#__PURE__*/react.createElement("td", null, /*#__PURE__*/react.createElement("code", null, "parallaxElements")), /*#__PURE__*/react.createElement("td", null, "boolean"), /*#__PURE__*/react.createElement("td", null, "false"), /*#__PURE__*/react.createElement("td", null, "Pure parallax scrolling effect without other embedded HTML elements")), /*#__PURE__*/react.createElement("tr", null, /*#__PURE__*/react.createElement("td", null, /*#__PURE__*/react.createElement("code", null, "parallaxElementsTransition")), /*#__PURE__*/react.createElement("td", null, "string"), /*#__PURE__*/react.createElement("td", null, "all 0.4s cubic-bezier(0, 0, 0.34, 0.96) 0s"), /*#__PURE__*/react.createElement("td", null, "Transition of parallax when ", /*#__PURE__*/react.createElement("code", null, "parallaxElements"), " is true")), /*#__PURE__*/react.createElement("tr", null, /*#__PURE__*/react.createElement("td", null, /*#__PURE__*/react.createElement("code", null, "img")), /*#__PURE__*/react.createElement("td", null, "string"), /*#__PURE__*/react.createElement("td", null, "-"), /*#__PURE__*/react.createElement("td", null, "Background image URL")), /*#__PURE__*/react.createElement("tr", null, /*#__PURE__*/react.createElement("td", null, /*#__PURE__*/react.createElement("code", null, "heightClass")), /*#__PURE__*/react.createElement("td", null, "string | ", /*#__PURE__*/react.createElement("code", null, "uix-height--100"), " | ", /*#__PURE__*/react.createElement("code", null, "uix-height--90"), " | ", /*#__PURE__*/react.createElement("code", null, "uix-height--80"), " | ", /*#__PURE__*/react.createElement("code", null, "uix-height--70"), " | ", /*#__PURE__*/react.createElement("code", null, "uix-height--60"), " | ", /*#__PURE__*/react.createElement("code", null, "uix-height--50"), " | ", /*#__PURE__*/react.createElement("code", null, "uix-height--40"), " | ", /*#__PURE__*/react.createElement("code", null, "uix-height--30"), " | ", /*#__PURE__*/react.createElement("code", null, "uix-height--20"), " | ", /*#__PURE__*/react.createElement("code", null, "uix-height--10")), /*#__PURE__*/react.createElement("td", null, "-"), /*#__PURE__*/react.createElement("td", null, "Class name of default height")), /*#__PURE__*/react.createElement("tr", null, /*#__PURE__*/react.createElement("td", null, /*#__PURE__*/react.createElement("code", null, "fullyVisible")), /*#__PURE__*/react.createElement("td", null, "boolean"), /*#__PURE__*/react.createElement("td", null, "false"), /*#__PURE__*/react.createElement("td", null, "Whether to display all pictures, including the edges")), /*#__PURE__*/react.createElement("tr", null, /*#__PURE__*/react.createElement("td", null, /*#__PURE__*/react.createElement("code", null, "offsetTop")), /*#__PURE__*/react.createElement("td", null, "number"), /*#__PURE__*/react.createElement("td", null, "0"), /*#__PURE__*/react.createElement("td", null, "Offset top of background")), /*#__PURE__*/react.createElement("tr", null, /*#__PURE__*/react.createElement("td", null, /*#__PURE__*/react.createElement("code", null, "overlay")), /*#__PURE__*/react.createElement("td", null, "boolean | string"), /*#__PURE__*/react.createElement("td", null, "false"), /*#__PURE__*/react.createElement("td", null, "Background overlay. You can set it to the color value, for example ", /*#__PURE__*/react.createElement("code", null, "rgba(0,0,0,.6)"))), /*#__PURE__*/react.createElement("tr", null, /*#__PURE__*/react.createElement("td", null, /*#__PURE__*/react.createElement("code", null, "skew")), /*#__PURE__*/react.createElement("td", null, "number"), /*#__PURE__*/react.createElement("td", null, "0"), /*#__PURE__*/react.createElement("td", null, "Skew of background")), /*#__PURE__*/react.createElement("tr", null, /*#__PURE__*/react.createElement("td", null, /*#__PURE__*/react.createElement("code", null, "speed")), /*#__PURE__*/react.createElement("td", null, "number"), /*#__PURE__*/react.createElement("td", null, "0"), /*#__PURE__*/react.createElement("td", null, "Speed of parallax animation")))))))))));
+  }, /*#__PURE__*/react.createElement("thead", null, /*#__PURE__*/react.createElement("tr", null, /*#__PURE__*/react.createElement("th", null, "Property"), /*#__PURE__*/react.createElement("th", null, "Type"), /*#__PURE__*/react.createElement("th", null, "Default"), /*#__PURE__*/react.createElement("th", null, "Description"))), /*#__PURE__*/react.createElement("tbody", null, /*#__PURE__*/react.createElement("tr", null, /*#__PURE__*/react.createElement("td", null, /*#__PURE__*/react.createElement("code", null, "parallaxElements")), /*#__PURE__*/react.createElement("td", null, "boolean"), /*#__PURE__*/react.createElement("td", null, "false"), /*#__PURE__*/react.createElement("td", null, /*#__PURE__*/react.createElement("strong", null, "(Required)"), " Pure parallax scrolling effect without other embedded HTML elements")), /*#__PURE__*/react.createElement("tr", null, /*#__PURE__*/react.createElement("td", null, /*#__PURE__*/react.createElement("code", null, "parallaxElementsTransition")), /*#__PURE__*/react.createElement("td", null, "string"), /*#__PURE__*/react.createElement("td", null, "all 0.4s cubic-bezier(0, 0, 0.34, 0.96) 0s"), /*#__PURE__*/react.createElement("td", null, "Transition of parallax when ", /*#__PURE__*/react.createElement("code", null, "parallaxElements"), " is true")), /*#__PURE__*/react.createElement("tr", null, /*#__PURE__*/react.createElement("td", null, /*#__PURE__*/react.createElement("code", null, "img")), /*#__PURE__*/react.createElement("td", null, "string"), /*#__PURE__*/react.createElement("td", null, "-"), /*#__PURE__*/react.createElement("td", null, "Background image URL")), /*#__PURE__*/react.createElement("tr", null, /*#__PURE__*/react.createElement("td", null, /*#__PURE__*/react.createElement("code", null, "heightClass")), /*#__PURE__*/react.createElement("td", null, "string | ", /*#__PURE__*/react.createElement("code", null, "uix-height--100"), " | ", /*#__PURE__*/react.createElement("code", null, "uix-height--90"), " | ", /*#__PURE__*/react.createElement("code", null, "uix-height--80"), " | ", /*#__PURE__*/react.createElement("code", null, "uix-height--70"), " | ", /*#__PURE__*/react.createElement("code", null, "uix-height--60"), " | ", /*#__PURE__*/react.createElement("code", null, "uix-height--50"), " | ", /*#__PURE__*/react.createElement("code", null, "uix-height--40"), " | ", /*#__PURE__*/react.createElement("code", null, "uix-height--30"), " | ", /*#__PURE__*/react.createElement("code", null, "uix-height--20"), " | ", /*#__PURE__*/react.createElement("code", null, "uix-height--10")), /*#__PURE__*/react.createElement("td", null, "-"), /*#__PURE__*/react.createElement("td", null, "Class name of default height")), /*#__PURE__*/react.createElement("tr", null, /*#__PURE__*/react.createElement("td", null, /*#__PURE__*/react.createElement("code", null, "fullyVisible")), /*#__PURE__*/react.createElement("td", null, "boolean"), /*#__PURE__*/react.createElement("td", null, "false"), /*#__PURE__*/react.createElement("td", null, "Whether to display all pictures, including the edges")), /*#__PURE__*/react.createElement("tr", null, /*#__PURE__*/react.createElement("td", null, /*#__PURE__*/react.createElement("code", null, "offsetTop")), /*#__PURE__*/react.createElement("td", null, "number"), /*#__PURE__*/react.createElement("td", null, "0"), /*#__PURE__*/react.createElement("td", null, "Offset top of background")), /*#__PURE__*/react.createElement("tr", null, /*#__PURE__*/react.createElement("td", null, /*#__PURE__*/react.createElement("code", null, "overlay")), /*#__PURE__*/react.createElement("td", null, "boolean | string"), /*#__PURE__*/react.createElement("td", null, "false"), /*#__PURE__*/react.createElement("td", null, "Background overlay. You can set it to the color value, for example ", /*#__PURE__*/react.createElement("code", null, "rgba(0,0,0,.6)"))), /*#__PURE__*/react.createElement("tr", null, /*#__PURE__*/react.createElement("td", null, /*#__PURE__*/react.createElement("code", null, "skew")), /*#__PURE__*/react.createElement("td", null, "number"), /*#__PURE__*/react.createElement("td", null, "0"), /*#__PURE__*/react.createElement("td", null, "Skew of background")), /*#__PURE__*/react.createElement("tr", null, /*#__PURE__*/react.createElement("td", null, /*#__PURE__*/react.createElement("code", null, "speed")), /*#__PURE__*/react.createElement("td", null, "number"), /*#__PURE__*/react.createElement("td", null, "0"), /*#__PURE__*/react.createElement("td", null, "Speed of parallax animation")))))))))));
 });
 ;// CONCATENATED MODULE: ./src/client/components/Accordion/AccordionItem.tsx
 
@@ -65647,9 +67197,6 @@ var Parallax = /*#__PURE__*/function (_Component) {
 
 
 
-
-
-var AccordionItem_excluded = ["defaultActive", "title", "children"];
 
 function AccordionItem_createSuper(Derived) { var hasNativeReflectConstruct = AccordionItem_isNativeReflectConstruct(); return function _createSuperInternal() { var Super = _getPrototypeOf(Derived), result; if (hasNativeReflectConstruct) { var NewTarget = _getPrototypeOf(this).constructor; result = Reflect.construct(Super, arguments, NewTarget); } else { result = Super.apply(this, arguments); } return _possibleConstructorReturn(this, result); }; }
 
@@ -65674,24 +67221,40 @@ var AccordionItem = /*#__PURE__*/function (_Component) {
       var _this$props = this.props,
           defaultActive = _this$props.defaultActive,
           title = _this$props.title,
-          children = _this$props.children,
-          attributes = _objectWithoutProperties(_this$props, AccordionItem_excluded);
-
+          boxToggleEv = _this$props.boxToggleEv,
+          boxAnimEndEv = _this$props.boxAnimEndEv,
+          triggerType = _this$props.triggerType,
+          children = _this$props.children;
       var activedClassName = typeof defaultActive !== 'undefined' && defaultActive !== false ? ' is-active' : '';
-      var tabpanelHeight = activedClassName != '' ? 'auto' : 0;
-      return /*#__PURE__*/react.createElement(react.Fragment, null, /*#__PURE__*/react.createElement("dl", extends_extends({
+      return /*#__PURE__*/react.createElement(react.Fragment, null, triggerType === 'click' ? /*#__PURE__*/react.createElement("dl", {
+        onClick: boxToggleEv,
+        onTransitionEnd: boxAnimEndEv,
         className: activedClassName,
         "aria-expanded": defaultActive ? 'true' : 'false'
-      }, attributes), /*#__PURE__*/react.createElement("dt", {
+      }, /*#__PURE__*/react.createElement("dt", {
         role: "presentation"
       }, /*#__PURE__*/react.createElement("a", {
         href: "#"
       }, title)), /*#__PURE__*/react.createElement("dd", {
         role: "tabpanel",
         style: {
-          height: tabpanelHeight
+          height: defaultActive ? 'auto' : '0px'
         }
-      }, /*#__PURE__*/react.createElement("div", null, children))));
+      }, /*#__PURE__*/react.createElement("div", null, children))) : '', triggerType === 'mouseover' ? /*#__PURE__*/react.createElement("dl", {
+        onMouseOver: boxToggleEv,
+        onTransitionEnd: boxAnimEndEv,
+        className: activedClassName,
+        "aria-expanded": defaultActive ? 'true' : 'false'
+      }, /*#__PURE__*/react.createElement("dt", {
+        role: "presentation"
+      }, /*#__PURE__*/react.createElement("a", {
+        href: "#"
+      }, title)), /*#__PURE__*/react.createElement("dd", {
+        role: "tabpanel",
+        style: {
+          height: defaultActive ? 'auto' : '0px'
+        }
+      }, /*#__PURE__*/react.createElement("div", null, children))) : '');
     }
   }]);
 
@@ -65709,7 +67272,6 @@ var AccordionItem = /*#__PURE__*/function (_Component) {
 
 
 
-var Accordion_excluded = ["triggerType", "displayTheFirstItem", "id", "children"];
 
 function Accordion_ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) { symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); } keys.push.apply(keys, symbols); } return keys; }
 
@@ -65726,7 +67288,6 @@ function Accordion_isNativeReflectConstruct() { if (typeof Reflect === "undefine
 
 
 /*-- Apply global scripts and styles --*/
-
 
 
 
@@ -65748,106 +67309,140 @@ var Accordion = /*#__PURE__*/function (_Component) {
 
     _this = _super.call(this, props);
 
-    _defineProperty(_assertThisInitialized(_this), "wrapperRef", /*#__PURE__*/react.createRef());
+    _defineProperty(_assertThisInitialized(_this), "rootRef", /*#__PURE__*/react.createRef());
 
+    _defineProperty(_assertThisInitialized(_this), "uniqueID", void 0);
+
+    _defineProperty(_assertThisInitialized(_this), "animOK", void 0);
+
+    _this.uniqueID = 'app-' + helpers.GUID.create();
+    _this.animOK = false;
+    _this.handleClickItem = _this.handleClickItem.bind(_assertThisInitialized(_this));
     return _this;
   }
 
   _createClass(Accordion, [{
-    key: "componentDidMount",
-    value: function componentDidMount() {
-      var self = this;
+    key: "handleClickItem",
+    value: function handleClickItem(e) {
+      var _this2 = this;
 
-      helpers(document).ready(function () {
-        var reactDomEl = self.wrapperRef.current;
+      e.preventDefault(); //Prevents further propagation of the current event in the capturing and bubbling phases(if use `e.target`).
 
-        var $el = helpers(reactDomEl);
+      e.stopPropagation();
+      if (this.animOK) return; //
 
-        var $li = $el.children('dl');
-        var aEvent = $el.data('event');
-        if (aEvent === null) aEvent = 'click';
+      var reactDomWrapperEl = this.rootRef.current;
+      var reactDomEl = e.currentTarget;
+      var animSpeed = this.props.duration || 200;
+      var $li = reactDomWrapperEl.querySelectorAll('dl');
+      var $allContent = reactDomWrapperEl.querySelectorAll('dd');
+      var $curContent = reactDomEl.querySelector('dd');
 
-        var openItem = function openItem(obj) {
-          //to open
-          // - temporarilty set height:auto
-          // - tween from height:0
-          TweenMax_TweenMax.set(obj, {
-            height: 'auto'
-          });
-          TweenMax_TweenMax.from(obj, 0.5, {
-            height: 0
-          });
-        }; //Initialize accordion items
+      if (reactDomEl.getAttribute('aria-expanded') === 'false' || reactDomEl.getAttribute('aria-expanded') === null) {
+        this.animOK = true;
+        setTimeout(function () {
+          _this2.animOK = false;
+        }, animSpeed); //Hide other all sibling <dt> of the selected element
 
-
-        $li.each(function (index) {
-          helpers(this).find('a').attr('href', 'javascript:');
-        });
-        $li.off(aEvent).on(aEvent, function (e) {
-          //Prevents further propagation of the current event in the capturing and bubbling phases.
-          e.stopPropagation(); //Its value is not a boolean but a string
-
-          var expanded = helpers(this).attr('aria-expanded') === true ? false : true,
-              $content = helpers(this).find('dd');
-
-          if (expanded) {
-            //Hide other all sibling <dt> of the selected element
-            var $e = helpers(this).siblings();
-
-            $e.removeClass('is-active').attr('aria-expanded', false);
-
-            helpers(this).addClass('is-active').attr('aria-expanded', true);
-
-            TweenMax_TweenMax.to($e.find('dd'), 0.5, {
-              height: 0
-            }); //to open
-
-            openItem($content);
-          } else {
-            if (e.type == 'click') {
-              helpers(this).removeClass('is-active').attr('aria-expanded', false); //to close
-
-
-              TweenMax_TweenMax.to($content, 0.5, {
-                height: 0
-              });
-            }
+        Array.prototype.forEach.call($allContent, function (node) {
+          if (node.clientHeight > 0) {
+            _this2.animateStyles(node, {
+              startHeight: node.scrollHeight,
+              endHeight: 0,
+              speed: animSpeed
+            });
           }
-        });
-      });
-    }
-    /** Remove the global list of events, especially as scroll and interval. */
+        }); //to open
 
+        Array.prototype.forEach.call($li, function (node) {
+          node.classList.remove('is-active');
+          node.setAttribute('aria-expanded', false);
+        });
+        reactDomEl.classList.add('is-active');
+        reactDomEl.setAttribute('aria-expanded', true); // When the height of the element is 0, the value of `offsetHeight` and `clientHeight` will be 0
+
+        this.animateStyles($curContent, {
+          startHeight: 0,
+          endHeight: $curContent.scrollHeight,
+          speed: animSpeed
+        });
+      } else {
+        if (e.type == 'click') {
+          //to close
+          reactDomEl.classList.remove('is-active');
+          reactDomEl.setAttribute('aria-expanded', false);
+          this.animateStyles($curContent, {
+            startHeight: $curContent.scrollHeight,
+            endHeight: 0,
+            speed: animSpeed
+          });
+        }
+      }
+    }
   }, {
-    key: "componentWillUnmount",
-    value: function componentWillUnmount() {
-      // Kill all aniamtions
-      TweenMax_TweenMax.killAll();
+    key: "animateStyles",
+    value: function animateStyles(curElement, config) {
+      if ((0,esm_typeof/* default */.Z)(curElement) === ( true ? "undefined" : 0)) return; // Set a default configuration
+
+      config = helpers.setDefaultOptions({
+        "startHeight": 0,
+        "endHeight": 0,
+        "speed": 200,
+        //ms
+        "fps": 1000 / 60 // 60FPS
+
+      }, config); //
+
+      var _endHeight = config.endHeight,
+          _speed = config.speed,
+          _fps = config.fps;
+      var _startHeight = config.startHeight;
+      var timer = null;
+      var startTime = Date.now();
+      var deltaHeight = curElement.clientHeight < _endHeight ? _endHeight / _speed * _fps : _startHeight / _speed * _fps;
+      timer = setInterval(function () {
+        var elapsed = Date.now() - startTime; //Work out the elapsed time
+        //If the elapsed time is less than the speed (ms)
+
+        if (elapsed < _speed) {
+          if (curElement.clientHeight < _endHeight) {
+            _startHeight = _startHeight + deltaHeight;
+          } else {
+            _startHeight = _startHeight - deltaHeight;
+          }
+
+          curElement.style.height = _startHeight + 'px';
+        } else {
+          curElement.style.height = _endHeight + 'px';
+          clearInterval(timer);
+        }
+      }, _fps);
     }
   }, {
     key: "render",
     value: function render() {
+      var _this3 = this;
+
       var _this$props = this.props,
           triggerType = _this$props.triggerType,
           displayTheFirstItem = _this$props.displayTheFirstItem,
           id = _this$props.id,
-          children = _this$props.children,
-          attributes = _objectWithoutProperties(_this$props, Accordion_excluded);
-
-      return /*#__PURE__*/react.createElement(react.Fragment, null, /*#__PURE__*/react.createElement("div", extends_extends({
-        ref: this.wrapperRef,
-        id: id ? id : 'app-accordion-' + helpers.GUID.create(),
+          children = _this$props.children;
+      return /*#__PURE__*/react.createElement(react.Fragment, null, /*#__PURE__*/react.createElement("div", {
+        ref: this.rootRef,
+        id: id || this.uniqueID,
         className: "uix-accordion",
-        "data-event": triggerType || 'click',
-        "data-first-show": displayTheFirstItem,
         role: "tablist"
-      }, attributes), children != null ? children.map(function (item, i) {
+      }, children != null ? children.map(function (item, i) {
         var childProps = Accordion_objectSpread({}, item.props);
 
-        delete childProps.key;
-        if (i === 0 && displayTheFirstItem) childProps.defaultActive = true;
+        var _defaultActive = i === 0 && displayTheFirstItem ? true : false;
+
         return /*#__PURE__*/react.createElement(AccordionItem, extends_extends({
-          key: "item" + i
+          key: "item" + i,
+          defaultActive: _defaultActive,
+          triggerType: triggerType || 'click',
+          boxToggleEv: _this3.handleClickItem
         }, childProps));
       }) : ""));
     }
@@ -65902,21 +67497,12 @@ var Accordion = /*#__PURE__*/function (_Component) {
     style: {
       marginRight: ".5rem"
     },
-    width: "15",
-    viewBox: "0 0 392.186 392.186"
-  }, /*#__PURE__*/react.createElement("g", null, /*#__PURE__*/react.createElement("g", null, /*#__PURE__*/react.createElement("g", null, /*#__PURE__*/react.createElement("path", {
+    width: "16",
+    viewBox: "0 0 122.88 91.26"
+  }, /*#__PURE__*/react.createElement("path", {
     fill: "#d2d2d2",
-    d: "M368.62,17.951H23.568C10.57,17.951,0,28.524,0,41.52v309.146c0,12.996,10.57,23.568,23.568,23.568h345.053c12.994,0,23.564-10.572,23.564-23.568V41.52C392.188,28.525,381.614,17.951,368.62,17.951z M297.56,57.528c0-4.806,3.896-8.703,8.701-8.703h8.703c4.808,0,8.701,3.896,8.701,8.703v9.863c0,4.806-3.896,8.702-8.701,8.702h-8.703c-4.805,0-8.701-3.896-8.701-8.702V57.528z M257.093,57.528c0-4.806,3.898-8.703,8.703-8.703h8.701c4.805,0,8.703,3.896,8.703,8.703v9.863c0,4.806-3.898,8.702-8.703,8.702h-8.701c-4.805,0-8.703-3.896-8.703-8.702V57.528z M363.903,345.951H28.282V102.235h335.621V345.951L363.903,345.951z M364.132,67.391c0,4.806-3.896,8.702-8.701,8.702h-8.703c-4.809,0-8.702-3.896-8.702-8.702v-9.863c0-4.806,3.896-8.703,8.702-8.703h8.703c4.806,0,8.701,3.896,8.701,8.703V67.391z"
-  }), /*#__PURE__*/react.createElement("path", {
-    fill: "#d2d2d2",
-    d: "M84.185,233.284l63.084,29.336c1.631,0.755,3.367,1.138,5.162,1.138c2.338,0,4.617-0.664,6.598-1.924c3.547-2.267,5.666-6.13,5.666-10.334v-0.322c0-4.752-2.785-9.116-7.096-11.118l-39.455-18.332l39.455-18.334c4.311-2.004,7.096-6.367,7.096-11.117v-0.319c0-4.21-2.119-8.075-5.666-10.334c-1.961-1.253-4.246-1.916-6.605-1.916c-1.779,0-3.563,0.391-5.16,1.133l-63.08,29.333c-4.307,2.004-7.09,6.369-7.09,11.117v0.877C77.093,226.909,79.874,231.272,84.185,233.284z"
-  }), /*#__PURE__*/react.createElement("path", {
-    fill: "#d2d2d2",
-    d: "M165.257,293.036c2.301,3.149,6.002,5.03,9.9,5.03h0.316c5.352,0,10.041-3.426,11.672-8.517L228.7,160.788c1.192-3.716,0.531-7.818-1.771-10.973c-2.301-3.15-6.002-5.03-9.901-5.03h-0.315c-5.354,0-10.048,3.425-11.679,8.516l-41.559,128.771C162.292,285.793,162.958,289.889,165.257,293.036z"
-  }), /*#__PURE__*/react.createElement("path", {
-    fill: "#d2d2d2",
-    d: "M227.49,192.276c0,4.745,2.783,9.109,7.095,11.123l39.455,18.329l-39.455,18.33c-4.31,2.004-7.095,6.368-7.095,11.118v0.322c0,4.205,2.117,8.068,5.668,10.336c1.974,1.258,4.254,1.924,6.595,1.924c1.793,0,3.528-0.383,5.17-1.142l63.08-29.335c4.307-2.009,7.09-6.372,7.09-11.115v-0.877c0-4.748-2.783-9.113-7.094-11.117l-63.08-29.333c-1.591-0.74-3.373-1.131-5.152-1.131c-2.355,0-4.643,0.661-6.604,1.912c-3.551,2.263-5.67,6.127-5.67,10.337v0.318H227.49L227.49,192.276z"
-  }))))), "Docs on GitHub"))))))), /*#__PURE__*/react.createElement("section", {
+    d: "M8.32,0h106.24c4.58,0,8.32,3.74,8.32,8.32v74.62c0,4.57-3.74,8.32-8.32,8.32H8.32C3.74,91.26,0,87.51,0,82.94 V8.32C0,3.74,3.74,0,8.32,0L8.32,0z M54.46,72.22L32,58.61v-8.63l22.46-13.61v10.26l-13.65,7.69l13.65,7.7V72.22L54.46,72.22z M68.42,72.22l22.46-13.61v-8.63L68.42,36.37v10.26l13.65,7.69l-13.65,7.7V72.22L68.42,72.22z M117.97,23.29H5.29v60.46 c0,0.64,0.25,1.2,0.67,1.63c0.42,0.42,0.99,0.67,1.63,0.67h108.04c0.64,0,1.2-0.25,1.63-0.67c0.43-0.43,0.67-0.99,0.67-1.63V23.29 H117.97L117.97,23.29z M106.64,9.35c2.27,0,4.11,1.84,4.11,4.11c0,2.27-1.84,4.11-4.11,4.11c-2.27,0-4.11-1.84-4.11-4.11 C102.54,11.19,104.38,9.35,106.64,9.35L106.64,9.35z M78.8,9.35c2.27,0,4.11,1.84,4.11,4.11c0,2.27-1.84,4.11-4.11,4.11 c-2.27,0-4.11-1.84-4.11-4.11C74.69,11.19,76.53,9.35,78.8,9.35L78.8,9.35z M92.72,9.35c2.27,0,4.11,1.84,4.11,4.11 c0,2.27-1.84,4.11-4.11,4.11c-2.27,0-4.11-1.84-4.11-4.11C88.61,11.19,90.45,9.35,92.72,9.35L92.72,9.35z"
+  })), "Docs on GitHub"))))))), /*#__PURE__*/react.createElement("section", {
     className: "uix-spacing--s uix-spacing--no-bottom"
   }, /*#__PURE__*/react.createElement("div", {
     className: "container"
@@ -65962,7 +67548,7 @@ var Accordion = /*#__PURE__*/function (_Component) {
   }, /*#__PURE__*/react.createElement("div", {
     className: "col-12"
   }, /*#__PURE__*/react.createElement(Accordion, {
-    triggerType: "mouseenter"
+    triggerType: "mouseover"
   }, /*#__PURE__*/react.createElement(AccordionItem, {
     title: /*#__PURE__*/react.createElement(react.Fragment, null, "Item 1")
   }, /*#__PURE__*/react.createElement("h4", null, "Usage:"), "Click on an item to open."), /*#__PURE__*/react.createElement(AccordionItem, {
@@ -65986,11 +67572,11 @@ var Accordion = /*#__PURE__*/function (_Component) {
     className: "table-responsive-md"
   }, /*#__PURE__*/react.createElement("table", {
     className: "table table-bordered table-striped mb-5"
-  }, /*#__PURE__*/react.createElement("thead", null, /*#__PURE__*/react.createElement("tr", null, /*#__PURE__*/react.createElement("th", null, "Property"), /*#__PURE__*/react.createElement("th", null, "Type"), /*#__PURE__*/react.createElement("th", null, "Default"), /*#__PURE__*/react.createElement("th", null, "Description"))), /*#__PURE__*/react.createElement("tbody", null, /*#__PURE__*/react.createElement("tr", null, /*#__PURE__*/react.createElement("td", null, /*#__PURE__*/react.createElement("code", null, "triggerType")), /*#__PURE__*/react.createElement("td", null, "string | ", /*#__PURE__*/react.createElement("code", null, "click"), " | ", /*#__PURE__*/react.createElement("code", null, "mouseenter")), /*#__PURE__*/react.createElement("td", null, "click"), /*#__PURE__*/react.createElement("td", null, "One event type, such as ", /*#__PURE__*/react.createElement("code", null, "click"), " or ", /*#__PURE__*/react.createElement("code", null, "mouseenter"))), /*#__PURE__*/react.createElement("tr", null, /*#__PURE__*/react.createElement("td", null, /*#__PURE__*/react.createElement("code", null, "displayTheFirstItem")), /*#__PURE__*/react.createElement("td", null, "boolean"), /*#__PURE__*/react.createElement("td", null, "false"), /*#__PURE__*/react.createElement("td", null, "Display the only first item of a list"))))), /*#__PURE__*/react.createElement("h4", null, "Accordion Item"), /*#__PURE__*/react.createElement("div", null, /*#__PURE__*/react.createElement("pre", null, "import ", "{AccordionItem}", " from '@uixkit.react/components/Accordion/index.tsx';")), /*#__PURE__*/react.createElement("div", {
+  }, /*#__PURE__*/react.createElement("thead", null, /*#__PURE__*/react.createElement("tr", null, /*#__PURE__*/react.createElement("th", null, "Property"), /*#__PURE__*/react.createElement("th", null, "Type"), /*#__PURE__*/react.createElement("th", null, "Default"), /*#__PURE__*/react.createElement("th", null, "Description"))), /*#__PURE__*/react.createElement("tbody", null, /*#__PURE__*/react.createElement("tr", null, /*#__PURE__*/react.createElement("td", null, /*#__PURE__*/react.createElement("code", null, "displayTheFirstItem")), /*#__PURE__*/react.createElement("td", null, "boolean"), /*#__PURE__*/react.createElement("td", null, "false"), /*#__PURE__*/react.createElement("td", null, "Display the only first item of a list")), /*#__PURE__*/react.createElement("tr", null, /*#__PURE__*/react.createElement("td", null, /*#__PURE__*/react.createElement("code", null, "triggerType")), /*#__PURE__*/react.createElement("td", null, /*#__PURE__*/react.createElement("code", null, "click"), " | ", /*#__PURE__*/react.createElement("code", null, "mouseover")), /*#__PURE__*/react.createElement("td", null, "click"), /*#__PURE__*/react.createElement("td", null, "One event type")), /*#__PURE__*/react.createElement("tr", null, /*#__PURE__*/react.createElement("td", null, /*#__PURE__*/react.createElement("code", null, "duration")), /*#__PURE__*/react.createElement("td", null, "number"), /*#__PURE__*/react.createElement("td", null, "200"), /*#__PURE__*/react.createElement("td", null, "The number of milliseconds(ms) each iteration of the animation takes to complete"))))), /*#__PURE__*/react.createElement("h4", null, "Accordion Item"), /*#__PURE__*/react.createElement("div", null, /*#__PURE__*/react.createElement("pre", null, "import ", "{AccordionItem}", " from '@uixkit.react/components/Accordion/index.tsx';")), /*#__PURE__*/react.createElement("div", {
     className: "table-responsive-md"
   }, /*#__PURE__*/react.createElement("table", {
     className: "table table-bordered table-striped mb-5"
-  }, /*#__PURE__*/react.createElement("thead", null, /*#__PURE__*/react.createElement("tr", null, /*#__PURE__*/react.createElement("th", null, "Property"), /*#__PURE__*/react.createElement("th", null, "Type"), /*#__PURE__*/react.createElement("th", null, "Default"), /*#__PURE__*/react.createElement("th", null, "Description"))), /*#__PURE__*/react.createElement("tbody", null, /*#__PURE__*/react.createElement("tr", null, /*#__PURE__*/react.createElement("td", null, /*#__PURE__*/react.createElement("code", null, "defaultActive")), /*#__PURE__*/react.createElement("td", null, "boolean"), /*#__PURE__*/react.createElement("td", null, "false"), /*#__PURE__*/react.createElement("td", null, "Set an item to activate by default")), /*#__PURE__*/react.createElement("tr", null, /*#__PURE__*/react.createElement("td", null, /*#__PURE__*/react.createElement("code", null, "title")), /*#__PURE__*/react.createElement("td", null, "string"), /*#__PURE__*/react.createElement("td", null, "-"), /*#__PURE__*/react.createElement("td", null, "Set a title for each item")))))))))));
+  }, /*#__PURE__*/react.createElement("thead", null, /*#__PURE__*/react.createElement("tr", null, /*#__PURE__*/react.createElement("th", null, "Property"), /*#__PURE__*/react.createElement("th", null, "Type"), /*#__PURE__*/react.createElement("th", null, "Default"), /*#__PURE__*/react.createElement("th", null, "Description"))), /*#__PURE__*/react.createElement("tbody", null, /*#__PURE__*/react.createElement("tr", null, /*#__PURE__*/react.createElement("td", null, /*#__PURE__*/react.createElement("code", null, "defaultActive")), /*#__PURE__*/react.createElement("td", null, "boolean"), /*#__PURE__*/react.createElement("td", null, "false"), /*#__PURE__*/react.createElement("td", null, "Set an item to activate by default")), /*#__PURE__*/react.createElement("tr", null, /*#__PURE__*/react.createElement("td", null, /*#__PURE__*/react.createElement("code", null, "title")), /*#__PURE__*/react.createElement("td", null, "string"), /*#__PURE__*/react.createElement("td", null, "-"), /*#__PURE__*/react.createElement("td", null, "Set a title for each item")), /*#__PURE__*/react.createElement("tr", null, /*#__PURE__*/react.createElement("td", null, /*#__PURE__*/react.createElement("code", null, "boxToggleEv")), /*#__PURE__*/react.createElement("td", null, "function"), /*#__PURE__*/react.createElement("td", null, "-"), /*#__PURE__*/react.createElement("td", null, "Handling events for collapsing item")), /*#__PURE__*/react.createElement("tr", null, /*#__PURE__*/react.createElement("td", null, /*#__PURE__*/react.createElement("code", null, "boxAnimEndEv")), /*#__PURE__*/react.createElement("td", null, "function"), /*#__PURE__*/react.createElement("td", null, "-"), /*#__PURE__*/react.createElement("td", null, "Handling events when the animation execution is complete")), /*#__PURE__*/react.createElement("tr", null, /*#__PURE__*/react.createElement("td", null, /*#__PURE__*/react.createElement("code", null, "triggerType")), /*#__PURE__*/react.createElement("td", null, /*#__PURE__*/react.createElement("code", null, "click"), " | ", /*#__PURE__*/react.createElement("code", null, "mouseover")), /*#__PURE__*/react.createElement("td", null, "click"), /*#__PURE__*/react.createElement("td", null, "One event type")))))))))));
 });
 ;// CONCATENATED MODULE: ./src/client/components/AccordionSlider/AccordionSliderItem.tsx
 
@@ -65998,9 +67584,6 @@ var Accordion = /*#__PURE__*/function (_Component) {
 
 
 
-
-
-var AccordionSliderItem_excluded = ["defaultActive", "bg", "children"];
 
 function AccordionSliderItem_createSuper(Derived) { var hasNativeReflectConstruct = AccordionSliderItem_isNativeReflectConstruct(); return function _createSuperInternal() { var Super = _getPrototypeOf(Derived), result; if (hasNativeReflectConstruct) { var NewTarget = _getPrototypeOf(this).constructor; result = Reflect.construct(Super, arguments, NewTarget); } else { result = Super.apply(this, arguments); } return _possibleConstructorReturn(this, result); }; }
 
@@ -66025,21 +67608,34 @@ var AccordionSliderItem = /*#__PURE__*/function (_Component) {
       var _this$props = this.props,
           defaultActive = _this$props.defaultActive,
           bg = _this$props.bg,
-          children = _this$props.children,
-          attributes = _objectWithoutProperties(_this$props, AccordionSliderItem_excluded);
-
+          boxToggleEv = _this$props.boxToggleEv,
+          boxAnimEndEv = _this$props.boxAnimEndEv,
+          boxAnimLeaveEv = _this$props.boxAnimLeaveEv,
+          triggerType = _this$props.triggerType,
+          children = _this$props.children;
       var activedClassName = typeof defaultActive !== 'undefined' && defaultActive !== false ? ' is-active' : '';
       var bgAttrs = /([a-z\-_0-9\/\:\.]*\.(jpg|jpeg|png|gif|svg|webp))/i.test(bg) ? {
         backgroundImage: "url(".concat(bg, ")")
       } : {
         backgroundColor: "".concat(bg)
       };
-      return /*#__PURE__*/react.createElement(react.Fragment, null, /*#__PURE__*/react.createElement("li", extends_extends({
+      return /*#__PURE__*/react.createElement(react.Fragment, null, triggerType === 'click' ? /*#__PURE__*/react.createElement("li", {
+        onClick: boxToggleEv,
+        onMouseLeave: boxAnimLeaveEv,
+        onTransitionEnd: boxAnimEndEv,
         style: bgAttrs,
         className: activedClassName
-      }, attributes), /*#__PURE__*/react.createElement("div", {
+      }, /*#__PURE__*/react.createElement("div", {
         className: "uix-accordion-slider__content"
-      }, children)));
+      }, children)) : '', triggerType === 'mouseover' ? /*#__PURE__*/react.createElement("li", {
+        onMouseOver: boxToggleEv,
+        onMouseLeave: boxAnimLeaveEv,
+        onTransitionEnd: boxAnimEndEv,
+        style: bgAttrs,
+        className: activedClassName
+      }, /*#__PURE__*/react.createElement("div", {
+        className: "uix-accordion-slider__content"
+      }, children)) : '');
     }
   }]);
 
@@ -66057,7 +67653,6 @@ var AccordionSliderItem = /*#__PURE__*/function (_Component) {
 
 
 
-var AccordionSlider_excluded = ["triggerType", "displayTheFirstItem", "autoReset", "displayRatio", "direction", "closeBtn", "id", "children"];
 
 function AccordionSlider_ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) { symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); } keys.push.apply(keys, symbols); } return keys; }
 
@@ -66095,141 +67690,182 @@ var AccordionSlider = /*#__PURE__*/function (_Component) {
 
     _this = _super.call(this, props);
 
-    _defineProperty(_assertThisInitialized(_this), "wrapperRef", /*#__PURE__*/react.createRef());
+    _defineProperty(_assertThisInitialized(_this), "rootRef", /*#__PURE__*/react.createRef());
 
+    _defineProperty(_assertThisInitialized(_this), "uniqueID", void 0);
+
+    _defineProperty(_assertThisInitialized(_this), "animOK", void 0);
+
+    _this.uniqueID = 'app-' + helpers.GUID.create();
+    _this.animOK = false;
+    _this.handleClickItem = _this.handleClickItem.bind(_assertThisInitialized(_this));
     return _this;
   }
 
   _createClass(AccordionSlider, [{
+    key: "handleClickItem",
+    value: function handleClickItem(e) {
+      var _this2 = this;
+
+      e.preventDefault(); //Prevents further propagation of the current event in the capturing and bubbling phases(if use `e.target`).
+
+      e.stopPropagation();
+      if (this.animOK) return; //
+
+      var reactDomWrapperEl = this.rootRef.current;
+      var reactDomEl = e.currentTarget;
+      var animSpeed = this.props.duration || 200;
+      var $li = reactDomWrapperEl.querySelectorAll('ul > li');
+      var total = $li.length;
+      var offsetVal = this.props.displayRatio || '60%';
+      var dir = this.props.direction || 'horizontal'; //Apply click method to outer div but not inner div
+
+      if (e.target.className == 'uix-accordion-slider__content__info' || e.target.className == 'uix-accordion-slider__content') {
+        this.animOK = true;
+        setTimeout(function () {
+          _this2.animOK = false;
+        }, animSpeed); //set other all sibling <li> of the selected element
+
+        Array.prototype.forEach.call($li, function (node) {
+          node.classList.add('active-sub');
+
+          if (node.clientHeight > 0) {
+            _this2.animateStyles(node, {
+              direction: dir,
+              startPercentage: 100 / total,
+              endPercentage: (100 - parseFloat(offsetVal)) / (total - 1),
+              speed: animSpeed
+            });
+          }
+        }); //
+
+        reactDomEl.classList.add('is-active');
+        this.animateStyles(reactDomEl, {
+          direction: dir,
+          startPercentage: 100 / total,
+          endPercentage: parseFloat(offsetVal),
+          speed: animSpeed
+        });
+      }
+    } // Initialize the width or height of each item
+
+  }, {
+    key: "handleResetItems",
+    value: function handleResetItems() {
+      var _this3 = this;
+
+      var reactDomWrapperEl = this.rootRef.current;
+      var $li = reactDomWrapperEl.querySelectorAll('ul > li');
+      var total = $li.length;
+      var animSpeed = this.props.duration || 200;
+      Array.prototype.forEach.call($li, function (node) {
+        node.classList.remove('is-active', 'active-sub');
+
+        _this3.animateStyles(node, {
+          direction: _this3.props.direction,
+          startPercentage: _this3.props.direction === 'verticle' ? node.scrollHeight / reactDomWrapperEl.clientHeight * 100 : node.scrollWidth / reactDomWrapperEl.clientWidth * 100,
+          endPercentage: 100 / total,
+          speed: animSpeed
+        });
+      });
+    }
+  }, {
+    key: "animateStyles",
+    value: function animateStyles(curElement, config) {
+      if ((0,esm_typeof/* default */.Z)(curElement) === ( true ? "undefined" : 0)) return; // Set a default configuration
+
+      config = helpers.setDefaultOptions({
+        "direction": "horizontal",
+        // `horizontal` or `verticle`
+        "startPercentage": 0,
+        "endPercentage": 0,
+        "speed": 200,
+        //ms
+        "fps": 1000 / 60 // 60FPS
+
+      }, config); //
+
+      var _direction = config.direction,
+          _endPercentage = config.endPercentage,
+          _speed = config.speed,
+          _fps = config.fps;
+      var _startPercentage = config.startPercentage;
+      var timer = null;
+      var startTime = Date.now();
+      var deltaPercentage = config.startPercentage < _endPercentage ? _endPercentage / _speed * _fps : _startPercentage / _speed * _fps;
+      timer = setInterval(function () {
+        var elapsed = Date.now() - startTime; //Work out the elapsed time
+        //If the elapsed time is less than the speed (ms)
+
+        if (elapsed < _speed) {
+          if (config.startPercentage < _endPercentage) {
+            _startPercentage = _startPercentage + deltaPercentage;
+          } else {
+            _startPercentage = _startPercentage - deltaPercentage;
+          }
+
+          if (_direction === 'horizontal') {
+            curElement.style.width = _startPercentage + '%';
+          } else {
+            curElement.style.height = _startPercentage + '%';
+          }
+        } else {
+          if (_direction === 'horizontal') {
+            curElement.style.width = _endPercentage + '%';
+          } else {
+            curElement.style.height = _endPercentage + '%';
+          }
+
+          clearInterval(timer);
+        }
+      }, _fps);
+    }
+  }, {
     key: "componentDidMount",
     value: function componentDidMount() {
-      var self = this;
+      var _this4 = this;
 
-      helpers(document).ready(function () {
-        var reactDomEl = self.wrapperRef.current;
+      //Initialize the width or height of each item
+      this.handleResetItems(); //auto close
 
-        var $el = helpers(reactDomEl);
+      var closeBtn = this.props.closeBtn || false;
 
-        var aEvent = $el.data('event'),
-            outReset = $el.data('out-reset'),
-            activeIndex = $el.data('actived-item'),
-            offsetVal = $el.data('offset'),
-            dir = $el.data('direction'),
-            closeBtn = $el.data('close-btn'),
-            $li = $el.find('> ul').children('li'),
-            total = $li.length;
-        if (activeIndex === null) activeIndex = false;
-        if (aEvent === null) aEvent = 'click';
-        if (outReset === null) outReset = true;
-        if (offsetVal === null) offsetVal = '60%'; //Initialize the width or height of each item
+      if (closeBtn !== null && closeBtn != false && closeBtn != '') {
+        helpers(closeBtn).off('click').on('click', function (e) {
+          e.preventDefault();
 
-        itemInit();
-        $li.on(aEvent, function (e) {
-          //Prevents further propagation of the current event in the capturing and bubbling phases.
-          e.stopPropagation(); //Apply click method to outer div but not inner div
-
-          if (e.target.className == 'uix-accordion-slider__content__info' || e.target.className == 'uix-accordion-slider__content') {
-            if (helpers(this).hasClass('is-active')) {
-              helpers(this).addClass('is-active');
-            } else {
-              $li.addClass('active-sub');
-
-              helpers(this).addClass('is-active');
-
-              helpers(this).siblings().removeClass('is-active');
-
-              if (dir == 'verticle') {
-                $li.css('height', (100 - parseFloat(offsetVal)) / (total - 1) + '%');
-
-                helpers(this).css('height', offsetVal);
-              } else {
-                $li.css('width', (100 - parseFloat(offsetVal)) / (total - 1) + '%');
-
-                helpers(this).css('width', offsetVal);
-              }
-            }
-          }
+          _this4.handleResetItems();
         });
-
-        if (outReset) {
-          $el.on('mouseleave', function (e) {
-            itemInit();
-          });
-        }
-
-        if (closeBtn !== null && closeBtn != false && closeBtn != '') {
-          helpers(closeBtn).off('click').on('click', function (e) {
-            e.preventDefault();
-            itemInit();
-          });
-        }
-        /*
-        	* Active the target item
-        	*
-        	* @param  {Number} index     - The index value of the item to be activated.
-        	* @return {Void}
-        	*/
-
-
-        function itemActiveItem(index) {
-          if (index >= 0) {
-            if (dir == 'verticle') {
-              $li.css('height', (100 - parseFloat(offsetVal)) / (total - 1) + '%');
-              $li.eq(index).css('height', offsetVal).addClass('is-active');
-            } else {
-              $li.css('width', (100 - parseFloat(offsetVal)) / (total - 1) + '%');
-              $li.eq(index).css('width', offsetVal).addClass('is-active');
-            }
-          }
-        }
-
-        itemActiveItem(parseFloat(activeIndex));
-        /*
-        	* Initialize the width or height of each item
-        	*
-        	* @return {Void}
-        	*/
-
-        function itemInit() {
-          if (dir == 'verticle') {
-            $li.removeClass('is-active active-sub').css('height', 100 / total + '%');
-          } else {
-            $li.removeClass('is-active active-sub').css('width', 100 / total + '%');
-          }
-        }
-      });
+      }
     }
   }, {
     key: "render",
     value: function render() {
+      var _this5 = this;
+
       var _this$props = this.props,
           triggerType = _this$props.triggerType,
           displayTheFirstItem = _this$props.displayTheFirstItem,
           autoReset = _this$props.autoReset,
-          displayRatio = _this$props.displayRatio,
-          direction = _this$props.direction,
-          closeBtn = _this$props.closeBtn,
           id = _this$props.id,
-          children = _this$props.children,
-          attributes = _objectWithoutProperties(_this$props, AccordionSlider_excluded);
-
-      return /*#__PURE__*/react.createElement(react.Fragment, null, /*#__PURE__*/react.createElement("div", extends_extends({
-        ref: this.wrapperRef,
-        id: id ? id : 'app-accordion-slider-' + helpers.GUID.create(),
-        className: "uix-accordion-slider",
-        "data-actived-item": displayTheFirstItem ? 0 : false,
-        "data-event": triggerType || 'click',
-        "data-out-reset": autoReset,
-        "data-offset": displayRatio || '60%',
-        "data-direction": direction || 'horizontal',
-        "data-close-btn": closeBtn || false
-      }, attributes), /*#__PURE__*/react.createElement("ul", null, children != null ? children.map(function (item, i) {
+          children = _this$props.children;
+      return /*#__PURE__*/react.createElement(react.Fragment, null, /*#__PURE__*/react.createElement("div", {
+        ref: this.rootRef,
+        id: id || this.uniqueID,
+        className: "uix-accordion-slider"
+      }, /*#__PURE__*/react.createElement("ul", null, children != null ? children.map(function (item, i) {
         var childProps = AccordionSlider_objectSpread({}, item.props);
 
-        delete childProps.key;
-        if (i === 0 && displayTheFirstItem) childProps.defaultActive = true;
+        var _defaultActive = i === 0 && displayTheFirstItem ? true : false;
+
         return /*#__PURE__*/react.createElement(AccordionSliderItem, extends_extends({
-          key: "item" + i
+          key: "item" + i,
+          defaultActive: _defaultActive,
+          triggerType: triggerType || 'click',
+          boxToggleEv: _this5.handleClickItem,
+          boxAnimLeaveEv: autoReset ? function () {
+            _this5.handleResetItems();
+          } : function () {}
         }, childProps));
       }) : "")));
     }
@@ -66286,21 +67922,12 @@ var AccordionSlider = /*#__PURE__*/function (_Component) {
     style: {
       marginRight: ".5rem"
     },
-    width: "15",
-    viewBox: "0 0 392.186 392.186"
-  }, /*#__PURE__*/react.createElement("g", null, /*#__PURE__*/react.createElement("g", null, /*#__PURE__*/react.createElement("g", null, /*#__PURE__*/react.createElement("path", {
+    width: "16",
+    viewBox: "0 0 122.88 91.26"
+  }, /*#__PURE__*/react.createElement("path", {
     fill: "#d2d2d2",
-    d: "M368.62,17.951H23.568C10.57,17.951,0,28.524,0,41.52v309.146c0,12.996,10.57,23.568,23.568,23.568h345.053c12.994,0,23.564-10.572,23.564-23.568V41.52C392.188,28.525,381.614,17.951,368.62,17.951z M297.56,57.528c0-4.806,3.896-8.703,8.701-8.703h8.703c4.808,0,8.701,3.896,8.701,8.703v9.863c0,4.806-3.896,8.702-8.701,8.702h-8.703c-4.805,0-8.701-3.896-8.701-8.702V57.528z M257.093,57.528c0-4.806,3.898-8.703,8.703-8.703h8.701c4.805,0,8.703,3.896,8.703,8.703v9.863c0,4.806-3.898,8.702-8.703,8.702h-8.701c-4.805,0-8.703-3.896-8.703-8.702V57.528z M363.903,345.951H28.282V102.235h335.621V345.951L363.903,345.951z M364.132,67.391c0,4.806-3.896,8.702-8.701,8.702h-8.703c-4.809,0-8.702-3.896-8.702-8.702v-9.863c0-4.806,3.896-8.703,8.702-8.703h8.703c4.806,0,8.701,3.896,8.701,8.703V67.391z"
-  }), /*#__PURE__*/react.createElement("path", {
-    fill: "#d2d2d2",
-    d: "M84.185,233.284l63.084,29.336c1.631,0.755,3.367,1.138,5.162,1.138c2.338,0,4.617-0.664,6.598-1.924c3.547-2.267,5.666-6.13,5.666-10.334v-0.322c0-4.752-2.785-9.116-7.096-11.118l-39.455-18.332l39.455-18.334c4.311-2.004,7.096-6.367,7.096-11.117v-0.319c0-4.21-2.119-8.075-5.666-10.334c-1.961-1.253-4.246-1.916-6.605-1.916c-1.779,0-3.563,0.391-5.16,1.133l-63.08,29.333c-4.307,2.004-7.09,6.369-7.09,11.117v0.877C77.093,226.909,79.874,231.272,84.185,233.284z"
-  }), /*#__PURE__*/react.createElement("path", {
-    fill: "#d2d2d2",
-    d: "M165.257,293.036c2.301,3.149,6.002,5.03,9.9,5.03h0.316c5.352,0,10.041-3.426,11.672-8.517L228.7,160.788c1.192-3.716,0.531-7.818-1.771-10.973c-2.301-3.15-6.002-5.03-9.901-5.03h-0.315c-5.354,0-10.048,3.425-11.679,8.516l-41.559,128.771C162.292,285.793,162.958,289.889,165.257,293.036z"
-  }), /*#__PURE__*/react.createElement("path", {
-    fill: "#d2d2d2",
-    d: "M227.49,192.276c0,4.745,2.783,9.109,7.095,11.123l39.455,18.329l-39.455,18.33c-4.31,2.004-7.095,6.368-7.095,11.118v0.322c0,4.205,2.117,8.068,5.668,10.336c1.974,1.258,4.254,1.924,6.595,1.924c1.793,0,3.528-0.383,5.17-1.142l63.08-29.335c4.307-2.009,7.09-6.372,7.09-11.115v-0.877c0-4.748-2.783-9.113-7.094-11.117l-63.08-29.333c-1.591-0.74-3.373-1.131-5.152-1.131c-2.355,0-4.643,0.661-6.604,1.912c-3.551,2.263-5.67,6.127-5.67,10.337v0.318H227.49L227.49,192.276z"
-  }))))), "Docs on GitHub"))))))), /*#__PURE__*/react.createElement("section", {
+    d: "M8.32,0h106.24c4.58,0,8.32,3.74,8.32,8.32v74.62c0,4.57-3.74,8.32-8.32,8.32H8.32C3.74,91.26,0,87.51,0,82.94 V8.32C0,3.74,3.74,0,8.32,0L8.32,0z M54.46,72.22L32,58.61v-8.63l22.46-13.61v10.26l-13.65,7.69l13.65,7.7V72.22L54.46,72.22z M68.42,72.22l22.46-13.61v-8.63L68.42,36.37v10.26l13.65,7.69l-13.65,7.7V72.22L68.42,72.22z M117.97,23.29H5.29v60.46 c0,0.64,0.25,1.2,0.67,1.63c0.42,0.42,0.99,0.67,1.63,0.67h108.04c0.64,0,1.2-0.25,1.63-0.67c0.43-0.43,0.67-0.99,0.67-1.63V23.29 H117.97L117.97,23.29z M106.64,9.35c2.27,0,4.11,1.84,4.11,4.11c0,2.27-1.84,4.11-4.11,4.11c-2.27,0-4.11-1.84-4.11-4.11 C102.54,11.19,104.38,9.35,106.64,9.35L106.64,9.35z M78.8,9.35c2.27,0,4.11,1.84,4.11,4.11c0,2.27-1.84,4.11-4.11,4.11 c-2.27,0-4.11-1.84-4.11-4.11C74.69,11.19,76.53,9.35,78.8,9.35L78.8,9.35z M92.72,9.35c2.27,0,4.11,1.84,4.11,4.11 c0,2.27-1.84,4.11-4.11,4.11c-2.27,0-4.11-1.84-4.11-4.11C88.61,11.19,90.45,9.35,92.72,9.35L92.72,9.35z"
+  })), "Docs on GitHub"))))))), /*#__PURE__*/react.createElement("section", {
     className: "uix-spacing--s uix-spacing--no-bottom"
   }, /*#__PURE__*/react.createElement("div", {
     className: "container"
@@ -66417,11 +68044,11 @@ var AccordionSlider = /*#__PURE__*/function (_Component) {
     className: "table-responsive-md"
   }, /*#__PURE__*/react.createElement("table", {
     className: "table table-bordered table-striped mb-5"
-  }, /*#__PURE__*/react.createElement("thead", null, /*#__PURE__*/react.createElement("tr", null, /*#__PURE__*/react.createElement("th", null, "Property"), /*#__PURE__*/react.createElement("th", null, "Type"), /*#__PURE__*/react.createElement("th", null, "Default"), /*#__PURE__*/react.createElement("th", null, "Description"))), /*#__PURE__*/react.createElement("tbody", null, /*#__PURE__*/react.createElement("tr", null, /*#__PURE__*/react.createElement("td", null, /*#__PURE__*/react.createElement("code", null, "triggerType")), /*#__PURE__*/react.createElement("td", null, "string | ", /*#__PURE__*/react.createElement("code", null, "click"), " | ", /*#__PURE__*/react.createElement("code", null, "mouseenter")), /*#__PURE__*/react.createElement("td", null, "click"), /*#__PURE__*/react.createElement("td", null, "One event type, such as ", /*#__PURE__*/react.createElement("code", null, "click"), " or ", /*#__PURE__*/react.createElement("code", null, "mouseenter"))), /*#__PURE__*/react.createElement("tr", null, /*#__PURE__*/react.createElement("td", null, /*#__PURE__*/react.createElement("code", null, "displayTheFirstItem")), /*#__PURE__*/react.createElement("td", null, "boolean"), /*#__PURE__*/react.createElement("td", null, "false"), /*#__PURE__*/react.createElement("td", null, "Display the only first item of a list")), /*#__PURE__*/react.createElement("tr", null, /*#__PURE__*/react.createElement("td", null, /*#__PURE__*/react.createElement("code", null, "autoReset")), /*#__PURE__*/react.createElement("td", null, "boolean"), /*#__PURE__*/react.createElement("td", null, "true"), /*#__PURE__*/react.createElement("td", null, "Reset the initial state when the mouse moves out of the component area")), /*#__PURE__*/react.createElement("tr", null, /*#__PURE__*/react.createElement("td", null, /*#__PURE__*/react.createElement("code", null, "displayRatio")), /*#__PURE__*/react.createElement("td", null, "string"), /*#__PURE__*/react.createElement("td", null, "60%"), /*#__PURE__*/react.createElement("td", null, "Display ratio measures the activated item's percentage of the component in the entire area")), /*#__PURE__*/react.createElement("tr", null, /*#__PURE__*/react.createElement("td", null, /*#__PURE__*/react.createElement("code", null, "direction")), /*#__PURE__*/react.createElement("td", null, /*#__PURE__*/react.createElement("code", null, "horizontal"), " | ", /*#__PURE__*/react.createElement("code", null, "verticle")), /*#__PURE__*/react.createElement("td", null, "horizontal"), /*#__PURE__*/react.createElement("td", null, "The direction of the slider animation, if it is ", /*#__PURE__*/react.createElement("code", null, "horizontal"), ", it means changing the width, otherwise changing the height")), /*#__PURE__*/react.createElement("tr", null, /*#__PURE__*/react.createElement("td", null, /*#__PURE__*/react.createElement("code", null, "closeBtn")), /*#__PURE__*/react.createElement("td", null, "string | boolean"), /*#__PURE__*/react.createElement("td", null, "false"), /*#__PURE__*/react.createElement("td", null, "The button that triggers the restoration of the initial state, represented by class, such as ", /*#__PURE__*/react.createElement("code", null, ".uix-accordion-img__close")))))), /*#__PURE__*/react.createElement("h4", null, "Accordion Slider Item"), /*#__PURE__*/react.createElement("div", null, /*#__PURE__*/react.createElement("pre", null, "import ", "{AccordionSliderItem}", " from '@uixkit.react/components/AccordionSlider/index.tsx';")), /*#__PURE__*/react.createElement("div", {
+  }, /*#__PURE__*/react.createElement("thead", null, /*#__PURE__*/react.createElement("tr", null, /*#__PURE__*/react.createElement("th", null, "Property"), /*#__PURE__*/react.createElement("th", null, "Type"), /*#__PURE__*/react.createElement("th", null, "Default"), /*#__PURE__*/react.createElement("th", null, "Description"))), /*#__PURE__*/react.createElement("tbody", null, /*#__PURE__*/react.createElement("tr", null, /*#__PURE__*/react.createElement("td", null, /*#__PURE__*/react.createElement("code", null, "triggerType")), /*#__PURE__*/react.createElement("td", null, /*#__PURE__*/react.createElement("code", null, "click"), " | ", /*#__PURE__*/react.createElement("code", null, "mouseover")), /*#__PURE__*/react.createElement("td", null, "click"), /*#__PURE__*/react.createElement("td", null, "One event type")), /*#__PURE__*/react.createElement("tr", null, /*#__PURE__*/react.createElement("td", null, /*#__PURE__*/react.createElement("code", null, "displayTheFirstItem")), /*#__PURE__*/react.createElement("td", null, "boolean"), /*#__PURE__*/react.createElement("td", null, "false"), /*#__PURE__*/react.createElement("td", null, "Display the only first item of a list")), /*#__PURE__*/react.createElement("tr", null, /*#__PURE__*/react.createElement("td", null, /*#__PURE__*/react.createElement("code", null, "autoReset")), /*#__PURE__*/react.createElement("td", null, "boolean"), /*#__PURE__*/react.createElement("td", null, "true"), /*#__PURE__*/react.createElement("td", null, "Reset the initial state when the mouse moves out of the component area")), /*#__PURE__*/react.createElement("tr", null, /*#__PURE__*/react.createElement("td", null, /*#__PURE__*/react.createElement("code", null, "displayRatio")), /*#__PURE__*/react.createElement("td", null, "string"), /*#__PURE__*/react.createElement("td", null, "60%"), /*#__PURE__*/react.createElement("td", null, "Display ratio measures the activated item's percentage of the component in the entire area")), /*#__PURE__*/react.createElement("tr", null, /*#__PURE__*/react.createElement("td", null, /*#__PURE__*/react.createElement("code", null, "direction")), /*#__PURE__*/react.createElement("td", null, /*#__PURE__*/react.createElement("code", null, "horizontal"), " | ", /*#__PURE__*/react.createElement("code", null, "verticle")), /*#__PURE__*/react.createElement("td", null, "horizontal"), /*#__PURE__*/react.createElement("td", null, "The direction of the slider animation, if it is ", /*#__PURE__*/react.createElement("code", null, "horizontal"), ", it means changing the width, otherwise changing the height")), /*#__PURE__*/react.createElement("tr", null, /*#__PURE__*/react.createElement("td", null, /*#__PURE__*/react.createElement("code", null, "closeBtn")), /*#__PURE__*/react.createElement("td", null, "string | boolean"), /*#__PURE__*/react.createElement("td", null, "false"), /*#__PURE__*/react.createElement("td", null, "The button that triggers the restoration of the initial state, represented by class, such as ", /*#__PURE__*/react.createElement("code", null, ".uix-accordion-img__close"))), /*#__PURE__*/react.createElement("tr", null, /*#__PURE__*/react.createElement("td", null, /*#__PURE__*/react.createElement("code", null, "duration")), /*#__PURE__*/react.createElement("td", null, "number"), /*#__PURE__*/react.createElement("td", null, "200"), /*#__PURE__*/react.createElement("td", null, "The number of milliseconds(ms) each iteration of the animation takes to complete"))))), /*#__PURE__*/react.createElement("h4", null, "Accordion Slider Item"), /*#__PURE__*/react.createElement("div", null, /*#__PURE__*/react.createElement("pre", null, "import ", "{AccordionSliderItem}", " from '@uixkit.react/components/AccordionSlider/index.tsx';")), /*#__PURE__*/react.createElement("div", {
     className: "table-responsive-md"
   }, /*#__PURE__*/react.createElement("table", {
     className: "table table-bordered table-striped mb-5"
-  }, /*#__PURE__*/react.createElement("thead", null, /*#__PURE__*/react.createElement("tr", null, /*#__PURE__*/react.createElement("th", null, "Property"), /*#__PURE__*/react.createElement("th", null, "Type"), /*#__PURE__*/react.createElement("th", null, "Default"), /*#__PURE__*/react.createElement("th", null, "Description"))), /*#__PURE__*/react.createElement("tbody", null, /*#__PURE__*/react.createElement("tr", null, /*#__PURE__*/react.createElement("td", null, /*#__PURE__*/react.createElement("code", null, "defaultActive")), /*#__PURE__*/react.createElement("td", null, "boolean"), /*#__PURE__*/react.createElement("td", null, "false"), /*#__PURE__*/react.createElement("td", null, "Set an item to activate by default")), /*#__PURE__*/react.createElement("tr", null, /*#__PURE__*/react.createElement("td", null, /*#__PURE__*/react.createElement("code", null, "bg")), /*#__PURE__*/react.createElement("td", null, "string"), /*#__PURE__*/react.createElement("td", null, "-"), /*#__PURE__*/react.createElement("td", null, "The URL or color of the background image. Eg. ", /*#__PURE__*/react.createElement("code", null, "http://example/demo.jpg"), ", ", /*#__PURE__*/react.createElement("code", null, "#f60"))))))))))));
+  }, /*#__PURE__*/react.createElement("thead", null, /*#__PURE__*/react.createElement("tr", null, /*#__PURE__*/react.createElement("th", null, "Property"), /*#__PURE__*/react.createElement("th", null, "Type"), /*#__PURE__*/react.createElement("th", null, "Default"), /*#__PURE__*/react.createElement("th", null, "Description"))), /*#__PURE__*/react.createElement("tbody", null, /*#__PURE__*/react.createElement("tr", null, /*#__PURE__*/react.createElement("td", null, /*#__PURE__*/react.createElement("code", null, "defaultActive")), /*#__PURE__*/react.createElement("td", null, "boolean"), /*#__PURE__*/react.createElement("td", null, "false"), /*#__PURE__*/react.createElement("td", null, "Set an item to activate by default")), /*#__PURE__*/react.createElement("tr", null, /*#__PURE__*/react.createElement("td", null, /*#__PURE__*/react.createElement("code", null, "bg")), /*#__PURE__*/react.createElement("td", null, "string"), /*#__PURE__*/react.createElement("td", null, "-"), /*#__PURE__*/react.createElement("td", null, "The URL or color of the background image. Eg. ", /*#__PURE__*/react.createElement("code", null, "http://example/demo.jpg"), ", ", /*#__PURE__*/react.createElement("code", null, "#f60"))), /*#__PURE__*/react.createElement("tr", null, /*#__PURE__*/react.createElement("td", null, /*#__PURE__*/react.createElement("code", null, "boxToggleEv")), /*#__PURE__*/react.createElement("td", null, "function"), /*#__PURE__*/react.createElement("td", null, "-"), /*#__PURE__*/react.createElement("td", null, "Handling events for collapsing item")), /*#__PURE__*/react.createElement("tr", null, /*#__PURE__*/react.createElement("td", null, /*#__PURE__*/react.createElement("code", null, "boxAnimEndEv")), /*#__PURE__*/react.createElement("td", null, "function"), /*#__PURE__*/react.createElement("td", null, "-"), /*#__PURE__*/react.createElement("td", null, "Handling events when the animation execution is complete")), /*#__PURE__*/react.createElement("tr", null, /*#__PURE__*/react.createElement("td", null, /*#__PURE__*/react.createElement("code", null, "boxAnimLeaveEv")), /*#__PURE__*/react.createElement("td", null, "function"), /*#__PURE__*/react.createElement("td", null, "-"), /*#__PURE__*/react.createElement("td", null, "Handling events when the mouse leaves the element")), /*#__PURE__*/react.createElement("tr", null, /*#__PURE__*/react.createElement("td", null, /*#__PURE__*/react.createElement("code", null, "triggerType")), /*#__PURE__*/react.createElement("td", null, /*#__PURE__*/react.createElement("code", null, "click"), " | ", /*#__PURE__*/react.createElement("code", null, "mouseover")), /*#__PURE__*/react.createElement("td", null, "click"), /*#__PURE__*/react.createElement("td", null, "One event type")))))))))));
 });
 ;// CONCATENATED MODULE: ./src/client/components/Counter/count-to.tsx
 
@@ -66475,7 +68102,7 @@ function countTo(curElement, config) {
     loopCount++;
     render(value);
 
-    if (typeof _update == 'function') {
+    if (typeof _update === 'function') {
       _update.call($el[0], value);
     }
 
@@ -66485,7 +68112,7 @@ function countTo(curElement, config) {
       clearInterval(data.interval);
       value = _numberEnd;
 
-      if (typeof _complete == 'function') {
+      if (typeof _complete === 'function') {
         _complete.call($el[0], value);
       }
     }
@@ -66507,9 +68134,7 @@ function countTo(curElement, config) {
     $el.html(formattedValue);
   }
 }
-/* harmony default export */ const count_to = ({
-  countTo: countTo
-});
+/* harmony default export */ const count_to = ((/* unused pure expression or super */ null && (countTo)));
 ;// CONCATENATED MODULE: ./src/client/components/Counter/index.tsx
 
 
@@ -66518,9 +68143,6 @@ function countTo(curElement, config) {
 
 
 
-
-
-var Counter_excluded = ["start", "stop", "fixed", "speed", "dilimiter", "doubleDigits", "displayNumber", "id"];
 
 function Counter_createSuper(Derived) { var hasNativeReflectConstruct = Counter_isNativeReflectConstruct(); return function _createSuperInternal() { var Super = _getPrototypeOf(Derived), result; if (hasNativeReflectConstruct) { var NewTarget = _getPrototypeOf(this).constructor; result = Reflect.construct(Super, arguments, NewTarget); } else { result = Super.apply(this, arguments); } return _possibleConstructorReturn(this, result); }; }
 
@@ -66554,11 +68176,15 @@ var Counter = /*#__PURE__*/function (_Component) {
 
     _classCallCheck(this, Counter);
 
-    _this = _super.call(this, props); // Add a scroll event listener to window
+    _this = _super.call(this, props);
 
-    _defineProperty(_assertThisInitialized(_this), "wrapperRef", /*#__PURE__*/react.createRef());
+    _defineProperty(_assertThisInitialized(_this), "rootRef", /*#__PURE__*/react.createRef());
 
     _defineProperty(_assertThisInitialized(_this), "windowScrollUpdate", void 0);
+
+    _defineProperty(_assertThisInitialized(_this), "uniqueID", void 0);
+
+    _this.uniqueID = 'app-' + helpers.GUID.create(); // Add a scroll event listener to window
 
     _this.handleScrollEvent = _this.handleScrollEvent.bind(_assertThisInitialized(_this));
     _this.windowScrollUpdate = helpers.throttle(_this.handleScrollEvent, 5);
@@ -66568,7 +68194,7 @@ var Counter = /*#__PURE__*/function (_Component) {
   _createClass(Counter, [{
     key: "handleScrollEvent",
     value: function handleScrollEvent() {
-      var reactDomEl = this.wrapperRef.current;
+      var reactDomEl = this.rootRef.current;
       var viewport = 1;
       var spyTop = reactDomEl.getBoundingClientRect().top; //Prevent asynchronous loading of repeated calls
 
@@ -66596,15 +68222,16 @@ var Counter = /*#__PURE__*/function (_Component) {
   }, {
     key: "componentDidMount",
     value: function componentDidMount() {
-      var self = this;
+      var _this2 = this;
+
+      // Add function to the element that should be used as the scrollable area.
+      window.removeEventListener('scroll', this.windowScrollUpdate);
+      window.removeEventListener('touchmove', this.windowScrollUpdate);
+      window.addEventListener('scroll', this.windowScrollUpdate);
+      window.addEventListener('touchmove', this.windowScrollUpdate); // Prevent calculation errors caused by unloaded completion
 
       helpers(document).ready(function () {
-        // Add function to the element that should be used as the scrollable area.
-        window.removeEventListener('scroll', self.windowScrollUpdate);
-        window.removeEventListener('touchmove', self.windowScrollUpdate);
-        window.addEventListener('scroll', self.windowScrollUpdate);
-        window.addEventListener('touchmove', self.windowScrollUpdate);
-        self.windowScrollUpdate();
+        _this2.windowScrollUpdate();
       });
     }
     /** Remove the global list of events, especially as scroll and interval. */
@@ -66627,19 +68254,17 @@ var Counter = /*#__PURE__*/function (_Component) {
           dilimiter = _this$props.dilimiter,
           doubleDigits = _this$props.doubleDigits,
           displayNumber = _this$props.displayNumber,
-          id = _this$props.id,
-          attributes = _objectWithoutProperties(_this$props, Counter_excluded);
-
-      return /*#__PURE__*/react.createElement(react.Fragment, null, /*#__PURE__*/react.createElement("span", extends_extends({
-        ref: this.wrapperRef,
-        id: id || 'app-counter-' + helpers.GUID.create(),
+          id = _this$props.id;
+      return /*#__PURE__*/react.createElement(react.Fragment, null, /*#__PURE__*/react.createElement("span", {
+        ref: this.rootRef,
+        id: id || this.uniqueID,
         "data-counter-fixed": fixed || 0,
         "data-counter-start": start || 0,
         "data-counter-number": stop || 0,
         "data-counter-double-digits": doubleDigits,
         "data-counter-dilimiter": dilimiter,
         "data-counter-duration": speed || 200
-      }, attributes), displayNumber));
+      }, displayNumber));
     }
   }]);
 
@@ -66684,21 +68309,12 @@ var Counter = /*#__PURE__*/function (_Component) {
     style: {
       marginRight: ".5rem"
     },
-    width: "15",
-    viewBox: "0 0 392.186 392.186"
-  }, /*#__PURE__*/react.createElement("g", null, /*#__PURE__*/react.createElement("g", null, /*#__PURE__*/react.createElement("g", null, /*#__PURE__*/react.createElement("path", {
+    width: "16",
+    viewBox: "0 0 122.88 91.26"
+  }, /*#__PURE__*/react.createElement("path", {
     fill: "#d2d2d2",
-    d: "M368.62,17.951H23.568C10.57,17.951,0,28.524,0,41.52v309.146c0,12.996,10.57,23.568,23.568,23.568h345.053c12.994,0,23.564-10.572,23.564-23.568V41.52C392.188,28.525,381.614,17.951,368.62,17.951z M297.56,57.528c0-4.806,3.896-8.703,8.701-8.703h8.703c4.808,0,8.701,3.896,8.701,8.703v9.863c0,4.806-3.896,8.702-8.701,8.702h-8.703c-4.805,0-8.701-3.896-8.701-8.702V57.528z M257.093,57.528c0-4.806,3.898-8.703,8.703-8.703h8.701c4.805,0,8.703,3.896,8.703,8.703v9.863c0,4.806-3.898,8.702-8.703,8.702h-8.701c-4.805,0-8.703-3.896-8.703-8.702V57.528z M363.903,345.951H28.282V102.235h335.621V345.951L363.903,345.951z M364.132,67.391c0,4.806-3.896,8.702-8.701,8.702h-8.703c-4.809,0-8.702-3.896-8.702-8.702v-9.863c0-4.806,3.896-8.703,8.702-8.703h8.703c4.806,0,8.701,3.896,8.701,8.703V67.391z"
-  }), /*#__PURE__*/react.createElement("path", {
-    fill: "#d2d2d2",
-    d: "M84.185,233.284l63.084,29.336c1.631,0.755,3.367,1.138,5.162,1.138c2.338,0,4.617-0.664,6.598-1.924c3.547-2.267,5.666-6.13,5.666-10.334v-0.322c0-4.752-2.785-9.116-7.096-11.118l-39.455-18.332l39.455-18.334c4.311-2.004,7.096-6.367,7.096-11.117v-0.319c0-4.21-2.119-8.075-5.666-10.334c-1.961-1.253-4.246-1.916-6.605-1.916c-1.779,0-3.563,0.391-5.16,1.133l-63.08,29.333c-4.307,2.004-7.09,6.369-7.09,11.117v0.877C77.093,226.909,79.874,231.272,84.185,233.284z"
-  }), /*#__PURE__*/react.createElement("path", {
-    fill: "#d2d2d2",
-    d: "M165.257,293.036c2.301,3.149,6.002,5.03,9.9,5.03h0.316c5.352,0,10.041-3.426,11.672-8.517L228.7,160.788c1.192-3.716,0.531-7.818-1.771-10.973c-2.301-3.15-6.002-5.03-9.901-5.03h-0.315c-5.354,0-10.048,3.425-11.679,8.516l-41.559,128.771C162.292,285.793,162.958,289.889,165.257,293.036z"
-  }), /*#__PURE__*/react.createElement("path", {
-    fill: "#d2d2d2",
-    d: "M227.49,192.276c0,4.745,2.783,9.109,7.095,11.123l39.455,18.329l-39.455,18.33c-4.31,2.004-7.095,6.368-7.095,11.118v0.322c0,4.205,2.117,8.068,5.668,10.336c1.974,1.258,4.254,1.924,6.595,1.924c1.793,0,3.528-0.383,5.17-1.142l63.08-29.335c4.307-2.009,7.09-6.372,7.09-11.115v-0.877c0-4.748-2.783-9.113-7.094-11.117l-63.08-29.333c-1.591-0.74-3.373-1.131-5.152-1.131c-2.355,0-4.643,0.661-6.604,1.912c-3.551,2.263-5.67,6.127-5.67,10.337v0.318H227.49L227.49,192.276z"
-  }))))), "Docs on GitHub"))))))), /*#__PURE__*/react.createElement("section", {
+    d: "M8.32,0h106.24c4.58,0,8.32,3.74,8.32,8.32v74.62c0,4.57-3.74,8.32-8.32,8.32H8.32C3.74,91.26,0,87.51,0,82.94 V8.32C0,3.74,3.74,0,8.32,0L8.32,0z M54.46,72.22L32,58.61v-8.63l22.46-13.61v10.26l-13.65,7.69l13.65,7.7V72.22L54.46,72.22z M68.42,72.22l22.46-13.61v-8.63L68.42,36.37v10.26l13.65,7.69l-13.65,7.7V72.22L68.42,72.22z M117.97,23.29H5.29v60.46 c0,0.64,0.25,1.2,0.67,1.63c0.42,0.42,0.99,0.67,1.63,0.67h108.04c0.64,0,1.2-0.25,1.63-0.67c0.43-0.43,0.67-0.99,0.67-1.63V23.29 H117.97L117.97,23.29z M106.64,9.35c2.27,0,4.11,1.84,4.11,4.11c0,2.27-1.84,4.11-4.11,4.11c-2.27,0-4.11-1.84-4.11-4.11 C102.54,11.19,104.38,9.35,106.64,9.35L106.64,9.35z M78.8,9.35c2.27,0,4.11,1.84,4.11,4.11c0,2.27-1.84,4.11-4.11,4.11 c-2.27,0-4.11-1.84-4.11-4.11C74.69,11.19,76.53,9.35,78.8,9.35L78.8,9.35z M92.72,9.35c2.27,0,4.11,1.84,4.11,4.11 c0,2.27-1.84,4.11-4.11,4.11c-2.27,0-4.11-1.84-4.11-4.11C88.61,11.19,90.45,9.35,92.72,9.35L92.72,9.35z"
+  })), "Docs on GitHub"))))))), /*#__PURE__*/react.createElement("section", {
     className: "uix-spacing--s uix-spacing--no-bottom"
   }, /*#__PURE__*/react.createElement("div", {
     className: "container"
@@ -66973,8 +68589,6 @@ var Option = /*#__PURE__*/function (_Component) {
 
 
 
-var DropdownMenu_excluded = ["name", "defaultLabel", "options", "id"];
-
 function DropdownMenu_createSuper(Derived) { var hasNativeReflectConstruct = DropdownMenu_isNativeReflectConstruct(); return function _createSuperInternal() { var Super = _getPrototypeOf(Derived), result; if (hasNativeReflectConstruct) { var NewTarget = _getPrototypeOf(this).constructor; result = Reflect.construct(Super, arguments, NewTarget); } else { result = Super.apply(this, arguments); } return _possibleConstructorReturn(this, result); }; }
 
 function DropdownMenu_isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Reflect.construct) return false; if (Reflect.construct.sham) return false; if (typeof Proxy === "function") return true; try { Boolean.prototype.valueOf.call(Reflect.construct(Boolean, [], function () {})); return true; } catch (e) { return false; } }
@@ -67012,6 +68626,10 @@ var DropdownMenu = /*#__PURE__*/function (_Component) {
     _classCallCheck(this, DropdownMenu);
 
     _this = _super.call(this, props);
+
+    _defineProperty(_assertThisInitialized(_this), "uniqueID", void 0);
+
+    _this.uniqueID = 'app-' + helpers.GUID.create();
     _this.handleClose = _this.handleClose.bind(_assertThisInitialized(_this));
     _this.handleClick = _this.handleClick.bind(_assertThisInitialized(_this));
     _this.handleSelect = _this.handleSelect.bind(_assertThisInitialized(_this));
@@ -67045,6 +68663,12 @@ var DropdownMenu = /*#__PURE__*/function (_Component) {
         selected: option,
         opened: false
       });
+
+      if (typeof this.props.optionChangeCallback === 'function') {
+        this.props.optionChangeCallback({
+          "value": option
+        });
+      }
     }
   }, {
     key: "componentDidMount",
@@ -67057,8 +68681,8 @@ var DropdownMenu = /*#__PURE__*/function (_Component) {
   }, {
     key: "componentWillUnmount",
     value: function componentWillUnmount() {
-      // Remove URL change events from window
-      window.removeEventListener('mousedown', this.handleClose);
+      // Remove URL change events from document
+      document.removeEventListener('mousedown', this.handleClose);
     }
   }, {
     key: "render",
@@ -67070,11 +68694,9 @@ var DropdownMenu = /*#__PURE__*/function (_Component) {
           name = _this$props.name,
           defaultLabel = _this$props.defaultLabel,
           options = _this$props.options,
-          id = _this$props.id,
-          attributes = _objectWithoutProperties(_this$props, DropdownMenu_excluded);
-
-      var cid = id || 'app-dropdown-menu-' + helpers.GUID.create();
-
+          btnIcon = _this$props.btnIcon,
+          id = _this$props.id;
+      var cid = id || this.uniqueID;
       var selectedLabel = this.state.selected ? this.state.selected.label : defaultLabel === undefined ? 'Select' : defaultLabel;
       var selectOptionsListPresentation = options === null || options === void 0 ? void 0 : options.map(function (selectOption, index) {
         return /*#__PURE__*/react.createElement(Option, {
@@ -67083,15 +68705,11 @@ var DropdownMenu = /*#__PURE__*/function (_Component) {
           onSelect: _this2.handleSelect
         });
       });
-      return /*#__PURE__*/react.createElement(react.Fragment, null, /*#__PURE__*/react.createElement("div", extends_extends({
+      return /*#__PURE__*/react.createElement(react.Fragment, null, /*#__PURE__*/react.createElement("div", {
         className: "uix-dropdown-menu" + (this.state.opened ? ' is-opened' : ''),
-        id: cid
-      }, attributes, {
+        id: cid,
         onClick: this.handleClick
-      }), /*#__PURE__*/react.createElement("span", null, /*#__PURE__*/react.createElement("i", {
-        className: "fa fa-cog",
-        "aria-hidden": "true"
-      }), " ", /*#__PURE__*/react.createElement("span", null, selectedLabel)), /*#__PURE__*/react.createElement("input", {
+      }, /*#__PURE__*/react.createElement("span", null, btnIcon || null, /*#__PURE__*/react.createElement("span", null, selectedLabel)), /*#__PURE__*/react.createElement("input", {
         name: name || '',
         type: "hidden",
         value: (_this$state$selected = this.state.selected) === null || _this$state$selected === void 0 ? void 0 : _this$state$selected.value
@@ -67150,21 +68768,12 @@ var DropdownMenuDemo_data1 = [{
     style: {
       marginRight: ".5rem"
     },
-    width: "15",
-    viewBox: "0 0 392.186 392.186"
-  }, /*#__PURE__*/react.createElement("g", null, /*#__PURE__*/react.createElement("g", null, /*#__PURE__*/react.createElement("g", null, /*#__PURE__*/react.createElement("path", {
+    width: "16",
+    viewBox: "0 0 122.88 91.26"
+  }, /*#__PURE__*/react.createElement("path", {
     fill: "#d2d2d2",
-    d: "M368.62,17.951H23.568C10.57,17.951,0,28.524,0,41.52v309.146c0,12.996,10.57,23.568,23.568,23.568h345.053c12.994,0,23.564-10.572,23.564-23.568V41.52C392.188,28.525,381.614,17.951,368.62,17.951z M297.56,57.528c0-4.806,3.896-8.703,8.701-8.703h8.703c4.808,0,8.701,3.896,8.701,8.703v9.863c0,4.806-3.896,8.702-8.701,8.702h-8.703c-4.805,0-8.701-3.896-8.701-8.702V57.528z M257.093,57.528c0-4.806,3.898-8.703,8.703-8.703h8.701c4.805,0,8.703,3.896,8.703,8.703v9.863c0,4.806-3.898,8.702-8.703,8.702h-8.701c-4.805,0-8.703-3.896-8.703-8.702V57.528z M363.903,345.951H28.282V102.235h335.621V345.951L363.903,345.951z M364.132,67.391c0,4.806-3.896,8.702-8.701,8.702h-8.703c-4.809,0-8.702-3.896-8.702-8.702v-9.863c0-4.806,3.896-8.703,8.702-8.703h8.703c4.806,0,8.701,3.896,8.701,8.703V67.391z"
-  }), /*#__PURE__*/react.createElement("path", {
-    fill: "#d2d2d2",
-    d: "M84.185,233.284l63.084,29.336c1.631,0.755,3.367,1.138,5.162,1.138c2.338,0,4.617-0.664,6.598-1.924c3.547-2.267,5.666-6.13,5.666-10.334v-0.322c0-4.752-2.785-9.116-7.096-11.118l-39.455-18.332l39.455-18.334c4.311-2.004,7.096-6.367,7.096-11.117v-0.319c0-4.21-2.119-8.075-5.666-10.334c-1.961-1.253-4.246-1.916-6.605-1.916c-1.779,0-3.563,0.391-5.16,1.133l-63.08,29.333c-4.307,2.004-7.09,6.369-7.09,11.117v0.877C77.093,226.909,79.874,231.272,84.185,233.284z"
-  }), /*#__PURE__*/react.createElement("path", {
-    fill: "#d2d2d2",
-    d: "M165.257,293.036c2.301,3.149,6.002,5.03,9.9,5.03h0.316c5.352,0,10.041-3.426,11.672-8.517L228.7,160.788c1.192-3.716,0.531-7.818-1.771-10.973c-2.301-3.15-6.002-5.03-9.901-5.03h-0.315c-5.354,0-10.048,3.425-11.679,8.516l-41.559,128.771C162.292,285.793,162.958,289.889,165.257,293.036z"
-  }), /*#__PURE__*/react.createElement("path", {
-    fill: "#d2d2d2",
-    d: "M227.49,192.276c0,4.745,2.783,9.109,7.095,11.123l39.455,18.329l-39.455,18.33c-4.31,2.004-7.095,6.368-7.095,11.118v0.322c0,4.205,2.117,8.068,5.668,10.336c1.974,1.258,4.254,1.924,6.595,1.924c1.793,0,3.528-0.383,5.17-1.142l63.08-29.335c4.307-2.009,7.09-6.372,7.09-11.115v-0.877c0-4.748-2.783-9.113-7.094-11.117l-63.08-29.333c-1.591-0.74-3.373-1.131-5.152-1.131c-2.355,0-4.643,0.661-6.604,1.912c-3.551,2.263-5.67,6.127-5.67,10.337v0.318H227.49L227.49,192.276z"
-  }))))), "Docs on GitHub"))))))), /*#__PURE__*/react.createElement("section", {
+    d: "M8.32,0h106.24c4.58,0,8.32,3.74,8.32,8.32v74.62c0,4.57-3.74,8.32-8.32,8.32H8.32C3.74,91.26,0,87.51,0,82.94 V8.32C0,3.74,3.74,0,8.32,0L8.32,0z M54.46,72.22L32,58.61v-8.63l22.46-13.61v10.26l-13.65,7.69l13.65,7.7V72.22L54.46,72.22z M68.42,72.22l22.46-13.61v-8.63L68.42,36.37v10.26l13.65,7.69l-13.65,7.7V72.22L68.42,72.22z M117.97,23.29H5.29v60.46 c0,0.64,0.25,1.2,0.67,1.63c0.42,0.42,0.99,0.67,1.63,0.67h108.04c0.64,0,1.2-0.25,1.63-0.67c0.43-0.43,0.67-0.99,0.67-1.63V23.29 H117.97L117.97,23.29z M106.64,9.35c2.27,0,4.11,1.84,4.11,4.11c0,2.27-1.84,4.11-4.11,4.11c-2.27,0-4.11-1.84-4.11-4.11 C102.54,11.19,104.38,9.35,106.64,9.35L106.64,9.35z M78.8,9.35c2.27,0,4.11,1.84,4.11,4.11c0,2.27-1.84,4.11-4.11,4.11 c-2.27,0-4.11-1.84-4.11-4.11C74.69,11.19,76.53,9.35,78.8,9.35L78.8,9.35z M92.72,9.35c2.27,0,4.11,1.84,4.11,4.11 c0,2.27-1.84,4.11-4.11,4.11c-2.27,0-4.11-1.84-4.11-4.11C88.61,11.19,90.45,9.35,92.72,9.35L92.72,9.35z"
+  })), "Docs on GitHub"))))))), /*#__PURE__*/react.createElement("section", {
     className: "uix-spacing--s uix-spacing--no-bottom"
   }, /*#__PURE__*/react.createElement("div", {
     className: "container"
@@ -67183,6 +68792,10 @@ var DropdownMenuDemo_data1 = [{
   }, /*#__PURE__*/react.createElement("div", {
     className: "col-12"
   }, /*#__PURE__*/react.createElement(DropdownMenu, {
+    btnIcon: /*#__PURE__*/react.createElement(react.Fragment, null, /*#__PURE__*/react.createElement("i", {
+      className: "fa fa-cog",
+      "aria-hidden": "true"
+    }), " "),
     name: "app-ddmenu-1",
     options: [{
       label: "Option 1",
@@ -67195,15 +68808,22 @@ var DropdownMenuDemo_data1 = [{
       value: "option-3"
     }]
   }), /*#__PURE__*/react.createElement("br", null), /*#__PURE__*/react.createElement("br", null), /*#__PURE__*/react.createElement(DropdownMenu, {
+    btnIcon: /*#__PURE__*/react.createElement(react.Fragment, null, /*#__PURE__*/react.createElement("i", {
+      className: "fa fa-cog",
+      "aria-hidden": "true"
+    }), " "),
     name: "app-ddmenu-2",
-    defaultLabel: "Click Me",
+    defaultLabel: "Click Me (contains callback function)",
     options: [{
       label: "Boy",
       value: "boy"
     }, {
       label: "Girl",
       value: "girl"
-    }]
+    }],
+    optionChangeCallback: function optionChangeCallback(res) {
+      return console.log(res.value);
+    }
   }))))), /*#__PURE__*/react.createElement("section", null, /*#__PURE__*/react.createElement("div", {
     className: "container"
   }, /*#__PURE__*/react.createElement("div", {
@@ -67221,7 +68841,13 @@ var DropdownMenuDemo_data1 = [{
     className: "table table-bordered table-striped mb-5"
   }, /*#__PURE__*/react.createElement("thead", null, /*#__PURE__*/react.createElement("tr", null, /*#__PURE__*/react.createElement("th", null, "Property"), /*#__PURE__*/react.createElement("th", null, "Type"), /*#__PURE__*/react.createElement("th", null, "Default"), /*#__PURE__*/react.createElement("th", null, "Description"))), /*#__PURE__*/react.createElement("tbody", null, /*#__PURE__*/react.createElement("tr", null, /*#__PURE__*/react.createElement("td", null, /*#__PURE__*/react.createElement("code", null, "name")), /*#__PURE__*/react.createElement("td", null, "string"), /*#__PURE__*/react.createElement("td", null, "-"), /*#__PURE__*/react.createElement("td", null, "Set a name for the form field for this component. Name is not deprecated when used with form fields.")), /*#__PURE__*/react.createElement("tr", null, /*#__PURE__*/react.createElement("td", null, /*#__PURE__*/react.createElement("code", null, "defaultLabel")), /*#__PURE__*/react.createElement("td", null, "string"), /*#__PURE__*/react.createElement("td", null, "-"), /*#__PURE__*/react.createElement("td", null, "Specify a default label text")), /*#__PURE__*/react.createElement("tr", null, /*#__PURE__*/react.createElement("td", null, /*#__PURE__*/react.createElement("code", null, "options")), /*#__PURE__*/react.createElement("td", null, "array"), /*#__PURE__*/react.createElement("td", null, "-"), /*#__PURE__*/react.createElement("td", null, "Specify data of Dropdown Menu as a JSON string format. Such as: ", /*#__PURE__*/react.createElement("br", null), " ", /*#__PURE__*/react.createElement("code", {
     className: "text-wrap"
-  }, "[{\"label\":\"Option 1\",\"value\":\"option-1\"},{\"label\":\"Option 2\",\"value\":\"option-2\"}]"))))))))))));
+  }, "[{\"label\":\"Option 1\",\"value\":\"option-1\"},{\"label\":\"Option 2\",\"value\":\"option-2\"}]"))), /*#__PURE__*/react.createElement("tr", null, /*#__PURE__*/react.createElement("td", null, /*#__PURE__*/react.createElement("code", null, "btnIcon")), /*#__PURE__*/react.createElement("td", null, "ReactNode"), /*#__PURE__*/react.createElement("td", null, "-"), /*#__PURE__*/react.createElement("td", null, "Button Icon")), /*#__PURE__*/react.createElement("tr", null, /*#__PURE__*/react.createElement("td", null, /*#__PURE__*/react.createElement("code", null, "optionChangeCallback")), /*#__PURE__*/react.createElement("td", null, "function | null"), /*#__PURE__*/react.createElement("td", null, "-"), /*#__PURE__*/react.createElement("td", null, "This function is called whenever the data is updated. Exposes the JSON format data about the option as an argument. You can use it like this: ", /*#__PURE__*/react.createElement("br", null), /*#__PURE__*/react.createElement("code", {
+    className: "text-wrap"
+  }, "(res) => console.log(res.value)")))))), /*#__PURE__*/react.createElement("p", null, "Array configuration properties of the ", /*#__PURE__*/react.createElement("code", null, "options"), ":"), /*#__PURE__*/react.createElement("div", {
+    className: "table-responsive-md"
+  }, /*#__PURE__*/react.createElement("table", {
+    className: "table table-bordered table-striped mb-5"
+  }, /*#__PURE__*/react.createElement("thead", null, /*#__PURE__*/react.createElement("tr", null, /*#__PURE__*/react.createElement("th", null, "Property"), /*#__PURE__*/react.createElement("th", null, "Type"), /*#__PURE__*/react.createElement("th", null, "Default"), /*#__PURE__*/react.createElement("th", null, "Description"))), /*#__PURE__*/react.createElement("tbody", null, /*#__PURE__*/react.createElement("tr", null, /*#__PURE__*/react.createElement("td", null, /*#__PURE__*/react.createElement("code", null, "label")), /*#__PURE__*/react.createElement("td", null, "string"), /*#__PURE__*/react.createElement("td", null, "-"), /*#__PURE__*/react.createElement("td", null, "Specify the label text for each option")), /*#__PURE__*/react.createElement("tr", null, /*#__PURE__*/react.createElement("td", null, /*#__PURE__*/react.createElement("code", null, "value")), /*#__PURE__*/react.createElement("td", null, "string"), /*#__PURE__*/react.createElement("td", null, "-"), /*#__PURE__*/react.createElement("td", null, "Specify the value for each option")))))))))));
 });
 ;// CONCATENATED MODULE: ./src/client/components/_plugins/BSL/lib/bodyScrollLock.es6.js
 
@@ -67526,9 +69152,7 @@ function closeModalDialog(curElement) {
 
   clearTimeout(window.setCloseModalDialog);
 }
-/* harmony default export */ const close_modal_dialog = ({
-  closeModalDialog: closeModalDialog
-});
+/* harmony default export */ const close_modal_dialog = ((/* unused pure expression or super */ null && (closeModalDialog)));
 ;// CONCATENATED MODULE: ./src/client/components/ModalDialog/fire-modal-dialog.tsx
 
 
@@ -67641,10 +69265,10 @@ function fireModalDialog(curElement, config) {
     }, animDelay);
   }
 }
-/* harmony default export */ const fire_modal_dialog = ({
-  fireModalDialog: fireModalDialog
-});
+/* harmony default export */ const fire_modal_dialog = ((/* unused pure expression or super */ null && (fireModalDialog)));
 ;// CONCATENATED MODULE: ./src/client/components/ModalDialog/index.tsx
+
+
 
 
 
@@ -67687,9 +69311,16 @@ var ModalDialog = /*#__PURE__*/function (_Component) {
   var _super = ModalDialog_createSuper(ModalDialog);
 
   function ModalDialog(props) {
+    var _this;
+
     _classCallCheck(this, ModalDialog);
 
-    return _super.call(this, props);
+    _this = _super.call(this, props);
+
+    _defineProperty(_assertThisInitialized(_this), "uniqueID", void 0);
+
+    _this.uniqueID = 'app-' + helpers.GUID.create();
+    return _this;
   }
 
   _createClass(ModalDialog, [{
@@ -67953,9 +69584,7 @@ var ModalDialog = /*#__PURE__*/function (_Component) {
           enableVideo = _this$props.enableVideo,
           id = _this$props.id,
           children = _this$props.children;
-
-      var cid = id || 'app-modal-' + helpers.GUID.create();
-
+      var cid = id || this.uniqueID;
       var fullClassName = fullscreen ? 'is-fullscreen' : '';
       var lightboxEnabled = lightbox === null || lightbox === undefined ? true : lightbox;
       return /*#__PURE__*/react.createElement(react.Fragment, null, this.createTrigger(triggerTagName, triggerClassName, triggerContent, cid, closeOnlyBtn, autoClose, width, height, autoOpen, lightboxEnabled), !enableVideo ? /*#__PURE__*/react.createElement("div", {
@@ -68043,21 +69672,12 @@ var ModalDialog = /*#__PURE__*/function (_Component) {
     style: {
       marginRight: ".5rem"
     },
-    width: "15",
-    viewBox: "0 0 392.186 392.186"
-  }, /*#__PURE__*/react.createElement("g", null, /*#__PURE__*/react.createElement("g", null, /*#__PURE__*/react.createElement("g", null, /*#__PURE__*/react.createElement("path", {
+    width: "16",
+    viewBox: "0 0 122.88 91.26"
+  }, /*#__PURE__*/react.createElement("path", {
     fill: "#d2d2d2",
-    d: "M368.62,17.951H23.568C10.57,17.951,0,28.524,0,41.52v309.146c0,12.996,10.57,23.568,23.568,23.568h345.053c12.994,0,23.564-10.572,23.564-23.568V41.52C392.188,28.525,381.614,17.951,368.62,17.951z M297.56,57.528c0-4.806,3.896-8.703,8.701-8.703h8.703c4.808,0,8.701,3.896,8.701,8.703v9.863c0,4.806-3.896,8.702-8.701,8.702h-8.703c-4.805,0-8.701-3.896-8.701-8.702V57.528z M257.093,57.528c0-4.806,3.898-8.703,8.703-8.703h8.701c4.805,0,8.703,3.896,8.703,8.703v9.863c0,4.806-3.898,8.702-8.703,8.702h-8.701c-4.805,0-8.703-3.896-8.703-8.702V57.528z M363.903,345.951H28.282V102.235h335.621V345.951L363.903,345.951z M364.132,67.391c0,4.806-3.896,8.702-8.701,8.702h-8.703c-4.809,0-8.702-3.896-8.702-8.702v-9.863c0-4.806,3.896-8.703,8.702-8.703h8.703c4.806,0,8.701,3.896,8.701,8.703V67.391z"
-  }), /*#__PURE__*/react.createElement("path", {
-    fill: "#d2d2d2",
-    d: "M84.185,233.284l63.084,29.336c1.631,0.755,3.367,1.138,5.162,1.138c2.338,0,4.617-0.664,6.598-1.924c3.547-2.267,5.666-6.13,5.666-10.334v-0.322c0-4.752-2.785-9.116-7.096-11.118l-39.455-18.332l39.455-18.334c4.311-2.004,7.096-6.367,7.096-11.117v-0.319c0-4.21-2.119-8.075-5.666-10.334c-1.961-1.253-4.246-1.916-6.605-1.916c-1.779,0-3.563,0.391-5.16,1.133l-63.08,29.333c-4.307,2.004-7.09,6.369-7.09,11.117v0.877C77.093,226.909,79.874,231.272,84.185,233.284z"
-  }), /*#__PURE__*/react.createElement("path", {
-    fill: "#d2d2d2",
-    d: "M165.257,293.036c2.301,3.149,6.002,5.03,9.9,5.03h0.316c5.352,0,10.041-3.426,11.672-8.517L228.7,160.788c1.192-3.716,0.531-7.818-1.771-10.973c-2.301-3.15-6.002-5.03-9.901-5.03h-0.315c-5.354,0-10.048,3.425-11.679,8.516l-41.559,128.771C162.292,285.793,162.958,289.889,165.257,293.036z"
-  }), /*#__PURE__*/react.createElement("path", {
-    fill: "#d2d2d2",
-    d: "M227.49,192.276c0,4.745,2.783,9.109,7.095,11.123l39.455,18.329l-39.455,18.33c-4.31,2.004-7.095,6.368-7.095,11.118v0.322c0,4.205,2.117,8.068,5.668,10.336c1.974,1.258,4.254,1.924,6.595,1.924c1.793,0,3.528-0.383,5.17-1.142l63.08-29.335c4.307-2.009,7.09-6.372,7.09-11.115v-0.877c0-4.748-2.783-9.113-7.094-11.117l-63.08-29.333c-1.591-0.74-3.373-1.131-5.152-1.131c-2.355,0-4.643,0.661-6.604,1.912c-3.551,2.263-5.67,6.127-5.67,10.337v0.318H227.49L227.49,192.276z"
-  }))))), "Docs on GitHub"))))))), /*#__PURE__*/react.createElement("section", {
+    d: "M8.32,0h106.24c4.58,0,8.32,3.74,8.32,8.32v74.62c0,4.57-3.74,8.32-8.32,8.32H8.32C3.74,91.26,0,87.51,0,82.94 V8.32C0,3.74,3.74,0,8.32,0L8.32,0z M54.46,72.22L32,58.61v-8.63l22.46-13.61v10.26l-13.65,7.69l13.65,7.7V72.22L54.46,72.22z M68.42,72.22l22.46-13.61v-8.63L68.42,36.37v10.26l13.65,7.69l-13.65,7.7V72.22L68.42,72.22z M117.97,23.29H5.29v60.46 c0,0.64,0.25,1.2,0.67,1.63c0.42,0.42,0.99,0.67,1.63,0.67h108.04c0.64,0,1.2-0.25,1.63-0.67c0.43-0.43,0.67-0.99,0.67-1.63V23.29 H117.97L117.97,23.29z M106.64,9.35c2.27,0,4.11,1.84,4.11,4.11c0,2.27-1.84,4.11-4.11,4.11c-2.27,0-4.11-1.84-4.11-4.11 C102.54,11.19,104.38,9.35,106.64,9.35L106.64,9.35z M78.8,9.35c2.27,0,4.11,1.84,4.11,4.11c0,2.27-1.84,4.11-4.11,4.11 c-2.27,0-4.11-1.84-4.11-4.11C74.69,11.19,76.53,9.35,78.8,9.35L78.8,9.35z M92.72,9.35c2.27,0,4.11,1.84,4.11,4.11 c0,2.27-1.84,4.11-4.11,4.11c-2.27,0-4.11-1.84-4.11-4.11C88.61,11.19,90.45,9.35,92.72,9.35L92.72,9.35z"
+  })), "Docs on GitHub"))))))), /*#__PURE__*/react.createElement("section", {
     className: "uix-spacing--s uix-spacing--no-bottom"
   }, /*#__PURE__*/react.createElement("div", {
     className: "container"
@@ -68161,7 +69781,7 @@ var ModalDialog = /*#__PURE__*/function (_Component) {
     className: "table-responsive-md"
   }, /*#__PURE__*/react.createElement("table", {
     className: "table table-bordered table-striped mb-5"
-  }, /*#__PURE__*/react.createElement("thead", null, /*#__PURE__*/react.createElement("tr", null, /*#__PURE__*/react.createElement("th", null, "Property"), /*#__PURE__*/react.createElement("th", null, "Type"), /*#__PURE__*/react.createElement("th", null, "Default"), /*#__PURE__*/react.createElement("th", null, "Description"))), /*#__PURE__*/react.createElement("tbody", null, /*#__PURE__*/react.createElement("tr", null, /*#__PURE__*/react.createElement("td", null, /*#__PURE__*/react.createElement("code", null, "height")), /*#__PURE__*/react.createElement("td", null, "number | string | boolean"), /*#__PURE__*/react.createElement("td", null, "false"), /*#__PURE__*/react.createElement("td", null, "Custom modal height whick need a unit string. Such as: ", /*#__PURE__*/react.createElement("code", null, "200px"))), /*#__PURE__*/react.createElement("tr", null, /*#__PURE__*/react.createElement("td", null, /*#__PURE__*/react.createElement("code", null, "width")), /*#__PURE__*/react.createElement("td", null, "number | string | boolean"), /*#__PURE__*/react.createElement("td", null, "false"), /*#__PURE__*/react.createElement("td", null, "Custom modal width whick need a unit string. Such as: ", /*#__PURE__*/react.createElement("code", null, "200px"))), /*#__PURE__*/react.createElement("tr", null, /*#__PURE__*/react.createElement("td", null, /*#__PURE__*/react.createElement("code", null, "lightbox")), /*#__PURE__*/react.createElement("td", null, "boolean"), /*#__PURE__*/react.createElement("td", null, "true"), /*#__PURE__*/react.createElement("td", null, "Whether to enable the lightbox effect")), /*#__PURE__*/react.createElement("tr", null, /*#__PURE__*/react.createElement("td", null, /*#__PURE__*/react.createElement("code", null, "closeOnlyBtn")), /*#__PURE__*/react.createElement("td", null, "boolean"), /*#__PURE__*/react.createElement("td", null, "false"), /*#__PURE__*/react.createElement("td", null, "Disable mask to close the window")), /*#__PURE__*/react.createElement("tr", null, /*#__PURE__*/react.createElement("td", null, /*#__PURE__*/react.createElement("code", null, "fullscreen")), /*#__PURE__*/react.createElement("td", null, "boolean"), /*#__PURE__*/react.createElement("td", null, "false"), /*#__PURE__*/react.createElement("td", null, "Toggles whether fullscreen should be enabled")), /*#__PURE__*/react.createElement("tr", null, /*#__PURE__*/react.createElement("td", null, /*#__PURE__*/react.createElement("code", null, "heading")), /*#__PURE__*/react.createElement("td", null, "React.ReactNode"), /*#__PURE__*/react.createElement("td", null, "-"), /*#__PURE__*/react.createElement("td", null, "Set a window title")), /*#__PURE__*/react.createElement("tr", null, /*#__PURE__*/react.createElement("td", null, /*#__PURE__*/react.createElement("code", null, "triggerTagName")), /*#__PURE__*/react.createElement("td", null, /*#__PURE__*/react.createElement("code", null, "a"), " | ", /*#__PURE__*/react.createElement("code", null, "button"), " | ", /*#__PURE__*/react.createElement("code", null, "div"), " | ", /*#__PURE__*/react.createElement("code", null, "span")), /*#__PURE__*/react.createElement("td", null, "-"), /*#__PURE__*/react.createElement("td", null, "Tag name of the trigger.")), /*#__PURE__*/react.createElement("tr", null, /*#__PURE__*/react.createElement("td", null, /*#__PURE__*/react.createElement("code", null, "triggerClassName")), /*#__PURE__*/react.createElement("td", null, "string"), /*#__PURE__*/react.createElement("td", null, "-"), /*#__PURE__*/react.createElement("td", null, "Specify a class for this Node")), /*#__PURE__*/react.createElement("tr", null, /*#__PURE__*/react.createElement("td", null, /*#__PURE__*/react.createElement("code", null, "triggerContent")), /*#__PURE__*/react.createElement("td", null, "React.ReactNode"), /*#__PURE__*/react.createElement("td", null, "-"), /*#__PURE__*/react.createElement("td", null, "Set a piece of text or HTML code for the trigger")), /*#__PURE__*/react.createElement("tr", null, /*#__PURE__*/react.createElement("td", null, /*#__PURE__*/react.createElement("code", null, "autoClose")), /*#__PURE__*/react.createElement("td", null, "number | boolean"), /*#__PURE__*/react.createElement("td", null, "false"), /*#__PURE__*/react.createElement("td", null, "Specify auto-close time. This function is not enabled when this value is false. If the value is ", /*#__PURE__*/react.createElement("code", null, "2000"), ", it will automatically close after 2 seconds.")), /*#__PURE__*/react.createElement("tr", null, /*#__PURE__*/react.createElement("td", null, /*#__PURE__*/react.createElement("code", null, "autoOpen")), /*#__PURE__*/react.createElement("td", null, "boolean"), /*#__PURE__*/react.createElement("td", null, "false"), /*#__PURE__*/react.createElement("td", null, "Automatically open the component, you can use it with the ", /*#__PURE__*/react.createElement("code", null, "autoClose"), " property at the same time")), /*#__PURE__*/react.createElement("tr", null, /*#__PURE__*/react.createElement("td", null, /*#__PURE__*/react.createElement("code", null, "enableVideo")), /*#__PURE__*/react.createElement("td", null, "boolean"), /*#__PURE__*/react.createElement("td", null, "false"), /*#__PURE__*/react.createElement("td", null, "Adapt the video to the window. For example, the content of the component can be written as: ", /*#__PURE__*/react.createElement("code", {
+  }, /*#__PURE__*/react.createElement("thead", null, /*#__PURE__*/react.createElement("tr", null, /*#__PURE__*/react.createElement("th", null, "Property"), /*#__PURE__*/react.createElement("th", null, "Type"), /*#__PURE__*/react.createElement("th", null, "Default"), /*#__PURE__*/react.createElement("th", null, "Description"))), /*#__PURE__*/react.createElement("tbody", null, /*#__PURE__*/react.createElement("tr", null, /*#__PURE__*/react.createElement("td", null, /*#__PURE__*/react.createElement("code", null, "height")), /*#__PURE__*/react.createElement("td", null, "number | string | boolean"), /*#__PURE__*/react.createElement("td", null, "false"), /*#__PURE__*/react.createElement("td", null, "Custom modal height whick need a unit string. Such as: ", /*#__PURE__*/react.createElement("code", null, "200px"))), /*#__PURE__*/react.createElement("tr", null, /*#__PURE__*/react.createElement("td", null, /*#__PURE__*/react.createElement("code", null, "width")), /*#__PURE__*/react.createElement("td", null, "number | string | boolean"), /*#__PURE__*/react.createElement("td", null, "false"), /*#__PURE__*/react.createElement("td", null, "Custom modal width whick need a unit string. Such as: ", /*#__PURE__*/react.createElement("code", null, "200px"))), /*#__PURE__*/react.createElement("tr", null, /*#__PURE__*/react.createElement("td", null, /*#__PURE__*/react.createElement("code", null, "lightbox")), /*#__PURE__*/react.createElement("td", null, "boolean"), /*#__PURE__*/react.createElement("td", null, "true"), /*#__PURE__*/react.createElement("td", null, "Whether to enable the lightbox effect")), /*#__PURE__*/react.createElement("tr", null, /*#__PURE__*/react.createElement("td", null, /*#__PURE__*/react.createElement("code", null, "closeOnlyBtn")), /*#__PURE__*/react.createElement("td", null, "boolean"), /*#__PURE__*/react.createElement("td", null, "false"), /*#__PURE__*/react.createElement("td", null, "Disable mask to close the window")), /*#__PURE__*/react.createElement("tr", null, /*#__PURE__*/react.createElement("td", null, /*#__PURE__*/react.createElement("code", null, "fullscreen")), /*#__PURE__*/react.createElement("td", null, "boolean"), /*#__PURE__*/react.createElement("td", null, "false"), /*#__PURE__*/react.createElement("td", null, "Toggles whether fullscreen should be enabled")), /*#__PURE__*/react.createElement("tr", null, /*#__PURE__*/react.createElement("td", null, /*#__PURE__*/react.createElement("code", null, "heading")), /*#__PURE__*/react.createElement("td", null, "ReactNode"), /*#__PURE__*/react.createElement("td", null, "-"), /*#__PURE__*/react.createElement("td", null, "Set a window title")), /*#__PURE__*/react.createElement("tr", null, /*#__PURE__*/react.createElement("td", null, /*#__PURE__*/react.createElement("code", null, "triggerTagName")), /*#__PURE__*/react.createElement("td", null, /*#__PURE__*/react.createElement("code", null, "a"), " | ", /*#__PURE__*/react.createElement("code", null, "button"), " | ", /*#__PURE__*/react.createElement("code", null, "div"), " | ", /*#__PURE__*/react.createElement("code", null, "span")), /*#__PURE__*/react.createElement("td", null, "-"), /*#__PURE__*/react.createElement("td", null, "Tag name of the trigger.")), /*#__PURE__*/react.createElement("tr", null, /*#__PURE__*/react.createElement("td", null, /*#__PURE__*/react.createElement("code", null, "triggerClassName")), /*#__PURE__*/react.createElement("td", null, "string"), /*#__PURE__*/react.createElement("td", null, "-"), /*#__PURE__*/react.createElement("td", null, "Specify a class for this Node")), /*#__PURE__*/react.createElement("tr", null, /*#__PURE__*/react.createElement("td", null, /*#__PURE__*/react.createElement("code", null, "triggerContent")), /*#__PURE__*/react.createElement("td", null, "ReactNode"), /*#__PURE__*/react.createElement("td", null, "-"), /*#__PURE__*/react.createElement("td", null, "Set a piece of text or HTML code for the trigger")), /*#__PURE__*/react.createElement("tr", null, /*#__PURE__*/react.createElement("td", null, /*#__PURE__*/react.createElement("code", null, "autoClose")), /*#__PURE__*/react.createElement("td", null, "number | boolean"), /*#__PURE__*/react.createElement("td", null, "false"), /*#__PURE__*/react.createElement("td", null, "Specify auto-close time. This function is not enabled when this value is false. If the value is ", /*#__PURE__*/react.createElement("code", null, "2000"), ", it will automatically close after 2 seconds.")), /*#__PURE__*/react.createElement("tr", null, /*#__PURE__*/react.createElement("td", null, /*#__PURE__*/react.createElement("code", null, "autoOpen")), /*#__PURE__*/react.createElement("td", null, "boolean"), /*#__PURE__*/react.createElement("td", null, "false"), /*#__PURE__*/react.createElement("td", null, "Automatically open the component, you can use it with the ", /*#__PURE__*/react.createElement("code", null, "autoClose"), " property at the same time")), /*#__PURE__*/react.createElement("tr", null, /*#__PURE__*/react.createElement("td", null, /*#__PURE__*/react.createElement("code", null, "enableVideo")), /*#__PURE__*/react.createElement("td", null, "boolean"), /*#__PURE__*/react.createElement("td", null, "false"), /*#__PURE__*/react.createElement("td", null, "Adapt the video to the window. For example, the content of the component can be written as: ", /*#__PURE__*/react.createElement("code", {
     className: "text-wrap"
   }, "<iframe width=\"560\" height=\"315\" src=\"https://www.youtube.com/xxx\" frameBorder=\"0\" allow=\"autoplay; encrypted-media\" allowFullScreen></iframe>"), " ", /*#__PURE__*/react.createElement("br", null), " or ", /*#__PURE__*/react.createElement("br", null), /*#__PURE__*/react.createElement("code", {
     className: "text-wrap"
@@ -68199,7 +69819,8 @@ function sliderAnime(curElement, config) {
   var animDelay = 0; //Used to delete the global listening event when the component is about to be unmounted
 
   window.dragEvents = [];
-  window.intervalEvents = []; //Slider Initialize
+  window.intervalEvents = [];
+  window.windowResizeEvents = []; //Slider Initialize
   //------------------------------------------
 
   var windowWidth = window.innerWidth;
@@ -68213,12 +69834,14 @@ function sliderAnime(curElement, config) {
 
       sliderInit(true);
     }
-  }
+  } // Add function to the window that should be resized
+
 
   var debounceFunc = helpers.debounce(windowUpdate, 50);
 
   window.removeEventListener('resize', debounceFunc);
-  window.addEventListener('resize', debounceFunc); //Core Functions
+  window.addEventListener('resize', debounceFunc);
+  window.windowResizeEvents.push(debounceFunc); //Core Functions
   //------------------------------------------
 
   /*
@@ -68780,9 +70403,7 @@ function sliderAnime(curElement, config) {
     img.style.display = 'none';
   }
 }
-/* harmony default export */ const slider_anime = ({
-  sliderAnime: sliderAnime
-});
+/* harmony default export */ const slider_anime = ((/* unused pure expression or super */ null && (sliderAnime)));
 ;// CONCATENATED MODULE: ./src/client/components/Slideshow/Item.tsx
 
 
@@ -68796,7 +70417,7 @@ function Item_isNativeReflectConstruct() { if (typeof Reflect === "undefined" ||
 
 
 
-var Item = /*#__PURE__*/function (_Component) {
+var Item_Item = /*#__PURE__*/function (_Component) {
   _inherits(Item, _Component);
 
   var _super = Item_createSuper(Item);
@@ -68887,8 +70508,11 @@ var Slideshow = /*#__PURE__*/function (_Component) {
 
     _this = _super.call(this, props);
 
-    _defineProperty(_assertThisInitialized(_this), "wrapperRef", /*#__PURE__*/react.createRef());
+    _defineProperty(_assertThisInitialized(_this), "rootRef", /*#__PURE__*/react.createRef());
 
+    _defineProperty(_assertThisInitialized(_this), "uniqueID", void 0);
+
+    _this.uniqueID = 'app-' + helpers.GUID.create();
     return _this;
   }
 
@@ -68898,7 +70522,7 @@ var Slideshow = /*#__PURE__*/function (_Component) {
       var self = this;
 
       helpers(document).ready(function () {
-        var reactDomEl = self.wrapperRef.current;
+        var reactDomEl = self.rootRef.current;
 
         var $el = helpers(reactDomEl); //Get parameter configuration from the data-* attribute of HTML
 
@@ -68938,6 +70562,14 @@ var Slideshow = /*#__PURE__*/function (_Component) {
           clearInterval(fn);
         });
         window.intervalEvents = [];
+      } // Remove resize events from window
+
+
+      if (Array.isArray(window.windowResizeEvents)) {
+        window.windowResizeEvents.forEach(function (fn) {
+          clearInterval(fn);
+        });
+        window.windowResizeEvents = [];
       }
     }
   }, {
@@ -68956,15 +70588,13 @@ var Slideshow = /*#__PURE__*/function (_Component) {
           draggableCursor = _this$props.draggableCursor,
           id = _this$props.id,
           children = _this$props.children;
-
-      var cid = id || 'app-slideshow-' + helpers.GUID.create();
-
+      var cid = id || this.uniqueID;
       return /*#__PURE__*/react.createElement(react.Fragment, null, /*#__PURE__*/react.createElement("div", {
         role: "banner",
         className: "uix-slideshow__wrapper",
         id: cid
       }, /*#__PURE__*/react.createElement("div", {
-        ref: this.wrapperRef,
+        ref: this.rootRef,
         className: "uix-slideshow__outline uix-slideshow uix-slideshow--eff-" + effect,
         "data-draggable": draggable,
         "data-draggable-cursor": draggableCursor || 'move',
@@ -68980,7 +70610,7 @@ var Slideshow = /*#__PURE__*/function (_Component) {
       }, children != null ? children.map(function (item, i) {
         var childProps = Slideshow_objectSpread({}, item.props);
 
-        return /*#__PURE__*/react.createElement(Item, extends_extends({
+        return /*#__PURE__*/react.createElement(Item_Item, extends_extends({
           key: i
         }, childProps));
       }) : ""))), paginationEnabled ? /*#__PURE__*/react.createElement("div", {
@@ -69054,21 +70684,12 @@ var Slideshow = /*#__PURE__*/function (_Component) {
     style: {
       marginRight: ".5rem"
     },
-    width: "15",
-    viewBox: "0 0 392.186 392.186"
-  }, /*#__PURE__*/react.createElement("g", null, /*#__PURE__*/react.createElement("g", null, /*#__PURE__*/react.createElement("g", null, /*#__PURE__*/react.createElement("path", {
+    width: "16",
+    viewBox: "0 0 122.88 91.26"
+  }, /*#__PURE__*/react.createElement("path", {
     fill: "#d2d2d2",
-    d: "M368.62,17.951H23.568C10.57,17.951,0,28.524,0,41.52v309.146c0,12.996,10.57,23.568,23.568,23.568h345.053c12.994,0,23.564-10.572,23.564-23.568V41.52C392.188,28.525,381.614,17.951,368.62,17.951z M297.56,57.528c0-4.806,3.896-8.703,8.701-8.703h8.703c4.808,0,8.701,3.896,8.701,8.703v9.863c0,4.806-3.896,8.702-8.701,8.702h-8.703c-4.805,0-8.701-3.896-8.701-8.702V57.528z M257.093,57.528c0-4.806,3.898-8.703,8.703-8.703h8.701c4.805,0,8.703,3.896,8.703,8.703v9.863c0,4.806-3.898,8.702-8.703,8.702h-8.701c-4.805,0-8.703-3.896-8.703-8.702V57.528z M363.903,345.951H28.282V102.235h335.621V345.951L363.903,345.951z M364.132,67.391c0,4.806-3.896,8.702-8.701,8.702h-8.703c-4.809,0-8.702-3.896-8.702-8.702v-9.863c0-4.806,3.896-8.703,8.702-8.703h8.703c4.806,0,8.701,3.896,8.701,8.703V67.391z"
-  }), /*#__PURE__*/react.createElement("path", {
-    fill: "#d2d2d2",
-    d: "M84.185,233.284l63.084,29.336c1.631,0.755,3.367,1.138,5.162,1.138c2.338,0,4.617-0.664,6.598-1.924c3.547-2.267,5.666-6.13,5.666-10.334v-0.322c0-4.752-2.785-9.116-7.096-11.118l-39.455-18.332l39.455-18.334c4.311-2.004,7.096-6.367,7.096-11.117v-0.319c0-4.21-2.119-8.075-5.666-10.334c-1.961-1.253-4.246-1.916-6.605-1.916c-1.779,0-3.563,0.391-5.16,1.133l-63.08,29.333c-4.307,2.004-7.09,6.369-7.09,11.117v0.877C77.093,226.909,79.874,231.272,84.185,233.284z"
-  }), /*#__PURE__*/react.createElement("path", {
-    fill: "#d2d2d2",
-    d: "M165.257,293.036c2.301,3.149,6.002,5.03,9.9,5.03h0.316c5.352,0,10.041-3.426,11.672-8.517L228.7,160.788c1.192-3.716,0.531-7.818-1.771-10.973c-2.301-3.15-6.002-5.03-9.901-5.03h-0.315c-5.354,0-10.048,3.425-11.679,8.516l-41.559,128.771C162.292,285.793,162.958,289.889,165.257,293.036z"
-  }), /*#__PURE__*/react.createElement("path", {
-    fill: "#d2d2d2",
-    d: "M227.49,192.276c0,4.745,2.783,9.109,7.095,11.123l39.455,18.329l-39.455,18.33c-4.31,2.004-7.095,6.368-7.095,11.118v0.322c0,4.205,2.117,8.068,5.668,10.336c1.974,1.258,4.254,1.924,6.595,1.924c1.793,0,3.528-0.383,5.17-1.142l63.08-29.335c4.307-2.009,7.09-6.372,7.09-11.115v-0.877c0-4.748-2.783-9.113-7.094-11.117l-63.08-29.333c-1.591-0.74-3.373-1.131-5.152-1.131c-2.355,0-4.643,0.661-6.604,1.912c-3.551,2.263-5.67,6.127-5.67,10.337v0.318H227.49L227.49,192.276z"
-  }))))), "Docs on GitHub"))))))), /*#__PURE__*/react.createElement("section", {
+    d: "M8.32,0h106.24c4.58,0,8.32,3.74,8.32,8.32v74.62c0,4.57-3.74,8.32-8.32,8.32H8.32C3.74,91.26,0,87.51,0,82.94 V8.32C0,3.74,3.74,0,8.32,0L8.32,0z M54.46,72.22L32,58.61v-8.63l22.46-13.61v10.26l-13.65,7.69l13.65,7.7V72.22L54.46,72.22z M68.42,72.22l22.46-13.61v-8.63L68.42,36.37v10.26l13.65,7.69l-13.65,7.7V72.22L68.42,72.22z M117.97,23.29H5.29v60.46 c0,0.64,0.25,1.2,0.67,1.63c0.42,0.42,0.99,0.67,1.63,0.67h108.04c0.64,0,1.2-0.25,1.63-0.67c0.43-0.43,0.67-0.99,0.67-1.63V23.29 H117.97L117.97,23.29z M106.64,9.35c2.27,0,4.11,1.84,4.11,4.11c0,2.27-1.84,4.11-4.11,4.11c-2.27,0-4.11-1.84-4.11-4.11 C102.54,11.19,104.38,9.35,106.64,9.35L106.64,9.35z M78.8,9.35c2.27,0,4.11,1.84,4.11,4.11c0,2.27-1.84,4.11-4.11,4.11 c-2.27,0-4.11-1.84-4.11-4.11C74.69,11.19,76.53,9.35,78.8,9.35L78.8,9.35z M92.72,9.35c2.27,0,4.11,1.84,4.11,4.11 c0,2.27-1.84,4.11-4.11,4.11c-2.27,0-4.11-1.84-4.11-4.11C88.61,11.19,90.45,9.35,92.72,9.35L92.72,9.35z"
+  })), "Docs on GitHub"))))))), /*#__PURE__*/react.createElement("section", {
     className: "uix-spacing--s"
   }, /*#__PURE__*/react.createElement("div", {
     className: "container"
@@ -69095,25 +70716,25 @@ var Slideshow = /*#__PURE__*/function (_Component) {
     })),
     draggable: false,
     draggableCursor: "move"
-  }, /*#__PURE__*/react.createElement(Item, {
+  }, /*#__PURE__*/react.createElement(Item_Item, {
     url: "".concat(websiteConfig.rootDirectory, "/assets/images/demo/cool-slider-1.jpg")
   }, /*#__PURE__*/react.createElement("div", {
     className: "uix-typo--color-white"
   }, /*#__PURE__*/react.createElement("h3", null, "Beautiful Free & Premium Responsive WordPress Themes"), /*#__PURE__*/react.createElement("p", null, "Uix Responsive Web UI Frameworks"), /*#__PURE__*/react.createElement("a", {
     href: "#",
     className: "uix-btn uix-btn__border--thin uix-btn__margin--b uix-btn__size--s uix-btn__bg--secondary is-pill is-fill-white"
-  }, "Link To"))), /*#__PURE__*/react.createElement(Item, {
+  }, "Link To"))), /*#__PURE__*/react.createElement(Item_Item, {
     url: "".concat(websiteConfig.rootDirectory, "/assets/images/demo/cool-slider-2.jpg")
   }, /*#__PURE__*/react.createElement("div", {
     className: "uix-typo--color-white"
   }, /*#__PURE__*/react.createElement("h3", null, "Hello World"), /*#__PURE__*/react.createElement("p", null, "UIUX Lab carefully crafts original design assets and publishes articles about UI/UX trends!"), /*#__PURE__*/react.createElement("a", {
     href: "#",
     className: "uix-btn uix-btn__border--thin uix-btn__margin--b uix-btn__size--s uix-btn__bg--secondary is-pill is-fill-white"
-  }, "Link To"))), /*#__PURE__*/react.createElement(Item, {
+  }, "Link To"))), /*#__PURE__*/react.createElement(Item_Item, {
     url: "".concat(websiteConfig.rootDirectory, "/assets/images/demo/cool-slider-3.jpg")
   }, /*#__PURE__*/react.createElement("div", {
     className: "uix-typo--color-white"
-  }, /*#__PURE__*/react.createElement("h3", null, "Title 3"), /*#__PURE__*/react.createElement("p", null, "Lorem ipsum dolor sit amet, consectetur adipiscing elit."))), /*#__PURE__*/react.createElement(Item, {
+  }, /*#__PURE__*/react.createElement("h3", null, "Title 3"), /*#__PURE__*/react.createElement("p", null, "Lorem ipsum dolor sit amet, consectetur adipiscing elit."))), /*#__PURE__*/react.createElement(Item_Item, {
     url: "".concat(websiteConfig.rootDirectory, "/assets/videos/1920x1080/demo.mp4")
   })), /*#__PURE__*/react.createElement("section", {
     className: "uix-spacing--s"
@@ -69142,21 +70763,21 @@ var Slideshow = /*#__PURE__*/function (_Component) {
     })),
     draggable: false,
     draggableCursor: "move"
-  }, /*#__PURE__*/react.createElement(Item, {
+  }, /*#__PURE__*/react.createElement(Item_Item, {
     url: "".concat(websiteConfig.rootDirectory, "/assets/images/demo/cool-slider-1.jpg")
   }, /*#__PURE__*/react.createElement("div", {
     className: "uix-typo--color-white"
   }, /*#__PURE__*/react.createElement("h3", null, "Beautiful Free & Premium Responsive WordPress Themes"), /*#__PURE__*/react.createElement("p", null, "Uix Responsive Web UI Frameworks"), /*#__PURE__*/react.createElement("a", {
     href: "#",
     className: "uix-btn uix-btn__border--thin uix-btn__margin--b uix-btn__size--s uix-btn__bg--secondary is-pill is-fill-white"
-  }, "Link To"))), /*#__PURE__*/react.createElement(Item, {
+  }, "Link To"))), /*#__PURE__*/react.createElement(Item_Item, {
     url: "".concat(websiteConfig.rootDirectory, "/assets/images/demo/cool-slider-2.jpg")
   }, /*#__PURE__*/react.createElement("div", {
     className: "uix-typo--color-white"
   }, /*#__PURE__*/react.createElement("h3", null, "Hello World"), /*#__PURE__*/react.createElement("p", null, "UIUX Lab carefully crafts original design assets and publishes articles about UI/UX trends!"), /*#__PURE__*/react.createElement("a", {
     href: "#",
     className: "uix-btn uix-btn__border--thin uix-btn__margin--b uix-btn__size--s uix-btn__bg--secondary is-pill is-fill-white"
-  }, "Link To"))), /*#__PURE__*/react.createElement(Item, {
+  }, "Link To"))), /*#__PURE__*/react.createElement(Item_Item, {
     url: "".concat(websiteConfig.rootDirectory, "/assets/images/demo/cool-slider-3.jpg")
   }, /*#__PURE__*/react.createElement("div", {
     className: "uix-typo--color-white"
@@ -69187,21 +70808,21 @@ var Slideshow = /*#__PURE__*/function (_Component) {
     })),
     draggable: true,
     draggableCursor: "move"
-  }, /*#__PURE__*/react.createElement(Item, {
+  }, /*#__PURE__*/react.createElement(Item_Item, {
     url: "".concat(websiteConfig.rootDirectory, "/assets/images/demo/cool-slider-1.jpg")
   }, /*#__PURE__*/react.createElement("div", {
     className: "uix-typo--color-white"
   }, /*#__PURE__*/react.createElement("h3", null, "Beautiful Free & Premium Responsive WordPress Themes"), /*#__PURE__*/react.createElement("p", null, "Uix Responsive Web UI Frameworks"), /*#__PURE__*/react.createElement("a", {
     href: "#",
     className: "uix-btn uix-btn__border--thin uix-btn__margin--b uix-btn__size--s uix-btn__bg--secondary is-pill is-fill-white"
-  }, "Link To"))), /*#__PURE__*/react.createElement(Item, {
+  }, "Link To"))), /*#__PURE__*/react.createElement(Item_Item, {
     url: "".concat(websiteConfig.rootDirectory, "/assets/images/demo/cool-slider-2.jpg")
   }, /*#__PURE__*/react.createElement("div", {
     className: "uix-typo--color-white"
   }, /*#__PURE__*/react.createElement("h3", null, "Hello World"), /*#__PURE__*/react.createElement("p", null, "UIUX Lab carefully crafts original design assets and publishes articles about UI/UX trends!"), /*#__PURE__*/react.createElement("a", {
     href: "#",
     className: "uix-btn uix-btn__border--thin uix-btn__margin--b uix-btn__size--s uix-btn__bg--secondary is-pill is-fill-white"
-  }, "Link To"))), /*#__PURE__*/react.createElement(Item, {
+  }, "Link To"))), /*#__PURE__*/react.createElement(Item_Item, {
     url: "".concat(websiteConfig.rootDirectory, "/assets/images/demo/cool-slider-3.jpg")
   }, /*#__PURE__*/react.createElement("div", {
     className: "uix-typo--color-white"
@@ -69220,7 +70841,7 @@ var Slideshow = /*#__PURE__*/function (_Component) {
     className: "table-responsive-md"
   }, /*#__PURE__*/react.createElement("table", {
     className: "table table-bordered table-striped mb-5"
-  }, /*#__PURE__*/react.createElement("thead", null, /*#__PURE__*/react.createElement("tr", null, /*#__PURE__*/react.createElement("th", null, "Property"), /*#__PURE__*/react.createElement("th", null, "Type"), /*#__PURE__*/react.createElement("th", null, "Default"), /*#__PURE__*/react.createElement("th", null, "Description"))), /*#__PURE__*/react.createElement("tbody", null, /*#__PURE__*/react.createElement("tr", null, /*#__PURE__*/react.createElement("td", null, /*#__PURE__*/react.createElement("code", null, "effect")), /*#__PURE__*/react.createElement("td", null, /*#__PURE__*/react.createElement("code", null, "scale"), " | ", /*#__PURE__*/react.createElement("code", null, "slide"), " | ", /*#__PURE__*/react.createElement("code", null, "fade")), /*#__PURE__*/react.createElement("td", null, "fade"), /*#__PURE__*/react.createElement("td", null, "Transition effects")), /*#__PURE__*/react.createElement("tr", null, /*#__PURE__*/react.createElement("td", null, /*#__PURE__*/react.createElement("code", null, "auto")), /*#__PURE__*/react.createElement("td", null, "boolean"), /*#__PURE__*/react.createElement("td", null, "false"), /*#__PURE__*/react.createElement("td", null, "Setup a slideshow for the slider to animate automatically")), /*#__PURE__*/react.createElement("tr", null, /*#__PURE__*/react.createElement("td", null, /*#__PURE__*/react.createElement("code", null, "timing")), /*#__PURE__*/react.createElement("td", null, "number"), /*#__PURE__*/react.createElement("td", null, "10000"), /*#__PURE__*/react.createElement("td", null, "Autoplay interval")), /*#__PURE__*/react.createElement("tr", null, /*#__PURE__*/react.createElement("td", null, /*#__PURE__*/react.createElement("code", null, "loop")), /*#__PURE__*/react.createElement("td", null, "boolean"), /*#__PURE__*/react.createElement("td", null, "false"), /*#__PURE__*/react.createElement("td", null, "Gives the slider a seamless infinite loop")), /*#__PURE__*/react.createElement("tr", null, /*#__PURE__*/react.createElement("td", null, /*#__PURE__*/react.createElement("code", null, "paginationEnabled")), /*#__PURE__*/react.createElement("td", null, "boolean"), /*#__PURE__*/react.createElement("td", null, "false"), /*#__PURE__*/react.createElement("td", null, "Display or hide Navigation of paging control")), /*#__PURE__*/react.createElement("tr", null, /*#__PURE__*/react.createElement("td", null, /*#__PURE__*/react.createElement("code", null, "arrowEnabled")), /*#__PURE__*/react.createElement("td", null, "boolean"), /*#__PURE__*/react.createElement("td", null, "false"), /*#__PURE__*/react.createElement("td", null, "Display or hide Previous/Next arrow")), /*#__PURE__*/react.createElement("tr", null, /*#__PURE__*/react.createElement("td", null, /*#__PURE__*/react.createElement("code", null, "arrowPrevIcon")), /*#__PURE__*/react.createElement("td", null, "React.ReactNode"), /*#__PURE__*/react.createElement("td", null, "-"), /*#__PURE__*/react.createElement("td", null, "Previous arrow icon")), /*#__PURE__*/react.createElement("tr", null, /*#__PURE__*/react.createElement("td", null, /*#__PURE__*/react.createElement("code", null, "arrowNextIcon")), /*#__PURE__*/react.createElement("td", null, "React.ReactNode"), /*#__PURE__*/react.createElement("td", null, "-"), /*#__PURE__*/react.createElement("td", null, "Next arrow icon")), /*#__PURE__*/react.createElement("tr", null, /*#__PURE__*/react.createElement("td", null, /*#__PURE__*/react.createElement("code", null, "draggable")), /*#__PURE__*/react.createElement("td", null, "boolean"), /*#__PURE__*/react.createElement("td", null, "false"), /*#__PURE__*/react.createElement("td", null, "Allow drag and drop on the slider")), /*#__PURE__*/react.createElement("tr", null, /*#__PURE__*/react.createElement("td", null, /*#__PURE__*/react.createElement("code", null, "draggableCursor")), /*#__PURE__*/react.createElement("td", null, "string | boolean"), /*#__PURE__*/react.createElement("td", null, "move"), /*#__PURE__*/react.createElement("td", null, "Drag & Drop Change icon/cursor while dragging"))))), /*#__PURE__*/react.createElement("h4", null, "Item"), /*#__PURE__*/react.createElement("div", null, /*#__PURE__*/react.createElement("pre", null, "import ", "{Item}", " from '@uixkit.react/components/Slideshow/index.tsx';")), /*#__PURE__*/react.createElement("div", {
+  }, /*#__PURE__*/react.createElement("thead", null, /*#__PURE__*/react.createElement("tr", null, /*#__PURE__*/react.createElement("th", null, "Property"), /*#__PURE__*/react.createElement("th", null, "Type"), /*#__PURE__*/react.createElement("th", null, "Default"), /*#__PURE__*/react.createElement("th", null, "Description"))), /*#__PURE__*/react.createElement("tbody", null, /*#__PURE__*/react.createElement("tr", null, /*#__PURE__*/react.createElement("td", null, /*#__PURE__*/react.createElement("code", null, "effect")), /*#__PURE__*/react.createElement("td", null, /*#__PURE__*/react.createElement("code", null, "scale"), " | ", /*#__PURE__*/react.createElement("code", null, "slide"), " | ", /*#__PURE__*/react.createElement("code", null, "fade")), /*#__PURE__*/react.createElement("td", null, "fade"), /*#__PURE__*/react.createElement("td", null, "Transition effects")), /*#__PURE__*/react.createElement("tr", null, /*#__PURE__*/react.createElement("td", null, /*#__PURE__*/react.createElement("code", null, "auto")), /*#__PURE__*/react.createElement("td", null, "boolean"), /*#__PURE__*/react.createElement("td", null, "false"), /*#__PURE__*/react.createElement("td", null, "Setup a slideshow for the slider to animate automatically")), /*#__PURE__*/react.createElement("tr", null, /*#__PURE__*/react.createElement("td", null, /*#__PURE__*/react.createElement("code", null, "timing")), /*#__PURE__*/react.createElement("td", null, "number"), /*#__PURE__*/react.createElement("td", null, "10000"), /*#__PURE__*/react.createElement("td", null, "Autoplay interval")), /*#__PURE__*/react.createElement("tr", null, /*#__PURE__*/react.createElement("td", null, /*#__PURE__*/react.createElement("code", null, "loop")), /*#__PURE__*/react.createElement("td", null, "boolean"), /*#__PURE__*/react.createElement("td", null, "false"), /*#__PURE__*/react.createElement("td", null, "Gives the slider a seamless infinite loop")), /*#__PURE__*/react.createElement("tr", null, /*#__PURE__*/react.createElement("td", null, /*#__PURE__*/react.createElement("code", null, "paginationEnabled")), /*#__PURE__*/react.createElement("td", null, "boolean"), /*#__PURE__*/react.createElement("td", null, "false"), /*#__PURE__*/react.createElement("td", null, "Display or hide Navigation of paging control")), /*#__PURE__*/react.createElement("tr", null, /*#__PURE__*/react.createElement("td", null, /*#__PURE__*/react.createElement("code", null, "arrowEnabled")), /*#__PURE__*/react.createElement("td", null, "boolean"), /*#__PURE__*/react.createElement("td", null, "false"), /*#__PURE__*/react.createElement("td", null, "Display or hide Previous/Next arrow")), /*#__PURE__*/react.createElement("tr", null, /*#__PURE__*/react.createElement("td", null, /*#__PURE__*/react.createElement("code", null, "arrowPrevIcon")), /*#__PURE__*/react.createElement("td", null, "ReactNode"), /*#__PURE__*/react.createElement("td", null, "-"), /*#__PURE__*/react.createElement("td", null, "Previous arrow icon")), /*#__PURE__*/react.createElement("tr", null, /*#__PURE__*/react.createElement("td", null, /*#__PURE__*/react.createElement("code", null, "arrowNextIcon")), /*#__PURE__*/react.createElement("td", null, "ReactNode"), /*#__PURE__*/react.createElement("td", null, "-"), /*#__PURE__*/react.createElement("td", null, "Next arrow icon")), /*#__PURE__*/react.createElement("tr", null, /*#__PURE__*/react.createElement("td", null, /*#__PURE__*/react.createElement("code", null, "draggable")), /*#__PURE__*/react.createElement("td", null, "boolean"), /*#__PURE__*/react.createElement("td", null, "false"), /*#__PURE__*/react.createElement("td", null, "Allow drag and drop on the slider")), /*#__PURE__*/react.createElement("tr", null, /*#__PURE__*/react.createElement("td", null, /*#__PURE__*/react.createElement("code", null, "draggableCursor")), /*#__PURE__*/react.createElement("td", null, "string | boolean"), /*#__PURE__*/react.createElement("td", null, "move"), /*#__PURE__*/react.createElement("td", null, "Drag & Drop Change icon/cursor while dragging"))))), /*#__PURE__*/react.createElement("h4", null, "Item"), /*#__PURE__*/react.createElement("div", null, /*#__PURE__*/react.createElement("pre", null, "import ", "{Item}", " from '@uixkit.react/components/Slideshow/index.tsx';")), /*#__PURE__*/react.createElement("div", {
     className: "table-responsive-md"
   }, /*#__PURE__*/react.createElement("table", {
     className: "table table-bordered table-striped mb-5"
@@ -76863,7 +78484,7 @@ function pagination_objectSpread(target) { for (var i = 1; i < arguments.length;
 
 
 
-var Pagination = {
+var pagination_Pagination = {
   update: function update() {
     // Render || Update Pagination bullets/items
     var swiper = this;
@@ -77169,7 +78790,7 @@ var Pagination = {
     bindModuleMethods(swiper, {
       pagination: pagination_objectSpread({
         dynamicBulletIndex: 0
-      }, Pagination)
+      }, pagination_Pagination)
     });
   },
   on: {
@@ -79828,9 +81449,6 @@ core_class.use(components); //EXPORT
 
 
 
-
-var Swiper_excluded = ["id"];
-
 function Swiper_createSuper(Derived) { var hasNativeReflectConstruct = Swiper_isNativeReflectConstruct(); return function _createSuperInternal() { var Super = _getPrototypeOf(Derived), result; if (hasNativeReflectConstruct) { var NewTarget = _getPrototypeOf(this).constructor; result = Reflect.construct(Super, arguments, NewTarget); } else { result = Super.apply(this, arguments); } return _possibleConstructorReturn(this, result); }; }
 
 function Swiper_isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Reflect.construct) return false; if (Reflect.construct.sham) return false; if (typeof Proxy === "function") return true; try { Boolean.prototype.valueOf.call(Reflect.construct(Boolean, [], function () {})); return true; } catch (e) { return false; } }
@@ -79871,8 +81489,11 @@ var Swiper_Swiper = /*#__PURE__*/function (_Component) {
 
     _this = _super.call(this, props);
 
-    _defineProperty(_assertThisInitialized(_this), "wrapperRef", /*#__PURE__*/react.createRef());
+    _defineProperty(_assertThisInitialized(_this), "rootRef", /*#__PURE__*/react.createRef());
 
+    _defineProperty(_assertThisInitialized(_this), "uniqueID", void 0);
+
+    _this.uniqueID = 'app-' + helpers.GUID.create();
     return _this;
   }
 
@@ -79882,7 +81503,7 @@ var Swiper_Swiper = /*#__PURE__*/function (_Component) {
       var self = this;
 
       helpers(document).ready(function () {
-        var reactDomEl = self.wrapperRef.current;
+        var reactDomEl = self.rootRef.current;
 
         var $el = helpers(reactDomEl); //Synchronize multiple objects
         //------------------------------------------
@@ -80355,15 +81976,12 @@ var Swiper_Swiper = /*#__PURE__*/function (_Component) {
   }, {
     key: "render",
     value: function render() {
-      var _this$props = this.props,
-          id = _this$props.id,
-          attributes = _objectWithoutProperties(_this$props, Swiper_excluded);
-
-      return /*#__PURE__*/react.createElement(react.Fragment, null, /*#__PURE__*/react.createElement("div", extends_extends({
-        ref: this.wrapperRef,
-        id: id ? id : 'app-swiper-' + helpers.GUID.create(),
+      var id = this.props.id;
+      return /*#__PURE__*/react.createElement(react.Fragment, null, /*#__PURE__*/react.createElement("div", {
+        ref: this.rootRef,
+        id: id || this.uniqueID,
         className: "uix-swiper"
-      }, attributes), /*#__PURE__*/react.createElement("section", {
+      }, /*#__PURE__*/react.createElement("section", {
         className: "uix-spacing--s uix-spacing--no-top"
       }, /*#__PURE__*/react.createElement("div", {
         className: "container"
@@ -80921,21 +82539,12 @@ var Swiper_Swiper = /*#__PURE__*/function (_Component) {
     style: {
       marginRight: ".5rem"
     },
-    width: "15",
-    viewBox: "0 0 392.186 392.186"
-  }, /*#__PURE__*/react.createElement("g", null, /*#__PURE__*/react.createElement("g", null, /*#__PURE__*/react.createElement("g", null, /*#__PURE__*/react.createElement("path", {
+    width: "16",
+    viewBox: "0 0 122.88 91.26"
+  }, /*#__PURE__*/react.createElement("path", {
     fill: "#d2d2d2",
-    d: "M368.62,17.951H23.568C10.57,17.951,0,28.524,0,41.52v309.146c0,12.996,10.57,23.568,23.568,23.568h345.053c12.994,0,23.564-10.572,23.564-23.568V41.52C392.188,28.525,381.614,17.951,368.62,17.951z M297.56,57.528c0-4.806,3.896-8.703,8.701-8.703h8.703c4.808,0,8.701,3.896,8.701,8.703v9.863c0,4.806-3.896,8.702-8.701,8.702h-8.703c-4.805,0-8.701-3.896-8.701-8.702V57.528z M257.093,57.528c0-4.806,3.898-8.703,8.703-8.703h8.701c4.805,0,8.703,3.896,8.703,8.703v9.863c0,4.806-3.898,8.702-8.703,8.702h-8.701c-4.805,0-8.703-3.896-8.703-8.702V57.528z M363.903,345.951H28.282V102.235h335.621V345.951L363.903,345.951z M364.132,67.391c0,4.806-3.896,8.702-8.701,8.702h-8.703c-4.809,0-8.702-3.896-8.702-8.702v-9.863c0-4.806,3.896-8.703,8.702-8.703h8.703c4.806,0,8.701,3.896,8.701,8.703V67.391z"
-  }), /*#__PURE__*/react.createElement("path", {
-    fill: "#d2d2d2",
-    d: "M84.185,233.284l63.084,29.336c1.631,0.755,3.367,1.138,5.162,1.138c2.338,0,4.617-0.664,6.598-1.924c3.547-2.267,5.666-6.13,5.666-10.334v-0.322c0-4.752-2.785-9.116-7.096-11.118l-39.455-18.332l39.455-18.334c4.311-2.004,7.096-6.367,7.096-11.117v-0.319c0-4.21-2.119-8.075-5.666-10.334c-1.961-1.253-4.246-1.916-6.605-1.916c-1.779,0-3.563,0.391-5.16,1.133l-63.08,29.333c-4.307,2.004-7.09,6.369-7.09,11.117v0.877C77.093,226.909,79.874,231.272,84.185,233.284z"
-  }), /*#__PURE__*/react.createElement("path", {
-    fill: "#d2d2d2",
-    d: "M165.257,293.036c2.301,3.149,6.002,5.03,9.9,5.03h0.316c5.352,0,10.041-3.426,11.672-8.517L228.7,160.788c1.192-3.716,0.531-7.818-1.771-10.973c-2.301-3.15-6.002-5.03-9.901-5.03h-0.315c-5.354,0-10.048,3.425-11.679,8.516l-41.559,128.771C162.292,285.793,162.958,289.889,165.257,293.036z"
-  }), /*#__PURE__*/react.createElement("path", {
-    fill: "#d2d2d2",
-    d: "M227.49,192.276c0,4.745,2.783,9.109,7.095,11.123l39.455,18.329l-39.455,18.33c-4.31,2.004-7.095,6.368-7.095,11.118v0.322c0,4.205,2.117,8.068,5.668,10.336c1.974,1.258,4.254,1.924,6.595,1.924c1.793,0,3.528-0.383,5.17-1.142l63.08-29.335c4.307-2.009,7.09-6.372,7.09-11.115v-0.877c0-4.748-2.783-9.113-7.094-11.117l-63.08-29.333c-1.591-0.74-3.373-1.131-5.152-1.131c-2.355,0-4.643,0.661-6.604,1.912c-3.551,2.263-5.67,6.127-5.67,10.337v0.318H227.49L227.49,192.276z"
-  }))))), "Docs on GitHub"))))))), /*#__PURE__*/react.createElement(Swiper_Swiper, null), /*#__PURE__*/react.createElement("section", {
+    d: "M8.32,0h106.24c4.58,0,8.32,3.74,8.32,8.32v74.62c0,4.57-3.74,8.32-8.32,8.32H8.32C3.74,91.26,0,87.51,0,82.94 V8.32C0,3.74,3.74,0,8.32,0L8.32,0z M54.46,72.22L32,58.61v-8.63l22.46-13.61v10.26l-13.65,7.69l13.65,7.7V72.22L54.46,72.22z M68.42,72.22l22.46-13.61v-8.63L68.42,36.37v10.26l13.65,7.69l-13.65,7.7V72.22L68.42,72.22z M117.97,23.29H5.29v60.46 c0,0.64,0.25,1.2,0.67,1.63c0.42,0.42,0.99,0.67,1.63,0.67h108.04c0.64,0,1.2-0.25,1.63-0.67c0.43-0.43,0.67-0.99,0.67-1.63V23.29 H117.97L117.97,23.29z M106.64,9.35c2.27,0,4.11,1.84,4.11,4.11c0,2.27-1.84,4.11-4.11,4.11c-2.27,0-4.11-1.84-4.11-4.11 C102.54,11.19,104.38,9.35,106.64,9.35L106.64,9.35z M78.8,9.35c2.27,0,4.11,1.84,4.11,4.11c0,2.27-1.84,4.11-4.11,4.11 c-2.27,0-4.11-1.84-4.11-4.11C74.69,11.19,76.53,9.35,78.8,9.35L78.8,9.35z M92.72,9.35c2.27,0,4.11,1.84,4.11,4.11 c0,2.27-1.84,4.11-4.11,4.11c-2.27,0-4.11-1.84-4.11-4.11C88.61,11.19,90.45,9.35,92.72,9.35L92.72,9.35z"
+  })), "Docs on GitHub"))))))), /*#__PURE__*/react.createElement(Swiper_Swiper, null), /*#__PURE__*/react.createElement("section", {
     className: "uix-spacing--s uix-spacing--no-bottom"
   }, /*#__PURE__*/react.createElement("div", {
     className: "container"
@@ -81148,21 +82757,12 @@ var BackToTop = /*#__PURE__*/function (_Component) {
     style: {
       marginRight: ".5rem"
     },
-    width: "15",
-    viewBox: "0 0 392.186 392.186"
-  }, /*#__PURE__*/react.createElement("g", null, /*#__PURE__*/react.createElement("g", null, /*#__PURE__*/react.createElement("g", null, /*#__PURE__*/react.createElement("path", {
+    width: "16",
+    viewBox: "0 0 122.88 91.26"
+  }, /*#__PURE__*/react.createElement("path", {
     fill: "#d2d2d2",
-    d: "M368.62,17.951H23.568C10.57,17.951,0,28.524,0,41.52v309.146c0,12.996,10.57,23.568,23.568,23.568h345.053c12.994,0,23.564-10.572,23.564-23.568V41.52C392.188,28.525,381.614,17.951,368.62,17.951z M297.56,57.528c0-4.806,3.896-8.703,8.701-8.703h8.703c4.808,0,8.701,3.896,8.701,8.703v9.863c0,4.806-3.896,8.702-8.701,8.702h-8.703c-4.805,0-8.701-3.896-8.701-8.702V57.528z M257.093,57.528c0-4.806,3.898-8.703,8.703-8.703h8.701c4.805,0,8.703,3.896,8.703,8.703v9.863c0,4.806-3.898,8.702-8.703,8.702h-8.701c-4.805,0-8.703-3.896-8.703-8.702V57.528z M363.903,345.951H28.282V102.235h335.621V345.951L363.903,345.951z M364.132,67.391c0,4.806-3.896,8.702-8.701,8.702h-8.703c-4.809,0-8.702-3.896-8.702-8.702v-9.863c0-4.806,3.896-8.703,8.702-8.703h8.703c4.806,0,8.701,3.896,8.701,8.703V67.391z"
-  }), /*#__PURE__*/react.createElement("path", {
-    fill: "#d2d2d2",
-    d: "M84.185,233.284l63.084,29.336c1.631,0.755,3.367,1.138,5.162,1.138c2.338,0,4.617-0.664,6.598-1.924c3.547-2.267,5.666-6.13,5.666-10.334v-0.322c0-4.752-2.785-9.116-7.096-11.118l-39.455-18.332l39.455-18.334c4.311-2.004,7.096-6.367,7.096-11.117v-0.319c0-4.21-2.119-8.075-5.666-10.334c-1.961-1.253-4.246-1.916-6.605-1.916c-1.779,0-3.563,0.391-5.16,1.133l-63.08,29.333c-4.307,2.004-7.09,6.369-7.09,11.117v0.877C77.093,226.909,79.874,231.272,84.185,233.284z"
-  }), /*#__PURE__*/react.createElement("path", {
-    fill: "#d2d2d2",
-    d: "M165.257,293.036c2.301,3.149,6.002,5.03,9.9,5.03h0.316c5.352,0,10.041-3.426,11.672-8.517L228.7,160.788c1.192-3.716,0.531-7.818-1.771-10.973c-2.301-3.15-6.002-5.03-9.901-5.03h-0.315c-5.354,0-10.048,3.425-11.679,8.516l-41.559,128.771C162.292,285.793,162.958,289.889,165.257,293.036z"
-  }), /*#__PURE__*/react.createElement("path", {
-    fill: "#d2d2d2",
-    d: "M227.49,192.276c0,4.745,2.783,9.109,7.095,11.123l39.455,18.329l-39.455,18.33c-4.31,2.004-7.095,6.368-7.095,11.118v0.322c0,4.205,2.117,8.068,5.668,10.336c1.974,1.258,4.254,1.924,6.595,1.924c1.793,0,3.528-0.383,5.17-1.142l63.08-29.335c4.307-2.009,7.09-6.372,7.09-11.115v-0.877c0-4.748-2.783-9.113-7.094-11.117l-63.08-29.333c-1.591-0.74-3.373-1.131-5.152-1.131c-2.355,0-4.643,0.661-6.604,1.912c-3.551,2.263-5.67,6.127-5.67,10.337v0.318H227.49L227.49,192.276z"
-  }))))), "Docs on GitHub"))))))), /*#__PURE__*/react.createElement("section", {
+    d: "M8.32,0h106.24c4.58,0,8.32,3.74,8.32,8.32v74.62c0,4.57-3.74,8.32-8.32,8.32H8.32C3.74,91.26,0,87.51,0,82.94 V8.32C0,3.74,3.74,0,8.32,0L8.32,0z M54.46,72.22L32,58.61v-8.63l22.46-13.61v10.26l-13.65,7.69l13.65,7.7V72.22L54.46,72.22z M68.42,72.22l22.46-13.61v-8.63L68.42,36.37v10.26l13.65,7.69l-13.65,7.7V72.22L68.42,72.22z M117.97,23.29H5.29v60.46 c0,0.64,0.25,1.2,0.67,1.63c0.42,0.42,0.99,0.67,1.63,0.67h108.04c0.64,0,1.2-0.25,1.63-0.67c0.43-0.43,0.67-0.99,0.67-1.63V23.29 H117.97L117.97,23.29z M106.64,9.35c2.27,0,4.11,1.84,4.11,4.11c0,2.27-1.84,4.11-4.11,4.11c-2.27,0-4.11-1.84-4.11-4.11 C102.54,11.19,104.38,9.35,106.64,9.35L106.64,9.35z M78.8,9.35c2.27,0,4.11,1.84,4.11,4.11c0,2.27-1.84,4.11-4.11,4.11 c-2.27,0-4.11-1.84-4.11-4.11C74.69,11.19,76.53,9.35,78.8,9.35L78.8,9.35z M92.72,9.35c2.27,0,4.11,1.84,4.11,4.11 c0,2.27-1.84,4.11-4.11,4.11c-2.27,0-4.11-1.84-4.11-4.11C88.61,11.19,90.45,9.35,92.72,9.35L92.72,9.35z"
+  })), "Docs on GitHub"))))))), /*#__PURE__*/react.createElement("section", {
     className: "uix-spacing--s"
   }, /*#__PURE__*/react.createElement("div", {
     className: "container"
@@ -81214,9 +82814,9 @@ var BackToTop = /*#__PURE__*/function (_Component) {
     className: "table-responsive-md"
   }, /*#__PURE__*/react.createElement("table", {
     className: "table table-bordered table-striped"
-  }, /*#__PURE__*/react.createElement("thead", null, /*#__PURE__*/react.createElement("tr", null, /*#__PURE__*/react.createElement("th", null, "Property"), /*#__PURE__*/react.createElement("th", null, "Type"), /*#__PURE__*/react.createElement("th", null, "Default"), /*#__PURE__*/react.createElement("th", null, "Description"))), /*#__PURE__*/react.createElement("tbody", null, /*#__PURE__*/react.createElement("tr", null, /*#__PURE__*/react.createElement("td", null, /*#__PURE__*/react.createElement("code", null, "speed")), /*#__PURE__*/react.createElement("td", null, "number"), /*#__PURE__*/react.createElement("td", null, "500"), /*#__PURE__*/react.createElement("td", null, "Speed of scrolling up. Amount of time measured in milliseconds.")), /*#__PURE__*/react.createElement("tr", null, /*#__PURE__*/react.createElement("td", null, /*#__PURE__*/react.createElement("code", null, "easing")), /*#__PURE__*/react.createElement("td", null, /*#__PURE__*/react.createElement("code", null, "easeIn"), " | ", /*#__PURE__*/react.createElement("code", null, "easeOut"), " | ", /*#__PURE__*/react.createElement("code", null, "easeInOut")), /*#__PURE__*/react.createElement("td", null, "-"), /*#__PURE__*/react.createElement("td", null, "Types of easing animation")), /*#__PURE__*/react.createElement("tr", null, /*#__PURE__*/react.createElement("td", null, /*#__PURE__*/react.createElement("code", null, "btnIcon")), /*#__PURE__*/react.createElement("td", null, "React.ReactNode"), /*#__PURE__*/react.createElement("td", null, "-"), /*#__PURE__*/react.createElement("td", null, "Button Icon"))))), /*#__PURE__*/react.createElement("p", {
+  }, /*#__PURE__*/react.createElement("thead", null, /*#__PURE__*/react.createElement("tr", null, /*#__PURE__*/react.createElement("th", null, "Property"), /*#__PURE__*/react.createElement("th", null, "Type"), /*#__PURE__*/react.createElement("th", null, "Default"), /*#__PURE__*/react.createElement("th", null, "Description"))), /*#__PURE__*/react.createElement("tbody", null, /*#__PURE__*/react.createElement("tr", null, /*#__PURE__*/react.createElement("td", null, /*#__PURE__*/react.createElement("code", null, "speed")), /*#__PURE__*/react.createElement("td", null, "number"), /*#__PURE__*/react.createElement("td", null, "500"), /*#__PURE__*/react.createElement("td", null, "Speed of scrolling up. Amount of time measured in milliseconds.")), /*#__PURE__*/react.createElement("tr", null, /*#__PURE__*/react.createElement("td", null, /*#__PURE__*/react.createElement("code", null, "easing")), /*#__PURE__*/react.createElement("td", null, /*#__PURE__*/react.createElement("code", null, "easeIn"), " | ", /*#__PURE__*/react.createElement("code", null, "easeOut"), " | ", /*#__PURE__*/react.createElement("code", null, "easeInOut")), /*#__PURE__*/react.createElement("td", null, "-"), /*#__PURE__*/react.createElement("td", null, "Types of easing animation")), /*#__PURE__*/react.createElement("tr", null, /*#__PURE__*/react.createElement("td", null, /*#__PURE__*/react.createElement("code", null, "btnIcon")), /*#__PURE__*/react.createElement("td", null, "ReactNode"), /*#__PURE__*/react.createElement("td", null, "-"), /*#__PURE__*/react.createElement("td", null, "Button Icon"))))), /*#__PURE__*/react.createElement("p", {
     className: "mb-5"
-  }, "It accepts all props(include data-* attributes) which native div support. Scroll the page down to preview. The button is in the bottom right corner of the screen.")))))));
+  }, "Scroll the page down to preview. The button is in the bottom right corner of the screen.")))))));
 });
 ;// CONCATENATED MODULE: ./src/client/components/Lightbox/thumb-switch.tsx
 
@@ -81324,9 +82924,7 @@ function thumbSwitch(curElement, config) {
     }
   });
 }
-/* harmony default export */ const thumb_switch = ({
-  thumbSwitch: thumbSwitch
-});
+/* harmony default export */ const thumb_switch = ((/* unused pure expression or super */ null && (thumbSwitch)));
 ;// CONCATENATED MODULE: ./src/client/components/Lightbox/fire-lightbox.tsx
 
 
@@ -81769,9 +83367,7 @@ function fireLightbox(curElement, config) {
 
   }
 }
-/* harmony default export */ const fire_lightbox = ({
-  fireLightbox: fireLightbox
-});
+/* harmony default export */ const fire_lightbox = ((/* unused pure expression or super */ null && (fireLightbox)));
 ;// CONCATENATED MODULE: ./src/client/components/Lightbox/close-lightbox.tsx
 
 /*-- Apply Third-party plugins --*/
@@ -81815,9 +83411,7 @@ function closeLightbox(config) {
 
   helpers('body').removeClass('scrollLock');
 }
-/* harmony default export */ const close_lightbox = ({
-  closeLightbox: closeLightbox
-});
+/* harmony default export */ const close_lightbox = ((/* unused pure expression or super */ null && (closeLightbox)));
 ;// CONCATENATED MODULE: ./src/client/components/Lightbox/index.tsx
 
 
@@ -81870,6 +83464,10 @@ var Lightbox = /*#__PURE__*/function (_Component) {
     _this = _super.call(this, props);
 
     _defineProperty(_assertThisInitialized(_this), "urlChange", void 0);
+
+    _defineProperty(_assertThisInitialized(_this), "uniqueID", void 0);
+
+    _this.uniqueID = 'app-' + helpers.GUID.create();
 
     _this.urlChange = function () {};
 
@@ -82042,9 +83640,7 @@ var Lightbox = /*#__PURE__*/function (_Component) {
           triggerContent = _this$props.triggerContent,
           htmlContent = _this$props.htmlContent,
           id = _this$props.id;
-
-      var cid = id || 'app-lightbox-' + helpers.GUID.create(); // The container ID of the HTML content displayed to the stage, such as `#my-lightbox-html-1`
-
+      var cid = id || this.uniqueID; // The container ID of the HTML content displayed to the stage, such as `#my-lightbox-html-1`
 
       var htmlID = htmlContent || ajax ? 'app-lightbox-html-' + cid : false;
       return /*#__PURE__*/react.createElement(react.Fragment, null, this.createTrigger(cid, triggerTagName, triggerClassName, triggerContent, src, htmlID ? '#' + htmlID : false, fixed, ajax), htmlContent ? /*#__PURE__*/react.createElement("div", {
@@ -82120,21 +83716,12 @@ var Lightbox = /*#__PURE__*/function (_Component) {
     style: {
       marginRight: ".5rem"
     },
-    width: "15",
-    viewBox: "0 0 392.186 392.186"
-  }, /*#__PURE__*/react.createElement("g", null, /*#__PURE__*/react.createElement("g", null, /*#__PURE__*/react.createElement("g", null, /*#__PURE__*/react.createElement("path", {
+    width: "16",
+    viewBox: "0 0 122.88 91.26"
+  }, /*#__PURE__*/react.createElement("path", {
     fill: "#d2d2d2",
-    d: "M368.62,17.951H23.568C10.57,17.951,0,28.524,0,41.52v309.146c0,12.996,10.57,23.568,23.568,23.568h345.053c12.994,0,23.564-10.572,23.564-23.568V41.52C392.188,28.525,381.614,17.951,368.62,17.951z M297.56,57.528c0-4.806,3.896-8.703,8.701-8.703h8.703c4.808,0,8.701,3.896,8.701,8.703v9.863c0,4.806-3.896,8.702-8.701,8.702h-8.703c-4.805,0-8.701-3.896-8.701-8.702V57.528z M257.093,57.528c0-4.806,3.898-8.703,8.703-8.703h8.701c4.805,0,8.703,3.896,8.703,8.703v9.863c0,4.806-3.898,8.702-8.703,8.702h-8.701c-4.805,0-8.703-3.896-8.703-8.702V57.528z M363.903,345.951H28.282V102.235h335.621V345.951L363.903,345.951z M364.132,67.391c0,4.806-3.896,8.702-8.701,8.702h-8.703c-4.809,0-8.702-3.896-8.702-8.702v-9.863c0-4.806,3.896-8.703,8.702-8.703h8.703c4.806,0,8.701,3.896,8.701,8.703V67.391z"
-  }), /*#__PURE__*/react.createElement("path", {
-    fill: "#d2d2d2",
-    d: "M84.185,233.284l63.084,29.336c1.631,0.755,3.367,1.138,5.162,1.138c2.338,0,4.617-0.664,6.598-1.924c3.547-2.267,5.666-6.13,5.666-10.334v-0.322c0-4.752-2.785-9.116-7.096-11.118l-39.455-18.332l39.455-18.334c4.311-2.004,7.096-6.367,7.096-11.117v-0.319c0-4.21-2.119-8.075-5.666-10.334c-1.961-1.253-4.246-1.916-6.605-1.916c-1.779,0-3.563,0.391-5.16,1.133l-63.08,29.333c-4.307,2.004-7.09,6.369-7.09,11.117v0.877C77.093,226.909,79.874,231.272,84.185,233.284z"
-  }), /*#__PURE__*/react.createElement("path", {
-    fill: "#d2d2d2",
-    d: "M165.257,293.036c2.301,3.149,6.002,5.03,9.9,5.03h0.316c5.352,0,10.041-3.426,11.672-8.517L228.7,160.788c1.192-3.716,0.531-7.818-1.771-10.973c-2.301-3.15-6.002-5.03-9.901-5.03h-0.315c-5.354,0-10.048,3.425-11.679,8.516l-41.559,128.771C162.292,285.793,162.958,289.889,165.257,293.036z"
-  }), /*#__PURE__*/react.createElement("path", {
-    fill: "#d2d2d2",
-    d: "M227.49,192.276c0,4.745,2.783,9.109,7.095,11.123l39.455,18.329l-39.455,18.33c-4.31,2.004-7.095,6.368-7.095,11.118v0.322c0,4.205,2.117,8.068,5.668,10.336c1.974,1.258,4.254,1.924,6.595,1.924c1.793,0,3.528-0.383,5.17-1.142l63.08-29.335c4.307-2.009,7.09-6.372,7.09-11.115v-0.877c0-4.748-2.783-9.113-7.094-11.117l-63.08-29.333c-1.591-0.74-3.373-1.131-5.152-1.131c-2.355,0-4.643,0.661-6.604,1.912c-3.551,2.263-5.67,6.127-5.67,10.337v0.318H227.49L227.49,192.276z"
-  }))))), "Docs on GitHub"))))))), /*#__PURE__*/react.createElement("section", {
+    d: "M8.32,0h106.24c4.58,0,8.32,3.74,8.32,8.32v74.62c0,4.57-3.74,8.32-8.32,8.32H8.32C3.74,91.26,0,87.51,0,82.94 V8.32C0,3.74,3.74,0,8.32,0L8.32,0z M54.46,72.22L32,58.61v-8.63l22.46-13.61v10.26l-13.65,7.69l13.65,7.7V72.22L54.46,72.22z M68.42,72.22l22.46-13.61v-8.63L68.42,36.37v10.26l13.65,7.69l-13.65,7.7V72.22L68.42,72.22z M117.97,23.29H5.29v60.46 c0,0.64,0.25,1.2,0.67,1.63c0.42,0.42,0.99,0.67,1.63,0.67h108.04c0.64,0,1.2-0.25,1.63-0.67c0.43-0.43,0.67-0.99,0.67-1.63V23.29 H117.97L117.97,23.29z M106.64,9.35c2.27,0,4.11,1.84,4.11,4.11c0,2.27-1.84,4.11-4.11,4.11c-2.27,0-4.11-1.84-4.11-4.11 C102.54,11.19,104.38,9.35,106.64,9.35L106.64,9.35z M78.8,9.35c2.27,0,4.11,1.84,4.11,4.11c0,2.27-1.84,4.11-4.11,4.11 c-2.27,0-4.11-1.84-4.11-4.11C74.69,11.19,76.53,9.35,78.8,9.35L78.8,9.35z M92.72,9.35c2.27,0,4.11,1.84,4.11,4.11 c0,2.27-1.84,4.11-4.11,4.11c-2.27,0-4.11-1.84-4.11-4.11C88.61,11.19,90.45,9.35,92.72,9.35L92.72,9.35z"
+  })), "Docs on GitHub"))))))), /*#__PURE__*/react.createElement("section", {
     className: "uix-spacing--s uix-spacing--no-bottom"
   }, /*#__PURE__*/react.createElement("div", {
     className: "container"
@@ -82208,10 +83795,10 @@ var Lightbox = /*#__PURE__*/function (_Component) {
     htmlContent: /*#__PURE__*/react.createElement(react.Fragment, null, /*#__PURE__*/react.createElement("div", {
       className: "text-left"
     }, /*#__PURE__*/react.createElement("p", null, /*#__PURE__*/react.createElement("h5", null, "Title 1")), /*#__PURE__*/react.createElement("p", null, "Duis mollis, est non commodo luctus, nisi erat porttitor ligula, eget lacinia odio sem nec elit. Cras mattis consectetur purus sit amet fermentum. Morbi leo risus, porta ac consectetur ac, vestibulum at eros. Praesent commodo cursus magna, vel scelerisque nisl consectetur et. ", /*#__PURE__*/react.createElement("a", {
-      href: "https://google.com",
+      href: "https://example.com",
       target: "_blank"
     }, "This is link")), /*#__PURE__*/react.createElement("p", null, "Nullam id dolor id nibh ultricies vehicula ut id elit. ", /*#__PURE__*/react.createElement("a", {
-      href: "https://google.com",
+      href: "https://example.com",
       target: "_blank"
     }, "Curabitur blandit tempus porttitor"), ". Integer posuere erat a ante venenatis dapibus posuere velit aliquet. Cras justo odio, dapibus ac facilisis in, egestas eget quam. Vestibulum id ligula porta felis euismod semper. Donec id elit non mi porta gravida at eget metus. Vestibulum id ligula porta felis euismod semper. Super/Duper/Long/NonBreaking/Path/Name/To/A/File/That/Is/Way/Deep/Down/In/Some/Mysterious/Remote/Desolate/Part/Of/The/Operating/System/To/A/File/That/Just/So/Happens/To/Be/Strangely/Named/Supercalifragilisticexpialidocious.txt")))
   }), /*#__PURE__*/react.createElement("br", null), /*#__PURE__*/react.createElement(Lightbox, {
@@ -82222,10 +83809,10 @@ var Lightbox = /*#__PURE__*/function (_Component) {
     htmlContent: /*#__PURE__*/react.createElement(react.Fragment, null, /*#__PURE__*/react.createElement("div", {
       className: "text-left"
     }, /*#__PURE__*/react.createElement("p", null, /*#__PURE__*/react.createElement("h5", null, "Title 2")), /*#__PURE__*/react.createElement("p", null, "Duis mollis, est non commodo luctus, nisi erat porttitor ligula, eget lacinia odio sem nec elit. Cras mattis consectetur purus sit amet fermentum. Morbi leo risus, porta ac consectetur ac, vestibulum at eros. Praesent commodo cursus magna, vel scelerisque nisl consectetur et. ", /*#__PURE__*/react.createElement("a", {
-      href: "https://google.com",
+      href: "https://example.com",
       target: "_blank"
     }, "This is link")), /*#__PURE__*/react.createElement("p", null, "Nullam id dolor id nibh ultricies vehicula ut id elit. ", /*#__PURE__*/react.createElement("a", {
-      href: "https://google.com",
+      href: "https://example.com",
       target: "_blank"
     }, "Curabitur blandit tempus porttitor"), ". Integer posuere erat a ante venenatis dapibus posuere velit aliquet. Cras justo odio, dapibus ac facilisis in, egestas eget quam. Vestibulum id ligula porta felis euismod semper. Donec id elit non mi porta gravida at eget metus. Vestibulum id ligula porta felis euismod semper. Super/Duper/Long/NonBreaking/Path/Name/To/A/File/That/Is/Way/Deep/Down/In/Some/Mysterious/Remote/Desolate/Part/Of/The/Operating/System/To/A/File/That/Just/So/Happens/To/Be/Strangely/Named/Supercalifragilisticexpialidocious.txt")))
   }), /*#__PURE__*/react.createElement("br", null))))), /*#__PURE__*/react.createElement("section", {
@@ -82271,7 +83858,7 @@ var Lightbox = /*#__PURE__*/function (_Component) {
     className: "text-wrap"
   }, "[{\"thumb\":\"path/1.jpg\",\"large\":\"path/1.jpg\"},{\"thumb\":\"path/2.jpg\",\"large\":\"path/2.jpg\"}]"))), /*#__PURE__*/react.createElement("tr", null, /*#__PURE__*/react.createElement("td", null, /*#__PURE__*/react.createElement("code", null, "fixed")), /*#__PURE__*/react.createElement("td", null, "boolean"), /*#__PURE__*/react.createElement("td", null, "true"), /*#__PURE__*/react.createElement("td", null, "Whether to fix the pop-up window")), /*#__PURE__*/react.createElement("tr", null, /*#__PURE__*/react.createElement("td", null, /*#__PURE__*/react.createElement("code", null, "ajax")), /*#__PURE__*/react.createElement("td", null, "boolean | JSON Object Literals"), /*#__PURE__*/react.createElement("td", null, "0"), /*#__PURE__*/react.createElement("td", null, "A set of key/value pairs that configure the Ajax request, such as ", /*#__PURE__*/react.createElement("br", null), /*#__PURE__*/react.createElement("code", {
     className: "text-wrap"
-  }, "{\"target\":\"#my-ajax-demo-target-button\",\"method\":\"POST\",\"url\":\"https://xxx.com\"}"))), /*#__PURE__*/react.createElement("tr", null, /*#__PURE__*/react.createElement("td", null, /*#__PURE__*/react.createElement("code", null, "triggerTagName")), /*#__PURE__*/react.createElement("td", null, /*#__PURE__*/react.createElement("code", null, "a"), " | ", /*#__PURE__*/react.createElement("code", null, "button"), " | ", /*#__PURE__*/react.createElement("code", null, "div"), " | ", /*#__PURE__*/react.createElement("code", null, "span")), /*#__PURE__*/react.createElement("td", null, "-"), /*#__PURE__*/react.createElement("td", null, "Tag name of the trigger.")), /*#__PURE__*/react.createElement("tr", null, /*#__PURE__*/react.createElement("td", null, /*#__PURE__*/react.createElement("code", null, "triggerClassName")), /*#__PURE__*/react.createElement("td", null, "string"), /*#__PURE__*/react.createElement("td", null, "-"), /*#__PURE__*/react.createElement("td", null, "Specify a class for this Node")), /*#__PURE__*/react.createElement("tr", null, /*#__PURE__*/react.createElement("td", null, /*#__PURE__*/react.createElement("code", null, "triggerContent")), /*#__PURE__*/react.createElement("td", null, "React.ReactNode"), /*#__PURE__*/react.createElement("td", null, "-"), /*#__PURE__*/react.createElement("td", null, "Set a piece of text or HTML code for the trigger")), /*#__PURE__*/react.createElement("tr", null, /*#__PURE__*/react.createElement("td", null, /*#__PURE__*/react.createElement("code", null, "htmlContent")), /*#__PURE__*/react.createElement("td", null, "React.ReactNode"), /*#__PURE__*/react.createElement("td", null, "-"), /*#__PURE__*/react.createElement("td", null, "A string of HTML to set as the content")))))))))));
+  }, "{\"target\":\"#my-ajax-demo-target-button\",\"method\":\"POST\",\"url\":\"https://xxx.com\"}"))), /*#__PURE__*/react.createElement("tr", null, /*#__PURE__*/react.createElement("td", null, /*#__PURE__*/react.createElement("code", null, "triggerTagName")), /*#__PURE__*/react.createElement("td", null, /*#__PURE__*/react.createElement("code", null, "a"), " | ", /*#__PURE__*/react.createElement("code", null, "button"), " | ", /*#__PURE__*/react.createElement("code", null, "div"), " | ", /*#__PURE__*/react.createElement("code", null, "span")), /*#__PURE__*/react.createElement("td", null, "-"), /*#__PURE__*/react.createElement("td", null, "Tag name of the trigger.")), /*#__PURE__*/react.createElement("tr", null, /*#__PURE__*/react.createElement("td", null, /*#__PURE__*/react.createElement("code", null, "triggerClassName")), /*#__PURE__*/react.createElement("td", null, "string"), /*#__PURE__*/react.createElement("td", null, "-"), /*#__PURE__*/react.createElement("td", null, "Specify a class for this Node")), /*#__PURE__*/react.createElement("tr", null, /*#__PURE__*/react.createElement("td", null, /*#__PURE__*/react.createElement("code", null, "triggerContent")), /*#__PURE__*/react.createElement("td", null, "ReactNode"), /*#__PURE__*/react.createElement("td", null, "-"), /*#__PURE__*/react.createElement("td", null, "Set a piece of text or HTML code for the trigger")), /*#__PURE__*/react.createElement("tr", null, /*#__PURE__*/react.createElement("td", null, /*#__PURE__*/react.createElement("code", null, "htmlContent")), /*#__PURE__*/react.createElement("td", null, "ReactNode"), /*#__PURE__*/react.createElement("td", null, "-"), /*#__PURE__*/react.createElement("td", null, "A string of HTML to set as the content")))))))))));
 });
 ;// CONCATENATED MODULE: ./src/client/components/ProgressBar/index.tsx
 
@@ -82315,11 +83902,15 @@ var ProgressBar = /*#__PURE__*/function (_Component) {
 
     _classCallCheck(this, ProgressBar);
 
-    _this = _super.call(this, props); // Add a scroll event listener to window
+    _this = _super.call(this, props);
 
-    _defineProperty(_assertThisInitialized(_this), "wrapperRef", /*#__PURE__*/react.createRef());
+    _defineProperty(_assertThisInitialized(_this), "rootRef", /*#__PURE__*/react.createRef());
 
     _defineProperty(_assertThisInitialized(_this), "windowScrollUpdate", void 0);
+
+    _defineProperty(_assertThisInitialized(_this), "uniqueID", void 0);
+
+    _this.uniqueID = 'app-' + helpers.GUID.create(); // Add a scroll event listener to window
 
     _this.handleScrollEvent = _this.handleScrollEvent.bind(_assertThisInitialized(_this));
     _this.windowScrollUpdate = helpers.throttle(_this.handleScrollEvent, 5);
@@ -82329,7 +83920,7 @@ var ProgressBar = /*#__PURE__*/function (_Component) {
   _createClass(ProgressBar, [{
     key: "handleScrollEvent",
     value: function handleScrollEvent() {
-      var reactDomEl = this.wrapperRef.current;
+      var reactDomEl = this.rootRef.current;
       var viewport = 1; //
 
       var spyTop = reactDomEl.getBoundingClientRect().top; //Prevent asynchronous loading of repeated calls
@@ -82363,15 +83954,16 @@ var ProgressBar = /*#__PURE__*/function (_Component) {
   }, {
     key: "componentDidMount",
     value: function componentDidMount() {
-      var self = this;
+      var _this2 = this;
+
+      // Add function to the element that should be used as the scrollable area.
+      window.removeEventListener('scroll', this.windowScrollUpdate);
+      window.removeEventListener('touchmove', this.windowScrollUpdate);
+      window.addEventListener('scroll', this.windowScrollUpdate);
+      window.addEventListener('touchmove', this.windowScrollUpdate); // Prevent calculation errors caused by unloaded completion
 
       helpers(document).ready(function () {
-        // Add function to the element that should be used as the scrollable area.
-        window.removeEventListener('scroll', self.windowScrollUpdate);
-        window.removeEventListener('touchmove', self.windowScrollUpdate);
-        window.addEventListener('scroll', self.windowScrollUpdate);
-        window.addEventListener('touchmove', self.windowScrollUpdate);
-        self.windowScrollUpdate();
+        _this2.windowScrollUpdate();
       });
     }
     /** Remove the global list of events, especially as scroll and interval. */
@@ -82404,8 +83996,8 @@ var ProgressBar = /*#__PURE__*/function (_Component) {
       }
 
       return /*#__PURE__*/react.createElement(react.Fragment, null, /*#__PURE__*/react.createElement("div", {
-        ref: this.wrapperRef,
-        id: id || 'app-progress-bar-' + helpers.GUID.create(),
+        ref: this.rootRef,
+        id: id || this.uniqueID,
         className: "".concat(shapeClassName, " uix-progressbar--progress-0"),
         "data-progressbar-percent": value || 0,
         "data-progressbar-unit": unit
@@ -82474,21 +84066,12 @@ var ProgressBar = /*#__PURE__*/function (_Component) {
     style: {
       marginRight: ".5rem"
     },
-    width: "15",
-    viewBox: "0 0 392.186 392.186"
-  }, /*#__PURE__*/react.createElement("g", null, /*#__PURE__*/react.createElement("g", null, /*#__PURE__*/react.createElement("g", null, /*#__PURE__*/react.createElement("path", {
+    width: "16",
+    viewBox: "0 0 122.88 91.26"
+  }, /*#__PURE__*/react.createElement("path", {
     fill: "#d2d2d2",
-    d: "M368.62,17.951H23.568C10.57,17.951,0,28.524,0,41.52v309.146c0,12.996,10.57,23.568,23.568,23.568h345.053c12.994,0,23.564-10.572,23.564-23.568V41.52C392.188,28.525,381.614,17.951,368.62,17.951z M297.56,57.528c0-4.806,3.896-8.703,8.701-8.703h8.703c4.808,0,8.701,3.896,8.701,8.703v9.863c0,4.806-3.896,8.702-8.701,8.702h-8.703c-4.805,0-8.701-3.896-8.701-8.702V57.528z M257.093,57.528c0-4.806,3.898-8.703,8.703-8.703h8.701c4.805,0,8.703,3.896,8.703,8.703v9.863c0,4.806-3.898,8.702-8.703,8.702h-8.701c-4.805,0-8.703-3.896-8.703-8.702V57.528z M363.903,345.951H28.282V102.235h335.621V345.951L363.903,345.951z M364.132,67.391c0,4.806-3.896,8.702-8.701,8.702h-8.703c-4.809,0-8.702-3.896-8.702-8.702v-9.863c0-4.806,3.896-8.703,8.702-8.703h8.703c4.806,0,8.701,3.896,8.701,8.703V67.391z"
-  }), /*#__PURE__*/react.createElement("path", {
-    fill: "#d2d2d2",
-    d: "M84.185,233.284l63.084,29.336c1.631,0.755,3.367,1.138,5.162,1.138c2.338,0,4.617-0.664,6.598-1.924c3.547-2.267,5.666-6.13,5.666-10.334v-0.322c0-4.752-2.785-9.116-7.096-11.118l-39.455-18.332l39.455-18.334c4.311-2.004,7.096-6.367,7.096-11.117v-0.319c0-4.21-2.119-8.075-5.666-10.334c-1.961-1.253-4.246-1.916-6.605-1.916c-1.779,0-3.563,0.391-5.16,1.133l-63.08,29.333c-4.307,2.004-7.09,6.369-7.09,11.117v0.877C77.093,226.909,79.874,231.272,84.185,233.284z"
-  }), /*#__PURE__*/react.createElement("path", {
-    fill: "#d2d2d2",
-    d: "M165.257,293.036c2.301,3.149,6.002,5.03,9.9,5.03h0.316c5.352,0,10.041-3.426,11.672-8.517L228.7,160.788c1.192-3.716,0.531-7.818-1.771-10.973c-2.301-3.15-6.002-5.03-9.901-5.03h-0.315c-5.354,0-10.048,3.425-11.679,8.516l-41.559,128.771C162.292,285.793,162.958,289.889,165.257,293.036z"
-  }), /*#__PURE__*/react.createElement("path", {
-    fill: "#d2d2d2",
-    d: "M227.49,192.276c0,4.745,2.783,9.109,7.095,11.123l39.455,18.329l-39.455,18.33c-4.31,2.004-7.095,6.368-7.095,11.118v0.322c0,4.205,2.117,8.068,5.668,10.336c1.974,1.258,4.254,1.924,6.595,1.924c1.793,0,3.528-0.383,5.17-1.142l63.08-29.335c4.307-2.009,7.09-6.372,7.09-11.115v-0.877c0-4.748-2.783-9.113-7.094-11.117l-63.08-29.333c-1.591-0.74-3.373-1.131-5.152-1.131c-2.355,0-4.643,0.661-6.604,1.912c-3.551,2.263-5.67,6.127-5.67,10.337v0.318H227.49L227.49,192.276z"
-  }))))), "Docs on GitHub"))))))), /*#__PURE__*/react.createElement("section", {
+    d: "M8.32,0h106.24c4.58,0,8.32,3.74,8.32,8.32v74.62c0,4.57-3.74,8.32-8.32,8.32H8.32C3.74,91.26,0,87.51,0,82.94 V8.32C0,3.74,3.74,0,8.32,0L8.32,0z M54.46,72.22L32,58.61v-8.63l22.46-13.61v10.26l-13.65,7.69l13.65,7.7V72.22L54.46,72.22z M68.42,72.22l22.46-13.61v-8.63L68.42,36.37v10.26l13.65,7.69l-13.65,7.7V72.22L68.42,72.22z M117.97,23.29H5.29v60.46 c0,0.64,0.25,1.2,0.67,1.63c0.42,0.42,0.99,0.67,1.63,0.67h108.04c0.64,0,1.2-0.25,1.63-0.67c0.43-0.43,0.67-0.99,0.67-1.63V23.29 H117.97L117.97,23.29z M106.64,9.35c2.27,0,4.11,1.84,4.11,4.11c0,2.27-1.84,4.11-4.11,4.11c-2.27,0-4.11-1.84-4.11-4.11 C102.54,11.19,104.38,9.35,106.64,9.35L106.64,9.35z M78.8,9.35c2.27,0,4.11,1.84,4.11,4.11c0,2.27-1.84,4.11-4.11,4.11 c-2.27,0-4.11-1.84-4.11-4.11C74.69,11.19,76.53,9.35,78.8,9.35L78.8,9.35z M92.72,9.35c2.27,0,4.11,1.84,4.11,4.11 c0,2.27-1.84,4.11-4.11,4.11c-2.27,0-4.11-1.84-4.11-4.11C88.61,11.19,90.45,9.35,92.72,9.35L92.72,9.35z"
+  })), "Docs on GitHub"))))))), /*#__PURE__*/react.createElement("section", {
     className: "uix-spacing--s uix-spacing--no-bottom"
   }, /*#__PURE__*/react.createElement("div", {
     className: "container"
@@ -82611,7 +84194,7 @@ var ProgressBar = /*#__PURE__*/function (_Component) {
     className: "table-responsive-md"
   }, /*#__PURE__*/react.createElement("table", {
     className: "table table-bordered table-striped mb-5"
-  }, /*#__PURE__*/react.createElement("thead", null, /*#__PURE__*/react.createElement("tr", null, /*#__PURE__*/react.createElement("th", null, "Property"), /*#__PURE__*/react.createElement("th", null, "Type"), /*#__PURE__*/react.createElement("th", null, "Default"), /*#__PURE__*/react.createElement("th", null, "Description"))), /*#__PURE__*/react.createElement("tbody", null, /*#__PURE__*/react.createElement("tr", null, /*#__PURE__*/react.createElement("td", null, /*#__PURE__*/react.createElement("code", null, "shape")), /*#__PURE__*/react.createElement("td", null, /*#__PURE__*/react.createElement("code", null, "circle"), " | ", /*#__PURE__*/react.createElement("code", null, "annulus"), " | ", /*#__PURE__*/react.createElement("code", null, "rectangle")), /*#__PURE__*/react.createElement("td", null, "-"), /*#__PURE__*/react.createElement("td", null, "Set a shape that circle, annulus or rectangle shaped progress bar")), /*#__PURE__*/react.createElement("tr", null, /*#__PURE__*/react.createElement("td", null, /*#__PURE__*/react.createElement("code", null, "unit")), /*#__PURE__*/react.createElement("td", null, "string"), /*#__PURE__*/react.createElement("td", null, "-"), /*#__PURE__*/react.createElement("td", null, "Set a unit that is percentage for progress bar, such as ", /*#__PURE__*/react.createElement("code", null, "%"))), /*#__PURE__*/react.createElement("tr", null, /*#__PURE__*/react.createElement("td", null, /*#__PURE__*/react.createElement("code", null, "value")), /*#__PURE__*/react.createElement("td", null, "number"), /*#__PURE__*/react.createElement("td", null, "0"), /*#__PURE__*/react.createElement("td", null, "Set a percentage you want to show")), /*#__PURE__*/react.createElement("tr", null, /*#__PURE__*/react.createElement("td", null, /*#__PURE__*/react.createElement("code", null, "label")), /*#__PURE__*/react.createElement("td", null, "React.ReactNode"), /*#__PURE__*/react.createElement("td", null, "0"), /*#__PURE__*/react.createElement("td", null, "Reference to div element which presents the text label for progress bar. Returns empty if text is not defined.")), /*#__PURE__*/react.createElement("tr", null, /*#__PURE__*/react.createElement("td", null, /*#__PURE__*/react.createElement("code", null, "displayPercentage")), /*#__PURE__*/react.createElement("td", null, "boolean"), /*#__PURE__*/react.createElement("td", null, "false"), /*#__PURE__*/react.createElement("td", null, "Whether to display percentage")))))))))));
+  }, /*#__PURE__*/react.createElement("thead", null, /*#__PURE__*/react.createElement("tr", null, /*#__PURE__*/react.createElement("th", null, "Property"), /*#__PURE__*/react.createElement("th", null, "Type"), /*#__PURE__*/react.createElement("th", null, "Default"), /*#__PURE__*/react.createElement("th", null, "Description"))), /*#__PURE__*/react.createElement("tbody", null, /*#__PURE__*/react.createElement("tr", null, /*#__PURE__*/react.createElement("td", null, /*#__PURE__*/react.createElement("code", null, "shape")), /*#__PURE__*/react.createElement("td", null, /*#__PURE__*/react.createElement("code", null, "circle"), " | ", /*#__PURE__*/react.createElement("code", null, "annulus"), " | ", /*#__PURE__*/react.createElement("code", null, "rectangle")), /*#__PURE__*/react.createElement("td", null, "-"), /*#__PURE__*/react.createElement("td", null, "Set a shape that circle, annulus or rectangle shaped progress bar")), /*#__PURE__*/react.createElement("tr", null, /*#__PURE__*/react.createElement("td", null, /*#__PURE__*/react.createElement("code", null, "unit")), /*#__PURE__*/react.createElement("td", null, "string"), /*#__PURE__*/react.createElement("td", null, "-"), /*#__PURE__*/react.createElement("td", null, "Set a unit that is percentage for progress bar, such as ", /*#__PURE__*/react.createElement("code", null, "%"))), /*#__PURE__*/react.createElement("tr", null, /*#__PURE__*/react.createElement("td", null, /*#__PURE__*/react.createElement("code", null, "value")), /*#__PURE__*/react.createElement("td", null, "number"), /*#__PURE__*/react.createElement("td", null, "0"), /*#__PURE__*/react.createElement("td", null, "Set a percentage you want to show")), /*#__PURE__*/react.createElement("tr", null, /*#__PURE__*/react.createElement("td", null, /*#__PURE__*/react.createElement("code", null, "label")), /*#__PURE__*/react.createElement("td", null, "ReactNode"), /*#__PURE__*/react.createElement("td", null, "0"), /*#__PURE__*/react.createElement("td", null, "Reference to div element which presents the text label for progress bar. Returns empty if text is not defined.")), /*#__PURE__*/react.createElement("tr", null, /*#__PURE__*/react.createElement("td", null, /*#__PURE__*/react.createElement("code", null, "displayPercentage")), /*#__PURE__*/react.createElement("td", null, "boolean"), /*#__PURE__*/react.createElement("td", null, "false"), /*#__PURE__*/react.createElement("td", null, "Whether to display percentage")))))))))));
 });
 ;// CONCATENATED MODULE: ./src/client/components/StickyElements/sticky.tsx
 
@@ -82682,13 +84265,15 @@ function sticky(curElement, config) {
   window.removeEventListener('scroll', throttleFunc);
   window.removeEventListener('touchmove', throttleFunc);
   window.addEventListener('scroll', throttleFunc);
-  window.addEventListener('touchmove', throttleFunc);
-  throttleFunc();
+  window.addEventListener('touchmove', throttleFunc); // Prevent calculation errors caused by unloaded completion
+
+  helpers(document).ready(function () {
+    throttleFunc();
+  });
+
   return throttleFunc;
 }
-/* harmony default export */ const StickyElements_sticky = ({
-  sticky: sticky
-});
+/* harmony default export */ const StickyElements_sticky = ((/* unused pure expression or super */ null && (sticky)));
 ;// CONCATENATED MODULE: ./src/client/components/StickyElements/index.tsx
 
 
@@ -82697,9 +84282,6 @@ function sticky(curElement, config) {
 
 
 
-
-
-var StickyElements_excluded = ["stopTrigger", "stopTriggerOffset", "id", "children"];
 
 function StickyElements_createSuper(Derived) { var hasNativeReflectConstruct = StickyElements_isNativeReflectConstruct(); return function _createSuperInternal() { var Super = _getPrototypeOf(Derived), result; if (hasNativeReflectConstruct) { var NewTarget = _getPrototypeOf(this).constructor; result = Reflect.construct(Super, arguments, NewTarget); } else { result = Super.apply(this, arguments); } return _possibleConstructorReturn(this, result); }; }
 
@@ -82742,11 +84324,15 @@ var Sticky = /*#__PURE__*/function (_Component) {
 
     _classCallCheck(this, Sticky);
 
-    _this = _super.call(this, props); // Add a scroll event listener to window
+    _this = _super.call(this, props);
 
-    _defineProperty(_assertThisInitialized(_this), "wrapperRef", /*#__PURE__*/react.createRef());
+    _defineProperty(_assertThisInitialized(_this), "rootRef", /*#__PURE__*/react.createRef());
 
     _defineProperty(_assertThisInitialized(_this), "windowScrollUpdate", void 0);
+
+    _defineProperty(_assertThisInitialized(_this), "uniqueID", void 0);
+
+    _this.uniqueID = 'app-' + helpers.GUID.create(); // Add a scroll event listener to window
 
     _this.windowScrollUpdate = function () {};
 
@@ -82758,7 +84344,7 @@ var Sticky = /*#__PURE__*/function (_Component) {
     key: "stickyInit",
     value: function stickyInit() {
       var self = this;
-      var reactDomEl = this.wrapperRef.current; //Set placeholder height
+      var reactDomEl = this.rootRef.current; //Set placeholder height
       //------------------------------------------
 
       var $placeholder = document.querySelector('[data-sticky-id="' + reactDomEl.dataset.stickyId + '"].is-placeholder');
@@ -82784,20 +84370,18 @@ var Sticky = /*#__PURE__*/function (_Component) {
   }, {
     key: "componentDidMount",
     value: function componentDidMount() {
-      var self = this;
+      var _this2 = this;
 
-      helpers(document).ready(function () {
-        TweenMax_TweenMax.to(window, 0.5, {
-          scrollTo: {
-            y: 0,
-            //y: "max" -->*/} vertical scroll to bottom
-            autoKill: false
-          },
-          ease: StickyElements_EasingList.easeOut,
-          onComplete: function onComplete() {
-            self.stickyInit();
-          }
-        });
+      TweenMax_TweenMax.to(window, 0.5, {
+        scrollTo: {
+          y: 0,
+          //y: "max" -->*/} vertical scroll to bottom
+          autoKill: false
+        },
+        ease: StickyElements_EasingList.easeOut,
+        onComplete: function onComplete() {
+          _this2.stickyInit();
+        }
       });
     }
     /** Remove the global list of events, especially as scroll and interval. */
@@ -82818,11 +84402,8 @@ var Sticky = /*#__PURE__*/function (_Component) {
           stopTrigger = _this$props.stopTrigger,
           stopTriggerOffset = _this$props.stopTriggerOffset,
           id = _this$props.id,
-          children = _this$props.children,
-          attributes = _objectWithoutProperties(_this$props, StickyElements_excluded);
-
-      var cid = id || 'app-sticky-' + helpers.GUID.create();
-
+          children = _this$props.children;
+      var cid = id || this.uniqueID;
       return /*#__PURE__*/react.createElement(react.Fragment, null, /*#__PURE__*/react.createElement("div", {
         "data-sticky-id": cid + '-sticky',
         className: "is-placeholder",
@@ -82831,14 +84412,14 @@ var Sticky = /*#__PURE__*/function (_Component) {
           width: "100%",
           visibility: "hidden"
         }
-      }), /*#__PURE__*/react.createElement("div", extends_extends({
-        ref: this.wrapperRef,
+      }), /*#__PURE__*/react.createElement("div", {
+        ref: this.rootRef,
         id: cid,
         "data-sticky-id": cid + '-sticky',
         className: "js-uix-sticky-el",
         "data-stop-trigger": stopTrigger || false,
         "data-stop-trigger-offset": stopTriggerOffset || 0
-      }, attributes), children));
+      }, children));
     }
   }]);
 
@@ -82883,21 +84464,12 @@ var Sticky = /*#__PURE__*/function (_Component) {
     style: {
       marginRight: ".5rem"
     },
-    width: "15",
-    viewBox: "0 0 392.186 392.186"
-  }, /*#__PURE__*/react.createElement("g", null, /*#__PURE__*/react.createElement("g", null, /*#__PURE__*/react.createElement("g", null, /*#__PURE__*/react.createElement("path", {
+    width: "16",
+    viewBox: "0 0 122.88 91.26"
+  }, /*#__PURE__*/react.createElement("path", {
     fill: "#d2d2d2",
-    d: "M368.62,17.951H23.568C10.57,17.951,0,28.524,0,41.52v309.146c0,12.996,10.57,23.568,23.568,23.568h345.053c12.994,0,23.564-10.572,23.564-23.568V41.52C392.188,28.525,381.614,17.951,368.62,17.951z M297.56,57.528c0-4.806,3.896-8.703,8.701-8.703h8.703c4.808,0,8.701,3.896,8.701,8.703v9.863c0,4.806-3.896,8.702-8.701,8.702h-8.703c-4.805,0-8.701-3.896-8.701-8.702V57.528z M257.093,57.528c0-4.806,3.898-8.703,8.703-8.703h8.701c4.805,0,8.703,3.896,8.703,8.703v9.863c0,4.806-3.898,8.702-8.703,8.702h-8.701c-4.805,0-8.703-3.896-8.703-8.702V57.528z M363.903,345.951H28.282V102.235h335.621V345.951L363.903,345.951z M364.132,67.391c0,4.806-3.896,8.702-8.701,8.702h-8.703c-4.809,0-8.702-3.896-8.702-8.702v-9.863c0-4.806,3.896-8.703,8.702-8.703h8.703c4.806,0,8.701,3.896,8.701,8.703V67.391z"
-  }), /*#__PURE__*/react.createElement("path", {
-    fill: "#d2d2d2",
-    d: "M84.185,233.284l63.084,29.336c1.631,0.755,3.367,1.138,5.162,1.138c2.338,0,4.617-0.664,6.598-1.924c3.547-2.267,5.666-6.13,5.666-10.334v-0.322c0-4.752-2.785-9.116-7.096-11.118l-39.455-18.332l39.455-18.334c4.311-2.004,7.096-6.367,7.096-11.117v-0.319c0-4.21-2.119-8.075-5.666-10.334c-1.961-1.253-4.246-1.916-6.605-1.916c-1.779,0-3.563,0.391-5.16,1.133l-63.08,29.333c-4.307,2.004-7.09,6.369-7.09,11.117v0.877C77.093,226.909,79.874,231.272,84.185,233.284z"
-  }), /*#__PURE__*/react.createElement("path", {
-    fill: "#d2d2d2",
-    d: "M165.257,293.036c2.301,3.149,6.002,5.03,9.9,5.03h0.316c5.352,0,10.041-3.426,11.672-8.517L228.7,160.788c1.192-3.716,0.531-7.818-1.771-10.973c-2.301-3.15-6.002-5.03-9.901-5.03h-0.315c-5.354,0-10.048,3.425-11.679,8.516l-41.559,128.771C162.292,285.793,162.958,289.889,165.257,293.036z"
-  }), /*#__PURE__*/react.createElement("path", {
-    fill: "#d2d2d2",
-    d: "M227.49,192.276c0,4.745,2.783,9.109,7.095,11.123l39.455,18.329l-39.455,18.33c-4.31,2.004-7.095,6.368-7.095,11.118v0.322c0,4.205,2.117,8.068,5.668,10.336c1.974,1.258,4.254,1.924,6.595,1.924c1.793,0,3.528-0.383,5.17-1.142l63.08-29.335c4.307-2.009,7.09-6.372,7.09-11.115v-0.877c0-4.748-2.783-9.113-7.094-11.117l-63.08-29.333c-1.591-0.74-3.373-1.131-5.152-1.131c-2.355,0-4.643,0.661-6.604,1.912c-3.551,2.263-5.67,6.127-5.67,10.337v0.318H227.49L227.49,192.276z"
-  }))))), "Docs on GitHub"))))))), /*#__PURE__*/react.createElement("section", {
+    d: "M8.32,0h106.24c4.58,0,8.32,3.74,8.32,8.32v74.62c0,4.57-3.74,8.32-8.32,8.32H8.32C3.74,91.26,0,87.51,0,82.94 V8.32C0,3.74,3.74,0,8.32,0L8.32,0z M54.46,72.22L32,58.61v-8.63l22.46-13.61v10.26l-13.65,7.69l13.65,7.7V72.22L54.46,72.22z M68.42,72.22l22.46-13.61v-8.63L68.42,36.37v10.26l13.65,7.69l-13.65,7.7V72.22L68.42,72.22z M117.97,23.29H5.29v60.46 c0,0.64,0.25,1.2,0.67,1.63c0.42,0.42,0.99,0.67,1.63,0.67h108.04c0.64,0,1.2-0.25,1.63-0.67c0.43-0.43,0.67-0.99,0.67-1.63V23.29 H117.97L117.97,23.29z M106.64,9.35c2.27,0,4.11,1.84,4.11,4.11c0,2.27-1.84,4.11-4.11,4.11c-2.27,0-4.11-1.84-4.11-4.11 C102.54,11.19,104.38,9.35,106.64,9.35L106.64,9.35z M78.8,9.35c2.27,0,4.11,1.84,4.11,4.11c0,2.27-1.84,4.11-4.11,4.11 c-2.27,0-4.11-1.84-4.11-4.11C74.69,11.19,76.53,9.35,78.8,9.35L78.8,9.35z M92.72,9.35c2.27,0,4.11,1.84,4.11,4.11 c0,2.27-1.84,4.11-4.11,4.11c-2.27,0-4.11-1.84-4.11-4.11C88.61,11.19,90.45,9.35,92.72,9.35L92.72,9.35z"
+  })), "Docs on GitHub"))))))), /*#__PURE__*/react.createElement("section", {
     className: "uix-spacing--s uix-spacing--no-bottom"
   }, /*#__PURE__*/react.createElement("div", {
     className: "container"
@@ -82958,6 +84530,1852 @@ var Sticky = /*#__PURE__*/function (_Component) {
     className: "mb-5"
   }, "The elements you actually want to stick should be wrapped in the ", /*#__PURE__*/react.createElement("code", null, "<Sticky />"), " tag. Set ", /*#__PURE__*/react.createElement("code", null, "stopTrigger"), " and ", /*#__PURE__*/react.createElement("code", null, "stopTriggerOffset"), " properties to turn off sticky. ")))))));
 });
+;// CONCATENATED MODULE: ./src/client/components/MultilevelDropdownMenu/MenuList.tsx
+
+
+
+
+
+
+
+function MenuList_createSuper(Derived) { var hasNativeReflectConstruct = MenuList_isNativeReflectConstruct(); return function _createSuperInternal() { var Super = _getPrototypeOf(Derived), result; if (hasNativeReflectConstruct) { var NewTarget = _getPrototypeOf(this).constructor; result = Reflect.construct(Super, arguments, NewTarget); } else { result = Super.apply(this, arguments); } return _possibleConstructorReturn(this, result); }; }
+
+function MenuList_isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Reflect.construct) return false; if (Reflect.construct.sham) return false; if (typeof Proxy === "function") return true; try { Boolean.prototype.valueOf.call(Reflect.construct(Boolean, [], function () {})); return true; } catch (e) { return false; } }
+
+
+
+
+/* Recursively nested components to traverse nodes
+-------------------------------------------------*/
+
+var MenuList_MenuList = /*#__PURE__*/function (_Component) {
+  _inherits(MenuList, _Component);
+
+  var _super = MenuList_createSuper(MenuList);
+
+  function MenuList(props) {
+    var _this;
+
+    _classCallCheck(this, MenuList);
+
+    _this = _super.call(this, props);
+    _this.handleCollapseMenuList = _this.handleCollapseMenuList.bind(_assertThisInitialized(_this));
+    return _this;
+  }
+
+  _createClass(MenuList, [{
+    key: "handleCollapseMenuList",
+    value: function handleCollapseMenuList(e) {
+      var el = helpers(e.target);
+
+      var $sub = el.next('ul');
+
+      if ($sub.length > 0) {
+        e.preventDefault();
+
+        if (el.attr('aria-expanded') === 'false' || el.attr('aria-expanded') === null) {
+          //Hide other all sibling <ul> of the selected element
+          var $siblingsItems = el.parent().siblings();
+
+          if ($siblingsItems.length > 0) {
+            $siblingsItems.each(function () {
+              var _link = helpers(this).find('> a');
+
+              _link.removeClass('is-active').attr('aria-expanded', false);
+
+              TweenMax_TweenMax.to(_link.next('ul'), 0.5, {
+                height: 0
+              });
+            });
+          }
+
+          el.addClass('is-active').attr('aria-expanded', true);
+          el.parent('li').addClass('is-active'); //to open
+          // - temporarilty set height:auto
+          // - tween from height:0
+
+          TweenMax_TweenMax.set($sub, {
+            height: 'auto'
+          });
+          TweenMax_TweenMax.from($sub, 0.5, {
+            height: 0
+          });
+        } else {
+          el.removeClass('is-active').attr('aria-expanded', false);
+          el.parent('li').removeClass('is-active'); //to close
+
+          TweenMax_TweenMax.to($sub, 0.5, {
+            height: 0
+          });
+        }
+      }
+    }
+  }, {
+    key: "render",
+    value: function render() {
+      var _this2 = this;
+
+      if (this.props.menuListData) {
+        return /*#__PURE__*/react.createElement(react.Fragment, null, /*#__PURE__*/react.createElement("ul", {
+          className: "uix-vertical-menu"
+        }, this.props.menuListData.map(function (item, i) {
+          return /*#__PURE__*/react.createElement("li", {
+            key: i
+          }, /*#__PURE__*/react.createElement("a", {
+            href: item.link || '#',
+            "aria-expanded": "false",
+            onClick: _this2.handleCollapseMenuList
+          }, item.title, item.children ? /*#__PURE__*/react.createElement("span", {
+            className: "uix-vertical-menu__arrow"
+          }) : ''), item.children && /*#__PURE__*/react.createElement(MenuList, {
+            menuListData: item.children
+          }));
+        })));
+      } else {
+        return /*#__PURE__*/react.createElement(react.Fragment, null);
+      }
+    }
+  }]);
+
+  return MenuList;
+}(react.Component);
+
+
+;// CONCATENATED MODULE: ./src/client/components/MultilevelDropdownMenu/index.tsx
+
+
+
+
+
+
+
+
+function MultilevelDropdownMenu_createSuper(Derived) { var hasNativeReflectConstruct = MultilevelDropdownMenu_isNativeReflectConstruct(); return function _createSuperInternal() { var Super = _getPrototypeOf(Derived), result; if (hasNativeReflectConstruct) { var NewTarget = _getPrototypeOf(this).constructor; result = Reflect.construct(Super, arguments, NewTarget); } else { result = Super.apply(this, arguments); } return _possibleConstructorReturn(this, result); }; }
+
+function MultilevelDropdownMenu_isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Reflect.construct) return false; if (Reflect.construct.sham) return false; if (typeof Proxy === "function") return true; try { Boolean.prototype.valueOf.call(Reflect.construct(Boolean, [], function () {})); return true; } catch (e) { return false; } }
+
+/* 
+ *************************************
+ * <!-- Multiple-Level Dropdown Menu -->
+ *************************************
+ */
+
+/*-- Apply Third-party plugins (import location should be in front of "global scripts and styles") --*/
+
+
+
+
+/*-- Apply global scripts and styles --*/
+
+
+
+/*-- Apply this component styles --*/
+
+ //
+
+
+
+var MultilevelDropdownMenu = /*#__PURE__*/function (_Component) {
+  _inherits(MultilevelDropdownMenu, _Component);
+
+  var _super = MultilevelDropdownMenu_createSuper(MultilevelDropdownMenu);
+
+  function MultilevelDropdownMenu(props) {
+    var _this;
+
+    _classCallCheck(this, MultilevelDropdownMenu);
+
+    _this = _super.call(this, props);
+
+    _defineProperty(_assertThisInitialized(_this), "uniqueID", void 0);
+
+    _this.uniqueID = 'app-' + helpers.GUID.create();
+    return _this;
+  }
+
+  _createClass(MultilevelDropdownMenu, [{
+    key: "render",
+    value: function render() {
+      var _this$props = this.props,
+          data = _this$props.data,
+          id = _this$props.id;
+      return /*#__PURE__*/react.createElement(react.Fragment, null, /*#__PURE__*/react.createElement("div", {
+        id: id || this.uniqueID
+      }, /*#__PURE__*/react.createElement(MenuList_MenuList, {
+        menuListData: data
+      })));
+    }
+  }]);
+
+  return MultilevelDropdownMenu;
+}(react.Component);
+
+
+;// CONCATENATED MODULE: ./src/client/views/_pages/ComponentsDemo/MultilevelDropdownMenuDemo.js
+
+
+ //Create or Remove Sidebar Menu
+
+
+var menuListData = [{
+  title: "Top level 1",
+  link: "#",
+  children: [{
+    title: "Sub level 1_1",
+    link: "#",
+    children: [{
+      title: "Sub Sub Level 1_1",
+      link: "#",
+      children: [{
+        title: "Sub Sub Sub Level 1_1",
+        link: "#"
+      }]
+    }]
+  }, {
+    title: "Sub level 1_2",
+    link: "#"
+  }]
+}, {
+  title: "Top level 2",
+  link: "https://example.com"
+}, {
+  title: "Top level 3",
+  link: "https://www.bing.com",
+  children: [{
+    title: "Sub level 3_1",
+    link: "#"
+  }, {
+    title: "Sub level 3_2",
+    link: "#"
+  }, {
+    title: "Sub level 3_3",
+    link: "#"
+  }]
+}, {
+  title: "Top level 4",
+  link: "#",
+  children: [{
+    title: "Sub level 4_1",
+    link: "#"
+  }, {
+    title: "Sub level 4_2",
+    link: "#"
+  }]
+}, {
+  title: "Top level 5",
+  link: "#"
+}, {
+  title: "Top level 6",
+  link: "#"
+}];
+/* harmony default export */ const MultilevelDropdownMenuDemo = (function () {
+  react.useEffect(function () {
+    // Equivalent to componentDidMount and componentDidUpdate:
+    helpers(document).ready(function () {
+      //Create sidebar menu
+      SidebarMenu();
+    });
+  });
+  return /*#__PURE__*/react.createElement(react.Fragment, null, /*#__PURE__*/react.createElement("section", null, /*#__PURE__*/react.createElement("div", {
+    className: "container"
+  }, /*#__PURE__*/react.createElement("div", {
+    className: "row"
+  }, /*#__PURE__*/react.createElement("div", {
+    className: "col-12"
+  }, /*#__PURE__*/react.createElement("h1", {
+    className: "uix-typo--h2"
+  }, "Multiple-Level Dropdown Menu", /*#__PURE__*/react.createElement("a", {
+    className: "uix-typo--h3 align-middle",
+    href: "https://github.com/xizon/uix-kit-react/tree/main/src/client/components/MultilevelDropdownMenu",
+    target: "_blank"
+  }, /*#__PURE__*/react.createElement("span", {
+    className: "uix-dir--right",
+    style: {
+      fontSize: "0.75rem",
+      color: "#ababab",
+      margin: ".5rem .5rem 0 0"
+    }
+  }, /*#__PURE__*/react.createElement("svg", {
+    style: {
+      marginRight: ".5rem"
+    },
+    width: "16",
+    viewBox: "0 0 122.88 91.26"
+  }, /*#__PURE__*/react.createElement("path", {
+    fill: "#d2d2d2",
+    d: "M8.32,0h106.24c4.58,0,8.32,3.74,8.32,8.32v74.62c0,4.57-3.74,8.32-8.32,8.32H8.32C3.74,91.26,0,87.51,0,82.94 V8.32C0,3.74,3.74,0,8.32,0L8.32,0z M54.46,72.22L32,58.61v-8.63l22.46-13.61v10.26l-13.65,7.69l13.65,7.7V72.22L54.46,72.22z M68.42,72.22l22.46-13.61v-8.63L68.42,36.37v10.26l13.65,7.69l-13.65,7.7V72.22L68.42,72.22z M117.97,23.29H5.29v60.46 c0,0.64,0.25,1.2,0.67,1.63c0.42,0.42,0.99,0.67,1.63,0.67h108.04c0.64,0,1.2-0.25,1.63-0.67c0.43-0.43,0.67-0.99,0.67-1.63V23.29 H117.97L117.97,23.29z M106.64,9.35c2.27,0,4.11,1.84,4.11,4.11c0,2.27-1.84,4.11-4.11,4.11c-2.27,0-4.11-1.84-4.11-4.11 C102.54,11.19,104.38,9.35,106.64,9.35L106.64,9.35z M78.8,9.35c2.27,0,4.11,1.84,4.11,4.11c0,2.27-1.84,4.11-4.11,4.11 c-2.27,0-4.11-1.84-4.11-4.11C74.69,11.19,76.53,9.35,78.8,9.35L78.8,9.35z M92.72,9.35c2.27,0,4.11,1.84,4.11,4.11 c0,2.27-1.84,4.11-4.11,4.11c-2.27,0-4.11-1.84-4.11-4.11C88.61,11.19,90.45,9.35,92.72,9.35L92.72,9.35z"
+  })), "Docs on GitHub"))))))), /*#__PURE__*/react.createElement("section", {
+    className: "uix-spacing--s uix-spacing--no-bottom"
+  }, /*#__PURE__*/react.createElement("div", {
+    className: "container"
+  }, /*#__PURE__*/react.createElement("div", {
+    className: "row"
+  }, /*#__PURE__*/react.createElement("div", {
+    className: "col-12"
+  }, /*#__PURE__*/react.createElement("h3", {
+    className: "app-header-title"
+  }, "Demos"), /*#__PURE__*/react.createElement("p", null, "Click the hyperlink to display the drop-down menu"), /*#__PURE__*/react.createElement("hr", null))))), /*#__PURE__*/react.createElement("section", {
+    className: "uix-spacing--s"
+  }, /*#__PURE__*/react.createElement("div", {
+    className: "container"
+  }, /*#__PURE__*/react.createElement("div", {
+    className: "row"
+  }, /*#__PURE__*/react.createElement("div", {
+    className: "col-12"
+  }, /*#__PURE__*/react.createElement(MultilevelDropdownMenu, {
+    data: menuListData
+  }))))), /*#__PURE__*/react.createElement("section", null, /*#__PURE__*/react.createElement("div", {
+    className: "container"
+  }, /*#__PURE__*/react.createElement("div", {
+    className: "row"
+  }, /*#__PURE__*/react.createElement("div", {
+    className: "col-12"
+  }, /*#__PURE__*/react.createElement("h3", {
+    className: "app-header-title"
+  }, "API"), /*#__PURE__*/react.createElement("hr", null), /*#__PURE__*/react.createElement("article", {
+    className: "uix-spacing--s",
+    itemProp: "text"
+  }, /*#__PURE__*/react.createElement("h4", null, "Multiple-Level Dropdown Menu"), /*#__PURE__*/react.createElement("div", null, /*#__PURE__*/react.createElement("pre", null, "import MultilevelDropdownMenu from '@uixkit.react/components/MultilevelDropdownMenu/index.tsx';")), /*#__PURE__*/react.createElement("div", {
+    className: "table-responsive-md"
+  }, /*#__PURE__*/react.createElement("table", {
+    className: "table table-bordered table-striped mb-5"
+  }, /*#__PURE__*/react.createElement("thead", null, /*#__PURE__*/react.createElement("tr", null, /*#__PURE__*/react.createElement("th", null, "Property"), /*#__PURE__*/react.createElement("th", null, "Type"), /*#__PURE__*/react.createElement("th", null, "Default"), /*#__PURE__*/react.createElement("th", null, "Description"))), /*#__PURE__*/react.createElement("tbody", null, /*#__PURE__*/react.createElement("tr", null, /*#__PURE__*/react.createElement("td", null, /*#__PURE__*/react.createElement("code", null, "data")), /*#__PURE__*/react.createElement("td", null, "array"), /*#__PURE__*/react.createElement("td", null, "-"), /*#__PURE__*/react.createElement("td", null, "Specify data of Cascading DropDown List as a JSON string format. Such as: ", /*#__PURE__*/react.createElement("br", null), /*#__PURE__*/react.createElement("code", {
+    className: "text-wrap"
+  }, "[{\"title\":\"Top level 1\",\"link\":\"#\",\"children\":[{\"title\":\"Sub level 1\",\"link\":\"#\",\"children\":[{\"title\":\"Sub Sub Level 1\",\"link\":\"#\"}]}]},{\"title\":\"Top level 2\",\"link\":\"https://example.com\"}]")))))), /*#__PURE__*/react.createElement("p", null, "Array configuration properties of the ", /*#__PURE__*/react.createElement("code", null, "data"), ":"), /*#__PURE__*/react.createElement("div", {
+    className: "table-responsive-md"
+  }, /*#__PURE__*/react.createElement("table", {
+    className: "table table-bordered table-striped mb-5"
+  }, /*#__PURE__*/react.createElement("thead", null, /*#__PURE__*/react.createElement("tr", null, /*#__PURE__*/react.createElement("th", null, "Property"), /*#__PURE__*/react.createElement("th", null, "Type"), /*#__PURE__*/react.createElement("th", null, "Default"), /*#__PURE__*/react.createElement("th", null, "Description"))), /*#__PURE__*/react.createElement("tbody", null, /*#__PURE__*/react.createElement("tr", null, /*#__PURE__*/react.createElement("td", null, /*#__PURE__*/react.createElement("code", null, "title")), /*#__PURE__*/react.createElement("td", null, "string"), /*#__PURE__*/react.createElement("td", null, "-"), /*#__PURE__*/react.createElement("td", null, "The title attribute is used to provide the label text of the hyperlink")), /*#__PURE__*/react.createElement("tr", null, /*#__PURE__*/react.createElement("td", null, /*#__PURE__*/react.createElement("code", null, "link")), /*#__PURE__*/react.createElement("td", null, "string"), /*#__PURE__*/react.createElement("td", null, "-"), /*#__PURE__*/react.createElement("td", null, "Specify a URL address.")), /*#__PURE__*/react.createElement("tr", null, /*#__PURE__*/react.createElement("td", null, /*#__PURE__*/react.createElement("code", null, "children")), /*#__PURE__*/react.createElement("td", null, "array"), /*#__PURE__*/react.createElement("td", null, "-"), /*#__PURE__*/react.createElement("td", null, "Specify a set of sub-navigation, the key value of each item still uses ", /*#__PURE__*/react.createElement("code", null, "title"), " and ", /*#__PURE__*/react.createElement("code", null, "link"), " Eg. ", /*#__PURE__*/react.createElement("code", {
+    className: "text-wrap"
+  }, "[{\"title\":\"Sub Sub Level 1\",\"link\":\"#\"},{\"title\":\"Sub Sub Level 2\",\"link\":\"#\"}]"))))))))))));
+});
+;// CONCATENATED MODULE: ./src/client/components/CascadingDropDownList/Group.tsx
+
+
+
+
+
+
+function Group_createSuper(Derived) { var hasNativeReflectConstruct = Group_isNativeReflectConstruct(); return function _createSuperInternal() { var Super = _getPrototypeOf(Derived), result; if (hasNativeReflectConstruct) { var NewTarget = _getPrototypeOf(this).constructor; result = Reflect.construct(Super, arguments, NewTarget); } else { result = Super.apply(this, arguments); } return _possibleConstructorReturn(this, result); }; }
+
+function Group_isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Reflect.construct) return false; if (Reflect.construct.sham) return false; if (typeof Proxy === "function") return true; try { Boolean.prototype.valueOf.call(Reflect.construct(Boolean, [], function () {})); return true; } catch (e) { return false; } }
+
+
+
+var Group = /*#__PURE__*/function (_Component) {
+  _inherits(Group, _Component);
+
+  var _super = Group_createSuper(Group);
+
+  function Group() {
+    _classCallCheck(this, Group);
+
+    return _super.apply(this, arguments);
+  }
+
+  _createClass(Group, [{
+    key: "render",
+    value: function render() {
+      var _this$props = this.props,
+          data = _this$props.data,
+          selectEv = _this$props.selectEv;
+      return /*#__PURE__*/react.createElement(react.Fragment, null, data.map(function (item, index) {
+        return /*#__PURE__*/react.createElement("div", {
+          className: item.current ? 'uix-cascading-dropdown-list__opt is-active' : 'uix-cascading-dropdown-list__opt',
+          key: index,
+          onClick: function onClick(e) {
+            return selectEv(item, index);
+          }
+        }, item.name);
+      }));
+    }
+  }]);
+
+  return Group;
+}(react.Component);
+
+
+;// CONCATENATED MODULE: ./src/client/components/CascadingDropDownList/index.tsx
+
+
+
+
+
+
+
+
+function CascadingDropDownList_createSuper(Derived) { var hasNativeReflectConstruct = CascadingDropDownList_isNativeReflectConstruct(); return function _createSuperInternal() { var Super = _getPrototypeOf(Derived), result; if (hasNativeReflectConstruct) { var NewTarget = _getPrototypeOf(this).constructor; result = Reflect.construct(Super, arguments, NewTarget); } else { result = Super.apply(this, arguments); } return _possibleConstructorReturn(this, result); }; }
+
+function CascadingDropDownList_isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Reflect.construct) return false; if (Reflect.construct.sham) return false; if (typeof Proxy === "function") return true; try { Boolean.prototype.valueOf.call(Reflect.construct(Boolean, [], function () {})); return true; } catch (e) { return false; } }
+
+/* 
+ *************************************
+ * <!-- Cascading DropDown List -->
+ *************************************
+ */
+
+/*-- Apply Third-party plugins (import location should be in front of "global scripts and styles") --*/
+
+
+
+
+/*-- Apply global scripts and styles --*/
+
+
+
+/*-- Apply this component styles --*/
+
+ //
+
+
+
+
+var CascadingDropDownList = /*#__PURE__*/function (_Component) {
+  _inherits(CascadingDropDownList, _Component);
+
+  var _super = CascadingDropDownList_createSuper(CascadingDropDownList);
+
+  function CascadingDropDownList(props) {
+    var _this;
+
+    _classCallCheck(this, CascadingDropDownList);
+
+    _this = _super.call(this, props);
+
+    _defineProperty(_assertThisInitialized(_this), "valRef", /*#__PURE__*/react.createRef());
+
+    _defineProperty(_assertThisInitialized(_this), "uniqueID", void 0);
+
+    _this.uniqueID = 'app-' + helpers.GUID.create();
+    _this.state = {
+      ajaxOptions: [],
+      firstLevelItems: [],
+      loading: true,
+      //for variable field
+      data: [],
+      selectedData: {
+        labels: [],
+        values: []
+      },
+      isShow: false
+    };
+    _this.handleClickItem = _this.handleClickItem.bind(_assertThisInitialized(_this));
+    _this.handleDisplayOptions = _this.handleDisplayOptions.bind(_assertThisInitialized(_this));
+    _this.handleInitControl = _this.handleInitControl.bind(_assertThisInitialized(_this));
+    _this.handleClickOutside = _this.handleClickOutside.bind(_assertThisInitialized(_this));
+    return _this;
+  }
+  /**
+   * If clicked on outside of element
+   */
+
+
+  _createClass(CascadingDropDownList, [{
+    key: "handleClickOutside",
+    value: function handleClickOutside(event) {
+      if (event.target.className != '' && event.target.className.indexOf('uix-cascading-dropdown-list__trigger') < 0 && event.target.className.indexOf('uix-cascading-dropdown-list__items') < 0 && event.target.className.indexOf('uix-cascading-dropdown-list__opt') < 0) {
+        this.setState({
+          isShow: false
+        });
+      }
+    }
+  }, {
+    key: "handleInitControl",
+    value: function handleInitControl() {
+      var firstLevelItems = [];
+      this.state.ajaxOptions.forEach(function (item) {
+        firstLevelItems.push({
+          "id": item.id,
+          "name": item.name
+        });
+      }); //
+
+      this.setState({
+        data: [this.state.ajaxOptions],
+        firstLevelItems: [firstLevelItems]
+      }); // update result to input
+
+      var inputEl = this.valRef.current;
+      inputEl.value = '';
+    }
+  }, {
+    key: "handleDisplayOptions",
+    value: function handleDisplayOptions(e) {
+      e.preventDefault();
+      this.setState({
+        isShow: !this.state.isShow
+      });
+    }
+  }, {
+    key: "handleClickItem",
+    value: function handleClickItem(resValue, index, level) {
+      console.log('resValue: ', resValue, ' | index: ', index, ' | level: ', level); // update value
+
+      this.setValue(this.state.ajaxOptions, resValue.id); //
+
+      var newData = this.state.data; // such as: [Array(6), Array(3)]
+      //console.log( 'newData: ', newData );
+      // All the elements from start(array.length - start) to the end of the array will be deleted.
+
+      newData.splice(level + 1);
+
+      if (resValue.children) {
+        var childList = resValue.children;
+        this.markAllItems(childList);
+        newData[level + 1] = childList;
+      } //
+
+
+      this.setState({
+        data: newData
+      });
+      this.markCurrent(newData[level], index);
+    }
+  }, {
+    key: "getData",
+    value: function getData() {
+      var _this2 = this;
+
+      //
+      this.setState({
+        loading: true
+      }); //
+
+      var ajaxURL = this.props.api;
+      var req = this.props.method.toLowerCase() === 'get' ? axios_default().get(ajaxURL) : axios_default().post(ajaxURL);
+      var allData = null;
+      req.then(function (res) {
+        allData = res.data.data;
+
+        _this2.setState({
+          loading: false
+        });
+
+        if (allData !== undefined) {
+          _this2.setState({
+            ajaxOptions: allData
+          }); //Initialize options 
+
+
+          _this2.handleInitControl(); //Set a default value
+
+
+          if (_this2.props.value) _this2.setValue(allData, _this2.props.value);
+        }
+      });
+    } // active the selected item
+
+  }, {
+    key: "markCurrent",
+    value: function markCurrent(arr, index) {
+      for (var i = 0; i < arr.length; i++) {
+        if (i === index) {
+          arr[i].current = true;
+        } else {
+          arr[i].current = false;
+        }
+      }
+    } // deactivate all items
+
+  }, {
+    key: "markAllItems",
+    value: function markAllItems(arr) {
+      for (var i = 0; i < arr.length; i++) {
+        arr[i].current = false;
+      }
+    }
+  }, {
+    key: "setValue",
+    value: function setValue(arr, targetVal) {
+      // update result to input
+      var inputEl = this.valRef.current;
+      inputEl.value = targetVal; //search JSON key that contains specific string
+
+      this.setState({
+        selectedData: {
+          labels: this.queryResultOfJSON(arr, targetVal, 'value'),
+          values: this.queryResultOfJSON(arr, targetVal, 'key')
+        }
+      });
+    }
+  }, {
+    key: "queryResultOfJSON",
+    value: function queryResultOfJSON(data, targetVal, returnType) {
+      var callbackValueNested = [];
+      var lastFirstLevelName = '';
+      var loop = true;
+      var resDepth = 0;
+
+      var getIndexOf = function getIndexOf(arr, val) {
+        for (var i = 0; i < arr.length; i++) {
+          if (arr[i].id.toString() === val.toString()) {
+            return i;
+          }
+        }
+
+        return -1;
+      };
+
+      var searchJsonStr = function searchJsonStr(list, depth) {
+        // `depth` is very important, it is used to accurately judge the final result
+        if (typeof depth === 'undefined') {
+          depth = 0;
+        } else {
+          depth++;
+        }
+
+        for (var i = 0; i < list.length; i++) {
+          var row = list[i];
+          var callbackValue = returnType === 'key' ? row.id.toString() : row.name.toString();
+
+          if (loop) {
+            // get first-level item
+            if (getIndexOf(data, row.id) !== -1) {
+              callbackValueNested.push(callbackValue);
+              lastFirstLevelName = callbackValue;
+            } // get child-level item
+
+
+            if (row.children) {
+              callbackValueNested.push(callbackValue);
+            }
+          } //check the value
+
+
+          if (row.id.toString() === targetVal.toString()) {
+            callbackValueNested.push(callbackValue);
+            loop = false;
+            resDepth = depth;
+            break;
+          } // Note: Recursion must be placed here
+
+
+          if (loop) {
+            if (row.children) {
+              searchJsonStr(row.children, depth);
+            }
+          }
+        }
+      };
+
+      searchJsonStr(data); // (1) Remove duplicate values
+      //------------------------------------------
+
+      callbackValueNested = callbackValueNested.filter(function (item, index, arr) {
+        return arr.indexOf(item, 0) === index;
+      }); // (2) Delete needless first-level
+      //------------------------------------------
+
+      var resAll = callbackValueNested.slice(callbackValueNested.indexOf(lastFirstLevelName), callbackValueNested.length); // (3) Returns result
+      //------------------------------------------
+
+      if (resAll.length > 1) {
+        // Get first-level item
+        resAll.splice(1); // Get child-level item
+
+        var resChild = callbackValueNested.slice(-resDepth); // Get the last elements in reverse
+        // Combine
+
+        resAll = resAll.concat(resChild);
+      }
+
+      return resAll;
+    }
+  }, {
+    key: "createTrigger",
+    value: function createTrigger(tagName, classes, content) {
+      switch (tagName) {
+        case 'a':
+          return /*#__PURE__*/react.createElement("a", {
+            role: "button",
+            href: "#",
+            className: "uix-cascading-dropdown-list__trigger " + classes,
+            onClick: this.handleDisplayOptions
+          }, content);
+
+        case 'button':
+          return /*#__PURE__*/react.createElement("button", {
+            type: "button",
+            className: "uix-cascading-dropdown-list__trigger " + classes,
+            onClick: this.handleDisplayOptions
+          }, content);
+
+        case 'div':
+          return /*#__PURE__*/react.createElement("div", {
+            role: "button",
+            className: "uix-cascading-dropdown-list__trigger " + classes,
+            onClick: this.handleDisplayOptions
+          }, content);
+
+        case 'span':
+          return /*#__PURE__*/react.createElement("span", {
+            role: "button",
+            className: "uix-cascading-dropdown-list__trigger " + classes,
+            onClick: this.handleDisplayOptions
+          }, content);
+      }
+    }
+  }, {
+    key: "componentDidMount",
+    value: function componentDidMount() {
+      // load data
+      this.getData(); //
+
+      document.removeEventListener('click', this.handleClickOutside);
+      document.addEventListener('click', this.handleClickOutside);
+    }
+    /** Remove the global list of events, especially as scroll and interval. */
+
+  }, {
+    key: "componentWillUnmount",
+    value: function componentWillUnmount() {
+      // Remove scroll events from document
+      document.removeEventListener('click', this.handleClickOutside);
+    }
+  }, {
+    key: "render",
+    value: function render() {
+      var _this3 = this;
+
+      var _this$props = this.props,
+          name = _this$props.name,
+          depth = _this$props.depth,
+          loader = _this$props.loader,
+          triggerTagName = _this$props.triggerTagName,
+          triggerClassName = _this$props.triggerClassName,
+          triggerContent = _this$props.triggerContent,
+          id = _this$props.id;
+      var _this$state = this.state,
+          data = _this$state.data,
+          selectedData = _this$state.selectedData,
+          isShow = _this$state.isShow;
+      var displayInfo = selectedData.labels ? selectedData.labels.map(function (item, i, arr) {
+        if (arr.length - 1 === i) {
+          return /*#__PURE__*/react.createElement("span", {
+            key: i
+          }, item);
+        } else {
+          return /*#__PURE__*/react.createElement(react.Fragment, null, /*#__PURE__*/react.createElement("span", {
+            key: i
+          }, item), /*#__PURE__*/react.createElement("svg", {
+            viewBox: "0 0 22 22",
+            width: "8"
+          }, /*#__PURE__*/react.createElement("path", {
+            d: "m345.44 248.29l-194.29 194.28c-12.359 12.365-32.397 12.365-44.75 0-12.354-12.354-12.354-32.391 0-44.744l171.91-171.91-171.91-171.9c-12.354-12.359-12.354-32.394 0-44.748 12.354-12.359 32.391-12.359 44.75 0l194.29 194.28c6.177 6.18 9.262 14.271 9.262 22.366 0 8.099-3.091 16.196-9.267 22.373",
+            transform: "matrix(.03541-.00013.00013.03541 2.98 3.02)",
+            fill: "#a5a5a5"
+          })));
+        }
+      }) : '';
+      return /*#__PURE__*/react.createElement(react.Fragment, null, /*#__PURE__*/react.createElement("div", {
+        id: id || this.uniqueID,
+        className: "uix-cascading-dropdown-list",
+        style: {
+          zIndex: depth ? depth : 1
+        }
+      }, /*#__PURE__*/react.createElement("input", {
+        name: name || '',
+        type: "hidden",
+        ref: this.valRef
+      }), selectedData.values ? selectedData.values.map(function (item, i) {
+        return /*#__PURE__*/react.createElement("input", {
+          key: i,
+          name: "".concat(name, "-node[]"),
+          type: "hidden",
+          defaultValue: item
+        });
+      }) : '', this.createTrigger(triggerTagName, triggerClassName, triggerContent), /*#__PURE__*/react.createElement("em", {
+        className: "uix-cascading-dropdown-list__result"
+      }, displayInfo), isShow ? /*#__PURE__*/react.createElement("div", {
+        className: "uix-cascading-dropdown-list__items"
+      }, /*#__PURE__*/react.createElement("ul", null, data.map(function (item, level) {
+        return /*#__PURE__*/react.createElement("li", {
+          key: level
+        }, /*#__PURE__*/react.createElement(Group, {
+          data: item,
+          selectEv: function selectEv(value, index) {
+            return _this3.handleClickItem(value, index, level);
+          }
+        }));
+      }))) : null, this.state.loading ? /*#__PURE__*/react.createElement(react.Fragment, null, /*#__PURE__*/react.createElement("div", null, loader)) : null));
+    }
+  }]);
+
+  return CascadingDropDownList;
+}(react.Component);
+
+
+;// CONCATENATED MODULE: ./src/client/views/_pages/ComponentsDemo/CascadingDropDownListDemo.js
+
+
+ //Create or Remove Sidebar Menu
+
+ //get project config
+
+
+/* harmony default export */ const CascadingDropDownListDemo = (function () {
+  react.useEffect(function () {
+    // Equivalent to componentDidMount and componentDidUpdate:
+    helpers(document).ready(function () {
+      //Create sidebar menu
+      SidebarMenu();
+    });
+  });
+  return /*#__PURE__*/react.createElement(react.Fragment, null, /*#__PURE__*/react.createElement("section", null, /*#__PURE__*/react.createElement("div", {
+    className: "container"
+  }, /*#__PURE__*/react.createElement("div", {
+    className: "row"
+  }, /*#__PURE__*/react.createElement("div", {
+    className: "col-12"
+  }, /*#__PURE__*/react.createElement("h1", {
+    className: "uix-typo--h2"
+  }, "Cascading DropDown List", /*#__PURE__*/react.createElement("a", {
+    className: "uix-typo--h3 align-middle",
+    href: "https://github.com/xizon/uix-kit-react/tree/main/src/client/components/CascadingDropDownList",
+    target: "_blank"
+  }, /*#__PURE__*/react.createElement("span", {
+    className: "uix-dir--right",
+    style: {
+      fontSize: "0.75rem",
+      color: "#ababab",
+      margin: ".5rem .5rem 0 0"
+    }
+  }, /*#__PURE__*/react.createElement("svg", {
+    style: {
+      marginRight: ".5rem"
+    },
+    width: "16",
+    viewBox: "0 0 122.88 91.26"
+  }, /*#__PURE__*/react.createElement("path", {
+    fill: "#d2d2d2",
+    d: "M8.32,0h106.24c4.58,0,8.32,3.74,8.32,8.32v74.62c0,4.57-3.74,8.32-8.32,8.32H8.32C3.74,91.26,0,87.51,0,82.94 V8.32C0,3.74,3.74,0,8.32,0L8.32,0z M54.46,72.22L32,58.61v-8.63l22.46-13.61v10.26l-13.65,7.69l13.65,7.7V72.22L54.46,72.22z M68.42,72.22l22.46-13.61v-8.63L68.42,36.37v10.26l13.65,7.69l-13.65,7.7V72.22L68.42,72.22z M117.97,23.29H5.29v60.46 c0,0.64,0.25,1.2,0.67,1.63c0.42,0.42,0.99,0.67,1.63,0.67h108.04c0.64,0,1.2-0.25,1.63-0.67c0.43-0.43,0.67-0.99,0.67-1.63V23.29 H117.97L117.97,23.29z M106.64,9.35c2.27,0,4.11,1.84,4.11,4.11c0,2.27-1.84,4.11-4.11,4.11c-2.27,0-4.11-1.84-4.11-4.11 C102.54,11.19,104.38,9.35,106.64,9.35L106.64,9.35z M78.8,9.35c2.27,0,4.11,1.84,4.11,4.11c0,2.27-1.84,4.11-4.11,4.11 c-2.27,0-4.11-1.84-4.11-4.11C74.69,11.19,76.53,9.35,78.8,9.35L78.8,9.35z M92.72,9.35c2.27,0,4.11,1.84,4.11,4.11 c0,2.27-1.84,4.11-4.11,4.11c-2.27,0-4.11-1.84-4.11-4.11C88.61,11.19,90.45,9.35,92.72,9.35L92.72,9.35z"
+  })), "Docs on GitHub"))))))), /*#__PURE__*/react.createElement("section", {
+    className: "uix-spacing--s uix-spacing--no-bottom"
+  }, /*#__PURE__*/react.createElement("div", {
+    className: "container"
+  }, /*#__PURE__*/react.createElement("div", {
+    className: "row"
+  }, /*#__PURE__*/react.createElement("div", {
+    className: "col-12"
+  }, /*#__PURE__*/react.createElement("h3", {
+    className: "app-header-title"
+  }, "Dynamic Drop Down List from JSON"), /*#__PURE__*/react.createElement("p", null, "Create a dynamic dropdown form that loads its data via JSON data. Support infinite recursion."), /*#__PURE__*/react.createElement("hr", null))))), /*#__PURE__*/react.createElement("section", {
+    className: "uix-spacing--s"
+  }, /*#__PURE__*/react.createElement("div", {
+    className: "container"
+  }, /*#__PURE__*/react.createElement("div", {
+    className: "row"
+  }, /*#__PURE__*/react.createElement("div", {
+    className: "col-12"
+  }, /*#__PURE__*/react.createElement(CascadingDropDownList, {
+    depth: 2,
+    name: "dd-menu-name-1",
+    api: websiteConfig.API.RECEIVE_DROPDOWN_LIST,
+    loader: /*#__PURE__*/react.createElement(react.Fragment, null, /*#__PURE__*/react.createElement("span", null, /*#__PURE__*/react.createElement("i", {
+      className: "fa fa-spinner fa-spin"
+    }))),
+    method: "get",
+    triggerTagName: "a",
+    triggerClassName: "uix-btn uix-btn__border--thin uix-btn__size--s uix-btn__bg--secondary is-pill is-fill-white",
+    triggerContent: /*#__PURE__*/react.createElement(react.Fragment, null, "Select")
+  }), /*#__PURE__*/react.createElement("br", null), /*#__PURE__*/react.createElement("br", null), /*#__PURE__*/react.createElement(CascadingDropDownList, {
+    depth: 1,
+    name: "dd-menu-name-2",
+    api: websiteConfig.API.RECEIVE_DROPDOWN_LIST,
+    loader: /*#__PURE__*/react.createElement(react.Fragment, null, /*#__PURE__*/react.createElement("span", null, /*#__PURE__*/react.createElement("i", {
+      className: "fa fa-spinner fa-spin"
+    }))),
+    method: "get",
+    value: "2_2_1",
+    triggerTagName: "a",
+    triggerClassName: "uix-btn uix-btn__border--thin uix-btn__size--s uix-btn__bg--secondary is-pill is-fill-white",
+    triggerContent: /*#__PURE__*/react.createElement(react.Fragment, null, "Select")
+  }))))), /*#__PURE__*/react.createElement("section", null, /*#__PURE__*/react.createElement("div", {
+    className: "container"
+  }, /*#__PURE__*/react.createElement("div", {
+    className: "row"
+  }, /*#__PURE__*/react.createElement("div", {
+    className: "col-12"
+  }, /*#__PURE__*/react.createElement("h3", {
+    className: "app-header-title"
+  }, "API"), /*#__PURE__*/react.createElement("hr", null), /*#__PURE__*/react.createElement("article", {
+    className: "uix-spacing--s",
+    itemProp: "text"
+  }, /*#__PURE__*/react.createElement("h4", null, "Cascading DropDown List"), /*#__PURE__*/react.createElement("div", null, /*#__PURE__*/react.createElement("pre", null, "import CascadingDropDownList from '@uixkit.react/components/CascadingDropDownList/index.tsx';")), /*#__PURE__*/react.createElement("div", {
+    className: "table-responsive-md"
+  }, /*#__PURE__*/react.createElement("table", {
+    className: "table table-bordered table-striped mb-5"
+  }, /*#__PURE__*/react.createElement("thead", null, /*#__PURE__*/react.createElement("tr", null, /*#__PURE__*/react.createElement("th", null, "Property"), /*#__PURE__*/react.createElement("th", null, "Type"), /*#__PURE__*/react.createElement("th", null, "Default"), /*#__PURE__*/react.createElement("th", null, "Description"))), /*#__PURE__*/react.createElement("tbody", null, /*#__PURE__*/react.createElement("tr", null, /*#__PURE__*/react.createElement("td", null, /*#__PURE__*/react.createElement("code", null, "api")), /*#__PURE__*/react.createElement("td", null, "string"), /*#__PURE__*/react.createElement("td", null, "-"), /*#__PURE__*/react.createElement("td", null, /*#__PURE__*/react.createElement("strong", null, "(Required)"), "API address to receive data")), /*#__PURE__*/react.createElement("tr", null, /*#__PURE__*/react.createElement("td", null, /*#__PURE__*/react.createElement("code", null, "name")), /*#__PURE__*/react.createElement("td", null, "string"), /*#__PURE__*/react.createElement("td", null, "-"), /*#__PURE__*/react.createElement("td", null, "Set a name for the form field for this component")), /*#__PURE__*/react.createElement("tr", null, /*#__PURE__*/react.createElement("td", null, /*#__PURE__*/react.createElement("code", null, "depth")), /*#__PURE__*/react.createElement("td", null, "number"), /*#__PURE__*/react.createElement("td", null, "1"), /*#__PURE__*/react.createElement("td", null, "Set the depth value of the control to control the display of the pop-up layer appear above. Please set it when multiple controls are used at the same time.")), /*#__PURE__*/react.createElement("tr", null, /*#__PURE__*/react.createElement("td", null, /*#__PURE__*/react.createElement("code", null, "method")), /*#__PURE__*/react.createElement("td", null, "string"), /*#__PURE__*/react.createElement("td", null, "post"), /*#__PURE__*/react.createElement("td", null, "Request method to be used when making the request.")), /*#__PURE__*/react.createElement("tr", null, /*#__PURE__*/react.createElement("td", null, /*#__PURE__*/react.createElement("code", null, "loader")), /*#__PURE__*/react.createElement("td", null, "ReactNode"), /*#__PURE__*/react.createElement("td", null, "-"), /*#__PURE__*/react.createElement("td", null, "Set a loader component to show while the component waits for the next load of data. e.g. ", /*#__PURE__*/react.createElement("code", null, "<span>Loading...</span>"), " or any fancy loader element")), /*#__PURE__*/react.createElement("tr", null, /*#__PURE__*/react.createElement("td", null, /*#__PURE__*/react.createElement("code", null, "value")), /*#__PURE__*/react.createElement("td", null, "string"), /*#__PURE__*/react.createElement("td", null, "-"), /*#__PURE__*/react.createElement("td", null, "Set a default value")), /*#__PURE__*/react.createElement("tr", null, /*#__PURE__*/react.createElement("td", null, /*#__PURE__*/react.createElement("code", null, "triggerTagName")), /*#__PURE__*/react.createElement("td", null, /*#__PURE__*/react.createElement("code", null, "a"), " | ", /*#__PURE__*/react.createElement("code", null, "button"), " | ", /*#__PURE__*/react.createElement("code", null, "div"), " | ", /*#__PURE__*/react.createElement("code", null, "span")), /*#__PURE__*/react.createElement("td", null, "-"), /*#__PURE__*/react.createElement("td", null, "Tag name of the trigger.")), /*#__PURE__*/react.createElement("tr", null, /*#__PURE__*/react.createElement("td", null, /*#__PURE__*/react.createElement("code", null, "triggerClassName")), /*#__PURE__*/react.createElement("td", null, "string"), /*#__PURE__*/react.createElement("td", null, "-"), /*#__PURE__*/react.createElement("td", null, "Specify a class for this Node")), /*#__PURE__*/react.createElement("tr", null, /*#__PURE__*/react.createElement("td", null, /*#__PURE__*/react.createElement("code", null, "triggerContent")), /*#__PURE__*/react.createElement("td", null, "ReactNode"), /*#__PURE__*/react.createElement("td", null, "-"), /*#__PURE__*/react.createElement("td", null, "Set a piece of text or HTML code for the trigger"))))), /*#__PURE__*/react.createElement("h4", null, "Create Callback"), /*#__PURE__*/react.createElement("p", null, "A successful response returns the details of the callback such as Sample Request Body:"), /*#__PURE__*/react.createElement("div", null, /*#__PURE__*/react.createElement("pre", {
+    className: "mb-5"
+  }, /*#__PURE__*/react.createElement("div", {
+    style: {
+      backgroundColor: "#f9f2f4",
+      borderRadius: "3px",
+      padding: "1rem",
+      wordBreak: "normal",
+      whiteSpace: "pre-wrap"
+    }
+  }, "[\n    {\n        \"id\": 1, \n        \"name\": \"Text 1\", \n        \"children\": [\n            {\n                \"id\": \"1_1\", \n                \"name\": \"Text 1_1\", \n                \"children\": [\n                    {\n                        \"id\": \"1_1_1\", \n                        \"name\": \"Text 1_1_1\"\n                    },\n                    {\n                        \"id\": \"1_1_2\", \n                        \"name\": \"Text 1_1_2\"\n                    },\n                    {\n                        \"id\": \"1_1_3\", \n                        \"name\": \"Text 1_1_3\"\n                    }\n                ]\n            }, \n            {\n                \"id\": \"1_2\", \n                \"name\": \"Text 1_2\", \n                \"children\": [\n                    {\n                        \"id\": \"1_2_1\", \n                        \"name\": \"Text 1_2_1\", \n                        \"children\": [\n                            {\n                                \"id\": \"1_2_1_1\", \n                                \"name\": \"Text 1_2_1_1\"\n                            },\n                            {\n                                \"id\": \"1_2_1_2\", \n                                \"name\": \"Text 1_2_1_2\"\n                            }\n                        ]\n                    }\n                ]\n            }\n        ]\n    }, \n    {\n        \"id\": 2, \n        \"name\": \"Text 2\", \n        \"children\": [\n            {\n                \"id\": \"2_1\", \n                \"name\": \"Text 2_1\", \n                \"children\": [\n                    {\n                        \"id\": \"2_1_1\", \n                        \"name\": \"Text 2_1_1\"\n                    }\n                ]\n            }, \n            {\n                \"id\": \"2_2\", \n                \"name\": \"Text 2_2\", \n                \"children\": [\n                    {\n                        \"id\": \"2_2_1\", \n                        \"name\": \"Text 2_2_1\"\n                    }\n                ]\n            }\n        ]\n    }, \n\t{\n\t\t\"id\": 3, \n\t\t\"name\": \"Text 3\", \n\t\t\"children\": [\n\t\t\t{\n\t\t\t\t\"id\": \"3_1\", \n\t\t\t\t\"name\": \"Text 3_1\"\n\t\t\t}, \n\t\t\t{\n\t\t\t\t\"id\": \"3_2\", \n\t\t\t\t\"name\": \"Text 3_2\"\n\t\t\t}, \n\t\t\t{\n\t\t\t\t\"id\": \"3_3\", \n\t\t\t\t\"name\": \"Text 3_3\"\n\t\t\t}\n\t\t]\n\t},\n    {\n        \"id\": 4, \n        \"name\": \"Text 4\"\n    },\n    {\n        \"id\": 5, \n        \"name\": \"Text 5\"\n    },\n    {\n        \"id\": 6, \n        \"name\": \"Text 6\"\n    }\n]")))))))));
+});
+;// CONCATENATED MODULE: ./src/client/components/Gallery/GalleryImage.tsx
+
+
+
+
+
+
+function GalleryImage_createSuper(Derived) { var hasNativeReflectConstruct = GalleryImage_isNativeReflectConstruct(); return function _createSuperInternal() { var Super = _getPrototypeOf(Derived), result; if (hasNativeReflectConstruct) { var NewTarget = _getPrototypeOf(this).constructor; result = Reflect.construct(Super, arguments, NewTarget); } else { result = Super.apply(this, arguments); } return _possibleConstructorReturn(this, result); }; }
+
+function GalleryImage_isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Reflect.construct) return false; if (Reflect.construct.sham) return false; if (typeof Proxy === "function") return true; try { Boolean.prototype.valueOf.call(Reflect.construct(Boolean, [], function () {})); return true; } catch (e) { return false; } }
+
+
+
+var GalleryImage = /*#__PURE__*/function (_Component) {
+  _inherits(GalleryImage, _Component);
+
+  var _super = GalleryImage_createSuper(GalleryImage);
+
+  function GalleryImage(props) {
+    _classCallCheck(this, GalleryImage);
+
+    return _super.call(this, props);
+  }
+
+  _createClass(GalleryImage, [{
+    key: "render",
+    value: function render() {
+      var _this$props = this.props,
+          url = _this$props.url,
+          title = _this$props.title;
+      return /*#__PURE__*/react.createElement(react.Fragment, null, /*#__PURE__*/react.createElement("li", {
+        className: "uix-gallery__item"
+      }, /*#__PURE__*/react.createElement("figure", null, /*#__PURE__*/react.createElement("img", {
+        src: url,
+        alt: title
+      }), title && title.length > 0 && typeof title !== 'undefined' ? /*#__PURE__*/react.createElement(react.Fragment, null, /*#__PURE__*/react.createElement("figcaption", null, title)) : '')));
+    }
+  }]);
+
+  return GalleryImage;
+}(react.Component);
+
+
+;// CONCATENATED MODULE: ./src/client/components/Gallery/index.tsx
+
+
+
+
+
+
+
+
+function Gallery_createSuper(Derived) { var hasNativeReflectConstruct = Gallery_isNativeReflectConstruct(); return function _createSuperInternal() { var Super = _getPrototypeOf(Derived), result; if (hasNativeReflectConstruct) { var NewTarget = _getPrototypeOf(this).constructor; result = Reflect.construct(Super, arguments, NewTarget); } else { result = Super.apply(this, arguments); } return _possibleConstructorReturn(this, result); }; }
+
+function Gallery_isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Reflect.construct) return false; if (Reflect.construct.sham) return false; if (typeof Proxy === "function") return true; try { Boolean.prototype.valueOf.call(Reflect.construct(Boolean, [], function () {})); return true; } catch (e) { return false; } }
+
+/* 
+ *************************************
+ * <!-- Gallery -->
+ *************************************
+ */
+
+/*-- Apply Third-party plugins (import location should be in front of "global scripts and styles") --*/
+
+
+
+
+/*-- Apply global scripts and styles --*/
+
+
+
+/*-- Apply this component styles --*/
+
+ //
+
+
+
+var Gallery = /*#__PURE__*/function (_Component) {
+  _inherits(Gallery, _Component);
+
+  var _super = Gallery_createSuper(Gallery);
+
+  function Gallery(props) {
+    var _this;
+
+    _classCallCheck(this, Gallery);
+
+    _this = _super.call(this, props);
+
+    _defineProperty(_assertThisInitialized(_this), "uniqueID", void 0);
+
+    _this.uniqueID = 'app-' + helpers.GUID.create();
+    return _this;
+  }
+
+  _createClass(Gallery, [{
+    key: "render",
+    value: function render() {
+      var _this$props = this.props,
+          fixedColumns = _this$props.fixedColumns,
+          data = _this$props.data,
+          id = _this$props.id;
+      return /*#__PURE__*/react.createElement(react.Fragment, null, /*#__PURE__*/react.createElement("div", {
+        id: id || this.uniqueID,
+        className: "uix-gallery"
+      }, /*#__PURE__*/react.createElement("ul", {
+        className: "uix-gallery__tiles uix-gallery__col-".concat(fixedColumns || 1)
+      }, data ? data.map(function (item, index) {
+        return /*#__PURE__*/react.createElement(GalleryImage, {
+          key: index,
+          url: item.url,
+          title: item.title
+        });
+      }) : '')));
+    }
+  }]);
+
+  return Gallery;
+}(react.Component);
+
+
+;// CONCATENATED MODULE: ./src/client/views/_pages/ComponentsDemo/GalleryDemo.js
+
+
+ //Create or Remove Sidebar Menu
+
+ //get project config
+
+
+/* harmony default export */ const GalleryDemo = (function () {
+  react.useEffect(function () {
+    // Equivalent to componentDidMount and componentDidUpdate:
+    helpers(document).ready(function () {
+      //Create sidebar menu
+      SidebarMenu();
+    });
+  });
+  return /*#__PURE__*/react.createElement(react.Fragment, null, /*#__PURE__*/react.createElement("section", null, /*#__PURE__*/react.createElement("div", {
+    className: "container"
+  }, /*#__PURE__*/react.createElement("div", {
+    className: "row"
+  }, /*#__PURE__*/react.createElement("div", {
+    className: "col-12"
+  }, /*#__PURE__*/react.createElement("h1", {
+    className: "uix-typo--h2"
+  }, "Gallery", /*#__PURE__*/react.createElement("a", {
+    className: "uix-typo--h3 align-middle",
+    href: "https://github.com/xizon/uix-kit-react/tree/main/src/client/components/Gallery",
+    target: "_blank"
+  }, /*#__PURE__*/react.createElement("span", {
+    className: "uix-dir--right",
+    style: {
+      fontSize: "0.75rem",
+      color: "#ababab",
+      margin: ".5rem .5rem 0 0"
+    }
+  }, /*#__PURE__*/react.createElement("svg", {
+    style: {
+      marginRight: ".5rem"
+    },
+    width: "16",
+    viewBox: "0 0 122.88 91.26"
+  }, /*#__PURE__*/react.createElement("path", {
+    fill: "#d2d2d2",
+    d: "M8.32,0h106.24c4.58,0,8.32,3.74,8.32,8.32v74.62c0,4.57-3.74,8.32-8.32,8.32H8.32C3.74,91.26,0,87.51,0,82.94 V8.32C0,3.74,3.74,0,8.32,0L8.32,0z M54.46,72.22L32,58.61v-8.63l22.46-13.61v10.26l-13.65,7.69l13.65,7.7V72.22L54.46,72.22z M68.42,72.22l22.46-13.61v-8.63L68.42,36.37v10.26l13.65,7.69l-13.65,7.7V72.22L68.42,72.22z M117.97,23.29H5.29v60.46 c0,0.64,0.25,1.2,0.67,1.63c0.42,0.42,0.99,0.67,1.63,0.67h108.04c0.64,0,1.2-0.25,1.63-0.67c0.43-0.43,0.67-0.99,0.67-1.63V23.29 H117.97L117.97,23.29z M106.64,9.35c2.27,0,4.11,1.84,4.11,4.11c0,2.27-1.84,4.11-4.11,4.11c-2.27,0-4.11-1.84-4.11-4.11 C102.54,11.19,104.38,9.35,106.64,9.35L106.64,9.35z M78.8,9.35c2.27,0,4.11,1.84,4.11,4.11c0,2.27-1.84,4.11-4.11,4.11 c-2.27,0-4.11-1.84-4.11-4.11C74.69,11.19,76.53,9.35,78.8,9.35L78.8,9.35z M92.72,9.35c2.27,0,4.11,1.84,4.11,4.11 c0,2.27-1.84,4.11-4.11,4.11c-2.27,0-4.11-1.84-4.11-4.11C88.61,11.19,90.45,9.35,92.72,9.35L92.72,9.35z"
+  })), "Docs on GitHub"))))))), /*#__PURE__*/react.createElement("section", {
+    className: "uix-spacing--s uix-spacing--no-bottom"
+  }, /*#__PURE__*/react.createElement("div", {
+    className: "container"
+  }, /*#__PURE__*/react.createElement("div", {
+    className: "row"
+  }, /*#__PURE__*/react.createElement("div", {
+    className: "col-12"
+  }, /*#__PURE__*/react.createElement("h3", {
+    className: "app-header-title"
+  }, "1 Column"), /*#__PURE__*/react.createElement("hr", null))))), /*#__PURE__*/react.createElement("section", {
+    className: "uix-spacing--s"
+  }, /*#__PURE__*/react.createElement("div", {
+    className: "container"
+  }, /*#__PURE__*/react.createElement(Gallery, {
+    fixedColumns: 1,
+    data: [{
+      "title": "Image Title",
+      "url": "".concat(websiteConfig.rootDirectory, "/assets/images/demo/test-img-big-1.jpg")
+    }, {
+      "url": "".concat(websiteConfig.rootDirectory, "/assets/images/demo/test-img-big-2.jpg")
+    }]
+  }))), /*#__PURE__*/react.createElement("section", {
+    className: "uix-spacing--s uix-spacing--no-bottom"
+  }, /*#__PURE__*/react.createElement("div", {
+    className: "container"
+  }, /*#__PURE__*/react.createElement("div", {
+    className: "row"
+  }, /*#__PURE__*/react.createElement("div", {
+    className: "col-12"
+  }, /*#__PURE__*/react.createElement("h3", {
+    className: "app-header-title"
+  }, "2 Columns"), /*#__PURE__*/react.createElement("hr", null))))), /*#__PURE__*/react.createElement("section", {
+    className: "uix-spacing--s"
+  }, /*#__PURE__*/react.createElement("div", {
+    className: "container"
+  }, /*#__PURE__*/react.createElement(Gallery, {
+    fixedColumns: 2,
+    data: [{
+      "title": "Image Title",
+      "url": "".concat(websiteConfig.rootDirectory, "/assets/images/demo/test-img-big-1.jpg")
+    }, {
+      "title": "Image Title",
+      "url": "".concat(websiteConfig.rootDirectory, "/assets/images/demo/test-img-big-2.jpg")
+    }, {
+      "title": "Image Title",
+      "url": "".concat(websiteConfig.rootDirectory, "/assets/images/demo/test-img-big-3.jpg")
+    }]
+  }))), /*#__PURE__*/react.createElement("section", {
+    className: "uix-spacing--s uix-spacing--no-bottom"
+  }, /*#__PURE__*/react.createElement("div", {
+    className: "container"
+  }, /*#__PURE__*/react.createElement("div", {
+    className: "row"
+  }, /*#__PURE__*/react.createElement("div", {
+    className: "col-12"
+  }, /*#__PURE__*/react.createElement("h3", {
+    className: "app-header-title"
+  }, "3 Columns"), /*#__PURE__*/react.createElement("hr", null))))), /*#__PURE__*/react.createElement("section", {
+    className: "uix-spacing--s"
+  }, /*#__PURE__*/react.createElement("div", {
+    className: "container"
+  }, /*#__PURE__*/react.createElement(Gallery, {
+    fixedColumns: 3,
+    data: [{
+      "title": "Image Title",
+      "url": "".concat(websiteConfig.rootDirectory, "/assets/images/demo/test-img-big-1.jpg")
+    }, {
+      "title": "Image Title",
+      "url": "".concat(websiteConfig.rootDirectory, "/assets/images/demo/test-img-big-2.jpg")
+    }, {
+      "title": "Image Title",
+      "url": "".concat(websiteConfig.rootDirectory, "/assets/images/demo/test-img-big-3.jpg")
+    }, {
+      "title": "Image Title",
+      "url": "".concat(websiteConfig.rootDirectory, "/assets/images/demo/test-img-big-4.jpg")
+    }, {
+      "title": "Image Title",
+      "url": "".concat(websiteConfig.rootDirectory, "/assets/images/demo/test-img-big-5.jpg")
+    }]
+  }))), /*#__PURE__*/react.createElement("section", {
+    className: "uix-spacing--s uix-spacing--no-bottom"
+  }, /*#__PURE__*/react.createElement("div", {
+    className: "container"
+  }, /*#__PURE__*/react.createElement("div", {
+    className: "row"
+  }, /*#__PURE__*/react.createElement("div", {
+    className: "col-12"
+  }, /*#__PURE__*/react.createElement("h3", {
+    className: "app-header-title"
+  }, "4 Columns"), /*#__PURE__*/react.createElement("hr", null))))), /*#__PURE__*/react.createElement("section", {
+    className: "uix-spacing--s"
+  }, /*#__PURE__*/react.createElement("div", {
+    className: "container"
+  }, /*#__PURE__*/react.createElement(Gallery, {
+    fixedColumns: 4,
+    data: [{
+      "title": "Image Title",
+      "url": "".concat(websiteConfig.rootDirectory, "/assets/images/demo/test-img-big-1.jpg")
+    }, {
+      "title": "Image Title",
+      "url": "".concat(websiteConfig.rootDirectory, "/assets/images/demo/test-img-big-2.jpg")
+    }, {
+      "title": "Image Title",
+      "url": "".concat(websiteConfig.rootDirectory, "/assets/images/demo/test-img-big-3.jpg")
+    }, {
+      "title": "Image Title",
+      "url": "".concat(websiteConfig.rootDirectory, "/assets/images/demo/test-img-big-4.jpg")
+    }, {
+      "title": "Image Title",
+      "url": "".concat(websiteConfig.rootDirectory, "/assets/images/demo/test-img-big-5.jpg")
+    }]
+  }))), /*#__PURE__*/react.createElement("section", {
+    className: "uix-spacing--s uix-spacing--no-bottom"
+  }, /*#__PURE__*/react.createElement("div", {
+    className: "container"
+  }, /*#__PURE__*/react.createElement("div", {
+    className: "row"
+  }, /*#__PURE__*/react.createElement("div", {
+    className: "col-12"
+  }, /*#__PURE__*/react.createElement("h3", {
+    className: "app-header-title"
+  }, "5 Columns"), /*#__PURE__*/react.createElement("hr", null))))), /*#__PURE__*/react.createElement("section", {
+    className: "uix-spacing--s"
+  }, /*#__PURE__*/react.createElement("div", {
+    className: "container"
+  }, /*#__PURE__*/react.createElement(Gallery, {
+    fixedColumns: 5,
+    data: [{
+      "title": "Image Title",
+      "url": "".concat(websiteConfig.rootDirectory, "/assets/images/demo/test-img-big-1.jpg")
+    }, {
+      "title": "Image Title",
+      "url": "".concat(websiteConfig.rootDirectory, "/assets/images/demo/test-img-big-2.jpg")
+    }, {
+      "title": "Image Title",
+      "url": "".concat(websiteConfig.rootDirectory, "/assets/images/demo/test-img-big-3.jpg")
+    }, {
+      "title": "Image Title",
+      "url": "".concat(websiteConfig.rootDirectory, "/assets/images/demo/test-img-big-4.jpg")
+    }, {
+      "title": "Image Title",
+      "url": "".concat(websiteConfig.rootDirectory, "/assets/images/demo/test-img-big-5.jpg")
+    }]
+  }))), /*#__PURE__*/react.createElement("section", {
+    className: "uix-spacing--s uix-spacing--no-bottom"
+  }, /*#__PURE__*/react.createElement("div", {
+    className: "container"
+  }, /*#__PURE__*/react.createElement("div", {
+    className: "row"
+  }, /*#__PURE__*/react.createElement("div", {
+    className: "col-12"
+  }, /*#__PURE__*/react.createElement("h3", {
+    className: "app-header-title"
+  }, "6 Columns"), /*#__PURE__*/react.createElement("hr", null))))), /*#__PURE__*/react.createElement("section", {
+    className: "uix-spacing--s"
+  }, /*#__PURE__*/react.createElement("div", {
+    className: "container"
+  }, /*#__PURE__*/react.createElement(Gallery, {
+    fixedColumns: 6,
+    data: [{
+      "title": "Image Title",
+      "url": "".concat(websiteConfig.rootDirectory, "/assets/images/demo/test-img-big-1.jpg")
+    }, {
+      "title": "Image Title",
+      "url": "".concat(websiteConfig.rootDirectory, "/assets/images/demo/test-img-big-2.jpg")
+    }, {
+      "title": "Image Title",
+      "url": "".concat(websiteConfig.rootDirectory, "/assets/images/demo/test-img-big-3.jpg")
+    }, {
+      "title": "Image Title",
+      "url": "".concat(websiteConfig.rootDirectory, "/assets/images/demo/test-img-big-4.jpg")
+    }, {
+      "title": "Image Title",
+      "url": "".concat(websiteConfig.rootDirectory, "/assets/images/demo/test-img-big-5.jpg")
+    }, {
+      "title": "Image Title",
+      "url": "".concat(websiteConfig.rootDirectory, "/assets/images/demo/test-img-big-3.jpg")
+    }]
+  }))), /*#__PURE__*/react.createElement("section", {
+    className: "uix-spacing--s uix-spacing--no-bottom"
+  }, /*#__PURE__*/react.createElement("div", {
+    className: "container"
+  }, /*#__PURE__*/react.createElement("div", {
+    className: "row"
+  }, /*#__PURE__*/react.createElement("div", {
+    className: "col-12"
+  }, /*#__PURE__*/react.createElement("h3", {
+    className: "app-header-title"
+  }, "7 Columns"), /*#__PURE__*/react.createElement("hr", null))))), /*#__PURE__*/react.createElement("section", {
+    className: "uix-spacing--s"
+  }, /*#__PURE__*/react.createElement("div", {
+    className: "container"
+  }, /*#__PURE__*/react.createElement(Gallery, {
+    fixedColumns: 7,
+    data: [{
+      "title": "Image Title",
+      "url": "".concat(websiteConfig.rootDirectory, "/assets/images/demo/test-img-big-1.jpg")
+    }, {
+      "title": "Image Title",
+      "url": "".concat(websiteConfig.rootDirectory, "/assets/images/demo/test-img-big-2.jpg")
+    }, {
+      "title": "Image Title",
+      "url": "".concat(websiteConfig.rootDirectory, "/assets/images/demo/test-img-big-3.jpg")
+    }, {
+      "title": "Image Title",
+      "url": "".concat(websiteConfig.rootDirectory, "/assets/images/demo/test-img-big-4.jpg")
+    }, {
+      "title": "Image Title",
+      "url": "".concat(websiteConfig.rootDirectory, "/assets/images/demo/test-img-big-5.jpg")
+    }, {
+      "title": "Image Title",
+      "url": "".concat(websiteConfig.rootDirectory, "/assets/images/demo/test-img-big-1.jpg")
+    }, {
+      "title": "Image Title",
+      "url": "".concat(websiteConfig.rootDirectory, "/assets/images/demo/test-img-big-3.jpg")
+    }, {
+      "title": "Image Title",
+      "url": "".concat(websiteConfig.rootDirectory, "/assets/images/demo/test-img-big-4.jpg")
+    }, {
+      "title": "Image Title",
+      "url": "".concat(websiteConfig.rootDirectory, "/assets/images/demo/test-img-big-5.jpg")
+    }]
+  }))), /*#__PURE__*/react.createElement("section", {
+    className: "uix-spacing--s uix-spacing--no-bottom"
+  }, /*#__PURE__*/react.createElement("div", {
+    className: "container"
+  }, /*#__PURE__*/react.createElement("div", {
+    className: "row"
+  }, /*#__PURE__*/react.createElement("div", {
+    className: "col-12"
+  }, /*#__PURE__*/react.createElement("h3", {
+    className: "app-header-title"
+  }, "8 Columns"), /*#__PURE__*/react.createElement("hr", null))))), /*#__PURE__*/react.createElement("section", {
+    className: "uix-spacing--s"
+  }, /*#__PURE__*/react.createElement("div", {
+    className: "container"
+  }, /*#__PURE__*/react.createElement(Gallery, {
+    fixedColumns: 8,
+    data: [{
+      "title": "Image Title",
+      "url": "".concat(websiteConfig.rootDirectory, "/assets/images/demo/test-img-big-1.jpg")
+    }, {
+      "title": "Image Title",
+      "url": "".concat(websiteConfig.rootDirectory, "/assets/images/demo/test-img-big-2.jpg")
+    }, {
+      "title": "Image Title",
+      "url": "".concat(websiteConfig.rootDirectory, "/assets/images/demo/test-img-big-3.jpg")
+    }, {
+      "title": "Image Title",
+      "url": "".concat(websiteConfig.rootDirectory, "/assets/images/demo/test-img-big-4.jpg")
+    }, {
+      "title": "Image Title",
+      "url": "".concat(websiteConfig.rootDirectory, "/assets/images/demo/test-img-big-5.jpg")
+    }, {
+      "title": "Image Title",
+      "url": "".concat(websiteConfig.rootDirectory, "/assets/images/demo/test-img-big-1.jpg")
+    }, {
+      "title": "Image Title",
+      "url": "".concat(websiteConfig.rootDirectory, "/assets/images/demo/test-img-big-3.jpg")
+    }, {
+      "title": "Image Title",
+      "url": "".concat(websiteConfig.rootDirectory, "/assets/images/demo/test-img-big-4.jpg")
+    }, {
+      "title": "Image Title",
+      "url": "".concat(websiteConfig.rootDirectory, "/assets/images/demo/test-img-big-5.jpg")
+    }, {
+      "title": "Image Title",
+      "url": "".concat(websiteConfig.rootDirectory, "/assets/images/demo/test-img-big-2.jpg")
+    }, {
+      "title": "Image Title",
+      "url": "".concat(websiteConfig.rootDirectory, "/assets/images/demo/test-img-big-4.jpg")
+    }]
+  }))), /*#__PURE__*/react.createElement("section", null, /*#__PURE__*/react.createElement("div", {
+    className: "container"
+  }, /*#__PURE__*/react.createElement("div", {
+    className: "row"
+  }, /*#__PURE__*/react.createElement("div", {
+    className: "col-12"
+  }, /*#__PURE__*/react.createElement("h3", {
+    className: "app-header-title"
+  }, "API"), /*#__PURE__*/react.createElement("hr", null), /*#__PURE__*/react.createElement("article", {
+    className: "uix-spacing--s",
+    itemProp: "text"
+  }, /*#__PURE__*/react.createElement("h4", null, "Gallery"), /*#__PURE__*/react.createElement("div", null, /*#__PURE__*/react.createElement("pre", null, "import Gallery from '@uixkit.react/components/Gallery/index.tsx';")), /*#__PURE__*/react.createElement("div", {
+    className: "table-responsive-md"
+  }, /*#__PURE__*/react.createElement("table", {
+    className: "table table-bordered table-striped mb-5"
+  }, /*#__PURE__*/react.createElement("thead", null, /*#__PURE__*/react.createElement("tr", null, /*#__PURE__*/react.createElement("th", null, "Property"), /*#__PURE__*/react.createElement("th", null, "Type"), /*#__PURE__*/react.createElement("th", null, "Default"), /*#__PURE__*/react.createElement("th", null, "Description"))), /*#__PURE__*/react.createElement("tbody", null, /*#__PURE__*/react.createElement("tr", null, /*#__PURE__*/react.createElement("td", null, /*#__PURE__*/react.createElement("code", null, "data")), /*#__PURE__*/react.createElement("td", null, "array"), /*#__PURE__*/react.createElement("td", null, "-"), /*#__PURE__*/react.createElement("td", null, "Specify data of images as a JSON string format. Such as: ", /*#__PURE__*/react.createElement("br", null), /*#__PURE__*/react.createElement("code", {
+    className: "text-wrap"
+  }, "[{\"title\":\"Image Title 1\",\"url\":\"xxx.jpg\"},{\"title\":\"Image Title 2\",\"url\":\"xxx.jpg\"}]"))), /*#__PURE__*/react.createElement("tr", null, /*#__PURE__*/react.createElement("td", null, /*#__PURE__*/react.createElement("code", null, "fixedColumns")), /*#__PURE__*/react.createElement("td", null, "number"), /*#__PURE__*/react.createElement("td", null, "1"), /*#__PURE__*/react.createElement("td", null, "Set numbers of columns on a gallery page. The value range is an integer from ", /*#__PURE__*/react.createElement("code", null, "1"), " to ", /*#__PURE__*/react.createElement("code", null, "8")))))), /*#__PURE__*/react.createElement("p", null, "Array configuration properties of the ", /*#__PURE__*/react.createElement("code", null, "options"), ":"), /*#__PURE__*/react.createElement("div", {
+    className: "table-responsive-md"
+  }, /*#__PURE__*/react.createElement("table", {
+    className: "table table-bordered table-striped mb-5"
+  }, /*#__PURE__*/react.createElement("thead", null, /*#__PURE__*/react.createElement("tr", null, /*#__PURE__*/react.createElement("th", null, "Property"), /*#__PURE__*/react.createElement("th", null, "Type"), /*#__PURE__*/react.createElement("th", null, "Default"), /*#__PURE__*/react.createElement("th", null, "Description"))), /*#__PURE__*/react.createElement("tbody", null, /*#__PURE__*/react.createElement("tr", null, /*#__PURE__*/react.createElement("td", null, /*#__PURE__*/react.createElement("code", null, "title")), /*#__PURE__*/react.createElement("td", null, "string | boolean"), /*#__PURE__*/react.createElement("td", null, "-"), /*#__PURE__*/react.createElement("td", null, "Specifies an alternate and title text for the image")), /*#__PURE__*/react.createElement("tr", null, /*#__PURE__*/react.createElement("td", null, /*#__PURE__*/react.createElement("code", null, "url")), /*#__PURE__*/react.createElement("td", null, "string"), /*#__PURE__*/react.createElement("td", null, "-"), /*#__PURE__*/react.createElement("td", null, "Specifies the path to the image")))))))))));
+});
+;// CONCATENATED MODULE: ./src/client/components/InfiniteScroll/index.tsx
+
+
+
+
+
+
+
+
+
+function InfiniteScroll_createSuper(Derived) { var hasNativeReflectConstruct = InfiniteScroll_isNativeReflectConstruct(); return function _createSuperInternal() { var Super = _getPrototypeOf(Derived), result; if (hasNativeReflectConstruct) { var NewTarget = _getPrototypeOf(this).constructor; result = Reflect.construct(Super, arguments, NewTarget); } else { result = Super.apply(this, arguments); } return _possibleConstructorReturn(this, result); }; }
+
+function InfiniteScroll_isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Reflect.construct) return false; if (Reflect.construct.sham) return false; if (typeof Proxy === "function") return true; try { Boolean.prototype.valueOf.call(Reflect.construct(Boolean, [], function () {})); return true; } catch (e) { return false; } }
+
+/* 
+ *************************************
+ * <!-- InfiniteScroll -->
+ *************************************
+ */
+
+/*-- Apply Third-party plugins (import location should be in front of "global scripts and styles") --*/
+
+
+
+
+/*-- Apply global scripts and styles --*/
+
+
+ //
+
+
+
+var InfiniteScroll = /*#__PURE__*/function (_Component) {
+  _inherits(InfiniteScroll, _Component);
+
+  var _super = InfiniteScroll_createSuper(InfiniteScroll);
+
+  function InfiniteScroll(props) {
+    var _this;
+
+    _classCallCheck(this, InfiniteScroll);
+
+    _this = _super.call(this, props);
+
+    _defineProperty(_assertThisInitialized(_this), "rootRef", /*#__PURE__*/react.createRef());
+
+    _defineProperty(_assertThisInitialized(_this), "windowScrollUpdate", void 0);
+
+    _defineProperty(_assertThisInitialized(_this), "uniqueID", void 0);
+
+    _defineProperty(_assertThisInitialized(_this), "totalPages", void 0);
+
+    _this.uniqueID = 'app-' + helpers.GUID.create();
+    _this.totalPages = 1;
+    _this.state = {
+      perPage: _this.props.perPage ? _this.props.perPage : 10,
+      posts: [],
+      loading: true,
+      page: 1,
+      endMsgDispay: false
+    }; // Add a scroll event listener to window
+
+    _this.handleScrollEvent = _this.handleScrollEvent.bind(_assertThisInitialized(_this));
+    _this.windowScrollUpdate = helpers.throttle(_this.handleScrollEvent, 5);
+    return _this;
+  }
+
+  _createClass(InfiniteScroll, [{
+    key: "handleScrollEvent",
+    value: function handleScrollEvent() {
+      var reactDomEl = this.rootRef.current;
+      var bottomOffsetVal = this.props.bottomOffset ? this.props.bottomOffset : 0; // Detect scroll end of the specified element
+
+      if (!this.state.loading) {
+        var scrolled = document.documentElement.scrollTop || document.body.scrollTop;
+
+        if (scrolled >= reactDomEl.getBoundingClientRect().height - window.innerHeight - bottomOffsetVal) {
+          this.loadMore();
+        }
+      }
+    }
+  }, {
+    key: "loadMore",
+    value: function loadMore() {
+      if (this.state.page < this.totalPages) {
+        var curPage = this.state.page + 1;
+        this.getData(curPage);
+        this.setState({
+          page: curPage,
+          loading: true
+        }); //console.log( 'curPage: ', curPage );
+      }
+    }
+  }, {
+    key: "getData",
+    value: function getData(currentPage) {
+      var _this2 = this;
+
+      var displayNum = this.state.perPage;
+      var ajaxURL = this.props.api.replace('{page}', currentPage).replace('{perPage}', displayNum);
+      var req = this.props.method.toLowerCase() === 'get' ? axios_default().get(ajaxURL) : axios_default().post(ajaxURL);
+      var allData = null;
+      req.then(function (res) {
+        var oldData = _this2.state.posts;
+        var newData = res.data.data;
+
+        _this2.setState({
+          loading: false
+        });
+
+        if (newData !== undefined) {
+          allData = [].concat(_toConsumableArray(oldData), _toConsumableArray(newData)); // Determine whether it is the last page
+
+          _this2.totalPages = res.data.total_pages;
+          var endMessageUpdate = false;
+          if (currentPage === _this2.totalPages) endMessageUpdate = _this2.props.endMessage;
+
+          _this2.setState({
+            posts: allData,
+            endMsgDispay: endMessageUpdate
+          }); //This function is called whenever the data is updated
+
+
+          if (typeof _this2.props.refreshCallback === 'function') {
+            _this2.props.refreshCallback({
+              data: allData,
+              currentPage: currentPage,
+              totalPages: _this2.totalPages
+            });
+          }
+        }
+      });
+    }
+  }, {
+    key: "componentDidMount",
+    value: function componentDidMount() {
+      var _this3 = this;
+
+      // load first page data
+      this.getData(this.state.page); // Add function to the element that should be used as the scrollable area.
+
+      window.removeEventListener('scroll', this.windowScrollUpdate);
+      window.removeEventListener('touchmove', this.windowScrollUpdate);
+      window.addEventListener('scroll', this.windowScrollUpdate);
+      window.addEventListener('touchmove', this.windowScrollUpdate); // Prevent calculation errors caused by unloaded completion
+
+      helpers(document).ready(function () {
+        _this3.windowScrollUpdate();
+      });
+    }
+    /** Remove the global list of events, especially as scroll and interval. */
+
+  }, {
+    key: "componentWillUnmount",
+    value: function componentWillUnmount() {
+      // Remove scroll events from window
+      window.removeEventListener('scroll', this.windowScrollUpdate);
+      window.removeEventListener('touchmove', this.windowScrollUpdate);
+    }
+  }, {
+    key: "render",
+    value: function render() {
+      var _this4 = this;
+
+      var _this$props = this.props,
+          loader = _this$props.loader,
+          id = _this$props.id;
+      var preloadedState = this.state.posts;
+      return /*#__PURE__*/react.createElement(react.Fragment, null, /*#__PURE__*/react.createElement("div", {
+        ref: this.rootRef,
+        id: id || this.uniqueID
+      }, preloadedState.map(function (item, i) {
+        if (typeof _this4.props.renderCallback === 'function') {
+          return _this4.props.renderCallback(item);
+        }
+      }), this.state.loading ? /*#__PURE__*/react.createElement(react.Fragment, null, /*#__PURE__*/react.createElement("div", null, loader)) : null, this.state.endMsgDispay ? /*#__PURE__*/react.createElement(react.Fragment, null, /*#__PURE__*/react.createElement("div", {
+        className: "uix-clearfix"
+      }), this.state.endMsgDispay) : null));
+    }
+  }]);
+
+  return InfiniteScroll;
+}(react.Component);
+
+
+;// CONCATENATED MODULE: ./src/client/views/_pages/ComponentsDemo/InfiniteScrollDemo.js
+
+
+ //Create or Remove Sidebar Menu
+
+ //get project config
+
+
+
+var InfiniteScrollDemo_Item = function Item(_ref) {
+  var id = _ref.id,
+      img = _ref.img,
+      title = _ref.title,
+      email = _ref.email;
+  return /*#__PURE__*/react.createElement(react.Fragment, null, /*#__PURE__*/react.createElement("div", {
+    className: "row text-center text-md-left align-items-center"
+  }, /*#__PURE__*/react.createElement("div", {
+    className: "col-lg-2 col-md-2"
+  }, /*#__PURE__*/react.createElement("img", {
+    className: "rounded mb-3",
+    src: img,
+    alt: title
+  })), /*#__PURE__*/react.createElement("div", {
+    className: "col-lg-10 col-md-10 justify-content-center"
+  }, /*#__PURE__*/react.createElement("h4", {
+    className: "uix-spacing--no"
+  }, title, " (ID:", id, ")"), /*#__PURE__*/react.createElement("span", null, "Email: ", email))), /*#__PURE__*/react.createElement("hr", null));
+};
+
+/* harmony default export */ const InfiniteScrollDemo = (function () {
+  react.useEffect(function () {
+    // Equivalent to componentDidMount and componentDidUpdate:
+    helpers(document).ready(function () {
+      //Create sidebar menu
+      SidebarMenu();
+    });
+  });
+  return /*#__PURE__*/react.createElement(react.Fragment, null, /*#__PURE__*/react.createElement("section", null, /*#__PURE__*/react.createElement("div", {
+    className: "container"
+  }, /*#__PURE__*/react.createElement("div", {
+    className: "row"
+  }, /*#__PURE__*/react.createElement("div", {
+    className: "col-12"
+  }, /*#__PURE__*/react.createElement("h1", {
+    className: "uix-typo--h2"
+  }, "Infinite Scroll", /*#__PURE__*/react.createElement("a", {
+    className: "uix-typo--h3 align-middle",
+    href: "https://github.com/xizon/uix-kit-react/tree/main/src/client/components/InfiniteScroll",
+    target: "_blank"
+  }, /*#__PURE__*/react.createElement("span", {
+    className: "uix-dir--right",
+    style: {
+      fontSize: "0.75rem",
+      color: "#ababab",
+      margin: ".5rem .5rem 0 0"
+    }
+  }, /*#__PURE__*/react.createElement("svg", {
+    style: {
+      marginRight: ".5rem"
+    },
+    width: "16",
+    viewBox: "0 0 122.88 91.26"
+  }, /*#__PURE__*/react.createElement("path", {
+    fill: "#d2d2d2",
+    d: "M8.32,0h106.24c4.58,0,8.32,3.74,8.32,8.32v74.62c0,4.57-3.74,8.32-8.32,8.32H8.32C3.74,91.26,0,87.51,0,82.94 V8.32C0,3.74,3.74,0,8.32,0L8.32,0z M54.46,72.22L32,58.61v-8.63l22.46-13.61v10.26l-13.65,7.69l13.65,7.7V72.22L54.46,72.22z M68.42,72.22l22.46-13.61v-8.63L68.42,36.37v10.26l13.65,7.69l-13.65,7.7V72.22L68.42,72.22z M117.97,23.29H5.29v60.46 c0,0.64,0.25,1.2,0.67,1.63c0.42,0.42,0.99,0.67,1.63,0.67h108.04c0.64,0,1.2-0.25,1.63-0.67c0.43-0.43,0.67-0.99,0.67-1.63V23.29 H117.97L117.97,23.29z M106.64,9.35c2.27,0,4.11,1.84,4.11,4.11c0,2.27-1.84,4.11-4.11,4.11c-2.27,0-4.11-1.84-4.11-4.11 C102.54,11.19,104.38,9.35,106.64,9.35L106.64,9.35z M78.8,9.35c2.27,0,4.11,1.84,4.11,4.11c0,2.27-1.84,4.11-4.11,4.11 c-2.27,0-4.11-1.84-4.11-4.11C74.69,11.19,76.53,9.35,78.8,9.35L78.8,9.35z M92.72,9.35c2.27,0,4.11,1.84,4.11,4.11 c0,2.27-1.84,4.11-4.11,4.11c-2.27,0-4.11-1.84-4.11-4.11C88.61,11.19,90.45,9.35,92.72,9.35L92.72,9.35z"
+  })), "Docs on GitHub"))))))), /*#__PURE__*/react.createElement("section", {
+    className: "uix-spacing--s uix-spacing--no-bottom"
+  }, /*#__PURE__*/react.createElement("div", {
+    className: "container"
+  }, /*#__PURE__*/react.createElement("div", {
+    className: "row"
+  }, /*#__PURE__*/react.createElement("div", {
+    className: "col-12"
+  }, /*#__PURE__*/react.createElement("h3", {
+    className: "app-header-title"
+  }, "Infinite Scroll Posts"), /*#__PURE__*/react.createElement("p", null, "Pull Down to refresh posts. An infinite-scroll that actually works."), /*#__PURE__*/react.createElement("hr", null))))), /*#__PURE__*/react.createElement("section", {
+    className: "uix-spacing--s"
+  }, /*#__PURE__*/react.createElement("div", {
+    className: "container"
+  }, /*#__PURE__*/react.createElement("div", {
+    className: "row"
+  }, /*#__PURE__*/react.createElement("div", {
+    className: "col-12"
+  }, /*#__PURE__*/react.createElement(InfiniteScroll, {
+    api: websiteConfig.API.RECEIVE_PAGE_LIST,
+    perPage: 10,
+    bottomOffset: 0,
+    loader: /*#__PURE__*/react.createElement(react.Fragment, null, /*#__PURE__*/react.createElement("span", null, "Loading...")),
+    endMessage: /*#__PURE__*/react.createElement(react.Fragment, null, /*#__PURE__*/react.createElement("p", {
+      className: "uix-typo--color-sub uix-t-c"
+    }, "No content yet.")),
+    method: "get",
+    refreshCallback: function refreshCallback(res) {
+      return console.log(res);
+    },
+    renderCallback: function renderCallback(res) {
+      return /*#__PURE__*/react.createElement(InfiniteScrollDemo_Item, {
+        key: "item" + res.id,
+        id: res.id,
+        img: res.avatar,
+        title: "".concat(res.name),
+        email: res.email
+      });
+    }
+  }))))), /*#__PURE__*/react.createElement("section", null, /*#__PURE__*/react.createElement("div", {
+    className: "container"
+  }, /*#__PURE__*/react.createElement("div", {
+    className: "row"
+  }, /*#__PURE__*/react.createElement("div", {
+    className: "col-12"
+  }, /*#__PURE__*/react.createElement("h3", {
+    className: "app-header-title"
+  }, "API"), /*#__PURE__*/react.createElement("hr", null), /*#__PURE__*/react.createElement("article", {
+    className: "uix-spacing--s",
+    itemProp: "text"
+  }, /*#__PURE__*/react.createElement("h4", null, "Infinite Scroll"), /*#__PURE__*/react.createElement("div", null, /*#__PURE__*/react.createElement("pre", null, "import InfiniteScroll from '@uixkit.react/components/InfiniteScroll/index.tsx';")), /*#__PURE__*/react.createElement("div", {
+    className: "table-responsive-md"
+  }, /*#__PURE__*/react.createElement("table", {
+    className: "table table-bordered table-striped mb-5"
+  }, /*#__PURE__*/react.createElement("thead", null, /*#__PURE__*/react.createElement("tr", null, /*#__PURE__*/react.createElement("th", null, "Property"), /*#__PURE__*/react.createElement("th", null, "Type"), /*#__PURE__*/react.createElement("th", null, "Default"), /*#__PURE__*/react.createElement("th", null, "Description"))), /*#__PURE__*/react.createElement("tbody", null, /*#__PURE__*/react.createElement("tr", null, /*#__PURE__*/react.createElement("td", null, /*#__PURE__*/react.createElement("code", null, "api")), /*#__PURE__*/react.createElement("td", null, "string"), /*#__PURE__*/react.createElement("td", null, "-"), /*#__PURE__*/react.createElement("td", null, /*#__PURE__*/react.createElement("strong", null, "(Required)"), " API address to receive data.")), /*#__PURE__*/react.createElement("tr", null, /*#__PURE__*/react.createElement("td", null, /*#__PURE__*/react.createElement("code", null, "perPage")), /*#__PURE__*/react.createElement("td", null, "number"), /*#__PURE__*/react.createElement("td", null, "10"), /*#__PURE__*/react.createElement("td", null, "The number of posts we want on the page before loading the next set.")), /*#__PURE__*/react.createElement("tr", null, /*#__PURE__*/react.createElement("td", null, /*#__PURE__*/react.createElement("code", null, "method")), /*#__PURE__*/react.createElement("td", null, /*#__PURE__*/react.createElement("code", null, "get"), " | ", /*#__PURE__*/react.createElement("code", null, "post")), /*#__PURE__*/react.createElement("td", null, "post"), /*#__PURE__*/react.createElement("td", null, "Request method to be used when making the request.")), /*#__PURE__*/react.createElement("tr", null, /*#__PURE__*/react.createElement("td", null, /*#__PURE__*/react.createElement("code", null, "loader")), /*#__PURE__*/react.createElement("td", null, "ReactNode"), /*#__PURE__*/react.createElement("td", null, "-"), /*#__PURE__*/react.createElement("td", null, "Set a loader component to show while the component waits for the next load of data. e.g. ", /*#__PURE__*/react.createElement("code", null, "<span>Loading...</span>"), " or any fancy loader element")), /*#__PURE__*/react.createElement("tr", null, /*#__PURE__*/react.createElement("td", null, /*#__PURE__*/react.createElement("code", null, "endMessage")), /*#__PURE__*/react.createElement("td", null, "ReactNode"), /*#__PURE__*/react.createElement("td", null, "-"), /*#__PURE__*/react.createElement("td", null, "This message is shown to the user when he has seen all the records.")), /*#__PURE__*/react.createElement("tr", null, /*#__PURE__*/react.createElement("td", null, /*#__PURE__*/react.createElement("code", null, "bottomOffset")), /*#__PURE__*/react.createElement("td", null, "number"), /*#__PURE__*/react.createElement("td", null, "0"), /*#__PURE__*/react.createElement("td", null, "Set an offset to scroll to the bottom")), /*#__PURE__*/react.createElement("tr", null, /*#__PURE__*/react.createElement("td", null, /*#__PURE__*/react.createElement("code", null, "refreshCallback")), /*#__PURE__*/react.createElement("td", null, "function | null"), /*#__PURE__*/react.createElement("td", null, "-"), /*#__PURE__*/react.createElement("td", null, "This function is called whenever the data is updated, including initialization. Exposes the JSON format data about the page number as an argument.")), /*#__PURE__*/react.createElement("tr", null, /*#__PURE__*/react.createElement("td", null, /*#__PURE__*/react.createElement("code", null, "renderCallback")), /*#__PURE__*/react.createElement("td", null, "function | null"), /*#__PURE__*/react.createElement("td", null, "-"), /*#__PURE__*/react.createElement("td", null, "Use the return function to render the data. The output HTML template uses custom HTML string in the returned JSON format data as a placeholder. Exposes each item data as an argument. You can use it like this: ", /*#__PURE__*/react.createElement("br", null), /*#__PURE__*/react.createElement("code", {
+    className: "text-wrap"
+  }, "(res) => {return <div key={\"item\" + res.id}><img src={res.avatar} />{res.name}</div>;}")))))), /*#__PURE__*/react.createElement("h4", null, "Create Callback"), /*#__PURE__*/react.createElement("p", null, "A successful response returns the details of the callback such as Sample Request Body:"), /*#__PURE__*/react.createElement("div", null, /*#__PURE__*/react.createElement("span", null, "Page 1:"), /*#__PURE__*/react.createElement("pre", {
+    className: "mb-5"
+  }, /*#__PURE__*/react.createElement("div", {
+    style: {
+      backgroundColor: "#f9f2f4",
+      borderRadius: "3px",
+      padding: "1rem",
+      wordBreak: "normal",
+      whiteSpace: "pre-wrap"
+    }
+  }, "{\n    \"page\": 1,\n    \"per_page\": 3,\n    \"total\": 5,\n    \"total_pages\": 2,\n    \"data\": [\n        {\n            \"id\": 1,\n            \"email\": \"george.bluth@reqres.in\",\n            \"name\": \"George\",\n            \"avatar\": \"data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAJYAAACWBAMAAADOL2zRAAAAGFBMVEXMzMyWlpbFxcW3t7eqqqq+vr6xsbGjo6NdFKDtAAAACXBIWXMAAA7EAAAOxAGVKw4bAAAAWElEQVRoge3SUQmAQBRE0WXRAC+C22AjbBcL2P9HQwwick6ACwPTGgAAAADfcFSuNYOtlWv1yrW2XKuvVGs/r0q1noG/b/UxRvATTUtLS0tLSwsAAADgTTdZSAdIz1EiEwAAAABJRU5ErkJggg==\"\n        },\n        {\n            \"id\": 2,\n            \"email\": \"janet.weaver@reqres.in\",\n            \"name\": \"Janet\",\n            \"avatar\": \"data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAJYAAACWBAMAAADOL2zRAAAAGFBMVEXMzMyWlpbFxcW3t7eqqqq+vr6xsbGjo6NdFKDtAAAACXBIWXMAAA7EAAAOxAGVKw4bAAAAWElEQVRoge3SUQmAQBRE0WXRAC+C22AjbBcL2P9HQwwick6ACwPTGgAAAADfcFSuNYOtlWv1yrW2XKuvVGs/r0q1noG/b/UxRvATTUtLS0tLSwsAAADgTTdZSAdIz1EiEwAAAABJRU5ErkJggg==\"\n        },\n        {\n            \"id\": 3,\n            \"email\": \"emma.wong@reqres.in\",\n            \"name\": \"Emma\",\n            \"avatar\": \"data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAJYAAACWBAMAAADOL2zRAAAAGFBMVEXMzMyWlpbFxcW3t7eqqqq+vr6xsbGjo6NdFKDtAAAACXBIWXMAAA7EAAAOxAGVKw4bAAAAWElEQVRoge3SUQmAQBRE0WXRAC+C22AjbBcL2P9HQwwick6ACwPTGgAAAADfcFSuNYOtlWv1yrW2XKuvVGs/r0q1noG/b/UxRvATTUtLS0tLSwsAAADgTTdZSAdIz1EiEwAAAABJRU5ErkJggg==\"\n        }\n    ]\n}")), /*#__PURE__*/react.createElement("span", null, "Page 2:"), /*#__PURE__*/react.createElement("pre", null, /*#__PURE__*/react.createElement("div", {
+    style: {
+      backgroundColor: "#f9f2f4",
+      borderRadius: "3px",
+      padding: "1rem",
+      wordBreak: "normal",
+      whiteSpace: "pre-wrap"
+    }
+  }, "{\n    \"page\": 2,\n    \"per_page\": 3,\n    \"total\": 5,\n    \"total_pages\": 2,\n    \"data\": [\n        {\n            \"id\": 4,\n            \"email\": \"george.bluth@reqres.in\",\n            \"name\": \"George (Page 2)\",\n            \"avatar\": \"data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAJYAAACWBAMAAADOL2zRAAAAGFBMVEXMzMyWlpbFxcW3t7eqqqq+vr6xsbGjo6NdFKDtAAAACXBIWXMAAA7EAAAOxAGVKw4bAAAAWElEQVRoge3SUQmAQBRE0WXRAC+C22AjbBcL2P9HQwwick6ACwPTGgAAAADfcFSuNYOtlWv1yrW2XKuvVGs/r0q1noG/b/UxRvATTUtLS0tLSwsAAADgTTdZSAdIz1EiEwAAAABJRU5ErkJggg==\"\n        },\n        {\n            \"id\": 5,\n            \"email\": \"janet.weaver@reqres.in\",\n            \"name\": \"Janet (Page 2)\",\n            \"avatar\": \"data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAJYAAACWBAMAAADOL2zRAAAAGFBMVEXMzMyWlpbFxcW3t7eqqqq+vr6xsbGjo6NdFKDtAAAACXBIWXMAAA7EAAAOxAGVKw4bAAAAWElEQVRoge3SUQmAQBRE0WXRAC+C22AjbBcL2P9HQwwick6ACwPTGgAAAADfcFSuNYOtlWv1yrW2XKuvVGs/r0q1noG/b/UxRvATTUtLS0tLSwsAAADgTTdZSAdIz1EiEwAAAABJRU5ErkJggg==\"\n        }\n    ]\n}")))))))));
+});
+;// CONCATENATED MODULE: ./src/client/views/_pages/ComponentsDemo/NavigationDemo.js
+
+
+
+ //Create or Remove Sidebar Menu
+
+
+var NavigationDemo_menuListData = [{
+  "title": /*#__PURE__*/react.createElement(react.Fragment, null, /*#__PURE__*/react.createElement("li", null, /*#__PURE__*/react.createElement(NavLink, {
+    "data-route": "true",
+    to: "/components-demo"
+  }, "Route Link"))),
+  "link": "#",
+  "mega": false
+}, {
+  "title": "Top level 1",
+  "link": "#",
+  "mega": false
+}, {
+  "title": "Top level 2",
+  "link": "#",
+  "mega": false,
+  "children": [{
+    "title": "Sub level 2",
+    "link": "#",
+    "mega": false,
+    "children": [{
+      "title": "Sub Sub Level 2",
+      "link": "#",
+      "mega": false
+    }]
+  }]
+}, {
+  "title": "Mega Menu",
+  "link": "#",
+  "mega": {
+    "columnLists": [{
+      "heading": "Mega Menu 1",
+      "list": [{
+        "title": "Menu Text",
+        "link": "#"
+      }, {
+        "title": "Menu Text",
+        "link": "#"
+      }]
+    }, {
+      "heading": "Mega Menu 2",
+      "list": [{
+        "title": "Menu Text",
+        "link": "#"
+      }, {
+        "title": "Menu Text",
+        "link": "#"
+      }]
+    }, {
+      "heading": "Mega Menu 3",
+      "list": [{
+        "title": "Menu Text",
+        "link": "#"
+      }, {
+        "title": "Menu Text",
+        "link": "#"
+      }]
+    }]
+  }
+}, {
+  "title": "Top level 3",
+  "link": "https://example.com",
+  "mega": false
+}];
+/* harmony default export */ const NavigationDemo = (function () {
+  react.useEffect(function () {
+    // Equivalent to componentDidMount and componentDidUpdate:
+    helpers(document).ready(function () {
+      //Create sidebar menu
+      SidebarMenu();
+    });
+  });
+  return /*#__PURE__*/react.createElement(react.Fragment, null, /*#__PURE__*/react.createElement("section", null, /*#__PURE__*/react.createElement("div", {
+    className: "container"
+  }, /*#__PURE__*/react.createElement("div", {
+    className: "row"
+  }, /*#__PURE__*/react.createElement("div", {
+    className: "col-12"
+  }, /*#__PURE__*/react.createElement("h1", {
+    className: "uix-typo--h2"
+  }, "Navigation", /*#__PURE__*/react.createElement("a", {
+    className: "uix-typo--h3 align-middle",
+    href: "https://github.com/xizon/uix-kit-react/tree/main/src/client/components/Navigation",
+    target: "_blank"
+  }, /*#__PURE__*/react.createElement("span", {
+    className: "uix-dir--right",
+    style: {
+      fontSize: "0.75rem",
+      color: "#ababab",
+      margin: ".5rem .5rem 0 0"
+    }
+  }, /*#__PURE__*/react.createElement("svg", {
+    style: {
+      marginRight: ".5rem"
+    },
+    width: "16",
+    viewBox: "0 0 122.88 91.26"
+  }, /*#__PURE__*/react.createElement("path", {
+    fill: "#d2d2d2",
+    d: "M8.32,0h106.24c4.58,0,8.32,3.74,8.32,8.32v74.62c0,4.57-3.74,8.32-8.32,8.32H8.32C3.74,91.26,0,87.51,0,82.94 V8.32C0,3.74,3.74,0,8.32,0L8.32,0z M54.46,72.22L32,58.61v-8.63l22.46-13.61v10.26l-13.65,7.69l13.65,7.7V72.22L54.46,72.22z M68.42,72.22l22.46-13.61v-8.63L68.42,36.37v10.26l13.65,7.69l-13.65,7.7V72.22L68.42,72.22z M117.97,23.29H5.29v60.46 c0,0.64,0.25,1.2,0.67,1.63c0.42,0.42,0.99,0.67,1.63,0.67h108.04c0.64,0,1.2-0.25,1.63-0.67c0.43-0.43,0.67-0.99,0.67-1.63V23.29 H117.97L117.97,23.29z M106.64,9.35c2.27,0,4.11,1.84,4.11,4.11c0,2.27-1.84,4.11-4.11,4.11c-2.27,0-4.11-1.84-4.11-4.11 C102.54,11.19,104.38,9.35,106.64,9.35L106.64,9.35z M78.8,9.35c2.27,0,4.11,1.84,4.11,4.11c0,2.27-1.84,4.11-4.11,4.11 c-2.27,0-4.11-1.84-4.11-4.11C74.69,11.19,76.53,9.35,78.8,9.35L78.8,9.35z M92.72,9.35c2.27,0,4.11,1.84,4.11,4.11 c0,2.27-1.84,4.11-4.11,4.11c-2.27,0-4.11-1.84-4.11-4.11C88.61,11.19,90.45,9.35,92.72,9.35L92.72,9.35z"
+  })), "Docs on GitHub"))))))), /*#__PURE__*/react.createElement("section", {
+    className: "uix-spacing--s uix-spacing--no-bottom"
+  }, /*#__PURE__*/react.createElement("div", {
+    className: "container"
+  }, /*#__PURE__*/react.createElement("div", {
+    className: "row"
+  }, /*#__PURE__*/react.createElement("div", {
+    className: "col-12"
+  }, /*#__PURE__*/react.createElement("h3", {
+    className: "app-header-title"
+  }, "Demos"), /*#__PURE__*/react.createElement("p", null, "Support mobile device access (If the displayMobileNav property is ", /*#__PURE__*/react.createElement("code", null, "true"), ")."), /*#__PURE__*/react.createElement("hr", null))))), /*#__PURE__*/react.createElement("section", {
+    className: "uix-spacing--s"
+  }, /*#__PURE__*/react.createElement("div", {
+    className: "container"
+  }, /*#__PURE__*/react.createElement("div", {
+    className: "row"
+  }, /*#__PURE__*/react.createElement("div", {
+    className: "col-12"
+  }, /*#__PURE__*/react.createElement("div", {
+    style: {
+      position: "relative",
+      zIndex: 1,
+      border: "1px solid #ddd",
+      borderRadius: "8px",
+      background: "#f9f9f9",
+      display: "flex",
+      flex: "0 0 100%"
+    }
+  }, /*#__PURE__*/react.createElement(Navigation, {
+    data: NavigationDemo_menuListData,
+    position: "left"
+  })))))), /*#__PURE__*/react.createElement("section", null, /*#__PURE__*/react.createElement("div", {
+    className: "container"
+  }, /*#__PURE__*/react.createElement("div", {
+    className: "row"
+  }, /*#__PURE__*/react.createElement("div", {
+    className: "col-12"
+  }, /*#__PURE__*/react.createElement("h3", {
+    className: "app-header-title"
+  }, "API"), /*#__PURE__*/react.createElement("hr", null), /*#__PURE__*/react.createElement("article", {
+    className: "uix-spacing--s",
+    itemProp: "text"
+  }, /*#__PURE__*/react.createElement("h4", null, "Navigation"), /*#__PURE__*/react.createElement("div", null, /*#__PURE__*/react.createElement("pre", null, "import Navigation from '@uixkit.react/components/Navigation/index.tsx';")), /*#__PURE__*/react.createElement("div", {
+    className: "table-responsive-md"
+  }, /*#__PURE__*/react.createElement("table", {
+    className: "table table-bordered table-striped mb-5"
+  }, /*#__PURE__*/react.createElement("thead", null, /*#__PURE__*/react.createElement("tr", null, /*#__PURE__*/react.createElement("th", null, "Property"), /*#__PURE__*/react.createElement("th", null, "Type"), /*#__PURE__*/react.createElement("th", null, "Default"), /*#__PURE__*/react.createElement("th", null, "Description"))), /*#__PURE__*/react.createElement("tbody", null, /*#__PURE__*/react.createElement("tr", null, /*#__PURE__*/react.createElement("td", null, /*#__PURE__*/react.createElement("code", null, "data")), /*#__PURE__*/react.createElement("td", null, "array"), /*#__PURE__*/react.createElement("td", null, "-"), /*#__PURE__*/react.createElement("td", null, "Specify data of Navigation List as a JSON string format. Such as: ", /*#__PURE__*/react.createElement("br", null), /*#__PURE__*/react.createElement("code", {
+    className: "text-wrap"
+  }, "[{\"title\":&lt;&gt;&lt;li&gt;&lt;NavLink data-route=\"true\" to=\"/components-demo\"&gt;Route Link&lt;/NavLink&gt;&lt;/li&gt;&lt;/&gt;,\"link\":\"#\",\"mega\":false},{\"title\":\"Top level 1\",\"link\":\"#\",\"mega\":false},{\"title\":\"Top level 2\",\"link\":\"#\",\"mega\":false,\"children\":[{\"title\":\"Sub level 2\",\"link\":\"#\",\"mega\":false,\"children\":[{\"title\":\"Sub Sub Level 2\",\"link\":\"#\",\"mega\":false}]}]},{\"title\":\"Mega Menu\",\"link\":\"#\",\"mega\":{\"columnLists\":[{\"heading\":\"Mega Menu 1\",\"list\":[{\"title\":\"Menu Text\",\"link\":\"#\"},{\"title\":\"Menu Text\",\"link\":\"#\"}]},{\"heading\":\"Mega Menu 2\",\"list\":[{\"title\":\"Menu Text\",\"link\":\"#\"},{\"title\":\"Menu Text\",\"link\":\"#\"}]},{\"heading\":\"Mega Menu 3\",\"list\":[{\"title\":\"Menu Text\",\"link\":\"#\"},{\"title\":\"Menu Text\",\"link\":\"#\"}]}]}},{\"title\":\"Top level 3\",\"link\":\"https://example.com\",\"mega\":false}]"))), /*#__PURE__*/react.createElement("tr", null, /*#__PURE__*/react.createElement("td", null, /*#__PURE__*/react.createElement("code", null, "position")), /*#__PURE__*/react.createElement("td", null, "null | ", /*#__PURE__*/react.createElement("code", null, "left"), " | ", /*#__PURE__*/react.createElement("code", null, "right")), /*#__PURE__*/react.createElement("td", null, "null"), /*#__PURE__*/react.createElement("td", null, "Set navigation to the left or right. If the value is ", /*#__PURE__*/react.createElement("code", null, "left"), ", it is forced to be left.")), /*#__PURE__*/react.createElement("tr", null, /*#__PURE__*/react.createElement("td", null, /*#__PURE__*/react.createElement("code", null, "tools")), /*#__PURE__*/react.createElement("td", null, "ReactNode"), /*#__PURE__*/react.createElement("td", null, "-"), /*#__PURE__*/react.createElement("td", null, "Set the trailing tool in the way of HTML Element, which can be a social button or other.")), /*#__PURE__*/react.createElement("tr", null, /*#__PURE__*/react.createElement("td", null, /*#__PURE__*/react.createElement("code", null, "mobileLogo")), /*#__PURE__*/react.createElement("td", null, "string"), /*#__PURE__*/react.createElement("td", null, "-"), /*#__PURE__*/react.createElement("td", null, "Specify a LOGO address for mobile navigation.")), /*#__PURE__*/react.createElement("tr", null, /*#__PURE__*/react.createElement("td", null, /*#__PURE__*/react.createElement("code", null, "label")), /*#__PURE__*/react.createElement("td", null, "string"), /*#__PURE__*/react.createElement("td", null, "-"), /*#__PURE__*/react.createElement("td", null, "Specify a navigation label.")), /*#__PURE__*/react.createElement("tr", null, /*#__PURE__*/react.createElement("td", null, /*#__PURE__*/react.createElement("code", null, "displayMobileNav")), /*#__PURE__*/react.createElement("td", null, "boolean"), /*#__PURE__*/react.createElement("td", null, "false"), /*#__PURE__*/react.createElement("td", null, "Whether to enable mobile navigation."))))), /*#__PURE__*/react.createElement("p", null, "Array configuration properties of the ", /*#__PURE__*/react.createElement("code", null, "data"), ":"), /*#__PURE__*/react.createElement("div", {
+    className: "table-responsive-md"
+  }, /*#__PURE__*/react.createElement("table", {
+    className: "table table-bordered table-striped mb-5"
+  }, /*#__PURE__*/react.createElement("thead", null, /*#__PURE__*/react.createElement("tr", null, /*#__PURE__*/react.createElement("th", null, "Property"), /*#__PURE__*/react.createElement("th", null, "Type"), /*#__PURE__*/react.createElement("th", null, "Default"), /*#__PURE__*/react.createElement("th", null, "Description"))), /*#__PURE__*/react.createElement("tbody", null, /*#__PURE__*/react.createElement("tr", null, /*#__PURE__*/react.createElement("td", null, /*#__PURE__*/react.createElement("code", null, "title")), /*#__PURE__*/react.createElement("td", null, "string | ReactNode"), /*#__PURE__*/react.createElement("td", null, "-"), /*#__PURE__*/react.createElement("td", null, "The title attribute is used to provide the label text of the hyperlink. ", /*#__PURE__*/react.createElement("br", null), "It supports ReactNode ", /*#__PURE__*/react.createElement("strong", null, "(Top-level element only)"), " type and can be used for Route Link, such as: ", /*#__PURE__*/react.createElement("br", null), /*#__PURE__*/react.createElement("code", {
+    className: "text-wrap"
+  }, "<><li><NavLink data-route=\"true\" to=\"/components-demo\">Route Link</NavLink></li></>"))), /*#__PURE__*/react.createElement("tr", null, /*#__PURE__*/react.createElement("td", null, /*#__PURE__*/react.createElement("code", null, "link")), /*#__PURE__*/react.createElement("td", null, "string"), /*#__PURE__*/react.createElement("td", null, "-"), /*#__PURE__*/react.createElement("td", null, "Specify a URL address.")), /*#__PURE__*/react.createElement("tr", null, /*#__PURE__*/react.createElement("td", null, /*#__PURE__*/react.createElement("code", null, "mega")), /*#__PURE__*/react.createElement("td", null, "boolean | JSON Object Literals"), /*#__PURE__*/react.createElement("td", null, "-"), /*#__PURE__*/react.createElement("td", null, /*#__PURE__*/react.createElement("strong", null, "(Top-level element only)"), " Configure Mega Menu, disable when the value is ", /*#__PURE__*/react.createElement("code", null, "false"), ". ", /*#__PURE__*/react.createElement("br", null), "Refer to the following configuration as a JSON string format: ", /*#__PURE__*/react.createElement("br", null), /*#__PURE__*/react.createElement("code", {
+    className: "text-wrap"
+  }, "{\"columnLists\":[{\"heading\":\"Mega Menu 1\",\"list\":[{\"title\":\"Menu Text\",\"link\":\"#\"},{\"title\":\"Menu Text\",\"link\":\"#\"}]},{\"heading\":\"Mega Menu 2\",\"list\":[{\"title\":\"Menu Text\",\"link\":\"#\"},{\"title\":\"Menu Text\",\"link\":\"#\"}]},{\"heading\":\"Mega Menu 3\",\"list\":[{\"title\":\"Menu Text\",\"link\":\"#\"},{\"title\":\"Menu Text\",\"link\":\"#\"}]}]}"))), /*#__PURE__*/react.createElement("tr", null, /*#__PURE__*/react.createElement("td", null, /*#__PURE__*/react.createElement("code", null, "children")), /*#__PURE__*/react.createElement("td", null, "array"), /*#__PURE__*/react.createElement("td", null, "-"), /*#__PURE__*/react.createElement("td", null, "Specify a set of sub-navigation, the key value of each item still uses ", /*#__PURE__*/react.createElement("code", null, "title"), ", ", /*#__PURE__*/react.createElement("code", null, "link"), " and ", /*#__PURE__*/react.createElement("code", null, "mega"), " (The ", /*#__PURE__*/react.createElement("code", null, "mega"), " attribute can be omitted). Eg.", /*#__PURE__*/react.createElement("br", null), " ", /*#__PURE__*/react.createElement("code", {
+    className: "text-wrap"
+  }, "[{\"title\":\"Sub level 2\",\"link\":\"#\",\"mega\":false,\"children\":[{\"title\":\"Sub Sub Level 2\",\"link\":\"#\",\"mega\":false}]}]")))))), /*#__PURE__*/react.createElement("p", null, "JSON configuration properties of the ", /*#__PURE__*/react.createElement("code", null, "mega"), ":"), /*#__PURE__*/react.createElement("div", {
+    className: "table-responsive-md"
+  }, /*#__PURE__*/react.createElement("table", {
+    className: "table table-bordered table-striped mb-5"
+  }, /*#__PURE__*/react.createElement("thead", null, /*#__PURE__*/react.createElement("tr", null, /*#__PURE__*/react.createElement("th", null, "Property"), /*#__PURE__*/react.createElement("th", null, "Type"), /*#__PURE__*/react.createElement("th", null, "Default"), /*#__PURE__*/react.createElement("th", null, "Description"))), /*#__PURE__*/react.createElement("tbody", null, /*#__PURE__*/react.createElement("tr", null, /*#__PURE__*/react.createElement("td", null, /*#__PURE__*/react.createElement("code", null, "columnLists")), /*#__PURE__*/react.createElement("td", null, "array"), /*#__PURE__*/react.createElement("td", null, "-"), /*#__PURE__*/react.createElement("td", null, "Root node of mega.")), /*#__PURE__*/react.createElement("tr", null, /*#__PURE__*/react.createElement("td", null, /*#__PURE__*/react.createElement("code", null, "title")), /*#__PURE__*/react.createElement("td", null, "string"), /*#__PURE__*/react.createElement("td", null, "-"), /*#__PURE__*/react.createElement("td", null, "The title attribute is used to provide the label text of the hyperlink")), /*#__PURE__*/react.createElement("tr", null, /*#__PURE__*/react.createElement("td", null, /*#__PURE__*/react.createElement("code", null, "link")), /*#__PURE__*/react.createElement("td", null, "string"), /*#__PURE__*/react.createElement("td", null, "-"), /*#__PURE__*/react.createElement("td", null, "Specify a URL address.")), /*#__PURE__*/react.createElement("tr", null, /*#__PURE__*/react.createElement("td", null, /*#__PURE__*/react.createElement("code", null, "heading")), /*#__PURE__*/react.createElement("td", null, "string"), /*#__PURE__*/react.createElement("td", null, "-"), /*#__PURE__*/react.createElement("td", null, "Specify the title label for each column navigation.")), /*#__PURE__*/react.createElement("tr", null, /*#__PURE__*/react.createElement("td", null, /*#__PURE__*/react.createElement("code", null, "list")), /*#__PURE__*/react.createElement("td", null, "array"), /*#__PURE__*/react.createElement("td", null, "-"), /*#__PURE__*/react.createElement("td", null, "A collection of items for each column navigation. the key value of each item still uses ", /*#__PURE__*/react.createElement("code", null, "title"), " and ", /*#__PURE__*/react.createElement("code", null, "link"), ". Eg. ", /*#__PURE__*/react.createElement("br", null), /*#__PURE__*/react.createElement("code", {
+    className: "text-wrap"
+  }, "[{\"title\":\"Menu Text\",\"link\":\"#\"},{\"title\":\"Menu Text\",\"link\":\"#\"}]"))))))))))));
+});
 ;// CONCATENATED MODULE: ./src/client/views/_pages/ComponentsDemo/index.js
 
 
@@ -82995,6 +86413,12 @@ function ComponentsDemo_isNativeReflectConstruct() { if (typeof Reflect === "und
 
 
 
+
+
+
+
+
+
  //Might have mismatching versions of React and the renderer (such as React DOM)
 
 function ComponentsDemo_HookContent() {
@@ -83009,7 +86433,11 @@ function ComponentsDemo_HookContent() {
   var theLocation = useLocation(); //
 
   var urlChk = function urlChk(str) {
-    return theLocation.pathname.indexOf(str) >= 0 ? true : false;
+    if (str.indexOf('#') >= 0) {
+      return theLocation.hash.indexOf(str) >= 0 ? true : false;
+    } else {
+      return theLocation.pathname.indexOf(str) >= 0 ? true : false;
+    }
   };
 
   return /*#__PURE__*/react.createElement(react.Fragment, null, /*#__PURE__*/react.createElement("div", {
@@ -83018,25 +86446,19 @@ function ComponentsDemo_HookContent() {
     className: "uix-demo-nav"
   }, /*#__PURE__*/react.createElement("li", {
     className: "uix-demo-nav-header"
-  }, "Getting started"), /*#__PURE__*/react.createElement("li", {
+  }, "WEB ELEMENTS"), /*#__PURE__*/react.createElement("li", {
     className: urlChk('/button') ? 'is-active' : ''
   }, /*#__PURE__*/react.createElement(NavLink, {
     "data-route": "true",
     to: "".concat(url, "/button"),
     activeClassName: "is-active"
   }, "Button")), /*#__PURE__*/react.createElement("li", {
-    className: urlChk('/form') ? 'is-active' : ''
+    className: urlChk('/pagination') ? 'is-active' : ''
   }, /*#__PURE__*/react.createElement(NavLink, {
     "data-route": "true",
-    to: "".concat(url, "/form"),
+    to: "".concat(url, "/pagination"),
     activeClassName: "is-active"
-  }, "Form")), /*#__PURE__*/react.createElement("li", {
-    className: urlChk('/grid') ? 'is-active' : ''
-  }, /*#__PURE__*/react.createElement(NavLink, {
-    "data-route": "true",
-    to: "".concat(url, "/grid"),
-    activeClassName: "is-active"
-  }, "Grid")), /*#__PURE__*/react.createElement("li", {
+  }, "Pagination")), /*#__PURE__*/react.createElement("li", {
     className: urlChk('/tabs') && !urlChk('/tabs-animated') ? 'is-active' : ''
   }, /*#__PURE__*/react.createElement(NavLink, {
     "data-route": "true",
@@ -83049,12 +86471,6 @@ function ComponentsDemo_HookContent() {
     to: "".concat(url, "/tabs-animated"),
     activeClassName: "is-active"
   }, "Tabs Animated")), /*#__PURE__*/react.createElement("li", {
-    className: urlChk('/video') ? 'is-active' : ''
-  }, /*#__PURE__*/react.createElement(NavLink, {
-    "data-route": "true",
-    to: "".concat(url, "/video"),
-    activeClassName: "is-active"
-  }, "Video")), /*#__PURE__*/react.createElement("li", {
     className: urlChk('/table') && !urlChk('/table-grid') && !urlChk('/table-sorter') ? 'is-active' : ''
   }, /*#__PURE__*/react.createElement(NavLink, {
     "data-route": "true",
@@ -83073,24 +86489,12 @@ function ComponentsDemo_HookContent() {
     to: "".concat(url, "/table-sorter"),
     activeClassName: "is-active"
   }, "Table Sorter")), /*#__PURE__*/react.createElement("li", {
-    className: urlChk('/scroll-reveal') ? 'is-active' : ''
-  }, /*#__PURE__*/react.createElement(NavLink, {
-    "data-route": "true",
-    to: "".concat(url, "/scroll-reveal"),
-    activeClassName: "is-active"
-  }, "Scroll Reveal")), /*#__PURE__*/react.createElement("li", {
     className: urlChk('/card') ? 'is-active' : ''
   }, /*#__PURE__*/react.createElement(NavLink, {
     "data-route": "true",
     to: "".concat(url, "/card"),
     activeClassName: "is-active"
   }, "Card")), /*#__PURE__*/react.createElement("li", {
-    className: urlChk('/parallax') ? 'is-active' : ''
-  }, /*#__PURE__*/react.createElement(NavLink, {
-    "data-route": "true",
-    to: "".concat(url, "/parallax"),
-    activeClassName: "is-active"
-  }, "Parallax")), /*#__PURE__*/react.createElement("li", {
     className: urlChk('/accordion') && !urlChk('/accordion-slider') ? 'is-active' : ''
   }, /*#__PURE__*/react.createElement(NavLink, {
     "data-route": "true",
@@ -83109,12 +86513,6 @@ function ComponentsDemo_HookContent() {
     to: "".concat(url, "/counter"),
     activeClassName: "is-active"
   }, "Counter")), /*#__PURE__*/react.createElement("li", {
-    className: urlChk('/dropdown-menu') ? 'is-active' : ''
-  }, /*#__PURE__*/react.createElement(NavLink, {
-    "data-route": "true",
-    to: "".concat(url, "/dropdown-menu"),
-    activeClassName: "is-active"
-  }, "Dropdown Menu")), /*#__PURE__*/react.createElement("li", {
     className: urlChk('/modal-dialog') ? 'is-active' : ''
   }, /*#__PURE__*/react.createElement(NavLink, {
     "data-route": "true",
@@ -83133,12 +86531,6 @@ function ComponentsDemo_HookContent() {
     to: "".concat(url, "/swiper"),
     activeClassName: "is-active"
   }, "Swiper")), /*#__PURE__*/react.createElement("li", {
-    className: urlChk('/back-to-top') ? 'is-active' : ''
-  }, /*#__PURE__*/react.createElement(NavLink, {
-    "data-route": "true",
-    to: "".concat(url, "/back-to-top"),
-    activeClassName: "is-active"
-  }, "Back To Top")), /*#__PURE__*/react.createElement("li", {
     className: urlChk('/lightbox') ? 'is-active' : ''
   }, /*#__PURE__*/react.createElement(NavLink, {
     "data-route": "true",
@@ -83151,12 +86543,190 @@ function ComponentsDemo_HookContent() {
     to: "".concat(url, "/progress-bar"),
     activeClassName: "is-active"
   }, "Progress Bar")), /*#__PURE__*/react.createElement("li", {
+    className: urlChk('/back-to-top') ? 'is-active' : ''
+  }, /*#__PURE__*/react.createElement(NavLink, {
+    "data-route": "true",
+    to: "".concat(url, "/back-to-top"),
+    activeClassName: "is-active"
+  }, "Back To Top")), /*#__PURE__*/react.createElement("li", {
+    className: "uix-demo-nav-header"
+  }, "FORMS"), /*#__PURE__*/react.createElement("li", {
+    className: urlChk('#app-goto__input__section') ? 'is-active' : ''
+  }, /*#__PURE__*/react.createElement(NavLink, {
+    "data-route": "true",
+    to: "".concat(url, "/form#app-goto__input__section"),
+    activeClassName: "is-active"
+  }, "Input")), /*#__PURE__*/react.createElement("li", {
+    className: urlChk('#app-goto__password-input__section') ? 'is-active' : ''
+  }, /*#__PURE__*/react.createElement(NavLink, {
+    "data-route": "true",
+    to: "".concat(url, "/form#app-goto__password-input__section"),
+    activeClassName: "is-active"
+  }, "Password Input")), /*#__PURE__*/react.createElement("li", {
+    className: urlChk('#app-goto__textarea__section') ? 'is-active' : ''
+  }, /*#__PURE__*/react.createElement(NavLink, {
+    "data-route": "true",
+    to: "".concat(url, "/form#app-goto__textarea__section"),
+    activeClassName: "is-active"
+  }, "Textarea")), /*#__PURE__*/react.createElement("li", {
+    className: urlChk('#app-goto__select-normal__section') ? 'is-active' : ''
+  }, /*#__PURE__*/react.createElement(NavLink, {
+    "data-route": "true",
+    to: "".concat(url, "/form#app-goto__select-normal__section"),
+    activeClassName: "is-active"
+  }, "Select (normal)")), /*#__PURE__*/react.createElement("li", {
+    className: urlChk('#app-goto__custom-select__section') ? 'is-active' : ''
+  }, /*#__PURE__*/react.createElement(NavLink, {
+    "data-route": "true",
+    to: "".concat(url, "/form#app-goto__custom-select__section"),
+    activeClassName: "is-active"
+  }, "Custom Select")), /*#__PURE__*/react.createElement("li", {
+    className: urlChk('#app-goto__multiple-select__section') ? 'is-active' : ''
+  }, /*#__PURE__*/react.createElement(NavLink, {
+    "data-route": "true",
+    to: "".concat(url, "/form#app-goto__multiple-select__section"),
+    activeClassName: "is-active"
+  }, "Multiple Select")), /*#__PURE__*/react.createElement("li", {
+    className: urlChk('#app-goto__single-select__section') ? 'is-active' : ''
+  }, /*#__PURE__*/react.createElement(NavLink, {
+    "data-route": "true",
+    to: "".concat(url, "/form#app-goto__single-select__section"),
+    activeClassName: "is-active"
+  }, "Single Select")), /*#__PURE__*/react.createElement("li", {
+    className: urlChk('/forform#app-goto__switch__section') ? 'is-active' : ''
+  }, /*#__PURE__*/react.createElement(NavLink, {
+    "data-route": "true",
+    to: "".concat(url, "/form#app-goto__switch__section"),
+    activeClassName: "is-active"
+  }, "Switch")), /*#__PURE__*/react.createElement("li", {
+    className: urlChk('#app-goto__radio__section') ? 'is-active' : ''
+  }, /*#__PURE__*/react.createElement(NavLink, {
+    "data-route": "true",
+    to: "".concat(url, "/form#app-goto__radio__section"),
+    activeClassName: "is-active"
+  }, "Radio")), /*#__PURE__*/react.createElement("li", {
+    className: urlChk('#app-goto__date__section') ? 'is-active' : ''
+  }, /*#__PURE__*/react.createElement(NavLink, {
+    "data-route": "true",
+    to: "".concat(url, "/form#app-goto__date__section"),
+    activeClassName: "is-active"
+  }, "Date")), /*#__PURE__*/react.createElement("li", {
+    className: urlChk('#app-goto__checkbox__section') ? 'is-active' : ''
+  }, /*#__PURE__*/react.createElement(NavLink, {
+    "data-route": "true",
+    to: "".concat(url, "/form#app-goto__checkbox__section"),
+    activeClassName: "is-active"
+  }, "Checkbox")), /*#__PURE__*/react.createElement("li", {
+    className: urlChk('#app-goto__number__section') ? 'is-active' : ''
+  }, /*#__PURE__*/react.createElement(NavLink, {
+    "data-route": "true",
+    to: "".concat(url, "/form#app-goto__number__section"),
+    activeClassName: "is-active"
+  }, "Number")), /*#__PURE__*/react.createElement("li", {
+    className: urlChk('#app-goto__dynamic-fields__section') ? 'is-active' : ''
+  }, /*#__PURE__*/react.createElement(NavLink, {
+    "data-route": "true",
+    to: "".concat(url, "/form#app-goto__dynamic-fields__section"),
+    activeClassName: "is-active"
+  }, "Dynamic Fields")), /*#__PURE__*/react.createElement("li", {
+    className: urlChk('#app-goto__file__section') ? 'is-active' : ''
+  }, /*#__PURE__*/react.createElement(NavLink, {
+    "data-route": "true",
+    to: "".concat(url, "/form#app-goto__file__section"),
+    activeClassName: "is-active"
+  }, "File")), /*#__PURE__*/react.createElement("li", {
+    className: urlChk('#app-goto__file-field__section') ? 'is-active' : ''
+  }, /*#__PURE__*/react.createElement(NavLink, {
+    "data-route": "true",
+    to: "".concat(url, "/form#app-goto__file-field__section"),
+    activeClassName: "is-active"
+  }, "File Field")), /*#__PURE__*/react.createElement("li", {
+    className: urlChk('#app-goto__merge-input__section') ? 'is-active' : ''
+  }, /*#__PURE__*/react.createElement(NavLink, {
+    "data-route": "true",
+    to: "".concat(url, "/form#app-goto__merge-input__section"),
+    activeClassName: "is-active"
+  }, "Merge Input")), /*#__PURE__*/react.createElement("li", {
+    className: urlChk('#app-goto__flex-layout__section') ? 'is-active' : ''
+  }, /*#__PURE__*/react.createElement(NavLink, {
+    "data-route": "true",
+    to: "".concat(url, "/form#app-goto__flex-layout__section"),
+    activeClassName: "is-active"
+  }, "Flex Layout")), /*#__PURE__*/react.createElement("li", {
+    className: "uix-demo-nav-header"
+  }, "INTERACTION"), /*#__PURE__*/react.createElement("li", {
+    className: urlChk('/scroll-reveal') ? 'is-active' : ''
+  }, /*#__PURE__*/react.createElement(NavLink, {
+    "data-route": "true",
+    to: "".concat(url, "/scroll-reveal"),
+    activeClassName: "is-active"
+  }, "Scroll Reveal")), /*#__PURE__*/react.createElement("li", {
+    className: urlChk('/parallax') ? 'is-active' : ''
+  }, /*#__PURE__*/react.createElement(NavLink, {
+    "data-route": "true",
+    to: "".concat(url, "/parallax"),
+    activeClassName: "is-active"
+  }, "Parallax")), /*#__PURE__*/react.createElement("li", {
     className: urlChk('/sticky-elements') ? 'is-active' : ''
   }, /*#__PURE__*/react.createElement(NavLink, {
     "data-route": "true",
     to: "".concat(url, "/sticky-elements"),
     activeClassName: "is-active"
-  }, "Sticky Elements")))), /*#__PURE__*/react.createElement("div", {
+  }, "Sticky Elements")), /*#__PURE__*/react.createElement("li", {
+    className: urlChk('/infinite-scroll') ? 'is-active' : ''
+  }, /*#__PURE__*/react.createElement(NavLink, {
+    "data-route": "true",
+    to: "".concat(url, "/infinite-scroll"),
+    activeClassName: "is-active"
+  }, "Infinite Scroll")), /*#__PURE__*/react.createElement("li", {
+    className: "uix-demo-nav-header"
+  }, "LAYOUT"), /*#__PURE__*/react.createElement("li", {
+    className: urlChk('/grid') ? 'is-active' : ''
+  }, /*#__PURE__*/react.createElement(NavLink, {
+    "data-route": "true",
+    to: "".concat(url, "/grid"),
+    activeClassName: "is-active"
+  }, "Grid")), /*#__PURE__*/react.createElement("li", {
+    className: urlChk('/gallery') ? 'is-active' : ''
+  }, /*#__PURE__*/react.createElement(NavLink, {
+    "data-route": "true",
+    to: "".concat(url, "/gallery"),
+    activeClassName: "is-active"
+  }, "Gallery")), /*#__PURE__*/react.createElement("li", {
+    className: "uix-demo-nav-header"
+  }, "NAVIGATION"), /*#__PURE__*/react.createElement("li", {
+    className: urlChk('/navigation') ? 'is-active' : ''
+  }, /*#__PURE__*/react.createElement(NavLink, {
+    "data-route": "true",
+    to: "".concat(url, "/navigation"),
+    activeClassName: "is-active"
+  }, "Navigation")), /*#__PURE__*/react.createElement("li", {
+    className: urlChk('/dropdown-menu') ? 'is-active' : ''
+  }, /*#__PURE__*/react.createElement(NavLink, {
+    "data-route": "true",
+    to: "".concat(url, "/dropdown-menu"),
+    activeClassName: "is-active"
+  }, "Dropdown Menu")), /*#__PURE__*/react.createElement("li", {
+    className: urlChk('/multilevel-dropdown-menu') ? 'is-active' : ''
+  }, /*#__PURE__*/react.createElement(NavLink, {
+    "data-route": "true",
+    to: "".concat(url, "/multilevel-dropdown-menu"),
+    activeClassName: "is-active"
+  }, "Multiple-Level Dropdown Menu")), /*#__PURE__*/react.createElement("li", {
+    className: urlChk('/cascading-dropDown-list') ? 'is-active' : ''
+  }, /*#__PURE__*/react.createElement(NavLink, {
+    "data-route": "true",
+    to: "".concat(url, "/cascading-dropDown-list"),
+    activeClassName: "is-active"
+  }, "Cascading DropDown List")), /*#__PURE__*/react.createElement("li", {
+    className: "uix-demo-nav-header"
+  }, "MEDIA"), /*#__PURE__*/react.createElement("li", {
+    className: urlChk('/video') ? 'is-active' : ''
+  }, /*#__PURE__*/react.createElement(NavLink, {
+    "data-route": "true",
+    to: "".concat(url, "/video"),
+    activeClassName: "is-active"
+  }, "Video")))), /*#__PURE__*/react.createElement("div", {
     className: "uix-demo-section"
   }, /*#__PURE__*/react.createElement("div", {
     className: "uix-demo-container"
@@ -83180,6 +86750,8 @@ function ComponentsDemo_HookContent() {
   }, /*#__PURE__*/react.createElement(FormDemo, null)), /*#__PURE__*/react.createElement(Route, {
     path: "".concat(path, "/grid")
   }, /*#__PURE__*/react.createElement(GridDemo, null)), /*#__PURE__*/react.createElement(Route, {
+    path: "".concat(path, "/pagination")
+  }, /*#__PURE__*/react.createElement(PaginationDemo, null)), /*#__PURE__*/react.createElement(Route, {
     path: "".concat(path, "/tabs")
   }, /*#__PURE__*/react.createElement(TabsDemo, null)), /*#__PURE__*/react.createElement(Route, {
     path: "".concat(path, "/tabs-animated")
@@ -83219,7 +86791,17 @@ function ComponentsDemo_HookContent() {
     path: "".concat(path, "/progress-bar")
   }, /*#__PURE__*/react.createElement(ProgressBarDemo, null)), /*#__PURE__*/react.createElement(Route, {
     path: "".concat(path, "/sticky-elements")
-  }, /*#__PURE__*/react.createElement(StickyElementsDemo, null)))))));
+  }, /*#__PURE__*/react.createElement(StickyElementsDemo, null)), /*#__PURE__*/react.createElement(Route, {
+    path: "".concat(path, "/multilevel-dropdown-menu")
+  }, /*#__PURE__*/react.createElement(MultilevelDropdownMenuDemo, null)), /*#__PURE__*/react.createElement(Route, {
+    path: "".concat(path, "/cascading-dropDown-list")
+  }, /*#__PURE__*/react.createElement(CascadingDropDownListDemo, null)), /*#__PURE__*/react.createElement(Route, {
+    path: "".concat(path, "/gallery")
+  }, /*#__PURE__*/react.createElement(GalleryDemo, null)), /*#__PURE__*/react.createElement(Route, {
+    path: "".concat(path, "/infinite-scroll")
+  }, /*#__PURE__*/react.createElement(InfiniteScrollDemo, null)), /*#__PURE__*/react.createElement(Route, {
+    path: "".concat(path, "/navigation")
+  }, /*#__PURE__*/react.createElement(NavigationDemo, null)))))));
 }
 
 var ComponentsDemo = /*#__PURE__*/function (_Component) {
@@ -83241,7 +86823,7 @@ var ComponentsDemo = /*#__PURE__*/function (_Component) {
         var $style = document.createElement("style");
         $style.id = 'app-uix-demo-style';
         document.head.appendChild($style);
-        $style.innerHTML = "\n\t\t\t\t/*-- Sidebar --*/\n\t\t\t\t.uix-demo-sidebar-left {\n\t\t\t\t\tposition: fixed;\n\t\t\t\t\ttop: 70px;\n\t\t\t\t\tbottom: 0;\n\t\t\t\t\tbox-sizing: border-box;\n\t\t\t\t\twidth: 240px;\n\t\t\t\t\tpadding: 40px 40px 60px 40px;\n\t\t\t\t\tborder-right: 1px #e5e5e5 solid;\n\t\t\t\t\toverflow: auto;\n\t\t\t\t}\n\n\t\t\t\t@media all and (max-width: 768px) {\n\t\t\t\t\t.uix-demo-sidebar-left {\n\t\t\t\t\t\tposition: relative;\n\t\t\t\t\t\ttop: 0;\n\t\t\t\t\t\twidth: 100%;\n\t\t\t\t\t\tpadding: 15px;\n\t\t\t\t\t}\n\t\t\t\t}\n\n\t\t\t\t\n\t\t\t\t/*-- Navigation --*/\n\t\t\t\t.uix-demo-nav,\n\t\t\t\t.uix-demo-nav ul {\n\t\t\t\t\tmargin: 0;\n\t\t\t\t\tpadding: 0;\n\t\t\t\t\tlist-style: none;\n\t\t\t\t\tfont-size: .875rem;\n\t\t\t\t}\n\n\t\t\t\t.uix-demo-nav-header {\n\t\t\t\t\tpadding: 8px 0;\n\t\t\t\t\tborder-bottom: 1px solid #e5e5e5;\n\t\t\t\t}\n\n\t\t\t\t.uix-demo-nav li {\n\t\t\t\t\tposition: relative;\n\t\t\t\t}\n\n\t\t\t\t\n\t\t\t\t\n\t\t\t\t.uix-demo-nav li>a {\n\t\t\t\t\tdisplay: flex;\n\t\t\t\t\talign-items: center;\n\t\t\t\t\tcolumn-gap: .25em;\n\t\t\t\t\ttext-decoration: none;\n\t\t\t\t\tcolor: #999;\n\t\t\t\t}\n\t\t\t\t\n\n\t\t\t\t.uix-demo-nav li>a>* {\n\t\t\t\t\tflex: none;\n\t\t\t\t}\n\t\t\t\t\n\t\t\t\t.uix-demo-nav li>a:focus {\n\t\t\t\t\toutline: none;\n\t\t\t\t}\n\t\t\t\t\n\t\t\t\t.uix-demo-nav>li>a {\n\t\t\t\t\tpadding: 5px 0;\n\t\t\t\t}\n\n\t\t\t\t.uix-demo-nav li.is-active > a {\n\t\t\t\t\tcolor: #333;\n\t\t\t\t}\n\t\t\t\t.uix-demo-nav li.is-active > a:after {\n\t\t\t\t\tcontent: '';\n\t\t\t\t\tdisplay: block;\n\t\t\t\t\twidth: 5px;\n\t\t\t\t\theight: 5px;\n\t\t\t\t\tposition: absolute;\n\t\t\t\t\ttop: 45%;\n\t\t\t\t\tleft: -1rem;\n\t\t\t\t\tbackground: #333;\n\t\t\t\t}\t\t\n\n\t\t\t\t@media all and (max-width: 768px) {\n\t\t\t\t\t.uix-demo-nav li {\n\t\t\t\t\t\tposition: relative;\n\t\t\t\t\t\tfloat: left;\n\t\t\t\t\t\tdisplay: inline-block;\n\t\t\t\t\t\tmargin: 0 1.2rem 0 0;\n\t\t\t\t\t}\n\n\t\t\t\t\t.uix-demo-nav-header {\n\t\t\t\t\t\twidth: 100%;\n\t\t\t\t\t}\t\n\n\t\t\t\t\t.uix-demo-nav li.is-active > a:after {\n\t\t\t\t\t\tleft: -.7rem;\n\t\t\t\t\t}\t\n\n\t\t\t\t}\n\t\t\t\t\n\t\t\t\t\n\t\t\t\t/*-- Main --*/\n\t\t\t\t.uix-demo-container {\n\t\t\t\t\tpadding-left: 15px;\n\t\t\t\t\tpadding-right: 15px;\n\t\t\t\t\tmax-width: 1000px;\n\t\t\t\t\tposition: relative;\n\t\t\t\t\tmargin-left: auto;\n\t\t\t\t\tmargin-right: auto;\n\t\t\t\t\tpadding-bottom: 70px;\n\t\t\t\t\t/* Do not use \"transform\", it will affect the \"position:fixed\" effect of the child */\n\t\t\t\t\tleft: 100px;\n\t\t\t\t}\n\t\t\t\t\n\t\t\t\t@media all and (max-width: 768px) {\n\t\t\t\t\t.uix-demo-container {\n\t\t\t\t\t\tpadding: 0;\t\n\t\t\t\t\t\tmax-width: 100%;\n\t\t\t\t\t\tleft: 0;\n\t\t\t\t\t}\n\t\t\t\t}\n\n\t\t\t\t@media all and (max-width: 1024px) and (min-width: 769px) {\n\t\t\t\t\t.uix-demo-container {\n\t\t\t\t\t\tmax-width: 700px;\n\t\t\t\t\t}\n\t\t\t\t}\n\t\t\n\t\t\t\t@media all and (max-width: 1440px) and (min-width: 1025px) {\n\t\t\t\t\t.uix-demo-container {\n\t\t\t\t\t\tmax-width: 1000px;\n\t\t\t\t\t}\n\t\t\t\t}\n\n\n\t\t\t\t@media all and (min-width: 1441px) {\n\t\t\t\t\t.uix-demo-container {\n\t\t\t\t\t\tmax-width: 1140px;\n\t\t\t\t\t\tleft: 0;\n\t\t\t\t\t}\n\t\t\t\t}\n\n\t\t\t\t\n\t\t\t\t.uix-demo-section {\n\t\t\t\t\tdisplay: flow-root;\n\t\t\t\t\tbox-sizing: border-box;\n\t\t\t\t\tpadding-top: 40px;\n\t\t\t\t\tpadding-bottom: 40px;\n\t\t\t\t}\n\t\t\t\t\n\t\t\t";
+        $style.innerHTML = "\n\t\t\t\t/*-- Sidebar --*/\n\t\t\t\t.uix-demo-sidebar-left {\n\t\t\t\t\tposition: fixed;\n\t\t\t\t\ttop: 70px;\n\t\t\t\t\tbottom: 0;\n\t\t\t\t\tbox-sizing: border-box;\n\t\t\t\t\twidth: 300px;\n\t\t\t\t\tpadding: 40px 40px 60px 40px;\n\t\t\t\t\tborder-right: 1px #e5e5e5 solid;\n\t\t\t\t\toverflow: auto;\n\t\t\t\t}\n\n\t\t\t\t@media all and (max-width: 768px) {\n\t\t\t\t\t.uix-demo-sidebar-left {\n\t\t\t\t\t\tposition: relative;\n\t\t\t\t\t\ttop: 0;\n\t\t\t\t\t\twidth: 100%;\n\t\t\t\t\t\tpadding: 15px;\n\t\t\t\t\t}\n\t\t\t\t}\n\n\t\t\t\t\n\t\t\t\t/*-- Navigation --*/\n\t\t\t\t.uix-demo-nav,\n\t\t\t\t.uix-demo-nav ul {\n\t\t\t\t\tmargin: 0;\n\t\t\t\t\tpadding: 0;\n\t\t\t\t\tlist-style: none;\n\t\t\t\t\tfont-size: .875rem;\n\t\t\t\t}\n\n\t\t\t\t.uix-demo-nav-header {\n\t\t\t\t\tpadding: 8px 0;\n\t\t\t\t\tborder-bottom: 1px solid #e5e5e5;\n\t\t\t\t\tfont-weight: 500;\n\t\t\t\t\topacity: .7;\n\t\t\t\t\tletter-spacing: 0.5px;\n\t\t\t\t\tpadding-top: 1rem;\n\t\t\t\t}\n\n\t\t\t\t.uix-demo-nav li {\n\t\t\t\t\tposition: relative;\n\t\t\t\t}\n\n\t\t\t\t\n\t\t\t\t\n\t\t\t\t.uix-demo-nav li>a {\n\t\t\t\t\tdisplay: flex;\n\t\t\t\t\talign-items: center;\n\t\t\t\t\tcolumn-gap: .25em;\n\t\t\t\t\ttext-decoration: none;\n\t\t\t\t\tcolor: #999;\n\t\t\t\t}\n\t\t\t\t\n\n\t\t\t\t.uix-demo-nav li>a>* {\n\t\t\t\t\tflex: none;\n\t\t\t\t}\n\t\t\t\t\n\t\t\t\t.uix-demo-nav li>a:focus {\n\t\t\t\t\toutline: none;\n\t\t\t\t}\n\t\t\t\t\n\t\t\t\t.uix-demo-nav>li>a {\n\t\t\t\t\tpadding: 5px 0;\n\t\t\t\t}\n\n\t\t\t\t.uix-demo-nav li.is-active > a {\n\t\t\t\t\tcolor: #333;\n\t\t\t\t}\n\t\t\t\t.uix-demo-nav li.is-active > a:after {\n\t\t\t\t\tcontent: '';\n\t\t\t\t\tdisplay: block;\n\t\t\t\t\twidth: 5px;\n\t\t\t\t\theight: 5px;\n\t\t\t\t\tposition: absolute;\n\t\t\t\t\ttop: 45%;\n\t\t\t\t\tleft: -1rem;\n\t\t\t\t\tbackground: #333;\n\t\t\t\t}\t\t\n\n\t\t\t\t@media all and (max-width: 768px) {\n\t\t\t\t\t.uix-demo-nav li {\n\t\t\t\t\t\tposition: relative;\n\t\t\t\t\t\tfloat: left;\n\t\t\t\t\t\tdisplay: inline-block;\n\t\t\t\t\t\tmargin: 0 1.2rem 0 0;\n\t\t\t\t\t}\n\n\t\t\t\t\t.uix-demo-nav-header {\n\t\t\t\t\t\twidth: 100%;\n\t\t\t\t\t}\t\n\n\t\t\t\t\t.uix-demo-nav li.is-active > a:after {\n\t\t\t\t\t\tleft: -.7rem;\n\t\t\t\t\t}\t\n\n\t\t\t\t}\n\t\t\t\t\n\t\t\t\t\n\t\t\t\t/*-- Main --*/\n\t\t\t\t.uix-demo-container {\n\t\t\t\t\tpadding-left: 15px;\n\t\t\t\t\tpadding-right: 15px;\n\t\t\t\t\tmax-width: 1000px;\n\t\t\t\t\tposition: relative;\n\t\t\t\t\tmargin-left: auto;\n\t\t\t\t\tmargin-right: auto;\n\t\t\t\t\tpadding-bottom: 70px;\n\t\t\t\t\t/* Do not use \"transform\", it will affect the \"position:fixed\" effect of the child */\n\t\t\t\t\tleft: 160px;\n\t\t\t\t}\n\t\t\t\t\n\t\t\t\t@media all and (max-width: 768px) {\n\t\t\t\t\t.uix-demo-container {\n\t\t\t\t\t\tpadding: 0;\t\n\t\t\t\t\t\tmax-width: 100%;\n\t\t\t\t\t\tleft: 0;\n\t\t\t\t\t}\n\t\t\t\t}\n\n\t\t\t\t@media all and (max-width: 1024px) and (min-width: 769px) {\n\t\t\t\t\t.uix-demo-container {\n\t\t\t\t\t\tmax-width: 700px;\n\t\t\t\t\t}\n\t\t\t\t}\n\t\t\n\t\t\t\t@media all and (max-width: 1440px) and (min-width: 1025px) {\n\t\t\t\t\t.uix-demo-container {\n\t\t\t\t\t\tmax-width: 1000px;\n\t\t\t\t\t}\n\t\t\t\t}\n\n\n\t\t\t\t@media all and (min-width: 1441px) {\n\t\t\t\t\t.uix-demo-container {\n\t\t\t\t\t\tmax-width: 1140px;\n\t\t\t\t\t\tleft: 60px;\n\t\t\t\t\t}\n\t\t\t\t}\n\n\t\t\t\t\n\t\t\t\t.uix-demo-section {\n\t\t\t\t\tdisplay: flow-root;\n\t\t\t\t\tbox-sizing: border-box;\n\t\t\t\t\tpadding-top: 40px;\n\t\t\t\t\tpadding-bottom: 40px;\n\t\t\t\t}\n\t\t\t\t\n\t\t\t";
       }
     }
   }, {
@@ -83515,6 +87097,7 @@ var Admin = /*#__PURE__*/function (_Component) {
 
 
 
+
 var routesConfig = [{
   component: App,
   routes: [
@@ -83550,13 +87133,17 @@ var routesConfig = [{
     pageTitle: 'Posts',
     exact: true
   }, {
+    path: "/posts/:post_id",
+    component: Posts_PostDetail,
+    pageTitle: ''
+  }, {
     path: "/member",
     component: _pages_Member,
     pageTitle: 'Member'
   }, {
-    path: "/posts/:post_id",
-    component: Posts_PostDetail,
-    pageTitle: ''
+    path: "/posts-pagination/:page_number",
+    component: _pages_PostsPagination,
+    pageTitle: 'Posts Pagination'
   }, {
     path: "/admin",
     component: _pages_Admin,
@@ -84336,13 +87923,42 @@ var demoListDetailReducer_initialState = {
       return state;
   }
 });
+;// CONCATENATED MODULE: ./src/client/reducers/demoListPostsPaginationReducer.js
+
+
+function demoListPostsPaginationReducer_ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) { symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); } keys.push.apply(keys, symbols); } return keys; }
+
+function demoListPostsPaginationReducer_objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { demoListPostsPaginationReducer_ownKeys(Object(source), true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { demoListPostsPaginationReducer_ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
+
+//initialize state
+var demoListPostsPaginationReducer_initialState = {
+  getData: null
+};
+/* harmony default export */ const demoListPostsPaginationReducer = (function () {
+  var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : demoListPostsPaginationReducer_initialState;
+  var action = arguments.length > 1 ? arguments[1] : undefined;
+
+  switch (action.type) {
+    case 'RECEIVE_PAGE_LIST':
+      {
+        return demoListPostsPaginationReducer_objectSpread(demoListPostsPaginationReducer_objectSpread({}, state), {}, {
+          getData: action.payload
+        });
+      }
+
+    default:
+      return state;
+  }
+});
 ;// CONCATENATED MODULE: ./src/client/reducers/index.js
+
 
 
 
 /* harmony default export */ const reducers = (combineReducers({
   listData: demoListReducer,
-  listDetailData: demoListDetailReducer
+  listDetailData: demoListDetailReducer,
+  listPostsPaginationData: demoListPostsPaginationReducer
 })); //@link to: `src/client/client.js`, src/store/createStore.js`
 ;// CONCATENATED MODULE: ./src/client/client.js
 

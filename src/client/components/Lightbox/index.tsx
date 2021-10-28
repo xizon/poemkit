@@ -63,10 +63,12 @@ type LightboxState = false;
 export default class Lightbox extends Component<LightboxProps, LightboxState> {
 
     urlChange: () => void;
+    uniqueID: string;
 
     constructor(props) {
         super(props);
         
+        this.uniqueID = 'app-' + __.GUID.create();
         this.urlChange = ()=>{};
 
     }
@@ -266,7 +268,7 @@ export default class Lightbox extends Component<LightboxProps, LightboxState> {
             id,
         } = this.props;
 
-        const cid = id || 'app-lightbox-' + __.GUID.create();
+        const cid = id || this.uniqueID;
 
         // The container ID of the HTML content displayed to the stage, such as `#my-lightbox-html-1`
         const htmlID = htmlContent || ajax ? 'app-lightbox-html-' + cid : false;

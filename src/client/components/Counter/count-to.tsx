@@ -84,7 +84,7 @@ export function countTo(curElement: any, config: countToConfig) {
 
         render(value);
 
-        if (typeof(_update) == 'function') {
+        if (typeof(_update) === 'function') {
             _update.call($el[0], value);
         }
 
@@ -94,7 +94,7 @@ export function countTo(curElement: any, config: countToConfig) {
             clearInterval(data.interval);
             value = _numberEnd;
 
-            if (typeof(_complete) == 'function') {
+            if (typeof(_complete) === 'function') {
                 _complete.call($el[0], value);
             }
         }
@@ -121,4 +121,4 @@ export function countTo(curElement: any, config: countToConfig) {
 
 }
 
-export default { countTo };
+export default countTo;

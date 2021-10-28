@@ -43,12 +43,15 @@ import { countTo } from '@uixkit.react/components/Counter/count-to';
 
 export default class Counter extends Component<CounterProps, CounterState> {
 
-    private wrapperRef = React.createRef<HTMLDivElement>();
+    private rootRef = React.createRef<HTMLDivElement>();
     
     windowScrollUpdate: () => void;
+    uniqueID: string;
     
     constructor(props) {
         super(props);
+
+        this.uniqueID = 'app-' + __.GUID.create();
 
         // Add a scroll event listener to window
         this.handleScrollEvent = this.handleScrollEvent.bind(this);
@@ -58,13 +61,13 @@ export default class Counter extends Component<CounterProps, CounterState> {
 
     handleScrollEvent() {
 
-        const reactDomEl: any = this.wrapperRef.current;
+        const reactDomEl: any = this.rootRef.current;
         const viewport = 1;
         const spyTop = reactDomEl.getBoundingClientRect().top;
 
         //Prevent asynchronous loading of repeated calls
         const actived = reactDomEl.dataset.activated;
-
+         
 
         if (spyTop < (window.innerHeight * viewport)) {
 
@@ -96,21 +99,16 @@ export default class Counter extends Component<CounterProps, CounterState> {
 
     componentDidMount() {
 
-        const self = this;
-
-        __(document).ready(function () {
-
-            
-            // Add function to the element that should be used as the scrollable area.
-            window.removeEventListener('scroll', self.windowScrollUpdate);
-            window.removeEventListener('touchmove', self.windowScrollUpdate);
-            window.addEventListener('scroll', self.windowScrollUpdate);
-            window.addEventListener('touchmove', self.windowScrollUpdate);
-            self.windowScrollUpdate();
-
-
+        // Add function to the element that should be used as the scrollable area.
+        window.removeEventListener('scroll', this.windowScrollUpdate);
+        window.removeEventListener('touchmove', this.windowScrollUpdate);
+        window.addEventListener('scroll', this.windowScrollUpdate);
+        window.addEventListener('touchmove', this.windowScrollUpdate);
+        
+        // Prevent calculation errors caused by unloaded completion
+        __( document ).ready( () => {
+            this.windowScrollUpdate();
         });
-
 
     }
 
@@ -135,23 +133,22 @@ export default class Counter extends Component<CounterProps, CounterState> {
             dilimiter,
             doubleDigits,
             displayNumber,
-            id,
-            ...attributes
+            id
         } = this.props;
 
         return (
             <>
 
                 <span
-                    ref={this.wrapperRef}
-                    id={id || 'app-counter-' + __.GUID.create()}
+                    ref={this.rootRef}
+                    id={id || this.uniqueID}
                     data-counter-fixed={fixed || 0}
                     data-counter-start={start as number || 0}
                     data-counter-number={stop as number || 0}
                     data-counter-double-digits={doubleDigits}
                     data-counter-dilimiter={dilimiter}
                     data-counter-duration={speed || 200}
-                    {...attributes}>{displayNumber}</span>
+                    >{displayNumber}</span>
 
 
             </>

@@ -22,14 +22,18 @@ type GridProps = {
     loop?: boolean | undefined;
     /** -- */
     id?: string;
-    children?: any;
 };
 type GridState = false;
 
 
 export default class Grid extends Component<GridProps, GridState> {
+
+    uniqueID: string;
+
     constructor(props) {
         super(props);
+
+        this.uniqueID = 'app-' + __.GUID.create();
     }
 
     render() {
@@ -48,7 +52,7 @@ export default class Grid extends Component<GridProps, GridState> {
             <>
 
 
-                <div className="uix-core-grid" id={id || 'app-grid-' + __.GUID.create()}>
+                <div className="uix-core-grid" id={id || this.uniqueID}>
                     <div className={'uix-core-grid__row' + (noBreak ? ' uix-core-grid__row--no-break' : '') + (loop ? ' uix-core-grid__row--loop' : '') + (equalWidth ? ' uix-core-grid__row--auto-width' : '') + (noGutters ? ' uix-core-grid__row--no-gutters' : '')}>
                         {children}
                     </div>

@@ -18,6 +18,7 @@ import { SidebarMenu } from '@uixkit.react/pages/ComponentsDemo/_SidebarMenu.js'
 //get project config
 import { rootDirectory } from '@uixkit.react/config/websiteConfig.js';
 
+
 export default (props) => {
     
 	
@@ -40,7 +41,6 @@ export default (props) => {
 	
 		//
 		pathname = pathname.replace(`${rootDirectory}`, '')
-		
 		
 		//page: 404
 		try {
@@ -116,42 +116,110 @@ export default (props) => {
         
     });
 	
+	//
+	const urlChk = function( str ) {
+		if ( str.indexOf( '#' ) >= 0 ) {
+			return theLocation.hash.indexOf( str ) >= 0 ? true : false;
+		} else {
+			return theLocation.pathname.indexOf( str ) >= 0 ? true : false;
+		}
+	};
+
+
+	const mobileClickEv = function() {
+		//close navigation mask
+		if ( typeof(document) !== 'undefined' && document.querySelector( '.uix-menu-mobile__toggle' ) !== null ) {
+			document.body.classList.remove( 'js-uix-menu-opened' );
+			document.querySelector( '.uix-menu-mobile__toggle' ).classList.remove( 'is-active' );
+		}
+		
+	}
+
+	const menuListData = [
+		{
+			"title": <>
+				<li onTouchStart={mobileClickEv()} className={props.location.pathname === "/index" || props.location.pathname === '' ? 'is-active' : ''}>
+					<NavLink data-route="true" to="/index" activeClassName="is-active">Home</NavLink>
+				</li>
+			</>,
+			"link": "#",
+			"mega": false
+		},
+		{
+			"title": <>
+				<li onTouchStart={mobileClickEv()} className={urlChk("/components-demo") ? 'is-active' : ''}>
+					<NavLink data-route="true" to="/components-demo" activeClassName="is-active">Components</NavLink>
+				</li>
+			</>,
+			"link": "#",
+			"mega": false
+		},
+		{
+			"title": <>
+				<li onTouchStart={mobileClickEv()} className={urlChk("/posts") && !urlChk("/posts-pagination") ? 'is-active' : ''}>
+					<NavLink data-route="true" to="/posts" activeClassName="is-active">Posts</NavLink>
+				</li>
+			</>,
+			"link": "#",
+			"mega": false
+		},
+		{
+			"title": <>
+				<li onTouchStart={mobileClickEv()} className={urlChk("/posts-pagination") ? 'is-active' : ''}>
+					<NavLink data-route="true" to="/posts-pagination/1" activeClassName="is-active">Posts Pagination</NavLink>
+				</li>
+			</>,
+			"link": "#",
+			"mega": false
+		},
+		{
+			"title": <>
+				<li onTouchStart={mobileClickEv()} className={urlChk("/errorpage") ? 'is-active' : ''}>
+					<NavLink data-route="true" to="/errorpage" activeClassName="is-active">404</NavLink>
+				</li>
+			</>,
+			"link": "#",
+			"mega": false
+		},
+		{
+			"title": <>
+				<li onTouchStart={mobileClickEv()} className={urlChk("/nested-routes") ? 'is-active' : ''}>
+					<NavLink data-route="true" to="/nested-routes" activeClassName="is-active">Nested Routes</NavLink>
+				</li>
+			</>,
+			"link": "#",
+			"mega": false
+		},
+		{
+			"title": <>
+				<li onTouchStart={mobileClickEv()} className={urlChk("/member") ? 'is-active' : ''}>
+					<NavLink data-route="true" to="/member" activeClassName="is-active">Member</NavLink>
+				</li>
+			</>,
+			"link": "#",
+			"mega": false
+		},
+		{
+			"title": <>
+				<li onTouchStart={mobileClickEv()} className={urlChk("/admin") ? 'is-active' : ''}>
+					<NavLink data-route="true" to="/admin" activeClassName="is-active">Admin</NavLink>
+				</li>
+			</>,
+			"link": "#",
+			"mega": false
+		}
+	];
+	
 
     return (
 	  <>
 
-		<Header headerOverlayEnabled="false" menu={
-			<>
-		
-					<li className={props.location.pathname === "/index" || props.location.pathname === '' ? 'is-active' : ''}>
-					  <NavLink data-route="true" to="/index" activeClassName="is-active">Home</NavLink>
-					</li>
-					<li className={props.location.pathname === "/components-demo" ? 'is-active' : ''}>
-					  <NavLink data-route="true" to="/components-demo" activeClassName="is-active">Components</NavLink>
-					</li>
-					<li className={props.location.pathname.indexOf( "/posts" ) >= 0 ? 'is-active' : ''}>
-					  <NavLink data-route="true" to="/posts" activeClassName="is-active">Posts</NavLink>
-					</li>
-					<li className={props.location.pathname === "/errorpage" ? 'is-active' : ''}>
-					  <NavLink data-route="true" to="/errorpage" activeClassName="is-active">404</NavLink>
-					</li>
-					<li className={props.location.pathname.indexOf( "/nested-routes" ) >= 0 ? 'is-active' : ''}>
-					  <NavLink data-route="true" to="/nested-routes" activeClassName="is-active">Nested Routes</NavLink>
-					</li>
-					<li className={props.location.pathname === "/member" ? 'is-active' : ''}>
-					  <NavLink data-route="true" to="/member" activeClassName="is-active">Member</NavLink>
-					</li>
-					<li className={props.location.pathname.indexOf( "/admin" ) >= 0 ? 'is-active' : ''}>
-					  <NavLink data-route="true" to="/admin" activeClassName="is-active">Admin</NavLink>
-					</li>
+		<Header 
+			headerOverlayEnabled="false" 
+			menu={menuListData} 
+			logo={<><NavLink data-route="true" to="/index" activeClassName="is-active"><img src={`${rootDirectory}/assets/images/logo.png`} alt="Uix Kit React" /></NavLink></>}
+		/>
 
-
-	
-			</>
-		} />
-
-
-        
             {/* A <Switch> looks through its children <Route>s and
                 renders the first one that matches the current URL. 
                 The express configuration associated with the file webpack.config.js

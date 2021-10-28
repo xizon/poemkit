@@ -155,4 +155,4 @@ export function setBG( config ) {
 
 }
 
-export default { setBG };
+export default setBG;

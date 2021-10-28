@@ -107,6 +107,12 @@ export default (pathname, store, context, template) => {
 		if ( pathname.indexOf( 'posts/' ) >= 0 ) {
 			if ( store.getState().listDetailData.detail ) pageTitle = store.getState().listDetailData.detail[0].name;
 		}
+
+		//page: Pagination
+		if ( pathname.indexOf( 'pagination/' ) >= 0 ) {
+			if ( store.getState().listPostsPaginationData.getData ) pageTitle = `${pageTitle} (page ${store.getState().listPostsPaginationData.getData.page})`;
+		}
+
 	
 		//page: Components Demo
 		if ( pathname.indexOf( 'components-demo/' ) >= 0 ) {

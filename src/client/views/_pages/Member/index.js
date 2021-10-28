@@ -17,9 +17,9 @@ class Member extends Component {
 				<main id="uix-maincontent">
 
 					{/*
-				<!-- Content   
-				====================================================== -->	
-				*/}
+					<!-- Content   
+					====================================================== -->	
+					*/}
 					<section className="uix-spacing--s">
 						<div className="container">
 							<div className="row">

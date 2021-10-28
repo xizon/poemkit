@@ -5,8 +5,6 @@ type GridColumnProps = {
     stackRatio?: string | boolean | undefined;
     stackSize?: string | boolean | undefined;
     inline?: boolean | undefined;
-	/** -- */
-	children?: any;
 };
 type GridColumnState = false;
 

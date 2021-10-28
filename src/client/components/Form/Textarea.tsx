@@ -39,10 +39,14 @@ type TextareaState = false;
 
 
 export default class Textarea extends Component<TextareaProps, TextareaState> {
+
+	uniqueID: string;
 	
 	constructor(props) {
 		super(props);
 	
+		this.uniqueID = 'app-' + __.GUID.create();
+
         this.handleFocus = this.handleFocus.bind(this);
         this.handleBlurChange = this.handleBlurChange.bind(this);
 		
@@ -120,7 +124,7 @@ export default class Textarea extends Component<TextareaProps, TextareaState> {
 		
 		const uiRes = typeof(ui) === 'undefined' ? '' : ui;
 		const nameRes = typeof(name) === 'undefined' ? ( typeof(label) !== 'undefined' ? __.toSlug( label ) : '' )  : name;
-		const idRes = id ? id : 'app-control-' + __.GUID.create();
+		const idRes = id || this.uniqueID;
 		const wrapperClassDisabled = disabled ? ' is-disabled' : '';
 		const wrapperClassUi = this.uiSwitch(uiRes);
 		const wrapperClassTheme = theme === 'line' ? ' uix-controls--line' : '';

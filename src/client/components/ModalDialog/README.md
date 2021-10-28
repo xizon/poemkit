@@ -19,10 +19,10 @@ import ModalDialog from '@uixkit.react/components/ModalDialog/index.tsx';
 | `lightbox` | boolean  | true | Whether to enable the lightbox effect |
 | `closeOnlyBtn` | boolean  | false | Disable mask to close the window |
 | `fullscreen` | boolean  | false | Toggles whether fullscreen should be enabled |
-| `heading` | React.ReactNode  | - | Set a window title |
+| `heading` | ReactNode  | - | Set a window title |
 | `triggerTagName` | `a` \| `button` \| `div` \| `span`  | - | Tag name of the trigger. |
 | `triggerClassName` | string  | - | Specify a class for this Node |
-| `triggerContent` | React.ReactNode  | - | Set a piece of text or HTML code for the trigger |
+| `triggerContent` | ReactNode  | - | Set a piece of text or HTML code for the trigger |
 | `autoClose` | number \| boolean  | false | Specify auto-close time. This function is not enabled when this value is false. If the value is `2000`, it will automatically close after 2 seconds. |
 | `autoOpen` | boolean  | false | Automatically open the component, you can use it with the `autoClose` property at the same time |
 | `enableVideo` | boolean  | false | Adapt the video to the window. For example, the content of the component can be written as: `<iframe width="560" height="315" src="https://www.youtube.com/xxx" frameBorder="0" allow="autoplay; encrypted-media" allowFullScreen></iframe>` <br /> or <br />`<video playsInline controls poster="/assets/videos/480x270/demo.jpg" src="/assets/videos/480x270/demo.mp4"></video>` |

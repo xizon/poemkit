@@ -1,3 +1,6 @@
+/**
+ * Corresponding to folder `./src/client/actions/*`
+ */
 
 const ROOT_DIR = "";
 
@@ -11,19 +14,31 @@ const config = {
 	  /*
 	   TYPE: Posts
 	   ------------------------------------------
-       Corresponding to folder `./src/client/actions/*`
 	  */
-	  "RECEIVE_DEMO_LIST": "http://api.countrylayer.com/v2/all?access_key=8ef27495767eb3ea58cc0eabf66068e9",
-	  "RECEIVE_DEMO_LISTDETAIL": "http://api.countrylayer.com/v2/name/{id}?access_key=8ef27495767eb3ea58cc0eabf66068e9",
+	  "RECEIVE_DEMO_LIST": "https://restcountries.com/v2/all",
+	  "RECEIVE_DEMO_LISTDETAIL": "https://restcountries.com/v2/name/{id}",
 
 	  //"RECEIVE_DEMO_LIST": `https://uiux.cc${ROOT_DIR}/assets/json/Posts.json`,
-	  //"RECEIVE_DEMO_LISTDETAIL": `https://uiux.cc${ROOT_DIR}/assets/json/PostDetail.json`,
+	  //"RECEIVE_DEMO_LISTDETAIL": `https://uiux.cc${ROOT_DIR}/assets/json/PostDetail.json?id={id}`,
 
 	  
 	  /*
+	   TYPE: Posts Pagination
+	   ------------------------------------------
+	  */
+	   "RECEIVE_PAGE_LIST": `https://uiux.cc/server/posts-pagination.php?page={page}`,
+ 
+
+	  /*
+	   TYPE: DropDown List
+	   ------------------------------------------
+	  */
+	   "RECEIVE_DROPDOWN_LIST": `https://uiux.cc/server/dropdown-list.php`,
+ 
+
+	  /*
 	   TYPE: User
 	   ------------------------------------------
-       Corresponding to folder `./src/client/services/*`
 	  */
 	  "LOGIN_REQUEST": `https://uiux.cc/server/sessions-create.php`,
 	  "USER_AUTHENTICATE": `https://uiux.cc/server/authenticate.php`,
@@ -49,16 +64,27 @@ const configTest = {
 	  /*
 	   TYPE: Posts
 	   ------------------------------------------
-       Corresponding to folder `./src/client/actions/*`
 	  */
 	  "RECEIVE_DEMO_LIST": `http://localhost:8888/uix-kit-react/public/assets/json/Posts.json`,
-	  "RECEIVE_DEMO_LISTDETAIL": `http://localhost:8888/uix-kit-react/public/assets/json/PostDetail.json`,
+	  "RECEIVE_DEMO_LISTDETAIL": `http://localhost:8888/uix-kit-react/public/assets/json/PostDetail.json?id={id}`,
 
-	  
+	  /*
+	   TYPE: Posts Pagination
+	   ------------------------------------------
+	  */
+	   "RECEIVE_PAGE_LIST": `http://localhost:8888/uix-kit-react/public/assets/json/pagination/page-{page}.json`,
+ 
+	   
+	  /*
+	   TYPE: DropDown List
+	   ------------------------------------------
+	  */
+	   "RECEIVE_DROPDOWN_LIST": `http://localhost:8888/uix-kit-react/public/assets/json/DropDownList.json`,
+ 
+
 	  /*
 	   TYPE: User
 	   ------------------------------------------
-       Corresponding to folder `./src/client/services/*`
 	  */
 	  "LOGIN_REQUEST": "http://localhost:8888/uix-kit-react/public/server/sessions-create.php",
 	  "USER_AUTHENTICATE": "http://localhost:8888/uix-kit-react/public/server/authenticate.php",

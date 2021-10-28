@@ -3,7 +3,7 @@
 
 <p align="center">
   <a href="https://github.com/xizon/uix-kit-react">
-	  <img src="https://raw.githubusercontent.com/xizon/uix-kit-react/master/public/assets/images/logo-colorful.png"  alt="Uix Kit"  width="180" >
+	  <img src="https://raw.githubusercontent.com/xizon/uix-kit-react/master/public/assets/images/logo-colorful.png"  alt="Uix Kit React"  width="180" >
   </a>
   <p align="center">
       <a href="https://travis-ci.com/xizon/uix-kit-react/" title="Travis CI"><img src="https://img.shields.io/travis/com/xizon/uix-kit-react?style=for-the-badge"/></a>
@@ -18,8 +18,6 @@
 
 Uix Kit React系一套免费的网站开发工具包，帮助开发者从零建立一个支持服务端渲染(SSR)的React技术网站，它支持pm2自动部署到服务器。
 
-它包含了一些UI迁移组件。核心交互脚本在组件挂载后立即调用, 无需使用React的钩子和状态生命周期，甚至完全使用这个脚本实现组件的交互(这对于快速创建一个演示模块非常有用)。
-
 
 
 ---
@@ -32,6 +30,7 @@ Uix Kit React系一套免费的网站开发工具包，帮助开发者从零建�
 
 ## 演示
 
+![quick overview 1](https://raw.githubusercontent.com/xizon/uix-kit-react/master/public/assets/images/demo-anim.gif)
 
 在线演示 [https://uiux.cc/uix-kit-react](https://uiux.cc/uix-kit-react)
 
@@ -52,8 +51,8 @@ Uix Kit React系一套免费的网站开发工具包，帮助开发者从零建�
 * 提供常见的网页组件和布局
 * 自动捆绑并生成独立的核心CSS和JS文件
 * 支持通过pm2自动部署到服务器
-* ✂️ UI迁移组件: 核心交互脚本在组件挂载后立即调用, 无需使用React的钩子和状态生命周期，甚至完全使用这个脚本实现组件的交互(这对于快速创建一个演示模块非常有用)
 * ✂️ 插件扩展: 默认组件演示导入了诸如Bootstrap4栅格系统, GSAP动画库, FontAwesome图标库, 3D引擎等常用的第三方插件，以便能够快速扩展您的网站 (可以按需配置需要导入的库或者插件)
+* ✂️ 可配置脚手架: 独立打包dist文件（您可以自主修改`webpack.config.js`使用内存挂载）
 
 
 * * *
@@ -562,3 +561,16 @@ uix-kit-react/
 ```
 
 
+
+## 兼容性
+
+| ![Chrome](https://raw.github.com/alrra/browser-logos/master/src/chrome/chrome_48x48.png) | ![Firefox](https://raw.github.com/alrra/browser-logos/master/src/firefox/firefox_48x48.png) | ![Edge](https://raw.github.com/alrra/browser-logos/master/src/edge/edge_48x48.png) | ![IE](https://raw.github.com/alrra/browser-logos/master/src/archive/internet-explorer_9-11/internet-explorer_9-11_48x48.png) | ![Safari](https://raw.github.com/alrra/browser-logos/master/src/safari/safari_48x48.png) | ![Opera](https://raw.github.com/alrra/browser-logos/master/src/opera/opera_48x48.png) | iOS  | Android
+| --- | --- | --- | --- | --- | --- | --- | --- |
+| >= 49 | >= 45 | >=14 | >=11 | >= 9 | >= 30 | >=10 | >=4.4 |
+
+## 支持的开发环境
+
+- 支持React 17 +
+- 支持ReactTypeScript 4.x.x + 
+- 支持ReactBabel 7.x.x + 
+- 支持ReactWebpack 5.x.x

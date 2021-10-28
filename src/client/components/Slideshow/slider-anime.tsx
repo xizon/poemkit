@@ -3,15 +3,15 @@ import { __ } from '@uixkit.react/components/_utils/_all';
 
 declare global {
     interface Window {
-        DocumentTouch?: any;
         dragEvents?: any[any];
         intervalEvents?: any[any];
+        windowResizeEvents?: any[any];
     }
 }
 
 interface sliderAnimeConfig {
     /** Setup a sliderAnime for the slider to animate automatically. */
-	auto?: boolean | undefined;
+	auto?: string | boolean | undefined;
     /** Autoplay interval. */
 	timing?: number | undefined;
     /** Gives the slider a seamless infinite loop. */
@@ -68,6 +68,8 @@ export function sliderAnime( curElement: any, config: sliderAnimeConfig ) {
     //Used to delete the global listening event when the component is about to be unmounted
     window.dragEvents = [];
     window.intervalEvents = [];
+    window.windowResizeEvents = [];
+    
 
 
     //Slider Initialize
@@ -89,10 +91,11 @@ export function sliderAnime( curElement: any, config: sliderAnimeConfig ) {
         }
     }
     
+    // Add function to the window that should be resized
     const debounceFunc = __.debounce(windowUpdate, 50);
     window.removeEventListener('resize', debounceFunc);
     window.addEventListener('resize', debounceFunc);
-    
+    window.windowResizeEvents.push(debounceFunc);
 
 
 
@@ -803,6 +806,7 @@ export function sliderAnime( curElement: any, config: sliderAnimeConfig ) {
     }	
 
 
+
 }
 
-export default { sliderAnime };
+export default sliderAnime;

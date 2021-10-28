@@ -15,6 +15,24 @@ function throttle( fn, limit ) {
     }
 }
 
+// Convert a string to slug.
+function toSlug( str ) {
+	if ( typeof( str ) == 'string' && str.length > 0 ) {
+		return str
+			.toString()
+			.replace(/[^\w\s\-！￥【】\u4e00-\u9eff]/gi, '')
+			.replace(/\s/g, '-')
+			.replace(/(\-){2,}/g, '-')
+			.replace(/\-\s*$/, '' )
+			.toLowerCase();
+
+
+
+	} else {
+		return str;
+	}
+}
+
 function createSidebarMenu( navItems ) {
 	// A few variables for use later
 	const navElem = document.createElement("nav"),
@@ -67,6 +85,21 @@ function createSidebarMenu( navItems ) {
 
 	});
 
+
+	// Page automatically slide to jump to the corresponding position
+	const browserURL = window.location.href;
+	if ( browserURL.indexOf( '#' ) >= 0 && document.querySelectorAll( '.app-header-title' ).length > 0 ) {
+		if ( browserURL.split( '#' )[1] !== '' ) {
+			const targetEl = document.querySelector( '#' + browserURL.split( '#' )[1] );
+			if ( targetEl !== null ) {
+				const elTop = targetEl.offsetTop;
+				window.scrollTo({ top: elTop, behavior: 'smooth' });
+			}
+		}
+
+	}
+	
+	
 	
 }
 
@@ -148,7 +181,7 @@ export function SidebarMenu() {
 				top: 100px;
 				right: 40px;
 				box-sizing: border-box;
-				max-width: 200px;
+				max-width: 180px;
 				overflow: auto;
 				max-height: calc(95vh - 100px);
 				border-left: 1px #e5e5e5 solid;
@@ -229,9 +262,10 @@ export function SidebarMenu() {
 		docLink.querySelector( 'a' ).style.display = 'none';
 
 		result.forEach( function(node, index) {
-
-			const linkID = 'app-header-title-' + index;
+			
+			
 			const linkTitle = node.innerHTML.replace(/<a\b[^>]*>(.*?)<\/a>/ig, '');
+			const linkID = 'app-goto__' + toSlug(linkTitle);
 			const sectionID = linkID + '__section';
 
 			
@@ -289,4 +323,4 @@ export function SidebarMenu() {
 }
 
 
-export default { SidebarMenu };
+export default SidebarMenu;

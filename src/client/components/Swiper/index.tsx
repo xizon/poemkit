@@ -37,19 +37,23 @@ type SwiperState = false;
 
 export default class Swiper extends Component<SwiperProps, SwiperState> {
 
-	private wrapperRef = React.createRef<HTMLDivElement>();
+	private rootRef = React.createRef<HTMLDivElement>();
+
+	uniqueID: string;
 
 	constructor(props) {
 		super(props);
+
+		this.uniqueID = 'app-' + __.GUID.create();
 	}
 	
-	componentDidMount(){
+	componentDidMount() {
 		
 		const self = this;
 
 		__( document ).ready( function() {
 
-			const reactDomEl: any = self.wrapperRef.current;
+			const reactDomEl: any = self.rootRef.current;
 			const $el = __( reactDomEl );
 
 			//Synchronize multiple objects
@@ -605,8 +609,7 @@ export default class Swiper extends Component<SwiperProps, SwiperState> {
 		
 		
 		const {
-			id,
-			...attributes
+			id
 		} = this.props;
 		
 
@@ -614,7 +617,7 @@ export default class Swiper extends Component<SwiperProps, SwiperState> {
 		return (
 		  <>
 			
-			<div ref={this.wrapperRef} id={id ? id : 'app-swiper-' + __.GUID.create() } className="uix-swiper" {...attributes}>
+			<div ref={this.rootRef} id={id || this.uniqueID} className="uix-swiper">
 
 
 				{/*<!-- Title

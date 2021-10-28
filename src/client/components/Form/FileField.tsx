@@ -41,10 +41,12 @@ export default class FileField extends Component<FileFieldProps, FileFieldState>
 	
 	private dropZoneRef = React.createRef<HTMLInputElement>();
 
+	uniqueID: string;
 
 	constructor(props) {
 		super(props);
 		
+		this.uniqueID = 'app-' + __.GUID.create();
 		
 		this.handleDragOver = this.handleDragOver.bind(this);
         this.handleChange = this.handleChange.bind(this);
@@ -112,9 +114,18 @@ export default class FileField extends Component<FileFieldProps, FileFieldState>
     }
 	
 	
-	componentDidMount(){
+	componentDidMount() {
 
-		document.addEventListener( 'dragover', this.handleDragOver );
+		document.removeEventListener('dragover', this.handleDragOver);
+		document.addEventListener('dragover', this.handleDragOver);
+	}
+
+	/** Remove the global list of events, especially as scroll and interval. */
+	componentWillUnmount() {
+
+		// Remove scroll events from document
+		document.removeEventListener('dragover', this.handleDragOver);
+
 	}
 
 	
@@ -131,7 +142,7 @@ export default class FileField extends Component<FileFieldProps, FileFieldState>
 		
 		
 		const nameRes = typeof(name) === 'undefined' ? ( typeof(label) !== 'undefined' ? __.toSlug( label ) : '' )  : name;
-		const idRes = id ? id : 'app-control-' + __.GUID.create();
+		const idRes = id || this.uniqueID;
 	
 		return (
 		  <>

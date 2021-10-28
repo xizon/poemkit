@@ -163,4 +163,4 @@ export function fireModalDialog(curElement: any, config: fireModalDialogConfig) 
 
 }
 
-export default { fireModalDialog };
+export default fireModalDialog;

@@ -3,7 +3,7 @@
 
 <p align="center">
   <a href="https://github.com/xizon/uix-kit-react">
-	  <img src="https://raw.githubusercontent.com/xizon/uix-kit-react/master/public/assets/images/logo-colorful.png"  alt="Uix Kit"  width="180" >
+	  <img src="https://raw.githubusercontent.com/xizon/uix-kit-react/master/public/assets/images/logo-colorful.png"  alt="Uix Kit React"  width="180" >
   </a>
   <p align="center">
       <a href="https://travis-ci.com/xizon/uix-kit-react/" title="Travis CI"><img src="https://img.shields.io/travis/com/xizon/uix-kit-react?style=for-the-badge"/></a>
@@ -18,7 +18,6 @@
 
 A free web kits with React for fast web design and development via SSR. Using react, redux, router, axios and express. This project was bootstrapped with nodejs library. Project supports automatic deployments from a number of repository hosting services via pm2.
 
-It contains some Migrating UI Components. The core interactive script is invoked immediately after a component is mounted without React Hooks and State Lifecycle, even use this script completely (this is very useful for quickly creating a demo module). 
 
 
 ---
@@ -32,6 +31,7 @@ It contains some Migrating UI Components. The core interactive script is invoked
 
 ## Demo
 
+![quick overview 1](https://raw.githubusercontent.com/xizon/uix-kit-react/master/public/assets/images/demo-anim.gif)
 
 For online demo, please checkout [https://uiux.cc/uix-kit-react](https://uiux.cc/uix-kit-react)
 
@@ -47,6 +47,8 @@ Server runs on `http://localhost:3000`
 * [File Structures](#file-structures)
 * [Contributing](#contributing)
 * [Changelog](#changelog)
+* [Browser Support](#browser-support)
+* [Supported development environment](#supported-development-environment)
 * [Licensing](#licensing)
 
 
@@ -65,9 +67,8 @@ Server runs on `http://localhost:3000`
 * Provides a common web page components and layouts
 * Automatically bundle and generate independent core CSS and JS files
 * Project supports automatic deployments from a number of repository hosting services via pm2
-* ✂️ Migrating UI Components: The core interactive script is invoked immediately after a component is mounted without React Hooks and State Lifecycle, even use this script completely (this is very useful for quickly creating a demo module). 
 * ✂️ Pluggable: The default components import some third-party plug-ins, such as  grid system of Bootstrap 4, GSAP animation library, FontAwesome icon library, 3D engine, etc., so that you can quickly expand your website (Support on-demand configuration)
-
+* ✂️ Configurable Scaffold: Independently package the dist files (you could modify `webpack.config.js` to use memory mount)
 
 
 * * *
@@ -577,6 +578,21 @@ Finding bugs, sending pull requests or improving our docs - any contribution is 
 ## Changelog
 
 [releases](CHANGELOG.md)
+
+
+## Browser Support
+
+| ![Chrome](https://raw.github.com/alrra/browser-logos/master/src/chrome/chrome_48x48.png) | ![Firefox](https://raw.github.com/alrra/browser-logos/master/src/firefox/firefox_48x48.png) | ![Edge](https://raw.github.com/alrra/browser-logos/master/src/edge/edge_48x48.png) | ![IE](https://raw.github.com/alrra/browser-logos/master/src/archive/internet-explorer_9-11/internet-explorer_9-11_48x48.png) | ![Safari](https://raw.github.com/alrra/browser-logos/master/src/safari/safari_48x48.png) | ![Opera](https://raw.github.com/alrra/browser-logos/master/src/opera/opera_48x48.png) | iOS  | Android
+| --- | --- | --- | --- | --- | --- | --- | --- |
+| >= 49 | >= 45 | >=14 | >=11 | >= 9 | >= 30 | >=10 | >=4.4 |
+
+
+## Supported development environment
+
+- Supports React 17 +
+- Supports TypeScript 4.x.x + 
+- Supports Babel 7.x.x + 
+- Supports Webpack 5.x.x
 
 
 

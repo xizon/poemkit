@@ -43,22 +43,28 @@ type ParallaxProps = {
     speed?: number | null;
     /** -- */
     id?: string;
-    children?: any;
 };
 type ParallaxState = false;
 
 
 export default class Parallax extends Component<ParallaxProps, ParallaxState> {
  
-     private wrapperRef = React.createRef<HTMLDivElement>();
+     private rootRef = React.createRef<HTMLDivElement>();
  
      windowScrollUpdate: () => void;
+     windowResizeUpdate: () => void;
+     uniqueID: string;
      
      constructor(props) {
          super(props);
  
+         this.uniqueID = 'app-' + __.GUID.create();
+         
          // Add a scroll event listener to window
          this.windowScrollUpdate = ()=>{};
+
+		// Add a resize event listener to window
+		this.windowResizeUpdate = ()=>{}; 
 
          this.parallaxInit = this.parallaxInit.bind(this);
  
@@ -67,7 +73,7 @@ export default class Parallax extends Component<ParallaxProps, ParallaxState> {
      parallaxInit(w) {
  
         const self = this;
-        const reactDomEl: any = self.wrapperRef.current;
+        const reactDomEl: any = self.rootRef.current;
 
         // Pure parallax scrolling effect without other embedded HTML elements
         //------------------------------------------
@@ -81,12 +87,12 @@ export default class Parallax extends Component<ParallaxProps, ParallaxState> {
 
 
             //Scroll Spy
-            self.windowScrollUpdate = parallax( reactDomEl, {
-                speed       : dataSpeed,
-                offsetTop   : 0,
-                transition  : dataEasing,
-                bg          : false
-            }) as () => void;
+            self.windowScrollUpdate = parallax(reactDomEl, {
+                speed: dataSpeed,
+                offsetTop: 0,
+                transition: dataEasing,
+                bg: false
+            }) as unknown as () => void;
 
         }
 
@@ -215,12 +221,12 @@ export default class Parallax extends Component<ParallaxProps, ParallaxState> {
 
 
                 //Scroll Spy
-                self.windowScrollUpdate = parallax( reactDomEl, {
-                    speed       : dataSpeed,
-                    offsetTop   : dataOffsetTop,
-                    transition  : dataEasing,
-                    bg          : { enable: true, xPos: dataXPos }
-                }) as () => void;
+                self.windowScrollUpdate = parallax(reactDomEl, {
+                    speed: dataSpeed,
+                    offsetTop: dataOffsetTop,
+                    transition: dataEasing,
+                    bg: { enable: true, xPos: dataXPos }
+                }) as unknown as () => void;
 
 
 
@@ -237,36 +243,28 @@ export default class Parallax extends Component<ParallaxProps, ParallaxState> {
  
      componentDidMount() {
  
-         const self = this;
- 
-         __(document).ready(function () {
- 
+        let windowWidth = window.innerWidth;
+        this.parallaxInit(windowWidth);
 
-             let windowWidth = window.innerWidth;
-             self.parallaxInit(windowWidth);
-    
-             function windowUpdate() {
-                 // Check window width has actually changed and it's not just iOS triggering a resize event on scroll
-                 if (window.innerWidth != windowWidth) {
-    
-                     // Update the window width for next time
-                     windowWidth = window.innerWidth;
-    
-                     // Do stuff here
-                     self.parallaxInit(windowWidth);
-    
-    
-                 }
-             }
-    
-             const debounceFunc = __.debounce(windowUpdate, 50);
-             window.removeEventListener('resize', debounceFunc);
-             window.addEventListener('resize', debounceFunc);
-    
+        const windowUpdate = () => {
+            // Check window width has actually changed and it's not just iOS triggering a resize event on scroll
+            if (window.innerWidth != windowWidth) {
 
- 
-         });
- 
+                // Update the window width for next time
+                windowWidth = window.innerWidth;
+
+                // Do stuff here
+                this.parallaxInit(windowWidth);
+
+
+            }
+        }
+
+        // Add function to the window that should be resized
+        this.windowResizeUpdate = __.debounce(windowUpdate, 50) as unknown as () => void;
+        window.removeEventListener('resize', this.windowResizeUpdate);
+        window.addEventListener('resize', this.windowResizeUpdate);
+
  
      }
  
@@ -276,6 +274,9 @@ export default class Parallax extends Component<ParallaxProps, ParallaxState> {
          // Remove scroll events from window
          window.removeEventListener('scroll', this.windowScrollUpdate);
          window.removeEventListener('touchmove', this.windowScrollUpdate);  
+
+		// Remove resize events from window
+		window.removeEventListener('resize', this.windowResizeUpdate);   
  
      }
  
@@ -293,8 +294,7 @@ export default class Parallax extends Component<ParallaxProps, ParallaxState> {
             skew,
             speed,
             id,
-            children,
-            ...attributes
+            children
         } = this.props;
 
         const _parallaxElements = typeof parallaxElements === typeof undefined ? false : parallaxElements;
@@ -304,15 +304,14 @@ export default class Parallax extends Component<ParallaxProps, ParallaxState> {
 
                 {!_parallaxElements ? (
                     <div 
-                        ref={this.wrapperRef}
-                        id={id || 'app-parallax-' + __.GUID.create()}
+                        ref={this.rootRef}
+                        id={id || this.uniqueID}
                         className={`uix-parallax ${heightClass || ''}`}
                         data-fully-visible={fullyVisible || false}
                         data-offset-top={offsetTop || 0}
                         data-overlay-bg={overlay || false}
                         data-skew={skew || 0}
-                        data-speed={speed || 0.1}
-                        {...attributes}>
+                        data-speed={speed || 0.1}>
                         <img className="uix-parallax__img" src={img} alt="" />
                         <div className="uix-v-align--absolute uix-t-c">
                             {children}
@@ -321,12 +320,11 @@ export default class Parallax extends Component<ParallaxProps, ParallaxState> {
 
                 ) : (
                     <div 
-                        ref={this.wrapperRef}
-                        id={id || 'app-parallaxEl-' + __.GUID.create()}
+                        ref={this.rootRef}
+                        id={id || this.uniqueID}
                         className={`uix-parallax--el ${heightClass || ''}`}
                         data-transition={parallaxElementsTransition || 'all 0.4s cubic-bezier(0, 0, 0.34, 0.96) 0s'}
-                        data-speed={speed || 0.1}
-                        {...attributes}>
+                        data-speed={speed || 0.1}>
                         {children}
                     </div>
                 )}

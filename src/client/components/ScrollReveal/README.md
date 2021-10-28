@@ -15,7 +15,7 @@ import ScrollReveal from '@uixkit.react/components/ScrollReveal/index.tsx';
 ```
 | Property | Type | Default | Description |
 | --- | --- | --- | --- |
-| `config` | JSON Object Literals  | - | Detailed animation parameters, using JSON string format.<br />**default value:**<br />`{"from": {"opacity":0,"x":70},"to":{"opacity":1,"x":0},"ease":"Power2.easeOut","duration": 0.4,"delay": 0,"infinite" : false,"viewport" : '100%'}` <br />**other:**<br />`{"viewport":"100%","from":{"opacity":0,"x":100},"to":{"opacity":1,"x":0},"ease":"Power2.easeOut","duration":0.8,"delay":0,"infinite":false}` <br />`{"viewport":"100%","from":"","to":".demo-sr-active","infinite":true}` |
+| `config` | JSON Object Literals  | - | <strong>(Required)</strong> Detailed animation parameters, using JSON string format.<br />**default value:**<br />`{"from": {"opacity":0,"x":70},"to":{"opacity":1,"x":0},"ease":"Power2.easeOut","duration": 0.4,"delay": 0,"infinite" : false,"viewport" : '100%'}` <br />**other:**<br />`{"viewport":"100%","from":{"opacity":0,"x":100},"to":{"opacity":1,"x":0},"ease":"Power2.easeOut","duration":0.8,"delay":0,"infinite":false}` <br />`{"viewport":"100%","from":"","to":".demo-sr-active","infinite":true}` |
 
 It accepts all props(include data-* attributes) which native div support.
 

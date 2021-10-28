@@ -67,14 +67,18 @@ type ModalDialogProps = {
     enableVideo?: boolean;
     /** -- */
     id?: string;
-    children?: any;
 };
 type ModalDialogState = false;
 
 
 export default class ModalDialog extends Component<ModalDialogProps, ModalDialogState> {
+
+    uniqueID: string;
+
     constructor(props) {
         super(props);
+
+        this.uniqueID = 'app-' + __.GUID.create();
     }
 
 
@@ -357,7 +361,7 @@ export default class ModalDialog extends Component<ModalDialogProps, ModalDialog
             children
         } = this.props;
 
-        const cid = id || 'app-modal-' + __.GUID.create();
+        const cid = id || this.uniqueID;
         const fullClassName = fullscreen ? 'is-fullscreen' : '';
         const lightboxEnabled = (lightbox === null || lightbox === undefined) ? true : lightbox;
 

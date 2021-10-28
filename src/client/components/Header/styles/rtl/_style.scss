@@ -1,0 +1,9 @@
+/* ====================================================== 
+   <!-- Header Area -->                                          
+/* ====================================================== */
+@import '@uixkit.react/components/_utils/styles/_variable-and-mixin.scss';
+
+.rtl .uix-header__container {
+    left: auto;
+	right: 0;
+}

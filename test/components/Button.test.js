@@ -37,7 +37,7 @@ describe('Button', () => {
 
     //
     test('renders initial button to <a>...</a>', () => {
-        render(<Button href="https://google.com" data-testid="test-element">Button Label</Button>);
+        render(<Button href="https://example.com" data-testid="test-element">Button Label</Button>);
 
         const $btn = screen.getByTestId('test-element');
 
@@ -48,7 +48,7 @@ describe('Button', () => {
 
         // Determine the type of button
         //------------------------------------------
-        expect($btn).toHaveAttribute('href', 'https://google.com');
+        expect($btn).toHaveAttribute('href', 'https://example.com');
 
         // Click event simulation
         //------------------------------------------

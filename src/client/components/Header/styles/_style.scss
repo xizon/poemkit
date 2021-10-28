@@ -1,0 +1,121 @@
+/* ====================================================== 
+   <!-- Header Area -->                                        
+/* ====================================================== */
+@import '@uixkit.react/components/_utils/styles/_variable-and-mixin.scss';
+
+
+/*
+ * 1. Default
+ * 2. Theme - White
+*/
+
+
+
+/* 
+ ---------------------------
+ 1. Default
+ ---------------------------
+ */ 
+
+/* Don't use "margin" or "padding" to set up ".uix-header__container" */
+
+.uix-header__container {
+	position: fixed;
+	left: 0;
+	top: 0;
+	width: 100%;
+	z-index: 90000;
+	box-shadow: 0px 2px 3px 0px rgba(0,0,0,0.10);
+	transition: .1s ease-in-out;
+	background-color: #fff;
+	
+	
+	&.is-fixed {
+		
+	}
+	
+
+	/* 
+	 ---------------------------
+	 2. Overlay Header
+	 ---------------------------
+	 */ 
+	&.uix-header__container--overlay {
+		background: rgba(255, 255, 255, 0.15);
+		border-bottom: 1px solid rgba(255, 255, 255, .2);
+
+		&.is-fixed {
+			background-color: #fff;
+		}
+
+	}
+
+	
+}
+
+/* Show Toolbar when viewing site with WordPress */
+.admin-bar .uix-header__container {
+    top: 32px;
+	
+}
+
+/* Admin bar becomes taller on smaller devices with WordPress */
+@media all and (max-width: 782px) {
+    .admin-bar .uix-header__container {
+         top: 0;
+    }
+}
+
+
+/* Don't use "margin" or "padding" to set up ".uix-header" */
+
+.uix-header {
+	/* Floating layer protection for IE */
+	background: url(data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7);
+
+}
+
+
+
+/* Header Placeholder, to prevent floating elements from affecting layout */
+.uix-header__placeholder {
+	height: 75px;
+	background: none;
+	display: block;
+	visibility: hidden;
+	width: 100%;
+	
+	&.is-fixed {
+		
+	}
+	
+}
+
+
+
+@media all and (max-width: 768px) {
+	
+	
+	.uix-header__container {
+		position: relative;
+
+		
+		&.uix-header__container--overlay {
+
+			background-color: $highlight-color1;
+			background-image: linear-gradient(to right, $btn-gradient-color1 0%, $btn-gradient-color2 20%, $btn-gradient-color3 100%);
+			position: relative;
+
+		}
+
+		
+	}
+
+	/* Header Placeholder, to prevent floating elements from affecting layout */
+	.uix-header__placeholder {
+		height: 0;
+	}
+
+	
+	
+}

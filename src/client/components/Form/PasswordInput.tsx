@@ -41,9 +41,13 @@ type PasswordInputState = {
 
 
 export default class PasswordInput extends Component<PasswordInputProps, PasswordInputState> {
+
+	uniqueID: string;
 	
 	constructor(props) {
 		super(props);
+
+		this.uniqueID = 'app-' + __.GUID.create();
 
 		this.state = {
 		  type: this.props.type ? this.props.type : 'password'
@@ -141,7 +145,7 @@ export default class PasswordInput extends Component<PasswordInputProps, Passwor
 		
 		const uiRes = typeof(ui) === 'undefined' ? '' : ui;
 		const nameRes = typeof(name) === 'undefined' ? ( typeof(label) !== 'undefined' ? __.toSlug( label ) : '' )  : name;
-		const idRes = id ? id : 'app-control-' + __.GUID.create();
+		const idRes = id || this.uniqueID;
 		const wrapperClassDisabled = disabled ? ' is-disabled' : '';
 		const wrapperClassIconLeft = iconLeft ? ' is-iconic' : '';
 		const wrapperClassIconRight = iconRight ? ' is-iconic is-reversed' : '';

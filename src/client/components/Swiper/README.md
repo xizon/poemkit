@@ -30,8 +30,7 @@ import Swiper from '@uixkit.react/components/Swiper/index.tsx';
             <td>-</td>
         </tr> 
         <tr>
-            <td colspan="4">This is a <strong>Migrating UI Component</strong>. There are not any properties and are used to quickly
-                migrate some completed HTML code. You only need to directly modify the component source code.</td>
+            <td colspan="4">This component uses the Swiper plug-in, and the source code is in <code>componentDidMount()</code>. There are not any properties.	</td>
         </tr>
     </tbody>
 </table>

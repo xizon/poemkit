@@ -34,12 +34,15 @@ type MultiSelectState = false;
 
 export default class MultiSelect extends Component<MultiSelectProps, MultiSelectState> {
 	
-	private wrapperRef = React.createRef<HTMLDivElement>();
+	private rootRef = React.createRef<HTMLDivElement>();
 	private resRef = React.createRef<HTMLInputElement>();
 	
+	uniqueID: string;
 
 	constructor(props) {
 		super(props);
+
+		this.uniqueID = 'app-' + __.GUID.create();
 	
         this.handleClickItem = this.handleClickItem.bind(this);
 		
@@ -54,7 +57,7 @@ export default class MultiSelect extends Component<MultiSelectProps, MultiSelect
 		event.preventDefault();
 		
 		const el = __( event.target );
-		const root = this.wrapperRef.current;
+		const root = this.rootRef.current;
 		const resInput = this.resRef.current;
 		
 		const $multiSelWrapper = __( root ),
@@ -115,7 +118,7 @@ export default class MultiSelect extends Component<MultiSelectProps, MultiSelect
 		
 		
 		const nameRes = typeof(name) === 'undefined' ? '' : name;
-		const idRes = id ? id : 'app-control-' + __.GUID.create();
+		const idRes = id || this.uniqueID;
 		const wrapperClassTheme = theme === 'line' ? ' uix-controls--line' : '';
 		
 		// Get all options from option prop
@@ -152,7 +155,7 @@ export default class MultiSelect extends Component<MultiSelectProps, MultiSelect
 		return (
 		  <>
 
-				<div ref={this.wrapperRef} className={"uix-controls uix-controls__multi-sel" + wrapperClassTheme} id={idRes + "__wrapper"}>
+				<div ref={this.rootRef} className={"uix-controls uix-controls__multi-sel" + wrapperClassTheme} id={idRes + "__wrapper"}>
 				  {multiSelOptionsList}
 
 				</div>

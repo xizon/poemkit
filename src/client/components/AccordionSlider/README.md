@@ -14,12 +14,13 @@ import { AccordionSlider } from '@uixkit.react/components/AccordionSlider/index.
 ```
 | Property | Type | Default | Description |
 | --- | --- | --- | --- |
-| `triggerType` | string \| `click` \| `mouseenter`  | click | One event type, such as `click` or `mouseenter` |
 | `displayTheFirstItem` | boolean | false | Display the only first item of a list |
+| `triggerType` | `click` \| `mouseover`  | click | One event type |
 | `autoReset` | boolean | true | Reset the initial state when the mouse moves out of the component area |
 | `displayRatio` | string | 60% | Display ratio measures the activated item's percentage of the component in the entire area |
 | `direction` | `horizontal` \| `verticle` | horizontal | The direction of the slider animation, if it is `horizontal`, it means changing the width, otherwise changing the height |
 | `closeBtn` | string \| boolean | false | The button that triggers the restoration of the initial state, represented by class, such as `.uix-accordion-img__close` |
+| `duration` | number | 200 | The number of milliseconds(ms) each iteration of the animation takes to complete |
 
 
 
@@ -31,6 +32,11 @@ import { AccordionSliderItem } from '@uixkit.react/components/AccordionSlider/in
 | --- | --- | --- | --- |
 | `defaultActive` | boolean | false | Set an item to activate by default |
 | `bg` | string | - | The URL or color of the background image. Eg. `http://example/demo.jpg`, `#f60` |
+| `boxToggleEv` | function | - | Handling events for collapsing item |
+| `boxAnimEndEv` | function | - | Handling events when the animation execution is complete |
+| `boxAnimLeaveEv` | function | - | Handling events when the mouse leaves the element |
+| `triggerType` | `click` \| `mouseover`  | click | One event type |
+
 
 
 
@@ -50,15 +56,15 @@ export default () => {
       <p>Show hidden divs on mouse event.</p>
       {/* ================================================================== */}
       <AccordionSlider triggerType="mouseover" displayTheFirstItem={true} autoReset={true} displayRatio="50%" direction="horizontal" closeBtn={false}>
-        <AccordionSliderItem bg={`/assets/images/demo/test-img-big-1.jpg`}>
+        <AccordionSliderItem bg={`/path/demo.png`}>
           <h3 className="uix-typo--color-white">Lorem Ipsum</h3>
           <p className="uix-typo--color-white">Lorem ipsum dolor sit amet, consectetur adipiscing elit, Lorem ipsum dolor sit amet, consectetur adipiscing elit</p>
         </AccordionSliderItem>
-        <AccordionSliderItem bg={`/assets/images/demo/test-img-big-2.jpg`}>
+        <AccordionSliderItem bg={`/path/demo.png`}>
           <h3 className="uix-typo--color-white">Lorem Ipsum</h3>
           <p className="uix-typo--color-white">Lorem ipsum dolor sit amet, consectetur adipiscing elit</p>
         </AccordionSliderItem>
-        <AccordionSliderItem bg={`/assets/images/demo/test-img-big-4.jpg`}>
+        <AccordionSliderItem bg={`/path/demo.png`}>
           <h3 className="uix-typo--color-white">Lorem Ipsum</h3>
           <p className="uix-typo--color-white">Lorem ipsum dolor sit amet, consectetur adipiscing elit</p>
         </AccordionSliderItem>
@@ -69,22 +75,22 @@ export default () => {
       <p>Click the item to show it. Hidden divs when you click the close button.</p>
       {/* ================================================================== */}
       <AccordionSlider triggerType="click" displayTheFirstItem={false} autoReset={false} displayRatio="60%" direction="horizontal" closeBtn=".uix-accordion-slider__close">
-        <AccordionSliderItem bg={`/assets/images/demo/test-img-big-1.jpg`}>
+        <AccordionSliderItem bg={`/path/demo.png`}>
           <h3 className="uix-typo--color-white">Lorem Ipsum</h3>
           <p className="uix-typo--color-white">Lorem ipsum dolor sit amet, consectetur adipiscing elit, Lorem ipsum dolor sit amet, consectetur adipiscing elit</p>
           <a className="uix-accordion-slider__close" href="#">Close</a>
         </AccordionSliderItem>
-        <AccordionSliderItem bg={`/assets/images/demo/test-img-big-2.jpg`}>
+        <AccordionSliderItem bg={`/path/demo.png`}>
           <h3 className="uix-typo--color-white">Lorem Ipsum</h3>
           <p className="uix-typo--color-white">Lorem ipsum dolor sit amet, consectetur adipiscing elit</p>
           <a className="uix-accordion-slider__close" href="#">Close</a>
         </AccordionSliderItem>
-        <AccordionSliderItem bg={`/assets/images/demo/test-img-big-4.jpg`}>
+        <AccordionSliderItem bg={`/path/demo.png`}>
           <h3 className="uix-typo--color-white">Lorem Ipsum</h3>
           <p className="uix-typo--color-white">Lorem ipsum dolor sit amet, consectetur adipiscing elit</p>
           <a className="uix-accordion-slider__close" href="#">Close</a>
         </AccordionSliderItem>
-        <AccordionSliderItem bg={`/assets/images/demo/test-img-big-5.jpg`}>
+        <AccordionSliderItem bg={`/path/demo.png`}>
           <h3 className="uix-typo--color-white">Lorem Ipsum</h3>
           <p className="uix-typo--color-white">Lorem ipsum dolor sit amet, consectetur adipiscing elit</p>
           <a className="uix-accordion-slider__close" href="#">Close</a>

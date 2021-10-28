@@ -28,15 +28,19 @@ type ButtonProps = {
 	target?: string;
 	/** -- */
 	id?: string;
-	children?: any;
 };
 type ButtonState = false;
 
 
 
 export default class Button extends Component<ButtonProps, ButtonState> {
+
+	uniqueID: string;
+
 	constructor(props) {
 		super(props);
+
+		this.uniqueID = 'app-' + __.GUID.create();
 	}
 
 
@@ -155,9 +159,9 @@ export default class Button extends Component<ButtonProps, ButtonState> {
 		  <>
 			
            {href ? (
-                <a tabIndex={0} href={href || '#'} className={"uix-btn" + _status + _border + _background + _spacing + _corners + _size + _iconPosition} target={target || '_self'} id={id || 'app-btn-' + __.GUID.create()} {...attributes}>{_icon !== '' ? <><span>{_icon}</span></> : ''}{children}</a>
+                <a tabIndex={0} href={href || '#'} className={"uix-btn" + _status + _border + _background + _spacing + _corners + _size + _iconPosition} target={target || '_self'} id={id || this.uniqueID} {...attributes}>{_icon !== '' ? <><span>{_icon}</span></> : ''}{children}</a>
             ) : (
-			  <button className={"uix-btn" + _status + _border + _background + _spacing + _corners + _size + _iconPosition} id={id ? id : 'app-btn-' + __.GUID.create() } type="button" {...attributes}>{_icon !== '' ? <><span>{_icon}</span></> : ''}{children}</button>
+			  <button className={"uix-btn" + _status + _border + _background + _spacing + _corners + _size + _iconPosition} id={id || this.uniqueID} type="button" {...attributes}>{_icon !== '' ? <><span>{_icon}</span></> : ''}{children}</button>
             )}	
 	
 		  </>

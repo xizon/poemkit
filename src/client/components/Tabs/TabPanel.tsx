@@ -3,6 +3,7 @@ import React, { Component } from 'react';
 type TabPanelProps = {
 	defaultActive?: string | boolean | undefined;
 	tabpanelClass?: string;
+	targetID?: string;
 };
 type TabPanelState = false;
 
@@ -19,6 +20,7 @@ export default class TabPanel extends Component<TabPanelProps, TabPanelState> {
 		const { 
 			defaultActive,
 			tabpanelClass,
+			targetID,
 			...attributes
 		} = this.props;
 		
@@ -28,7 +30,7 @@ export default class TabPanel extends Component<TabPanelProps, TabPanelState> {
 		return (
 		  <>
  
-				<div role="tabpanel" className={ tabpanelClass ? `uix-tabs__content ${tabpanelClass} ${activedClassName}` : `uix-tabs__content ${activedClassName}`} {...attributes}></div>
+				<div role="tabpanel" id={targetID} className={ tabpanelClass ? `uix-tabs__content ${tabpanelClass} ${activedClassName}` : `uix-tabs__content ${activedClassName}`} {...attributes}></div>
 	
 		  </>
 		)

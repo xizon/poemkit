@@ -36,8 +36,12 @@ export default class File extends Component<FileProps, FileState>  {
 	
 	private fileRef = React.createRef<HTMLDivElement>();
 
+	uniqueID: string;
+
 	constructor(props) {
 		super(props);
+
+		this.uniqueID = 'app-' + __.GUID.create();
 	
         this.handleChange = this.handleChange.bind(this);
 		
@@ -70,7 +74,7 @@ export default class File extends Component<FileProps, FileState>  {
 		
 		
 		const nameRes = typeof(name) === 'undefined' ? ( typeof(label) !== 'undefined' ? __.toSlug( label ) : '' )  : name;
-		const idRes = id ? id : 'app-control-' + __.GUID.create();
+		const idRes = id || this.uniqueID;
 	
 		return (
 		  <>

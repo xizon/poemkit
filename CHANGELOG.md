@@ -2,6 +2,35 @@
 
 
 
+#### = 0.1.3 (October 28, 2021) =
+
+* New: Add new UI components `MultilevelDropdownMenu`.
+* New: Add new UI components `CascadingDropDownList`.
+* New: Add new UI components `Gallery`.
+* New: Add new UI components `InfiniteScroll`.
+* New: Add new UI components `Pagination`.
+* New: Added a demonstration of asynchronous paging.
+* New: Added the callback function method of the select form component.
+* New: Added `optionChangeCallback()` callback function to the drop-down menu and select control.
+* Fix: Fixed some issues with parallax component.
+* Fix: Fixed the position problem of mega menu.
+* Fix: Fixed the problem that the helper script gets the width and height.
+* Fix: Fixed the problem that the width and height of hidden elements in the helper script may be 0.
+* Tweak: Optimized redux patterns for ensuring good performance.
+* Tweak: Changed the test API of Posts.
+* Tweak: Optimized the `htmlEncode()` and `htmlDecode()` methods of core helpers.
+* Tweak: Removed redundant SCSS files and moved some files to the corresponding component folder.
+* Tweak: Enhanced the `prev()`, `next()`, `parent()`, `parents()` and `siblings()` methods in the core helpers script, and supports HTML node, ID and Class selectors.
+* Tweak: Adjusted the side navigation of the component demo.
+* Tweak: Improved the performance for all UI components.
+* Tweak: Delete unnecessary props on a DOM element from UI components.
+* Tweak: Component comments adjustment.
+* Refactor: Refactored some components to use React hooks to optimize performance.
+* Refactor: Partially refactor the component `Accordion`, `AccordionSlider`, `Tabs`, `Table`, `Table Sorter`, `Header` and `Navigation`.
+
+
+
+
 #### = 0.1.2 (October 13, 2021) =
 
 * Fix: Fixed the wrong width, height and position of the large image triggered by the Lightbox component.

@@ -15,6 +15,8 @@ import '@uixkit.react/components/_utils/styles/_all.scss';
 import '@uixkit.react/components/_utils/styles/rtl/_all.scss';
 import { __ } from '@uixkit.react/components/_utils/_all';
 
+/*-- Apply this component styles --*/
+import '@uixkit.react/components/Footer/styles/_style.scss';
 
 
 export default class Footer extends Component<{}, {}> {

@@ -3,8 +3,8 @@
  * Core Helpers
  *
  * @package: uix-kit-react
- * @version: 0.36
- * @last update: October 13, 2021
+ * @version: 0.40
+ * @last update: October 23, 2021
  * @author: UIUX Lab <uiuxlab@gmail.com>
  * @license: MIT
  *
@@ -91,16 +91,25 @@ __( document ).ready( function() {
 			__( 'h1' ).wrapInner( '<span class="new-div" />' );
 			√√
 			__( 'h1' ).text( 'New H1' );
+
 			__( '.demo1' ).prev().addClass( 'prev' );
 			__( '.demo2' ).next().addClass( 'next' );
 			__( '.demo3' ).parent().addClass( 'parent' );
 			__( '.menu' ).parents().addClass( 'all-parents' );
-			__( '.menu' ).parents( '.menu__inner' ).addClass( 'parent-target' );
 			__( '.demo' ).children().addClass( 'children-all' );
+			__( '.class-1' ).siblings().addClass( 'class-siblings' );
+
+			__( '.demo1' ).prev( 'ul' ).addClass( 'prev' );
+			__( '.demo2' ).next( 'ul' ).addClass( 'next' );
+			__( '.demo3' ).parent( 'ul' ).addClass( 'parent' );
+			__( '.menu' ).parents( 'ul' ).addClass( 'all-parents' );
 			__( '.demo' ).children( '.demo-children2' ).addClass( 'children-single' );
+			__( '.class-1' ).siblings( 'ul' ).addClass( 'class-siblings' );
+
+
 			__( '.class-1' ).not( '.class-2' ).addClass( 'class-not' );
 			__( '.class-1' ).filter( '.class-2' ).addClass( 'class-filter' );
-			__( '.class-1' ).siblings().addClass( 'class-siblings' );
+			
 			__( '.demo' ).trigger( 'click' );
 			__( '.demo' ).toggleClass( 'class-toggle-1 class-toggle-2' );
 
@@ -244,7 +253,7 @@ __( document ).ready( function() {
 			// AJAX demos
 			//+++++++++++++++++++++++++++++++++++++++++++
 			__.ajax({
-				url: 'http://api.countrylayer.com/v2/name/Argentina?access_key=8ef27495767eb3ea58cc0eabf66068e9',
+				url: 'https://restcountries.com/v2/name/Argentina',
 				method: 'GET',
 				complete: function( data ) {
 					console.log( '=> ajax ok!' );
@@ -431,8 +440,6 @@ const __ = (function () {
 				if ( attr == 'width' ) return window.innerWidth;
 			}		
 	
-			
-			
 
 			//element data
 			//-----------------
@@ -446,9 +453,15 @@ const __ = (function () {
 			if (computedStyle) { // This will be true on nearly all browsers
 				_val =  computedStyle[attr];  //return ??px
 			}
-			
-			const newVal = /\d+/.exec( _val );
 
+			
+			// if getComputedStyle return 'auto'
+			if ( attr === 'height' && _val === 'auto' ) return actualPropertyValue(self, 'height');
+			if ( attr === 'width'  && _val === 'auto' ) return actualPropertyValue(self, 'width');
+
+
+			//
+			const newVal = /\d+/.exec( _val ); // Array ["123"]
 			return parseFloat( newVal );
 
 		} else {
@@ -636,6 +649,85 @@ const __ = (function () {
 			return str;
 		}
 	}
+
+
+	/*
+	* Get the actual value with user specific methed
+	* it can be 'width', 'height', 'outerWidth', 'outerHeight'
+	* @private
+	* @param {Element} el           - A DOM node containing one selector to match against.
+	* @param {String} prop          - A string naming the property of style.
+	* @param {?Json} config         - Whether or not margin is included. The key `includeMargin` 
+	                                  takes effect when set to true
+	* @return {Number}              - Returns a pure number.
+	*/
+	function actualPropertyValue(el, prop, config) {
+		const style      = window.getComputedStyle ? window.getComputedStyle(el) : el.currentStyle,
+			display    = style.display,
+			position   = style.position,
+			visibility = style.visibility;
+			
+		let marginWidth = 0;
+		let marginHeight = 0;
+
+		let maxVal;
+		let actualVal;
+
+
+		if ( config && config.includeMargin === true ) {
+			marginWidth = parseFloat(style.marginLeft) + parseFloat(style.marginRight);
+			marginHeight = parseFloat(style.marginTop) + parseFloat(style.marginBottom);
+		}
+
+		
+		if ( prop === 'width' ) {
+			maxVal = parseFloat( style.maxWidth );
+
+			// if its not hidden we just return normal height
+			if(display !== 'none' && maxVal !== '0') {
+				return el.clientWidth;
+			}
+		}
+		if ( prop === 'height' ) {
+			maxVal = parseFloat( style.maxHeight );
+			if(display !== 'none' && maxVal !== '0') {
+				return el.clientHeight;
+			} 
+		}
+		
+		if ( prop === 'outerWidth' ) {
+			maxVal = parseFloat( style.maxWidth );
+			if(display !== 'none' && maxVal !== '0') {
+				return el.offsetWidth + marginWidth;
+			}
+		}
+		if ( prop === 'outerHeight' ) {
+			maxVal = parseFloat( style.maxHeight );
+			if(display !== 'none' && maxVal !== '0') {
+				return el.offsetHeight + marginHeight;
+			} 
+		}
+
+		// the element is hidden so:
+		// making the el block so we can meassure its height but still be hidden
+		el.style.position   = 'absolute';
+		el.style.visibility = 'hidden';
+		el.style.display    = 'block';
+
+
+		if ( prop === 'width' ) actualVal = el.clientWidth;
+		if ( prop === 'height' ) actualVal = el.clientHeight;
+		if ( prop === 'outerWidth' ) actualVal = el.offsetWidth + marginWidth;
+		if ( prop === 'outerHeight' ) actualVal = el.offsetHeight + marginHeight;
+
+		// reverting to the original values
+		el.style.display    = display;
+		el.style.position   = position;
+		el.style.visibility = visibility;
+
+		return actualVal;
+	}
+
 
 
 	/*
@@ -963,7 +1055,7 @@ const __ = (function () {
 		/*
 		 * Get the -webkit-transition-duration property
 		 *
-		 * @param {Element} el - A DOMString containing one selector to match against.
+		 * @param {Element} el - A DOM node containing one selector to match against.
 		 * @return {Number}    - Returns a pure number.
 		 */		
 		t.getTransitionDuration = function( el ) {
@@ -994,7 +1086,7 @@ const __ = (function () {
 		/*
 		 * Get an object's absolute position on the page
 		 *
-		 * @param {Element} el - A DOMString containing one selector to match against.
+		 * @param {Element} el - A DOM node containing one selector to match against.
 		 * @return {Json}    - An object containing the properties top and left. 
 		 */	
 		t.getAbsoluteCoordinates = function( el ) {
@@ -1009,7 +1101,7 @@ const __ = (function () {
 			} else {
 
 				// width and height in pixels, including padding and border
-				// Corresponds to jQuery outerWidth(), outerHeight()
+				// Corresponds to outerWidth(), outerHeight()
 				leftPos = ( el.offsetLeft == 0 ) ? ( windowWidth - ( el.parentElement.offsetLeft + el.parentElement.offsetWidth ) ) : ( windowWidth - ( el.offsetLeft + el.offsetWidth ) );
 				topPos = ( el.offsetTop == 0 ) ? ( windowWidth - ( el.parentElement.offsetTop + el.parentElement.offsetHeight ) ) : ( windowWidth - ( el.offsetTop + el.offsetHeight ) );
 			}
@@ -1302,12 +1394,24 @@ const __ = (function () {
 	 */
 	 __.htmlEncode = function(str) {
 		
-		const div = document.createElement('div');
+		let res = '';
+		if (typeof (document) === 'undefined') {
+			res = str.replace(/[\u00A0-\u9999<>\&]/g, function(i) {
+				return '&#'+i.charCodeAt(0)+';';
+			});
+		} else {
+			const div = document.createElement('div');
 
-		//Creates a new Text node. This method can be used to escape HTML characters.
-		div.appendChild(document.createTextNode(str));
+			//Creates a new Text node. This method can be used to escape HTML characters.
+			div.appendChild(document.createTextNode(str));
 
-		let res = div.innerHTML;
+			res = div.innerHTML;
+		}
+
+
+		//Convert single and double quotes
+		res = res.replace(/"/g, '&quot;').replace(/'/g, '&#39;');
+
 		return res;
 
 	};
@@ -1319,11 +1423,37 @@ const __ = (function () {
 	 * @return {string}             - Filtered text.
 	 */
 	 __.htmlDecode = function(str) {
-		
-		const txt = document.createElement('textarea');
-		txt.innerHTML = str;
 
-		let res = txt.value;
+		let res = '';
+		if (typeof (document) === 'undefined') {
+			const entities = [
+				['amp', '&'],
+				['apos', '\''],
+				['#x27', '\''],
+				['#x2F', '/'],
+				['#39', '\''],
+				['#47', '/'],
+				['lt', '<'],
+				['gt', '>'],
+				['nbsp', ' '],
+				['quot', '"'],
+				['#60', '<'],
+				['#62', '>']
+			];
+
+			for (let i = 0, max = entities.length; i < max; i++) {
+				str = str.replace(new RegExp('&'+entities[i][0]+';', 'g'), entities[i][1]);
+			} 
+			res = str;
+			
+		} else {
+			const txt = document.createElement('textarea');
+			txt.innerHTML = str;
+
+			res = txt.value;
+		}
+		
+
 		return res;
 
 	};
@@ -1371,7 +1501,7 @@ const __ = (function () {
 	/* ---------------- API methods ----------------- */
 	
 	
-	/**
+	/*
 	 * Core method
 	 *
 	 * @param  {String|Element} s       - The selector to search for or HTML element to wrap with functionality
@@ -1721,7 +1851,7 @@ const __ = (function () {
     /*
      * Insert an element as the first child node of another
      *
-     * @param  {Element} el  - Element to insert
+     * @param  {Element} el  - A DOM node containing one selector to match against.
      */
      __.prototype.prependTo = function(el) {
         if (this.firstChild) {
@@ -1732,7 +1862,7 @@ const __ = (function () {
     /*
      * Insert an element to the end of the target
      *
-     * @param  {Element} el  - Element to insert
+     * @param  {Element} el  - A DOM node containing one selector to match against.
      */
      __.prototype.appendTo = function(el) {
         this.appendChild(el);
@@ -1965,7 +2095,7 @@ const __ = (function () {
 	/*
 	 * Get the descendants of each element in the current set of matched elements
 	 *
-	 * @param  {String|Element} s   - A string or element containing a selector expression to match elements against.
+	 * @param  {String} s           - A string containing a selector expression to match elements against.
 	 * @return {Array}              - The collection of elements
 	 */
 	__.prototype.find = function(s) {
@@ -1998,7 +2128,7 @@ const __ = (function () {
 	/*
 	 * Reduce the set of matched elements to the one at the specified index.
 	 *
-	 * @param  {Number} index   - A string or element containing a selector expression to match elements against.
+	 * @param  {Number} index   - A number for index.
 	 * @return {Array}          - Contains only a collection of HTML elements.
 	 */
 	__.prototype.eq = function(index) {
@@ -2019,12 +2149,28 @@ const __ = (function () {
 	 * Returns the Element immediately prior to the specified one in its parent's children list, 
 	 * or null if the specified element is the first one in the list.
 	 *
+	 * @param  {String} s       - A string containing a selector expression to match elements against.
 	 * @return {Array}          - Contains only a collection of HTML elements.
 	 */
-    __.prototype.prev = function() {
+    __.prototype.prev = function( s ) {
 
 		const el = this.previousElementSibling;
-		if ( el !== null ) return el;
+
+		if (s === undefined) {
+			if ( el !== null ) return el;
+		} else {
+			if (
+				el !== null && 
+				//Determine whether the ID, class and HTML nodes match
+			    ( el.nodeName.toLowerCase() === s || el.classList.contains( s.replace(/\./g,'') ) || '#' + el.id === s )
+			) {
+				return el;
+			} else {
+				return [];
+			}
+			
+		}
+
 		
     }
 	
@@ -2033,12 +2179,28 @@ const __ = (function () {
      * Returns the element immediately following the specified one in its parent's children list, 
      * or null if the specified element is the last one in the list.
 	 *
+	 * @param  {String} s       - A string containing a selector expression to match elements against.
 	 * @return {Array}          - Contains only a collection of HTML elements.
 	 */
-    __.prototype.next = function() {
+    __.prototype.next = function( s ) {
 
 		const el = this.nextElementSibling;
-		if ( el !== null ) return el;
+
+		if (s === undefined) {
+			if ( el !== null ) return el;
+		} else {
+			if (
+				el !== null && 
+				//Determine whether the ID, class and HTML nodes match
+			    ( el.nodeName.toLowerCase() === s || el.classList.contains( s.replace(/\./g,'') ) || '#' + el.id === s )
+			) {
+				return el;
+			} else {
+				return [];
+			}
+			
+		}
+
 		
     }
 
@@ -2046,19 +2208,35 @@ const __ = (function () {
 	 * Returns the DOM node's parent Element, or null if the node either has no parent,
 	 * or its parent isn't a DOM Element.
 	 *
+	 * @param  {String} s       - A string containing a selector expression to match elements against.
 	 * @return {Array}          - Contains only a collection of HTML elements.
 	 */
-    __.prototype.parent = function() {
+    __.prototype.parent = function( s ) {
 
 		const el = this.parentElement;
-		if ( el !== null ) return el;
+
+		if (s === undefined) {
+			if ( el !== null ) return el;
+		} else {
+			if (
+				el !== null && 
+				//Determine whether the ID, class and HTML nodes match
+			    ( el.nodeName.toLowerCase() === s || el.classList.contains( s.replace(/\./g,'') ) || '#' + el.id === s )
+			) {
+				return el;
+			} else {
+				return [];
+			}
+			
+		}
+
     }
 
 
 	/*
 	 * Get the ancestors of each element in the current set of matched elements.
 	 *
-	 * @param  {Element} s   - A parent element.
+	 * @param  {String} s                 - A string containing a selector expression to match elements against.
 	 * @return {Array}                    - Contains only a collection of HTML elements.
 	 */
 	 __.prototype.parents = function(s) {
@@ -2075,7 +2253,22 @@ const __ = (function () {
 		
 		while (_parent !== parentSelector) {
 			const _currentNode = _parent;
-			parents.push(_currentNode);
+
+			//Determine whether the ID, class and HTML nodes match
+			if (s !== undefined) {
+				if ( 
+					_currentNode.nodeName.toLowerCase() === s || 
+					_currentNode.classList.contains( s.replace(/\./g,'') ) || 
+					'#' + _currentNode.id === s 
+				) {
+					parents.push(_currentNode);
+				}
+				
+			} else {
+				parents.push(_currentNode);
+			}
+
+			//
 			_parent = _currentNode.parentNode;
 		}
 		
@@ -2091,8 +2284,9 @@ const __ = (function () {
 	 * Returns a live HTMLCollection which contains all of the child elements 
 	 * of the node upon which it was called.
 	 *
-	 * @param  {?String|?Element} s   - The selector that needs to be filtered.
-	 * @return {Array}                -  The collection of elements
+	 * @param  {Element} s         - The selector that needs to be filtered. A DOMstring containing 
+	 *                               one selector to match against.
+	 * @return {Array}              -  The collection of elements
 	 */
     __.prototype.children = function(s) {
 
@@ -2100,15 +2294,30 @@ const __ = (function () {
 		const childrenList = self.children;
 		const res = [];
 	
-		
-		if (s === undefined) {
+		if ( childrenList ) {
 			for (let i = 0; i < childrenList.length; i++ ) {
-				res.push(childrenList[i]);	
+
+				const _currentNode = childrenList[i];
+
+				//Determine whether the ID, class and HTML nodes match
+				if (s !== undefined) {
+					if ( 
+						_currentNode.nodeName.toLowerCase() === s || 
+						_currentNode.classList.contains( s.replace(/\./g,'') ) || 
+						'#' + _currentNode.id === s 
+					) {
+						res.push(_currentNode);
+					}
+					
+				} else {
+					res.push(_currentNode);
+				}
+				
 			}
-			return res;
-		} else {
-			return [].slice.call( this.querySelectorAll(s) );
+
 		}
+
+		return res;
 
     }
 	
@@ -2116,7 +2325,7 @@ const __ = (function () {
 	/*
 	 * Reduce the set of matched elements to those that match the selector or pass the function's test.
 	 *
-	 * @param  {String|Element} s   - The selector that needs to be filtered.
+	 * @param  {String} s           - A string containing a selector expression to match elements against.
 	 * @return {Array}              -  The collection of elements
 	 */
     __.prototype.filter = function(s) {
@@ -2138,7 +2347,7 @@ const __ = (function () {
 	/*
 	 * Remove elements from the set of matched elements.
 	 *
-	 * @param  {String|Element} s   - The selector that needs to be filtered.
+	 * @param  {String} s           - A string containing a selector expression to match elements against.
 	 * @return {Array}              -  The collection of elements
 	 */
     __.prototype.not = function(s) {
@@ -2161,12 +2370,12 @@ const __ = (function () {
 	/*
 	 * Get the siblings of each element in the set of matched elements
 	 *
+	 * @param  {String} s                 - A string containing a selector expression to match elements against.
 	 * @return {Array}              -  The collection of elements
 	 */
-    __.prototype.siblings = function() {
+    __.prototype.siblings = function( s ) {
 		
 		const self = this;
-		
 		
 		// for collecting siblings
 		let siblings = []; 
@@ -2180,8 +2389,25 @@ const __ = (function () {
 		// collecting siblings
 		while (sibling) {
 			if (sibling.nodeType === 1 && sibling !== self) {
-				siblings.push(sibling);
+
+				//Determine whether the ID, class and HTML nodes match
+				if (s !== undefined) {
+					if ( 
+						sibling.nodeName.toLowerCase() === s || 
+						sibling.classList.contains( s.replace(/\./g,'') ) || 
+						'#' + sibling.id === s 
+					) {
+						siblings.push(sibling);
+					}
+					
+				} else {
+					siblings.push(sibling);
+				}
+
+				
 			}
+
+			//
 			sibling = sibling.nextSibling;
 		}
 		
@@ -2235,7 +2461,7 @@ const __ = (function () {
 	 * Traverses the Element and its parents (heading toward the document root) 
 	 * until it finds a node that matches the provided selector string. 
 	 *
-	 * @param  {String|Element} s   - The selector that needs to be filtered.
+	 * @param  {String} s           - A string containing a selector expression to match elements against.
 	 * @return {Array}              - Contains only a collection of HTML elements.
 	 */
 	__.prototype.closest = function(s) {
@@ -2916,7 +3142,7 @@ const __ = (function () {
 	 * Search for a given element from among the matched elements.
 	 *
 	 * @return {Number}     - The return value is an integer indicating the position of the 
-	 *                        first element within the jQuery object relative to its sibling elements.
+	 *                        first element within the object relative to its sibling elements.
 	 */
     __.prototype.index = function() {
 		const self = this;
@@ -3278,6 +3504,7 @@ const __ = (function () {
 	
     return __;
 })();
+
 
 
 export default __;

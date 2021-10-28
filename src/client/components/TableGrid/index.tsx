@@ -19,110 +19,12 @@ import { __ } from '@uixkit.react/components/_utils/_all';
 import '@uixkit.react/components/TableGrid/styles/_style.scss';
 
 
-/* Table Grid Field
--------------------------------------------------*/
-type TableGridFieldProps = {
-	cols?: number;
-	content?: any;
-};
-type TableGridFieldState = false;
+//
+import TableGridRow from '@uixkit.react/components/TableGrid/TableGridRow';
+import TableGridHeaders from '@uixkit.react/components/TableGrid/TableGridHeaders';
 
 
 
-class TableGridField extends Component<TableGridFieldProps, TableGridFieldState> {
-	constructor(props) {
-		super(props);
-	}
-	render() {
-		
-		return (
-		  <>
-			<div className="uix-table-grid__row-cell" style={{flex: this.props.cols}} role="gridcell">{this.props.content}</div>
-		  </>
-		)
-	}
-}
-
-
-
-/* Table Grid Row
--------------------------------------------------*/
-interface TableGridRowConfig {
-    data: any[] | undefined;
-    selected: string | undefined;
-}
-
-type TableGridRowProps = {
-	data?: TableGridRowConfig;
-};
-type TableGridRowState = false;
-
-
-class TableGridRow extends Component<TableGridRowProps, TableGridRowState> {
-	constructor(props) {
-		super(props);
-	}
-	render() {
-		
-		const _fields = this.props.data!.data!;
-		const _selected = this.props.data!.selected!;
-		const rowClasses = _selected ? 'uix-table-grid__row is-drop-target' : 'uix-table-grid__row';
-
-		
-		const fields = _fields.map((el, i) => {
-			return <TableGridField key={"field" + i} cols={el.cols} content={el.content}  />
-		});
-												
-		return (
-		  <>
-			<div className={rowClasses} role="row" id={'app-table-grid-field-row' + __.GUID.create()}>
-				{fields}
-			</div>
-	
-		  </>
-		)
-	}
-}
-		
-
-/* Table Grid Headers
--------------------------------------------------*/				
-type TableGridHeadersProps = {
-	data: any[];
-};
-type TableGridHeadersState = false;
-
-
-class TableGridHeaders extends Component<TableGridHeadersProps, TableGridHeadersState> {
-	constructor(props) {
-		super(props);
-	}
-	render() {
-		if ( this.props.data ) {
-			
-			return (
-			  <>
-
-				<div className="uix-table-grid__head" role="row" id={'app-table-grid-columnheader' + __.GUID.create()}>
-					{this.props.data!.map((item, i) => {
-						return <div key={"columnheader" + i} className="uix-table-grid__head-cell" style={{flex:1}} role="columnheader" tabIndex={0}>{item}</div>;
-					})
-					}
-				</div>
-
-			  </>
-			)	
-		} else {
-			return (
-				<></>
-			)
-		}
-	}
-}
-
-
-/* Table Grid Grid Component 
--------------------------------------------------*/				
 type TableGridProps = {
 	data: any;
 	/** -- */
@@ -133,8 +35,13 @@ type TableGridState = false;
 
 
 export default class TableGrid extends Component<TableGridProps, TableGridState> {
+
+	uniqueID: string;
+
 	constructor(props) {
 		super(props);
+
+		this.uniqueID = 'app-' + __.GUID.create();
 	}
 	
 
@@ -142,8 +49,7 @@ export default class TableGrid extends Component<TableGridProps, TableGridState>
 		
 		const { 
 			data,
-			id,
-			...attributes
+			id
 		} = this.props;
 
 		
@@ -153,7 +59,7 @@ export default class TableGrid extends Component<TableGridProps, TableGridState>
 		return (
 		  <>
 			
-			<div className="uix-table-grid" id={id || 'app-table-grid-' + __.GUID.create()} {...attributes} role="grid">
+			<div className="uix-table-grid" id={id || this.uniqueID} role="grid">
 		
                 <TableGridHeaders data={_headers} />
 					

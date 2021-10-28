@@ -32,8 +32,6 @@ export default ({ staticContext = {} }) => {
 										<p>
 											A free web kits with React for fast web design and development via SSR. Using react, redux, router, axios and express. This project was bootstrapped with nodejs library. Project supports automatic deployments from a number of repository hosting services via pm2.
 										</p>		
-										<p>It contains some Migrating UI Components. The core interactive script is invoked immediately after a component is mounted without React Hooks and State Lifecycle, even use this script completely (this is very useful for quickly creating a demo module).</p>
-
 										<p>
 											<NavLink data-route="true" to="/components-demo" style={{textDecoration: "underline"}}>
 												<i className="fa fa-external-link" aria-hidden="true"></i> Click me to view components!

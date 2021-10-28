@@ -67,15 +67,19 @@ type CardProps = {
 	avatar?: string | null;
 	/** -- */
 	id?: string;
-	children?: any;
 };
 type CardState = false;
 
 
 
 export default class Card extends Component<CardProps, CardState> {
+
+	uniqueID: string;
+	
 	constructor(props) {
 		super(props);
+		
+		this.uniqueID = 'app-' + __.GUID.create();
 	}
 
 	render() {
@@ -99,7 +103,7 @@ export default class Card extends Component<CardProps, CardState> {
 		} = this.props;
 
 		//set ID
-		const cid = id || 'app-card-' + __.GUID.create();
+		const cid = id || this.uniqueID;
 
 		//title
 		const _title = title || '';
