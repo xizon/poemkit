@@ -1,18 +1,18 @@
 /* ======================================================
     <!-- Tabs Animated -->
 /* ====================================================== */
-@import '@uixkit.react/components/_utils/styles/_variable-and-mixin.scss';
+@import '@poemkit/components/_utils/styles/_variable-and-mixin.scss';
 
 
 
-.uix-tabs-animated {
+.poemkit-tabs-animated {
 	
 	width: 100%;
 	min-height: 150px;
 	position: relative;
 	overflow: hidden; /* reqiured */
 
-	.uix-tabs__nav {
+	.poemkit-tabs__nav {
 		
 		> ul {
 			display: flex;
@@ -55,9 +55,9 @@
 		}
 
 	}
-	.uix-tabs__contentWrapper {
+	.poemkit-tabs__contentWrapper {
 		
-		.uix-tabs__content {
+		.poemkit-tabs__content {
 			position: absolute;
 			width: 100%;
 			opacity: 0;
@@ -65,11 +65,11 @@
 			transition: .5s ease-in-out;
 
 			&.leave {
-				animation: uix-cssAnim--leave 0.5s 1 forwards;
+				animation: poemkit-cssAnim--leave 0.5s 1 forwards;
 			}
 
 			&.is-active {
-				animation: uix-cssAnim--rightToLeft 0.5s 1 forwards;
+				animation: poemkit-cssAnim--rightToLeft 0.5s 1 forwards;
 			}
 
 		}	
@@ -80,7 +80,7 @@
 
 /*----------*/
 
-@keyframes uix-cssAnim--rightToLeft {
+@keyframes poemkit-cssAnim--rightToLeft {
   0% {
     opacity: 0;
     transform: translateX(100%);
@@ -92,7 +92,7 @@
   }
 }
 
-@keyframes uix-cssAnim--leave {
+@keyframes poemkit-cssAnim--leave {
   0% {
     opacity: 1;
     transform: translateX(0%);

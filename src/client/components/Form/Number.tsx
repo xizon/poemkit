@@ -1,22 +1,22 @@
 import React, { Component } from 'react';
 
 /*-- Apply Third-party plugins (import location should be in front of "global scripts and styles") --*/
-import '@uixkit.react/components/_plugins/_lib-bootstrap';
-import '@uixkit.react/components/_plugins/_lib-icons';
-import TweenMax, { TimelineMax } from '@uixkit.react/components/_plugins/_lib-gsap';
+import '@poemkit/components/_plugins/_lib-bootstrap';
+import '@poemkit/components/_plugins/_lib-icons';
+import TweenMax, { TimelineMax } from '@poemkit/components/_plugins/_lib-gsap';
 
 /*-- Apply global scripts and styles --*/
-import '@uixkit.react/components/_utils/styles/_all.scss';
-import '@uixkit.react/components/_utils/styles/rtl/_all.scss';
-import { __ } from '@uixkit.react/components/_utils/_all';
+import '@poemkit/components/_utils/styles/_all.scss';
+import '@poemkit/components/_utils/styles/rtl/_all.scss';
+import { __ } from '@poemkit/components/_utils/_all';
 
 /*-- Apply this component styles --*/
-import '@uixkit.react/components/Form/styles/_basic.scss';
-import '@uixkit.react/components/Form/styles/_layout.scss';
-import '@uixkit.react/components/Form/styles/_theme_material.scss';
-import '@uixkit.react/components/Form/styles/rtl/_basic.scss';
-import '@uixkit.react/components/Form/styles/rtl/_layout.scss';
-import '@uixkit.react/components/Form/styles/rtl/_theme_material.scss';
+import '@poemkit/components/Form/styles/_basic.scss';
+import '@poemkit/components/Form/styles/_layout.scss';
+import '@poemkit/components/Form/styles/_theme_material.scss';
+import '@poemkit/components/Form/styles/rtl/_basic.scss';
+import '@poemkit/components/Form/styles/rtl/_layout.scss';
+import '@poemkit/components/Form/styles/rtl/_theme_material.scss';
 
 
 type NumberProps = {
@@ -127,7 +127,7 @@ export default class Number extends Component<NumberProps, NumberState>  {
 		const nameRes = typeof(name) === 'undefined' ? '' : name;
 		const idRes = id || this.uniqueID;
 		const wrapperClassDisabled = disabled ? ' is-disabled' : '';
-		const wrapperClassTheme = theme === 'line' ? ' uix-controls--line' : '';
+		const wrapperClassTheme = theme === 'line' ? ' poemkit-controls--line' : '';
 		const dp = decimals || 0;
 		const resVal = parseFloat( this.state.count ).toFixed( dp as number );
 		
@@ -135,11 +135,11 @@ export default class Number extends Component<NumberProps, NumberState>  {
 		return (
 		  <>
 
-				<div className={"uix-controls uix-controls__number" + wrapperClassDisabled + wrapperClassTheme }>
-			        {theme === 'line' ? <><ins className="uix-controls__bar"></ins><ins className="uix-controls__basic-bar"></ins></> : ''}
+				<div className={"poemkit-controls poemkit-controls__number" + wrapperClassDisabled + wrapperClassTheme }>
+			        {theme === 'line' ? <><ins className="poemkit-controls__bar"></ins><ins className="poemkit-controls__basic-bar"></ins></> : ''}
 					  <input 
 						  type="number"
-						  className="js-uix-float-label"
+						  className="js-poemkit-float-label"
 						  step={required || 0.01}
 						  id={idRes}
 						  name={nameRes}
@@ -151,8 +151,8 @@ export default class Number extends Component<NumberProps, NumberState>  {
 						  onChange={this.handleVoidChange}
 						  {...attributes}
 						/>
-					  <span className="uix-controls__number__btn uix-controls__number__btn--add" data-min={min || null} data-max={max || null} data-step={btnStepPlus || 1} onClick={this.handlePlus}>+</span>
-					  <span className="uix-controls__number__btn uix-controls__number__btn--remove" data-min={min || null} data-max={max || null} data-step={btnStepMinus || 1} onClick={this.handleMinus}>-</span>	
+					  <span className="poemkit-controls__number__btn poemkit-controls__number__btn--add" data-min={min || null} data-max={max || null} data-step={btnStepPlus || 1} onClick={this.handlePlus}>+</span>
+					  <span className="poemkit-controls__number__btn poemkit-controls__number__btn--remove" data-min={min || null} data-max={max || null} data-step={btnStepMinus || 1} onClick={this.handleMinus}>-</span>	
 
 				</div>
 

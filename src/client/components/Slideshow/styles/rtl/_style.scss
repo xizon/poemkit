@@ -1,7 +1,7 @@
 /* ======================================================
    <!-- Slideshow (Basic) -->
 /* ====================================================== */
-@import '@uixkit.react/components/_utils/styles/_variable-and-mixin.scss';
+@import '@poemkit/components/_utils/styles/_variable-and-mixin.scss';
 
 /*
  * 1. Initialize the slider style
@@ -15,11 +15,11 @@
  1. Initialize the slider style
  ---------------------------
  */
-.rtl .uix-slideshow {
+.rtl .poemkit-slideshow {
 
-	.uix-slideshow__inner {
+	.poemkit-slideshow__inner {
 
-		.uix-slideshow__item {
+		.poemkit-slideshow__item {
 			left: auto;
 			right: 0;
 
@@ -35,7 +35,7 @@
  2. Pagination dots
  ---------------------------
  */
- .rtl .uix-slideshow__pagination {
+ .rtl .poemkit-slideshow__pagination {
 
 	ul {
 		left: auto;
@@ -52,14 +52,14 @@
  3. Next/Prev buttons
  ---------------------------
  */
- .rtl .uix-slideshow__arrows {
+ .rtl .poemkit-slideshow__arrows {
 
-	.uix-slideshow__arrows--prev {
+	.poemkit-slideshow__arrows--prev {
 		left: auto;
 		right: 15px;
 
 	}
-	.uix-slideshow__arrows--next {
+	.poemkit-slideshow__arrows--next {
 		right: auto;
 		left: 15px;
 		text-align: left;

@@ -2,7 +2,7 @@
  *************************************
  * Specify a background image
  *
- * @package: uix-kit-react
+ * @package: poemkit
  *
  *************************************
  */
@@ -63,10 +63,10 @@ export function setBG( config ) {
 	let moveAnim             = 'none',
 		moveAnimLoop         = 'infinite',
 		moveEasing           = 'linear',
-		moveKeyframesTop     = '@keyframes js-uix-cssanim--move-t{from{background-position:0 0;}to{background-position:0 -19999px;}',
-		moveKeyframesBottom  = '@keyframes js-uix-cssanim--move-b{from{background-position:0 0;}to{background-position:0 19999px;}',
-		moveKeyframesLeft    = '@keyframes js-uix-cssanim--move-l{from{background-position:0 0;}to{background-position:-19999px 0;}',
-		moveKeyframesRight   = '@keyframes js-uix-cssanim--move-r{from{background-position:0 0;}to{background-position:19999px 0;}';
+		moveKeyframesTop     = '@keyframes js-poemkit-cssanim--move-t{from{background-position:0 0;}to{background-position:0 -19999px;}',
+		moveKeyframesBottom  = '@keyframes js-poemkit-cssanim--move-b{from{background-position:0 0;}to{background-position:0 19999px;}',
+		moveKeyframesLeft    = '@keyframes js-poemkit-cssanim--move-l{from{background-position:0 0;}to{background-position:-19999px 0;}',
+		moveKeyframesRight   = '@keyframes js-poemkit-cssanim--move-r{from{background-position:0 0;}to{background-position:19999px 0;}';
 
 
 	if ( dataMove && Object.prototype.toString.call( dataMove )=='[object Object]' ) {
@@ -78,16 +78,16 @@ export function setBG( config ) {
 
 		switch (dataMove.dir) {
 			case 'top':
-				moveAnim = 'js-uix-cssanim--move-t '+parseInt(dataMove.speed)+'s '+moveEasing+' '+ moveAnimLoop;
+				moveAnim = 'js-poemkit-cssanim--move-t '+parseInt(dataMove.speed)+'s '+moveEasing+' '+ moveAnimLoop;
 				break;
 			case 'bottom':
-				moveAnim = 'js-uix-cssanim--move-b '+parseInt(dataMove.speed)+'s '+moveEasing+' '+ moveAnimLoop;        
+				moveAnim = 'js-poemkit-cssanim--move-b '+parseInt(dataMove.speed)+'s '+moveEasing+' '+ moveAnimLoop;        
 				break;
 			case 'left':
-				moveAnim = 'js-uix-cssanim--move-l '+parseInt(dataMove.speed)+'s '+moveEasing+' '+ moveAnimLoop;    
+				moveAnim = 'js-poemkit-cssanim--move-l '+parseInt(dataMove.speed)+'s '+moveEasing+' '+ moveAnimLoop;    
 				break;
 			case 'right':
-				moveAnim = 'js-uix-cssanim--move-r '+parseInt(dataMove.speed)+'s '+moveEasing+' '+ moveAnimLoop;            
+				moveAnim = 'js-poemkit-cssanim--move-r '+parseInt(dataMove.speed)+'s '+moveEasing+' '+ moveAnimLoop;            
 				break;
 		}
 
@@ -101,10 +101,10 @@ export function setBG( config ) {
 			}
 		}
 
-		addStyles( '#js-uix-cssanim--move-t', moveKeyframesTop );
-		addStyles( '#js-uix-cssanim--move-b', moveKeyframesBottom );
-		addStyles( '#js-uix-cssanim--move-l', moveKeyframesLeft );
-		addStyles( '#js-uix-cssanim--move-r', moveKeyframesRight );
+		addStyles( '#js-poemkit-cssanim--move-t', moveKeyframesTop );
+		addStyles( '#js-poemkit-cssanim--move-b', moveKeyframesBottom );
+		addStyles( '#js-poemkit-cssanim--move-l', moveKeyframesLeft );
+		addStyles( '#js-poemkit-cssanim--move-r', moveKeyframesRight );
 
 
 	}

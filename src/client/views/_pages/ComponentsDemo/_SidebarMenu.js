@@ -257,7 +257,7 @@ export function SidebarMenu() {
 
 
 		//get DOC anchor element HTML code
-		const docLink = document.querySelector( 'h1.uix-typo--h2' );
+		const docLink = document.querySelector( 'h1.poemkit-typo--h2' );
 		const docLinkText = docLink.innerHTML.match(/<a.*?>(.*?)<\/a>/g)[0];
 		docLink.querySelector( 'a' ).style.display = 'none';
 

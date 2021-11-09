@@ -3,13 +3,50 @@ import {
 	Route, 
 	Switch, 
 	NavLink,
-	useRouteMatch,
-	useParams
+	useRouteMatch
 } from 'react-router-dom';
-import { __ } from '@uixkit.react/components/_utils/_all';
-import Footer from '@uixkit.react/components/Footer/index.tsx';
+import { __ } from '@poemkit/components/_utils/_all';
+import Footer from '@poemkit/components/Footer/index.tsx';
 
-import NestedRoutesDetail from '@uixkit.react/pages/NestedRoutes/NestedRoutesDetail.js';
+import NestedRoutesDetail from '@poemkit/pages/NestedRoutes/NestedRoutesDetail.js';
+
+//manage the document head
+import { Helmet } from "react-helmet";
+import siteInfo from '@poemkit/helpers/site-info.js';
+function SeoVars() {
+	const {siteName, baseURL, pageTitle} = siteInfo('/nested-routes');
+	// if the value of `pageTitle` is `{{pageTitle}}`, the value 
+	// of Redux store will be rendered asynchronously
+
+	return {
+		"siteName": siteName,
+		"baseURL": baseURL,
+		"imgURL": '',
+		"bodyClasses": 'page',
+		"pageTitle": pageTitle,
+		"desc": pageTitle
+	}
+}
+
+function Seo() {
+	const {siteName, baseURL, imgURL, bodyClasses, pageTitle, desc} = SeoVars();
+	return (
+		<Helmet>
+			<html lang="en-US" dir="ltr" />
+			<title>{`${pageTitle} - ${siteName}`}</title>
+			<body class={`${bodyClasses}`} />
+			<meta name="description" content={`${desc}`}/>
+			<meta property="og:title" content={`${pageTitle} - ${siteName}`}/>
+			<meta property="og:url" content={`${baseURL}`}/>
+			<meta property="og:description" content={`${desc}`}/>
+			<meta property="og:type" content="website"/>
+			<meta property="og:site_name" content={`${siteName}`}/>
+			{imgURL === '' ? '' : <meta property="og:image" content={`${imgURL}`}/>}
+			<link rel="canonical" href={`${baseURL}`}/>
+		</Helmet>
+	)
+}
+
 
 
 
@@ -21,7 +58,6 @@ function HookContent() {
 	// us build relative links.
 	let { path, url } = useRouteMatch();
 
-	
 	return (
 		<>
 		
@@ -56,13 +92,11 @@ class NestedRoutes extends Component {
     return (
 	  <>
 
-		<main id="uix-maincontent">
-
-			{/*
-			<!-- Content   
-			====================================================== -->	
-			*/}
-			<section className="uix-spacing--s">
+		<main id="poemkit-maincontent">
+			
+			{/*<!-- Content 
+			====================================================== -->*/}
+			<section className="poemkit-spacing--s">
 				<div className="container">
 						<div className="row">
 							<div className="col-12">
@@ -82,8 +116,8 @@ class NestedRoutes extends Component {
 		</main>
 
 		<Footer />
-
-          
+		<Seo />
+		
 
       </>
     ); 

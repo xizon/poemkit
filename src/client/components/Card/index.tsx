@@ -6,22 +6,22 @@
 import React, { Component } from 'react';
 
 /*-- Apply Third-party plugins (import location should be in front of "global scripts and styles") --*/
-import '@uixkit.react/components/_plugins/_lib-bootstrap';
-import '@uixkit.react/components/_plugins/_lib-icons';
-import TweenMax, { TimelineMax } from '@uixkit.react/components/_plugins/_lib-gsap';
+import '@poemkit/components/_plugins/_lib-bootstrap';
+import '@poemkit/components/_plugins/_lib-icons';
+import TweenMax, { TimelineMax } from '@poemkit/components/_plugins/_lib-gsap';
 
 /*-- Apply global scripts and styles --*/
-import '@uixkit.react/components/_utils/styles/_all.scss';
-import '@uixkit.react/components/_utils/styles/rtl/_all.scss';
-import { __ } from '@uixkit.react/components/_utils/_all';
+import '@poemkit/components/_utils/styles/_all.scss';
+import '@poemkit/components/_utils/styles/rtl/_all.scss';
+import { __ } from '@poemkit/components/_utils/_all';
 
 /*-- Apply this component styles --*/
-import '@uixkit.react/components/Card/styles/_style.scss';
+import '@poemkit/components/Card/styles/_style.scss';
 
 
 
 // Specify a background image
-import { setBG } from '@uixkit.react/components/_utils/_all';
+import { setBG } from '@poemkit/components/_utils/_all';
 
 
 interface CardBgConfig {
@@ -145,27 +145,27 @@ export default class Card extends Component<CardProps, CardState> {
 				res = (
 					<>
 
-						<div id={cid} className="uix-card--thumb">
-							<div className="uix-card--thumb__header">
-								<div className="uix-card--thumb__preview" style={{ flexBasis: "50px" }}>
+						<div id={cid} className="poemkit-card--thumb">
+							<div className="poemkit-card--thumb__header">
+								<div className="poemkit-card--thumb__preview" style={{ flexBasis: "50px" }}>
 									{/*<!-- image begin -->*/}
-									<img src={_avatar} alt="" className="uix-border--circle" />
+									<img src={_avatar} alt="" className="poemkit-border--circle" />
 									{/*<!-- image end -->*/}
 								</div>
 
-								<div className="uix-card--thumb__content">
-									<div className="uix-card--thumb__content__child">
-										<div className="uix-card--thumb__content__child--left">
+								<div className="poemkit-card--thumb__content">
+									<div className="poemkit-card--thumb__content__child">
+										<div className="poemkit-card--thumb__content__child--left">
 											<div>
 												{/*<!-- content begin -->*/}
 
-												<h5 className={titleEllipsis ? 'uix-t-ellipsis uix-spacing--no' : 'uix-relative--inline uix-spacing--no'}>{_title}</h5>
+												<h5 className={titleEllipsis ? 'poemkit-t-ellipsis poemkit-spacing--no' : 'poemkit-relative--inline poemkit-spacing--no'}>{_title}</h5>
 
-												{_subTitle !== '' ? <><small className="uix-typo--color-sub">{_subTitle}</small></> : ''}
+												{_subTitle !== '' ? <><small className="poemkit-typo--color-sub">{_subTitle}</small></> : ''}
 												{/*<!-- content end -->*/}
 											</div>
 										</div>
-										<div className="uix-card--thumb__content__child--right" style={{ minWidth: "50px", textAlign: "right" }}>
+										<div className="poemkit-card--thumb__content__child--right" style={{ minWidth: "50px", textAlign: "right" }}>
 											{/*<!-- content begin -->*/}
 
 											{_btnIcon !== '' ? <><button aria-haspopup="true" onClick={btnClickEvent}>{_btnIcon}</button></> : ''}
@@ -178,9 +178,9 @@ export default class Card extends Component<CardProps, CardState> {
 
 							</div>
 
-							<div className="uix-card--thumb__body">
+							<div className="poemkit-card--thumb__body">
 								{/*<!-- content begin -->*/}
-								<small className="uix-typo--color-sub">
+								<small className="poemkit-typo--color-sub">
 									{children}
 								</small>
 								{/*<!-- content end -->*/}
@@ -194,8 +194,8 @@ export default class Card extends Component<CardProps, CardState> {
 				res = (
 					<>
 
-						<div id={cid} className="uix-card--gallery" role="figure">
-							<div className="uix-card--gallery__preview">
+						<div id={cid} className="poemkit-card--gallery" role="figure">
+							<div className="poemkit-card--gallery__preview">
 								{/*<!-- image begin -->*/}
 								<img src={_bgConfig.src} alt="" />
 								{/*<!-- image end -->*/}
@@ -206,15 +206,15 @@ export default class Card extends Component<CardProps, CardState> {
 
 
 							</div>
-							<div className="uix-card--gallery__body">
-								<div className="uix-card--gallery__header">
-									<div className="uix-card--gallery__header__child">
+							<div className="poemkit-card--gallery__body">
+								<div className="poemkit-card--gallery__header">
+									<div className="poemkit-card--gallery__header__child">
 										{/*<!-- content begin -->*/}
-										<h5 className={titleEllipsis ? 'uix-t-ellipsis' : 'uix-relative--inline'} style={{ margin: "10px", paddingBottom: 0 }}>{_title}&nbsp;&nbsp;</h5>
+										<h5 className={titleEllipsis ? 'poemkit-t-ellipsis' : 'poemkit-relative--inline'} style={{ margin: "10px", paddingBottom: 0 }}>{_title}&nbsp;&nbsp;</h5>
 
-										{_subTitle !== '' ? <><small className="uix-typo--color-sub">{_subTitle}</small></> : ''}
+										{_subTitle !== '' ? <><small className="poemkit-typo--color-sub">{_subTitle}</small></> : ''}
 
-										<div className="uix-card--gallery__action" style={{ margin: "10px" }}>
+										<div className="poemkit-card--gallery__action" style={{ margin: "10px" }}>
 											{_btnIcon !== '' ? <><button aria-haspopup="true" onClick={btnClickEvent}>{_btnIcon}</button></> : ''}
 										</div>
 										{/*<!-- content end -->*/}
@@ -230,8 +230,8 @@ export default class Card extends Component<CardProps, CardState> {
 				res = (
 					<>
 
-						<div id={cid} className="uix-card--gallery" role="figure">
-							<div className="uix-card--gallery__preview uix-core-grid__col-12 uix-core-grid__mobile-stack">
+						<div id={cid} className="poemkit-card--gallery" role="figure">
+							<div className="poemkit-card--gallery__preview poemkit-core-grid__col-12 poemkit-core-grid__mobile-stack">
 								{/*<!-- image begin -->*/}
 								<img src={_bgConfig.src} alt="" />
 								{/*<!-- image end -->*/}
@@ -242,9 +242,9 @@ export default class Card extends Component<CardProps, CardState> {
 
 
 							</div>
-							<div className="uix-card--gallery__body">
-								<div className="uix-card--gallery__header">
-									<div className="uix-card--gallery__header__child">
+							<div className="poemkit-card--gallery__body">
+								<div className="poemkit-card--gallery__header">
+									<div className="poemkit-card--gallery__header__child">
 										{/*<!-- content begin -->*/}
 										{children}
 										{/*<!-- content end -->*/}
@@ -263,16 +263,16 @@ export default class Card extends Component<CardProps, CardState> {
 					<>
 
 
-						<div id={cid} className="uix-card--gallery uix-card--gallery--horizontal" role="figure">
-							<div className={`uix-card--gallery__preview uix-core-grid__col-${_contentRatio} uix-core-grid__mobile-stack`} style={_bgStyles}>
+						<div id={cid} className="poemkit-card--gallery poemkit-card--gallery--horizontal" role="figure">
+							<div className={`poemkit-card--gallery__preview poemkit-core-grid__col-${_contentRatio} poemkit-core-grid__mobile-stack`} style={_bgStyles}>
 								{/*<!-- image begin -->*/}
 								<img src={_bgConfig.src} alt="" />
 								{/*<!-- image end -->*/}
 
 							</div>
-							<div className="uix-card--gallery__body">
-								<div className="uix-card--gallery__header">
-									<div className="uix-card--gallery__header__child">
+							<div className="poemkit-card--gallery__body">
+								<div className="poemkit-card--gallery__header">
+									<div className="poemkit-card--gallery__header__child">
 										{/*<!-- content begin -->*/}
 										{children}
 										{/*<!-- content end -->*/}
@@ -289,16 +289,16 @@ export default class Card extends Component<CardProps, CardState> {
 				res = (
 					<>
 
-						<div id={cid} className="uix-card--gallery uix-card--gallery--overlay" role="figure">
-							<div className="uix-card--gallery__preview uix-core-grid__col-12 uix-core-grid__mobile-stack">
+						<div id={cid} className="poemkit-card--gallery poemkit-card--gallery--overlay" role="figure">
+							<div className="poemkit-card--gallery__preview poemkit-core-grid__col-12 poemkit-core-grid__mobile-stack">
 								{/*<!-- image begin -->*/}
 								<img src={_bgConfig.src} alt="" />
 								{/*<!-- image end -->*/}
 
 							</div>
-							<div className={`uix-card--gallery__body ${verticalCenter ? 'uix-card--gallery__body--verticalCenter' : ''} uix-core-grid__col-${_contentRatio} uix-core-grid__mobile-stack`}>
-								<div className="uix-card--gallery__header">
-									<div className="uix-card--gallery__header__child">
+							<div className={`poemkit-card--gallery__body ${verticalCenter ? 'poemkit-card--gallery__body--verticalCenter' : ''} poemkit-core-grid__col-${_contentRatio} poemkit-core-grid__mobile-stack`}>
+								<div className="poemkit-card--gallery__header">
+									<div className="poemkit-card--gallery__header__child">
 										{/*<!-- content begin -->*/}
 										{children}
 										{/*<!-- content end -->*/}
@@ -316,22 +316,22 @@ export default class Card extends Component<CardProps, CardState> {
 				res = (
 					<>
 
-						<div id={cid} className="uix-card--gallery uix-card--gallery--horizontal is-mobile-still" role="figure">
-							<div className="uix-card--gallery__preview" style={{ padding: "25px", background: "#EAEAEA" }}>
+						<div id={cid} className="poemkit-card--gallery poemkit-card--gallery--horizontal is-mobile-still" role="figure">
+							<div className="poemkit-card--gallery__preview" style={{ padding: "25px", background: "#EAEAEA" }}>
 								{/*<!-- image begin -->*/}
 								{_icon}
 								{/*<!-- image end -->*/}
 
 							</div>
-							<div className="uix-card--gallery__body">
-								<div className="uix-card--gallery__header">
-									<div className="uix-card--gallery__header__child">
+							<div className="poemkit-card--gallery__body">
+								<div className="poemkit-card--gallery__header">
+									<div className="poemkit-card--gallery__header__child">
 										{/*<!-- content begin -->*/}
 										<span style={{ margin: "0 10px 10px", display: "block" }}>
-											<h5 className={titleEllipsis ? 'uix-t-ellipsis' : ''} style={{ margin: "10px", marginLeft: 0, marginBottom: 0, paddingBottom: 0 }}>{_title}</h5>
-											{_subTitle !== '' ? <><small className="uix-typo--color-sub">{_subTitle}</small></> : ''}
+											<h5 className={titleEllipsis ? 'poemkit-t-ellipsis' : ''} style={{ margin: "10px", marginLeft: 0, marginBottom: 0, paddingBottom: 0 }}>{_title}</h5>
+											{_subTitle !== '' ? <><small className="poemkit-typo--color-sub">{_subTitle}</small></> : ''}
 
-											{_btnIcon !== '' ? <><div className="uix-card--gallery__action" style={{ margin: "10px" }}><button aria-haspopup="true" onClick={btnClickEvent}>{_btnIcon}</button></div></> : ''}
+											{_btnIcon !== '' ? <><div className="poemkit-card--gallery__action" style={{ margin: "10px" }}><button aria-haspopup="true" onClick={btnClickEvent}>{_btnIcon}</button></div></> : ''}
 
 										</span>
 										{/*<!-- content end -->*/}
@@ -349,23 +349,23 @@ export default class Card extends Component<CardProps, CardState> {
 				res = (
 					<>
 
-						<div id={cid} className="uix-card--gallery uix-card--gallery--horizontal is-mobile-still" role="figure">
-							<div className="uix-card--gallery__preview" style={{ padding: "25px", background: "#EAEAEA" }}>
+						<div id={cid} className="poemkit-card--gallery poemkit-card--gallery--horizontal is-mobile-still" role="figure">
+							<div className="poemkit-card--gallery__preview" style={{ padding: "25px", background: "#EAEAEA" }}>
 								{/*<!-- image begin -->*/}
 								{_icon}
 								{/*<!-- image end -->*/}
 
 							</div>
-							<div className="uix-card--gallery__body">
+							<div className="poemkit-card--gallery__body">
 
-								<div className="uix-card--gallery__content">
-									<div className="uix-card--gallery__content__child">
-										<div className="uix-card--gallery__content__child--left">
+								<div className="poemkit-card--gallery__content">
+									<div className="poemkit-card--gallery__content__child">
+										<div className="poemkit-card--gallery__content__child--left">
 											<div>
 												{/*<!-- content begin -->*/}
 												<span style={{ margin: "0 10px 10px", display: "block" }}>
-													<h5 className={titleEllipsis ? 'uix-t-ellipsis' : ''} style={{ margin: "10px", marginLeft: 0, marginBottom: 0, paddingBottom: 0 }}>{_title}</h5>
-													{_subTitle !== '' ? <><small className="uix-typo--color-sub">{_subTitle}</small></> : ''}
+													<h5 className={titleEllipsis ? 'poemkit-t-ellipsis' : ''} style={{ margin: "10px", marginLeft: 0, marginBottom: 0, paddingBottom: 0 }}>{_title}</h5>
+													{_subTitle !== '' ? <><small className="poemkit-typo--color-sub">{_subTitle}</small></> : ''}
 												</span>
 												{/*<!-- content end -->*/}
 											</div>
@@ -373,9 +373,9 @@ export default class Card extends Component<CardProps, CardState> {
 
 
 										{_btnIcon !== '' ? <>
-											<div className="uix-card--gallery__content__child--right" style={{ minWidth: "50px" }}>
+											<div className="poemkit-card--gallery__content__child--right" style={{ minWidth: "50px" }}>
 												{/*<!-- content begin -->*/}
-												<div className="uix-card--gallery__action" style={{ margin: "10px" }}>
+												<div className="poemkit-card--gallery__action" style={{ margin: "10px" }}>
 													<button aria-haspopup="true" onClick={btnClickEvent}>{_btnIcon}</button>
 												</div>
 												{/*<!-- content end -->*/}
@@ -396,20 +396,20 @@ export default class Card extends Component<CardProps, CardState> {
 				res = (
 					<>
 
-						<div id={cid} className="uix-card--author">
-							<div className="uix-card--author__header">
-								<div className="uix-card--author__text uix-f-l">
-									<h3 className={titleEllipsis ? 'uix-t-ellipsis' : ''}>{_title}</h3>
+						<div id={cid} className="poemkit-card--author">
+							<div className="poemkit-card--author__header">
+								<div className="poemkit-card--author__text poemkit-f-l">
+									<h3 className={titleEllipsis ? 'poemkit-t-ellipsis' : ''}>{_title}</h3>
 									{_subTitle !== '' ? <>{_subTitle}</> : ''}
 								</div>
-								<div className="uix-card--author__preview uix-border--circle uix-border--circle-only-img uix-f-r">
-									<img src={_avatar} alt="" className="uix-border--circle" />
+								<div className="poemkit-card--author__preview poemkit-border--circle poemkit-border--circle-only-img poemkit-f-r">
+									<img src={_avatar} alt="" className="poemkit-border--circle" />
 								</div>
 							</div>
-							<div className="uix-card--author__content">
+							<div className="poemkit-card--author__content">
 								{children}
 							</div>
-							{_btnIcon !== '' ? <><a role="button" className="uix-card--author__jump" onClick={btnHyperlinkClickEvent}>{_btnIcon}</a></> : ''}
+							{_btnIcon !== '' ? <><a role="button" className="poemkit-card--author__jump" onClick={btnHyperlinkClickEvent}>{_btnIcon}</a></> : ''}
 						</div>
 
 					</>
@@ -419,16 +419,16 @@ export default class Card extends Component<CardProps, CardState> {
 				res = (
 					<>
 
-						<div id={cid} className="uix-card--author uix-card--author--noborder uix-t-c">
-							<div className="uix-card--author__header">
+						<div id={cid} className="poemkit-card--author poemkit-card--author--noborder poemkit-t-c">
+							<div className="poemkit-card--author__header">
 
-								<div className="uix-card--author__preview uix-border--circle uix-border--circle-only-img">
-									<img src={_avatar} alt="" className="uix-border--circle" />
+								<div className="poemkit-card--author__preview poemkit-border--circle poemkit-border--circle-only-img">
+									<img src={_avatar} alt="" className="poemkit-border--circle" />
 								</div>
 
 							</div>
-							<div className="uix-card--author__content uix-card--author__content--rounded">
-								<h4 className={titleEllipsis ? 'uix-t-ellipsis uix-t-c uix-spacing--no' : 'uix-t-c uix-spacing--no'}>{_title}</h4>
+							<div className="poemkit-card--author__content poemkit-card--author__content--rounded">
+								<h4 className={titleEllipsis ? 'poemkit-t-ellipsis poemkit-t-c poemkit-spacing--no' : 'poemkit-t-c poemkit-spacing--no'}>{_title}</h4>
 								{_subTitle !== '' ? <>{_subTitle}</> : ''}
 								{children}
 							</div>
@@ -442,15 +442,15 @@ export default class Card extends Component<CardProps, CardState> {
 			case 'authorcard-stats':
 				res = (
 					<>
-						<div id={cid} className="uix-card--author uix-card--author--noborder uix-card--author--stats">
-							<div className="uix-card--author__header">
+						<div id={cid} className="poemkit-card--author poemkit-card--author--noborder poemkit-card--author--stats">
+							<div className="poemkit-card--author__header">
 
-								<div className="uix-card--author__preview uix-card--author__preview--rounded uix-card--author__preview--jumpOut">
+								<div className="poemkit-card--author__preview poemkit-card--author__preview--rounded poemkit-card--author__preview--jumpOut">
 									<img src={_avatar} alt="" />
 								</div>
 
 							</div>
-							<div className="uix-card--author__content uix-card--author__content--rounded  uix-t-r">
+							<div className="poemkit-card--author__content poemkit-card--author__content--rounded  poemkit-t-r">
 								{children}
 							</div>
 

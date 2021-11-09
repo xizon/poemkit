@@ -6,26 +6,26 @@
 import React, { Component } from 'react';
 
 /*-- Apply Third-party plugins (import location should be in front of "global scripts and styles") --*/
-import '@uixkit.react/components/_plugins/_lib-bootstrap';
-import '@uixkit.react/components/_plugins/_lib-icons';
-import TweenMax, { TimelineMax } from '@uixkit.react/components/_plugins/_lib-gsap';
+import '@poemkit/components/_plugins/_lib-bootstrap';
+import '@poemkit/components/_plugins/_lib-icons';
+import TweenMax, { TimelineMax } from '@poemkit/components/_plugins/_lib-gsap';
 
 // Slideshow
-import { Swiper as SW } from '@uixkit.react/components/_plugins/_lib-slideshow';
+import { Swiper as SW } from '@poemkit/components/_plugins/_lib-slideshow';
 
 
 /*-- Apply global scripts and styles --*/
-import '@uixkit.react/components/_utils/styles/_all.scss';
-import '@uixkit.react/components/_utils/styles/rtl/_all.scss';
-import { __ } from '@uixkit.react/components/_utils/_all';
+import '@poemkit/components/_utils/styles/_all.scss';
+import '@poemkit/components/_utils/styles/rtl/_all.scss';
+import { __ } from '@poemkit/components/_utils/_all';
 
 
 /*-- Apply this component styles --*/
-import '@uixkit.react/components/Swiper/styles/_style.scss';
+import '@poemkit/components/Swiper/styles/_style.scss';
 
 
 //get project config
-import { rootDirectory } from '@uixkit.react/config/websiteConfig.js';
+import { rootDirectory } from '@poemkit/config/websiteConfig.js';
 
 
 type SwiperProps = {
@@ -617,12 +617,12 @@ export default class Swiper extends Component<SwiperProps, SwiperState> {
 		return (
 		  <>
 			
-			<div ref={this.rootRef} id={id || this.uniqueID} className="uix-swiper">
+			<div ref={this.rootRef} id={id || this.uniqueID} className="poemkit-swiper">
 
 
 				{/*<!-- Title
 				====================================================== -->*/}
-				<section className="uix-spacing--s uix-spacing--no-top">
+				<section className="poemkit-spacing--s poemkit-spacing--no-top">
 					<div className="container">
 						<div className="row">
 							<div className="col-12">
@@ -692,7 +692,7 @@ export default class Swiper extends Component<SwiperProps, SwiperState> {
 
 				{/*<!-- Title
 				====================================================== -->*/}
-				<section className="uix-spacing--s">
+				<section className="poemkit-spacing--s">
 					<div className="container">
 						<div className="row">
 							<div className="col-12">
@@ -739,7 +739,7 @@ export default class Swiper extends Component<SwiperProps, SwiperState> {
 
 				{/*<!-- Title
 				====================================================== -->*/}
-				<section className="uix-spacing--s">
+				<section className="poemkit-spacing--s">
 					<div className="container">
 						<div className="row">
 							<div className="col-12">
@@ -787,7 +787,7 @@ export default class Swiper extends Component<SwiperProps, SwiperState> {
 
 				{/*<!-- Title
 				====================================================== -->*/}
-				<section className="uix-spacing--s">
+				<section className="poemkit-spacing--s">
 					<div className="container">
 						<div className="row">
 							<div className="col-12">
@@ -837,7 +837,7 @@ export default class Swiper extends Component<SwiperProps, SwiperState> {
 
 				{/*<!-- Title
 				====================================================== -->*/}
-				<section className="uix-spacing--s">
+				<section className="poemkit-spacing--s">
 					<div className="container">
 						<div className="row">
 							<div className="col-12">
@@ -887,7 +887,7 @@ export default class Swiper extends Component<SwiperProps, SwiperState> {
 
 				{/*<!-- Title
 				====================================================== -->*/}
-				<section className="uix-spacing--s">
+				<section className="poemkit-spacing--s">
 					<div className="container">
 						<div className="row">
 							<div className="col-12">
@@ -941,7 +941,7 @@ export default class Swiper extends Component<SwiperProps, SwiperState> {
 
 				{/*<!-- Title
 				====================================================== -->*/}
-				<section className="uix-spacing--s">
+				<section className="poemkit-spacing--s">
 					<div className="container">
 						<div className="row">
 							<div className="col-12">
@@ -1011,7 +1011,7 @@ export default class Swiper extends Component<SwiperProps, SwiperState> {
 
 				{/*<!-- Title
 				====================================================== -->*/}
-				<section className="uix-spacing--s">
+				<section className="poemkit-spacing--s">
 					<div className="container">
 						<div className="row">
 							<div className="col-12">
@@ -1080,7 +1080,7 @@ export default class Swiper extends Component<SwiperProps, SwiperState> {
 
 
 			</div>
-			{/*<!-- /.uix-swiper -->*/}
+			{/*<!-- /.poemkit-swiper -->*/}
 
 
 

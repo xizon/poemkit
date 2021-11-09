@@ -1,6 +1,6 @@
-# @uixkit.react/components/Table
+# @poemkit/components/Table
 
-[Source](https://github.com/xizon/uix-kit-react/tree/main/src/client/components/Table)
+[Source](https://github.com/xizon/poemkit/tree/main/src/client/components/Table)
 
 ## Version
 
@@ -11,7 +11,7 @@
 
 ### Table
 ```js
-import Table from '@uixkit.react/components/Table/index.tsx';
+import Table from '@poemkit/components/Table/index.tsx';
 ```
 | Property | Type | Default | Description |
 | --- | --- | --- | --- |
@@ -40,7 +40,7 @@ JSON configuration properties of the `data`:
 
 ```js
 import React from 'react';
-import Table from '@uixkit.react/components/Table/index.tsx';
+import Table from '@poemkit/components/Table/index.tsx';
 
 
 

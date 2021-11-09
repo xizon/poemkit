@@ -27,16 +27,16 @@
       "noImplicitAny": false,
       "baseUrl": "./src",
       "paths": {
-        "@uixkit.react/config/*": ["config/*"],
-        "@uixkit.react/components/*": ["client/components/*"],
-        "@uixkit.react/router/*": ["client/router/*"],
-        "@uixkit.react/helpers/*": ["client/helpers/*"],
-        "@uixkit.react/services/*": ["client/services/*"],
-        "@uixkit.react/reducers/*": ["client/reducers/*"],
-        "@uixkit.react/pages/*": ["client/views/_pages/*"],
-        "@uixkit.react/actions/*": ["client/actions/*"],
-        "@uixkit.react/server/*": ["server/*"],
-        "@uixkit.react/store/*": ["store/*"]
+        "@poemkit/config/*": ["config/*"],
+        "@poemkit/components/*": ["client/components/*"],
+        "@poemkit/router/*": ["client/router/*"],
+        "@poemkit/helpers/*": ["client/helpers/*"],
+        "@poemkit/services/*": ["client/services/*"],
+        "@poemkit/reducers/*": ["client/reducers/*"],
+        "@poemkit/pages/*": ["client/views/_pages/*"],
+        "@poemkit/actions/*": ["client/actions/*"],
+        "@poemkit/server/*": ["server/*"],
+        "@poemkit/store/*": ["store/*"]
       }
     },
     "include": [

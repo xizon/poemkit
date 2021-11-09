@@ -6,26 +6,26 @@
 import React, { Component } from 'react';
 
 /*-- Apply Third-party plugins (import location should be in front of "global scripts and styles") --*/
-import '@uixkit.react/components/_plugins/_lib-bootstrap';
-import '@uixkit.react/components/_plugins/_lib-icons';
-import TweenMax, { TimelineMax } from '@uixkit.react/components/_plugins/_lib-gsap';
+import '@poemkit/components/_plugins/_lib-bootstrap';
+import '@poemkit/components/_plugins/_lib-icons';
+import TweenMax, { TimelineMax } from '@poemkit/components/_plugins/_lib-gsap';
 
 
 /*-- Apply global scripts and styles --*/
-import '@uixkit.react/components/_utils/styles/_all.scss';
-import '@uixkit.react/components/_utils/styles/rtl/_all.scss';
-import { __ } from '@uixkit.react/components/_utils/_all';
+import '@poemkit/components/_utils/styles/_all.scss';
+import '@poemkit/components/_utils/styles/rtl/_all.scss';
+import { __ } from '@poemkit/components/_utils/_all';
 
 
 /*-- Apply this component styles --*/
-import '@uixkit.react/components/Navigation/styles/_primary-navigation.scss';
-import '@uixkit.react/components/Navigation/styles/_mobile-menu.scss';
-import '@uixkit.react/components/Navigation/styles/rtl/_primary-navigation.scss';
-import '@uixkit.react/components/Navigation/styles/rtl/_mobile-menu.scss';
+import '@poemkit/components/Navigation/styles/_primary-navigation.scss';
+import '@poemkit/components/Navigation/styles/_mobile-menu.scss';
+import '@poemkit/components/Navigation/styles/rtl/_primary-navigation.scss';
+import '@poemkit/components/Navigation/styles/rtl/_mobile-menu.scss';
 
 
 //
-import MenuList from '@uixkit.react/components/Navigation/MenuList';
+import MenuList from '@poemkit/components/Navigation/MenuList';
 
 
 type NavigationProps = {
@@ -69,8 +69,8 @@ export default class Navigation extends Component<NavigationProps, NavigationSta
     }
 
     handleScrollEvent() {
-		const $elMenuContainer = __( '.uix-menu__container:not(.is-mobile)' );
-		const $elMobileToggle = __( '.admin-bar .uix-menu-mobile__toggle' );
+		const $elMenuContainer = __( '.poemkit-menu__container:not(.is-mobile)' );
+		const $elMobileToggle = __( '.admin-bar .poemkit-menu-mobile__toggle' );
 		const scrolled = __( window ).scrollTop();
 
 		// Primary Menu
@@ -102,15 +102,15 @@ export default class Navigation extends Component<NavigationProps, NavigationSta
 		el.classList.toggle( 'is-active' );
 
 		if ( el.classList.contains( 'is-active' ) ) {
-			document.body.classList.add( 'js-uix-menu-opened' );
+			document.body.classList.add( 'js-poemkit-menu-opened' );
 		} else {
-			document.body.classList.remove( 'js-uix-menu-opened' );
+			document.body.classList.remove( 'js-poemkit-menu-opened' );
 		}
 	}
 
 	handleClickMobileClose() {
 		this.mobileToggleRef.current!.classList.remove( 'is-active' );
-		document.body.classList.remove( 'js-uix-menu-opened' );
+		document.body.classList.remove( 'js-poemkit-menu-opened' );
 	}
 
 
@@ -157,7 +157,7 @@ export default class Navigation extends Component<NavigationProps, NavigationSta
 		return (
 			<>
 				<nav 
-				className={mobileEnabled ? 'uix-menu__container is-mobile' : 'uix-menu__container'} 
+				className={mobileEnabled ? 'poemkit-menu__container is-mobile' : 'poemkit-menu__container'} 
 				ref={(node) => {
 					if (node) {
 						if ( position === 'left' ) node.style.setProperty("float", "left", "important");
@@ -165,11 +165,11 @@ export default class Navigation extends Component<NavigationProps, NavigationSta
 					}
 				}}>
 
-					<div className="uix-menu__inner">
+					<div className="poemkit-menu__inner">
 
-						{mobileLogo ? <><span className="uix-brand--mobile"><img src={mobileLogo} alt={label as string} /></span></> : ''}
+						{mobileLogo ? <><span className="poemkit-brand--mobile"><img src={mobileLogo} alt={label as string} /></span></> : ''}
 						<MenuList menuListData={data} mobile={mobileEnabled} />
-						{tools ? <><div className="uix-menu__right-box">{tools}</div></> : ''}
+						{tools ? <><div className="poemkit-menu__right-box">{tools}</div></> : ''}
 						
 					</div>
 				</nav>
@@ -192,12 +192,12 @@ export default class Navigation extends Component<NavigationProps, NavigationSta
 			{/* <!-- Mobile Menu Toggle Trigger--> */}
 			{displayMobileNav ? (
 				<>
-					<div ref={this.mobileToggleRef} className="uix-menu-mobile__toggle" onClick={this.handleClickMobileToggle}>
+					<div ref={this.mobileToggleRef} className="poemkit-menu-mobile__toggle" onClick={this.handleClickMobileToggle}>
 						<span></span>
 						<span></span>
 						<span></span>
 					</div>
-					<div ref={this.mobileMaskRef} className="uix-menu-mobile__mask" onClick={this.handleClickMobileClose}></div>
+					<div ref={this.mobileMaskRef} className="poemkit-menu-mobile__mask" onClick={this.handleClickMobileClose}></div>
 				</>
 			) : ''}
 

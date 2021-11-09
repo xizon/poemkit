@@ -1,6 +1,6 @@
-# @uixkit.react/components/TableGrid
+# @poemkit/components/TableGrid
 
-[Source](https://github.com/xizon/uix-kit-react/tree/main/src/client/components/TableGrid)
+[Source](https://github.com/xizon/poemkit/tree/main/src/client/components/TableGrid)
 
 ## Version
 
@@ -10,7 +10,7 @@
 
 ### Table Grid
 ```js
-import TableGrid from '@uixkit.react/components/TableGrid/index.tsx';
+import TableGrid from '@poemkit/components/TableGrid/index.tsx';
 ```
 | Property | Type | Default | Description |
 | --- | --- | --- | --- |
@@ -31,7 +31,7 @@ JSON configuration properties of the `data`:
 
 ```js
 import React from 'react';
-import TableGrid from '@uixkit.react/components/TableGrid/index.tsx';
+import TableGrid from '@poemkit/components/TableGrid/index.tsx';
 
 
 const data1 = {

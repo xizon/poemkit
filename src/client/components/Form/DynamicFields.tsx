@@ -2,22 +2,22 @@ import React, { Component } from 'react';
 
 
 /*-- Apply Third-party plugins (import location should be in front of "global scripts and styles") --*/
-import '@uixkit.react/components/_plugins/_lib-bootstrap';
-import '@uixkit.react/components/_plugins/_lib-icons';
-import TweenMax, { TimelineMax } from '@uixkit.react/components/_plugins/_lib-gsap';
+import '@poemkit/components/_plugins/_lib-bootstrap';
+import '@poemkit/components/_plugins/_lib-icons';
+import TweenMax, { TimelineMax } from '@poemkit/components/_plugins/_lib-gsap';
 
 /*-- Apply global scripts and styles --*/
-import '@uixkit.react/components/_utils/styles/_all.scss';
-import '@uixkit.react/components/_utils/styles/rtl/_all.scss';
-import { __ } from '@uixkit.react/components/_utils/_all';
+import '@poemkit/components/_utils/styles/_all.scss';
+import '@poemkit/components/_utils/styles/rtl/_all.scss';
+import { __ } from '@poemkit/components/_utils/_all';
 
 /*-- Apply this component styles --*/
-import '@uixkit.react/components/Form/styles/_basic.scss';
-import '@uixkit.react/components/Form/styles/_layout.scss';
-import '@uixkit.react/components/Form/styles/_theme_material.scss';
-import '@uixkit.react/components/Form/styles/rtl/_basic.scss';
-import '@uixkit.react/components/Form/styles/rtl/_layout.scss';
-import '@uixkit.react/components/Form/styles/rtl/_theme_material.scss';
+import '@poemkit/components/Form/styles/_basic.scss';
+import '@poemkit/components/Form/styles/_layout.scss';
+import '@poemkit/components/Form/styles/_theme_material.scss';
+import '@poemkit/components/Form/styles/rtl/_basic.scss';
+import '@poemkit/components/Form/styles/rtl/_layout.scss';
+import '@poemkit/components/Form/styles/rtl/_theme_material.scss';
 
 
 type DynamicFieldsProps = {
@@ -94,8 +94,8 @@ export default class DynamicFields extends Component<DynamicFieldsProps, Dynamic
 		
 		
 		//
-		return function (event) { // e is the event object that returned
-			event.preventDefault();
+		return function (e) { // e is the event object that returned
+			e.preventDefault();
 			
 			let elVals = [...curVal];
 			elVals.splice(param,1);
@@ -106,7 +106,7 @@ export default class DynamicFields extends Component<DynamicFieldsProps, Dynamic
 	
 	createUI(){
 		return this.state.elVals.map((el, i) => 
-		   <div key={i} className="uix-controls__dynamic-fields__tmpl__wrapper">
+		   <div key={i} className="poemkit-controls__dynamic-fields__tmpl__wrapper">
 									 
 				{el.map((data,index) => {
 						return (
@@ -118,7 +118,7 @@ export default class DynamicFields extends Component<DynamicFieldsProps, Dynamic
 				}
 
 			  &nbsp;&nbsp;
-			  <a href="#" className="uix-controls__dynamic-fields__removebtn" onClick={this.handleClickRemove(i)}><i className="fa fa-minus-circle" aria-hidden="true"></i></a> {this.props.removeLabel || ''}
+			  <a href="#" className="poemkit-controls__dynamic-fields__removebtn" onClick={this.handleClickRemove(i)}><i className="fa fa-minus-circle" aria-hidden="true"></i></a> {this.props.removeLabel || ''}
 		   </div>          
 		)
 	}
@@ -131,7 +131,7 @@ export default class DynamicFields extends Component<DynamicFieldsProps, Dynamic
 		
 		//update values for all displayed controls
 		const root = this.rootRef.current;
-		const controls = __( root ).find( '.uix-controls__dynamic-fields__append' ).find( '[name]' );
+		const controls = __( root ).find( '.poemkit-controls__dynamic-fields__append' ).find( '[name]' );
 		
 		let n = 0;
 		_val.map((data,index) => {
@@ -169,12 +169,12 @@ export default class DynamicFields extends Component<DynamicFieldsProps, Dynamic
 		return (
 		  <>
 
-				<div ref={this.rootRef} className="uix-controls__dynamic-fields-container" data-max-fields={maxFields || 10} id={idRes}>
-					<div className="uix-controls__dynamic-fields__append">
+				<div ref={this.rootRef} className="poemkit-controls__dynamic-fields-container" data-max-fields={maxFields || 10} id={idRes}>
+					<div className="poemkit-controls__dynamic-fields__append">
 			            {tempHtmlString}
 			            {this.createUI()}
 			       </div>
-					<a ref={this.addBtnRef} href="#" className="uix-controls__dynamic-fields__addbtn" onClick={this.handleClickAdd}><i className="fa fa-plus-circle" aria-hidden="true"></i> {addLabel || 'Add new'}</a>
+					<a ref={this.addBtnRef} href="#" className="poemkit-controls__dynamic-fields__addbtn" onClick={this.handleClickAdd}><i className="fa fa-plus-circle" aria-hidden="true"></i> {addLabel || 'Add new'}</a>
 
 				</div>
 			

@@ -1,10 +1,10 @@
 /* ======================================================
    <!-- LightBox -->
 /* ====================================================== */
-@import '@uixkit.react/components/_utils/styles/_variable-and-mixin.scss';
+@import '@poemkit/components/_utils/styles/_variable-and-mixin.scss';
 
 
-.rtl .uix-lightbox__close {
+.rtl .poemkit-lightbox__close {
 	right: auto;
 	left: 15px;
 

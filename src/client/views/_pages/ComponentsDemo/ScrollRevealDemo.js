@@ -1,10 +1,10 @@
 import React from 'react';
-import { __ } from '@uixkit.react/components/_utils/_all';
-import ScrollReveal from '@uixkit.react/components/ScrollReveal/index.tsx';
+import { __ } from '@poemkit/components/_utils/_all';
+import ScrollReveal from '@poemkit/components/ScrollReveal/index.tsx';
 
 
 //Create or Remove Sidebar Menu
-import { SidebarMenu } from '@uixkit.react/pages/ComponentsDemo/_SidebarMenu.js';
+import { SidebarMenu } from '@poemkit/pages/ComponentsDemo/_SidebarMenu.js';
 
 
 export default () => {
@@ -48,9 +48,9 @@ export default () => {
 			<div className="container">
 				<div className="row">
 					<div className="col-12">
-						<h1 className="uix-typo--h2">
+						<h1 className="poemkit-typo--h2">
 							Scroll Reveal 
-							<a className="uix-typo--h3 align-middle" href="https://github.com/xizon/uix-kit-react/tree/main/src/client/components/ScrollReveal" target="_blank"><span className="uix-dir--right" style={{fontSize:"0.75rem",color: "#ababab",margin:".5rem .5rem 0 0"}}><svg style={{marginRight:".5rem"}} width="16" viewBox="0 0 122.88 91.26"><path fill="#d2d2d2" d="M8.32,0h106.24c4.58,0,8.32,3.74,8.32,8.32v74.62c0,4.57-3.74,8.32-8.32,8.32H8.32C3.74,91.26,0,87.51,0,82.94 V8.32C0,3.74,3.74,0,8.32,0L8.32,0z M54.46,72.22L32,58.61v-8.63l22.46-13.61v10.26l-13.65,7.69l13.65,7.7V72.22L54.46,72.22z M68.42,72.22l22.46-13.61v-8.63L68.42,36.37v10.26l13.65,7.69l-13.65,7.7V72.22L68.42,72.22z M117.97,23.29H5.29v60.46 c0,0.64,0.25,1.2,0.67,1.63c0.42,0.42,0.99,0.67,1.63,0.67h108.04c0.64,0,1.2-0.25,1.63-0.67c0.43-0.43,0.67-0.99,0.67-1.63V23.29 H117.97L117.97,23.29z M106.64,9.35c2.27,0,4.11,1.84,4.11,4.11c0,2.27-1.84,4.11-4.11,4.11c-2.27,0-4.11-1.84-4.11-4.11 C102.54,11.19,104.38,9.35,106.64,9.35L106.64,9.35z M78.8,9.35c2.27,0,4.11,1.84,4.11,4.11c0,2.27-1.84,4.11-4.11,4.11 c-2.27,0-4.11-1.84-4.11-4.11C74.69,11.19,76.53,9.35,78.8,9.35L78.8,9.35z M92.72,9.35c2.27,0,4.11,1.84,4.11,4.11 c0,2.27-1.84,4.11-4.11,4.11c-2.27,0-4.11-1.84-4.11-4.11C88.61,11.19,90.45,9.35,92.72,9.35L92.72,9.35z"/></svg>Docs on GitHub</span></a>
+							<a className="poemkit-typo--h3 align-middle" href="https://github.com/xizon/poemkit/tree/main/src/client/components/ScrollReveal" target="_blank"><span className="poemkit-dir--right" style={{fontSize:"0.75rem",color: "#ababab",margin:".5rem .5rem 0 0"}}><svg style={{marginRight:".5rem"}} width="16" viewBox="0 0 122.88 91.26"><path fill="#d2d2d2" d="M8.32,0h106.24c4.58,0,8.32,3.74,8.32,8.32v74.62c0,4.57-3.74,8.32-8.32,8.32H8.32C3.74,91.26,0,87.51,0,82.94 V8.32C0,3.74,3.74,0,8.32,0L8.32,0z M54.46,72.22L32,58.61v-8.63l22.46-13.61v10.26l-13.65,7.69l13.65,7.7V72.22L54.46,72.22z M68.42,72.22l22.46-13.61v-8.63L68.42,36.37v10.26l13.65,7.69l-13.65,7.7V72.22L68.42,72.22z M117.97,23.29H5.29v60.46 c0,0.64,0.25,1.2,0.67,1.63c0.42,0.42,0.99,0.67,1.63,0.67h108.04c0.64,0,1.2-0.25,1.63-0.67c0.43-0.43,0.67-0.99,0.67-1.63V23.29 H117.97L117.97,23.29z M106.64,9.35c2.27,0,4.11,1.84,4.11,4.11c0,2.27-1.84,4.11-4.11,4.11c-2.27,0-4.11-1.84-4.11-4.11 C102.54,11.19,104.38,9.35,106.64,9.35L106.64,9.35z M78.8,9.35c2.27,0,4.11,1.84,4.11,4.11c0,2.27-1.84,4.11-4.11,4.11 c-2.27,0-4.11-1.84-4.11-4.11C74.69,11.19,76.53,9.35,78.8,9.35L78.8,9.35z M92.72,9.35c2.27,0,4.11,1.84,4.11,4.11 c0,2.27-1.84,4.11-4.11,4.11c-2.27,0-4.11-1.84-4.11-4.11C88.61,11.19,90.45,9.35,92.72,9.35L92.72,9.35z"/></svg>Docs on GitHub</span></a>
 						</h1>
 					</div>
 				</div>
@@ -66,7 +66,7 @@ export default () => {
 
 		{/*<!-- Content   
 		====================================================== -->*/}
-		<section className="uix-spacing--s">
+		<section className="poemkit-spacing--s">
 			<div className="container">
 				<div className="row">
 					<div className="col-12">
@@ -86,32 +86,32 @@ export default () => {
 
 		{/*<!-- Scroll Reveal
 		============================================= -->*/} 
-		<ScrollReveal className="uix-spacing--s uix-height--50 uix-el--transparent" config='{"viewport":"100%","from":{"opacity":0,"x":100},"to":{"opacity":1,"x":0},"ease":"Power2.easeOut","duration":0.8,"delay":0,"infinite":false}' style={{background:"#e6e6e6"}}>
-			<div className="uix-v-align--relative uix-t-c">
+		<ScrollReveal className="poemkit-spacing--s poemkit-height--50 poemkit-el--transparent" config='{"viewport":"100%","from":{"opacity":0,"x":100},"to":{"opacity":1,"x":0},"ease":"Power2.easeOut","duration":0.8,"delay":0,"infinite":false}' style={{background:"#e6e6e6"}}>
+			<div className="poemkit-v-align--relative poemkit-t-c">
 				<h3>Moving the element when going left</h3>
 			</div>
 		</ScrollReveal> 
 
 
 
-		<ScrollReveal className="uix-spacing--s uix-height--50 uix-el--transparent" config='{"viewport":"100%","from":{"opacity":0,"scale":0.5,"transform":"translateX(50px) rotate(30deg)"},"to":{"opacity":1,"scale":1,"transform":"translateX(0) rotate(0deg)"},"ease":"Power2.easeOut","duration":0.8,"delay":0.5,"infinite":false}' style={{background:"#ACABA3"}}>
-			<div className="uix-v-align--relative uix-t-c">
+		<ScrollReveal className="poemkit-spacing--s poemkit-height--50 poemkit-el--transparent" config='{"viewport":"100%","from":{"opacity":0,"scale":0.5,"transform":"translateX(50px) rotate(30deg)"},"to":{"opacity":1,"scale":1,"transform":"translateX(0) rotate(0deg)"},"ease":"Power2.easeOut","duration":0.8,"delay":0.5,"infinite":false}' style={{background:"#ACABA3"}}>
+			<div className="poemkit-v-align--relative poemkit-t-c">
 				<h3>Flipping the element when going left</h3>
 
 			</div>
 		</ScrollReveal>
 
 
-		<ScrollReveal className="uix-spacing--s uix-height--50 uix-el--transparent" config='{"viewport":"80%","from":{"opacity":0,"y":150},"to":{"opacity":1,"y":0},"ease":"Power2.easeOut","duration":0.8,"delay":0,"infinite":true}' style={{background:"#C7BAAF"}}>
-			<div className="uix-v-align--relative uix-t-c">
+		<ScrollReveal className="poemkit-spacing--s poemkit-height--50 poemkit-el--transparent" config='{"viewport":"80%","from":{"opacity":0,"y":150},"to":{"opacity":1,"y":0},"ease":"Power2.easeOut","duration":0.8,"delay":0,"infinite":true}' style={{background:"#C7BAAF"}}>
+			<div className="poemkit-v-align--relative poemkit-t-c">
 				<h3>Infinite loop animation</h3>
 
 			</div>
 		</ScrollReveal>
 
 
-		<ScrollReveal className="uix-spacing--s uix-height--50 uix-el--transparent" config='{"viewport":"100%","from":{"opacity":0,"y":150},"to":{"opacity":1,"y":0},"ease":"Power2.easeOut","duration":0.8,"delay":0,"infinite":false}' style={{background:"#AB9799"}}>
-			<div className="uix-v-align--relative uix-t-c">
+		<ScrollReveal className="poemkit-spacing--s poemkit-height--50 poemkit-el--transparent" config='{"viewport":"100%","from":{"opacity":0,"y":150},"to":{"opacity":1,"y":0},"ease":"Power2.easeOut","duration":0.8,"delay":0,"infinite":false}' style={{background:"#AB9799"}}>
+			<div className="poemkit-v-align--relative poemkit-t-c">
 				<h3>Moving the element when going top</h3>
 
 			</div>
@@ -119,8 +119,8 @@ export default () => {
 
 
 
-		<ScrollReveal className="uix-spacing--s uix-height--50" config='{"viewport":"100%","from":"","to":".demo-sr-active","infinite":true}' style={{background:"#91707A"}}>
-			<div className="uix-v-align--relative uix-t-c">
+		<ScrollReveal className="poemkit-spacing--s poemkit-height--50" config='{"viewport":"100%","from":"","to":".demo-sr-active","infinite":true}' style={{background:"#91707A"}}>
+			<div className="poemkit-v-align--relative poemkit-t-c">
 				<h3>Add class <code>.demo-sr-active</code> when element becomes visible</h3>
 
 			</div>
@@ -129,8 +129,8 @@ export default () => {
 
 
 
-		<ScrollReveal className="uix-spacing--s uix-height--50 uix-el--zoom" config='{"viewport":"100%","from":{"scale":0},"to":{"scale":1},"ease":"Power2.easeOut","duration":0.8,"delay":0,"infinite":false}' style={{background:"#805965"}}>
-			<div className="uix-v-align--relative uix-t-c">
+		<ScrollReveal className="poemkit-spacing--s poemkit-height--50 poemkit-el--zoom" config='{"viewport":"100%","from":{"scale":0},"to":{"scale":1},"ease":"Power2.easeOut","duration":0.8,"delay":0,"infinite":false}' style={{background:"#805965"}}>
+			<div className="poemkit-v-align--relative poemkit-t-c">
 				<h3>Scale effect</h3>
 
 			</div>
@@ -140,7 +140,7 @@ export default () => {
 
 		{/*<!-- API 
 		====================================================== -->*/}
-			<section className="uix-spacing--s uix-spacing--no-bottom">
+			<section className="poemkit-spacing--s poemkit-spacing--no-bottom">
 				<div className="container">
 					<div className="row">
 						<div className="col-12">
@@ -148,10 +148,10 @@ export default () => {
 							<hr />
 
 
-							<article className="uix-spacing--s" itemProp="text">
+							<article className="poemkit-spacing--s" itemProp="text">
 								<h4>Scroll Reveal</h4>
 								<div>
-									<pre>import ScrollReveal from '@uixkit.react/components/ScrollReveal/index.tsx';</pre>
+									<pre>import ScrollReveal from '@poemkit/components/ScrollReveal/index.tsx';</pre>
 								</div>
 
 								<div className="table-responsive-md">

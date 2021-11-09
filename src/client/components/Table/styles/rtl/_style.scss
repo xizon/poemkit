@@ -1,7 +1,7 @@
 /* ======================================================
    <!-- Table -->
 /* ====================================================== */
-@import '@uixkit.react/components/_utils/styles/_variable-and-mixin.scss';
+@import '@poemkit/components/_utils/styles/_variable-and-mixin.scss';
 
 
 /*
@@ -15,8 +15,8 @@ $table-border-color: #d6d5d5;
  1. Generic
  ---------------------------
  */
-.rtl table.uix-table,
-.rtl .uix-table table {
+.rtl table.poemkit-table,
+.rtl .poemkit-table table {
 
 	th,
 	td {
@@ -30,11 +30,11 @@ $table-border-color: #d6d5d5;
 
 		th {
 
-			&.uix-t-r {
+			&.poemkit-t-r {
 				text-align: left;
 			}
 
-			&.uix-t-l {
+			&.poemkit-t-l {
 				text-align: right;
 			}
 
@@ -48,42 +48,42 @@ $table-border-color: #d6d5d5;
 			--breakpoint-xl:1200px;
 			*/
 			@media all and (max-width: 576px) {
-				&.uix-t-r--sm {
+				&.poemkit-t-r--sm {
 					text-align: left;
 				}
 
-				&.uix-t-l--sm {
+				&.poemkit-t-l--sm {
 					text-align: right;
 				}
 			}
 
 			@media all and (max-width: 768px) {
-				&.uix-t-r--md {
+				&.poemkit-t-r--md {
 					text-align: left;
 				}
 
-				&.uix-t-l--md {
+				&.poemkit-t-l--md {
 					text-align: right;
 				}
 			}
 
 			@media all and (max-width: 992px) {
-				&.uix-t-r--lg {
+				&.poemkit-t-r--lg {
 					text-align: left;
 				}
 
-				&.uix-t-l--lg {
+				&.poemkit-t-l--lg {
 					text-align: right;
 				}
 			}
 
 
 			@media all and (max-width: 1200px) {
-				&.uix-t-r--xl {
+				&.poemkit-t-r--xl {
 					text-align: left;
 				}
 
-				&.uix-t-l--xl {
+				&.poemkit-t-l--xl {
 					text-align: right;
 				}
 			}
@@ -101,8 +101,8 @@ $table-border-color: #d6d5d5;
 
 @media all and (max-width: 768px) {
 
-	.rtl table.uix-table.is-responsive,
-	.rtl .uix-table.is-responsive table {
+	.rtl table.poemkit-table.is-responsive,
+	.rtl .poemkit-table.is-responsive table {
 
 		tbody {
 
@@ -125,8 +125,8 @@ $table-border-color: #d6d5d5;
 
 
 	/* With scroll bars */
-	.rtl .js-uix-table--responsive-scrolled table,
-	.rtl table.js-uix-table--responsive-scrolled {
+	.rtl .js-poemkit-table--responsive-scrolled table,
+	.rtl table.js-poemkit-table--responsive-scrolled {
 
 
 		thead {

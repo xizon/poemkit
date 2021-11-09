@@ -2,22 +2,22 @@ import React, { Component } from 'react';
 
 
 /*-- Apply Third-party plugins (import location should be in front of "global scripts and styles") --*/
-import '@uixkit.react/components/_plugins/_lib-bootstrap';
-import '@uixkit.react/components/_plugins/_lib-icons';
-import TweenMax, { TimelineMax } from '@uixkit.react/components/_plugins/_lib-gsap';
+import '@poemkit/components/_plugins/_lib-bootstrap';
+import '@poemkit/components/_plugins/_lib-icons';
+import TweenMax, { TimelineMax } from '@poemkit/components/_plugins/_lib-gsap';
 
 /*-- Apply global scripts and styles --*/
-import '@uixkit.react/components/_utils/styles/_all.scss';
-import '@uixkit.react/components/_utils/styles/rtl/_all.scss';
-import { __ } from '@uixkit.react/components/_utils/_all';
+import '@poemkit/components/_utils/styles/_all.scss';
+import '@poemkit/components/_utils/styles/rtl/_all.scss';
+import { __ } from '@poemkit/components/_utils/_all';
 
 /*-- Apply this component styles --*/
-import '@uixkit.react/components/Form/styles/_basic.scss';
-import '@uixkit.react/components/Form/styles/_layout.scss';
-import '@uixkit.react/components/Form/styles/_theme_material.scss';
-import '@uixkit.react/components/Form/styles/rtl/_basic.scss';
-import '@uixkit.react/components/Form/styles/rtl/_layout.scss';
-import '@uixkit.react/components/Form/styles/rtl/_theme_material.scss';
+import '@poemkit/components/Form/styles/_basic.scss';
+import '@poemkit/components/Form/styles/_layout.scss';
+import '@poemkit/components/Form/styles/_theme_material.scss';
+import '@poemkit/components/Form/styles/rtl/_basic.scss';
+import '@poemkit/components/Form/styles/rtl/_layout.scss';
+import '@poemkit/components/Form/styles/rtl/_theme_material.scss';
 
 
 type MergeInputProps = {
@@ -101,7 +101,7 @@ export default class MergeInput extends Component<MergeInputProps, MergeInputSta
 		  <>
 			
 
-				<div className={"uix-controls__merge" + wrapperClassDisabled + wrapperClassIcon+ wrapperClassUi}>
+				<div className={"poemkit-controls__merge" + wrapperClassDisabled + wrapperClassIcon+ wrapperClassUi}>
 			      {icon || null}
 				  <input 
 			          className={(value && value.length > 0 ? 'is-active' : '')}
@@ -114,7 +114,7 @@ export default class MergeInput extends Component<MergeInputProps, MergeInputSta
 					  required={required || null}
                       {...attributes}
 					/>
-			        <button type={btnType || 'button'} className="uix-btn uix-btn__bg--primary"><span>{label || null}</span></button>
+			        <button type={btnType || 'button'} className="poemkit-btn poemkit-btn__bg--primary"><span>{label || null}</span></button>
 				  
 
 				</div>

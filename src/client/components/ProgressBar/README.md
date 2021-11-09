@@ -1,6 +1,6 @@
-# @uixkit.react/components/ProgressBar
+# @poemkit/components/ProgressBar
 
-[Source](https://github.com/xizon/uix-kit-react/tree/main/src/client/components/ProgressBar)
+[Source](https://github.com/xizon/poemkit/tree/main/src/client/components/ProgressBar)
 
 ## Version
 
@@ -10,7 +10,7 @@
 
 ### Progress Bar
 ```js
-import ProgressBar from '@uixkit.react/components/ProgressBar/index.tsx';
+import ProgressBar from '@poemkit/components/ProgressBar/index.tsx';
 ```
 | Property | Type | Default | Description |
 | --- | --- | --- | --- |
@@ -26,7 +26,7 @@ import ProgressBar from '@uixkit.react/components/ProgressBar/index.tsx';
 
 ```js
 import React from 'react';
-import ProgressBar from '@uixkit.react/components/ProgressBar/index.tsx';
+import ProgressBar from '@poemkit/components/ProgressBar/index.tsx';
 
 export default () => {
   return (

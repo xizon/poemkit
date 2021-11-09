@@ -22,7 +22,7 @@ ol {
 	}
 }
 
-.uix-list {
+.poemkit-list {
 	&::after {
 		content: '';
 		clear: both;
@@ -35,10 +35,10 @@ ol {
  1. Normal List Styling
  ---------------------------
  */ 
-ol.uix-list--normal,
-ul.uix-list--normal,
-.uix-list--normal ul,
-.uix-list--normal ol {
+ol.poemkit-list--normal,
+ul.poemkit-list--normal,
+.poemkit-list--normal ul,
+.poemkit-list--normal ol {
 	
 	display: block;
 	margin: 1.421875rem;
@@ -53,28 +53,28 @@ ul.uix-list--normal,
 	}
 }
 
-ul.uix-list--normal, 
-.uix-list--normal ul {
+ul.poemkit-list--normal, 
+.poemkit-list--normal ul {
     list-style-type: disc;
 }
 
-ol.uix-list--normal, 
-.uix-list--normal ol {
+ol.poemkit-list--normal, 
+.poemkit-list--normal ol {
     list-style-type: decimal;
 }
 
 /*-- Noemal List Effect by Default --*/
 /* Compatible with  Uix Shortcodes (WordPress Plugin) and Block Button Link */
-.uix-list--normal a:not(.uix-sc-btn):not(.wp-block-button__link):not(.uix-btn) {
+.poemkit-list--normal a:not(.poemkit-sc-btn):not(.wp-block-button__link):not(.poemkit-btn) {
     color: $highlight-color1;
 }
 
-.uix-list--normal a:not(.uix-sc-btn):not(.wp-block-button__link):not(.uix-btn):hover {
+.poemkit-list--normal a:not(.poemkit-sc-btn):not(.wp-block-button__link):not(.poemkit-btn):hover {
     color: $highlight-color2;
     text-decoration: underline;
 }
 
-.uix-list--normal a:not(.uix-sc-btn):not(.wp-block-button__link):not(.uix-btn):hover img {
+.poemkit-list--normal a:not(.poemkit-sc-btn):not(.wp-block-button__link):not(.poemkit-btn):hover img {
     text-decoration: none;
 }
 
@@ -86,8 +86,8 @@ ol.uix-list--normal,
  ---------------------------
  */ 
 
-ol.uix-list--numbered,
-.uix-list--numbered ol {
+ol.poemkit-list--numbered,
+.poemkit-list--numbered ol {
     list-style: none;
     margin-left: 1rem;
     counter-reset: line;
@@ -117,7 +117,7 @@ ol.uix-list--numbered,
 	
 
 }
-.uix-list--numbered.uix-list--numbered-1-digit > li::before {
+.poemkit-list--numbered.poemkit-list--numbered-1-digit > li::before {
 	content: counter(line);
 }	
 
@@ -127,10 +127,10 @@ ol.uix-list--numbered,
  ---------------------------
  */ 
 
-ol.uix-list--circle,
-ul.uix-list--circle,
-.uix-list--circle ol,
-.uix-list--circle ul {
+ol.poemkit-list--circle,
+ul.poemkit-list--circle,
+.poemkit-list--circle ol,
+.poemkit-list--circle ul {
     list-style: none;
     margin-left: 1rem;
     counter-reset: line;
@@ -168,8 +168,8 @@ ul.uix-list--circle,
  ---------------------------
  */ 
 
-ol.uix-list--numbered-large,
-.uix-list--numbered-large ol {
+ol.poemkit-list--numbered-large,
+.poemkit-list--numbered-large ol {
     counter-reset: item;
 	
 	/*removes original number*/
@@ -202,12 +202,12 @@ ol.uix-list--numbered-large,
 
 }
 
-.uix-list--numbered-large.uix-list--numbered-1-digit li::before {
+.poemkit-list--numbered-large.poemkit-list--numbered-1-digit li::before {
 	content: counter(item)".";
 }	
 
-ol.uix-list--numbered-large.uix-list--numbered-bg,
-.uix-list--numbered-large.uix-list--numbered-bg ol {
+ol.poemkit-list--numbered-large.poemkit-list--numbered-bg,
+.poemkit-list--numbered-large.poemkit-list--numbered-bg ol {
    
 	li {
 		background: rgba(228,225,225,1.00);
@@ -242,7 +242,7 @@ ol.uix-list--numbered-large.uix-list--numbered-bg,
 
 }
 
-.uix-list--numbered-large.uix-list--numbered-bg.uix-list--numbered-1-digit li::before {
+.poemkit-list--numbered-large.poemkit-list--numbered-bg.poemkit-list--numbered-1-digit li::before {
 	content: counter(item);
 }	
 
@@ -254,7 +254,7 @@ ol.uix-list--numbered-large.uix-list--numbered-bg,
  */ 
 $step-line-color: #333;
 
-.uix-list--numbered-step {
+.poemkit-list--numbered-step {
     counter-reset: step;
     list-style-type: none;
 	margin-left: 1rem;
@@ -304,7 +304,7 @@ $step-line-color: #333;
 
 @media all and (max-width:768px) {
 
-    .uix-list--numbered-step {
+    .poemkit-list--numbered-step {
 		
 		li {
 			padding-left: 2.5rem;

@@ -1,7 +1,7 @@
 /* ======================================================
    <!-- Progress Bar -->
 /* ====================================================== */
-@import '@uixkit.react/components/_utils/styles/_variable-and-mixin.scss';
+@import '@poemkit/components/_utils/styles/_variable-and-mixin.scss';
 
 /*
  * 1. Radial Progress Bar
@@ -25,7 +25,7 @@ $bar-speed      : 0.8s;
 	width: $w;
 }
 
-.uix-progressbar--circle {
+.poemkit-progressbar--circle {
 	@include size($bar-size, $bar-size);
 
 	display: inline-block;
@@ -33,19 +33,19 @@ $bar-speed      : 0.8s;
 	position: relative;
 
 
-	.uix-progressbar__title {
+	.poemkit-progressbar__title {
 		color: $primary-text-color;
 		padding-top: 1rem;
 	}
 
-	.uix-progressbar__pie {
+	.poemkit-progressbar__pie {
 		@include size(100%, 100%);
 		clip: rect(0, $bar-size, $bar-size, $bar-size / 2);
 		left: 0;
 		position: absolute;
 		top: 0;
 
-		.uix-progressbar__pie--half-circle {
+		.poemkit-progressbar__pie--half-circle {
 			transition: all #{$bar-speed} ease;
 			@include size(100%, 100%);
 			border: $bar-line-size solid;
@@ -57,7 +57,7 @@ $bar-speed      : 0.8s;
 		}
 	}
 
-	.uix-progressbar__track {
+	.poemkit-progressbar__track {
 		border: $bar-line-size solid $bar-track-bg;
 		background: $bar-bg;
 		border-radius: 100%;
@@ -78,7 +78,7 @@ $bar-speed      : 0.8s;
 			top: 0;
 		}
 
-		.uix-progressbar__unit {
+		.poemkit-progressbar__unit {
 			color: $sub-text-color;
 			font-size: 0.875rem;
 			display: inline-block;
@@ -90,7 +90,7 @@ $bar-speed      : 0.8s;
 
 	&.is-transparent {
 
-		.uix-progressbar__track {
+		.poemkit-progressbar__track {
 			color: $primary-text-color;
 			background: none;
 		}
@@ -98,41 +98,41 @@ $bar-speed      : 0.8s;
 
 	@for $i from 1 to 101 {
 
-		&.uix-progressbar--progress-#{$i} {
+		&.poemkit-progressbar--progress-#{$i} {
 
 			@if $i <= 50 {
-				.uix-progressbar__pie {
-					.uix-progressbar__pie--right-side {
+				.poemkit-progressbar__pie {
+					.poemkit-progressbar__pie--right-side {
 						display: none;
 					}
 				}
 			}
 
 			@if $i > 50 {
-				.uix-progressbar__pie {
+				.poemkit-progressbar__pie {
 					clip: rect(auto, auto, auto, auto);
 
-					.uix-progressbar__pie--right-side {
+					.poemkit-progressbar__pie--right-side {
 						transform: rotate(180deg);
 					}
 				}
 
 			}
 
-			.uix-progressbar__pie {
-				.uix-progressbar__pie--half-circle {
+			.poemkit-progressbar__pie {
+				.poemkit-progressbar__pie--half-circle {
 					border-color: $bar-fill-color;
 				}
 
-				.uix-progressbar__pie--left-side {
+				.poemkit-progressbar__pie--left-side {
 					transform: rotate(#{$i*3.5}deg);
 				}
 
 			}
 
 			@if $i == 100 {
-				.uix-progressbar__pie {
-					.uix-progressbar__pie--right-side {
+				.poemkit-progressbar__pie {
+					.poemkit-progressbar__pie--right-side {
 						transform: rotate(170deg);
 					}
 				}
@@ -153,17 +153,17 @@ $bar-speed      : 0.8s;
  2. Rectangle Progress Bar
  ---------------------------
  */
-.uix-progressbar--rectangle {
+.poemkit-progressbar--rectangle {
 	display: block;
 	margin: 1rem;
 	position: relative;
 	width: calc(100% - 2rem);
 
-	.uix-progressbar__title {
+	.poemkit-progressbar__title {
 		color: $primary-text-color;
 	}
 
-	.uix-progressbar__bar {
+	.poemkit-progressbar__bar {
 		height: $bar-line-size;
 		background-color: $bar-track-bg;
 
@@ -174,7 +174,7 @@ $bar-speed      : 0.8s;
 			right: 0;
 			font-weight: bold;
 
-			.uix-progressbar__unit {
+			.poemkit-progressbar__unit {
 				color: $sub-text-color;
 				font-size: 0.875rem;
 				display: inline-block;
@@ -183,7 +183,7 @@ $bar-speed      : 0.8s;
 			}
 		}
 
-		.uix-progressbar__track {
+		.poemkit-progressbar__track {
 			transition: all #{$bar-speed} ease;
 			position: relative;
 			height: 100%;
@@ -195,7 +195,7 @@ $bar-speed      : 0.8s;
 	}
 
 	@for $i from 1 to 101 {
-		&.uix-progressbar--progress-#{$i} .uix-progressbar__track {
+		&.poemkit-progressbar--progress-#{$i} .poemkit-progressbar__track {
 			width: #{$i}#{"%"};
 		}
 	}

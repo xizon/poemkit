@@ -12,7 +12,7 @@ process.on('unhandledRejection', err => {
 
 
 /*
- * @uixkit.react/components/Tabs
+ * @poemkit/components/TabsAnimated
  * ----------------------------------------
  */
 
@@ -22,10 +22,10 @@ import '@testing-library/jest-dom';
 
 
 import React from 'react';
-import { TabsAnimated, TabList, TabPanel } from '@uixkit.react/components/TabsAnimated/index.tsx';
+import { TabsAnimated, TabList, TabPanel } from '@poemkit/components/TabsAnimated/index.tsx';
 
 
-describe('Tabs', () => {
+describe('TabsAnimated', () => {
 
     const codeConstructor = (
         <TabsAnimated>
@@ -51,11 +51,11 @@ describe('Tabs', () => {
         codeConstructor
     );
 
-    console.log(renderer.toJSON());
+    //console.log(renderer.toJSON());
 
 
     //
-    test('renders initial tabs to <Tabs>...</Tabs>', () => {
+    it('renders initial this component to <TabsAnimated>...</TabsAnimated>', () => {
 
         const { getByTestId } = render(codeConstructor);
 

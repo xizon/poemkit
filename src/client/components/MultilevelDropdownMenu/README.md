@@ -1,6 +1,6 @@
-# @uixkit.react/components/MultilevelDropdownMenu
+# @poemkit/components/MultilevelDropdownMenu
 
-[Source](https://github.com/xizon/uix-kit-react/tree/main/src/client/components/MultilevelDropdownMenu)
+[Source](https://github.com/xizon/poemkit/tree/main/src/client/components/MultilevelDropdownMenu)
 
 ## Version
 
@@ -10,7 +10,7 @@
 
 ### Multiple-Level Dropdown Menu
 ```js
-import MultilevelDropdownMenu from '@uixkit.react/components/MultilevelDropdownMenu/index.tsx';
+import MultilevelDropdownMenu from '@poemkit/components/MultilevelDropdownMenu/index.tsx';
 ```
 | Property | Type | Default | Description |
 | --- | --- | --- | --- |
@@ -32,7 +32,7 @@ Array configuration properties of the `data`:
 
 ```js
 import React from 'react';
-import MultilevelDropdownMenu from '@uixkit.react/components/MultilevelDropdownMenu/index.tsx';
+import MultilevelDropdownMenu from '@poemkit/components/MultilevelDropdownMenu/index.tsx';
 
 const menuListData = [{
 	title: "Top level 1",

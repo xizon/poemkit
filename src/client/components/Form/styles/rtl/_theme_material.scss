@@ -1,7 +1,7 @@
 /* ======================================================
     <!-- Form  ( Material Design Theme )-->
 /* ====================================================== */
-@import '@uixkit.react/components/_utils/styles/_variable-and-mixin.scss';
+@import '@poemkit/components/_utils/styles/_variable-and-mixin.scss';
 @import '_variable-and-mixin.scss';
 
 /*
@@ -15,8 +15,8 @@
  ---------------------------
  */
 @mixin create-line-rtl() {
-    .rtl .uix-controls__basic-bar,
-	.rtl .uix-controls__bar {
+    .rtl .poemkit-controls__basic-bar,
+	.rtl .poemkit-controls__bar {
 		left: auto;
         right: 0;
 	}
@@ -24,7 +24,7 @@
 
 
 /* Default Controls */
-.rtl .uix-controls:not(.uix-controls__toggle):not(.uix-controls__checkbox):not(.uix-controls__radio):not(.uix-controls__select) {
+.rtl .poemkit-controls:not(.poemkit-controls__toggle):not(.poemkit-controls__checkbox):not(.poemkit-controls__radio):not(.poemkit-controls__select) {
 
     //Create Line Effect on Click
     @include create-line-rtl();
@@ -32,7 +32,7 @@
 }
 
 /* Create Line Effect on Click */
-.rtl .uix-controls.uix-controls--line {
+.rtl .poemkit-controls.poemkit-controls--line {
 
 
 	label {
@@ -73,7 +73,7 @@
 			}
 
 			textarea,
-			button:not(.uix-btn),
+			button:not(.poemkit-btn),
 			select {
 				padding-right: 0 !important;
 			}
@@ -95,7 +95,7 @@
 
 
 	/*-- Select --*/
-	&.uix-controls__normal-select {
+	&.poemkit-controls__normal-select {
 
 	
 		select {
@@ -117,9 +117,9 @@
  ---------------------------
  */
 
-.rtl .uix-controls__select-wrapper {
+.rtl .poemkit-controls__select-wrapper {
 
-	&.uix-controls--line.is-disabled {
+	&.poemkit-controls--line.is-disabled {
 
 		/* Mask used to prohibit selection */
 		&::before {
@@ -131,8 +131,8 @@
 	}
 
 
-	.uix-controls--line  {
-		.uix-controls__select-trigger {
+	.poemkit-controls--line  {
+		.poemkit-controls__select-trigger {
 			padding-right: 0;
 
 		}

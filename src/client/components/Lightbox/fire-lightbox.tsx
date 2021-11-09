@@ -1,14 +1,14 @@
-import { __ } from '@uixkit.react/components/_utils/_all';
+import { __ } from '@poemkit/components/_utils/_all';
 
  /*-- Apply Third-party plugins --*/
-import { disableBodyScroll } from '@uixkit.react/components/_plugins/_lib-scrolllock';
-import TweenMax from '@uixkit.react/components/_plugins/_lib-gsap';
+import { disableBodyScroll } from '@poemkit/components/_plugins/_lib-scrolllock';
+import TweenMax from '@poemkit/components/_plugins/_lib-gsap';
 
 //
 import axios from 'axios';
 
 //
-import { thumbSwitch } from '@uixkit.react/components/Lightbox/thumb-switch';
+import { thumbSwitch } from '@poemkit/components/Lightbox/thumb-switch';
 
 
 interface ajaxPropConfig {
@@ -63,7 +63,7 @@ export function fireLightbox(curElement: any, config: fireLightboxConfig) {
 
     //
     const docURL          = window.location.href,
-          $content        = __( innerEl ).find( '> .uix-lightbox__html' ),
+          $content        = __( innerEl ).find( '> .poemkit-lightbox__html' ),
           customWidth     = 1000; //Match the width in the css file;
 
 
@@ -76,7 +76,7 @@ export function fireLightbox(curElement: any, config: fireLightboxConfig) {
         imgCalcContainerSrc: any        = '';
 
     if ( dataAjax ) {
-        __( wrapperEl ).addClass( 'js-uix-ajax' );
+        __( wrapperEl ).addClass( 'js-poemkit-ajax' );
 
         //Parse ajax config
         if ( typeof dataAjax === 'string' ) dataAjax = JSON.parse( dataAjax.replace(/([a-zA-Z0-9]+?):/g, '"$1":').replace(/'/g,'"') );
@@ -96,7 +96,7 @@ export function fireLightbox(curElement: any, config: fireLightboxConfig) {
 
 
     if ( !dataFixed ) {
-        __( wrapperEl ).addClass( 'js-uix-no-fixed' );
+        __( wrapperEl ).addClass( 'js-poemkit-no-fixed' );
         __( closeEl ).addClass( 'is-active' );
         
         //Initialize the wrapper position
@@ -106,11 +106,11 @@ export function fireLightbox(curElement: any, config: fireLightboxConfig) {
 
 
     //Reset current container type
-    __( innerEl ).removeClass( 'js-uix-custom js-uix-pure-image' );
+    __( innerEl ).removeClass( 'js-poemkit-custom js-poemkit-pure-image' );
 
 
     // Locks the page
-    if ( !__( wrapperEl ).hasClass( 'js-uix-no-fixed' ) ) {
+    if ( !__( wrapperEl ).hasClass( 'js-poemkit-no-fixed' ) ) {
         
         // Locks the page
         //
@@ -195,16 +195,16 @@ export function fireLightbox(curElement: any, config: fireLightboxConfig) {
             imgCalcContainerSrc = imgSrcStr[0].large;
 
             //push the large photos
-            largePhotos += '<div class="uix-lightbox__photo-container uix-lightbox__photo-sets-container"><a href="#" class="uix-lightbox__photo-sets__prev"></a><a href="#" class="uix-lightbox__photo-sets__next"></a><ul>';
+            largePhotos += '<div class="poemkit-lightbox__photo-container poemkit-lightbox__photo-sets-container"><a href="#" class="poemkit-lightbox__photo-sets__prev"></a><a href="#" class="poemkit-lightbox__photo-sets__next"></a><ul>';
             for ( let i = 0; i < imgSrcStr.length; i++ ) {
             
                 const tempID = 'lightbox-' + __.GUID.create();
                 
                 largePhotos += '<li>';
-                largePhotos += '	<a class="uix-lightbox__original__link" data-target-id="'+tempID+'-sets-'+i+'" href="#">';
+                largePhotos += '	<a class="poemkit-lightbox__original__link" data-target-id="'+tempID+'-sets-'+i+'" href="#">';
                 largePhotos += '	   <img src="'+imgSrcStr[i].large+'" alt=""/>';
                 largePhotos += '	</a>';
-                largePhotos += '	<div class="uix-lightbox__original__target" id="'+tempID+'-sets-'+i+'">';
+                largePhotos += '	<div class="poemkit-lightbox__original__target" id="'+tempID+'-sets-'+i+'">';
                 largePhotos += '	   <img src="'+imgSrcStr[i].large+'" alt=""/>';
                 largePhotos += '	</div>';
                 largePhotos += '</li>'; 
@@ -213,7 +213,7 @@ export function fireLightbox(curElement: any, config: fireLightboxConfig) {
             largePhotos += '</ul></div>';
             
             //push the thumbs
-            thumbs += '<div class="uix-lightbox__thumb-container"><ul>';
+            thumbs += '<div class="poemkit-lightbox__thumb-container"><ul>';
             for ( let k = 0; k < imgSrcStr.length; k++ ) {
                 
                 const active = ( k == 0 ) ? 'class="is-active"' : '';
@@ -232,11 +232,11 @@ export function fireLightbox(curElement: any, config: fireLightboxConfig) {
             
             //Only one image
             imgCalcContainerSrc = imgSrcStr;
-            htmlContent += '<div class="uix-lightbox__photo-container">';
-            htmlContent += '	<a class="uix-lightbox__original__link" data-target-id="'+tempID+'" href="#">';
+            htmlContent += '<div class="poemkit-lightbox__photo-container">';
+            htmlContent += '	<a class="poemkit-lightbox__original__link" data-target-id="'+tempID+'" href="#">';
             htmlContent += '	   <img src="'+imgSrcStr+'" alt=""/>';
             htmlContent += '	</a>';
-            htmlContent += '	<div class="uix-lightbox__original__target" id="'+tempID+'">';
+            htmlContent += '	<div class="poemkit-lightbox__original__target" id="'+tempID+'">';
             htmlContent += '	   <img src="'+imgSrcStr+'" alt=""/>';
             htmlContent += '	</div>';
             htmlContent += '</div>'; 
@@ -246,7 +246,7 @@ export function fireLightbox(curElement: any, config: fireLightboxConfig) {
         $content.html( htmlContent );
 
         //Set current container type
-        __( innerEl ).addClass( 'js-uix-pure-image' );
+        __( innerEl ).addClass( 'js-poemkit-pure-image' );
 
         //Set container width
         const img = new Image();
@@ -283,26 +283,26 @@ export function fireLightbox(curElement: any, config: fireLightboxConfig) {
             
 
             //Don't write variables outside
-            const $lbSetsContainer = __( '.uix-lightbox__photo-container.uix-lightbox__photo-sets-container' );
+            const $lbSetsContainer = __( '.poemkit-lightbox__photo-container.poemkit-lightbox__photo-sets-container' );
             $lbSetsContainer.css( {
                 'height': h + 'px'
             } );
             
             
             //Set a new height & width of inside images
-            $content.find( '.uix-lightbox__photo-sets-container ul > li img' ).css( {
+            $content.find( '.poemkit-lightbox__photo-sets-container ul > li img' ).css( {
                 'height': h + 'px'
             } );
 
             
             if ( ! __( 'body' ).hasClass( 'rtl' ) ) {
-                $content.find( '.uix-lightbox__photo-sets-container' ).css( {
+                $content.find( '.poemkit-lightbox__photo-sets-container' ).css( {
                     'width': 'calc('+ h*ratioW +'px + 6rem)',
                     'margin-left': '-3rem'
                 } );
 
             } else {
-                $content.find( '.uix-lightbox__photo-sets-container' ).css( {
+                $content.find( '.poemkit-lightbox__photo-sets-container' ).css( {
                     'width': 'calc('+ h*ratioW +'px + 6rem)',
                     'margin-right': '-3rem'
                 } );
@@ -313,11 +313,11 @@ export function fireLightbox(curElement: any, config: fireLightboxConfig) {
             
             //If the image is larger than the current window, it will display at the top.
             //Don't write variables outside
-            const $lbTarImg = __( '.uix-lightbox__photo-container > .uix-lightbox__original__target' );
+            const $lbTarImg = __( '.poemkit-lightbox__photo-container > .poemkit-lightbox__original__target' );
             if ( oh > window.innerHeight ) {
-                $lbTarImg.addClass( 'uix-lightbox__original__target--imgfull' );
+                $lbTarImg.addClass( 'poemkit-lightbox__original__target--imgfull' );
             } else {
-                $lbTarImg.removeClass( 'uix-lightbox__original__target--imgfull' );
+                $lbTarImg.removeClass( 'poemkit-lightbox__original__target--imgfull' );
             }
             
         
@@ -326,7 +326,7 @@ export function fireLightbox(curElement: any, config: fireLightboxConfig) {
         };
         
         
-        __( innerEl ).find( '> .uix-lightbox__html' ).removeClass( 'js-uix-no-img' );
+        __( innerEl ).find( '> .poemkit-lightbox__html' ).removeClass( 'js-poemkit-no-img' );
 
         
     }	
@@ -336,13 +336,13 @@ export function fireLightbox(curElement: any, config: fireLightboxConfig) {
     ////////////   PHOTOS (thumbnail interaction)  /////////////
     ////////////////////////////////////////////////////////////
     */
-    const largeImgCloseEl = '.uix-lightbox__original__close';
+    const largeImgCloseEl = '.poemkit-lightbox__original__close';
 
     // Set a default width for container (Match the width in the css file)
     const thumbSwitchWidth = 1000;
 
     // Click thumbnail to show large photo
-    __( '.uix-lightbox__thumb-container li' ).off( 'click' ).on( 'click', function( this: any, e: any ) {
+    __( '.poemkit-lightbox__thumb-container li' ).off( 'click' ).on( 'click', function( this: any, e: any ) {
         e.preventDefault();
 
         thumbSwitch( __( this ), {
@@ -353,11 +353,11 @@ export function fireLightbox(curElement: any, config: fireLightboxConfig) {
     });		
     
     
-    __( '.uix-lightbox__photo-sets-container > a' ).off( 'click' ).on( 'click', function( this: any, e: any ) {
+    __( '.poemkit-lightbox__photo-sets-container > a' ).off( 'click' ).on( 'click', function( this: any, e: any ) {
         e.preventDefault();
 
-        const $largePhoto = __( this ).closest( '.uix-lightbox__html' ).find( '.uix-lightbox__photo-container.uix-lightbox__photo-sets-container' ),
-            $thumb      = __( this ).closest( '.uix-lightbox__html' ).find( '.uix-lightbox__thumb-container li' ),
+        const $largePhoto = __( this ).closest( '.poemkit-lightbox__html' ).find( '.poemkit-lightbox__photo-container.poemkit-lightbox__photo-sets-container' ),
+            $thumb      = __( this ).closest( '.poemkit-lightbox__html' ).find( '.poemkit-lightbox__thumb-container li' ),
             total       = $thumb.length,
             curIndex    = $thumb.filter( '.is-active' ).index();
         
@@ -369,14 +369,14 @@ export function fireLightbox(curElement: any, config: fireLightboxConfig) {
         if ( nextIndex > total - 1 ) nextIndex = 0;
         
         // Click thumbnail to show large photo
-        if ( __( this ).hasClass( 'uix-lightbox__photo-sets__prev' ) ) {
+        if ( __( this ).hasClass( 'poemkit-lightbox__photo-sets__prev' ) ) {
             thumbSwitch( $thumb.eq( prevIndex ), {
                 index        : prevIndex,
                 width        : thumbSwitchWidth,
                 classLoader  : loaderEl
             });
         }
-        if ( __( this ).hasClass( 'uix-lightbox__photo-sets__next' ) ) {
+        if ( __( this ).hasClass( 'poemkit-lightbox__photo-sets__next' ) ) {
             thumbSwitch( $thumb.eq( nextIndex ), {
                 index        : nextIndex,
                 width        : thumbSwitchWidth,
@@ -390,14 +390,14 @@ export function fireLightbox(curElement: any, config: fireLightboxConfig) {
 
     if ( window.innerWidth > 768 ) {
 
-        __( '.uix-lightbox__original__link' ).off( 'click' ).on( 'click', function( this: any, e: any ) {
+        __( '.poemkit-lightbox__original__link' ).off( 'click' ).on( 'click', function( this: any, e: any ) {
             e.preventDefault();
 
-            __( '.uix-lightbox__original__target#' + __( this ).data( 'target-id' ) ).addClass( 'is-active' );
+            __( '.poemkit-lightbox__original__target#' + __( this ).data( 'target-id' ) ).addClass( 'is-active' );
 
 
-            if ( __( this ).closest( '.uix-lightbox__container.js-uix-no-fixed' ).length > 0 ) {
-                __( '.uix-lightbox__container.js-uix-no-fixed, .uix-lightbox__original__target--imgfull' ).addClass( 'no-fixed-imgEnlarged' );
+            if ( __( this ).closest( '.poemkit-lightbox__container.js-poemkit-no-fixed' ).length > 0 ) {
+                __( '.poemkit-lightbox__container.js-poemkit-no-fixed, .poemkit-lightbox__original__target--imgfull' ).addClass( 'no-fixed-imgEnlarged' );
             }
 
 
@@ -410,8 +410,8 @@ export function fireLightbox(curElement: any, config: fireLightboxConfig) {
         __( largeImgCloseEl ).off( 'click' ).on( 'click', function( this: any, e: any ) {
             e.preventDefault();
 
-            __( '.uix-lightbox__original__target' ).removeClass( 'is-active' );
-            __( '.uix-lightbox__container.js-uix-no-fixed, .uix-lightbox__original__target--imgfull' ).removeClass( 'no-fixed-imgEnlarged' );
+            __( '.poemkit-lightbox__original__target' ).removeClass( 'is-active' );
+            __( '.poemkit-lightbox__container.js-poemkit-no-fixed, .poemkit-lightbox__original__target--imgfull' ).removeClass( 'no-fixed-imgEnlarged' );
 
 
             //---
@@ -431,7 +431,7 @@ export function fireLightbox(curElement: any, config: fireLightboxConfig) {
     if ( dataHtmlID && dataHtmlID != '' ) {
 
 
-        const $htmlAjaxContainer = __( dataHtmlID ).find( '.uix-lightbox__htmlcontent-inner > div' );
+        const $htmlAjaxContainer = __( dataHtmlID ).find( '.poemkit-lightbox__htmlcontent-inner > div' );
 
         //show the lightbox
         showLightbox();
@@ -442,18 +442,18 @@ export function fireLightbox(curElement: any, config: fireLightboxConfig) {
             __( loaderEl ).addClass( 'is-loaded' );
             
             //Set current container type
-            __( innerEl ).addClass( 'js-uix-custom' );
+            __( innerEl ).addClass( 'js-poemkit-custom' );
             
             //Set container width
-            if ( __( innerEl ).find( '> .uix-lightbox__html .uix-lightbox__htmlcontent-inner' ).length > 0 ) {
+            if ( __( innerEl ).find( '> .poemkit-lightbox__html .poemkit-lightbox__htmlcontent-inner' ).length > 0 ) {
                 
                 if ( window.innerWidth <= 768 ) {
                     __( innerEl ).css( 'width', window.innerWidth - 10 + 'px' );
                 } else {
-                    __( innerEl ).css( 'width', __( innerEl ).find( '> .uix-lightbox__html .uix-lightbox__htmlcontent-inner' ).width() + 'px' );
+                    __( innerEl ).css( 'width', __( innerEl ).find( '> .poemkit-lightbox__html .poemkit-lightbox__htmlcontent-inner' ).width() + 'px' );
                 }
                 
-                __( innerEl ).find( '> .uix-lightbox__html' ).addClass( 'js-uix-no-img' );
+                __( innerEl ).find( '> .poemkit-lightbox__html' ).addClass( 'js-poemkit-no-img' );
 
                 
             }
@@ -463,7 +463,7 @@ export function fireLightbox(curElement: any, config: fireLightboxConfig) {
         
         
         
-        if ( __( wrapperEl ).hasClass( 'js-uix-ajax' ) ) {
+        if ( __( wrapperEl ).hasClass( 'js-poemkit-ajax' ) ) {
 
             //Add content to the dynamic AJAX container
             const ajaxURL = dataAjax.url;
@@ -477,7 +477,7 @@ export function fireLightbox(curElement: any, config: fireLightboxConfig) {
                 location.hash = ajaxURL;
             }
 
-            document.cookie = 'uix-lightbox-ajaxURL=' + ajaxURL;
+            document.cookie = 'poemkit-lightbox-ajaxURL=' + ajaxURL;
 
             
             // Add a request or response interceptor
@@ -578,7 +578,7 @@ export function fireLightbox(curElement: any, config: fireLightboxConfig) {
             // content pushing completed
             htmlContentLoaded();
 
-        }//endif __( wrapperEl ).hasClass( 'js-uix-ajax' )
+        }//endif __( wrapperEl ).hasClass( 'js-poemkit-ajax' )
 
         
     }	

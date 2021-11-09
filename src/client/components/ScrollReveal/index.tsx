@@ -6,14 +6,14 @@
 import React, { Component } from 'react';
 
 /*-- Apply Third-party plugins (import location should be in front of "global scripts and styles") --*/
-import '@uixkit.react/components/_plugins/_lib-bootstrap';
-import '@uixkit.react/components/_plugins/_lib-icons';
-import TweenMax, { TimelineMax } from '@uixkit.react/components/_plugins/_lib-gsap';
+import '@poemkit/components/_plugins/_lib-bootstrap';
+import '@poemkit/components/_plugins/_lib-icons';
+import TweenMax, { TimelineMax } from '@poemkit/components/_plugins/_lib-gsap';
 
 /*-- Apply global scripts and styles --*/
-import '@uixkit.react/components/_utils/styles/_all.scss';
-import '@uixkit.react/components/_utils/styles/rtl/_all.scss';
-import { __ } from '@uixkit.react/components/_utils/_all';
+import '@poemkit/components/_utils/styles/_all.scss';
+import '@poemkit/components/_utils/styles/rtl/_all.scss';
+import { __ } from '@poemkit/components/_utils/_all';
 
 
 interface ScrollRevealConfig {
@@ -68,7 +68,7 @@ export default class ScrollReveal extends Component<ScrollRevealProps, ScrollRev
 	getAnimConfiguration() {
 		const reactDomEl: any = this.rootRef.current;
 
-		let config = reactDomEl.dataset.uixAnim;
+		let config = reactDomEl.dataset.poemkitAnim;
 		config = __.validate.isJSON( config ) ? JSON.parse( config ) : {};
 
 		// Set a default configuration
@@ -218,7 +218,7 @@ export default class ScrollReveal extends Component<ScrollRevealProps, ScrollRev
 	* @return {Void}
 	* #Usage: 
 
-	<ul data-uix-anim='{"viewport":"90%","from":{"y":0},"to":{"y":0},"ease":"Power2.easeOut","duration":0.8,"delay":0.2,"infinite":true}' data-img-ids='["[data-imgshow]"]'>
+	<ul data-poemkit-anim='{"viewport":"90%","from":{"y":0},"to":{"y":0},"ease":"Power2.easeOut","duration":0.8,"delay":0.2,"infinite":true}' data-img-ids='["[data-imgshow]"]'>
 		<li data-imgshow="1"><img src={`logo-1.jpg`} alt=""/></li>
 		<li data-imgshow="1"><img src={`logo-2.jpg`} alt=""/></li>
 		<li data-imgshow="1"><img src={`logo-3.jpg`} alt=""/></li>
@@ -307,6 +307,10 @@ export default class ScrollReveal extends Component<ScrollRevealProps, ScrollRev
         window.removeEventListener('scroll', this.windowScrollUpdate);
         window.removeEventListener('touchmove', this.windowScrollUpdate);  
 
+		// Kill all aniamtions
+        this.tl.kill();
+		TweenMax.killAll();
+
     }
 
 
@@ -327,7 +331,7 @@ export default class ScrollReveal extends Component<ScrollRevealProps, ScrollRev
 			<div 
 			ref={this.rootRef} 
 			id={id || this.uniqueID}
-			data-uix-anim={config || '{"viewport":"80%","from":{"opacity":0,"y":150},"to":{"opacity":1,"y":0},"ease":"Power2.easeOut","duration":0.8,"delay":0,"infinite":true}'}
+			data-poemkit-anim={config || '{"viewport":"80%","from":{"opacity":0,"y":150},"to":{"opacity":1,"y":0},"ease":"Power2.easeOut","duration":0.8,"delay":0,"infinite":true}'}
 			{...attributes}>
 			    {children}
 			</div>

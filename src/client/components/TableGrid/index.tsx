@@ -6,22 +6,22 @@
 import React, { Component } from 'react';
 
 /*-- Apply Third-party plugins (import location should be in front of "global scripts and styles") --*/
-import '@uixkit.react/components/_plugins/_lib-bootstrap';
-import '@uixkit.react/components/_plugins/_lib-icons';
-import TweenMax, { TimelineMax } from '@uixkit.react/components/_plugins/_lib-gsap';
+import '@poemkit/components/_plugins/_lib-bootstrap';
+import '@poemkit/components/_plugins/_lib-icons';
+import TweenMax, { TimelineMax } from '@poemkit/components/_plugins/_lib-gsap';
 
 /*-- Apply global scripts and styles --*/
-import '@uixkit.react/components/_utils/styles/_all.scss';
-import '@uixkit.react/components/_utils/styles/rtl/_all.scss';
-import { __ } from '@uixkit.react/components/_utils/_all';
+import '@poemkit/components/_utils/styles/_all.scss';
+import '@poemkit/components/_utils/styles/rtl/_all.scss';
+import { __ } from '@poemkit/components/_utils/_all';
 
 /*-- Apply this component styles --*/
-import '@uixkit.react/components/TableGrid/styles/_style.scss';
+import '@poemkit/components/TableGrid/styles/_style.scss';
 
 
 //
-import TableGridRow from '@uixkit.react/components/TableGrid/TableGridRow';
-import TableGridHeaders from '@uixkit.react/components/TableGrid/TableGridHeaders';
+import TableGridRow from '@poemkit/components/TableGrid/TableGridRow';
+import TableGridHeaders from '@poemkit/components/TableGrid/TableGridHeaders';
 
 
 
@@ -59,11 +59,11 @@ export default class TableGrid extends Component<TableGridProps, TableGridState>
 		return (
 		  <>
 			
-			<div className="uix-table-grid" id={id || this.uniqueID} role="grid">
+			<div className="poemkit-table-grid" id={id || this.uniqueID} role="grid">
 		
                 <TableGridHeaders data={_headers} />
 					
-				<div className="uix-table-grid__body" role="rowgroup">
+				<div className="poemkit-table-grid__body" role="rowgroup">
 					{data.hasOwnProperty( 'fields' ) ? data.fields.map((item, i) => {
 						return <TableGridRow key={"row" + i} data={item} />;
 					}) : ""

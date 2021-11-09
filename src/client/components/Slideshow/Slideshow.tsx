@@ -1,23 +1,23 @@
 import React, { Component } from 'react';
 
 /*-- Apply Third-party plugins (import location should be in front of 'global scripts and styles') --*/
-import '@uixkit.react/components/_plugins/_lib-bootstrap';
-import '@uixkit.react/components/_plugins/_lib-icons';
-import TweenMax, { TimelineMax } from '@uixkit.react/components/_plugins/_lib-gsap';
+import '@poemkit/components/_plugins/_lib-bootstrap';
+import '@poemkit/components/_plugins/_lib-icons';
+import TweenMax, { TimelineMax } from '@poemkit/components/_plugins/_lib-gsap';
 
 /*-- Apply global scripts and styles --*/
-import '@uixkit.react/components/_utils/styles/_all.scss';
-import '@uixkit.react/components/_utils/styles/rtl/_all.scss';
-import { __ } from '@uixkit.react/components/_utils/_all';
+import '@poemkit/components/_utils/styles/_all.scss';
+import '@poemkit/components/_utils/styles/rtl/_all.scss';
+import { __ } from '@poemkit/components/_utils/_all';
 
 /*-- Apply this component styles --*/
-import '@uixkit.react/components/Slideshow/styles/_style.scss';
-import '@uixkit.react/components/Slideshow/styles/rtl/_style.scss';
+import '@poemkit/components/Slideshow/styles/_style.scss';
+import '@poemkit/components/Slideshow/styles/rtl/_style.scss';
 
 
 // 
-import { sliderAnime } from '@uixkit.react/components/Slideshow/slider-anime';
-import Item from '@uixkit.react/components/Slideshow/Item';
+import { sliderAnime } from '@poemkit/components/Slideshow/slider-anime';
+import SlideshowItem from '@poemkit/components/Slideshow/SlideshowItem';
 
 declare global {
     interface Window {
@@ -44,7 +44,7 @@ type SlideshowProps = {
 	arrowPrevIcon?: React.ReactNode;
 	/** Next arrow icon */
 	arrowNextIcon?: React.ReactNode;
-    /** Allow drag and drop on the slider. */
+    /** Allow drag and drop on the slider (touch devices will always work). */
     draggable?: boolean;   
     /** Drag & Drop Change icon/cursor while dragging. */
 	draggableCursor?: string | boolean;   
@@ -71,7 +71,7 @@ export default class Slideshow extends Component<SlideshowProps, SlideshowState>
 
         const self = this;
 
-        __(document).ready(function () {
+        __( document ).ready( function() {
 
 			const reactDomEl: any = self.rootRef.current;
 			const $el = __( reactDomEl );
@@ -155,9 +155,9 @@ export default class Slideshow extends Component<SlideshowProps, SlideshowState>
             <>
 
 
-            <div role="banner" className="uix-slideshow__wrapper" id={cid}>
+            <div role="banner" className="poemkit-slideshow__wrapper" id={cid}>
                 <div ref={this.rootRef}
-                    className={"uix-slideshow__outline uix-slideshow uix-slideshow--eff-" + effect}
+                    className={"poemkit-slideshow__outline poemkit-slideshow poemkit-slideshow--eff-" + effect}
                     data-draggable={draggable}
                     data-draggable-cursor={draggableCursor || 'move'}
                     data-auto={auto}
@@ -167,34 +167,34 @@ export default class Slideshow extends Component<SlideshowProps, SlideshowState>
                     data-count-now="false"
                     data-controls-pagination={".app-slider-pagination-" + cid}
                     data-controls-arrows={".app-slider-arrows-" + cid}>
-                    <div className="uix-slideshow__inner">
+                    <div className="poemkit-slideshow__inner">
 
                         {(children != null) ? (children as any[]).map((item, i) => {
                             const childProps = { ...item.props };
-                            return <Item key={i} {...childProps} />;
+                            return <SlideshowItem key={i} {...childProps} />;
 
                         })
                             : ""
                         }
 
                     </div>
-                    {/*<!-- /.uix-slideshow__inner -->*/}
+                    {/*<!-- /.poemkit-slideshow__inner -->*/}
 
                 </div>
-                {/*<!-- /.uix-slideshow__outline -->*/}
+                {/*<!-- /.poemkit-slideshow__outline -->*/}
 
             </div>
-            {/*<!-- /.uix-slideshow__wrapper -->*/}
+            {/*<!-- /.poemkit-slideshow__wrapper -->*/}
 
 
             { paginationEnabled ? (
-                <div className={"uix-slideshow__pagination app-slider-pagination-" + cid}></div>
+                <div className={"poemkit-slideshow__pagination app-slider-pagination-" + cid}></div>
             ) : ''}
 
             { arrowEnabled ? (
-                <div className={"uix-slideshow__arrows app-slider-arrows-" + cid}>
-                <a href="#" className="uix-slideshow__arrows--prev">{ arrowPrevIcon || <><i className="fa fa-long-arrow-left" aria-hidden="true"></i></> }</a>
-                <a href="#" className="uix-slideshow__arrows--next">{ arrowNextIcon || <><i className="fa fa-long-arrow-right" aria-hidden="true"></i></> }</a>
+                <div className={"poemkit-slideshow__arrows app-slider-arrows-" + cid}>
+                <a href="#" className="poemkit-slideshow__arrows--prev">{ arrowPrevIcon || <><i className="fa fa-long-arrow-left" aria-hidden="true"></i></> }</a>
+                <a href="#" className="poemkit-slideshow__arrows--next">{ arrowNextIcon || <><i className="fa fa-long-arrow-right" aria-hidden="true"></i></> }</a>
             </div>
             ) : ''}
             

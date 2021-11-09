@@ -1,7 +1,7 @@
 /* ====================================================== 
    <!-- Brand -->                         
 /* ====================================================== */
-.uix-brand {
+.poemkit-brand {
 	float: left;
 	font-size: 1.3125rem;
 	font-weight: 700;
@@ -17,7 +17,7 @@
 	}
 	
 
-	.uix-brand__description {
+	.poemkit-brand__description {
 		padding: 0;
 		@include ellipsis();
 		width: 90%;
@@ -31,13 +31,13 @@
 
 
 
-.uix-brand--mobile {
+.poemkit-brand--mobile {
     display: none;
 }
 
 @media all and (max-width: 768px) {
 
-	.uix-brand--mobile {
+	.poemkit-brand--mobile {
 		display: block;
 	    text-align: center;
 		
@@ -49,7 +49,7 @@
 		
 	}
 	
-	.uix-brand img {
+	.poemkit-brand img {
 		margin-bottom: 0.75rem;
 	}
 	

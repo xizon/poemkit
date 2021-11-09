@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { __ } from '@uixkit.react/components/_utils/_all';
+import { __ } from '@poemkit/components/_utils/_all';
 
 
 /* Table Sorter Headers
@@ -28,7 +28,7 @@ export default class TableSorterHeaders extends Component<TableSorterHeadersProp
 				<thead>
 					<tr id={this.uniqueID}>
 						{this.props.data!.map((item, i) => {
-							return <th data-sort-type={item.type} data-table-row={i} key={"header" + i} onClick={this.props.clickEv} style={item.type ? {cursor:"pointer"} : {}}>{item.type ? <><span className="uix-table-sorter" style={{pointerEvents:"none"}}>{item.content}</span></> : <>{item.content}</> }</th>;
+							return <th data-sort-type={item.type} data-table-row={i} key={"header" + i} onClick={this.props.clickEv} style={item.type ? {cursor:"pointer"} : {}}>{item.type ? <><span className="poemkit-table-sorter" style={{pointerEvents:"none"}}>{item.content}</span></> : <>{item.content}</> }</th>;
 						})
 						}
 					</tr>

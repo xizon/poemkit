@@ -1,4 +1,4 @@
-import { __ } from '@uixkit.react/components/_utils/_all';
+import { __ } from '@poemkit/components/_utils/_all';
 
 
 declare global {
@@ -24,7 +24,7 @@ interface sliderAnimeConfig {
     paginationID?: string | undefined;   
     /** Previous/Next arrow navigation ID. */
 	arrowsID?: string | boolean | undefined;   
-    /** Allow drag and drop on the slider. */
+    /** Allow drag and drop on the slider (touch devices will always work). */
     draggable?: boolean | undefined;   
     /** Drag & Drop Change icon/cursor while dragging. */
 	draggableCursor?: string | boolean | undefined;   
@@ -43,8 +43,8 @@ export function sliderAnime( curElement: any, config: sliderAnimeConfig ) {
         "loop"              : false,
         "countTotalID"      : "p.count em.count",
         "countCurID"        : "p.count em.current",
-        "paginationID"      : ".uix-slideshow__pagination",
-        "arrowsID"          : ".uix-slideshow__arrows",
+        "paginationID"      : ".poemkit-slideshow__pagination",
+        "arrowsID"          : ".poemkit-slideshow__arrows",
         "draggable"         : false,
         "draggableCursor"   : "move"
     }, config);
@@ -99,9 +99,6 @@ export function sliderAnime( curElement: any, config: sliderAnimeConfig ) {
 
 
 
-    //Core Functions
-    //------------------------------------------
-
     /*
      * Returns the dimensions of a video asynchrounsly.
      *
@@ -140,7 +137,7 @@ export function sliderAnime( curElement: any, config: sliderAnimeConfig ) {
      */
     function sliderInit(resize) {
 
-        const $items = $sliderWrapper.find('.uix-slideshow__item'),
+        const $items = $sliderWrapper.find('.poemkit-slideshow__item'),
               $first = $items.first();
 
         let nativeItemW,
@@ -150,22 +147,6 @@ export function sliderAnime( curElement: any, config: sliderAnimeConfig ) {
 
 
         if (activated === null || activated === 0) {
-
-
-            //Images loaded
-            //-------------------------------------	
-            const images: string[] = [];
-            $items.each(function (this: any, index: number) {
-                const imgURL = __( this ).find('img').attr('src');
-                if (imgURL !== null) {
-                    images.push(imgURL);
-                }
-            });
-
-            loader(images, loadImage, function () {
-                $sliderWrapper.addClass('is-loaded');
-            });
-
 
 
             //Autoplay times
@@ -181,7 +162,6 @@ export function sliderAnime( curElement: any, config: sliderAnimeConfig ) {
                 //The speed of movement between elements.
                 // Avoid the error that getTransitionDuration takes 0
                 animDelay = __.cssProperty.getTransitionDuration($first[0]);
-
 
 
             }, 100);
@@ -295,21 +275,21 @@ export function sliderAnime( curElement: any, config: sliderAnimeConfig ) {
 
 
     /*
-        * Trigger slider autoplay
-        *
-        * @param  {Function} playTimes            - Number of times.
-        * @param  {Number} timing                 - Autoplay interval.
-        * @param  {Boolean} loop                  - Gives the slider a seamless infinite loop.
-        * @param  {Object} slider                 - Selector of the slider .
-        * @param  {String} countTotalID           - Total number ID or class of counter.
-        * @param  {String} countCurID             - Current number ID or class of counter.
-        * @param  {String} paginationID           - Navigation ID for paging control of each slide.
-        * @param  {String} arrowsID               - Previous/Next arrow navigation ID.
-        * @return {Void}                          - The constructor.
-        */
+    * Trigger slider autoplay
+    *
+    * @param  {Function} playTimes            - Number of times.
+    * @param  {Number} timing                 - Autoplay interval.
+    * @param  {Boolean} loop                  - Gives the slider a seamless infinite loop.
+    * @param  {Object} slider                 - Selector of the slider .
+    * @param  {String} countTotalID           - Total number ID or class of counter.
+    * @param  {String} countCurID             - Current number ID or class of counter.
+    * @param  {String} paginationID           - Navigation ID for paging control of each slide.
+    * @param  {String} arrowsID               - Previous/Next arrow navigation ID.
+    * @return {Void}                          - The constructor.
+    */
     function sliderAutoPlay( playTimes, timing, loop, slider, countTotalID, countCurID, paginationID, arrowsID ) {	
 
-        const items = slider.find( '.uix-slideshow__item' ),
+        const items = slider.find( '.poemkit-slideshow__item' ),
               total = items.length;
 
         slider[0].animatedSlides = setInterval( function() {
@@ -335,24 +315,24 @@ export function sliderAnime( curElement: any, config: sliderAnimeConfig ) {
 
 
     /*
-        * Initialize all the items to the stage
-        *
-        * @param  {Object} slider                 - Current selector of each slider.
-        * @param  {Number} nativeItemW            - Returns the intrinsic width of the image/video.
-        * @param  {Number} nativeItemH            - Returns the intrinsic height of the image/video.
-        * @param  {String} paginationID           - Navigation ID for paging control of each slide.
-        * @param  {String} arrowsID               - Previous/Next arrow navigation ID.
-        * @param  {Boolean} loop                  - Gives the slider a seamless infinite loop. 
-        * @param  {Boolean} draggable             - Allow drag and drop on the slider.
-        * @param  {String} draggableCursor        - Drag & Drop Change icon/cursor while dragging.
-        * @param  {String} countTotalID           - Total number ID or class of counter.
-        * @param  {String} countCurID             - Current number ID or class of counter.
-        * @return {Void}
-        */
+    * Initialize all the items to the stage
+    *
+    * @param  {Object} slider                 - Current selector of each slider.
+    * @param  {Number} nativeItemW            - Returns the intrinsic width of the image/video.
+    * @param  {Number} nativeItemH            - Returns the intrinsic height of the image/video.
+    * @param  {String} paginationID           - Navigation ID for paging control of each slide.
+    * @param  {String} arrowsID               - Previous/Next arrow navigation ID.
+    * @param  {Boolean} loop                  - Gives the slider a seamless infinite loop. 
+    * @param  {Boolean} draggable             - Allow drag and drop on the slider (touch devices will always work).
+    * @param  {String} draggableCursor        - Drag & Drop Change icon/cursor while dragging.
+    * @param  {String} countTotalID           - Total number ID or class of counter.
+    * @param  {String} countCurID             - Current number ID or class of counter.
+    * @return {Void}
+    */
     function addItemsToStage( slider, nativeItemW, nativeItemH, paginationID, arrowsID, loop, draggable, draggableCursor, countTotalID, countCurID ) {
 
         const $this                    = slider,
-                $items                   = $this.find( '.uix-slideshow__item' ),
+                $items                   = $this.find( '.poemkit-slideshow__item' ),
                 $first                   = $items.first(),
                 itemsTotal               = $items.length;
 
@@ -360,7 +340,7 @@ export function sliderAnime( curElement: any, config: sliderAnimeConfig ) {
         //If arrows does not exist on the page, it will be added by default, 
         //and the drag and drop function will be activated.
         if ( __( arrowsID ).length == 0 ) {
-            __( 'body' ).prepend( '<div style="display:none;" class="uix-slideshow__arrows '+arrowsID.replace('#','').replace('.','')+'"><a href="#" class="uix-slideshow__arrows--prev"></a><a href="#" class="uix-slideshow__arrows--next"></a></div>' );
+            __( 'body' ).prepend( '<div style="display:none;" class="poemkit-slideshow__arrows '+arrowsID.replace('#','').replace('.','')+'"><a href="#" class="poemkit-slideshow__arrows--prev"></a><a href="#" class="poemkit-slideshow__arrows--next"></a></div>' );
         }
 
 
@@ -428,8 +408,8 @@ export function sliderAnime( curElement: any, config: sliderAnimeConfig ) {
 
         //Next/Prev buttons
         //-------------------------------------		
-        const _prev = __( arrowsID ).find( '.uix-slideshow__arrows--prev' ),
-              _next = __( arrowsID ).find( '.uix-slideshow__arrows--next' );
+        const _prev = __( arrowsID ).find( '.poemkit-slideshow__arrows--prev' ),
+              _next = __( arrowsID ).find( '.poemkit-slideshow__arrows--next' );
 
 
         __( arrowsID ).find( 'a' ).removeClass( 'is-disabled' );
@@ -496,7 +476,7 @@ export function sliderAnime( curElement: any, config: sliderAnimeConfig ) {
 
         //Added touch method to mobile device and desktop
         //-------------------------------------	
-        const $dragTrigger = $this.find( '.uix-slideshow__inner' );
+        const $dragTrigger = $this.find( '.poemkit-slideshow__inner' );
         let mouseX, mouseY;
         let isMoving = false;
 
@@ -511,18 +491,25 @@ export function sliderAnime( curElement: any, config: sliderAnimeConfig ) {
         if ( draggable && draggableCursor != '' && draggableCursor != false ) $dragTrigger.css( 'cursor', draggableCursor );
 
 
-        $dragTrigger[0].removeEventListener( 'mousedown', dragStart );
-        document.removeEventListener( 'mouseup', dragEnd );
+        //draggable for touch devices
+        if ( __.isTouchCapable() ) draggable = true;
 
-        $dragTrigger[0].removeEventListener( 'touchstart', dragStart );
-        document.removeEventListener( 'touchend', dragEnd );
+        if ( draggable ) {
+
+            $dragTrigger[0].removeEventListener( 'mousedown', dragStart );
+            document.removeEventListener( 'mouseup', dragEnd );
+
+            $dragTrigger[0].removeEventListener( 'touchstart', dragStart );
+            document.removeEventListener( 'touchend', dragEnd );
 
 
-        //
-        $dragTrigger[0].addEventListener( 'mousedown', dragStart );
-        $dragTrigger[0].addEventListener( 'touchstart', dragStart );
+            //
+            $dragTrigger[0].addEventListener( 'mousedown', dragStart );
+            $dragTrigger[0].addEventListener( 'touchstart', dragStart );
 
-        
+        }
+
+
         function dragStart(e) {
             //Do not use "e.preventDefault()" to avoid prevention page scroll on drag in IOS and Android
             const touches = e.touches;
@@ -563,21 +550,17 @@ export function sliderAnime( curElement: any, config: sliderAnimeConfig ) {
 
             //--- left
             if ( offsetX >= 50) {
-                if ( draggable || ( touches && touches.length ) ) {
-                    if ( !isMoving ) {
-                        isMoving = true;
-                        nextMove();
-                    }
+                if ( !isMoving ) {
+                    isMoving = true;
+                    nextMove();
                 }
             }
 
             //--- right
             if ( offsetX <= -50) {
-                if ( draggable || ( touches && touches.length ) ) {
-                    if ( !isMoving ) {
-                        isMoving = true;
-                        prevMove();
-                    }
+                if ( !isMoving ) {
+                    isMoving = true;
+                    prevMove();
                 }
             }
 
@@ -607,21 +590,21 @@ export function sliderAnime( curElement: any, config: sliderAnimeConfig ) {
 
 
     /*
-        * Transition Between Slides
-        *
-        * @param  {Number} elementIndex           - Index of current slider.
-        * @param  {Object} slider                 - Selector of the slider .
-        * @param  {String} dir                    - Switching direction indicator.
-        * @param  {String} countTotalID           - Total number ID or class of counter.
-        * @param  {String} countCurID             - Current number ID or class of counter.
-        * @param  {String} paginationID           - Navigation ID for paging control of each slide.
-        * @param  {String} arrowsID               - Previous/Next arrow navigation ID.
-        * @param  {Boolean} loop                  - Gives the slider a seamless infinite loop.
-        * @return {Void}
-        */
+    * Transition Between Slides
+    *
+    * @param  {Number} elementIndex           - Index of current slider.
+    * @param  {Object} slider                 - Selector of the slider .
+    * @param  {String} dir                    - Switching direction indicator.
+    * @param  {String} countTotalID           - Total number ID or class of counter.
+    * @param  {String} countCurID             - Current number ID or class of counter.
+    * @param  {String} paginationID           - Navigation ID for paging control of each slide.
+    * @param  {String} arrowsID               - Previous/Next arrow navigation ID.
+    * @param  {Boolean} loop                  - Gives the slider a seamless infinite loop.
+    * @return {Void}
+    */
     function sliderUpdates( elementIndex, slider, dir, countTotalID, countCurID, paginationID, arrowsID, loop ) {
 
-        const $items = slider.find( '.uix-slideshow__item' ),
+        const $items = slider.find( '.poemkit-slideshow__item' ),
                 total  = $items.length;
 
 
@@ -642,8 +625,8 @@ export function sliderAnime( curElement: any, config: sliderAnimeConfig ) {
             if ( elementIndex < 0 ) elementIndex = total-1;	
         } else {
             __( arrowsID ).find( 'a' ).removeClass( 'is-disabled' );
-            if ( elementIndex == total - 1 ) __( arrowsID ).find( '.uix-slideshow__arrows--next' ).addClass( 'is-disabled' );
-            if ( elementIndex == 0 ) __( arrowsID ).find( '.uix-slideshow__arrows--prev' ).addClass( 'is-disabled' );
+            if ( elementIndex == total - 1 ) __( arrowsID ).find( '.poemkit-slideshow__arrows--next' ).addClass( 'is-disabled' );
+            if ( elementIndex == 0 ) __( arrowsID ).find( '.poemkit-slideshow__arrows--prev' ).addClass( 'is-disabled' );
         }
 
         
@@ -655,12 +638,12 @@ export function sliderAnime( curElement: any, config: sliderAnimeConfig ) {
             if ( !loop ) {
                 //first item
                 if ( elementIndex == 0 ) {
-                    __( arrowsID ).find( '.uix-slideshow__arrows--prev' ).addClass( 'is-disabled' );
+                    __( arrowsID ).find( '.poemkit-slideshow__arrows--prev' ).addClass( 'is-disabled' );
                 }
 
                 //last item
                 if ( elementIndex == total - 1 ) {
-                    __( arrowsID ).find( '.uix-slideshow__arrows--next' ).addClass( 'is-disabled' );
+                    __( arrowsID ).find( '.poemkit-slideshow__arrows--next' ).addClass( 'is-disabled' );
                 }	
             }
 
@@ -689,7 +672,7 @@ export function sliderAnime( curElement: any, config: sliderAnimeConfig ) {
         //Add transition class to each item
         $items.removeClass( 'leave prev next' );
         $items.addClass( dirIndicatorClassName );
-        slider.find( '.uix-slideshow__item.is-active' ).removeClass( 'is-active' ).addClass( 'leave ' + dirIndicatorClassName );
+        slider.find( '.poemkit-slideshow__item.is-active' ).removeClass( 'is-active' ).addClass( 'leave ' + dirIndicatorClassName );
         $items.eq( elementIndex ).addClass( 'is-active ' + dirIndicatorClassName ).removeClass( 'leave' );
 
 
@@ -710,12 +693,12 @@ export function sliderAnime( curElement: any, config: sliderAnimeConfig ) {
     }
 
     /*
-        * Initialize the default height of item
-        *
-        * @param  {Object} slider                 - Selector of the slider .
-        * @param  {Object} currentLlement         - Current selector of each slider.
-        * @return {Void}
-        */
+    * Initialize the default height of item
+    *
+    * @param  {Object} slider                 - Selector of the slider .
+    * @param  {Object} currentLlement         - Current selector of each slider.
+    * @return {Void}
+    */
     function itemDefaultInit( slider, currentLlement ) {
 
         if ( currentLlement.find( 'video' ).length > 0 ) {
@@ -728,11 +711,11 @@ export function sliderAnime( curElement: any, config: sliderAnimeConfig ) {
 
 
             currentLlement.find( 'video' ).css({
-                'width': currentLlement.closest( '.uix-slideshow__outline' ).width() + 'px'
+                'width': currentLlement.closest( '.poemkit-slideshow__outline' ).width() + 'px'
             });   
             
             getVideoDimensions(_src).then(function (res: any): void {
-                slider.css( 'height', res.height*(currentLlement.closest( '.uix-slideshow__outline' ).width()/res.width) + 'px' );
+                slider.css( 'height', res.height*(currentLlement.closest( '.poemkit-slideshow__outline' ).width()/res.width) + 'px' );
             });
 
             
@@ -745,7 +728,7 @@ export function sliderAnime( curElement: any, config: sliderAnimeConfig ) {
 
                 img.onload = function() {
 
-                    slider.css( 'height', currentLlement.closest( '.uix-slideshow__outline' ).width()*(img.height/img.width) + 'px' );		
+                    slider.css( 'height', currentLlement.closest( '.poemkit-slideshow__outline' ).width()*(img.height/img.width) + 'px' );		
 
                 };
 
@@ -758,53 +741,6 @@ export function sliderAnime( curElement: any, config: sliderAnimeConfig ) {
 
 
     }
-
-    // loader will 'load' items by calling thingToDo for each item,
-    // before calling allDone when all the things to do have been done.
-    function loader(items, thingToDo, allDone) {
-        if (!items) {
-            // nothing to do.
-            return;
-        }
-
-        if ('undefined' === items.length) {
-            // convert single item to array.
-            items = [items];
-        }
-
-        let count = items.length;
-
-        // this callback counts down the things to do.
-        const thingToDoCompleted = function (items, i) {
-            count--;
-            if (0 == count) {
-                allDone(items);
-            }
-        };
-
-        for (let i = 0; i < items.length; i++) {
-            // 'do' each thing, and await callback.
-            thingToDo(items, i, thingToDoCompleted);
-        }
-    }
-
-    function loadImage(items, i, onComplete) {
-        const onLoad = function (e) {
-            e.target.removeEventListener("load", onLoad);
-
-            // this next line can be removed.
-            // only here to prove the image was loaded.
-            document.body.appendChild(e.target);
-
-            // notify that we're done.
-            onComplete(items, i);
-        }
-        const img = new Image();
-        img.addEventListener("load", onLoad, false);
-        img.src = items[i];
-        img.style.display = 'none';
-    }	
-
 
 
 }

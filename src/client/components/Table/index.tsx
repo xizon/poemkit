@@ -6,25 +6,25 @@
 import React, { Component } from 'react';
 
 /*-- Apply Third-party plugins (import location should be in front of "global scripts and styles") --*/
-import '@uixkit.react/components/_plugins/_lib-bootstrap';
-import '@uixkit.react/components/_plugins/_lib-icons';
-import TweenMax, { TimelineMax } from '@uixkit.react/components/_plugins/_lib-gsap';
+import '@poemkit/components/_plugins/_lib-bootstrap';
+import '@poemkit/components/_plugins/_lib-icons';
+import TweenMax, { TimelineMax } from '@poemkit/components/_plugins/_lib-gsap';
 
 /*-- Apply global scripts and styles --*/
-import '@uixkit.react/components/_utils/styles/_all.scss';
-import '@uixkit.react/components/_utils/styles/rtl/_all.scss';
-import { __ } from '@uixkit.react/components/_utils/_all';
+import '@poemkit/components/_utils/styles/_all.scss';
+import '@poemkit/components/_utils/styles/rtl/_all.scss';
+import { __ } from '@poemkit/components/_utils/_all';
 
 /*-- Apply this component styles --*/
-import '@uixkit.react/components/Table/styles/_style.scss';
-import '@uixkit.react/components/Table/styles/rtl/_style.scss';
+import '@poemkit/components/Table/styles/_style.scss';
+import '@poemkit/components/Table/styles/rtl/_style.scss';
 
 
 //
-import TableRow from '@uixkit.react/components/Table/TableRow';
-import TableHeaders from '@uixkit.react/components/Table/TableHeaders';
-import TableSummaries from '@uixkit.react/components/Table/TableSummaries';
-import TableColgroup from '@uixkit.react/components/Table/TableColgroup';
+import TableRow from '@poemkit/components/Table/TableRow';
+import TableHeaders from '@poemkit/components/Table/TableHeaders';
+import TableSummaries from '@poemkit/components/Table/TableSummaries';
+import TableColgroup from '@poemkit/components/Table/TableColgroup';
 
 
 	
@@ -76,7 +76,7 @@ export default class Table extends Component<TableProps, TableState> {
 			 ////////////////////////////////////////////////////////////
 			 */
 		
-			if ( $el.hasClass( 'js-uix-table--responsive-scrolled' ) ) {
+			if ( $el.hasClass( 'js-poemkit-table--responsive-scrolled' ) ) {
 
 				let	windowWidth = window.innerWidth;
 				tableDataScrolledInit( windowWidth );
@@ -162,20 +162,20 @@ export default class Table extends Component<TableProps, TableState> {
 		//Set the class names of different styles
 		let classes = '';
 		
-		if ( bordered ) classes += ' uix-table--bordered';
-		if ( noborder ) classes += ' uix-table--noborder';
+		if ( bordered ) classes += ' poemkit-table--bordered';
+		if ( noborder ) classes += ' poemkit-table--noborder';
 		if ( horizontal ) classes += ' is-horizontal';
-		if ( alternantRow ) classes += ' uix-table--alternant-row';
-		if ( alternantCol ) classes += ' uix-table--alternant-col';
-		if ( perLine ) classes += ' uix-table--per-line';
-		if ( responsive && !responsiveWithScrollBar ) classes += ' is-responsive js-uix-table--responsive';
-		if ( responsiveWithScrollBar && !responsive ) classes += ' js-uix-table--responsive-scrolled';
+		if ( alternantRow ) classes += ' poemkit-table--alternant-row';
+		if ( alternantCol ) classes += ' poemkit-table--alternant-col';
+		if ( perLine ) classes += ' poemkit-table--per-line';
+		if ( responsive && !responsiveWithScrollBar ) classes += ' is-responsive js-poemkit-table--responsive';
+		if ( responsiveWithScrollBar && !responsive ) classes += ' js-poemkit-table--responsive-scrolled';
 
 		
 		return (
 		  <>
 			
-			<div ref={this.rootRef} className={"uix-table" + classes} id={id || this.uniqueID}>
+			<div ref={this.rootRef} className={"poemkit-table" + classes} id={id || this.uniqueID}>
 				<table>
 			
 			        <TableHeaders data={_headers} />

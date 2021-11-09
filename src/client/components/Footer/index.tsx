@@ -6,17 +6,17 @@
 import React, { Component } from 'react';
 
 /*-- Apply Third-party plugins (import location should be in front of "global scripts and styles") --*/
-import '@uixkit.react/components/_plugins/_lib-bootstrap';
-import '@uixkit.react/components/_plugins/_lib-icons';
-import TweenMax, { TimelineMax } from '@uixkit.react/components/_plugins/_lib-gsap';
+import '@poemkit/components/_plugins/_lib-bootstrap';
+import '@poemkit/components/_plugins/_lib-icons';
+import TweenMax, { TimelineMax } from '@poemkit/components/_plugins/_lib-gsap';
 
 /*-- Apply global scripts and styles --*/
-import '@uixkit.react/components/_utils/styles/_all.scss';
-import '@uixkit.react/components/_utils/styles/rtl/_all.scss';
-import { __ } from '@uixkit.react/components/_utils/_all';
+import '@poemkit/components/_utils/styles/_all.scss';
+import '@poemkit/components/_utils/styles/rtl/_all.scss';
+import { __ } from '@poemkit/components/_utils/_all';
 
 /*-- Apply this component styles --*/
-import '@uixkit.react/components/Footer/styles/_style.scss';
+import '@poemkit/components/Footer/styles/_style.scss';
 
 
 export default class Footer extends Component<{}, {}> {
@@ -31,18 +31,18 @@ export default class Footer extends Component<{}, {}> {
 			   <!-- Footer
 				============================================= -->    
 			*/}
-			<footer className="uix-footer__container">
-				<div className="uix-footer">
+			<footer className="poemkit-footer__container">
+				<div className="poemkit-footer">
 
 					<div className="container">
 						<hr />
 
 						<div className="row">
-							<div className="col-lg-6 col-md-6 uix-t-l uix-t-c--md">
-								Copyright &copy; Uix Kit React 2021.  |  All rights reserved. Created by <a href="https://uiux.cc">UIUX Lab</a>.
+							<div className="col-lg-6 col-md-6 poemkit-t-l poemkit-t-c--md">
+								Copyright &copy; PoemKit 2021.  |  All rights reserved. Created by <a href="https://uiux.cc">UIUX Lab</a>.
 							</div>
-							<div className="col-lg-6 col-md-6 uix-t-r uix-t-c--md">
-								<div className="uix-footer__menu">
+							<div className="col-lg-6 col-md-6 poemkit-t-r poemkit-t-c--md">
+								<div className="poemkit-footer__menu">
 									<ul>
 										<li>
 											<a href="https://uiux.cc" target="_blank">
@@ -55,7 +55,7 @@ export default class Footer extends Component<{}, {}> {
 											</a>
 										</li>
 										<li>
-											<a href="https://github.com/xizon/uix-kit-react" target="_blank">
+											<a href="https://github.com/xizon/poemkit" target="_blank">
 												Download
 											</a>
 										</li>

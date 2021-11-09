@@ -1,22 +1,22 @@
 import React, { Component } from 'react';
 
 /*-- Apply Third-party plugins (import location should be in front of "global scripts and styles") --*/
-import '@uixkit.react/components/_plugins/_lib-bootstrap';
-import '@uixkit.react/components/_plugins/_lib-icons';
-import TweenMax, { TimelineMax } from '@uixkit.react/components/_plugins/_lib-gsap';
+import '@poemkit/components/_plugins/_lib-bootstrap';
+import '@poemkit/components/_plugins/_lib-icons';
+import TweenMax, { TimelineMax } from '@poemkit/components/_plugins/_lib-gsap';
 
 /*-- Apply global scripts and styles --*/
-import '@uixkit.react/components/_utils/styles/_all.scss';
-import '@uixkit.react/components/_utils/styles/rtl/_all.scss';
-import { __ } from '@uixkit.react/components/_utils/_all';
+import '@poemkit/components/_utils/styles/_all.scss';
+import '@poemkit/components/_utils/styles/rtl/_all.scss';
+import { __ } from '@poemkit/components/_utils/_all';
 
 /*-- Apply this component styles --*/
-import '@uixkit.react/components/Tabs/styles/_style.scss';
+import '@poemkit/components/Tabs/styles/_style.scss';
 
 
 //
-import TabList from '@uixkit.react/components/Tabs/TabList';
-import TabPanel from '@uixkit.react/components/Tabs/TabPanel';
+import TabList from '@poemkit/components/Tabs/TabList';
+import TabPanel from '@poemkit/components/Tabs/TabPanel';
 
 
 type TabsProps = {
@@ -67,11 +67,11 @@ export default class Tabs extends Component<TabsProps, TabsState> {
 	
 		const reactDomWrapperEl: any = this.rootRef.current;
 		const currentIndex = Array.prototype.slice.call(targetEl.parentElement.children).indexOf(targetEl);
-		const $li               = reactDomWrapperEl.querySelectorAll( '.uix-tabs__nav ul > li' ),
-	          $allContent       = reactDomWrapperEl.querySelectorAll( '.uix-tabs__content' ),
-			  liWidth           = $li[0].offsetWidth, //element height + padding width + borders width
-			  liHeight          = $li[0].offsetHeight, //element width + padding width + borders width
-			  itemTotal         = $li.length;
+		const $li               = reactDomWrapperEl.querySelectorAll( '.poemkit-tabs__nav ul > li' ),
+	          $allContent       = reactDomWrapperEl.querySelectorAll( '.poemkit-tabs__content' ),
+			  liWidth           = $li[0].offsetWidth, //including: padding + borders + v-scrollbars (if rendered)
+			  liHeight          = $li[0].offsetHeight, //including: padding + borders + v-scrollbars (if rendered)
+			  itemsTotal         = $li.length;
 
 
 		//
@@ -98,7 +98,7 @@ export default class Tabs extends Component<TabsProps, TabsState> {
 		if ( !this.rotationEnabled ) {
 			if ( this.props.fullwidth ) {
 				Array.prototype.forEach.call($li, (node) => {
-					node.style.width = ( 100 / itemTotal ) + '%'
+					node.style.width = ( 100 / itemsTotal ) + '%'
 				});
 			}
 
@@ -107,9 +107,9 @@ export default class Tabs extends Component<TabsProps, TabsState> {
 				translateY = currentIndex * liHeight;
 
 			if ( window.innerWidth <= 768 ) {
-				reactDomWrapperEl.querySelector( '.uix-tabs__marker' ).style.transform = 'translateY( '+translateY+'px )';
+				reactDomWrapperEl.querySelector( '.poemkit-tabs__marker' ).style.transform = 'translateY( '+translateY+'px )';
 			} else {
-				reactDomWrapperEl.querySelector( '.uix-tabs__marker' ).style.transform = 'translateX( '+translateX+'% )';
+				reactDomWrapperEl.querySelector( '.poemkit-tabs__marker' ).style.transform = 'translateX( '+translateX+'% )';
 			}
 		}
 
@@ -125,14 +125,14 @@ export default class Tabs extends Component<TabsProps, TabsState> {
 
 		if ( this.rotationEnabled ) {
 
-			const step = 2 * Math.PI / itemTotal;
-			const pad = reactDomWrapperEl.querySelector( '.uix-tabs__nav ul' ).clientWidth;		
+			const step = 2 * Math.PI / itemsTotal;
+			const pad = reactDomWrapperEl.querySelector( '.poemkit-tabs__nav ul' ).clientWidth;	//including: padding
 	
 			if ( itemsInit ) {
-				reactDomWrapperEl.querySelector( '.uix-tabs__nav' ).style.width = this.rotationRadius * 2 + 'px';
-				reactDomWrapperEl.querySelector( '.uix-tabs__nav ul' ).style.width = this.rotationRadius * 2 + 'px';
-				reactDomWrapperEl.querySelector( '.uix-tabs__nav ul' ).style.height = this.rotationRadius * 2 + 'px';
-				reactDomWrapperEl.querySelector( '.uix-tabs__nav ul' ).style.transform = 'rotate('+this.rotationWapperDeg+'deg)';
+				reactDomWrapperEl.querySelector( '.poemkit-tabs__nav' ).style.width = this.rotationRadius * 2 + 'px';
+				reactDomWrapperEl.querySelector( '.poemkit-tabs__nav ul' ).style.width = this.rotationRadius * 2 + 'px';
+				reactDomWrapperEl.querySelector( '.poemkit-tabs__nav ul' ).style.height = this.rotationRadius * 2 + 'px';
+				reactDomWrapperEl.querySelector( '.poemkit-tabs__nav ul' ).style.transform = 'rotate('+this.rotationWapperDeg+'deg)';
 
 				let angle = 0;
 				let transitionDelay = 0;
@@ -173,15 +173,15 @@ export default class Tabs extends Component<TabsProps, TabsState> {
 		const self = this;
 		const reactDomWrapperEl: any = this.rootRef.current;
 		const currentIndex = Array.prototype.slice.call(targetEl.parentElement.children).indexOf(targetEl);
-		const $li               = reactDomWrapperEl.querySelectorAll( '.uix-tabs__nav ul > li' ),
-			  liWidth           = $li[0].offsetWidth, //element height + padding width + borders width
-			  liHeight          = $li[0].offsetHeight, //element width + padding width + borders width
-			  itemTotal         = $li.length;
+		const $li               = reactDomWrapperEl.querySelectorAll( '.poemkit-tabs__nav ul > li' ),
+			  liWidth           = $li[0].offsetWidth, //including: padding + borders + v-scrollbars (if rendered)
+			  liHeight          = $li[0].offsetHeight, //including: padding + borders + v-scrollbars (if rendered)
+			  itemsTotal         = $li.length;
 
 		let curAngle = self.lastAngel;	
 
-		const increase = Math.PI * 2 / itemTotal,
-				endAngle = currentIndex % itemTotal * increase; 
+		const increase = Math.PI * 2 / itemsTotal,
+				endAngle = currentIndex % itemsTotal * increase; 
 
 		( function turn() {
 			if (Math.abs(endAngle - curAngle) > 1 / 8) {
@@ -221,7 +221,7 @@ export default class Tabs extends Component<TabsProps, TabsState> {
 		
 		// Initialize tabs
 		const reactDomWrapperEl: any = this.rootRef.current;
-		const $li = reactDomWrapperEl.querySelectorAll( '.uix-tabs__nav ul > li' );
+		const $li = reactDomWrapperEl.querySelectorAll( '.poemkit-tabs__nav ul > li' );
 		this.itemInit($li[0], true);
 	}
 	
@@ -245,9 +245,9 @@ export default class Tabs extends Component<TabsProps, TabsState> {
 				<div 
 				    ref={this.rootRef}
 					id={id || this.uniqueID} 
-					className={"uix-tabs" + (!center && !rotation && !fullwidth ? ' uix-tabs--normal' : '') + (center ? ' uix-tabs--center' : '') + (rotation ? ' uix-tabs--rotation' : '')} 
+					className={"poemkit-tabs" + (!center && !rotation && !fullwidth ? ' poemkit-tabs--normal' : '') + (center ? ' poemkit-tabs--center' : '') + (rotation ? ' poemkit-tabs--rotation' : '')} 
 					>
-					<div className="uix-tabs__nav">
+					<div className="poemkit-tabs__nav">
 						<ul role="tablist">
 							
 							{(() => {
@@ -275,7 +275,7 @@ export default class Tabs extends Component<TabsProps, TabsState> {
 							
 						</ul>
 					</div>
-					{/*<!-- /.uix-tabs__nav -->*/}
+					{/*<!-- /.poemkit-tabs__nav -->*/}
 
 					{(() => {
 						if ( children != null ) {
@@ -299,7 +299,7 @@ export default class Tabs extends Component<TabsProps, TabsState> {
 					})()}
 
 				</div>
-				{/*<!-- .uix-tabs end -->*/}     
+				{/*<!-- .poemkit-tabs end -->*/}     
 			
 	
 		  </>

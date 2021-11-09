@@ -1,5 +1,5 @@
 import React from 'react';
-import { __ } from '@uixkit.react/components/_utils/_all';
+import { __ } from '@poemkit/components/_utils/_all';
 import {
 	Input,
 	PasswordInput,
@@ -17,11 +17,11 @@ import {
 	DynamicFields,
 	File,
 	FileField
-} from '@uixkit.react/components/Form/index.tsx';
+} from '@poemkit/components/Form/index.tsx';
 
 
 //Create or Remove Sidebar Menu
-import { SidebarMenu } from '@uixkit.react/pages/ComponentsDemo/_SidebarMenu.js';
+import { SidebarMenu } from '@poemkit/pages/ComponentsDemo/_SidebarMenu.js';
 
 export default () => {
 
@@ -45,9 +45,9 @@ export default () => {
 			<div className="container">
 				<div className="row">
 					<div className="col-12">
-						<h1 className="uix-typo--h2">
+						<h1 className="poemkit-typo--h2">
 							Form 
-							<a className="uix-typo--h3 align-middle" href="https://github.com/xizon/uix-kit-react/tree/main/src/client/components/Form" target="_blank"><span className="uix-dir--right" style={{fontSize:"0.75rem",color: "#ababab",margin:".5rem .5rem 0 0"}}><svg style={{marginRight:".5rem"}} width="16" viewBox="0 0 122.88 91.26"><path fill="#d2d2d2" d="M8.32,0h106.24c4.58,0,8.32,3.74,8.32,8.32v74.62c0,4.57-3.74,8.32-8.32,8.32H8.32C3.74,91.26,0,87.51,0,82.94 V8.32C0,3.74,3.74,0,8.32,0L8.32,0z M54.46,72.22L32,58.61v-8.63l22.46-13.61v10.26l-13.65,7.69l13.65,7.7V72.22L54.46,72.22z M68.42,72.22l22.46-13.61v-8.63L68.42,36.37v10.26l13.65,7.69l-13.65,7.7V72.22L68.42,72.22z M117.97,23.29H5.29v60.46 c0,0.64,0.25,1.2,0.67,1.63c0.42,0.42,0.99,0.67,1.63,0.67h108.04c0.64,0,1.2-0.25,1.63-0.67c0.43-0.43,0.67-0.99,0.67-1.63V23.29 H117.97L117.97,23.29z M106.64,9.35c2.27,0,4.11,1.84,4.11,4.11c0,2.27-1.84,4.11-4.11,4.11c-2.27,0-4.11-1.84-4.11-4.11 C102.54,11.19,104.38,9.35,106.64,9.35L106.64,9.35z M78.8,9.35c2.27,0,4.11,1.84,4.11,4.11c0,2.27-1.84,4.11-4.11,4.11 c-2.27,0-4.11-1.84-4.11-4.11C74.69,11.19,76.53,9.35,78.8,9.35L78.8,9.35z M92.72,9.35c2.27,0,4.11,1.84,4.11,4.11 c0,2.27-1.84,4.11-4.11,4.11c-2.27,0-4.11-1.84-4.11-4.11C88.61,11.19,90.45,9.35,92.72,9.35L92.72,9.35z"/></svg>Docs on GitHub</span></a>
+							<a className="poemkit-typo--h3 align-middle" href="https://github.com/xizon/poemkit/tree/main/src/client/components/Form" target="_blank"><span className="poemkit-dir--right" style={{fontSize:"0.75rem",color: "#ababab",margin:".5rem .5rem 0 0"}}><svg style={{marginRight:".5rem"}} width="16" viewBox="0 0 122.88 91.26"><path fill="#d2d2d2" d="M8.32,0h106.24c4.58,0,8.32,3.74,8.32,8.32v74.62c0,4.57-3.74,8.32-8.32,8.32H8.32C3.74,91.26,0,87.51,0,82.94 V8.32C0,3.74,3.74,0,8.32,0L8.32,0z M54.46,72.22L32,58.61v-8.63l22.46-13.61v10.26l-13.65,7.69l13.65,7.7V72.22L54.46,72.22z M68.42,72.22l22.46-13.61v-8.63L68.42,36.37v10.26l13.65,7.69l-13.65,7.7V72.22L68.42,72.22z M117.97,23.29H5.29v60.46 c0,0.64,0.25,1.2,0.67,1.63c0.42,0.42,0.99,0.67,1.63,0.67h108.04c0.64,0,1.2-0.25,1.63-0.67c0.43-0.43,0.67-0.99,0.67-1.63V23.29 H117.97L117.97,23.29z M106.64,9.35c2.27,0,4.11,1.84,4.11,4.11c0,2.27-1.84,4.11-4.11,4.11c-2.27,0-4.11-1.84-4.11-4.11 C102.54,11.19,104.38,9.35,106.64,9.35L106.64,9.35z M78.8,9.35c2.27,0,4.11,1.84,4.11,4.11c0,2.27-1.84,4.11-4.11,4.11 c-2.27,0-4.11-1.84-4.11-4.11C74.69,11.19,76.53,9.35,78.8,9.35L78.8,9.35z M92.72,9.35c2.27,0,4.11,1.84,4.11,4.11 c0,2.27-1.84,4.11-4.11,4.11c-2.27,0-4.11-1.84-4.11-4.11C88.61,11.19,90.45,9.35,92.72,9.35L92.72,9.35z"/></svg>Docs on GitHub</span></a>
 						</h1>
 					</div>
 				</div>
@@ -66,7 +66,7 @@ export default () => {
 
 			{/*<!-- Content 
 			====================================================== -->*/}
-			<section className="uix-spacing--s uix-spacing--no-bottom">
+			<section className="poemkit-spacing--s poemkit-spacing--no-bottom">
 				<div className="container">
 					<div className="row">
 						<div className="col-12">
@@ -87,7 +87,7 @@ export default () => {
 
 		   {/*<!-- Content 
 			====================================================== -->*/}
-			<section className="uix-spacing--s">
+			<section className="poemkit-spacing--s">
 				<div className="container">
 
 				   <div className="row">
@@ -181,7 +181,7 @@ export default () => {
 	
 			{/*<!-- Content 
 			====================================================== -->*/}
-			<section className="uix-spacing--s uix-spacing--no-bottom">
+			<section className="poemkit-spacing--s poemkit-spacing--no-bottom">
 				<div className="container">
 					<div className="row">
 						<div className="col-12">
@@ -202,7 +202,7 @@ export default () => {
 
 		   {/*<!-- Content 
 			====================================================== -->*/}
-			<section className="uix-spacing--s">
+			<section className="poemkit-spacing--s">
 				<div className="container">
 
 				   <div className="row">
@@ -321,7 +321,7 @@ export default () => {
 
 		   {/*<!-- Content 
 			====================================================== -->*/}
-			<section className="uix-spacing--s">
+			<section className="poemkit-spacing--s">
 				<div className="container">
 
 					   <div className="row">
@@ -411,7 +411,7 @@ export default () => {
 
 		   {/*<!-- Content 
 			====================================================== -->*/}
-			<section className="uix-spacing--s">
+			<section className="poemkit-spacing--s">
 				<div className="container">
 
 
@@ -517,7 +517,7 @@ export default () => {
 
 		   {/*<!-- Content 
 			====================================================== -->*/}
-			<section className="uix-spacing--s">
+			<section className="poemkit-spacing--s">
 				<div className="container">
 
 
@@ -636,7 +636,7 @@ export default () => {
 
 		   {/*<!-- Content 
 			====================================================== -->*/}
-			<section className="uix-spacing--s">
+			<section className="poemkit-spacing--s">
 				<div className="container">
 
 				   <div className="row">
@@ -705,7 +705,7 @@ export default () => {
 
 		   {/*<!-- Content 
 			====================================================== -->*/}
-			<section className="uix-spacing--s">
+			<section className="poemkit-spacing--s">
 				<div className="container">
 
 				   <div className="row">
@@ -799,7 +799,7 @@ export default () => {
 
 		   {/*<!-- Content 
 			====================================================== -->*/}
-			<section className="uix-spacing--s">
+			<section className="poemkit-spacing--s">
 				<div className="container">
 
 				   <div className="row">
@@ -869,7 +869,7 @@ export default () => {
 
 		   {/*<!-- Content 
 			====================================================== -->*/}
-			<section className="uix-spacing--s">
+			<section className="poemkit-spacing--s">
 				<div className="container">
 
 
@@ -958,7 +958,7 @@ export default () => {
 
 		   {/*<!-- Content 
 			====================================================== -->*/}
-			<section className="uix-spacing--s">
+			<section className="poemkit-spacing--s">
 				<div className="container">
 
 				   <div className="row">
@@ -1035,7 +1035,7 @@ export default () => {
 
 		   {/*<!-- Content 
 			====================================================== -->*/}
-			<section className="uix-spacing--s">
+			<section className="poemkit-spacing--s">
 				<div className="container">
 
 
@@ -1095,7 +1095,7 @@ export default () => {
 
 		   {/*<!-- Content 
 			====================================================== -->*/}
-			<section className="uix-spacing--s">
+			<section className="poemkit-spacing--s">
 				<div className="container">
 
 				   <div className="row">
@@ -1153,7 +1153,7 @@ export default () => {
 
 		   {/*<!-- Content 
 			====================================================== -->*/}
-			<section className="uix-spacing--s">
+			<section className="poemkit-spacing--s">
 				<div className="container">
 
 				   <div className="row">
@@ -1222,7 +1222,7 @@ export default () => {
 
 		   {/*<!-- Content 
 			====================================================== -->*/}
-			<section className="uix-spacing--s">
+			<section className="poemkit-spacing--s">
 				<div className="container">
 				   <div className="row">
 						<div className="col-12">
@@ -1269,7 +1269,7 @@ export default () => {
 
 		   {/*<!-- Content 
 			====================================================== -->*/}
-			<section className="uix-spacing--s">
+			<section className="poemkit-spacing--s">
 				<div className="container">
 
 
@@ -1321,8 +1321,8 @@ export default () => {
 
 		   {/*<!-- Content 
 			====================================================== -->*/}
-			<section className="uix-spacing--s">
-				<div className="container uix-t-c">
+			<section className="poemkit-spacing--s">
+				<div className="container poemkit-t-c">
 
 
 						<div className="row">
@@ -1371,14 +1371,14 @@ export default () => {
 
 		   {/*<!-- Content 
 			====================================================== -->*/}
-			<section className="uix-spacing--s uix-spacing--no-top">
+			<section className="poemkit-spacing--s poemkit-spacing--no-top">
 				<div className="container">
 
 
 					   <div className="row">
 							<div className="col-12">
-								<p className="uix-t-l">
-								  <button type="submit" className="uix-btn uix-btn__border--thin uix-btn__size--s uix-btn__bg--primary">Submit Your Info</button>
+								<p className="poemkit-t-l">
+								  <button type="submit" className="poemkit-btn poemkit-btn__border--thin poemkit-btn__size--s poemkit-btn__bg--primary">Submit Your Info</button>
 								</p> 
 
 								<span className="response"></span>
@@ -1426,7 +1426,7 @@ export default () => {
 
 	   {/*<!-- Content 
 		====================================================== -->*/}
-		<section className="uix-spacing--s">
+		<section className="poemkit-spacing--s">
 			<div className="container">
 
 
@@ -1438,12 +1438,12 @@ export default () => {
 								 <form method="post" action="#" id="app-my-form">
 
 
-									<div className="uix-controls-layout">
-										<div className="uix-controls-layout__content">
-											<div className="uix-controls-layout__content__inner">
+									<div className="poemkit-controls-layout">
+										<div className="poemkit-controls-layout__content">
+											<div className="poemkit-controls-layout__content__inner">
 												<div>
 													{/*<!-- // -->*/}
-													<h3 className="uix-typo--color-sub uix-typo--h6 uix-spacing--no uix-typo--style-uppercase">Left Title</h3>
+													<h3 className="poemkit-typo--color-sub poemkit-typo--h6 poemkit-spacing--no poemkit-typo--style-uppercase">Left Title</h3>
 													{/*<!-- // -->*/}
 												</div>
 												<div>
@@ -1453,18 +1453,18 @@ export default () => {
 												</div>
 											</div>
 										</div>
-										<div className="uix-controls-layout__icon">
+										<div className="poemkit-controls-layout__icon">
 											<i className="fa fa-angle-right"></i>
 										</div>
 									</div>     
 
 
-									 <div className="uix-controls-layout">
-										<div className="uix-controls-layout__content">
-											<div className="uix-controls-layout__content__inner">
+									 <div className="poemkit-controls-layout">
+										<div className="poemkit-controls-layout__content">
+											<div className="poemkit-controls-layout__content__inner">
 												<div>
 													{/*<!-- // -->*/}
-													<h3 className="uix-typo--color-sub uix-typo--h6 uix-spacing--no uix-typo--style-uppercase">Left Title</h3>
+													<h3 className="poemkit-typo--color-sub poemkit-typo--h6 poemkit-spacing--no poemkit-typo--style-uppercase">Left Title</h3>
 													{/*<!-- // -->*/}
 												</div>
 												<div>
@@ -1474,17 +1474,17 @@ export default () => {
 												</div>
 											</div>
 										</div>
-										<div className="uix-controls-layout__icon">
+										<div className="poemkit-controls-layout__icon">
 											<i className="fa fa-angle-right"></i>
 										</div>
 									</div>     
 
-									<div className="uix-controls-layout">
-										<div className="uix-controls-layout__content">
-											<div className="uix-controls-layout__content__inner">
-												<div className="uix-t-r">
+									<div className="poemkit-controls-layout">
+										<div className="poemkit-controls-layout__content">
+											<div className="poemkit-controls-layout__content__inner">
+												<div className="poemkit-t-r">
 													{/*<!-- // -->*/}
-													<h3 className="uix-typo--color-sub uix-typo--h6 uix-spacing--no uix-typo--style-uppercase">Right Title</h3>
+													<h3 className="poemkit-typo--color-sub poemkit-typo--h6 poemkit-spacing--no poemkit-typo--style-uppercase">Right Title</h3>
 													{/*<!-- // -->*/}
 												</div>
 												<div>
@@ -1494,18 +1494,18 @@ export default () => {
 												</div>
 											</div>
 										</div>
-										<div className="uix-controls-layout__icon">
+										<div className="poemkit-controls-layout__icon">
 											<i className="fa fa-angle-right"></i>
 										</div>
 									</div>     
 
 
-									<div className="uix-controls-layout">
-										<div className="uix-controls-layout__content">
-											<div className="uix-controls-layout__content__inner">
-												<div className="uix-t-r">
+									<div className="poemkit-controls-layout">
+										<div className="poemkit-controls-layout__content">
+											<div className="poemkit-controls-layout__content__inner">
+												<div className="poemkit-t-r">
 													{/*<!-- // -->*/}
-													<h3 className="uix-typo--color-sub uix-typo--h6 uix-spacing--no uix-typo--style-uppercase">Right Title</h3>
+													<h3 className="poemkit-typo--color-sub poemkit-typo--h6 poemkit-spacing--no poemkit-typo--style-uppercase">Right Title</h3>
 													{/*<!-- // -->*/}
 												</div>
 												<div>
@@ -1515,18 +1515,18 @@ export default () => {
 												</div>
 											</div>
 										</div>
-										<div className="uix-controls-layout__icon">
+										<div className="poemkit-controls-layout__icon">
 											<i className="fa fa-angle-right"></i>
 										</div>
 									</div>     
 
 
-									<div className="uix-controls-layout">
-										<div className="uix-controls-layout__content">
-											<div className="uix-controls-layout__content__inner">
+									<div className="poemkit-controls-layout">
+										<div className="poemkit-controls-layout__content">
+											<div className="poemkit-controls-layout__content__inner">
 												<div>
 													{/*<!-- // -->*/}
-													<h3 className="uix-typo--color-sub uix-typo--h6 uix-spacing--no uix-typo--style-uppercase">No Icon</h3>
+													<h3 className="poemkit-typo--color-sub poemkit-typo--h6 poemkit-spacing--no poemkit-typo--style-uppercase">No Icon</h3>
 													{/*<!-- // -->*/}
 												</div>
 												<div>
@@ -1539,12 +1539,12 @@ export default () => {
 									</div>     
 
 
-									 <div className="uix-controls-layout">
-										<div className="uix-controls-layout__content">
-											<div className="uix-controls-layout__content__inner">
+									 <div className="poemkit-controls-layout">
+										<div className="poemkit-controls-layout__content">
+											<div className="poemkit-controls-layout__content__inner">
 												<div>
 													{/*<!-- // -->*/}
-													<h3 className="uix-typo--color-sub uix-typo--h6 uix-spacing--no uix-typo--style-uppercase">No Icon</h3>
+													<h3 className="poemkit-typo--color-sub poemkit-typo--h6 poemkit-spacing--no poemkit-typo--style-uppercase">No Icon</h3>
 													{/*<!-- // -->*/}
 												</div>
 												<div>
@@ -1557,9 +1557,9 @@ export default () => {
 									</div>          
 
 
-									 <div className="uix-controls-layout">
-										<div className="uix-controls-layout__content">
-											<div className="uix-controls-layout__content__inner">
+									 <div className="poemkit-controls-layout">
+										<div className="poemkit-controls-layout__content">
+											<div className="poemkit-controls-layout__content__inner">
 												<div>
 													{/*<!-- // -->*/}
 
@@ -1567,7 +1567,7 @@ export default () => {
 												</div>
 												<div>
 													{/*<!-- // -->*/}
-													<button type="submit" className="uix-btn uix-btn__border--thin uix-btn__size--s uix-btn__bg--primary">Submit Your Info</button>   
+													<button type="submit" className="poemkit-btn poemkit-btn__border--thin poemkit-btn__size--s poemkit-btn__bg--primary">Submit Your Info</button>   
 													{/*<!-- // -->*/}
 												</div>
 											</div>
@@ -1605,10 +1605,10 @@ export default () => {
 						<hr />
 
 
-						<article className="uix-spacing--s" itemProp="text">
+						<article className="poemkit-spacing--s" itemProp="text">
 							<h4>Input</h4>
 							<div>
-								<pre>import {`{Input}`} from '@uixkit.react/components/Form/index.tsx';</pre>
+								<pre>import {`{Input}`} from '@poemkit/components/Form/index.tsx';</pre>
 							</div>
 							<div className="table-responsive-md">
 								<table className="table table-bordered table-striped">
@@ -1705,7 +1705,7 @@ export default () => {
 
 							<h4>Password Input</h4>
 							<div>
-								<pre>import {`{PasswordInput}`} from '@uixkit.react/components/Form/index.tsx';</pre>
+								<pre>import {`{PasswordInput}`} from '@poemkit/components/Form/index.tsx';</pre>
 							</div>
 							<div className="table-responsive-md">
 								<table className="table table-bordered table-striped">
@@ -1796,7 +1796,7 @@ export default () => {
 
 							<h4>Merge Input</h4>
 							<div>
-								<pre>import {`{MergeInput}`} from '@uixkit.react/components/Form/index.tsx';</pre>
+								<pre>import {`{MergeInput}`} from '@poemkit/components/Form/index.tsx';</pre>
 							</div>
 							<div className="table-responsive-md">
 								<table className="table table-bordered table-striped">
@@ -1882,7 +1882,7 @@ export default () => {
 
 							<h4>Textarea</h4>
 							<div>
-								<pre>import {`{Textarea}`} from '@uixkit.react/components/Form/index.tsx';</pre>
+								<pre>import {`{Textarea}`} from '@poemkit/components/Form/index.tsx';</pre>
 							</div>
 							<div className="table-responsive-md">
 								<table className="table table-bordered table-striped">
@@ -1976,7 +1976,7 @@ export default () => {
 
 							<h4>Select</h4>
 							<div>
-								<pre>import {`{Select}`} from '@uixkit.react/components/Form/index.tsx';</pre>
+								<pre>import {`{Select}`} from '@poemkit/components/Form/index.tsx';</pre>
 							</div>
 							<div className="table-responsive-md">
 								<table className="table table-bordered table-striped">
@@ -2056,7 +2056,7 @@ export default () => {
 
 							<h4>Custom Select</h4>
 							<div>
-								<pre>import {`{CustomSelect}`} from '@uixkit.react/components/Form/index.tsx';</pre>
+								<pre>import {`{CustomSelect}`} from '@poemkit/components/Form/index.tsx';</pre>
 							</div>
 							<div className="table-responsive-md">
 								<table className="table table-bordered table-striped mb-5">
@@ -2143,7 +2143,7 @@ export default () => {
 
 							<h4>Checkbox</h4>
 							<div>
-								<pre>import {`{Checkbox}`} from '@uixkit.react/components/Form/index.tsx';</pre>
+								<pre>import {`{Checkbox}`} from '@poemkit/components/Form/index.tsx';</pre>
 							</div>
 							<div className="table-responsive-md">
 								<table className="table table-bordered table-striped">
@@ -2200,7 +2200,7 @@ export default () => {
 
 							<h4>Radio</h4>
 							<div>
-								<pre>import {`{Radio}`} from '@uixkit.react/components/Form/index.tsx';</pre>
+								<pre>import {`{Radio}`} from '@poemkit/components/Form/index.tsx';</pre>
 							</div>
 							<div className="table-responsive-md">
 								<table className="table table-bordered table-striped mb-5">
@@ -2255,7 +2255,7 @@ export default () => {
 
 							<h4>Multiple Select</h4>
 							<div>
-								<pre>import {`{MultiSelect}`} from '@uixkit.react/components/Form/index.tsx';</pre>
+								<pre>import {`{MultiSelect}`} from '@poemkit/components/Form/index.tsx';</pre>
 							</div>
 							<div className="table-responsive-md">
 								<table className="table table-bordered table-striped mb-5">
@@ -2309,7 +2309,7 @@ export default () => {
 
 							<h4>Single Select</h4>
 							<div>
-								<pre>import {`{SingleSelect}`} from '@uixkit.react/components/Form/index.tsx';</pre>
+								<pre>import {`{SingleSelect}`} from '@poemkit/components/Form/index.tsx';</pre>
 							</div>
 							<div className="table-responsive-md">
 								<table className="table table-bordered table-striped mb-5">
@@ -2375,7 +2375,7 @@ export default () => {
 
 							<h4>Date</h4>
 							<div>
-								<pre>import {`{Date}`} from '@uixkit.react/components/Form/index.tsx';</pre>
+								<pre>import {`{Date}`} from '@poemkit/components/Form/index.tsx';</pre>
 							</div>
 							<div className="table-responsive-md">
 								<table className="table table-bordered table-striped">
@@ -2455,7 +2455,7 @@ export default () => {
 
 							<h4>Number</h4>
 							<div>
-								<pre>import {`{Number}`} from '@uixkit.react/components/Form/index.tsx';</pre>
+								<pre>import {`{Number}`} from '@poemkit/components/Form/index.tsx';</pre>
 							</div>
 							<div className="table-responsive-md">
 								<table className="table table-bordered table-striped">
@@ -2548,7 +2548,7 @@ export default () => {
 
 							<h4>Switch</h4>
 							<div>
-								<pre>import {`{Switch}`} from '@uixkit.react/components/Form/index.tsx';</pre>
+								<pre>import {`{Switch}`} from '@poemkit/components/Form/index.tsx';</pre>
 							</div>
 							<div className="table-responsive-md">
 								<table className="table table-bordered table-striped">
@@ -2629,7 +2629,7 @@ export default () => {
 
 							<h4>Dynamic Fields</h4>
 							<div>
-								<pre>import {`{DynamicFields}`} from '@uixkit.react/components/Form/index.tsx';</pre>
+								<pre>import {`{DynamicFields}`} from '@poemkit/components/Form/index.tsx';</pre>
 							</div>
 							<div className="table-responsive-md">
 								<table className="table table-bordered table-striped mb-5">
@@ -2684,7 +2684,7 @@ export default () => {
 
 							<h4>File</h4>
 							<div>
-								<pre>import {`{File}`} from '@uixkit.react/components/Form/index.tsx';</pre>
+								<pre>import {`{File}`} from '@poemkit/components/Form/index.tsx';</pre>
 							</div>
 							<div className="table-responsive-md">
 								<table className="table table-bordered table-striped">
@@ -2734,7 +2734,7 @@ export default () => {
 
 							<h4>File Field</h4>
 							<div>
-								<pre>import {`{FileField}`} from '@uixkit.react/components/Form/index.tsx';</pre>
+								<pre>import {`{FileField}`} from '@poemkit/components/Form/index.tsx';</pre>
 							</div>
 							<div className="table-responsive-md">
 								<table className="table table-bordered table-striped">
@@ -2789,13 +2789,11 @@ export default () => {
 
 					</div>
 				</div>
-				{/*
-			<!-- .row end -->*/}
+				{/*<!-- .row end -->*/}
 
 
 			</div>
-			{/*
-		<!-- .container end -->*/}
+			{/*<!-- .container end -->*/}
 		</section>
 
 			

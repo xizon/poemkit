@@ -1,6 +1,6 @@
-# @uixkit.react/components/Slideshow
+# @poemkit/components/Slideshow
 
-[Source](https://github.com/xizon/uix-kit-react/tree/main/src/client/components/Slideshow)
+[Source](https://github.com/xizon/poemkit/tree/main/src/client/components/Slideshow)
 
 ## Version
 
@@ -10,7 +10,7 @@
 
 ### Slideshow
 ```js
-import { Slideshow } from '@uixkit.react/components/Slideshow/index.tsx';
+import { Slideshow } from '@poemkit/components/Slideshow/index.tsx';
 ```
 | Property | Type | Default | Description |
 | --- | --- | --- | --- |
@@ -22,14 +22,14 @@ import { Slideshow } from '@uixkit.react/components/Slideshow/index.tsx';
 | `arrowEnabled` | boolean  | false | Display or hide Previous/Next arrow |
 | `arrowPrevIcon` | ReactNode  | - | Previous arrow icon |
 | `arrowNextIcon` | ReactNode  | - | Next arrow icon |
-| `draggable` | boolean  | false | Allow drag and drop on the slider |
+| `draggable` | boolean  | false | Allow drag and drop on the slider (touch devices will always work) |
 | `draggableCursor` | string \| boolean  | move | Drag & Drop Change icon/cursor while dragging |
 
 
 
-### Item
+### Slideshow Item
 ```js
-import { Item } from '@uixkit.react/components/Slideshow/index.tsx';
+import { SlideshowItem } from '@poemkit/components/Slideshow/index.tsx';
 ```
 | Property | Type | Default | Description |
 | --- | --- | --- | --- |
@@ -38,7 +38,7 @@ import { Item } from '@uixkit.react/components/Slideshow/index.tsx';
 
 ---
 
-If you want to modify the transition-duration property, please directly modify the <code>.uix-slideshow__item</code> in the CSS file. <strong>All effects are controlled by CSS styles.</strong>
+If you want to modify the transition-duration property, please directly modify the <code>.poemkit-slideshow__item</code> in the CSS file. <strong>All effects are controlled by CSS styles.</strong>
 
 
 
@@ -46,7 +46,7 @@ If you want to modify the transition-duration property, please directly modify t
 
 ```js
 import React from 'react';
-import { Slideshow, Item } from '@uixkit.react/components/Slideshow/index.tsx';
+import { Slideshow, SlideshowItem } from '@poemkit/components/Slideshow/index.tsx';
 
 export default () => {
     return (
@@ -65,27 +65,27 @@ export default () => {
                 draggable={false}
                 draggableCursor="move">
 
-                <Item url={`/path/demo.png`}>
-                    <div className="uix-typo--color-white">
+                <SlideshowItem url={`/path/demo.png`}>
+                    <div className="poemkit-typo--color-white">
                         <h3>Beautiful Free &amp; Premium Responsive WordPress Themes</h3>
-                        <p>Uix Responsive Web UI Frameworks</p>
-                        <a href="#" className="uix-btn uix-btn__border--thin uix-btn__margin--b uix-btn__size--s uix-btn__bg--secondary is-pill is-fill-white">Link To</a>
+                        <p>Responsive Web UI Frameworks</p>
+                        <a href="#" className="poemkit-btn poemkit-btn__border--thin poemkit-btn__margin--b poemkit-btn__size--s poemkit-btn__bg--secondary is-pill is-fill-white">Link To</a>
                     </div>
-                </Item>
-                <Item url={`/path/demo.png`}>
-                    <div className="uix-typo--color-white">
+                </SlideshowItem>
+                <SlideshowItem url={`/path/demo.png`}>
+                    <div className="poemkit-typo--color-white">
                         <h3>Hello World</h3>
                         <p>UIUX Lab carefully crafts original design assets and publishes articles about UI/UX trends!</p>
-                        <a href="#" className="uix-btn uix-btn__border--thin uix-btn__margin--b uix-btn__size--s uix-btn__bg--secondary is-pill is-fill-white">Link To</a>
+                        <a href="#" className="poemkit-btn poemkit-btn__border--thin poemkit-btn__margin--b poemkit-btn__size--s poemkit-btn__bg--secondary is-pill is-fill-white">Link To</a>
                     </div>
-                </Item>
-                <Item url={`/path/demo.png`}>
-                    <div className="uix-typo--color-white">
+                </SlideshowItem>
+                <SlideshowItem url={`/path/demo.png`}>
+                    <div className="poemkit-typo--color-white">
                         <h3>Title 3</h3>
                         <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
                     </div>
-                </Item>
-                <Item url={`/path/demo.mp4`}></Item>
+                </SlideshowItem>
+                <SlideshowItem url={`/path/demo.mp4`}></SlideshowItem>
 
             </Slideshow>
 
@@ -104,26 +104,26 @@ export default () => {
                 draggable={false}
                 draggableCursor="move">
 
-                <Item url={`/path/demo.png`}>
-                    <div className="uix-typo--color-white">
+                <SlideshowItem url={`/path/demo.png`}>
+                    <div className="poemkit-typo--color-white">
                         <h3>Beautiful Free &amp; Premium Responsive WordPress Themes</h3>
-                        <p>Uix Responsive Web UI Frameworks</p>
-                        <a href="#" className="uix-btn uix-btn__border--thin uix-btn__margin--b uix-btn__size--s uix-btn__bg--secondary is-pill is-fill-white">Link To</a>
+                        <p>Responsive Web UI Frameworks</p>
+                        <a href="#" className="poemkit-btn poemkit-btn__border--thin poemkit-btn__margin--b poemkit-btn__size--s poemkit-btn__bg--secondary is-pill is-fill-white">Link To</a>
                     </div>
-                </Item>
-                <Item url={`/path/demo.png`}>
-                    <div className="uix-typo--color-white">
+                </SlideshowItem>
+                <SlideshowItem url={`/path/demo.png`}>
+                    <div className="poemkit-typo--color-white">
                         <h3>Hello World</h3>
                         <p>UIUX Lab carefully crafts original design assets and publishes articles about UI/UX trends!</p>
-                        <a href="#" className="uix-btn uix-btn__border--thin uix-btn__margin--b uix-btn__size--s uix-btn__bg--secondary is-pill is-fill-white">Link To</a>
+                        <a href="#" className="poemkit-btn poemkit-btn__border--thin poemkit-btn__margin--b poemkit-btn__size--s poemkit-btn__bg--secondary is-pill is-fill-white">Link To</a>
                     </div>
-                </Item>
-                <Item url={`/path/demo.png`}>
-                    <div className="uix-typo--color-white">
+                </SlideshowItem>
+                <SlideshowItem url={`/path/demo.png`}>
+                    <div className="poemkit-typo--color-white">
                         <h3>Title 3</h3>
                         <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
                     </div>
-                </Item>
+                </SlideshowItem>
             </Slideshow>
 
 
@@ -143,26 +143,26 @@ export default () => {
                 draggable={true}
                 draggableCursor="move">
 
-                <Item url={`/path/demo.png`}>
-                    <div className="uix-typo--color-white">
+                <SlideshowItem url={`/path/demo.png`}>
+                    <div className="poemkit-typo--color-white">
                         <h3>Beautiful Free &amp; Premium Responsive WordPress Themes</h3>
-                        <p>Uix Responsive Web UI Frameworks</p>
-                        <a href="#" className="uix-btn uix-btn__border--thin uix-btn__margin--b uix-btn__size--s uix-btn__bg--secondary is-pill is-fill-white">Link To</a>
+                        <p>Responsive Web UI Frameworks</p>
+                        <a href="#" className="poemkit-btn poemkit-btn__border--thin poemkit-btn__margin--b poemkit-btn__size--s poemkit-btn__bg--secondary is-pill is-fill-white">Link To</a>
                     </div>
-                </Item>
-                <Item url={`/path/demo.png`}>
-                    <div className="uix-typo--color-white">
+                </SlideshowItem>
+                <SlideshowItem url={`/path/demo.png`}>
+                    <div className="poemkit-typo--color-white">
                         <h3>Hello World</h3>
                         <p>UIUX Lab carefully crafts original design assets and publishes articles about UI/UX trends!</p>
-                        <a href="#" className="uix-btn uix-btn__border--thin uix-btn__margin--b uix-btn__size--s uix-btn__bg--secondary is-pill is-fill-white">Link To</a>
+                        <a href="#" className="poemkit-btn poemkit-btn__border--thin poemkit-btn__margin--b poemkit-btn__size--s poemkit-btn__bg--secondary is-pill is-fill-white">Link To</a>
                     </div>
-                </Item>
-                <Item url={`/path/demo.png`}>
-                    <div className="uix-typo--color-white">
+                </SlideshowItem>
+                <SlideshowItem url={`/path/demo.png`}>
+                    <div className="poemkit-typo--color-white">
                         <h3>Title 3</h3>
                         <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
                     </div>
-                </Item>
+                </SlideshowItem>
             </Slideshow>
 
         </>

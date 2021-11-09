@@ -1,7 +1,7 @@
 /* ======================================================
    <!-- LightBox -->
 /* ====================================================== */
-@import '@uixkit.react/components/_utils/styles/_variable-and-mixin.scss';
+@import '@poemkit/components/_utils/styles/_variable-and-mixin.scss';
 
 /*
  * 1. Initialization module
@@ -20,7 +20,7 @@ $lb-custom-w: 1000px;
 $lb-radius: 3px;
 
 
-.uix-lightbox__container-mask {
+.poemkit-lightbox__container-mask {
 	display: none;
 	position: fixed;
 	z-index: 99997;
@@ -32,7 +32,7 @@ $lb-radius: 3px;
 }
 
 
-.uix-lightbox__close {
+.poemkit-lightbox__close {
 	display: none;
 	border-radius: 50%;
 	text-align: center;
@@ -72,7 +72,7 @@ $lb-radius: 3px;
     
 }
 
-.uix-lightbox__loading {
+.poemkit-lightbox__loading {
 	position: fixed;
 	z-index: 99998;
 	left: 50vw;
@@ -86,7 +86,7 @@ $lb-radius: 3px;
 }
 
 
-.uix-lightbox__container {
+.poemkit-lightbox__container {
 	display: none;
 	position: fixed;
 	z-index: 99998;
@@ -97,7 +97,7 @@ $lb-radius: 3px;
 
 
 
-	.uix-lightbox__inner {
+	.poemkit-lightbox__inner {
 		pointer-events: all;
 		display: none;
 		max-width: #{$lb-custom-w};
@@ -109,23 +109,23 @@ $lb-radius: 3px;
 
 
 
-		.uix-lightbox__html {
+		.poemkit-lightbox__html {
 
 			text-align: center;
 
-			.uix-lightbox__photo-container {
+			.poemkit-lightbox__photo-container {
 				transition: all 0.1s ease;
 				display: inline-block;
 
-				&.uix-lightbox__photo-sets-container {
+				&.poemkit-lightbox__photo-sets-container {
 					overflow: hidden;
 					background-color: transparent;
 					position: relative;
 
 				}
 
-				.uix-lightbox__photo-sets__prev,
-				.uix-lightbox__photo-sets__next {
+				.poemkit-lightbox__photo-sets__prev,
+				.poemkit-lightbox__photo-sets__next {
 					position: absolute;
 					z-index: 2;
 					top: 50%;
@@ -151,7 +151,7 @@ $lb-radius: 3px;
 
 
 				}
-				.uix-lightbox__photo-sets__prev {
+				.poemkit-lightbox__photo-sets__prev {
 					left: 0;
 
 					&::before {
@@ -159,7 +159,7 @@ $lb-radius: 3px;
 					}
 
 				}
-				.uix-lightbox__photo-sets__next {
+				.poemkit-lightbox__photo-sets__next {
 					right: 0;
 
 					&::before {
@@ -206,7 +206,7 @@ $lb-radius: 3px;
 			}
 
 
-			.uix-lightbox__thumb-container {
+			.poemkit-lightbox__thumb-container {
 				position: absolute;
 				bottom: 0;
 				left: 50%;
@@ -282,7 +282,7 @@ $lb-radius: 3px;
 				border-bottom-right-radius: $lb-radius;
 			}
 
-			&.js-uix-no-img {
+			&.js-poemkit-no-img {
 				background: #fff;
 				border-radius: $lb-radius;
 			}
@@ -298,9 +298,9 @@ $lb-radius: 3px;
 
 
 
-		&.js-uix-pure-image {
+		&.js-poemkit-pure-image {
 
-			.uix-lightbox__html {
+			.poemkit-lightbox__html {
 				&::before,
 				&::after {
 					display: none;
@@ -316,11 +316,11 @@ $lb-radius: 3px;
 
 
 		 /* Custom content width you want */
-		&.js-uix-custom {
+		&.js-poemkit-custom {
 			max-width: 70vw;
 
-			.uix-lightbox__html {
-				> .uix-lightbox__htmlcontent-inner {
+			.poemkit-lightbox__html {
+				> .poemkit-lightbox__htmlcontent-inner {
 					width: 70vw;
 					max-width: 100%;
 				}
@@ -332,7 +332,7 @@ $lb-radius: 3px;
 
 
 
-	&.js-uix-no-fixed {
+	&.js-poemkit-no-fixed {
 		position: absolute;
 		top: 100px;
 
@@ -342,22 +342,22 @@ $lb-radius: 3px;
 			margin-top: 0 !important; /* Protected from js */
 		}
 
-		.uix-lightbox__inner {
+		.poemkit-lightbox__inner {
 			top: 0;
 			transform: translateY(0);
 			padding-bottom: 5rem;
 
 
-			.uix-lightbox__html {
+			.poemkit-lightbox__html {
 				&::after {
 					bottom: 5rem;
 				}
 			}
 
 
-			&.js-uix-pure-image {
+			&.js-poemkit-pure-image {
 
-				.uix-lightbox__html {
+				.poemkit-lightbox__html {
 
 					img {
 						max-height: inherit;
@@ -367,11 +367,11 @@ $lb-radius: 3px;
 
 			}
 
-			&.js-uix-custom {
+			&.js-poemkit-custom {
 
 				max-width: 1200px;
 
-				.uix-lightbox__html > .uix-lightbox__htmlcontent-inner {
+				.poemkit-lightbox__html > .poemkit-lightbox__htmlcontent-inner {
 					width: #{$lb-custom-w};
 					max-height: inherit;
 
@@ -384,26 +384,26 @@ $lb-radius: 3px;
 
 }
 
-@include customScrollbar( 'vertical', '.uix-lightbox__htmlcontent-inner' );
-@include customScrollbar( 'horizontal', '.uix-lightbox__thumb-container' );
+@include customScrollbar( 'vertical', '.poemkit-lightbox__htmlcontent-inner' );
+@include customScrollbar( 'horizontal', '.poemkit-lightbox__thumb-container' );
 
 @media all and (max-width: 768px) {
 
-	.uix-lightbox__container {
+	.poemkit-lightbox__container {
 
-		.uix-lightbox__inner {
+		.poemkit-lightbox__inner {
 
 			max-width: calc(100% - 30px) !important;
 			margin: 15px auto;
 
 
-			.uix-lightbox__html {
-				> .uix-lightbox__htmlcontent-inner {
+			.poemkit-lightbox__html {
+				> .poemkit-lightbox__htmlcontent-inner {
 					width: auto;
 				}
 
 
-				.uix-lightbox__thumb-container {
+				.poemkit-lightbox__thumb-container {
 					bottom: -100px;
 
 				}
@@ -412,11 +412,11 @@ $lb-radius: 3px;
 
 
 			 /* Custom content width you want */
-			&.js-uix-custom {
+			&.js-poemkit-custom {
 				max-width: calc(100vw - 30px);
 
-				.uix-lightbox__html {
-					> .uix-lightbox__htmlcontent-inner {
+				.poemkit-lightbox__html {
+					> .poemkit-lightbox__htmlcontent-inner {
 						width: auto;
 					}
 				}
@@ -425,23 +425,23 @@ $lb-radius: 3px;
 
 		}
 
-		&.js-uix-no-fixed {
+		&.js-poemkit-no-fixed {
 			top: 50px;
 
 			&.no-fixed-imgEnlarged {
 				top: 0;
 			}
 
-			.uix-lightbox__inner {
+			.poemkit-lightbox__inner {
 
 				/* Prevent closing button position error */
 				overflow: hidden;
 
-				&.js-uix-custom {
+				&.js-poemkit-custom {
 
 					max-width: calc(100vw - 30px);
 
-					.uix-lightbox__html > .uix-lightbox__htmlcontent-inner {
+					.poemkit-lightbox__html > .poemkit-lightbox__htmlcontent-inner {
 						width: auto;
 
 					}
@@ -464,14 +464,14 @@ $lb-radius: 3px;
  ---------------------------
  */
 
-.uix-lightbox__original__link {
+.poemkit-lightbox__original__link {
 	cursor: zoom-in;
 	display: block;
 }
 
 /* prevent touch on element */
 @media all and (max-width: 768px) {
-	.uix-lightbox__original__link {
+	.poemkit-lightbox__original__link {
 		pointer-events: none;
 	}
 }
@@ -481,7 +481,7 @@ $lb-radius: 3px;
 
 /* Styles the close link, adds the slide down transition */
 
-.uix-lightbox__original__close {
+.poemkit-lightbox__original__close {
     display: none;
     width: 50px;
     height: 50px;
@@ -532,7 +532,7 @@ $lb-radius: 3px;
 
 /* Styles the lightbox image, centers it vertically and horizontally, adds the zoom-in transition and makes it responsive using a combination of margin and absolute positioning */
 
-.uix-lightbox__original__target {
+.poemkit-lightbox__original__target {
 
     position: fixed;
 	left: 50% !important;
@@ -580,7 +580,7 @@ $lb-radius: 3px;
 
 
 
-	/* To perform the animations upon clicking the .uix-lightbox__original__target anchor */
+	/* To perform the animations upon clicking the .poemkit-lightbox__original__target anchor */
 	&.is-active {
 		opacity: 1;
 		top: 0;
@@ -601,7 +601,7 @@ $lb-radius: 3px;
 			max-height: inherit !important;
 		}
 
-		.uix-lightbox__original__close {
+		.poemkit-lightbox__original__close {
 			top: 0px;
 		}
 
@@ -609,7 +609,7 @@ $lb-radius: 3px;
 
 
 
-	&.uix-lightbox__original__target--imgfull {
+	&.poemkit-lightbox__original__target--imgfull {
 
 		img {
 			margin: 0 auto !important; /* Protected from js */
@@ -628,13 +628,13 @@ $lb-radius: 3px;
  3. HTML content area
  ---------------------------
  */
-.uix-lightbox__htmlcontent-template {
+.poemkit-lightbox__htmlcontent-template {
 	display: none;
 }
 
-.uix-lightbox__htmlcontent-container {
+.poemkit-lightbox__htmlcontent-container {
 
-	.uix-lightbox__htmlcontent-inner {
+	.poemkit-lightbox__htmlcontent-inner {
 
 		position: relative;
 		/* Required Width */

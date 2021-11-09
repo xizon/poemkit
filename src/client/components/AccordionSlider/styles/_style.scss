@@ -1,13 +1,13 @@
 /* ======================================================
     <!-- Accordion Slider -->
 /* ====================================================== */
-@import '@uixkit.react/components/_utils/styles/_variable-and-mixin.scss';
+@import '@poemkit/components/_utils/styles/_variable-and-mixin.scss';
 
 
 // Accordion Height
 $accordion-slider-height: 250px;
 
-.uix-accordion-slider {
+.poemkit-accordion-slider {
 
 	width: 100%;
 	height: $accordion-slider-height;
@@ -44,7 +44,7 @@ $accordion-slider-height: 250px;
 
 			}
 
-			> .uix-accordion-slider__content {
+			> .poemkit-accordion-slider__content {
 				display: block;
 				height: $accordion-slider-height;
 				width: 100%;
@@ -64,7 +64,7 @@ $accordion-slider-height: 250px;
 
 
 
-				.uix-accordion-slider__close {
+				.poemkit-accordion-slider__close {
 					position: absolute;
 					right: 10px;
 					top: 10px;
@@ -111,7 +111,7 @@ $accordion-slider-height: 250px;
 // Stack items
 @media all and (max-width:  768px) {
 
-	.uix-accordion-slider {
+	.poemkit-accordion-slider {
 
 		height: auto;
 
@@ -129,6 +129,10 @@ $accordion-slider-height: 250px;
 
 			}
 
+		}
+
+		li.is-active {
+			width: 100% !important;
 		}
 
 	}

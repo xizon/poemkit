@@ -2,9 +2,9 @@
  *************************************
  * Core Helpers
  *
- * @package: uix-kit-react
- * @version: 0.40
- * @last update: October 23, 2021
+ * @package: poemkit
+ * @version: 0.41
+ * @last update: October 30, 2021
  * @author: UIUX Lab <uiuxlab@gmail.com>
  * @license: MIT
  *
@@ -120,7 +120,7 @@ __( document ).ready( function() {
 			__( '.menu li' ).eq(1).append( htmlObject.firstChild );
 
 			//clone HTML Element
-			const cloneHTML = __( '.uix-menu__container' ).clone();
+			const cloneHTML = __( '.poemkit-menu__container' ).clone();
 			__( cloneHTML ).addClass( 'is-mobile' );
 			__( 'body' ).prependTo( cloneHTML );
 			__( 'body' ).appendTo( cloneHTML );
@@ -244,8 +244,8 @@ __( document ).ready( function() {
 
 			});
 
-			__( '.menu' ).animate( 'marginLeft', 0, 100, 'px', 1500, 'ease-out' );
-			__( '.menu' ).animate( 'marginTop', 0, 200, 'px', 1500, 'ease-out' );
+			__( '.menu' ).animate( 'marginLeft', 0, 100, 'px', 1500, 'ease-out', function(){ console.log(this.className); } );
+			__( '.menu' ).animate( 'marginTop', 0, 200, 'px', 1500, 'ease-out', function(){ console.log(this.className); } );
 
 			
 			
@@ -3229,9 +3229,10 @@ const __ = (function () {
 	* @param  {String} unit         - Unit string, such as `px` and `%`, and so on.
 	* @param  {Number} duration     - The number of milliseconds each iteration of the animation takes to complete
 	* @param  {String} easing       - The rate of the animation's change over time. Accepts the pre-defined values "linear", "ease-in", "ease-out", and "ease-in-out"
+	* @param  {Function} complete   - A function to call once the animation is complete, called once per matched element.
 	* @return {Void}
 	*/
-	 __.prototype.animate = function(prop, from, to, unit, duration, easing) {
+	 __.prototype.animate = function(prop, from, to, unit, duration, easing, complete) {
 		const el = this;
 		const start = new Date().getTime();
 		const timer = setInterval(function () {
@@ -3263,6 +3264,13 @@ const __ = (function () {
 			
 			if (time >= duration) {
 				clearInterval(timer);
+
+				//
+				if (complete && (typeof complete == "function")) {
+					complete.call(el);
+				}
+
+
 			}
 		}, 1000 / 60);
 
@@ -3504,7 +3512,6 @@ const __ = (function () {
 	
     return __;
 })();
-
 
 
 export default __;

@@ -1,10 +1,10 @@
 /* ====================================================== 
    <!-- Mobile Menu --> 
 /* ====================================================== */
-@import '@uixkit.react/components/_utils/styles/_variable-and-mixin.scss';
+@import '@poemkit/components/_utils/styles/_variable-and-mixin.scss';
 
 /* Mobile Menu Toggle */
-.uix-menu-mobile__toggle {
+.poemkit-menu-mobile__toggle {
     @include transition-default();
     position: absolute;
     display: none;
@@ -19,7 +19,7 @@
     transition: .1s ease-in-out;
 	
 }
-.uix-menu-mobile__mask {
+.poemkit-menu-mobile__mask {
 	content: '';
 	left: 0;
 	top: 0;
@@ -32,14 +32,14 @@
 	display: none;
 }
 
-.js-uix-menu-opened .uix-menu-mobile__mask {
+.js-poemkit-menu-opened .poemkit-menu-mobile__mask {
 	background: rgba(0,0,0,.7);
 	display: block;
 }
 
 
 /* Show Toolbar when viewing site with WordPress */
-.admin-bar .uix-menu-mobile__toggle {
+.admin-bar .poemkit-menu-mobile__toggle {
     //top: 66px; // 66px (If it's the outermost)
 	top: 0;
 	
@@ -50,25 +50,25 @@
 
 /* Admin bar becomes taller on smaller devices with WordPress */
 @media all and (max-width: 782px) {
-    .admin-bar .uix-menu-mobile__toggle.is-fixed {
+    .admin-bar .poemkit-menu-mobile__toggle.is-fixed {
 		//top: 66px; // 66px (If it's the outermost)
 		top: 0;
     }
 }
 
 @media all and (max-width: 600px) {
-    .admin-bar .uix-menu-mobile__toggle.is-fixed {
+    .admin-bar .poemkit-menu-mobile__toggle.is-fixed {
         top: 20px;
     }
 }
 
 @media all and (max-width: 768px) {
-    .uix-menu-mobile__toggle {
+    .poemkit-menu-mobile__toggle {
         display: block;
     }
 }
 
-.uix-menu-mobile__toggle {
+.poemkit-menu-mobile__toggle {
     span {
         display: block;
         position: absolute;
@@ -93,8 +93,8 @@
   	
 }
 
-body.js-uix-menu-opened {
-	.uix-menu-mobile__toggle {
+body.js-poemkit-menu-opened {
+	.poemkit-menu-mobile__toggle {
 		span {
 			left: 16px;
 			
@@ -115,7 +115,7 @@ body.js-uix-menu-opened {
 
 /* Mobile Menu Container */
 
-.uix-menu__container.is-mobile {
+.poemkit-menu__container.is-mobile {
 	
     @include transition-default();
     left: -300px;
@@ -135,14 +135,14 @@ body.js-uix-menu-opened {
 
 	
 	
-    > .uix-menu__inner {
+    > .poemkit-menu__inner {
         padding: 0 0 15px;
         > p {
             margin-left: 15px;
             margin-right: 15px;
         }
 	  
-	    > .uix-menu__right-box {
+	    > .poemkit-menu__right-box {
 		    padding-left: .5rem;
 			
 		
@@ -153,7 +153,7 @@ body.js-uix-menu-opened {
 		    }
 			
 			/* Social button for white color */
-			.uix-social-btn--white {
+			.poemkit-social-btn--white {
 				border-color: $primary-text-color;
 				color: $primary-text-color;
 
@@ -310,7 +310,7 @@ body.js-uix-menu-opened {
 		}
 	} 
 
-	.uix-menu__arrow-mobile {
+	.poemkit-menu__arrow-mobile {
 	    position: absolute;
 	    top: 0;
 	    right: 10px;
@@ -328,7 +328,7 @@ body.js-uix-menu-opened {
 
 	}
 
-	li.is-active .uix-menu__arrow-mobile::after {
+	li.is-active .poemkit-menu__arrow-mobile::after {
 		content: '-';
 	}
 
@@ -392,6 +392,6 @@ body.js-uix-menu-opened {
 
 }
 
-.js-uix-menu-opened .uix-menu__container.is-mobile {
+.js-poemkit-menu-opened .poemkit-menu__container.is-mobile {
 	left: 0;
 }

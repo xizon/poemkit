@@ -1,15 +1,54 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { __ } from '@uixkit.react/components/_utils/_all';
-import { actionCreatorOfGetDataInitial, actionCreatorOfGetDataByPage } from '@uixkit.react/actions/demoListPostsPaginationActions.js';
-import Pagination from '@uixkit.react/components/Pagination/index.tsx';
-import Footer from '@uixkit.react/components/Footer/index.tsx';
-import Item from '@uixkit.react/pages/PostsPagination/Item.js';
+import { __ } from '@poemkit/components/_utils/_all';
+import { actionCreatorOfGetDataInitial, actionCreatorOfGetDataByPage } from '@poemkit/actions/demoListPostsPaginationActions.js';
+import Pagination from '@poemkit/components/Pagination/index.tsx';
+import Footer from '@poemkit/components/Footer/index.tsx';
+import Item from '@poemkit/pages/PostsPagination/Item.js';
 
-import customRoutesConfig from '@uixkit.react/router/RoutesConfig.js';
+//
+let PAGE_TITLE = null;
+let SITE_NAME = null;
 
-//get project config
-import { rootDirectory } from '@uixkit.react/config/websiteConfig.js';
+//manage the document head
+import { Helmet } from "react-helmet";
+import siteInfo from '@poemkit/helpers/site-info.js';
+function SeoVars() {
+	const {siteName, baseURL, pageTitle} = siteInfo('/posts-pagination');
+	// if the value of `pageTitle` is `{{pageTitle}}`, the value 
+	// of Redux store will be rendered asynchronously
+
+	PAGE_TITLE = pageTitle;
+	SITE_NAME = siteName;
+
+	return {
+		"siteName": siteName,
+		"baseURL": baseURL,
+		"imgURL": '',
+		"bodyClasses": 'page',
+		"pageTitle": '{{pageTitle}}',
+		"desc": '{{pageTitle}}'
+	}
+}
+
+function Seo() {
+	const {siteName, baseURL, imgURL, bodyClasses, pageTitle, desc} = SeoVars();
+	return (
+		<Helmet>
+			<html lang="en-US" dir="ltr" />
+			<title>{`${pageTitle} - ${siteName}`}</title>
+			<body class={`${bodyClasses}`} />
+			<meta name="description" content={`${desc}`}/>
+			<meta property="og:title" content={`${pageTitle} - ${siteName}`}/>
+			<meta property="og:url" content={`${baseURL}`}/>
+			<meta property="og:description" content={`${desc}`}/>
+			<meta property="og:type" content="website"/>
+			<meta property="og:site_name" content={`${siteName}`}/>
+			{imgURL === '' ? '' : <meta property="og:image" content={`${imgURL}`}/>}
+			<link rel="canonical" href={`${baseURL}`}/>
+		</Helmet>
+	)
+}
 
 class PostsPagination extends Component {
 
@@ -201,24 +240,14 @@ class PostsPagination extends Component {
 			isLoaded = true;
 
 
-			//change page title
+			//update page title
 			//------------------------------------------
-			if (typeof (document) !== 'undefined') {
+			if (typeof(document) !== 'undefined') {
 
-				// update page title
-				customRoutesConfig[0].routes.forEach((item, index) => {
-					const _path = item.path.replace(`${rootDirectory}`, '');
-					const pathname = '/posts-pagination';
-					
-					if ( _path === pathname || 
-						( _path.indexOf( `/${pathname.replace(/^\/([^\/]*).*$/, '$1')}` ) >= 0 && _path != "/" )
-					  ) {
-					   document.title = `${item.pageTitle} (page ${preloadedState.page}) - ${customRoutesConfig[0].routes[0].pageTitle}`;
-				   }
-				});
-				
+				//update page title
+				document.title = `${PAGE_TITLE} (page ${preloadedState.page}) - ${SITE_NAME}`;
+
 			}
-
 
 		}
 
@@ -227,13 +256,13 @@ class PostsPagination extends Component {
 			<>
 
 
-				<main id="uix-maincontent">
+				<main id="poemkit-maincontent">
 
 					{/*
 					<!-- Content   
 					====================================================== -->	
 					*/}
-					<section className="uix-spacing--s">
+					<section className="poemkit-spacing--s">
 						<div className="container">
 							<div className="row">
 								<div className="col-12">
@@ -284,6 +313,7 @@ class PostsPagination extends Component {
 				</main>
 
 				<Footer />
+				<Seo />
 
 
 

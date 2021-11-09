@@ -1,22 +1,22 @@
 import React, { Component } from 'react';
 
 /*-- Apply Third-party plugins (import location should be in front of "global scripts and styles") --*/
-import '@uixkit.react/components/_plugins/_lib-bootstrap';
-import '@uixkit.react/components/_plugins/_lib-icons';
-import TweenMax, { TimelineMax } from '@uixkit.react/components/_plugins/_lib-gsap';
+import '@poemkit/components/_plugins/_lib-bootstrap';
+import '@poemkit/components/_plugins/_lib-icons';
+import TweenMax, { TimelineMax } from '@poemkit/components/_plugins/_lib-gsap';
 
 /*-- Apply global scripts and styles --*/
-import '@uixkit.react/components/_utils/styles/_all.scss';
-import '@uixkit.react/components/_utils/styles/rtl/_all.scss';
-import { __ } from '@uixkit.react/components/_utils/_all';
+import '@poemkit/components/_utils/styles/_all.scss';
+import '@poemkit/components/_utils/styles/rtl/_all.scss';
+import { __ } from '@poemkit/components/_utils/_all';
 
 /*-- Apply this component styles --*/
-import '@uixkit.react/components/Form/styles/_basic.scss';
-import '@uixkit.react/components/Form/styles/_layout.scss';
-import '@uixkit.react/components/Form/styles/_theme_material.scss';
-import '@uixkit.react/components/Form/styles/rtl/_basic.scss';
-import '@uixkit.react/components/Form/styles/rtl/_layout.scss';
-import '@uixkit.react/components/Form/styles/rtl/_theme_material.scss';
+import '@poemkit/components/Form/styles/_basic.scss';
+import '@poemkit/components/Form/styles/_layout.scss';
+import '@poemkit/components/Form/styles/_theme_material.scss';
+import '@poemkit/components/Form/styles/rtl/_basic.scss';
+import '@poemkit/components/Form/styles/rtl/_layout.scss';
+import '@poemkit/components/Form/styles/rtl/_theme_material.scss';
 
 
 
@@ -72,9 +72,9 @@ export default class Radio extends Component<RadioProps, RadioState> {
 			const requiredVal = index === 0 ? required || null : null;
 			
 			if ( index === defaultValIndex ) {
-				return <label key={index} className={index === defaultValIndex ? 'is-active' : ''}><input type="radio" name={nameRes} value={optionValues[index] as string} required={requiredVal} defaultChecked /><span className="uix-controls__radio-trigger"></span>{radioOption}</label>;
+				return <label key={index} className={index === defaultValIndex ? 'is-active' : ''}><input type="radio" name={nameRes} value={optionValues[index] as string} required={requiredVal} defaultChecked /><span className="poemkit-controls__radio-trigger"></span>{radioOption}</label>;
 			} else {
-				return <label key={index} className={index === defaultValIndex ? 'is-active' : ''}><input type="radio" name={nameRes} value={optionValues[index] as string} required={requiredVal} /><span className="uix-controls__radio-trigger"></span>{radioOption}</label>;
+				return <label key={index} className={index === defaultValIndex ? 'is-active' : ''}><input type="radio" name={nameRes} value={optionValues[index] as string} required={requiredVal} /><span className="poemkit-controls__radio-trigger"></span>{radioOption}</label>;
 			}
 			
 		    
@@ -84,7 +84,7 @@ export default class Radio extends Component<RadioProps, RadioState> {
 		return (
 		  <>
 
-				<div className={"uix-controls uix-controls__radio" + wrapperClassDisabled } id={idRes} {...attributes}>
+				<div className={"poemkit-controls poemkit-controls__radio" + wrapperClassDisabled } id={idRes} {...attributes}>
 			       {radioOptionsList}
 				</div>
 	

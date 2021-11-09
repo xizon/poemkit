@@ -1,7 +1,7 @@
 /* ====================================================== 
    <!-- Pagination -->                         
 /* ====================================================== */
-@import '@uixkit.react/components/_utils/styles/_variable-and-mixin.scss';
+@import '@poemkit/components/_utils/styles/_variable-and-mixin.scss';
 
 /*
  * 1. Default
@@ -15,7 +15,7 @@
  1. Default
  ---------------------------
  */ 
-.uix-pagination__container {
+.poemkit-pagination__container {
 	margin-top: 2.84375rem;
 	
 	&::before {
@@ -103,7 +103,7 @@
  2. Paginate WordPress Posts
  ---------------------------
  */ 
-.uix-page-links {
+.poemkit-page-links {
 	margin: 0.875rem 0;
 	font-weight: 600;
 	position: relative;

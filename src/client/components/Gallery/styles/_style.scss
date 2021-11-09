@@ -1,24 +1,24 @@
 /* ======================================================
    <!-- Gallery Layout -->
 /* ====================================================== */
-@import '@uixkit.react/components/_utils/styles/_variable-and-mixin.scss';
+@import '@poemkit/components/_utils/styles/_variable-and-mixin.scss';
 
 
-@mixin galleryGridGenerate( $classname: '.uix-gallery', $gap: 15px ) {
-	// @include galleryGridGenerate( '.uix-gallery', 15px );
+@mixin galleryGridGenerate( $classname: '.poemkit-gallery', $gap: 15px ) {
+	// @include galleryGridGenerate( '.poemkit-gallery', 15px );
 
     @if ( $classname != '' ) {
 
         #{$classname} {
             
-            .uix-gallery__tiles {
+            .poemkit-gallery__tiles {
                 display: flex;
                 flex-wrap: wrap;
                 list-style-type: none;
                 padding: 0;
                 margin: 0;
 
-                .uix-gallery__item {
+                .poemkit-gallery__item {
                     margin: 0 #{$gap} #{$gap} 0;
                     display: flex;
                     flex-grow: 1;
@@ -27,22 +27,22 @@
                     position: relative;
                 }
 
-                .uix-gallery__item figure {
+                .poemkit-gallery__item figure {
                         margin: 0;
                         height: 100%;
                 }
 
-                .uix-gallery__item img {
+                .poemkit-gallery__item img {
                     display: block;
                     max-width: 100%;
                     height: auto;
                 }
 
-                .uix-gallery__item img {
+                .poemkit-gallery__item img {
                     width: 100%;
                 }
 
-                .uix-gallery__item figcaption {
+                .poemkit-gallery__item figcaption {
                     position: absolute;
                     bottom: 0;
                     width: 100%;
@@ -55,40 +55,40 @@
                     background: linear-gradient(0deg, rgba(0, 0, 0, 0.7) 0, rgba(0, 0, 0, 0.3) 70%, transparent);
                 }
 
-                .uix-gallery__item figcaption img {
+                .poemkit-gallery__item figcaption img {
                     display: inline;
                 }
 
                 &.is-cropped {
-                    .uix-gallery__image {
+                    .poemkit-gallery__image {
                         a, img {
                             width: 100%;
                         }
                     }
 
-                    .uix-gallery__item {
+                    .poemkit-gallery__item {
                         a, img {
                             width: 100%;
                         }
                     }
                 }
 
-                .uix-gallery__item {
+                .poemkit-gallery__item {
                     width: calc((100% - #{$gap}) / 2);
                 }
 
-                .uix-gallery__item:nth-of-type(even) {
+                .poemkit-gallery__item:nth-of-type(even) {
                     margin-right: 0;
                 }
 
-                &.uix-gallery__col-1 {
-                    .uix-gallery__item {
+                &.poemkit-gallery__col-1 {
+                    .poemkit-gallery__item {
                         width: 100%;
                         margin-right: 0;
                     }
                 }
 
-                .uix-gallery__item {
+                .poemkit-gallery__item {
                     &:last-child {
                         margin-right: 0;
                     }
@@ -102,99 +102,99 @@
         @media all and (min-width: 769px) {
             #{$classname} {
                 
-                .uix-gallery__tiles {
+                .poemkit-gallery__tiles {
                     
-                    &.uix-gallery__col-3 {
-                        .uix-gallery__item {
+                    &.poemkit-gallery__col-3 {
+                        .poemkit-gallery__item {
                             width: calc((100% - #{$gap} * 2) / 3);
                             margin-right: #{$gap};
                         }
                     }
 
-                    &.uix-gallery__col-4 {
-                        .uix-gallery__item {
+                    &.poemkit-gallery__col-4 {
+                        .poemkit-gallery__item {
                             width: calc((100% - #{$gap} * 3) / 4);
                             margin-right: #{$gap};
                         }
                     }
 
-                    &.uix-gallery__col-5 {
-                        .uix-gallery__item {
+                    &.poemkit-gallery__col-5 {
+                        .poemkit-gallery__item {
                             width: calc((100% - #{$gap} * 4) / 5);
                             margin-right: #{$gap};
                         }
                     }
 
-                    &.uix-gallery__col-6 {
-                        .uix-gallery__item {
+                    &.poemkit-gallery__col-6 {
+                        .poemkit-gallery__item {
                             width: calc((100% - #{$gap} * 5) / 6);
                             margin-right: #{$gap};
                         }
                     }
 
-                    &.uix-gallery__col-7 {
-                        .uix-gallery__item {
+                    &.poemkit-gallery__col-7 {
+                        .poemkit-gallery__item {
                             width: calc((100% - #{$gap} * 6) / 7);
                             margin-right: #{$gap};
                         }
                     }
 
-                    &.uix-gallery__col-8 {
-                        .uix-gallery__item {
+                    &.poemkit-gallery__col-8 {
+                        .poemkit-gallery__item {
                             width: calc((100% - #{$gap} * 7) / 8);
                             margin-right: #{$gap};
                         }
                     }
 
-                    &.uix-gallery__col-1 {
-                        .uix-gallery__item:nth-of-type(1n) {
+                    &.poemkit-gallery__col-1 {
+                        .poemkit-gallery__item:nth-of-type(1n) {
                             margin-right: 0;
                         }
                     }
 
-                    &.uix-gallery__col-2 {
-                        .uix-gallery__item:nth-of-type(2n) {
+                    &.poemkit-gallery__col-2 {
+                        .poemkit-gallery__item:nth-of-type(2n) {
                             margin-right: 0;
                         }
                     }
 
-                    &.uix-gallery__col-3 {
-                        .uix-gallery__item:nth-of-type(3n) {
+                    &.poemkit-gallery__col-3 {
+                        .poemkit-gallery__item:nth-of-type(3n) {
                             margin-right: 0;
                         }
                     }
 
-                    &.uix-gallery__col-4 {
-                        .uix-gallery__item:nth-of-type(4n) {
+                    &.poemkit-gallery__col-4 {
+                        .poemkit-gallery__item:nth-of-type(4n) {
                             margin-right: 0;
                         }
                     }
 
-                    &.uix-gallery__col-5 {
-                        .uix-gallery__item:nth-of-type(5n) {
+                    &.poemkit-gallery__col-5 {
+                        .poemkit-gallery__item:nth-of-type(5n) {
                              margin-right: 0;
                         }
                     }
 
-                    &.uix-gallery__col-6 {
-                        .uix-gallery__item:nth-of-type(6n) {
+                    &.poemkit-gallery__col-6 {
+                        .poemkit-gallery__item:nth-of-type(6n) {
                             margin-right: 0;
                         }
                     }
 
-                    &.uix-gallery__col-7 {
-                        .uix-gallery__item:nth-of-type(7n) {
+                    &.poemkit-gallery__col-7 {
+                        .poemkit-gallery__item:nth-of-type(7n) {
                             margin-right: 0;
                         }
                     }
 
-                    &.uix-gallery__col-8 {
-                        .uix-gallery__item:nth-of-type(8n) {
+                    &.poemkit-gallery__col-8 {
+                        .poemkit-gallery__item:nth-of-type(8n) {
                             margin-right: 0;
                         }
                     }
                     
-                    .uix-gallery__item {
+                    .poemkit-gallery__item {
                         &:last-child {
                             margin-right: 0;
                         }
@@ -217,7 +217,7 @@
 
 
 
-@include galleryGridGenerate( '.uix-gallery', 15px );
+@include galleryGridGenerate( '.poemkit-gallery', 15px );
 
 
 

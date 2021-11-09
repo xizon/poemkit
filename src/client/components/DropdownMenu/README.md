@@ -1,6 +1,6 @@
-# @uixkit.react/components/DropdownMenu
+# @poemkit/components/DropdownMenu
 
-[Source](https://github.com/xizon/uix-kit-react/tree/main/src/client/components/DropdownMenu)
+[Source](https://github.com/xizon/poemkit/tree/main/src/client/components/DropdownMenu)
 
 ## Version
 
@@ -10,7 +10,7 @@
 
 ### Dropdown Menu
 ```js
-import DropdownMenu from '@uixkit.react/components/DropdownMenu/index.tsx';
+import DropdownMenu from '@poemkit/components/DropdownMenu/index.tsx';
 ```
 | Property | Type | Default | Description |
 | --- | --- | --- | --- |
@@ -35,7 +35,7 @@ Array configuration properties of the `options`:
 
 ```js
 import React from 'react';
-import DropdownMenu from '@uixkit.react/components/DropdownMenu/index.tsx';
+import DropdownMenu from '@poemkit/components/DropdownMenu/index.tsx';
 
 export default () => {
   return (

@@ -1,6 +1,6 @@
-# @uixkit.react/components/Counter
+# @poemkit/components/Counter
 
-[Source](https://github.com/xizon/uix-kit-react/tree/main/src/client/components/Counter)
+[Source](https://github.com/xizon/poemkit/tree/main/src/client/components/Counter)
 
 ## Version
 
@@ -10,14 +10,14 @@
 
 ### Counter
 ```js
-import Counter from '@uixkit.react/components/Counter/index.tsx';
+import Counter from '@poemkit/components/Counter/index.tsx';
 ```
 | Property | Type | Default | Description |
 | --- | --- | --- | --- |
 | `start` | number  | 0 | The number the element should start at |
 | `stop` | number  | 0 | The number the element should end at |
 | `fixed` | number  | 0 | Formats a number using fixed-point notation. |
-| `speed` | number  | 200 | How long it should take to count between the target numbers |
+| `speed` | number  | 200 | How long it should take to count between the target numbers. Amount of time measured in milliseconds. |
 | `dilimiter` | boolean  | false | The number of decimal places to show |
 | `doubleDigits` | boolean  | false | Two digits are used by default, if it is a number `2` it should be displayed `02` |
 | `displayNumber` | string \| number  | - | String displayed by default |
@@ -28,7 +28,7 @@ import Counter from '@uixkit.react/components/Counter/index.tsx';
 
 ```js
 import React from 'react';
-import Counter from '@uixkit.react/components/Counter/index.tsx';
+import Counter from '@poemkit/components/Counter/index.tsx';
 
 export default () => {
   return (

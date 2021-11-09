@@ -12,9 +12,9 @@
  6. Vertical Text
  ---------------------------
  */ 
-.rtl .uix-typo--vertical {
+.rtl .poemkit-typo--vertical {
 
-	&:not(.uix-typo--vertical-characters-line) {
+	&:not(.poemkit-typo--vertical-characters-line) {
 		writing-mode: vertical-lr;
 		transform: translateX(-.5rem);
 		

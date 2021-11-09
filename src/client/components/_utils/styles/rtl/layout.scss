@@ -4,26 +4,26 @@
 
 /* 
  ---------------------------
- 4. Uix Grid
+ 4. PoemKit Grid
  ---------------------------
  */ 
 
-.rtl [class*='uix-core-grid__col-'] {
+.rtl [class*='poemkit-core-grid__col-'] {
 	float: right;
 }
 
-@mixin uixCoreGridGenerateRTL( $classname: '.uix-core-grid', $pad: 15px ) {
-	// @include uixCoreGridGenerate( '.uix-core-grid', 15px );
+@mixin poemkitCoreGridGenerateRTL( $classname: '.poemkit-core-grid', $pad: 15px ) {
+	// @include poemkitCoreGridGenerate( '.poemkit-core-grid', 15px );
 	
     @if ( $classname != '' ) {
 	
 		.rtl #{$classname} {
 
-			[class*='uix-core-grid__col-'] {
+			[class*='poemkit-core-grid__col-'] {
 				padding-right: auto;
 				padding-left: #{$pad};
 
-				.uix-core-grid__row &:last-of-type {
+				.poemkit-core-grid__row &:last-of-type {
 					padding-left: 0;
 				}
 			}
@@ -37,7 +37,7 @@
 }
 
 
-@include uixCoreGridGenerateRTL( '.uix-core-grid', 15px );
+@include poemkitCoreGridGenerateRTL( '.poemkit-core-grid', 15px );
 
 
 

@@ -1,6 +1,6 @@
-# @uixkit.react/components/Footer
+# @poemkit/components/Footer
 
-[Source](https://github.com/xizon/uix-kit-react/tree/main/src/client/components/Footer)
+[Source](https://github.com/xizon/poemkit/tree/main/src/client/components/Footer)
 
 ## Version
 
@@ -10,7 +10,7 @@
 
 ### Footer
 ```js
-import Footer from '@uixkit.react/components/Footer/index.tsx';
+import Footer from '@poemkit/components/Footer/index.tsx';
 ```
 | Property | Type | Default | Description |
 | --- | --- | --- | --- |
@@ -21,7 +21,7 @@ import Footer from '@uixkit.react/components/Footer/index.tsx';
 
 ```js
 import React from 'react';
-import Footer from '@uixkit.react/components/Footer/index.tsx';
+import Footer from '@poemkit/components/Footer/index.tsx';
 
 export default () => {
   return (

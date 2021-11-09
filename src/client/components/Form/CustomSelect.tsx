@@ -1,22 +1,22 @@
 import React, { Component } from 'react';
 
 /*-- Apply Third-party plugins (import location should be in front of "global scripts and styles") --*/
-import '@uixkit.react/components/_plugins/_lib-bootstrap';
-import '@uixkit.react/components/_plugins/_lib-icons';
-import TweenMax, { TimelineMax } from '@uixkit.react/components/_plugins/_lib-gsap';
+import '@poemkit/components/_plugins/_lib-bootstrap';
+import '@poemkit/components/_plugins/_lib-icons';
+import TweenMax, { TimelineMax } from '@poemkit/components/_plugins/_lib-gsap';
 
 /*-- Apply global scripts and styles --*/
-import '@uixkit.react/components/_utils/styles/_all.scss';
-import '@uixkit.react/components/_utils/styles/rtl/_all.scss';
-import { __ } from '@uixkit.react/components/_utils/_all';
+import '@poemkit/components/_utils/styles/_all.scss';
+import '@poemkit/components/_utils/styles/rtl/_all.scss';
+import { __ } from '@poemkit/components/_utils/_all';
 
 /*-- Apply this component styles --*/
-import '@uixkit.react/components/Form/styles/_basic.scss';
-import '@uixkit.react/components/Form/styles/_layout.scss';
-import '@uixkit.react/components/Form/styles/_theme_material.scss';
-import '@uixkit.react/components/Form/styles/rtl/_basic.scss';
-import '@uixkit.react/components/Form/styles/rtl/_layout.scss';
-import '@uixkit.react/components/Form/styles/rtl/_theme_material.scss';
+import '@poemkit/components/Form/styles/_basic.scss';
+import '@poemkit/components/Form/styles/_layout.scss';
+import '@poemkit/components/Form/styles/_theme_material.scss';
+import '@poemkit/components/Form/styles/rtl/_basic.scss';
+import '@poemkit/components/Form/styles/rtl/_layout.scss';
+import '@poemkit/components/Form/styles/rtl/_theme_material.scss';
 
 type OptionChangeFnType = (arg1: any) => void;
 
@@ -64,11 +64,11 @@ export default class CustomSelect extends Component<CustomSelectProps, CustomSel
     handleClickOutside(event) {
 		if ( 
 			event.target.className != '' && ( 
-				event.target.className.indexOf( 'uix-controls__select-trigger' ) < 0 && 
-				event.target.className.indexOf( 'uix-controls__select__option' ) < 0
+				event.target.className.indexOf( 'poemkit-controls__select-trigger' ) < 0 && 
+				event.target.className.indexOf( 'poemkit-controls__select__option' ) < 0
 			)
 		   ) {
-			__( '.uix-controls__select.js-uix-new' ).removeClass( 'is-opened' );
+			__( '.poemkit-controls__select.js-poemkit-new' ).removeClass( 'is-opened' );
 		}
     }
 	
@@ -81,7 +81,7 @@ export default class CustomSelect extends Component<CustomSelectProps, CustomSel
 		
 		const root = this.rootRef.current;
 		const $selectWrapper = __( root ),
-			$selectCurWrapper = $selectWrapper.find( '.uix-controls__select.js-uix-new' );
+			$selectCurWrapper = $selectWrapper.find( '.poemkit-controls__select.js-poemkit-new' );
 
 		$selectCurWrapper.addClass( 'is-opened' );
 
@@ -99,17 +99,17 @@ export default class CustomSelect extends Component<CustomSelectProps, CustomSel
 		const root = this.rootRef.current;
 		
 		const $selectWrapper  = __( root ),
-			$selectCurWrapper = $selectWrapper.find( '.uix-controls__select.js-uix-new' ),
+			$selectCurWrapper = $selectWrapper.find( '.poemkit-controls__select.js-poemkit-new' ),
 			curVal            = el.data( 'value' );
 
 		//Close the selector
 		$selectCurWrapper.removeClass( 'is-opened' );
 
 		//Set the selector text
-		$selectCurWrapper.find( '.uix-controls__select-trigger' ).html( el.html() );
+		$selectCurWrapper.find( '.poemkit-controls__select-trigger' ).html( el.html() );
 
 		//Activate this option
-		$selectCurWrapper.find( '.uix-controls__select__option' ).removeClass( 'is-active' );
+		$selectCurWrapper.find( '.poemkit-controls__select__option' ).removeClass( 'is-active' );
 		el.addClass( 'is-active' );
 
 		
@@ -187,8 +187,8 @@ export default class CustomSelect extends Component<CustomSelectProps, CustomSel
 		const idRes = id || this.uniqueID;
 		const wrapperClassDisabled = disabled ? ' is-disabled' : '';
 		const wrapperClassUi = this.uiSwitch(uiRes);
-		const wrapperClassTheme = theme === 'line' ? ' uix-controls--line' : '';
-		const wrapperClassPosition = position === 'top' ? ' uix-controls__select--top' : '';
+		const wrapperClassTheme = theme === 'line' ? ' poemkit-controls--line' : '';
+		const wrapperClassPosition = position === 'top' ? ' poemkit-controls__select--top' : '';
 		
 
 		// Get all options from option prop
@@ -207,7 +207,7 @@ export default class CustomSelect extends Component<CustomSelectProps, CustomSel
 		//Synchronize to the original select change event
 		const defaultValIndex = value ? optionValues.indexOf( value ) : 0; //get index from default value
 		const selectOptionsListPresentation = optionKeys.map((selectOption, index) => {
-		    return <span role="option" className={index === defaultValIndex ? 'uix-controls__select__option is-active' : 'uix-controls__select__option'} key={index} data-value={optionValues[index]} onClick={this.handleClickItem}>{selectOption}</span>;
+		    return <span role="option" className={index === defaultValIndex ? 'poemkit-controls__select__option is-active' : 'poemkit-controls__select__option'} key={index} data-value={optionValues[index]} onClick={this.handleClickItem}>{selectOption}</span>;
 		});	
 
 		
@@ -215,8 +215,8 @@ export default class CustomSelect extends Component<CustomSelectProps, CustomSel
 		  <>
 
 			
-				<div ref={this.rootRef} className={"uix-controls__select-wrapper" + wrapperClassPosition + wrapperClassDisabled + wrapperClassUi + wrapperClassTheme} id={idRes + "__wrapper"}>
-					<div className={"uix-controls uix-controls__select" + wrapperClassPosition + wrapperClassDisabled + wrapperClassUi + wrapperClassTheme} style={{display:"none"}}>
+				<div ref={this.rootRef} className={"poemkit-controls__select-wrapper" + wrapperClassPosition + wrapperClassDisabled + wrapperClassUi + wrapperClassTheme} id={idRes + "__wrapper"}>
+					<div className={"poemkit-controls poemkit-controls__select" + wrapperClassPosition + wrapperClassDisabled + wrapperClassUi + wrapperClassTheme} style={{display:"none"}}>
 						<label htmlFor={idRes}>
 						  <select  
 							  id={idRes}
@@ -230,25 +230,25 @@ export default class CustomSelect extends Component<CustomSelectProps, CustomSel
 			                </select>
 						</label>
 						<span>Custom Select</span></div>
-					<div className={"uix-controls uix-controls__select js-uix-new" + wrapperClassPosition + wrapperClassDisabled + wrapperClassUi + wrapperClassTheme}>
+					<div className={"poemkit-controls poemkit-controls__select js-poemkit-new" + wrapperClassPosition + wrapperClassDisabled + wrapperClassUi + wrapperClassTheme}>
 						<span 
-							className="uix-controls__select-trigger"
+							className="poemkit-controls__select-trigger"
 							onClick={this.handleClick}
 						>
 							{optionKeys[defaultValIndex]}
 						</span>
 
-						{theme === 'line' ? <><ins className="uix-controls__bar"></ins><ins className="uix-controls__basic-bar"></ins></> : ''}
+						{theme === 'line' ? <><ins className="poemkit-controls__bar"></ins><ins className="poemkit-controls__basic-bar"></ins></> : ''}
 			
-						<div role="presentation" className="uix-controls__select__option-container">
+						<div role="presentation" className="poemkit-controls__select__option-container">
 							<div>
 								{selectOptionsListPresentation}
 			                </div>
 						</div>
 					</div>
-					<span className="uix-controls__select-label">
+					<span className="poemkit-controls__select-label">
 						{label || null}
-						{required ? <><span className="uix-controls__im">*</span></> : ''}
+						{required ? <><span className="poemkit-controls__im">*</span></> : ''}
 					</span>
 				</div>
 			

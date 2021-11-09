@@ -4,11 +4,34 @@ import {
 	Switch, 
 	useRouteMatch,
 } from 'react-router-dom';
-import { __ } from '@uixkit.react/components/_utils/_all';
-import Footer from '@uixkit.react/components/Footer/index.tsx';
-import Authorized from '@uixkit.react/pages/Admin/Authorized.js';
-import { PrivateRoute } from '@uixkit.react/router/PrivateRoute.js';
+import { __ } from '@poemkit/components/_utils/_all';
+import Footer from '@poemkit/components/Footer/index.tsx';
+import Authorized from '@poemkit/pages/Admin/Authorized.js';
+import { PrivateRoute } from '@poemkit/router/PrivateRoute.js';
 
+
+//manage the document head
+import { Helmet } from "react-helmet";
+import siteInfo from '@poemkit/helpers/site-info.js';
+function SeoVars() {
+	const {siteName, pageTitle} = siteInfo('/admin');
+	return {
+		"siteName": siteName,
+		"bodyClasses": 'page admin',
+		"pageTitle": pageTitle,
+	}
+}
+
+function Seo() {
+	const {siteName, bodyClasses, pageTitle} = SeoVars();
+	return (
+		<Helmet>
+			<html lang="en-US" dir="ltr" />
+			<title>{`${pageTitle} - ${siteName}`}</title>
+			<body class={`${bodyClasses}`} />
+		</Helmet>
+	)
+}
 
 
 //Might have mismatching versions of React and the renderer (such as React DOM)
@@ -43,13 +66,11 @@ class Admin extends Component {
     return (
 	  <>
 
-		<main id="uix-maincontent">
+		<main id="poemkit-maincontent">
 
-			{/*
-			<!-- Content   
-			====================================================== -->	
-			*/}
-			<section className="uix-spacing--s">
+			{/*<!-- Content 
+			====================================================== -->*/}
+			<section className="poemkit-spacing--s">
 				<div className="container">
 						<div className="row">
 							<div className="col-12">
@@ -69,6 +90,7 @@ class Admin extends Component {
 		</main>
 
 		<Footer />
+		<Seo />
 
           
 

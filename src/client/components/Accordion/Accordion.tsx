@@ -1,21 +1,21 @@
 import React, { Component } from 'react';
 
 /*-- Apply Third-party plugins (import location should be in front of "global scripts and styles") --*/
-import '@uixkit.react/components/_plugins/_lib-bootstrap';
-import '@uixkit.react/components/_plugins/_lib-icons';
-import TweenMax, { TimelineMax } from '@uixkit.react/components/_plugins/_lib-gsap';
+import '@poemkit/components/_plugins/_lib-bootstrap';
+import '@poemkit/components/_plugins/_lib-icons';
+import TweenMax, { TimelineMax } from '@poemkit/components/_plugins/_lib-gsap';
 
 /*-- Apply global scripts and styles --*/
-import '@uixkit.react/components/_utils/styles/_all.scss';
-import '@uixkit.react/components/_utils/styles/rtl/_all.scss';
-import { __ } from '@uixkit.react/components/_utils/_all';
+import '@poemkit/components/_utils/styles/_all.scss';
+import '@poemkit/components/_utils/styles/rtl/_all.scss';
+import { __ } from '@poemkit/components/_utils/_all';
 
 /*-- Apply this component styles --*/
-import '@uixkit.react/components/Accordion/styles/_style.scss';
+import '@poemkit/components/Accordion/styles/_style.scss';
 
 
 //
-import AccordionItem from '@uixkit.react/components/Accordion/AccordionItem';
+import AccordionItem from '@poemkit/components/Accordion/AccordionItem';
 
 
 type AccordionProps = {
@@ -177,7 +177,7 @@ export default class Accordion extends Component<AccordionProps, AccordionState>
 				<div
 					ref={this.rootRef}
 					id={id || this.uniqueID}
-					className="uix-accordion"
+					className="poemkit-accordion"
 					role="tablist">
 
 					{( children != null ) ? (children as any[]).map((item, i) => {
@@ -198,7 +198,7 @@ export default class Accordion extends Component<AccordionProps, AccordionState>
 
 
 				</div>
-				{/*<!-- .uix-accordion end -->*/}     
+				{/*<!-- .poemkit-accordion end -->*/}     
 			
 	
 		  </>

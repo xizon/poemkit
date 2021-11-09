@@ -33,12 +33,12 @@ gridColDivisions.forEach(item => {
     if ( _n2 !== 5 ) {
         switch (_n1) {
             case 1:
-                gridWidths.push({'ratio': item, 'class': "uix-core-grid__col-" + (12/_n2)});
+                gridWidths.push({'ratio': item, 'class': "poemkit-core-grid__col-" + (12/_n2)});
                 break;
 
             case 2:
             case 3:
-            gridWidths.push({'ratio': item, 'class': "uix-core-grid__col-" + (12- 12/_n2)});
+            gridWidths.push({'ratio': item, 'class': "poemkit-core-grid__col-" + (12- 12/_n2)});
                 break;
 
 
@@ -46,23 +46,23 @@ gridColDivisions.forEach(item => {
     } 
 });
 
-gridWidths.push({'ratio': "1/5", 'class': "uix-core-grid__col-2"});	
-gridWidths.push({'ratio': "2/5", 'class': "uix-core-grid__col-5"});	
-gridWidths.push({'ratio': "3/5", 'class': "uix-core-grid__col-7"});	
-gridWidths.push({'ratio': "4/5", 'class': "uix-core-grid__col-10"});	
+gridWidths.push({'ratio': "1/5", 'class': "poemkit-core-grid__col-2"});	
+gridWidths.push({'ratio': "2/5", 'class': "poemkit-core-grid__col-5"});	
+gridWidths.push({'ratio': "3/5", 'class': "poemkit-core-grid__col-7"});	
+gridWidths.push({'ratio': "4/5", 'class': "poemkit-core-grid__col-10"});	
 
 /*
-    {ratio: "1/1", class: "uix-core-grid__col-12"}
-    {ratio: "1/2", class: "uix-core-grid__col-6"}
-    {ratio: "1/3", class: "uix-core-grid__col-4"}
-    {ratio: "2/3", class: "uix-core-grid__col-8"}
-    {ratio: "1/4", class: "uix-core-grid__col-3"}
-    {ratio: "3/4", class: "uix-core-grid__col-9"}
-    {ratio: "1/6", class: "uix-core-grid__col-2"}
-    {ratio: "1/5", class: "uix-core-grid__col-2"}
-    {ratio: "2/5", class: "uix-core-grid__col-5"}
-    {ratio: "3/5", class: "uix-core-grid__col-7"}
-    {ratio: "4/5", class: "uix-core-grid__col-10"}
+    {ratio: "1/1", class: "poemkit-core-grid__col-12"}
+    {ratio: "1/2", class: "poemkit-core-grid__col-6"}
+    {ratio: "1/3", class: "poemkit-core-grid__col-4"}
+    {ratio: "2/3", class: "poemkit-core-grid__col-8"}
+    {ratio: "1/4", class: "poemkit-core-grid__col-3"}
+    {ratio: "3/4", class: "poemkit-core-grid__col-9"}
+    {ratio: "1/6", class: "poemkit-core-grid__col-2"}
+    {ratio: "1/5", class: "poemkit-core-grid__col-2"}
+    {ratio: "2/5", class: "poemkit-core-grid__col-5"}
+    {ratio: "3/5", class: "poemkit-core-grid__col-7"}
+    {ratio: "4/5", class: "poemkit-core-grid__col-10"}
 */
 
 
@@ -92,14 +92,14 @@ export default class GridColumn extends Component<GridColumnProps, GridColumnSta
         }
 
         //
-        const inlineClassName = inline ? ' uix-core-grid__inline' : '';
+        const inlineClassName = inline ? ' poemkit-core-grid__inline' : '';
 
 		return (
             <>
 
 
                 {!ratio ? (
-                    <div className="uix-core-grid__col">{children}</div>
+                    <div className="poemkit-core-grid__col">{children}</div>
                 ) : gridWidths.map((item, index) => {
                         if (item.ratio === ratio) return (<div key={index} className={item.class + stackClassName + inlineClassName}>{children}</div>);
                     })

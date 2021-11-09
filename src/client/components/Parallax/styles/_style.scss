@@ -1,9 +1,9 @@
 /* ====================================================== 
    <!-- Parallax -->                                        
 /* ====================================================== */
-@import '@uixkit.react/components/_utils/styles/_variable-and-mixin.scss';
+@import '@poemkit/components/_utils/styles/_variable-and-mixin.scss';
 
-.uix-parallax {
+.poemkit-parallax {
 	position: relative;
 	width: 100%;
 	background-attachment: fixed;
@@ -12,7 +12,7 @@
 	height: auto;
 	width: 100%;
 	
-	.uix-parallax__img {
+	.poemkit-parallax__img {
 	    visibility: hidden;
 	}
 }

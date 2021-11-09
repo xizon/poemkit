@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { __ } from '@uixkit.react/components/_utils/_all';
+import { __ } from '@poemkit/components/_utils/_all';
 
 
 /* Table Grid Headers
@@ -25,9 +25,9 @@ export default class TableGridHeaders extends Component<TableGridHeadersProps, T
 			return (
 			  <>
 
-				<div className="uix-table-grid__head" role="row" id={this.uniqueID}>
+				<div className="poemkit-table-grid__head" role="row" id={this.uniqueID}>
 					{this.props.data!.map((item, i) => {
-						return <div key={"columnheader" + i} className="uix-table-grid__head-cell" style={{flex:1}} role="columnheader" tabIndex={0}>{item}</div>;
+						return <div key={"columnheader" + i} className="poemkit-table-grid__head-cell" style={{flex:1}} role="columnheader" tabIndex={0}>{item}</div>;
 					})
 					}
 				</div>

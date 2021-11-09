@@ -6,21 +6,21 @@
 import React, { Component } from 'react';
 
 /*-- Apply Third-party plugins (import location should be in front of "global scripts and styles") --*/
-import '@uixkit.react/components/_plugins/_lib-bootstrap';
-import '@uixkit.react/components/_plugins/_lib-icons';
-import TweenMax, { TimelineMax } from '@uixkit.react/components/_plugins/_lib-gsap';
+import '@poemkit/components/_plugins/_lib-bootstrap';
+import '@poemkit/components/_plugins/_lib-icons';
+import TweenMax, { TimelineMax } from '@poemkit/components/_plugins/_lib-gsap';
 
 /*-- Apply global scripts and styles --*/
-import '@uixkit.react/components/_utils/styles/_all.scss';
-import '@uixkit.react/components/_utils/styles/rtl/_all.scss';
-import { __ } from '@uixkit.react/components/_utils/_all';
+import '@poemkit/components/_utils/styles/_all.scss';
+import '@poemkit/components/_utils/styles/rtl/_all.scss';
+import { __ } from '@poemkit/components/_utils/_all';
 
 /*-- Apply this component styles --*/
-import '@uixkit.react/components/Pagination/styles/_style.scss';
+import '@poemkit/components/Pagination/styles/_style.scss';
 
 
 //
-import { paginationNavigators } from '@uixkit.react/components/Pagination/pagination-navigators';
+import { paginationNavigators } from '@poemkit/components/Pagination/pagination-navigators';
 
 
 type PageFnType = (arg1: number) => void;
@@ -127,13 +127,13 @@ export default class Pagination extends Component<PaginationProps, PaginationSta
         let alignClassName = '';
         switch (align) {
             case 'left':
-                alignClassName = ' uix-t-l';
+                alignClassName = ' poemkit-t-l';
                 break;
             case 'right':
-                alignClassName = ' uix-t-r';
+                alignClassName = ' poemkit-t-r';
                 break;
             case 'center':
-                alignClassName = ' uix-t-c';
+                alignClassName = ' poemkit-t-c';
                 break;
         }
 
@@ -180,7 +180,7 @@ export default class Pagination extends Component<PaginationProps, PaginationSta
 
         return (
             <>
-                <nav aria-label="Page navigation" className={"uix-pagination__container" + alignClassName}>
+                <nav aria-label="Page navigation" className={"poemkit-pagination__container" + alignClassName}>
                     <ul>
                         {firstLabel ? (
                             <li className={activePage > 1 ? _firstClassName : `${_firstClassName} ${_disabledClassName}`}>

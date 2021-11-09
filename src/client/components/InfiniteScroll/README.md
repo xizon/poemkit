@@ -1,6 +1,6 @@
-# @uixkit.react/components/InfiniteScroll
+# @poemkit/components/InfiniteScroll
 
-[Source](https://github.com/xizon/uix-kit-react/tree/main/src/client/components/InfiniteScroll)
+[Source](https://github.com/xizon/poemkit/tree/main/src/client/components/InfiniteScroll)
 
 ## Version
 
@@ -10,7 +10,7 @@
 
 ### Infinite Scroll
 ```js
-import InfiniteScroll from '@uixkit.react/components/InfiniteScroll/index.tsx';
+import InfiniteScroll from '@poemkit/components/InfiniteScroll/index.tsx';
 ```
 | Property | Type | Default | Description |
 | --- | --- | --- | --- |
@@ -88,7 +88,7 @@ Page 2:
 
 ```js
 import React from 'react';
-import InfiniteScroll from '@uixkit.react/components/InfiniteScroll/index.tsx';
+import InfiniteScroll from '@poemkit/components/InfiniteScroll/index.tsx';
 
 const Item = ({ id, img, title, email }) => {
     return (
@@ -98,7 +98,7 @@ const Item = ({ id, img, title, email }) => {
                     <img className="rounded mb-3" src={img} alt={title} />
                 </div>
                 <div className="col-lg-10 col-md-10 justify-content-center">
-                    <h4 className="uix-spacing--no">{title} (ID:{id})</h4>
+                    <h4 className="poemkit-spacing--no">{title} (ID:{id})</h4>
                     <span>Email: {email}</span>
                 </div>
 
@@ -117,7 +117,7 @@ export default () => {
         perPage={10}
         bottomOffset={0}
         loader={<><span>Loading...</span></>}
-        endMessage={<><p className="uix-typo--color-sub uix-t-c">No content yet.</p></>}
+        endMessage={<><p className="poemkit-typo--color-sub poemkit-t-c">No content yet.</p></>}
         method="get"
         refreshCallback={(res) => console.log(res)}
         renderCallback={(res) => {

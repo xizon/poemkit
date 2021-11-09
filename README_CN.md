@@ -1,14 +1,13 @@
-# Uix Kit React
+# PoemKit
 
 
 <p align="center">
-  <a href="https://github.com/xizon/uix-kit-react">
-	  <img src="https://raw.githubusercontent.com/xizon/uix-kit-react/master/public/assets/images/logo-colorful.png"  alt="Uix Kit React"  width="180" >
+  <a href="https://github.com/xizon/poemkit">
+	  <img src="https://raw.githubusercontent.com/xizon/poemkit/master/public/assets/images/logo-colorful.png"  alt="PoemKit"  width="180" >
   </a>
   <p align="center">
-      <a href="https://travis-ci.com/xizon/uix-kit-react/" title="Travis CI"><img src="https://img.shields.io/travis/com/xizon/uix-kit-react?style=for-the-badge"/></a>
-	  <a href="https://www.npmjs.com/package/uix-kit-react" title="npm version"><img src="https://img.shields.io/npm/v/uix-kit-react?style=for-the-badge"/></a>
-	  <a href="https://github.com/xizon/uix-kit-react/blob/master/LICENSE" title="license"><img src="https://img.shields.io/badge/license-MIT-brightgreen.svg?style=for-the-badge"/></a>
+	  <a href="https://www.npmjs.com/package/poemkit" title="npm version"><img src="https://img.shields.io/npm/v/poemkit?style=for-the-badge"/></a>
+	  <a href="https://github.com/xizon/poemkit/blob/master/LICENSE" title="license"><img src="https://img.shields.io/badge/license-MIT-brightgreen.svg?style=for-the-badge"/></a>
 	   
   </p>
   <br>
@@ -16,7 +15,7 @@
 
 
 
-Uix Kit React系一套免费的网站开发工具包，帮助开发者从零建立一个支持服务端渲染(SSR)的React技术网站，它支持pm2自动部署到服务器。
+PoemKit系一套免费的网站开发工具包，帮助开发者从零建立一个支持服务端渲染(SSR)的React技术网站，它支持pm2自动部署到服务器。PoemKit提供了50多个内置UI组件，用于构建现代Web应用程序。
 
 
 
@@ -30,9 +29,9 @@ Uix Kit React系一套免费的网站开发工具包，帮助开发者从零建�
 
 ## 演示
 
-![quick overview 1](https://raw.githubusercontent.com/xizon/uix-kit-react/master/public/assets/images/demo-anim.gif)
+![quick overview 1](https://raw.githubusercontent.com/xizon/poemkit/master/public/assets/images/demo-anim.gif)
 
-在线演示 [https://uiux.cc/uix-kit-react](https://uiux.cc/uix-kit-react)
+在线演示 [https://uiux.cc/poemkit](https://uiux.cc/poemkit)
 
 服务器端运行 `http://localhost:3000`
 
@@ -42,13 +41,14 @@ Uix Kit React系一套免费的网站开发工具包，帮助开发者从零建�
 
 
 * 基础环境: TypeScript 4.x.x + Babel 7.x.x + Webpack 5.x.x
+* 提供结构化布局对象、UI控件等多种预置UI组件
+* 可访问的URL、SEO优化，以及使用React Helmet使您的站点对搜索引擎友好
 * 集开发、调试、打包和部署为一体
 * 它不是一个JavaScript框架
 * 没有jQuery且不绑定任何工具库
 * 支持服务器端渲染（SSR）
 * 组件分离，可以导入任何第三方UI组件到项目 (比如Ant Design)
 * 使用Sass/SCSS来设置React组件的样式
-* 提供常见的网页组件和布局
 * 自动捆绑并生成独立的核心CSS和JS文件
 * 支持通过pm2自动部署到服务器
 * ✂️ 插件扩展: 默认组件演示导入了诸如Bootstrap4栅格系统, GSAP动画库, FontAwesome图标库, 3D引擎等常用的第三方插件，以便能够快速扩展您的网站 (可以按需配置需要导入的库或者插件)
@@ -63,7 +63,7 @@ Uix Kit React系一套免费的网站开发工具包，帮助开发者从零建�
 
 1. 配置你电脑的Node.js环境，推荐`Node 14+`版本，测试环境为v14.16.0
 
-2. 下载完资源后，进入到 `uix-kit-react` 目录下，运行相关命令进行开发或者部署。
+2. 下载完资源后，进入到 `poemkit` 目录下，运行相关命令进行开发或者部署。
 
 3. 当你需要配置脚手架和网站基础信息和结构的时候，可编辑 `package.json` 文件。
 
@@ -77,20 +77,20 @@ Uix Kit React系一套免费的网站开发工具包，帮助开发者从零建�
 **Step 1.** 下载项目
 
 ```sh
-$ sudo npm install uix-kit-react
+$ sudo npm install poemkit
 ```
 
 或者克隆项目: 
 
 ```sh
-$ git clone git://github.com/xizon/uix-kit-react.git
+$ git clone git://github.com/xizon/poemkit.git
 ```
 
 
-**Step 2.** 使用命令进入 `uix-kit-react/` 目录, {your_directory}换成你的目录路径
+**Step 2.** 使用命令进入 `poemkit/` 目录, {your_directory}换成你的目录路径
 
 ```sh
-$ cd /{your_directory}/uix-kit-react
+$ cd /{your_directory}/poemkit
 ```
 
 
@@ -174,8 +174,8 @@ $ sudo pm2 install typescript
 6.6) PM2常用命令:
 
 ```sh
-#先进入 `"uix-kit-react/"` 目录 
-$ cd /{your_directory}/uix-kit-react
+#先进入 `"poemkit/"` 目录 
+$ cd /{your_directory}/poemkit
 
 
 #用pm2运行应用
@@ -270,16 +270,16 @@ resolve: {
 	alias: {
 
 		// 需要同时配置 `babel.config.js` 和 `tsconfig.json` 文件
-		'@uixkit.react/config': path.resolve(__dirname, alias.pathConfig ),
-		'@uixkit.react/components': path.resolve(__dirname, alias.pathComponents ),
-		'@uixkit.react/router': path.resolve(__dirname, alias.pathRouter ),
-		'@uixkit.react/helpers': path.resolve(__dirname, alias.pathHelpers ),
-		'@uixkit.react/services': path.resolve(__dirname, alias.pathServices ),
-		'@uixkit.react/reducers': path.resolve(__dirname, alias.pathReducers ),
-		'@uixkit.react/pages': path.resolve(__dirname, alias.pathPages ),
-		'@uixkit.react/actions': path.resolve(__dirname, alias.pathActions ),
-		'@uixkit.react/server': path.resolve(__dirname, alias.pathServer ),
-		'@uixkit.react/store': path.resolve(__dirname, alias.pathStore ),
+		'@poemkit/config': path.resolve(__dirname, alias.pathConfig ),
+		'@poemkit/components': path.resolve(__dirname, alias.pathComponents ),
+		'@poemkit/router': path.resolve(__dirname, alias.pathRouter ),
+		'@poemkit/helpers': path.resolve(__dirname, alias.pathHelpers ),
+		'@poemkit/services': path.resolve(__dirname, alias.pathServices ),
+		'@poemkit/reducers': path.resolve(__dirname, alias.pathReducers ),
+		'@poemkit/pages': path.resolve(__dirname, alias.pathPages ),
+		'@poemkit/actions': path.resolve(__dirname, alias.pathActions ),
+		'@poemkit/server': path.resolve(__dirname, alias.pathServer ),
+		'@poemkit/store': path.resolve(__dirname, alias.pathStore ),
 
 	}
 },
@@ -294,16 +294,16 @@ resolve: {
 	["module-resolver", {
 	  "root": ["./src"],
 	  "alias": {
-		"@uixkit.react/config": "./src/config",
-		"@uixkit.react/components": "./src/client/components",
-		"@uixkit.react/router": "./src/client/router",
-		"@uixkit.react/helpers": "./src/client/helpers",
-		"@uixkit.react/services": "./src/client/services",
-		"@uixkit.react/reducers": "./src/client/reducers",
-		"@uixkit.react/pages": "./src/client/views/_pages",
-		"@uixkit.react/actions": "./src/client/actions",
-		"@uixkit.react/server": "./src/server",
-		"@uixkit.react/store": "./src/store"
+		"@poemkit/config": "./src/config",
+		"@poemkit/components": "./src/client/components",
+		"@poemkit/router": "./src/client/router",
+		"@poemkit/helpers": "./src/client/helpers",
+		"@poemkit/services": "./src/client/services",
+		"@poemkit/reducers": "./src/client/reducers",
+		"@poemkit/pages": "./src/client/views/_pages",
+		"@poemkit/actions": "./src/client/actions",
+		"@poemkit/server": "./src/server",
+		"@poemkit/store": "./src/store"
 	  }
 	}]
   ]
@@ -318,16 +318,16 @@ resolve: {
   "compilerOptions": {
     "baseUrl": "./src",
     "paths": {
-        "@uixkit.react/config/*": ["config/*"],
-        "@uixkit.react/components/*": ["client/components/*"],
-        "@uixkit.react/router/*": ["client/router/*"],
-        "@uixkit.react/helpers/*": ["client/helpers/*"],
-        "@uixkit.react/services/*": ["client/services/*"],
-        "@uixkit.react/reducers/*": ["client/reducers/*"],
-        "@uixkit.react/pages/*": ["client/views/_pages/*"],
-        "@uixkit.react/actions/*": ["client/actions/*"],
-        "@uixkit.react/server/*": ["server/*"],
-        "@uixkit.react/store/*": ["store/*"]
+        "@poemkit/config/*": ["config/*"],
+        "@poemkit/components/*": ["client/components/*"],
+        "@poemkit/router/*": ["client/router/*"],
+        "@poemkit/helpers/*": ["client/helpers/*"],
+        "@poemkit/services/*": ["client/services/*"],
+        "@poemkit/reducers/*": ["client/reducers/*"],
+        "@poemkit/pages/*": ["client/views/_pages/*"],
+        "@poemkit/actions/*": ["client/actions/*"],
+        "@poemkit/server/*": ["server/*"],
+        "@poemkit/store/*": ["store/*"]
     }
   }
 }
@@ -341,16 +341,16 @@ resolve: {
     "testEnvironment": "jsdom",
     "moduleNameMapper": {
       "\\.(css|less|scss|sass)$": "identity-obj-proxy",
-      "^@uixkit.react/config/(.*)": "<rootDir>/src/config/$1",
-      "^@uixkit.react/components/(.*)": "<rootDir>/src/client/components/$1",
-      "^@uixkit.react/router/(.*)": "<rootDir>/src/client/router/$1",
-      "^@uixkit.react/helpers/(.*)": "<rootDir>/src/client/helpers/$1",
-      "^@uixkit.react/services/(.*)": "<rootDir>/src/client/services/$1",
-      "^@uixkit.react/reducers/(.*)": "<rootDir>/src/client/reducers/$1",
-      "^@uixkit.react/pages/(.*)": "<rootDir>/src/client/views/_pages/$1",
-      "^@uixkit.react/actions/(.*)": "<rootDir>/src/client/actions/$1",
-      "^@uixkit.react/server/(.*)": "<rootDir>/src/server/$1",
-      "^@uixkit.react/store/(.*)": "<rootDir>/src/store/$1"
+      "^@poemkit/config/(.*)": "<rootDir>/src/config/$1",
+      "^@poemkit/components/(.*)": "<rootDir>/src/client/components/$1",
+      "^@poemkit/router/(.*)": "<rootDir>/src/client/router/$1",
+      "^@poemkit/helpers/(.*)": "<rootDir>/src/client/helpers/$1",
+      "^@poemkit/services/(.*)": "<rootDir>/src/client/services/$1",
+      "^@poemkit/reducers/(.*)": "<rootDir>/src/client/reducers/$1",
+      "^@poemkit/pages/(.*)": "<rootDir>/src/client/views/_pages/$1",
+      "^@poemkit/actions/(.*)": "<rootDir>/src/client/actions/$1",
+      "^@poemkit/server/(.*)": "<rootDir>/src/server/$1",
+      "^@poemkit/store/(.*)": "<rootDir>/src/store/$1"
     },
     "transform": {
       "^.+\\.(js|jsx)$": "babel-jest",
@@ -393,10 +393,10 @@ output: {
 ```json
 {
   "author": "UIUX Lab",
-  "name": "uix-kit-react",
+  "name": "poemkit",
   "email": "uiuxlab@gmail.com",
   "version": "1.0.0",
-  "projectName": "Uix Kit React",
+  "projectName": "PoemKit",
   "createdInfo": "UIUX Lab (https://uiux.cc)",
   "projectURL": "https://uiux.cc",
   "description": "A free web kits with React for fast web design and development via SSR.",
@@ -475,7 +475,7 @@ if ( process.env.NODE_ENV === 'development' ) {
 
 更改网站的根目录，以便您的项目上传到另一个目录时可以使用它。修改 `./src/config/websiteConfig.js` 的键 `rootDirectory`。
 
-如果该文件位于根目录中，则可以将其保留为空。 如果在另一个目录中，则可以写成 "/blog" (结尾不要加斜杠)
+如果该文件位于根目录中，则可以将其保留为空。 如果在另一个目录中，则可以写成 "/blog" **(结尾不要加斜杠)**
 
 
 ```json
@@ -483,6 +483,20 @@ if ( process.env.NODE_ENV === 'development' ) {
   "rootDirectory": ""
 }
 ```
+
+
+### ⚙️ 网站URL配置:
+
+网站地址(URL)通常被用于SEO优化。修改 `./src/config/websiteConfig.js` 的键 `siteUrl`。一个完整的URL一般被命名为 `https://domain-name.com` **(结尾不要加斜杠和子目录名称)**
+
+
+```json
+{
+  "siteUrl": ""
+}
+```
+
+
 
 ### ⚙️ 接口API配置:
 
@@ -510,7 +524,7 @@ if ( process.env.NODE_ENV === 'development' ) {
 
 
 ```sh
-uix-kit-react/
+poemkit/
 ├── README.md
 ├── CHANGELOG.md
 ├── CONTRIBUTING.md
@@ -528,11 +542,11 @@ uix-kit-react/
 │   └── assets/
 ├── dist/         ------------------------------- # web 编译出的文件，用于生产环境
 │   ├── css/
-│   │   ├── uix-kit-react.css
-│   │   └── uix-kit-react.min.css
+│   │   ├── poemkit.css
+│   │   └── poemkit.min.css
 │   └── js/
-│   │   ├── uix-kit-react.js
-│   │   └── uix-kit-react.min.js
+│   │   ├── poemkit.js
+│   │   └── poemkit.min.js
 ├── src/
 │   ├── client/
 │   │   ├── client.js

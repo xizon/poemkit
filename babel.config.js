@@ -28,16 +28,16 @@ module.exports = {
     ["module-resolver", {
       "root": ["./src"],
       "alias": {
-        "@uixkit.react/config": "./src/config",
-        "@uixkit.react/components": "./src/client/components",
-        "@uixkit.react/router": "./src/client/router",
-        "@uixkit.react/helpers": "./src/client/helpers",
-        "@uixkit.react/services": "./src/client/services",
-        "@uixkit.react/reducers": "./src/client/reducers",
-        "@uixkit.react/pages": "./src/client/views/_pages",
-        "@uixkit.react/actions": "./src/client/actions",
-        "@uixkit.react/server": "./src/server",
-        "@uixkit.react/store": "./src/store"
+        "@poemkit/config": "./src/config",
+        "@poemkit/components": "./src/client/components",
+        "@poemkit/router": "./src/client/router",
+        "@poemkit/helpers": "./src/client/helpers",
+        "@poemkit/services": "./src/client/services",
+        "@poemkit/reducers": "./src/client/reducers",
+        "@poemkit/pages": "./src/client/views/_pages",
+        "@poemkit/actions": "./src/client/actions",
+        "@poemkit/server": "./src/server",
+        "@poemkit/store": "./src/store"
       }
     }]
 

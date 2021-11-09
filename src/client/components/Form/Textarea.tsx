@@ -1,22 +1,22 @@
 import React, { Component } from 'react';
 
 /*-- Apply Third-party plugins (import location should be in front of "global scripts and styles") --*/
-import '@uixkit.react/components/_plugins/_lib-bootstrap';
-import '@uixkit.react/components/_plugins/_lib-icons';
-import TweenMax, { TimelineMax } from '@uixkit.react/components/_plugins/_lib-gsap';
+import '@poemkit/components/_plugins/_lib-bootstrap';
+import '@poemkit/components/_plugins/_lib-icons';
+import TweenMax, { TimelineMax } from '@poemkit/components/_plugins/_lib-gsap';
 
 /*-- Apply global scripts and styles --*/
-import '@uixkit.react/components/_utils/styles/_all.scss';
-import '@uixkit.react/components/_utils/styles/rtl/_all.scss';
-import { __ } from '@uixkit.react/components/_utils/_all';
+import '@poemkit/components/_utils/styles/_all.scss';
+import '@poemkit/components/_utils/styles/rtl/_all.scss';
+import { __ } from '@poemkit/components/_utils/_all';
 
 /*-- Apply this component styles --*/
-import '@uixkit.react/components/Form/styles/_basic.scss';
-import '@uixkit.react/components/Form/styles/_layout.scss';
-import '@uixkit.react/components/Form/styles/_theme_material.scss';
-import '@uixkit.react/components/Form/styles/rtl/_basic.scss';
-import '@uixkit.react/components/Form/styles/rtl/_layout.scss';
-import '@uixkit.react/components/Form/styles/rtl/_theme_material.scss';
+import '@poemkit/components/Form/styles/_basic.scss';
+import '@poemkit/components/Form/styles/_layout.scss';
+import '@poemkit/components/Form/styles/_theme_material.scss';
+import '@poemkit/components/Form/styles/rtl/_basic.scss';
+import '@poemkit/components/Form/styles/rtl/_layout.scss';
+import '@poemkit/components/Form/styles/rtl/_theme_material.scss';
 
 
 
@@ -55,7 +55,7 @@ export default class Textarea extends Component<TextareaProps, TextareaState> {
     handleFocus(event) {
 		const el = __( event.target );
 		
-		el.closest( 'div' ).find( 'label, .uix-controls__bar' ).addClass( 'is-active' );
+		el.closest( 'div' ).find( 'label, .poemkit-controls__bar' ).addClass( 'is-active' );
     }
 
     handleBlurChange(event) {
@@ -75,7 +75,7 @@ export default class Textarea extends Component<TextareaProps, TextareaState> {
 			val === 'blank' || 
 			( val != '' && val != 'blank' ) 
 		) {
-			el.closest( 'div' ).find( '.uix-controls__bar' ).removeClass( 'is-active' );
+			el.closest( 'div' ).find( '.poemkit-controls__bar' ).removeClass( 'is-active' );
 		}	
     }
 	
@@ -127,16 +127,16 @@ export default class Textarea extends Component<TextareaProps, TextareaState> {
 		const idRes = id || this.uniqueID;
 		const wrapperClassDisabled = disabled ? ' is-disabled' : '';
 		const wrapperClassUi = this.uiSwitch(uiRes);
-		const wrapperClassTheme = theme === 'line' ? ' uix-controls--line' : '';
+		const wrapperClassTheme = theme === 'line' ? ' poemkit-controls--line' : '';
 		
 		return (
 		  <>
 
 	
-				<div className={"uix-controls uix-controls__textarea" + wrapperClassDisabled + wrapperClassUi + wrapperClassTheme}>
+				<div className={"poemkit-controls poemkit-controls__textarea" + wrapperClassDisabled + wrapperClassUi + wrapperClassTheme}>
 
 				  <textarea  
-					  className="js-uix-float-label" 
+					  className="js-poemkit-float-label" 
 			          id={idRes}
 					  name={nameRes}
 					  defaultValue={value || ''}
@@ -153,9 +153,9 @@ export default class Textarea extends Component<TextareaProps, TextareaState> {
 					</textarea>
 				  <label htmlFor={idRes} className={(value && value.length > 0 ? 'is-active' : '')}>
 					  {label || null}
-					  {required ? <><span className="uix-controls__im">*</span></> : ''}
+					  {required ? <><span className="poemkit-controls__im">*</span></> : ''}
 				  </label>
-				  {theme === 'line' ? <><ins className="uix-controls__bar"></ins><ins className="uix-controls__basic-bar"></ins></> : ''}
+				  {theme === 'line' ? <><ins className="poemkit-controls__bar"></ins><ins className="poemkit-controls__basic-bar"></ins></> : ''}
 	
 				</div>
 	

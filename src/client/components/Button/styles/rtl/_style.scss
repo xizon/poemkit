@@ -1,7 +1,7 @@
 /* ======================================================
    <!-- Button -->
 /* ====================================================== */
-@import '@uixkit.react/components/_utils/styles/_variable-and-mixin.scss';
+@import '@poemkit/components/_utils/styles/_variable-and-mixin.scss';
 
 /*
  * 4. Icons
@@ -20,12 +20,12 @@ $button-class-margin-b: 1rem;
  ---------------------------
  */
 
-.rtl .uix-btn__icon {
+.rtl .poemkit-btn__icon {
     padding-left: auto;
     padding-right: 3.6rem;
 
 
-	&.uix-btn__icon--right {
+	&.poemkit-btn__icon--right {
 		padding-left: 3.6rem;
 		padding-right: 2.5rem;
 
@@ -41,7 +41,7 @@ $button-class-margin-b: 1rem;
 	}
 
 
-	&.uix-btn__icon--left {
+	&.poemkit-btn__icon--left {
 
 		> span {
 			right: 0;
@@ -49,13 +49,13 @@ $button-class-margin-b: 1rem;
 
 	}
 
-	&.is-transparent.uix-btn__icon--left {
+	&.is-transparent.poemkit-btn__icon--left {
 		> span {
 			border-right: none;
             border-left: 1px solid rgba(0,0,0,.1);
 		}
 	}
-	&.is-transparent.uix-btn__icon--right {
+	&.is-transparent.poemkit-btn__icon--right {
 		> span {
 			border-left: none;
             border-right: 1px solid rgba(0,0,0,.1);
@@ -63,19 +63,19 @@ $button-class-margin-b: 1rem;
 	}
 
 
-	&.is-pill.uix-btn__icon--left span {
+	&.is-pill.poemkit-btn__icon--left span {
 		border-radius: 35px 35px 0 0;
 	}
 
-	&.is-pill.uix-btn__icon--right span {
+	&.is-pill.poemkit-btn__icon--right span {
 		border-radius: 0 0 50px 50px;
 	}
 
-	&.is-rounded.uix-btn__icon--left span {
+	&.is-rounded.poemkit-btn__icon--left span {
 		border-radius: 4px 4px 0 0;
 	}
 
-	&.is-rounded.uix-btn__icon--right span {
+	&.is-rounded.poemkit-btn__icon--right span {
 		border-radius: 0 0 4px 4px;
 	}
 
@@ -89,9 +89,9 @@ $button-class-margin-b: 1rem;
  5. Group
  ---------------------------
  */
-.rtl .uix-btn__group {
+.rtl .poemkit-btn__group {
 
-	> .uix-btn {
+	> .poemkit-btn {
 		float: right;
 		
 
@@ -107,17 +107,17 @@ $button-class-margin-b: 1rem;
 
 		}
 
-		&.uix-btn__border--thin:not(:first-child) {
+		&.poemkit-btn__border--thin:not(:first-child) {
 			margin-left: auto;
             margin-right: -1px;
 		}
 
-		&.uix-btn__border--medium:not(:first-child) {
+		&.poemkit-btn__border--medium:not(:first-child) {
 			margin-left: auto;
             margin-right: -2px;
 		}
 
-		&.uix-btn__border--thick:not(:first-child) {
+		&.poemkit-btn__border--thick:not(:first-child) {
 			margin-left: auto;
             margin-right: -3px;
 		}
@@ -138,12 +138,12 @@ $button-class-margin-b: 1rem;
  ---------------------------
  */
 
-.rtl .uix-btn__margin--l {
+.rtl .poemkit-btn__margin--l {
 	margin-left: auto;
     margin-right: #{$button-class-margin-lr};
 }
 
-.rtl .uix-btn__margin--r {
+.rtl .poemkit-btn__margin--r {
 	margin-right: auto;
     margin-left: #{$button-class-margin-lr};
 }

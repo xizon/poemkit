@@ -4,7 +4,7 @@
  * Global variables from front pages
  * => These variables originate in the HTML page, before the bundled JS file
  *
- * @package: uix-kit-react
+ * @package: poemkit
  *
  *************************************
  */

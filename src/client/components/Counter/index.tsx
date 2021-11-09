@@ -6,14 +6,14 @@
 import React, { Component } from 'react';
 
 /*-- Apply Third-party plugins (import location should be in front of "global scripts and styles") --*/
-import '@uixkit.react/components/_plugins/_lib-bootstrap';
-import '@uixkit.react/components/_plugins/_lib-icons';
-import TweenMax, { TimelineMax } from '@uixkit.react/components/_plugins/_lib-gsap';
+import '@poemkit/components/_plugins/_lib-bootstrap';
+import '@poemkit/components/_plugins/_lib-icons';
+import TweenMax, { TimelineMax } from '@poemkit/components/_plugins/_lib-gsap';
 
 /*-- Apply global scripts and styles --*/
-import '@uixkit.react/components/_utils/styles/_all.scss';
-import '@uixkit.react/components/_utils/styles/rtl/_all.scss';
-import { __ } from '@uixkit.react/components/_utils/_all';
+import '@poemkit/components/_utils/styles/_all.scss';
+import '@poemkit/components/_utils/styles/rtl/_all.scss';
+import { __ } from '@poemkit/components/_utils/_all';
 
 
 type CounterProps = {
@@ -23,7 +23,7 @@ type CounterProps = {
     stop?: number;
     /** Formats a number using fixed-point notation. */
     fixed?: number;
-    /** How long it should take to count between the target numbers */
+    /** How long it should take to count between the target numbers. Amount of time measured in milliseconds. */
     speed?: number;
     /** The number of decimal places to show */
     dilimiter?: boolean;
@@ -38,7 +38,7 @@ type CounterState = false;
 
 
 // CountTo Effect
-import { countTo } from '@uixkit.react/components/Counter/count-to';
+import { countTo } from '@poemkit/components/Counter/count-to';
 
 
 export default class Counter extends Component<CounterProps, CounterState> {

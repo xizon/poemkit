@@ -1,10 +1,10 @@
 import React from 'react';
 import { BrowserRouter } from 'react-router-dom';
 import { renderRoutes } from 'react-router-config';
-import customRoutesConfig from '@uixkit.react/router/RoutesConfig.js';
+import customRoutesConfig from '@poemkit/router/RoutesConfig.js';
 
 //get project config
-import { rootDirectory } from '@uixkit.react/config/websiteConfig.js';
+import { rootDirectory } from '@poemkit/config/websiteConfig.js';
 
 
 export default () => {
@@ -17,10 +17,10 @@ export default () => {
 	 //The base URL for all locations. If your app is served from a sub-directory on your server, 
 	 //you’ll want to set this to the sub-directory. A properly formatted basename should have a leading slash, but no trailing slash.
 	 <BrowserRouter basename={rootDirectory}>
-         <div className="uix-wrapper">
+         <div className="poemkit-wrapper">
 			{renderRoutes(customRoutesConfig)}
 		 </div>
-         {/* <!-- .uix-wrapper end --> */}
+         {/* <!-- .poemkit-wrapper end --> */}
     </BrowserRouter>
   );
 };

@@ -15,10 +15,10 @@
  1. Normal List Styling
  ---------------------------
  */ 
-.rtl ol.uix-list--normal,
-.rtl ul.uix-list--normal,
-.rtl .uix-list--normal ul,
-.rtl .uix-list--normal ol {
+.rtl ol.poemkit-list--normal,
+.rtl ul.poemkit-list--normal,
+.rtl .poemkit-list--normal ul,
+.rtl .poemkit-list--normal ol {
 	
 	padding-left: auto;	
 	padding-right: 0.875rem;	
@@ -34,8 +34,8 @@
  ---------------------------
  */ 
 
-.rtl ol.uix-list--numbered,
-.rtl .uix-list--numbered ol {
+.rtl ol.poemkit-list--numbered,
+.rtl .poemkit-list--numbered ol {
     margin-left: auto;
 	margin-right: 1rem;
 	
@@ -61,10 +61,10 @@
  ---------------------------
  */ 
 
-.rtl ol.uix-list--circle,
-.rtl ul.uix-list--circle,
-.rtl .uix-list--circle ol,
-.rtl .uix-list--circle ul {
+.rtl ol.poemkit-list--circle,
+.rtl ul.poemkit-list--circle,
+.rtl .poemkit-list--circle ol,
+.rtl .poemkit-list--circle ul {
     margin-left: auto;
 	margin-right: 1rem;
 	
@@ -88,8 +88,8 @@
  ---------------------------
  */ 
 
-.rtl ol.uix-list--numbered-large,
-.rtl .uix-list--numbered-large ol {
+.rtl ol.poemkit-list--numbered-large,
+.rtl .poemkit-list--numbered-large ol {
 
 	
 	li {
@@ -106,8 +106,8 @@
 
 }
 
-.rtl ol.uix-list--numbered-large.uix-list--numbered-bg,
-.rtl .uix-list--numbered-large.uix-list--numbered-bg ol {
+.rtl ol.poemkit-list--numbered-large.poemkit-list--numbered-bg,
+.rtl .poemkit-list--numbered-large.poemkit-list--numbered-bg ol {
    
 	li {
 		margin-right: 0;
@@ -135,7 +135,7 @@
  */ 
 $step-line-color: #333;
 
-.rtl .uix-list--numbered-step {
+.rtl .poemkit-list--numbered-step {
     margin-left: auto;
 	margin-right: 1rem;
 	
@@ -166,7 +166,7 @@ $step-line-color: #333;
 
 @media all and (max-width:768px) {
 
-    .rtl .uix-list--numbered-step {
+    .rtl .poemkit-list--numbered-step {
 		
 		li {
 			padding-right: 2.5rem;

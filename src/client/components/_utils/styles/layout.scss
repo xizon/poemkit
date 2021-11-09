@@ -2,10 +2,10 @@
    <!-- Basic Layout Styles -->                                        
 /* ====================================================== */
 /*
- * 1. Bootstrap 4.x                              - Do not use prefix "uix-"
+ * 1. Bootstrap 4.x                              - Do not use prefix "poemkit-"
  * 2. Material Container                         
  * 3. Main Wrapper                               
- * 4. Uix Grid (Core Grid)
+ * 4. PoemKit Grid (Core Grid)
  * 5. Align Wide and Full Classes For Elements
 */
 
@@ -36,7 +36,7 @@
  ---------------------------
  */ 
 
-.uix-container__bg {
+.poemkit-container__bg {
 	position: relative;
 	z-index: 2;
 	overflow: hidden;
@@ -46,40 +46,40 @@
 		margin-right: 0;
 	}
 	
-	&.uix-container__bg--no-gutters {
+	&.poemkit-container__bg--no-gutters {
 		padding-left: 0;
 		padding-right: 0;
 	}
 	
-	&.uix-container__bg--white {
+	&.poemkit-container__bg--white {
 		background: #fff;
 	}
 	
-	&.uix-container__bg--shadow {
+	&.poemkit-container__bg--shadow {
 		@include outer-shadow( 'regular' );
 	}
 	
-	&.uix-container__bg--rounded-large {
+	&.poemkit-container__bg--rounded-large {
 		border-radius: 15px;
 	}
 	
-	&.uix-container__bg--rounded-medium {
+	&.poemkit-container__bg--rounded-medium {
 		border-radius: 7px;
 	}
 	
-	&.uix-container__bg--rounded-small {
+	&.poemkit-container__bg--rounded-small {
 		border-radius: 2px;
 	}
 	
-	&.uix-container__bg--totop-large {
+	&.poemkit-container__bg--totop-large {
 		margin-top: -15rem;
 	}
 	
-	&.uix-container__bg--totop-medium {
+	&.poemkit-container__bg--totop-medium {
 		margin-top: -10rem;
 	}
 	
-	&.uix-container__bg--totop-small {
+	&.poemkit-container__bg--totop-small {
 		margin-top: -5rem;
 	}
 	
@@ -89,17 +89,17 @@
 
 @media all and (max-width: 768px) { 
 	
-	.uix-container__bg {
+	.poemkit-container__bg {
 	
-		&.uix-container__bg--totop-large {
+		&.poemkit-container__bg--totop-large {
 			margin-top: -7rem;
 		}
 
-		&.uix-container__bg--totop-medium {
+		&.poemkit-container__bg--totop-medium {
 			margin-top: -4rem;
 		}
 
-		&.uix-container__bg--totop-small {
+		&.poemkit-container__bg--totop-small {
 			margin-top: -2rem;
 		}	
 		
@@ -113,21 +113,21 @@
  ---------------------------
  */ 
 /* Note: Do not use the "transform" property, otherwise it may affect the internal elements */
-.uix-wrapper {
+.poemkit-wrapper {
 	min-height: 100%;
 	width: 100%;
 	overflow: hidden;
 }
 
 /* Show Toolbar when viewing site with WordPress */
-.admin-bar .uix-wrapper {
+.admin-bar .poemkit-wrapper {
 	margin-top: 32px;
 	
 }
 
 /* Admin bar becomes taller on smaller devices with WordPress */
 @media all and (max-width: 782px) {
-    .admin-bar .uix-wrapper {
+    .admin-bar .poemkit-wrapper {
          margin-top: 46px;
     }
 }
@@ -135,78 +135,78 @@
 
 /* 
  ---------------------------
- 4. Uix Grid
+ 4. PoemKit Grid
  ---------------------------
  */ 
 //Width property that can be used independently
 //It can be used for Inline Elements
-[class*='uix-core-grid__col-'] {
+[class*='poemkit-core-grid__col-'] {
 	box-sizing: border-box;
     float: left;
 	position: relative;
 }
 
-.uix-core-grid__inline {
+.poemkit-core-grid__inline {
 	float: none;
 	display: inline-block;
 }
 
 
-.uix-core-grid__col-1 {
+.poemkit-core-grid__col-1 {
 	width: 8.333333333333%;
 }
 
-.uix-core-grid__col-2 {
+.poemkit-core-grid__col-2 {
 	width: 16.66666666666667%;
 }
 
-.uix-core-grid__col-3 {
+.poemkit-core-grid__col-3 {
 	width: 25%;
 }
 
-.uix-core-grid__col-4 {
+.poemkit-core-grid__col-4 {
 	width: 33.333333333333%;
 }
 
 
-.uix-core-grid__col-5 {
+.poemkit-core-grid__col-5 {
 	width: 41.666666666667%;
 }
 
-.uix-core-grid__col-6 {
+.poemkit-core-grid__col-6 {
 	width: 50%;
 }
 
-.uix-core-grid__col-7 {
+.poemkit-core-grid__col-7 {
 	width: 58.333333333333%;
 }
 
-.uix-core-grid__col-8 {
+.poemkit-core-grid__col-8 {
 	width: 66.666666666667%;
 }
 
-.uix-core-grid__col-9 {
+.poemkit-core-grid__col-9 {
 	width: 75%;
 }
 
-.uix-core-grid__col-10 {
+.poemkit-core-grid__col-10 {
 	width: 83.333333333333%;
 }
 
 
-.uix-core-grid__col-11 {
+.poemkit-core-grid__col-11 {
 	width: 91.666666666667%;
 }
 
-.uix-core-grid__col-12 {
+.poemkit-core-grid__col-12 {
 	width: 100%;
 }
 
 @media all and (max-width: 768px) {
-	.uix-core-grid__mobile-half {
+	.poemkit-core-grid__mobile-half {
 		width: 50%;
 	}
-	.uix-core-grid__mobile-stack {
+	.poemkit-core-grid__mobile-stack {
 		width: 100%;
 	}
 }
@@ -214,26 +214,26 @@
 
 
 
-@mixin uixCoreGridGenerate( $classname: '.uix-core-grid', $pad: 15px ) {
-	// @include uixCoreGridGenerate( '.uix-core-grid', 15px );
+@mixin poemkitCoreGridGenerate( $classname: '.poemkit-core-grid', $pad: 15px ) {
+	// @include poemkitCoreGridGenerate( '.poemkit-core-grid', 15px );
 
     @if ( $classname != '' ) {
 		#{$classname} {
 			width: 100%;
 
-			.uix-core-grid__row {
+			.poemkit-core-grid__row {
 
 				width: calc( 100% + #{$pad} );
 
 				&::after {
-					/* Or @extend .uix-clearfix */
+					/* Or @extend .poemkit-clearfix */
 					content: "";
 					display: table;
 					clear: both;
 				}
 
 
-			    [class*='uix-core-grid__col-'] {
+			    [class*='poemkit-core-grid__col-'] {
 					> div {
 						word-wrap: break-word;
 						position: relative;
@@ -241,11 +241,11 @@
 				}
 
 				
-				&.uix-core-grid__row--no-gutters {
+				&.poemkit-core-grid__row--no-gutters {
 
 					width: 100%;
 
-					[class*='uix-core-grid__col-'] {
+					[class*='poemkit-core-grid__col-'] {
 						padding-right: 0 !important;
 					}
 
@@ -253,20 +253,20 @@
 				
 				
 				/* Auto width, for automatic widths such as 5 columns */
-				&.uix-core-grid__row--auto-width {
+				&.poemkit-core-grid__row--auto-width {
 					
 					display: flex;
 					flex-wrap: wrap;
 					
-					.uix-core-grid__col {
+					.poemkit-core-grid__col {
 						flex: 1;
 						padding-right: #{$pad};
 					}		
 					
 
 				}
-				&.uix-core-grid__row--auto-width.uix-core-grid__row--no-gutters {
-					.uix-core-grid__col {
+				&.poemkit-core-grid__row--auto-width.poemkit-core-grid__row--no-gutters {
+					.poemkit-core-grid__col {
 						padding-right: 0;
 					}		
 					
@@ -276,13 +276,13 @@
 			
 			
 			//Common style attribute
-			[class*='uix-core-grid__col-'] {
+			[class*='poemkit-core-grid__col-'] {
 				padding-right: #{$pad};
 
-				.uix-core-grid__row &:last-of-type {
+				.poemkit-core-grid__row &:last-of-type {
 					padding-right: 0;
 
-					[class*='uix-core-grid__col-'] {
+					[class*='poemkit-core-grid__col-'] {
 						> div {
 							width: calc(100% - #{$pad}); 
 						}	
@@ -293,10 +293,10 @@
 
 			}
 
-			.uix-core-grid__row.uix-core-grid__row--loop .uix-core-grid__col-6:nth-child(2n+1),
-			.uix-core-grid__row.uix-core-grid__row--loop .uix-core-grid__col-4:nth-child(3n+1),
-			.uix-core-grid__row.uix-core-grid__row--loop .uix-core-grid__col-3:nth-child(4n+1),
-			.uix-core-grid__row.uix-core-grid__row--loop .uix-core-grid__col-2:nth-child(6n+1) {
+			.poemkit-core-grid__row.poemkit-core-grid__row--loop .poemkit-core-grid__col-6:nth-child(2n+1),
+			.poemkit-core-grid__row.poemkit-core-grid__row--loop .poemkit-core-grid__col-4:nth-child(3n+1),
+			.poemkit-core-grid__row.poemkit-core-grid__row--loop .poemkit-core-grid__col-3:nth-child(4n+1),
+			.poemkit-core-grid__row.poemkit-core-grid__row--loop .poemkit-core-grid__col-2:nth-child(6n+1) {
 				clear: both;
 			}
 
@@ -312,14 +312,14 @@
 			#{$classname} {
 				
 				
-				.uix-core-grid__row {
+				.poemkit-core-grid__row {
 					/* Auto width, for automatic widths such as 5 columns */
-					&.uix-core-grid__row--auto-width {
+					&.poemkit-core-grid__row--auto-width {
 						display: block;		
 					}	
 
-					&.uix-core-grid__row--auto-width.uix-core-grid__row--no-gutters {
-						.uix-core-grid__col {
+					&.poemkit-core-grid__row--auto-width.poemkit-core-grid__row--no-gutters {
+						.poemkit-core-grid__col {
 							padding-right: #{$pad};
 						}		
 
@@ -328,21 +328,21 @@
 					
 				}
 				
-				.uix-core-grid__row.uix-core-grid__row--no-break {
+				.poemkit-core-grid__row.poemkit-core-grid__row--no-break {
 					/* Auto width, for automatic widths such as 5 columns */
-					&.uix-core-grid__row--auto-width {
+					&.poemkit-core-grid__row--auto-width {
 						display: flex;	
 						
 					}			
 					
 				}		
 
-				.uix-core-grid__row:not(.uix-core-grid__row--no-break) {
-					&.uix-core-grid__row--no-gutters {
+				.poemkit-core-grid__row:not(.poemkit-core-grid__row--no-break) {
+					&.poemkit-core-grid__row--no-gutters {
 						width: calc(100% + #{$pad});
 					}	
 					
-					[class*='uix-core-grid__col-'] {
+					[class*='poemkit-core-grid__col-'] {
 						float: none;
 						width: calc(100% - #{$pad});
 						padding-left: 0;
@@ -373,46 +373,46 @@
 }
 
 
-@mixin uixCoreGridColumnBreakpoint( $classname: '.uix-core-grid', $pad: 15px, $size: 'md', $breakpoint: 768px ) {
+@mixin poemkitCoreGridColumnBreakpoint( $classname: '.poemkit-core-grid', $pad: 15px, $size: 'md', $breakpoint: 768px ) {
     @if ( $classname != '' and $size != '' and $breakpoint != '' ) {
         #{$classname} {
             @media all and (max-width: #{$breakpoint}) {
 
-                .uix-core-grid__col-3--#{$size},
-                .uix-core-grid__col-4--#{$size},
-                .uix-core-grid__col-6--#{$size} {
+                .poemkit-core-grid__col-3--#{$size},
+                .poemkit-core-grid__col-4--#{$size},
+                .poemkit-core-grid__col-6--#{$size} {
                     float: left !important;
                     padding-right: #{$pad} !important;
                 }
                 
-                .uix-core-grid__col-3--#{$size} {
+                .poemkit-core-grid__col-3--#{$size} {
                     width: 25% !important;
                 }
                 
-                .uix-core-grid__col-4--#{$size} {
+                .poemkit-core-grid__col-4--#{$size} {
                     width: 33.333333333333% !important;
                 }
                 
-                .uix-core-grid__col-6--#{$size} {
+                .poemkit-core-grid__col-6--#{$size} {
                     width: 50% !important;
                 }
                 
-                .uix-core-grid__row--no-gutters {
-                    .uix-core-grid__col-3--#{$size} {
+                .poemkit-core-grid__row--no-gutters {
+                    .poemkit-core-grid__col-3--#{$size} {
                         width: calc(25% - #{$pad/4}) !important;
                     }
-                    .uix-core-grid__col-4--#{$size} {
+                    .poemkit-core-grid__col-4--#{$size} {
                         width: calc(33.333333333333% - #{$pad/3}) !important;
                     }
-                    .uix-core-grid__col-6--#{$size} {
+                    .poemkit-core-grid__col-6--#{$size} {
                         width: calc(50% - #{$pad/2}) !important;
                     }
                 }
 
-                .uix-core-grid__row--loop {
-                    .uix-core-grid__col-3--#{$size}:nth-child(4n+1),
-                    .uix-core-grid__col-4--#{$size}:nth-child(3n+1),
-                    .uix-core-grid__col-6--#{$size}:nth-child(2n+1) {
+                .poemkit-core-grid__row--loop {
+                    .poemkit-core-grid__col-3--#{$size}:nth-child(4n+1),
+                    .poemkit-core-grid__col-4--#{$size}:nth-child(3n+1),
+                    .poemkit-core-grid__col-6--#{$size}:nth-child(2n+1) {
                         clear: both;
                     }
                 }
@@ -427,7 +427,7 @@
 
 
 
-@include uixCoreGridGenerate( '.uix-core-grid', 15px );
+@include poemkitCoreGridGenerate( '.poemkit-core-grid', 15px );
 
 
 /* The breakpoint is the same as bootstrap 4 */
@@ -438,10 +438,10 @@
 --breakpoint-lg:992px;
 --breakpoint-xl:1200px;
 */
-@include uixCoreGridColumnBreakpoint( '.uix-core-grid', 15px, 'sm', '576px' );	
-@include uixCoreGridColumnBreakpoint( '.uix-core-grid', 15px, 'md', '768px' );	
-@include uixCoreGridColumnBreakpoint( '.uix-core-grid', 15px, 'lg', '992px' );	
-@include uixCoreGridColumnBreakpoint( '.uix-core-grid', 15px, 'xl', '1200px' );	
+@include poemkitCoreGridColumnBreakpoint( '.poemkit-core-grid', 15px, 'sm', '576px' );	
+@include poemkitCoreGridColumnBreakpoint( '.poemkit-core-grid', 15px, 'md', '768px' );	
+@include poemkitCoreGridColumnBreakpoint( '.poemkit-core-grid', 15px, 'lg', '992px' );	
+@include poemkitCoreGridColumnBreakpoint( '.poemkit-core-grid', 15px, 'xl', '1200px' );	
 
 
 

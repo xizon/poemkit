@@ -1,6 +1,23 @@
 # Changelog
 
 
+#### = 0.1.5 (November 8, 2021) =
+
+* New: Added Site Address (URL) configuration of the `./src/config/websiteConfig.js` for SEO.
+* New: Accessible URL, Technical SEO, and making your site search engine friendly with React Helmet.
+* New: New component Unit Testing examples are added.
+* New: Add new UI components `ImageShapes`.
+* New: Add new UI components `MousewheelInteraction`.
+* New: Add new UI components `HybridContentSlider`.
+* New: Add new UI components `Timeline`.
+* New: Add new UI components `SeamlessScrollingElement`.
+* New: Add new UI components `PeriodicalScroll`.
+* New: Add new UI components `ShowMoreLess`.
+* Tweak: Enhanced the animate method in helper scripts.
+* Tweak: Add progress spy to AJAX Loader of Lightbox.
+* Tweak: Modified the picture loading status of `Parallax`.
+* Tweak: Optimized some component algorithms to improve performance.
+
 
 #### = 0.1.3 (October 28, 2021) =
 

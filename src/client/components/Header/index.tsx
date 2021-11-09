@@ -6,26 +6,26 @@
 import React, { Component } from 'react';
 
 /*-- Apply Third-party plugins (import location should be in front of "global scripts and styles") --*/
-import '@uixkit.react/components/_plugins/_lib-bootstrap';
-import '@uixkit.react/components/_plugins/_lib-icons';
-import TweenMax, { TimelineMax } from '@uixkit.react/components/_plugins/_lib-gsap';
+import '@poemkit/components/_plugins/_lib-bootstrap';
+import '@poemkit/components/_plugins/_lib-icons';
+import TweenMax, { TimelineMax } from '@poemkit/components/_plugins/_lib-gsap';
 
 /*-- Apply global scripts and styles --*/
-import '@uixkit.react/components/_utils/styles/_all.scss';
-import '@uixkit.react/components/_utils/styles/rtl/_all.scss';
-import { __ } from '@uixkit.react/components/_utils/_all';
+import '@poemkit/components/_utils/styles/_all.scss';
+import '@poemkit/components/_utils/styles/rtl/_all.scss';
+import { __ } from '@poemkit/components/_utils/_all';
 
 /*-- Apply this component styles --*/
-import '@uixkit.react/components/Header/styles/_style.scss';
-import '@uixkit.react/components/Header/styles/rtl/_style.scss';
+import '@poemkit/components/Header/styles/_style.scss';
+import '@poemkit/components/Header/styles/rtl/_style.scss';
 
 
 //get project config
-import { rootDirectory } from '@uixkit.react/config/websiteConfig.js';
+import { rootDirectory } from '@poemkit/config/websiteConfig.js';
 
 
 //get navigation
-import Navigation from '@uixkit.react/components/Navigation/index';
+import Navigation from '@poemkit/components/Navigation/index';
 
 
 
@@ -61,7 +61,7 @@ export default class Header extends Component<HeaderProps, HeaderState> {
     }
 
     handleScrollEvent() {
-		const $el = __( '.uix-header__container, .uix-header__placeholder' );
+		const $el = __( '.poemkit-header__container, .poemkit-header__placeholder' );
 		const scrolled = __( window ).scrollTop();
 
 		if ( scrolled >= 220 ) {
@@ -100,10 +100,10 @@ export default class Header extends Component<HeaderProps, HeaderState> {
 		
 					function headerInit( w ) {
 						
-						const $headerPlaceholder = __( '.uix-header__placeholder.js-uix-header__placeholder-autoheight' );
+						const $headerPlaceholder = __( '.poemkit-header__placeholder.js-poemkit-header__placeholder-autoheight' );
 			
 						if ( w > 768 ) {
-							$headerPlaceholder.css( 'height', __( '.uix-header__container' ).outerHeight( true ) + 'px' ); 
+							$headerPlaceholder.css( 'height', __( '.poemkit-header__container' ).outerHeight( true ) + 'px' ); 
 							__( 'body' ).removeClass( 'is-mobile' );
 						} else {
 							$headerPlaceholder.css( 'height', 0 ); 
@@ -188,35 +188,27 @@ export default class Header extends Component<HeaderProps, HeaderState> {
 			
 			{/*<!-- Header Area
 			============================================= -->     */} 
-			<header className={ _headerOverlayEnabled ? 'uix-header__container uix-header__container--overlay' : 'uix-header__container'}>
+			<header className={ _headerOverlayEnabled ? 'poemkit-header__container poemkit-header__container--overlay' : 'poemkit-header__container'}>
 
-				 <div className="uix-header">
+				 <div className="poemkit-header">
 					 <div className="container">
 
-							{logo ? <><div className="uix-brand">{logo}</div></> : null}
+							{logo ? <><div className="poemkit-brand">{logo}</div></> : null}
 					
 							<Navigation 
 							    displayMobileNav={true}
 								data={menu} 
-								label="Uix Kit React" 
+								label="PoemKit" 
 								mobileLogo={`${rootDirectory}/assets/images/logo-colorful.png`} 
 								tools={<>
-									<a className="uix-social-btn uix-social-btn--small uix-social-btn--circle uix-social-btn--thin" title="Follow us on Twitter" href="https://twitter.com/uiux_lab" target="_blank">
-										<i className="fa fa-twitter"></i>
-									</a>
-									<a className="uix-social-btn uix-social-btn--small uix-social-btn--circle uix-social-btn--thin" title="Follow us on Facebook" href="https://www.facebook.com/uiuxlabhome" target="_blank">
-										<i className="fa fa-facebook"></i>
-									</a>
-									<a className="uix-social-btn uix-social-btn--small uix-social-btn--circle uix-social-btn--thin" title="Fork on Github" href="https://github.com/xizon/uix-kit-react" target="_blank">
-										<i className="fa fa-github"></i>
-									</a>
+								    <a title="Fork on Github" href="https://github.com/xizon/poemkit" target="_blank" className="poemkit-btn poemkit-btn__border--thin poemkit-btn__bg--primary is-transparent is-rounded poemkit-btn__size--t poemkit-btn__icon poemkit-btn__icon--left"><span><i className="fa fa-github" aria-hidden="true"></i></span>Documentation</a>
 							</>}/>	
 
 
 					  </div>
 					  {/*<!-- .container end -->*/}
 
-					  <div className="uix-clearfix"></div>
+					  <div className="poemkit-clearfix"></div>
 				 </div>
 
 			</header>  
@@ -224,7 +216,7 @@ export default class Header extends Component<HeaderProps, HeaderState> {
            {headerOverlayEnabled === true ? (
               <></>
             ) : (
-              <div className="uix-header__placeholder js-uix-header__placeholder-autoheight"></div>
+              <div className="poemkit-header__placeholder js-poemkit-header__placeholder-autoheight"></div>
             )}
 			
 	

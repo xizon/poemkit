@@ -1,7 +1,7 @@
 /* ======================================================
     <!-- Tabs -->
 /* ====================================================== */
-@import '@uixkit.react/components/_utils/styles/_variable-and-mixin.scss';
+@import '@poemkit/components/_utils/styles/_variable-and-mixin.scss';
 
 /*
  * 1. Tab Normal Effect
@@ -10,7 +10,7 @@
 
 
 
-.uix-tabs {
+.poemkit-tabs {
 
 
 	/*
@@ -18,12 +18,12 @@
 	 1. Tab Normal Effect
 	 ---------------------------
 	 */
-	&:not(.uix-tabs--rotation) {
+	&:not(.poemkit-tabs--rotation) {
 
 
 		$maker-w: 100%;
 
-		.uix-tabs__marker {
+		.poemkit-tabs__marker {
 			height: 2px;
 			width: 100%;
 			position: absolute;
@@ -47,7 +47,7 @@
 
 	}
 
-	.uix-tabs__content {
+	.poemkit-tabs__content {
 
 		display: none;
 		padding: 1.3125rem;
@@ -58,7 +58,7 @@
 		}
 	}
 
-	.uix-tabs__nav {
+	.poemkit-tabs__nav {
 
 
 		> ul {
@@ -98,10 +98,10 @@
 
 
 
-	&.uix-tabs--center {
+	&.poemkit-tabs--center {
 
 
-		.uix-tabs__nav {
+		.poemkit-tabs__nav {
 
 			> ul {
 				border-bottom: 1px solid #efefef;
@@ -127,9 +127,9 @@
 	}
 
 
-	&.uix-tabs--normal {
+	&.poemkit-tabs--normal {
 
-		.uix-tabs__nav {
+		.poemkit-tabs__nav {
 
 			> ul {
 				border-bottom: 1px solid #efefef;
@@ -158,12 +158,12 @@
 	 2. Tab Rotation Effect
 	 ---------------------------
 	 */
-	&.uix-tabs--rotation {
+	&.poemkit-tabs--rotation {
 
-		.uix-tabs__content {
+		.poemkit-tabs__content {
 			position: relative;
 		}
-		.uix-tabs__nav {
+		.poemkit-tabs__nav {
 			position: relative;
 			margin: 0;
 
@@ -219,9 +219,9 @@
 
 
 /* Center alignment */
-.uix-t-c .uix-tabs.uix-tabs--rotation {
+.poemkit-t-c .poemkit-tabs.poemkit-tabs--rotation {
 
-	.uix-tabs__nav {
+	.poemkit-tabs__nav {
 		margin: 0 auto;
 	}
 
@@ -230,16 +230,16 @@
 
 
 @media all and (max-width: 768px) {
-	.uix-tabs {
+	.poemkit-tabs {
 
-		&:not(.uix-tabs--rotation) li {
+		&:not(.poemkit-tabs--rotation) li {
 			width: 100% !important;
 		}
 
 		/* Tab Rotation Effect */
-		&.uix-tabs--rotation {
+		&.poemkit-tabs--rotation {
 
-			.uix-tabs__nav {
+			.poemkit-tabs__nav {
 			    width: auto !important;
 			}
 

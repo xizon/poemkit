@@ -1,146 +1,119 @@
 import React from 'react';
-import { renderToString } from 'react-dom/server.js';
+import ReactDOMServer from 'react-dom/server';
+import { Helmet } from "react-helmet";
 import { Provider } from 'react-redux';
 import { StaticRouter } from 'react-router-dom';
 import { renderRoutes } from 'react-router-config';
-import { __ } from '@uixkit.react/components/_utils/_all';
 
-import customRoutesConfig from '@uixkit.react/router/RoutesConfig.js';
+import customRoutesConfig from '@poemkit/router/RoutesConfig.js';
 
 //get project config
-import { rootDirectory } from '@uixkit.react/config/websiteConfig.js';
+import { rootDirectory } from '@poemkit/config/websiteConfig.js';
 
 //As we can not use BrowserRouter on server side, we will use StaticRouter . 
 //Also we have same set up as frontend, but wrap it all by renderToString function 
 //from react-dom/server library.
 export default (pathname, store, context, template) => {
-    const content = renderToString(
-        <Provider store={store}>
-            <StaticRouter location={pathname} context={context}>
-				 <div className="uix-wrapper">
+
+	const content = ReactDOMServer.renderToString(
+		<Provider store={store}>
+			<StaticRouter location={pathname} context={context}>
+				<div className="poemkit-wrapper">
 					{renderRoutes(customRoutesConfig)}
-				 </div>
-				 {/* <!-- .uix-wrapper end --> */}
-            </StaticRouter>
-        </Provider>
-    );
+				</div>
+			</StaticRouter>
+		</Provider>
+	);
+
+
+	if (template != null && template != '' && typeof template != typeof undefined) {
+		template = template.replace('{{reactApp}}', content)
+			.replace('{{preloadedState}}', JSON.stringify(store.getState()));
 
 
 
-
-
-    if ( template != null && template != '' && typeof template != typeof undefined ) {
-        template = template.replace('{{reactApp}}', content )
-                           .replace('{{preloadedState}}', JSON.stringify(store.getState()) );  
-	
-		
-		
 		//Replace the default address of the router with the proxy path you configured 
 		//through Apache or Nginx (only when rendering)
 		//------------------------------------------
-		template = template.replace(/data\-route\=\"true\"\s*href\=\"/g, `data-route="true" href="${rootDirectory}` );
-	
-		
-		
-		
-		//change page title
+		template = template.replace(/data\-route\=\"true\"\s*href\=\"/g, `data-route="true" href="${rootDirectory}`);
+
+
+
+		// SEO with React Helmet 
 		//------------------------------------------
+		const helmet = Helmet.renderStatic();
+		template = template.replace('{{helmetHtmlAttributes}}', `${helmet.htmlAttributes.toString()}`)
+			.replace('{{helmetTitle}}', `${helmet.title.toString()}`)
+			.replace('{{helmetMeta}}', `${helmet.meta.toString()}`)
+			.replace('{{helmetLink}}', `${helmet.link.toString()}`)
+			.replace('{{helmetBodyAttributes}}', `${helmet.bodyAttributes.toString()}`);
+
+
+		//title and site name
+		//------------------------------------------
+		const siteName = customRoutesConfig[0].routes[0].pageTitle;
 		let pageTitle = null;
 		let pageNoMatchTitle = null;
-		const breakException = {};
-		
-		//
 		pathname = pathname.replace(`${rootDirectory}`, '')
-		
-		
-		//page: 404
-		try {
-			customRoutesConfig[0].routes.forEach((item, index) => {
-				if ( item.status === 404 ) {
-					pageNoMatchTitle = item.pageTitle;
-					//
-					throw breakException;
-				}
-			});
-		} catch (e) {}	
-
-		
-		try {
-			customRoutesConfig[0].routes.forEach((item, index) => {
-
-				const _path = item.path.replace(`${rootDirectory}`, '');
-				
-				if ( _path.indexOf( `/${pathname.replace(/^\/([^\/]*).*$/, '$1')}` ) < 0 && _path != "/" ) {
-					pageTitle = pageNoMatchTitle;
-					//
-					throw breakException;
-				}
-			});
-		} catch (e) {}	
-
-		
-		
-		//page: ...
-		try {
-			customRoutesConfig[0].routes.forEach((item, index) => {
-				
-				const _path = item.path.replace(`${rootDirectory}`, '');
-				/*
-				console.log( '_path: ', _path );
-				console.log( 'pathname: ', pathname );
-				console.log( 'check: ', `/${pathname.replace(/^\/([^\/]*).*$/, '$1')}` );
-				*/
-				
-				if ( _path === pathname || 
-					 ( _path.indexOf( `/${pathname.replace(/^\/([^\/]*).*$/, '$1')}` ) >= 0 && _path != "/" )
-				   ) {
-					pageTitle = item.pageTitle;
-					//
-					throw breakException;
-					
-				}
-			});
-		} catch (e) {}	
 
 
-		//page: Posts detail
-		if ( pathname.indexOf( 'posts/' ) >= 0 ) {
-			if ( store.getState().listDetailData.detail ) pageTitle = store.getState().listDetailData.detail[0].name;
+		//=> PAGE: 404
+		customRoutesConfig[0].routes.some((item, index) => {
+			if (item.status === 404) {
+				pageNoMatchTitle = item.pageTitle;
+				return true;
+			}
+		});
+
+		customRoutesConfig[0].routes.some((item, index) => {
+			const _path = item.path.replace(`${rootDirectory}`, '');
+
+			// Returns the name of the first character that starts with a slash and is grouped by a slash
+			const nestedName = pathname.replace(/^\/([^\/]*).*$/, '$1');
+			if (_path.indexOf(`/${nestedName}`) < 0 && _path != "/") {
+				pageTitle = pageNoMatchTitle;
+				return true;
+			}
+		});
+
+
+		//=> PAGE: ...
+		customRoutesConfig[0].routes.some((item, index) => {
+			//console.log( 'pathname: ', pathname ); // such as "/index",  "/components-demo"
+			
+			const _path = item.path.replace(`${rootDirectory}`, '');
+
+			// Returns the name of the first character that starts with a slash and is grouped by a slash
+			const nestedName = pathname.replace(/^\/([^\/]*).*$/, '$1');
+			if (_path === pathname ||
+				(_path.indexOf(`/${nestedName}`) >= 0 && _path != "/")
+			) {
+				pageTitle = item.pageTitle;
+				return true;
+
+			}
+		});
+
+		//=> PAGE: Posts detail (available when Redux store is used)
+		if (pathname.indexOf('posts/') >= 0) {
+			if (store.getState().listDetailData.detail) pageTitle = store.getState().listDetailData.detail[0].name;
 		}
 
-		//page: Pagination
-		if ( pathname.indexOf( 'pagination/' ) >= 0 ) {
-			if ( store.getState().listPostsPaginationData.getData ) pageTitle = `${pageTitle} (page ${store.getState().listPostsPaginationData.getData.page})`;
+		//=> PAGE: Pagination (available when Redux store is used)
+		if (pathname.indexOf('posts-pagination/') >= 0) {
+			if (store.getState().listPostsPaginationData.getData) pageTitle = `${pageTitle} (page ${store.getState().listPostsPaginationData.getData.page})`;
 		}
 
-	
-		//page: Components Demo
-		if ( pathname.indexOf( 'components-demo/' ) >= 0 ) {
-			let titleStr = pathname.split( '/' ).pop();
-			pageTitle = __.lastUrlParamFormat( titleStr );	
-		}
-		
-		
-		// update page title
-		// When the page is not the homepage (including all homepage addresses of 
-		// the routing configuration), change the page title
-		if ( 
-			pageTitle !== null &&
-			pathname !== "/" &&
-			pathname !== "/index"
-		) {
-			template = template.replace('{{pageTitle}}', `${pageTitle} - ${customRoutesConfig[0].routes[0].pageTitle}` ); 
-		} else {
-			template = template.replace('{{pageTitle}}', `${pageTitle}` ); 
-		}
-		
-		
 
-		
-    }
+		//update page title and site name
+		//------------------------------------------
+		template = template.replace(/\{\{pageTitle\}\}/g, pageTitle)
+						   .replace(/\{\{siteName\}\}/g, siteName);
 
-   
-    return template;
+	}
+
+
+	return template;
 
 
 };

@@ -1,6 +1,6 @@
-# @uixkit.react/components/Pagination
+# @poemkit/components/Pagination
 
-[Source](https://github.com/xizon/uix-kit-react/tree/main/src/client/components/Pagination)
+[Source](https://github.com/xizon/poemkit/tree/main/src/client/components/Pagination)
 
 ## Version
 
@@ -10,7 +10,7 @@
 
 ### Pagination
 ```js
-import Pagination from '@uixkit.react/components/Pagination/index.tsx';
+import Pagination from '@poemkit/components/Pagination/index.tsx';
 ```
 | Property | Type | Default | Description |
 | --- | --- | --- | --- |
@@ -37,7 +37,7 @@ import Pagination from '@uixkit.react/components/Pagination/index.tsx';
 
 ```js
 import React from 'react';
-import Pagination from '@uixkit.react/components/Pagination/index.tsx';
+import Pagination from '@poemkit/components/Pagination/index.tsx';
 
 
 function gotoPageNumber( number ) {
@@ -88,8 +88,8 @@ export default () => {
         onlyPrevNext={true}
         previousLabel={<><i className="fa fa-angle-left" aria-hidden="true"></i></>}
         nextLabel={<><i className="fa fa-angle-right" aria-hidden="true"></i></>}
-        previousClass="previous uix-f-l"
-        nextClass="next uix-f-r"
+        previousClass="previous poemkit-f-l"
+        nextClass="next poemkit-f-r"
       />	
         
         

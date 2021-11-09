@@ -6,40 +6,111 @@ import {
 	useRouteMatch,
 	useLocation
 } from 'react-router-dom';
-import { __ } from '@uixkit.react/components/_utils/_all';
-
+import { __ } from '@poemkit/components/_utils/_all';
 
 //components list
-import ButtonDemo from '@uixkit.react/pages/ComponentsDemo/ButtonDemo.js';
-import FormDemo from '@uixkit.react/pages/ComponentsDemo/FormDemo.js';
-import GridDemo from '@uixkit.react/pages/ComponentsDemo/GridDemo.js';
-import PaginationDemo from '@uixkit.react/pages/ComponentsDemo/PaginationDemo.js';
-import TabsDemo from '@uixkit.react/pages/ComponentsDemo/TabsDemo.js';
-import TabsAnimatedDemo from '@uixkit.react/pages/ComponentsDemo/TabsAnimatedDemo.js';
-import VideoDemo from '@uixkit.react/pages/ComponentsDemo/VideoDemo.js';
-import TableDemo from '@uixkit.react/pages/ComponentsDemo/TableDemo.js';
-import TableGridDemo from '@uixkit.react/pages/ComponentsDemo/TableGridDemo.js';
-import TableSorterDemo from '@uixkit.react/pages/ComponentsDemo/TableSorterDemo.js';
-import ScrollRevealDemo from '@uixkit.react/pages/ComponentsDemo/ScrollRevealDemo.js';
-import CardDemo from '@uixkit.react/pages/ComponentsDemo/CardDemo.js';
-import ParallaxDemo from '@uixkit.react/pages/ComponentsDemo/ParallaxDemo.js';
-import AccordionDemo from '@uixkit.react/pages/ComponentsDemo/AccordionDemo.js';
-import AccordionSliderDemo from '@uixkit.react/pages/ComponentsDemo/AccordionSliderDemo.js';
-import CounterDemo from '@uixkit.react/pages/ComponentsDemo/CounterDemo.js';
-import DropdownMenuDemo from '@uixkit.react/pages/ComponentsDemo/DropdownMenuDemo.js';
-import ModalDialogDemo from '@uixkit.react/pages/ComponentsDemo/ModalDialogDemo.js';
-import SlideshowDemo from '@uixkit.react/pages/ComponentsDemo/SlideshowDemo.js';
-import SwiperDemo from '@uixkit.react/pages/ComponentsDemo/SwiperDemo.js';
-import BackToTopDemo from '@uixkit.react/pages/ComponentsDemo/BackToTopDemo.js';
-import LightboxDemo from '@uixkit.react/pages/ComponentsDemo/LightboxDemo.js';
-import ProgressBarDemo from '@uixkit.react/pages/ComponentsDemo/ProgressBarDemo.js';
-import StickyElementsDemo from '@uixkit.react/pages/ComponentsDemo/StickyElementsDemo.js';
-import MultilevelDropdownMenuDemo from '@uixkit.react/pages/ComponentsDemo/MultilevelDropdownMenuDemo.js';
-import CascadingDropDownListDemo from '@uixkit.react/pages/ComponentsDemo/CascadingDropDownListDemo.js';
-import GalleryDemo from '@uixkit.react/pages/ComponentsDemo/GalleryDemo.js';
-import InfiniteScrollDemo from '@uixkit.react/pages/ComponentsDemo/InfiniteScrollDemo.js';
-import NavigationDemo from '@uixkit.react/pages/ComponentsDemo/NavigationDemo.js';
+import AccordionDemo from '@poemkit/pages/ComponentsDemo/AccordionDemo.js';
+import AccordionSliderDemo from '@poemkit/pages/ComponentsDemo/AccordionSliderDemo.js';
+import ButtonDemo from '@poemkit/pages/ComponentsDemo/ButtonDemo.js';
+import BackToTopDemo from '@poemkit/pages/ComponentsDemo/BackToTopDemo.js';
+import CardDemo from '@poemkit/pages/ComponentsDemo/CardDemo.js';
+import CounterDemo from '@poemkit/pages/ComponentsDemo/CounterDemo.js';
+import CascadingDropDownListDemo from '@poemkit/pages/ComponentsDemo/CascadingDropDownListDemo.js';
+import DropdownMenuDemo from '@poemkit/pages/ComponentsDemo/DropdownMenuDemo.js';
+import FormDemo from '@poemkit/pages/ComponentsDemo/FormDemo.js';
+import GridDemo from '@poemkit/pages/ComponentsDemo/GridDemo.js';
+import GalleryDemo from '@poemkit/pages/ComponentsDemo/GalleryDemo.js';
+import HybridContentSliderDemo from '@poemkit/pages/ComponentsDemo/HybridContentSliderDemo.js';
+import InfiniteScrollDemo from '@poemkit/pages/ComponentsDemo/InfiniteScrollDemo.js';
+import ImageShapesDemo from '@poemkit/pages/ComponentsDemo/ImageShapesDemo.js';
+import LightboxDemo from '@poemkit/pages/ComponentsDemo/LightboxDemo.js';
+import ModalDialogDemo from '@poemkit/pages/ComponentsDemo/ModalDialogDemo.js';
+import MultilevelDropdownMenuDemo from '@poemkit/pages/ComponentsDemo/MultilevelDropdownMenuDemo.js';
+import MousewheelInteractionDemo from '@poemkit/pages/ComponentsDemo/MousewheelInteractionDemo.js';
+import NavigationDemo from '@poemkit/pages/ComponentsDemo/NavigationDemo.js';
+import PaginationDemo from '@poemkit/pages/ComponentsDemo/PaginationDemo.js';
+import ParallaxDemo from '@poemkit/pages/ComponentsDemo/ParallaxDemo.js';
+import ProgressBarDemo from '@poemkit/pages/ComponentsDemo/ProgressBarDemo.js';
+import PeriodicalScrollDemo from '@poemkit/pages/ComponentsDemo/PeriodicalScrollDemo.js';
+import ScrollRevealDemo from '@poemkit/pages/ComponentsDemo/ScrollRevealDemo.js';
+import SlideshowDemo from '@poemkit/pages/ComponentsDemo/SlideshowDemo.js';
+import SwiperDemo from '@poemkit/pages/ComponentsDemo/SwiperDemo.js';
+import StickyElementsDemo from '@poemkit/pages/ComponentsDemo/StickyElementsDemo.js';
+import SeamlessScrollingElementDemo from '@poemkit/pages/ComponentsDemo/SeamlessScrollingElementDemo.js';
+import ShowMoreLessDemo from '@poemkit/pages/ComponentsDemo/ShowMoreLessDemo.js';
+import TabsDemo from '@poemkit/pages/ComponentsDemo/TabsDemo.js';
+import TabsAnimatedDemo from '@poemkit/pages/ComponentsDemo/TabsAnimatedDemo.js';
+import TableDemo from '@poemkit/pages/ComponentsDemo/TableDemo.js';
+import TableGridDemo from '@poemkit/pages/ComponentsDemo/TableGridDemo.js';
+import TableSorterDemo from '@poemkit/pages/ComponentsDemo/TableSorterDemo.js';
+import TimelineDemo from '@poemkit/pages/ComponentsDemo/TimelineDemo.js';
+import VideoDemo from '@poemkit/pages/ComponentsDemo/VideoDemo.js';
 
+
+//
+let PAGE_TITLE = null;
+let SITE_NAME = null;
+
+//manage the document head
+import { Helmet } from "react-helmet";
+import siteInfo from '@poemkit/helpers/site-info.js';
+function SeoVars() {
+	const {siteName, baseURL, pageTitle} = siteInfo('/components-demo');
+	// if the value of `pageTitle` is `{{pageTitle}}`, the value 
+	// of Redux store will be rendered asynchronously
+
+	PAGE_TITLE = pageTitle;
+	SITE_NAME = siteName;
+	
+	return {
+		"siteName": siteName,
+		"baseURL": baseURL,
+		"imgURL": '',
+		"bodyClasses": 'page',
+		"pageTitle": pageTitle,
+		"desc": pageTitle
+	}
+}
+
+function Seo() {
+	const {siteName, baseURL, imgURL, bodyClasses, pageTitle, desc} = SeoVars();
+	return (
+		<Helmet>
+			<html lang="en-US" dir="ltr" />
+			<title>{`${pageTitle} - ${siteName}`}</title>
+			<body class={`${bodyClasses}`} />
+			<meta name="description" content={`${desc}`}/>
+			<meta property="og:title" content={`${pageTitle} - ${siteName}`}/>
+			<meta property="og:url" content={`${baseURL}`}/>
+			<meta property="og:description" content={`${desc}`}/>
+			<meta property="og:type" content="website"/>
+			<meta property="og:site_name" content={`${siteName}`}/>
+			{imgURL === '' ? '' : <meta property="og:image" content={`${imgURL}`}/>}
+			<link rel="canonical" href={`${baseURL}`}/>
+		</Helmet>
+	)
+}
+
+function SeoChild(params) {
+	const {title} = params;
+	const {siteName, baseURL, imgURL, bodyClasses, pageTitle, desc} = SeoVars();
+
+	return (
+		<Helmet>
+			<html lang="en-US" dir="ltr" />
+			<title>{`${title} - ${pageTitle} - ${siteName}`}</title>
+			<body class={`${bodyClasses}`} />
+			<meta name="description" content={`${title} - ${desc}`}/>
+			<meta property="og:title" content={`${title} - ${pageTitle} - ${siteName}`}/>
+			<meta property="og:url" content={`${baseURL}`}/>
+			<meta property="og:description" content={`${title} - ${desc}`}/>
+			<meta property="og:type" content="website"/>
+			<meta property="og:site_name" content={`${siteName}`}/>
+			{imgURL === '' ? '' : <meta property="og:image" content={`${imgURL}`}/>}
+			<link rel="canonical" href={`${baseURL}`}/>
+		</Helmet>
+	)
+}
 
 
 //Might have mismatching versions of React and the renderer (such as React DOM)
@@ -62,175 +133,204 @@ function HookContent() {
 		}
 	};
 
+
+	//update page title
+	const refreshTitle = (e) => {
+		const childTitle = e.currentTarget.innerHTML.replace(/(<([^>]+)>)/ig, '');
+		document.title = `${childTitle} - ${PAGE_TITLE} - ${SITE_NAME}`;
+	}
+	
+
 	return (
 		<>
-		
 
-		{/*
-		<!-- Sidebar   
-		====================================================== -->	
-		*/}
-		<div className="uix-demo-sidebar-left">
+		<Seo />
+		
+		{/*<!-- Sidebar 
+		====================================================== -->*/}
+		<div className="poemkit-demo-sidebar-left">
 			<h4>Components</h4>
-			<ul className="uix-demo-nav">
+			<ul className="poemkit-demo-nav">
 				{/*    /////////////////////////   */} 
-				<li className="uix-demo-nav-header">WEB ELEMENTS</li>
-				<li className={urlChk('/button') ? 'is-active' : ''}>
-					<NavLink data-route="true" to={`${url}/button`} activeClassName="is-active">Button</NavLink>
-				</li>
-				<li className={urlChk('/pagination') ? 'is-active' : ''}>
-					<NavLink data-route="true" to={`${url}/pagination`} activeClassName="is-active">Pagination</NavLink>
-				</li>
-				<li className={urlChk('/tabs') && !urlChk('/tabs-animated') ? 'is-active' : ''}>
-					<NavLink data-route="true" to={`${url}/tabs`} activeClassName="is-active">Tabs</NavLink>
-				</li>
-				<li className={urlChk('/tabs-animated') ? 'is-active' : ''}>
-					<NavLink data-route="true" to={`${url}/tabs-animated`} activeClassName="is-active">Tabs Animated</NavLink>
-				</li>
-				<li className={urlChk('/table') && !urlChk('/table-grid') && !urlChk('/table-sorter') ? 'is-active' : ''}>
-					<NavLink data-route="true" to={`${url}/table`} activeClassName="is-active">Table</NavLink>
-				</li>
-				<li className={urlChk('/table-grid') ? 'is-active' : ''}>
-					<NavLink data-route="true" to={`${url}/table-grid`} activeClassName="is-active">Table Grid</NavLink>
-				</li>
-				<li className={urlChk('/table-sorter') ? 'is-active' : ''}>
-					<NavLink data-route="true" to={`${url}/table-sorter`} activeClassName="is-active">Table Sorter</NavLink>
-				</li>
-				<li className={urlChk('/card') ? 'is-active' : ''}>
-					<NavLink data-route="true" to={`${url}/card`} activeClassName="is-active">Card</NavLink>
-				</li>
+				<li className="poemkit-demo-nav-header">WEB ELEMENTS</li>
 				<li className={urlChk('/accordion') && !urlChk('/accordion-slider') ? 'is-active' : ''}>
-					<NavLink data-route="true" to={`${url}/accordion`} activeClassName="is-active">Accordion</NavLink>
+					<NavLink data-route="true" onClick={(e) => refreshTitle(e)} to={`${url}/accordion`} activeClassName="is-active">Accordion</NavLink>
 				</li>
 				<li className={urlChk('/accordion-slider') ? 'is-active' : ''}>
-					<NavLink data-route="true" to={`${url}/accordion-slider`} activeClassName="is-active">Accordion Slider</NavLink>
+					<NavLink data-route="true" onClick={(e) => refreshTitle(e)} to={`${url}/accordion-slider`} activeClassName="is-active">Accordion Slider</NavLink>
 				</li>
-				<li className={urlChk('/counter') ? 'is-active' : ''}>
-					<NavLink data-route="true" to={`${url}/counter`} activeClassName="is-active">Counter</NavLink>
-				</li>
-				<li className={urlChk('/modal-dialog') ? 'is-active' : ''}>
-					<NavLink data-route="true" to={`${url}/modal-dialog`} activeClassName="is-active">Modal Dialog</NavLink>
-				</li>
-				<li className={urlChk('/slideshow') ? 'is-active' : ''}>
-					<NavLink data-route="true" to={`${url}/slideshow`} activeClassName="is-active">Slideshow</NavLink>
-				</li>
-				<li className={urlChk('/swiper') ? 'is-active' : ''}>
-					<NavLink data-route="true" to={`${url}/swiper`} activeClassName="is-active">Swiper</NavLink>
-				</li>
-
-				<li className={urlChk('/lightbox') ? 'is-active' : ''}>
-					<NavLink data-route="true" to={`${url}/lightbox`} activeClassName="is-active">Lightbox</NavLink>
-				</li>
-				<li className={urlChk('/progress-bar') ? 'is-active' : ''}>
-					<NavLink data-route="true" to={`${url}/progress-bar`} activeClassName="is-active">Progress Bar</NavLink>
+				<li className={urlChk('/button') ? 'is-active' : ''}>
+					<NavLink data-route="true" onClick={(e) => refreshTitle(e)} to={`${url}/button`} activeClassName="is-active">Button</NavLink>
 				</li>
 				<li className={urlChk('/back-to-top') ? 'is-active' : ''}>
-					<NavLink data-route="true" to={`${url}/back-to-top`} activeClassName="is-active">Back To Top</NavLink>
+					<NavLink data-route="true" onClick={(e) => refreshTitle(e)} to={`${url}/back-to-top`} activeClassName="is-active">Back To Top</NavLink>
+				</li>
+				<li className={urlChk('/card') ? 'is-active' : ''}>
+					<NavLink data-route="true" onClick={(e) => refreshTitle(e)} to={`${url}/card`} activeClassName="is-active">Card</NavLink>
+				</li>
+				<li className={urlChk('/counter') ? 'is-active' : ''}>
+					<NavLink data-route="true" onClick={(e) => refreshTitle(e)} to={`${url}/counter`} activeClassName="is-active">Counter</NavLink>
+				</li>
+				<li className={urlChk('/hybrid-content-slider') ? 'is-active' : ''}>
+					<NavLink data-route="true" onClick={(e) => refreshTitle(e)} to={`${url}/hybrid-content-slider`} activeClassName="is-active">Hybrid Content Slider</NavLink>
+				</li>
+				<li className={urlChk('/image-shapes') ? 'is-active' : ''}>
+					<NavLink data-route="true" onClick={(e) => refreshTitle(e)} to={`${url}/image-shapes`} activeClassName="is-active">Image Shapes</NavLink>
+				</li>
+				<li className={urlChk('/lightbox') ? 'is-active' : ''}>
+					<NavLink data-route="true" onClick={(e) => refreshTitle(e)} to={`${url}/lightbox`} activeClassName="is-active">Lightbox</NavLink>
+				</li>
+				<li className={urlChk('/modal-dialog') ? 'is-active' : ''}>
+					<NavLink data-route="true" onClick={(e) => refreshTitle(e)} to={`${url}/modal-dialog`} activeClassName="is-active">Modal Dialog</NavLink>
+				</li>
+				<li className={urlChk('/pagination') ? 'is-active' : ''}>
+					<NavLink data-route="true" onClick={(e) => refreshTitle(e)} to={`${url}/pagination`} activeClassName="is-active">Pagination</NavLink>
+				</li>
+				<li className={urlChk('/progress-bar') ? 'is-active' : ''}>
+					<NavLink data-route="true" onClick={(e) => refreshTitle(e)} to={`${url}/progress-bar`} activeClassName="is-active">Progress Bar</NavLink>
+				</li>
+				<li className={urlChk('/periodical-scroll') ? 'is-active' : ''}>
+					<NavLink data-route="true" onClick={(e) => refreshTitle(e)} to={`${url}/periodical-scroll`} activeClassName="is-active">Periodical Scroll</NavLink>
+				</li>
+				<li className={urlChk('/slideshow') ? 'is-active' : ''}>
+					<NavLink data-route="true" onClick={(e) => refreshTitle(e)} to={`${url}/slideshow`} activeClassName="is-active">Slideshow</NavLink>
+				</li>
+				<li className={urlChk('/swiper') ? 'is-active' : ''}>
+					<NavLink data-route="true" onClick={(e) => refreshTitle(e)} to={`${url}/swiper`} activeClassName="is-active">Swiper</NavLink>
+				</li>
+				<li className={urlChk('/seamless-scrolling-element') ? 'is-active' : ''}>
+					<NavLink data-route="true" onClick={(e) => refreshTitle(e)} to={`${url}/seamless-scrolling-element`} activeClassName="is-active">Seamless Scrolling Element</NavLink>
+				</li>
+				<li className={urlChk('/show-more-less') ? 'is-active' : ''}>
+					<NavLink data-route="true" onClick={(e) => refreshTitle(e)} to={`${url}/show-more-less`} activeClassName="is-active">Show More Less</NavLink>
+				</li>
+				<li className={urlChk('/tabs') && !urlChk('/tabs-animated') ? 'is-active' : ''}>
+					<NavLink data-route="true" onClick={(e) => refreshTitle(e)} to={`${url}/tabs`} activeClassName="is-active">Tabs</NavLink>
+				</li>
+				<li className={urlChk('/tabs-animated') ? 'is-active' : ''}>
+					<NavLink data-route="true" onClick={(e) => refreshTitle(e)} to={`${url}/tabs-animated`} activeClassName="is-active">Tabs Animated</NavLink>
+				</li>
+				<li className={urlChk('/table') && !urlChk('/table-grid') && !urlChk('/table-sorter') ? 'is-active' : ''}>
+					<NavLink data-route="true" onClick={(e) => refreshTitle(e)} to={`${url}/table`} activeClassName="is-active">Table</NavLink>
+				</li>
+				<li className={urlChk('/table-grid') ? 'is-active' : ''}>
+					<NavLink data-route="true" onClick={(e) => refreshTitle(e)} to={`${url}/table-grid`} activeClassName="is-active">Table Grid</NavLink>
+				</li>
+				<li className={urlChk('/table-sorter') ? 'is-active' : ''}>
+					<NavLink data-route="true" onClick={(e) => refreshTitle(e)} to={`${url}/table-sorter`} activeClassName="is-active">Table Sorter</NavLink>
+				</li>
+				<li className={urlChk('/timeline') ? 'is-active' : ''}>
+					<NavLink data-route="true" onClick={(e) => refreshTitle(e)} to={`${url}/timeline`} activeClassName="is-active">Timeline</NavLink>
 				</li>
 
 
 
                 {/*    /////////////////////////   */} 
-				<li className="uix-demo-nav-header">FORMS</li>
+				<li className="poemkit-demo-nav-header">FORMS</li>
 				<li className={urlChk('#app-goto__input__section') ? 'is-active' : ''}>
-					<NavLink data-route="true" to={`${url}/form#app-goto__input__section`} activeClassName="is-active">Input</NavLink>
+					<NavLink data-route="true" onClick={(e)=>refreshTitle(e)} to={`${url}/form#app-goto__input__section`} activeClassName="is-active">Input</NavLink>
 				</li>
 				<li className={urlChk('#app-goto__password-input__section') ? 'is-active' : ''}>
-					<NavLink data-route="true" to={`${url}/form#app-goto__password-input__section`} activeClassName="is-active">Password Input</NavLink>
+					<NavLink data-route="true" onClick={(e)=>refreshTitle(e)} to={`${url}/form#app-goto__password-input__section`} activeClassName="is-active">Password Input</NavLink>
 				</li>
 				<li className={urlChk('#app-goto__textarea__section') ? 'is-active' : ''}>
-					<NavLink data-route="true" to={`${url}/form#app-goto__textarea__section`} activeClassName="is-active">Textarea</NavLink>
+					<NavLink data-route="true" onClick={(e)=>refreshTitle(e)} to={`${url}/form#app-goto__textarea__section`} activeClassName="is-active">Textarea</NavLink>
 				</li>
 				<li className={urlChk('#app-goto__select-normal__section') ? 'is-active' : ''}>
-					<NavLink data-route="true" to={`${url}/form#app-goto__select-normal__section`} activeClassName="is-active">Select (normal)</NavLink>
+					<NavLink data-route="true" onClick={(e)=>refreshTitle(e)} to={`${url}/form#app-goto__select-normal__section`} activeClassName="is-active">Select (normal)</NavLink>
 				</li>
 				<li className={urlChk('#app-goto__custom-select__section') ? 'is-active' : ''}>
-					<NavLink data-route="true" to={`${url}/form#app-goto__custom-select__section`} activeClassName="is-active">Custom Select</NavLink>
+					<NavLink data-route="true" onClick={(e)=>refreshTitle(e)} to={`${url}/form#app-goto__custom-select__section`} activeClassName="is-active">Custom Select</NavLink>
 				</li>
 				<li className={urlChk('#app-goto__multiple-select__section') ? 'is-active' : ''}>
-					<NavLink data-route="true" to={`${url}/form#app-goto__multiple-select__section`} activeClassName="is-active">Multiple Select</NavLink>
+					<NavLink data-route="true" onClick={(e)=>refreshTitle(e)} to={`${url}/form#app-goto__multiple-select__section`} activeClassName="is-active">Multiple Select</NavLink>
 				</li>
 				<li className={urlChk('#app-goto__single-select__section') ? 'is-active' : ''}>
-					<NavLink data-route="true" to={`${url}/form#app-goto__single-select__section`} activeClassName="is-active">Single Select</NavLink>
+					<NavLink data-route="true" onClick={(e)=>refreshTitle(e)} to={`${url}/form#app-goto__single-select__section`} activeClassName="is-active">Single Select</NavLink>
 				</li>
 				<li className={urlChk('/forform#app-goto__switch__section') ? 'is-active' : ''}>
-					<NavLink data-route="true" to={`${url}/form#app-goto__switch__section`} activeClassName="is-active">Switch</NavLink>
+					<NavLink data-route="true" onClick={(e)=>refreshTitle(e)} to={`${url}/form#app-goto__switch__section`} activeClassName="is-active">Switch</NavLink>
 				</li>
 				<li className={urlChk('#app-goto__radio__section') ? 'is-active' : ''}>
-					<NavLink data-route="true" to={`${url}/form#app-goto__radio__section`} activeClassName="is-active">Radio</NavLink>
+					<NavLink data-route="true" onClick={(e)=>refreshTitle(e)} to={`${url}/form#app-goto__radio__section`} activeClassName="is-active">Radio</NavLink>
 				</li>
 				<li className={urlChk('#app-goto__date__section') ? 'is-active' : ''}>
-					<NavLink data-route="true" to={`${url}/form#app-goto__date__section`} activeClassName="is-active">Date</NavLink>
+					<NavLink data-route="true" onClick={(e)=>refreshTitle(e)} to={`${url}/form#app-goto__date__section`} activeClassName="is-active">Date</NavLink>
 				</li>
 				<li className={urlChk('#app-goto__checkbox__section') ? 'is-active' : ''}>
-					<NavLink data-route="true" to={`${url}/form#app-goto__checkbox__section`} activeClassName="is-active">Checkbox</NavLink>
+					<NavLink data-route="true" onClick={(e)=>refreshTitle(e)} to={`${url}/form#app-goto__checkbox__section`} activeClassName="is-active">Checkbox</NavLink>
 				</li>
 				<li className={urlChk('#app-goto__number__section') ? 'is-active' : ''}>
-					<NavLink data-route="true" to={`${url}/form#app-goto__number__section`} activeClassName="is-active">Number</NavLink>
+					<NavLink data-route="true" onClick={(e)=>refreshTitle(e)} to={`${url}/form#app-goto__number__section`} activeClassName="is-active">Number</NavLink>
 				</li>
 				<li className={urlChk('#app-goto__dynamic-fields__section') ? 'is-active' : ''}>
-					<NavLink data-route="true" to={`${url}/form#app-goto__dynamic-fields__section`} activeClassName="is-active">Dynamic Fields</NavLink>
+					<NavLink data-route="true" onClick={(e)=>refreshTitle(e)} to={`${url}/form#app-goto__dynamic-fields__section`} activeClassName="is-active">Dynamic Fields</NavLink>
 				</li>
 				<li className={urlChk('#app-goto__file__section') ? 'is-active' : ''}>
-					<NavLink data-route="true" to={`${url}/form#app-goto__file__section`} activeClassName="is-active">File</NavLink>
+					<NavLink data-route="true" onClick={(e)=>refreshTitle(e)} to={`${url}/form#app-goto__file__section`} activeClassName="is-active">File</NavLink>
 				</li>
 				<li className={urlChk('#app-goto__file-field__section') ? 'is-active' : ''}>
-					<NavLink data-route="true" to={`${url}/form#app-goto__file-field__section`} activeClassName="is-active">File Field</NavLink>
+					<NavLink data-route="true" onClick={(e)=>refreshTitle(e)} to={`${url}/form#app-goto__file-field__section`} activeClassName="is-active">File Field</NavLink>
 				</li>
 				<li className={urlChk('#app-goto__merge-input__section') ? 'is-active' : ''}>
-					<NavLink data-route="true" to={`${url}/form#app-goto__merge-input__section`} activeClassName="is-active">Merge Input</NavLink>
+					<NavLink data-route="true" onClick={(e)=>refreshTitle(e)} to={`${url}/form#app-goto__merge-input__section`} activeClassName="is-active">Merge Input</NavLink>
 				</li>
 				<li className={urlChk('#app-goto__flex-layout__section') ? 'is-active' : ''}>
-					<NavLink data-route="true" to={`${url}/form#app-goto__flex-layout__section`} activeClassName="is-active">Flex Layout</NavLink>
+					<NavLink data-route="true" onClick={(e)=>refreshTitle(e)} to={`${url}/form#app-goto__flex-layout__section`} activeClassName="is-active">Flex Layout</NavLink>
 				</li>
-								
+
+
 
 				{/*    /////////////////////////   */} 
-				<li className="uix-demo-nav-header">INTERACTION</li>
-				<li className={urlChk('/scroll-reveal') ? 'is-active' : ''}>
-					<NavLink data-route="true" to={`${url}/scroll-reveal`} activeClassName="is-active">Scroll Reveal</NavLink>
+				<li className="poemkit-demo-nav-header">INTERACTION</li>
+				<li className={urlChk('/infinite-scroll') ? 'is-active' : ''}>
+					<NavLink data-route="true" onClick={(e)=>refreshTitle(e)} to={`${url}/infinite-scroll`} activeClassName="is-active">Infinite Scroll</NavLink>
+				</li>
+				<li className={urlChk('/mousewheel-interaction') ? 'is-active' : ''}>
+					<NavLink data-route="true" onClick={(e)=>refreshTitle(e)} to={`${url}/mousewheel-interaction`} activeClassName="is-active">Mousewheel Interaction</NavLink>
 				</li>
 				<li className={urlChk('/parallax') ? 'is-active' : ''}>
-					<NavLink data-route="true" to={`${url}/parallax`} activeClassName="is-active">Parallax</NavLink>
+					<NavLink data-route="true" onClick={(e)=>refreshTitle(e)} to={`${url}/parallax`} activeClassName="is-active">Parallax</NavLink>
+				</li>
+				<li className={urlChk('/scroll-reveal') ? 'is-active' : ''}>
+					<NavLink data-route="true" onClick={(e)=>refreshTitle(e)} to={`${url}/scroll-reveal`} activeClassName="is-active">Scroll Reveal</NavLink>
 				</li>
 				<li className={urlChk('/sticky-elements') ? 'is-active' : ''}>
-					<NavLink data-route="true" to={`${url}/sticky-elements`} activeClassName="is-active">Sticky Elements</NavLink>
+					<NavLink data-route="true" onClick={(e)=>refreshTitle(e)} to={`${url}/sticky-elements`} activeClassName="is-active">Sticky Elements</NavLink>
 				</li>
-				<li className={urlChk('/infinite-scroll') ? 'is-active' : ''}>
-					<NavLink data-route="true" to={`${url}/infinite-scroll`} activeClassName="is-active">Infinite Scroll</NavLink>
-				</li>
+
 
 
 				{/*    /////////////////////////   */} 
-				<li className="uix-demo-nav-header">LAYOUT</li>
+				<li className="poemkit-demo-nav-header">LAYOUT</li>
 				<li className={urlChk('/grid') ? 'is-active' : ''}>
-					<NavLink data-route="true" to={`${url}/grid`} activeClassName="is-active">Grid</NavLink>
+					<NavLink data-route="true" onClick={(e)=>refreshTitle(e)} to={`${url}/grid`} activeClassName="is-active">Grid</NavLink>
 				</li>
 				<li className={urlChk('/gallery') ? 'is-active' : ''}>
-					<NavLink data-route="true" to={`${url}/gallery`} activeClassName="is-active">Gallery</NavLink>
+					<NavLink data-route="true" onClick={(e)=>refreshTitle(e)} to={`${url}/gallery`} activeClassName="is-active">Gallery</NavLink>
 				</li>
 
 
 				{/*    /////////////////////////   */} 
-				<li className="uix-demo-nav-header">NAVIGATION</li>
-				<li className={urlChk('/navigation') ? 'is-active' : ''}>
-					<NavLink data-route="true" to={`${url}/navigation`} activeClassName="is-active">Navigation</NavLink>
+				<li className="poemkit-demo-nav-header">NAVIGATION</li>
+				<li className={urlChk('/cascading-dropDown-list') ? 'is-active' : ''}>
+					<NavLink data-route="true" onClick={(e)=>refreshTitle(e)} to={`${url}/cascading-dropDown-list`} activeClassName="is-active">Cascading DropDown List</NavLink>
 				</li>
 				<li className={urlChk('/dropdown-menu') ? 'is-active' : ''}>
-					<NavLink data-route="true" to={`${url}/dropdown-menu`} activeClassName="is-active">Dropdown Menu</NavLink>
+					<NavLink data-route="true" onClick={(e)=>refreshTitle(e)} to={`${url}/dropdown-menu`} activeClassName="is-active">Dropdown Menu</NavLink>
 				</li>
 				<li className={urlChk('/multilevel-dropdown-menu') ? 'is-active' : ''}>
-					<NavLink data-route="true" to={`${url}/multilevel-dropdown-menu`} activeClassName="is-active">Multiple-Level Dropdown Menu</NavLink>
+					<NavLink data-route="true" onClick={(e)=>refreshTitle(e)} to={`${url}/multilevel-dropdown-menu`} activeClassName="is-active">Multiple-Level Dropdown Menu</NavLink>
 				</li>
-				<li className={urlChk('/cascading-dropDown-list') ? 'is-active' : ''}>
-					<NavLink data-route="true" to={`${url}/cascading-dropDown-list`} activeClassName="is-active">Cascading DropDown List</NavLink>
+				<li className={urlChk('/navigation') ? 'is-active' : ''}>
+					<NavLink data-route="true" onClick={(e)=>refreshTitle(e)} to={`${url}/navigation`} activeClassName="is-active">Navigation</NavLink>
 				</li>
 
 
 				{/*    /////////////////////////   */} 
-				<li className="uix-demo-nav-header">MEDIA</li>
+				<li className="poemkit-demo-nav-header">MEDIA</li>
 				<li className={urlChk('/video') ? 'is-active' : ''}>
-					<NavLink data-route="true" to={`${url}/video`} activeClassName="is-active">Video</NavLink>
+					<NavLink data-route="true" onClick={(e)=>refreshTitle(e)} to={`${url}/video`} activeClassName="is-active">Video</NavLink>
 				</li>
 
 
@@ -238,12 +338,10 @@ function HookContent() {
 		</div>
 
 
-		{/*
-		<!-- Content   
-		====================================================== -->	
-		*/}
-		<div className="uix-demo-section">
-			<div className="uix-demo-container">
+		{/*<!-- Content 
+		====================================================== -->*/}
+		<div className="poemkit-demo-section">
+			<div className="poemkit-demo-container">
 				<div>
 
 					<Switch>
@@ -257,7 +355,7 @@ function HookContent() {
 
 											<h3>Introduction</h3>
 											<p>Get familiar with the basic setup and overview of UI Components.</p>
-											<p><a className="btn btn-dark" href="https://github.com/xizon/uix-kit-react" target="_blank">Download Uix Kit React</a></p>
+											<p><a className="btn btn-dark" href="https://github.com/xizon/poemkit" target="_blank">Download PoemKit</a></p>
 
 										</div>
 									</div>
@@ -271,39 +369,44 @@ function HookContent() {
 
 
 						</Route>
-								
-						<Route path={`${path}/button`}><ButtonDemo/></Route>
-						<Route path={`${path}/form`}><FormDemo/></Route>
-						<Route path={`${path}/grid`}><GridDemo/></Route>
-						<Route path={`${path}/pagination`}><PaginationDemo/></Route>
-						<Route path={`${path}/tabs`}><TabsDemo/></Route>
-						<Route path={`${path}/tabs-animated`}><TabsAnimatedDemo/></Route>
-						<Route path={`${path}/video`}><VideoDemo/></Route>
-						<Route path={`${path}/table`}><TableDemo/></Route>
-						<Route path={`${path}/table-grid`}><TableGridDemo/></Route>
-						<Route path={`${path}/table-sorter`}><TableSorterDemo/></Route>
-						<Route path={`${path}/scroll-reveal`}><ScrollRevealDemo/></Route>
-						<Route path={`${path}/card`}><CardDemo/></Route>
-						<Route path={`${path}/parallax`}><ParallaxDemo/></Route>
-						<Route path={`${path}/accordion`}><AccordionDemo/></Route>
-						<Route path={`${path}/accordion-slider`}><AccordionSliderDemo/></Route>
-						<Route path={`${path}/counter`}><CounterDemo/></Route>
-						<Route path={`${path}/dropdown-menu`}><DropdownMenuDemo/></Route>
-						<Route path={`${path}/modal-dialog`}><ModalDialogDemo/></Route>
-						<Route path={`${path}/slideshow`}><SlideshowDemo/></Route>
-						<Route path={`${path}/swiper`}><SwiperDemo/></Route>
-						<Route path={`${path}/back-to-top`}><BackToTopDemo/></Route>
-						<Route path={`${path}/lightbox`}><LightboxDemo/></Route>
-						<Route path={`${path}/progress-bar`}><ProgressBarDemo/></Route>
-						<Route path={`${path}/sticky-elements`}><StickyElementsDemo/></Route>
-						<Route path={`${path}/multilevel-dropdown-menu`}><MultilevelDropdownMenuDemo/></Route>
-						<Route path={`${path}/cascading-dropDown-list`}><CascadingDropDownListDemo/></Route>
-						<Route path={`${path}/gallery`}><GalleryDemo/></Route>
-						<Route path={`${path}/infinite-scroll`}><InfiniteScrollDemo/></Route>
-						<Route path={`${path}/navigation`}><NavigationDemo/></Route>
+							
+						<Route path={`${path}/accordion`}><AccordionDemo/><SeoChild title="Accordion"/></Route>
+						<Route path={`${path}/accordion-slider`}><AccordionSliderDemo/><SeoChild title="Accordion Slider"/></Route>
+						<Route path={`${path}/button`}><ButtonDemo/><SeoChild title="Button"/></Route>
+						<Route path={`${path}/back-to-top`}><BackToTopDemo/><SeoChild title="Back To Top"/></Route>
+						<Route path={`${path}/card`}><CardDemo/><SeoChild title="Card"/></Route>
+						<Route path={`${path}/counter`}><CounterDemo/><SeoChild title="Counter"/></Route>
+						<Route path={`${path}/cascading-dropDown-list`}><CascadingDropDownListDemo/><SeoChild title="Cascading DropDown List"/></Route>
+						<Route path={`${path}/dropdown-menu`}><DropdownMenuDemo/><SeoChild title="Dropdown Menu"/></Route>
+						<Route path={`${path}/form`}><FormDemo/><SeoChild title="Form"/></Route>
+						<Route path={`${path}/grid`}><GridDemo/><SeoChild title="Grid"/></Route>
+						<Route path={`${path}/gallery`}><GalleryDemo/><SeoChild title="Gallery"/></Route>
+						<Route path={`${path}/hybrid-content-slider`}><HybridContentSliderDemo/><SeoChild title="Hybrid Content Slider"/></Route>
+						<Route path={`${path}/infinite-scroll`}><InfiniteScrollDemo/><SeoChild title="Infinite Scroll"/></Route>
+						<Route path={`${path}/image-shapes`}><ImageShapesDemo/><SeoChild title="Image Shapes"/></Route>
+						<Route path={`${path}/lightbox`}><LightboxDemo/><SeoChild title="Lightbox"/></Route>
+						<Route path={`${path}/modal-dialog`}><ModalDialogDemo/><SeoChild title="Modal Dialog"/></Route>
+						<Route path={`${path}/multilevel-dropdown-menu`}><MultilevelDropdownMenuDemo/><SeoChild title="Multiple-Level Dropdown Menu"/></Route>
+						<Route path={`${path}/mousewheel-interaction`}><MousewheelInteractionDemo/><SeoChild title="Mousewheel Interaction"/></Route>
+						<Route path={`${path}/navigation`}><NavigationDemo/><SeoChild title="Navigation"/></Route>
+						<Route path={`${path}/pagination`}><PaginationDemo/><SeoChild title="Pagination"/></Route>
+						<Route path={`${path}/parallax`}><ParallaxDemo/><SeoChild title="Parallax"/></Route>
+						<Route path={`${path}/progress-bar`}><ProgressBarDemo/><SeoChild title="Progress Bar"/></Route>
+						<Route path={`${path}/periodical-scroll`}><PeriodicalScrollDemo/><SeoChild title="Periodical Scroll"/></Route>
+						<Route path={`${path}/scroll-reveal`}><ScrollRevealDemo/><SeoChild title="Scroll Reveal"/></Route>
+						<Route path={`${path}/slideshow`}><SlideshowDemo/><SeoChild title="Slideshow"/></Route>
+						<Route path={`${path}/swiper`}><SwiperDemo/><SeoChild title="Swiper"/></Route>
+						<Route path={`${path}/sticky-elements`}><StickyElementsDemo/><SeoChild title="Sticky Elements"/></Route>
+						<Route path={`${path}/seamless-scrolling-element`}><SeamlessScrollingElementDemo/><SeoChild title="Seamless Scrolling Element"/></Route>
+						<Route path={`${path}/show-more-less`}><ShowMoreLessDemo/><SeoChild title="Show More Less"/></Route>
+						<Route path={`${path}/tabs`}><TabsDemo/><SeoChild title="Tabs"/></Route>
+						<Route path={`${path}/tabs-animated`}><TabsAnimatedDemo/><SeoChild title="Tabs Animated"/></Route>
+						<Route path={`${path}/table`}><TableDemo/><SeoChild title="Table"/></Route>
+						<Route path={`${path}/table-grid`}><TableGridDemo/><SeoChild title="Table Grid"/></Route>
+						<Route path={`${path}/table-sorter`}><TableSorterDemo/><SeoChild title="Table Sorter"/></Route>
+						<Route path={`${path}/timeline`}><TimelineDemo/><SeoChild title="Timeline"/></Route>
+						<Route path={`${path}/video`}><VideoDemo/><SeoChild title="Video"/></Route>
 
-
-						
 
 					</Switch>
 
@@ -328,13 +431,13 @@ class ComponentsDemo extends Component {
     componentDidMount() {
         //do shmething
 
-	    if ( document.querySelector( '#app-uix-demo-style') === null ) {
+	    if ( document.querySelector( '#app-poemkit-demo-style') === null ) {
 			const $style = document.createElement("style");
-			$style.id = 'app-uix-demo-style';
+			$style.id = 'app-poemkit-demo-style';
 			document.head.appendChild($style);
 			$style.innerHTML = `
 				/*-- Sidebar --*/
-				.uix-demo-sidebar-left {
+				.poemkit-demo-sidebar-left {
 					position: fixed;
 					top: 70px;
 					bottom: 0;
@@ -346,7 +449,7 @@ class ComponentsDemo extends Component {
 				}
 
 				@media all and (max-width: 768px) {
-					.uix-demo-sidebar-left {
+					.poemkit-demo-sidebar-left {
 						position: relative;
 						top: 0;
 						width: 100%;
@@ -356,15 +459,15 @@ class ComponentsDemo extends Component {
 
 				
 				/*-- Navigation --*/
-				.uix-demo-nav,
-				.uix-demo-nav ul {
+				.poemkit-demo-nav,
+				.poemkit-demo-nav ul {
 					margin: 0;
 					padding: 0;
 					list-style: none;
 					font-size: .875rem;
 				}
 
-				.uix-demo-nav-header {
+				.poemkit-demo-nav-header {
 					padding: 8px 0;
 					border-bottom: 1px solid #e5e5e5;
 					font-weight: 500;
@@ -373,13 +476,13 @@ class ComponentsDemo extends Component {
 					padding-top: 1rem;
 				}
 
-				.uix-demo-nav li {
+				.poemkit-demo-nav li {
 					position: relative;
 				}
 
 				
 				
-				.uix-demo-nav li>a {
+				.poemkit-demo-nav li>a {
 					display: flex;
 					align-items: center;
 					column-gap: .25em;
@@ -388,22 +491,22 @@ class ComponentsDemo extends Component {
 				}
 				
 
-				.uix-demo-nav li>a>* {
+				.poemkit-demo-nav li>a>* {
 					flex: none;
 				}
 				
-				.uix-demo-nav li>a:focus {
+				.poemkit-demo-nav li>a:focus {
 					outline: none;
 				}
 				
-				.uix-demo-nav>li>a {
+				.poemkit-demo-nav>li>a {
 					padding: 5px 0;
 				}
 
-				.uix-demo-nav li.is-active > a {
+				.poemkit-demo-nav li.is-active > a {
 					color: #333;
 				}
-				.uix-demo-nav li.is-active > a:after {
+				.poemkit-demo-nav li.is-active > a:after {
 					content: '';
 					display: block;
 					width: 5px;
@@ -415,18 +518,18 @@ class ComponentsDemo extends Component {
 				}		
 
 				@media all and (max-width: 768px) {
-					.uix-demo-nav li {
+					.poemkit-demo-nav li {
 						position: relative;
 						float: left;
 						display: inline-block;
 						margin: 0 1.2rem 0 0;
 					}
 
-					.uix-demo-nav-header {
+					.poemkit-demo-nav-header {
 						width: 100%;
 					}	
 
-					.uix-demo-nav li.is-active > a:after {
+					.poemkit-demo-nav li.is-active > a:after {
 						left: -.7rem;
 					}	
 
@@ -434,7 +537,7 @@ class ComponentsDemo extends Component {
 				
 				
 				/*-- Main --*/
-				.uix-demo-container {
+				.poemkit-demo-container {
 					padding-left: 15px;
 					padding-right: 15px;
 					max-width: 1000px;
@@ -447,7 +550,7 @@ class ComponentsDemo extends Component {
 				}
 				
 				@media all and (max-width: 768px) {
-					.uix-demo-container {
+					.poemkit-demo-container {
 						padding: 0;	
 						max-width: 100%;
 						left: 0;
@@ -455,27 +558,27 @@ class ComponentsDemo extends Component {
 				}
 
 				@media all and (max-width: 1024px) and (min-width: 769px) {
-					.uix-demo-container {
+					.poemkit-demo-container {
 						max-width: 700px;
 					}
 				}
 		
 				@media all and (max-width: 1440px) and (min-width: 1025px) {
-					.uix-demo-container {
+					.poemkit-demo-container {
 						max-width: 1000px;
 					}
 				}
 
 
 				@media all and (min-width: 1441px) {
-					.uix-demo-container {
+					.poemkit-demo-container {
 						max-width: 1140px;
 						left: 60px;
 					}
 				}
 
 				
-				.uix-demo-section {
+				.poemkit-demo-section {
 					display: flow-root;
 					box-sizing: border-box;
 					padding-top: 40px;
@@ -495,7 +598,7 @@ class ComponentsDemo extends Component {
 	  <>
 		
 		
-            <main id="uix-maincontent">
+            <main id="poemkit-maincontent">
 		
 				<HookContent />
 

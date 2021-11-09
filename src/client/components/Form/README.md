@@ -1,6 +1,6 @@
-# @uixkit.react/components/Form
+# @poemkit/components/Form
 
-[Source](https://github.com/xizon/uix-kit-react/tree/main/src/client/components/Form)
+[Source](https://github.com/xizon/poemkit/tree/main/src/client/components/Form)
 
 ## Version
 
@@ -11,7 +11,7 @@
 
 ### Input
 ```js
-import { Input } from '@uixkit.react/components/Form/index.tsx';
+import { Input } from '@poemkit/components/Form/index.tsx';
 ```
 | Property | Type | Default | Description |
 | --- | --- | --- | --- |
@@ -34,7 +34,7 @@ It accepts all props which this control support.
 
 ### Password Input
 ```js
-import { PasswordInput } from '@uixkit.react/components/Form/index.tsx';
+import { PasswordInput } from '@poemkit/components/Form/index.tsx';
 ```
 | Property | Type | Default | Description |
 | --- | --- | --- | --- |
@@ -57,7 +57,7 @@ It accepts all props which this control support.
 
 ### Merge Input
 ```js
-import { MergeInput } from '@uixkit.react/components/Form/index.tsx';
+import { MergeInput } from '@poemkit/components/Form/index.tsx';
 ```
 | Property | Type | Default | Description |
 | --- | --- | --- | --- |
@@ -78,7 +78,7 @@ It accepts all props which this control support.
 
 ### Textarea
 ```js
-import { Textarea } from '@uixkit.react/components/Form/index.tsx';
+import { Textarea } from '@poemkit/components/Form/index.tsx';
 ```
 | Property | Type | Default | Description |
 | --- | --- | --- | --- |
@@ -101,7 +101,7 @@ It accepts all props which this control support.
 
 ### Select
 ```js
-import { Select } from '@uixkit.react/components/Form/index.tsx';
+import { Select } from '@poemkit/components/Form/index.tsx';
 ```
 | Property | Type | Default | Description |
 | --- | --- | --- | --- |
@@ -123,7 +123,7 @@ It accepts all props which this control support.
 
 ### Custom Select
 ```js
-import { CustomSelect } from '@uixkit.react/components/Form/index.tsx';
+import { CustomSelect } from '@poemkit/components/Form/index.tsx';
 ```
 | Property | Type | Default | Description |
 | --- | --- | --- | --- |
@@ -142,7 +142,7 @@ import { CustomSelect } from '@uixkit.react/components/Form/index.tsx';
 
 ### Checkbox
 ```js
-import { Checkbox } from '@uixkit.react/components/Form/index.tsx';
+import { Checkbox } from '@poemkit/components/Form/index.tsx';
 ```
 | Property | Type | Default | Description |
 | --- | --- | --- | --- |
@@ -160,7 +160,7 @@ It accepts all props which this control support.
 
 ### Radio
 ```js
-import { Radio } from '@uixkit.react/components/Form/index.tsx';
+import { Radio } from '@poemkit/components/Form/index.tsx';
 ```
 | Property | Type | Default | Description |
 | --- | --- | --- | --- |
@@ -173,7 +173,7 @@ import { Radio } from '@uixkit.react/components/Form/index.tsx';
 
 ### Multiple Select
 ```js
-import { MultiSelect } from '@uixkit.react/components/Form/index.tsx';
+import { MultiSelect } from '@poemkit/components/Form/index.tsx';
 ```
 | Property | Type | Default | Description |
 | --- | --- | --- | --- |
@@ -187,7 +187,7 @@ import { MultiSelect } from '@uixkit.react/components/Form/index.tsx';
 
 ### Single Select
 ```js
-import { SingleSelect } from '@uixkit.react/components/Form/index.tsx';
+import { SingleSelect } from '@poemkit/components/Form/index.tsx';
 ```
 | Property | Type | Default | Description |
 | --- | --- | --- | --- |
@@ -202,7 +202,7 @@ import { SingleSelect } from '@uixkit.react/components/Form/index.tsx';
 
 ### Date
 ```js
-import { Date } from '@uixkit.react/components/Form/index.tsx';
+import { Date } from '@poemkit/components/Form/index.tsx';
 ```
 | Property | Type | Default | Description |
 | --- | --- | --- | --- |
@@ -223,7 +223,7 @@ It accepts all props which this control support.
 
 ### Number
 ```js
-import { Number } from '@uixkit.react/components/Form/index.tsx';
+import { Number } from '@poemkit/components/Form/index.tsx';
 ```
 | Property | Type | Default | Description |
 | --- | --- | --- | --- |
@@ -247,7 +247,7 @@ It accepts all props which this control support.
 
 ### Switch
 ```js
-import { Switch } from '@uixkit.react/components/Form/index.tsx';
+import { Switch } from '@poemkit/components/Form/index.tsx';
 ```
 | Property | Type | Default | Description |
 | --- | --- | --- | --- |
@@ -268,7 +268,7 @@ It accepts all props which this control support.
 
 ### Dynamic Fields
 ```js
-import { DynamicFields } from '@uixkit.react/components/Form/index.tsx';
+import { DynamicFields } from '@poemkit/components/Form/index.tsx';
 ```
 | Property | Type | Default | Description |
 | --- | --- | --- | --- |
@@ -281,7 +281,7 @@ import { DynamicFields } from '@uixkit.react/components/Form/index.tsx';
 
 ### File
 ```js
-import { File } from '@uixkit.react/components/Form/index.tsx';
+import { File } from '@poemkit/components/Form/index.tsx';
 ```
 | Property | Type | Default | Description |
 | --- | --- | --- | --- |
@@ -295,7 +295,7 @@ It accepts all props which this control support.
 
 ### File Field
 ```js
-import { FileField } from '@uixkit.react/components/Form/index.tsx';
+import { FileField } from '@poemkit/components/Form/index.tsx';
 ```
 | Property | Type | Default | Description |
 | --- | --- | --- | --- |
@@ -328,7 +328,7 @@ import {
 	DynamicFields,
 	File,
 	FileField
-} from '@uixkit.react/components/Form/index.tsx';
+} from '@poemkit/components/Form/index.tsx';
 
 
 
@@ -873,12 +873,12 @@ export default () => {
 
 		 <form method="post" action="#" id="app-my-form">
 
-			<div className="uix-controls-layout">
-				<div className="uix-controls-layout__content">
-					<div className="uix-controls-layout__content__inner">
+			<div className="poemkit-controls-layout">
+				<div className="poemkit-controls-layout__content">
+					<div className="poemkit-controls-layout__content__inner">
 						<div>
 							{/*<!-- // -->*/}
-							<h3 className="uix-typo--color-sub uix-typo--h6 uix-spacing--no uix-typo--style-uppercase">Left Title</h3>
+							<h3 className="poemkit-typo--color-sub poemkit-typo--h6 poemkit-spacing--no poemkit-typo--style-uppercase">Left Title</h3>
 							{/*<!-- // -->*/}
 						</div>
 						<div>
@@ -888,18 +888,18 @@ export default () => {
 						</div>
 					</div>
 				</div>
-				<div className="uix-controls-layout__icon">
+				<div className="poemkit-controls-layout__icon">
 					<i className="fa fa-angle-right"></i>
 				</div>
 			</div>     
 
 
-			 <div className="uix-controls-layout">
-				<div className="uix-controls-layout__content">
-					<div className="uix-controls-layout__content__inner">
+			 <div className="poemkit-controls-layout">
+				<div className="poemkit-controls-layout__content">
+					<div className="poemkit-controls-layout__content__inner">
 						<div>
 							{/*<!-- // -->*/}
-							<h3 className="uix-typo--color-sub uix-typo--h6 uix-spacing--no uix-typo--style-uppercase">Left Title</h3>
+							<h3 className="poemkit-typo--color-sub poemkit-typo--h6 poemkit-spacing--no poemkit-typo--style-uppercase">Left Title</h3>
 							{/*<!-- // -->*/}
 						</div>
 						<div>
@@ -909,17 +909,17 @@ export default () => {
 						</div>
 					</div>
 				</div>
-				<div className="uix-controls-layout__icon">
+				<div className="poemkit-controls-layout__icon">
 					<i className="fa fa-angle-right"></i>
 				</div>
 			</div>     
 
-			<div className="uix-controls-layout">
-				<div className="uix-controls-layout__content">
-					<div className="uix-controls-layout__content__inner">
-						<div className="uix-t-r">
+			<div className="poemkit-controls-layout">
+				<div className="poemkit-controls-layout__content">
+					<div className="poemkit-controls-layout__content__inner">
+						<div className="poemkit-t-r">
 							{/*<!-- // -->*/}
-							<h3 className="uix-typo--color-sub uix-typo--h6 uix-spacing--no uix-typo--style-uppercase">Right Title</h3>
+							<h3 className="poemkit-typo--color-sub poemkit-typo--h6 poemkit-spacing--no poemkit-typo--style-uppercase">Right Title</h3>
 							{/*<!-- // -->*/}
 						</div>
 						<div>
@@ -929,18 +929,18 @@ export default () => {
 						</div>
 					</div>
 				</div>
-				<div className="uix-controls-layout__icon">
+				<div className="poemkit-controls-layout__icon">
 					<i className="fa fa-angle-right"></i>
 				</div>
 			</div>     
 
 
-			<div className="uix-controls-layout">
-				<div className="uix-controls-layout__content">
-					<div className="uix-controls-layout__content__inner">
-						<div className="uix-t-r">
+			<div className="poemkit-controls-layout">
+				<div className="poemkit-controls-layout__content">
+					<div className="poemkit-controls-layout__content__inner">
+						<div className="poemkit-t-r">
 							{/*<!-- // -->*/}
-							<h3 className="uix-typo--color-sub uix-typo--h6 uix-spacing--no uix-typo--style-uppercase">Right Title</h3>
+							<h3 className="poemkit-typo--color-sub poemkit-typo--h6 poemkit-spacing--no poemkit-typo--style-uppercase">Right Title</h3>
 							{/*<!-- // -->*/}
 						</div>
 						<div>
@@ -950,18 +950,18 @@ export default () => {
 						</div>
 					</div>
 				</div>
-				<div className="uix-controls-layout__icon">
+				<div className="poemkit-controls-layout__icon">
 					<i className="fa fa-angle-right"></i>
 				</div>
 			</div>     
 
 
-			<div className="uix-controls-layout">
-				<div className="uix-controls-layout__content">
-					<div className="uix-controls-layout__content__inner">
+			<div className="poemkit-controls-layout">
+				<div className="poemkit-controls-layout__content">
+					<div className="poemkit-controls-layout__content__inner">
 						<div>
 							{/*<!-- // -->*/}
-							<h3 className="uix-typo--color-sub uix-typo--h6 uix-spacing--no uix-typo--style-uppercase">No Icon</h3>
+							<h3 className="poemkit-typo--color-sub poemkit-typo--h6 poemkit-spacing--no poemkit-typo--style-uppercase">No Icon</h3>
 							{/*<!-- // -->*/}
 						</div>
 						<div>
@@ -974,12 +974,12 @@ export default () => {
 			</div>     
 
 
-			 <div className="uix-controls-layout">
-				<div className="uix-controls-layout__content">
-					<div className="uix-controls-layout__content__inner">
+			 <div className="poemkit-controls-layout">
+				<div className="poemkit-controls-layout__content">
+					<div className="poemkit-controls-layout__content__inner">
 						<div>
 							{/*<!-- // -->*/}
-							<h3 className="uix-typo--color-sub uix-typo--h6 uix-spacing--no uix-typo--style-uppercase">No Icon</h3>
+							<h3 className="poemkit-typo--color-sub poemkit-typo--h6 poemkit-spacing--no poemkit-typo--style-uppercase">No Icon</h3>
 							{/*<!-- // -->*/}
 						</div>
 						<div>
@@ -992,9 +992,9 @@ export default () => {
 			</div>          
 
 
-			 <div className="uix-controls-layout">
-				<div className="uix-controls-layout__content">
-					<div className="uix-controls-layout__content__inner">
+			 <div className="poemkit-controls-layout">
+				<div className="poemkit-controls-layout__content">
+					<div className="poemkit-controls-layout__content__inner">
 						<div>
 							{/*<!-- // -->*/}
 
@@ -1002,7 +1002,7 @@ export default () => {
 						</div>
 						<div>
 							{/*<!-- // -->*/}
-							<button type="submit" className="uix-btn uix-btn__border--thin uix-btn__size--s uix-btn__bg--primary">Submit Your Info</button>   
+							<button type="submit" className="poemkit-btn poemkit-btn__border--thin poemkit-btn__size--s poemkit-btn__bg--primary">Submit Your Info</button>   
 							{/*<!-- // -->*/}
 						</div>
 					</div>

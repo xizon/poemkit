@@ -1,6 +1,6 @@
-# @uixkit.react/components/Lightbox
+# @poemkit/components/Lightbox
 
-[Source](https://github.com/xizon/uix-kit-react/tree/main/src/client/components/Lightbox)
+[Source](https://github.com/xizon/poemkit/tree/main/src/client/components/Lightbox)
 
 ## Version
 
@@ -10,7 +10,7 @@
 
 ### Lightbox
 ```js
-import Lightbox from '@uixkit.react/components/Lightbox/index.tsx';
+import Lightbox from '@poemkit/components/Lightbox/index.tsx';
 ```
 | Property | Type | Default | Description |
 | --- | --- | --- | --- |
@@ -28,7 +28,7 @@ import Lightbox from '@uixkit.react/components/Lightbox/index.tsx';
 
 ```js
 import React from 'react';
-import Lightbox from '@uixkit.react/components/Lightbox/index.tsx';
+import Lightbox from '@poemkit/components/Lightbox/index.tsx';
 
 export default () => {
   return (
@@ -72,7 +72,7 @@ export default () => {
   
       <Lightbox 
         triggerTagName="a" 
-        triggerClassName="uix-btn uix-btn__border--thin uix-btn__margin--b uix-btn__size--s uix-btn__bg--primary" 
+        triggerClassName="poemkit-btn poemkit-btn__border--thin poemkit-btn__margin--b poemkit-btn__size--s poemkit-btn__bg--primary" 
         triggerContent={<>
           Click Me To Show HTML Code
         </>}
@@ -92,7 +92,7 @@ export default () => {
       <Lightbox 
         fixed={false}
         triggerTagName="a" 
-        triggerClassName="uix-btn uix-btn__border--thin uix-btn__margin--b uix-btn__size--s uix-btn__bg--primary" 
+        triggerClassName="poemkit-btn poemkit-btn__border--thin poemkit-btn__margin--b poemkit-btn__size--s poemkit-btn__bg--primary" 
         triggerContent={<>
           Click Me To Show HTML Code (Not Fixed)
         </>}
@@ -116,7 +116,7 @@ export default () => {
         fixed={false}
         ajax={`{"target":"#app-home-description","method":"GET","url":"/index"}`}
         triggerTagName="a" 
-        triggerClassName="uix-btn uix-btn__border--thin uix-btn__margin--b uix-btn__size--s uix-btn__bg--primary" 
+        triggerClassName="poemkit-btn poemkit-btn__border--thin poemkit-btn__margin--b poemkit-btn__size--s poemkit-btn__bg--primary" 
         triggerContent={<>
           Click Me To Add <strong>"Home"</strong> Elements
         </>} />

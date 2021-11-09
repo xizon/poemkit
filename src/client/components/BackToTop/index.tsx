@@ -6,21 +6,22 @@
 import React, { Component } from 'react';
 
 /*-- Apply Third-party plugins (import location should be in front of "global scripts and styles") --*/
-import '@uixkit.react/components/_plugins/_lib-bootstrap';
-import '@uixkit.react/components/_plugins/_lib-icons';
-import TweenMax, { TimelineMax } from '@uixkit.react/components/_plugins/_lib-gsap';
+import '@poemkit/components/_plugins/_lib-bootstrap';
+import '@poemkit/components/_plugins/_lib-icons';
+import TweenMax, { TimelineMax } from '@poemkit/components/_plugins/_lib-gsap';
 
 /*-- Apply global scripts and styles --*/
-import '@uixkit.react/components/_utils/styles/_all.scss';
-import '@uixkit.react/components/_utils/styles/rtl/_all.scss';
-import { __ } from '@uixkit.react/components/_utils/_all';
+import '@poemkit/components/_utils/styles/_all.scss';
+import '@poemkit/components/_utils/styles/rtl/_all.scss';
+import { __ } from '@poemkit/components/_utils/_all';
 
 /*-- Apply this component styles --*/
-import '@uixkit.react/components/BackToTop/styles/_style.scss';
+import '@poemkit/components/BackToTop/styles/_style.scss';
 
 
 // Adapt the easing parameters of TweenMax
 enum EasingList {
+    linear = 'Linear.easeNone',
     easeIn = 'Power2.easeIn', 
     easeOut = 'Power2.easeOut', 
     easeInOut = 'Power2.easeInOut'
@@ -90,10 +91,10 @@ export default class BackToTop extends Component<BackToTopProps, BackToTopState>
 
         const self = this;
 
-        __(document).ready(function () {
+        __( document ).ready( function() {
 
             // Move HTML templates to tag end body </body>
-            Array.prototype.forEach.call(document.querySelectorAll('.uix-to-top:not(.is-loaded)'), function (node) {
+            Array.prototype.forEach.call(document.querySelectorAll('.poemkit-to-top:not(.is-loaded)'), function (node) {
                 node.classList.add( 'is-loaded' );
                 document.body.appendChild(node);
             });
@@ -108,7 +109,7 @@ export default class BackToTop extends Component<BackToTopProps, BackToTopState>
 
 
             //
-            __( '.uix-to-top > button' ).off( 'click' ).on( 'click', function( this: any, e: any ) { 
+            __( '.poemkit-to-top > button' ).off( 'click' ).on( 'click', function( this: any, e: any ) { 
                 self.moveToTop(e);
             });
              
@@ -122,7 +123,7 @@ export default class BackToTop extends Component<BackToTopProps, BackToTopState>
     /** Remove the global list of events, especially as scroll and interval. */
     componentWillUnmount() {
         //Hide other pages button of back-to-top
-        Array.prototype.forEach.call( document.querySelectorAll( '.uix-to-top > button' ), function( el ) {
+        Array.prototype.forEach.call( document.querySelectorAll( '.poemkit-to-top > button' ), function( el ) {
             el.classList.remove( 'is-active' );
         });
 
@@ -145,7 +146,7 @@ export default class BackToTop extends Component<BackToTopProps, BackToTopState>
 
         return (
             <>
-            <div className="uix-to-top">
+            <div className="poemkit-to-top">
                 <button type="button" className={ this.state.isAtRange ? 'is-active' : ''}>
                     {btnIcon || <><i className="fa fa-arrow-up" aria-hidden="true"></i></>}
                 </button>

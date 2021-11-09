@@ -12,7 +12,7 @@ process.on('unhandledRejection', err => {
 
 
 /*
- * @uixkit.react/components/Button
+ * @poemkit/components/Button
  * ----------------------------------------
  */
 
@@ -22,7 +22,7 @@ import '@testing-library/jest-dom';
 
 
 import React from 'react';
-import { Button } from '@uixkit.react/components/Button/index.tsx';
+import { Button } from '@poemkit/components/Button/index.tsx';
 
 
 
@@ -32,11 +32,11 @@ describe('Button', () => {
         <Button data-testid="test-element">Button Label</Button>
     );
 
-    console.log(renderer.toJSON());
+    //console.log(renderer.toJSON());
 
 
     //
-    test('renders initial button to <a>...</a>', () => {
+    it('renders initial this component to <a>...</a>', () => {
         render(<Button href="https://example.com" data-testid="test-element">Button Label</Button>);
 
         const $btn = screen.getByTestId('test-element');
@@ -57,7 +57,7 @@ describe('Button', () => {
     });
 
     //
-    test('renders initial button to <button>...</button>', () => {
+    it('renders initial this component to <button>...</button>', () => {
         render(<Button data-testid="test-element">Button Label</Button>);
 
         const $btn = screen.getByTestId('test-element');

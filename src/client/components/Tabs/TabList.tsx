@@ -34,7 +34,7 @@ export default class TabList extends Component<TabListProps, TabListState> {
 		return (
 		  <>
  
-				<li onClick={switchEv} role="presentation" className={activedClassName} data-tab={targetID}>{index === 1 ? <><div className="uix-tabs__marker"></div></> : ''}<a href="#" {...attributes}>{children}</a></li>
+				<li onClick={switchEv} role="presentation" className={activedClassName} data-tab={targetID}>{index === 1 ? <><div className="poemkit-tabs__marker"></div></> : ''}<a href="#" {...attributes}>{children}</a></li>
 	
 		  </>
 		)

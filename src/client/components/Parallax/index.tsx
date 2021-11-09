@@ -6,20 +6,20 @@
 import React, { Component } from 'react';
 
 /*-- Apply Third-party plugins (import location should be in front of "global scripts and styles") --*/
-import '@uixkit.react/components/_plugins/_lib-bootstrap';
-import '@uixkit.react/components/_plugins/_lib-icons';
-import TweenMax, { TimelineMax } from '@uixkit.react/components/_plugins/_lib-gsap';
+import '@poemkit/components/_plugins/_lib-bootstrap';
+import '@poemkit/components/_plugins/_lib-icons';
+import TweenMax, { TimelineMax } from '@poemkit/components/_plugins/_lib-gsap';
 
 /*-- Apply global scripts and styles --*/
-import '@uixkit.react/components/_utils/styles/_all.scss';
-import '@uixkit.react/components/_utils/styles/rtl/_all.scss';
-import { __ } from '@uixkit.react/components/_utils/_all';
+import '@poemkit/components/_utils/styles/_all.scss';
+import '@poemkit/components/_utils/styles/rtl/_all.scss';
+import { __ } from '@poemkit/components/_utils/_all';
 
 /*-- Apply this component styles --*/
-import '@uixkit.react/components/Parallax/styles/_style.scss';
+import '@poemkit/components/Parallax/styles/_style.scss';
 
 //
-import { parallax } from '@uixkit.react/components/Parallax/parallax';
+import { parallax } from '@poemkit/components/Parallax/parallax';
 
 
 type ParallaxProps = {
@@ -39,7 +39,7 @@ type ParallaxProps = {
     overlay?: boolean | string | null;
     /** skew of background */
     skew?: number | null;
-    /** speed of parallax animation */
+    /** speed of parallax animation. Recommended value: `-10.00` to `10.00` */
     speed?: number | null;
     /** -- */
     id?: string;
@@ -48,37 +48,37 @@ type ParallaxState = false;
 
 
 export default class Parallax extends Component<ParallaxProps, ParallaxState> {
- 
-     private rootRef = React.createRef<HTMLDivElement>();
- 
-     windowScrollUpdate: () => void;
-     windowResizeUpdate: () => void;
-     uniqueID: string;
-     
-     constructor(props) {
-         super(props);
- 
-         this.uniqueID = 'app-' + __.GUID.create();
-         
-         // Add a scroll event listener to window
-         this.windowScrollUpdate = ()=>{};
 
-		// Add a resize event listener to window
-		this.windowResizeUpdate = ()=>{}; 
+    private rootRef = React.createRef<HTMLDivElement>();
 
-         this.parallaxInit = this.parallaxInit.bind(this);
- 
-     }
- 
-     parallaxInit(w) {
- 
+    windowScrollUpdate: () => void;
+    windowResizeUpdate: () => void;
+    uniqueID: string;
+
+    constructor(props) {
+        super(props);
+
+        this.uniqueID = 'app-' + __.GUID.create();
+
+        // Add a scroll event listener to window
+        this.windowScrollUpdate = () => { };
+
+        // Add a resize event listener to window
+        this.windowResizeUpdate = () => { };
+
+        this.parallaxInit = this.parallaxInit.bind(this);
+
+    }
+
+    parallaxInit(w) {
+
         const self = this;
         const reactDomEl: any = self.rootRef.current;
 
         // Pure parallax scrolling effect without other embedded HTML elements
         //------------------------------------------
-        if ( reactDomEl.classList.contains( 'uix-parallax--el' ) ) {
-        
+        if (reactDomEl.classList.contains('poemkit-parallax--el')) {
+
             let dataSpeed = reactDomEl.dataset.speed,
                 dataEasing = reactDomEl.dataset.transition;
 
@@ -99,9 +99,9 @@ export default class Parallax extends Component<ParallaxProps, ParallaxState> {
 
         // Parallax scrolling effect with embedded HTML elements
         //------------------------------------------
-        if ( !reactDomEl.classList.contains( 'uix-parallax--el' ) ) {
-            const $curImg = reactDomEl.querySelector( '.uix-parallax__img'),
-                  dataImg = $curImg.src;
+        if (!reactDomEl.classList.contains('poemkit-parallax--el')) {
+            const $curImg = reactDomEl.querySelector('.poemkit-parallax__img'),
+                dataImg = $curImg.src;
 
             let dataSkew = reactDomEl.dataset.skew,
                 dataSpeed = reactDomEl.dataset.speed,
@@ -129,30 +129,30 @@ export default class Parallax extends Component<ParallaxProps, ParallaxState> {
             if (dataXPos === undefined) dataXPos = '50%';
             if (dataOffsetTop === undefined) dataOffsetTop = 0;
             if (dataFullyVisible === undefined) dataFullyVisible = false;
-            
+
 
             //Trigger a callback when the selected images are loaded
             //Check if the picture is loaded on the page
             const img = new Image();
             img.onload = function () {
 
-                curImgH = $curImg.offsetHeight; //element height + padding width + borders width
-                curImgW = $curImg.offsetWidth; //element width + padding width + borders width
+                curImgH = $curImg.offsetHeight; //including: padding + borders + v-scrollbars (if rendered)
+                curImgW = $curImg.offsetWidth; //including: padding + borders + v-scrollbars (if rendered)
 
                 //Custom height for parallax container
                 if (
-                    reactDomEl.classList.contains('uix-height--10') ||
-                    reactDomEl.classList.contains('uix-height--20') ||
-                    reactDomEl.classList.contains('uix-height--30') ||
-                    reactDomEl.classList.contains('uix-height--40') ||
-                    reactDomEl.classList.contains('uix-height--50') ||
-                    reactDomEl.classList.contains('uix-height--60') ||
-                    reactDomEl.classList.contains('uix-height--70') ||
-                    reactDomEl.classList.contains('uix-height--80') ||
-                    reactDomEl.classList.contains('uix-height--90') ||
-                    reactDomEl.classList.contains('uix-height--100')
+                    reactDomEl.classList.contains('poemkit-height--10') ||
+                    reactDomEl.classList.contains('poemkit-height--20') ||
+                    reactDomEl.classList.contains('poemkit-height--30') ||
+                    reactDomEl.classList.contains('poemkit-height--40') ||
+                    reactDomEl.classList.contains('poemkit-height--50') ||
+                    reactDomEl.classList.contains('poemkit-height--60') ||
+                    reactDomEl.classList.contains('poemkit-height--70') ||
+                    reactDomEl.classList.contains('poemkit-height--80') ||
+                    reactDomEl.classList.contains('poemkit-height--90') ||
+                    reactDomEl.classList.contains('poemkit-height--100')
                 ) {
-                
+
                     const newH = reactDomEl.offsetHeight;
                     reactDomEl.style.height = newH + 'px';
                     $curImg.style.maxHeight = newH + 'px';
@@ -162,11 +162,11 @@ export default class Parallax extends Component<ParallaxProps, ParallaxState> {
                 }
 
 
-                //If the ".uix-v-align--absolute" has more content
+                //If the ".poemkit-v-align--absolute" has more content
                 if (w <= 768) {
 
-                    if (reactDomEl.querySelector('.uix-v-align--absolute').offsetHeight >= curImgH) {
-                        reactDomEl.querySelector('.uix-v-align--absolute').classList.add('uix-v-align--relative');
+                    if (reactDomEl.querySelector('.poemkit-v-align--absolute').offsetHeight >= curImgH) {
+                        reactDomEl.querySelector('.poemkit-v-align--absolute').classList.add( 'poemkit-v-align--relative' );
                         $curImg.style.display = 'none';
                     }
 
@@ -232,17 +232,17 @@ export default class Parallax extends Component<ParallaxProps, ParallaxState> {
 
             };
 
-            img.src = dataImg;       
+            img.src = dataImg;
         }
 
 
 
- 
-     }
- 
- 
-     componentDidMount() {
- 
+
+    }
+
+
+    componentDidMount() {
+
         let windowWidth = window.innerWidth;
         this.parallaxInit(windowWidth);
 
@@ -265,23 +265,23 @@ export default class Parallax extends Component<ParallaxProps, ParallaxState> {
         window.removeEventListener('resize', this.windowResizeUpdate);
         window.addEventListener('resize', this.windowResizeUpdate);
 
- 
-     }
- 
-     /** Remove the global list of events, especially as scroll and interval. */
-     componentWillUnmount() {
-         
-         // Remove scroll events from window
-         window.removeEventListener('scroll', this.windowScrollUpdate);
-         window.removeEventListener('touchmove', this.windowScrollUpdate);  
 
-		// Remove resize events from window
-		window.removeEventListener('resize', this.windowResizeUpdate);   
- 
-     }
- 
- 
-     render() {
+    }
+
+    /** Remove the global list of events, especially as scroll and interval. */
+    componentWillUnmount() {
+
+        // Remove scroll events from window
+        window.removeEventListener('scroll', this.windowScrollUpdate);
+        window.removeEventListener('touchmove', this.windowScrollUpdate);
+
+        // Remove resize events from window
+        window.removeEventListener('resize', this.windowResizeUpdate);
+
+    }
+
+
+    render() {
 
         const {
             parallaxElements,
@@ -303,26 +303,26 @@ export default class Parallax extends Component<ParallaxProps, ParallaxState> {
             <>
 
                 {!_parallaxElements ? (
-                    <div 
+                    <div
                         ref={this.rootRef}
                         id={id || this.uniqueID}
-                        className={`uix-parallax ${heightClass || ''}`}
+                        className={`poemkit-parallax ${heightClass || ''}`}
                         data-fully-visible={fullyVisible || false}
                         data-offset-top={offsetTop || 0}
                         data-overlay-bg={overlay || false}
                         data-skew={skew || 0}
                         data-speed={speed || 0.1}>
-                        <img className="uix-parallax__img" src={img} alt="" />
-                        <div className="uix-v-align--absolute uix-t-c">
+                        <img className="poemkit-parallax__img" src={img} alt="" />
+                        <div className="poemkit-v-align--absolute poemkit-t-c">
                             {children}
                         </div>
                     </div>
 
                 ) : (
-                    <div 
+                    <div
                         ref={this.rootRef}
                         id={id || this.uniqueID}
-                        className={`uix-parallax--el ${heightClass || ''}`}
+                        className={`poemkit-parallax--el ${heightClass || ''}`}
                         data-transition={parallaxElementsTransition || 'all 0.4s cubic-bezier(0, 0, 0.34, 0.96) 0s'}
                         data-speed={speed || 0.1}>
                         {children}
@@ -332,8 +332,7 @@ export default class Parallax extends Component<ParallaxProps, ParallaxState> {
 
 
             </>
-        )        
-     }
- }
- 
- 
+        )
+    }
+}
+

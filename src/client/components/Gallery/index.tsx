@@ -6,21 +6,21 @@
 import React, { Component } from 'react';
 
 /*-- Apply Third-party plugins (import location should be in front of "global scripts and styles") --*/
-import '@uixkit.react/components/_plugins/_lib-bootstrap';
-import '@uixkit.react/components/_plugins/_lib-icons';
-import TweenMax, { TimelineMax } from '@uixkit.react/components/_plugins/_lib-gsap';
+import '@poemkit/components/_plugins/_lib-bootstrap';
+import '@poemkit/components/_plugins/_lib-icons';
+import TweenMax, { TimelineMax } from '@poemkit/components/_plugins/_lib-gsap';
 
 /*-- Apply global scripts and styles --*/
-import '@uixkit.react/components/_utils/styles/_all.scss';
-import '@uixkit.react/components/_utils/styles/rtl/_all.scss';
-import { __ } from '@uixkit.react/components/_utils/_all';
+import '@poemkit/components/_utils/styles/_all.scss';
+import '@poemkit/components/_utils/styles/rtl/_all.scss';
+import { __ } from '@poemkit/components/_utils/_all';
 
 /*-- Apply this component styles --*/
-import '@uixkit.react/components/Gallery/styles/_style.scss';
+import '@poemkit/components/Gallery/styles/_style.scss';
 
 
 //
-import GalleryImage from '@uixkit.react/components/Gallery/GalleryImage';
+import GalleryImage from '@poemkit/components/Gallery/GalleryImage';
 
 type GalleryProps = {
     /** Set numbers of columns on a gallery page. The value range is an integer from 1 to 8 */
@@ -58,8 +58,8 @@ export default class Gallery extends Component<GalleryProps, GalleryState> {
             <>
 
 
-                <div id={id || this.uniqueID} className="uix-gallery">
-                    <ul className={`uix-gallery__tiles uix-gallery__col-${fixedColumns || 1}`}>
+                <div id={id || this.uniqueID} className="poemkit-gallery">
+                    <ul className={`poemkit-gallery__tiles poemkit-gallery__col-${fixedColumns || 1}`}>
                         {data ? data.map((item, index) => {
                             return <GalleryImage key={index} url={item.url} title={item.title} />
                         }) : ''}

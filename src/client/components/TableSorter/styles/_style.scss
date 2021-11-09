@@ -1,12 +1,12 @@
 /* ======================================================
    <!-- Table Sorter -->
 /* ====================================================== */
-@import '@uixkit.react/components/_utils/styles/_variable-and-mixin.scss';
+@import '@poemkit/components/_utils/styles/_variable-and-mixin.scss';
 
 //The basic style uses the Table component
-@import '@uixkit.react/components/Table/styles/_style.scss';
+@import '@poemkit/components/Table/styles/_style.scss';
 
-.uix-table-sorter {
+.poemkit-table-sorter {
 	cursor: pointer;
 
 	&::after {
@@ -22,21 +22,21 @@
 }
 
 
-.js-uix-newsort {
-	animation: uix-cssAnim--newsort .5s linear 1 forwards;
+.js-poemkit-newsort {
+	animation: poemkit-cssAnim--newsort .5s linear 1 forwards;
 	opacity: 0;
 }
 
 @for $i from 1 to 100 {
 
-	.js-uix-newsort:nth-child(#{$i+1}) {
+	.js-poemkit-newsort:nth-child(#{$i+1}) {
 		animation-delay: #{$i*100}ms;
 	}
 }
 
 
 
-@keyframes uix-cssAnim--newsort {
+@keyframes poemkit-cssAnim--newsort {
 	0%   {
 		opacity: 0;
 		transform: translateX(10px);

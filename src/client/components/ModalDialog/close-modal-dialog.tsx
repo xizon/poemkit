@@ -1,8 +1,8 @@
-import { __ } from '@uixkit.react/components/_utils/_all';
+import { __ } from '@poemkit/components/_utils/_all';
 
 /*-- Apply Third-party plugins --*/
-import { enableBodyScroll } from '@uixkit.react/components/_plugins/_lib-scrolllock';
-import TweenMax from '@uixkit.react/components/_plugins/_lib-gsap';
+import { enableBodyScroll } from '@poemkit/components/_plugins/_lib-scrolllock';
+import TweenMax from '@poemkit/components/_plugins/_lib-gsap';
 
 
 declare global {
@@ -16,17 +16,17 @@ export function closeModalDialog(curElement: any) {
     if ( typeof curElement === typeof undefined ) return;
 
     //Enable mask to close the window.
-    __( '.uix-modal-mask' ).removeClass( 'js-uix-disabled' );
+    __( '.poemkit-modal-mask' ).removeClass( 'js-poemkit-disabled' );
 
     curElement.removeClass( 'is-active' );
-    TweenMax.to( '.uix-modal-mask', 0.3, {
+    TweenMax.to( '.poemkit-modal-mask', 0.3, {
         css: {
             opacity : 0,
             display : 'none'
         }
     });
         
-    curElement.find( '.uix-modal-box__content' ).removeClass( 'js-uix-no-fullscreen' );
+    curElement.find( '.poemkit-modal-box__content' ).removeClass( 'js-poemkit-no-fullscreen' );
 
 
     // Unlocks the page

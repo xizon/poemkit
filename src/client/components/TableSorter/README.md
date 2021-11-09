@@ -1,6 +1,6 @@
-# @uixkit.react/components/TableSorter
+# @poemkit/components/TableSorter
 
-[Source](https://github.com/xizon/uix-kit-react/tree/main/src/client/components/TableSorter)
+[Source](https://github.com/xizon/poemkit/tree/main/src/client/components/TableSorter)
 
 ## Version
 
@@ -11,7 +11,7 @@
 
 ### Table Sorter
 ```js
-import TableSorter from '@uixkit.react/components/TableSorter/index.tsx';
+import TableSorter from '@poemkit/components/TableSorter/index.tsx';
 ```
 | Property | Type | Default | Description |
 | --- | --- | --- | --- |
@@ -39,7 +39,7 @@ JSON configuration properties of the `data`:
 
 ```js
 import React from 'react';
-import TableSorter from '@uixkit.react/components/TableSorter/index.tsx';
+import TableSorter from '@poemkit/components/TableSorter/index.tsx';
 
 
 

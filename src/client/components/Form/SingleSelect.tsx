@@ -1,22 +1,22 @@
 import React, { Component } from 'react';
 
 /*-- Apply Third-party plugins (import location should be in front of "global scripts and styles") --*/
-import '@uixkit.react/components/_plugins/_lib-bootstrap';
-import '@uixkit.react/components/_plugins/_lib-icons';
-import TweenMax, { TimelineMax } from '@uixkit.react/components/_plugins/_lib-gsap';
+import '@poemkit/components/_plugins/_lib-bootstrap';
+import '@poemkit/components/_plugins/_lib-icons';
+import TweenMax, { TimelineMax } from '@poemkit/components/_plugins/_lib-gsap';
 
 /*-- Apply global scripts and styles --*/
-import '@uixkit.react/components/_utils/styles/_all.scss';
-import '@uixkit.react/components/_utils/styles/rtl/_all.scss';
-import { __ } from '@uixkit.react/components/_utils/_all';
+import '@poemkit/components/_utils/styles/_all.scss';
+import '@poemkit/components/_utils/styles/rtl/_all.scss';
+import { __ } from '@poemkit/components/_utils/_all';
 
 /*-- Apply this component styles --*/
-import '@uixkit.react/components/Form/styles/_basic.scss';
-import '@uixkit.react/components/Form/styles/_layout.scss';
-import '@uixkit.react/components/Form/styles/_theme_material.scss';
-import '@uixkit.react/components/Form/styles/rtl/_basic.scss';
-import '@uixkit.react/components/Form/styles/rtl/_layout.scss';
-import '@uixkit.react/components/Form/styles/rtl/_theme_material.scss';
+import '@poemkit/components/Form/styles/_basic.scss';
+import '@poemkit/components/Form/styles/_layout.scss';
+import '@poemkit/components/Form/styles/_theme_material.scss';
+import '@poemkit/components/Form/styles/rtl/_basic.scss';
+import '@poemkit/components/Form/styles/rtl/_layout.scss';
+import '@poemkit/components/Form/styles/rtl/_theme_material.scss';
 
 
 
@@ -153,7 +153,7 @@ export default class SingleSelect extends Component<SingleSelectProps, SingleSel
 		const uiRes = typeof(ui) === 'undefined' ? '' : ui;
 		const nameRes = typeof(name) === 'undefined' ? '' : name;
 		const idRes = id || this.uniqueID;
-		const wrapperClassTheme = theme === 'line' ? ' uix-controls--line' : '';
+		const wrapperClassTheme = theme === 'line' ? ' poemkit-controls--line' : '';
 		const wrapperClassUi = this.uiSwitch(uiRes);
 		
 		// Get all options from option prop
@@ -176,7 +176,7 @@ export default class SingleSelect extends Component<SingleSelectProps, SingleSel
 		    return (
 			    <React.Fragment key={index}>
 				    <span aria-checked={(activeThisEl ? 'true' : 'false')} role="radio" data-value={optionValues[index]} className={activeThisEl ? 'is-active' : ''} data-switchid={_targetArr[index]}  onClick={this.handleClickItem}>
-				        {theme === 'line' ? <><ins className="uix-controls__bar"></ins><ins className="uix-controls__basic-bar"></ins></> : ''}
+				        {theme === 'line' ? <><ins className="poemkit-controls__bar"></ins><ins className="poemkit-controls__basic-bar"></ins></> : ''}
 				        {selectOption}
 				    </span>
 				</React.Fragment>
@@ -187,7 +187,7 @@ export default class SingleSelect extends Component<SingleSelectProps, SingleSel
 		return (
 		  <>
 
-				<div ref={this.rootRef} className={"uix-controls uix-controls__single-sel" + wrapperClassUi + wrapperClassTheme} id={idRes + "__wrapper"}>
+				<div ref={this.rootRef} className={"poemkit-controls poemkit-controls__single-sel" + wrapperClassUi + wrapperClassTheme} id={idRes + "__wrapper"}>
 				  {singleSelOptionsList}
 				</div>
 			    <input 

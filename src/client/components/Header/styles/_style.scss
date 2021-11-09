@@ -1,7 +1,7 @@
 /* ====================================================== 
    <!-- Header Area -->                                        
 /* ====================================================== */
-@import '@uixkit.react/components/_utils/styles/_variable-and-mixin.scss';
+@import '@poemkit/components/_utils/styles/_variable-and-mixin.scss';
 
 
 /*
@@ -17,9 +17,9 @@
  ---------------------------
  */ 
 
-/* Don't use "margin" or "padding" to set up ".uix-header__container" */
+/* Don't use "margin" or "padding" to set up ".poemkit-header__container" */
 
-.uix-header__container {
+.poemkit-header__container {
 	position: fixed;
 	left: 0;
 	top: 0;
@@ -40,7 +40,7 @@
 	 2. Overlay Header
 	 ---------------------------
 	 */ 
-	&.uix-header__container--overlay {
+	&.poemkit-header__container--overlay {
 		background: rgba(255, 255, 255, 0.15);
 		border-bottom: 1px solid rgba(255, 255, 255, .2);
 
@@ -54,22 +54,22 @@
 }
 
 /* Show Toolbar when viewing site with WordPress */
-.admin-bar .uix-header__container {
+.admin-bar .poemkit-header__container {
     top: 32px;
 	
 }
 
 /* Admin bar becomes taller on smaller devices with WordPress */
 @media all and (max-width: 782px) {
-    .admin-bar .uix-header__container {
+    .admin-bar .poemkit-header__container {
          top: 0;
     }
 }
 
 
-/* Don't use "margin" or "padding" to set up ".uix-header" */
+/* Don't use "margin" or "padding" to set up ".poemkit-header" */
 
-.uix-header {
+.poemkit-header {
 	/* Floating layer protection for IE */
 	background: url(data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7);
 
@@ -78,7 +78,7 @@
 
 
 /* Header Placeholder, to prevent floating elements from affecting layout */
-.uix-header__placeholder {
+.poemkit-header__placeholder {
 	height: 75px;
 	background: none;
 	display: block;
@@ -96,11 +96,11 @@
 @media all and (max-width: 768px) {
 	
 	
-	.uix-header__container {
+	.poemkit-header__container {
 		position: relative;
 
 		
-		&.uix-header__container--overlay {
+		&.poemkit-header__container--overlay {
 
 			background-color: $highlight-color1;
 			background-image: linear-gradient(to right, $btn-gradient-color1 0%, $btn-gradient-color2 20%, $btn-gradient-color3 100%);
@@ -112,7 +112,7 @@
 	}
 
 	/* Header Placeholder, to prevent floating elements from affecting layout */
-	.uix-header__placeholder {
+	.poemkit-header__placeholder {
 		height: 0;
 	}
 

@@ -18,7 +18,7 @@ export default class TableGridField extends Component<TableGridFieldProps, Table
 		
 		return (
 		  <>
-			<div className="uix-table-grid__row-cell" style={{flex: this.props.cols}} role="gridcell">{this.props.content}</div>
+			<div className="poemkit-table-grid__row-cell" style={{flex: this.props.cols}} role="gridcell">{this.props.content}</div>
 		  </>
 		)
 	}

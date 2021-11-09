@@ -1,7 +1,7 @@
 /* ======================================================
     <!-- Form -->
 /* ====================================================== */
-@import '@uixkit.react/components/_utils/styles/_variable-and-mixin.scss';
+@import '@poemkit/components/_utils/styles/_variable-and-mixin.scss';
 @import '_variable-and-mixin.scss';
 
 /*
@@ -58,21 +58,21 @@ input[type="datetime-local"].is-active::-webkit-datetime-edit {
 
 
 /* Password display hidden switch */
-.uix-controls__passwordSwitch {
+.poemkit-controls__passwordSwitch {
     position: absolute;
     font-size: 12px;
     opacity: .6;
     transform: translate(-1.8rem, 10px);	
 }
 
-.is-iconic .uix-controls__passwordSwitch {
+.is-iconic .poemkit-controls__passwordSwitch {
     transform: translate(-2.5rem,5px);
 	
 	i {
 		color: #333;
 	}
 }
-.is-iconic.is-reversed .uix-controls__passwordSwitch {
+.is-iconic.is-reversed .poemkit-controls__passwordSwitch {
     transform: translate(-1.8rem,5px);
 	
 	i {
@@ -83,7 +83,7 @@ input[type="datetime-local"].is-active::-webkit-datetime-edit {
 	}
 }
 
-.uix-controls--line .uix-controls__passwordSwitch {
+.poemkit-controls--line .poemkit-controls__passwordSwitch {
     top: 0;
     right: -10px;
 }
@@ -92,7 +92,7 @@ input[type="datetime-local"].is-active::-webkit-datetime-edit {
 
 
 /* Required field marker */
-.uix-controls__im {
+.poemkit-controls__im {
 	color: red;
 	display: inline-block;
 	padding: 0 .5rem;
@@ -102,7 +102,7 @@ input[type="datetime-local"].is-active::-webkit-datetime-edit {
 
 
 /* Default Controls */
-.uix-controls:not(.uix-controls__toggle):not(.uix-controls__checkbox):not(.uix-controls__radio):not(.uix-controls__select) {
+.poemkit-controls:not(.poemkit-controls__toggle):not(.poemkit-controls__checkbox):not(.poemkit-controls__radio):not(.poemkit-controls__select) {
 
 	position: relative;
 	margin-bottom: #{$control-padding-height*2};
@@ -114,11 +114,11 @@ input[type="datetime-local"].is-active::-webkit-datetime-edit {
 	}
 
 
-	&.uix-controls__side {
+	&.poemkit-controls__side {
 		margin-left: .2rem;
 	}
 
-	&.uix-t-c {
+	&.poemkit-t-c {
 		text-align: center !important;
 	}
 
@@ -126,7 +126,7 @@ input[type="datetime-local"].is-active::-webkit-datetime-edit {
 
 		input:not([type="checkbox"]):not([type="radio"]),
 		textarea,
-		button:not(.uix-btn),
+		button:not(.poemkit-btn),
 		select {
 			border-radius: 50px;
 		}
@@ -135,7 +135,7 @@ input[type="datetime-local"].is-active::-webkit-datetime-edit {
 	&.is-rounded {
 		input:not([type="checkbox"]):not([type="radio"]),
 		textarea,
-		button:not(.uix-btn),
+		button:not(.poemkit-btn),
 		select {
 			border-radius: 4px;
 		}
@@ -177,7 +177,7 @@ input[type="datetime-local"].is-active::-webkit-datetime-edit {
 	}
 
 
-	&.uix-controls__short-s {
+	&.poemkit-controls__short-s {
 
 		input:not([type="checkbox"]):not([type="radio"]) {
 			width: 120px;
@@ -187,7 +187,7 @@ input[type="datetime-local"].is-active::-webkit-datetime-edit {
 
 	}
 
-	&.uix-controls__short-m {
+	&.poemkit-controls__short-m {
 
 		input:not([type="checkbox"]):not([type="radio"]) {
 			width: 155px;
@@ -198,7 +198,7 @@ input[type="datetime-local"].is-active::-webkit-datetime-edit {
 	}
 
 
-	&.uix-controls__short-l {
+	&.poemkit-controls__short-l {
 		input:not([type="checkbox"]):not([type="radio"]) {
 			width: 192px;
 			margin-right: .5rem;
@@ -208,7 +208,7 @@ input[type="datetime-local"].is-active::-webkit-datetime-edit {
 
 
     textarea,
-	button:not(.uix-btn),
+	button:not(.poemkit-btn),
 	select {
 		border-radius: 0;
 		/* Remove inner shadow from inputs on mobile iOS */
@@ -250,7 +250,7 @@ input[type="datetime-local"].is-active::-webkit-datetime-edit {
 
 	
 
-	button:not(.uix-btn) {
+	button:not(.poemkit-btn) {
 		cursor: pointer;
 		padding: 0.75rem 0;
 		width: auto;
@@ -310,7 +310,7 @@ input[type="datetime-local"].is-active::-webkit-datetime-edit {
 
 
 	/*-- Select Arrow --*/
-	.uix-controls__arrow {
+	.poemkit-controls__arrow {
 		display: inline-block;
 		position: absolute;
 		right: 0.875rem;
@@ -322,7 +322,7 @@ input[type="datetime-local"].is-active::-webkit-datetime-edit {
 
 
 	/*-- Radio --*/
-	&.uix-controls__normal-radio {
+	&.poemkit-controls__normal-radio {
 
 		label {
 			padding-left: 1.25rem !important;
@@ -339,7 +339,7 @@ input[type="datetime-local"].is-active::-webkit-datetime-edit {
 	}
 
 	/*-- Select --*/
-	&.uix-controls__normal-select {
+	&.poemkit-controls__normal-select {
 
 		
         
@@ -348,7 +348,7 @@ input[type="datetime-local"].is-active::-webkit-datetime-edit {
         }
 
 
-		.uix-controls__arrow {
+		.poemkit-controls__arrow {
 			right: 0;
 		}
         
@@ -368,7 +368,7 @@ input[type="datetime-local"].is-active::-webkit-datetime-edit {
 
 		&.is-fullwidth {
             
-            .uix-controls__arrow {
+            .poemkit-controls__arrow {
                 right: $control-padding-side;
             }
             
@@ -439,7 +439,7 @@ input[type="datetime-local"].is-active::-webkit-datetime-edit {
 
 
 		textarea,
-		button:not(.uix-btn),
+		button:not(.poemkit-btn),
 		select {
 			padding-left: #{$control-padding-side + $control-icon-placeholder};
 			width: calc(100% - #{$control-padding-side + $control-icon-placeholder} - 2px - #{$control-padding-side});
@@ -472,7 +472,7 @@ input[type="datetime-local"].is-active::-webkit-datetime-edit {
 			}
 
 			textarea,
-			button:not(.uix-btn),
+			button:not(.poemkit-btn),
 			select {
 				padding-left: $control-padding-side;
                 padding-right: #{$control-padding-side + $control-icon-placeholder};
@@ -493,7 +493,7 @@ input[type="datetime-local"].is-active::-webkit-datetime-edit {
 		}
 
 		textarea,
-		button:not(.uix-btn),
+		button:not(.poemkit-btn),
 		select {
 		    border-color: #4AB005;
 		}
@@ -512,7 +512,7 @@ input[type="datetime-local"].is-active::-webkit-datetime-edit {
 
 		}
 		textarea,
-		button:not(.uix-btn),
+		button:not(.poemkit-btn),
 		select {
 		    border-color: #f00;
 		}
@@ -523,14 +523,14 @@ input[type="datetime-local"].is-active::-webkit-datetime-edit {
 	}
 
 	/*-- Form Status: Disable --*/
-	&:not(.uix-controls--line).is-disabled {
+	&:not(.poemkit-controls--line).is-disabled {
 		input:not([type="checkbox"]):not([type="radio"]) {
 		    border-color: #E1E1E1;
 			background: #EDEDED;
 
 		}
 		textarea,
-		button:not(.uix-btn),
+		button:not(.poemkit-btn),
 		select {
 		    border-color: #E1E1E1;
 			background: #E1E1E1;
@@ -563,7 +563,7 @@ input[type="datetime-local"].is-active::-webkit-datetime-edit {
  ---------------------------
  */
 
-.uix-controls__file-container {
+.poemkit-controls__file-container {
 
     position: relative;
 	cursor: pointer;
@@ -572,7 +572,7 @@ input[type="datetime-local"].is-active::-webkit-datetime-edit {
 	color: $control-text-color;
 	@include transition-default();
 
-	.uix-controls__file-trigger {
+	.poemkit-controls__file-trigger {
 
 		i {
 			margin-right: .5rem;
@@ -595,13 +595,13 @@ input[type="datetime-local"].is-active::-webkit-datetime-edit {
 
 }
 
-.uix-controls__file-return {
+.poemkit-controls__file-return {
 	font-style: italic;
 }
 
 
 /* HTML5 drag and drop upload control */
-.uix-controls__file-field-container {
+.poemkit-controls__file-field-container {
     height: 400px;
 	max-height: 30vh;
     margin: 0 auto;
@@ -610,7 +610,7 @@ input[type="datetime-local"].is-active::-webkit-datetime-edit {
     background-color: transparent;
 	margin-bottom: 2.5rem;
 
-	.uix-controls__file-field-trigger {
+	.poemkit-controls__file-field-trigger {
 		width: 400px;
 		max-width: 100%;
 		height: 100%;
@@ -713,7 +713,7 @@ input[type="datetime-local"].is-active::-webkit-datetime-edit {
 
 $controls-merge-button-width: 20%;
 
-.uix-controls__merge {
+.poemkit-controls__merge {
 	position: relative;
 
 	&::after {
@@ -867,11 +867,11 @@ $controls-merge-button-width: 20%;
  4. Custom Select
  ---------------------------
  */
-.uix-controls__select {
+.poemkit-controls__select {
 	position: relative;
 	margin-right: .3rem;
 
-	&.js-uix-new {
+	&.js-poemkit-new {
 		text-align: left; /* Required */
 	}
 
@@ -882,7 +882,7 @@ $controls-merge-button-width: 20%;
 
 }
 
-.uix-controls__select-wrapper {
+.poemkit-controls__select-wrapper {
 	position: relative;
 	display: inline-block;
 	user-select: none;
@@ -891,7 +891,7 @@ $controls-merge-button-width: 20%;
 	&.is-fullwidth {
 		width: 100%;
 
-		.uix-controls__select-trigger {
+		.poemkit-controls__select-trigger {
 			width: 100% !important;
 		}
 
@@ -903,7 +903,7 @@ $controls-merge-button-width: 20%;
 	}
 
 	
-	&:not(.uix-controls--line).is-disabled {
+	&:not(.poemkit-controls--line).is-disabled {
 
 		/* Mask used to prohibit selection */
 		&::before {
@@ -920,7 +920,7 @@ $controls-merge-button-width: 20%;
 
 		}
 
-		.uix-controls__select-trigger {
+		.poemkit-controls__select-trigger {
 			border-color: #E1E1E1 !important;
 			background: #EDEDED !important;
 
@@ -934,7 +934,7 @@ $controls-merge-button-width: 20%;
 	}
 
 
-	.uix-controls__select-trigger {
+	.poemkit-controls__select-trigger {
 		@include control-label-text();
 		position: relative;
 		display: inline-block;
@@ -964,26 +964,26 @@ $controls-merge-button-width: 20%;
 	}
 
 	.is-pill {
-		.uix-controls__select-trigger {
+		.poemkit-controls__select-trigger {
 			border-radius: 50px;
 		}
 	}
 
 	&.is-rounded {
-		.uix-controls__select-trigger {
+		.poemkit-controls__select-trigger {
 			border-radius: 4px;
 		}
 	}
 
 
-	.uix-controls__select-label {
+	.poemkit-controls__select-label {
 		display: inline-block;
 		margin-left: .3rem;
 		margin-right: .3rem;
 		@include control-label-text();
 	}
 
-	.uix-controls__select__option-container {
+	.poemkit-controls__select__option-container {
 		position: absolute;
 		z-index: 2;
 		display: block;
@@ -1027,7 +1027,7 @@ $controls-merge-button-width: 20%;
 	}
 
 
-	.uix-controls__select__option {
+	.poemkit-controls__select__option {
 		position: relative;
 		display: block;
 		border-bottom: 1px solid $control-sub-color;
@@ -1053,19 +1053,19 @@ $controls-merge-button-width: 20%;
 	}
 
 
-	.uix-controls__select {
+	.poemkit-controls__select {
 		position: relative;
 		display: inline-block;
 
 		&.is-opened {
 
-			.uix-controls__select-trigger {
+			.poemkit-controls__select-trigger {
 				&::after {
 					transform: rotate(-135deg);
 				}
 			}
 
-			.uix-controls__select__option-container {
+			.poemkit-controls__select__option-container {
 				opacity: 1;
 				visibility: visible;
 				pointer-events: all;
@@ -1077,7 +1077,7 @@ $controls-merge-button-width: 20%;
         
 
 		&.is-transparent {
-			.uix-controls__select-trigger {
+			.poemkit-controls__select-trigger {
 				background: none;
 				border-color: rgba(255,255,255,.1);
 			}
@@ -1088,9 +1088,9 @@ $controls-merge-button-width: 20%;
 
 
     /* Shown above */
-	.uix-controls__select--top {
+	.poemkit-controls__select--top {
 		/* Shown from above */
-		.uix-controls__select__option-container {
+		.poemkit-controls__select__option-container {
 			top: auto;
 			bottom: 100%;
 			margin-bottom: 15px;
@@ -1121,7 +1121,7 @@ $controls-merge-button-width: 20%;
 		}
         
 		&.is-opened {
-			.uix-controls__select__option-container {
+			.poemkit-controls__select__option-container {
 				transform: translateY(0);
 
 			}
@@ -1139,7 +1139,7 @@ $controls-merge-button-width: 20%;
  5. Custom Radio, Toggle And Checkbox
  ---------------------------
  */
-.uix-controls__radio {
+.poemkit-controls__radio {
 
 	position: relative;
 
@@ -1156,7 +1156,7 @@ $controls-merge-button-width: 20%;
 	}
     
     
-    &:not(.uix-controls--line).is-disabled {
+    &:not(.poemkit-controls--line).is-disabled {
         user-select: none;
         pointer-events: none;
         opacity: .3;
@@ -1170,12 +1170,12 @@ $controls-merge-button-width: 20%;
 	input[type="radio"] {
 		display: none;
 
-		&:checked + .uix-controls__radio-trigger::before{
+		&:checked + .poemkit-controls__radio-trigger::before{
 		    transform: scale(1);
 		}
 	}
 
-	.uix-controls__radio-trigger {
+	.poemkit-controls__radio-trigger {
 		width: 18px;
 		height: 18px;
 		border-radius: 50%;
@@ -1204,11 +1204,11 @@ $controls-merge-button-width: 20%;
 
 
 
-.uix-controls__toggle {
+.poemkit-controls__toggle {
 
 	position: relative;
     
-    &:not(.uix-controls--line).is-disabled {
+    &:not(.poemkit-controls--line).is-disabled {
         user-select: none;
         pointer-events: none;
         opacity: .3;
@@ -1241,13 +1241,13 @@ $controls-merge-button-width: 20%;
 	input[type="checkbox"] {
 		display: none;
 
-		&:checked + .uix-controls__toggle-trigger {
+		&:checked + .poemkit-controls__toggle-trigger {
 			margin-left: 8px;
 			background: $control-focus-color;
 		}
 	}
 
-	.uix-controls__toggle-trigger {
+	.poemkit-controls__toggle-trigger {
 		width: 12px;
 		height: 12px;
 		background: $control-sub-color;
@@ -1284,11 +1284,11 @@ $controls-merge-button-width: 20%;
 	}
 }
 
-.uix-controls__checkbox {
+.poemkit-controls__checkbox {
 
 	position: relative;
     
-    &:not(.uix-controls--line).is-disabled {
+    &:not(.poemkit-controls--line).is-disabled {
         user-select: none;
         pointer-events: none;
         opacity: .3;
@@ -1305,13 +1305,13 @@ $controls-merge-button-width: 20%;
 	input[type="checkbox"] {
 		display: none;
 
-		&:checked + .uix-controls__checkbox-trigger::before,
-		&:checked + .uix-controls__checkbox-trigger::after {
+		&:checked + .poemkit-controls__checkbox-trigger::before,
+		&:checked + .poemkit-controls__checkbox-trigger::after {
 			opacity: 1;
 		}
 	}
 
-	.uix-controls__checkbox-trigger {
+	.poemkit-controls__checkbox-trigger {
 		display: inline-block;
 		width: 15px;
 		height: 15px;
@@ -1357,7 +1357,7 @@ $controls-merge-button-width: 20%;
  6. Custom Input Number
  ---------------------------
  */
-.uix-controls__number {
+.poemkit-controls__number {
 
 	input[type="number"]::-webkit-inner-spin-button,
 	input[type="number"]::-webkit-outer-spin-button {
@@ -1378,7 +1378,7 @@ $controls-merge-button-width: 20%;
 	}
 
 
-	.uix-controls__number__btn {
+	.poemkit-controls__number__btn {
 		position: absolute;
 		height: calc(50% - 1px);
 		width: 27px;
@@ -1396,13 +1396,13 @@ $controls-merge-button-width: 20%;
 		}
 
 
-		&.uix-controls__number__btn--add {
+		&.poemkit-controls__number__btn--add {
 			top: 1px;
 			border-radius: 0 4px 0 0;
 			border-bottom: 1px solid $control-sub-color;
 		}
 
-		&.uix-controls__number__btn--remove {
+		&.poemkit-controls__number__btn--remove {
 			bottom: 1px;
 			border-radius: 0 0 4px 0;
 
@@ -1411,7 +1411,7 @@ $controls-merge-button-width: 20%;
 	}
 	
 
-	&.is-disabled .uix-controls__number__btn {
+	&.is-disabled .poemkit-controls__number__btn {
 		pointer-events: none;
 		user-select: none;	
 		opacity: .6;
@@ -1429,7 +1429,7 @@ $controls-merge-button-width: 20%;
  7. Multiple Selector
  ---------------------------
  */
-.uix-controls__multi-sel {
+.poemkit-controls__multi-sel {
 
 	> span {
 		position: relative;
@@ -1503,7 +1503,7 @@ $controls-merge-button-width: 20%;
  ---------------------------
  */
 
-.uix-controls__single-sel {
+.poemkit-controls__single-sel {
 
 	> span {
 		position: relative;
@@ -1573,7 +1573,7 @@ $controls-merge-button-width: 20%;
  9. Search of Widget
  ---------------------------
  */
-.uix-search-box {
+.poemkit-search-box {
 	position: relative;
 	font-size: 0.875rem;
 
@@ -1581,7 +1581,7 @@ $controls-merge-button-width: 20%;
 	label {
 		width: 100%;
 	}
-	.uix-search-box__field {
+	.poemkit-search-box__field {
 		width: 100%;
 		background: #fff;
 		border: 1px solid $sub-text-color;
@@ -1601,7 +1601,7 @@ $controls-merge-button-width: 20%;
 			display: none;
 		}
 	}
-	.uix-search-box__submit {
+	.poemkit-search-box__submit {
 		position: absolute;
 		top: 0.5rem;
 		right: 0.875rem;
@@ -1621,21 +1621,21 @@ $controls-merge-button-width: 20%;
  10. Add / remove input field dynamically
  ---------------------------
  */
-.uix-controls__dynamic-fields-container {
+.poemkit-controls__dynamic-fields-container {
 	margin-bottom: 2.5rem;
 
-	.uix-controls__dynamic-fields__append::before {
+	.poemkit-controls__dynamic-fields__append::before {
 		display: block;
 		content: '';
 		clear: both;
 
 	}
 
-	.uix-controls__dynamic-fields__tmpl {
+	.poemkit-controls__dynamic-fields__tmpl {
 		display: none;
 	}
 
-	.uix-controls__dynamic-fields__tmpl__wrapper:first-child .uix-controls__dynamic-fields__removebtn {
+	.poemkit-controls__dynamic-fields__tmpl__wrapper:first-child .poemkit-controls__dynamic-fields__removebtn {
 		display: none
 	}
 }

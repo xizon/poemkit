@@ -9,9 +9,9 @@ type AccordionSliderItemProps = {
 	/** Handling events for collapsing item */
 	boxToggleEv?: React.MouseEventHandler<HTMLElement>;
 	/** Handling events when the animation execution is complete */
-	boxAnimEndEv?: React.TransitionEventHandler<HTMLElement>;
+	elAnimEndEv?: React.TransitionEventHandler<HTMLElement>;
 	/** Handling events when the mouse leaves the element */
-	boxAnimLeaveEv?: React.MouseEventHandler<HTMLElement>;
+	elAnimLeaveEv?: React.MouseEventHandler<HTMLElement>;
 	/** One event type, such as `click` or `mouseover` */
 	triggerType?: string;
 };
@@ -30,8 +30,8 @@ export default class AccordionSliderItem extends Component<AccordionSliderItemPr
             defaultActive,
 			bg,
 			boxToggleEv,
-			boxAnimEndEv,
-			boxAnimLeaveEv,
+			elAnimEndEv,
+			elAnimLeaveEv,
 			triggerType,
 			children
 		} = this.props;
@@ -47,11 +47,11 @@ export default class AccordionSliderItem extends Component<AccordionSliderItemPr
 				{ triggerType === 'click' ? (
 					<li 
 					onClick={boxToggleEv} 
-					onMouseLeave={boxAnimLeaveEv}
-					onTransitionEnd={boxAnimEndEv} 
+					onMouseLeave={elAnimLeaveEv}
+					onTransitionEnd={elAnimEndEv} 
 					style={bgAttrs}
 					className={activedClassName}>
-						<div className="uix-accordion-slider__content">
+						<div className="poemkit-accordion-slider__content">
 							{children}
 						</div>
 					</li>
@@ -59,12 +59,13 @@ export default class AccordionSliderItem extends Component<AccordionSliderItemPr
 
 				{ triggerType === 'mouseover' ? (
 					<li 
+					onClick={(e) => e.preventDefault()}
 					onMouseOver={boxToggleEv} 
-					onMouseLeave={boxAnimLeaveEv}
-					onTransitionEnd={boxAnimEndEv} 
+					onMouseLeave={elAnimLeaveEv}
+					onTransitionEnd={elAnimEndEv} 
 					style={bgAttrs}
 					className={activedClassName}>
-						<div className="uix-accordion-slider__content">
+						<div className="poemkit-accordion-slider__content">
 							{children}
 						</div>
 					</li>

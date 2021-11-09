@@ -17,11 +17,11 @@
  5. Element Floating
  ---------------------------
  */ 
-.rtl .uix-f-l {
+.rtl .poemkit-f-l {
     float: right;
 }
 
-.rtl .uix-f-r {
+.rtl .poemkit-f-r {
     float: left;
 }
 /* 
@@ -30,11 +30,11 @@
  ---------------------------
  */ 
 
-.rtl .uix-t-r {
+.rtl .poemkit-t-r {
     text-align: left;
 }
 
-.rtl .uix-t-l {
+.rtl .poemkit-t-l {
     text-align: right;
 }
 
@@ -47,42 +47,42 @@
 --breakpoint-xl:1200px;
 */
 @media all and (max-width: 576px) {
-	.rtl .uix-t-r--sm {
+	.rtl .poemkit-t-r--sm {
 		text-align: left;
 	}
 
-	.rtl .uix-t-l--sm {
+	.rtl .poemkit-t-l--sm {
 		text-align: right;
 	}
 }
 
 @media all and (max-width: 768px) {
-	.rtl .uix-t-r--md {
+	.rtl .poemkit-t-r--md {
 		text-align: left;
 	}
 
-	.rtl .uix-t-l--md {
+	.rtl .poemkit-t-l--md {
 		text-align: right;
 	}
 }
 
 @media all and (max-width: 992px) {
-	.rtl .uix-t-r--lg {
+	.rtl .poemkit-t-r--lg {
 		text-align: left;
 	}
 
-	.rtl .uix-t-l--lg {
+	.rtl .poemkit-t-l--lg {
 		text-align: right;
 	}
 }
 
 
 @media all and (max-width: 1200px) {
-	.rtl .uix-t-r--xl {
+	.rtl .poemkit-t-r--xl {
 		text-align: left;
 	}
 
-	.rtl .uix-t-l--xl {
+	.rtl .poemkit-t-l--xl {
 		text-align: right;
 	}
 }
@@ -93,7 +93,7 @@
  12. Tip Bubble
  ---------------------------
  */ 
-.rtl .uix-bubble {
+.rtl .poemkit-bubble {
 	margin-left: auto;
 	margin-right: .5rem;
 	right: auto;
@@ -101,7 +101,7 @@
 }
 
 @media all and (max-width: 768px) {
-	.rtl .uix-bubble {
+	.rtl .poemkit-bubble {
 		right: auto;
 		left: 1rem;
 	}
@@ -117,29 +117,29 @@
  */ 
 
 /* Don't use `width: 100%` because it is wrong if the parent has padding. */
-.rtl .uix-dir--left {
+.rtl .poemkit-dir--left {
     left: auto !important;
 	right: 0 !important;
 }
-.rtl .uix-dir--right {
+.rtl .poemkit-dir--right {
 	left: 0 !important;
     right: auto !important;
 }
 
-.rtl .uix-dir--top-left {
+.rtl .poemkit-dir--top-left {
     left: auto !important;
 	right: 0 !important;
 }
-.rtl .uix-dir--top-right {
+.rtl .poemkit-dir--top-right {
 	left: 0 !important;
     right: auto !important;
 
 }
-.rtl .uix-dir--bottom-left {
+.rtl .poemkit-dir--bottom-left {
     left: auto !important;
 	right: 0 !important;
 }
-.rtl .uix-dir--bottom-right {
+.rtl .poemkit-dir--bottom-right {
 	left: 0 !important;
     right: auto !important;
 

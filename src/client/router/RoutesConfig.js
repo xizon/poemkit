@@ -1,14 +1,14 @@
-import App from '@uixkit.react/router/App.js';
+import App from '@poemkit/router/App.js';
 //
-import Home from '@uixkit.react/pages/Home/index.js';
-import Posts from '@uixkit.react/pages/Posts/index.js';
-import PostDetail from '@uixkit.react/pages/Posts/PostDetail.js';
-import PostsPagination from '@uixkit.react/pages/PostsPagination/index.js';
-import Member from '@uixkit.react/pages/Member/index.js';
-import NoMatch from '@uixkit.react/pages/404/index.js';
-import NestedRoutes from '@uixkit.react/pages/NestedRoutes/index.js';
-import ComponentsDemo from '@uixkit.react/pages/ComponentsDemo/index.js';
-import Admin from '@uixkit.react/pages/Admin/index.js';
+import Home from '@poemkit/pages/Home/index.js';
+import Posts from '@poemkit/pages/Posts/index.js';
+import PostDetail from '@poemkit/pages/Posts/PostDetail.js';
+import PostsPagination from '@poemkit/pages/PostsPagination/index.js';
+import Member from '@poemkit/pages/Member/index.js';
+import NoMatch from '@poemkit/pages/404/index.js';
+import NestedRoutes from '@poemkit/pages/NestedRoutes/index.js';
+import ComponentsDemo from '@poemkit/pages/ComponentsDemo/index.js';
+import Admin from '@poemkit/pages/Admin/index.js';
 
 
 
@@ -25,13 +25,13 @@ const routesConfig = [
         path: "/",
         component: Home,
         exact: true,
-        pageTitle: 'Uix Kit React'
+        pageTitle: 'PoemKit'
       },
 
       {
         path: "/index",
         component: Home,
-        pageTitle: 'Uix Kit React'
+        pageTitle: 'PoemKit'
       },
 
 

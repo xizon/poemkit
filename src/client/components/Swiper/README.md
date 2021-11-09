@@ -1,6 +1,6 @@
-# @uixkit.react/components/Swiper
+# @poemkit/components/Swiper
 
-[Source](https://github.com/xizon/uix-kit-react/tree/main/src/client/components/Swiper)
+[Source](https://github.com/xizon/poemkit/tree/main/src/client/components/Swiper)
 
 ## Version
 
@@ -11,7 +11,7 @@
 
 ### Swiper
 ```js
-import Swiper from '@uixkit.react/components/Swiper/index.tsx';
+import Swiper from '@poemkit/components/Swiper/index.tsx';
 ```
 <table>
     <thead>
@@ -41,7 +41,7 @@ import Swiper from '@uixkit.react/components/Swiper/index.tsx';
 
 ```js
 import React from 'react';
-import Swiper from '@uixkit.react/components/Swiper/index.tsx';
+import Swiper from '@poemkit/components/Swiper/index.tsx';
 
 export default () => {
   return (

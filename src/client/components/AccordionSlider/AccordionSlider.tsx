@@ -1,21 +1,21 @@
 import React, { Component } from 'react';
 
 /*-- Apply Third-party plugins (import location should be in front of "global scripts and styles") --*/
-import '@uixkit.react/components/_plugins/_lib-bootstrap';
-import '@uixkit.react/components/_plugins/_lib-icons';
-import TweenMax, { TimelineMax } from '@uixkit.react/components/_plugins/_lib-gsap';
+import '@poemkit/components/_plugins/_lib-bootstrap';
+import '@poemkit/components/_plugins/_lib-icons';
+import TweenMax, { TimelineMax } from '@poemkit/components/_plugins/_lib-gsap';
 
 /*-- Apply global scripts and styles --*/
-import '@uixkit.react/components/_utils/styles/_all.scss';
-import '@uixkit.react/components/_utils/styles/rtl/_all.scss';
-import { __ } from '@uixkit.react/components/_utils/_all';
+import '@poemkit/components/_utils/styles/_all.scss';
+import '@poemkit/components/_utils/styles/rtl/_all.scss';
+import { __ } from '@poemkit/components/_utils/_all';
 
 /*-- Apply this component styles --*/
-import '@uixkit.react/components/AccordionSlider/styles/_style.scss';
+import '@poemkit/components/AccordionSlider/styles/_style.scss';
 
 
 //
-import AccordionSliderItem from '@uixkit.react/components/AccordionSlider/AccordionSliderItem';
+import AccordionSliderItem from '@poemkit/components/AccordionSlider/AccordionSliderItem';
 
 
 type AccordionSliderProps = {
@@ -27,9 +27,9 @@ type AccordionSliderProps = {
 	autoReset?: boolean;
 	/** Display ratio measures the activated item's percentage of the component in the entire area */
 	displayRatio?: string;
-	/** The direction of the slider animation, if it is `horizontal`, it means changing the width, otherwise changing the height */
+	/** The direction of the component animation, if it is `horizontal`, it means changing the width, otherwise changing the height */
 	direction?: string;
-	/** The button that triggers the restoration of the initial state, represented by class, such as `.uix-accordion-img__close` */
+	/** The button that triggers the restoration of the initial state, represented by class, such as `.poemkit-accordion-img__close` */
 	closeBtn?: string | boolean;
 	/** The number of milliseconds(ms) each iteration of the animation takes to complete */
 	duration?: number;
@@ -57,76 +57,88 @@ export default class AccordionSlider extends Component<AccordionSliderProps, Acc
 	}
 
 	handleClickItem(e) {
-		e.preventDefault();
-		//Prevents further propagation of the current event in the capturing and bubbling phases(if use `e.target`).
-		e.stopPropagation();
 
-		if ( this.animOK ) return;
+		// only for desktop
+		if ( window.innerWidth > 768 ) {
 
-		//
-		const reactDomWrapperEl: any = this.rootRef.current;
-		const reactDomEl: any = e.currentTarget;
-		const animSpeed = this.props.duration || 200;
-		const $li = reactDomWrapperEl.querySelectorAll( 'ul > li' );
-		const total = $li.length;
-		const offsetVal = this.props.displayRatio || '60%';
-		const dir = this.props.direction || 'horizontal';
-		
+			e.preventDefault();
+			//Prevents further propagation of the current event in the capturing and bubbling phases(if use `e.target`).
+			e.stopPropagation();
 
-		//Apply click method to outer div but not inner div
-		if ( e.target.className == 'uix-accordion-slider__content__info' || e.target.className == 'uix-accordion-slider__content' ) {
-			
-			this.animOK = true;
-			setTimeout( () => {
-				this.animOK = false;
-			}, animSpeed);
-
-
-			//set other all sibling <li> of the selected element
-			Array.prototype.forEach.call($li, (node) => {
-				node.classList.add( 'active-sub' );
-				if ( node.clientHeight > 0 ) {
-					this.animateStyles(node, {
-						direction        : dir,
-						startPercentage  : 100 / total,
-						endPercentage    : (100 - parseFloat(offsetVal)) / (total-1),
-						speed            : animSpeed
-					});				
-				}	
-			});
-				
+			if ( this.animOK ) return;
 
 			//
-			reactDomEl.classList.add('is-active');
-			this.animateStyles(reactDomEl, {
-				direction        : dir,
-				startPercentage  : 100 / total,
-				endPercentage    : parseFloat(offsetVal),
-				speed            : animSpeed
-			});
+			const reactDomWrapperEl: any = this.rootRef.current;
+			const reactDomEl: any = e.currentTarget;
+			const animSpeed = this.props.duration || 200;
+			const $li = reactDomWrapperEl.querySelectorAll( 'ul > li' );
+			const total = $li.length;
+			const offsetVal = this.props.displayRatio || '60%';
+			const dir = this.props.direction || 'horizontal';
+			
 
+			//Apply click method to outer div but not inner div
+			if ( e.target.className == 'poemkit-accordion-slider__content__info' || e.target.className == 'poemkit-accordion-slider__content' ) {
+				
+				this.animOK = true;
+				setTimeout( () => {
+					this.animOK = false;
+				}, animSpeed);
+
+
+				//set other all sibling <li> of the selected element
+				Array.prototype.forEach.call($li, (node) => {
+					node.classList.add( 'active-sub' );
+					if ( node.clientHeight > 0 ) {
+						this.animateStyles(node, {
+							direction        : dir,
+							startPercentage  : 100 / total,
+							endPercentage    : (100 - parseFloat(offsetVal)) / (total-1),
+							speed            : animSpeed
+						});				
+					}	
+				});
+					
+
+				//
+				reactDomEl.classList.add( 'is-active' );
+				this.animateStyles(reactDomEl, {
+					direction        : dir,
+					startPercentage  : 100 / total,
+					endPercentage    : parseFloat(offsetVal),
+					speed            : animSpeed
+				});
+
+
+			}
 
 		}
+
 		
 	}
 
 	// Initialize the width or height of each item
 	handleResetItems() {
 
-		const reactDomWrapperEl: any = this.rootRef.current;
-		const $li = reactDomWrapperEl.querySelectorAll( 'ul > li' );
-		const total = $li.length;
-		const animSpeed = this.props.duration || 200;
+		// only for desktop
+		if ( window.innerWidth > 768 ) {
 
-		Array.prototype.forEach.call($li, (node) => {
-			node.classList.remove('is-active', 'active-sub');
-			this.animateStyles(node, {
-				direction        : this.props.direction,
-				startPercentage  : this.props.direction === 'verticle' ? (node.scrollHeight / reactDomWrapperEl.clientHeight) * 100 : (node.scrollWidth / reactDomWrapperEl.clientWidth) * 100,
-				endPercentage    : 100 / total,
-				speed            : animSpeed
+			const reactDomWrapperEl: any = this.rootRef.current;
+			const $li = reactDomWrapperEl.querySelectorAll( 'ul > li' );
+			const total = $li.length;
+			const animSpeed = this.props.duration || 200;
+
+			Array.prototype.forEach.call($li, (node) => {
+				node.classList.remove( 'is-active', 'active-sub' );
+				this.animateStyles(node, {
+					direction        : this.props.direction,
+					startPercentage  : this.props.direction === 'verticle' ? (node.scrollHeight / reactDomWrapperEl.clientHeight) * 100 : (node.scrollWidth / reactDomWrapperEl.clientWidth) * 100,
+					endPercentage    : 100 / total,
+					speed            : animSpeed
+				});
 			});
-		});
+
+		}
 
 
 	}
@@ -219,7 +231,7 @@ export default class AccordionSlider extends Component<AccordionSliderProps, Acc
 				<div 
 				    ref={this.rootRef}
 					id={id || this.uniqueID}
-					className="uix-accordion-slider">
+					className="poemkit-accordion-slider">
 					<ul>
 
 						{( children != null ) ? (children as any[]).map((item, i) => {
@@ -230,7 +242,7 @@ export default class AccordionSlider extends Component<AccordionSliderProps, Acc
 										defaultActive={_defaultActive}
 										triggerType={triggerType || 'click'}
 										boxToggleEv={this.handleClickItem}
-										boxAnimLeaveEv={autoReset ? ()=>{this.handleResetItems();} : ()=>{} }
+										elAnimLeaveEv={autoReset ? ()=>{this.handleResetItems();} : ()=>{} }
 										{...childProps}
 										/>;		
 
@@ -240,7 +252,7 @@ export default class AccordionSlider extends Component<AccordionSliderProps, Acc
 					</ul>
 
 				</div>
-				{/*<!-- .uix-accordion-slider end -->*/}     
+				{/*<!-- .poemkit-accordion-slider end -->*/}     
 			
 	
 		  </>

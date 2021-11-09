@@ -1,14 +1,13 @@
-/**
- * Corresponding to folder `./src/client/actions/*`
- */
-
+// If the file is in the root directory, you can leave it empty. If in another directory, 
+// you can write: "/blog". (no trailing slash)
 const ROOT_DIR = "";
 
-const config = {
-  // If the file is in the root directory, you can leave it empty. If in another directory, 
-  // you can write: "/blog". (but no trailing slash)
-  "rootDirectory": ROOT_DIR,
+// The Site Address (URL) will be named `https://domain-name.com` (no trailing slash and subdirectory)
+const SITE_URL = "";
 
+const config = {
+  "rootDirectory": ROOT_DIR,
+  "siteUrl": SITE_URL,
   "API": {
 
 	  /*
@@ -55,39 +54,37 @@ const config = {
  * API for Test (Please use a PHP server environment with a local port of 8888)
  */
 const configTest = {
-  // If the file is in the root directory, you can leave it empty. If in another directory, 
-  // you can write: "/blog". (but no trailing slash)
   "rootDirectory": ROOT_DIR,
-	
+  "siteUrl": SITE_URL,
   "API": {
 
 	  /*
 	   TYPE: Posts
 	   ------------------------------------------
 	  */
-	  "RECEIVE_DEMO_LIST": `http://localhost:8888/uix-kit-react/public/assets/json/Posts.json`,
-	  "RECEIVE_DEMO_LISTDETAIL": `http://localhost:8888/uix-kit-react/public/assets/json/PostDetail.json?id={id}`,
+	  "RECEIVE_DEMO_LIST": `http://localhost:8888/poemkit/public/assets/json/Posts.json`,
+	  "RECEIVE_DEMO_LISTDETAIL": `http://localhost:8888/poemkit/public/assets/json/PostDetail.json?id={id}`,
 
 	  /*
 	   TYPE: Posts Pagination
 	   ------------------------------------------
 	  */
-	   "RECEIVE_PAGE_LIST": `http://localhost:8888/uix-kit-react/public/assets/json/pagination/page-{page}.json`,
+	   "RECEIVE_PAGE_LIST": `http://localhost:8888/poemkit/public/assets/json/pagination/page-{page}.json`,
  
 	   
 	  /*
 	   TYPE: DropDown List
 	   ------------------------------------------
 	  */
-	   "RECEIVE_DROPDOWN_LIST": `http://localhost:8888/uix-kit-react/public/assets/json/DropDownList.json`,
+	   "RECEIVE_DROPDOWN_LIST": `http://localhost:8888/poemkit/public/assets/json/DropDownList.json`,
  
 
 	  /*
 	   TYPE: User
 	   ------------------------------------------
 	  */
-	  "LOGIN_REQUEST": "http://localhost:8888/uix-kit-react/public/server/sessions-create.php",
-	  "USER_AUTHENTICATE": "http://localhost:8888/uix-kit-react/public/server/authenticate.php",
+	  "LOGIN_REQUEST": "http://localhost:8888/poemkit/public/server/sessions-create.php",
+	  "USER_AUTHENTICATE": "http://localhost:8888/poemkit/public/server/authenticate.php",
 	  "SIGNUP_REQUEST": ""
 	  
   }

@@ -1,4 +1,4 @@
-# Contributing to Uix Kit React
+# Contributing to PoemKit
 
 Hi, there!
 
@@ -15,7 +15,7 @@ Hi, there!
 <a name="res"></a>
 ## Resources
 
-Uix Kit React bundles the following third-party resources:
+PoemKit bundles the following third-party resources:
 
 
 Default Vendor:
@@ -28,6 +28,7 @@ Default Vendor:
 - [React Router](https://reacttraining.com/react-router/web/guides/quick-start/)
 - [axios](https://github.com/axios/axios)
 - [pm2](https://pm2.keymetrics.io/)
+- [React Helmet](https://github.com/nfl/react-helmet)
 
 
 Plugins(Optional):

@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
-import { __ } from '@uixkit.react/components/_utils/_all';
-import TweenMax, { TimelineMax } from '@uixkit.react/components/_plugins/_lib-gsap';
+import { __ } from '@poemkit/components/_utils/_all';
+import TweenMax, { TimelineMax } from '@poemkit/components/_plugins/_lib-gsap';
 
 
 /* Recursively nested components to traverse nodes
@@ -38,13 +38,13 @@ export default class MenuList extends Component<MenuListProps, MenuListState>  {
         //////////////  Not Mobile (item event)   //////////////////
         ////////////////////////////////////////////////////////////
         */
-        const menuContainer = e.currentTarget.closest( '.uix-menu__container' );
+        const menuContainer = e.currentTarget.closest( '.poemkit-menu__container' );
         if ( menuContainer !== null && menuContainer.classList.contains( 'is-mobile' ) ) return;
 
 
         //
         const self = this;
-        TweenMax.set( [e.currentTarget.querySelector( 'ul.sub-menu' ), e.currentTarget.querySelector( '.uix-menu__arrow-mega' )], {
+        TweenMax.set( [e.currentTarget.querySelector( 'ul.sub-menu' ), e.currentTarget.querySelector( '.poemkit-menu__arrow-mega' )], {
             css: {
                 opacity    : 0,
                 display    : 'block',
@@ -72,13 +72,13 @@ export default class MenuList extends Component<MenuListProps, MenuListState>  {
         /////////////////  Not Mobile  (item event)  ///////////////
         ////////////////////////////////////////////////////////////
         */
-        const menuContainer = e.currentTarget.closest( '.uix-menu__container' );
+        const menuContainer = e.currentTarget.closest( '.poemkit-menu__container' );
         if ( menuContainer !== null && menuContainer.classList.contains( 'is-mobile' ) ) return;
 
 
         //
         const self = this;
-        TweenMax.to( [e.currentTarget.querySelector( 'ul.sub-menu' ), e.currentTarget.querySelector( '.uix-menu__arrow-mega' )], 0.3, {
+        TweenMax.to( [e.currentTarget.querySelector( 'ul.sub-menu' ), e.currentTarget.querySelector( '.poemkit-menu__arrow-mega' )], 0.3, {
             css: {
                 opacity    : 0,
                 marginTop  : self.animMarginTop + 'px'
@@ -164,7 +164,7 @@ export default class MenuList extends Component<MenuListProps, MenuListState>  {
         ////////////////////////////////////////////////////////////
         */
         const w = window.innerWidth; 
-        const megaMenuRootLi = document.querySelectorAll( '.uix-menu__container:not(.is-mobile) li.multi-column' );
+        const megaMenuRootLi = document.querySelectorAll( '.poemkit-menu__container:not(.is-mobile) li.multi-column' );
     
         //This value is equal to the $nav-mega-li-w variable in the SCSS
         const perDefaultW = 270; //Default width of each column
@@ -315,11 +315,11 @@ export default class MenuList extends Component<MenuListProps, MenuListState>  {
 
 
                         {/* Desktop arrow */}
-                        {item.mega && !mobile ? <span className="uix-menu__arrow-mega"></span> : ''}
-                        {(item.children || item.mega) && !mobile ? <span className="uix-menu__arrow"></span> : ''}
+                        {item.mega && !mobile ? <span className="poemkit-menu__arrow-mega"></span> : ''}
+                        {(item.children || item.mega) && !mobile ? <span className="poemkit-menu__arrow"></span> : ''}
 
                         {/* Mobile arrow */}
-                        {mobile && (item.mega || item.children) ? <em className="uix-menu__arrow-mobile"></em> : ''}
+                        {mobile && (item.mega || item.children) ? <em className="poemkit-menu__arrow-mobile"></em> : ''}
 
 
                         {/* Hyperlinks*/}
@@ -366,7 +366,7 @@ export default class MenuList extends Component<MenuListProps, MenuListState>  {
             return <ul className="sub-menu" style={{marginTop:`${this.animMarginTop}px`}}>{options}</ul>;
         }
             
-        return <ul className="uix-menu">{options}</ul>;
+        return <ul className="poemkit-menu">{options}</ul>;
 
 	}
 }
@@ -382,10 +382,10 @@ render() {
     return (
       <>
                 
-      <nav className="uix-menu__container">
-        <div className="uix-menu__inner">
-            <span className="uix-brand--mobile"><img src="" /></span>
-            <ul className="uix-menu">
+      <nav className="poemkit-menu__container">
+        <div className="poemkit-menu__inner">
+            <span className="poemkit-brand--mobile"><img src="" /></span>
+            <ul className="poemkit-menu">
                 <li className="multi-column"><a href="#">Components</a>
                     <ul className="sub-menu">
 
@@ -395,7 +395,7 @@ render() {
                                 <li><a href="#">Menu Text</a></li>
                                 <li><a href="#">Menu Text</a></li>
                                 <li><a href="#">Menu Text</a></li>
-                                <li><a href="#">Menu Text</a><span className="uix-bubble">new</span></li>
+                                <li><a href="#">Menu Text</a><span className="poemkit-bubble">new</span></li>
                             </ul>
                         </li>
 

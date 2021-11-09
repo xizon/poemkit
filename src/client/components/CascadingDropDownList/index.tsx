@@ -6,22 +6,22 @@
 import React, { Component } from 'react';
 
 /*-- Apply Third-party plugins (import location should be in front of "global scripts and styles") --*/
-import '@uixkit.react/components/_plugins/_lib-bootstrap';
-import '@uixkit.react/components/_plugins/_lib-icons';
-import TweenMax, { TimelineMax } from '@uixkit.react/components/_plugins/_lib-gsap';
+import '@poemkit/components/_plugins/_lib-bootstrap';
+import '@poemkit/components/_plugins/_lib-icons';
+import TweenMax, { TimelineMax } from '@poemkit/components/_plugins/_lib-gsap';
 
 /*-- Apply global scripts and styles --*/
-import '@uixkit.react/components/_utils/styles/_all.scss';
-import '@uixkit.react/components/_utils/styles/rtl/_all.scss';
-import { __ } from '@uixkit.react/components/_utils/_all';
+import '@poemkit/components/_utils/styles/_all.scss';
+import '@poemkit/components/_utils/styles/rtl/_all.scss';
+import { __ } from '@poemkit/components/_utils/_all';
 
 
 /*-- Apply this component styles --*/
-import '@uixkit.react/components/CascadingDropDownList/styles/_style.scss';
+import '@poemkit/components/CascadingDropDownList/styles/_style.scss';
 
 //
 import axios from 'axios';
-import Group from '@uixkit.react/components/CascadingDropDownList/Group';
+import Group from '@poemkit/components/CascadingDropDownList/Group';
 
 type CascadingDropDownListProps = {
     /** API address to receive data */
@@ -105,9 +105,9 @@ export default class CascadingDropDownList extends Component<CascadingDropDownLi
      handleClickOutside(event) {
 		if ( 
 			event.target.className != '' && ( 
-				event.target.className.indexOf( 'uix-cascading-dropdown-list__trigger' ) < 0 && 
-				event.target.className.indexOf( 'uix-cascading-dropdown-list__items' ) < 0 && 
-                event.target.className.indexOf( 'uix-cascading-dropdown-list__opt' ) < 0
+				event.target.className.indexOf( 'poemkit-cascading-dropdown-list__trigger' ) < 0 && 
+				event.target.className.indexOf( 'poemkit-cascading-dropdown-list__items' ) < 0 && 
+                event.target.className.indexOf( 'poemkit-cascading-dropdown-list__opt' ) < 0
 			)
 		   ) {
 			this.setState({isShow: false});
@@ -177,6 +177,8 @@ export default class CascadingDropDownList extends Component<CascadingDropDownLi
 
 
     getData() {
+        if ( this.props.api === undefined ) return;
+
         //
         this.setState({
             loading: true
@@ -359,16 +361,16 @@ export default class CascadingDropDownList extends Component<CascadingDropDownLi
     createTrigger(tagName, classes, content) {
         switch (tagName) {
             case 'a':
-                return <a role="button" href="#" className={"uix-cascading-dropdown-list__trigger " + classes} onClick={this.handleDisplayOptions}>{content}</a>;
+                return <a role="button" href="#" className={"poemkit-cascading-dropdown-list__trigger " + classes} onClick={this.handleDisplayOptions}>{content}</a>;
 
             case 'button':
-                return <button type="button" className={"uix-cascading-dropdown-list__trigger " + classes} onClick={this.handleDisplayOptions}>{content}</button>;
+                return <button type="button" className={"poemkit-cascading-dropdown-list__trigger " + classes} onClick={this.handleDisplayOptions}>{content}</button>;
 
             case 'div':
-                return <div role="button" className={"uix-cascading-dropdown-list__trigger " + classes} onClick={this.handleDisplayOptions}>{content}</div>;
+                return <div role="button" className={"poemkit-cascading-dropdown-list__trigger " + classes} onClick={this.handleDisplayOptions}>{content}</div>;
 
             case 'span':
-                return <span role="button" className={"uix-cascading-dropdown-list__trigger " + classes} onClick={this.handleDisplayOptions}>{content}</span>;
+                return <span role="button" className={"poemkit-cascading-dropdown-list__trigger " + classes} onClick={this.handleDisplayOptions}>{content}</span>;
 
         }
     }
@@ -430,7 +432,7 @@ export default class CascadingDropDownList extends Component<CascadingDropDownLi
 
                 <div
                     id={id || this.uniqueID}
-                    className="uix-cascading-dropdown-list" style={{zIndex:(depth ? depth : 1)}}>
+                    className="poemkit-cascading-dropdown-list" style={{zIndex:(depth ? depth : 1)}}>
 
                     <input name={name || ''} type="hidden" ref={this.valRef} />
                     {selectedData!.values ? selectedData!.values.map((item, i) => {
@@ -439,10 +441,10 @@ export default class CascadingDropDownList extends Component<CascadingDropDownLi
 
                     {this.createTrigger(triggerTagName, triggerClassName, triggerContent)}
        
-                    <em className="uix-cascading-dropdown-list__result">{displayInfo}</em>
+                    <em className="poemkit-cascading-dropdown-list__result">{displayInfo}</em>
 
                     {isShow ? (
-                        <div className="uix-cascading-dropdown-list__items">
+                        <div className="poemkit-cascading-dropdown-list__items">
                             <ul>
                                 {data.map((item, level) => {
                                     return (

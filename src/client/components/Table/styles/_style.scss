@@ -1,7 +1,7 @@
 /* ======================================================
    <!-- Table -->
 /* ====================================================== */
-@import '@uixkit.react/components/_utils/styles/_variable-and-mixin.scss';
+@import '@poemkit/components/_utils/styles/_variable-and-mixin.scss';
 
 /*
  * 1. Generic
@@ -17,8 +17,8 @@ $table-border-color: #EEEEEE;
 $table-border-headerbg: #FAFAFA;
 $table-alternant-bg: #FAFAFA;
 
-table.uix-table,
-.uix-table table {
+table.poemkit-table,
+.poemkit-table table {
 
 	margin: 0;
 	padding: 0;
@@ -54,16 +54,16 @@ table.uix-table,
 		th {
 			text-align: inherit; /* Required */
 
-			&.uix-t-r {
+			&.poemkit-t-r {
 				text-align: right;
 			}
 
-			&.uix-t-l {
+			&.poemkit-t-l {
 				text-align: left;
 			}
 
 
-			&.uix-t-c {
+			&.poemkit-t-c {
 				text-align: center;
 			}
 
@@ -76,54 +76,54 @@ table.uix-table,
 			--breakpoint-xl:1200px;
 			*/
 			@media all and (max-width: 576px) {
-				&.uix-t-r--sm {
+				&.poemkit-t-r--sm {
 					text-align: right;
 				}
 
-				&.uix-t-l--sm {
+				&.poemkit-t-l--sm {
 					text-align: left;
 				}
-				&.uix-t-c--sm {
+				&.poemkit-t-c--sm {
 					text-align: center;
 				}
 			}
 
 			@media all and (max-width: 768px) {
-				&.uix-t-r--md {
+				&.poemkit-t-r--md {
 					text-align: right;
 				}
 
-				&.uix-t-l--md {
+				&.poemkit-t-l--md {
 					text-align: left;
 				}
-				&.uix-t-c--md {
+				&.poemkit-t-c--md {
 					text-align: center;
 				}
 			}
 
 			@media all and (max-width: 992px) {
-				&.uix-t-r--lg {
+				&.poemkit-t-r--lg {
 					text-align: right;
 				}
 
-				&.uix-t-l--lg {
+				&.poemkit-t-l--lg {
 					text-align: left;
 				}
-				&.uix-t-c--lg {
+				&.poemkit-t-c--lg {
 					text-align: center;
 				}
 			}
 
 
 			@media all and (max-width: 1200px) {
-				&.uix-t-r--xl {
+				&.poemkit-t-r--xl {
 					text-align: right;
 				}
 
-				&.uix-t-l--xl {
+				&.poemkit-t-l--xl {
 					text-align: left;
 				}
-				.uix-t-c--xl {
+				.poemkit-t-c--xl {
 					text-align: center;
 				}
 			}
@@ -148,24 +148,24 @@ table.uix-table,
 
 /*-- Table Effect by Default --*/
 /* Compatible with  Uix Shortcodes (WordPress Plugin) and Block Button Link */
-.uix-table a:not(.uix-sc-btn):not(.wp-block-button__link):not(.uix-btn) {
+.poemkit-table a:not(.poemkit-sc-btn):not(.wp-block-button__link):not(.poemkit-btn) {
     color: $highlight-color1;
 }
 
-.uix-table a:not(.uix-sc-btn):not(.wp-block-button__link):not(.uix-btn):hover {
+.poemkit-table a:not(.poemkit-sc-btn):not(.wp-block-button__link):not(.poemkit-btn):hover {
     color: $highlight-color2;
     text-decoration: underline;
 }
 
-.uix-table a:not(.uix-sc-btn):not(.wp-block-button__link):not(.uix-btn):hover img {
+.poemkit-table a:not(.poemkit-sc-btn):not(.wp-block-button__link):not(.poemkit-btn):hover img {
     text-decoration: none;
 }
 
 
 @media all and (max-width: 768px) {
 
-	table.uix-table.is-responsive,
-	.uix-table.is-responsive table {
+	table.poemkit-table.is-responsive,
+	.poemkit-table.is-responsive table {
 
 		thead {
 		    display: none;
@@ -211,8 +211,8 @@ table.uix-table,
 
 
 	/* With scroll bars */
-	.js-uix-table--responsive-scrolled table,
-	table.js-uix-table--responsive-scrolled {
+	.js-poemkit-table--responsive-scrolled table,
+	table.js-poemkit-table--responsive-scrolled {
 		display: block;
 		width: 100%;
 		border-bottom: 0 !important;
@@ -282,8 +282,8 @@ table.uix-table,
 }
 
 
-table.uix-table--bordered,
-.uix-table--bordered table {
+table.poemkit-table--bordered,
+.poemkit-table--bordered table {
 
 	border: 1px solid $table-border-color;
 	border-collapse: collapse;
@@ -298,34 +298,34 @@ table.uix-table--bordered,
 
 }
 
-table.uix-table--noborder,
-.uix-table--noborder table {
+table.poemkit-table--noborder,
+.poemkit-table--noborder table {
 	border: none;
 }
 
-table.uix-table--top-noborder,
-.uix-table--top-noborder table {
+table.poemkit-table--top-noborder,
+.poemkit-table--top-noborder table {
 	td {
 		border-top: none;
 	}
 }
 
-table.uix-table--bottom-noborder,
-.uix-table--bottom-noborder table {
+table.poemkit-table--bottom-noborder,
+.poemkit-table--bottom-noborder table {
 	td {
 		border-bottom: none;
 	}
 }
 
-table.uix-table--alternant-row,
-.uix-table--alternant-row table {
+table.poemkit-table--alternant-row,
+.poemkit-table--alternant-row table {
 	tbody tr:nth-child(even) {
 		background-color: $table-alternant-bg;
 	}
 }
 
-table.uix-table--alternant-col,
-.uix-table--alternant-col table {
+table.poemkit-table--alternant-col,
+.poemkit-table--alternant-col table {
 	
     tbody tr td:first-child {
 		color: #fff;
@@ -342,13 +342,13 @@ table.uix-table--alternant-col,
 
 }
 
-table.uix-table--striped tr:nth-child(2n-1) td,
-.uix-table--striped table tr:nth-child(2n-1) td {
+table.poemkit-table--striped tr:nth-child(2n-1) td,
+.poemkit-table--striped table tr:nth-child(2n-1) td {
 	background-color: $table-border-headerbg;
 }
 
-table.uix-table--per-line,
-.uix-table--per-line table {
+table.poemkit-table--per-line,
+.poemkit-table--per-line table {
 
 	td {
 		border-bottom: 1px solid $table-border-color;
@@ -385,8 +385,8 @@ table.is-horizontal,
 @media all and (max-width: 768px) {
 
 
-	table.uix-table--per-line.is-responsive,
-	.uix-table--per-line.is-responsive table {
+	table.poemkit-table--per-line.is-responsive,
+	.poemkit-table--per-line.is-responsive table {
 
 		tbody tr:last-child td {
 			border-bottom-width: 1px;

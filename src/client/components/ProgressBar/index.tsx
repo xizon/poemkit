@@ -6,17 +6,17 @@
 import React, { Component } from 'react';
 
 /*-- Apply Third-party plugins (import location should be in front of "global scripts and styles") --*/
-import '@uixkit.react/components/_plugins/_lib-bootstrap';
-import '@uixkit.react/components/_plugins/_lib-icons';
-import TweenMax, { TimelineMax } from '@uixkit.react/components/_plugins/_lib-gsap';
+import '@poemkit/components/_plugins/_lib-bootstrap';
+import '@poemkit/components/_plugins/_lib-icons';
+import TweenMax, { TimelineMax } from '@poemkit/components/_plugins/_lib-gsap';
 
 /*-- Apply global scripts and styles --*/
-import '@uixkit.react/components/_utils/styles/_all.scss';
-import '@uixkit.react/components/_utils/styles/rtl/_all.scss';
-import { __ } from '@uixkit.react/components/_utils/_all';
+import '@poemkit/components/_utils/styles/_all.scss';
+import '@poemkit/components/_utils/styles/rtl/_all.scss';
+import { __ } from '@poemkit/components/_utils/_all';
 
 /*-- Apply this component styles --*/
-import '@uixkit.react/components/ProgressBar/styles/_style.scss';
+import '@poemkit/components/ProgressBar/styles/_style.scss';
 
 
 type ProgressBarProps = {
@@ -80,16 +80,16 @@ export default class ProgressBar extends Component<ProgressBarProps, ProgressBar
 
                 //Radial Progress Bar
                 
-                if ( reactDomEl.classList.contains( 'uix-progressbar--circle' ) ) {
-                    reactDomEl.querySelector( '.uix-progressbar__track' ).innerHTML = '<span>'+percent+'<em className="uix-progressbar__unit">'+unit+'</em></span>';
-                    reactDomEl.classList.add( 'uix-progressbar--progress-' + percent )
+                if ( reactDomEl.classList.contains( 'poemkit-progressbar--circle' ) ) {
+                    reactDomEl.querySelector( '.poemkit-progressbar__track' ).innerHTML = '<span>'+percent+'<em className="poemkit-progressbar__unit">'+unit+'</em></span>';
+                    reactDomEl.classList.add( 'poemkit-progressbar--progress-' + percent )
                 } 
 
 
                 //Rectangle Progress Bar
-                if ( reactDomEl.classList.contains( 'uix-progressbar--rectangle' ) ) {
-                    reactDomEl.querySelector( '.uix-progressbar__bar > span' ).innerHTML = percent+'<em className="uix-progressbar__unit">'+unit+'</em>';
-                    reactDomEl.classList.add( 'uix-progressbar--progress-' + percent )
+                if ( reactDomEl.classList.contains( 'poemkit-progressbar--rectangle' ) ) {
+                    reactDomEl.querySelector( '.poemkit-progressbar__bar > span' ).innerHTML = percent+'<em className="poemkit-progressbar__unit">'+unit+'</em>';
+                    reactDomEl.classList.add( 'poemkit-progressbar--progress-' + percent )
                 } 
 
 
@@ -144,11 +144,11 @@ export default class ProgressBar extends Component<ProgressBarProps, ProgressBar
 
         let shapeClassName = '';
         if ( shape === 'annulus') {
-            shapeClassName = 'uix-progressbar--circle is-transparent';
+            shapeClassName = 'poemkit-progressbar--circle is-transparent';
         } else if ( shape=== 'circle' ) {
-            shapeClassName = 'uix-progressbar--circle';
+            shapeClassName = 'poemkit-progressbar--circle';
         } else if ( shape=== 'rectangle' ) {
-            shapeClassName = 'uix-progressbar--rectangle';
+            shapeClassName = 'poemkit-progressbar--rectangle';
         }
 
 
@@ -158,24 +158,24 @@ export default class ProgressBar extends Component<ProgressBarProps, ProgressBar
                 <div 
                 ref={this.rootRef}
                 id={id || this.uniqueID}
-                className={`${shapeClassName} uix-progressbar--progress-0`} 
+                className={`${shapeClassName} poemkit-progressbar--progress-0`} 
                 data-progressbar-percent={value || 0} 
                 data-progressbar-unit={unit}> 
                     { shape === 'rectangle' ? (<>
-                        { label ? <><div className="uix-progressbar__title">{label}</div></> : '' }
-                        <div className="uix-progressbar__bar">
-                            <div className="uix-progressbar__track"></div>
-                            <span>0<em className="uix-progressbar__unit">%</em></span>
+                        { label ? <><div className="poemkit-progressbar__title">{label}</div></> : '' }
+                        <div className="poemkit-progressbar__bar">
+                            <div className="poemkit-progressbar__track"></div>
+                            <span>0<em className="poemkit-progressbar__unit">%</em></span>
                         </div>
                     </>) : (<>
-                        <span className="uix-progressbar__track">
-                            { displayPercentage ? <><span>0<em className="uix-progressbar__unit">{unit || ''}</em></span></> : '' }
+                        <span className="poemkit-progressbar__track">
+                            { displayPercentage ? <><span>0<em className="poemkit-progressbar__unit">{unit || ''}</em></span></> : '' }
                         </span>
-                        <div className="uix-progressbar__pie">
-                            <div className="uix-progressbar__pie--left-side uix-progressbar__pie--half-circle"></div>
-                            <div className="uix-progressbar__pie--right-side uix-progressbar__pie--half-circle"></div>
+                        <div className="poemkit-progressbar__pie">
+                            <div className="poemkit-progressbar__pie--left-side poemkit-progressbar__pie--half-circle"></div>
+                            <div className="poemkit-progressbar__pie--right-side poemkit-progressbar__pie--half-circle"></div>
                         </div>
-                        { label ? <><div className="uix-progressbar__title">{label}</div></> : '' }
+                        { label ? <><div className="poemkit-progressbar__title">{label}</div></> : '' }
                     </>)}
                     
                 </div>   

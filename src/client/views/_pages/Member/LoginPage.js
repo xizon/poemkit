@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 
-import { __ } from '@uixkit.react/components/_utils/_all';
+import { __ } from '@poemkit/components/_utils/_all';
 
-import AuthService from "@uixkit.react/services/auth-service.js";
+import AuthService from "@poemkit/services/auth-service.js";
 
 class LoginPage extends Component {
 	

@@ -30,12 +30,12 @@
  1. Content Block
  ---------------------------
  */ 
-.uix-relative {
+.poemkit-relative {
     position: relative;
 	
 }
 
-.uix-relative--inline {
+.poemkit-relative--inline {
 	display: inline-block;
 	position: relative;
 	
@@ -55,17 +55,17 @@
 }
 
 /* Clip child elements */
-.uix-relative--inline-clip {
+.poemkit-relative--inline-clip {
   overflow: hidden;
 }
 
 /* 
  ---------------------------
  2. Elements after a floating element will flow around it. 
-    Use the "uix-clearfix" hack to fix the problem
+    Use the "poemkit-clearfix" hack to fix the problem
  ---------------------------
  */ 
-.uix-clearfix {
+.poemkit-clearfix {
 	
 	&::before {
 		display: table;
@@ -87,23 +87,23 @@
  3. Shadow Effect
  ---------------------------
  */ 
-.uix-outer-shadow--regular {
+.poemkit-outer-shadow--regular {
     @include outer-shadow( 'regular' );
 }
 
-.uix-outer-shadow--thick {
+.poemkit-outer-shadow--thick {
     @include outer-shadow( 'thick' );
 }
 
-.uix-outer-shadow--light {
+.poemkit-outer-shadow--light {
     @include outer-shadow( 'light' );
 }
 
-.uix-outer-shadow--highlight {
+.poemkit-outer-shadow--highlight {
     @include outer-shadow( 'highlight', $highlight-color1 );
 }
 
-.uix-none-shadow {
+.poemkit-none-shadow {
 	box-shadow: none !important;
 	text-shadow: none !important;
 }
@@ -113,7 +113,7 @@
  4. Smooth Transition Effect
  ---------------------------
  */ 
-.uix-trans {
+.poemkit-trans {
     @include transition-default();
 
     img, 
@@ -133,11 +133,11 @@
  5. Element Floating
  ---------------------------
  */ 
-.uix-f-l {
+.poemkit-f-l {
     float: left;
 }
 
-.uix-f-r {
+.poemkit-f-r {
     float: right;
 }
 
@@ -147,16 +147,16 @@
  6. Element Alignment
  ---------------------------
  */ 
-.uix-t-r {
+.poemkit-t-r {
     text-align: right;
 }
 
-.uix-t-l {
+.poemkit-t-l {
     text-align: left;
 }
 
 
-.uix-t-c {
+.poemkit-t-c {
     text-align: center;
 }
 
@@ -170,54 +170,54 @@
 --breakpoint-xl:1200px;
 */
 @media all and (max-width: 576px) {
-	.uix-t-r--sm {
+	.poemkit-t-r--sm {
 		text-align: right;
 	}
 
-	.uix-t-l--sm {
+	.poemkit-t-l--sm {
 		text-align: left;
 	}
-	.uix-t-c--sm {
+	.poemkit-t-c--sm {
 		text-align: center;
 	}
 }
 
 @media all and (max-width: 768px) {
-	.uix-t-r--md {
+	.poemkit-t-r--md {
 		text-align: right;
 	}
 
-	.uix-t-l--md {
+	.poemkit-t-l--md {
 		text-align: left;
 	}
-	.uix-t-c--md {
+	.poemkit-t-c--md {
 		text-align: center;
 	}
 }
 
 @media all and (max-width: 992px) {
-	.uix-t-r--lg {
+	.poemkit-t-r--lg {
 		text-align: right;
 	}
 
-	.uix-t-l--lg {
+	.poemkit-t-l--lg {
 		text-align: left;
 	}
-	.uix-t-c--lg {
+	.poemkit-t-c--lg {
 		text-align: center;
 	}
 }
 
 
 @media all and (max-width: 1200px) {
-	.uix-t-r--xl {
+	.poemkit-t-r--xl {
 		text-align: right;
 	}
 
-	.uix-t-l--xl {
+	.poemkit-t-l--xl {
 		text-align: left;
 	}
-	.uix-t-c--xl {
+	.poemkit-t-c--xl {
 		text-align: center;
 	}
 }
@@ -228,7 +228,7 @@
  7. Truncate String with Ellipsis
  ---------------------------
  */ 
-.uix-t-ellipsis {
+.poemkit-t-ellipsis {
 	@include ellipsis();
 }
 
@@ -240,8 +240,8 @@
  */ 
 
 /*-- Using transform property --*/
-.uix-v-align--absolute,
-.uix-v-align--relative {
+.poemkit-v-align--absolute,
+.poemkit-v-align--relative {
     position: absolute;
     z-index: 6;
     width: 100%;
@@ -250,33 +250,33 @@
 	transform: translateY(-50%);
 	
 	/* Vertical Bottom */
-	&.uix-v-align--absolute--b {
+	&.poemkit-v-align--absolute--b {
 		top: auto;
 		bottom: 0;
 		transform: translateY(0);	
 	}
 
 	/* Vertical Top */
-	&.uix-v-align--absolute--t {
+	&.poemkit-v-align--absolute--t {
 		top: 0;
 		transform: translateY(0);	
 	}	
 }
 
-.uix-v-align--relative {
+.poemkit-v-align--relative {
     position: relative;
 }
 
 
 @media all and (max-width: 768px) {
-	.uix-v-align--relative {
+	.poemkit-v-align--relative {
 		top: 0;
 		transform: none;
 	}
 }
 
 /*-- Using table --*/
-.uix-v-align--table {
+.poemkit-v-align--table {
 	display: table;
 	width: 100%;
 	height: 100%;
@@ -286,12 +286,12 @@
 	}
 	
 	/* Vertical Bottom */
-	&.uix-v-align--table--b > div {
+	&.poemkit-v-align--table--b > div {
 		vertical-align: bottom;
 	}
 
 	/* Vertical Top */
-	&.uix-v-align--table--t > div {
+	&.poemkit-v-align--table--t > div {
 		vertical-align: top;
 	}	
 	
@@ -303,11 +303,11 @@
  9. Specifies Whether To Clip Content
  ---------------------------
  */ 
-.uix-hidden-scrollbar-x {
+.poemkit-hidden-scrollbar-x {
     overflow-x: hidden;
 }
 
-.uix-hidden-scrollbar {
+.poemkit-hidden-scrollbar {
     overflow: hidden;
 }
 
@@ -318,57 +318,57 @@
  10. Specifies a Default Height
  ---------------------------
  */ 
-.uix-height--10 {
+.poemkit-height--10 {
     height: 10vh !important;
 }
 
-.uix-height--20 {
+.poemkit-height--20 {
     height: 20vh !important;
 }
 
-.uix-height--30 {
+.poemkit-height--30 {
     height: 30vh !important;
 }
 
-.uix-height--40 {
+.poemkit-height--40 {
     height: 40vh !important;
 }
 
-.uix-height--50 {
+.poemkit-height--50 {
     height: 50vh !important;
 }
 
-.uix-height--60 {
+.poemkit-height--60 {
     height: 60vh !important;
 }
 
-.uix-height--70 {
+.poemkit-height--70 {
     height: 70vh !important;
 }
 
-.uix-height--80 {
+.poemkit-height--80 {
     height: 80vh !important;
 }
 
-.uix-height--90 {
+.poemkit-height--90 {
     height: 90vh !important;
 }
 
-.uix-height--100 {
+.poemkit-height--100 {
     height: 100vh !important;
 }
 
 @media all and (max-width: 768px) {
-	.uix-height--100:not(.is-mobile-still), 
-	.uix-height--90:not(.is-mobile-still), 
-	.uix-height--80:not(.is-mobile-still), 
-	.uix-height--70:not(.is-mobile-still), 
-	.uix-height--60:not(.is-mobile-still), 
-	.uix-height--50:not(.is-mobile-still), 
-	.uix-height--40:not(.is-mobile-still), 
-	.uix-height--30:not(.is-mobile-still), 
-	.uix-height--20:not(.is-mobile-still), 
-	.uix-height--10:not(.is-mobile-still) {
+	.poemkit-height--100:not(.is-mobile-still), 
+	.poemkit-height--90:not(.is-mobile-still), 
+	.poemkit-height--80:not(.is-mobile-still), 
+	.poemkit-height--70:not(.is-mobile-still), 
+	.poemkit-height--60:not(.is-mobile-still), 
+	.poemkit-height--50:not(.is-mobile-still), 
+	.poemkit-height--40:not(.is-mobile-still), 
+	.poemkit-height--30:not(.is-mobile-still), 
+	.poemkit-height--20:not(.is-mobile-still), 
+	.poemkit-height--10:not(.is-mobile-still) {
 	    height: auto !important;
 		
 	}
@@ -382,14 +382,14 @@
  ---------------------------
  */ 
 @media all and (max-width: 768px) {
-    .uix-hide-mobile {
+    .poemkit-hide-mobile {
         display: none !important;
     }
 }
 
 
 @media all and (min-width: 769px) {
-    .uix-hide-pc {
+    .poemkit-hide-pc {
         display: none !important;
     }
 }
@@ -401,7 +401,7 @@
  12. Tip Bubble
  ---------------------------
  */ 
-.uix-bubble {
+.poemkit-bubble {
 	font-weight: 100;
 	text-transform: uppercase;
 	font-weight: 700;
@@ -420,7 +420,7 @@
 }
 
 @media all and (max-width: 768px) {
-	.uix-bubble {
+	.poemkit-bubble {
 		right: 1rem;
 		top: .7rem;
 	}
@@ -432,8 +432,8 @@
  13. Image Hover Overlay Effects
  ---------------------------
  */ 
-img.uix-filter-hover--color,
-.uix-filter-hover--color img {
+img.poemkit-filter-hover--color,
+.poemkit-filter-hover--color img {
 	transition: filter .3s cubic-bezier(.445,.05,.55,.95);
     will-change: filter;
 	
@@ -450,60 +450,60 @@ img.uix-filter-hover--color,
  ---------------------------
  */ 
 /*--- Directions --- */
-[class*='uix-dir--top'],
-[class*='uix-dir--bottom'],
-[class*='uix-dir--left'],
-[class*='uix-dir--right'],
-[class*='uix-dir--center'] {
+[class*='poemkit-dir--top'],
+[class*='poemkit-dir--bottom'],
+[class*='poemkit-dir--left'],
+[class*='poemkit-dir--right'],
+[class*='poemkit-dir--center'] {
     position: absolute !important;
 }
 
 
 /* Don't use `width: 100%` because it is wrong if the parent has padding. */
-.uix-dir--top {
+.poemkit-dir--top {
 	top: 0 !important;
     bottom: auto !important;
 	left: 0 !important;
 	right: 0 !important;
 }
-.uix-dir--bottom {
+.poemkit-dir--bottom {
     top: auto !important;
 	bottom: 0 !important;
 	left: 0 !important;
 	right: 0 !important;
 }
-.uix-dir--left {
+.poemkit-dir--left {
 	top: 0 !important;
 	bottom: 0 !important;
 	left: 0 !important;
     right: auto !important;
 }
-.uix-dir--right {
+.poemkit-dir--right {
 	top: 0 !important;
 	bottom: 0 !important;
     left: auto !important;
 	right: 0 !important;
 }
 
-.uix-dir--top-left {
+.poemkit-dir--top-left {
 	top: 0 !important;
     bottom: auto !important;
 	left: 0 !important;
     right: auto !important;
 }
-.uix-dir--top-right {
+.poemkit-dir--top-right {
 	top: 0 !important;
     bottom: auto !important;
     left: auto !important;
 	right: 0 !important;
 }
-.uix-dir--bottom-left {
+.poemkit-dir--bottom-left {
     top: auto !important;
 	bottom: 0 !important;
 	left: 0 !important;
     right: auto !important;
 }
-.uix-dir--bottom-right {
+.poemkit-dir--bottom-right {
     top: auto !important;
 	bottom: 0 !important;
     left: auto !important;
@@ -516,13 +516,13 @@ img.uix-filter-hover--color,
  15. Element Hidden Style
  ---------------------------
  */ 
-.uix-el--transparent {
+.poemkit-el--transparent {
 	opacity: 0;
 }
-.uix-el--scale {
+.poemkit-el--scale {
 	transform: scale(0);
 }
-.uix-el--skew {
+.poemkit-el--skew {
     transform: skew(0deg, -5deg);	
 }
 
@@ -531,17 +531,17 @@ img.uix-filter-hover--color,
   16. Border Radius
  ---------------------------
  */ 
-.uix-border--rounded {
+.poemkit-border--rounded {
 	
 	border-radius: 4px;
 	
-	&.uix-border--rounded-img {
+	&.poemkit-border--rounded-img {
 		> img {
 			border-radius: 4px;
 		}		
 	}
 	
-	&.uix-border--rounded-only-img {
+	&.poemkit-border--rounded-only-img {
 		border-radius: 0;
 		> img {
 			border-radius: 4px;
@@ -551,16 +551,16 @@ img.uix-filter-hover--color,
 
 }
 
-.uix-border--circle {
+.poemkit-border--circle {
 	border-radius: 50%;
 	
-	&.uix-border--circle-img {
+	&.poemkit-border--circle-img {
 		> img {
 			border-radius: 50%;
 		}		
 	}
 	
-	&.uix-border--circle-only-img {
+	&.poemkit-border--circle-only-img {
 		border-radius: 0;
 		> img {
 			border-radius: 50%;
@@ -575,8 +575,8 @@ img.uix-filter-hover--color,
  17. Align Wide and Full Classes For Elements
  ---------------------------
  */ 
-img.uix-alignfull,
-.uix-alignfull img {
+img.poemkit-alignfull,
+.poemkit-alignfull img {
 	margin-left: calc( -100vw / 2 + 100% / 2 );
 	margin-right: calc( -100vw / 2 + 100% / 2 );
 	max-width: 100vw;
@@ -590,7 +590,7 @@ img.uix-alignfull,
  18. HTML Disclosure Summary element 
  ---------------------------
  */ 
-details.uix-details-reset {
+details.poemkit-details-reset {
     &:not([open]) > *:not(summary){
         display: none !important;
     }

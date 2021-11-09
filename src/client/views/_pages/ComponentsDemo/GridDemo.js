@@ -1,9 +1,9 @@
 import React from 'react';
-import { __ } from '@uixkit.react/components/_utils/_all';
-import { Grid, GridColumn } from '@uixkit.react/components/Grid/index.tsx';
+import { __ } from '@poemkit/components/_utils/_all';
+import { Grid, GridColumn } from '@poemkit/components/Grid/index.tsx';
 
 //Create or Remove Sidebar Menu
-import { SidebarMenu } from '@uixkit.react/pages/ComponentsDemo/_SidebarMenu.js';
+import { SidebarMenu } from '@poemkit/pages/ComponentsDemo/_SidebarMenu.js';
 
 export default () => {
 
@@ -24,9 +24,9 @@ export default () => {
 			<div className="container">
 				<div className="row">
 					<div className="col-12">
-						<h1 className="uix-typo--h2">
+						<h1 className="poemkit-typo--h2">
 							Grid 
-							<a className="uix-typo--h3 align-middle" href="https://github.com/xizon/uix-kit-react/tree/main/src/client/components/Grid" target="_blank"><span className="uix-dir--right" style={{fontSize:"0.75rem",color: "#ababab",margin:".5rem .5rem 0 0"}}><svg style={{marginRight:".5rem"}} width="16" viewBox="0 0 122.88 91.26"><path fill="#d2d2d2" d="M8.32,0h106.24c4.58,0,8.32,3.74,8.32,8.32v74.62c0,4.57-3.74,8.32-8.32,8.32H8.32C3.74,91.26,0,87.51,0,82.94 V8.32C0,3.74,3.74,0,8.32,0L8.32,0z M54.46,72.22L32,58.61v-8.63l22.46-13.61v10.26l-13.65,7.69l13.65,7.7V72.22L54.46,72.22z M68.42,72.22l22.46-13.61v-8.63L68.42,36.37v10.26l13.65,7.69l-13.65,7.7V72.22L68.42,72.22z M117.97,23.29H5.29v60.46 c0,0.64,0.25,1.2,0.67,1.63c0.42,0.42,0.99,0.67,1.63,0.67h108.04c0.64,0,1.2-0.25,1.63-0.67c0.43-0.43,0.67-0.99,0.67-1.63V23.29 H117.97L117.97,23.29z M106.64,9.35c2.27,0,4.11,1.84,4.11,4.11c0,2.27-1.84,4.11-4.11,4.11c-2.27,0-4.11-1.84-4.11-4.11 C102.54,11.19,104.38,9.35,106.64,9.35L106.64,9.35z M78.8,9.35c2.27,0,4.11,1.84,4.11,4.11c0,2.27-1.84,4.11-4.11,4.11 c-2.27,0-4.11-1.84-4.11-4.11C74.69,11.19,76.53,9.35,78.8,9.35L78.8,9.35z M92.72,9.35c2.27,0,4.11,1.84,4.11,4.11 c0,2.27-1.84,4.11-4.11,4.11c-2.27,0-4.11-1.84-4.11-4.11C88.61,11.19,90.45,9.35,92.72,9.35L92.72,9.35z"/></svg>Docs on GitHub</span></a>
+							<a className="poemkit-typo--h3 align-middle" href="https://github.com/xizon/poemkit/tree/main/src/client/components/Grid" target="_blank"><span className="poemkit-dir--right" style={{fontSize:"0.75rem",color: "#ababab",margin:".5rem .5rem 0 0"}}><svg style={{marginRight:".5rem"}} width="16" viewBox="0 0 122.88 91.26"><path fill="#d2d2d2" d="M8.32,0h106.24c4.58,0,8.32,3.74,8.32,8.32v74.62c0,4.57-3.74,8.32-8.32,8.32H8.32C3.74,91.26,0,87.51,0,82.94 V8.32C0,3.74,3.74,0,8.32,0L8.32,0z M54.46,72.22L32,58.61v-8.63l22.46-13.61v10.26l-13.65,7.69l13.65,7.7V72.22L54.46,72.22z M68.42,72.22l22.46-13.61v-8.63L68.42,36.37v10.26l13.65,7.69l-13.65,7.7V72.22L68.42,72.22z M117.97,23.29H5.29v60.46 c0,0.64,0.25,1.2,0.67,1.63c0.42,0.42,0.99,0.67,1.63,0.67h108.04c0.64,0,1.2-0.25,1.63-0.67c0.43-0.43,0.67-0.99,0.67-1.63V23.29 H117.97L117.97,23.29z M106.64,9.35c2.27,0,4.11,1.84,4.11,4.11c0,2.27-1.84,4.11-4.11,4.11c-2.27,0-4.11-1.84-4.11-4.11 C102.54,11.19,104.38,9.35,106.64,9.35L106.64,9.35z M78.8,9.35c2.27,0,4.11,1.84,4.11,4.11c0,2.27-1.84,4.11-4.11,4.11 c-2.27,0-4.11-1.84-4.11-4.11C74.69,11.19,76.53,9.35,78.8,9.35L78.8,9.35z M92.72,9.35c2.27,0,4.11,1.84,4.11,4.11 c0,2.27-1.84,4.11-4.11,4.11c-2.27,0-4.11-1.84-4.11-4.11C88.61,11.19,90.45,9.35,92.72,9.35L92.72,9.35z"/></svg>Docs on GitHub</span></a>
 						</h1>
 					</div>
 				</div>
@@ -42,11 +42,11 @@ export default () => {
 
 		{/*<!-- Content 
 		====================================================== -->*/}
-		<section className="uix-spacing--s uix-spacing--no-bottom">
+		<section className="poemkit-spacing--s poemkit-spacing--no-bottom">
 			<div className="container">
 				<div className="row">
 					<div className="col-12">
-						<h3 className="app-header-title">Uix Grid</h3>
+						<h3 className="app-header-title">PoemKit Grid</h3>
 						<p>
 							It can be used for fluid layout for multiple projects and <strong>Bootstrap</strong> grid system. Its biggest feature is its support for <strong>loop</strong> lists.
 						</p>
@@ -65,7 +65,7 @@ export default () => {
 
 		   {/*<!-- Content 
 			====================================================== -->*/}
-			<section className="uix-spacing--s">
+			<section className="poemkit-spacing--s">
 				<div className="container">
 
 					<div style={{backgroundColor: "#000"}}>
@@ -467,7 +467,7 @@ export default () => {
 				<div className="container">
 					<div className="row">
 						<div className="col-12">
-							<h3 className="app-header-title">No Gutter Column For Uix Grid</h3>
+							<h3 className="app-header-title">No Gutter Column For PoemKit Grid</h3>
 							<p>
 								Set the <code>noGutters</code> attribute of <code>&lt;Grid&gt;</code> markup.<code>true</code> will remove all the columns spacing.
 							</p>		
@@ -489,7 +489,7 @@ export default () => {
 
 			{/*<!-- Content 
 			====================================================== -->*/}
-			<section className="uix-spacing--s">
+			<section className="poemkit-spacing--s">
 				<div className="container">
 
 					<div style={{ backgroundColor: "#000" }}>
@@ -893,7 +893,7 @@ export default () => {
 				<div className="container">
 					<div className="row">
 						<div className="col-12">
-							<h3 className="app-header-title">Uix Grid (No line breaks)</h3>
+							<h3 className="app-header-title">PoemKit Grid (No line breaks)</h3>
 							<p>
 							Set the <code>noBreak</code> attribute of <code>&lt;Grid&gt;</code> markup.<code>true</code> will prevent the columns from automatically wrapping across multiple lines. <em>Please simulate mobile viewing after zooming out your viewport.</em>
 							</p>
@@ -915,7 +915,7 @@ export default () => {
 			
 		   {/*<!-- Content 
 			====================================================== -->*/}
-			<section className="uix-spacing--s">
+			<section className="poemkit-spacing--s">
 				<div className="container">
 
 					<div style={{backgroundColor: "#000"}}>
@@ -991,7 +991,7 @@ export default () => {
 
 		   {/*<!-- Content 
 			====================================================== -->*/}
-			<section className="uix-spacing--s">
+			<section className="poemkit-spacing--s">
 				<div className="container">
 
 					<div style={{backgroundColor: "#000"}}>
@@ -1000,7 +1000,7 @@ export default () => {
 							<div style={{ background: "blue", boxShadow: "inset 0px 0px 0px 1px rgba(0,0,0,.5)" }}>1/6</div>
 						</GridColumn>
 				
-						<div className="uix-clearfix"></div>
+						<div className="poemkit-clearfix"></div>
 						
 
 						<div className="text-center">
@@ -1009,14 +1009,14 @@ export default () => {
 							</GridColumn>		
 						</div>
 
-						<div className="uix-clearfix"></div>
+						<div className="poemkit-clearfix"></div>
 
 
 						<GridColumn ratio="2/5" stackRatio="1/2" stackSize="md">
 							<div style={{background:"green",boxShadow:"inset 0px 0px 0px 1px rgba(0,0,0,.5)"}}>2/5, The width becomes 50% on mobile.</div>
 						</GridColumn>		
 		
-						<div className="uix-clearfix"></div>
+						<div className="poemkit-clearfix"></div>
 
 					</div>
 
@@ -1039,10 +1039,10 @@ export default () => {
 							<hr />
 
 
-							<article className="uix-spacing--s" itemProp="text">
+							<article className="poemkit-spacing--s" itemProp="text">
 								<h4>Grid</h4>
 								<div>
-									<pre>import {`{Grid}`} from '@uixkit.react/components/Grid/index.tsx';</pre>
+									<pre>import {`{Grid}`} from '@poemkit/components/Grid/index.tsx';</pre>
 								</div>
 								<div className="table-responsive-md">
 									<table className="table table-bordered table-striped mb-5">
@@ -1087,7 +1087,7 @@ export default () => {
 	
 								<h4>GridColumn</h4>
 								<div>
-									<pre>import {`{GridColumn}`} from '@uixkit.react/components/Grid/index.tsx';</pre>
+									<pre>import {`{GridColumn}`} from '@poemkit/components/Grid/index.tsx';</pre>
 								</div>
 								<div className="table-responsive-md">
 									<table className="table table-bordered table-striped mb-5">

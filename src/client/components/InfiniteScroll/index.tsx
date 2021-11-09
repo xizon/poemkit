@@ -6,14 +6,14 @@
 import React, { Component } from 'react';
 
 /*-- Apply Third-party plugins (import location should be in front of "global scripts and styles") --*/
-import '@uixkit.react/components/_plugins/_lib-bootstrap';
-import '@uixkit.react/components/_plugins/_lib-icons';
-import TweenMax, { TimelineMax } from '@uixkit.react/components/_plugins/_lib-gsap';
+import '@poemkit/components/_plugins/_lib-bootstrap';
+import '@poemkit/components/_plugins/_lib-icons';
+import TweenMax, { TimelineMax } from '@poemkit/components/_plugins/_lib-gsap';
 
 /*-- Apply global scripts and styles --*/
-import '@uixkit.react/components/_utils/styles/_all.scss';
-import '@uixkit.react/components/_utils/styles/rtl/_all.scss';
-import { __ } from '@uixkit.react/components/_utils/_all';
+import '@poemkit/components/_utils/styles/_all.scss';
+import '@poemkit/components/_utils/styles/rtl/_all.scss';
+import { __ } from '@poemkit/components/_utils/_all';
 
 //
 import axios from 'axios';
@@ -115,6 +115,9 @@ export default class InfiniteScroll extends Component<InfiniteScrollProps, Infin
     }
     
 	getData(currentPage) {
+        if ( this.props.api === undefined ) return;
+
+        //
         const displayNum: any = this.state.perPage;
         const ajaxURL = (this.props.api as string).replace('{page}', currentPage).replace('{perPage}', displayNum );
         const req = this.props.method!.toLowerCase() === 'get' ? axios.get(ajaxURL) : axios.post(ajaxURL);
@@ -213,7 +216,7 @@ export default class InfiniteScroll extends Component<InfiniteScrollProps, Infin
                     })}
     
                     {this.state.loading ? <><div>{loader}</div></> : null}
-                    {this.state.endMsgDispay ? <><div className="uix-clearfix"></div>{this.state.endMsgDispay}</> : null}
+                    {this.state.endMsgDispay ? <><div className="poemkit-clearfix"></div>{this.state.endMsgDispay}</> : null}
 
 
                 </div>

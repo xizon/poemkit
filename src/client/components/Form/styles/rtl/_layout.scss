@@ -1,14 +1,14 @@
 /* ======================================================
     <!-- Form ( Layout ) -->
 /* ====================================================== */
-@import '@uixkit.react/components/_utils/styles/_variable-and-mixin.scss';
+@import '@poemkit/components/_utils/styles/_variable-and-mixin.scss';
 @import '_variable-and-mixin.scss';
 
-.rtl .uix-controls-layout {
+.rtl .poemkit-controls-layout {
 
-    .uix-controls-layout__content {
+    .poemkit-controls-layout__content {
 
-        .uix-controls-layout__content__inner {
+        .poemkit-controls-layout__content__inner {
 
             > div {
                 &:first-child {
@@ -21,7 +21,7 @@
 
     }   
 
-    .uix-controls-layout__icon {
+    .poemkit-controls-layout__icon {
         margin-left: auto;
         margin-right: 1rem;
     }
@@ -31,11 +31,11 @@
 
 @media all and (max-width: 768px) {
     
-    .rtl .uix-controls-layout {
+    .rtl .poemkit-controls-layout {
 
-        .uix-controls-layout__content {
+        .poemkit-controls-layout__content {
 
-            .uix-controls-layout__content__inner {
+            .poemkit-controls-layout__content__inner {
 
                 > div {
                     &:first-child {

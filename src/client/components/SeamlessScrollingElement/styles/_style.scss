@@ -1,0 +1,19 @@
+/* ======================================================
+     <!-- Seamless Scrolling Element -->
+/* ====================================================== */
+@import '@poemkit/components/_utils/styles/_variable-and-mixin.scss';
+
+
+.poemkit-seamless-scrolling {
+    position: relative;
+    width: auto;
+    overflow: hidden;
+
+	ul {
+    
+		li {
+            position: absolute;
+            transition: none;
+		}
+	}
+}

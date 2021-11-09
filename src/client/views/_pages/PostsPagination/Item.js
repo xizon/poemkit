@@ -10,7 +10,7 @@ export default ({ id, img, title, email }) => {
                     <img className="rounded mb-3" src={img} alt={title} />
                 </div>
                 <div className="col-lg-10 col-md-10 justify-content-center">
-                    <h4 className="uix-spacing--no">{title} (ID:{id})</h4>
+                    <h4 className="poemkit-spacing--no">{title} (ID:{id})</h4>
                     <span>Email: {email}</span>
                 </div>
 

@@ -1,6 +1,6 @@
-# @uixkit.react/components/Tabs
+# @poemkit/components/Tabs
 
-[Source](https://github.com/xizon/uix-kit-react/tree/main/src/client/components/Tabs)
+[Source](https://github.com/xizon/poemkit/tree/main/src/client/components/Tabs)
 
 ## Version
 
@@ -10,7 +10,7 @@
 
 ### Tabs
 ```js
-import { Tabs } from '@uixkit.react/components/Tabs/index.tsx';
+import { Tabs } from '@poemkit/components/Tabs/index.tsx';
 ```
 | Property | Type | Default | Description |
 | --- | --- | --- | --- |
@@ -24,7 +24,7 @@ import { Tabs } from '@uixkit.react/components/Tabs/index.tsx';
 
 ### Tab List
 ```js
-import { TabList } from '@uixkit.react/components/Tabs/index.tsx';
+import { TabList } from '@poemkit/components/Tabs/index.tsx';
 ```
 | Property | Type | Default | Description |
 | --- | --- | --- | --- |
@@ -34,13 +34,13 @@ import { TabList } from '@uixkit.react/components/Tabs/index.tsx';
 
 ### Tab Panel
 ```js
-import { TabPanel } from '@uixkit.react/components/Tabs/index.tsx';
+import { TabPanel } from '@poemkit/components/Tabs/index.tsx';
 ```
 | Property | Type | Default | Description |
 | --- | --- | --- | --- |
 | `key` | string \| `tab-panel-*` | - |  A “key” is a special string attribute you need to include when creating lists of elements. Let’s assign a key to our list of items. Must contain the string `tab-panel` |
 | `defaultActive` | boolean | false | Set an item to activate by default |
-| `tabpanelClass` | string | - | Additional style name, such as `uix-outer-shadow--regular` |
+| `tabpanelClass` | string | - | Additional style name, such as `poemkit-outer-shadow--regular` |
 
 
 It accepts all props(include data-* attributes) which native div support.
@@ -51,7 +51,7 @@ It accepts all props(include data-* attributes) which native div support.
 
 ```js
 import React from 'react';
-import { Tabs, TabList, TabPanel } from '@uixkit.react/components/Tabs/index.tsx';
+import { Tabs, TabList, TabPanel } from '@poemkit/components/Tabs/index.tsx';
 
 
 export default () => {
@@ -132,21 +132,21 @@ export default () => {
 			<TabList key="tab-list-4">Tab 4</TabList>
 			<TabList key="tab-list-5">Tab 5</TabList>
 
-			<TabPanel key="tab-panel-1" tabpanelClass="uix-outer-shadow--regular" style={{marginTop:"50px"}} defaultActive>
+			<TabPanel key="tab-panel-1" tabpanelClass="poemkit-outer-shadow--regular" style={{marginTop:"50px"}} defaultActive>
 				<p>Hi, this is the first tab.</p>
 			</TabPanel>
-			<TabPanel key="tab-panel-2" tabpanelClass="uix-outer-shadow--regular" style={{marginTop:"50px"}}>
+			<TabPanel key="tab-panel-2" tabpanelClass="poemkit-outer-shadow--regular" style={{marginTop:"50px"}}>
 				<p>This is the 2nd tab.</p>
 				<p>This is the 2nd tab.</p>
 				<p>This is the 2nd tab.</p>
 			</TabPanel>
-			<TabPanel key="tab-panel-3" tabpanelClass="uix-outer-shadow--regular" style={{marginTop:"50px"}}>
+			<TabPanel key="tab-panel-3" tabpanelClass="poemkit-outer-shadow--regular" style={{marginTop:"50px"}}>
 				<p>And this is the 3rd tab.</p>
 			</TabPanel>    
-			<TabPanel key="tab-panel-3" tabpanelClass="uix-outer-shadow--regular" style={{marginTop:"50px"}}>
+			<TabPanel key="tab-panel-3" tabpanelClass="poemkit-outer-shadow--regular" style={{marginTop:"50px"}}>
 				<p>And this is the 4th tab.</p>
 			</TabPanel> 
-			<TabPanel key="tab-panel-3" tabpanelClass="uix-outer-shadow--regular" style={{marginTop:"50px"}}>
+			<TabPanel key="tab-panel-3" tabpanelClass="poemkit-outer-shadow--regular" style={{marginTop:"50px"}}>
 				<p>And this is the 5th tab.</p>
 			</TabPanel> 
 		</Tabs>	
@@ -163,18 +163,18 @@ export default () => {
 			<TabList key="tab-list-3">Tab 3</TabList>
 			<TabList key="tab-list-4">Tab 4</TabList>
 
-			<TabPanel key="tab-panel-1" tabpanelClass="uix-outer-shadow--regular" style={{marginTop:"50px"}} defaultActive>
+			<TabPanel key="tab-panel-1" tabpanelClass="poemkit-outer-shadow--regular" style={{marginTop:"50px"}} defaultActive>
 				<p>Hi, this is the first tab.</p>
 			</TabPanel>
-			<TabPanel key="tab-panel-2" tabpanelClass="uix-outer-shadow--regular" style={{marginTop:"50px"}}>
+			<TabPanel key="tab-panel-2" tabpanelClass="poemkit-outer-shadow--regular" style={{marginTop:"50px"}}>
 				<p>This is the 2nd tab.</p>
 				<p>This is the 2nd tab.</p>
 				<p>This is the 2nd tab.</p>
 			</TabPanel>
-			<TabPanel key="tab-panel-3" tabpanelClass="uix-outer-shadow--regular" style={{marginTop:"50px"}}>
+			<TabPanel key="tab-panel-3" tabpanelClass="poemkit-outer-shadow--regular" style={{marginTop:"50px"}}>
 				<p>And this is the 3rd tab.</p>
 			</TabPanel>    
-			<TabPanel key="tab-panel-3" tabpanelClass="uix-outer-shadow--regular" style={{marginTop:"50px"}}>
+			<TabPanel key="tab-panel-3" tabpanelClass="poemkit-outer-shadow--regular" style={{marginTop:"50px"}}>
 				<p>And this is the 4th tab.</p>
 			</TabPanel> 
 		</Tabs>		

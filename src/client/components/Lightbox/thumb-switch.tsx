@@ -1,7 +1,7 @@
-import { __ } from '@uixkit.react/components/_utils/_all';
+import { __ } from '@poemkit/components/_utils/_all';
 
 /*-- Apply Third-party plugins --*/
-import TweenMax from '@uixkit.react/components/_plugins/_lib-gsap';
+import TweenMax from '@poemkit/components/_plugins/_lib-gsap';
 
 
 interface thumbSwitchConfig {
@@ -31,12 +31,12 @@ export function thumbSwitch(curElement: any, config: thumbSwitchConfig) {
           customWidth = config.width; //Match the width in the css file;
 
 
-    const $largePhoto = curElement.closest('.uix-lightbox__html').find('.uix-lightbox__photo-container.uix-lightbox__photo-sets-container'),
-          $thumb = curElement.closest('.uix-lightbox__html').find('.uix-lightbox__thumb-container li');
+    const $largePhoto = curElement.closest('.poemkit-lightbox__html').find('.poemkit-lightbox__photo-container.poemkit-lightbox__photo-sets-container'),
+          $thumb = curElement.closest('.poemkit-lightbox__html').find('.poemkit-lightbox__thumb-container li');
 
     // show the content container
     const showLightboxContent = function () {
-        TweenMax.set(curElement.closest('.uix-lightbox__html'), {
+        TweenMax.set(curElement.closest('.poemkit-lightbox__html'), {
             css: {
                 'display': 'block'
             },
@@ -117,11 +117,11 @@ export function thumbSwitch(curElement: any, config: thumbSwitchConfig) {
 
                 //If the image is larger than the current window, it will display at the top.
                 //Don't write variables outside
-                const $lbTarImg = $largePhoto.find('li').eq(targetIndex).find('.uix-lightbox__original__target');
+                const $lbTarImg = $largePhoto.find('li').eq(targetIndex).find('.poemkit-lightbox__original__target');
                 if (oh > window.innerHeight) {
-                    $lbTarImg.addClass('uix-lightbox__original__target--imgfull');
+                    $lbTarImg.addClass('poemkit-lightbox__original__target--imgfull');
                 } else {
-                    $lbTarImg.removeClass('uix-lightbox__original__target--imgfull');
+                    $lbTarImg.removeClass('poemkit-lightbox__original__target--imgfull');
                 }
 
                 TweenMax.to( _curObj, 0.5, {

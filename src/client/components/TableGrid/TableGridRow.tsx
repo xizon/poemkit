@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
-import { __ } from '@uixkit.react/components/_utils/_all';
-import TableGridField from '@uixkit.react/components/TableGrid/TableGridField';
+import { __ } from '@poemkit/components/_utils/_all';
+import TableGridField from '@poemkit/components/TableGrid/TableGridField';
 
 
 /* Table Grid Row
@@ -29,7 +29,7 @@ export default class TableGridRow extends Component<TableGridRowProps, TableGrid
 		
 		const _fields = this.props.data!.data!;
 		const _selected = this.props.data!.selected!;
-		const rowClasses = _selected ? 'uix-table-grid__row is-drop-target' : 'uix-table-grid__row';
+		const rowClasses = _selected ? 'poemkit-table-grid__row is-drop-target' : 'poemkit-table-grid__row';
 
 		
 		const fields = _fields.map((el, i) => {

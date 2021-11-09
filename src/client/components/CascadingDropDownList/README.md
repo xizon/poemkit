@@ -1,6 +1,6 @@
-# @uixkit.react/components/CascadingDropDownList
+# @poemkit/components/CascadingDropDownList
 
-[Source](https://github.com/xizon/uix-kit-react/tree/main/src/client/components/CascadingDropDownList)
+[Source](https://github.com/xizon/poemkit/tree/main/src/client/components/CascadingDropDownList)
 
 ## Version
 
@@ -10,7 +10,7 @@
 
 ### Cascading DropDown List
 ```js
-import CascadingDropDownList from '@uixkit.react/components/CascadingDropDownList/index.tsx';
+import CascadingDropDownList from '@poemkit/components/CascadingDropDownList/index.tsx';
 ```
 | Property | Type | Default | Description |
 | --- | --- | --- | --- |
@@ -140,7 +140,7 @@ A successful response returns the details of the callback such as Sample Request
 
 ```js
 import React from 'react';
-import CascadingDropDownList from '@uixkit.react/components/CascadingDropDownList/index.tsx';
+import CascadingDropDownList from '@poemkit/components/CascadingDropDownList/index.tsx';
 
 export default () => {
   return (
@@ -154,7 +154,7 @@ export default () => {
         loader={<><span>Loading...</span></>}
         method="get"
         triggerTagName="a" 
-        triggerClassName="uix-btn uix-btn__border--thin uix-btn__size--s uix-btn__bg--secondary is-pill is-fill-white" 
+        triggerClassName="poemkit-btn poemkit-btn__border--thin poemkit-btn__size--s poemkit-btn__bg--secondary is-pill is-fill-white" 
         triggerContent={<>
           Select
         </>}
@@ -170,7 +170,7 @@ export default () => {
         method="get"
         value="YourDefaultValue"
         triggerTagName="a" 
-        triggerClassName="uix-btn uix-btn__border--thin uix-btn__size--s uix-btn__bg--secondary is-pill is-fill-white" 
+        triggerClassName="poemkit-btn poemkit-btn__border--thin poemkit-btn__size--s poemkit-btn__bg--secondary is-pill is-fill-white" 
         triggerContent={<>
           Select
         </>}

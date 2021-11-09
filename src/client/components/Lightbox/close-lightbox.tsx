@@ -1,7 +1,7 @@
-import { __ } from '@uixkit.react/components/_utils/_all';
+import { __ } from '@poemkit/components/_utils/_all';
 
 /*-- Apply Third-party plugins --*/
-import { enableBodyScroll } from '@uixkit.react/components/_plugins/_lib-scrolllock';
+import { enableBodyScroll } from '@poemkit/components/_plugins/_lib-scrolllock';
 
 
 interface closeLightboxConfig {
@@ -35,17 +35,17 @@ export function closeLightbox(config: closeLightboxConfig) {
 
 
     //Detect URL change when AJAX calls are done
-    if ( __( wrapperEl ).hasClass( 'js-uix-ajax' ) ) {
+    if ( __( wrapperEl ).hasClass( 'js-poemkit-ajax' ) ) {
         history.pushState( null, '', config.url );
     }
 
     //Remove all dynamic classes
-    __( wrapperEl ).removeClass( 'js-uix-no-fixed js-uix-ajax' );
+    __( wrapperEl ).removeClass( 'js-poemkit-no-fixed js-poemkit-ajax' );
     __( closeEl ).removeClass( 'is-active' );
     
 
     //Reset current container type
-    __( innerEl ).removeClass( 'js-uix-custom js-uix-pure-image' );
+    __( innerEl ).removeClass( 'js-poemkit-custom js-poemkit-pure-image' );
     
     
     //close windows

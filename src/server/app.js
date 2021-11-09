@@ -1,9 +1,9 @@
 import express from 'express';
 import { matchRoutes } from 'react-router-config';
-import render from '@uixkit.react/server/renderer.js';
-import createNewStore from '@uixkit.react/store/createStore.js';
+import render from '@poemkit/server/renderer.js';
+import createNewStore from '@poemkit/store/createStore.js';
 
-import customRoutesConfig from '@uixkit.react/router/RoutesConfig.js';
+import customRoutesConfig from '@poemkit/router/RoutesConfig.js';
 
 //
 import compression from 'compression';

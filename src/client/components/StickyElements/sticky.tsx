@@ -1,4 +1,4 @@
-import { __ } from '@uixkit.react/components/_utils/_all';
+import { __ } from '@poemkit/components/_utils/_all';
 
 interface stickyConfig {
     /** Placeholder for the current element */
@@ -21,7 +21,7 @@ export function sticky( curElement: any, config: stickyConfig ) {
           topSpacing = config.topSpacing;
     
     //The original width of the element
-    const originalWidth = curElement.offsetWidth; //element width + padding width + borders width
+    const originalWidth = curElement.offsetWidth; //including: padding + borders + v-scrollbars (if rendered)
 
     //Returns the element top position relative to the viewport.
     const elOriginalOffsetTop = curElement.getBoundingClientRect().top;

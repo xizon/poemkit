@@ -1,12 +1,12 @@
 /* ======================================================
    <!-- Dropdown Menu -->
 /* ====================================================== */
-@import '@uixkit.react/components/_utils/styles/_variable-and-mixin.scss';
+@import '@poemkit/components/_utils/styles/_variable-and-mixin.scss';
 
 
 
 /* Do not use <a> tag */
-.uix-dropdown-menu {
+.poemkit-dropdown-menu {
 	display: inline-block;
 	cursor: pointer;
 	position: relative;
@@ -76,7 +76,7 @@
 
     &.is-opened {
 		> ul {
-            animation: uix-cssAnim--dropdown-display 0.4s cubic-bezier(0.73, 0.005, 0.22, 1);
+            animation: poemkit-cssAnim--dropdown-display 0.4s cubic-bezier(0.73, 0.005, 0.22, 1);
 			display: block !important;
 		}
     }
@@ -87,7 +87,7 @@
 
 
 
-@keyframes uix-cssAnim--dropdown-display {
+@keyframes poemkit-cssAnim--dropdown-display {
     0%{
         opacity: 0;
         transform: scale(0.98) translateY(-0.6em);

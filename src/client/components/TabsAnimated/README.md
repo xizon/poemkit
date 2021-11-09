@@ -1,6 +1,6 @@
-# @uixkit.react/components/TabsAnimated
+# @poemkit/components/TabsAnimated
 
-[Source](https://github.com/xizon/uix-kit-react/tree/main/src/client/components/TabsAnimated)
+[Source](https://github.com/xizon/poemkit/tree/main/src/client/components/TabsAnimated)
 
 ## Version
 
@@ -10,7 +10,7 @@
 
 ### Tabs Animated
 ```js
-import { TabsAnimated } from '@uixkit.react/components/TabsAnimated/index.tsx';
+import { TabsAnimated } from '@poemkit/components/TabsAnimated/index.tsx';
 ```
 | Property | Type | Default | Description |
 | --- | --- | --- | --- |
@@ -19,7 +19,7 @@ import { TabsAnimated } from '@uixkit.react/components/TabsAnimated/index.tsx';
 
 ### Tab List
 ```js
-import { TabList } from '@uixkit.react/components/TabsAnimated/index.tsx';
+import { TabList } from '@poemkit/components/TabsAnimated/index.tsx';
 ```
 | Property | Type | Default | Description |
 | --- | --- | --- | --- |
@@ -29,13 +29,13 @@ import { TabList } from '@uixkit.react/components/TabsAnimated/index.tsx';
 
 ### Tab Panel
 ```js
-import { TabPanel } from '@uixkit.react/components/TabsAnimated/index.tsx';
+import { TabPanel } from '@poemkit/components/TabsAnimated/index.tsx';
 ```
 | Property | Type | Default | Description |
 | --- | --- | --- | --- |
 | `key` | string \| `tab-panel-*` | - |  A “key” is a special string attribute you need to include when creating lists of elements. Let’s assign a key to our list of items. Must contain the string `tab-panel` |
 | `defaultActive` | boolean | false | Set an item to activate by default |
-| `tabpanelClass` | string | - | Additional style name, such as `uix-outer-shadow--regular` |
+| `tabpanelClass` | string | - | Additional style name, such as `poemkit-outer-shadow--regular` |
 
 
 It accepts all props(include data-* attributes) which native div support.
@@ -44,7 +44,7 @@ It accepts all props(include data-* attributes) which native div support.
 
 ```js
 import React from 'react';
-import { TabsAnimated, TabList, TabPanel } from '@uixkit.react/components/TabsAnimated/index.tsx';
+import { TabsAnimated, TabList, TabPanel } from '@poemkit/components/TabsAnimated/index.tsx';
 
 
 export default () => {

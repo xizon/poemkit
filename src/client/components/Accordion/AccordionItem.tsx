@@ -9,7 +9,7 @@ type AccordionItemProps = {
 	/** Handling events for collapsing item */
 	boxToggleEv?: React.MouseEventHandler<HTMLElement>;
 	/** Handling events when the animation execution is complete */
-	boxAnimEndEv?: React.TransitionEventHandler<HTMLElement>;
+	elAnimEndEv?: React.TransitionEventHandler<HTMLElement>;
 	/** One event type, such as `click` or `mouseover` */
 	triggerType?: string;
 };
@@ -28,7 +28,7 @@ export default class AccordionItem extends Component<AccordionItemProps, Accordi
             defaultActive,
 			title,
 			boxToggleEv,
-			boxAnimEndEv,
+			elAnimEndEv,
 			triggerType,
 			children
 		} = this.props;
@@ -42,7 +42,7 @@ export default class AccordionItem extends Component<AccordionItemProps, Accordi
 				{ triggerType === 'click' ? (
 					<dl 
 					onClick={boxToggleEv} 
-					onTransitionEnd={boxAnimEndEv} 
+					onTransitionEnd={elAnimEndEv} 
 					className={activedClassName} 
 					aria-expanded={defaultActive ? 'true' : 'false'}>
 						<dt role="presentation"><a href="#">{title}</a></dt>
@@ -60,8 +60,9 @@ export default class AccordionItem extends Component<AccordionItemProps, Accordi
 
 				{ triggerType === 'mouseover' ? (
 					<dl 
+					onClick={(e) => e.preventDefault()}
 					onMouseOver={boxToggleEv} 
-					onTransitionEnd={boxAnimEndEv} 
+					onTransitionEnd={elAnimEndEv} 
 					className={activedClassName} 
 					aria-expanded={defaultActive ? 'true' : 'false'}>
 						<dt role="presentation"><a href="#">{title}</a></dt>

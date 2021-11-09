@@ -1,7 +1,7 @@
 /* ======================================================
    <!-- Table Grid -->
 /* ====================================================== */
-@import '@uixkit.react/components/_utils/styles/_variable-and-mixin.scss';
+@import '@poemkit/components/_utils/styles/_variable-and-mixin.scss';
 
 /*
  * 1. Row Dropzone
@@ -19,14 +19,14 @@ $table-alternant-bg: #FAFAFA;
  */
 
 
-.uix-table-grid {
+.poemkit-table-grid {
     border-collapse: separate;
     border-spacing: 0;
     
-    .uix-table-grid__head {
+    .poemkit-table-grid__head {
         display: flex;
 
-        .uix-table-grid__head-cell {
+        .poemkit-table-grid__head-cell {
             flex: 1; /* default value, this attribute can be specified in HTML */
             box-sizing: border-box;
             text-align: start;
@@ -43,7 +43,7 @@ $table-alternant-bg: #FAFAFA;
     }
     
     
-    .uix-table-grid__body {
+    .poemkit-table-grid__body {
         position: relative;
         border: 1px $table-border-color solid;
         border-radius: 3px;
@@ -54,7 +54,7 @@ $table-alternant-bg: #FAFAFA;
     }
     
 
-    .uix-table-grid__row {
+    .poemkit-table-grid__row {
         display: flex;
         position: relative;
         cursor: pointer;
@@ -82,7 +82,7 @@ $table-alternant-bg: #FAFAFA;
         }
         
         
-        .uix-table-grid__row-cell {
+        .poemkit-table-grid__row-cell {
             flex: 1; /* default value, this attribute can be specified in HTML */
             font-size: 1rem;
             padding: .5rem 1rem;

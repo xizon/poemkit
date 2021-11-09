@@ -1,11 +1,11 @@
-import { __ } from '@uixkit.react/components/_utils/_all';
+import { __ } from '@poemkit/components/_utils/_all';
 
  /*-- Apply Third-party plugins --*/
-import { disableBodyScroll } from '@uixkit.react/components/_plugins/_lib-scrolllock';
-import TweenMax from '@uixkit.react/components/_plugins/_lib-gsap';
+import { disableBodyScroll } from '@poemkit/components/_plugins/_lib-scrolllock';
+import TweenMax from '@poemkit/components/_plugins/_lib-gsap';
 
 //
-import { closeModalDialog } from '@uixkit.react/components/ModalDialog/close-modal-dialog';
+import { closeModalDialog } from '@poemkit/components/ModalDialog/close-modal-dialog';
 
 declare global {
     interface Window {
@@ -22,7 +22,7 @@ interface fireModalDialogConfig {
      * This attribute "data-modal-width" may not exist. Such as: 200px
      */
     width?: number | string | boolean | undefined;
-    /** Delay Time when Full Screen Effect is fired */
+    /** Delay Time when Full Screen Effect is fired. Amount of time measured in milliseconds. */
     speed?: number | undefined;
     /** Link or button that fires an event */
     btn?: object | boolean | undefined;
@@ -63,26 +63,23 @@ export function fireModalDialog(curElement: any, config: fireModalDialogConfig) 
     clearTimeout( window.setCloseModalDialog );	
 
     //Add modal mask to stage
-    if ( __( '.uix-modal-mask' ).length == 0 ) {
-        __( 'body' ).prepend( '<div className="uix-modal-mask"></div>' );
+    if ( __( '.poemkit-modal-mask' ).length == 0 ) {
+        __( 'body' ).prepend( '<div className="poemkit-modal-mask"></div>' );
     }
     if ( closeOnlyBtnEnabled ) {
-        __( '.uix-modal-mask' ).addClass( 'js-uix-disabled' );
+        __( '.poemkit-modal-mask' ).addClass( 'js-poemkit-disabled' );
     } else {
-        __( '.uix-modal-mask' ).removeClass( 'js-uix-disabled' );
+        __( '.poemkit-modal-mask' ).removeClass( 'js-poemkit-disabled' );
     }
 
 
     // Initializate modal
     if ( linkBtn ) {
-        linkBtn.attr( 'href', 'javascript:void(0)' );
-        curElement.find( '.uix-modal-box__content' ).addClass( 'js-uix-no-fullscreen' );
-
+        curElement.find( '.poemkit-modal-box__content' ).addClass( 'js-poemkit-no-fullscreen' );
 
         if ( linkBtn.data( 'video-win' ) ) {
-            curElement.find( '.uix-modal-box__content > .uix-modal-box__body' ).css( 'overflow-y', 'hidden' );
+            curElement.find( '.poemkit-modal-box__content > .poemkit-modal-box__body' ).css( 'overflow-y', 'hidden' );
         }
-
     }
 
 
@@ -114,7 +111,7 @@ export function fireModalDialog(curElement: any, config: fireModalDialogConfig) 
         
         //Enable the lightbox effect.
         if ( lightBoxEnabled ) {
-            TweenMax.set( '.uix-modal-mask', {
+            TweenMax.set( '.poemkit-modal-mask', {
                 css: {
                     opacity : 0,
                     display : 'none'
@@ -139,7 +136,7 @@ export function fireModalDialog(curElement: any, config: fireModalDialogConfig) 
         //auto close
         if ( closeTime && !isNaN( closeTime as number ) ) {
             window.setCloseModalDialog = setTimeout( function() {
-                closeModalDialog( __( '.uix-modal-box' ) );
+                closeModalDialog( __( '.poemkit-modal-box' ) );
             }, closeTime as number );
         }
         
@@ -151,9 +148,9 @@ export function fireModalDialog(curElement: any, config: fireModalDialogConfig) 
         setTimeout( function() {
 
             if ( !curElement.hasClass( 'is-video' ) ) {
-                curElement.find( '.uix-modal-box__content > .uix-modal-box__body' ).css( 'overflow-y', 'scroll' );
+                curElement.find( '.poemkit-modal-box__content > .poemkit-modal-box__body' ).css( 'overflow-y', 'scroll' );
             } else {
-                curElement.find( '.uix-modal-box__content > .uix-modal-box__body' ).css( 'overflow-y', 'hidden' );
+                curElement.find( '.poemkit-modal-box__content > .poemkit-modal-box__body' ).css( 'overflow-y', 'hidden' );
             }
 
         }, animDelay );

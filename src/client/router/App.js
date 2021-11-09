@@ -6,17 +6,16 @@ import {
 	Redirect,
 	useLocation
 } from 'react-router-dom';
-import { __ } from '@uixkit.react/components/_utils/_all';
 
-import customRoutesConfig from '@uixkit.react/router/RoutesConfig.js';
-import Header from '@uixkit.react/components/Header/index.tsx';
+import customRoutesConfig from '@poemkit/router/RoutesConfig.js';
+import Header from '@poemkit/components/Header/index.tsx';
 
 //Create or Remove Sidebar Menu
-import { SidebarMenu } from '@uixkit.react/pages/ComponentsDemo/_SidebarMenu.js';
+import { SidebarMenu } from '@poemkit/pages/ComponentsDemo/_SidebarMenu.js';
 
 
 //get project config
-import { rootDirectory } from '@uixkit.react/config/websiteConfig.js';
+import { rootDirectory } from '@poemkit/config/websiteConfig.js';
 
 
 export default (props) => {
@@ -26,94 +25,8 @@ export default (props) => {
     const theLocation = useLocation();
     React.useEffect(() => {
 		
-
 		//Remove sidebar menu
-		//------------------------------------------
 		SidebarMenu();
-
-		
-		//change page title
-		//------------------------------------------
-		let pageTitle = null;
-		let pageNoMatchTitle = null;
-		const breakException = {};
-		let pathname = theLocation.pathname;
-	
-		//
-		pathname = pathname.replace(`${rootDirectory}`, '')
-		
-		//page: 404
-		try {
-			customRoutesConfig[0].routes.forEach((item, index) => {
-				if ( item.status === 404 ) {
-					pageNoMatchTitle = item.pageTitle;
-					//
-					throw breakException;
-				}
-			});
-		} catch (e) {}	
-
-		
-		try {
-			customRoutesConfig[0].routes.forEach((item, index) => {
-				
-				const _path = item.path.replace(`${rootDirectory}`, '');
-				if ( _path.indexOf( `/${pathname.replace(/^\/([^\/]*).*$/, '$1')}` ) < 0 && _path != "/" ) {
-					pageTitle = pageNoMatchTitle;
-					//
-					throw breakException;
-				}
-			});
-		} catch (e) {}	
-
-		
-		
-		//page: ...
-		try {
-			customRoutesConfig[0].routes.forEach((item, index) => {
-				const _path = item.path.replace(`${rootDirectory}`, '');
-				
-				/*
-				console.log( '_path: ', _path );
-				console.log( 'pathname: ', pathname );
-				console.log( 'check: ', `/${pathname.replace(/^\/([^\/]*).*$/, '$1')}` );
-				*/
-				
-				
-				if ( _path === pathname || 
-					 ( _path.indexOf( `/${pathname.replace(/^\/([^\/]*).*$/, '$1')}` ) >= 0 && _path != "/" )
-				   ) {
-					pageTitle = item.pageTitle;
-					//
-					throw breakException;
-					
-				}
-			});
-		} catch (e) {}	
-
-
-		//page: Components Demo
-		if ( pathname.indexOf( 'components-demo/' ) >= 0 ) {
-			let titleStr = pathname.split( '/' ).pop();
-			pageTitle = __.lastUrlParamFormat( titleStr );	
-		}
-
-		
-
-		// update page title
-		// When the page is not the homepage (including all homepage addresses of 
-		// the routing configuration), change the page title
-		if ( 
-			pageTitle !== null &&
-			pathname !== "/" &&
-			pathname !== "/index"
-		) {
-			document.title =  `${pageTitle} - ${customRoutesConfig[0].routes[0].pageTitle}`;
-		} else {
-			document.title =  `${pageTitle}`;
-		}
-
-        
     });
 	
 	//
@@ -128,9 +41,9 @@ export default (props) => {
 
 	const mobileClickEv = function() {
 		//close navigation mask
-		if ( typeof(document) !== 'undefined' && document.querySelector( '.uix-menu-mobile__toggle' ) !== null ) {
-			document.body.classList.remove( 'js-uix-menu-opened' );
-			document.querySelector( '.uix-menu-mobile__toggle' ).classList.remove( 'is-active' );
+		if ( typeof(document) !== 'undefined' && document.querySelector( '.poemkit-menu-mobile__toggle' ) !== null ) {
+			document.body.classList.remove( 'js-poemkit-menu-opened' );
+			document.querySelector( '.poemkit-menu-mobile__toggle' ).classList.remove( 'is-active' );
 		}
 		
 	}
@@ -217,7 +130,7 @@ export default (props) => {
 		<Header 
 			headerOverlayEnabled="false" 
 			menu={menuListData} 
-			logo={<><NavLink data-route="true" to="/index" activeClassName="is-active"><img src={`${rootDirectory}/assets/images/logo.png`} alt="Uix Kit React" /></NavLink></>}
+			logo={<><NavLink data-route="true" to="/index" activeClassName="is-active"><img src={`${rootDirectory}/assets/images/logo.png`} alt="PoemKit" /></NavLink></>}
 		/>
 
             {/* A <Switch> looks through its children <Route>s and

@@ -1,6 +1,6 @@
-# @uixkit.react/components/ModalDialog
+# @poemkit/components/ModalDialog
 
-[Source](https://github.com/xizon/uix-kit-react/tree/main/src/client/components/ModalDialog)
+[Source](https://github.com/xizon/poemkit/tree/main/src/client/components/ModalDialog)
 
 ## Version
 
@@ -10,7 +10,7 @@
 
 ### Modal Dialog
 ```js
-import ModalDialog from '@uixkit.react/components/ModalDialog/index.tsx';
+import ModalDialog from '@poemkit/components/ModalDialog/index.tsx';
 ```
 | Property | Type | Default | Description |
 | --- | --- | --- | --- |
@@ -33,7 +33,7 @@ import ModalDialog from '@uixkit.react/components/ModalDialog/index.tsx';
 
 ```js
 import React from 'react';
-import ModalDialog from '@uixkit.react/components/ModalDialog/index.tsx';
+import ModalDialog from '@poemkit/components/ModalDialog/index.tsx';
 
 export default () => {
   return (
@@ -45,7 +45,7 @@ export default () => {
       <ModalDialog 
       autoOpen={false}
       triggerTagName="a" 
-      triggerClassName="uix-btn uix-btn__border--thin uix-btn__margin--b uix-btn__size--s uix-btn__bg--primary" 
+      triggerClassName="poemkit-btn poemkit-btn__border--thin poemkit-btn__margin--b poemkit-btn__size--s poemkit-btn__bg--primary" 
       triggerContent={<>
         Click Here to Open Modal
       </>}>
@@ -56,7 +56,7 @@ export default () => {
       <ModalDialog 
       fullscreen={true} 
       triggerTagName="a" 
-      triggerClassName="uix-btn uix-btn__border--thin uix-btn__margin--b uix-btn__size--s uix-btn__bg--primary" 
+      triggerClassName="poemkit-btn poemkit-btn__border--thin poemkit-btn__margin--b poemkit-btn__size--s poemkit-btn__bg--primary" 
       triggerContent={<>
         Click Here to Open Modal (Fullscreen)
       </>}>
@@ -68,7 +68,7 @@ export default () => {
       width="300px"
       height="200px"
       triggerTagName="a" 
-      triggerClassName="uix-btn uix-btn__border--thin uix-btn__margin--b uix-btn__size--s uix-btn__bg--primary" 
+      triggerClassName="poemkit-btn poemkit-btn__border--thin poemkit-btn__margin--b poemkit-btn__size--s poemkit-btn__bg--primary" 
       triggerContent={<>
         Click Here to Open Modal (Custom)
       </>}>
@@ -82,7 +82,7 @@ export default () => {
       width="300px"
       height="200px"
       triggerTagName="a" 
-      triggerClassName="uix-btn uix-btn__border--thin uix-btn__margin--b uix-btn__size--s uix-btn__bg--primary" 
+      triggerClassName="poemkit-btn poemkit-btn__border--thin poemkit-btn__margin--b poemkit-btn__size--s poemkit-btn__bg--primary" 
       triggerContent={<>
         Click Here to Open Modal (No mask)
       </>}>
@@ -97,7 +97,7 @@ export default () => {
       <ModalDialog 
         enableVideo={true}
         triggerTagName="a" 
-        triggerClassName="uix-btn uix-btn__border--thin uix-btn__margin--b uix-btn__size--s uix-btn__bg--primary" 
+        triggerClassName="poemkit-btn poemkit-btn__border--thin poemkit-btn__margin--b poemkit-btn__size--s poemkit-btn__bg--primary" 
         triggerContent={<>
           Click Here to Open MP4 file
         </>}>
@@ -107,7 +107,7 @@ export default () => {
         <ModalDialog 
         enableVideo={true}
         triggerTagName="a" 
-        triggerClassName="uix-btn uix-btn__border--thin uix-btn__margin--b uix-btn__size--s uix-btn__bg--primary" 
+        triggerClassName="poemkit-btn poemkit-btn__border--thin poemkit-btn__margin--b poemkit-btn__size--s poemkit-btn__bg--primary" 
         triggerContent={<>
           Click Here to Open Youtube Video
         </>}>

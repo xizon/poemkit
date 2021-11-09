@@ -6,26 +6,26 @@
 import React, { Component } from 'react';
 
 /*-- Apply Third-party plugins (import location should be in front of "global scripts and styles") --*/
-import '@uixkit.react/components/_plugins/_lib-bootstrap';
-import '@uixkit.react/components/_plugins/_lib-icons';
-import TweenMax, { TimelineMax } from '@uixkit.react/components/_plugins/_lib-gsap';
+import '@poemkit/components/_plugins/_lib-bootstrap';
+import '@poemkit/components/_plugins/_lib-icons';
+import TweenMax, { TimelineMax } from '@poemkit/components/_plugins/_lib-gsap';
 
 /*-- Apply global scripts and styles --*/
-import '@uixkit.react/components/_utils/styles/_all.scss';
-import '@uixkit.react/components/_utils/styles/rtl/_all.scss';
-import { __ } from '@uixkit.react/components/_utils/_all';
+import '@poemkit/components/_utils/styles/_all.scss';
+import '@poemkit/components/_utils/styles/rtl/_all.scss';
+import { __ } from '@poemkit/components/_utils/_all';
 
 /*-- Apply this component styles --*/
-import '@uixkit.react/components/Lightbox/styles/_style.scss';
-import '@uixkit.react/components/Lightbox/styles/rtl/_style.scss';
+import '@poemkit/components/Lightbox/styles/_style.scss';
+import '@poemkit/components/Lightbox/styles/rtl/_style.scss';
 
 
 //Enables body scroll locking
-import { clearAllBodyScrollLocks } from '@uixkit.react/components/_plugins/_lib-scrolllock';
+import { clearAllBodyScrollLocks } from '@poemkit/components/_plugins/_lib-scrolllock';
 
 // 
-import { fireLightbox } from '@uixkit.react/components/Lightbox/fire-lightbox';
-import { closeLightbox } from '@uixkit.react/components/Lightbox/close-lightbox';
+import { fireLightbox } from '@poemkit/components/Lightbox/fire-lightbox';
+import { closeLightbox } from '@poemkit/components/Lightbox/close-lightbox';
 
 
 interface ajaxPropConfig {
@@ -81,28 +81,28 @@ export default class Lightbox extends Component<LightboxProps, LightboxState> {
             case 'a':
                 return (
                     <>
-                        <a role="button" href="#" id={id} className={"uix-lightbox__trigger " + classes} data-lb-src={dataSrc} data-lb-html={dataHtmlID} data-lb-fixed={dataFixed} data-lb-ajax={dataAjax}>{content}</a>
+                        <a role="button" href="#" id={id} className={"poemkit-lightbox__trigger " + classes} data-lb-src={dataSrc} data-lb-html={dataHtmlID} data-lb-fixed={dataFixed} data-lb-ajax={dataAjax}>{content}</a>
                     </>
                 )
 
             case 'button':
                 return (
                     <>
-                        <button type="button" id={id} className={"uix-lightbox__trigger " + classes} data-lb-src={dataSrc} data-lb-html={dataHtmlID} data-lb-fixed={dataFixed} data-lb-ajax={dataAjax}>{content}</button>
+                        <button type="button" id={id} className={"poemkit-lightbox__trigger " + classes} data-lb-src={dataSrc} data-lb-html={dataHtmlID} data-lb-fixed={dataFixed} data-lb-ajax={dataAjax}>{content}</button>
                     </>
                 )
 
             case 'div':
                 return (
                     <>
-                        <div role="button" id={id} className={"uix-lightbox__trigger " + classes} data-lb-src={dataSrc} data-lb-html={dataHtmlID} data-lb-fixed={dataFixed} data-lb-ajax={dataAjax}>{content}</div>
+                        <div role="button" id={id} className={"poemkit-lightbox__trigger " + classes} data-lb-src={dataSrc} data-lb-html={dataHtmlID} data-lb-fixed={dataFixed} data-lb-ajax={dataAjax}>{content}</div>
                     </>
                 )
 
             case 'span':
                 return (
                     <>
-                        <span role="button" id={id} className={"uix-lightbox__trigger " + classes} data-lb-src={dataSrc} data-lb-html={dataHtmlID} data-lb-fixed={dataFixed} data-lb-ajax={dataAjax}>{content}</span>
+                        <span role="button" id={id} className={"poemkit-lightbox__trigger " + classes} data-lb-src={dataSrc} data-lb-html={dataHtmlID} data-lb-fixed={dataFixed} data-lb-ajax={dataAjax}>{content}</span>
                     </>
                 )
 
@@ -115,34 +115,34 @@ export default class Lightbox extends Component<LightboxProps, LightboxState> {
 
         const self = this;
 
-        __(document).ready(function () {
+        __( document ).ready( function() {
 
         
             // The name of the relevant style of the container
-            const wrapperEl       = '.uix-lightbox__container',
-                  innerEl         = '.uix-lightbox__inner',
-                  maskEl          = '.uix-lightbox__container-mask',
-                  closeEl         = '.uix-lightbox__close',
-                  loaderEl        = '.uix-lightbox__loading';
+            const wrapperEl       = '.poemkit-lightbox__container',
+                  innerEl         = '.poemkit-lightbox__inner',
+                  maskEl          = '.poemkit-lightbox__container-mask',
+                  closeEl         = '.poemkit-lightbox__close',
+                  loaderEl        = '.poemkit-lightbox__loading';
 
             // Temporarily stored URL
             const docURL = window.location.href;
 
 
-            if ( __( '.uix-lightbox__container' ).length == 0 ) {
+            if ( __( '.poemkit-lightbox__container' ).length == 0 ) {
                 __( 'body' ).prepend(`
-                    <div class="uix-lightbox__loading is-loaded uix-t-c">
+                    <div class="poemkit-lightbox__loading is-loaded poemkit-t-c">
                         <i class="fa fa-spinner fa-spin"></i>Loading...
                     </div>
-                    <a class="uix-lightbox__original__close" href="#"></a>
-                    <div class="uix-lightbox__container">
-                        <div class="uix-lightbox__inner">
-                            <div class="uix-lightbox__html"></div>
+                    <a class="poemkit-lightbox__original__close" href="#"></a>
+                    <div class="poemkit-lightbox__container">
+                        <div class="poemkit-lightbox__inner">
+                            <div class="poemkit-lightbox__html"></div>
                             <p class="title"></p>
                         </div>
                     </div>
-                    <div class="uix-lightbox__container-mask"></div>
-                    <div class="uix-lightbox__close">
+                    <div class="poemkit-lightbox__container-mask"></div>
+                    <div class="poemkit-lightbox__close">
                         <button type="button"></button>
                     </div>
                 `);
@@ -150,7 +150,7 @@ export default class Lightbox extends Component<LightboxProps, LightboxState> {
             
 
             // Move HTML templates to tag end body </body>
-            Array.prototype.forEach.call(document.querySelectorAll('.uix-lightbox__htmlcontent-template:not(.is-loaded)'), function (node) {
+            Array.prototype.forEach.call(document.querySelectorAll('.poemkit-lightbox__htmlcontent-template:not(.is-loaded)'), function (node) {
                 node.classList.add( 'is-loaded' );
                 document.body.appendChild(node);
             });
@@ -158,7 +158,7 @@ export default class Lightbox extends Component<LightboxProps, LightboxState> {
         
             // Fire the lightbox
             //------------------------------------------
-            __( '.uix-lightbox__trigger' ).off( 'click' ).on( 'click', function( this: any, e: any ) { 
+            __( '.poemkit-lightbox__trigger' ).off( 'click' ).on( 'click', function( this: any, e: any ) { 
                 e.preventDefault();
 
                 const $this = __( this );
@@ -197,7 +197,7 @@ export default class Lightbox extends Component<LightboxProps, LightboxState> {
                     }		
                   
                     
-                    let prevURL = decodeURIComponent(document.cookie.replace(new RegExp("(?:(?:^|.*;)\\s*" + encodeURIComponent( 'uix-lightbox-ajaxURL' ).replace(/[\-\.\+\*]/g, "\\$&") + "\\s*\\=\\s*([^;]*).*$)|^.*$"), "$1")) || null;
+                    let prevURL = decodeURIComponent(document.cookie.replace(new RegExp("(?:(?:^|.*;)\\s*" + encodeURIComponent( 'poemkit-lightbox-ajaxURL' ).replace(/[\-\.\+\*]/g, "\\$&") + "\\s*\\=\\s*([^;]*).*$)|^.*$"), "$1")) || null;
 
 
                     if ( ajaxConfig.url === prevURL ) {
@@ -279,9 +279,9 @@ export default class Lightbox extends Component<LightboxProps, LightboxState> {
                 {this.createTrigger(cid, triggerTagName, triggerClassName, triggerContent, src, (htmlID ? '#' + htmlID : false), fixed, ajax)}
 
                 {htmlContent ? (
-                    <div className="uix-lightbox__htmlcontent-template" id={htmlID || ''}>
-                        <div className="uix-lightbox__htmlcontent-container" role="dialog" tabIndex={-1} aria-hidden="true">
-                            <div className="uix-lightbox__htmlcontent-inner" role="document">
+                    <div className="poemkit-lightbox__htmlcontent-template" id={htmlID || ''}>
+                        <div className="poemkit-lightbox__htmlcontent-container" role="dialog" tabIndex={-1} aria-hidden="true">
+                            <div className="poemkit-lightbox__htmlcontent-inner" role="document">
                                 <div role="note">
 
                                     {/*<!-- ///////   content begin /////// -->*/}
@@ -289,7 +289,7 @@ export default class Lightbox extends Component<LightboxProps, LightboxState> {
                                     {/*<!-- ///////   content end /////// -->*/}
 
                                 </div>{/*<!-- /[role="note"] -->*/}
-                            </div>{/*<!-- /.uix-lightbox__htmlcontent-inner -->*/}
+                            </div>{/*<!-- /.poemkit-lightbox__htmlcontent-inner -->*/}
                         </div>
                     </div>
 
@@ -297,11 +297,11 @@ export default class Lightbox extends Component<LightboxProps, LightboxState> {
                 }
 
                 {ajax ? (
-                    <div className="uix-lightbox__htmlcontent-template" id={htmlID || ''}>
-                        <div className="uix-lightbox__htmlcontent-container" role="dialog" tabIndex={-1} aria-hidden="true">
-                            <div className="uix-lightbox__htmlcontent-inner" role="document">
+                    <div className="poemkit-lightbox__htmlcontent-template" id={htmlID || ''}>
+                        <div className="poemkit-lightbox__htmlcontent-container" role="dialog" tabIndex={-1} aria-hidden="true">
+                            <div className="poemkit-lightbox__htmlcontent-inner" role="document">
                                 <div role="note"></div>{/*<!-- /[role="note"] -->*/}
-                            </div>{/*<!-- /.uix-lightbox__htmlcontent-inner -->*/}
+                            </div>{/*<!-- /.poemkit-lightbox__htmlcontent-inner -->*/}
                         </div>
                     </div>
 

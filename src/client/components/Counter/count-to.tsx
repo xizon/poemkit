@@ -1,4 +1,4 @@
-import { __ } from '@uixkit.react/components/_utils/_all';
+import { __ } from '@poemkit/components/_utils/_all';
 
 
 type UpdateFnType = (arg1: number) => number | void;
@@ -11,7 +11,7 @@ interface countToConfig {
     to?: number | undefined;
     /** Formats a number using fixed-point notation. */
     fixed?: number | undefined;
-    /** How long it should take to count between the target numbers */
+    /** How long it should take to count between the target numbers. Amount of time measured in milliseconds. */
     speed?: number | undefined;
     /** How often the element should be updated */
     refreshInterval?: number | undefined;

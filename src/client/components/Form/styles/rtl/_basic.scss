@@ -1,7 +1,7 @@
 /* ======================================================
     <!-- Form -->
 /* ====================================================== */
-@import '@uixkit.react/components/_utils/styles/_variable-and-mixin.scss';
+@import '@poemkit/components/_utils/styles/_variable-and-mixin.scss';
 @import '_variable-and-mixin.scss';
 
 
@@ -34,18 +34,18 @@ $control-sub-color: #dce4e8;
  */
 
 /* Default Controls */
-.rtl .uix-controls:not(.uix-controls__toggle):not(.uix-controls__checkbox):not(.uix-controls__radio):not(.uix-controls__select) {
+.rtl .poemkit-controls:not(.poemkit-controls__toggle):not(.poemkit-controls__checkbox):not(.poemkit-controls__radio):not(.poemkit-controls__select) {
 
 	text-align: right;
 
 
-	&.uix-controls__side {
+	&.poemkit-controls__side {
 		margin-left: auto;
 		margin-right: .2rem;
 	}
 
 
-	&.uix-controls__short-s {
+	&.poemkit-controls__short-s {
 
 		input:not([type="checkbox"]):not([type="radio"]) {
 			margin-right: auto;
@@ -55,7 +55,7 @@ $control-sub-color: #dce4e8;
 
 	}
 
-	&.uix-controls__short-m {
+	&.poemkit-controls__short-m {
 
 		input:not([type="checkbox"]):not([type="radio"]) {
 			margin-right: auto;
@@ -64,7 +64,7 @@ $control-sub-color: #dce4e8;
 	}
 
 
-	&.uix-controls__short-l {
+	&.poemkit-controls__short-l {
 		input:not([type="checkbox"]):not([type="radio"]) {
 			margin-right: auto;
 			margin-left: .5rem;
@@ -83,13 +83,13 @@ $control-sub-color: #dce4e8;
 
 
 	/*-- Select Arrow --*/
-	.uix-controls__arrow {
+	.poemkit-controls__arrow {
 		right: auto;
 		left: 0.875rem;
 	}
 
 	/*-- Radio --*/
-	&.uix-controls__normal-radio {
+	&.poemkit-controls__normal-radio {
 
 		label {
 			padding-left: auto !important;
@@ -100,14 +100,14 @@ $control-sub-color: #dce4e8;
 	}
 
 	/*-- Select --*/
-	&.uix-controls__normal-select {
+	&.poemkit-controls__normal-select {
 
 		margin-right: auto;
 		margin-left: 1.65rem;
 
 
 
-		.uix-controls__arrow {
+		.poemkit-controls__arrow {
 			left: -1rem;
 		}
 
@@ -142,7 +142,7 @@ $control-sub-color: #dce4e8;
 		}
 
 		textarea,
-		button:not(.uix-btn),
+		button:not(.poemkit-btn),
 		select {
 			padding-left: auto;
 			padding-right: #{$control-padding-side + $control-icon-placeholder};
@@ -177,7 +177,7 @@ $control-sub-color: #dce4e8;
 			}
 
 			textarea,
-			button:not(.uix-btn),
+			button:not(.poemkit-btn),
 			select {
 				padding-right: $control-padding-side;
                 padding-left: #{$control-padding-side + $control-icon-placeholder};
@@ -210,9 +210,9 @@ $control-sub-color: #dce4e8;
  ---------------------------
  */
 
-.rtl .uix-controls__file-container {
+.rtl .poemkit-controls__file-container {
 
-	.uix-controls__file-trigger {
+	.poemkit-controls__file-trigger {
 
 		i {
 			margin-right: auto;
@@ -232,9 +232,9 @@ $control-sub-color: #dce4e8;
 
 
 /* HTML5 drag and drop upload control */
-.rtl .uix-controls__file-field-container {
+.rtl .poemkit-controls__file-field-container {
 
-	.uix-controls__file-field-trigger {
+	.poemkit-controls__file-field-trigger {
 
 		> div {
 
@@ -266,7 +266,7 @@ $control-sub-color: #dce4e8;
  */
 
 
-.rtl .uix-controls__merge {
+.rtl .poemkit-controls__merge {
 
 
 	i {
@@ -348,21 +348,21 @@ $control-sub-color: #dce4e8;
  4. Custom Select
  ---------------------------
  */
-.rtl .uix-controls__select {
+.rtl .poemkit-controls__select {
 	margin-right: auto;
 	margin-left: .3rem;
 
-	&.js-uix-new {
+	&.js-poemkit-new {
 		text-align: right; /* Required */
 	}
 
 
 }
 
-.rtl .uix-controls__select-wrapper {
+.rtl .poemkit-controls__select-wrapper {
 
 
-	&:not(.uix-controls--line).is-disabled {
+	&:not(.poemkit-controls--line).is-disabled {
 
 		/* Mask used to prohibit selection */
 		&::before {
@@ -374,7 +374,7 @@ $control-sub-color: #dce4e8;
 	}
 
 
-	.uix-controls__select-trigger {
+	.poemkit-controls__select-trigger {
 		padding: #{$control-padding-height} $control-padding-side $control-padding-height #{$control-padding-side+1.5};
 
 		&::after {
@@ -386,7 +386,7 @@ $control-sub-color: #dce4e8;
 
 
 
-	.uix-controls__select__option-container {
+	.poemkit-controls__select__option-container {
 		left: auto;
 		right: 0;
 
@@ -401,9 +401,9 @@ $control-sub-color: #dce4e8;
 	}
 
 
-	.uix-controls__select--top {
+	.poemkit-controls__select--top {
 		/* Shown from above */
-		.uix-controls__select__option-container {
+		.poemkit-controls__select__option-container {
 
 
 			&::after {
@@ -419,7 +419,7 @@ $control-sub-color: #dce4e8;
 
 	}
 
-	.uix-controls__select__option {
+	.poemkit-controls__select__option {
 
 		&:first-of-type {
 		    border-radius:  0 0 2px 2px;
@@ -440,7 +440,7 @@ $control-sub-color: #dce4e8;
  5. Custom Radio, Toggle And Checkbox
  ---------------------------
  */
-.rtl .uix-controls__radio {
+.rtl .poemkit-controls__radio {
 
 	text-align: right;
 
@@ -449,7 +449,7 @@ $control-sub-color: #dce4e8;
 	}
 
 
-	.uix-controls__radio-trigger {
+	.poemkit-controls__radio-trigger {
 		margin-right: auto;
 		margin-left: 5px;
 
@@ -464,7 +464,7 @@ $control-sub-color: #dce4e8;
 
 
 
-.rtl .uix-controls__toggle {
+.rtl .poemkit-controls__toggle {
 
 	label {
 		text-align: right; /* Required */
@@ -475,13 +475,13 @@ $control-sub-color: #dce4e8;
 	input[type="checkbox"] {
 		display: none;
 
-		&:checked + .uix-controls__toggle-trigger {
+		&:checked + .poemkit-controls__toggle-trigger {
 			margin-left: auto;
 			margin-right: 8px;
 		}
 	}
 
-	.uix-controls__toggle-trigger {
+	.poemkit-controls__toggle-trigger {
 		margin: 0.5rem 0 0.5rem .5rem;
 
 		&::before {
@@ -499,14 +499,14 @@ $control-sub-color: #dce4e8;
 	}
 }
 
-.rtl .uix-controls__checkbox {
+.rtl .poemkit-controls__checkbox {
 
 	label {
 		text-align: right; /* Required */
 	}
 
 
-	.uix-controls__checkbox-trigger {
+	.poemkit-controls__checkbox-trigger {
 		margin: #{$control-padding-height} 0 #{$control-padding-height} .5rem;
 
 		&::before,
@@ -527,10 +527,10 @@ $control-sub-color: #dce4e8;
  6. Custom Input Number
  ---------------------------
  */
-.rtl .uix-controls__number {
+.rtl .poemkit-controls__number {
 
 
-	.uix-controls__number__btn {
+	.poemkit-controls__number__btn {
 		border-left: none;
 		border-right: 1px solid $control-sub-color;
 		right: auto;
@@ -548,7 +548,7 @@ $control-sub-color: #dce4e8;
  7. Multiple Selector
  ---------------------------
  */
-.rtl .uix-controls__multi-sel {
+.rtl .poemkit-controls__multi-sel {
 
 	float: right;
 
@@ -576,7 +576,7 @@ $control-sub-color: #dce4e8;
  ---------------------------
  */
 
-.rtl .uix-controls__single-sel {
+.rtl .poemkit-controls__single-sel {
 
 	float: right;
 
@@ -596,9 +596,9 @@ $control-sub-color: #dce4e8;
  9. Search of Widget
  ---------------------------
  */
-.rtl .uix-search-box {
+.rtl .poemkit-search-box {
 
-	.uix-search-box__submit {
+	.poemkit-search-box__submit {
 		right: auto;
 		left: 0.875rem;
 	}

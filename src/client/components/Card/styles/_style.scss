@@ -1,7 +1,7 @@
 /* ======================================================
    <!-- Card -->
 /* ====================================================== */
-@import '@uixkit.react/components/_utils/styles/_variable-and-mixin.scss';
+@import '@poemkit/components/_utils/styles/_variable-and-mixin.scss';
 
 
 /*
@@ -19,7 +19,7 @@ $card-radius: 8px;
  ---------------------------
  */
 
-.uix-card--author {
+.poemkit-card--author {
     box-sizing: border-box;
 	margin: 0 auto;
 	border: 1px solid #eaeaea;
@@ -28,10 +28,10 @@ $card-radius: 8px;
 	border-radius: $card-radius;
 	@include outer-shadow( 'regular' );
 
-	&.uix-card--author--noborder {
+	&.poemkit-card--author--noborder {
 		border: none;
 	}
-	&.uix-card--author--stats {
+	&.poemkit-card--author--stats {
 		margin-top: 2rem;
 	}
 
@@ -42,7 +42,7 @@ $card-radius: 8px;
 		clear: both;
 	}
 
-	.uix-card--author__tagline {
+	.poemkit-card--author__tagline {
 		font-size: 0.75rem;
 		font-weight: 500;
 		text-transform: uppercase;
@@ -50,7 +50,7 @@ $card-radius: 8px;
 	}
 
 
-	.uix-card--author__header {
+	.poemkit-card--author__header {
 		min-height: 2.086538461rem;
 		background: #fff;
 		padding: 0.65625rem 1.75rem 0 1.75rem;
@@ -63,25 +63,25 @@ $card-radius: 8px;
 			font-size: 1.125rem;
 
 		}
-		.uix-card--author__text {
+		.poemkit-card--author__text {
 			margin-top: 0.4375rem;
 			width: calc(100% - 105px );
 			a {
 				font-size: 0.75rem;
 			}
 		}
-		.uix-card--author__preview {
+		.poemkit-card--author__preview {
 			position: relative;
 			display: inline-block;
 			top: 0.175rem;
 			width: 100px;
 			height: 100px;
 
-			&.uix-card--author__preview--rounded {
+			&.poemkit-card--author__preview--rounded {
 				border-radius: $card-radius;
 			}
 
-			&.uix-card--author__preview--jumpOut {
+			&.poemkit-card--author__preview--jumpOut {
 				@include outer-shadow( 'regular' );
 				position: absolute;
 				transform: translateY(-2rem);
@@ -97,12 +97,12 @@ $card-radius: 8px;
 		}
 	}
 
-	.uix-card--author__content {
+	.poemkit-card--author__content {
 		background: #fff;
 		padding: 1.75rem 1.75rem 1.3125rem 1.75rem;
 		line-height: 1.5;
 
-		&.uix-card--author__content--rounded {
+		&.poemkit-card--author__content--rounded {
 			border-radius: 0  0 #{$card-radius} #{$card-radius};
 		}
 
@@ -190,7 +190,7 @@ $card-radius: 8px;
 
 	}
 
-	.uix-card--author__jump {
+	.poemkit-card--author__jump {
 		font-size: 0.875rem;
 		display: block;
 		background: #F6F6F6;
@@ -211,7 +211,7 @@ $card-radius: 8px;
  2. Gallery Card
  ---------------------------
  */
-.uix-card--gallery {
+.poemkit-card--gallery {
     box-sizing: border-box;
     position: relative;
     display: inline-flex;
@@ -223,14 +223,14 @@ $card-radius: 8px;
     border-radius: $card-radius;
    
     
-    .uix-card--gallery__preview,
-    .uix-card--gallery__body {
+    .poemkit-card--gallery__preview,
+    .poemkit-card--gallery__body {
         display: flex;                 /* nested flex container */
         flex-direction: column;        /* vertical alignment of flex items */
         justify-content: center;       /* center flex items vertically */  
     }
     
-    .uix-card--gallery__preview {
+    .poemkit-card--gallery__preview {
         align-items: center; /* center flex items horizontally */
         padding: 0;  /* default value, this attribute can be specified in HTML */
         box-sizing: border-box;
@@ -263,11 +263,11 @@ $card-radius: 8px;
     }
     
     
-    .uix-card--gallery__header {
+    .poemkit-card--gallery__header {
         display: flex;
         align-items: center; /* center flex items horizontally */
         
-        .uix-card--gallery__header__child {
+        .poemkit-card--gallery__header__child {
             display: flex;
             flex: 1;
             word-break: break-all;
@@ -281,15 +281,15 @@ $card-radius: 8px;
         }      
     }
     
-    .uix-card--gallery__content {
+    .poemkit-card--gallery__content {
   
-        > .uix-card--gallery__content__child {
+        > .poemkit-card--gallery__content__child {
             display: flex;
             flex-direction: row;
             align-items: center;
 
 
-            .uix-card--gallery__content__child--left {
+            .poemkit-card--gallery__content__child--left {
                 display: flex;
                 flex-direction: row;
                 flex: 1;
@@ -306,7 +306,7 @@ $card-radius: 8px;
             }
 
 
-            .uix-card--gallery__content__child--right {
+            .poemkit-card--gallery__content__child--right {
                 min-width: 50px; /* default value, this attribute can be specified in HTML */
             }   
 
@@ -319,13 +319,13 @@ $card-radius: 8px;
 
     
     
-    .uix-card--gallery__body {
+    .poemkit-card--gallery__body {
         flex: 1;
         max-width: 100%; /* Prevent text overflow with no-wrap when horizontal type is used  */
         min-width: 0; /* prevents flex-boxes of becoming smaller than it's contents -- for rows */
     }
     
-    .uix-card--gallery__action {
+    .poemkit-card--gallery__action {
         display: flex;
         flex: 1;
         margin-left: 1rem;
@@ -334,11 +334,11 @@ $card-radius: 8px;
     
   
     /*-- horizontal layout --*/
-    &.uix-card--gallery--horizontal {
+    &.poemkit-card--gallery--horizontal {
         flex-direction: row;
         
 
-        .uix-card--gallery__preview {
+        .poemkit-card--gallery__preview {
             border-radius: $card-radius 0 0 $card-radius;
         
             img {
@@ -348,8 +348,8 @@ $card-radius: 8px;
             
         }
         
-        .uix-card--gallery__header {
-            .uix-card--gallery__header__child {
+        .poemkit-card--gallery__header {
+            .poemkit-card--gallery__header__child {
                 display: block;
             }      
         }   
@@ -358,21 +358,21 @@ $card-radius: 8px;
     
     
     /*-- overlay layout --*/
-    &.uix-card--gallery--overlay {
+    &.poemkit-card--gallery--overlay {
         
-        .uix-card--gallery__preview {
+        .poemkit-card--gallery__preview {
             border-radius: $card-radius;
             img {
                 border-radius: $card-radius;
             }
         }
 
-        .uix-card--gallery__body {
+        .poemkit-card--gallery__body {
 			position: absolute;
 			bottom: 0;
             left: 0;
             
-            &.uix-card--gallery__body--verticalCenter {
+            &.poemkit-card--gallery__body--verticalCenter {
                 height: 100%;
             }
         }
@@ -382,7 +382,7 @@ $card-radius: 8px;
     
 
     /*-- Menu Group --*/
-    .uix-card--gallery__status {
+    .poemkit-card--gallery__status {
         position: absolute;
         justify-content: center;
         display: flex;
@@ -394,7 +394,7 @@ $card-radius: 8px;
         z-index: 2;
 
 
-        .uix-card--gallery__status__item {
+        .poemkit-card--gallery__status__item {
             display: flex;
             align-items: center;
             color: #fff;
@@ -412,7 +412,7 @@ $card-radius: 8px;
 
 
 
-    .uix-card--gallery__menu {
+    .poemkit-card--gallery__menu {
         display: flex;
         justify-content: space-between;
         align-items: center;
@@ -423,7 +423,7 @@ $card-radius: 8px;
         z-index: 2;
 
 
-        .uix-card--gallery__menu__avatar {
+        .poemkit-card--gallery__menu__avatar {
             display: flex;
             align-items: center;
 
@@ -442,7 +442,7 @@ $card-radius: 8px;
         }
 
 
-        .uix-card--gallery__menu__items {
+        .poemkit-card--gallery__menu__items {
             display: flex;
             cursor: pointer;
 
@@ -459,7 +459,7 @@ $card-radius: 8px;
         }
 
 
-        .uix-card--gallery__menu__action {
+        .poemkit-card--gallery__menu__action {
             display: flex;
 
             button {
@@ -495,15 +495,15 @@ $card-radius: 8px;
      you need to use the following to achieve the layout
     */
     /*
-    .uix-card--gallery__menu {
+    .poemkit-card--gallery__menu {
         display: flex;
         
-        .uix-card--gallery__menu__items {
+        .poemkit-card--gallery__menu__items {
             display: flex;
             margin-left: auto;
         }
 
-        .uix-card--gallery__menu__action {
+        .poemkit-card--gallery__menu__action {
             display: flex;
             margin-left: auto;
         }
@@ -533,14 +533,14 @@ $card-radius: 8px;
 }
 
 @media all and (max-width: 768px) {
-	.uix-card--gallery {
+	.poemkit-card--gallery {
 
         
         /*-- horizontal layout --*/
-        &.uix-card--gallery--horizontal:not(.is-mobile-still) {
+        &.poemkit-card--gallery--horizontal:not(.is-mobile-still) {
             flex-direction: column;
             
-            .uix-card--gallery__preview {
+            .poemkit-card--gallery__preview {
                 border-radius: $card-radius $card-radius 0 0;
                 img {
                     border-radius: $card-radius $card-radius 0 0;
@@ -551,14 +551,14 @@ $card-radius: 8px;
         
 
         /*-- Menu Group --*/
-        .uix-card--gallery__menu {
+        .poemkit-card--gallery__menu {
             flex-direction: column;
 
-            .uix-card--gallery__menu__avatar {
+            .poemkit-card--gallery__menu__avatar {
                 margin: 1rem;
             }
 
-            .uix-card--gallery__menu__action {
+            .poemkit-card--gallery__menu__action {
                 margin: 1rem;
             }
 
@@ -575,7 +575,7 @@ $card-radius: 8px;
  3. Thumbnail Card
  ---------------------------
  */
-.uix-card--thumb {
+.poemkit-card--thumb {
     box-sizing: border-box;
     position: relative;
     display: inline-flex;
@@ -587,29 +587,29 @@ $card-radius: 8px;
     @include outer-shadow( 'regular' );
     border-radius: $card-radius;
 
-    .uix-card--thumb__header {
+    .poemkit-card--thumb__header {
         display: inline-flex;
         flex-direction: row;
         align-items: center; /* center flex items horizontally */
         
         
-        .uix-card--thumb__preview {
+        .poemkit-card--thumb__preview {
             flex-basis: 50px; /* default value, this attribute can be specified in HTML */
             margin-right: 5px;
         }
         
-        .uix-card--thumb__content {
+        .poemkit-card--thumb__content {
             /* ----- Keep the width of the picture fixed -----  begin  */
             flex: 1;
             min-width: 0; /* prevents flex-boxes of becoming smaller than it's contents -- for rows */
             /* ----- Keep the width of the picture fixed -----  end  */
             
-            > .uix-card--thumb__content__child {
+            > .poemkit-card--thumb__content__child {
                 display: flex;
                 flex-direction: row;
 
                 
-                .uix-card--thumb__content__child--left {
+                .poemkit-card--thumb__content__child--left {
                     display: flex;
                     flex-direction: row;
                     flex: 1;
@@ -626,7 +626,7 @@ $card-radius: 8px;
                 }
                 
 
-                .uix-card--thumb__content__child--right {
+                .poemkit-card--thumb__content__child--right {
                     min-width: 50px; /* default value, this attribute can be specified in HTML */
                 }   
 
@@ -640,7 +640,7 @@ $card-radius: 8px;
     }
     
     
-    .uix-card--thumb__body {
+    .poemkit-card--thumb__body {
         padding-top: .5rem;
         line-height: 1.25;
     }

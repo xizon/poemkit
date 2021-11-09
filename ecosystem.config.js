@@ -2,7 +2,7 @@ module.exports = {
   "apps": [
     {
       //App name
-      "name": "uix-kit-react",
+      "name": "poemkit",
       //The path of the executable file
       "script": "ts-node -r tsconfig-paths/register ./src/server/server.js",
       "env": {
@@ -23,9 +23,9 @@ module.exports = {
       "port": "3000",
       "ref": "origin/master",
       //git ssh
-      "repo": "https://github.com/xizon/uix-kit-react.git",
+      "repo": "https://github.com/xizon/poemkit.git",
       //project destination path of the server
-      "path": "/Applications/MAMP/htdocs/uix-kit-react",
+      "path": "/Applications/MAMP/htdocs/poemkit",
       //hook
       'post-deploy' : 'npm install && npm run build && pm2 reload ecosystem.config.js --env production',
       "env": {

@@ -1,42 +1,6 @@
 import React, { Component } from 'react';
-import {
-	useParams,
-	useLocation
-} from 'react-router-dom';
-import { __ } from '@uixkit.react/components/_utils/_all';
-
-import customRoutesConfig from '@uixkit.react/router/RoutesConfig.js';
-
-
-//Might have mismatching versions of React and the renderer (such as React DOM)
-function HookScript() {
-	
-	//Click the route to trigger the event
-    const theLocation = useLocation();
-    React.useEffect(() => { // Equivalent to componentDidMount and componentDidUpdate:
-		
-		//output name
-		//------------------------------------------
-		let pageTitle = null;
-		const breakException = {};
-		const pathname = theLocation.pathname;
-
-		let titleStr = pathname.split( '/' ).pop();
-		titleStr = __.lastUrlParamFormat( titleStr );
-		
-		console.log( 'titleOutput: ', titleStr );
-		
-		__( '#app-topic-name' ).html( titleStr );
-
-
-        
-    });
-	
-	return (
-		<></>
-	)
-
-}
+import { useParams } from 'react-router-dom';
+import { __ } from '@poemkit/components/_utils/_all';
 
 
 function HookTopicId() {
@@ -52,24 +16,18 @@ function HookTopicId() {
 }
 
 
-//---
 class NestedRoutesDetail extends Component {
+	render() {
 
-  render() {
-	
-	return (
-		<>
-		
-		    <HookScript />
-		
-			<p>Detail for topic ID: <span style={{background:"yellow",padding:"5px"}}><HookTopicId /></span><br />
-		    Detail for topic Name: <span id="app-topic-name" style={{background:"yellow",padding:"5px"}}></span></p>
-		</>
-	)  
-	  
-	  
-  }
-    
+		return (
+			<>
+				<p>Detail for topic ID: <span style={{ background: "yellow", padding: "5px" }}><HookTopicId /></span></p>
+			</>
+		)
+
+
+	}
+
 }
 
 export default NestedRoutesDetail;

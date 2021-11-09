@@ -19,9 +19,9 @@ export default class ButtonGroup extends Component<ButtonGroupProps, ButtonGroup
 		if (typeof(param) === 'undefined' || param === false) param = '';
 		
 		//margin
-		if ( param.indexOf( 'bottom' ) >= 0 ) classes += ' uix-btn__margin--b';
-		if ( param.indexOf( 'left' ) >= 0 ) classes += ' uix-btn__margin--l';
-		if ( param.indexOf( 'right' ) >= 0 ) classes += ' uix-btn__margin--r';
+		if ( param.indexOf( 'bottom' ) >= 0 ) classes += ' poemkit-btn__margin--b';
+		if ( param.indexOf( 'left' ) >= 0 ) classes += ' poemkit-btn__margin--l';
+		if ( param.indexOf( 'right' ) >= 0 ) classes += ' poemkit-btn__margin--r';
 
 		return classes;
 	}
@@ -39,7 +39,7 @@ export default class ButtonGroup extends Component<ButtonGroupProps, ButtonGroup
 
 		return (
             <>
-			    <div className={"uix-btn__group" + _spacing + (fullwidth ? ' is-fullwidth' : '')}>{children}</div>
+			    <div className={"poemkit-btn__group" + _spacing + (fullwidth ? ' is-fullwidth' : '')}>{children}</div>
     
             </>
           )

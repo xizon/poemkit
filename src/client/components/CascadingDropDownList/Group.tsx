@@ -19,7 +19,7 @@ export default class Group extends Component<GroupProps, GroupState> {
         return (
             <>
                 {data.map((item, index) => {
-                    return <div className={item.current ? 'uix-cascading-dropdown-list__opt is-active' : 'uix-cascading-dropdown-list__opt'} key={index} onClick={(e) => selectEv!(item, index)}>{item.name}</div>
+                    return <div className={item.current ? 'poemkit-cascading-dropdown-list__opt is-active' : 'poemkit-cascading-dropdown-list__opt'} key={index} onClick={(e) => selectEv!(item, index)}>{item.name}</div>
                 })}
             </>
         )

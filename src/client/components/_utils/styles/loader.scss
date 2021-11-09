@@ -1,13 +1,13 @@
 /* ====================================================== 
    <!-- Loader -->                                               
 /* ====================================================== */
-.uix-loader-progress {
+.poemkit-loader-progress {
 	text-align: center;
 	font-size: 0.75rem;
 	transform: translate(10px,-10px);
 }
 
-.uix-loader-progress__line {
+.poemkit-loader-progress__line {
 	top: 0;
 	left: 0;
 	width: 0;
@@ -21,8 +21,8 @@
     box-shadow: 0 1px 5px 0 rgba(255, 255, 255, 0.3);
 }
 
-.uix-loader,
-.uix-loader-progress {
+.poemkit-loader,
+.poemkit-loader-progress {
 	bottom: 0;
 	left: 0;
 	width: 65px;
@@ -55,8 +55,8 @@
 		bottom: 10px;
 		left: 10px;
 	}
-	.uix-loader__spinner {
-	    animation: uix-cssAnim--rotate .5s linear infinite;
+	.poemkit-loader__spinner {
+	    animation: poemkit-cssAnim--rotate .5s linear infinite;
 		
 		path {
 			stroke-dasharray: 1,150;
@@ -64,21 +64,21 @@
 			stroke-dashoffset: 0;
 			stroke: $highlight-color1;
 			stroke-linecap: round;
-			animation: uix-cssAnim--dash 1.5s ease-in-out infinite;
+			animation: poemkit-cssAnim--dash 1.5s ease-in-out infinite;
 		}
 	}
 	
 }
 
 
-@keyframes uix-cssAnim--rotate {
+@keyframes poemkit-cssAnim--rotate {
 	100% {
 	    transform: rotate(360deg);
 	}
 }
 
 
-@keyframes uix-cssAnim--dash {
+@keyframes poemkit-cssAnim--dash {
 	0% {
 		stroke-dasharray: 1,150;
 		/* 1%, 101% circumference */

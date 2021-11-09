@@ -2,7 +2,7 @@
    <!-- Navigation -->                                      
 /* ====================================================== */
 
-.rtl .uix-menu__container:not(.is-mobile) {
+.rtl .poemkit-menu__container:not(.is-mobile) {
     float: left;
 	
 	
@@ -12,7 +12,7 @@
 	 1. Primary Menu
 	 ---------------------------
 	 */ 
-	ul.uix-menu {
+	ul.poemkit-menu {
 	    float: right;
 		
 	    > li {
@@ -20,7 +20,7 @@
 		    margin-left: 1.6875rem;
 			
 
-			.uix-bubble {
+			.poemkit-bubble {
 				right: auto;
 				left: 1rem;
 			}
@@ -103,7 +103,7 @@
 			padding-left: auto !important;
 			padding-right: 1.159375rem !important;
 
-			.uix-bubble {
+			.poemkit-bubble {
 				right: auto;
 				left: 1rem;
 			}
@@ -113,7 +113,7 @@
 	}
 
 
-	ul.uix-menu ul.sub-menu .uix-menu__arrow {
+	ul.poemkit-menu ul.sub-menu .poemkit-menu__arrow {
 	    right: auto;
 	    left: 1.159375rem;
 	}	
@@ -123,7 +123,7 @@
 	 4. Dropdown Arrow
 	 ---------------------------
 	 */ 
-	.uix-menu__arrow {
+	.poemkit-menu__arrow {
 	    right: auto;
 	    left: 0.284375rem;
 	}
@@ -133,7 +133,7 @@
 	 5. Right Box
 	 ---------------------------
 	 */ 
-	 .uix-menu__right-box {
+	 .poemkit-menu__right-box {
 		float: left;
 	}
 
@@ -143,8 +143,8 @@
 
 @media all and (max-width: 1250px) {
 	
-	.rtl .uix-menu__container:not(.is-mobile) {
-		ul.uix-menu > li {
+	.rtl .poemkit-menu__container:not(.is-mobile) {
+		ul.poemkit-menu > li {
 			margin-right: auto;
 			margin-left: 1.125rem;
 		}	

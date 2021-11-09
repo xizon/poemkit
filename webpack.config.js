@@ -81,7 +81,7 @@ let customWebsiteVersion     = json.version,
 	customWebsiteAuthor      = ( Object.prototype.toString.call( json.author ) == '[object Object]' ) ? json.author.name : json.author,
 	customWebsiteTitle       = json.projectName,
 	customWebsiteDesc        = json.description,
-	customWebsiteGenerator   = 'Uix Kit React',
+	customWebsiteGenerator   = 'PoemKit',
 	customWebsiteHash        = randomString({length: 20}),
 	customWebsiteComment     = `
 DO NOT OVERRIDE THIS FILE.
@@ -91,7 +91,7 @@ Generated with "npm run build"
 ## Project Description :  ` + customWebsiteDesc + `
 ## Project URL         :  ` + json.projectURL + `
 ## Version             :  ` + customWebsiteVersion + `
-## Based on            :  Uix Kit React (` + json.homepage + `)
+## Based on            :  PoemKit (` + json.homepage + `)
 ## Last Update         :  ` + moment().format( "MMMM D, YYYY" ) + `
 ## Created by          :  ` + json.createdInfo + ( json.email != '' ? ' (' + json.email + ')' : '' ) + `
 ## Released under the ` + json.license + ` license.
@@ -215,16 +215,16 @@ const webpackConfig = {
 			// specific mappings.
 			// Supports directories and custom aliases for specific files when the express server is running, 
 			// you need to configure the `babel.config.js` and `tsconfig.json` at the same time
-			'@uixkit.react/config': path.resolve(__dirname, alias.pathConfig ),
-			'@uixkit.react/components': path.resolve(__dirname, alias.pathComponents ),
-			'@uixkit.react/router': path.resolve(__dirname, alias.pathRouter ),
-			'@uixkit.react/helpers': path.resolve(__dirname, alias.pathHelpers ),
-			'@uixkit.react/services': path.resolve(__dirname, alias.pathServices ),
-			'@uixkit.react/reducers': path.resolve(__dirname, alias.pathReducers ),
-			'@uixkit.react/pages': path.resolve(__dirname, alias.pathPages ),
-			'@uixkit.react/actions': path.resolve(__dirname, alias.pathActions ),
-			'@uixkit.react/server': path.resolve(__dirname, alias.pathServer ),
-			'@uixkit.react/store': path.resolve(__dirname, alias.pathStore )
+			'@poemkit/config': path.resolve(__dirname, alias.pathConfig ),
+			'@poemkit/components': path.resolve(__dirname, alias.pathComponents ),
+			'@poemkit/router': path.resolve(__dirname, alias.pathRouter ),
+			'@poemkit/helpers': path.resolve(__dirname, alias.pathHelpers ),
+			'@poemkit/services': path.resolve(__dirname, alias.pathServices ),
+			'@poemkit/reducers': path.resolve(__dirname, alias.pathReducers ),
+			'@poemkit/pages': path.resolve(__dirname, alias.pathPages ),
+			'@poemkit/actions': path.resolve(__dirname, alias.pathActions ),
+			'@poemkit/server': path.resolve(__dirname, alias.pathServer ),
+			'@poemkit/store': path.resolve(__dirname, alias.pathStore )
 			
 		}
     },
@@ -236,8 +236,8 @@ const webpackConfig = {
 //    },
 	
 	entry: {
-		'uix-kit-react': './'+globs.build+'/client.js',
-		'uix-kit-react.min': './'+globs.build+'/client.js'
+		'poemkit': './'+globs.build+'/client.js',
+		'poemkit.min': './'+globs.build+'/client.js'
 	},
     output: {
         path: path.resolve(__dirname, './' + globs.dist + '/js' ),

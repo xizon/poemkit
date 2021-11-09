@@ -1,11 +1,11 @@
 {
   "author": "UIUX Lab",
   "email": "uiuxlab@gmail.com",
-  "name": "uix-kit-react",
-  "projectName": "Uix Kit React",
+  "name": "poemkit",
+  "projectName": "PoemKit",
   "createdInfo": "UIUX Lab (https://uiux.cc)",
   "projectURL": "https://uiux.cc",
-  "version": "0.1.3",
+  "version": "0.1.5",
   "description": "A free web kits with React for fast web design and development via SSR.",
   "main": "index.js",
   "directories": {
@@ -30,22 +30,22 @@
     "_comment_8_": "run a specific test",
     "test": "cross-env NODE_ENV=test jest",
     "_comment_9_": "An opinionated code formatter for core CSS file",
-    "prettier": "prettier \"./dist/css/uix-kit-react.css\""
+    "prettier": "prettier \"./dist/css/poemkit.css\""
   },
   "jest": {
     "testEnvironment": "jsdom",
     "moduleNameMapper": {
       "\\.(css|less|scss|sass)$": "identity-obj-proxy",
-      "^@uixkit.react/config/(.*)": "<rootDir>/src/config/$1",
-      "^@uixkit.react/components/(.*)": "<rootDir>/src/client/components/$1",
-      "^@uixkit.react/router/(.*)": "<rootDir>/src/client/router/$1",
-      "^@uixkit.react/helpers/(.*)": "<rootDir>/src/client/helpers/$1",
-      "^@uixkit.react/services/(.*)": "<rootDir>/src/client/services/$1",
-      "^@uixkit.react/reducers/(.*)": "<rootDir>/src/client/reducers/$1",
-      "^@uixkit.react/pages/(.*)": "<rootDir>/src/client/views/_pages/$1",
-      "^@uixkit.react/actions/(.*)": "<rootDir>/src/client/actions/$1",
-      "^@uixkit.react/server/(.*)": "<rootDir>/src/server/$1",
-      "^@uixkit.react/store/(.*)": "<rootDir>/src/store/$1"
+      "^@poemkit/config/(.*)": "<rootDir>/src/config/$1",
+      "^@poemkit/components/(.*)": "<rootDir>/src/client/components/$1",
+      "^@poemkit/router/(.*)": "<rootDir>/src/client/router/$1",
+      "^@poemkit/helpers/(.*)": "<rootDir>/src/client/helpers/$1",
+      "^@poemkit/services/(.*)": "<rootDir>/src/client/services/$1",
+      "^@poemkit/reducers/(.*)": "<rootDir>/src/client/reducers/$1",
+      "^@poemkit/pages/(.*)": "<rootDir>/src/client/views/_pages/$1",
+      "^@poemkit/actions/(.*)": "<rootDir>/src/client/actions/$1",
+      "^@poemkit/server/(.*)": "<rootDir>/src/server/$1",
+      "^@poemkit/store/(.*)": "<rootDir>/src/store/$1"
     },
     "transform": {
       "^.+\\.(js|jsx)$": "babel-jest",
@@ -54,27 +54,28 @@
   },
   "repository": {
     "type": "git",
-    "url": "uix-kit-react"
+    "url": "poemkit"
   },
   "keywords": [
-    "uix",
     "typescript",
     "component",
     "components",
-    "design",
-    "framework",
     "frontend",
     "react",
     "react-component",
     "ui",
     "kit",
-    "ssr"
+    "ssr",
+    "redux",
+    "developer-tools",
+    "responsive-design",
+    "toolkit"
   ],
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/xizon/uix-kit-react/issues"
+    "url": "https://github.com/xizon/poemkit/issues"
   },
-  "homepage": "https://github.com/xizon/uix-kit-react#readme",
+  "homepage": "https://github.com/xizon/poemkit#readme",
   "devDependencies": {
     "@node-minify/core": "^6.2.0",
     "@node-minify/uglify-js": "^4.0.2",
@@ -115,7 +116,7 @@
     "safe-buffer": "^5.2.1",
     "sass-loader": "^7.1.0",
     "style-loader": "^0.23.1",
-    "tar": "^4.4.8",
+    "tar": "^4.4.19",
     "terser-webpack-plugin": "^5.1.4",
     "ts-jest": "^27.0.4",
     "ts-node": "^10.1.0",
@@ -138,7 +139,7 @@
     "@babel/preset-react": "^7.0.0",
     "@babel/preset-typescript": "^7.1.0",
     "@babel/register": "^7.13.14",
-    "axios": "^0.21.1",
+    "axios": "^0.24.0",
     "babel-plugin-module-resolver": "^4.1.0",
     "compression": "^1.7.4",
     "cors": "^2.8.5",
@@ -147,6 +148,7 @@
     "prop-types": "^15.7.2",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
+    "react-helmet": "^6.1.0",
     "react-redux": "^7.2.3",
     "react-router-config": "^5.1.1",
     "react-router-dom": "^5.2.0",

@@ -1,6 +1,6 @@
-# @uixkit.react/components/Header
+# @poemkit/components/Header
 
-[Source](https://github.com/xizon/uix-kit-react/tree/main/src/client/components/Header)
+[Source](https://github.com/xizon/poemkit/tree/main/src/client/components/Header)
 
 ## Version
 
@@ -10,12 +10,12 @@
 
 ### Header
 ```js
-import Header from '@uixkit.react/components/Header/index.tsx';
+import Header from '@poemkit/components/Header/index.tsx';
 ```
 | Property | Type | Default | Description |
 | --- | --- | --- | --- |
 | `headerOverlayEnabled` | boolean  | false | <strong>(Required)</strong> `true` will set the Header to overlay the top of the page. <br />The header is the element at the top of the web page. This element appears on every single page of the site and usually contains a logo, a menu to access different sections of the site, a search bar, and contact information. |
-| `menu` | array  | - | Specify data of Navigation List as a JSON string format. Please refer to the `data` attribute of the component [`<Navigation />`](https://github.com/xizon/uix-kit-react/tree/main/src/client/components/Navigation) |
+| `menu` | array  | - | Specify data of Navigation List as a JSON string format. Please refer to the `data` attribute of the component [`<Navigation />`](https://github.com/xizon/poemkit/tree/main/src/client/components/Navigation) |
 | `logo` | ReactNode  | - | Specify a LOGO via HTML Element |
 
 
@@ -24,7 +24,7 @@ import Header from '@uixkit.react/components/Header/index.tsx';
 
 ```js
 import React from 'react';
-import Header from '@uixkit.react/components/Header/index.tsx';
+import Header from '@poemkit/components/Header/index.tsx';
 import { NavLink } from 'react-router-dom';
 
 const menuListData = [

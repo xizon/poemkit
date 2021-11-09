@@ -1,10 +1,10 @@
 /* ====================================================== 
    <!-- Mobile Menu -->
 /* ====================================================== */
-@import '@uixkit.react/components/_utils/styles/_variable-and-mixin.scss';
+@import '@poemkit/components/_utils/styles/_variable-and-mixin.scss';
 
 /* Mobile Menu Toggle */
-.rtl .uix-menu-mobile__toggle {
+.rtl .poemkit-menu-mobile__toggle {
     right: auto;
     left: 30px;
 	
@@ -15,8 +15,8 @@
 	
 }
 
-body.js-uix-menu-opened.rtl {
-	.uix-menu-mobile__toggle {
+body.js-poemkit-menu-opened.rtl {
+	.poemkit-menu-mobile__toggle {
 	    span {
 		    right: 7px;
 	    } 
@@ -26,13 +26,13 @@ body.js-uix-menu-opened.rtl {
 
 
 /* Mobile Menu Container */
-.rtl .uix-menu__container.is-mobile {
+.rtl .poemkit-menu__container.is-mobile {
 	left: auto;
 	right: 0;
 	transform: translateX(300px);
 
 	li.multi-column span.multi-column-title,
-	ul.uix-menu > li ul > li {
+	ul.poemkit-menu > li ul > li {
 		padding-right: .625rem !important;
 	}
 	
@@ -51,8 +51,8 @@ body.js-uix-menu-opened.rtl {
         padding-right: .825em;
     }
 	
-    > .uix-menu__inner {
-	    > .uix-menu__right-box {
+    > .poemkit-menu__inner {
+	    > .poemkit-menu__right-box {
 		    padding-left: auto;
 		    padding-right: .5rem;
 		
@@ -63,13 +63,13 @@ body.js-uix-menu-opened.rtl {
 	    }  
     }
 	
-	.uix-menu__arrow-mobile {
+	.poemkit-menu__arrow-mobile {
 	    right: auto;
 	    left: 10px;
 	}	
 			
 }
 
-.rtl .js-uix-menu-opened .uix-menu__container.is-mobile {
+.rtl .js-poemkit-menu-opened .poemkit-menu__container.is-mobile {
     transform: translateX(0);
 }

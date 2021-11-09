@@ -27,7 +27,7 @@ export default class TabPanel extends Component<TabPanelProps, TabPanelState> {
 		return (
 		  <>
  
-				<div role="tabpanel" className={ tabpanelClass ? `uix-tabs__content ${tabpanelClass} ${activedClassName}` : `uix-tabs__content ${activedClassName}`} {...attributes}></div>
+				<div role="tabpanel" className={ tabpanelClass ? `poemkit-tabs__content ${tabpanelClass} ${activedClassName}` : `poemkit-tabs__content ${activedClassName}`} {...attributes}></div>
 	
 		  </>
 		)

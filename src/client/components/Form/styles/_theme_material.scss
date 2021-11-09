@@ -1,7 +1,7 @@
 /* ======================================================
     <!-- Form  ( Material Design Theme )-->
 /* ====================================================== */
-@import '@uixkit.react/components/_utils/styles/_variable-and-mixin.scss';
+@import '@poemkit/components/_utils/styles/_variable-and-mixin.scss';
 @import '_variable-and-mixin.scss';
 
 /*
@@ -18,8 +18,8 @@
  ---------------------------
  */
 @mixin create-line() {
-    .uix-controls__basic-bar,
-	.uix-controls__bar {
+    .poemkit-controls__basic-bar,
+	.poemkit-controls__bar {
 		position: absolute;
 		height: 2px;
 		left: 0;
@@ -37,7 +37,7 @@
 	}
 
     
-    .uix-controls__basic-bar {
+    .poemkit-controls__basic-bar {
         z-index: 0;
         display: block;
         width: 100%;
@@ -48,7 +48,7 @@
 
 
 /* Default Controls */
-.uix-controls:not(.uix-controls__toggle):not(.uix-controls__checkbox):not(.uix-controls__radio):not(.uix-controls__select) {
+.poemkit-controls:not(.poemkit-controls__toggle):not(.poemkit-controls__checkbox):not(.poemkit-controls__radio):not(.poemkit-controls__select) {
 
     
     //Create Line Effect on Click
@@ -58,7 +58,7 @@
 	/*-- Form Status: Success --*/
 	&.is-success {
 		
-		.uix-controls__bar {
+		.poemkit-controls__bar {
 			background: #4AB005;
             width: 100%;
 		}
@@ -68,7 +68,7 @@
 	/*-- Form Status: Error --*/
 	&.is-error {
 		
-		.uix-controls__bar {
+		.poemkit-controls__bar {
 			background: #f00;
             width: 100%;   
 		}
@@ -77,7 +77,7 @@
 
 	/*-- Form Status: Disable --*/
 	&.is-disabled {
-		.uix-controls__bar {
+		.poemkit-controls__bar {
 			background: #E1E1E1;
             width: 100%;
 		}
@@ -89,14 +89,14 @@
 
 
 /* Create Line Effect on Click */
-.uix-controls.uix-controls--line {
+.poemkit-controls.poemkit-controls--line {
 
 
 	&.is-pill,
 	&.is-rounded {
 		input:not([type="checkbox"]):not([type="radio"]),
 		textarea,
-		button:not(.uix-btn),
+		button:not(.poemkit-btn),
 		select {
 			border-radius: 0 !important;
 		}
@@ -105,7 +105,7 @@
 	}
 
     
-	.uix-controls__bar {
+	.poemkit-controls__bar {
 		display: block !important;
 	}
 
@@ -120,7 +120,7 @@
 
 
     textarea,
-    button:not(.uix-btn),
+    button:not(.poemkit-btn),
     select {
         border-top-color: $control-focus-bordercolor2 !important;
         border-left-color: $control-focus-bordercolor2 !important;
@@ -139,7 +139,7 @@
 
 
         textarea,
-        button:not(.uix-btn),
+        button:not(.poemkit-btn),
         select {
             padding-left: 0 !important;
             padding-right: 0 !important;
@@ -150,7 +150,7 @@
     }
 
 
-	&.uix-controls__short-s {
+	&.poemkit-controls__short-s {
 
 		input:not([type="checkbox"]):not([type="radio"]) {
 			width: 120px !important;
@@ -159,7 +159,7 @@
 
 	}
 
-	&.uix-controls__short-m {
+	&.poemkit-controls__short-m {
 
 		input:not([type="checkbox"]):not([type="radio"]) {
 			width: 155px !important;
@@ -169,7 +169,7 @@
 	}
 
 
-	&.uix-controls__short-l {
+	&.poemkit-controls__short-l {
 		input:not([type="checkbox"]):not([type="radio"]) {
 			width: 192px !important;
 		}
@@ -198,7 +198,7 @@
 	}
 
 
-	button:not(.uix-btn) {
+	button:not(.poemkit-btn) {
 
 		&:focus {
 			border-color: $control-focus-bordercolor2 !important;
@@ -242,7 +242,7 @@
 			}
 
 			textarea,
-			button:not(.uix-btn),
+			button:not(.poemkit-btn),
 			select {
 				padding-left: !important;
 			}
@@ -261,7 +261,7 @@
 
 
 	/*-- Select --*/
-	&.uix-controls__normal-select {
+	&.poemkit-controls__normal-select {
 
 	
 		select {
@@ -282,7 +282,7 @@
 
 		}
 		textarea,
-		button:not(.uix-btn),
+		button:not(.poemkit-btn),
 		select {
 		    opacity: .7;
 		}
@@ -302,9 +302,9 @@
  ---------------------------
  */
 
-.uix-controls__select-wrapper {
+.poemkit-controls__select-wrapper {
 
-	&.uix-controls--line.is-disabled {
+	&.poemkit-controls--line.is-disabled {
 
 		opacity: .7;
 
@@ -326,8 +326,8 @@
 	}
 
 
-	.uix-controls--line  {
-		.uix-controls__select-trigger {
+	.poemkit-controls--line  {
+		.poemkit-controls__select-trigger {
 			border-radius: 0;
             padding-left: 0;
 			border-top-color: $control-focus-bordercolor2 !important;
@@ -340,8 +340,8 @@
 
         //Create Line Effect on Click
         @include create-line();
-        .uix-controls__basic-bar,
-        .uix-controls__bar {
+        .poemkit-controls__basic-bar,
+        .poemkit-controls__bar {
             bottom: #{$control-padding-height*2};
         }
         
@@ -349,11 +349,11 @@
 
     
     
-	.uix-controls__select {
+	.poemkit-controls__select {
 		
 		&.is-opened {
 
-			.uix-controls__bar {
+			.poemkit-controls__bar {
                 width: 100%;
 			}
 		}
@@ -369,12 +369,12 @@
  6. Custom Input Number
  ---------------------------
  */
-.uix-controls__number {
+.poemkit-controls__number {
 
 	
-	&.uix-controls--line {
+	&.poemkit-controls--line {
 
-		.uix-controls__number__btn {
+		.poemkit-controls__number__btn {
 		    border: none;
 
 		}
@@ -391,11 +391,11 @@
  7. Multiple Selector
  ---------------------------
  */
-.uix-controls__multi-sel {
+.poemkit-controls__multi-sel {
 
 
 	/* Create Line Effect on Click */
-	&.uix-controls--line {
+	&.poemkit-controls--line {
 
 		> span {
 			border-top-color: transparent !important;
@@ -410,7 +410,7 @@
 			}
             
             &:hover {
-                .uix-controls__bar {
+                .poemkit-controls__bar {
                     width: 100% !important;
                     bottom: -1px !important;
                 }      
@@ -432,10 +432,10 @@
  ---------------------------
  */
 
-.uix-controls__single-sel {
+.poemkit-controls__single-sel {
 
 	/* Create Line Effect on Click */
-	&.uix-controls--line {
+	&.poemkit-controls--line {
 
 
 		> span {
@@ -448,14 +448,14 @@
 			&.is-active {
 				color: $control-text-color !important;   
                 
-                .uix-controls__basic-bar {
+                .poemkit-controls__basic-bar {
                     background: $highlight-color1 !important;
                 }      
                 
 			}
             
 			&:hover {
-                .uix-controls__bar {
+                .poemkit-controls__bar {
                     width: 100% !important;
                     bottom: -1px !important;
                 }     

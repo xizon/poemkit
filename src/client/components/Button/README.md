@@ -1,6 +1,6 @@
-# @uixkit.react/components/Button
+# @poemkit/components/Button
 
-[Source](https://github.com/xizon/uix-kit-react/tree/main/src/client/components/Button)
+[Source](https://github.com/xizon/poemkit/tree/main/src/client/components/Button)
 
 ## Version
 
@@ -11,7 +11,7 @@
 
 ### Button
 ```js
-import { Button } from '@uixkit.react/components/Button/index.tsx';
+import { Button } from '@poemkit/components/Button/index.tsx';
 ```
 | Property | Type | Default | Description |
 | --- | --- | --- | --- |
@@ -34,7 +34,7 @@ It accepts all props(include data-* attributes) which native buttons support.
 
 ### ButtonGroup
 ```js
-import { ButtonGroup } from '@uixkit.react/components/Button/index.tsx';
+import { ButtonGroup } from '@poemkit/components/Button/index.tsx';
 ```
 | Property | Type | Default | Description |
 | --- | --- | --- | --- |
@@ -46,7 +46,7 @@ import { ButtonGroup } from '@uixkit.react/components/Button/index.tsx';
 
 ```js
 import React from 'react';
-import { Button, ButtonGroup } from '@uixkit.react/components/Button/index.tsx';
+import { Button, ButtonGroup } from '@poemkit/components/Button/index.tsx';
 
 
 export default () => {
@@ -207,7 +207,7 @@ export default () => {
 
 		{/*    /////////////////////////   */}  
 
-		<div className="uix-t-c" style={{background:"#333",padding:"1.5rem 0 0",marginTop:"1rem"}}>
+		<div className="poemkit-t-c" style={{background:"#333",padding:"1.5rem 0 0",marginTop:"1rem"}}>
 			<Button border="thin" spacing="bottom" background="secondary fillwhite" size="small" href="#">White Button</Button>
 			<Button border="thin" spacing="bottom" background="secondary" size="small" href="#">White Button</Button>
 

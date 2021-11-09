@@ -1,22 +1,22 @@
 import React, { Component } from 'react';
 
 /*-- Apply Third-party plugins (import location should be in front of "global scripts and styles") --*/
-import '@uixkit.react/components/_plugins/_lib-bootstrap';
-import '@uixkit.react/components/_plugins/_lib-icons';
-import TweenMax, { TimelineMax } from '@uixkit.react/components/_plugins/_lib-gsap';
+import '@poemkit/components/_plugins/_lib-bootstrap';
+import '@poemkit/components/_plugins/_lib-icons';
+import TweenMax, { TimelineMax } from '@poemkit/components/_plugins/_lib-gsap';
 
 /*-- Apply global scripts and styles --*/
-import '@uixkit.react/components/_utils/styles/_all.scss';
-import '@uixkit.react/components/_utils/styles/rtl/_all.scss';
-import { __ } from '@uixkit.react/components/_utils/_all';
+import '@poemkit/components/_utils/styles/_all.scss';
+import '@poemkit/components/_utils/styles/rtl/_all.scss';
+import { __ } from '@poemkit/components/_utils/_all';
 
 /*-- Apply this component styles --*/
-import '@uixkit.react/components/TabsAnimated/styles/_style.scss';
+import '@poemkit/components/TabsAnimated/styles/_style.scss';
 
 
 //
-import TabList from '@uixkit.react/components/TabsAnimated/TabList';
-import TabPanel from '@uixkit.react/components/TabsAnimated/TabPanel';
+import TabList from '@poemkit/components/TabsAnimated/TabList';
+import TabPanel from '@poemkit/components/TabsAnimated/TabPanel';
 
 
 type TabsAnimatedProps = {
@@ -53,11 +53,11 @@ export default class TabsAnimated extends Component<TabsAnimatedProps, TabsAnima
 
 			this.setSelected(itemIndex);
 
-			const animSpeed: any = __.cssProperty.getTransitionDuration( __( '.uix-tabs-animated .uix-tabs__content' )[0] );	
+			const animSpeed: any = __.cssProperty.getTransitionDuration( __( '.poemkit-tabs-animated .poemkit-tabs__content' )[0] );	
 
-			__( '.uix-tabs-animated .uix-tabs__content.is-active' ).removeClass('is-active').addClass('leave');							
+			__( '.poemkit-tabs-animated .poemkit-tabs__content.is-active' ).removeClass('is-active').addClass('leave');							
 			setTimeout( function() {
-				__( '.uix-tabs-animated .uix-tabs__content' ).removeClass('leave').eq(itemIndex).addClass('is-active');								
+				__( '.poemkit-tabs-animated .poemkit-tabs__content' ).removeClass('leave').eq(itemIndex).addClass('is-active');								
 			}, animSpeed);
 		};
 
@@ -71,8 +71,8 @@ export default class TabsAnimated extends Component<TabsAnimatedProps, TabsAnima
 		__( document ).ready( function() {
 
 			//init content boxes height
-			const maxContentHeight = __( '.uix-tabs-animated .uix-tabs__content' ).maxDimension().height;	
-			__( '.uix-tabs-animated' ).css({'height': (maxContentHeight+60)+'px'});			
+			const maxContentHeight = __( '.poemkit-tabs-animated .poemkit-tabs__content' ).maxDimension().height;	
+			__( '.poemkit-tabs-animated' ).css({'height': (maxContentHeight+60)+'px'});			
 			
 			
 		});
@@ -98,8 +98,8 @@ export default class TabsAnimated extends Component<TabsAnimatedProps, TabsAnima
 		return (
 		  <>
  
-			  <div id={id || this.uniqueID} className="uix-tabs-animated">
-				<div className="uix-tabs__nav">
+			  <div id={id || this.uniqueID} className="poemkit-tabs-animated">
+				<div className="poemkit-tabs__nav">
 					<ul role="tablist">
 						{( children != null ) ? (children as any[]).map((item, i) => {
 							const childProps = { ...item.props };
@@ -118,9 +118,9 @@ export default class TabsAnimated extends Component<TabsAnimatedProps, TabsAnima
 						}
 					</ul>
 				</div>
-				{/*<!-- /.uix-tabs__nav -->*/}
+				{/*<!-- /.poemkit-tabs__nav -->*/}
 
-				<div className="uix-tabs__contentWrapper">
+				<div className="poemkit-tabs__contentWrapper">
 
 					{( children != null ) ? (children as any[]).map((item, i) => {
 
@@ -139,7 +139,7 @@ export default class TabsAnimated extends Component<TabsAnimatedProps, TabsAnima
 
 				</div>
 			  </div>
-			  {/*<!-- .uix-tabs-animated end -->*/}     
+			  {/*<!-- .poemkit-tabs-animated end -->*/}     
 
 
 	

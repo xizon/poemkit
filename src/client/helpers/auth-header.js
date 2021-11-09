@@ -12,7 +12,7 @@ export default () => {
 /*
 Example:
 
-import authHeader from '@uixkit.react/helpers/auth-header.js';
+import authHeader from '@poemkit/helpers/auth-header.js';
 axios({headers: { ...authHeader(), 'Content-Type': 'application/json' }})
 
 

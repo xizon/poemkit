@@ -6,26 +6,26 @@
 import React, { Component } from 'react';
 
 /*-- Apply Third-party plugins (import location should be in front of "global scripts and styles") --*/
-import '@uixkit.react/components/_plugins/_lib-bootstrap';
-import '@uixkit.react/components/_plugins/_lib-icons';
-import TweenMax, { TimelineMax } from '@uixkit.react/components/_plugins/_lib-gsap';
+import '@poemkit/components/_plugins/_lib-bootstrap';
+import '@poemkit/components/_plugins/_lib-icons';
+import TweenMax, { TimelineMax } from '@poemkit/components/_plugins/_lib-gsap';
 
 /*-- Apply global scripts and styles --*/
-import '@uixkit.react/components/_utils/styles/_all.scss';
-import '@uixkit.react/components/_utils/styles/rtl/_all.scss';
-import { __ } from '@uixkit.react/components/_utils/_all';
+import '@poemkit/components/_utils/styles/_all.scss';
+import '@poemkit/components/_utils/styles/rtl/_all.scss';
+import { __ } from '@poemkit/components/_utils/_all';
 
 /*-- Apply this component styles --*/
-import '@uixkit.react/components/ModalDialog/styles/_style.scss';
-import '@uixkit.react/components/ModalDialog/styles/rtl/_style.scss';
+import '@poemkit/components/ModalDialog/styles/_style.scss';
+import '@poemkit/components/ModalDialog/styles/rtl/_style.scss';
 
 
 //Enables body scroll locking
-import { clearAllBodyScrollLocks } from '@uixkit.react/components/_plugins/_lib-scrolllock';
+import { clearAllBodyScrollLocks } from '@poemkit/components/_plugins/_lib-scrolllock';
 
 // 
-import { fireModalDialog } from '@uixkit.react/components/ModalDialog/fire-modal-dialog';
-import { closeModalDialog } from '@uixkit.react/components/ModalDialog/close-modal-dialog';
+import { fireModalDialog } from '@poemkit/components/ModalDialog/fire-modal-dialog';
+import { closeModalDialog } from '@poemkit/components/ModalDialog/close-modal-dialog';
 
 declare global {
     interface Window {
@@ -103,7 +103,7 @@ export default class ModalDialog extends Component<ModalDialogProps, ModalDialog
 
         // close Modal Dialog
         //------------------------------------------
-        closeModalDialog( __( '.uix-modal-box' ) );
+        closeModalDialog( __( '.poemkit-modal-box' ) );
     }
 
 
@@ -113,7 +113,7 @@ export default class ModalDialog extends Component<ModalDialogProps, ModalDialog
         const curModalID = '#' + obj.data('modal-id');
 
         //Delay Time when Full Screen Effect is fired.
-        const modalSpeed: any = __.cssProperty.getTransitionDuration(__('.uix-modal-box:first-child')[0]);
+        const modalSpeed: any = __.cssProperty.getTransitionDuration(__('.poemkit-modal-box:first-child')[0]);
 
         let dataH = obj.data('modal-height'),
             dataW = obj.data('modal-width'),
@@ -138,7 +138,7 @@ export default class ModalDialog extends Component<ModalDialogProps, ModalDialog
 
             const windowWidth = window.innerWidth;
             const windowHeight = window.innerHeight;
-            const $videoWrapper = __( curModalID ).find('.uix-modal-box__video-container');
+            const $videoWrapper = __( curModalID ).find('.poemkit-modal-box__video-container');
             const isIframe = $videoWrapper.find('iframe').length > 0 ? true : false;
             let $video: any = isIframe ? $videoWrapper.find('iframe') : $videoWrapper.find('video');
 
@@ -288,21 +288,21 @@ export default class ModalDialog extends Component<ModalDialogProps, ModalDialog
         const self = this;
         window.curVideo = null;
 
-        __(document).ready(function () {
+        __( document ).ready( function() {
 
             //Add modal mask to stage
-            if (__('.uix-modal-mask').length == 0) {
-                __('body').prepend('<div class="uix-modal-mask"></div>');
+            if (__('.poemkit-modal-mask').length == 0) {
+                __('body').prepend('<div class="poemkit-modal-mask"></div>');
             }
 
-            const btnClose = '.uix-modal-box [data-modal-close-trigger], .uix-modal-mask:not(.js-uix-disabled)';
+            const btnClose = '.poemkit-modal-box [data-modal-close-trigger], .poemkit-modal-mask:not(.js-poemkit-disabled)';
             __( btnClose ).off( 'click' ).on( 'click', function (this: any, e: any) {
                 self.closeWin(e);
             });
 
 
             // Move HTML templates to tag end body </body>
-            Array.prototype.forEach.call(document.querySelectorAll('.uix-modal-box:not(.is-loaded)'), function (node) {
+            Array.prototype.forEach.call(document.querySelectorAll('.poemkit-modal-box:not(.is-loaded)'), function (node) {
                 node.classList.add( 'is-loaded' );
                 document.body.appendChild(node);
             });   
@@ -371,13 +371,13 @@ export default class ModalDialog extends Component<ModalDialogProps, ModalDialog
                 {this.createTrigger(triggerTagName, triggerClassName, triggerContent, cid, closeOnlyBtn, autoClose, width, height, autoOpen, lightboxEnabled)}
 
                 {!enableVideo ? (
-                    <div className={`uix-modal-box ${fullClassName}`} role="dialog" tabIndex={-1} aria-hidden="true" id={cid}>
-                        <button type="button" className="uix-modal-box__close" data-modal-close-trigger="true"></button>
-                        <div className="uix-modal-box__content" role="document">
-                            <div className="uix-modal-box__head">
+                    <div className={`poemkit-modal-box ${fullClassName}`} role="dialog" tabIndex={-1} aria-hidden="true" id={cid}>
+                        <button type="button" className="poemkit-modal-box__close" data-modal-close-trigger="true"></button>
+                        <div className="poemkit-modal-box__content" role="document">
+                            <div className="poemkit-modal-box__head">
                                 {heading || ''}
                             </div>
-                            <div className="uix-modal-box__body">
+                            <div className="poemkit-modal-box__body">
                                 <div role="note">
                                     {/*<!-- ////////  content  begin //////// -->*/}
                                     {children}
@@ -389,11 +389,11 @@ export default class ModalDialog extends Component<ModalDialogProps, ModalDialog
                         </div>
                     </div>
                 ) : (
-                    <div className="uix-modal-box is-fullscreen is-video" role="dialog" tabIndex={-1} aria-hidden="true" id={cid}>
-                        <button type="button" className="uix-modal-box__close" data-modal-close-trigger="true"></button>
-                        <div className="uix-modal-box__content" role="document">
-                            <div className="uix-modal-box__video-waiting"></div>
-                            <div className="uix-modal-box__video-container">
+                    <div className="poemkit-modal-box is-fullscreen is-video" role="dialog" tabIndex={-1} aria-hidden="true" id={cid}>
+                        <button type="button" className="poemkit-modal-box__close" data-modal-close-trigger="true"></button>
+                        <div className="poemkit-modal-box__content" role="document">
+                            <div className="poemkit-modal-box__video-waiting"></div>
+                            <div className="poemkit-modal-box__video-container">
                                 <div className="embed-responsive embed-responsive-16by9">
                                     {/*<!-- ////////  content  begin //////// -->*/}
                                     {children}

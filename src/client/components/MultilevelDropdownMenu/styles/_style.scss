@@ -1,15 +1,15 @@
 /* ======================================================
    <!-- Multiple-Level Dropdown Menu -->
 /* ====================================================== */
-@import '@uixkit.react/components/_utils/styles/_variable-and-mixin.scss';
+@import '@poemkit/components/_utils/styles/_variable-and-mixin.scss';
 
 
-.uix-vertical-menu {
+.poemkit-vertical-menu {
 
 	margin: 0;
 	padding: 0;
 
-	.uix-vertical-menu__arrow {
+	.poemkit-vertical-menu__arrow {
 		@include transition-default();
 		display: inline-block;
 		width: 1rem;
@@ -50,7 +50,7 @@
 
 			&.is-active {
 
-				 > .uix-vertical-menu__arrow {
+				 > .poemkit-vertical-menu__arrow {
 					transform: rotate(90deg);
 					top: .5rem;
 

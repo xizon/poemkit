@@ -1,9 +1,9 @@
 /* ======================================================
     <!-- Modal Dialog -->
 /* ====================================================== */
-@import '@uixkit.react/components/_utils/styles/_variable-and-mixin.scss';
+@import '@poemkit/components/_utils/styles/_variable-and-mixin.scss';
 
-.rtl .uix-modal-box {
+.rtl .poemkit-modal-box {
 	left: auto;
 	right: 50%;
 
@@ -11,7 +11,7 @@
 
 	/* Video container */
 
-	.uix-modal-box__video-waiting {
+	.poemkit-modal-box__video-waiting {
 
 		left: auto;
 		right: 50%;
@@ -21,7 +21,7 @@
 
 	}
 
-	.uix-modal-box__close {
+	.poemkit-modal-box__close {
 		right: auto;
 		left: 12px;
 
@@ -32,7 +32,7 @@
 		left: auto;
 		right: 0;
 
-		.uix-modal-box__close {
+		.poemkit-modal-box__close {
 			right: auto;
 			left: 26px;
 
@@ -44,7 +44,7 @@
 
 }
 
-.rtl .uix-modal-mask {
+.rtl .poemkit-modal-mask {
 	left: auto;
 	right: 0;
 }

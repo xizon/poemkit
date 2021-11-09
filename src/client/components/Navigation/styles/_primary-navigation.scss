@@ -1,7 +1,7 @@
 /* ====================================================== 
    <!-- Navigation -->                                    
 /* ====================================================== */
-@import '@uixkit.react/components/_utils/styles/_variable-and-mixin.scss';
+@import '@poemkit/components/_utils/styles/_variable-and-mixin.scss';
 
 /*
  * 1. Primary Menu
@@ -17,7 +17,7 @@ $nav-font-size    : 0.75rem;
 $nav-sub-w        : 220px;
 $nav-mega-li-w    : 270px;
 
-.uix-menu__container:not(.is-mobile) {
+.poemkit-menu__container:not(.is-mobile) {
 	float: right;
 	padding-top: 1.25rem;
 
@@ -37,7 +37,7 @@ $nav-mega-li-w    : 270px;
 	 1. Primary Menu
 	 ---------------------------
 	 */ 
-	ul.uix-menu {
+	ul.poemkit-menu {
 		font-size: $nav-font-size;
 		line-height: 2.34375;
 		float: left;
@@ -66,7 +66,7 @@ $nav-mega-li-w    : 270px;
 			white-space: nowrap; /* Required*/
 			font-size: $nav-font-size; /*Fighting the Space Between Inline Block Elements*/
 
-			.uix-bubble {
+			.poemkit-bubble {
 				right: 1rem;
 			}
 
@@ -257,7 +257,7 @@ $nav-mega-li-w    : 270px;
 
                 
 	
-				.uix-bubble {
+				.poemkit-bubble {
 					right: 1.2rem;
 				}
 				
@@ -294,7 +294,7 @@ $nav-mega-li-w    : 270px;
 			
 		}
 
-		.uix-menu__arrow-mega {
+		.poemkit-menu__arrow-mega {
 			content: '';
 			display: none;
 			position: absolute;
@@ -314,13 +314,13 @@ $nav-mega-li-w    : 270px;
 	}
 
 
-	ul.uix-menu ul.sub-menu .uix-menu__arrow {
+	ul.poemkit-menu ul.sub-menu .poemkit-menu__arrow {
 		background-color: #000;
 		right: 2.159375rem;
 		margin-top: 0.3125rem;
 	}
 
-	li.multi-column > ul li .uix-menu__arrow {
+	li.multi-column > ul li .poemkit-menu__arrow {
 		display: none;
 	}
 
@@ -329,7 +329,7 @@ $nav-mega-li-w    : 270px;
 	 4. Dropdown Arrow
 	 ---------------------------
 	 */ 
-	.uix-menu__arrow {
+	.poemkit-menu__arrow {
 		display: block;
 		position: absolute;
 		right: 0.284375rem;
@@ -345,7 +345,7 @@ $nav-mega-li-w    : 270px;
 	 5. Right Box
 	 ---------------------------
 	 */ 
-	.uix-menu__right-box {
+	.poemkit-menu__right-box {
 		float: right;
 	}
 
@@ -353,14 +353,14 @@ $nav-mega-li-w    : 270px;
 
 
 
-.uix-header__container--overlay .uix-menu__container:not(.is-mobile) {
+.poemkit-header__container--overlay .poemkit-menu__container:not(.is-mobile) {
 	
 	/* 
 	 ---------------------------
 	 1. Primary Menu
 	 ---------------------------
 	 */ 
-	ul.uix-menu {
+	ul.poemkit-menu {
 	
 		> li {
 			
@@ -388,8 +388,8 @@ $nav-mega-li-w    : 270px;
 
 
 @media all and (max-width: 1250px) {
-	.uix-menu__container:not(.is-mobile) {
-		ul.uix-menu {
+	.poemkit-menu__container:not(.is-mobile) {
+		ul.poemkit-menu {
 			> li {
 				padding-left: 0.875rem;
 				padding-right: 0.875rem;
@@ -403,7 +403,7 @@ $nav-mega-li-w    : 270px;
 
 @media all and (max-width: 768px) {
 	
-    .uix-menu__container:not(.is-mobile) {
+    .poemkit-menu__container:not(.is-mobile) {
         display: none;
     }
 }

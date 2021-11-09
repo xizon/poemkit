@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
-import { __ } from '@uixkit.react/components/_utils/_all';
-import TweenMax, { TimelineMax } from '@uixkit.react/components/_plugins/_lib-gsap';
+import { __ } from '@poemkit/components/_utils/_all';
+import TweenMax, { TimelineMax } from '@poemkit/components/_plugins/_lib-gsap';
 
 
 /* Recursively nested components to traverse nodes
@@ -70,14 +70,14 @@ export default class MenuList extends Component<MenuListProps, MenuListState>  {
 			
 			return (
 			  <>
-                <ul className="uix-vertical-menu">
+                <ul className="poemkit-vertical-menu">
                     
                     {this.props.menuListData.map((item, i) => {
                         return (
                         <li key={i}>
                             <a href={item.link || '#'} aria-expanded="false" onClick={this.handleCollapseMenuList}>
                                 {item.title}
-                                {item.children ? <span className="uix-vertical-menu__arrow"></span> : ''}
+                                {item.children ? <span className="poemkit-vertical-menu__arrow"></span> : ''}
                             </a>
                             {item.children && <MenuList menuListData={item.children}  />}
                         </li>

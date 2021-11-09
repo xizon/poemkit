@@ -1,0 +1,20 @@
+/* ======================================================
+     <!-- Image Shapes -->
+/* ====================================================== */
+@import '@poemkit/components/_utils/styles/_variable-and-mixin.scss';
+
+
+.poemkit-shape-img {
+
+	opacity: 0;
+	@include transition-default();
+
+	&.is-active {
+		opacity: 1;
+	}
+
+	img {
+		display: none;
+	}
+}
+

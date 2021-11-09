@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { __ } from '@uixkit.react/components/_utils/_all';
+import { __ } from '@poemkit/components/_utils/_all';
 
 /* Table Headers
 -------------------------------------------------*/			

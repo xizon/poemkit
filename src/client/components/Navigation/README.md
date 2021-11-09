@@ -1,6 +1,6 @@
-# @uixkit.react/components/Navigation
+# @poemkit/components/Navigation
 
-[Source](https://github.com/xizon/uix-kit-react/tree/main/src/client/components/Navigation)
+[Source](https://github.com/xizon/poemkit/tree/main/src/client/components/Navigation)
 
 ## Version
 
@@ -10,7 +10,7 @@
 
 ### Navigation
 ```js
-import Navigation from '@uixkit.react/components/Navigation/index.tsx';
+import Navigation from '@poemkit/components/Navigation/index.tsx';
 ```
 | Property | Type | Default | Description |
 | --- | --- | --- | --- |
@@ -51,7 +51,7 @@ JSON configuration properties of the `mega`:
 
 ```js
 import React from 'react';
-import Navigation from '@uixkit.react/components/Navigation/index.tsx';
+import Navigation from '@poemkit/components/Navigation/index.tsx';
 import { NavLink } from 'react-router-dom';
 
 const menuListData = [
@@ -136,7 +136,7 @@ export default () => {
 				<a title="Follow us on Twitter" href="https://twitter.com/xxx" target="_blank">
 					<i className="fa fa-twitter"></i>
 				</a>
-				<a className="uix-social-btn uix-social-btn--small uix-social-btn--circle uix-social-btn--thin" title="Follow us on Facebook" href="https://www.facebook.com/xxx" target="_blank">
+				<a className="poemkit-social-btn poemkit-social-btn--small poemkit-social-btn--circle poemkit-social-btn--thin" title="Follow us on Facebook" href="https://www.facebook.com/xxx" target="_blank">
 					<i className="fa fa-facebook"></i>
 				</a>
 		</>}/>

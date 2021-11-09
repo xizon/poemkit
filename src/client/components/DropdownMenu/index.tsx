@@ -6,22 +6,22 @@
 import React, { Component } from 'react';
 
 /*-- Apply Third-party plugins (import location should be in front of "global scripts and styles") --*/
-import '@uixkit.react/components/_plugins/_lib-bootstrap';
-import '@uixkit.react/components/_plugins/_lib-icons';
-import TweenMax, { TimelineMax } from '@uixkit.react/components/_plugins/_lib-gsap';
+import '@poemkit/components/_plugins/_lib-bootstrap';
+import '@poemkit/components/_plugins/_lib-icons';
+import TweenMax, { TimelineMax } from '@poemkit/components/_plugins/_lib-gsap';
 
 /*-- Apply global scripts and styles --*/
-import '@uixkit.react/components/_utils/styles/_all.scss';
-import '@uixkit.react/components/_utils/styles/rtl/_all.scss';
-import { __ } from '@uixkit.react/components/_utils/_all';
+import '@poemkit/components/_utils/styles/_all.scss';
+import '@poemkit/components/_utils/styles/rtl/_all.scss';
+import { __ } from '@poemkit/components/_utils/_all';
 
 /*-- Apply this component styles --*/
-import '@uixkit.react/components/DropdownMenu/styles/_style.scss';
-import '@uixkit.react/components/DropdownMenu/styles/rtl/_style.scss';
+import '@poemkit/components/DropdownMenu/styles/_style.scss';
+import '@poemkit/components/DropdownMenu/styles/rtl/_style.scss';
 
 
 //
-import Option from '@uixkit.react/components/DropdownMenu/Option';
+import Option from '@poemkit/components/DropdownMenu/Option';
 
 type OptionChangeFnType = (arg1: any) => void;
 
@@ -76,7 +76,7 @@ export default class DropdownMenu extends Component<DropdownMenuProps, DropdownM
 
 	handleClose(e) {
 
-        if ( e.target.closest( '.uix-dropdown-menu' ) === null ) {
+        if ( e.target.closest( '.poemkit-dropdown-menu' ) === null ) {
             this.setState({
                 opened: false
             });
@@ -138,7 +138,7 @@ export default class DropdownMenu extends Component<DropdownMenuProps, DropdownM
         return (
             <>
 
-                <div className={"uix-dropdown-menu" + (this.state.opened ? ' is-opened' : '')} id={cid} onClick={this.handleClick}>
+                <div className={"poemkit-dropdown-menu" + (this.state.opened ? ' is-opened' : '')} id={cid} onClick={this.handleClick}>
                     <span>
                         {btnIcon || null}
                         <span>{selectedLabel}</span>

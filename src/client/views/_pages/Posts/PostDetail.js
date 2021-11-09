@@ -1,10 +1,52 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { __ } from '@uixkit.react/components/_utils/_all';
-import actionCreators from '@uixkit.react/actions/demoListDetailActions.js';
-import Footer from '@uixkit.react/components/Footer/index.tsx';
+import { __ } from '@poemkit/components/_utils/_all';
+import actionCreators from '@poemkit/actions/demoListDetailActions.js';
+import Footer from '@poemkit/components/Footer/index.tsx';
 
-import customRoutesConfig from '@uixkit.react/router/RoutesConfig.js';
+//
+let PAGE_TITLE = null;
+let SITE_NAME = null;
+
+//manage the document head
+import { Helmet } from "react-helmet";
+import siteInfo from '@poemkit/helpers/site-info.js';
+function SeoVars() {
+	const {siteName, baseURL, pageTitle} = siteInfo('/posts', 'posts-pagination');
+	// if the value of `pageTitle` is `{{pageTitle}}`, the value 
+	// of Redux store will be rendered asynchronously
+
+	PAGE_TITLE = pageTitle;
+	SITE_NAME = siteName;
+
+	return {
+		"siteName": siteName,
+		"baseURL": baseURL,
+		"imgURL": '',
+		"bodyClasses": 'page',
+		"pageTitle": '{{pageTitle}}',
+		"desc": '{{pageTitle}}'
+	}
+}
+
+function Seo() {
+	const {siteName, baseURL, imgURL, bodyClasses, pageTitle, desc} = SeoVars();
+	return (
+		<Helmet>
+			<html lang="en-US" dir="ltr" />
+			<title>{`${pageTitle} - ${siteName}`}</title>
+			<body class={`${bodyClasses}`} />
+			<meta name="description" content={`${desc}`}/>
+			<meta property="og:title" content={`${pageTitle} - ${siteName}`}/>
+			<meta property="og:url" content={`${baseURL}`}/>
+			<meta property="og:description" content={`${desc}`}/>
+			<meta property="og:type" content="website"/>
+			<meta property="og:site_name" content={`${siteName}`}/>
+			{imgURL === '' ? '' : <meta property="og:image" content={`${imgURL}`}/>}
+			<link rel="canonical" href={`${baseURL}`}/>
+		</Helmet>
+	)
+}
 
 class PostDetail extends Component {
 	constructor(props) {
@@ -133,12 +175,12 @@ class PostDetail extends Component {
 			isLoaded = true;
 
 
-			//change page title
+			//update page title
 			//------------------------------------------
-			if (typeof (document) !== 'undefined') {
+			if (typeof(document) !== 'undefined') {
 
-				// update page title
-				document.title = `${preloadedState[0].name} - ${customRoutesConfig[0].routes[0].pageTitle}`;
+				//update page title
+				document.title = `${preloadedState[0].name} - ${SITE_NAME}`;
 			}
 
 
@@ -150,13 +192,13 @@ class PostDetail extends Component {
 			<>
 
 
-				<main id="uix-maincontent">
+				<main id="poemkit-maincontent">
 
 					{/*
 					<!-- Content   
 					====================================================== -->	
 					*/}
-					<section className="uix-spacing--s">
+					<section className="poemkit-spacing--s">
 						<div className="container">
 							<div className="row">
 								<div className="col-12">
@@ -202,6 +244,7 @@ class PostDetail extends Component {
 
 
 				<Footer />
+				<Seo />
 
 			</>
 

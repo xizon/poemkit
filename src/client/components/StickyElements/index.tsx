@@ -6,22 +6,23 @@
 import React, { Component } from 'react';
 
 /*-- Apply Third-party plugins (import location should be in front of "global scripts and styles") --*/
-import '@uixkit.react/components/_plugins/_lib-bootstrap';
-import '@uixkit.react/components/_plugins/_lib-icons';
-import TweenMax, { TimelineMax } from '@uixkit.react/components/_plugins/_lib-gsap';
+import '@poemkit/components/_plugins/_lib-bootstrap';
+import '@poemkit/components/_plugins/_lib-icons';
+import TweenMax, { TimelineMax } from '@poemkit/components/_plugins/_lib-gsap';
 
 /*-- Apply global scripts and styles --*/
-import '@uixkit.react/components/_utils/styles/_all.scss';
-import '@uixkit.react/components/_utils/styles/rtl/_all.scss';
-import { __ } from '@uixkit.react/components/_utils/_all';
+import '@poemkit/components/_utils/styles/_all.scss';
+import '@poemkit/components/_utils/styles/rtl/_all.scss';
+import { __ } from '@poemkit/components/_utils/_all';
 
 
 //
-import { sticky } from '@uixkit.react/components/StickyElements/sticky';
+import { sticky } from '@poemkit/components/StickyElements/sticky';
 
 
 // Adapt the easing parameters of TweenMax
 enum EasingList {
+    linear = 'Linear.easeNone',
     easeIn = 'Power2.easeIn', 
     easeOut = 'Power2.easeOut', 
     easeInOut = 'Power2.easeInOut'
@@ -71,15 +72,15 @@ export default class Sticky extends Component<StickyProps, StickyState> {
         //------------------------------------------
         const $placeholder = document.querySelector( '[data-sticky-id="'+reactDomEl.dataset.stickyId+'"].is-placeholder' );
         const elStyle = window.getComputedStyle(reactDomEl);
-        const elOuterHeight = reactDomEl.offsetHeight + parseFloat( elStyle.marginTop ) + parseFloat( elStyle.marginBottom ); //element width + padding + borders + margin
+        const elOuterHeight = reactDomEl.offsetHeight + parseFloat( elStyle.marginTop ) + parseFloat( elStyle.marginBottom ); //including: padding + borders + v-scrollbars (if rendered) + margin
         ($placeholder as HTMLElement).style.height = elOuterHeight + 'px';
         
 
         //Get header height
         //------------------------------------------
-        const $headerContainer = document.querySelector( '.uix-header__container' );
+        const $headerContainer = document.querySelector( '.poemkit-header__container' );
         const headerContainerStyle = window.getComputedStyle($headerContainer as HTMLElement);
-        const headerContainerOuterHeight = ($headerContainer as HTMLElement).offsetHeight + parseFloat( headerContainerStyle.marginTop ) + parseFloat( headerContainerStyle.marginBottom ); ////element width + padding + borders + margin
+        const headerContainerOuterHeight = ($headerContainer as HTMLElement).offsetHeight + parseFloat( headerContainerStyle.marginTop ) + parseFloat( headerContainerStyle.marginBottom ); //including: padding + borders + v-scrollbars (if rendered) + margin
 
 
         //Scroll Spy
@@ -141,7 +142,7 @@ export default class Sticky extends Component<StickyProps, StickyState> {
                ref={this.rootRef}
                id={cid}
                data-sticky-id={cid + '-sticky'}
-               className="js-uix-sticky-el" 
+               className="js-poemkit-sticky-el" 
                data-stop-trigger={stopTrigger || false}
                data-stop-trigger-offset={stopTriggerOffset || 0}
                >

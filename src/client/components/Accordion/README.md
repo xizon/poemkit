@@ -1,6 +1,6 @@
-# @uixkit.react/components/Accordion
+# @poemkit/components/Accordion
 
-[Source](https://github.com/xizon/uix-kit-react/tree/main/src/client/components/Accordion)
+[Source](https://github.com/xizon/poemkit/tree/main/src/client/components/Accordion)
 
 ## Version
 
@@ -10,7 +10,7 @@
 
 ### Accordion
 ```js
-import { Accordion } from '@uixkit.react/components/Accordion/index.tsx';
+import { Accordion } from '@poemkit/components/Accordion/index.tsx';
 ```
 | Property | Type | Default | Description |
 | --- | --- | --- | --- |
@@ -22,14 +22,14 @@ import { Accordion } from '@uixkit.react/components/Accordion/index.tsx';
 
 ### Accordion Item
 ```js
-import { AccordionItem } from '@uixkit.react/components/Accordion/index.tsx';
+import { AccordionItem } from '@poemkit/components/Accordion/index.tsx';
 ```
 | Property | Type | Default | Description |
 | --- | --- | --- | --- |
 | `defaultActive` | boolean | false | Set an item to activate by default |
 | `title` | string | - | Set a title for each item |
 | `boxToggleEv` | function | - | Handling events for collapsing item |
-| `boxAnimEndEv` | function | - | Handling events when the animation execution is complete |
+| `elAnimEndEv` | function | - | Handling events when the animation execution is complete |
 | `triggerType` | `click` \| `mouseover`  | click | One event type |
 
 
@@ -38,7 +38,7 @@ import { AccordionItem } from '@uixkit.react/components/Accordion/index.tsx';
 
 ```js
 import React from 'react';
-import { Accordion, AccordionItem } from '@uixkit.react/components/Accordion/index.tsx';
+import { Accordion, AccordionItem } from '@poemkit/components/Accordion/index.tsx';
 
 export default () => {
   return (

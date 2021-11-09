@@ -1,6 +1,6 @@
-# @uixkit.react/components/Gallery
+# @poemkit/components/Gallery
 
-[Source](https://github.com/xizon/uix-kit-react/tree/main/src/client/components/Gallery)
+[Source](https://github.com/xizon/poemkit/tree/main/src/client/components/Gallery)
 
 ## Version
 
@@ -10,7 +10,7 @@
 
 ### Gallery
 ```js
-import Gallery from '@uixkit.react/components/Gallery/index.tsx';
+import Gallery from '@poemkit/components/Gallery/index.tsx';
 ```
 | Property | Type | Default | Description |
 | --- | --- | --- | --- |
@@ -32,7 +32,7 @@ Array configuration properties of the `data`:
 
 ```js
 import React from 'react';
-import Gallery from '@uixkit.react/components/Gallery/index.tsx';
+import Gallery from '@poemkit/components/Gallery/index.tsx';
 
 export default () => {
   return (

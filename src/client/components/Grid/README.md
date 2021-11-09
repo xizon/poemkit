@@ -1,6 +1,6 @@
-# @uixkit.react/components/Grid
+# @poemkit/components/Grid
 
-[Source](https://github.com/xizon/uix-kit-react/tree/main/src/client/components/Grid)
+[Source](https://github.com/xizon/poemkit/tree/main/src/client/components/Grid)
 
 ## Version
 
@@ -10,7 +10,7 @@
 
 ### Grid
 ```js
-import { Grid } from '@uixkit.react/components/Grid/index.tsx';
+import { Grid } from '@poemkit/components/Grid/index.tsx';
 ```
 | Property | Type | Default | Description |
 | --- | --- | --- | --- |
@@ -22,7 +22,7 @@ import { Grid } from '@uixkit.react/components/Grid/index.tsx';
 
 ### GridColumn
 ```js
-import { GridColumn } from '@uixkit.react/components/Grid/index.tsx';
+import { GridColumn } from '@poemkit/components/Grid/index.tsx';
 ```
 | Property | Type | Default | Description |
 | --- | --- | --- | --- |
@@ -38,14 +38,14 @@ import { GridColumn } from '@uixkit.react/components/Grid/index.tsx';
 
 ```js
 import React from 'react';
-import { Grid, GridColumn } from '@uixkit.react/components/Grid/index.tsx';
+import { Grid, GridColumn } from '@poemkit/components/Grid/index.tsx';
 
 export default () => {
   return (
     <>
 
 
-        <h3>Uix Grid</h3>
+        <h3>PoemKit Grid</h3>
         <p>
           It can be used for fluid layout for multiple projects and <strong>Bootstrap</strong> grid system. Its biggest feature is its support for <strong>loop</strong> lists.
         </p>
@@ -429,7 +429,7 @@ export default () => {
 
 
 
-        <h3>No Gutter Column For Uix Grid</h3>
+        <h3>No Gutter Column For PoemKit Grid</h3>
         <p>
           Set the <code>noGutters</code> attribute of <code>&lt;Grid&gt;</code> markup.<code>true</code> will remove all the columns spacing.
         </p>		
@@ -440,7 +440,7 @@ export default () => {
         </Grid>
 
 
-        <h3>Uix Grid (No line breaks)</h3>
+        <h3>PoemKit Grid (No line breaks)</h3>
         <p>
         Set the <code>noBreak</code> attribute of <code>&lt;Grid&gt;</code> markup.<code>true</code> will prevent the columns from automatically wrapping across multiple lines. <em>Please simulate mobile viewing after zooming out your viewport.</em> 
         </p>
@@ -486,7 +486,7 @@ export default () => {
           <div style={{ background: "blue", boxShadow: "inset 0px 0px 0px 1px rgba(0,0,0,.5)" }}>1/6</div>
         </GridColumn>
     
-        <div className="uix-clearfix"></div>
+        <div className="poemkit-clearfix"></div>
         
 
         <div className="text-center">
@@ -495,14 +495,14 @@ export default () => {
           </GridColumn>		
         </div>
 
-        <div className="uix-clearfix"></div>
+        <div className="poemkit-clearfix"></div>
 
 
         <GridColumn ratio="2/5" stackRatio="1/2" stackSize="md">
           <div style={{background:"green",boxShadow:"inset 0px 0px 0px 1px rgba(0,0,0,.5)"}}>2/5, The width becomes 50% on mobile.</div>
         </GridColumn>		
 
-        <div className="uix-clearfix"></div>
+        <div className="poemkit-clearfix"></div>
 
 
     </>

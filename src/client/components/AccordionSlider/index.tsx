@@ -3,5 +3,5 @@
  * <!-- Accordion Slider -->
  *************************************
  */
-export { default as AccordionSlider } from '@uixkit.react/components/AccordionSlider/AccordionSlider';
-export { default as AccordionSliderItem } from '@uixkit.react/components/AccordionSlider/AccordionSliderItem';
+export { default as AccordionSlider } from '@poemkit/components/AccordionSlider/AccordionSlider';
+export { default as AccordionSliderItem } from '@poemkit/components/AccordionSlider/AccordionSliderItem';
