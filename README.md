@@ -6,6 +6,7 @@
 	  <img src="https://raw.githubusercontent.com/xizon/poemkit/master/public/assets/images/logo-colorful.png"  alt="PoemKit"  width="180" >
   </a>
   <p align="center">
+	  <a href="https://app.travis-ci.com/github/xizon/poemkit" title="Travis CI"><img src="https://img.shields.io/travis/com/xizon/poemkit?style=for-the-badge"/></a>
 	  <a href="https://www.npmjs.com/package/poemkit" title="npm version"><img src="https://img.shields.io/npm/v/poemkit?style=for-the-badge"/></a>
 	  <a href="https://github.com/xizon/poemkit/blob/master/LICENSE" title="license"><img src="https://img.shields.io/badge/license-MIT-brightgreen.svg?style=for-the-badge"/></a>
 	   
