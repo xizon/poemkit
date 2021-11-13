@@ -18,7 +18,7 @@
 
 A free web kits with React for fast web design and development via SSR. Using react, redux, router, axios and express. This project was bootstrapped with nodejs library. Project supports automatic deployments from a number of repository hosting services via pm2. PoemKit delivers more than 50+ built-in UI components for building modern web applications.
 
-
+**PoemKit can work and deploy through commands, it still requires real code to be written behind them.** These kits serve as UI components and some logic modules that can be put together into a real website or application prototype that will still require programming functions to make them work in the real world.
 
 ---
 
@@ -596,7 +596,7 @@ Finding bugs, sending pull requests or improving our docs - any contribution is 
 
 ## Browser Support
 
-| ![Chrome](https://raw.github.com/alrra/browser-logos/master/src/chrome/chrome_48x48.png) | ![Firefox](https://raw.github.com/alrra/browser-logos/master/src/firefox/firefox_48x48.png) | ![Edge](https://raw.github.com/alrra/browser-logos/master/src/edge/edge_48x48.png) | ![IE](https://raw.github.com/alrra/browser-logos/master/src/archive/internet-explorer_9-11/internet-explorer_9-11_48x48.png) | ![Safari](https://raw.github.com/alrra/browser-logos/master/src/safari/safari_48x48.png) | ![Opera](https://raw.github.com/alrra/browser-logos/master/src/opera/opera_48x48.png) | iOS  | Android
+| Chrome | Firefox | Edge | IE| Safari |Opera | iOS  | Android
 | --- | --- | --- | --- | --- | --- | --- | --- |
 | >= 49 | >= 45 | >=14 | >=11 | >= 9 | >= 30 | >=10 | >=4.4 |
 

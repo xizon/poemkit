@@ -18,7 +18,7 @@
 
 PoemKit系一套免费的网站开发工具包，帮助开发者从零建立一个支持服务端渲染(SSR)的React技术网站，它支持pm2自动部署到服务器。PoemKit提供了50多个内置UI组件，用于构建现代Web应用程序。
 
-
+**PoemKit可以直接通过命令工作和部署到云服务器, 但仍然需要在其背后编写真正的代码。** 这些工具包作为UI组件和逻辑模块，可以组合成一个真正的应用程序原型。它仍然需要编程功能才能使它们在实际需求中工作。
 
 ---
 
@@ -579,7 +579,7 @@ poemkit/
 
 ## 兼容性
 
-| ![Chrome](https://raw.github.com/alrra/browser-logos/master/src/chrome/chrome_48x48.png) | ![Firefox](https://raw.github.com/alrra/browser-logos/master/src/firefox/firefox_48x48.png) | ![Edge](https://raw.github.com/alrra/browser-logos/master/src/edge/edge_48x48.png) | ![IE](https://raw.github.com/alrra/browser-logos/master/src/archive/internet-explorer_9-11/internet-explorer_9-11_48x48.png) | ![Safari](https://raw.github.com/alrra/browser-logos/master/src/safari/safari_48x48.png) | ![Opera](https://raw.github.com/alrra/browser-logos/master/src/opera/opera_48x48.png) | iOS  | Android
+| Chrome | Firefox | Edge | IE| Safari |Opera | iOS  | Android
 | --- | --- | --- | --- | --- | --- | --- | --- |
 | >= 49 | >= 45 | >=14 | >=11 | >= 9 | >= 30 | >=10 | >=4.4 |
 
