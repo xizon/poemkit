@@ -3,7 +3,7 @@
 
 <p align="center">
   <a href="https://github.com/xizon/poemkit">
-	  <img src="https://raw.githubusercontent.com/xizon/poemkit/master/public/assets/images/logo-colorful.png"  alt="PoemKit"  width="180" >
+	  <img src="public/assets/images/logo-colorful.png"  alt="PoemKit"  width="180" >
   </a>
   <p align="center">
 	  <a href="https://app.travis-ci.com/github/xizon/poemkit" title="Travis CI"><img src="https://img.shields.io/travis/com/xizon/poemkit?style=for-the-badge"/></a>
@@ -31,7 +31,7 @@ A free web kits with React for fast web design and development via SSR. Using re
 
 ## Demo
 
-![quick overview 1](https://raw.githubusercontent.com/xizon/poemkit/master/public/assets/images/demo-anim.gif)
+![quick overview 1](public/assets/images/demo-anim.gif)
 
 For online demo, please checkout [https://uiux.cc/poemkit](https://uiux.cc/poemkit)
 
