@@ -1,6 +1,23 @@
 # Changelog
 
 
+#### = 0.1.6 (November 23, 2021) =
+
+* Fix: Fixed Rendering breakpoint bug(s) in different resolutions.
+* Tweak: Optimized the performance of the component Modal Dialog.
+* Tweak: Separate the styles of some components to make each component more clear.
+* Tweak: Naming check of some components.
+* Tweak: Adjusts ES modules tree shaking by default for JS part.
+* New: Add new UI components `ContentPlaceholder`.
+* New: Add new UI components `Tooltip`.
+* New: Add new UI components `ListBulleted`.
+* New: Add new UI components `ImagePerspectiveHover`.
+* New: Add vertical layout of navigation component.
+* New: Add a form type of Tag Input.
+* New: Add image transition animation to Scroll Reveal component.
+
+
+
 #### = 0.1.5 (November 8, 2021) =
 
 * New: Added Site Address (URL) configuration of the `./src/config/websiteConfig.js` for SEO.

@@ -3,8 +3,8 @@
  * Core Helpers
  *
  * @package: poemkit
- * @version: 0.41
- * @last update: October 30, 2021
+ * @version: 0.42
+ * @last update: November 22, 2021
  * @author: UIUX Lab <uiuxlab@gmail.com>
  * @license: MIT
  *
@@ -120,7 +120,7 @@ __( document ).ready( function() {
 			__( '.menu li' ).eq(1).append( htmlObject.firstChild );
 
 			//clone HTML Element
-			const cloneHTML = __( '.poemkit-menu__container' ).clone();
+			const cloneHTML = __( '.uix-menu__container' ).clone();
 			__( cloneHTML ).addClass( 'is-mobile' );
 			__( 'body' ).prependTo( cloneHTML );
 			__( 'body' ).appendTo( cloneHTML );
@@ -1313,7 +1313,7 @@ const __ = (function () {
 	 *
 	 * @param  {Function} fn    - A function to be executed within the time limit.
 	 * @param  {Number} limit   - Waiting time.
-	 * @return {Void}    
+	 * @return {Function}       - Returns a new function.
 	 */  
 	__.throttle = function( fn, limit = 300 ) {
 		let waiting = false;                     
@@ -1335,7 +1335,7 @@ const __ = (function () {
 	 *
 	 * @param  {Function} fn    - A function to be executed within the time limit.
 	 * @param  {Number} limit   - Waiting time.
-	 * @return {Void}    
+	 * @return {Function}       - Returns a new function.
 	 */  
 	__.debounce = function( fn, limit = 300 ) {
 		let timer;
@@ -3512,7 +3512,6 @@ const __ = (function () {
 	
     return __;
 })();
-
 
 export default __;
 

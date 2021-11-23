@@ -5,10 +5,9 @@
  */
 import React, { Component } from 'react';
 
-/*-- Apply Third-party plugins (import location should be in front of "global scripts and styles") --*/
+/*-- Apply Third-party plugins (import location should be in front of "GLOBAL STYLES") --*/
 import '@poemkit/components/_plugins/_lib-bootstrap';
 import '@poemkit/components/_plugins/_lib-icons';
-import TweenMax, { TimelineMax } from '@poemkit/components/_plugins/_lib-gsap';
 
 /*-- Apply global scripts and styles --*/
 import '@poemkit/components/_utils/styles/_all.scss';
@@ -19,8 +18,11 @@ import { __ } from '@poemkit/components/_utils/_all';
 import '@poemkit/components/ModalDialog/styles/_style.scss';
 import '@poemkit/components/ModalDialog/styles/rtl/_style.scss';
 
+/*-- Apply Third-party animation plugins --*/
+import TweenMax from '@poemkit/components/_plugins/_lib-gsap';
 
-//Enables body scroll locking
+
+//Destroys body scroll locking
 import { clearAllBodyScrollLocks } from '@poemkit/components/_plugins/_lib-scrolllock';
 
 // 
@@ -30,6 +32,7 @@ import { closeModalDialog } from '@poemkit/components/ModalDialog/close-modal-di
 declare global {
     interface Window {
         curVideo?: any;
+        setCloseModalDialog?: any;
     }
 }
 
@@ -337,6 +340,9 @@ export default class ModalDialog extends Component<ModalDialogProps, ModalDialog
 
 		// Kill all aniamtions
 		TweenMax.killAll();  
+
+        // Cancels a timeout previously established by calling setTimeout().
+        clearTimeout( window.setCloseModalDialog );	
 
 
     }

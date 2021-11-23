@@ -40,7 +40,7 @@ export default class SlideshowItem extends Component<SlideshowItemProps, Slidesh
                 )}
 
                 <div className="poemkit-slideshow__txt">
-                    <div className="poemkit-core-grid__col-7">
+                    <div>
                         {children}
                     </div>
                 </div>

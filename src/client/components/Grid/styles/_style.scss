@@ -1,0 +1,309 @@
+/* ======================================================
+   <!-- Grid -->
+/* ====================================================== */
+@import '@poemkit/components/_utils/styles/_variable-and-mixin.scss';
+
+//Width property that can be used independently
+//It can be used for Inline Elements
+[class*='poemkit-core-grid__col-'] {
+	box-sizing: border-box;
+    float: left;
+	position: relative;
+}
+
+.poemkit-core-grid__inline {
+	float: none;
+	display: inline-block;
+}
+
+
+.poemkit-core-grid__col-1 {
+	width: 8.333333333333%;
+}
+
+.poemkit-core-grid__col-2 {
+	width: 16.66666666666667%;
+}
+
+.poemkit-core-grid__col-3 {
+	width: 25%;
+}
+
+.poemkit-core-grid__col-4 {
+	width: 33.333333333333%;
+}
+
+
+.poemkit-core-grid__col-5 {
+	width: 41.666666666667%;
+}
+
+.poemkit-core-grid__col-6 {
+	width: 50%;
+}
+
+.poemkit-core-grid__col-7 {
+	width: 58.333333333333%;
+}
+
+.poemkit-core-grid__col-8 {
+	width: 66.666666666667%;
+}
+
+.poemkit-core-grid__col-9 {
+	width: 75%;
+}
+
+.poemkit-core-grid__col-10 {
+	width: 83.333333333333%;
+}
+
+
+.poemkit-core-grid__col-11 {
+	width: 91.666666666667%;
+}
+
+.poemkit-core-grid__col-12 {
+	width: 100%;
+}
+
+@media all and (max-width: 768px) {
+	.poemkit-core-grid__mobile-half {
+		width: 50%;
+	}
+	.poemkit-core-grid__mobile-stack {
+		width: 100%;
+	}
+}
+
+
+
+
+@mixin poemkitCoreGridGenerate( $classname: '.poemkit-core-grid', $pad: 15px ) {
+	// @include poemkitCoreGridGenerate( '.poemkit-core-grid', 15px );
+
+    @if ( $classname != '' ) {
+		#{$classname} {
+			width: 100%;
+
+			.poemkit-core-grid__row {
+
+				width: calc( 100% + #{$pad} );
+
+				&::after {
+					/* Or @extend .poemkit-clearfix */
+					content: "";
+					display: table;
+					clear: both;
+				}
+
+
+			    [class*='poemkit-core-grid__col-'] {
+					> div {
+						word-wrap: break-word;
+						position: relative;
+					}	
+				}
+
+				
+				&.poemkit-core-grid__row--no-gutters {
+
+					width: 100%;
+
+					[class*='poemkit-core-grid__col-'] {
+						padding-right: 0 !important;
+					}
+
+				}	
+				
+				
+				/* Auto width, for automatic widths such as 5 columns */
+				&.poemkit-core-grid__row--auto-width {
+					
+					display: flex;
+					flex-wrap: wrap;
+					
+					.poemkit-core-grid__col {
+						flex: 1;
+						padding-right: #{$pad};
+					}		
+					
+
+				}
+				&.poemkit-core-grid__row--auto-width.poemkit-core-grid__row--no-gutters {
+					.poemkit-core-grid__col {
+						padding-right: 0;
+					}		
+					
+				}
+
+			}
+			
+			
+			//Common style attribute
+			[class*='poemkit-core-grid__col-'] {
+				padding-right: #{$pad};
+
+				.poemkit-core-grid__row &:last-of-type {
+					padding-right: 0;
+
+					[class*='poemkit-core-grid__col-'] {
+						> div {
+							width: calc(100% - #{$pad}); 
+						}	
+					}
+
+
+				}
+
+			}
+
+			.poemkit-core-grid__row.poemkit-core-grid__row--loop .poemkit-core-grid__col-6:nth-child(2n+1),
+			.poemkit-core-grid__row.poemkit-core-grid__row--loop .poemkit-core-grid__col-4:nth-child(3n+1),
+			.poemkit-core-grid__row.poemkit-core-grid__row--loop .poemkit-core-grid__col-3:nth-child(4n+1),
+			.poemkit-core-grid__row.poemkit-core-grid__row--loop .poemkit-core-grid__col-2:nth-child(6n+1) {
+				clear: both;
+			}
+
+
+
+		}
+
+		
+
+
+		@media all and (max-width: 768px) {
+
+			#{$classname} {
+				
+				
+				.poemkit-core-grid__row {
+					/* Auto width, for automatic widths such as 5 columns */
+					&.poemkit-core-grid__row--auto-width {
+						display: block;		
+					}	
+
+					&.poemkit-core-grid__row--auto-width.poemkit-core-grid__row--no-gutters {
+						.poemkit-core-grid__col {
+							padding-right: #{$pad};
+						}		
+
+					}	
+					
+					
+				}
+				
+				.poemkit-core-grid__row.poemkit-core-grid__row--no-break {
+					/* Auto width, for automatic widths such as 5 columns */
+					&.poemkit-core-grid__row--auto-width {
+						display: flex;	
+						
+					}			
+					
+				}		
+
+				.poemkit-core-grid__row:not(.poemkit-core-grid__row--no-break) {
+					&.poemkit-core-grid__row--no-gutters {
+						width: calc(100% + #{$pad});
+					}	
+					
+					[class*='poemkit-core-grid__col-'] {
+						float: none;
+						width: calc(100% - #{$pad});
+						padding-left: 0;
+						padding-right: 0;
+
+
+					}
+
+					
+				}
+
+
+
+
+			}
+			
+			
+
+		}
+
+
+
+
+
+	}
+	
+	
+}
+
+
+@mixin poemkitCoreGridColumnBreakpoint( $classname: '.poemkit-core-grid', $pad: 15px, $size: 'md', $breakpoint: 768px ) {
+    @if ( $classname != '' and $size != '' and $breakpoint != '' ) {
+        #{$classname} {
+            @media all and (max-width: #{$breakpoint}) {
+
+                .poemkit-core-grid__col-3--#{$size},
+                .poemkit-core-grid__col-4--#{$size},
+                .poemkit-core-grid__col-6--#{$size} {
+                    float: left !important;
+                    padding-right: #{$pad} !important;
+                }
+                
+                .poemkit-core-grid__col-3--#{$size} {
+                    width: 25% !important;
+                }
+                
+                .poemkit-core-grid__col-4--#{$size} {
+                    width: 33.333333333333% !important;
+                }
+                
+                .poemkit-core-grid__col-6--#{$size} {
+                    width: 50% !important;
+                }
+                
+                .poemkit-core-grid__row--no-gutters {
+                    .poemkit-core-grid__col-3--#{$size} {
+                        width: calc(25% - #{$pad/4}) !important;
+                    }
+                    .poemkit-core-grid__col-4--#{$size} {
+                        width: calc(33.333333333333% - #{$pad/3}) !important;
+                    }
+                    .poemkit-core-grid__col-6--#{$size} {
+                        width: calc(50% - #{$pad/2}) !important;
+                    }
+                }
+
+                .poemkit-core-grid__row--loop {
+                    .poemkit-core-grid__col-3--#{$size}:nth-child(4n+1),
+                    .poemkit-core-grid__col-4--#{$size}:nth-child(3n+1),
+                    .poemkit-core-grid__col-6--#{$size}:nth-child(2n+1) {
+                        clear: both;
+                    }
+                }
+
+
+            }
+
+        }
+
+    }
+}
+
+
+
+@include poemkitCoreGridGenerate( '.poemkit-core-grid', 15px );
+
+
+/* The breakpoint is the same as bootstrap 4 */
+/*
+--breakpoint-xs:0;
+--breakpoint-sm:576px;
+--breakpoint-md:768px;
+--breakpoint-lg:992px;
+--breakpoint-xl:1200px;
+*/
+@include poemkitCoreGridColumnBreakpoint( '.poemkit-core-grid', 15px, 'sm', '576px' );	
+@include poemkitCoreGridColumnBreakpoint( '.poemkit-core-grid', 15px, 'md', '768px' );	
+@include poemkitCoreGridColumnBreakpoint( '.poemkit-core-grid', 15px, 'lg', '992px' );	
+@include poemkitCoreGridColumnBreakpoint( '.poemkit-core-grid', 15px, 'xl', '1200px' );	

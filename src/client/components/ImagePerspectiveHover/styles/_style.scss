@@ -1,0 +1,21 @@
+/* ======================================================
+   <!-- Image Perspective Hover -->
+/* ====================================================== */
+@import '@poemkit/components/_utils/styles/_variable-and-mixin.scss';
+
+
+.poemkit-perspective-hover {
+
+	/* Require more than 500, compatible firefox height */
+	perspective: 700px;
+
+	> div {
+		display: inline-block;
+		@include transition-default(); 
+	}
+
+	img {
+		@include transition-default(); 
+	}
+
+}

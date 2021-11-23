@@ -1,10 +1,9 @@
 import React, { Component } from 'react';
 
 
-/*-- Apply Third-party plugins (import location should be in front of "global scripts and styles") --*/
+/*-- Apply Third-party plugins (import location should be in front of "GLOBAL STYLES") --*/
 import '@poemkit/components/_plugins/_lib-bootstrap';
 import '@poemkit/components/_plugins/_lib-icons';
-import TweenMax, { TimelineMax } from '@poemkit/components/_plugins/_lib-gsap';
 
 /*-- Apply global scripts and styles --*/
 import '@poemkit/components/_utils/styles/_all.scss';
@@ -30,6 +29,7 @@ type MergeInputProps = {
 	maxLength?: any;
 	disabled?: any;
 	required?: any;
+	placeholder?: string;
 	icon?: object;
 	/** -- */
 	id?: string;
@@ -79,6 +79,7 @@ export default class MergeInput extends Component<MergeInputProps, MergeInputSta
 			icon,
 			disabled,
 			required,
+			placeholder,
 			value,
 			label,
 			name,
@@ -104,10 +105,10 @@ export default class MergeInput extends Component<MergeInputProps, MergeInputSta
 				<div className={"poemkit-controls__merge" + wrapperClassDisabled + wrapperClassIcon+ wrapperClassUi}>
 			      {icon || null}
 				  <input 
-			          className={(value && value.length > 0 ? 'is-active' : '')}
 					  type={typeRes} 
 			          id={idRes}
 					  name={nameRes}
+					  placeholder={placeholder || ''}
 					  defaultValue={value || ''}
 					  maxLength={maxLength || null}
 			          disabled={disabled || null}

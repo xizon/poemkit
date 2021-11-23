@@ -1,0 +1,133 @@
+/* ======================================================
+   <!-- Content Placeholder -->
+/* ====================================================== */
+@import '@poemkit/components/_utils/styles/_variable-and-mixin.scss';
+
+
+$poemkit-content-placeholder-w: 100%;
+
+.poemkit-content-placeholder {
+	width: 100%;
+
+	&::after {
+		content: '';
+		display: block;
+		clear: both;
+	}
+
+	ul {
+		list-style: none;
+		padding: 0;
+		margin: 0;
+	}
+	li {
+		overflow: hidden;
+		padding: 15px 0;
+		margin: 0;
+		border: 0;
+		background: 0;
+	}
+
+	.poemkit-content-placeholder__line {
+		height: 8px;
+		background-color: rgba(85,102,119,.1);
+	}
+	.poemkit-content-placeholder__line--first {
+		width: 100%;
+		animation: poemkit-cssAnim--firstline 1s infinite linear;
+	}
+	.poemkit-content-placeholder__line--second {
+		margin-top: 8px;
+		width: #{$poemkit-content-placeholder-w - 30%};
+		animation: poemkit-cssAnim--secondline 1s infinite linear;
+	}
+	.poemkit-content-placeholder__thumbSlot {
+		width: 80px;
+		height: 60px;
+		float: left;
+		background-color: rgba(85,102,119,.1);
+		animation: poemkit-cssAnim--thumb 1s infinite linear;
+
+		~ .poemkit-content-placeholder__textSlot {
+			width: calc(#{$poemkit-content-placeholder-w} - 100px);
+			margin-left: 20px;
+			float: left;
+		}
+
+	}
+	.poemkit-content-placeholder__textSlot {
+		width: #{$poemkit-content-placeholder-w};
+		margin-top: 2px;
+
+		~ .poemkit-content-placeholder__thumbSlot {
+			width: #{$poemkit-content-placeholder-w};
+			margin-top: 10px;
+		}
+	}
+
+
+	.uix-content-placeholder__view--aspectRatio {
+		.poemkit-content-placeholder__thumbSlot {
+			animation: poemkit-cssAnim--fullImg 2.5s ease-in-out infinite;
+			background-image:linear-gradient(90deg,rgba(85,102,119,.1),rgba(255,255,255,.1) 15%,rgba(85,102,119,.1) 30%);
+			background-color: rgba(85,102,119,0);
+			background-size: 450px 100%;
+			float: none;
+			/* Maintain Aspect Ratio 1:1*/
+			width: 100%;
+			padding-top: 100%;
+			/* 1:1 Aspect Ratio */
+			position: relative;
+			/* If you want text inside of it */
+		}
+	}
+
+}
+
+
+
+@keyframes poemkit-cssAnim--firstline {
+	from {
+		box-shadow: inset 0 0 0 rgba(255, 255, 255, 0.3);
+	}
+
+	to {
+		box-shadow: inset 200px 0 0 rgba(255, 255, 255, 0.3);
+	}
+}
+
+
+@keyframes poemkit-cssAnim--secondline {
+	from {
+		box-shadow: inset 0 0 0 rgba(255, 255, 255, 0.3);
+	}
+
+	to {
+		box-shadow: inset 150px 0 0 rgba(255, 255, 255, 0.3);
+	}
+}
+
+
+
+@keyframes poemkit-cssAnim--thumb {
+	from {
+		box-shadow: inset 0 0 0 rgba(255, 255, 255, 0.3);
+	}
+
+	to {
+		box-shadow: inset 80px 0 0 rgba(255, 255, 255, 0.3);
+	}
+}
+
+
+@keyframes poemkit-cssAnim--fullImg {
+	0% {
+		background-position: -150px 0;
+	}
+	50% {
+		background-position: 300px 0;
+	}
+	to {
+		background-position: 300px 0;
+	}
+}

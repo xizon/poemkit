@@ -6,9 +6,9 @@
  * ## Project Name        :  PoemKit
  * ## Project Description :  A free web kits with React for fast web design and development via SSR.
  * ## Project URL         :  https://uiux.cc
- * ## Version             :  0.1.5
+ * ## Version             :  0.1.6
  * ## Based on            :  PoemKit (https://github.com/xizon/poemkit#readme)
- * ## Last Update         :  November 10, 2021
+ * ## Last Update         :  November 23, 2021
  * ## Created by          :  UIUX Lab (https://uiux.cc) (uiuxlab@gmail.com)
  * ## Released under the MIT license.
  *
@@ -31733,8 +31733,8 @@ function _readOnlyError(name) {
  * Core Helpers
  *
  * @package: poemkit
- * @version: 0.41
- * @last update: October 30, 2021
+ * @version: 0.42
+ * @last update: November 22, 2021
  * @author: UIUX Lab <uiuxlab@gmail.com>
  * @license: MIT
  *
@@ -31851,7 +31851,7 @@ __( document ).ready( function() {
 			__( '.menu li' ).eq(1).append( htmlObject.firstChild );
 
 			//clone HTML Element
-			const cloneHTML = __( '.poemkit-menu__container' ).clone();
+			const cloneHTML = __( '.uix-menu__container' ).clone();
 			__( cloneHTML ).addClass( 'is-mobile' );
 			__( 'body' ).prependTo( cloneHTML );
 			__( 'body' ).appendTo( cloneHTML );
@@ -32925,7 +32925,7 @@ var __ = function () {
    *
    * @param  {Function} fn    - A function to be executed within the time limit.
    * @param  {Number} limit   - Waiting time.
-   * @return {Void}    
+   * @return {Function}       - Returns a new function.
    */
 
 
@@ -32947,7 +32947,7 @@ var __ = function () {
    *
    * @param  {Function} fn    - A function to be executed within the time limit.
    * @param  {Number} limit   - Waiting time.
-   * @return {Void}    
+   * @return {Function}       - Returns a new function.
    */
 
 
@@ -43160,6 +43160,8 @@ function _isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Re
 
 
 
+/*-- Apply Third-party animation plugins --*/
+
 
 /* Recursively nested components to traverse nodes
 -------------------------------------------------*/
@@ -43556,8 +43558,7 @@ function Navigation_isNativeReflectConstruct() { if (typeof Reflect === "undefin
  *************************************
  */
 
-/*-- Apply Third-party plugins (import location should be in front of "global scripts and styles") --*/
-
+/*-- Apply Third-party plugins (import location should be in front of "GLOBAL STYLES") --*/
 
 
 
@@ -43565,7 +43566,10 @@ function Navigation_isNativeReflectConstruct() { if (typeof Reflect === "undefin
 
 
 
+
 /*-- Apply this component styles --*/
+
+
 
 
 
@@ -43679,9 +43683,12 @@ var Navigation = /*#__PURE__*/function (_Component) {
           tools = _this$props.tools,
           mobileLogo = _this$props.mobileLogo,
           label = _this$props.label,
-          displayMobileNav = _this$props.displayMobileNav;
+          displayMobileNav = _this$props.displayMobileNav,
+          direction = _this$props.direction;
+      var navClassName = direction === 'vertical' ? 'poemkit-v-menu__container' : 'poemkit-menu__container';
+      if (mobileEnabled) navClassName = 'poemkit-menu__container';
       return /*#__PURE__*/react.createElement(react.Fragment, null, /*#__PURE__*/react.createElement("nav", {
-        className: mobileEnabled ? 'poemkit-menu__container is-mobile' : 'poemkit-menu__container',
+        className: mobileEnabled ? "".concat(navClassName, " is-mobile") : "".concat(navClassName),
         ref: function ref(node) {
           if (node) {
             if (position === 'left') node.style.setProperty("float", "left", "important");
@@ -43697,7 +43704,8 @@ var Navigation = /*#__PURE__*/function (_Component) {
         alt: label
       }))) : '', /*#__PURE__*/react.createElement(MenuList, {
         menuListData: data,
-        mobile: mobileEnabled
+        mobile: mobileEnabled,
+        dir: direction
       }), tools ? /*#__PURE__*/react.createElement(react.Fragment, null, /*#__PURE__*/react.createElement("div", {
         className: "poemkit-menu__right-box"
       }, tools)) : '')));
@@ -43741,12 +43749,12 @@ function Header_isNativeReflectConstruct() { if (typeof Reflect === "undefined" 
  *************************************
  */
 
-/*-- Apply Third-party plugins (import location should be in front of "global scripts and styles") --*/
-
+/*-- Apply Third-party plugins (import location should be in front of "GLOBAL STYLES") --*/
 
 
 
 /*-- Apply global scripts and styles --*/
+
 
 
 
@@ -44287,12 +44295,12 @@ function Footer_isNativeReflectConstruct() { if (typeof Reflect === "undefined" 
  *************************************
  */
 
-/*-- Apply Third-party plugins (import location should be in front of "global scripts and styles") --*/
-
+/*-- Apply Third-party plugins (import location should be in front of "GLOBAL STYLES") --*/
 
 
 
 /*-- Apply global scripts and styles --*/
+
 
 
 
@@ -45394,7 +45402,9 @@ function Seo() {
   }, /*#__PURE__*/react.createElement("img", {
     src: "".concat(websiteConfig.rootDirectory, "/assets/images/logo-colorful.png"),
     alt: "PoemKit"
-  }), /*#__PURE__*/react.createElement("p", null, "A free web kits with React for fast web design and development via SSR. Using react, redux, router, axios and express. This project was bootstrapped with nodejs library. Project supports automatic deployments from a number of repository hosting services via pm2. PoemKit delivers more than 50+ built-in UI components for building modern web applications."), /*#__PURE__*/react.createElement("p", null, /*#__PURE__*/react.createElement(NavLink, {
+  }), /*#__PURE__*/react.createElement("p", null, "A free web kits with React for fast web design and development via SSR. Using react, redux, router, axios and express. This project was bootstrapped with nodejs library. Project supports automatic deployments from a number of repository hosting services via pm2. PoemKit delivers more than ", /*#__PURE__*/react.createElement("strong", {
+    className: "poemkit-typo--color-highlight"
+  }, "50+"), " built-in UI components for building modern web applications."), /*#__PURE__*/react.createElement("p", null, /*#__PURE__*/react.createElement(NavLink, {
     "data-route": "true",
     to: "/components-demo",
     style: {
@@ -46314,12 +46324,12 @@ function Pagination_isNativeReflectConstruct() { if (typeof Reflect === "undefin
  *************************************
  */
 
-/*-- Apply Third-party plugins (import location should be in front of "global scripts and styles") --*/
-
+/*-- Apply Third-party plugins (import location should be in front of "GLOBAL STYLES") --*/
 
 
 
 /*-- Apply global scripts and styles --*/
+
 
 
 
@@ -47760,12 +47770,12 @@ function Accordion_createSuper(Derived) { var hasNativeReflectConstruct = Accord
 function Accordion_isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Reflect.construct) return false; if (Reflect.construct.sham) return false; if (typeof Proxy === "function") return true; try { Boolean.prototype.valueOf.call(Reflect.construct(Boolean, [], function () {})); return true; } catch (e) { return false; } }
 
 
-/*-- Apply Third-party plugins (import location should be in front of "global scripts and styles") --*/
-
+/*-- Apply Third-party plugins (import location should be in front of "GLOBAL STYLES") --*/
 
 
 
 /*-- Apply global scripts and styles --*/
+
 
 
 
@@ -48144,12 +48154,12 @@ function AccordionSlider_createSuper(Derived) { var hasNativeReflectConstruct = 
 function AccordionSlider_isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Reflect.construct) return false; if (Reflect.construct.sham) return false; if (typeof Proxy === "function") return true; try { Boolean.prototype.valueOf.call(Reflect.construct(Boolean, [], function () {})); return true; } catch (e) { return false; } }
 
 
-/*-- Apply Third-party plugins (import location should be in front of "global scripts and styles") --*/
-
+/*-- Apply Third-party plugins (import location should be in front of "GLOBAL STYLES") --*/
 
 
 
 /*-- Apply global scripts and styles --*/
+
 
 
 
@@ -48574,12 +48584,12 @@ function Button_createSuper(Derived) { var hasNativeReflectConstruct = Button_is
 function Button_isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Reflect.construct) return false; if (Reflect.construct.sham) return false; if (typeof Proxy === "function") return true; try { Boolean.prototype.valueOf.call(Reflect.construct(Boolean, [], function () {})); return true; } catch (e) { return false; } }
 
 
-/*-- Apply Third-party plugins (import location should be in front of "global scripts and styles") --*/
-
+/*-- Apply Third-party plugins (import location should be in front of "GLOBAL STYLES") --*/
 
 
 
 /*-- Apply global scripts and styles --*/
+
 
 
 
@@ -49534,8 +49544,7 @@ function BackToTop_isNativeReflectConstruct() { if (typeof Reflect === "undefine
  *************************************
  */
 
-/*-- Apply Third-party plugins (import location should be in front of "global scripts and styles") --*/
-
+/*-- Apply Third-party plugins (import location should be in front of "GLOBAL STYLES") --*/
 
 
 
@@ -49545,6 +49554,9 @@ function BackToTop_isNativeReflectConstruct() { if (typeof Reflect === "undefine
 
 
 /*-- Apply this component styles --*/
+
+
+/*-- Apply Third-party animation plugins --*/
 
  // Adapt the easing parameters of TweenMax
 
@@ -49788,12 +49800,12 @@ function Card_isNativeReflectConstruct() { if (typeof Reflect === "undefined" ||
  *************************************
  */
 
-/*-- Apply Third-party plugins (import location should be in front of "global scripts and styles") --*/
-
+/*-- Apply Third-party plugins (import location should be in front of "GLOBAL STYLES") --*/
 
 
 
 /*-- Apply global scripts and styles --*/
+
 
 
 
@@ -49959,7 +49971,7 @@ var Card = /*#__PURE__*/function (_Component) {
             className: "poemkit-card--gallery",
             role: "figure"
           }, /*#__PURE__*/react.createElement("div", {
-            className: "poemkit-card--gallery__preview poemkit-core-grid__col-12 poemkit-core-grid__mobile-stack"
+            className: "poemkit-card--gallery__preview"
           }, /*#__PURE__*/react.createElement("img", {
             src: _bgConfig.src,
             alt: ""
@@ -49978,7 +49990,7 @@ var Card = /*#__PURE__*/function (_Component) {
             className: "poemkit-card--gallery poemkit-card--gallery--horizontal",
             role: "figure"
           }, /*#__PURE__*/react.createElement("div", {
-            className: "poemkit-card--gallery__preview poemkit-core-grid__col-".concat(_contentRatio, " poemkit-core-grid__mobile-stack"),
+            className: "poemkit-card--gallery__preview poemkit-card--gallery__grid__col-".concat(_contentRatio, " poemkit-card--gallery__preview--mobile-stack"),
             style: _bgStyles
           }, /*#__PURE__*/react.createElement("img", {
             src: _bgConfig.src,
@@ -49998,12 +50010,12 @@ var Card = /*#__PURE__*/function (_Component) {
             className: "poemkit-card--gallery poemkit-card--gallery--overlay",
             role: "figure"
           }, /*#__PURE__*/react.createElement("div", {
-            className: "poemkit-card--gallery__preview poemkit-core-grid__col-12 poemkit-core-grid__mobile-stack"
+            className: "poemkit-card--gallery__preview"
           }, /*#__PURE__*/react.createElement("img", {
             src: _bgConfig.src,
             alt: ""
           })), /*#__PURE__*/react.createElement("div", {
-            className: "poemkit-card--gallery__body ".concat(verticalCenter ? 'poemkit-card--gallery__body--verticalCenter' : '', " poemkit-core-grid__col-").concat(_contentRatio, " poemkit-core-grid__mobile-stack")
+            className: "poemkit-card--gallery__body ".concat(verticalCenter ? 'poemkit-card--gallery__body--verticalCenter' : '', " poemkit-card--gallery__grid__col-").concat(_contentRatio, " poemkit-card--gallery__preview--mobile-stack")
           }, /*#__PURE__*/react.createElement("div", {
             className: "poemkit-card--gallery__header"
           }, /*#__PURE__*/react.createElement("div", {
@@ -51005,12 +51017,12 @@ function Counter_isNativeReflectConstruct() { if (typeof Reflect === "undefined"
  *************************************
  */
 
-/*-- Apply Third-party plugins (import location should be in front of "global scripts and styles") --*/
-
+/*-- Apply Third-party plugins (import location should be in front of "GLOBAL STYLES") --*/
 
 
 
 /*-- Apply global scripts and styles --*/
+
 
 
 
@@ -51443,12 +51455,12 @@ function CascadingDropDownList_isNativeReflectConstruct() { if (typeof Reflect =
  *************************************
  */
 
-/*-- Apply Third-party plugins (import location should be in front of "global scripts and styles") --*/
-
+/*-- Apply Third-party plugins (import location should be in front of "GLOBAL STYLES") --*/
 
 
 
 /*-- Apply global scripts and styles --*/
+
 
 
 
@@ -51947,6 +51959,331 @@ var CascadingDropDownList = /*#__PURE__*/function (_Component) {
     }
   }, "[\n    {\n        \"id\": 1, \n        \"name\": \"Text 1\", \n        \"children\": [\n            {\n                \"id\": \"1_1\", \n                \"name\": \"Text 1_1\", \n                \"children\": [\n                    {\n                        \"id\": \"1_1_1\", \n                        \"name\": \"Text 1_1_1\"\n                    },\n                    {\n                        \"id\": \"1_1_2\", \n                        \"name\": \"Text 1_1_2\"\n                    },\n                    {\n                        \"id\": \"1_1_3\", \n                        \"name\": \"Text 1_1_3\"\n                    }\n                ]\n            }, \n            {\n                \"id\": \"1_2\", \n                \"name\": \"Text 1_2\", \n                \"children\": [\n                    {\n                        \"id\": \"1_2_1\", \n                        \"name\": \"Text 1_2_1\", \n                        \"children\": [\n                            {\n                                \"id\": \"1_2_1_1\", \n                                \"name\": \"Text 1_2_1_1\"\n                            },\n                            {\n                                \"id\": \"1_2_1_2\", \n                                \"name\": \"Text 1_2_1_2\"\n                            }\n                        ]\n                    }\n                ]\n            }\n        ]\n    }, \n    {\n        \"id\": 2, \n        \"name\": \"Text 2\", \n        \"children\": [\n            {\n                \"id\": \"2_1\", \n                \"name\": \"Text 2_1\", \n                \"children\": [\n                    {\n                        \"id\": \"2_1_1\", \n                        \"name\": \"Text 2_1_1\"\n                    }\n                ]\n            }, \n            {\n                \"id\": \"2_2\", \n                \"name\": \"Text 2_2\", \n                \"children\": [\n                    {\n                        \"id\": \"2_2_1\", \n                        \"name\": \"Text 2_2_1\"\n                    }\n                ]\n            }\n        ]\n    }, \n\t{\n\t\t\"id\": 3, \n\t\t\"name\": \"Text 3\", \n\t\t\"children\": [\n\t\t\t{\n\t\t\t\t\"id\": \"3_1\", \n\t\t\t\t\"name\": \"Text 3_1\"\n\t\t\t}, \n\t\t\t{\n\t\t\t\t\"id\": \"3_2\", \n\t\t\t\t\"name\": \"Text 3_2\"\n\t\t\t}, \n\t\t\t{\n\t\t\t\t\"id\": \"3_3\", \n\t\t\t\t\"name\": \"Text 3_3\"\n\t\t\t}\n\t\t]\n\t},\n    {\n        \"id\": 4, \n        \"name\": \"Text 4\"\n    },\n    {\n        \"id\": 5, \n        \"name\": \"Text 5\"\n    },\n    {\n        \"id\": 6, \n        \"name\": \"Text 6\"\n    }\n]")))))))));
 });
+;// CONCATENATED MODULE: ./src/client/components/ContentPlaceholder/index.tsx
+
+
+
+
+
+
+
+
+function ContentPlaceholder_createSuper(Derived) { var hasNativeReflectConstruct = ContentPlaceholder_isNativeReflectConstruct(); return function _createSuperInternal() { var Super = _getPrototypeOf(Derived), result; if (hasNativeReflectConstruct) { var NewTarget = _getPrototypeOf(this).constructor; result = Reflect.construct(Super, arguments, NewTarget); } else { result = Super.apply(this, arguments); } return _possibleConstructorReturn(this, result); }; }
+
+function ContentPlaceholder_isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Reflect.construct) return false; if (Reflect.construct.sham) return false; if (typeof Proxy === "function") return true; try { Boolean.prototype.valueOf.call(Reflect.construct(Boolean, [], function () {})); return true; } catch (e) { return false; } }
+
+/* 
+ *************************************
+ * <!-- Content Placeholder -->
+ *************************************
+ */
+
+/*-- Apply Third-party plugins (import location should be in front of "GLOBAL STYLES") --*/
+
+
+
+/*-- Apply global scripts and styles --*/
+
+
+
+
+/*-- Apply this component styles --*/
+
+
+
+
+var ContentPlaceholder = /*#__PURE__*/function (_Component) {
+  _inherits(ContentPlaceholder, _Component);
+
+  var _super = ContentPlaceholder_createSuper(ContentPlaceholder);
+
+  function ContentPlaceholder(props) {
+    var _this;
+
+    _classCallCheck(this, ContentPlaceholder);
+
+    _this = _super.call(this, props);
+
+    _defineProperty(_assertThisInitialized(_this), "uniqueID", void 0);
+
+    _this.uniqueID = 'app-' + helpers.GUID.create();
+    return _this;
+  }
+
+  _createClass(ContentPlaceholder, [{
+    key: "render",
+    value: function render() {
+      var _this$props = this.props,
+          type = _this$props.type,
+          id = _this$props.id; //set ID
+
+      var cid = id || this.uniqueID; //return HTML structure
+
+      var res = null;
+      var typeRes = type ? type : '';
+
+      switch (typeRes) {
+        case 'page':
+          res = /*#__PURE__*/react.createElement(react.Fragment, null, /*#__PURE__*/react.createElement("div", {
+            id: cid,
+            className: "poemkit-content-placeholder"
+          }, /*#__PURE__*/react.createElement("ul", null, /*#__PURE__*/react.createElement("li", null, /*#__PURE__*/react.createElement("div", {
+            className: "poemkit-content-placeholder__view"
+          }, /*#__PURE__*/react.createElement("ul", null, /*#__PURE__*/react.createElement("li", null, /*#__PURE__*/react.createElement("div", {
+            className: "poemkit-content-placeholder__textSlot"
+          }, /*#__PURE__*/react.createElement("div", {
+            className: "poemkit-content-placeholder__line--first poemkit-content-placeholder__line"
+          }), /*#__PURE__*/react.createElement("div", {
+            className: "poemkit-content-placeholder__line--second poemkit-content-placeholder__line"
+          })), /*#__PURE__*/react.createElement("div", {
+            className: "poemkit-content-placeholder__thumbSlot"
+          })))))), /*#__PURE__*/react.createElement("ul", null, /*#__PURE__*/react.createElement("div", {
+            className: "poemkit-content-placeholder__view"
+          }, /*#__PURE__*/react.createElement("ul", null, /*#__PURE__*/react.createElement("li", null, /*#__PURE__*/react.createElement("div", {
+            className: "poemkit-content-placeholder__thumbSlot"
+          }), /*#__PURE__*/react.createElement("div", {
+            className: "poemkit-content-placeholder__textSlot"
+          }, /*#__PURE__*/react.createElement("div", {
+            className: "poemkit-content-placeholder__line--first poemkit-content-placeholder__line"
+          }), /*#__PURE__*/react.createElement("div", {
+            className: "poemkit-content-placeholder__line--second poemkit-content-placeholder__line"
+          }))), /*#__PURE__*/react.createElement("li", null, /*#__PURE__*/react.createElement("div", {
+            className: "poemkit-content-placeholder__thumbSlot"
+          }), /*#__PURE__*/react.createElement("div", {
+            className: "poemkit-content-placeholder__textSlot"
+          }, /*#__PURE__*/react.createElement("div", {
+            className: "poemkit-content-placeholder__line--first poemkit-content-placeholder__line"
+          }), /*#__PURE__*/react.createElement("div", {
+            className: "poemkit-content-placeholder__line--second poemkit-content-placeholder__line"
+          }))), /*#__PURE__*/react.createElement("li", null, /*#__PURE__*/react.createElement("div", {
+            className: "poemkit-content-placeholder__thumbSlot"
+          }), /*#__PURE__*/react.createElement("div", {
+            className: "poemkit-content-placeholder__textSlot"
+          }, /*#__PURE__*/react.createElement("div", {
+            className: "poemkit-content-placeholder__line--first poemkit-content-placeholder__line"
+          }), /*#__PURE__*/react.createElement("div", {
+            className: "poemkit-content-placeholder__line--second poemkit-content-placeholder__line"
+          }))))))));
+          break;
+
+        case 'list':
+          res = /*#__PURE__*/react.createElement(react.Fragment, null, /*#__PURE__*/react.createElement("div", {
+            id: cid,
+            className: "poemkit-content-placeholder"
+          }, /*#__PURE__*/react.createElement("ul", null, /*#__PURE__*/react.createElement("div", {
+            className: "poemkit-content-placeholder__view"
+          }, /*#__PURE__*/react.createElement("ul", null, /*#__PURE__*/react.createElement("li", null, /*#__PURE__*/react.createElement("div", {
+            className: "poemkit-content-placeholder__thumbSlot"
+          }), /*#__PURE__*/react.createElement("div", {
+            className: "poemkit-content-placeholder__textSlot"
+          }, /*#__PURE__*/react.createElement("div", {
+            className: "poemkit-content-placeholder__line--first poemkit-content-placeholder__line"
+          }), /*#__PURE__*/react.createElement("div", {
+            className: "poemkit-content-placeholder__line--second poemkit-content-placeholder__line"
+          }))), /*#__PURE__*/react.createElement("li", null, /*#__PURE__*/react.createElement("div", {
+            className: "poemkit-content-placeholder__thumbSlot"
+          }), /*#__PURE__*/react.createElement("div", {
+            className: "poemkit-content-placeholder__textSlot"
+          }, /*#__PURE__*/react.createElement("div", {
+            className: "poemkit-content-placeholder__line--first poemkit-content-placeholder__line"
+          }), /*#__PURE__*/react.createElement("div", {
+            className: "poemkit-content-placeholder__line--second poemkit-content-placeholder__line"
+          }))), /*#__PURE__*/react.createElement("li", null, /*#__PURE__*/react.createElement("div", {
+            className: "poemkit-content-placeholder__thumbSlot"
+          }), /*#__PURE__*/react.createElement("div", {
+            className: "poemkit-content-placeholder__textSlot"
+          }, /*#__PURE__*/react.createElement("div", {
+            className: "poemkit-content-placeholder__line--first poemkit-content-placeholder__line"
+          }), /*#__PURE__*/react.createElement("div", {
+            className: "poemkit-content-placeholder__line--second poemkit-content-placeholder__line"
+          }))))))));
+          break;
+
+        case 'content':
+          res = /*#__PURE__*/react.createElement(react.Fragment, null, /*#__PURE__*/react.createElement("div", {
+            id: cid,
+            className: "poemkit-content-placeholder"
+          }, /*#__PURE__*/react.createElement("ul", null, /*#__PURE__*/react.createElement("li", null, /*#__PURE__*/react.createElement("div", {
+            className: "poemkit-content-placeholder__view"
+          }, /*#__PURE__*/react.createElement("ul", null, /*#__PURE__*/react.createElement("li", null, /*#__PURE__*/react.createElement("div", {
+            className: "poemkit-content-placeholder__textSlot"
+          }, /*#__PURE__*/react.createElement("div", {
+            className: "poemkit-content-placeholder__line--first poemkit-content-placeholder__line"
+          }), /*#__PURE__*/react.createElement("div", {
+            className: "poemkit-content-placeholder__line--second poemkit-content-placeholder__line"
+          })), /*#__PURE__*/react.createElement("div", {
+            className: "poemkit-content-placeholder__thumbSlot"
+          }))))))));
+          break;
+
+        case 'image':
+          res = /*#__PURE__*/react.createElement(react.Fragment, null, /*#__PURE__*/react.createElement("div", {
+            id: cid,
+            className: "poemkit-content-placeholder"
+          }, /*#__PURE__*/react.createElement("div", {
+            className: "poemkit-content-placeholder__view uix-content-placeholder__view--aspectRatio"
+          }, /*#__PURE__*/react.createElement("div", {
+            className: "poemkit-content-placeholder__thumbSlot"
+          }))));
+          break;
+      }
+
+      return /*#__PURE__*/react.createElement(react.Fragment, null, res);
+    }
+  }]);
+
+  return ContentPlaceholder;
+}(react.Component);
+
+
+;// CONCATENATED MODULE: ./src/client/views/_pages/ComponentsDemo/ContentPlaceholderDemo.js
+
+
+ //Create or Remove Sidebar Menu
+
+
+/* harmony default export */ const ContentPlaceholderDemo = (function () {
+  react.useEffect(function () {
+    // Equivalent to componentDidMount and componentDidUpdate:
+    helpers(document).ready(function () {
+      //Create sidebar menu
+      SidebarMenu();
+    });
+  });
+  return /*#__PURE__*/react.createElement(react.Fragment, null, /*#__PURE__*/react.createElement("section", null, /*#__PURE__*/react.createElement("div", {
+    className: "container"
+  }, /*#__PURE__*/react.createElement("div", {
+    className: "row"
+  }, /*#__PURE__*/react.createElement("div", {
+    className: "col-12"
+  }, /*#__PURE__*/react.createElement("h1", {
+    className: "poemkit-typo--h2"
+  }, "Content Placeholder", /*#__PURE__*/react.createElement("a", {
+    className: "poemkit-typo--h3 align-middle",
+    href: "https://github.com/xizon/poemkit/tree/main/src/client/components/ContentPlaceholder",
+    target: "_blank"
+  }, /*#__PURE__*/react.createElement("span", {
+    className: "poemkit-dir--right",
+    style: {
+      fontSize: "0.75rem",
+      color: "#ababab",
+      margin: ".5rem .5rem 0 0"
+    }
+  }, /*#__PURE__*/react.createElement("svg", {
+    style: {
+      marginRight: ".5rem"
+    },
+    width: "15",
+    viewBox: "0 0 392.186 392.186"
+  }, /*#__PURE__*/react.createElement("g", null, /*#__PURE__*/react.createElement("g", null, /*#__PURE__*/react.createElement("g", null, /*#__PURE__*/react.createElement("path", {
+    fill: "#d2d2d2",
+    d: "M368.62,17.951H23.568C10.57,17.951,0,28.524,0,41.52v309.146c0,12.996,10.57,23.568,23.568,23.568h345.053c12.994,0,23.564-10.572,23.564-23.568V41.52C392.188,28.525,381.614,17.951,368.62,17.951z M297.56,57.528c0-4.806,3.896-8.703,8.701-8.703h8.703c4.808,0,8.701,3.896,8.701,8.703v9.863c0,4.806-3.896,8.702-8.701,8.702h-8.703c-4.805,0-8.701-3.896-8.701-8.702V57.528z M257.093,57.528c0-4.806,3.898-8.703,8.703-8.703h8.701c4.805,0,8.703,3.896,8.703,8.703v9.863c0,4.806-3.898,8.702-8.703,8.702h-8.701c-4.805,0-8.703-3.896-8.703-8.702V57.528z M363.903,345.951H28.282V102.235h335.621V345.951L363.903,345.951z M364.132,67.391c0,4.806-3.896,8.702-8.701,8.702h-8.703c-4.809,0-8.702-3.896-8.702-8.702v-9.863c0-4.806,3.896-8.703,8.702-8.703h8.703c4.806,0,8.701,3.896,8.701,8.703V67.391z"
+  }), /*#__PURE__*/react.createElement("path", {
+    fill: "#d2d2d2",
+    d: "M84.185,233.284l63.084,29.336c1.631,0.755,3.367,1.138,5.162,1.138c2.338,0,4.617-0.664,6.598-1.924c3.547-2.267,5.666-6.13,5.666-10.334v-0.322c0-4.752-2.785-9.116-7.096-11.118l-39.455-18.332l39.455-18.334c4.311-2.004,7.096-6.367,7.096-11.117v-0.319c0-4.21-2.119-8.075-5.666-10.334c-1.961-1.253-4.246-1.916-6.605-1.916c-1.779,0-3.563,0.391-5.16,1.133l-63.08,29.333c-4.307,2.004-7.09,6.369-7.09,11.117v0.877C77.093,226.909,79.874,231.272,84.185,233.284z"
+  }), /*#__PURE__*/react.createElement("path", {
+    fill: "#d2d2d2",
+    d: "M165.257,293.036c2.301,3.149,6.002,5.03,9.9,5.03h0.316c5.352,0,10.041-3.426,11.672-8.517L228.7,160.788c1.192-3.716,0.531-7.818-1.771-10.973c-2.301-3.15-6.002-5.03-9.901-5.03h-0.315c-5.354,0-10.048,3.425-11.679,8.516l-41.559,128.771C162.292,285.793,162.958,289.889,165.257,293.036z"
+  }), /*#__PURE__*/react.createElement("path", {
+    fill: "#d2d2d2",
+    d: "M227.49,192.276c0,4.745,2.783,9.109,7.095,11.123l39.455,18.329l-39.455,18.33c-4.31,2.004-7.095,6.368-7.095,11.118v0.322c0,4.205,2.117,8.068,5.668,10.336c1.974,1.258,4.254,1.924,6.595,1.924c1.793,0,3.528-0.383,5.17-1.142l63.08-29.335c4.307-2.009,7.09-6.372,7.09-11.115v-0.877c0-4.748-2.783-9.113-7.094-11.117l-63.08-29.333c-1.591-0.74-3.373-1.131-5.152-1.131c-2.355,0-4.643,0.661-6.604,1.912c-3.551,2.263-5.67,6.127-5.67,10.337v0.318H227.49L227.49,192.276z"
+  }))))), "Docs on GitHub"))))))), /*#__PURE__*/react.createElement("section", {
+    className: "poemkit-spacing--s poemkit-spacing--no-bottom"
+  }, /*#__PURE__*/react.createElement("div", {
+    className: "container"
+  }, /*#__PURE__*/react.createElement("div", {
+    className: "row"
+  }, /*#__PURE__*/react.createElement("div", {
+    className: "col-12"
+  }, /*#__PURE__*/react.createElement("h3", {
+    className: "app-header-title"
+  }, "For Page Loading"), /*#__PURE__*/react.createElement("p", null, "These placeholders provide good UX, it gives users a sense of what to expect where on the page when the loading finishes."), /*#__PURE__*/react.createElement("hr", null))))), /*#__PURE__*/react.createElement("section", {
+    className: "poemkit-spacing--s"
+  }, /*#__PURE__*/react.createElement("div", {
+    className: "container poemkit-t-c"
+  }, /*#__PURE__*/react.createElement("div", {
+    className: "row"
+  }, /*#__PURE__*/react.createElement("div", {
+    className: "col-12"
+  }, /*#__PURE__*/react.createElement(ContentPlaceholder, {
+    type: "page"
+  }))))), /*#__PURE__*/react.createElement("section", {
+    className: "poemkit-spacing--s poemkit-spacing--no-bottom"
+  }, /*#__PURE__*/react.createElement("div", {
+    className: "container"
+  }, /*#__PURE__*/react.createElement("div", {
+    className: "row"
+  }, /*#__PURE__*/react.createElement("div", {
+    className: "col-12"
+  }, /*#__PURE__*/react.createElement("h3", {
+    className: "app-header-title"
+  }, "For List"), /*#__PURE__*/react.createElement("hr", null))))), /*#__PURE__*/react.createElement("section", {
+    className: "poemkit-spacing--s"
+  }, /*#__PURE__*/react.createElement("div", {
+    className: "container poemkit-t-c"
+  }, /*#__PURE__*/react.createElement("div", {
+    className: "row"
+  }, /*#__PURE__*/react.createElement("div", {
+    className: "col-12"
+  }, /*#__PURE__*/react.createElement(ContentPlaceholder, {
+    type: "list"
+  }))))), /*#__PURE__*/react.createElement("section", {
+    className: "poemkit-spacing--s poemkit-spacing--no-bottom"
+  }, /*#__PURE__*/react.createElement("div", {
+    className: "container"
+  }, /*#__PURE__*/react.createElement("div", {
+    className: "row"
+  }, /*#__PURE__*/react.createElement("div", {
+    className: "col-12"
+  }, /*#__PURE__*/react.createElement("h3", {
+    className: "app-header-title"
+  }, "For Content"), /*#__PURE__*/react.createElement("hr", null))))), /*#__PURE__*/react.createElement("section", {
+    className: "poemkit-spacing--s"
+  }, /*#__PURE__*/react.createElement("div", {
+    className: "container poemkit-t-c"
+  }, /*#__PURE__*/react.createElement("div", {
+    className: "row"
+  }, /*#__PURE__*/react.createElement("div", {
+    className: "col-12"
+  }, /*#__PURE__*/react.createElement(ContentPlaceholder, {
+    type: "content"
+  }))))), /*#__PURE__*/react.createElement("section", {
+    className: "poemkit-spacing--s poemkit-spacing--no-bottom"
+  }, /*#__PURE__*/react.createElement("div", {
+    className: "container"
+  }, /*#__PURE__*/react.createElement("div", {
+    className: "row"
+  }, /*#__PURE__*/react.createElement("div", {
+    className: "col-12"
+  }, /*#__PURE__*/react.createElement("h3", {
+    className: "app-header-title"
+  }, "For Image"), /*#__PURE__*/react.createElement("p", null, "Create flexible image placeholders that keep their aspect ratio (1:1) when resized. "), /*#__PURE__*/react.createElement("hr", null))))), /*#__PURE__*/react.createElement("section", {
+    className: "poemkit-spacing--s"
+  }, /*#__PURE__*/react.createElement("div", {
+    className: "container poemkit-t-c"
+  }, /*#__PURE__*/react.createElement("div", {
+    className: "row"
+  }, /*#__PURE__*/react.createElement("div", {
+    className: "col-md-3 col-lg-3"
+  }, /*#__PURE__*/react.createElement(ContentPlaceholder, {
+    type: "image"
+  }))))), /*#__PURE__*/react.createElement("section", null, /*#__PURE__*/react.createElement("div", {
+    className: "container"
+  }, /*#__PURE__*/react.createElement("div", {
+    className: "row"
+  }, /*#__PURE__*/react.createElement("div", {
+    className: "col-12"
+  }, /*#__PURE__*/react.createElement("h3", {
+    className: "app-header-title"
+  }, "API"), /*#__PURE__*/react.createElement("hr", null), /*#__PURE__*/react.createElement("article", {
+    className: "poemkit-spacing--s",
+    itemProp: "text"
+  }, /*#__PURE__*/react.createElement("h4", null, "Content Placeholder"), /*#__PURE__*/react.createElement("div", null, /*#__PURE__*/react.createElement("pre", null, "import ContentPlaceholder from '@poemkit/components/ContentPlaceholder/index.tsx';")), /*#__PURE__*/react.createElement("div", {
+    className: "table-responsive-md"
+  }, /*#__PURE__*/react.createElement("table", {
+    className: "table table-bordered table-striped mb-5"
+  }, /*#__PURE__*/react.createElement("thead", null, /*#__PURE__*/react.createElement("tr", null, /*#__PURE__*/react.createElement("th", null, "Property"), /*#__PURE__*/react.createElement("th", null, "Type"), /*#__PURE__*/react.createElement("th", null, "Default"), /*#__PURE__*/react.createElement("th", null, "Description"))), /*#__PURE__*/react.createElement("tbody", null, /*#__PURE__*/react.createElement("tr", null, /*#__PURE__*/react.createElement("td", null, /*#__PURE__*/react.createElement("code", null, "type")), /*#__PURE__*/react.createElement("td", null, /*#__PURE__*/react.createElement("code", null, "page"), " | ", /*#__PURE__*/react.createElement("code", null, "list"), " | ", /*#__PURE__*/react.createElement("code", null, "content"), " | ", /*#__PURE__*/react.createElement("code", null, "image")), /*#__PURE__*/react.createElement("td", null, "-"), /*#__PURE__*/react.createElement("td", null, /*#__PURE__*/react.createElement("strong", null, "(Required)"), " Placeholder display style")))))))))));
+});
 ;// CONCATENATED MODULE: ./src/client/components/DropdownMenu/Option.tsx
 
 
@@ -52019,12 +52356,12 @@ function DropdownMenu_isNativeReflectConstruct() { if (typeof Reflect === "undef
  *************************************
  */
 
-/*-- Apply Third-party plugins (import location should be in front of "global scripts and styles") --*/
-
+/*-- Apply Third-party plugins (import location should be in front of "GLOBAL STYLES") --*/
 
 
 
 /*-- Apply global scripts and styles --*/
+
 
 
 
@@ -52279,19 +52616,19 @@ var data1 = [{
 
 
 
-var Input_excluded = ["type", "theme", "ui", "disabled", "required", "value", "label", "units", "name", "id", "maxLength", "iconLeft", "iconRight"];
+var Input_excluded = ["type", "theme", "ui", "disabled", "required", "placeholder", "value", "label", "units", "name", "id", "maxLength", "iconLeft", "iconRight"];
 
 function Input_createSuper(Derived) { var hasNativeReflectConstruct = Input_isNativeReflectConstruct(); return function _createSuperInternal() { var Super = _getPrototypeOf(Derived), result; if (hasNativeReflectConstruct) { var NewTarget = _getPrototypeOf(this).constructor; result = Reflect.construct(Super, arguments, NewTarget); } else { result = Super.apply(this, arguments); } return _possibleConstructorReturn(this, result); }; }
 
 function Input_isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Reflect.construct) return false; if (Reflect.construct.sham) return false; if (typeof Proxy === "function") return true; try { Boolean.prototype.valueOf.call(Reflect.construct(Boolean, [], function () {})); return true; } catch (e) { return false; } }
 
 
-/*-- Apply Third-party plugins (import location should be in front of "global scripts and styles") --*/
-
+/*-- Apply Third-party plugins (import location should be in front of "GLOBAL STYLES") --*/
 
 
 
 /*-- Apply global scripts and styles --*/
+
 
 
 
@@ -52378,6 +52715,7 @@ var Input = /*#__PURE__*/function (_Component) {
           ui = _this$props.ui,
           disabled = _this$props.disabled,
           required = _this$props.required,
+          placeholder = _this$props.placeholder,
           value = _this$props.value,
           label = _this$props.label,
           units = _this$props.units,
@@ -52404,6 +52742,7 @@ var Input = /*#__PURE__*/function (_Component) {
         className: "js-poemkit-float-label",
         id: idRes,
         name: nameRes,
+        placeholder: placeholder || '',
         defaultValue: value || '',
         maxLength: maxLength || null,
         onFocus: this.handleFocus,
@@ -52438,19 +52777,19 @@ var Input = /*#__PURE__*/function (_Component) {
 
 
 
-var Textarea_excluded = ["theme", "cols", "rows", "ui", "disabled", "required", "value", "label", "name", "id", "maxLength"];
+var Textarea_excluded = ["theme", "cols", "rows", "ui", "disabled", "required", "placeholder", "value", "label", "name", "id", "maxLength"];
 
 function Textarea_createSuper(Derived) { var hasNativeReflectConstruct = Textarea_isNativeReflectConstruct(); return function _createSuperInternal() { var Super = _getPrototypeOf(Derived), result; if (hasNativeReflectConstruct) { var NewTarget = _getPrototypeOf(this).constructor; result = Reflect.construct(Super, arguments, NewTarget); } else { result = Super.apply(this, arguments); } return _possibleConstructorReturn(this, result); }; }
 
 function Textarea_isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Reflect.construct) return false; if (Reflect.construct.sham) return false; if (typeof Proxy === "function") return true; try { Boolean.prototype.valueOf.call(Reflect.construct(Boolean, [], function () {})); return true; } catch (e) { return false; } }
 
 
-/*-- Apply Third-party plugins (import location should be in front of "global scripts and styles") --*/
-
+/*-- Apply Third-party plugins (import location should be in front of "GLOBAL STYLES") --*/
 
 
 
 /*-- Apply global scripts and styles --*/
+
 
 
 
@@ -52535,6 +52874,7 @@ var Textarea = /*#__PURE__*/function (_Component) {
           ui = _this$props.ui,
           disabled = _this$props.disabled,
           required = _this$props.required,
+          placeholder = _this$props.placeholder,
           value = _this$props.value,
           label = _this$props.label,
           name = _this$props.name,
@@ -52554,6 +52894,7 @@ var Textarea = /*#__PURE__*/function (_Component) {
         className: "js-poemkit-float-label",
         id: idRes,
         name: nameRes,
+        placeholder: placeholder || '',
         defaultValue: value || '',
         maxLength: maxLength || null,
         onFocus: this.handleFocus,
@@ -52597,12 +52938,12 @@ function Select_createSuper(Derived) { var hasNativeReflectConstruct = Select_is
 function Select_isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Reflect.construct) return false; if (Reflect.construct.sham) return false; if (typeof Proxy === "function") return true; try { Boolean.prototype.valueOf.call(Reflect.construct(Boolean, [], function () {})); return true; } catch (e) { return false; } }
 
 
-/*-- Apply Third-party plugins (import location should be in front of "global scripts and styles") --*/
-
+/*-- Apply Third-party plugins (import location should be in front of "GLOBAL STYLES") --*/
 
 
 
 /*-- Apply global scripts and styles --*/
+
 
 
 
@@ -52773,12 +53114,12 @@ function CustomSelect_createSuper(Derived) { var hasNativeReflectConstruct = Cus
 function CustomSelect_isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Reflect.construct) return false; if (Reflect.construct.sham) return false; if (typeof Proxy === "function") return true; try { Boolean.prototype.valueOf.call(Reflect.construct(Boolean, [], function () {})); return true; } catch (e) { return false; } }
 
 
-/*-- Apply Third-party plugins (import location should be in front of "global scripts and styles") --*/
-
+/*-- Apply Third-party plugins (import location should be in front of "GLOBAL STYLES") --*/
 
 
 
 /*-- Apply global scripts and styles --*/
+
 
 
 
@@ -53010,12 +53351,12 @@ function Checkbox_createSuper(Derived) { var hasNativeReflectConstruct = Checkbo
 function Checkbox_isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Reflect.construct) return false; if (Reflect.construct.sham) return false; if (typeof Proxy === "function") return true; try { Boolean.prototype.valueOf.call(Reflect.construct(Boolean, [], function () {})); return true; } catch (e) { return false; } }
 
 
-/*-- Apply Third-party plugins (import location should be in front of "global scripts and styles") --*/
-
+/*-- Apply Third-party plugins (import location should be in front of "GLOBAL STYLES") --*/
 
 
 
 /*-- Apply global scripts and styles --*/
+
 
 
 
@@ -53126,12 +53467,12 @@ function Radio_createSuper(Derived) { var hasNativeReflectConstruct = Radio_isNa
 function Radio_isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Reflect.construct) return false; if (Reflect.construct.sham) return false; if (typeof Proxy === "function") return true; try { Boolean.prototype.valueOf.call(Reflect.construct(Boolean, [], function () {})); return true; } catch (e) { return false; } }
 
 
-/*-- Apply Third-party plugins (import location should be in front of "global scripts and styles") --*/
-
+/*-- Apply Third-party plugins (import location should be in front of "GLOBAL STYLES") --*/
 
 
 
 /*-- Apply global scripts and styles --*/
+
 
 
 
@@ -53242,12 +53583,12 @@ function Switch_createSuper(Derived) { var hasNativeReflectConstruct = Switch_is
 function Switch_isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Reflect.construct) return false; if (Reflect.construct.sham) return false; if (typeof Proxy === "function") return true; try { Boolean.prototype.valueOf.call(Reflect.construct(Boolean, [], function () {})); return true; } catch (e) { return false; } }
 
 
-/*-- Apply Third-party plugins (import location should be in front of "global scripts and styles") --*/
-
+/*-- Apply Third-party plugins (import location should be in front of "GLOBAL STYLES") --*/
 
 
 
 /*-- Apply global scripts and styles --*/
+
 
 
 
@@ -53402,12 +53743,12 @@ function MultiSelect_createSuper(Derived) { var hasNativeReflectConstruct = Mult
 function MultiSelect_isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Reflect.construct) return false; if (Reflect.construct.sham) return false; if (typeof Proxy === "function") return true; try { Boolean.prototype.valueOf.call(Reflect.construct(Boolean, [], function () {})); return true; } catch (e) { return false; } }
 
 
-/*-- Apply Third-party plugins (import location should be in front of "global scripts and styles") --*/
-
+/*-- Apply Third-party plugins (import location should be in front of "GLOBAL STYLES") --*/
 
 
 
 /*-- Apply global scripts and styles --*/
+
 
 
 
@@ -53581,12 +53922,12 @@ function SingleSelect_createSuper(Derived) { var hasNativeReflectConstruct = Sin
 function SingleSelect_isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Reflect.construct) return false; if (Reflect.construct.sham) return false; if (typeof Proxy === "function") return true; try { Boolean.prototype.valueOf.call(Reflect.construct(Boolean, [], function () {})); return true; } catch (e) { return false; } }
 
 
-/*-- Apply Third-party plugins (import location should be in front of "global scripts and styles") --*/
-
+/*-- Apply Third-party plugins (import location should be in front of "GLOBAL STYLES") --*/
 
 
 
 /*-- Apply global scripts and styles --*/
+
 
 
 
@@ -53776,12 +54117,12 @@ function Number_createSuper(Derived) { var hasNativeReflectConstruct = Number_is
 function Number_isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Reflect.construct) return false; if (Reflect.construct.sham) return false; if (typeof Proxy === "function") return true; try { Boolean.prototype.valueOf.call(Reflect.construct(Boolean, [], function () {})); return true; } catch (e) { return false; } }
 
 
-/*-- Apply Third-party plugins (import location should be in front of "global scripts and styles") --*/
-
+/*-- Apply Third-party plugins (import location should be in front of "GLOBAL STYLES") --*/
 
 
 
 /*-- Apply global scripts and styles --*/
+
 
 
 
@@ -53945,12 +54286,12 @@ function Date_isNativeReflectConstruct() { if (typeof Reflect === "undefined" ||
 
 
 
-/*-- Apply Third-party plugins (import location should be in front of "global scripts and styles") --*/
-
+/*-- Apply Third-party plugins (import location should be in front of "GLOBAL STYLES") --*/
 
 
 
 /*-- Apply global scripts and styles --*/
+
 
 
 
@@ -54139,12 +54480,12 @@ function DynamicFields_createSuper(Derived) { var hasNativeReflectConstruct = Dy
 function DynamicFields_isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Reflect.construct) return false; if (Reflect.construct.sham) return false; if (typeof Proxy === "function") return true; try { Boolean.prototype.valueOf.call(Reflect.construct(Boolean, [], function () {})); return true; } catch (e) { return false; } }
 
 
-/*-- Apply Third-party plugins (import location should be in front of "global scripts and styles") --*/
-
+/*-- Apply Third-party plugins (import location should be in front of "GLOBAL STYLES") --*/
 
 
 
 /*-- Apply global scripts and styles --*/
+
 
 
 
@@ -54322,12 +54663,12 @@ function File_createSuper(Derived) { var hasNativeReflectConstruct = File_isNati
 function File_isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Reflect.construct) return false; if (Reflect.construct.sham) return false; if (typeof Proxy === "function") return true; try { Boolean.prototype.valueOf.call(Reflect.construct(Boolean, [], function () {})); return true; } catch (e) { return false; } }
 
 
-/*-- Apply Third-party plugins (import location should be in front of "global scripts and styles") --*/
-
+/*-- Apply Third-party plugins (import location should be in front of "GLOBAL STYLES") --*/
 
 
 
 /*-- Apply global scripts and styles --*/
+
 
 
 
@@ -54433,12 +54774,12 @@ function FileField_createSuper(Derived) { var hasNativeReflectConstruct = FileFi
 function FileField_isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Reflect.construct) return false; if (Reflect.construct.sham) return false; if (typeof Proxy === "function") return true; try { Boolean.prototype.valueOf.call(Reflect.construct(Boolean, [], function () {})); return true; } catch (e) { return false; } }
 
 
-/*-- Apply Third-party plugins (import location should be in front of "global scripts and styles") --*/
-
+/*-- Apply Third-party plugins (import location should be in front of "GLOBAL STYLES") --*/
 
 
 
 /*-- Apply global scripts and styles --*/
+
 
 
 
@@ -54598,19 +54939,19 @@ var FileField = /*#__PURE__*/function (_Component) {
 
 
 
-var MergeInput_excluded = ["btnType", "type", "ui", "icon", "disabled", "required", "value", "label", "name", "id", "maxLength"];
+var MergeInput_excluded = ["btnType", "type", "ui", "icon", "disabled", "required", "placeholder", "value", "label", "name", "id", "maxLength"];
 
 function MergeInput_createSuper(Derived) { var hasNativeReflectConstruct = MergeInput_isNativeReflectConstruct(); return function _createSuperInternal() { var Super = _getPrototypeOf(Derived), result; if (hasNativeReflectConstruct) { var NewTarget = _getPrototypeOf(this).constructor; result = Reflect.construct(Super, arguments, NewTarget); } else { result = Super.apply(this, arguments); } return _possibleConstructorReturn(this, result); }; }
 
 function MergeInput_isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Reflect.construct) return false; if (Reflect.construct.sham) return false; if (typeof Proxy === "function") return true; try { Boolean.prototype.valueOf.call(Reflect.construct(Boolean, [], function () {})); return true; } catch (e) { return false; } }
 
 
-/*-- Apply Third-party plugins (import location should be in front of "global scripts and styles") --*/
-
+/*-- Apply Third-party plugins (import location should be in front of "GLOBAL STYLES") --*/
 
 
 
 /*-- Apply global scripts and styles --*/
+
 
 
 
@@ -54667,6 +55008,7 @@ var MergeInput = /*#__PURE__*/function (_Component) {
           icon = _this$props.icon,
           disabled = _this$props.disabled,
           required = _this$props.required,
+          placeholder = _this$props.placeholder,
           value = _this$props.value,
           label = _this$props.label,
           name = _this$props.name,
@@ -54684,10 +55026,10 @@ var MergeInput = /*#__PURE__*/function (_Component) {
       return /*#__PURE__*/react.createElement(react.Fragment, null, /*#__PURE__*/react.createElement("div", {
         className: "poemkit-controls__merge" + wrapperClassDisabled + wrapperClassIcon + wrapperClassUi
       }, icon || null, /*#__PURE__*/react.createElement("input", extends_extends({
-        className: value && value.length > 0 ? 'is-active' : '',
         type: typeRes,
         id: idRes,
         name: nameRes,
+        placeholder: placeholder || '',
         defaultValue: value || '',
         maxLength: maxLength || null,
         disabled: disabled || null,
@@ -54713,19 +55055,19 @@ var MergeInput = /*#__PURE__*/function (_Component) {
 
 
 
-var PasswordInput_excluded = ["theme", "ui", "disabled", "required", "value", "label", "units", "name", "id", "maxLength", "iconLeft", "iconRight"];
+var PasswordInput_excluded = ["theme", "ui", "disabled", "required", "placeholder", "value", "label", "units", "name", "id", "maxLength", "iconLeft", "iconRight"];
 
 function PasswordInput_createSuper(Derived) { var hasNativeReflectConstruct = PasswordInput_isNativeReflectConstruct(); return function _createSuperInternal() { var Super = _getPrototypeOf(Derived), result; if (hasNativeReflectConstruct) { var NewTarget = _getPrototypeOf(this).constructor; result = Reflect.construct(Super, arguments, NewTarget); } else { result = Super.apply(this, arguments); } return _possibleConstructorReturn(this, result); }; }
 
 function PasswordInput_isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Reflect.construct) return false; if (Reflect.construct.sham) return false; if (typeof Proxy === "function") return true; try { Boolean.prototype.valueOf.call(Reflect.construct(Boolean, [], function () {})); return true; } catch (e) { return false; } }
 
 
-/*-- Apply Third-party plugins (import location should be in front of "global scripts and styles") --*/
-
+/*-- Apply Third-party plugins (import location should be in front of "GLOBAL STYLES") --*/
 
 
 
 /*-- Apply global scripts and styles --*/
+
 
 
 
@@ -54824,6 +55166,7 @@ var PasswordInput = /*#__PURE__*/function (_Component) {
           ui = _this$props.ui,
           disabled = _this$props.disabled,
           required = _this$props.required,
+          placeholder = _this$props.placeholder,
           value = _this$props.value,
           label = _this$props.label,
           units = _this$props.units,
@@ -54849,6 +55192,7 @@ var PasswordInput = /*#__PURE__*/function (_Component) {
         className: "js-poemkit-float-label",
         id: idRes,
         name: nameRes,
+        placeholder: placeholder || '',
         defaultValue: value || '',
         maxLength: maxLength || null,
         onFocus: this.handleFocus,
@@ -54882,12 +55226,256 @@ var PasswordInput = /*#__PURE__*/function (_Component) {
 }(react.Component);
 
 
+;// CONCATENATED MODULE: ./src/client/components/Form/TagInput.tsx
+
+
+
+
+
+
+
+
+function TagInput_createSuper(Derived) { var hasNativeReflectConstruct = TagInput_isNativeReflectConstruct(); return function _createSuperInternal() { var Super = _getPrototypeOf(Derived), result; if (hasNativeReflectConstruct) { var NewTarget = _getPrototypeOf(this).constructor; result = Reflect.construct(Super, arguments, NewTarget); } else { result = Super.apply(this, arguments); } return _possibleConstructorReturn(this, result); }; }
+
+function TagInput_isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Reflect.construct) return false; if (Reflect.construct.sham) return false; if (typeof Proxy === "function") return true; try { Boolean.prototype.valueOf.call(Reflect.construct(Boolean, [], function () {})); return true; } catch (e) { return false; } }
+
+
+/*-- Apply Third-party plugins (import location should be in front of "GLOBAL STYLES") --*/
+
+
+
+/*-- Apply global scripts and styles --*/
+
+
+
+
+/*-- Apply this component styles --*/
+
+
+
+
+
+
+
+
+var TagInput = /*#__PURE__*/function (_Component) {
+  _inherits(TagInput, _Component);
+
+  var _super = TagInput_createSuper(TagInput);
+
+  function TagInput(props) {
+    var _this;
+
+    _classCallCheck(this, TagInput);
+
+    _this = _super.call(this, props);
+
+    _defineProperty(_assertThisInitialized(_this), "rootRef", /*#__PURE__*/react.createRef());
+
+    _defineProperty(_assertThisInitialized(_this), "uniqueID", void 0);
+
+    _defineProperty(_assertThisInitialized(_this), "lastId", void 0);
+
+    _defineProperty(_assertThisInitialized(_this), "defaultTagsVal", void 0);
+
+    _defineProperty(_assertThisInitialized(_this), "max", void 0);
+
+    _this.uniqueID = 'app-' + helpers.GUID.create();
+    _this.defaultTagsVal = [];
+    _this.lastId = -1;
+    _this.max = _this.props.maxTags ? _this.props.maxTags : 10; //get default value
+
+    if (_this.props.value) {
+      _this.props.value.trim().replace(/^\,|\,$/g, '').split(',').forEach(function (item, index) {
+        _this.defaultTagsVal.push({
+          content: item,
+          id: index
+        });
+      });
+    } //
+
+
+    _this.state = {
+      // What the user has entered
+      userInput: '',
+      items: _this.props.value ? _this.defaultTagsVal : [],
+      alreadyInItems: false
+    };
+    _this.handleChange = _this.handleChange.bind(_assertThisInitialized(_this));
+    _this.handleKeypress = _this.handleKeypress.bind(_assertThisInitialized(_this));
+    _this.handleClick = _this.handleClick.bind(_assertThisInitialized(_this));
+    _this.handleFocus = _this.handleFocus.bind(_assertThisInitialized(_this));
+    _this.handleBlur = _this.handleBlur.bind(_assertThisInitialized(_this));
+    return _this;
+  }
+
+  _createClass(TagInput, [{
+    key: "createAddedList",
+    value: function createAddedList() {
+      var _this2 = this;
+
+      var elements = this.state.items.map(function (listitem, index) {
+        return /*#__PURE__*/react.createElement("li", {
+          key: listitem.id,
+          onClick: _this2.handleClick,
+          "data-item": listitem.id
+        }, listitem.content);
+      });
+      return elements;
+    }
+  }, {
+    key: "handleFocus",
+    value: function handleFocus() {
+      var _this$rootRef$current;
+
+      (_this$rootRef$current = this.rootRef.current) === null || _this$rootRef$current === void 0 ? void 0 : _this$rootRef$current.classList.add('is-active');
+    }
+  }, {
+    key: "handleBlur",
+    value: function handleBlur() {
+      var _this$rootRef$current2;
+
+      (_this$rootRef$current2 = this.rootRef.current) === null || _this$rootRef$current2 === void 0 ? void 0 : _this$rootRef$current2.classList.remove('is-active');
+    }
+  }, {
+    key: "handleClick",
+    value: function handleClick(e) {
+      var idToRemove = Number(e.target.dataset["item"]);
+      var newArray = this.state.items.filter(function (listitem) {
+        return listitem.id !== idToRemove;
+      });
+      this.setState({
+        items: newArray
+      });
+    }
+  }, {
+    key: "handleKeypress",
+    value: function handleKeypress(e) {
+      if (e.key == "Enter") {
+        e.preventDefault();
+        var alreadyInItems = this.state.alreadyInItems;
+        if (alreadyInItems) return false; //
+
+        var newArray = this.state.items;
+        var currentcontent = this.state.userInput.trim();
+
+        if (!currentcontent) {
+          return;
+        } //Limit the total number of tags added
+
+
+        if (this.max - 1 < newArray.length) {
+          return;
+        }
+
+        newArray.push({
+          content: currentcontent,
+          id: ++this.lastId
+        });
+        this.setState({
+          items: newArray,
+          userInput: ''
+        });
+      }
+    }
+  }, {
+    key: "handleChange",
+    value: function handleChange(e) {
+      var items = this.state.items;
+      var userInput = e.currentTarget.value;
+      var alreadyInItems = this.state.alreadyInItems;
+
+      if (items && items.length > 0) {
+        var alreadyIn = items.some(function (obj) {
+          return obj.content.toLowerCase() == userInput.toLowerCase();
+        });
+
+        if (alreadyIn) {
+          alreadyInItems = true;
+        } else {
+          alreadyInItems = false;
+        }
+      }
+
+      this.setState({
+        userInput: e.currentTarget.value,
+        alreadyInItems: alreadyInItems
+      });
+    }
+  }, {
+    key: "uiSwitch",
+    value:
+    /**
+     * Set the class names of different styles
+     */
+    function uiSwitch(param) {
+      var classes = ''; //corners
+
+      if (param.indexOf('pill') >= 0) classes += ' is-pill';
+      if (param.indexOf('rounded') >= 0) classes += ' is-rounded'; //size
+
+      if (param.indexOf('fullwidth') >= 0) classes += ' is-fullwidth';
+      return classes;
+    }
+  }, {
+    key: "render",
+    value: function render() {
+      var _this$props = this.props,
+          ui = _this$props.ui,
+          disabled = _this$props.disabled,
+          required = _this$props.required,
+          placeholder = _this$props.placeholder,
+          name = _this$props.name,
+          id = _this$props.id;
+      var uiRes = typeof ui === 'undefined' ? '' : ui;
+      var nameRes = typeof name === 'undefined' ? '' : name;
+      var idRes = id || this.uniqueID;
+      var wrapperClassDisabled = disabled ? ' is-disabled' : '';
+      var wrapperClassUi = this.uiSwitch(uiRes); //
+
+      var resArr = [];
+      this.state.items.forEach(function (listitem) {
+        resArr.push(listitem.content);
+      });
+      var resVal = resArr.join(',');
+      return /*#__PURE__*/react.createElement(react.Fragment, null, /*#__PURE__*/react.createElement("div", {
+        ref: this.rootRef,
+        className: "poemkit-controls__tags-wrapper" + wrapperClassUi
+      }, /*#__PURE__*/react.createElement("div", null, /*#__PURE__*/react.createElement("ul", {
+        className: "poemkit-controls__tags__list"
+      }, this.createAddedList()), /*#__PURE__*/react.createElement("div", {
+        className: "poemkit-controls__tags" + wrapperClassDisabled
+      }, /*#__PURE__*/react.createElement("input", {
+        type: "text",
+        autoComplete: "off",
+        placeholder: placeholder || '',
+        value: this.state.userInput,
+        disabled: disabled || null,
+        onChange: this.handleChange,
+        onKeyPress: this.handleKeypress,
+        onFocus: this.handleFocus,
+        onBlur: this.handleBlur
+      }))), /*#__PURE__*/react.createElement("input", {
+        type: "hidden",
+        id: idRes,
+        name: nameRes,
+        defaultValue: resVal,
+        required: required || null
+      })));
+    }
+  }]);
+
+  return TagInput;
+}(react.Component);
+
+
 ;// CONCATENATED MODULE: ./src/client/components/Form/index.tsx
 /* 
  *************************************
  * <!-- Form -->
  *************************************
  */
+
 
 
 
@@ -55782,6 +56370,32 @@ var PasswordInput = /*#__PURE__*/function (_Component) {
       className: "fa fa-envelope",
       "aria-hidden": "true"
     })
+  }))))), /*#__PURE__*/react.createElement("section", null, /*#__PURE__*/react.createElement("div", {
+    className: "container"
+  }, /*#__PURE__*/react.createElement("div", {
+    className: "row"
+  }, /*#__PURE__*/react.createElement("div", {
+    className: "col-12"
+  }, /*#__PURE__*/react.createElement("h3", {
+    className: "app-header-title"
+  }, "Tag Input"), /*#__PURE__*/react.createElement("hr", null))))), /*#__PURE__*/react.createElement("section", {
+    className: "poemkit-spacing--s"
+  }, /*#__PURE__*/react.createElement("div", {
+    className: "container"
+  }, /*#__PURE__*/react.createElement("div", {
+    className: "row"
+  }, /*#__PURE__*/react.createElement("div", {
+    className: "col-12"
+  }, /*#__PURE__*/react.createElement(TagInput, {
+    ui: "rounded",
+    placeholder: "Add tag...",
+    name: "tagInput-name-1"
+  }), /*#__PURE__*/react.createElement("hr", null), /*#__PURE__*/react.createElement(TagInput, {
+    ui: "rounded",
+    placeholder: "Add tag...",
+    name: "tagInput-name-2",
+    maxTags: 5,
+    value: "tag1,tag2,tag3"
   }))))), /*#__PURE__*/react.createElement("section", {
     className: "poemkit-spacing--s poemkit-spacing--no-top"
   }, /*#__PURE__*/react.createElement("div", {
@@ -55933,25 +56547,31 @@ var PasswordInput = /*#__PURE__*/function (_Component) {
     className: "table-responsive-md"
   }, /*#__PURE__*/react.createElement("table", {
     className: "table table-bordered table-striped"
-  }, /*#__PURE__*/react.createElement("thead", null, /*#__PURE__*/react.createElement("tr", null, /*#__PURE__*/react.createElement("th", null, "Property"), /*#__PURE__*/react.createElement("th", null, "Type"), /*#__PURE__*/react.createElement("th", null, "Default"), /*#__PURE__*/react.createElement("th", null, "Description"))), /*#__PURE__*/react.createElement("tbody", null, /*#__PURE__*/react.createElement("tr", null, /*#__PURE__*/react.createElement("td", null, /*#__PURE__*/react.createElement("code", null, "type")), /*#__PURE__*/react.createElement("td", null, "string"), /*#__PURE__*/react.createElement("td", null, "text"), /*#__PURE__*/react.createElement("td", null, "The type of input. Such as <input type=\"text\" name=\"name\"> gives a text box.")), /*#__PURE__*/react.createElement("tr", null, /*#__PURE__*/react.createElement("td", null, /*#__PURE__*/react.createElement("code", null, "theme")), /*#__PURE__*/react.createElement("td", null, "string | ", /*#__PURE__*/react.createElement("code", null, "line")), /*#__PURE__*/react.createElement("td", null, "-"), /*#__PURE__*/react.createElement("td", null, "The display style of the control")), /*#__PURE__*/react.createElement("tr", null, /*#__PURE__*/react.createElement("td", null, /*#__PURE__*/react.createElement("code", null, "ui")), /*#__PURE__*/react.createElement("td", null, "string"), /*#__PURE__*/react.createElement("td", null, "-"), /*#__PURE__*/react.createElement("td", null, "The overlay style of the control. Can be used at the same time, separated by spaces. The optional values are:", /*#__PURE__*/react.createElement("br", null), /*#__PURE__*/react.createElement("strong", null, "status:"), /*#__PURE__*/react.createElement("br", null), /*#__PURE__*/react.createElement("code", null, "error"), ", ", /*#__PURE__*/react.createElement("code", null, "success"), /*#__PURE__*/react.createElement("br", null), /*#__PURE__*/react.createElement("strong", null, "corners:"), /*#__PURE__*/react.createElement("br", null), /*#__PURE__*/react.createElement("code", null, "pill"), ", ", /*#__PURE__*/react.createElement("code", null, "rounded"), /*#__PURE__*/react.createElement("br", null), /*#__PURE__*/react.createElement("strong", null, "size:"), /*#__PURE__*/react.createElement("br", null), /*#__PURE__*/react.createElement("code", null, "fullwidth"), ", ", /*#__PURE__*/react.createElement("code", null, "small"), ", ", /*#__PURE__*/react.createElement("code", null, "medium"), ", ", /*#__PURE__*/react.createElement("code", null, "large"))), /*#__PURE__*/react.createElement("tr", null, /*#__PURE__*/react.createElement("td", null, /*#__PURE__*/react.createElement("code", null, "value")), /*#__PURE__*/react.createElement("td", null, "string"), /*#__PURE__*/react.createElement("td", null, "-"), /*#__PURE__*/react.createElement("td", null, "Set a default value for this control")), /*#__PURE__*/react.createElement("tr", null, /*#__PURE__*/react.createElement("td", null, /*#__PURE__*/react.createElement("code", null, "label")), /*#__PURE__*/react.createElement("td", null, "string | ReactNode"), /*#__PURE__*/react.createElement("td", null, "-"), /*#__PURE__*/react.createElement("td", null, "It is used to specify a label for an element of a form.")), /*#__PURE__*/react.createElement("tr", null, /*#__PURE__*/react.createElement("td", null, /*#__PURE__*/react.createElement("code", null, "units")), /*#__PURE__*/react.createElement("td", null, "string"), /*#__PURE__*/react.createElement("td", null, "-"), /*#__PURE__*/react.createElement("td", null, "Specify a unit identification string. Such as ", /*#__PURE__*/react.createElement("code", null, "em"), ", ", /*#__PURE__*/react.createElement("code", null, "px"), ", and so on.")), /*#__PURE__*/react.createElement("tr", null, /*#__PURE__*/react.createElement("td", null, /*#__PURE__*/react.createElement("code", null, "name")), /*#__PURE__*/react.createElement("td", null, "string"), /*#__PURE__*/react.createElement("td", null, "-"), /*#__PURE__*/react.createElement("td", null, "Name is not deprecated when used with form fields.")), /*#__PURE__*/react.createElement("tr", null, /*#__PURE__*/react.createElement("td", null, /*#__PURE__*/react.createElement("code", null, "maxLength")), /*#__PURE__*/react.createElement("td", null, "number"), /*#__PURE__*/react.createElement("td", null, "-"), /*#__PURE__*/react.createElement("td", null, "Defines the maximum number of characters")), /*#__PURE__*/react.createElement("tr", null, /*#__PURE__*/react.createElement("td", null, /*#__PURE__*/react.createElement("code", null, "disabled")), /*#__PURE__*/react.createElement("td", null, "boolean"), /*#__PURE__*/react.createElement("td", null, "false"), /*#__PURE__*/react.createElement("td", null, "Whether the input is disabled")), /*#__PURE__*/react.createElement("tr", null, /*#__PURE__*/react.createElement("td", null, /*#__PURE__*/react.createElement("code", null, "required")), /*#__PURE__*/react.createElement("td", null, "boolean"), /*#__PURE__*/react.createElement("td", null, "false"), /*#__PURE__*/react.createElement("td", null, "When present, it specifies that a field must be filled out before submitting the form.")), /*#__PURE__*/react.createElement("tr", null, /*#__PURE__*/react.createElement("td", null, /*#__PURE__*/react.createElement("code", null, "iconLeft")), /*#__PURE__*/react.createElement("td", null, "ReactNode"), /*#__PURE__*/react.createElement("td", null, "-"), /*#__PURE__*/react.createElement("td", null, "Set the left icon of this control")), /*#__PURE__*/react.createElement("tr", null, /*#__PURE__*/react.createElement("td", null, /*#__PURE__*/react.createElement("code", null, "iconRight")), /*#__PURE__*/react.createElement("td", null, "ReactNode"), /*#__PURE__*/react.createElement("td", null, "-"), /*#__PURE__*/react.createElement("td", null, "Set the right icon of this control"))))), /*#__PURE__*/react.createElement("p", {
+  }, /*#__PURE__*/react.createElement("thead", null, /*#__PURE__*/react.createElement("tr", null, /*#__PURE__*/react.createElement("th", null, "Property"), /*#__PURE__*/react.createElement("th", null, "Type"), /*#__PURE__*/react.createElement("th", null, "Default"), /*#__PURE__*/react.createElement("th", null, "Description"))), /*#__PURE__*/react.createElement("tbody", null, /*#__PURE__*/react.createElement("tr", null, /*#__PURE__*/react.createElement("td", null, /*#__PURE__*/react.createElement("code", null, "type")), /*#__PURE__*/react.createElement("td", null, "string"), /*#__PURE__*/react.createElement("td", null, "text"), /*#__PURE__*/react.createElement("td", null, "The type of input. Such as <input type=\"text\" name=\"name\"> gives a text box.")), /*#__PURE__*/react.createElement("tr", null, /*#__PURE__*/react.createElement("td", null, /*#__PURE__*/react.createElement("code", null, "theme")), /*#__PURE__*/react.createElement("td", null, "string | ", /*#__PURE__*/react.createElement("code", null, "line")), /*#__PURE__*/react.createElement("td", null, "-"), /*#__PURE__*/react.createElement("td", null, "The display style of the control")), /*#__PURE__*/react.createElement("tr", null, /*#__PURE__*/react.createElement("td", null, /*#__PURE__*/react.createElement("code", null, "ui")), /*#__PURE__*/react.createElement("td", null, "string"), /*#__PURE__*/react.createElement("td", null, "-"), /*#__PURE__*/react.createElement("td", null, "The overlay style of the control. Can be used at the same time, separated by spaces. The optional values are:", /*#__PURE__*/react.createElement("br", null), /*#__PURE__*/react.createElement("strong", null, "status:"), /*#__PURE__*/react.createElement("br", null), /*#__PURE__*/react.createElement("code", null, "error"), ", ", /*#__PURE__*/react.createElement("code", null, "success"), /*#__PURE__*/react.createElement("br", null), /*#__PURE__*/react.createElement("strong", null, "corners:"), /*#__PURE__*/react.createElement("br", null), /*#__PURE__*/react.createElement("code", null, "pill"), ", ", /*#__PURE__*/react.createElement("code", null, "rounded"), /*#__PURE__*/react.createElement("br", null), /*#__PURE__*/react.createElement("strong", null, "size:"), /*#__PURE__*/react.createElement("br", null), /*#__PURE__*/react.createElement("code", null, "fullwidth"), ", ", /*#__PURE__*/react.createElement("code", null, "small"), ", ", /*#__PURE__*/react.createElement("code", null, "medium"), ", ", /*#__PURE__*/react.createElement("code", null, "large"))), /*#__PURE__*/react.createElement("tr", null, /*#__PURE__*/react.createElement("td", null, /*#__PURE__*/react.createElement("code", null, "value")), /*#__PURE__*/react.createElement("td", null, "string"), /*#__PURE__*/react.createElement("td", null, "-"), /*#__PURE__*/react.createElement("td", null, "Set a default value for this control")), /*#__PURE__*/react.createElement("tr", null, /*#__PURE__*/react.createElement("td", null, /*#__PURE__*/react.createElement("code", null, "label")), /*#__PURE__*/react.createElement("td", null, "string | ReactNode"), /*#__PURE__*/react.createElement("td", null, "-"), /*#__PURE__*/react.createElement("td", null, "It is used to specify a label for an element of a form.")), /*#__PURE__*/react.createElement("tr", null, /*#__PURE__*/react.createElement("td", null, /*#__PURE__*/react.createElement("code", null, "units")), /*#__PURE__*/react.createElement("td", null, "string"), /*#__PURE__*/react.createElement("td", null, "-"), /*#__PURE__*/react.createElement("td", null, "Specify a unit identification string. Such as ", /*#__PURE__*/react.createElement("code", null, "em"), ", ", /*#__PURE__*/react.createElement("code", null, "px"), ", and so on.")), /*#__PURE__*/react.createElement("tr", null, /*#__PURE__*/react.createElement("td", null, /*#__PURE__*/react.createElement("code", null, "name")), /*#__PURE__*/react.createElement("td", null, "string"), /*#__PURE__*/react.createElement("td", null, "-"), /*#__PURE__*/react.createElement("td", null, "Name is not deprecated when used with form fields.")), /*#__PURE__*/react.createElement("tr", null, /*#__PURE__*/react.createElement("td", null, /*#__PURE__*/react.createElement("code", null, "placeholder")), /*#__PURE__*/react.createElement("td", null, "string"), /*#__PURE__*/react.createElement("td", null, "-"), /*#__PURE__*/react.createElement("td", null, "Specifies a short hint that describes.")), /*#__PURE__*/react.createElement("tr", null, /*#__PURE__*/react.createElement("td", null, /*#__PURE__*/react.createElement("code", null, "maxLength")), /*#__PURE__*/react.createElement("td", null, "number"), /*#__PURE__*/react.createElement("td", null, "-"), /*#__PURE__*/react.createElement("td", null, "Defines the maximum number of characters")), /*#__PURE__*/react.createElement("tr", null, /*#__PURE__*/react.createElement("td", null, /*#__PURE__*/react.createElement("code", null, "disabled")), /*#__PURE__*/react.createElement("td", null, "boolean"), /*#__PURE__*/react.createElement("td", null, "false"), /*#__PURE__*/react.createElement("td", null, "Whether the input is disabled")), /*#__PURE__*/react.createElement("tr", null, /*#__PURE__*/react.createElement("td", null, /*#__PURE__*/react.createElement("code", null, "required")), /*#__PURE__*/react.createElement("td", null, "boolean"), /*#__PURE__*/react.createElement("td", null, "false"), /*#__PURE__*/react.createElement("td", null, "When present, it specifies that a field must be filled out before submitting the form.")), /*#__PURE__*/react.createElement("tr", null, /*#__PURE__*/react.createElement("td", null, /*#__PURE__*/react.createElement("code", null, "iconLeft")), /*#__PURE__*/react.createElement("td", null, "ReactNode"), /*#__PURE__*/react.createElement("td", null, "-"), /*#__PURE__*/react.createElement("td", null, "Set the left icon of this control")), /*#__PURE__*/react.createElement("tr", null, /*#__PURE__*/react.createElement("td", null, /*#__PURE__*/react.createElement("code", null, "iconRight")), /*#__PURE__*/react.createElement("td", null, "ReactNode"), /*#__PURE__*/react.createElement("td", null, "-"), /*#__PURE__*/react.createElement("td", null, "Set the right icon of this control"))))), /*#__PURE__*/react.createElement("p", {
     className: "mb-5"
   }, "It accepts all props which this control support."), /*#__PURE__*/react.createElement("h4", null, "Password Input"), /*#__PURE__*/react.createElement("div", null, /*#__PURE__*/react.createElement("pre", null, "import ", "{PasswordInput}", " from '@poemkit/components/Form/index.tsx';")), /*#__PURE__*/react.createElement("div", {
     className: "table-responsive-md"
   }, /*#__PURE__*/react.createElement("table", {
     className: "table table-bordered table-striped"
-  }, /*#__PURE__*/react.createElement("thead", null, /*#__PURE__*/react.createElement("tr", null, /*#__PURE__*/react.createElement("th", null, "Property"), /*#__PURE__*/react.createElement("th", null, "Type"), /*#__PURE__*/react.createElement("th", null, "Default"), /*#__PURE__*/react.createElement("th", null, "Description"))), /*#__PURE__*/react.createElement("tbody", null, /*#__PURE__*/react.createElement("tr", null, /*#__PURE__*/react.createElement("td", null, /*#__PURE__*/react.createElement("code", null, "theme")), /*#__PURE__*/react.createElement("td", null, "string | ", /*#__PURE__*/react.createElement("code", null, "line")), /*#__PURE__*/react.createElement("td", null, "-"), /*#__PURE__*/react.createElement("td", null, "The display style of the control")), /*#__PURE__*/react.createElement("tr", null, /*#__PURE__*/react.createElement("td", null, /*#__PURE__*/react.createElement("code", null, "ui")), /*#__PURE__*/react.createElement("td", null, "string"), /*#__PURE__*/react.createElement("td", null, "-"), /*#__PURE__*/react.createElement("td", null, "The overlay style of the control. Can be used at the same time, separated by spaces. The optional values are:", /*#__PURE__*/react.createElement("br", null), /*#__PURE__*/react.createElement("strong", null, "status:"), /*#__PURE__*/react.createElement("br", null), /*#__PURE__*/react.createElement("code", null, "error"), ", ", /*#__PURE__*/react.createElement("code", null, "success"), /*#__PURE__*/react.createElement("br", null), /*#__PURE__*/react.createElement("strong", null, "corners:"), /*#__PURE__*/react.createElement("br", null), /*#__PURE__*/react.createElement("code", null, "pill"), ", ", /*#__PURE__*/react.createElement("code", null, "rounded"), /*#__PURE__*/react.createElement("br", null), /*#__PURE__*/react.createElement("strong", null, "size:"), /*#__PURE__*/react.createElement("br", null), /*#__PURE__*/react.createElement("code", null, "fullwidth"), ", ", /*#__PURE__*/react.createElement("code", null, "small"), ", ", /*#__PURE__*/react.createElement("code", null, "medium"), ", ", /*#__PURE__*/react.createElement("code", null, "large"))), /*#__PURE__*/react.createElement("tr", null, /*#__PURE__*/react.createElement("td", null, /*#__PURE__*/react.createElement("code", null, "value")), /*#__PURE__*/react.createElement("td", null, "string"), /*#__PURE__*/react.createElement("td", null, "-"), /*#__PURE__*/react.createElement("td", null, "Set a default value for this control")), /*#__PURE__*/react.createElement("tr", null, /*#__PURE__*/react.createElement("td", null, /*#__PURE__*/react.createElement("code", null, "label")), /*#__PURE__*/react.createElement("td", null, "string | ReactNode"), /*#__PURE__*/react.createElement("td", null, "-"), /*#__PURE__*/react.createElement("td", null, "It is used to specify a label for an element of a form.")), /*#__PURE__*/react.createElement("tr", null, /*#__PURE__*/react.createElement("td", null, /*#__PURE__*/react.createElement("code", null, "units")), /*#__PURE__*/react.createElement("td", null, "string"), /*#__PURE__*/react.createElement("td", null, "-"), /*#__PURE__*/react.createElement("td", null, "Specify a unit identification string. Such as ", /*#__PURE__*/react.createElement("code", null, "em"), ", ", /*#__PURE__*/react.createElement("code", null, "px"), ", and so on.")), /*#__PURE__*/react.createElement("tr", null, /*#__PURE__*/react.createElement("td", null, /*#__PURE__*/react.createElement("code", null, "name")), /*#__PURE__*/react.createElement("td", null, "string"), /*#__PURE__*/react.createElement("td", null, "-"), /*#__PURE__*/react.createElement("td", null, "Name is not deprecated when used with form fields.")), /*#__PURE__*/react.createElement("tr", null, /*#__PURE__*/react.createElement("td", null, /*#__PURE__*/react.createElement("code", null, "maxLength")), /*#__PURE__*/react.createElement("td", null, "number"), /*#__PURE__*/react.createElement("td", null, "-"), /*#__PURE__*/react.createElement("td", null, "Defines the maximum number of characters")), /*#__PURE__*/react.createElement("tr", null, /*#__PURE__*/react.createElement("td", null, /*#__PURE__*/react.createElement("code", null, "disabled")), /*#__PURE__*/react.createElement("td", null, "boolean"), /*#__PURE__*/react.createElement("td", null, "false"), /*#__PURE__*/react.createElement("td", null, "Whether the input is disabled")), /*#__PURE__*/react.createElement("tr", null, /*#__PURE__*/react.createElement("td", null, /*#__PURE__*/react.createElement("code", null, "required")), /*#__PURE__*/react.createElement("td", null, "boolean"), /*#__PURE__*/react.createElement("td", null, "false"), /*#__PURE__*/react.createElement("td", null, "When present, it specifies that a field must be filled out before submitting the form.")), /*#__PURE__*/react.createElement("tr", null, /*#__PURE__*/react.createElement("td", null, /*#__PURE__*/react.createElement("code", null, "iconLeft")), /*#__PURE__*/react.createElement("td", null, "ReactNode"), /*#__PURE__*/react.createElement("td", null, "-"), /*#__PURE__*/react.createElement("td", null, "Set the left icon of this control")), /*#__PURE__*/react.createElement("tr", null, /*#__PURE__*/react.createElement("td", null, /*#__PURE__*/react.createElement("code", null, "iconRight")), /*#__PURE__*/react.createElement("td", null, "ReactNode"), /*#__PURE__*/react.createElement("td", null, "-"), /*#__PURE__*/react.createElement("td", null, "Set the right icon of this control"))))), /*#__PURE__*/react.createElement("p", {
+  }, /*#__PURE__*/react.createElement("thead", null, /*#__PURE__*/react.createElement("tr", null, /*#__PURE__*/react.createElement("th", null, "Property"), /*#__PURE__*/react.createElement("th", null, "Type"), /*#__PURE__*/react.createElement("th", null, "Default"), /*#__PURE__*/react.createElement("th", null, "Description"))), /*#__PURE__*/react.createElement("tbody", null, /*#__PURE__*/react.createElement("tr", null, /*#__PURE__*/react.createElement("td", null, /*#__PURE__*/react.createElement("code", null, "theme")), /*#__PURE__*/react.createElement("td", null, "string | ", /*#__PURE__*/react.createElement("code", null, "line")), /*#__PURE__*/react.createElement("td", null, "-"), /*#__PURE__*/react.createElement("td", null, "The display style of the control")), /*#__PURE__*/react.createElement("tr", null, /*#__PURE__*/react.createElement("td", null, /*#__PURE__*/react.createElement("code", null, "ui")), /*#__PURE__*/react.createElement("td", null, "string"), /*#__PURE__*/react.createElement("td", null, "-"), /*#__PURE__*/react.createElement("td", null, "The overlay style of the control. Can be used at the same time, separated by spaces. The optional values are:", /*#__PURE__*/react.createElement("br", null), /*#__PURE__*/react.createElement("strong", null, "status:"), /*#__PURE__*/react.createElement("br", null), /*#__PURE__*/react.createElement("code", null, "error"), ", ", /*#__PURE__*/react.createElement("code", null, "success"), /*#__PURE__*/react.createElement("br", null), /*#__PURE__*/react.createElement("strong", null, "corners:"), /*#__PURE__*/react.createElement("br", null), /*#__PURE__*/react.createElement("code", null, "pill"), ", ", /*#__PURE__*/react.createElement("code", null, "rounded"), /*#__PURE__*/react.createElement("br", null), /*#__PURE__*/react.createElement("strong", null, "size:"), /*#__PURE__*/react.createElement("br", null), /*#__PURE__*/react.createElement("code", null, "fullwidth"), ", ", /*#__PURE__*/react.createElement("code", null, "small"), ", ", /*#__PURE__*/react.createElement("code", null, "medium"), ", ", /*#__PURE__*/react.createElement("code", null, "large"))), /*#__PURE__*/react.createElement("tr", null, /*#__PURE__*/react.createElement("td", null, /*#__PURE__*/react.createElement("code", null, "value")), /*#__PURE__*/react.createElement("td", null, "string"), /*#__PURE__*/react.createElement("td", null, "-"), /*#__PURE__*/react.createElement("td", null, "Set a default value for this control")), /*#__PURE__*/react.createElement("tr", null, /*#__PURE__*/react.createElement("td", null, /*#__PURE__*/react.createElement("code", null, "label")), /*#__PURE__*/react.createElement("td", null, "string | ReactNode"), /*#__PURE__*/react.createElement("td", null, "-"), /*#__PURE__*/react.createElement("td", null, "It is used to specify a label for an element of a form.")), /*#__PURE__*/react.createElement("tr", null, /*#__PURE__*/react.createElement("td", null, /*#__PURE__*/react.createElement("code", null, "units")), /*#__PURE__*/react.createElement("td", null, "string"), /*#__PURE__*/react.createElement("td", null, "-"), /*#__PURE__*/react.createElement("td", null, "Specify a unit identification string. Such as ", /*#__PURE__*/react.createElement("code", null, "em"), ", ", /*#__PURE__*/react.createElement("code", null, "px"), ", and so on.")), /*#__PURE__*/react.createElement("tr", null, /*#__PURE__*/react.createElement("td", null, /*#__PURE__*/react.createElement("code", null, "name")), /*#__PURE__*/react.createElement("td", null, "string"), /*#__PURE__*/react.createElement("td", null, "-"), /*#__PURE__*/react.createElement("td", null, "Name is not deprecated when used with form fields.")), /*#__PURE__*/react.createElement("tr", null, /*#__PURE__*/react.createElement("td", null, /*#__PURE__*/react.createElement("code", null, "placeholder")), /*#__PURE__*/react.createElement("td", null, "string"), /*#__PURE__*/react.createElement("td", null, "-"), /*#__PURE__*/react.createElement("td", null, "Specifies a short hint that describes.")), /*#__PURE__*/react.createElement("tr", null, /*#__PURE__*/react.createElement("td", null, /*#__PURE__*/react.createElement("code", null, "maxLength")), /*#__PURE__*/react.createElement("td", null, "number"), /*#__PURE__*/react.createElement("td", null, "-"), /*#__PURE__*/react.createElement("td", null, "Defines the maximum number of characters")), /*#__PURE__*/react.createElement("tr", null, /*#__PURE__*/react.createElement("td", null, /*#__PURE__*/react.createElement("code", null, "disabled")), /*#__PURE__*/react.createElement("td", null, "boolean"), /*#__PURE__*/react.createElement("td", null, "false"), /*#__PURE__*/react.createElement("td", null, "Whether the input is disabled")), /*#__PURE__*/react.createElement("tr", null, /*#__PURE__*/react.createElement("td", null, /*#__PURE__*/react.createElement("code", null, "required")), /*#__PURE__*/react.createElement("td", null, "boolean"), /*#__PURE__*/react.createElement("td", null, "false"), /*#__PURE__*/react.createElement("td", null, "When present, it specifies that a field must be filled out before submitting the form.")), /*#__PURE__*/react.createElement("tr", null, /*#__PURE__*/react.createElement("td", null, /*#__PURE__*/react.createElement("code", null, "iconLeft")), /*#__PURE__*/react.createElement("td", null, "ReactNode"), /*#__PURE__*/react.createElement("td", null, "-"), /*#__PURE__*/react.createElement("td", null, "Set the left icon of this control")), /*#__PURE__*/react.createElement("tr", null, /*#__PURE__*/react.createElement("td", null, /*#__PURE__*/react.createElement("code", null, "iconRight")), /*#__PURE__*/react.createElement("td", null, "ReactNode"), /*#__PURE__*/react.createElement("td", null, "-"), /*#__PURE__*/react.createElement("td", null, "Set the right icon of this control"))))), /*#__PURE__*/react.createElement("p", {
     className: "mb-5"
   }, "It accepts all props which this control support."), /*#__PURE__*/react.createElement("h4", null, "Merge Input"), /*#__PURE__*/react.createElement("div", null, /*#__PURE__*/react.createElement("pre", null, "import ", "{MergeInput}", " from '@poemkit/components/Form/index.tsx';")), /*#__PURE__*/react.createElement("div", {
     className: "table-responsive-md"
   }, /*#__PURE__*/react.createElement("table", {
     className: "table table-bordered table-striped"
-  }, /*#__PURE__*/react.createElement("thead", null, /*#__PURE__*/react.createElement("tr", null, /*#__PURE__*/react.createElement("th", null, "Property"), /*#__PURE__*/react.createElement("th", null, "Type"), /*#__PURE__*/react.createElement("th", null, "Default"), /*#__PURE__*/react.createElement("th", null, "Description"))), /*#__PURE__*/react.createElement("tbody", null, /*#__PURE__*/react.createElement("tr", null, /*#__PURE__*/react.createElement("td", null, /*#__PURE__*/react.createElement("code", null, "type")), /*#__PURE__*/react.createElement("td", null, "string"), /*#__PURE__*/react.createElement("td", null, "text"), /*#__PURE__*/react.createElement("td", null, "The type of input. Such as <input type=\"text\" name=\"name\"> gives a text box.")), /*#__PURE__*/react.createElement("tr", null, /*#__PURE__*/react.createElement("td", null, /*#__PURE__*/react.createElement("code", null, "btnType")), /*#__PURE__*/react.createElement("td", null, "string"), /*#__PURE__*/react.createElement("td", null, "button"), /*#__PURE__*/react.createElement("td", null, "The type attribute specifies the type of button. Such as ", /*#__PURE__*/react.createElement("code", null, "submit"), ", ", /*#__PURE__*/react.createElement("code", null, "reset"), " or ", /*#__PURE__*/react.createElement("code", null, "button"))), /*#__PURE__*/react.createElement("tr", null, /*#__PURE__*/react.createElement("td", null, /*#__PURE__*/react.createElement("code", null, "ui")), /*#__PURE__*/react.createElement("td", null, "string"), /*#__PURE__*/react.createElement("td", null, "-"), /*#__PURE__*/react.createElement("td", null, "The overlay style of the control. Can be used at the same time, separated by spaces. The optional values are:", /*#__PURE__*/react.createElement("br", null), /*#__PURE__*/react.createElement("strong", null, "status:"), /*#__PURE__*/react.createElement("br", null), /*#__PURE__*/react.createElement("code", null, "error"), ", ", /*#__PURE__*/react.createElement("code", null, "success"), /*#__PURE__*/react.createElement("br", null), /*#__PURE__*/react.createElement("strong", null, "corners:"), /*#__PURE__*/react.createElement("br", null), /*#__PURE__*/react.createElement("code", null, "pill"), ", ", /*#__PURE__*/react.createElement("code", null, "rounded"))), /*#__PURE__*/react.createElement("tr", null, /*#__PURE__*/react.createElement("td", null, /*#__PURE__*/react.createElement("code", null, "value")), /*#__PURE__*/react.createElement("td", null, "string"), /*#__PURE__*/react.createElement("td", null, "-"), /*#__PURE__*/react.createElement("td", null, "Set a default value for this control")), /*#__PURE__*/react.createElement("tr", null, /*#__PURE__*/react.createElement("td", null, /*#__PURE__*/react.createElement("code", null, "label")), /*#__PURE__*/react.createElement("td", null, "string | ReactNode"), /*#__PURE__*/react.createElement("td", null, "-"), /*#__PURE__*/react.createElement("td", null, "It is used to specify a label for an element of a form.")), /*#__PURE__*/react.createElement("tr", null, /*#__PURE__*/react.createElement("td", null, /*#__PURE__*/react.createElement("code", null, "name")), /*#__PURE__*/react.createElement("td", null, "string"), /*#__PURE__*/react.createElement("td", null, "-"), /*#__PURE__*/react.createElement("td", null, "Name is not deprecated when used with form fields.")), /*#__PURE__*/react.createElement("tr", null, /*#__PURE__*/react.createElement("td", null, /*#__PURE__*/react.createElement("code", null, "maxLength")), /*#__PURE__*/react.createElement("td", null, "number"), /*#__PURE__*/react.createElement("td", null, "-"), /*#__PURE__*/react.createElement("td", null, "Defines the maximum number of characters")), /*#__PURE__*/react.createElement("tr", null, /*#__PURE__*/react.createElement("td", null, /*#__PURE__*/react.createElement("code", null, "disabled")), /*#__PURE__*/react.createElement("td", null, "boolean"), /*#__PURE__*/react.createElement("td", null, "false"), /*#__PURE__*/react.createElement("td", null, "Whether the input is disabled")), /*#__PURE__*/react.createElement("tr", null, /*#__PURE__*/react.createElement("td", null, /*#__PURE__*/react.createElement("code", null, "required")), /*#__PURE__*/react.createElement("td", null, "boolean"), /*#__PURE__*/react.createElement("td", null, "false"), /*#__PURE__*/react.createElement("td", null, "When present, it specifies that a field must be filled out before submitting the form.")), /*#__PURE__*/react.createElement("tr", null, /*#__PURE__*/react.createElement("td", null, /*#__PURE__*/react.createElement("code", null, "icon")), /*#__PURE__*/react.createElement("td", null, "ReactNode"), /*#__PURE__*/react.createElement("td", null, "-"), /*#__PURE__*/react.createElement("td", null, "Set the icon of this control"))))), /*#__PURE__*/react.createElement("p", {
+  }, /*#__PURE__*/react.createElement("thead", null, /*#__PURE__*/react.createElement("tr", null, /*#__PURE__*/react.createElement("th", null, "Property"), /*#__PURE__*/react.createElement("th", null, "Type"), /*#__PURE__*/react.createElement("th", null, "Default"), /*#__PURE__*/react.createElement("th", null, "Description"))), /*#__PURE__*/react.createElement("tbody", null, /*#__PURE__*/react.createElement("tr", null, /*#__PURE__*/react.createElement("td", null, /*#__PURE__*/react.createElement("code", null, "type")), /*#__PURE__*/react.createElement("td", null, "string"), /*#__PURE__*/react.createElement("td", null, "text"), /*#__PURE__*/react.createElement("td", null, "The type of input. Such as <input type=\"text\" name=\"name\"> gives a text box.")), /*#__PURE__*/react.createElement("tr", null, /*#__PURE__*/react.createElement("td", null, /*#__PURE__*/react.createElement("code", null, "btnType")), /*#__PURE__*/react.createElement("td", null, "string"), /*#__PURE__*/react.createElement("td", null, "button"), /*#__PURE__*/react.createElement("td", null, "The type attribute specifies the type of button. Such as ", /*#__PURE__*/react.createElement("code", null, "submit"), ", ", /*#__PURE__*/react.createElement("code", null, "reset"), " or ", /*#__PURE__*/react.createElement("code", null, "button"))), /*#__PURE__*/react.createElement("tr", null, /*#__PURE__*/react.createElement("td", null, /*#__PURE__*/react.createElement("code", null, "ui")), /*#__PURE__*/react.createElement("td", null, "string"), /*#__PURE__*/react.createElement("td", null, "-"), /*#__PURE__*/react.createElement("td", null, "The overlay style of the control. Can be used at the same time, separated by spaces. The optional values are:", /*#__PURE__*/react.createElement("br", null), /*#__PURE__*/react.createElement("strong", null, "status:"), /*#__PURE__*/react.createElement("br", null), /*#__PURE__*/react.createElement("code", null, "error"), ", ", /*#__PURE__*/react.createElement("code", null, "success"), /*#__PURE__*/react.createElement("br", null), /*#__PURE__*/react.createElement("strong", null, "corners:"), /*#__PURE__*/react.createElement("br", null), /*#__PURE__*/react.createElement("code", null, "pill"), ", ", /*#__PURE__*/react.createElement("code", null, "rounded"))), /*#__PURE__*/react.createElement("tr", null, /*#__PURE__*/react.createElement("td", null, /*#__PURE__*/react.createElement("code", null, "value")), /*#__PURE__*/react.createElement("td", null, "string"), /*#__PURE__*/react.createElement("td", null, "-"), /*#__PURE__*/react.createElement("td", null, "Set a default value for this control")), /*#__PURE__*/react.createElement("tr", null, /*#__PURE__*/react.createElement("td", null, /*#__PURE__*/react.createElement("code", null, "label")), /*#__PURE__*/react.createElement("td", null, "string | ReactNode"), /*#__PURE__*/react.createElement("td", null, "-"), /*#__PURE__*/react.createElement("td", null, "It is used to specify a label for an element of a form.")), /*#__PURE__*/react.createElement("tr", null, /*#__PURE__*/react.createElement("td", null, /*#__PURE__*/react.createElement("code", null, "name")), /*#__PURE__*/react.createElement("td", null, "string"), /*#__PURE__*/react.createElement("td", null, "-"), /*#__PURE__*/react.createElement("td", null, "Name is not deprecated when used with form fields.")), /*#__PURE__*/react.createElement("tr", null, /*#__PURE__*/react.createElement("td", null, /*#__PURE__*/react.createElement("code", null, "placeholder")), /*#__PURE__*/react.createElement("td", null, "string"), /*#__PURE__*/react.createElement("td", null, "-"), /*#__PURE__*/react.createElement("td", null, "Specifies a short hint that describes.")), /*#__PURE__*/react.createElement("tr", null, /*#__PURE__*/react.createElement("td", null, /*#__PURE__*/react.createElement("code", null, "maxLength")), /*#__PURE__*/react.createElement("td", null, "number"), /*#__PURE__*/react.createElement("td", null, "-"), /*#__PURE__*/react.createElement("td", null, "Defines the maximum number of characters")), /*#__PURE__*/react.createElement("tr", null, /*#__PURE__*/react.createElement("td", null, /*#__PURE__*/react.createElement("code", null, "disabled")), /*#__PURE__*/react.createElement("td", null, "boolean"), /*#__PURE__*/react.createElement("td", null, "false"), /*#__PURE__*/react.createElement("td", null, "Whether the input is disabled")), /*#__PURE__*/react.createElement("tr", null, /*#__PURE__*/react.createElement("td", null, /*#__PURE__*/react.createElement("code", null, "required")), /*#__PURE__*/react.createElement("td", null, "boolean"), /*#__PURE__*/react.createElement("td", null, "false"), /*#__PURE__*/react.createElement("td", null, "When present, it specifies that a field must be filled out before submitting the form.")), /*#__PURE__*/react.createElement("tr", null, /*#__PURE__*/react.createElement("td", null, /*#__PURE__*/react.createElement("code", null, "icon")), /*#__PURE__*/react.createElement("td", null, "ReactNode"), /*#__PURE__*/react.createElement("td", null, "-"), /*#__PURE__*/react.createElement("td", null, "Set the icon of this control"))))), /*#__PURE__*/react.createElement("p", {
     className: "mb-5"
-  }, "It accepts all props which this control support."), /*#__PURE__*/react.createElement("h4", null, "Textarea"), /*#__PURE__*/react.createElement("div", null, /*#__PURE__*/react.createElement("pre", null, "import ", "{Textarea}", " from '@poemkit/components/Form/index.tsx';")), /*#__PURE__*/react.createElement("div", {
+  }, "It accepts all props which this control support."), /*#__PURE__*/react.createElement("h4", null, "Tag Input"), /*#__PURE__*/react.createElement("div", null, /*#__PURE__*/react.createElement("pre", null, "import ", "{TagInput}", " from '@poemkit/components/Form/index.tsx';")), /*#__PURE__*/react.createElement("div", {
+    className: "table-responsive-md"
+  }, /*#__PURE__*/react.createElement("table", {
+    className: "table table-bordered table-striped mb-5"
+  }, /*#__PURE__*/react.createElement("thead", null, /*#__PURE__*/react.createElement("tr", null, /*#__PURE__*/react.createElement("th", null, "Property"), /*#__PURE__*/react.createElement("th", null, "Type"), /*#__PURE__*/react.createElement("th", null, "Default"), /*#__PURE__*/react.createElement("th", null, "Description"))), /*#__PURE__*/react.createElement("tbody", null, /*#__PURE__*/react.createElement("tr", null, /*#__PURE__*/react.createElement("td", null, /*#__PURE__*/react.createElement("code", null, "maxTags")), /*#__PURE__*/react.createElement("td", null, "number"), /*#__PURE__*/react.createElement("td", null, "10"), /*#__PURE__*/react.createElement("td", null, "Maximum number of tags that can be added.")), /*#__PURE__*/react.createElement("tr", null, /*#__PURE__*/react.createElement("td", null, /*#__PURE__*/react.createElement("code", null, "ui")), /*#__PURE__*/react.createElement("td", null, "string"), /*#__PURE__*/react.createElement("td", null, "-"), /*#__PURE__*/react.createElement("td", null, "The overlay style of the control. Can be used at the same time, separated by spaces. The optional values are:", /*#__PURE__*/react.createElement("br", null), /*#__PURE__*/react.createElement("strong", null, "corners:"), /*#__PURE__*/react.createElement("br", null), /*#__PURE__*/react.createElement("code", null, "pill"), ", ", /*#__PURE__*/react.createElement("code", null, "rounded"), /*#__PURE__*/react.createElement("br", null), /*#__PURE__*/react.createElement("strong", null, "size:"), /*#__PURE__*/react.createElement("br", null), /*#__PURE__*/react.createElement("code", null, "fullwidth"))), /*#__PURE__*/react.createElement("tr", null, /*#__PURE__*/react.createElement("td", null, /*#__PURE__*/react.createElement("code", null, "value")), /*#__PURE__*/react.createElement("td", null, "string"), /*#__PURE__*/react.createElement("td", null, "-"), /*#__PURE__*/react.createElement("td", null, "Set a default value for this control. It accepts multiple values, separated by commas. like this: ", /*#__PURE__*/react.createElement("code", {
+    className: "text-wrap"
+  }, "tag1,tag2,tag3"))), /*#__PURE__*/react.createElement("tr", null, /*#__PURE__*/react.createElement("td", null, /*#__PURE__*/react.createElement("code", null, "name")), /*#__PURE__*/react.createElement("td", null, "string"), /*#__PURE__*/react.createElement("td", null, "-"), /*#__PURE__*/react.createElement("td", null, "Name is not deprecated when used with form fields.")), /*#__PURE__*/react.createElement("tr", null, /*#__PURE__*/react.createElement("td", null, /*#__PURE__*/react.createElement("code", null, "placeholder")), /*#__PURE__*/react.createElement("td", null, "string"), /*#__PURE__*/react.createElement("td", null, "-"), /*#__PURE__*/react.createElement("td", null, "Specifies a short hint that describes.")), /*#__PURE__*/react.createElement("tr", null, /*#__PURE__*/react.createElement("td", null, /*#__PURE__*/react.createElement("code", null, "disabled")), /*#__PURE__*/react.createElement("td", null, "boolean"), /*#__PURE__*/react.createElement("td", null, "false"), /*#__PURE__*/react.createElement("td", null, "Whether the input is disabled")), /*#__PURE__*/react.createElement("tr", null, /*#__PURE__*/react.createElement("td", null, /*#__PURE__*/react.createElement("code", null, "required")), /*#__PURE__*/react.createElement("td", null, "boolean"), /*#__PURE__*/react.createElement("td", null, "false"), /*#__PURE__*/react.createElement("td", null, "When present, it specifies that a field must be filled out before submitting the form."))))), /*#__PURE__*/react.createElement("h4", null, "Textarea"), /*#__PURE__*/react.createElement("div", null, /*#__PURE__*/react.createElement("pre", null, "import ", "{Textarea}", " from '@poemkit/components/Form/index.tsx';")), /*#__PURE__*/react.createElement("div", {
     className: "table-responsive-md"
   }, /*#__PURE__*/react.createElement("table", {
     className: "table table-bordered table-striped"
-  }, /*#__PURE__*/react.createElement("thead", null, /*#__PURE__*/react.createElement("tr", null, /*#__PURE__*/react.createElement("th", null, "Property"), /*#__PURE__*/react.createElement("th", null, "Type"), /*#__PURE__*/react.createElement("th", null, "Default"), /*#__PURE__*/react.createElement("th", null, "Description"))), /*#__PURE__*/react.createElement("tbody", null, /*#__PURE__*/react.createElement("tr", null, /*#__PURE__*/react.createElement("td", null, /*#__PURE__*/react.createElement("code", null, "theme")), /*#__PURE__*/react.createElement("td", null, "string | ", /*#__PURE__*/react.createElement("code", null, "line")), /*#__PURE__*/react.createElement("td", null, "-"), /*#__PURE__*/react.createElement("td", null, "The display style of the control")), /*#__PURE__*/react.createElement("tr", null, /*#__PURE__*/react.createElement("td", null, /*#__PURE__*/react.createElement("code", null, "ui")), /*#__PURE__*/react.createElement("td", null, "string"), /*#__PURE__*/react.createElement("td", null, "-"), /*#__PURE__*/react.createElement("td", null, "The overlay style of the control. Can be used at the same time, separated by spaces. The optional values are:", /*#__PURE__*/react.createElement("br", null), /*#__PURE__*/react.createElement("strong", null, "status:"), /*#__PURE__*/react.createElement("br", null), /*#__PURE__*/react.createElement("code", null, "error"), ", ", /*#__PURE__*/react.createElement("code", null, "success"), /*#__PURE__*/react.createElement("br", null), /*#__PURE__*/react.createElement("strong", null, "corners:"), /*#__PURE__*/react.createElement("br", null), /*#__PURE__*/react.createElement("code", null, "pill"), ", ", /*#__PURE__*/react.createElement("code", null, "rounded"), /*#__PURE__*/react.createElement("br", null), /*#__PURE__*/react.createElement("strong", null, "size:"), /*#__PURE__*/react.createElement("br", null), /*#__PURE__*/react.createElement("code", null, "fullwidth"))), /*#__PURE__*/react.createElement("tr", null, /*#__PURE__*/react.createElement("td", null, /*#__PURE__*/react.createElement("code", null, "value")), /*#__PURE__*/react.createElement("td", null, "string"), /*#__PURE__*/react.createElement("td", null, "-"), /*#__PURE__*/react.createElement("td", null, "Set a default value for this control")), /*#__PURE__*/react.createElement("tr", null, /*#__PURE__*/react.createElement("td", null, /*#__PURE__*/react.createElement("code", null, "label")), /*#__PURE__*/react.createElement("td", null, "string | ReactNode"), /*#__PURE__*/react.createElement("td", null, "-"), /*#__PURE__*/react.createElement("td", null, "It is used to specify a label for an element of a form.")), /*#__PURE__*/react.createElement("tr", null, /*#__PURE__*/react.createElement("td", null, /*#__PURE__*/react.createElement("code", null, "units")), /*#__PURE__*/react.createElement("td", null, "string"), /*#__PURE__*/react.createElement("td", null, "-"), /*#__PURE__*/react.createElement("td", null, "Specify a unit identification string. Such as ", /*#__PURE__*/react.createElement("code", null, "em"), ", ", /*#__PURE__*/react.createElement("code", null, "px"), ", and so on.")), /*#__PURE__*/react.createElement("tr", null, /*#__PURE__*/react.createElement("td", null, /*#__PURE__*/react.createElement("code", null, "name")), /*#__PURE__*/react.createElement("td", null, "string"), /*#__PURE__*/react.createElement("td", null, "-"), /*#__PURE__*/react.createElement("td", null, "Name is not deprecated when used with form fields.")), /*#__PURE__*/react.createElement("tr", null, /*#__PURE__*/react.createElement("td", null, /*#__PURE__*/react.createElement("code", null, "maxLength")), /*#__PURE__*/react.createElement("td", null, "number"), /*#__PURE__*/react.createElement("td", null, "-"), /*#__PURE__*/react.createElement("td", null, "Defines the maximum number of characters")), /*#__PURE__*/react.createElement("tr", null, /*#__PURE__*/react.createElement("td", null, /*#__PURE__*/react.createElement("code", null, "cols")), /*#__PURE__*/react.createElement("td", null, "number"), /*#__PURE__*/react.createElement("td", null, "-"), /*#__PURE__*/react.createElement("td", null, "The cols attribute specifies the visible width of a text area.")), /*#__PURE__*/react.createElement("tr", null, /*#__PURE__*/react.createElement("td", null, /*#__PURE__*/react.createElement("code", null, "rows")), /*#__PURE__*/react.createElement("td", null, "number"), /*#__PURE__*/react.createElement("td", null, "-"), /*#__PURE__*/react.createElement("td", null, "The rows attribute specifies the visible height of a text area, in lines.")), /*#__PURE__*/react.createElement("tr", null, /*#__PURE__*/react.createElement("td", null, /*#__PURE__*/react.createElement("code", null, "disabled")), /*#__PURE__*/react.createElement("td", null, "boolean"), /*#__PURE__*/react.createElement("td", null, "false"), /*#__PURE__*/react.createElement("td", null, "Whether the input is disabled")), /*#__PURE__*/react.createElement("tr", null, /*#__PURE__*/react.createElement("td", null, /*#__PURE__*/react.createElement("code", null, "required")), /*#__PURE__*/react.createElement("td", null, "boolean"), /*#__PURE__*/react.createElement("td", null, "false"), /*#__PURE__*/react.createElement("td", null, "When present, it specifies that a field must be filled out before submitting the form."))))), /*#__PURE__*/react.createElement("p", {
+  }, /*#__PURE__*/react.createElement("thead", null, /*#__PURE__*/react.createElement("tr", null, /*#__PURE__*/react.createElement("th", null, "Property"), /*#__PURE__*/react.createElement("th", null, "Type"), /*#__PURE__*/react.createElement("th", null, "Default"), /*#__PURE__*/react.createElement("th", null, "Description"))), /*#__PURE__*/react.createElement("tbody", null, /*#__PURE__*/react.createElement("tr", null, /*#__PURE__*/react.createElement("td", null, /*#__PURE__*/react.createElement("code", null, "theme")), /*#__PURE__*/react.createElement("td", null, "string | ", /*#__PURE__*/react.createElement("code", null, "line")), /*#__PURE__*/react.createElement("td", null, "-"), /*#__PURE__*/react.createElement("td", null, "The display style of the control")), /*#__PURE__*/react.createElement("tr", null, /*#__PURE__*/react.createElement("td", null, /*#__PURE__*/react.createElement("code", null, "ui")), /*#__PURE__*/react.createElement("td", null, "string"), /*#__PURE__*/react.createElement("td", null, "-"), /*#__PURE__*/react.createElement("td", null, "The overlay style of the control. Can be used at the same time, separated by spaces. The optional values are:", /*#__PURE__*/react.createElement("br", null), /*#__PURE__*/react.createElement("strong", null, "status:"), /*#__PURE__*/react.createElement("br", null), /*#__PURE__*/react.createElement("code", null, "error"), ", ", /*#__PURE__*/react.createElement("code", null, "success"), /*#__PURE__*/react.createElement("br", null), /*#__PURE__*/react.createElement("strong", null, "corners:"), /*#__PURE__*/react.createElement("br", null), /*#__PURE__*/react.createElement("code", null, "pill"), ", ", /*#__PURE__*/react.createElement("code", null, "rounded"), /*#__PURE__*/react.createElement("br", null), /*#__PURE__*/react.createElement("strong", null, "size:"), /*#__PURE__*/react.createElement("br", null), /*#__PURE__*/react.createElement("code", null, "fullwidth"))), /*#__PURE__*/react.createElement("tr", null, /*#__PURE__*/react.createElement("td", null, /*#__PURE__*/react.createElement("code", null, "value")), /*#__PURE__*/react.createElement("td", null, "string"), /*#__PURE__*/react.createElement("td", null, "-"), /*#__PURE__*/react.createElement("td", null, "Set a default value for this control")), /*#__PURE__*/react.createElement("tr", null, /*#__PURE__*/react.createElement("td", null, /*#__PURE__*/react.createElement("code", null, "label")), /*#__PURE__*/react.createElement("td", null, "string | ReactNode"), /*#__PURE__*/react.createElement("td", null, "-"), /*#__PURE__*/react.createElement("td", null, "It is used to specify a label for an element of a form.")), /*#__PURE__*/react.createElement("tr", null, /*#__PURE__*/react.createElement("td", null, /*#__PURE__*/react.createElement("code", null, "units")), /*#__PURE__*/react.createElement("td", null, "string"), /*#__PURE__*/react.createElement("td", null, "-"), /*#__PURE__*/react.createElement("td", null, "Specify a unit identification string. Such as ", /*#__PURE__*/react.createElement("code", null, "em"), ", ", /*#__PURE__*/react.createElement("code", null, "px"), ", and so on.")), /*#__PURE__*/react.createElement("tr", null, /*#__PURE__*/react.createElement("td", null, /*#__PURE__*/react.createElement("code", null, "name")), /*#__PURE__*/react.createElement("td", null, "string"), /*#__PURE__*/react.createElement("td", null, "-"), /*#__PURE__*/react.createElement("td", null, "Name is not deprecated when used with form fields.")), /*#__PURE__*/react.createElement("tr", null, /*#__PURE__*/react.createElement("td", null, /*#__PURE__*/react.createElement("code", null, "placeholder")), /*#__PURE__*/react.createElement("td", null, "string"), /*#__PURE__*/react.createElement("td", null, "-"), /*#__PURE__*/react.createElement("td", null, "Specifies a short hint that describes.")), /*#__PURE__*/react.createElement("tr", null, /*#__PURE__*/react.createElement("td", null, /*#__PURE__*/react.createElement("code", null, "maxLength")), /*#__PURE__*/react.createElement("td", null, "number"), /*#__PURE__*/react.createElement("td", null, "-"), /*#__PURE__*/react.createElement("td", null, "Defines the maximum number of characters")), /*#__PURE__*/react.createElement("tr", null, /*#__PURE__*/react.createElement("td", null, /*#__PURE__*/react.createElement("code", null, "cols")), /*#__PURE__*/react.createElement("td", null, "number"), /*#__PURE__*/react.createElement("td", null, "-"), /*#__PURE__*/react.createElement("td", null, "The cols attribute specifies the visible width of a text area.")), /*#__PURE__*/react.createElement("tr", null, /*#__PURE__*/react.createElement("td", null, /*#__PURE__*/react.createElement("code", null, "rows")), /*#__PURE__*/react.createElement("td", null, "number"), /*#__PURE__*/react.createElement("td", null, "-"), /*#__PURE__*/react.createElement("td", null, "The rows attribute specifies the visible height of a text area, in lines.")), /*#__PURE__*/react.createElement("tr", null, /*#__PURE__*/react.createElement("td", null, /*#__PURE__*/react.createElement("code", null, "disabled")), /*#__PURE__*/react.createElement("td", null, "boolean"), /*#__PURE__*/react.createElement("td", null, "false"), /*#__PURE__*/react.createElement("td", null, "Whether the input is disabled")), /*#__PURE__*/react.createElement("tr", null, /*#__PURE__*/react.createElement("td", null, /*#__PURE__*/react.createElement("code", null, "required")), /*#__PURE__*/react.createElement("td", null, "boolean"), /*#__PURE__*/react.createElement("td", null, "false"), /*#__PURE__*/react.createElement("td", null, "When present, it specifies that a field must be filled out before submitting the form."))))), /*#__PURE__*/react.createElement("p", {
     className: "mb-5"
   }, "It accepts all props which this control support."), /*#__PURE__*/react.createElement("h4", null, "Select"), /*#__PURE__*/react.createElement("div", null, /*#__PURE__*/react.createElement("pre", null, "import ", "{Select}", " from '@poemkit/components/Form/index.tsx';")), /*#__PURE__*/react.createElement("div", {
     className: "table-responsive-md"
@@ -55989,7 +56609,9 @@ var PasswordInput = /*#__PURE__*/function (_Component) {
     className: "table table-bordered table-striped mb-5"
   }, /*#__PURE__*/react.createElement("thead", null, /*#__PURE__*/react.createElement("tr", null, /*#__PURE__*/react.createElement("th", null, "Property"), /*#__PURE__*/react.createElement("th", null, "Type"), /*#__PURE__*/react.createElement("th", null, "Default"), /*#__PURE__*/react.createElement("th", null, "Description"))), /*#__PURE__*/react.createElement("tbody", null, /*#__PURE__*/react.createElement("tr", null, /*#__PURE__*/react.createElement("td", null, /*#__PURE__*/react.createElement("code", null, "options")), /*#__PURE__*/react.createElement("td", null, "JSON Object Literals"), /*#__PURE__*/react.createElement("td", null, "-"), /*#__PURE__*/react.createElement("td", null, /*#__PURE__*/react.createElement("strong", null, "(Required)"), " Set the default value using JSON string format for menu of options, like this: ", /*#__PURE__*/react.createElement("code", {
     className: "text-wrap"
-  }, "{\"Option 1\":\"value-1\",\"Option 2\":\"value-2\",\"Option 3\":\"value-3\"}"))), /*#__PURE__*/react.createElement("tr", null, /*#__PURE__*/react.createElement("td", null, /*#__PURE__*/react.createElement("code", null, "theme")), /*#__PURE__*/react.createElement("td", null, "string | ", /*#__PURE__*/react.createElement("code", null, "line")), /*#__PURE__*/react.createElement("td", null, "-"), /*#__PURE__*/react.createElement("td", null, "The display style of the control")), /*#__PURE__*/react.createElement("tr", null, /*#__PURE__*/react.createElement("td", null, /*#__PURE__*/react.createElement("code", null, "value")), /*#__PURE__*/react.createElement("td", null, "string"), /*#__PURE__*/react.createElement("td", null, "-"), /*#__PURE__*/react.createElement("td", null, "Set a default value for this control")), /*#__PURE__*/react.createElement("tr", null, /*#__PURE__*/react.createElement("td", null, /*#__PURE__*/react.createElement("code", null, "name")), /*#__PURE__*/react.createElement("td", null, "string"), /*#__PURE__*/react.createElement("td", null, "-"), /*#__PURE__*/react.createElement("td", null, "Name is not deprecated when used with form fields.")), /*#__PURE__*/react.createElement("tr", null, /*#__PURE__*/react.createElement("td", null, /*#__PURE__*/react.createElement("code", null, "required")), /*#__PURE__*/react.createElement("td", null, "boolean"), /*#__PURE__*/react.createElement("td", null, "false"), /*#__PURE__*/react.createElement("td", null, "When present, it specifies that a field must be filled out before submitting the form."))))), /*#__PURE__*/react.createElement("h4", null, "Single Select"), /*#__PURE__*/react.createElement("div", null, /*#__PURE__*/react.createElement("pre", null, "import ", "{SingleSelect}", " from '@poemkit/components/Form/index.tsx';")), /*#__PURE__*/react.createElement("div", {
+  }, "{\"Option 1\":\"value-1\",\"Option 2\":\"value-2\",\"Option 3\":\"value-3\"}"))), /*#__PURE__*/react.createElement("tr", null, /*#__PURE__*/react.createElement("td", null, /*#__PURE__*/react.createElement("code", null, "theme")), /*#__PURE__*/react.createElement("td", null, "string | ", /*#__PURE__*/react.createElement("code", null, "line")), /*#__PURE__*/react.createElement("td", null, "-"), /*#__PURE__*/react.createElement("td", null, "The display style of the control")), /*#__PURE__*/react.createElement("tr", null, /*#__PURE__*/react.createElement("td", null, /*#__PURE__*/react.createElement("code", null, "value")), /*#__PURE__*/react.createElement("td", null, "string"), /*#__PURE__*/react.createElement("td", null, "-"), /*#__PURE__*/react.createElement("td", null, "Set a default value for this control.  It accepts multiple values, separated by commas. like this: ", /*#__PURE__*/react.createElement("code", {
+    className: "text-wrap"
+  }, "value-1,value-2"))), /*#__PURE__*/react.createElement("tr", null, /*#__PURE__*/react.createElement("td", null, /*#__PURE__*/react.createElement("code", null, "name")), /*#__PURE__*/react.createElement("td", null, "string"), /*#__PURE__*/react.createElement("td", null, "-"), /*#__PURE__*/react.createElement("td", null, "Name is not deprecated when used with form fields.")), /*#__PURE__*/react.createElement("tr", null, /*#__PURE__*/react.createElement("td", null, /*#__PURE__*/react.createElement("code", null, "required")), /*#__PURE__*/react.createElement("td", null, "boolean"), /*#__PURE__*/react.createElement("td", null, "false"), /*#__PURE__*/react.createElement("td", null, "When present, it specifies that a field must be filled out before submitting the form."))))), /*#__PURE__*/react.createElement("h4", null, "Single Select"), /*#__PURE__*/react.createElement("div", null, /*#__PURE__*/react.createElement("pre", null, "import ", "{SingleSelect}", " from '@poemkit/components/Form/index.tsx';")), /*#__PURE__*/react.createElement("div", {
     className: "table-responsive-md"
   }, /*#__PURE__*/react.createElement("table", {
     className: "table table-bordered table-striped mb-5"
@@ -56047,12 +56669,16 @@ function Grid_createSuper(Derived) { var hasNativeReflectConstruct = Grid_isNati
 function Grid_isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Reflect.construct) return false; if (Reflect.construct.sham) return false; if (typeof Proxy === "function") return true; try { Boolean.prototype.valueOf.call(Reflect.construct(Boolean, [], function () {})); return true; } catch (e) { return false; } }
 
 
-/*-- Apply Third-party plugins (import location should be in front of "global scripts and styles") --*/
-
+/*-- Apply Third-party plugins (import location should be in front of "GLOBAL STYLES") --*/
 
 
 
 /*-- Apply global scripts and styles --*/
+
+
+
+
+/*-- Apply this component styles --*/
 
 
 
@@ -57864,31 +58490,31 @@ var GridColumn = /*#__PURE__*/function (_Component) {
     className: "table table-bordered table-striped mb-5"
   }, /*#__PURE__*/react.createElement("thead", null, /*#__PURE__*/react.createElement("tr", null, /*#__PURE__*/react.createElement("th", null, "Property"), /*#__PURE__*/react.createElement("th", null, "Type"), /*#__PURE__*/react.createElement("th", null, "Default"), /*#__PURE__*/react.createElement("th", null, "Description"))), /*#__PURE__*/react.createElement("tbody", null, /*#__PURE__*/react.createElement("tr", null, /*#__PURE__*/react.createElement("td", null, /*#__PURE__*/react.createElement("code", null, "ratio")), /*#__PURE__*/react.createElement("td", null, /*#__PURE__*/react.createElement("code", null, "1/1"), " | ", /*#__PURE__*/react.createElement("code", null, "1/2"), " | ", /*#__PURE__*/react.createElement("code", null, "1/3"), " | ", /*#__PURE__*/react.createElement("code", null, "2/3"), " | ", /*#__PURE__*/react.createElement("code", null, "1/4"), " |", /*#__PURE__*/react.createElement("code", null, "3/4"), " | ", /*#__PURE__*/react.createElement("code", null, "1/5"), " | ", /*#__PURE__*/react.createElement("code", null, "2/5"), " | ", /*#__PURE__*/react.createElement("code", null, "3/5"), " | ", /*#__PURE__*/react.createElement("code", null, "4/5"), " |", /*#__PURE__*/react.createElement("code", null, "1/6"), " | boolean"), /*#__PURE__*/react.createElement("td", null, "-"), /*#__PURE__*/react.createElement("td", null, "The ratio of each column")), /*#__PURE__*/react.createElement("tr", null, /*#__PURE__*/react.createElement("td", null, /*#__PURE__*/react.createElement("code", null, "stackRatio")), /*#__PURE__*/react.createElement("td", null, /*#__PURE__*/react.createElement("code", null, "1/1"), " | ", /*#__PURE__*/react.createElement("code", null, "1/2"), " | ", /*#__PURE__*/react.createElement("code", null, "1/3"), " | ", /*#__PURE__*/react.createElement("code", null, "2/3"), " | ", /*#__PURE__*/react.createElement("code", null, "1/4"), " |", /*#__PURE__*/react.createElement("code", null, "3/4"), " | ", /*#__PURE__*/react.createElement("code", null, "1/5"), " | ", /*#__PURE__*/react.createElement("code", null, "2/5"), " | ", /*#__PURE__*/react.createElement("code", null, "3/5"), " | ", /*#__PURE__*/react.createElement("code", null, "4/5"), " |", /*#__PURE__*/react.createElement("code", null, "1/6"), " | boolean"), /*#__PURE__*/react.createElement("td", null, "-"), /*#__PURE__*/react.createElement("td", null, "The ratio of stacked breakpoints. ", /*#__PURE__*/react.createElement("br", null), " You can set breakpoints for the ", /*#__PURE__*/react.createElement("code", null, "stackSize"), "and ", /*#__PURE__*/react.createElement("code", null, "stackRatio"), " props that starts out stacked before becoming horizontal with at the small breakpoint. Setting it to a breakpoint (", /*#__PURE__*/react.createElement("code", null, "sm, md, lg, xl"), ") of the", /*#__PURE__*/react.createElement("code", null, "stackSize"), " prop will set the ", /*#__PURE__*/react.createElement("code", null, "<GridColumn>...</Grid>"), "as fluid until the specified breakpoint")), /*#__PURE__*/react.createElement("tr", null, /*#__PURE__*/react.createElement("td", null, /*#__PURE__*/react.createElement("code", null, "stackSize")), /*#__PURE__*/react.createElement("td", null, /*#__PURE__*/react.createElement("code", null, "sm"), " | ", /*#__PURE__*/react.createElement("code", null, "md"), " | ", /*#__PURE__*/react.createElement("code", null, "lg"), " | ", /*#__PURE__*/react.createElement("code", null, "xl"), " | boolean"), /*#__PURE__*/react.createElement("td", null, "-"), /*#__PURE__*/react.createElement("td", null, "The size of stacked breakpoints")), /*#__PURE__*/react.createElement("tr", null, /*#__PURE__*/react.createElement("td", null, /*#__PURE__*/react.createElement("code", null, "inline")), /*#__PURE__*/react.createElement("td", null, "boolean"), /*#__PURE__*/react.createElement("td", null, "false"), /*#__PURE__*/react.createElement("td", null, "This attribute will make the column in a separate block, there is no float, and its centering can be controlled")))))))))));
 });
-;// CONCATENATED MODULE: ./src/client/components/Gallery/GalleryImage.tsx
+;// CONCATENATED MODULE: ./src/client/components/Gallery/Image.tsx
 
 
 
 
 
 
-function GalleryImage_createSuper(Derived) { var hasNativeReflectConstruct = GalleryImage_isNativeReflectConstruct(); return function _createSuperInternal() { var Super = _getPrototypeOf(Derived), result; if (hasNativeReflectConstruct) { var NewTarget = _getPrototypeOf(this).constructor; result = Reflect.construct(Super, arguments, NewTarget); } else { result = Super.apply(this, arguments); } return _possibleConstructorReturn(this, result); }; }
+function Image_createSuper(Derived) { var hasNativeReflectConstruct = Image_isNativeReflectConstruct(); return function _createSuperInternal() { var Super = _getPrototypeOf(Derived), result; if (hasNativeReflectConstruct) { var NewTarget = _getPrototypeOf(this).constructor; result = Reflect.construct(Super, arguments, NewTarget); } else { result = Super.apply(this, arguments); } return _possibleConstructorReturn(this, result); }; }
 
-function GalleryImage_isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Reflect.construct) return false; if (Reflect.construct.sham) return false; if (typeof Proxy === "function") return true; try { Boolean.prototype.valueOf.call(Reflect.construct(Boolean, [], function () {})); return true; } catch (e) { return false; } }
+function Image_isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Reflect.construct) return false; if (Reflect.construct.sham) return false; if (typeof Proxy === "function") return true; try { Boolean.prototype.valueOf.call(Reflect.construct(Boolean, [], function () {})); return true; } catch (e) { return false; } }
 
 
 
-var GalleryImage = /*#__PURE__*/function (_Component) {
-  _inherits(GalleryImage, _Component);
+var Image_Image = /*#__PURE__*/function (_Component) {
+  _inherits(Image, _Component);
 
-  var _super = GalleryImage_createSuper(GalleryImage);
+  var _super = Image_createSuper(Image);
 
-  function GalleryImage(props) {
-    _classCallCheck(this, GalleryImage);
+  function Image(props) {
+    _classCallCheck(this, Image);
 
     return _super.call(this, props);
   }
 
-  _createClass(GalleryImage, [{
+  _createClass(Image, [{
     key: "render",
     value: function render() {
       var _this$props = this.props,
@@ -57903,7 +58529,7 @@ var GalleryImage = /*#__PURE__*/function (_Component) {
     }
   }]);
 
-  return GalleryImage;
+  return Image;
 }(react.Component);
 
 
@@ -57926,12 +58552,12 @@ function Gallery_isNativeReflectConstruct() { if (typeof Reflect === "undefined"
  *************************************
  */
 
-/*-- Apply Third-party plugins (import location should be in front of "global scripts and styles") --*/
-
+/*-- Apply Third-party plugins (import location should be in front of "GLOBAL STYLES") --*/
 
 
 
 /*-- Apply global scripts and styles --*/
+
 
 
 
@@ -57972,7 +58598,7 @@ var Gallery = /*#__PURE__*/function (_Component) {
       }, /*#__PURE__*/react.createElement("ul", {
         className: "poemkit-gallery__tiles poemkit-gallery__col-".concat(fixedColumns || 1)
       }, data ? data.map(function (item, index) {
-        return /*#__PURE__*/react.createElement(GalleryImage, {
+        return /*#__PURE__*/react.createElement(Image_Image, {
           key: index,
           url: item.url,
           title: item.title
@@ -58327,6 +58953,8 @@ var Gallery = /*#__PURE__*/function (_Component) {
 });
 ;// CONCATENATED MODULE: ./src/client/components/HybridContentSlider/hybrid-slider-anime.tsx
 
+
+/*-- Apply Third-party animation plugins --*/
 
 
 function hybridSliderAnime(curElement, config) {
@@ -59317,13 +59945,15 @@ function HybridContentSlider_isNativeReflectConstruct() { if (typeof Reflect ===
 
 
 
-
 /*-- Apply global scripts and styles --*/
 
 
 
 
 /*-- Apply this component styles --*/
+
+
+/*-- Apply Third-party animation plugins --*/
 
  // 
 
@@ -59755,12 +60385,12 @@ function InfiniteScroll_isNativeReflectConstruct() { if (typeof Reflect === "und
  *************************************
  */
 
-/*-- Apply Third-party plugins (import location should be in front of "global scripts and styles") --*/
-
+/*-- Apply Third-party plugins (import location should be in front of "GLOBAL STYLES") --*/
 
 
 
 /*-- Apply global scripts and styles --*/
+
 
 
  //
@@ -60082,12 +60712,12 @@ function ImageShapes_isNativeReflectConstruct() { if (typeof Reflect === "undefi
  *************************************
  */
 
-/*-- Apply Third-party plugins (import location should be in front of "global scripts and styles") --*/
-
+/*-- Apply Third-party plugins (import location should be in front of "GLOBAL STYLES") --*/
 
 
 
 /*-- Apply global scripts and styles --*/
+
 
 
 
@@ -60344,6 +60974,377 @@ var ImageShapes = /*#__PURE__*/function (_Component) {
       whiteSpace: "pre-wrap"
     }
   }, "<svg fill-rule=\"evenodd\" clip-rule=\"evenodd\" width=\"300px\" height=\"300px\" viewBox=\"0 0 300 300\">\n    <path fill=\"#191616\" d=\"M105.1,18.4l154.2,184.3C259.3,202.7,49.7,208.7,105.1,18.4z\"/>\n</svg>")))))))));
+});
+;// CONCATENATED MODULE: ./src/client/components/ImagePerspectiveHover/Image.tsx
+
+
+
+
+
+
+function ImagePerspectiveHover_Image_createSuper(Derived) { var hasNativeReflectConstruct = ImagePerspectiveHover_Image_isNativeReflectConstruct(); return function _createSuperInternal() { var Super = _getPrototypeOf(Derived), result; if (hasNativeReflectConstruct) { var NewTarget = _getPrototypeOf(this).constructor; result = Reflect.construct(Super, arguments, NewTarget); } else { result = Super.apply(this, arguments); } return _possibleConstructorReturn(this, result); }; }
+
+function ImagePerspectiveHover_Image_isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Reflect.construct) return false; if (Reflect.construct.sham) return false; if (typeof Proxy === "function") return true; try { Boolean.prototype.valueOf.call(Reflect.construct(Boolean, [], function () {})); return true; } catch (e) { return false; } }
+
+
+
+var ImagePerspectiveHover_Image_Image = /*#__PURE__*/function (_Component) {
+  _inherits(Image, _Component);
+
+  var _super = ImagePerspectiveHover_Image_createSuper(Image);
+
+  function Image(props) {
+    _classCallCheck(this, Image);
+
+    return _super.call(this, props);
+  }
+
+  _createClass(Image, [{
+    key: "render",
+    value: function render() {
+      var _this$props = this.props,
+          url = _this$props.url,
+          title = _this$props.title,
+          width = _this$props.width;
+      return /*#__PURE__*/react.createElement(react.Fragment, null, /*#__PURE__*/react.createElement("img", {
+        src: url,
+        alt: title,
+        width: isNaN(width) ? parseFloat(width) : width
+      }));
+    }
+  }]);
+
+  return Image;
+}(react.Component);
+
+
+;// CONCATENATED MODULE: ./src/client/components/ImagePerspectiveHover/index.tsx
+
+
+
+
+
+
+
+
+function ImagePerspectiveHover_createSuper(Derived) { var hasNativeReflectConstruct = ImagePerspectiveHover_isNativeReflectConstruct(); return function _createSuperInternal() { var Super = _getPrototypeOf(Derived), result; if (hasNativeReflectConstruct) { var NewTarget = _getPrototypeOf(this).constructor; result = Reflect.construct(Super, arguments, NewTarget); } else { result = Super.apply(this, arguments); } return _possibleConstructorReturn(this, result); }; }
+
+function ImagePerspectiveHover_isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Reflect.construct) return false; if (Reflect.construct.sham) return false; if (typeof Proxy === "function") return true; try { Boolean.prototype.valueOf.call(Reflect.construct(Boolean, [], function () {})); return true; } catch (e) { return false; } }
+
+/* 
+ *************************************
+ * <!-- Image Perspective Hover -->
+ *************************************
+ */
+
+/*-- Apply Third-party plugins (import location should be in front of "GLOBAL STYLES") --*/
+
+
+
+/*-- Apply global scripts and styles --*/
+
+
+
+
+/*-- Apply this component styles --*/
+
+ //
+
+
+
+var ImagePerspectiveHover = /*#__PURE__*/function (_Component) {
+  _inherits(ImagePerspectiveHover, _Component);
+
+  var _super = ImagePerspectiveHover_createSuper(ImagePerspectiveHover);
+
+  function ImagePerspectiveHover(props) {
+    var _this;
+
+    _classCallCheck(this, ImagePerspectiveHover);
+
+    _this = _super.call(this, props);
+
+    _defineProperty(_assertThisInitialized(_this), "parallaxZoneRef", /*#__PURE__*/react.createRef());
+
+    _defineProperty(_assertThisInitialized(_this), "uniqueID", void 0);
+
+    _defineProperty(_assertThisInitialized(_this), "itemsTotal", void 0);
+
+    _this.uniqueID = 'app-' + helpers.GUID.create();
+    _this.itemsTotal = _this.props.data ? _this.props.data.length : 0;
+    _this.handleMove = _this.handleMove.bind(_assertThisInitialized(_this));
+    _this.handleMoveEnd = _this.handleMoveEnd.bind(_assertThisInitialized(_this));
+    return _this;
+  }
+
+  _createClass(ImagePerspectiveHover, [{
+    key: "handleMove",
+    value: function handleMove(e) {
+      var offset = this.props.offset;
+      var el = this.parallaxZoneRef.current;
+      var offsetRes = typeof offset === 'undefined' ? false : offset;
+      var w = el.clientWidth; //including: padding
+
+      var h = el.clientHeight; //including: padding
+
+      var base = 0; //Base offset value.
+
+      var multiple = 0; //The power of target number.
+
+      if (offsetRes) {
+        if (this.itemsTotal === 1) {
+          base = Math.pow(offsetRes[0], offsetRes[1]);
+        } else {
+          base = offsetRes[0];
+          multiple = offsetRes[1];
+        }
+      }
+
+      var mouseX, mouseY, offsetX, offsetY;
+      var touches = e.touches; //get the absolute position of a mouse
+      //!!! Important: If you do not use window.pageXOffset or window.pageYOffset, 
+      //              the mouse coordinates are relative to the parent element
+
+      if (touches && touches.length) {
+        mouseX = touches[0].clientX + window.pageXOffset;
+        mouseY = touches[0].clientY + window.pageYOffset;
+      } else {
+        mouseX = e.clientX + window.pageXOffset;
+        mouseY = e.clientY + window.pageYOffset;
+      } //Find mouse position relative to element
+      //!!! Important: Using `el.offsetTop` or `el.offsetLeft` is relative, the value may be 0
+
+
+      offsetX = mouseX - helpers(el).offset().left;
+      offsetY = mouseY - helpers(el).offset().top; //console.log('mouseX: ', mouseX, ' mouseY: ', mouseY, 'el.offsetLeft: ', __(el).offset().left, ' el.offsetTop: ', __(el).offset().top );
+
+      if (this.itemsTotal === 1) {
+        /*
+        ////////////////////////////////////////////////////////////
+        ////////////////////////  Only One   ///////////////////////
+        ////////////////////////////////////////////////////////////
+        */
+        // function to run matrix3D effect on block
+        var targetX = this.mousePosition(offsetX, w, base),
+            targetY = this.mousePosition(offsetY, h, base);
+        el.style.transform = "rotateX(".concat(targetY, "deg) rotateY(").concat(targetX, "deg)");
+      } else {
+        /*
+        ////////////////////////////////////////////////////////////
+        ////////////////////  Multiple Images   ////////////////////
+        ////////////////////////////////////////////////////////////
+        */
+        // function to run matrix3D effect on block
+        var _targetX = offsetX / w,
+            _targetY = offsetY / h;
+
+        var $items = el.children;
+        Array.prototype.forEach.call($items, function (node, index) {
+          var x = _targetX * (base * Math.pow(multiple, index)),
+              y = _targetY * (base * Math.pow(multiple, index)),
+              z = 0,
+              deg = _targetY * (180 / Math.PI),
+              rotateDeg = deg - 35;
+
+          node.style.transform = "translate(".concat(x, "px ,").concat(y, "px) rotate3d( -1, 1, 0, ").concat(rotateDeg, "deg )");
+        });
+      }
+    }
+  }, {
+    key: "handleMoveEnd",
+    value: function handleMoveEnd(e) {
+      var el = this.parallaxZoneRef.current;
+
+      if (this.props.reset) {
+        if (this.itemsTotal === 1) {
+          /*
+          ////////////////////////////////////////////////////////////
+          ////////////////////////  Only One   ///////////////////////
+          ////////////////////////////////////////////////////////////
+          */
+          el.style.transform = "rotateX(0deg) rotateY(0deg)";
+        } else {
+          /*
+          ////////////////////////////////////////////////////////////
+          ////////////////////  Multiple Images   ////////////////////
+          ////////////////////////////////////////////////////////////
+          */
+          var $items = el.children;
+          Array.prototype.forEach.call($items, function (node, index) {
+            node.style.transform = "translate(0,0) rotate3d( -1, 1, 0, 0deg )";
+          });
+        }
+      }
+    } // make some calculations for mouse position
+
+  }, {
+    key: "mousePosition",
+    value: function mousePosition(mousePos, dimension, base) {
+      return Math.floor(mousePos / dimension * (base * 2)) - base;
+    }
+  }, {
+    key: "render",
+    value: function render() {
+      var _this$props = this.props,
+          data = _this$props.data,
+          id = _this$props.id;
+      return /*#__PURE__*/react.createElement(react.Fragment, null, /*#__PURE__*/react.createElement("div", {
+        id: id || this.uniqueID,
+        className: "poemkit-perspective-hover"
+      }, /*#__PURE__*/react.createElement("div", {
+        ref: this.parallaxZoneRef,
+        onMouseMove: this.handleMove,
+        onTouchMove: this.handleMove,
+        onMouseLeave: this.handleMoveEnd,
+        onTouchEnd: this.handleMoveEnd
+      }, data ? data.map(function (item, index) {
+        return /*#__PURE__*/react.createElement(ImagePerspectiveHover_Image_Image, {
+          key: index,
+          url: item.url,
+          title: item.title,
+          width: item.width
+        });
+      }) : '')));
+    }
+  }]);
+
+  return ImagePerspectiveHover;
+}(react.Component);
+
+
+;// CONCATENATED MODULE: ./src/client/views/_pages/ComponentsDemo/ImagePerspectiveHoverDemo.js
+
+
+ //Create or Remove Sidebar Menu
+
+ //get project config
+
+
+/* harmony default export */ const ImagePerspectiveHoverDemo = (function () {
+  react.useEffect(function () {
+    // Equivalent to componentDidMount and componentDidUpdate:
+    helpers(document).ready(function () {
+      //Create sidebar menu
+      SidebarMenu();
+    });
+  });
+  return /*#__PURE__*/react.createElement(react.Fragment, null, /*#__PURE__*/react.createElement("section", null, /*#__PURE__*/react.createElement("div", {
+    className: "container"
+  }, /*#__PURE__*/react.createElement("div", {
+    className: "row"
+  }, /*#__PURE__*/react.createElement("div", {
+    className: "col-12"
+  }, /*#__PURE__*/react.createElement("h1", {
+    className: "poemkit-typo--h2"
+  }, "Image Perspective Hover", /*#__PURE__*/react.createElement("a", {
+    className: "poemkit-typo--h3 align-middle",
+    href: "https://github.com/xizon/poemkit/tree/main/src/client/components/ImagePerspectiveHover",
+    target: "_blank"
+  }, /*#__PURE__*/react.createElement("span", {
+    className: "poemkit-dir--right",
+    style: {
+      fontSize: "0.75rem",
+      color: "#ababab",
+      margin: ".5rem .5rem 0 0"
+    }
+  }, /*#__PURE__*/react.createElement("svg", {
+    style: {
+      marginRight: ".5rem"
+    },
+    width: "15",
+    viewBox: "0 0 392.186 392.186"
+  }, /*#__PURE__*/react.createElement("g", null, /*#__PURE__*/react.createElement("g", null, /*#__PURE__*/react.createElement("g", null, /*#__PURE__*/react.createElement("path", {
+    fill: "#d2d2d2",
+    d: "M368.62,17.951H23.568C10.57,17.951,0,28.524,0,41.52v309.146c0,12.996,10.57,23.568,23.568,23.568h345.053c12.994,0,23.564-10.572,23.564-23.568V41.52C392.188,28.525,381.614,17.951,368.62,17.951z M297.56,57.528c0-4.806,3.896-8.703,8.701-8.703h8.703c4.808,0,8.701,3.896,8.701,8.703v9.863c0,4.806-3.896,8.702-8.701,8.702h-8.703c-4.805,0-8.701-3.896-8.701-8.702V57.528z M257.093,57.528c0-4.806,3.898-8.703,8.703-8.703h8.701c4.805,0,8.703,3.896,8.703,8.703v9.863c0,4.806-3.898,8.702-8.703,8.702h-8.701c-4.805,0-8.703-3.896-8.703-8.702V57.528z M363.903,345.951H28.282V102.235h335.621V345.951L363.903,345.951z M364.132,67.391c0,4.806-3.896,8.702-8.701,8.702h-8.703c-4.809,0-8.702-3.896-8.702-8.702v-9.863c0-4.806,3.896-8.703,8.702-8.703h8.703c4.806,0,8.701,3.896,8.701,8.703V67.391z"
+  }), /*#__PURE__*/react.createElement("path", {
+    fill: "#d2d2d2",
+    d: "M84.185,233.284l63.084,29.336c1.631,0.755,3.367,1.138,5.162,1.138c2.338,0,4.617-0.664,6.598-1.924c3.547-2.267,5.666-6.13,5.666-10.334v-0.322c0-4.752-2.785-9.116-7.096-11.118l-39.455-18.332l39.455-18.334c4.311-2.004,7.096-6.367,7.096-11.117v-0.319c0-4.21-2.119-8.075-5.666-10.334c-1.961-1.253-4.246-1.916-6.605-1.916c-1.779,0-3.563,0.391-5.16,1.133l-63.08,29.333c-4.307,2.004-7.09,6.369-7.09,11.117v0.877C77.093,226.909,79.874,231.272,84.185,233.284z"
+  }), /*#__PURE__*/react.createElement("path", {
+    fill: "#d2d2d2",
+    d: "M165.257,293.036c2.301,3.149,6.002,5.03,9.9,5.03h0.316c5.352,0,10.041-3.426,11.672-8.517L228.7,160.788c1.192-3.716,0.531-7.818-1.771-10.973c-2.301-3.15-6.002-5.03-9.901-5.03h-0.315c-5.354,0-10.048,3.425-11.679,8.516l-41.559,128.771C162.292,285.793,162.958,289.889,165.257,293.036z"
+  }), /*#__PURE__*/react.createElement("path", {
+    fill: "#d2d2d2",
+    d: "M227.49,192.276c0,4.745,2.783,9.109,7.095,11.123l39.455,18.329l-39.455,18.33c-4.31,2.004-7.095,6.368-7.095,11.118v0.322c0,4.205,2.117,8.068,5.668,10.336c1.974,1.258,4.254,1.924,6.595,1.924c1.793,0,3.528-0.383,5.17-1.142l63.08-29.335c4.307-2.009,7.09-6.372,7.09-11.115v-0.877c0-4.748-2.783-9.113-7.094-11.117l-63.08-29.333c-1.591-0.74-3.373-1.131-5.152-1.131c-2.355,0-4.643,0.661-6.604,1.912c-3.551,2.263-5.67,6.127-5.67,10.337v0.318H227.49L227.49,192.276z"
+  }))))), "Docs on GitHub"))))))), /*#__PURE__*/react.createElement("section", {
+    className: "poemkit-spacing--s poemkit-spacing--no-bottom"
+  }, /*#__PURE__*/react.createElement("div", {
+    className: "container"
+  }, /*#__PURE__*/react.createElement("div", {
+    className: "row"
+  }, /*#__PURE__*/react.createElement("div", {
+    className: "col-12"
+  }, /*#__PURE__*/react.createElement("h3", {
+    className: "app-header-title"
+  }, "Only One"), /*#__PURE__*/react.createElement("p", null, "Transform individual elements by spying to the entire window."), /*#__PURE__*/react.createElement("hr", null))))), /*#__PURE__*/react.createElement("section", {
+    className: "poemkit-spacing--s"
+  }, /*#__PURE__*/react.createElement("div", {
+    className: "container poemkit-t-c"
+  }, /*#__PURE__*/react.createElement("div", {
+    className: "row"
+  }, /*#__PURE__*/react.createElement("div", {
+    className: "col-12"
+  }, /*#__PURE__*/react.createElement(ImagePerspectiveHover, {
+    offset: [10, 1],
+    reset: true,
+    data: [{
+      "title": "Image Title",
+      "url": "".concat(websiteConfig.rootDirectory, "/assets/images/demo/test-img-big-1.jpg"),
+      "width": 320
+    }]
+  }))))), /*#__PURE__*/react.createElement("section", null, /*#__PURE__*/react.createElement("div", {
+    className: "container"
+  }, /*#__PURE__*/react.createElement("div", {
+    className: "row"
+  }, /*#__PURE__*/react.createElement("div", {
+    className: "col-12"
+  }, /*#__PURE__*/react.createElement("h3", {
+    className: "app-header-title"
+  }, "Multiple Images"), /*#__PURE__*/react.createElement("p", null, "This transitional effect can be seen when you move your mouse over a certain element that makes it change position or animate."), /*#__PURE__*/react.createElement("hr", null))))), /*#__PURE__*/react.createElement("section", {
+    className: "poemkit-spacing--s"
+  }, /*#__PURE__*/react.createElement("div", {
+    className: "container poemkit-t-c"
+  }, /*#__PURE__*/react.createElement("div", {
+    className: "row"
+  }, /*#__PURE__*/react.createElement("div", {
+    className: "col-12"
+  }, /*#__PURE__*/react.createElement(ImagePerspectiveHover, {
+    offset: [20, 2],
+    reset: false,
+    data: [{
+      "title": "Image Title",
+      "url": "".concat(websiteConfig.rootDirectory, "/assets/images/demo/test-img-big-1.jpg"),
+      "width": 200
+    }, {
+      "title": "Image Title",
+      "url": "".concat(websiteConfig.rootDirectory, "/assets/images/demo/test-img-big-2.jpg"),
+      "width": 300
+    }, {
+      "title": "Image Title",
+      "url": "".concat(websiteConfig.rootDirectory, "/assets/images/demo/test-img-big-3.jpg"),
+      "width": 170
+    }]
+  }))))), /*#__PURE__*/react.createElement("section", null, /*#__PURE__*/react.createElement("div", {
+    className: "container"
+  }, /*#__PURE__*/react.createElement("div", {
+    className: "row"
+  }, /*#__PURE__*/react.createElement("div", {
+    className: "col-12"
+  }, /*#__PURE__*/react.createElement("h3", {
+    className: "app-header-title"
+  }, "API"), /*#__PURE__*/react.createElement("hr", null), /*#__PURE__*/react.createElement("article", {
+    className: "poemkit-spacing--s",
+    itemProp: "text"
+  }, /*#__PURE__*/react.createElement("h4", null, "Image Perspective Hover"), /*#__PURE__*/react.createElement("div", null, /*#__PURE__*/react.createElement("pre", null, "import ImagePerspectiveHover from '@poemkit/components/ImagePerspectiveHover/index.tsx';")), /*#__PURE__*/react.createElement("div", {
+    className: "table-responsive-md"
+  }, /*#__PURE__*/react.createElement("table", {
+    className: "table table-bordered table-striped mb-5"
+  }, /*#__PURE__*/react.createElement("thead", null, /*#__PURE__*/react.createElement("tr", null, /*#__PURE__*/react.createElement("th", null, "Property"), /*#__PURE__*/react.createElement("th", null, "Type"), /*#__PURE__*/react.createElement("th", null, "Default"), /*#__PURE__*/react.createElement("th", null, "Description"))), /*#__PURE__*/react.createElement("tbody", null, /*#__PURE__*/react.createElement("tr", null, /*#__PURE__*/react.createElement("td", null, /*#__PURE__*/react.createElement("code", null, "data")), /*#__PURE__*/react.createElement("td", null, "array"), /*#__PURE__*/react.createElement("td", null, "-"), /*#__PURE__*/react.createElement("td", null, "Specify data of images as a JSON string format. Such as: ", /*#__PURE__*/react.createElement("br", null), /*#__PURE__*/react.createElement("code", {
+    className: "text-wrap"
+  }, "[{\"title\":\"Image Title 1\",\"url\":\"xxx.jpg\",\"width\":200},{\"title\":\"Image Title 2\",\"url\":\"xxx.jpg\",\"width\":300}]"))), /*#__PURE__*/react.createElement("tr", null, /*#__PURE__*/react.createElement("td", null, /*#__PURE__*/react.createElement("code", null, "offset")), /*#__PURE__*/react.createElement("td", null, "array"), /*#__PURE__*/react.createElement("td", null, "-"), /*#__PURE__*/react.createElement("td", null, "Base offset value and power of target number, the format is an array, such as ", /*#__PURE__*/react.createElement("code", null, "[20,2]"))), /*#__PURE__*/react.createElement("tr", null, /*#__PURE__*/react.createElement("td", null, /*#__PURE__*/react.createElement("code", null, "reset")), /*#__PURE__*/react.createElement("td", null, "boolean"), /*#__PURE__*/react.createElement("td", null, "false"), /*#__PURE__*/react.createElement("td", null, "If enabled, it will return to the default position when the mouse is moved away from the image"))))), /*#__PURE__*/react.createElement("p", null, "Array configuration properties of the ", /*#__PURE__*/react.createElement("code", null, "options"), ":"), /*#__PURE__*/react.createElement("div", {
+    className: "table-responsive-md"
+  }, /*#__PURE__*/react.createElement("table", {
+    className: "table table-bordered table-striped mb-5"
+  }, /*#__PURE__*/react.createElement("thead", null, /*#__PURE__*/react.createElement("tr", null, /*#__PURE__*/react.createElement("th", null, "Property"), /*#__PURE__*/react.createElement("th", null, "Type"), /*#__PURE__*/react.createElement("th", null, "Default"), /*#__PURE__*/react.createElement("th", null, "Description"))), /*#__PURE__*/react.createElement("tbody", null, /*#__PURE__*/react.createElement("tr", null, /*#__PURE__*/react.createElement("td", null, /*#__PURE__*/react.createElement("code", null, "title")), /*#__PURE__*/react.createElement("td", null, "string | boolean"), /*#__PURE__*/react.createElement("td", null, "-"), /*#__PURE__*/react.createElement("td", null, "Specifies an alternate and title text for the image")), /*#__PURE__*/react.createElement("tr", null, /*#__PURE__*/react.createElement("td", null, /*#__PURE__*/react.createElement("code", null, "url")), /*#__PURE__*/react.createElement("td", null, "string"), /*#__PURE__*/react.createElement("td", null, "-"), /*#__PURE__*/react.createElement("td", null, "Specifies the path to the image")), /*#__PURE__*/react.createElement("tr", null, /*#__PURE__*/react.createElement("td", null, /*#__PURE__*/react.createElement("code", null, "width")), /*#__PURE__*/react.createElement("td", null, "number"), /*#__PURE__*/react.createElement("td", null, "-"), /*#__PURE__*/react.createElement("td", null, "Specify a width")))))))))));
 });
 ;// CONCATENATED MODULE: ./src/client/components/_plugins/BSL/lib/bodyScrollLock.es6.js
 
@@ -60622,7 +61623,7 @@ var enableBodyScroll = function enableBodyScroll(targetElement) {
 ;// CONCATENATED MODULE: ./src/client/components/Lightbox/thumb-switch.tsx
 
 
-/*-- Apply Third-party plugins --*/
+/*-- Apply Third-party animation plugins --*/
 
 
 // Click thumbnail to show large photo
@@ -60729,8 +61730,9 @@ function thumbSwitch(curElement, config) {
 ;// CONCATENATED MODULE: ./src/client/components/Lightbox/fire-lightbox.tsx
 
 
-/*-- Apply Third-party plugins --*/
+/*-- Apply Third-party animation plugins --*/
 
+ //Disables body scroll locking
 
  //
 
@@ -61170,8 +62172,7 @@ function fireLightbox(curElement, config) {
 }
 /* harmony default export */ const fire_lightbox = ((/* unused pure expression or super */ null && (fireLightbox)));
 ;// CONCATENATED MODULE: ./src/client/components/Lightbox/close-lightbox.tsx
-
-/*-- Apply Third-party plugins --*/
+ //Enables body scroll locking
 
 
 function closeLightbox(config) {
@@ -61232,8 +62233,7 @@ function Lightbox_isNativeReflectConstruct() { if (typeof Reflect === "undefined
  *************************************
  */
 
-/*-- Apply Third-party plugins (import location should be in front of "global scripts and styles") --*/
-
+/*-- Apply Third-party plugins (import location should be in front of "GLOBAL STYLES") --*/
 
 
 
@@ -61245,7 +62245,10 @@ function Lightbox_isNativeReflectConstruct() { if (typeof Reflect === "undefined
 /*-- Apply this component styles --*/
 
 
- //Enables body scroll locking
+
+/*-- Apply Third-party animation plugins --*/
+
+ //Destroys body scroll locking
 
  // 
 
@@ -61661,11 +62664,403 @@ var Lightbox = /*#__PURE__*/function (_Component) {
     className: "text-wrap"
   }, "{\"target\":\"#my-ajax-demo-target-button\",\"method\":\"POST\",\"url\":\"https://xxx.com\"}"))), /*#__PURE__*/react.createElement("tr", null, /*#__PURE__*/react.createElement("td", null, /*#__PURE__*/react.createElement("code", null, "triggerTagName")), /*#__PURE__*/react.createElement("td", null, /*#__PURE__*/react.createElement("code", null, "a"), " | ", /*#__PURE__*/react.createElement("code", null, "button"), " | ", /*#__PURE__*/react.createElement("code", null, "div"), " | ", /*#__PURE__*/react.createElement("code", null, "span")), /*#__PURE__*/react.createElement("td", null, "-"), /*#__PURE__*/react.createElement("td", null, "Tag name of the trigger.")), /*#__PURE__*/react.createElement("tr", null, /*#__PURE__*/react.createElement("td", null, /*#__PURE__*/react.createElement("code", null, "triggerClassName")), /*#__PURE__*/react.createElement("td", null, "string"), /*#__PURE__*/react.createElement("td", null, "-"), /*#__PURE__*/react.createElement("td", null, "Specify a class for this Node")), /*#__PURE__*/react.createElement("tr", null, /*#__PURE__*/react.createElement("td", null, /*#__PURE__*/react.createElement("code", null, "triggerContent")), /*#__PURE__*/react.createElement("td", null, "ReactNode"), /*#__PURE__*/react.createElement("td", null, "-"), /*#__PURE__*/react.createElement("td", null, "Set a piece of text or HTML code for the trigger")), /*#__PURE__*/react.createElement("tr", null, /*#__PURE__*/react.createElement("td", null, /*#__PURE__*/react.createElement("code", null, "htmlContent")), /*#__PURE__*/react.createElement("td", null, "ReactNode"), /*#__PURE__*/react.createElement("td", null, "-"), /*#__PURE__*/react.createElement("td", null, "A string of HTML to set as the content")))))))))));
 });
+;// CONCATENATED MODULE: ./src/client/components/ListBulleted/ListBulletedItem.tsx
+
+
+
+
+
+
+function ListBulletedItem_createSuper(Derived) { var hasNativeReflectConstruct = ListBulletedItem_isNativeReflectConstruct(); return function _createSuperInternal() { var Super = _getPrototypeOf(Derived), result; if (hasNativeReflectConstruct) { var NewTarget = _getPrototypeOf(this).constructor; result = Reflect.construct(Super, arguments, NewTarget); } else { result = Super.apply(this, arguments); } return _possibleConstructorReturn(this, result); }; }
+
+function ListBulletedItem_isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Reflect.construct) return false; if (Reflect.construct.sham) return false; if (typeof Proxy === "function") return true; try { Boolean.prototype.valueOf.call(Reflect.construct(Boolean, [], function () {})); return true; } catch (e) { return false; } }
+
+
+
+var ListBulletedItem = /*#__PURE__*/function (_Component) {
+  _inherits(ListBulletedItem, _Component);
+
+  var _super = ListBulletedItem_createSuper(ListBulletedItem);
+
+  function ListBulletedItem(props) {
+    _classCallCheck(this, ListBulletedItem);
+
+    return _super.call(this, props);
+  }
+
+  _createClass(ListBulletedItem, [{
+    key: "render",
+    value: function render() {
+      var _this$props = this.props,
+          type = _this$props.type,
+          marker = _this$props.marker,
+          children = _this$props.children;
+      return /*#__PURE__*/react.createElement(react.Fragment, null, /*#__PURE__*/react.createElement("li", null, type === 'icon' ? marker : null, type !== 'icon' ? /*#__PURE__*/react.createElement(react.Fragment, null, /*#__PURE__*/react.createElement("strong", {
+        className: "poemkit-typo--h4"
+      }, marker)) : null, children));
+    }
+  }]);
+
+  return ListBulletedItem;
+}(react.Component);
+
+
+;// CONCATENATED MODULE: ./src/client/components/ListBulleted/ListBulleted.tsx
+
+
+
+
+
+
+
+
+
+function ListBulleted_ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) { symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); } keys.push.apply(keys, symbols); } return keys; }
+
+function ListBulleted_objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ListBulleted_ownKeys(Object(source), true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ListBulleted_ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
+
+function ListBulleted_createSuper(Derived) { var hasNativeReflectConstruct = ListBulleted_isNativeReflectConstruct(); return function _createSuperInternal() { var Super = _getPrototypeOf(Derived), result; if (hasNativeReflectConstruct) { var NewTarget = _getPrototypeOf(this).constructor; result = Reflect.construct(Super, arguments, NewTarget); } else { result = Super.apply(this, arguments); } return _possibleConstructorReturn(this, result); }; }
+
+function ListBulleted_isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Reflect.construct) return false; if (Reflect.construct.sham) return false; if (typeof Proxy === "function") return true; try { Boolean.prototype.valueOf.call(Reflect.construct(Boolean, [], function () {})); return true; } catch (e) { return false; } }
+
+
+/*-- Apply Third-party plugins (import location should be in front of "GLOBAL STYLES") --*/
+
+
+
+/*-- Apply global scripts and styles --*/
+
+
+
+
+/*-- Apply this component styles --*/
+
+
+ // 
+
+
+
+var ListBulleted = /*#__PURE__*/function (_Component) {
+  _inherits(ListBulleted, _Component);
+
+  var _super = ListBulleted_createSuper(ListBulleted);
+
+  function ListBulleted(props) {
+    var _this;
+
+    _classCallCheck(this, ListBulleted);
+
+    _this = _super.call(this, props);
+
+    _defineProperty(_assertThisInitialized(_this), "uniqueID", void 0);
+
+    _this.uniqueID = 'app-' + helpers.GUID.create();
+    return _this;
+  }
+
+  _createClass(ListBulleted, [{
+    key: "render",
+    value: function render() {
+      var _this$props = this.props,
+          type = _this$props.type,
+          leadingZero = _this$props.leadingZero,
+          id = _this$props.id,
+          children = _this$props.children;
+      var leadingZeroClassName = leadingZero ? ' poemkit-list--numbered-leading-zero' : '';
+      var listClassName = '';
+
+      switch (type) {
+        case 'icon':
+          listClassName = 'poemkit-list poemkit-list--icon';
+          break;
+
+        case 'dot':
+          listClassName = 'poemkit-list poemkit-list--dot';
+          break;
+
+        case 'numbered':
+          listClassName = 'poemkit-list poemkit-list--numbered' + leadingZeroClassName;
+          break;
+
+        case 'numbered-large':
+          listClassName = 'poemkit-list poemkit-list--numbered-large' + leadingZeroClassName;
+          break;
+
+        case 'numbered-large-bg':
+          listClassName = 'poemkit-list poemkit-list--numbered-large poemkit-list--numbered-bg' + leadingZeroClassName;
+          break;
+
+        case 'numbered-step':
+          listClassName = 'poemkit-list poemkit-list--numbered-step';
+          break;
+      } //end switch
+
+
+      var items = children != null ? children.map(function (item, i) {
+        var childProps = ListBulleted_objectSpread({}, item.props);
+
+        return /*#__PURE__*/react.createElement(ListBulletedItem, extends_extends({
+          key: "item" + i,
+          type: type
+        }, childProps));
+      }) : '';
+      return /*#__PURE__*/react.createElement(react.Fragment, null, type === 'icon' || type === 'dot' || type === 'numbered-step' ? /*#__PURE__*/react.createElement(react.Fragment, null, /*#__PURE__*/react.createElement("ul", {
+        id: id || this.uniqueID,
+        className: listClassName
+      }, items)) : '', type === 'numbered' ? /*#__PURE__*/react.createElement(react.Fragment, null, /*#__PURE__*/react.createElement("ol", {
+        id: id || this.uniqueID,
+        className: listClassName
+      }, items)) : '', type === 'numbered-large' || type === 'numbered-large-bg' ? /*#__PURE__*/react.createElement(react.Fragment, null, /*#__PURE__*/react.createElement("div", {
+        id: id || this.uniqueID,
+        className: listClassName
+      }, /*#__PURE__*/react.createElement("ol", null, items))) : '');
+    }
+  }]);
+
+  return ListBulleted;
+}(react.Component);
+
+
+;// CONCATENATED MODULE: ./src/client/components/ListBulleted/index.tsx
+/* 
+ *************************************
+ * <!-- List Bulleted -->
+ *************************************
+ */
+
+
+;// CONCATENATED MODULE: ./src/client/views/_pages/ComponentsDemo/ListBulletedDemo.js
+
+
+ //Create or Remove Sidebar Menu
+
+
+/* harmony default export */ const ListBulletedDemo = (function () {
+  react.useEffect(function () {
+    // Equivalent to componentDidMount and componentDidUpdate:
+    helpers(document).ready(function () {
+      //Create sidebar menu
+      SidebarMenu();
+    });
+  });
+  return /*#__PURE__*/react.createElement(react.Fragment, null, /*#__PURE__*/react.createElement("section", null, /*#__PURE__*/react.createElement("div", {
+    className: "container"
+  }, /*#__PURE__*/react.createElement("div", {
+    className: "row"
+  }, /*#__PURE__*/react.createElement("div", {
+    className: "col-12"
+  }, /*#__PURE__*/react.createElement("h1", {
+    className: "poemkit-typo--h2"
+  }, "List Bulleted", /*#__PURE__*/react.createElement("a", {
+    className: "poemkit-typo--h3 align-middle",
+    href: "https://github.com/xizon/poemkit/tree/main/src/client/components/ListBulleted",
+    target: "_blank"
+  }, /*#__PURE__*/react.createElement("span", {
+    className: "poemkit-dir--right",
+    style: {
+      fontSize: "0.75rem",
+      color: "#ababab",
+      margin: ".5rem .5rem 0 0"
+    }
+  }, /*#__PURE__*/react.createElement("svg", {
+    style: {
+      marginRight: ".5rem"
+    },
+    width: "15",
+    viewBox: "0 0 392.186 392.186"
+  }, /*#__PURE__*/react.createElement("g", null, /*#__PURE__*/react.createElement("g", null, /*#__PURE__*/react.createElement("g", null, /*#__PURE__*/react.createElement("path", {
+    fill: "#d2d2d2",
+    d: "M368.62,17.951H23.568C10.57,17.951,0,28.524,0,41.52v309.146c0,12.996,10.57,23.568,23.568,23.568h345.053c12.994,0,23.564-10.572,23.564-23.568V41.52C392.188,28.525,381.614,17.951,368.62,17.951z M297.56,57.528c0-4.806,3.896-8.703,8.701-8.703h8.703c4.808,0,8.701,3.896,8.701,8.703v9.863c0,4.806-3.896,8.702-8.701,8.702h-8.703c-4.805,0-8.701-3.896-8.701-8.702V57.528z M257.093,57.528c0-4.806,3.898-8.703,8.703-8.703h8.701c4.805,0,8.703,3.896,8.703,8.703v9.863c0,4.806-3.898,8.702-8.703,8.702h-8.701c-4.805,0-8.703-3.896-8.703-8.702V57.528z M363.903,345.951H28.282V102.235h335.621V345.951L363.903,345.951z M364.132,67.391c0,4.806-3.896,8.702-8.701,8.702h-8.703c-4.809,0-8.702-3.896-8.702-8.702v-9.863c0-4.806,3.896-8.703,8.702-8.703h8.703c4.806,0,8.701,3.896,8.701,8.703V67.391z"
+  }), /*#__PURE__*/react.createElement("path", {
+    fill: "#d2d2d2",
+    d: "M84.185,233.284l63.084,29.336c1.631,0.755,3.367,1.138,5.162,1.138c2.338,0,4.617-0.664,6.598-1.924c3.547-2.267,5.666-6.13,5.666-10.334v-0.322c0-4.752-2.785-9.116-7.096-11.118l-39.455-18.332l39.455-18.334c4.311-2.004,7.096-6.367,7.096-11.117v-0.319c0-4.21-2.119-8.075-5.666-10.334c-1.961-1.253-4.246-1.916-6.605-1.916c-1.779,0-3.563,0.391-5.16,1.133l-63.08,29.333c-4.307,2.004-7.09,6.369-7.09,11.117v0.877C77.093,226.909,79.874,231.272,84.185,233.284z"
+  }), /*#__PURE__*/react.createElement("path", {
+    fill: "#d2d2d2",
+    d: "M165.257,293.036c2.301,3.149,6.002,5.03,9.9,5.03h0.316c5.352,0,10.041-3.426,11.672-8.517L228.7,160.788c1.192-3.716,0.531-7.818-1.771-10.973c-2.301-3.15-6.002-5.03-9.901-5.03h-0.315c-5.354,0-10.048,3.425-11.679,8.516l-41.559,128.771C162.292,285.793,162.958,289.889,165.257,293.036z"
+  }), /*#__PURE__*/react.createElement("path", {
+    fill: "#d2d2d2",
+    d: "M227.49,192.276c0,4.745,2.783,9.109,7.095,11.123l39.455,18.329l-39.455,18.33c-4.31,2.004-7.095,6.368-7.095,11.118v0.322c0,4.205,2.117,8.068,5.668,10.336c1.974,1.258,4.254,1.924,6.595,1.924c1.793,0,3.528-0.383,5.17-1.142l63.08-29.335c4.307-2.009,7.09-6.372,7.09-11.115v-0.877c0-4.748-2.783-9.113-7.094-11.117l-63.08-29.333c-1.591-0.74-3.373-1.131-5.152-1.131c-2.355,0-4.643,0.661-6.604,1.912c-3.551,2.263-5.67,6.127-5.67,10.337v0.318H227.49L227.49,192.276z"
+  }))))), "Docs on GitHub"))))))), /*#__PURE__*/react.createElement("section", {
+    className: "poemkit-spacing--s poemkit-spacing--no-bottom"
+  }, /*#__PURE__*/react.createElement("div", {
+    className: "container"
+  }, /*#__PURE__*/react.createElement("div", {
+    className: "row"
+  }, /*#__PURE__*/react.createElement("div", {
+    className: "col-12"
+  }, /*#__PURE__*/react.createElement("h3", {
+    className: "app-header-title"
+  }, "Icons Ordered List"), /*#__PURE__*/react.createElement("hr", null))))), /*#__PURE__*/react.createElement("section", {
+    className: "poemkit-spacing--s"
+  }, /*#__PURE__*/react.createElement("div", {
+    className: "container"
+  }, /*#__PURE__*/react.createElement("div", {
+    className: "row"
+  }, /*#__PURE__*/react.createElement("div", {
+    className: "col-lg-6 col-md-6"
+  }, /*#__PURE__*/react.createElement(ListBulleted, {
+    type: "icon"
+  }, /*#__PURE__*/react.createElement(ListBulletedItem, {
+    marker: /*#__PURE__*/react.createElement(react.Fragment, null, /*#__PURE__*/react.createElement("i", {
+      className: "fa fa-check-square-o",
+      "aria-hidden": "true"
+    }))
+  }, "Here's bullet point number one"), /*#__PURE__*/react.createElement(ListBulletedItem, {
+    marker: /*#__PURE__*/react.createElement(react.Fragment, null, /*#__PURE__*/react.createElement("i", {
+      className: "fa fa-check-square-o",
+      "aria-hidden": "true"
+    }))
+  }, "Now for the second point"), /*#__PURE__*/react.createElement(ListBulletedItem, {
+    marker: /*#__PURE__*/react.createElement(react.Fragment, null, /*#__PURE__*/react.createElement("i", {
+      className: "fa fa-check-square-o",
+      "aria-hidden": "true"
+    }))
+  }, "You guessed it, here comes the third"), /*#__PURE__*/react.createElement(ListBulletedItem, {
+    marker: /*#__PURE__*/react.createElement(react.Fragment, null, /*#__PURE__*/react.createElement("i", {
+      className: "fa fa-check-square-o",
+      "aria-hidden": "true"
+    }))
+  }, "A fourth bullet point just to be safe"))), /*#__PURE__*/react.createElement("div", {
+    className: "col-lg-6 col-md-6"
+  }, /*#__PURE__*/react.createElement(ListBulleted, {
+    type: "icon"
+  }, /*#__PURE__*/react.createElement(ListBulletedItem, {
+    marker: /*#__PURE__*/react.createElement(react.Fragment, null, /*#__PURE__*/react.createElement("i", {
+      className: "fa fa-angle-right",
+      "aria-hidden": "true"
+    }))
+  }, "Here's bullet point number one"), /*#__PURE__*/react.createElement(ListBulletedItem, {
+    marker: /*#__PURE__*/react.createElement(react.Fragment, null, /*#__PURE__*/react.createElement("i", {
+      className: "fa fa-angle-right",
+      "aria-hidden": "true"
+    }))
+  }, "Now for the second point"), /*#__PURE__*/react.createElement(ListBulletedItem, {
+    marker: /*#__PURE__*/react.createElement(react.Fragment, null, /*#__PURE__*/react.createElement("i", {
+      className: "fa fa-angle-right",
+      "aria-hidden": "true"
+    }))
+  }, "You guessed it, here comes the third"), /*#__PURE__*/react.createElement(ListBulletedItem, {
+    marker: /*#__PURE__*/react.createElement(react.Fragment, null, /*#__PURE__*/react.createElement("i", {
+      className: "fa fa-angle-right",
+      "aria-hidden": "true"
+    }))
+  }, "A fourth bullet point just to be safe")))))), /*#__PURE__*/react.createElement("section", null, /*#__PURE__*/react.createElement("div", {
+    className: "container"
+  }, /*#__PURE__*/react.createElement("div", {
+    className: "row"
+  }, /*#__PURE__*/react.createElement("div", {
+    className: "col-12"
+  }, /*#__PURE__*/react.createElement("h3", {
+    className: "app-header-title"
+  }, "Custom Bullets Ordered List"), /*#__PURE__*/react.createElement("hr", null))))), /*#__PURE__*/react.createElement("section", {
+    className: "poemkit-spacing--s"
+  }, /*#__PURE__*/react.createElement("div", {
+    className: "container"
+  }, /*#__PURE__*/react.createElement("div", {
+    className: "row"
+  }, /*#__PURE__*/react.createElement("div", {
+    className: "col-lg-6 col-md-6"
+  }, /*#__PURE__*/react.createElement(ListBulleted, {
+    type: "dot"
+  }, /*#__PURE__*/react.createElement(ListBulletedItem, null, "Line Item #1"), /*#__PURE__*/react.createElement(ListBulletedItem, null, "Line Item #2"), /*#__PURE__*/react.createElement(ListBulletedItem, null, "Line Item #3"), /*#__PURE__*/react.createElement(ListBulletedItem, null, "Line Item #4"), /*#__PURE__*/react.createElement(ListBulletedItem, null, "Line Item #5"))), /*#__PURE__*/react.createElement("div", {
+    className: "col-lg-6 col-md-6"
+  })))), /*#__PURE__*/react.createElement("section", null, /*#__PURE__*/react.createElement("div", {
+    className: "container"
+  }, /*#__PURE__*/react.createElement("div", {
+    className: "row"
+  }, /*#__PURE__*/react.createElement("div", {
+    className: "col-12"
+  }, /*#__PURE__*/react.createElement("h3", {
+    className: "app-header-title"
+  }, "Numbers Ordered List"), /*#__PURE__*/react.createElement("hr", null))))), /*#__PURE__*/react.createElement("section", {
+    className: "poemkit-spacing--s"
+  }, /*#__PURE__*/react.createElement("div", {
+    className: "container"
+  }, /*#__PURE__*/react.createElement("div", {
+    className: "row"
+  }, /*#__PURE__*/react.createElement("div", {
+    className: "col-lg-6 col-md-6"
+  }, /*#__PURE__*/react.createElement(ListBulleted, {
+    type: "numbered"
+  }, /*#__PURE__*/react.createElement(ListBulletedItem, null, "Line Item #1"), /*#__PURE__*/react.createElement(ListBulletedItem, null, "Line Item #2"), /*#__PURE__*/react.createElement(ListBulletedItem, null, "Line Item #3"), /*#__PURE__*/react.createElement(ListBulletedItem, null, "Line Item #4"), /*#__PURE__*/react.createElement(ListBulletedItem, null, "Line Item #5"))), /*#__PURE__*/react.createElement("div", {
+    className: "col-lg-6 col-md-6"
+  }, /*#__PURE__*/react.createElement(ListBulleted, {
+    type: "numbered",
+    leadingZero: true
+  }, /*#__PURE__*/react.createElement(ListBulletedItem, null, "Line Item #1"), /*#__PURE__*/react.createElement(ListBulletedItem, null, "Line Item #2"), /*#__PURE__*/react.createElement(ListBulletedItem, null, "Line Item #3"), /*#__PURE__*/react.createElement(ListBulletedItem, null, "Line Item #4"), /*#__PURE__*/react.createElement(ListBulletedItem, null, "Line Item #5")))), /*#__PURE__*/react.createElement("div", {
+    className: "row"
+  }, /*#__PURE__*/react.createElement("div", {
+    className: "col-12"
+  }, /*#__PURE__*/react.createElement(ListBulleted, {
+    type: "numbered-large"
+  }, /*#__PURE__*/react.createElement(ListBulletedItem, {
+    marker: /*#__PURE__*/react.createElement(react.Fragment, null, "This is the First Heading")
+  }, /*#__PURE__*/react.createElement("p", null, "Lorem ipsum dolor sit amet, consectetur adipiscing elit.")), /*#__PURE__*/react.createElement(ListBulletedItem, {
+    marker: /*#__PURE__*/react.createElement(react.Fragment, null, "This is the Second Heading")
+  }, /*#__PURE__*/react.createElement("p", null, "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque pellentesque tortor non erat sodales, in tristique dui convallis.")), /*#__PURE__*/react.createElement(ListBulletedItem, {
+    marker: /*#__PURE__*/react.createElement(react.Fragment, null, "This is the Third Heading")
+  }, /*#__PURE__*/react.createElement("p", null, "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque pellentesque tortor non erat sodales, in tristique dui convallis. Mauris sed mi nulla. Interdum et malesuada fames ac ante ipsum primis in faucibus."))))), /*#__PURE__*/react.createElement("div", {
+    className: "row"
+  }, /*#__PURE__*/react.createElement("div", {
+    className: "col-12"
+  }, /*#__PURE__*/react.createElement(ListBulleted, {
+    type: "numbered-large-bg",
+    leadingZero: true
+  }, /*#__PURE__*/react.createElement(ListBulletedItem, null, /*#__PURE__*/react.createElement("p", null, "Consectetur adipiscing elit.")), /*#__PURE__*/react.createElement(ListBulletedItem, null, /*#__PURE__*/react.createElement("p", null, "This is the Second heading")), /*#__PURE__*/react.createElement(ListBulletedItem, null, /*#__PURE__*/react.createElement("p", null, "Lorem ipsum dolor sit amet, consectetur adipiscing elit."))))))), /*#__PURE__*/react.createElement("section", null, /*#__PURE__*/react.createElement("div", {
+    className: "container"
+  }, /*#__PURE__*/react.createElement("div", {
+    className: "row"
+  }, /*#__PURE__*/react.createElement("div", {
+    className: "col-12"
+  }, /*#__PURE__*/react.createElement("h3", {
+    className: "app-header-title"
+  }, "Step Timeline By Numbers"), /*#__PURE__*/react.createElement("hr", null))))), /*#__PURE__*/react.createElement("section", {
+    className: "poemkit-spacing--s"
+  }, /*#__PURE__*/react.createElement("div", {
+    className: "container"
+  }, /*#__PURE__*/react.createElement("div", {
+    className: "row"
+  }, /*#__PURE__*/react.createElement("div", {
+    className: "col-12"
+  }, /*#__PURE__*/react.createElement(ListBulleted, {
+    type: "numbered-step"
+  }, /*#__PURE__*/react.createElement(ListBulletedItem, {
+    marker: /*#__PURE__*/react.createElement(react.Fragment, null, "Step 1")
+  }, /*#__PURE__*/react.createElement("p", null, "Lorem ipsum dolor sit amet, consectetur adipiscing elit.")), /*#__PURE__*/react.createElement(ListBulletedItem, {
+    marker: /*#__PURE__*/react.createElement(react.Fragment, null, "Step 2")
+  }, /*#__PURE__*/react.createElement("p", null, "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque pellentesque tortor non erat sodales, in tristique dui convallis. Mauris sed mi nulla. Interdum et malesuada fames ac ante ipsum primis in faucibus.")), /*#__PURE__*/react.createElement(ListBulletedItem, {
+    marker: /*#__PURE__*/react.createElement(react.Fragment, null, "Step 3")
+  }, /*#__PURE__*/react.createElement("p", null, "Lorem ipsum dolor sit amet, consectetur adipiscing elit.")), /*#__PURE__*/react.createElement(ListBulletedItem, {
+    marker: /*#__PURE__*/react.createElement(react.Fragment, null, "Step 4")
+  }, /*#__PURE__*/react.createElement("p", null, "Lorem ipsum dolor sit amet, consectetur adipiscing elit.")), /*#__PURE__*/react.createElement(ListBulletedItem, {
+    marker: /*#__PURE__*/react.createElement(react.Fragment, null, "Step 5")
+  }, /*#__PURE__*/react.createElement("p", null, "Lorem ipsum dolor sit amet, consectetur adipiscing elit."))))))), /*#__PURE__*/react.createElement("section", null, /*#__PURE__*/react.createElement("div", {
+    className: "container"
+  }, /*#__PURE__*/react.createElement("div", {
+    className: "row"
+  }, /*#__PURE__*/react.createElement("div", {
+    className: "col-12"
+  }, /*#__PURE__*/react.createElement("h3", {
+    className: "app-header-title"
+  }, "API"), /*#__PURE__*/react.createElement("hr", null), /*#__PURE__*/react.createElement("article", {
+    className: "poemkit-spacing--s",
+    itemProp: "text"
+  }, /*#__PURE__*/react.createElement("h4", null, "List Bulleted"), /*#__PURE__*/react.createElement("div", null, /*#__PURE__*/react.createElement("pre", null, "import ", "{ListBulleted}", " from '@poemkit/components/ListBulleted/index.tsx';")), /*#__PURE__*/react.createElement("div", {
+    className: "table-responsive-md"
+  }, /*#__PURE__*/react.createElement("table", {
+    className: "table table-bordered table-striped mb-5"
+  }, /*#__PURE__*/react.createElement("thead", null, /*#__PURE__*/react.createElement("tr", null, /*#__PURE__*/react.createElement("th", null, "Property"), /*#__PURE__*/react.createElement("th", null, "Type"), /*#__PURE__*/react.createElement("th", null, "Default"), /*#__PURE__*/react.createElement("th", null, "Description"))), /*#__PURE__*/react.createElement("tbody", null, /*#__PURE__*/react.createElement("tr", null, /*#__PURE__*/react.createElement("td", null, /*#__PURE__*/react.createElement("code", null, "type")), /*#__PURE__*/react.createElement("td", null, /*#__PURE__*/react.createElement("code", null, "icon"), " | ", /*#__PURE__*/react.createElement("code", null, "dot"), " | ", /*#__PURE__*/react.createElement("code", null, "numbered"), " | ", /*#__PURE__*/react.createElement("code", null, "numbered-large"), " | ", /*#__PURE__*/react.createElement("code", null, "numbered-large-bg"), " | ", /*#__PURE__*/react.createElement("code", null, "numbered-step")), /*#__PURE__*/react.createElement("td", null, "-"), /*#__PURE__*/react.createElement("td", null, /*#__PURE__*/react.createElement("strong", null, "(Required)"), " Sets the marker (such as a disc, character, or custom counter style) of a list item element.")), /*#__PURE__*/react.createElement("tr", null, /*#__PURE__*/react.createElement("td", null, /*#__PURE__*/react.createElement("code", null, "leadingZero")), /*#__PURE__*/react.createElement("td", null, "boolean"), /*#__PURE__*/react.createElement("td", null, "false"), /*#__PURE__*/react.createElement("td", null, "Add a leading zero is any 0 digit that comes before the first nonzero digit in a number string in positional notation. Only valid for lists with numbered type."))))), /*#__PURE__*/react.createElement("h4", null, "List Bulleted Item"), /*#__PURE__*/react.createElement("div", null, /*#__PURE__*/react.createElement("pre", null, "import ", "{ListBulletedItem}", " from '@poemkit/components/ListBulleted/index.tsx';")), /*#__PURE__*/react.createElement("div", {
+    className: "table-responsive-md"
+  }, /*#__PURE__*/react.createElement("table", {
+    className: "table table-bordered table-striped mb-5"
+  }, /*#__PURE__*/react.createElement("thead", null, /*#__PURE__*/react.createElement("tr", null, /*#__PURE__*/react.createElement("th", null, "Property"), /*#__PURE__*/react.createElement("th", null, "Type"), /*#__PURE__*/react.createElement("th", null, "Default"), /*#__PURE__*/react.createElement("th", null, "Description"))), /*#__PURE__*/react.createElement("tbody", null, /*#__PURE__*/react.createElement("tr", null, /*#__PURE__*/react.createElement("td", null, /*#__PURE__*/react.createElement("code", null, "type")), /*#__PURE__*/react.createElement("td", null, /*#__PURE__*/react.createElement("code", null, "icon"), " | ", /*#__PURE__*/react.createElement("code", null, "dot"), " | ", /*#__PURE__*/react.createElement("code", null, "numbered"), " | ", /*#__PURE__*/react.createElement("code", null, "numbered-large"), " | ", /*#__PURE__*/react.createElement("code", null, "numbered-large-bg"), " | ", /*#__PURE__*/react.createElement("code", null, "numbered-step")), /*#__PURE__*/react.createElement("td", null, "-"), /*#__PURE__*/react.createElement("td", null, "Sets the marker (such as a disc, character, or custom counter style) of a list item element.")), /*#__PURE__*/react.createElement("tr", null, /*#__PURE__*/react.createElement("td", null, /*#__PURE__*/react.createElement("code", null, "marker")), /*#__PURE__*/react.createElement("td", null, "ReactNode"), /*#__PURE__*/react.createElement("td", null, "-"), /*#__PURE__*/react.createElement("td", null, "Set the display content of the marker, it will change according to different types.")))))))))));
+});
 ;// CONCATENATED MODULE: ./src/client/components/ModalDialog/close-modal-dialog.tsx
 
 
-/*-- Apply Third-party plugins --*/
+/*-- Apply Third-party animation plugins --*/
 
+ //Enables body scroll locking
 
 
 function closeModalDialog(curElement) {
@@ -61694,8 +63089,9 @@ function closeModalDialog(curElement) {
 ;// CONCATENATED MODULE: ./src/client/components/ModalDialog/fire-modal-dialog.tsx
 
 
-/*-- Apply Third-party plugins --*/
+/*-- Apply Third-party animation plugins --*/
 
+ //Disables body scroll locking
 
  //
 
@@ -61822,8 +63218,7 @@ function ModalDialog_isNativeReflectConstruct() { if (typeof Reflect === "undefi
  *************************************
  */
 
-/*-- Apply Third-party plugins (import location should be in front of "global scripts and styles") --*/
-
+/*-- Apply Third-party plugins (import location should be in front of "GLOBAL STYLES") --*/
 
 
 
@@ -61835,7 +63230,10 @@ function ModalDialog_isNativeReflectConstruct() { if (typeof Reflect === "undefi
 /*-- Apply this component styles --*/
 
 
- //Enables body scroll locking
+
+/*-- Apply Third-party animation plugins --*/
+
+ //Destroys body scroll locking
 
  // 
 
@@ -62101,7 +63499,9 @@ var ModalDialog = /*#__PURE__*/function (_Component) {
     value: function componentWillUnmount() {
       clearAllBodyScrollLocks(); // Kill all aniamtions
 
-      TweenMax_TweenMax.killAll();
+      TweenMax_TweenMax.killAll(); // Cancels a timeout previously established by calling setTimeout().
+
+      clearTimeout(window.setCloseModalDialog);
     }
   }, {
     key: "render",
@@ -62338,6 +63738,8 @@ function MenuList_isNativeReflectConstruct() { if (typeof Reflect === "undefined
 
 
 
+/*-- Apply Third-party animation plugins --*/
+
 
 /* Recursively nested components to traverse nodes
 -------------------------------------------------*/
@@ -62454,12 +63856,12 @@ function MultilevelDropdownMenu_isNativeReflectConstruct() { if (typeof Reflect 
  *************************************
  */
 
-/*-- Apply Third-party plugins (import location should be in front of "global scripts and styles") --*/
-
+/*-- Apply Third-party plugins (import location should be in front of "GLOBAL STYLES") --*/
 
 
 
 /*-- Apply global scripts and styles --*/
+
 
 
 
@@ -62662,12 +64064,12 @@ function MousewheelInteraction_isNativeReflectConstruct() { if (typeof Reflect =
  *************************************
  */
 
-/*-- Apply Third-party plugins (import location should be in front of "global scripts and styles") --*/
-
+/*-- Apply Third-party plugins (import location should be in front of "GLOBAL STYLES") --*/
 
 
 
 /*-- Apply global scripts and styles --*/
+
 
 
 
@@ -63023,7 +64425,7 @@ var NavigationDemo_menuListData = [{
     className: "col-12"
   }, /*#__PURE__*/react.createElement("h3", {
     className: "app-header-title"
-  }, "Demos"), /*#__PURE__*/react.createElement("p", null, "Support mobile device access (If the displayMobileNav property is ", /*#__PURE__*/react.createElement("code", null, "true"), ")."), /*#__PURE__*/react.createElement("hr", null))))), /*#__PURE__*/react.createElement("section", {
+  }, "Horizontal"), /*#__PURE__*/react.createElement("p", null, "Support mobile device access (If the displayMobileNav property is ", /*#__PURE__*/react.createElement("code", null, "true"), ")."), /*#__PURE__*/react.createElement("hr", null))))), /*#__PURE__*/react.createElement("section", {
     className: "poemkit-spacing--s"
   }, /*#__PURE__*/react.createElement("div", {
     className: "container"
@@ -63044,6 +64446,38 @@ var NavigationDemo_menuListData = [{
   }, /*#__PURE__*/react.createElement(Navigation, {
     data: NavigationDemo_menuListData,
     position: "left"
+  })))))), /*#__PURE__*/react.createElement("section", {
+    className: "poemkit-spacing--s poemkit-spacing--no-bottom"
+  }, /*#__PURE__*/react.createElement("div", {
+    className: "container"
+  }, /*#__PURE__*/react.createElement("div", {
+    className: "row"
+  }, /*#__PURE__*/react.createElement("div", {
+    className: "col-12"
+  }, /*#__PURE__*/react.createElement("h3", {
+    className: "app-header-title"
+  }, "Vertical"), /*#__PURE__*/react.createElement("p", null, "Support mobile device access (If the displayMobileNav property is ", /*#__PURE__*/react.createElement("code", null, "true"), ")."), /*#__PURE__*/react.createElement("hr", null))))), /*#__PURE__*/react.createElement("section", {
+    className: "poemkit-spacing--s"
+  }, /*#__PURE__*/react.createElement("div", {
+    className: "container"
+  }, /*#__PURE__*/react.createElement("div", {
+    className: "row"
+  }, /*#__PURE__*/react.createElement("div", {
+    className: "col-12"
+  }, /*#__PURE__*/react.createElement("div", {
+    style: {
+      position: "relative",
+      zIndex: 1,
+      border: "1px solid #ddd",
+      borderRadius: "8px",
+      background: "#f9f9f9",
+      display: "flex",
+      flex: "0 0 100%"
+    }
+  }, /*#__PURE__*/react.createElement(Navigation, {
+    data: NavigationDemo_menuListData,
+    position: "left",
+    direction: "vertical"
   })))))), /*#__PURE__*/react.createElement("section", null, /*#__PURE__*/react.createElement("div", {
     className: "container"
   }, /*#__PURE__*/react.createElement("div", {
@@ -63061,7 +64495,7 @@ var NavigationDemo_menuListData = [{
     className: "table table-bordered table-striped mb-5"
   }, /*#__PURE__*/react.createElement("thead", null, /*#__PURE__*/react.createElement("tr", null, /*#__PURE__*/react.createElement("th", null, "Property"), /*#__PURE__*/react.createElement("th", null, "Type"), /*#__PURE__*/react.createElement("th", null, "Default"), /*#__PURE__*/react.createElement("th", null, "Description"))), /*#__PURE__*/react.createElement("tbody", null, /*#__PURE__*/react.createElement("tr", null, /*#__PURE__*/react.createElement("td", null, /*#__PURE__*/react.createElement("code", null, "data")), /*#__PURE__*/react.createElement("td", null, "array"), /*#__PURE__*/react.createElement("td", null, "-"), /*#__PURE__*/react.createElement("td", null, "Specify data of Navigation List as a JSON string format. Such as: ", /*#__PURE__*/react.createElement("br", null), /*#__PURE__*/react.createElement("code", {
     className: "text-wrap"
-  }, "[{\"title\":&lt;&gt;&lt;li&gt;&lt;NavLink data-route=\"true\" to=\"/components-demo\"&gt;Route Link&lt;/NavLink&gt;&lt;/li&gt;&lt;/&gt;,\"link\":\"#\",\"mega\":false},{\"title\":\"Top level 1\",\"link\":\"#\",\"mega\":false},{\"title\":\"Top level 2\",\"link\":\"#\",\"mega\":false,\"children\":[{\"title\":\"Sub level 2\",\"link\":\"#\",\"mega\":false,\"children\":[{\"title\":\"Sub Sub Level 2\",\"link\":\"#\",\"mega\":false}]}]},{\"title\":\"Mega Menu\",\"link\":\"#\",\"mega\":{\"columnLists\":[{\"heading\":\"Mega Menu 1\",\"list\":[{\"title\":\"Menu Text\",\"link\":\"#\"},{\"title\":\"Menu Text\",\"link\":\"#\"}]},{\"heading\":\"Mega Menu 2\",\"list\":[{\"title\":\"Menu Text\",\"link\":\"#\"},{\"title\":\"Menu Text\",\"link\":\"#\"}]},{\"heading\":\"Mega Menu 3\",\"list\":[{\"title\":\"Menu Text\",\"link\":\"#\"},{\"title\":\"Menu Text\",\"link\":\"#\"}]}]}},{\"title\":\"Top level 3\",\"link\":\"https://example.com\",\"mega\":false}]"))), /*#__PURE__*/react.createElement("tr", null, /*#__PURE__*/react.createElement("td", null, /*#__PURE__*/react.createElement("code", null, "position")), /*#__PURE__*/react.createElement("td", null, "null | ", /*#__PURE__*/react.createElement("code", null, "left"), " | ", /*#__PURE__*/react.createElement("code", null, "right")), /*#__PURE__*/react.createElement("td", null, "null"), /*#__PURE__*/react.createElement("td", null, "Set navigation to the left or right. If the value is ", /*#__PURE__*/react.createElement("code", null, "left"), ", it is forced to be left.")), /*#__PURE__*/react.createElement("tr", null, /*#__PURE__*/react.createElement("td", null, /*#__PURE__*/react.createElement("code", null, "tools")), /*#__PURE__*/react.createElement("td", null, "ReactNode"), /*#__PURE__*/react.createElement("td", null, "-"), /*#__PURE__*/react.createElement("td", null, "Set the trailing tool in the way of HTML Element, which can be a social button or other.")), /*#__PURE__*/react.createElement("tr", null, /*#__PURE__*/react.createElement("td", null, /*#__PURE__*/react.createElement("code", null, "mobileLogo")), /*#__PURE__*/react.createElement("td", null, "string"), /*#__PURE__*/react.createElement("td", null, "-"), /*#__PURE__*/react.createElement("td", null, "Specify a LOGO address for mobile navigation.")), /*#__PURE__*/react.createElement("tr", null, /*#__PURE__*/react.createElement("td", null, /*#__PURE__*/react.createElement("code", null, "label")), /*#__PURE__*/react.createElement("td", null, "string"), /*#__PURE__*/react.createElement("td", null, "-"), /*#__PURE__*/react.createElement("td", null, "Specify a navigation label.")), /*#__PURE__*/react.createElement("tr", null, /*#__PURE__*/react.createElement("td", null, /*#__PURE__*/react.createElement("code", null, "displayMobileNav")), /*#__PURE__*/react.createElement("td", null, "boolean"), /*#__PURE__*/react.createElement("td", null, "false"), /*#__PURE__*/react.createElement("td", null, "Whether to enable mobile navigation."))))), /*#__PURE__*/react.createElement("p", null, "Array configuration properties of the ", /*#__PURE__*/react.createElement("code", null, "data"), ":"), /*#__PURE__*/react.createElement("div", {
+  }, "[{\"title\":&lt;&gt;&lt;li&gt;&lt;NavLink data-route=\"true\" to=\"/components-demo\"&gt;Route Link&lt;/NavLink&gt;&lt;/li&gt;&lt;/&gt;,\"link\":\"#\",\"mega\":false},{\"title\":\"Top level 1\",\"link\":\"#\",\"mega\":false},{\"title\":\"Top level 2\",\"link\":\"#\",\"mega\":false,\"children\":[{\"title\":\"Sub level 2\",\"link\":\"#\",\"mega\":false,\"children\":[{\"title\":\"Sub Sub Level 2\",\"link\":\"#\",\"mega\":false}]}]},{\"title\":\"Mega Menu\",\"link\":\"#\",\"mega\":{\"columnLists\":[{\"heading\":\"Mega Menu 1\",\"list\":[{\"title\":\"Menu Text\",\"link\":\"#\"},{\"title\":\"Menu Text\",\"link\":\"#\"}]},{\"heading\":\"Mega Menu 2\",\"list\":[{\"title\":\"Menu Text\",\"link\":\"#\"},{\"title\":\"Menu Text\",\"link\":\"#\"}]},{\"heading\":\"Mega Menu 3\",\"list\":[{\"title\":\"Menu Text\",\"link\":\"#\"},{\"title\":\"Menu Text\",\"link\":\"#\"}]}]}},{\"title\":\"Top level 3\",\"link\":\"https://example.com\",\"mega\":false}]"))), /*#__PURE__*/react.createElement("tr", null, /*#__PURE__*/react.createElement("td", null, /*#__PURE__*/react.createElement("code", null, "position")), /*#__PURE__*/react.createElement("td", null, "null | ", /*#__PURE__*/react.createElement("code", null, "left"), " | ", /*#__PURE__*/react.createElement("code", null, "right")), /*#__PURE__*/react.createElement("td", null, "null"), /*#__PURE__*/react.createElement("td", null, "Set navigation to the left or right. If the value is ", /*#__PURE__*/react.createElement("code", null, "left"), ", it is forced to be left.")), /*#__PURE__*/react.createElement("tr", null, /*#__PURE__*/react.createElement("td", null, /*#__PURE__*/react.createElement("code", null, "tools")), /*#__PURE__*/react.createElement("td", null, "ReactNode"), /*#__PURE__*/react.createElement("td", null, "-"), /*#__PURE__*/react.createElement("td", null, "Set the trailing tool in the way of HTML Element, which can be a social button or other.")), /*#__PURE__*/react.createElement("tr", null, /*#__PURE__*/react.createElement("td", null, /*#__PURE__*/react.createElement("code", null, "mobileLogo")), /*#__PURE__*/react.createElement("td", null, "string"), /*#__PURE__*/react.createElement("td", null, "-"), /*#__PURE__*/react.createElement("td", null, "Specify a LOGO address for mobile navigation.")), /*#__PURE__*/react.createElement("tr", null, /*#__PURE__*/react.createElement("td", null, /*#__PURE__*/react.createElement("code", null, "label")), /*#__PURE__*/react.createElement("td", null, "string"), /*#__PURE__*/react.createElement("td", null, "-"), /*#__PURE__*/react.createElement("td", null, "Specify a navigation label.")), /*#__PURE__*/react.createElement("tr", null, /*#__PURE__*/react.createElement("td", null, /*#__PURE__*/react.createElement("code", null, "displayMobileNav")), /*#__PURE__*/react.createElement("td", null, "boolean"), /*#__PURE__*/react.createElement("td", null, "false"), /*#__PURE__*/react.createElement("td", null, "Whether to enable mobile navigation.")), /*#__PURE__*/react.createElement("tr", null, /*#__PURE__*/react.createElement("td", null, /*#__PURE__*/react.createElement("code", null, "direction")), /*#__PURE__*/react.createElement("td", null, "null | ", /*#__PURE__*/react.createElement("code", null, "vertical"), " | ", /*#__PURE__*/react.createElement("code", null, "horizontal")), /*#__PURE__*/react.createElement("td", null, "horizontal"), /*#__PURE__*/react.createElement("td", null, "The navigation direction."))))), /*#__PURE__*/react.createElement("p", null, "Array configuration properties of the ", /*#__PURE__*/react.createElement("code", null, "data"), ":"), /*#__PURE__*/react.createElement("div", {
     className: "table-responsive-md"
   }, /*#__PURE__*/react.createElement("table", {
     className: "table table-bordered table-striped mb-5"
@@ -63450,12 +64884,12 @@ function Parallax_isNativeReflectConstruct() { if (typeof Reflect === "undefined
  *************************************
  */
 
-/*-- Apply Third-party plugins (import location should be in front of "global scripts and styles") --*/
-
+/*-- Apply Third-party plugins (import location should be in front of "GLOBAL STYLES") --*/
 
 
 
 /*-- Apply global scripts and styles --*/
+
 
 
 
@@ -63904,12 +65338,12 @@ function ProgressBar_isNativeReflectConstruct() { if (typeof Reflect === "undefi
  *************************************
  */
 
-/*-- Apply Third-party plugins (import location should be in front of "global scripts and styles") --*/
-
+/*-- Apply Third-party plugins (import location should be in front of "GLOBAL STYLES") --*/
 
 
 
 /*-- Apply global scripts and styles --*/
+
 
 
 
@@ -64280,8 +65714,7 @@ function PeriodicalScroll_createSuper(Derived) { var hasNativeReflectConstruct =
 function PeriodicalScroll_isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Reflect.construct) return false; if (Reflect.construct.sham) return false; if (typeof Proxy === "function") return true; try { Boolean.prototype.valueOf.call(Reflect.construct(Boolean, [], function () {})); return true; } catch (e) { return false; } }
 
 
-/*-- Apply Third-party plugins (import location should be in front of "global scripts and styles") --*/
-
+/*-- Apply Third-party plugins (import location should be in front of "GLOBAL STYLES") --*/
 
 
 
@@ -64291,6 +65724,9 @@ function PeriodicalScroll_isNativeReflectConstruct() { if (typeof Reflect === "u
 
 
 /*-- Apply this component styles --*/
+
+
+/*-- Apply Third-party animation plugins --*/
 
  //
 
@@ -64578,14 +66014,19 @@ function ScrollReveal_isNativeReflectConstruct() { if (typeof Reflect === "undef
  *************************************
  */
 
-/*-- Apply Third-party plugins (import location should be in front of "global scripts and styles") --*/
-
+/*-- Apply Third-party plugins (import location should be in front of "GLOBAL STYLES") --*/
 
 
 
 /*-- Apply global scripts and styles --*/
 
 
+
+
+/*-- Apply this component styles --*/
+
+
+/*-- Apply Third-party animation plugins --*/
 
 
 
@@ -64846,6 +66287,8 @@ var ScrollReveal = /*#__PURE__*/function (_Component) {
 
  //Create or Remove Sidebar Menu
 
+ //get project config
+
 
 /* harmony default export */ const ScrollRevealDemo = (function () {
   react.useEffect(function () {
@@ -64948,7 +66391,40 @@ var ScrollReveal = /*#__PURE__*/function (_Component) {
     }
   }, /*#__PURE__*/react.createElement("div", {
     className: "poemkit-v-align--relative poemkit-t-c"
-  }, /*#__PURE__*/react.createElement("h3", null, "Scale effect"))), /*#__PURE__*/react.createElement("section", {
+  }, /*#__PURE__*/react.createElement("h3", null, "Scale effect"))), /*#__PURE__*/react.createElement("div", {
+    className: "poemkit-spacing--s"
+  }, /*#__PURE__*/react.createElement(ScrollReveal, {
+    className: "d-inline-block poemkit-sr-image-anim poemkit-sr-image-anim--x",
+    config: "{\"viewport\":\"50%\",\"from\":\"\",\"to\":\".is-active\",\"infinite\":false}"
+  }, /*#__PURE__*/react.createElement("img", {
+    src: "".concat(websiteConfig.rootDirectory, "/assets/images/demo/test-img-big-1.jpg"),
+    style: {
+      maxWidth: "500px"
+    },
+    alt: ""
+  }))), /*#__PURE__*/react.createElement("div", {
+    className: "poemkit-spacing--s"
+  }, /*#__PURE__*/react.createElement(ScrollReveal, {
+    className: "d-inline-block poemkit-sr-image-anim poemkit-sr-image-anim--y",
+    config: "{\"viewport\":\"50%\",\"from\":\"\",\"to\":\".is-active\",\"infinite\":false}"
+  }, /*#__PURE__*/react.createElement("img", {
+    src: "".concat(websiteConfig.rootDirectory, "/assets/images/demo/test-img-big-2.jpg"),
+    style: {
+      maxWidth: "500px"
+    },
+    alt: ""
+  }))), /*#__PURE__*/react.createElement("div", {
+    className: "poemkit-spacing--s"
+  }, /*#__PURE__*/react.createElement(ScrollReveal, {
+    className: "d-inline-block poemkit-sr-image-anim poemkit-sr-image-anim--z",
+    config: "{\"viewport\":\"50%\",\"from\":\"\",\"to\":\".is-active\",\"infinite\":false}"
+  }, /*#__PURE__*/react.createElement("img", {
+    src: "".concat(websiteConfig.rootDirectory, "/assets/images/demo/test-img-big-3.jpg"),
+    style: {
+      maxWidth: "500px"
+    },
+    alt: ""
+  }))), /*#__PURE__*/react.createElement("section", {
     className: "poemkit-spacing--s poemkit-spacing--no-bottom"
   }, /*#__PURE__*/react.createElement("div", {
     className: "container"
@@ -65587,9 +67063,7 @@ var SlideshowItem = /*#__PURE__*/function (_Component) {
         muted: true
       }), /*#__PURE__*/react.createElement("div", {
         className: "poemkit-slideshow__txt"
-      }, /*#__PURE__*/react.createElement("div", {
-        className: "poemkit-core-grid__col-7"
-      }, children)));
+      }, /*#__PURE__*/react.createElement("div", null, children)));
     }
   }]);
 
@@ -65620,8 +67094,8 @@ function Slideshow_isNativeReflectConstruct() { if (typeof Reflect === "undefine
 
 
 
-
 /*-- Apply global scripts and styles --*/
+
 
 
 
@@ -76596,8 +78070,7 @@ function Swiper_isNativeReflectConstruct() { if (typeof Reflect === "undefined" 
  *************************************
  */
 
-/*-- Apply Third-party plugins (import location should be in front of "global scripts and styles") --*/
-
+/*-- Apply Third-party plugins (import location should be in front of "GLOBAL STYLES") --*/
 
 
  // Slideshow
@@ -76609,6 +78082,9 @@ function Swiper_isNativeReflectConstruct() { if (typeof Reflect === "undefined" 
 
 
 /*-- Apply this component styles --*/
+
+
+/*-- Apply Third-party animation plugins --*/
 
  //get project config
 
@@ -77799,14 +79275,16 @@ function StickyElements_isNativeReflectConstruct() { if (typeof Reflect === "und
  *************************************
  */
 
-/*-- Apply Third-party plugins (import location should be in front of "global scripts and styles") --*/
-
+/*-- Apply Third-party plugins (import location should be in front of "GLOBAL STYLES") --*/
 
 
 
 /*-- Apply global scripts and styles --*/
 
 
+
+
+/*-- Apply Third-party animation plugins --*/
 
  //
 
@@ -78092,8 +79570,7 @@ function SeamlessScrollingElement_createSuper(Derived) { var hasNativeReflectCon
 function SeamlessScrollingElement_isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Reflect.construct) return false; if (Reflect.construct.sham) return false; if (typeof Proxy === "function") return true; try { Boolean.prototype.valueOf.call(Reflect.construct(Boolean, [], function () {})); return true; } catch (e) { return false; } }
 
 
-/*-- Apply Third-party plugins (import location should be in front of "global scripts and styles") --*/
-
+/*-- Apply Third-party plugins (import location should be in front of "GLOBAL STYLES") --*/
 
 
 
@@ -78103,6 +79580,9 @@ function SeamlessScrollingElement_isNativeReflectConstruct() { if (typeof Reflec
 
 
 /*-- Apply this component styles --*/
+
+
+/*-- Apply Third-party animation plugins --*/
 
  //
 
@@ -78390,12 +79870,12 @@ function ShowMoreLess_isNativeReflectConstruct() { if (typeof Reflect === "undef
  *************************************
  */
 
-/*-- Apply Third-party plugins (import location should be in front of "global scripts and styles") --*/
-
+/*-- Apply Third-party plugins (import location should be in front of "GLOBAL STYLES") --*/
 
 
 
 /*-- Apply global scripts and styles --*/
+
 
 
 
@@ -78774,12 +80254,12 @@ function Tabs_createSuper(Derived) { var hasNativeReflectConstruct = Tabs_isNati
 function Tabs_isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Reflect.construct) return false; if (Reflect.construct.sham) return false; if (typeof Proxy === "function") return true; try { Boolean.prototype.valueOf.call(Reflect.construct(Boolean, [], function () {})); return true; } catch (e) { return false; } }
 
 
-/*-- Apply Third-party plugins (import location should be in front of "global scripts and styles") --*/
-
+/*-- Apply Third-party plugins (import location should be in front of "GLOBAL STYLES") --*/
 
 
 
 /*-- Apply global scripts and styles --*/
+
 
 
 
@@ -79414,12 +80894,12 @@ function TabsAnimated_createSuper(Derived) { var hasNativeReflectConstruct = Tab
 function TabsAnimated_isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Reflect.construct) return false; if (Reflect.construct.sham) return false; if (typeof Proxy === "function") return true; try { Boolean.prototype.valueOf.call(Reflect.construct(Boolean, [], function () {})); return true; } catch (e) { return false; } }
 
 
-/*-- Apply Third-party plugins (import location should be in front of "global scripts and styles") --*/
-
+/*-- Apply Third-party plugins (import location should be in front of "GLOBAL STYLES") --*/
 
 
 
 /*-- Apply global scripts and styles --*/
+
 
 
 
@@ -79933,12 +81413,12 @@ function Table_isNativeReflectConstruct() { if (typeof Reflect === "undefined" |
  *************************************
  */
 
-/*-- Apply Third-party plugins (import location should be in front of "global scripts and styles") --*/
-
+/*-- Apply Third-party plugins (import location should be in front of "GLOBAL STYLES") --*/
 
 
 
 /*-- Apply global scripts and styles --*/
+
 
 
 
@@ -80662,7 +82142,7 @@ var TableGridRow = /*#__PURE__*/function (_Component) {
     value: function render() {
       var _fields = this.props.data.data;
       var _selected = this.props.data.selected;
-      var rowClasses = _selected ? 'poemkit-table-grid__row is-drop-target' : 'poemkit-table-grid__row';
+      var rowClassName = _selected ? 'poemkit-table-grid__row is-drop-target' : 'poemkit-table-grid__row';
 
       var fields = _fields.map(function (el, i) {
         return /*#__PURE__*/react.createElement(TableGridField, {
@@ -80673,7 +82153,7 @@ var TableGridRow = /*#__PURE__*/function (_Component) {
       });
 
       return /*#__PURE__*/react.createElement(react.Fragment, null, /*#__PURE__*/react.createElement("div", {
-        className: rowClasses,
+        className: rowClassName,
         role: "row",
         id: this.uniqueID
       }, fields));
@@ -80768,12 +82248,12 @@ function TableGrid_isNativeReflectConstruct() { if (typeof Reflect === "undefine
  *************************************
  */
 
-/*-- Apply Third-party plugins (import location should be in front of "global scripts and styles") --*/
-
+/*-- Apply Third-party plugins (import location should be in front of "GLOBAL STYLES") --*/
 
 
 
 /*-- Apply global scripts and styles --*/
+
 
 
 
@@ -81161,12 +82641,12 @@ function TableSorter_isNativeReflectConstruct() { if (typeof Reflect === "undefi
  *************************************
  */
 
-/*-- Apply Third-party plugins (import location should be in front of "global scripts and styles") --*/
-
+/*-- Apply Third-party plugins (import location should be in front of "GLOBAL STYLES") --*/
 
 
 
 /*-- Apply global scripts and styles --*/
+
 
 
 
@@ -81600,12 +83080,12 @@ function Timeline_isNativeReflectConstruct() { if (typeof Reflect === "undefined
  *************************************
  */
 
-/*-- Apply Third-party plugins (import location should be in front of "global scripts and styles") --*/
-
+/*-- Apply Third-party plugins (import location should be in front of "GLOBAL STYLES") --*/
 
 
 
 /*-- Apply global scripts and styles --*/
+
 
 
 
@@ -82223,6 +83703,449 @@ var TimelineDemo_data = [{
   }, /*#__PURE__*/react.createElement("table", {
     className: "table table-bordered table-striped mb-5"
   }, /*#__PURE__*/react.createElement("thead", null, /*#__PURE__*/react.createElement("tr", null, /*#__PURE__*/react.createElement("th", null, "Property"), /*#__PURE__*/react.createElement("th", null, "Type"), /*#__PURE__*/react.createElement("th", null, "Default"), /*#__PURE__*/react.createElement("th", null, "Description"))), /*#__PURE__*/react.createElement("tbody", null, /*#__PURE__*/react.createElement("tr", null, /*#__PURE__*/react.createElement("td", null, /*#__PURE__*/react.createElement("code", null, "url")), /*#__PURE__*/react.createElement("td", null, "string"), /*#__PURE__*/react.createElement("td", null, "-"), /*#__PURE__*/react.createElement("td", null, "Specifies the path to the image")), /*#__PURE__*/react.createElement("tr", null, /*#__PURE__*/react.createElement("td", null, /*#__PURE__*/react.createElement("code", null, "title")), /*#__PURE__*/react.createElement("td", null, "ReactNode"), /*#__PURE__*/react.createElement("td", null, "-"), /*#__PURE__*/react.createElement("td", null, "Specifies a title for each item")), /*#__PURE__*/react.createElement("tr", null, /*#__PURE__*/react.createElement("td", null, /*#__PURE__*/react.createElement("code", null, "content")), /*#__PURE__*/react.createElement("td", null, "ReactNode"), /*#__PURE__*/react.createElement("td", null, "-"), /*#__PURE__*/react.createElement("td", null, "Specifies a content for each item")), /*#__PURE__*/react.createElement("tr", null, /*#__PURE__*/react.createElement("td", null, /*#__PURE__*/react.createElement("code", null, "node")), /*#__PURE__*/react.createElement("td", null, "ReactNode"), /*#__PURE__*/react.createElement("td", null, "-"), /*#__PURE__*/react.createElement("td", null, "Specifies a time-node for each item")))))))))));
+});
+;// CONCATENATED MODULE: ./src/client/components/Tooltip/index.tsx
+
+
+
+
+
+
+
+
+function Tooltip_createSuper(Derived) { var hasNativeReflectConstruct = Tooltip_isNativeReflectConstruct(); return function _createSuperInternal() { var Super = _getPrototypeOf(Derived), result; if (hasNativeReflectConstruct) { var NewTarget = _getPrototypeOf(this).constructor; result = Reflect.construct(Super, arguments, NewTarget); } else { result = Super.apply(this, arguments); } return _possibleConstructorReturn(this, result); }; }
+
+function Tooltip_isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Reflect.construct) return false; if (Reflect.construct.sham) return false; if (typeof Proxy === "function") return true; try { Boolean.prototype.valueOf.call(Reflect.construct(Boolean, [], function () {})); return true; } catch (e) { return false; } }
+
+/* 
+ *************************************
+ * <!-- Tooltip -->
+ *************************************
+ */
+
+/*-- Apply Third-party plugins (import location should be in front of "GLOBAL STYLES") --*/
+
+
+
+/*-- Apply global scripts and styles --*/
+
+
+
+
+/*-- Apply this component styles --*/
+
+
+
+
+var Tooltip = /*#__PURE__*/function (_Component) {
+  _inherits(Tooltip, _Component);
+
+  var _super = Tooltip_createSuper(Tooltip);
+
+  function Tooltip(props) {
+    var _this;
+
+    _classCallCheck(this, Tooltip);
+
+    _this = _super.call(this, props);
+
+    _defineProperty(_assertThisInitialized(_this), "tipdivRef", /*#__PURE__*/react.createRef());
+
+    _defineProperty(_assertThisInitialized(_this), "hoverDelay", void 0);
+
+    _defineProperty(_assertThisInitialized(_this), "mouseOutDelay", void 0);
+
+    _defineProperty(_assertThisInitialized(_this), "hoverTimeout", void 0);
+
+    _defineProperty(_assertThisInitialized(_this), "uniqueID", void 0);
+
+    _this.uniqueID = 'app-' + helpers.GUID.create();
+    _this.hoverDelay = _this.props.hoverDelay ? _this.props.hoverDelay : 200;
+    _this.mouseOutDelay = _this.props.mouseOutDelay ? _this.props.mouseOutDelay : _this.hoverDelay;
+    _this.hoverTimeout = false;
+    _this.state = {
+      hasBeenShown: false
+    };
+    _this.handleTouchStart = _this.handleTouchStart.bind(_assertThisInitialized(_this));
+    _this.handleMouseEnter = _this.handleMouseEnter.bind(_assertThisInitialized(_this));
+    _this.handleMouseLeave = _this.handleMouseLeave.bind(_assertThisInitialized(_this));
+    return _this;
+  }
+
+  _createClass(Tooltip, [{
+    key: "handleMouseEnter",
+    value: function handleMouseEnter() {
+      var _this2 = this;
+
+      clearTimeout(this.hoverTimeout);
+      this.hoverTimeout = setTimeout(function () {
+        _this2.isShow();
+      }, this.hoverDelay);
+    }
+  }, {
+    key: "handleMouseLeave",
+    value: function handleMouseLeave() {
+      var _this3 = this;
+
+      clearTimeout(this.hoverTimeout);
+      this.hoverTimeout = setTimeout(function () {
+        _this3.hideTip();
+      }, this.mouseOutDelay);
+    }
+  }, {
+    key: "isShow",
+    value: function isShow() {
+      var _this4 = this;
+
+      if (!this.state.hasBeenShown) {
+        // this will render once, then fire componentDidUpdate, which will show the tip
+        return this.setState({
+          hasBeenShown: true
+        });
+      }
+
+      if (!this.state.isShow) {
+        this.setState({
+          isShow: true
+        }, function () {
+          var _this4$tipdivRef$curr;
+
+          (_this4$tipdivRef$curr = _this4.tipdivRef.current) === null || _this4$tipdivRef$curr === void 0 ? void 0 : _this4$tipdivRef$curr.classList.add('is-active');
+        });
+      }
+    }
+  }, {
+    key: "hideTip",
+    value: function hideTip() {
+      var _this5 = this;
+
+      if (this.state.isShow) {
+        this.setState({
+          isShow: false
+        }, function () {
+          var _this5$tipdivRef$curr;
+
+          (_this5$tipdivRef$curr = _this5.tipdivRef.current) === null || _this5$tipdivRef$curr === void 0 ? void 0 : _this5$tipdivRef$curr.classList.remove('is-active');
+        });
+      }
+    }
+  }, {
+    key: "handleTouchStart",
+    value: function handleTouchStart(e) {
+      this.hideTip();
+    }
+  }, {
+    key: "componentDidUpdate",
+    value: function componentDidUpdate(prevProps, prevState) {
+      if (!this.state.hasBeenShown) {
+        this.setState({
+          hasBeenShown: true
+        });
+        return setTimeout(this.isShow, 0);
+      }
+
+      if (!prevState.hasBeenShown && this.state.hasBeenShown) {
+        this.isShow();
+      }
+    }
+  }, {
+    key: "componentDidMount",
+    value: function componentDidMount() {
+      window.removeEventListener('touchstart', this.handleTouchStart);
+      window.addEventListener('touchstart', this.handleTouchStart);
+    }
+    /** Remove the global list of events, especially as scroll and interval. */
+
+  }, {
+    key: "componentWillUnmount",
+    value: function componentWillUnmount() {
+      // Remove scroll events from window
+      window.removeEventListener('touchstart', this.handleTouchStart); // Cancels a timeout previously established by calling setTimeout().
+
+      clearTimeout(this.hoverTimeout);
+    }
+  }, {
+    key: "render",
+    value: function render() {
+      var _this$props = this.props,
+          direction = _this$props.direction,
+          size = _this$props.size,
+          showTriggerContent = _this$props.showTriggerContent,
+          hideTriggerContent = _this$props.hideTriggerContent,
+          id = _this$props.id;
+      return /*#__PURE__*/react.createElement(react.Fragment, null, /*#__PURE__*/react.createElement("div", {
+        id: id || this.uniqueID,
+        onMouseEnter: this.handleMouseEnter,
+        onMouseLeave: this.handleMouseLeave,
+        className: "poemkit-tooltip"
+      }, /*#__PURE__*/react.createElement("span", {
+        "data-microtip-position": direction || 'top',
+        "data-microtip-size": size || 'auto',
+        role: "tooltip",
+        ref: this.tipdivRef
+      }, showTriggerContent), /*#__PURE__*/react.createElement("div", null, hideTriggerContent)));
+    }
+  }]);
+
+  return Tooltip;
+}(react.Component);
+
+
+;// CONCATENATED MODULE: ./src/client/views/_pages/ComponentsDemo/TooltipDemo.js
+
+
+ //Create or Remove Sidebar Menu
+
+ //get project config
+
+
+/* harmony default export */ const TooltipDemo = (function () {
+  react.useEffect(function () {
+    // Equivalent to componentDidMount and componentDidUpdate:
+    helpers(document).ready(function () {
+      //Create sidebar menu
+      SidebarMenu();
+    });
+  });
+  return /*#__PURE__*/react.createElement(react.Fragment, null, /*#__PURE__*/react.createElement("section", null, /*#__PURE__*/react.createElement("div", {
+    className: "container"
+  }, /*#__PURE__*/react.createElement("div", {
+    className: "row"
+  }, /*#__PURE__*/react.createElement("div", {
+    className: "col-12"
+  }, /*#__PURE__*/react.createElement("h1", {
+    className: "poemkit-typo--h2"
+  }, "Tooltip", /*#__PURE__*/react.createElement("a", {
+    className: "poemkit-typo--h3 align-middle",
+    href: "https://github.com/xizon/poemkit/tree/main/src/client/components/Tooltip",
+    target: "_blank"
+  }, /*#__PURE__*/react.createElement("span", {
+    className: "poemkit-dir--right",
+    style: {
+      fontSize: "0.75rem",
+      color: "#ababab",
+      margin: ".5rem .5rem 0 0"
+    }
+  }, /*#__PURE__*/react.createElement("svg", {
+    style: {
+      marginRight: ".5rem"
+    },
+    width: "15",
+    viewBox: "0 0 392.186 392.186"
+  }, /*#__PURE__*/react.createElement("g", null, /*#__PURE__*/react.createElement("g", null, /*#__PURE__*/react.createElement("g", null, /*#__PURE__*/react.createElement("path", {
+    fill: "#d2d2d2",
+    d: "M368.62,17.951H23.568C10.57,17.951,0,28.524,0,41.52v309.146c0,12.996,10.57,23.568,23.568,23.568h345.053c12.994,0,23.564-10.572,23.564-23.568V41.52C392.188,28.525,381.614,17.951,368.62,17.951z M297.56,57.528c0-4.806,3.896-8.703,8.701-8.703h8.703c4.808,0,8.701,3.896,8.701,8.703v9.863c0,4.806-3.896,8.702-8.701,8.702h-8.703c-4.805,0-8.701-3.896-8.701-8.702V57.528z M257.093,57.528c0-4.806,3.898-8.703,8.703-8.703h8.701c4.805,0,8.703,3.896,8.703,8.703v9.863c0,4.806-3.898,8.702-8.703,8.702h-8.701c-4.805,0-8.703-3.896-8.703-8.702V57.528z M363.903,345.951H28.282V102.235h335.621V345.951L363.903,345.951z M364.132,67.391c0,4.806-3.896,8.702-8.701,8.702h-8.703c-4.809,0-8.702-3.896-8.702-8.702v-9.863c0-4.806,3.896-8.703,8.702-8.703h8.703c4.806,0,8.701,3.896,8.701,8.703V67.391z"
+  }), /*#__PURE__*/react.createElement("path", {
+    fill: "#d2d2d2",
+    d: "M84.185,233.284l63.084,29.336c1.631,0.755,3.367,1.138,5.162,1.138c2.338,0,4.617-0.664,6.598-1.924c3.547-2.267,5.666-6.13,5.666-10.334v-0.322c0-4.752-2.785-9.116-7.096-11.118l-39.455-18.332l39.455-18.334c4.311-2.004,7.096-6.367,7.096-11.117v-0.319c0-4.21-2.119-8.075-5.666-10.334c-1.961-1.253-4.246-1.916-6.605-1.916c-1.779,0-3.563,0.391-5.16,1.133l-63.08,29.333c-4.307,2.004-7.09,6.369-7.09,11.117v0.877C77.093,226.909,79.874,231.272,84.185,233.284z"
+  }), /*#__PURE__*/react.createElement("path", {
+    fill: "#d2d2d2",
+    d: "M165.257,293.036c2.301,3.149,6.002,5.03,9.9,5.03h0.316c5.352,0,10.041-3.426,11.672-8.517L228.7,160.788c1.192-3.716,0.531-7.818-1.771-10.973c-2.301-3.15-6.002-5.03-9.901-5.03h-0.315c-5.354,0-10.048,3.425-11.679,8.516l-41.559,128.771C162.292,285.793,162.958,289.889,165.257,293.036z"
+  }), /*#__PURE__*/react.createElement("path", {
+    fill: "#d2d2d2",
+    d: "M227.49,192.276c0,4.745,2.783,9.109,7.095,11.123l39.455,18.329l-39.455,18.33c-4.31,2.004-7.095,6.368-7.095,11.118v0.322c0,4.205,2.117,8.068,5.668,10.336c1.974,1.258,4.254,1.924,6.595,1.924c1.793,0,3.528-0.383,5.17-1.142l63.08-29.335c4.307-2.009,7.09-6.372,7.09-11.115v-0.877c0-4.748-2.783-9.113-7.094-11.117l-63.08-29.333c-1.591-0.74-3.373-1.131-5.152-1.131c-2.355,0-4.643,0.661-6.604,1.912c-3.551,2.263-5.67,6.127-5.67,10.337v0.318H227.49L227.49,192.276z"
+  }))))), "Docs on GitHub"))))))), /*#__PURE__*/react.createElement("section", {
+    className: "poemkit-spacing--s poemkit-spacing--no-bottom"
+  }, /*#__PURE__*/react.createElement("div", {
+    className: "container"
+  }, /*#__PURE__*/react.createElement("div", {
+    className: "row"
+  }, /*#__PURE__*/react.createElement("div", {
+    className: "col-12"
+  }, /*#__PURE__*/react.createElement("h3", {
+    className: "app-header-title"
+  }, "Demos"), /*#__PURE__*/react.createElement("p", null, "Please move your mouse pointer over an element."), /*#__PURE__*/react.createElement("hr", null))))), /*#__PURE__*/react.createElement("section", {
+    className: "poemkit-spacing--s"
+  }, /*#__PURE__*/react.createElement("div", {
+    className: "container"
+  }, /*#__PURE__*/react.createElement("div", {
+    className: "row"
+  }, /*#__PURE__*/react.createElement("div", {
+    className: "col-12"
+  }, /*#__PURE__*/react.createElement(Tooltip, {
+    hoverDelay: 300,
+    direction: "top",
+    size: "auto",
+    showTriggerContent: /*#__PURE__*/react.createElement(react.Fragment, null, /*#__PURE__*/react.createElement("i", {
+      className: "fa fa-question-circle",
+      "aria-hidden": "true"
+    }), " Top (auto width, 300 microseconds delay)"),
+    hideTriggerContent: /*#__PURE__*/react.createElement(react.Fragment, null, /*#__PURE__*/react.createElement("div", {
+      className: "poemkit-t-l"
+    }, "Hi, there. I am here."))
+  }), "\xA0\xA0\xA0\xA0", /*#__PURE__*/react.createElement(Tooltip, {
+    hoverDelay: 300,
+    direction: "top",
+    size: "auto",
+    showTriggerContent: /*#__PURE__*/react.createElement(react.Fragment, null, /*#__PURE__*/react.createElement("i", {
+      className: "fa fa-question-circle",
+      "aria-hidden": "true"
+    }), " Top (auto width, 300 microseconds delay)"),
+    hideTriggerContent: /*#__PURE__*/react.createElement(react.Fragment, null, /*#__PURE__*/react.createElement("div", {
+      className: "poemkit-t-l"
+    }, "Hi."))
+  }), "\xA0\xA0\xA0\xA0", /*#__PURE__*/react.createElement(Tooltip, {
+    hoverDelay: 0,
+    direction: "top",
+    size: "large",
+    showTriggerContent: /*#__PURE__*/react.createElement(react.Fragment, null, /*#__PURE__*/react.createElement("i", {
+      className: "fa fa-question-circle",
+      "aria-hidden": "true"
+    }), " Top (large size, no delay)"),
+    hideTriggerContent: /*#__PURE__*/react.createElement(react.Fragment, null, /*#__PURE__*/react.createElement("div", {
+      className: "poemkit-t-l"
+    }, "An underlying front-end system that makes it easy to extend and modify core files."))
+  }), /*#__PURE__*/react.createElement("hr", null), /*#__PURE__*/react.createElement(Tooltip, {
+    hoverDelay: 0,
+    direction: "top-right",
+    size: "large",
+    showTriggerContent: /*#__PURE__*/react.createElement(react.Fragment, null, /*#__PURE__*/react.createElement("i", {
+      className: "fa fa-question-circle",
+      "aria-hidden": "true"
+    }), " Top Right"),
+    hideTriggerContent: /*#__PURE__*/react.createElement(react.Fragment, null, /*#__PURE__*/react.createElement("div", {
+      className: "poemkit-t-l"
+    }, "An underlying front-end system that makes it easy to extend and modify core files."))
+  }), /*#__PURE__*/react.createElement("hr", null), /*#__PURE__*/react.createElement(Tooltip, {
+    hoverDelay: 0,
+    direction: "top-left",
+    size: "large",
+    showTriggerContent: /*#__PURE__*/react.createElement(react.Fragment, null, /*#__PURE__*/react.createElement("i", {
+      className: "fa fa-question-circle",
+      "aria-hidden": "true"
+    }), " Top Left"),
+    hideTriggerContent: /*#__PURE__*/react.createElement(react.Fragment, null, /*#__PURE__*/react.createElement("div", {
+      className: "poemkit-t-l"
+    }, "An underlying front-end system that makes it easy to extend and modify core files."))
+  }), /*#__PURE__*/react.createElement("hr", null), /*#__PURE__*/react.createElement(Tooltip, {
+    hoverDelay: 0,
+    direction: "bottom",
+    size: "large",
+    showTriggerContent: /*#__PURE__*/react.createElement(react.Fragment, null, /*#__PURE__*/react.createElement("i", {
+      className: "fa fa-question-circle",
+      "aria-hidden": "true"
+    }), " Bottom"),
+    hideTriggerContent: /*#__PURE__*/react.createElement(react.Fragment, null, /*#__PURE__*/react.createElement("div", {
+      className: "poemkit-t-l"
+    }, "An underlying front-end system that makes it easy to extend and modify core files."))
+  }), /*#__PURE__*/react.createElement("hr", null), /*#__PURE__*/react.createElement(Tooltip, {
+    hoverDelay: 0,
+    direction: "bottom-right",
+    size: "large",
+    showTriggerContent: /*#__PURE__*/react.createElement(react.Fragment, null, /*#__PURE__*/react.createElement("i", {
+      className: "fa fa-question-circle",
+      "aria-hidden": "true"
+    }), " Bottom Right"),
+    hideTriggerContent: /*#__PURE__*/react.createElement(react.Fragment, null, /*#__PURE__*/react.createElement("div", {
+      className: "poemkit-t-l"
+    }, "An underlying front-end system that makes it easy to extend and modify core files."))
+  }), /*#__PURE__*/react.createElement("hr", null), /*#__PURE__*/react.createElement(Tooltip, {
+    hoverDelay: 0,
+    direction: "bottom-left",
+    size: "large",
+    showTriggerContent: /*#__PURE__*/react.createElement(react.Fragment, null, /*#__PURE__*/react.createElement("i", {
+      className: "fa fa-question-circle",
+      "aria-hidden": "true"
+    }), " Bottom Left"),
+    hideTriggerContent: /*#__PURE__*/react.createElement(react.Fragment, null, /*#__PURE__*/react.createElement("div", {
+      className: "poemkit-t-l"
+    }, "An underlying front-end system that makes it easy to extend and modify core files."))
+  }), /*#__PURE__*/react.createElement("hr", null), /*#__PURE__*/react.createElement(Tooltip, {
+    hoverDelay: 0,
+    direction: "left",
+    size: "small",
+    showTriggerContent: /*#__PURE__*/react.createElement(react.Fragment, null, /*#__PURE__*/react.createElement("i", {
+      className: "fa fa-question-circle",
+      "aria-hidden": "true"
+    }), " Left (Size: small)"),
+    hideTriggerContent: /*#__PURE__*/react.createElement(react.Fragment, null, /*#__PURE__*/react.createElement("div", {
+      className: "poemkit-t-c"
+    }, "Centered text"))
+  }), /*#__PURE__*/react.createElement("hr", null), /*#__PURE__*/react.createElement(Tooltip, {
+    hoverDelay: 0,
+    direction: "right",
+    size: "small",
+    showTriggerContent: /*#__PURE__*/react.createElement(react.Fragment, null, /*#__PURE__*/react.createElement("i", {
+      className: "fa fa-question-circle",
+      "aria-hidden": "true"
+    }), " Right (Size: small)"),
+    hideTriggerContent: /*#__PURE__*/react.createElement(react.Fragment, null, /*#__PURE__*/react.createElement("div", {
+      className: "poemkit-t-c"
+    }, "Centered text"))
+  }), /*#__PURE__*/react.createElement("hr", null), /*#__PURE__*/react.createElement(Tooltip, {
+    hoverDelay: 0,
+    direction: "left",
+    size: "medium",
+    showTriggerContent: /*#__PURE__*/react.createElement(react.Fragment, null, /*#__PURE__*/react.createElement("i", {
+      className: "fa fa-question-circle",
+      "aria-hidden": "true"
+    }), " Left (Size: medium)"),
+    hideTriggerContent: /*#__PURE__*/react.createElement(react.Fragment, null, /*#__PURE__*/react.createElement("div", {
+      className: "poemkit-t-c"
+    }, "Centered text"))
+  }), /*#__PURE__*/react.createElement("hr", null), /*#__PURE__*/react.createElement(Tooltip, {
+    hoverDelay: 0,
+    direction: "right",
+    size: "medium",
+    showTriggerContent: /*#__PURE__*/react.createElement(react.Fragment, null, /*#__PURE__*/react.createElement("i", {
+      className: "fa fa-question-circle",
+      "aria-hidden": "true"
+    }), " Right (Size: medium)"),
+    hideTriggerContent: /*#__PURE__*/react.createElement(react.Fragment, null, /*#__PURE__*/react.createElement("div", {
+      className: "poemkit-t-c"
+    }, "Centered text"))
+  }), /*#__PURE__*/react.createElement("hr", null), /*#__PURE__*/react.createElement(Tooltip, {
+    hoverDelay: 0,
+    direction: "left",
+    size: "large",
+    showTriggerContent: /*#__PURE__*/react.createElement(react.Fragment, null, /*#__PURE__*/react.createElement("i", {
+      className: "fa fa-question-circle",
+      "aria-hidden": "true"
+    }), " Left (Size: large)"),
+    hideTriggerContent: /*#__PURE__*/react.createElement(react.Fragment, null, /*#__PURE__*/react.createElement("div", {
+      className: "poemkit-t-c"
+    }, "Centered text"))
+  }), /*#__PURE__*/react.createElement("hr", null), /*#__PURE__*/react.createElement(Tooltip, {
+    hoverDelay: 0,
+    direction: "right",
+    size: "large",
+    showTriggerContent: /*#__PURE__*/react.createElement(react.Fragment, null, /*#__PURE__*/react.createElement("i", {
+      className: "fa fa-question-circle",
+      "aria-hidden": "true"
+    }), " Right (Size: large)"),
+    hideTriggerContent: /*#__PURE__*/react.createElement(react.Fragment, null, /*#__PURE__*/react.createElement("div", {
+      className: "poemkit-t-c"
+    }, "Centered text"))
+  }), /*#__PURE__*/react.createElement("hr", null), /*#__PURE__*/react.createElement(Tooltip, {
+    hoverDelay: 0,
+    direction: "right",
+    size: "large",
+    showTriggerContent: /*#__PURE__*/react.createElement(react.Fragment, null, /*#__PURE__*/react.createElement("i", {
+      className: "fa fa-question-circle",
+      "aria-hidden": "true"
+    }), " Image (Size: large)"),
+    hideTriggerContent: /*#__PURE__*/react.createElement(react.Fragment, null, /*#__PURE__*/react.createElement("div", {
+      className: "poemkit-t-c"
+    }, /*#__PURE__*/react.createElement("img", {
+      src: "".concat(websiteConfig.rootDirectory, "/assets/images/demo/qr-code.png"),
+      alt: ""
+    }), /*#__PURE__*/react.createElement("br", null), "Centered image"))
+  }))))), /*#__PURE__*/react.createElement("section", null, /*#__PURE__*/react.createElement("div", {
+    className: "container"
+  }, /*#__PURE__*/react.createElement("div", {
+    className: "row"
+  }, /*#__PURE__*/react.createElement("div", {
+    className: "col-12"
+  }, /*#__PURE__*/react.createElement("h3", {
+    className: "app-header-title"
+  }, "API"), /*#__PURE__*/react.createElement("hr", null), /*#__PURE__*/react.createElement("article", {
+    className: "poemkit-spacing--s",
+    itemProp: "text"
+  }, /*#__PURE__*/react.createElement("h4", null, "Tooltip"), /*#__PURE__*/react.createElement("div", null, /*#__PURE__*/react.createElement("pre", null, "import Tooltip from '@poemkit/components/Tooltip/index.tsx';")), /*#__PURE__*/react.createElement("div", {
+    className: "table-responsive-md"
+  }, /*#__PURE__*/react.createElement("table", {
+    className: "table table-bordered table-striped mb-5"
+  }, /*#__PURE__*/react.createElement("thead", null, /*#__PURE__*/react.createElement("tr", null, /*#__PURE__*/react.createElement("th", null, "Property"), /*#__PURE__*/react.createElement("th", null, "Type"), /*#__PURE__*/react.createElement("th", null, "Default"), /*#__PURE__*/react.createElement("th", null, "Description"))), /*#__PURE__*/react.createElement("tbody", null, /*#__PURE__*/react.createElement("tr", null, /*#__PURE__*/react.createElement("td", null, /*#__PURE__*/react.createElement("code", null, "direction")), /*#__PURE__*/react.createElement("td", null, /*#__PURE__*/react.createElement("code", null, "top"), " | ", /*#__PURE__*/react.createElement("code", null, "top-right"), " | ", /*#__PURE__*/react.createElement("code", null, "top-left"), " | ", /*#__PURE__*/react.createElement("code", null, "bottom"), " | ", /*#__PURE__*/react.createElement("code", null, "bottom-right"), " | ", /*#__PURE__*/react.createElement("code", null, "bottom-left")), /*#__PURE__*/react.createElement("td", null, "top"), /*#__PURE__*/react.createElement("td", null, "The direction of the tip. Defaults to ", /*#__PURE__*/react.createElement("code", null, "top"), ".")), /*#__PURE__*/react.createElement("tr", null, /*#__PURE__*/react.createElement("td", null, /*#__PURE__*/react.createElement("code", null, "size")), /*#__PURE__*/react.createElement("td", null, /*#__PURE__*/react.createElement("code", null, "auto"), " | ", /*#__PURE__*/react.createElement("code", null, "large"), " | ", /*#__PURE__*/react.createElement("code", null, "medium"), " | ", /*#__PURE__*/react.createElement("code", null, "small")), /*#__PURE__*/react.createElement("td", null, "auto"), /*#__PURE__*/react.createElement("td", null, "The size of the content area. Defaults to ", /*#__PURE__*/react.createElement("code", null, "auto"), ".")), /*#__PURE__*/react.createElement("tr", null, /*#__PURE__*/react.createElement("td", null, /*#__PURE__*/react.createElement("code", null, "hoverDelay")), /*#__PURE__*/react.createElement("td", null, "number"), /*#__PURE__*/react.createElement("td", null, "200"), /*#__PURE__*/react.createElement("td", null, "The number of milliseconds to determine hover intent")), /*#__PURE__*/react.createElement("tr", null, /*#__PURE__*/react.createElement("td", null, /*#__PURE__*/react.createElement("code", null, "mouseOutDelay")), /*#__PURE__*/react.createElement("td", null, "number"), /*#__PURE__*/react.createElement("td", null, "-"), /*#__PURE__*/react.createElement("td", null, "The number of milliseconds to determine hover-end intent, defaults to the hoverDelay value")), /*#__PURE__*/react.createElement("tr", null, /*#__PURE__*/react.createElement("td", null, /*#__PURE__*/react.createElement("code", null, "showTriggerContent")), /*#__PURE__*/react.createElement("td", null, "ReactNode"), /*#__PURE__*/react.createElement("td", null, "-"), /*#__PURE__*/react.createElement("td", null, "Set a piece of text or HTML code for the show trigger")), /*#__PURE__*/react.createElement("tr", null, /*#__PURE__*/react.createElement("td", null, /*#__PURE__*/react.createElement("code", null, "hideTriggerContent")), /*#__PURE__*/react.createElement("td", null, "ReactNode"), /*#__PURE__*/react.createElement("td", null, "-"), /*#__PURE__*/react.createElement("td", null, "Set a piece of text or HTML code for the hide trigger")))))))))));
 });
 ;// CONCATENATED MODULE: ./node_modules/@babel/runtime/helpers/esm/arrayWithHoles.js
 function _arrayWithHoles(arr) {
@@ -91787,11 +93710,11 @@ function Video_isNativeReflectConstruct() { if (typeof Reflect === "undefined" |
  *************************************
  */
 
-/*-- Apply Third-party plugins (import location should be in front of "global scripts and styles") --*/
+/*-- Apply Third-party plugins (import location should be in front of "GLOBAL STYLES") --*/
 
 
+ // Player
 
-// Player
 
 /*-- Apply global scripts and styles --*/
 
@@ -92076,6 +93999,10 @@ function ComponentsDemo_isNativeReflectConstruct() { if (typeof Reflect === "und
 
 
 
+
+
+
+
  //
 
 var ComponentsDemo_PAGE_TITLE = null;
@@ -92275,6 +94202,15 @@ function ComponentsDemo_HookContent() {
     to: "".concat(url, "/counter"),
     activeClassName: "is-active"
   }, "Counter")), /*#__PURE__*/react.createElement("li", {
+    className: urlChk('/content-placeholder') ? 'is-active' : ''
+  }, /*#__PURE__*/react.createElement(NavLink, {
+    "data-route": "true",
+    onClick: function onClick(e) {
+      return refreshTitle(e);
+    },
+    to: "".concat(url, "/content-placeholder"),
+    activeClassName: "is-active"
+  }, "Content Placeholder")), /*#__PURE__*/react.createElement("li", {
     className: urlChk('/hybrid-content-slider') ? 'is-active' : ''
   }, /*#__PURE__*/react.createElement(NavLink, {
     "data-route": "true",
@@ -92302,6 +94238,15 @@ function ComponentsDemo_HookContent() {
     to: "".concat(url, "/lightbox"),
     activeClassName: "is-active"
   }, "Lightbox")), /*#__PURE__*/react.createElement("li", {
+    className: urlChk('/list-bulleted') ? 'is-active' : ''
+  }, /*#__PURE__*/react.createElement(NavLink, {
+    "data-route": "true",
+    onClick: function onClick(e) {
+      return refreshTitle(e);
+    },
+    to: "".concat(url, "/list-bulleted"),
+    activeClassName: "is-active"
+  }, "List Bulleted")), /*#__PURE__*/react.createElement("li", {
     className: urlChk('/modal-dialog') ? 'is-active' : ''
   }, /*#__PURE__*/react.createElement(NavLink, {
     "data-route": "true",
@@ -92428,6 +94373,15 @@ function ComponentsDemo_HookContent() {
     to: "".concat(url, "/timeline"),
     activeClassName: "is-active"
   }, "Timeline")), /*#__PURE__*/react.createElement("li", {
+    className: urlChk('/tooltip') ? 'is-active' : ''
+  }, /*#__PURE__*/react.createElement(NavLink, {
+    "data-route": "true",
+    onClick: function onClick(e) {
+      return refreshTitle(e);
+    },
+    to: "".concat(url, "/tooltip"),
+    activeClassName: "is-active"
+  }, "Tooltip")), /*#__PURE__*/react.createElement("li", {
     className: "poemkit-demo-nav-header"
   }, "FORMS"), /*#__PURE__*/react.createElement("li", {
     className: urlChk('#app-goto__input__section') ? 'is-active' : ''
@@ -92574,6 +94528,15 @@ function ComponentsDemo_HookContent() {
     to: "".concat(url, "/form#app-goto__merge-input__section"),
     activeClassName: "is-active"
   }, "Merge Input")), /*#__PURE__*/react.createElement("li", {
+    className: urlChk('#app-goto__tag-input__section') ? 'is-active' : ''
+  }, /*#__PURE__*/react.createElement(NavLink, {
+    "data-route": "true",
+    onClick: function onClick(e) {
+      return refreshTitle(e);
+    },
+    to: "".concat(url, "/form#app-goto__tag-input__section"),
+    activeClassName: "is-active"
+  }, "Tag Input")), /*#__PURE__*/react.createElement("li", {
     className: urlChk('#app-goto__flex-layout__section') ? 'is-active' : ''
   }, /*#__PURE__*/react.createElement(NavLink, {
     "data-route": "true",
@@ -92594,6 +94557,15 @@ function ComponentsDemo_HookContent() {
     to: "".concat(url, "/infinite-scroll"),
     activeClassName: "is-active"
   }, "Infinite Scroll")), /*#__PURE__*/react.createElement("li", {
+    className: urlChk('/image-perspective-hover') ? 'is-active' : ''
+  }, /*#__PURE__*/react.createElement(NavLink, {
+    "data-route": "true",
+    onClick: function onClick(e) {
+      return refreshTitle(e);
+    },
+    to: "".concat(url, "/image-perspective-hover"),
+    activeClassName: "is-active"
+  }, "Image Perspective Hover")), /*#__PURE__*/react.createElement("li", {
     className: urlChk('/mousewheel-interaction') ? 'is-active' : ''
   }, /*#__PURE__*/react.createElement(NavLink, {
     "data-route": "true",
@@ -92744,6 +94716,10 @@ function ComponentsDemo_HookContent() {
   }, /*#__PURE__*/react.createElement(CascadingDropDownListDemo, null), /*#__PURE__*/react.createElement(SeoChild, {
     title: "Cascading DropDown List"
   })), /*#__PURE__*/react.createElement(Route, {
+    path: "".concat(path, "/content-placeholder")
+  }, /*#__PURE__*/react.createElement(ContentPlaceholderDemo, null), /*#__PURE__*/react.createElement(SeoChild, {
+    title: "Content Placeholder"
+  })), /*#__PURE__*/react.createElement(Route, {
     path: "".concat(path, "/dropdown-menu")
   }, /*#__PURE__*/react.createElement(DropdownMenuDemo, null), /*#__PURE__*/react.createElement(SeoChild, {
     title: "Dropdown Menu"
@@ -92772,9 +94748,17 @@ function ComponentsDemo_HookContent() {
   }, /*#__PURE__*/react.createElement(ImageShapesDemo, null), /*#__PURE__*/react.createElement(SeoChild, {
     title: "Image Shapes"
   })), /*#__PURE__*/react.createElement(Route, {
+    path: "".concat(path, "/image-perspective-hover")
+  }, /*#__PURE__*/react.createElement(ImagePerspectiveHoverDemo, null), /*#__PURE__*/react.createElement(SeoChild, {
+    title: "Image Perspective Hover"
+  })), /*#__PURE__*/react.createElement(Route, {
     path: "".concat(path, "/lightbox")
   }, /*#__PURE__*/react.createElement(LightboxDemo, null), /*#__PURE__*/react.createElement(SeoChild, {
     title: "Lightbox"
+  })), /*#__PURE__*/react.createElement(Route, {
+    path: "".concat(path, "/list-bulleted")
+  }, /*#__PURE__*/react.createElement(ListBulletedDemo, null), /*#__PURE__*/react.createElement(SeoChild, {
+    title: "List Bulleted"
   })), /*#__PURE__*/react.createElement(Route, {
     path: "".concat(path, "/modal-dialog")
   }, /*#__PURE__*/react.createElement(ModalDialogDemo, null), /*#__PURE__*/react.createElement(SeoChild, {
@@ -92856,6 +94840,10 @@ function ComponentsDemo_HookContent() {
   }, /*#__PURE__*/react.createElement(TimelineDemo, null), /*#__PURE__*/react.createElement(SeoChild, {
     title: "Timeline"
   })), /*#__PURE__*/react.createElement(Route, {
+    path: "".concat(path, "/tooltip")
+  }, /*#__PURE__*/react.createElement(TooltipDemo, null), /*#__PURE__*/react.createElement(SeoChild, {
+    title: "Tooltip"
+  })), /*#__PURE__*/react.createElement(Route, {
     path: "".concat(path, "/video")
   }, /*#__PURE__*/react.createElement(VideoDemo, null), /*#__PURE__*/react.createElement(SeoChild, {
     title: "Video"
@@ -92881,7 +94869,7 @@ var ComponentsDemo = /*#__PURE__*/function (_Component) {
         var $style = document.createElement("style");
         $style.id = 'app-poemkit-demo-style';
         document.head.appendChild($style);
-        $style.innerHTML = "\n\t\t\t\t/*-- Sidebar --*/\n\t\t\t\t.poemkit-demo-sidebar-left {\n\t\t\t\t\tposition: fixed;\n\t\t\t\t\ttop: 70px;\n\t\t\t\t\tbottom: 0;\n\t\t\t\t\tbox-sizing: border-box;\n\t\t\t\t\twidth: 300px;\n\t\t\t\t\tpadding: 40px 40px 60px 40px;\n\t\t\t\t\tborder-right: 1px #e5e5e5 solid;\n\t\t\t\t\toverflow: auto;\n\t\t\t\t}\n\n\t\t\t\t@media all and (max-width: 768px) {\n\t\t\t\t\t.poemkit-demo-sidebar-left {\n\t\t\t\t\t\tposition: relative;\n\t\t\t\t\t\ttop: 0;\n\t\t\t\t\t\twidth: 100%;\n\t\t\t\t\t\tpadding: 15px;\n\t\t\t\t\t}\n\t\t\t\t}\n\n\t\t\t\t\n\t\t\t\t/*-- Navigation --*/\n\t\t\t\t.poemkit-demo-nav,\n\t\t\t\t.poemkit-demo-nav ul {\n\t\t\t\t\tmargin: 0;\n\t\t\t\t\tpadding: 0;\n\t\t\t\t\tlist-style: none;\n\t\t\t\t\tfont-size: .875rem;\n\t\t\t\t}\n\n\t\t\t\t.poemkit-demo-nav-header {\n\t\t\t\t\tpadding: 8px 0;\n\t\t\t\t\tborder-bottom: 1px solid #e5e5e5;\n\t\t\t\t\tfont-weight: 500;\n\t\t\t\t\topacity: .7;\n\t\t\t\t\tletter-spacing: 0.5px;\n\t\t\t\t\tpadding-top: 1rem;\n\t\t\t\t}\n\n\t\t\t\t.poemkit-demo-nav li {\n\t\t\t\t\tposition: relative;\n\t\t\t\t}\n\n\t\t\t\t\n\t\t\t\t\n\t\t\t\t.poemkit-demo-nav li>a {\n\t\t\t\t\tdisplay: flex;\n\t\t\t\t\talign-items: center;\n\t\t\t\t\tcolumn-gap: .25em;\n\t\t\t\t\ttext-decoration: none;\n\t\t\t\t\tcolor: #999;\n\t\t\t\t}\n\t\t\t\t\n\n\t\t\t\t.poemkit-demo-nav li>a>* {\n\t\t\t\t\tflex: none;\n\t\t\t\t}\n\t\t\t\t\n\t\t\t\t.poemkit-demo-nav li>a:focus {\n\t\t\t\t\toutline: none;\n\t\t\t\t}\n\t\t\t\t\n\t\t\t\t.poemkit-demo-nav>li>a {\n\t\t\t\t\tpadding: 5px 0;\n\t\t\t\t}\n\n\t\t\t\t.poemkit-demo-nav li.is-active > a {\n\t\t\t\t\tcolor: #333;\n\t\t\t\t}\n\t\t\t\t.poemkit-demo-nav li.is-active > a:after {\n\t\t\t\t\tcontent: '';\n\t\t\t\t\tdisplay: block;\n\t\t\t\t\twidth: 5px;\n\t\t\t\t\theight: 5px;\n\t\t\t\t\tposition: absolute;\n\t\t\t\t\ttop: 45%;\n\t\t\t\t\tleft: -1rem;\n\t\t\t\t\tbackground: #333;\n\t\t\t\t}\t\t\n\n\t\t\t\t@media all and (max-width: 768px) {\n\t\t\t\t\t.poemkit-demo-nav li {\n\t\t\t\t\t\tposition: relative;\n\t\t\t\t\t\tfloat: left;\n\t\t\t\t\t\tdisplay: inline-block;\n\t\t\t\t\t\tmargin: 0 1.2rem 0 0;\n\t\t\t\t\t}\n\n\t\t\t\t\t.poemkit-demo-nav-header {\n\t\t\t\t\t\twidth: 100%;\n\t\t\t\t\t}\t\n\n\t\t\t\t\t.poemkit-demo-nav li.is-active > a:after {\n\t\t\t\t\t\tleft: -.7rem;\n\t\t\t\t\t}\t\n\n\t\t\t\t}\n\t\t\t\t\n\t\t\t\t\n\t\t\t\t/*-- Main --*/\n\t\t\t\t.poemkit-demo-container {\n\t\t\t\t\tpadding-left: 15px;\n\t\t\t\t\tpadding-right: 15px;\n\t\t\t\t\tmax-width: 1000px;\n\t\t\t\t\tposition: relative;\n\t\t\t\t\tmargin-left: auto;\n\t\t\t\t\tmargin-right: auto;\n\t\t\t\t\tpadding-bottom: 70px;\n\t\t\t\t\t/* Do not use \"transform\", it will affect the \"position:fixed\" effect of the child */\n\t\t\t\t\tleft: 160px;\n\t\t\t\t}\n\t\t\t\t\n\t\t\t\t@media all and (max-width: 768px) {\n\t\t\t\t\t.poemkit-demo-container {\n\t\t\t\t\t\tpadding: 0;\t\n\t\t\t\t\t\tmax-width: 100%;\n\t\t\t\t\t\tleft: 0;\n\t\t\t\t\t}\n\t\t\t\t}\n\n\t\t\t\t@media all and (max-width: 1024px) and (min-width: 769px) {\n\t\t\t\t\t.poemkit-demo-container {\n\t\t\t\t\t\tmax-width: 700px;\n\t\t\t\t\t}\n\t\t\t\t}\n\t\t\n\t\t\t\t@media all and (max-width: 1440px) and (min-width: 1025px) {\n\t\t\t\t\t.poemkit-demo-container {\n\t\t\t\t\t\tmax-width: 1000px;\n\t\t\t\t\t}\n\t\t\t\t}\n\n\n\t\t\t\t@media all and (min-width: 1441px) {\n\t\t\t\t\t.poemkit-demo-container {\n\t\t\t\t\t\tmax-width: 1140px;\n\t\t\t\t\t\tleft: 60px;\n\t\t\t\t\t}\n\t\t\t\t}\n\n\t\t\t\t\n\t\t\t\t.poemkit-demo-section {\n\t\t\t\t\tdisplay: flow-root;\n\t\t\t\t\tbox-sizing: border-box;\n\t\t\t\t\tpadding-top: 40px;\n\t\t\t\t\tpadding-bottom: 40px;\n\t\t\t\t}\n\t\t\t\t\n\t\t\t";
+        $style.innerHTML = "\n\t\t\t\t/*-- Sidebar --*/\n\t\t\t\t.poemkit-demo-sidebar-left {\n\t\t\t\t\tposition: fixed;\n\t\t\t\t\ttop: 70px;\n\t\t\t\t\tbottom: 0;\n\t\t\t\t\tbox-sizing: border-box;\n\t\t\t\t\twidth: 300px;\n\t\t\t\t\tpadding: 40px 40px 60px 40px;\n\t\t\t\t\tborder-right: 1px #e5e5e5 solid;\n\t\t\t\t\toverflow: auto;\n\t\t\t\t}\n\n\t\t\t\t@media all and (max-width: 768px) {\n\t\t\t\t\t.poemkit-demo-sidebar-left {\n\t\t\t\t\t\tposition: relative;\n\t\t\t\t\t\ttop: 0;\n\t\t\t\t\t\twidth: 100%;\n\t\t\t\t\t\tpadding: 15px;\n\t\t\t\t\t}\n\t\t\t\t}\n\n\t\t\t\t\n\t\t\t\t/*-- Navigation --*/\n\t\t\t\t.poemkit-demo-nav,\n\t\t\t\t.poemkit-demo-nav ul {\n\t\t\t\t\tmargin: 0;\n\t\t\t\t\tpadding: 0;\n\t\t\t\t\tlist-style: none;\n\t\t\t\t\tfont-size: .875rem;\n\t\t\t\t}\n\n\t\t\t\t.poemkit-demo-nav-header {\n\t\t\t\t\tpadding: 8px 0;\n\t\t\t\t\tborder-bottom: 1px solid #e5e5e5;\n\t\t\t\t\tfont-weight: 500;\n\t\t\t\t\topacity: .7;\n\t\t\t\t\tletter-spacing: 0.5px;\n\t\t\t\t\tpadding-top: 1rem;\n\t\t\t\t}\n\n\t\t\t\t.poemkit-demo-nav li {\n\t\t\t\t\tposition: relative;\n\t\t\t\t}\n\n\t\t\t\t\n\t\t\t\t\n\t\t\t\t.poemkit-demo-nav li>a {\n\t\t\t\t\tdisplay: flex;\n\t\t\t\t\talign-items: center;\n\t\t\t\t\tcolumn-gap: .25em;\n\t\t\t\t\ttext-decoration: none;\n\t\t\t\t\tcolor: #999;\n\t\t\t\t}\n\t\t\t\t\n\n\t\t\t\t.poemkit-demo-nav li>a>* {\n\t\t\t\t\tflex: none;\n\t\t\t\t}\n\t\t\t\t\n\t\t\t\t.poemkit-demo-nav li>a:focus {\n\t\t\t\t\toutline: none;\n\t\t\t\t}\n\t\t\t\t\n\t\t\t\t.poemkit-demo-nav>li>a {\n\t\t\t\t\tpadding: 5px 0;\n\t\t\t\t}\n\n\t\t\t\t.poemkit-demo-nav li.is-active > a {\n\t\t\t\t\tcolor: #333;\n\t\t\t\t}\n\t\t\t\t.poemkit-demo-nav li.is-active > a:after {\n\t\t\t\t\tcontent: '';\n\t\t\t\t\tdisplay: block;\n\t\t\t\t\twidth: 5px;\n\t\t\t\t\theight: 5px;\n\t\t\t\t\tposition: absolute;\n\t\t\t\t\ttop: 45%;\n\t\t\t\t\tleft: -1rem;\n\t\t\t\t\tbackground: #333;\n\t\t\t\t}\t\t\n\n\t\t\t\t@media all and (max-width: 768px) {\n\t\t\t\t\t.poemkit-demo-nav li {\n\t\t\t\t\t\tposition: relative;\n\t\t\t\t\t\tfloat: left;\n\t\t\t\t\t\tdisplay: inline-block;\n\t\t\t\t\t\tmargin: 0 1.2rem 0 0;\n\t\t\t\t\t}\n\n\t\t\t\t\t.poemkit-demo-nav-header {\n\t\t\t\t\t\twidth: 100%;\n\t\t\t\t\t}\t\n\n\t\t\t\t\t.poemkit-demo-nav li.is-active > a:after {\n\t\t\t\t\t\tleft: -.7rem;\n\t\t\t\t\t}\t\n\n\t\t\t\t}\n\t\t\t\t\n\t\t\t\t\n\t\t\t\t/*-- Main --*/\n\t\t\t\t.poemkit-demo-container {\n\t\t\t\t\tpadding-left: 15px;\n\t\t\t\t\tpadding-right: 15px;\n\t\t\t\t\tmax-width: 1000px;\n\t\t\t\t\tposition: relative;\n\t\t\t\t\tmargin-left: auto;\n\t\t\t\t\tmargin-right: auto;\n\t\t\t\t\tpadding-bottom: 70px;\n\t\t\t\t\t/* Do not use \"transform\", it will affect the \"position:fixed\" effect of the child */\n\t\t\t\t\tleft: 160px;\n\t\t\t\t}\n\t\t\t\t\n\t\t\t\t@media all and (max-width: 768px) {\n\t\t\t\t\t.poemkit-demo-container {\n\t\t\t\t\t\tpadding: 0;\t\n\t\t\t\t\t\tmax-width: 100%;\n\t\t\t\t\t\tleft: 0;\n\t\t\t\t\t}\n\t\t\t\t}\n\n\t\t\t\t@media all and (max-width: 1024px) and (min-width: 769px) {\n\t\t\t\t\t.poemkit-demo-container {\n\t\t\t\t\t\tmax-width: 700px;\n\t\t\t\t\t}\n\t\t\t\t}\n\t\t\n\t\t\t\t@media all and (max-width: 1440px) and (min-width: 1025px) {\n\t\t\t\t\t.poemkit-demo-container {\n\t\t\t\t\t\tmax-width: 1000px;\n\t\t\t\t\t}\n\t\t\t\t}\n\n\n\t\t\t\t@media all and (max-width: 1600px) and (min-width: 1441px) {\n\t\t\t\t\t.poemkit-demo-container {\n\t\t\t\t\t\tmax-width: 1100px;\n\t\t\t\t\t\tleft: 100px;\n\t\t\t\t\t}\n\t\t\t\t}\n\n\t\t\t\t@media all and (min-width: 1601px) {\n\t\t\t\t\t.poemkit-demo-container {\n\t\t\t\t\t\tmax-width: 1140px;\n\t\t\t\t\t\tleft: 60px;\n\t\t\t\t\t}\n\t\t\t\t}\n\n\t\t\t\t\n\t\t\t\t.poemkit-demo-section {\n\t\t\t\t\tdisplay: flow-root;\n\t\t\t\t\tbox-sizing: border-box;\n\t\t\t\t\tpadding-top: 40px;\n\t\t\t\t\tpadding-bottom: 40px;\n\t\t\t\t}\n\t\t\t\t\n\t\t\t";
       }
     }
   }, {

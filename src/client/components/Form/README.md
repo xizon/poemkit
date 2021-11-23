@@ -4,7 +4,7 @@
 
 ## Version
 
-=> 0.0.1 (October 10, 2021)
+=> 0.0.2 (November 22, 2021)
 
 
 ## API
@@ -22,6 +22,7 @@ import { Input } from '@poemkit/components/Form/index.tsx';
 | `label` | string \| ReactNode | - | It is used to specify a label for an element of a form. |
 | `units` | string | - | Specify a unit identification string. Such as `em`, `px`, and so on. |
 | `name` | string | - | Name is not deprecated when used with form fields. |
+| `placeholder` | string | - |  Specifies a short hint that describes. |
 | `maxLength` | number | - | Defines the maximum number of characters |
 | `disabled` | boolean | false | Whether the input is disabled |
 | `required` | boolean | false | When present, it specifies that a field must be filled out before submitting the form. |
@@ -44,6 +45,7 @@ import { PasswordInput } from '@poemkit/components/Form/index.tsx';
 | `label` | string \| ReactNode | - | It is used to specify a label for an element of a form. |
 | `units` | string | - | Specify a unit identification string. Such as `em`, `px`, and so on. |
 | `name` | string | - | Name is not deprecated when used with form fields. |
+| `placeholder` | string | - |  Specifies a short hint that describes. |
 | `maxLength` | number | - | Defines the maximum number of characters |
 | `disabled` | boolean | false | Whether the input is disabled |
 | `required` | boolean | false | When present, it specifies that a field must be filled out before submitting the form. |
@@ -67,6 +69,7 @@ import { MergeInput } from '@poemkit/components/Form/index.tsx';
 | `value` | string | - | Set a default value for this control |
 | `label` | string \| ReactNode | - | It is used to specify a label for an element of a form. |
 | `name` | string | - | Name is not deprecated when used with form fields. |
+| `placeholder` | string | - |  Specifies a short hint that describes. |
 | `maxLength` | number | - | Defines the maximum number of characters |
 | `disabled` | boolean | false | Whether the input is disabled |
 | `required` | boolean | false | When present, it specifies that a field must be filled out before submitting the form. |
@@ -74,6 +77,22 @@ import { MergeInput } from '@poemkit/components/Form/index.tsx';
 
 
 It accepts all props which this control support.
+
+
+
+### Tag Input
+```js
+import { TagInput } from '@poemkit/components/Form/index.tsx';
+```
+| Property | Type | Default | Description |
+| --- | --- | --- | --- |
+| `maxTags` | number | 10 | Maximum number of tags that can be added. |
+| `ui` | string | - | The overlay style of the control. Can be used at the same time, separated by spaces. The optional values are:<br />**corners:**<br />`pill`, `rounded`<br />**size:**<br />`fullwidth` |
+| `value` | string | - | Set a default value for this control. It accepts multiple values, separated by commas. like this: `tag1,tag2,tag3` |
+| `name` | string | - | Name is not deprecated when used with form fields. |
+| `placeholder` | string | - |  Specifies a short hint that describes. |
+| `disabled` | boolean | false | Whether the input is disabled |
+| `required` | boolean | false | When present, it specifies that a field must be filled out before submitting the form. |
 
 
 ### Textarea
@@ -88,6 +107,7 @@ import { Textarea } from '@poemkit/components/Form/index.tsx';
 | `label` | string \| ReactNode | - | It is used to specify a label for an element of a form. |
 | `units` | string | - | Specify a unit identification string. Such as `em`, `px`, and so on. |
 | `name` | string | - | Name is not deprecated when used with form fields. |
+| `placeholder` | string | - |  Specifies a short hint that describes. |
 | `maxLength` | number | - | Defines the maximum number of characters |
 | `cols` | number  | - | The cols attribute specifies the visible width of a text area. |
 | `rows` | number  | - | The rows attribute specifies the visible height of a text area, in lines. |
@@ -108,7 +128,7 @@ import { Select } from '@poemkit/components/Form/index.tsx';
 | `options` | JSON Object Literals | - | <strong>(Required)</strong> Set the default value using JSON string format for menu of options, like this: `{"Option 1":"value-1","Option 2":"value-2","Option 3":"value-3"}`|
 | `theme` | string \| `line` | - | The display style of the control |
 | `ui` | string | - | The overlay style of the control. Can be used at the same time, separated by spaces. The optional values are:<br />**corners:**<br />`pill`, `rounded`<br />**size:**<br />`fullwidth` |
-| `value` | string | - | Set a default value for this control |
+| `value` | string | - | Set a default value for this control. |
 | `label` | string \| ReactNode | - | It is used to specify a label for an element of a form. |
 | `name` | string | - | Name is not deprecated when used with form fields. |
 | `disabled` | boolean | false | Whether the input is disabled |
@@ -179,7 +199,7 @@ import { MultiSelect } from '@poemkit/components/Form/index.tsx';
 | --- | --- | --- | --- |
 | `options` | JSON Object Literals | - | <strong>(Required)</strong> Set the default value using JSON string format for menu of options, like this: `{"Option 1":"value-1","Option 2":"value-2","Option 3":"value-3"}`|
 | `theme` | string \| `line` | - | The display style of the control |
-| `value` | string | - | Set a default value for this control |
+| `value` | string | - | Set a default value for this control. It accepts multiple values, separated by commas. like this: `value-1,value-2` |
 | `name` | string | - | Name is not deprecated when used with form fields. |
 | `required` | boolean | false | When present, it specifies that a field must be filled out before submitting the form. |
 
@@ -315,6 +335,7 @@ import {
 	Input,
 	PasswordInput,
 	MergeInput,
+	TagInput,
 	Textarea,
 	Select,
 	CustomSelect,
@@ -865,8 +886,13 @@ export default () => {
 		<MergeInput btnType="button" ui="pill" placeholder="Enter your Email" type="email" label="Subscribe" name="mergeInput-name-5" icon={<i className="fa fa-envelope" aria-hidden="true"></i>} />																		
 		<MergeInput btnType="button" ui="rounded" placeholder="Enter your Email" type="email" label="Subscribe" name="mergeInput-name-5_2" icon={<i className="fa fa-envelope" aria-hidden="true"></i>} />
 
-	
-			
+
+		<h3>Tag Input</h3>
+		{/* ================================================================== */}      
+
+		<TagInput ui="rounded" placeholder="Add tag..." name="tagInput-name-1" />
+		<TagInput ui="rounded" placeholder="Add tag..." name="tagInput-name-2" maxTags={5} value="tag1,tag2,tag3"/>
+
 
 		<h3>Flex Layout</h3>
 		{/* ================================================================== */}      

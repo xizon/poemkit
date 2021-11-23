@@ -1,15 +1,15 @@
 import React, { Component } from 'react';
 
-type GalleryImageProps = {
+type ImageProps = {
 	/** Specifies the path to the image */
 	url?: string | undefined;
 	/** Specifies an alternate and title text for the image */
 	title?: string | boolean | undefined;
 };
-type GalleryImageState = false;
+type ImageState = false;
 
 
-export default class GalleryImage extends Component<GalleryImageProps, GalleryImageState> {
+export default class Image extends Component<ImageProps, ImageState> {
 	
 	constructor(props) {
 		super(props);

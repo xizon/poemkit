@@ -1,8 +1,10 @@
 import { __ } from '@poemkit/components/_utils/_all';
 
-/*-- Apply Third-party plugins --*/
-import { enableBodyScroll } from '@poemkit/components/_plugins/_lib-scrolllock';
+/*-- Apply Third-party animation plugins --*/
 import TweenMax from '@poemkit/components/_plugins/_lib-gsap';
+
+//Enables body scroll locking
+import { enableBodyScroll } from '@poemkit/components/_plugins/_lib-scrolllock';
 
 
 declare global {

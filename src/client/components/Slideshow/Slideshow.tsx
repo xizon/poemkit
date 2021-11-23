@@ -3,7 +3,6 @@ import React, { Component } from 'react';
 /*-- Apply Third-party plugins (import location should be in front of 'global scripts and styles') --*/
 import '@poemkit/components/_plugins/_lib-bootstrap';
 import '@poemkit/components/_plugins/_lib-icons';
-import TweenMax, { TimelineMax } from '@poemkit/components/_plugins/_lib-gsap';
 
 /*-- Apply global scripts and styles --*/
 import '@poemkit/components/_utils/styles/_all.scss';

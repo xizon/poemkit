@@ -6,9 +6,9 @@
  * ## Project Name        :  PoemKit
  * ## Project Description :  A free web kits with React for fast web design and development via SSR.
  * ## Project URL         :  https://uiux.cc
- * ## Version             :  0.1.5
+ * ## Version             :  0.1.6
  * ## Based on            :  PoemKit (https://github.com/xizon/poemkit#readme)
- * ## Last Update         :  November 10, 2021
+ * ## Last Update         :  November 23, 2021
  * ## Created by          :  UIUX Lab (https://uiux.cc) (uiuxlab@gmail.com)
  * ## Released under the MIT license.
  *
@@ -19394,15 +19394,8 @@ figure figcaption {
 }
 
 /* ====================================================== 
-   <!-- Bullet List -->      
+   <!-- List -->      
 /* ====================================================== */
-/*
- * 1. Normal List Styling
- * 2. Normal Numbers Ordered List
- * 3. Custom Circle Icons Ordered List
- * 4. Big Numbers Ordered List
- * 5. Step Timeline By Numbers
-*/
 ul,
 ol {
   list-style: none;
@@ -19413,279 +19406,6 @@ ul > li,
 ol > li {
   margin-bottom: 0;
   transition: all 0.3s ease;
-}
-
-.poemkit-list::after {
-  content: '';
-  clear: both;
-  display: block;
-}
-
-/* 
- ---------------------------
- 1. Normal List Styling
- ---------------------------
- */
-ol.poemkit-list--normal,
-ul.poemkit-list--normal,
-.poemkit-list--normal ul,
-.poemkit-list--normal ol {
-  display: block;
-  margin: 1.421875rem;
-  padding-left: 0.875rem;
-}
-
-ol.poemkit-list--normal ul,
-ol.poemkit-list--normal ol,
-ul.poemkit-list--normal ul,
-ul.poemkit-list--normal ol,
-.poemkit-list--normal ul ul,
-.poemkit-list--normal ul ol,
-.poemkit-list--normal ol ul,
-.poemkit-list--normal ol ol {
-  margin-top: 0;
-  margin-bottom: 0;
-  padding-top: 0;
-  padding-bottom: 0;
-}
-
-ul.poemkit-list--normal,
-.poemkit-list--normal ul {
-  list-style-type: disc;
-}
-
-ol.poemkit-list--normal,
-.poemkit-list--normal ol {
-  list-style-type: decimal;
-}
-
-/*-- Noemal List Effect by Default --*/
-/* Compatible with  Uix Shortcodes (WordPress Plugin) and Block Button Link */
-.poemkit-list--normal a:not(.poemkit-sc-btn):not(.wp-block-button__link):not(.poemkit-btn) {
-  color: #6B6BF6;
-}
-
-.poemkit-list--normal a:not(.poemkit-sc-btn):not(.wp-block-button__link):not(.poemkit-btn):hover {
-  color: #7D7DFC;
-  text-decoration: underline;
-}
-
-.poemkit-list--normal a:not(.poemkit-sc-btn):not(.wp-block-button__link):not(.poemkit-btn):hover img {
-  text-decoration: none;
-}
-
-/* 
- ---------------------------
- 2. Normal Numbers Ordered List
- ---------------------------
- */
-ol.poemkit-list--numbered,
-.poemkit-list--numbered ol {
-  list-style: none;
-  margin-left: 1rem;
-  counter-reset: line;
-}
-
-ol.poemkit-list--numbered > li,
-.poemkit-list--numbered ol > li {
-  position: relative;
-  margin-bottom: .5rem;
-  margin-left: .5rem;
-}
-
-ol.poemkit-list--numbered > li::before,
-.poemkit-list--numbered ol > li::before {
-  position: absolute;
-  left: -2.25em;
-  display: inline-block;
-  width: 22px;
-  height: 22px;
-  margin-right: 0.5em;
-  background-color: #6B6BF6;
-  border-radius: 50%;
-  color: #fff;
-  text-align: center;
-  line-height: 22px;
-  counter-increment: line;
-  content: "0" counter(line);
-  font-size: 0.75rem;
-}
-
-.poemkit-list--numbered.poemkit-list--numbered-1-digit > li::before {
-  content: counter(line);
-}
-
-/* 
- ---------------------------
- 3. Custom Circle Icons Ordered List
- ---------------------------
- */
-ol.poemkit-list--circle,
-ul.poemkit-list--circle,
-.poemkit-list--circle ol,
-.poemkit-list--circle ul {
-  list-style: none;
-  margin-left: 1rem;
-  counter-reset: line;
-}
-
-ol.poemkit-list--circle > li,
-ul.poemkit-list--circle > li,
-.poemkit-list--circle ol > li,
-.poemkit-list--circle ul > li {
-  position: relative;
-  margin-bottom: .5rem;
-  color: #212121;
-  margin-left: 1rem;
-}
-
-ol.poemkit-list--circle > li::before,
-ul.poemkit-list--circle > li::before,
-.poemkit-list--circle ol > li::before,
-.poemkit-list--circle ul > li::before {
-  position: absolute;
-  left: -1.5em;
-  top: 50%;
-  transform: translateY(-50%);
-  display: inline-block;
-  width: 10px;
-  height: 10px;
-  background-color: #6B6BF6;
-  color: #fff;
-  border-radius: 50%;
-  text-align: center;
-  counter-increment: line;
-  content: '';
-}
-
-/* 
- ---------------------------
- 4. Big Numbers Ordered List
- ---------------------------
- */
-ol.poemkit-list--numbered-large,
-.poemkit-list--numbered-large ol {
-  counter-reset: item;
-  /*removes original number*/
-  list-style-type: none;
-  /*remove if full width*/
-  text-align: justify;
-}
-
-ol.poemkit-list--numbered-large li,
-.poemkit-list--numbered-large ol li {
-  display: block;
-  padding-left: 2.5rem;
-  position: relative;
-  min-height: 3.5rem;
-  /*generic alignment*/
-  text-indent: 0;
-  list-style-position: outside;
-  margin-left: 1.2rem;
-  list-style-type: number;
-}
-
-ol.poemkit-list--numbered-large li::before,
-.poemkit-list--numbered-large ol li::before {
-  content: "0" counter(item) ".";
-  counter-increment: item;
-  position: absolute;
-  margin-left: -3.5rem;
-  font-size: 3rem;
-  color: #AEAEAE;
-  line-height: 1;
-}
-
-.poemkit-list--numbered-large.poemkit-list--numbered-1-digit li::before {
-  content: counter(item) ".";
-}
-
-ol.poemkit-list--numbered-large.poemkit-list--numbered-bg li,
-.poemkit-list--numbered-large.poemkit-list--numbered-bg ol li {
-  background: #e4e1e1;
-  min-height: 70px;
-  border-radius: 50px;
-  margin-bottom: 1rem;
-  margin-left: 0;
-  padding-left: 4.5rem;
-}
-
-ol.poemkit-list--numbered-large.poemkit-list--numbered-bg li p,
-.poemkit-list--numbered-large.poemkit-list--numbered-bg ol li p {
-  padding-top: 1.5rem;
-  padding-right: 2rem;
-  line-height: 1.3;
-}
-
-ol.poemkit-list--numbered-large.poemkit-list--numbered-bg li::before,
-.poemkit-list--numbered-large.poemkit-list--numbered-bg ol li::before {
-  background: #6B6BF6;
-  border-radius: 50%;
-  width: 50px;
-  height: 50px;
-  line-height: 50px;
-  content: "0" counter(item);
-  font-size: 1.5rem;
-  color: #fff;
-  text-align: center;
-  top: 50%;
-  transform: translateY(-50%);
-  margin-left: -4rem;
-}
-
-.poemkit-list--numbered-large.poemkit-list--numbered-bg.poemkit-list--numbered-1-digit li::before {
-  content: counter(item);
-}
-
-/* 
- ---------------------------
- 5. Step Timeline By Numbers
- ---------------------------
- */
-.poemkit-list--numbered-step {
-  counter-reset: step;
-  list-style-type: none;
-  margin-left: 1rem;
-}
-
-.poemkit-list--numbered-step li {
-  position: relative;
-  padding: 0 0 1.5rem 3.75rem;
-  min-height: 75px;
-  border-left: 2px solid #333;
-}
-
-.poemkit-list--numbered-step li::before {
-  counter-increment: step;
-  content: counters(step, ".") " ";
-  position: absolute;
-  left: -26px;
-  top: 0;
-  height: 50px;
-  width: 50px;
-  font-size: 1rem;
-  font-weight: 700;
-  line-height: 48px;
-  text-align: center;
-  color: #fff;
-  background-color: #6B6BF6;
-  border: 2px solid #333;
-  border-radius: 50%;
-  z-index: 2;
-}
-
-.poemkit-list--numbered-step li:last-child {
-  border-left: none;
-}
-
-.poemkit-list--numbered-step li:last-child::before {
-  content: '\2713';
-}
-
-@media all and (max-width: 768px) {
-  .poemkit-list--numbered-step li {
-    padding-left: 2.5rem;
-  }
 }
 
 /* ====================================================== 
@@ -19737,6 +19457,123 @@ ol.poemkit-list--numbered-large.poemkit-list--numbered-bg li::before,
 /* Clip child elements */
 .poemkit-relative--inline-clip {
   overflow: hidden;
+}
+
+/*----*/
+.poemkit-display-none {
+  display: none !important;
+}
+
+.poemkit-display-inline {
+  display: inline !important;
+}
+
+.poemkit-display-inline-block {
+  display: inline-block !important;
+}
+
+.poemkit-display-block {
+  display: block !important;
+}
+
+.poemkit-display-flex {
+  display: flex !important;
+}
+
+.poemkit-display-inline-flex {
+  display: inline-flex !important;
+}
+
+/* The breakpoint is the same as bootstrap 4 */
+/*
+--breakpoint-xs:0;
+--breakpoint-sm:576px;
+--breakpoint-md:768px;
+--breakpoint-lg:992px;
+--breakpoint-xl:1200px;
+*/
+@media all and (max-width: 576px) {
+  .poemkit-display-none--sm {
+    display: none !important;
+  }
+  .poemkit-display-inline--sm {
+    display: inline !important;
+  }
+  .poemkit-display-inline-block--sm {
+    display: inline-block !important;
+  }
+  .poemkit-display-block--sm {
+    display: block !important;
+  }
+  .poemkit-display-flex--sm {
+    display: flex !important;
+  }
+  .poemkit-display-inline-flex--sm {
+    display: inline-flex !important;
+  }
+}
+
+@media all and (max-width: 768px) {
+  .poemkit-display-none--md {
+    display: none !important;
+  }
+  .poemkit-display-inline--md {
+    display: inline !important;
+  }
+  .poemkit-display-inline-block--md {
+    display: inline-block !important;
+  }
+  .poemkit-display-block--md {
+    display: block !important;
+  }
+  .poemkit-display-flex--md {
+    display: flex !important;
+  }
+  .poemkit-display-inline-flex--md {
+    display: inline-flex !important;
+  }
+}
+
+@media all and (max-width: 992px) {
+  .poemkit-display-none--lg {
+    display: none !important;
+  }
+  .poemkit-display-inline--lg {
+    display: inline !important;
+  }
+  .poemkit-display-inline-block--lg {
+    display: inline-block !important;
+  }
+  .poemkit-display-block--lg {
+    display: block !important;
+  }
+  .poemkit-display-flex--lg {
+    display: flex !important;
+  }
+  .poemkit-display-inline-flex--lg {
+    display: inline-flex !important;
+  }
+}
+
+@media all and (max-width: 1200px) {
+  .poemkit-display-none--xl {
+    display: none !important;
+  }
+  .poemkit-display-inline--xl {
+    display: inline !important;
+  }
+  .poemkit-display-inline-block--xl {
+    display: inline-block !important;
+  }
+  .poemkit-display-block--xl {
+    display: block !important;
+  }
+  .poemkit-display-flex--xl {
+    display: flex !important;
+  }
+  .poemkit-display-inline-flex--xl {
+    display: inline-flex !important;
+  }
 }
 
 /* 
@@ -20266,9 +20103,7 @@ details.poemkit-details-reset > summary::-webkit-details-marker {
 /*
  * 1. Bootstrap 4.x                              - Do not use prefix "poemkit-"
  * 2. Material Container                         
- * 3. Main Wrapper                               
- * 4. PoemKit Grid (Core Grid)
- * 5. Align Wide and Full Classes For Elements
+ * 3. Main Wrapper                          
 */
 /* 
  ---------------------------
@@ -20373,304 +20208,6 @@ details.poemkit-details-reset > summary::-webkit-details-marker {
 @media all and (max-width: 782px) {
   .admin-bar .poemkit-wrapper {
     margin-top: 46px;
-  }
-}
-
-/* 
- ---------------------------
- 4. PoemKit Grid
- ---------------------------
- */
-[class*='poemkit-core-grid__col-'] {
-  box-sizing: border-box;
-  float: left;
-  position: relative;
-}
-
-.poemkit-core-grid__inline {
-  float: none;
-  display: inline-block;
-}
-
-.poemkit-core-grid__col-1 {
-  width: 8.333333333333%;
-}
-
-.poemkit-core-grid__col-2 {
-  width: 16.66666666666667%;
-}
-
-.poemkit-core-grid__col-3 {
-  width: 25%;
-}
-
-.poemkit-core-grid__col-4 {
-  width: 33.333333333333%;
-}
-
-.poemkit-core-grid__col-5 {
-  width: 41.666666666667%;
-}
-
-.poemkit-core-grid__col-6 {
-  width: 50%;
-}
-
-.poemkit-core-grid__col-7 {
-  width: 58.333333333333%;
-}
-
-.poemkit-core-grid__col-8 {
-  width: 66.666666666667%;
-}
-
-.poemkit-core-grid__col-9 {
-  width: 75%;
-}
-
-.poemkit-core-grid__col-10 {
-  width: 83.333333333333%;
-}
-
-.poemkit-core-grid__col-11 {
-  width: 91.666666666667%;
-}
-
-.poemkit-core-grid__col-12 {
-  width: 100%;
-}
-
-@media all and (max-width: 768px) {
-  .poemkit-core-grid__mobile-half {
-    width: 50%;
-  }
-  .poemkit-core-grid__mobile-stack {
-    width: 100%;
-  }
-}
-
-.poemkit-core-grid {
-  width: 100%;
-}
-
-.poemkit-core-grid .poemkit-core-grid__row {
-  width: calc( 100% + 15px);
-  /* Auto width, for automatic widths such as 5 columns */
-}
-
-.poemkit-core-grid .poemkit-core-grid__row::after {
-  /* Or @extend .poemkit-clearfix */
-  content: "";
-  display: table;
-  clear: both;
-}
-
-.poemkit-core-grid .poemkit-core-grid__row [class*='poemkit-core-grid__col-'] > div {
-  word-wrap: break-word;
-  position: relative;
-}
-
-.poemkit-core-grid .poemkit-core-grid__row.poemkit-core-grid__row--no-gutters {
-  width: 100%;
-}
-
-.poemkit-core-grid .poemkit-core-grid__row.poemkit-core-grid__row--no-gutters [class*='poemkit-core-grid__col-'] {
-  padding-right: 0 !important;
-}
-
-.poemkit-core-grid .poemkit-core-grid__row.poemkit-core-grid__row--auto-width {
-  display: flex;
-  flex-wrap: wrap;
-}
-
-.poemkit-core-grid .poemkit-core-grid__row.poemkit-core-grid__row--auto-width .poemkit-core-grid__col {
-  flex: 1;
-  padding-right: 15px;
-}
-
-.poemkit-core-grid .poemkit-core-grid__row.poemkit-core-grid__row--auto-width.poemkit-core-grid__row--no-gutters .poemkit-core-grid__col {
-  padding-right: 0;
-}
-
-.poemkit-core-grid [class*='poemkit-core-grid__col-'] {
-  padding-right: 15px;
-}
-
-.poemkit-core-grid__row .poemkit-core-grid [class*='poemkit-core-grid__col-']:last-of-type {
-  padding-right: 0;
-}
-
-.poemkit-core-grid__row .poemkit-core-grid [class*='poemkit-core-grid__col-']:last-of-type [class*='poemkit-core-grid__col-'] > div {
-  width: calc(100% - 15px);
-}
-
-.poemkit-core-grid .poemkit-core-grid__row.poemkit-core-grid__row--loop .poemkit-core-grid__col-6:nth-child(2n+1),
-.poemkit-core-grid .poemkit-core-grid__row.poemkit-core-grid__row--loop .poemkit-core-grid__col-4:nth-child(3n+1),
-.poemkit-core-grid .poemkit-core-grid__row.poemkit-core-grid__row--loop .poemkit-core-grid__col-3:nth-child(4n+1),
-.poemkit-core-grid .poemkit-core-grid__row.poemkit-core-grid__row--loop .poemkit-core-grid__col-2:nth-child(6n+1) {
-  clear: both;
-}
-
-@media all and (max-width: 768px) {
-  .poemkit-core-grid .poemkit-core-grid__row {
-    /* Auto width, for automatic widths such as 5 columns */
-  }
-  .poemkit-core-grid .poemkit-core-grid__row.poemkit-core-grid__row--auto-width {
-    display: block;
-  }
-  .poemkit-core-grid .poemkit-core-grid__row.poemkit-core-grid__row--auto-width.poemkit-core-grid__row--no-gutters .poemkit-core-grid__col {
-    padding-right: 15px;
-  }
-  .poemkit-core-grid .poemkit-core-grid__row.poemkit-core-grid__row--no-break {
-    /* Auto width, for automatic widths such as 5 columns */
-  }
-  .poemkit-core-grid .poemkit-core-grid__row.poemkit-core-grid__row--no-break.poemkit-core-grid__row--auto-width {
-    display: flex;
-  }
-  .poemkit-core-grid .poemkit-core-grid__row:not(.poemkit-core-grid__row--no-break).poemkit-core-grid__row--no-gutters {
-    width: calc(100% + 15px);
-  }
-  .poemkit-core-grid .poemkit-core-grid__row:not(.poemkit-core-grid__row--no-break) [class*='poemkit-core-grid__col-'] {
-    float: none;
-    width: calc(100% - 15px);
-    padding-left: 0;
-    padding-right: 0;
-  }
-}
-
-/* The breakpoint is the same as bootstrap 4 */
-/*
---breakpoint-xs:0;
---breakpoint-sm:576px;
---breakpoint-md:768px;
---breakpoint-lg:992px;
---breakpoint-xl:1200px;
-*/
-@media all and (max-width: 576px) {
-  .poemkit-core-grid .poemkit-core-grid__col-3--sm,
-  .poemkit-core-grid .poemkit-core-grid__col-4--sm,
-  .poemkit-core-grid .poemkit-core-grid__col-6--sm {
-    float: left !important;
-    padding-right: 15px !important;
-  }
-  .poemkit-core-grid .poemkit-core-grid__col-3--sm {
-    width: 25% !important;
-  }
-  .poemkit-core-grid .poemkit-core-grid__col-4--sm {
-    width: 33.333333333333% !important;
-  }
-  .poemkit-core-grid .poemkit-core-grid__col-6--sm {
-    width: 50% !important;
-  }
-  .poemkit-core-grid .poemkit-core-grid__row--no-gutters .poemkit-core-grid__col-3--sm {
-    width: calc(25% - 3.75px) !important;
-  }
-  .poemkit-core-grid .poemkit-core-grid__row--no-gutters .poemkit-core-grid__col-4--sm {
-    width: calc(33.333333333333% - 5px) !important;
-  }
-  .poemkit-core-grid .poemkit-core-grid__row--no-gutters .poemkit-core-grid__col-6--sm {
-    width: calc(50% - 7.5px) !important;
-  }
-  .poemkit-core-grid .poemkit-core-grid__row--loop .poemkit-core-grid__col-3--sm:nth-child(4n+1),
-  .poemkit-core-grid .poemkit-core-grid__row--loop .poemkit-core-grid__col-4--sm:nth-child(3n+1),
-  .poemkit-core-grid .poemkit-core-grid__row--loop .poemkit-core-grid__col-6--sm:nth-child(2n+1) {
-    clear: both;
-  }
-}
-
-@media all and (max-width: 768px) {
-  .poemkit-core-grid .poemkit-core-grid__col-3--md,
-  .poemkit-core-grid .poemkit-core-grid__col-4--md,
-  .poemkit-core-grid .poemkit-core-grid__col-6--md {
-    float: left !important;
-    padding-right: 15px !important;
-  }
-  .poemkit-core-grid .poemkit-core-grid__col-3--md {
-    width: 25% !important;
-  }
-  .poemkit-core-grid .poemkit-core-grid__col-4--md {
-    width: 33.333333333333% !important;
-  }
-  .poemkit-core-grid .poemkit-core-grid__col-6--md {
-    width: 50% !important;
-  }
-  .poemkit-core-grid .poemkit-core-grid__row--no-gutters .poemkit-core-grid__col-3--md {
-    width: calc(25% - 3.75px) !important;
-  }
-  .poemkit-core-grid .poemkit-core-grid__row--no-gutters .poemkit-core-grid__col-4--md {
-    width: calc(33.333333333333% - 5px) !important;
-  }
-  .poemkit-core-grid .poemkit-core-grid__row--no-gutters .poemkit-core-grid__col-6--md {
-    width: calc(50% - 7.5px) !important;
-  }
-  .poemkit-core-grid .poemkit-core-grid__row--loop .poemkit-core-grid__col-3--md:nth-child(4n+1),
-  .poemkit-core-grid .poemkit-core-grid__row--loop .poemkit-core-grid__col-4--md:nth-child(3n+1),
-  .poemkit-core-grid .poemkit-core-grid__row--loop .poemkit-core-grid__col-6--md:nth-child(2n+1) {
-    clear: both;
-  }
-}
-
-@media all and (max-width: 992px) {
-  .poemkit-core-grid .poemkit-core-grid__col-3--lg,
-  .poemkit-core-grid .poemkit-core-grid__col-4--lg,
-  .poemkit-core-grid .poemkit-core-grid__col-6--lg {
-    float: left !important;
-    padding-right: 15px !important;
-  }
-  .poemkit-core-grid .poemkit-core-grid__col-3--lg {
-    width: 25% !important;
-  }
-  .poemkit-core-grid .poemkit-core-grid__col-4--lg {
-    width: 33.333333333333% !important;
-  }
-  .poemkit-core-grid .poemkit-core-grid__col-6--lg {
-    width: 50% !important;
-  }
-  .poemkit-core-grid .poemkit-core-grid__row--no-gutters .poemkit-core-grid__col-3--lg {
-    width: calc(25% - 3.75px) !important;
-  }
-  .poemkit-core-grid .poemkit-core-grid__row--no-gutters .poemkit-core-grid__col-4--lg {
-    width: calc(33.333333333333% - 5px) !important;
-  }
-  .poemkit-core-grid .poemkit-core-grid__row--no-gutters .poemkit-core-grid__col-6--lg {
-    width: calc(50% - 7.5px) !important;
-  }
-  .poemkit-core-grid .poemkit-core-grid__row--loop .poemkit-core-grid__col-3--lg:nth-child(4n+1),
-  .poemkit-core-grid .poemkit-core-grid__row--loop .poemkit-core-grid__col-4--lg:nth-child(3n+1),
-  .poemkit-core-grid .poemkit-core-grid__row--loop .poemkit-core-grid__col-6--lg:nth-child(2n+1) {
-    clear: both;
-  }
-}
-
-@media all and (max-width: 1200px) {
-  .poemkit-core-grid .poemkit-core-grid__col-3--xl,
-  .poemkit-core-grid .poemkit-core-grid__col-4--xl,
-  .poemkit-core-grid .poemkit-core-grid__col-6--xl {
-    float: left !important;
-    padding-right: 15px !important;
-  }
-  .poemkit-core-grid .poemkit-core-grid__col-3--xl {
-    width: 25% !important;
-  }
-  .poemkit-core-grid .poemkit-core-grid__col-4--xl {
-    width: 33.333333333333% !important;
-  }
-  .poemkit-core-grid .poemkit-core-grid__col-6--xl {
-    width: 50% !important;
-  }
-  .poemkit-core-grid .poemkit-core-grid__row--no-gutters .poemkit-core-grid__col-3--xl {
-    width: calc(25% - 3.75px) !important;
-  }
-  .poemkit-core-grid .poemkit-core-grid__row--no-gutters .poemkit-core-grid__col-4--xl {
-    width: calc(33.333333333333% - 5px) !important;
-  }
-  .poemkit-core-grid .poemkit-core-grid__row--no-gutters .poemkit-core-grid__col-6--xl {
-    width: calc(50% - 7.5px) !important;
-  }
-  .poemkit-core-grid .poemkit-core-grid__row--loop .poemkit-core-grid__col-3--xl:nth-child(4n+1),
-  .poemkit-core-grid .poemkit-core-grid__row--loop .poemkit-core-grid__col-4--xl:nth-child(3n+1),
-  .poemkit-core-grid .poemkit-core-grid__row--loop .poemkit-core-grid__col-6--xl:nth-child(2n+1) {
-    clear: both;
   }
 }
 
@@ -21652,150 +21189,6 @@ body.rtl {
 }
 
 /* ====================================================== 
-   <!-- Bullet List -->      
-/* ====================================================== */
-/*
- * 1. Normal List Styling
- * 2. Normal Numbers Ordered List
- * 3. Custom Circle Icons Ordered List
- * 4. Big Numbers Ordered List
- * 5. Step Timeline By Numbers
-*/
-/* 
- ---------------------------
- 1. Normal List Styling
- ---------------------------
- */
-.rtl ol.poemkit-list--normal,
-.rtl ul.poemkit-list--normal,
-.rtl .poemkit-list--normal ul,
-.rtl .poemkit-list--normal ol {
-  padding-left: auto;
-  padding-right: 0.875rem;
-}
-
-/* 
- ---------------------------
- 2. Normal Numbers Ordered List
- ---------------------------
- */
-.rtl ol.poemkit-list--numbered,
-.rtl .poemkit-list--numbered ol {
-  margin-left: auto;
-  margin-right: 1rem;
-}
-
-.rtl ol.poemkit-list--numbered > li,
-.rtl .poemkit-list--numbered ol > li {
-  margin-left: auto;
-  margin-right: .5rem;
-}
-
-.rtl ol.poemkit-list--numbered > li::before,
-.rtl .poemkit-list--numbered ol > li::before {
-  left: auto;
-  right: -2.25em;
-  margin-right: auto;
-  margin-left: 0.5em;
-}
-
-/* 
- ---------------------------
- 3. Custom Circle Icons Ordered List
- ---------------------------
- */
-.rtl ol.poemkit-list--circle,
-.rtl ul.poemkit-list--circle,
-.rtl .poemkit-list--circle ol,
-.rtl .poemkit-list--circle ul {
-  margin-left: auto;
-  margin-right: 1rem;
-}
-
-.rtl ol.poemkit-list--circle > li,
-.rtl ul.poemkit-list--circle > li,
-.rtl .poemkit-list--circle ol > li,
-.rtl .poemkit-list--circle ul > li {
-  margin-left: auto;
-  margin-right: 1rem;
-}
-
-.rtl ol.poemkit-list--circle > li::before,
-.rtl ul.poemkit-list--circle > li::before,
-.rtl .poemkit-list--circle ol > li::before,
-.rtl .poemkit-list--circle ul > li::before {
-  left: auto;
-  right: -1.5em;
-}
-
-/* 
- ---------------------------
- 4. Big Numbers Ordered List
- ---------------------------
- */
-.rtl ol.poemkit-list--numbered-large li,
-.rtl .poemkit-list--numbered-large ol li {
-  padding-left: auto;
-  padding-right: 2.5rem;
-  margin-left: auto;
-  margin-right: 1.2rem;
-}
-
-.rtl ol.poemkit-list--numbered-large li::before,
-.rtl .poemkit-list--numbered-large ol li::before {
-  margin-left: auto;
-  margin-right: -3.5rem;
-}
-
-.rtl ol.poemkit-list--numbered-large.poemkit-list--numbered-bg li,
-.rtl .poemkit-list--numbered-large.poemkit-list--numbered-bg ol li {
-  margin-right: 0;
-  padding-right: 4.5rem;
-}
-
-.rtl ol.poemkit-list--numbered-large.poemkit-list--numbered-bg li p,
-.rtl .poemkit-list--numbered-large.poemkit-list--numbered-bg ol li p {
-  padding-right: auto;
-  padding-left: 2rem;
-}
-
-.rtl ol.poemkit-list--numbered-large.poemkit-list--numbered-bg li::before,
-.rtl .poemkit-list--numbered-large.poemkit-list--numbered-bg ol li::before {
-  margin-right: -4rem;
-}
-
-/* 
- ---------------------------
- 5. Step Timeline By Numbers
- ---------------------------
- */
-.rtl .poemkit-list--numbered-step {
-  margin-left: auto;
-  margin-right: 1rem;
-}
-
-.rtl .poemkit-list--numbered-step li {
-  padding: 0 3.75rem 1.5rem 0;
-  border-left: none;
-  border-right: 2px solid #333;
-}
-
-.rtl .poemkit-list--numbered-step li::before {
-  left: auto;
-  right: -26px;
-}
-
-.rtl .poemkit-list--numbered-step li:last-child {
-  border-right: none;
-}
-
-@media all and (max-width: 768px) {
-  .rtl .poemkit-list--numbered-step li {
-    padding-right: 2.5rem;
-  }
-}
-
-/* ====================================================== 
    <!-- Helper Classes -->                                 
 /* ====================================================== */
 /*
@@ -21927,27 +21320,6 @@ body.rtl {
 .rtl .poemkit-dir--bottom-right {
   left: 0 !important;
   right: auto !important;
-}
-
-/* ====================================================== 
-   <!-- Basic Layout Styles -->                                      
-/* ====================================================== */
-/* 
- ---------------------------
- 4. PoemKit Grid
- ---------------------------
- */
-.rtl [class*='poemkit-core-grid__col-'] {
-  float: right;
-}
-
-.rtl .poemkit-core-grid [class*='poemkit-core-grid__col-'] {
-  padding-right: auto;
-  padding-left: 15px;
-}
-
-.poemkit-core-grid__row .rtl .poemkit-core-grid [class*='poemkit-core-grid__col-']:last-of-type {
-  padding-left: 0;
 }
 
 /* ====================================================== 
@@ -22377,6 +21749,226 @@ body.rtl {
   .poemkit-menu__container:not(.is-mobile) {
     display: none;
   }
+}
+
+/* ======================================================
+   <!-- Vertical Menu -->
+/* ====================================================== */
+/*
+ * 1. Primary Menu
+ * 2. Sub Menu (Using WordPress default class name )
+ * 3. Multi-level Sub Menu Position
+ * 4. Mega/Dropdown Menu
+ * 5. Dropdown Arrow
+*/
+.poemkit-v-menu__container:not(.is-mobile) {
+  width: 250px;
+  height: 100%;
+  position: relative;
+  top: 0;
+  left: 0;
+  z-index: 2;
+  box-shadow: 0 0 1px 0 rgba(0, 0, 0, 0.4);
+  /*
+	 ---------------------------
+	 1. Primary Menu
+	 ---------------------------
+	 */
+  /*
+	 ---------------------------
+	 5. Dropdown Arrow
+	 ---------------------------
+	 */
+}
+
+.poemkit-v-menu__container:not(.is-mobile) ul.poemkit-menu {
+  margin: 0;
+  padding: 0;
+  /*
+		 ---------------------------
+		 2. Sub Menu (Using WordPress default class name )
+		 ---------------------------
+		 */
+  /*
+		 ---------------------------
+		 4. Mega/Dropdown Menu
+		 ---------------------------
+		 */
+  /* Multi-column */
+}
+
+.poemkit-v-menu__container:not(.is-mobile) ul.poemkit-menu li {
+  transition: all 0.3s ease;
+  position: relative;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+  text-align: right;
+  padding: 0 1rem;
+  font-weight: 500;
+  font-size: 0.75rem;
+}
+
+.poemkit-v-menu__container:not(.is-mobile) ul.poemkit-menu li a {
+  padding: 1.25rem 0 1.25rem;
+  display: block;
+  color: #525252;
+}
+
+.poemkit-v-menu__container:not(.is-mobile) ul.poemkit-menu li a:hover {
+  color: #000;
+}
+
+.poemkit-v-menu__container:not(.is-mobile) ul.poemkit-menu li .poemkit-bubble {
+  right: 1rem;
+}
+
+.poemkit-v-menu__container:not(.is-mobile) ul.poemkit-menu ul.sub-menu {
+  margin: 0;
+  padding: 0;
+  display: none;
+  position: absolute;
+  top: 0;
+  min-width: 200px;
+  height: auto;
+  box-shadow: 0 0 1px 0 rgba(0, 0, 0, 0.4);
+  background: #fff;
+  z-index: 3;
+  left: 250px;
+  /*
+			 ---------------------------
+			 3. Multi-level Sub Menu Position
+			 ---------------------------
+			 */
+}
+
+.poemkit-v-menu__container:not(.is-mobile) ul.poemkit-menu ul.sub-menu ul {
+  left: 200px;
+}
+
+.poemkit-v-menu__container:not(.is-mobile) ul.poemkit-menu ul.sub-menu ul ul {
+  left: 400px;
+}
+
+.poemkit-v-menu__container:not(.is-mobile) ul.poemkit-menu ul.sub-menu ul ul ul {
+  left: 600px;
+}
+
+.poemkit-v-menu__container:not(.is-mobile) ul.poemkit-menu ul.sub-menu ul ul ul ul {
+  left: 800px;
+}
+
+.poemkit-v-menu__container:not(.is-mobile) ul.poemkit-menu ul.sub-menu ul ul ul ul ul {
+  left: 1000px;
+}
+
+.poemkit-v-menu__container:not(.is-mobile) ul.poemkit-menu ul.sub-menu ul ul ul ul ul ul {
+  left: 1200px;
+}
+
+.poemkit-v-menu__container:not(.is-mobile) ul.poemkit-menu ul.sub-menu ul ul ul ul ul ul ul {
+  left: 1400px;
+}
+
+.poemkit-v-menu__container:not(.is-mobile) ul.poemkit-menu ul.sub-menu ul ul ul ul ul ul ul ul {
+  left: 1600px;
+}
+
+.poemkit-v-menu__container:not(.is-mobile) ul.poemkit-menu ul.sub-menu ul ul ul ul ul ul ul ul ul {
+  left: 1800px;
+}
+
+.poemkit-v-menu__container:not(.is-mobile) ul.poemkit-menu ul.sub-menu ul ul ul ul ul ul ul ul ul ul {
+  left: 2000px;
+}
+
+.poemkit-v-menu__container:not(.is-mobile) ul.poemkit-menu li.multi-column .poemkit-menu__arrow-mega {
+  display: none !important;
+}
+
+.poemkit-v-menu__container:not(.is-mobile) ul.poemkit-menu li.multi-column span.multi-column-title {
+  color: #b9b9b9;
+  font-weight: 700;
+  display: inline-block;
+  cursor: default;
+  text-align: left;
+  display: block;
+  padding: 1rem 1rem 0;
+}
+
+.poemkit-v-menu__container:not(.is-mobile) ul.poemkit-menu li.multi-column > ul {
+  min-width: inherit;
+  white-space: nowrap;
+  display: none;
+  padding: 0;
+}
+
+.poemkit-v-menu__container:not(.is-mobile) ul.poemkit-menu li.multi-column > ul ul {
+  display: block;
+}
+
+.poemkit-v-menu__container:not(.is-mobile) ul.poemkit-menu li.multi-column > ul ul li {
+  float: none;
+  display: block;
+  text-align: left;
+}
+
+.poemkit-v-menu__container:not(.is-mobile) ul.poemkit-menu li.multi-column > ul li {
+  overflow: hidden;
+  vertical-align: top;
+  padding: 0;
+}
+
+.poemkit-v-menu__container:not(.is-mobile) ul.poemkit-menu li.multi-column > ul li ul {
+  position: relative;
+  border: none;
+}
+
+.poemkit-v-menu__container:not(.is-mobile) ul.poemkit-menu li.multi-column > ul li li {
+  padding: 0 1rem;
+}
+
+.poemkit-v-menu__container:not(.is-mobile) ul.poemkit-menu li.multi-column > ul > li {
+  display: inline-block;
+  max-height: 100%;
+  overflow-y: auto;
+  box-sizing: border-box;
+}
+
+.poemkit-v-menu__container:not(.is-mobile) ul.poemkit-menu li.multi-column > ul > li::-webkit-scrollbar-track {
+  border-radius: 0px;
+  background-color: rgba(0, 0, 0, 0);
+}
+
+.poemkit-v-menu__container:not(.is-mobile) ul.poemkit-menu li.multi-column > ul > li::-webkit-scrollbar {
+  width: 1px;
+  background-color: rgba(0, 0, 0, 0);
+}
+
+.poemkit-v-menu__container:not(.is-mobile) ul.poemkit-menu li.multi-column > ul > li::-webkit-scrollbar-thumb {
+  border-radius: 0px;
+  background-color: rgba(0, 0, 0, 0.4);
+}
+
+.poemkit-v-menu__container:not(.is-mobile) ul.poemkit-menu li.multi-column > ul > li ul {
+  left: 0;
+}
+
+.poemkit-v-menu__container:not(.is-mobile) ul.poemkit-menu li.multi-column > ul > li li {
+  border-bottom-color: rgba(0, 0, 0, 0.07);
+}
+
+.poemkit-v-menu__container:not(.is-mobile) ul.poemkit-menu li.multi-column > ul > li .poemkit-menu__arrow {
+  display: none;
+}
+
+.poemkit-v-menu__container:not(.is-mobile) .poemkit-menu__arrow {
+  display: block;
+  position: absolute;
+  right: .5rem;
+  top: 50%;
+  background-color: #333;
+  width: 3px;
+  height: 3px;
+  border-radius: 100%;
 }
 
 /* ====================================================== 
@@ -22847,6 +22439,131 @@ body.js-poemkit-menu-opened .poemkit-menu-mobile__toggle span:nth-child(3) {
     margin-right: auto;
     margin-left: 1.125rem;
   }
+}
+
+/* ======================================================
+   <!-- Vertical Menu (RTL) -->
+/* ====================================================== */
+/*
+ * 1. Primary Menu
+ * 2. Sub Menu (Using WordPress default class name )
+ * 3. Multi-level Sub Menu Position
+ * 4. Mega/Dropdown Menu
+ * 5. Dropdown Arrow
+*/
+.rtl .poemkit-v-menu__container:not(.is-mobile) {
+  left: auto;
+  right: 0;
+  box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1);
+  /*
+	 ---------------------------
+	 1. Primary Menu
+	 ---------------------------
+	 */
+  /*
+	 ---------------------------
+	 4. Dropdown Arrow
+	 ---------------------------
+	 */
+}
+
+.rtl .poemkit-v-menu__container:not(.is-mobile) ul.poemkit-menu {
+  /*
+		 ---------------------------
+		 2. Sub Menu (Using WordPress default class name )
+		 ---------------------------
+		 */
+  /*
+		 ---------------------------
+		 4. Mega/Dropdown Menu
+		 ---------------------------
+		 */
+  /* Multi-column */
+}
+
+.rtl .poemkit-v-menu__container:not(.is-mobile) ul.poemkit-menu li {
+  text-align: left;
+}
+
+.rtl .poemkit-v-menu__container:not(.is-mobile) ul.poemkit-menu li .poemkit-bubble {
+  right: auto;
+  left: 1rem;
+}
+
+.rtl .poemkit-v-menu__container:not(.is-mobile) ul.poemkit-menu ul.sub-menu {
+  left: auto;
+  right: 250px;
+  /*
+			 ---------------------------
+			 3. Multi-level Sub Menu Position
+			 ---------------------------
+			 */
+}
+
+.rtl .poemkit-v-menu__container:not(.is-mobile) ul.poemkit-menu ul.sub-menu ul {
+  right: 200px;
+}
+
+.rtl .poemkit-v-menu__container:not(.is-mobile) ul.poemkit-menu ul.sub-menu ul ul {
+  right: 400px;
+}
+
+.rtl .poemkit-v-menu__container:not(.is-mobile) ul.poemkit-menu ul.sub-menu ul ul ul {
+  right: 600px;
+}
+
+.rtl .poemkit-v-menu__container:not(.is-mobile) ul.poemkit-menu ul.sub-menu ul ul ul ul {
+  right: 800px;
+}
+
+.rtl .poemkit-v-menu__container:not(.is-mobile) ul.poemkit-menu ul.sub-menu ul ul ul ul ul {
+  right: 1000px;
+}
+
+.rtl .poemkit-v-menu__container:not(.is-mobile) ul.poemkit-menu ul.sub-menu ul ul ul ul ul ul {
+  right: 1200px;
+}
+
+.rtl .poemkit-v-menu__container:not(.is-mobile) ul.poemkit-menu ul.sub-menu ul ul ul ul ul ul ul {
+  right: 1400px;
+}
+
+.rtl .poemkit-v-menu__container:not(.is-mobile) ul.poemkit-menu ul.sub-menu ul ul ul ul ul ul ul ul {
+  right: 1600px;
+}
+
+.rtl .poemkit-v-menu__container:not(.is-mobile) ul.poemkit-menu ul.sub-menu ul ul ul ul ul ul ul ul ul {
+  right: 1800px;
+}
+
+.rtl .poemkit-v-menu__container:not(.is-mobile) ul.poemkit-menu ul.sub-menu ul ul ul ul ul ul ul ul ul ul {
+  right: 2000px;
+}
+
+.rtl .poemkit-v-menu__container:not(.is-mobile) ul.poemkit-menu li.multi-column span.multi-column-title {
+  text-align: right;
+}
+
+.rtl .poemkit-v-menu__container:not(.is-mobile) ul.poemkit-menu li.multi-column > ul ul li {
+  text-align: right;
+}
+
+.rtl .poemkit-v-menu__container:not(.is-mobile) ul.poemkit-menu li.multi-column > ul li ul {
+  border-right: none;
+}
+
+.rtl .poemkit-v-menu__container:not(.is-mobile) ul.poemkit-menu li.multi-column > ul > li:first-child {
+  border-right: none;
+}
+
+.rtl .poemkit-v-menu__container:not(.is-mobile) ul.poemkit-menu li.multi-column > ul > li ul {
+  left: auto;
+  right: 0;
+}
+
+.rtl .poemkit-v-menu__container:not(.is-mobile) .poemkit-menu__arrow {
+  right: auto;
+  left: .5rem;
 }
 
 /* ====================================================== 
@@ -23786,7 +23503,7 @@ body.js-poemkit-menu-opened.rtl .poemkit-menu-mobile__toggle span {
  * 1. Author Card
  * 2. Gallery Card (via Flex)
  * 3. Thumbnail Card (via Flex)
-
+ * 4. Card Grid
 */
 /*
  ---------------------------
@@ -24359,6 +24076,68 @@ body.js-poemkit-menu-opened.rtl .poemkit-menu-mobile__toggle span {
   outline: 5px auto -webkit-focus-ring-color;
 }
 
+/*
+ ---------------------------
+ 4. Card Grid
+ ---------------------------
+ */
+.poemkit-card--gallery__grid__col-1 {
+  width: 8.333333333333%;
+}
+
+.poemkit-card--gallery__grid__col-2 {
+  width: 16.66666666666667%;
+}
+
+.poemkit-card--gallery__grid__col-3 {
+  width: 25%;
+}
+
+.poemkit-card--gallery__grid__col-4 {
+  width: 33.333333333333%;
+}
+
+.poemkit-card--gallery__grid__col-5 {
+  width: 41.666666666667%;
+}
+
+.poemkit-card--gallery__grid__col-6 {
+  width: 50%;
+}
+
+.poemkit-card--gallery__grid__col-7 {
+  width: 58.333333333333%;
+}
+
+.poemkit-card--gallery__grid__col-8 {
+  width: 66.666666666667%;
+}
+
+.poemkit-card--gallery__grid__col-9 {
+  width: 75%;
+}
+
+.poemkit-card--gallery__grid__col-10 {
+  width: 83.333333333333%;
+}
+
+.poemkit-card--gallery__grid__col-11 {
+  width: 91.666666666667%;
+}
+
+.poemkit-card--gallery__grid__col-12 {
+  width: 100%;
+}
+
+@media all and (max-width: 768px) {
+  .poemkit-card--gallery__preview--mobile-half {
+    width: 50%;
+  }
+  .poemkit-card--gallery__preview--mobile-stack {
+    width: 100%;
+  }
+}
+
 /* ======================================================
     <!-- Cascading DropDown List -->
 /* ====================================================== */
@@ -24442,6 +24221,143 @@ body.js-poemkit-menu-opened.rtl .poemkit-menu-mobile__toggle span {
 
 .poemkit-cascading-dropdown-list .poemkit-cascading-dropdown-list__opt.is-active {
   background: #f7f7f7;
+}
+
+/* ======================================================
+   <!-- Content Placeholder -->
+/* ====================================================== */
+.poemkit-content-placeholder {
+  width: 100%;
+}
+
+.poemkit-content-placeholder::after {
+  content: '';
+  display: block;
+  clear: both;
+}
+
+.poemkit-content-placeholder ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.poemkit-content-placeholder li {
+  overflow: hidden;
+  padding: 15px 0;
+  margin: 0;
+  border: 0;
+  background: 0;
+}
+
+.poemkit-content-placeholder .poemkit-content-placeholder__line {
+  height: 8px;
+  background-color: rgba(85, 102, 119, 0.1);
+}
+
+.poemkit-content-placeholder .poemkit-content-placeholder__line--first {
+  width: 100%;
+  animation: poemkit-cssAnim--firstline 1s infinite linear;
+}
+
+.poemkit-content-placeholder .poemkit-content-placeholder__line--second {
+  margin-top: 8px;
+  width: 70%;
+  animation: poemkit-cssAnim--secondline 1s infinite linear;
+}
+
+.poemkit-content-placeholder .poemkit-content-placeholder__thumbSlot {
+  width: 80px;
+  height: 60px;
+  float: left;
+  background-color: rgba(85, 102, 119, 0.1);
+  animation: poemkit-cssAnim--thumb 1s infinite linear;
+}
+
+.poemkit-content-placeholder .poemkit-content-placeholder__thumbSlot ~ .poemkit-content-placeholder__textSlot {
+  width: calc(100% - 100px);
+  margin-left: 20px;
+  float: left;
+}
+
+.poemkit-content-placeholder .poemkit-content-placeholder__textSlot {
+  width: 100%;
+  margin-top: 2px;
+}
+
+.poemkit-content-placeholder .poemkit-content-placeholder__textSlot ~ .poemkit-content-placeholder__thumbSlot {
+  width: 100%;
+  margin-top: 10px;
+}
+
+.poemkit-content-placeholder .uix-content-placeholder__view--aspectRatio .poemkit-content-placeholder__thumbSlot {
+  animation: poemkit-cssAnim--fullImg 2.5s ease-in-out infinite;
+  background-image: linear-gradient(90deg, rgba(85, 102, 119, 0.1), rgba(255, 255, 255, 0.1) 15%, rgba(85, 102, 119, 0.1) 30%);
+  background-color: rgba(85, 102, 119, 0);
+  background-size: 450px 100%;
+  float: none;
+  /* Maintain Aspect Ratio 1:1*/
+  width: 100%;
+  padding-top: 100%;
+  /* 1:1 Aspect Ratio */
+  position: relative;
+  /* If you want text inside of it */
+}
+
+@keyframes poemkit-cssAnim--firstline {
+  from {
+    box-shadow: inset 0 0 0 rgba(255, 255, 255, 0.3);
+  }
+  to {
+    box-shadow: inset 200px 0 0 rgba(255, 255, 255, 0.3);
+  }
+}
+
+@keyframes poemkit-cssAnim--secondline {
+  from {
+    box-shadow: inset 0 0 0 rgba(255, 255, 255, 0.3);
+  }
+  to {
+    box-shadow: inset 150px 0 0 rgba(255, 255, 255, 0.3);
+  }
+}
+
+@keyframes poemkit-cssAnim--thumb {
+  from {
+    box-shadow: inset 0 0 0 rgba(255, 255, 255, 0.3);
+  }
+  to {
+    box-shadow: inset 80px 0 0 rgba(255, 255, 255, 0.3);
+  }
+}
+
+@keyframes poemkit-cssAnim--fullImg {
+  0% {
+    background-position: -150px 0;
+  }
+  50% {
+    background-position: 300px 0;
+  }
+  to {
+    background-position: 300px 0;
+  }
+}
+
+/* ======================================================
+   <!-- Content Placeholder -->
+/* ====================================================== */
+.rtl .poemkit-content-placeholder .poemkit-content-placeholder__thumbSlot {
+  float: right;
+}
+
+.rtl .poemkit-content-placeholder .poemkit-content-placeholder__thumbSlot ~ .poemkit-content-placeholder__textSlot {
+  margin-left: auto;
+  margin-right: 20px;
+  float: right;
+}
+
+.rtl .poemkit-content-placeholder .uix-content-placeholder__view--aspectRatio .poemkit-content-placeholder__thumbSlot {
+  float: none;
 }
 
 /* ======================================================
@@ -24545,6 +24461,7 @@ body.js-poemkit-menu-opened.rtl .poemkit-menu-mobile__toggle span {
   right: 20px;
 }
 
+@charset "UTF-8";
 /* ======================================================
     <!-- Form -->
 /* ====================================================== */
@@ -24559,6 +24476,7 @@ body.js-poemkit-menu-opened.rtl .poemkit-menu-mobile__toggle span {
  * 8. Single Selector
  * 9. Search of Widget
  * 10. Add / remove input field dynamically
+ * 11. Tag Input
 */
 /*
  ---------------------------
@@ -25893,6 +25811,92 @@ input[type="datetime-local"].is-active::-webkit-datetime-edit {
   display: none;
 }
 
+/*
+ ---------------------------
+ 11. Tag Input
+ ---------------------------
+ */
+.poemkit-controls__tags-wrapper {
+  display: flex;
+}
+
+.poemkit-controls__tags-wrapper ul, .poemkit-controls__tags-wrapper li {
+  padding: 0;
+  margin: 0;
+  list-style: none;
+}
+
+.poemkit-controls__tags-wrapper > div {
+  transition: all 0.3s ease;
+  align-items: center;
+  display: flex;
+  flex-wrap: wrap;
+  border: 1px solid #dce4e8;
+}
+
+.poemkit-controls__tags-wrapper.is-pill > div {
+  border-radius: 50px;
+}
+
+.poemkit-controls__tags-wrapper.is-rounded > div {
+  border-radius: 4px;
+}
+
+.poemkit-controls__tags-wrapper.is-fullwidth > div {
+  width: 100%;
+}
+
+.poemkit-controls__tags-wrapper.is-active > div {
+  outline: none;
+  border-color: #dadada;
+  box-shadow: 0px 0px 0px 3px rgba(218, 218, 218, 0.35);
+}
+
+.poemkit-controls__tags-wrapper .poemkit-controls__tags {
+  position: relative;
+}
+
+.poemkit-controls__tags-wrapper .poemkit-controls__tags input {
+  transition: all 0.3s ease;
+  font-size: 0.875rem;
+  font-weight: 600;
+  margin: .5rem .5rem 0 .5rem;
+  box-sizing: content-box;
+  color: #888;
+  border: none;
+  transform: translateY(-0.2rem);
+}
+
+.poemkit-controls__tags-wrapper .poemkit-controls__tags input:focus {
+  outline: none;
+}
+
+.poemkit-controls__tags-wrapper ul.poemkit-controls__tags__list li {
+  display: inline-block;
+  margin: 5px;
+  margin-bottom: 0;
+  padding: .1rem 1.5rem .1rem 1rem;
+  font-size: 0.75rem;
+  background: #efefef;
+  border-radius: 30px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  position: relative;
+}
+
+.poemkit-controls__tags-wrapper ul.poemkit-controls__tags__list li::after {
+  content: " ×";
+  color: #333;
+  font-weight: 400;
+  opacity: .6;
+  font-size: 18px;
+  line-height: 20px;
+  position: absolute;
+  right: 8px;
+  top: 0;
+  cursor: pointer;
+}
+
 /* ======================================================
     <!-- Form ( Layout ) -->
 /* ====================================================== */
@@ -26775,6 +26779,318 @@ input[type="datetime-local"].is-active::-webkit-datetime-edit {
 }
 
 /* ======================================================
+   <!-- Grid -->
+/* ====================================================== */
+[class*='poemkit-core-grid__col-'] {
+  box-sizing: border-box;
+  float: left;
+  position: relative;
+}
+
+.poemkit-core-grid__inline {
+  float: none;
+  display: inline-block;
+}
+
+.poemkit-core-grid__col-1 {
+  width: 8.333333333333%;
+}
+
+.poemkit-core-grid__col-2 {
+  width: 16.66666666666667%;
+}
+
+.poemkit-core-grid__col-3 {
+  width: 25%;
+}
+
+.poemkit-core-grid__col-4 {
+  width: 33.333333333333%;
+}
+
+.poemkit-core-grid__col-5 {
+  width: 41.666666666667%;
+}
+
+.poemkit-core-grid__col-6 {
+  width: 50%;
+}
+
+.poemkit-core-grid__col-7 {
+  width: 58.333333333333%;
+}
+
+.poemkit-core-grid__col-8 {
+  width: 66.666666666667%;
+}
+
+.poemkit-core-grid__col-9 {
+  width: 75%;
+}
+
+.poemkit-core-grid__col-10 {
+  width: 83.333333333333%;
+}
+
+.poemkit-core-grid__col-11 {
+  width: 91.666666666667%;
+}
+
+.poemkit-core-grid__col-12 {
+  width: 100%;
+}
+
+@media all and (max-width: 768px) {
+  .poemkit-core-grid__mobile-half {
+    width: 50%;
+  }
+  .poemkit-core-grid__mobile-stack {
+    width: 100%;
+  }
+}
+
+.poemkit-core-grid {
+  width: 100%;
+}
+
+.poemkit-core-grid .poemkit-core-grid__row {
+  width: calc( 100% + 15px);
+  /* Auto width, for automatic widths such as 5 columns */
+}
+
+.poemkit-core-grid .poemkit-core-grid__row::after {
+  /* Or @extend .poemkit-clearfix */
+  content: "";
+  display: table;
+  clear: both;
+}
+
+.poemkit-core-grid .poemkit-core-grid__row [class*='poemkit-core-grid__col-'] > div {
+  word-wrap: break-word;
+  position: relative;
+}
+
+.poemkit-core-grid .poemkit-core-grid__row.poemkit-core-grid__row--no-gutters {
+  width: 100%;
+}
+
+.poemkit-core-grid .poemkit-core-grid__row.poemkit-core-grid__row--no-gutters [class*='poemkit-core-grid__col-'] {
+  padding-right: 0 !important;
+}
+
+.poemkit-core-grid .poemkit-core-grid__row.poemkit-core-grid__row--auto-width {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.poemkit-core-grid .poemkit-core-grid__row.poemkit-core-grid__row--auto-width .poemkit-core-grid__col {
+  flex: 1;
+  padding-right: 15px;
+}
+
+.poemkit-core-grid .poemkit-core-grid__row.poemkit-core-grid__row--auto-width.poemkit-core-grid__row--no-gutters .poemkit-core-grid__col {
+  padding-right: 0;
+}
+
+.poemkit-core-grid [class*='poemkit-core-grid__col-'] {
+  padding-right: 15px;
+}
+
+.poemkit-core-grid__row .poemkit-core-grid [class*='poemkit-core-grid__col-']:last-of-type {
+  padding-right: 0;
+}
+
+.poemkit-core-grid__row .poemkit-core-grid [class*='poemkit-core-grid__col-']:last-of-type [class*='poemkit-core-grid__col-'] > div {
+  width: calc(100% - 15px);
+}
+
+.poemkit-core-grid .poemkit-core-grid__row.poemkit-core-grid__row--loop .poemkit-core-grid__col-6:nth-child(2n+1),
+.poemkit-core-grid .poemkit-core-grid__row.poemkit-core-grid__row--loop .poemkit-core-grid__col-4:nth-child(3n+1),
+.poemkit-core-grid .poemkit-core-grid__row.poemkit-core-grid__row--loop .poemkit-core-grid__col-3:nth-child(4n+1),
+.poemkit-core-grid .poemkit-core-grid__row.poemkit-core-grid__row--loop .poemkit-core-grid__col-2:nth-child(6n+1) {
+  clear: both;
+}
+
+@media all and (max-width: 768px) {
+  .poemkit-core-grid .poemkit-core-grid__row {
+    /* Auto width, for automatic widths such as 5 columns */
+  }
+  .poemkit-core-grid .poemkit-core-grid__row.poemkit-core-grid__row--auto-width {
+    display: block;
+  }
+  .poemkit-core-grid .poemkit-core-grid__row.poemkit-core-grid__row--auto-width.poemkit-core-grid__row--no-gutters .poemkit-core-grid__col {
+    padding-right: 15px;
+  }
+  .poemkit-core-grid .poemkit-core-grid__row.poemkit-core-grid__row--no-break {
+    /* Auto width, for automatic widths such as 5 columns */
+  }
+  .poemkit-core-grid .poemkit-core-grid__row.poemkit-core-grid__row--no-break.poemkit-core-grid__row--auto-width {
+    display: flex;
+  }
+  .poemkit-core-grid .poemkit-core-grid__row:not(.poemkit-core-grid__row--no-break).poemkit-core-grid__row--no-gutters {
+    width: calc(100% + 15px);
+  }
+  .poemkit-core-grid .poemkit-core-grid__row:not(.poemkit-core-grid__row--no-break) [class*='poemkit-core-grid__col-'] {
+    float: none;
+    width: calc(100% - 15px);
+    padding-left: 0;
+    padding-right: 0;
+  }
+}
+
+/* The breakpoint is the same as bootstrap 4 */
+/*
+--breakpoint-xs:0;
+--breakpoint-sm:576px;
+--breakpoint-md:768px;
+--breakpoint-lg:992px;
+--breakpoint-xl:1200px;
+*/
+@media all and (max-width: 576px) {
+  .poemkit-core-grid .poemkit-core-grid__col-3--sm,
+  .poemkit-core-grid .poemkit-core-grid__col-4--sm,
+  .poemkit-core-grid .poemkit-core-grid__col-6--sm {
+    float: left !important;
+    padding-right: 15px !important;
+  }
+  .poemkit-core-grid .poemkit-core-grid__col-3--sm {
+    width: 25% !important;
+  }
+  .poemkit-core-grid .poemkit-core-grid__col-4--sm {
+    width: 33.333333333333% !important;
+  }
+  .poemkit-core-grid .poemkit-core-grid__col-6--sm {
+    width: 50% !important;
+  }
+  .poemkit-core-grid .poemkit-core-grid__row--no-gutters .poemkit-core-grid__col-3--sm {
+    width: calc(25% - 3.75px) !important;
+  }
+  .poemkit-core-grid .poemkit-core-grid__row--no-gutters .poemkit-core-grid__col-4--sm {
+    width: calc(33.333333333333% - 5px) !important;
+  }
+  .poemkit-core-grid .poemkit-core-grid__row--no-gutters .poemkit-core-grid__col-6--sm {
+    width: calc(50% - 7.5px) !important;
+  }
+  .poemkit-core-grid .poemkit-core-grid__row--loop .poemkit-core-grid__col-3--sm:nth-child(4n+1),
+  .poemkit-core-grid .poemkit-core-grid__row--loop .poemkit-core-grid__col-4--sm:nth-child(3n+1),
+  .poemkit-core-grid .poemkit-core-grid__row--loop .poemkit-core-grid__col-6--sm:nth-child(2n+1) {
+    clear: both;
+  }
+}
+
+@media all and (max-width: 768px) {
+  .poemkit-core-grid .poemkit-core-grid__col-3--md,
+  .poemkit-core-grid .poemkit-core-grid__col-4--md,
+  .poemkit-core-grid .poemkit-core-grid__col-6--md {
+    float: left !important;
+    padding-right: 15px !important;
+  }
+  .poemkit-core-grid .poemkit-core-grid__col-3--md {
+    width: 25% !important;
+  }
+  .poemkit-core-grid .poemkit-core-grid__col-4--md {
+    width: 33.333333333333% !important;
+  }
+  .poemkit-core-grid .poemkit-core-grid__col-6--md {
+    width: 50% !important;
+  }
+  .poemkit-core-grid .poemkit-core-grid__row--no-gutters .poemkit-core-grid__col-3--md {
+    width: calc(25% - 3.75px) !important;
+  }
+  .poemkit-core-grid .poemkit-core-grid__row--no-gutters .poemkit-core-grid__col-4--md {
+    width: calc(33.333333333333% - 5px) !important;
+  }
+  .poemkit-core-grid .poemkit-core-grid__row--no-gutters .poemkit-core-grid__col-6--md {
+    width: calc(50% - 7.5px) !important;
+  }
+  .poemkit-core-grid .poemkit-core-grid__row--loop .poemkit-core-grid__col-3--md:nth-child(4n+1),
+  .poemkit-core-grid .poemkit-core-grid__row--loop .poemkit-core-grid__col-4--md:nth-child(3n+1),
+  .poemkit-core-grid .poemkit-core-grid__row--loop .poemkit-core-grid__col-6--md:nth-child(2n+1) {
+    clear: both;
+  }
+}
+
+@media all and (max-width: 992px) {
+  .poemkit-core-grid .poemkit-core-grid__col-3--lg,
+  .poemkit-core-grid .poemkit-core-grid__col-4--lg,
+  .poemkit-core-grid .poemkit-core-grid__col-6--lg {
+    float: left !important;
+    padding-right: 15px !important;
+  }
+  .poemkit-core-grid .poemkit-core-grid__col-3--lg {
+    width: 25% !important;
+  }
+  .poemkit-core-grid .poemkit-core-grid__col-4--lg {
+    width: 33.333333333333% !important;
+  }
+  .poemkit-core-grid .poemkit-core-grid__col-6--lg {
+    width: 50% !important;
+  }
+  .poemkit-core-grid .poemkit-core-grid__row--no-gutters .poemkit-core-grid__col-3--lg {
+    width: calc(25% - 3.75px) !important;
+  }
+  .poemkit-core-grid .poemkit-core-grid__row--no-gutters .poemkit-core-grid__col-4--lg {
+    width: calc(33.333333333333% - 5px) !important;
+  }
+  .poemkit-core-grid .poemkit-core-grid__row--no-gutters .poemkit-core-grid__col-6--lg {
+    width: calc(50% - 7.5px) !important;
+  }
+  .poemkit-core-grid .poemkit-core-grid__row--loop .poemkit-core-grid__col-3--lg:nth-child(4n+1),
+  .poemkit-core-grid .poemkit-core-grid__row--loop .poemkit-core-grid__col-4--lg:nth-child(3n+1),
+  .poemkit-core-grid .poemkit-core-grid__row--loop .poemkit-core-grid__col-6--lg:nth-child(2n+1) {
+    clear: both;
+  }
+}
+
+@media all and (max-width: 1200px) {
+  .poemkit-core-grid .poemkit-core-grid__col-3--xl,
+  .poemkit-core-grid .poemkit-core-grid__col-4--xl,
+  .poemkit-core-grid .poemkit-core-grid__col-6--xl {
+    float: left !important;
+    padding-right: 15px !important;
+  }
+  .poemkit-core-grid .poemkit-core-grid__col-3--xl {
+    width: 25% !important;
+  }
+  .poemkit-core-grid .poemkit-core-grid__col-4--xl {
+    width: 33.333333333333% !important;
+  }
+  .poemkit-core-grid .poemkit-core-grid__col-6--xl {
+    width: 50% !important;
+  }
+  .poemkit-core-grid .poemkit-core-grid__row--no-gutters .poemkit-core-grid__col-3--xl {
+    width: calc(25% - 3.75px) !important;
+  }
+  .poemkit-core-grid .poemkit-core-grid__row--no-gutters .poemkit-core-grid__col-4--xl {
+    width: calc(33.333333333333% - 5px) !important;
+  }
+  .poemkit-core-grid .poemkit-core-grid__row--no-gutters .poemkit-core-grid__col-6--xl {
+    width: calc(50% - 7.5px) !important;
+  }
+  .poemkit-core-grid .poemkit-core-grid__row--loop .poemkit-core-grid__col-3--xl:nth-child(4n+1),
+  .poemkit-core-grid .poemkit-core-grid__row--loop .poemkit-core-grid__col-4--xl:nth-child(3n+1),
+  .poemkit-core-grid .poemkit-core-grid__row--loop .poemkit-core-grid__col-6--xl:nth-child(2n+1) {
+    clear: both;
+  }
+}
+
+/* ======================================================
+   <!-- Grid -->
+/* ====================================================== */
+.rtl [class*='poemkit-core-grid__col-'] {
+  float: right;
+}
+
+.rtl .poemkit-core-grid [class*='poemkit-core-grid__col-'] {
+  padding-right: auto;
+  padding-left: 15px;
+}
+
+.poemkit-core-grid__row .rtl .poemkit-core-grid [class*='poemkit-core-grid__col-']:last-of-type {
+  padding-left: 0;
+}
+
+/* ======================================================
    <!-- Gallery Layout -->
 /* ====================================================== */
 .poemkit-gallery .poemkit-gallery__tiles {
@@ -27090,6 +27406,23 @@ input[type="datetime-local"].is-active::-webkit-datetime-edit {
 
 .poemkit-shape-img img {
   display: none;
+}
+
+/* ======================================================
+   <!-- Image Perspective Hover -->
+/* ====================================================== */
+.poemkit-perspective-hover {
+  /* Require more than 500, compatible firefox height */
+  perspective: 700px;
+}
+
+.poemkit-perspective-hover > div {
+  display: inline-block;
+  transition: all 0.3s ease;
+}
+
+.poemkit-perspective-hover img {
+  transition: all 0.3s ease;
 }
 
 /* ======================================================
@@ -27674,6 +28007,470 @@ input[type="datetime-local"].is-active::-webkit-datetime-edit {
 .rtl .poemkit-lightbox__close {
   right: auto;
   left: 15px;
+}
+
+/* ======================================================
+   <!-- List Bulleted -->
+/* ====================================================== */
+/*
+ * 1. Normal List Styling
+ * 2. Normal Numbers Ordered List
+ * 3. Custom Circle Icons Ordered List
+ * 4. Big Numbers Ordered List
+ * 5. Step Timeline By Numbers
+ * 6. List With Icon
+*/
+ul.poemkit-list,
+ol.poemkit-list {
+  list-style: none;
+  margin-bottom: 1.421875rem;
+}
+
+ul.poemkit-list > li,
+ol.poemkit-list > li {
+  margin-bottom: 0;
+  transition: all 0.3s ease;
+}
+
+.poemkit-list::after {
+  content: '';
+  clear: both;
+  display: block;
+}
+
+/* 
+ ---------------------------
+ 1. Normal List Styling
+ ---------------------------
+ */
+ol.poemkit-list--normal,
+ul.poemkit-list--normal,
+.poemkit-list--normal ul,
+.poemkit-list--normal ol {
+  display: block;
+  margin: 1.421875rem;
+  padding-left: 0.875rem;
+}
+
+ol.poemkit-list--normal ul,
+ol.poemkit-list--normal ol,
+ul.poemkit-list--normal ul,
+ul.poemkit-list--normal ol,
+.poemkit-list--normal ul ul,
+.poemkit-list--normal ul ol,
+.poemkit-list--normal ol ul,
+.poemkit-list--normal ol ol {
+  margin-top: 0;
+  margin-bottom: 0;
+  padding-top: 0;
+  padding-bottom: 0;
+}
+
+ul.poemkit-list--normal,
+.poemkit-list--normal ul {
+  list-style-type: disc;
+}
+
+ol.poemkit-list--normal,
+.poemkit-list--normal ol {
+  list-style-type: decimal;
+}
+
+/*-- Noemal List Effect by Default --*/
+/* Compatible with  Uix Shortcodes (WordPress Plugin) and Block Button Link */
+.poemkit-list--normal a:not(.poemkit-sc-btn):not(.wp-block-button__link):not(.poemkit-btn) {
+  color: #6B6BF6;
+}
+
+.poemkit-list--normal a:not(.poemkit-sc-btn):not(.wp-block-button__link):not(.poemkit-btn):hover {
+  color: #7D7DFC;
+  text-decoration: underline;
+}
+
+.poemkit-list--normal a:not(.poemkit-sc-btn):not(.wp-block-button__link):not(.poemkit-btn):hover img {
+  text-decoration: none;
+}
+
+/* 
+ ---------------------------
+ 2. Normal Numbers Ordered List
+ ---------------------------
+ */
+ol.poemkit-list--numbered,
+.poemkit-list--numbered ol {
+  list-style: none;
+  margin-left: 1rem;
+  counter-reset: line;
+}
+
+ol.poemkit-list--numbered > li,
+.poemkit-list--numbered ol > li {
+  position: relative;
+  margin-bottom: .5rem;
+  margin-left: .5rem;
+}
+
+ol.poemkit-list--numbered > li::before,
+.poemkit-list--numbered ol > li::before {
+  position: absolute;
+  left: -2.25em;
+  display: inline-block;
+  width: 22px;
+  height: 22px;
+  margin-right: 0.5em;
+  background-color: #6B6BF6;
+  border-radius: 50%;
+  color: #fff;
+  text-align: center;
+  line-height: 22px;
+  counter-increment: line;
+  content: counter(line);
+  font-size: 0.75rem;
+}
+
+.poemkit-list--numbered.poemkit-list--numbered-leading-zero > li::before {
+  content: "0" counter(line);
+}
+
+/* 
+ ---------------------------
+ 3. Custom Circle Icons Ordered List
+ ---------------------------
+ */
+ol.poemkit-list--dot,
+ul.poemkit-list--dot,
+.poemkit-list--dot ol,
+.poemkit-list--dot ul {
+  list-style: none;
+  margin-left: 1rem;
+  counter-reset: line;
+}
+
+ol.poemkit-list--dot > li,
+ul.poemkit-list--dot > li,
+.poemkit-list--dot ol > li,
+.poemkit-list--dot ul > li {
+  position: relative;
+  margin-bottom: .5rem;
+  color: #212121;
+  margin-left: 1rem;
+}
+
+ol.poemkit-list--dot > li::before,
+ul.poemkit-list--dot > li::before,
+.poemkit-list--dot ol > li::before,
+.poemkit-list--dot ul > li::before {
+  position: absolute;
+  left: -1.5em;
+  top: 50%;
+  transform: translateY(-50%);
+  display: inline-block;
+  width: 10px;
+  height: 10px;
+  background-color: #6B6BF6;
+  color: #fff;
+  border-radius: 50%;
+  text-align: center;
+  counter-increment: line;
+  content: '';
+}
+
+/* 
+ ---------------------------
+ 4. Big Numbers Ordered List
+ ---------------------------
+ */
+ol.poemkit-list--numbered-large,
+.poemkit-list--numbered-large ol {
+  counter-reset: item;
+  /*removes original number*/
+  list-style-type: none;
+  /*remove if full width*/
+  text-align: justify;
+}
+
+ol.poemkit-list--numbered-large li,
+.poemkit-list--numbered-large ol li {
+  display: block;
+  padding-left: 2.5rem;
+  position: relative;
+  min-height: 3.5rem;
+  /*generic alignment*/
+  text-indent: 0;
+  list-style-position: outside;
+  margin-left: 1.2rem;
+  list-style-type: number;
+}
+
+ol.poemkit-list--numbered-large li::before,
+.poemkit-list--numbered-large ol li::before {
+  content: counter(item) ".";
+  counter-increment: item;
+  position: absolute;
+  margin-left: -3.5rem;
+  font-size: 3rem;
+  color: #AEAEAE;
+  line-height: 1;
+}
+
+.poemkit-list--numbered-large.poemkit-list--numbered-leading-zero li::before {
+  content: "0" counter(item) ".";
+}
+
+ol.poemkit-list--numbered-large.poemkit-list--numbered-bg li,
+.poemkit-list--numbered-large.poemkit-list--numbered-bg ol li {
+  background: #efefef;
+  min-height: 70px;
+  border-radius: 50px;
+  margin-bottom: 1rem;
+  margin-left: 0;
+  padding-left: 4.5rem;
+}
+
+ol.poemkit-list--numbered-large.poemkit-list--numbered-bg li p,
+.poemkit-list--numbered-large.poemkit-list--numbered-bg ol li p {
+  padding-top: 1.5rem;
+  padding-right: 2rem;
+  line-height: 1.3;
+}
+
+ol.poemkit-list--numbered-large.poemkit-list--numbered-bg li::before,
+.poemkit-list--numbered-large.poemkit-list--numbered-bg ol li::before {
+  background: #6B6BF6;
+  border-radius: 50%;
+  width: 50px;
+  height: 50px;
+  line-height: 50px;
+  content: counter(item);
+  font-size: 1.5rem;
+  color: #fff;
+  text-align: center;
+  top: 50%;
+  transform: translateY(-50%);
+  margin-left: -4rem;
+}
+
+.poemkit-list--numbered-large.poemkit-list--numbered-bg.poemkit-list--numbered-leading-zero li::before {
+  content: "0" counter(item);
+}
+
+/* 
+ ---------------------------
+ 5. Step Timeline By Numbers
+ ---------------------------
+ */
+.poemkit-list--numbered-step {
+  counter-reset: step;
+  list-style-type: none;
+  margin-left: 1rem;
+}
+
+.poemkit-list--numbered-step li {
+  position: relative;
+  padding: 0 0 1.5rem 3.75rem;
+  min-height: 75px;
+  border-left: 2px solid #333;
+}
+
+.poemkit-list--numbered-step li::before {
+  counter-increment: step;
+  content: counters(step, ".") " ";
+  position: absolute;
+  left: -26px;
+  top: 0;
+  height: 50px;
+  width: 50px;
+  font-size: 1rem;
+  font-weight: 700;
+  line-height: 48px;
+  text-align: center;
+  color: #fff;
+  background-color: #6B6BF6;
+  border: 2px solid #333;
+  border-radius: 50%;
+  z-index: 2;
+}
+
+.poemkit-list--numbered-step li:last-child {
+  border-left: none;
+}
+
+.poemkit-list--numbered-step li:last-child::before {
+  content: '\2713';
+}
+
+.poemkit-list--numbered-step.poemkit-list--numbered-leading-zero li::before {
+  content: "0" counters(step, ".") " ";
+}
+
+@media all and (max-width: 768px) {
+  .poemkit-list--numbered-step li {
+    padding-left: 2.5rem;
+  }
+}
+
+/* 
+ ---------------------------
+ 6. List With Icon
+ ---------------------------
+ */
+.poemkit-list--icon i {
+  margin-right: .5rem;
+}
+
+/* ======================================================
+   <!-- List Bulleted -->
+/* ====================================================== */
+/*
+ * 1. Normal List Styling
+ * 2. Normal Numbers Ordered List
+ * 3. Custom Circle Icons Ordered List
+ * 4. Big Numbers Ordered List
+ * 5. Step Timeline By Numbers
+ * 6. List With Icon
+*/
+/* 
+ ---------------------------
+ 1. Normal List Styling
+ ---------------------------
+ */
+.rtl ol.poemkit-list--normal,
+.rtl ul.poemkit-list--normal,
+.rtl .poemkit-list--normal ul,
+.rtl .poemkit-list--normal ol {
+  padding-left: auto;
+  padding-right: 0.875rem;
+}
+
+/* 
+  ---------------------------
+  2. Normal Numbers Ordered List
+  ---------------------------
+  */
+.rtl ol.poemkit-list--numbered,
+.rtl .poemkit-list--numbered ol {
+  margin-left: auto;
+  margin-right: 1rem;
+}
+
+.rtl ol.poemkit-list--numbered > li,
+.rtl .poemkit-list--numbered ol > li {
+  margin-left: auto;
+  margin-right: .5rem;
+}
+
+.rtl ol.poemkit-list--numbered > li::before,
+.rtl .poemkit-list--numbered ol > li::before {
+  left: auto;
+  right: -2.25em;
+  margin-right: auto;
+  margin-left: 0.5em;
+}
+
+/* 
+  ---------------------------
+  3. Custom Circle Icons Ordered List
+  ---------------------------
+  */
+.rtl ol.poemkit-list--dot,
+.rtl ul.poemkit-list--dot,
+.rtl .poemkit-list--dot ol,
+.rtl .poemkit-list--dot ul {
+  margin-left: auto;
+  margin-right: 1rem;
+}
+
+.rtl ol.poemkit-list--dot > li,
+.rtl ul.poemkit-list--dot > li,
+.rtl .poemkit-list--dot ol > li,
+.rtl .poemkit-list--dot ul > li {
+  margin-left: auto;
+  margin-right: 1rem;
+}
+
+.rtl ol.poemkit-list--dot > li::before,
+.rtl ul.poemkit-list--dot > li::before,
+.rtl .poemkit-list--dot ol > li::before,
+.rtl .poemkit-list--dot ul > li::before {
+  left: auto;
+  right: -1.5em;
+}
+
+/* 
+  ---------------------------
+  4. Big Numbers Ordered List
+  ---------------------------
+  */
+.rtl ol.poemkit-list--numbered-large li,
+.rtl .poemkit-list--numbered-large ol li {
+  padding-left: auto;
+  padding-right: 2.5rem;
+  margin-left: auto;
+  margin-right: 1.2rem;
+}
+
+.rtl ol.poemkit-list--numbered-large li::before,
+.rtl .poemkit-list--numbered-large ol li::before {
+  margin-left: auto;
+  margin-right: -3.5rem;
+}
+
+.rtl ol.poemkit-list--numbered-large.poemkit-list--numbered-bg li,
+.rtl .poemkit-list--numbered-large.poemkit-list--numbered-bg ol li {
+  margin-right: 0;
+  padding-right: 4.5rem;
+}
+
+.rtl ol.poemkit-list--numbered-large.poemkit-list--numbered-bg li p,
+.rtl .poemkit-list--numbered-large.poemkit-list--numbered-bg ol li p {
+  padding-right: auto;
+  padding-left: 2rem;
+}
+
+.rtl ol.poemkit-list--numbered-large.poemkit-list--numbered-bg li::before,
+.rtl .poemkit-list--numbered-large.poemkit-list--numbered-bg ol li::before {
+  margin-right: -4rem;
+}
+
+/* 
+  ---------------------------
+  5. Step Timeline By Numbers
+  ---------------------------
+  */
+.rtl .poemkit-list--numbered-step {
+  margin-left: auto;
+  margin-right: 1rem;
+}
+
+.rtl .poemkit-list--numbered-step li {
+  padding: 0 3.75rem 1.5rem 0;
+  border-left: none;
+  border-right: 2px solid #333;
+}
+
+.rtl .poemkit-list--numbered-step li::before {
+  left: auto;
+  right: -26px;
+}
+
+.rtl .poemkit-list--numbered-step li:last-child {
+  border-right: none;
+}
+
+@media all and (max-width: 768px) {
+  .rtl .poemkit-list--numbered-step li {
+    padding-right: 2.5rem;
+  }
+}
+
+/* 
+ ---------------------------
+ 6. List With Icon
+ ---------------------------
+ */
+.rtl .poemkit-list--icon i {
+  margin-right: auto;
+  margin-left: .5rem;
 }
 
 /* ======================================================
@@ -29974,6 +30771,89 @@ input[type="datetime-local"].is-active::-webkit-datetime-edit {
 }
 
 /* ======================================================
+   <!-- Scroll Reveal -->
+/* ====================================================== */
+/*
+ * 1. Image Animation
+*/
+/* 
+ ---------------------------
+ 1. Image Animation
+ ---------------------------
+ */
+.poemkit-sr-image-anim {
+  position: relative;
+  line-height: 0;
+  background-color: #f5f6fa;
+  overflow: hidden;
+  transform: rotate(0.0001deg);
+  display: inline-block;
+  /* Image overlay */
+  /*-- Effect 1 --*/
+  /*-- Effect 2 --*/
+  /*-- Effect 3 --*/
+}
+
+.poemkit-sr-image-anim img {
+  transform: scale(1.1);
+  transition: 0.5s cubic-bezier(0.77, 0.2, 0.05, 1);
+}
+
+.poemkit-sr-image-anim::after {
+  display: block;
+  content: '';
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  background-color: #f5f6fa;
+  transform-origin: right top;
+  backface-visibility: hidden;
+  transition: 0.5s cubic-bezier(0.77, 0.2, 0.05, 1);
+}
+
+.poemkit-sr-image-anim.poemkit-sr-image-anim--x::after {
+  transform: translateX(0);
+}
+
+.poemkit-sr-image-anim.poemkit-sr-image-anim--x.is-active img {
+  transform: scale(1);
+  transition-delay: 0.1s;
+}
+
+.poemkit-sr-image-anim.poemkit-sr-image-anim--x.is-active::after {
+  transform: translateX(100%);
+}
+
+.poemkit-sr-image-anim.poemkit-sr-image-anim--y::after {
+  transform: translateY(0);
+}
+
+.poemkit-sr-image-anim.poemkit-sr-image-anim--y.is-active img {
+  transform: scale(1);
+  transition-delay: 0.1s;
+}
+
+.poemkit-sr-image-anim.poemkit-sr-image-anim--y.is-active::after {
+  transform: translateY(100%);
+}
+
+.poemkit-sr-image-anim.poemkit-sr-image-anim--z::after {
+  transform: scale(1);
+  transform-origin: center center;
+}
+
+.poemkit-sr-image-anim.poemkit-sr-image-anim--z.is-active img {
+  transform: scale(1);
+  transition-delay: 0.1s;
+}
+
+.poemkit-sr-image-anim.poemkit-sr-image-anim--z.is-active::after {
+  transform: scale(0);
+}
+
+/* ======================================================
    <!-- Slideshow (Basic) -->
 /* ====================================================== */
 /*
@@ -30218,9 +31098,6 @@ input[type="datetime-local"].is-active::-webkit-datetime-edit {
     margin-bottom: 0;
     padding-bottom: 0;
     line-height: 1.2;
-  }
-  .poemkit-slideshow .poemkit-slideshow__inner .poemkit-slideshow__item .poemkit-slideshow__txt [class*='poemkit-core-grid__col-'] {
-    width: 100%;
   }
   .poemkit-slideshow .poemkit-slideshow__inner .poemkit-slideshow__item .poemkit-slideshow__txt .poemkit-btn {
     margin-top: .3rem;
@@ -33706,6 +34583,315 @@ table.is-horizontal th,
 
 .poemkit-timeline__container-wrapper.is-horizontal .poemkit-timeline__btn.poemkit-timeline__btn--next:hover {
   margin-right: -0.3125rem;
+}
+
+/* ======================================================
+   <!-- ToolTip -->
+/* ====================================================== */
+/*
+ * 1. Base Styles
+ * 2. Position Modifiers - Top
+ * 3. Position Modifiers - Top Left
+ * 4. Position Modifiers - Top Right
+ * 5. Position Modifiers - Bottom
+ * 6. Position Modifiers - Bottom Left
+ * 7. Position Modifiers - Bottom Right
+ * 8. Position Modifiers - Left
+ * 9. Position Modifiers - Right
+ * 10. Size
+*/
+.poemkit-tooltip {
+  position: relative;
+  display: inline-block;
+  /*
+	---------------------------
+	1. Base Styles
+	---------------------------
+	*/
+}
+
+.poemkit-tooltip [role~="tooltip"]::before,
+.poemkit-tooltip > div {
+  transform: translate3d(0, 0, 0);
+  backface-visibility: hidden;
+  will-change: transform;
+  opacity: 0;
+  pointer-events: none;
+  position: absolute;
+  box-sizing: border-box;
+  z-index: 10;
+  transform-origin: top;
+  box-shadow: rgba(0, 0, 0, 0.07) 0px 5px 15px 0px, rgba(50, 50, 93, 0.1) 0px 15px 35px 0px;
+  transition: all 0.3s ease;
+}
+
+.poemkit-tooltip > div {
+  background: rgba(17, 17, 17, 0.9);
+  border-radius: 4px;
+  color: #ffffff;
+  content: attr(aria-label);
+  font-size: 0.8125rem;
+  font-weight: normal;
+  text-transform: none;
+  padding: .5em 1em;
+  white-space: nowrap;
+  box-sizing: content-box;
+  line-height: 1.5;
+}
+
+.poemkit-tooltip > div img {
+  height: auto !important;
+  margin: .5rem 0;
+}
+
+.poemkit-tooltip [role~="tooltip"] {
+  position: relative;
+}
+
+.poemkit-tooltip [role~="tooltip"]::before {
+  background-size: 100% auto !important;
+  content: "";
+}
+
+.poemkit-tooltip [role~="tooltip"].is-active::before,
+.poemkit-tooltip [role~="tooltip"].is-active ~ div {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.poemkit-tooltip [role~="tooltip"]:focus::before,
+.poemkit-tooltip [role~="tooltip"]:focus ~ div {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.poemkit-tooltip [role~="tooltip"] {
+  /*
+		---------------------------
+		2. Position Modifiers - Top
+		---------------------------
+		*/
+  /*
+		---------------------------
+		3. Position Modifiers - Top Left
+		---------------------------
+		*/
+  /*
+		---------------------------
+		4. Position Modifiers - Top Right
+		---------------------------
+		*/
+  /*
+		---------------------------
+		5. Position Modifiers - Bottom
+		---------------------------
+		*/
+  /*
+		---------------------------
+		6. Position Modifiers - Bottom Left
+		---------------------------
+		*/
+  /*
+		---------------------------
+		7. Position Modifiers - Bottom Right
+		---------------------------
+		*/
+  /*
+		---------------------------
+		8. Position Modifiers - Left
+		---------------------------
+		*/
+  /*
+		 ---------------------------
+		 9. Position Modifiers - Right
+		 ---------------------------
+		 */
+  /*
+		 ---------------------------
+		 10. Size
+		 ---------------------------
+		 */
+}
+
+.poemkit-tooltip [role~="tooltip"][data-microtip-position|="top"]::before {
+  background: url("data:image/svg+xml;charset=utf-8,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20width%3D%2236px%22%20height%3D%2212px%22%3E%3Cpath%20fill%3D%22rgba%2817,%2017,%2017,%200.9%29%22%20transform%3D%22rotate%280%29%22%20d%3D%22M2.658,0.000%20C-13.615,0.000%2050.938,0.000%2034.662,0.000%20C28.662,0.000%2023.035,12.002%2018.660,12.002%20C14.285,12.002%208.594,0.000%202.658,0.000%20Z%22/%3E%3C/svg%3E") no-repeat;
+  height: 6px;
+  width: 18px;
+  margin-bottom: 5px;
+}
+
+.poemkit-tooltip [role~="tooltip"][data-microtip-position|="top"] ~ div {
+  margin-bottom: 6px;
+}
+
+.poemkit-tooltip [role~="tooltip"][data-microtip-position|="top"]::before {
+  transform: translate3d(-50%, 0, 0);
+  bottom: 100%;
+  left: 50%;
+}
+
+.poemkit-tooltip [role~="tooltip"][data-microtip-position|="top"].is-active::before {
+  transform: translate3d(-50%, -5px, 0);
+}
+
+.poemkit-tooltip [role~="tooltip"][data-microtip-position|="top"] ~ div {
+  transform: translate3d(-50%, 0, 0);
+  bottom: 100%;
+  left: 50%;
+}
+
+.poemkit-tooltip [role~="tooltip"][data-microtip-position="top"].is-active ~ div {
+  transform: translate3d(-50%, -5px, 0);
+}
+
+.poemkit-tooltip [role~="tooltip"][data-microtip-position="top-left"] ~ div {
+  transform: translate3d(calc(-100% + 16px), 0, 0);
+  bottom: 100%;
+}
+
+.poemkit-tooltip [role~="tooltip"][data-microtip-position="top-left"].is-active ~ div {
+  transform: translate3d(calc(-100% + 16px), -5px, 0);
+}
+
+.poemkit-tooltip [role~="tooltip"][data-microtip-position="top-right"] ~ div {
+  transform: translate3d(calc(0% + -16px), 0, 0);
+  bottom: 100%;
+}
+
+.poemkit-tooltip [role~="tooltip"][data-microtip-position="top-right"].is-active ~ div {
+  transform: translate3d(calc(0% + -16px), -5px, 0);
+}
+
+.poemkit-tooltip [role~="tooltip"][data-microtip-position|="bottom"]::before {
+  background: url("data:image/svg+xml;charset=utf-8,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20width%3D%2236px%22%20height%3D%2212px%22%3E%3Cpath%20fill%3D%22rgba%2817,%2017,%2017,%200.9%29%22%20transform%3D%22rotate%28180%2018%206%29%22%20d%3D%22M2.658,0.000%20C-13.615,0.000%2050.938,0.000%2034.662,0.000%20C28.662,0.000%2023.035,12.002%2018.660,12.002%20C14.285,12.002%208.594,0.000%202.658,0.000%20Z%22/%3E%3C/svg%3E") no-repeat;
+  height: 6px;
+  width: 18px;
+  margin-top: 5px;
+  margin-bottom: 0;
+}
+
+.poemkit-tooltip [role~="tooltip"][data-microtip-position|="bottom"] ~ div {
+  margin-top: 6px;
+}
+
+.poemkit-tooltip [role~="tooltip"][data-microtip-position|="bottom"]::before {
+  transform: translate3d(-50%, -10px, 0);
+  bottom: auto;
+  left: 50%;
+  top: 100%;
+}
+
+.poemkit-tooltip [role~="tooltip"][data-microtip-position|="bottom"].is-active::before {
+  transform: translate3d(-50%, 0, 0);
+}
+
+.poemkit-tooltip [role~="tooltip"][data-microtip-position|="bottom"] ~ div {
+  transform: translate3d(-50%, -10px, 0);
+  top: 100%;
+  left: 50%;
+}
+
+.poemkit-tooltip [role~="tooltip"][data-microtip-position="bottom"].is-active ~ div {
+  transform: translate3d(-50%, 0, 0);
+}
+
+.poemkit-tooltip [role~="tooltip"][data-microtip-position="bottom-left"] ~ div {
+  transform: translate3d(calc(-100% + 16px), -10px, 0);
+  top: 100%;
+}
+
+.poemkit-tooltip [role~="tooltip"][data-microtip-position="bottom-left"].is-active ~ div {
+  transform: translate3d(calc(-100% + 16px), 0, 0);
+}
+
+.poemkit-tooltip [role~="tooltip"][data-microtip-position="bottom-right"] ~ div {
+  transform: translate3d(calc(0% + -16px), -10px, 0);
+  top: 100%;
+}
+
+.poemkit-tooltip [role~="tooltip"][data-microtip-position="bottom-right"].is-active ~ div {
+  transform: translate3d(calc(0% + -16px), 0, 0);
+}
+
+.poemkit-tooltip [role~="tooltip"][data-microtip-position="left"]::before,
+.poemkit-tooltip [role~="tooltip"][data-microtip-position="left"] ~ div {
+  bottom: auto;
+  left: auto;
+  right: 100%;
+  top: 50%;
+  transform: translate3d(10px, -50%, 0);
+}
+
+.poemkit-tooltip [role~="tooltip"][data-microtip-position="left"]::before {
+  background: url("data:image/svg+xml;charset=utf-8,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20width%3D%2212px%22%20height%3D%2236px%22%3E%3Cpath%20fill%3D%22rgba%2817,%2017,%2017,%200.9%29%22%20transform%3D%22rotate%28-90%2018%2018%29%22%20d%3D%22M2.658,0.000%20C-13.615,0.000%2050.938,0.000%2034.662,0.000%20C28.662,0.000%2023.035,12.002%2018.660,12.002%20C14.285,12.002%208.594,0.000%202.658,0.000%20Z%22/%3E%3C/svg%3E") no-repeat;
+  height: 18px;
+  width: 6px;
+  margin-right: 5px;
+  margin-bottom: 0;
+}
+
+.poemkit-tooltip [role~="tooltip"][data-microtip-position="left"] ~ div {
+  margin-right: 10px;
+}
+
+.poemkit-tooltip [role~="tooltip"][data-microtip-position="left"].is-active::before,
+.poemkit-tooltip [role~="tooltip"][data-microtip-position="left"].is-active ~ div {
+  transform: translate3d(0, -50%, 0);
+}
+
+.poemkit-tooltip [role~="tooltip"][data-microtip-position="right"]::before,
+.poemkit-tooltip [role~="tooltip"][data-microtip-position="right"] ~ div {
+  bottom: auto;
+  left: 100%;
+  top: 50%;
+  transform: translate3d(-10px, -50%, 0);
+}
+
+.poemkit-tooltip [role~="tooltip"][data-microtip-position="right"]::before {
+  background: url("data:image/svg+xml;charset=utf-8,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20width%3D%2212px%22%20height%3D%2236px%22%3E%3Cpath%20fill%3D%22rgba%2817,%2017,%2017,%200.9%29%22%20transform%3D%22rotate%2890%206%206%29%22%20d%3D%22M2.658,0.000%20C-13.615,0.000%2050.938,0.000%2034.662,0.000%20C28.662,0.000%2023.035,12.002%2018.660,12.002%20C14.285,12.002%208.594,0.000%202.658,0.000%20Z%22/%3E%3C/svg%3E") no-repeat;
+  height: 18px;
+  width: 6px;
+  margin-bottom: 0;
+  margin-left: 5px;
+}
+
+.poemkit-tooltip [role~="tooltip"][data-microtip-position="right"] ~ div {
+  margin-left: 10px;
+}
+
+.poemkit-tooltip [role~="tooltip"][data-microtip-position="right"].is-active::before,
+.poemkit-tooltip [role~="tooltip"][data-microtip-position="right"].is-active ~ div {
+  transform: translate3d(0, -50%, 0);
+}
+
+.poemkit-tooltip [role~="tooltip"][data-microtip-size="auto"] ~ div {
+  white-space: nowrap;
+  width: auto;
+  max-width: 530px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.poemkit-tooltip [role~="tooltip"][data-microtip-size="small"] ~ div {
+  white-space: initial;
+  width: 80px;
+}
+
+.poemkit-tooltip [role~="tooltip"][data-microtip-size="medium"] ~ div {
+  white-space: initial;
+  width: 150px;
+}
+
+.poemkit-tooltip [role~="tooltip"][data-microtip-size="large"] ~ div {
+  white-space: initial;
+  width: 260px;
+}
+
+/* ======================================================
+   <!-- ToolTip -->
+/* ====================================================== */
+.rtl .poemkit-tooltip > div {
+  text-align: right;
 }
 
 @keyframes plyr-progress {

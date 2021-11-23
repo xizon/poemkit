@@ -5,10 +5,9 @@
  */
 import React, { Component } from 'react';
 
-/*-- Apply Third-party plugins (import location should be in front of "global scripts and styles") --*/
+/*-- Apply Third-party plugins (import location should be in front of "GLOBAL STYLES") --*/
 import '@poemkit/components/_plugins/_lib-bootstrap';
 import '@poemkit/components/_plugins/_lib-icons';
-import TweenMax, { TimelineMax } from '@poemkit/components/_plugins/_lib-gsap';
 
 
 /*-- Apply global scripts and styles --*/
@@ -19,9 +18,12 @@ import { __ } from '@poemkit/components/_utils/_all';
 
 /*-- Apply this component styles --*/
 import '@poemkit/components/Navigation/styles/_primary-navigation.scss';
+import '@poemkit/components/Navigation/styles/_primary-navigation-vertical.scss';
 import '@poemkit/components/Navigation/styles/_mobile-menu.scss';
 import '@poemkit/components/Navigation/styles/rtl/_primary-navigation.scss';
+import '@poemkit/components/Navigation/styles/rtl/_primary-navigation-vertical.scss';
 import '@poemkit/components/Navigation/styles/rtl/_mobile-menu.scss';
+
 
 
 //
@@ -42,6 +44,8 @@ type NavigationProps = {
 	 label?: string;
 	 /** Whether to enable mobile navigation */
 	 displayMobileNav?: boolean;
+    /** The navigation direction. Possible values are: `vertical` and `horizontal` */
+    direction?: string;
 	 
 };
 type NavigationState = false;
@@ -150,14 +154,17 @@ export default class Navigation extends Component<NavigationProps, NavigationSta
 			tools,
 			mobileLogo,
 			label,
-			displayMobileNav
+			displayMobileNav,
+			direction
 		} = this.props;
 
+		let navClassName = direction === 'vertical' ? 'poemkit-v-menu__container' : 'poemkit-menu__container';
+		if ( mobileEnabled ) navClassName = 'poemkit-menu__container';
 
 		return (
 			<>
 				<nav 
-				className={mobileEnabled ? 'poemkit-menu__container is-mobile' : 'poemkit-menu__container'} 
+				className={mobileEnabled ? `${navClassName} is-mobile` : `${navClassName}`} 
 				ref={(node) => {
 					if (node) {
 						if ( position === 'left' ) node.style.setProperty("float", "left", "important");
@@ -168,7 +175,7 @@ export default class Navigation extends Component<NavigationProps, NavigationSta
 					<div className="poemkit-menu__inner">
 
 						{mobileLogo ? <><span className="poemkit-brand--mobile"><img src={mobileLogo} alt={label as string} /></span></> : ''}
-						<MenuList menuListData={data} mobile={mobileEnabled} />
+						<MenuList menuListData={data} mobile={mobileEnabled} dir={direction} />
 						{tools ? <><div className="poemkit-menu__right-box">{tools}</div></> : ''}
 						
 					</div>

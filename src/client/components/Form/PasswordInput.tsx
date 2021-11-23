@@ -1,9 +1,8 @@
 import React, { Component } from 'react';
 
-/*-- Apply Third-party plugins (import location should be in front of "global scripts and styles") --*/
+/*-- Apply Third-party plugins (import location should be in front of "GLOBAL STYLES") --*/
 import '@poemkit/components/_plugins/_lib-bootstrap';
 import '@poemkit/components/_plugins/_lib-icons';
-import TweenMax, { TimelineMax } from '@poemkit/components/_plugins/_lib-gsap';
 
 /*-- Apply global scripts and styles --*/
 import '@poemkit/components/_utils/styles/_all.scss';
@@ -30,6 +29,7 @@ type PasswordInputProps = {
 	maxLength?: any;
 	disabled?: any;
 	required: any;
+	placeholder?: string;
 	iconLeft?: object;
 	iconRight?: object;
 	/** -- */
@@ -131,6 +131,7 @@ export default class PasswordInput extends Component<PasswordInputProps, Passwor
 			ui,
 			disabled,
 			required,
+			placeholder,
 			value,
 			label,
 			units,
@@ -163,6 +164,7 @@ export default class PasswordInput extends Component<PasswordInputProps, Passwor
 					  className="js-poemkit-float-label" 
 			          id={idRes}
 					  name={nameRes}
+					  placeholder={placeholder || ''}
 					  defaultValue={value || ''}
 					  maxLength={maxLength || null}
 			          onFocus={this.handleFocus}

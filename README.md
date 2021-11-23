@@ -18,7 +18,7 @@
 
 A free web kits with React for fast web design and development via SSR. Using react, redux, router, axios and express. This project was bootstrapped with nodejs library. Project supports automatic deployments from a number of repository hosting services via pm2. PoemKit delivers more than 50+ built-in UI components for building modern web applications.
 
-**PoemKit can work and deploy through commands, it still requires real code to be written behind them.** These kits serve as UI components and some logic modules that can be put together into a real website or application prototype that will still require programming functions to make them work in the real world.
+**PoemKit can work and deploy through commands, it still requires real code to be written behind them.** These kits serve as UI components and some logic modules that can be put together into a real website or application prototype that will still require programming functions to make them work in the real world. PoemKit meets fully customizable webpack requirements.
 
 ---
 

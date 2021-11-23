@@ -8,7 +8,7 @@
  * 1. Author Card
  * 2. Gallery Card (via Flex)
  * 3. Thumbnail Card (via Flex)
-
+ * 4. Card Grid
 */
 
 $card-radius: 8px;
@@ -259,7 +259,8 @@ $card-radius: 8px;
             border-radius: inherit;
             border: 1px solid transparent;
         }
-        
+
+
     }
     
     
@@ -665,3 +666,68 @@ $card-radius: 8px;
     
 }
 
+
+
+/*
+ ---------------------------
+ 4. Card Grid
+ ---------------------------
+ */
+
+.poemkit-card--gallery__grid__col-1 {
+    width: 8.333333333333%;
+}
+
+.poemkit-card--gallery__grid__col-2 {
+    width: 16.66666666666667%;
+}
+
+.poemkit-card--gallery__grid__col-3 {
+    width: 25%;
+}
+
+.poemkit-card--gallery__grid__col-4 {
+    width: 33.333333333333%;
+}
+
+.poemkit-card--gallery__grid__col-5 {
+    width: 41.666666666667%;
+}
+
+.poemkit-card--gallery__grid__col-6 {
+    width: 50%;
+}
+
+.poemkit-card--gallery__grid__col-7 {
+    width: 58.333333333333%;
+}
+
+.poemkit-card--gallery__grid__col-8 {
+    width: 66.666666666667%;
+}
+
+.poemkit-card--gallery__grid__col-9 {
+    width: 75%;
+}
+
+.poemkit-card--gallery__grid__col-10 {
+    width: 83.333333333333%;
+}
+
+.poemkit-card--gallery__grid__col-11 {
+    width: 91.666666666667%;
+}
+
+.poemkit-card--gallery__grid__col-12 {
+    width: 100%;
+}
+
+@media all and (max-width: 768px) {
+    .poemkit-card--gallery__preview--mobile-half {
+        width: 50%;
+    }
+
+    .poemkit-card--gallery__preview--mobile-stack {
+        width: 100%;
+    }
+}

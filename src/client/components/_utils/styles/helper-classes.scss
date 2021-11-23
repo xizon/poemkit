@@ -59,6 +59,148 @@
   overflow: hidden;
 }
 
+
+
+/*----*/
+.poemkit-display-none {
+    display: none !important;
+}
+
+.poemkit-display-inline {
+    display: inline !important;
+}
+
+.poemkit-display-inline-block {
+    display: inline-block !important;
+}
+
+.poemkit-display-block {
+    display: block !important;
+}
+
+.poemkit-display-flex {
+    display: flex !important;
+}
+
+.poemkit-display-inline-flex {
+    display: inline-flex !important;
+}
+
+/* The breakpoint is the same as bootstrap 4 */
+/*
+--breakpoint-xs:0;
+--breakpoint-sm:576px;
+--breakpoint-md:768px;
+--breakpoint-lg:992px;
+--breakpoint-xl:1200px;
+*/
+@media all and (max-width: 576px) {
+    .poemkit-display-none--sm  {
+        display: none !important;
+    }
+    
+    .poemkit-display-inline--sm  {
+        display: inline !important;
+    }
+    
+    .poemkit-display-inline-block--sm  {
+        display: inline-block !important;
+    }
+    
+    .poemkit-display-block--sm  {
+        display: block !important;
+    }
+    
+    .poemkit-display-flex--sm  {
+        display: flex !important;
+    }
+    
+    .poemkit-display-inline-flex--sm  {
+        display: inline-flex !important;
+    }
+}
+
+@media all and (max-width: 768px) {
+    .poemkit-display-none--md  {
+        display: none !important;
+    }
+    
+    .poemkit-display-inline--md  {
+        display: inline !important;
+    }
+    
+    .poemkit-display-inline-block--md  {
+        display: inline-block !important;
+    }
+    
+    .poemkit-display-block--md  {
+        display: block !important;
+    }
+    
+    .poemkit-display-flex--md  {
+        display: flex !important;
+    }
+    
+    .poemkit-display-inline-flex--md  {
+        display: inline-flex !important;
+    }
+}
+
+@media all and (max-width: 992px) {
+    .poemkit-display-none--lg  {
+        display: none !important;
+    }
+    
+    .poemkit-display-inline--lg  {
+        display: inline !important;
+    }
+    
+    .poemkit-display-inline-block--lg  {
+        display: inline-block !important;
+    }
+    
+    .poemkit-display-block--lg  {
+        display: block !important;
+    }
+    
+    .poemkit-display-flex--lg  {
+        display: flex !important;
+    }
+    
+    .poemkit-display-inline-flex--lg  {
+        display: inline-flex !important;
+    }
+}
+
+
+@media all and (max-width: 1200px) {
+    .poemkit-display-none--xl  {
+        display: none !important;
+    }
+    
+    .poemkit-display-inline--xl  {
+        display: inline !important;
+    }
+    
+    .poemkit-display-inline-block--xl  {
+        display: inline-block !important;
+    }
+    
+    .poemkit-display-block--xl  {
+        display: block !important;
+    }
+    
+    .poemkit-display-flex--xl  {
+        display: flex !important;
+    }
+    
+    .poemkit-display-inline-flex--xl  {
+        display: inline-flex !important;
+    }
+}
+
+
+
 /* 
  ---------------------------
  2. Elements after a floating element will flow around it. 

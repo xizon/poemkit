@@ -16,6 +16,7 @@ import BackToTopDemo from '@poemkit/pages/ComponentsDemo/BackToTopDemo.js';
 import CardDemo from '@poemkit/pages/ComponentsDemo/CardDemo.js';
 import CounterDemo from '@poemkit/pages/ComponentsDemo/CounterDemo.js';
 import CascadingDropDownListDemo from '@poemkit/pages/ComponentsDemo/CascadingDropDownListDemo.js';
+import ContentPlaceholderDemo from '@poemkit/pages/ComponentsDemo/ContentPlaceholderDemo.js';
 import DropdownMenuDemo from '@poemkit/pages/ComponentsDemo/DropdownMenuDemo.js';
 import FormDemo from '@poemkit/pages/ComponentsDemo/FormDemo.js';
 import GridDemo from '@poemkit/pages/ComponentsDemo/GridDemo.js';
@@ -23,7 +24,9 @@ import GalleryDemo from '@poemkit/pages/ComponentsDemo/GalleryDemo.js';
 import HybridContentSliderDemo from '@poemkit/pages/ComponentsDemo/HybridContentSliderDemo.js';
 import InfiniteScrollDemo from '@poemkit/pages/ComponentsDemo/InfiniteScrollDemo.js';
 import ImageShapesDemo from '@poemkit/pages/ComponentsDemo/ImageShapesDemo.js';
+import ImagePerspectiveHoverDemo from '@poemkit/pages/ComponentsDemo/ImagePerspectiveHoverDemo.js';
 import LightboxDemo from '@poemkit/pages/ComponentsDemo/LightboxDemo.js';
+import ListBulletedDemo from '@poemkit/pages/ComponentsDemo/ListBulletedDemo.js';
 import ModalDialogDemo from '@poemkit/pages/ComponentsDemo/ModalDialogDemo.js';
 import MultilevelDropdownMenuDemo from '@poemkit/pages/ComponentsDemo/MultilevelDropdownMenuDemo.js';
 import MousewheelInteractionDemo from '@poemkit/pages/ComponentsDemo/MousewheelInteractionDemo.js';
@@ -44,6 +47,7 @@ import TableDemo from '@poemkit/pages/ComponentsDemo/TableDemo.js';
 import TableGridDemo from '@poemkit/pages/ComponentsDemo/TableGridDemo.js';
 import TableSorterDemo from '@poemkit/pages/ComponentsDemo/TableSorterDemo.js';
 import TimelineDemo from '@poemkit/pages/ComponentsDemo/TimelineDemo.js';
+import TooltipDemo from '@poemkit/pages/ComponentsDemo/TooltipDemo.js';
 import VideoDemo from '@poemkit/pages/ComponentsDemo/VideoDemo.js';
 
 
@@ -145,7 +149,8 @@ function HookContent() {
 		<>
 
 		<Seo />
-		
+
+	
 		{/*<!-- Sidebar 
 		====================================================== -->*/}
 		<div className="poemkit-demo-sidebar-left">
@@ -171,6 +176,9 @@ function HookContent() {
 				<li className={urlChk('/counter') ? 'is-active' : ''}>
 					<NavLink data-route="true" onClick={(e) => refreshTitle(e)} to={`${url}/counter`} activeClassName="is-active">Counter</NavLink>
 				</li>
+				<li className={urlChk('/content-placeholder') ? 'is-active' : ''}>
+					<NavLink data-route="true" onClick={(e) => refreshTitle(e)} to={`${url}/content-placeholder`} activeClassName="is-active">Content Placeholder</NavLink>
+				</li>
 				<li className={urlChk('/hybrid-content-slider') ? 'is-active' : ''}>
 					<NavLink data-route="true" onClick={(e) => refreshTitle(e)} to={`${url}/hybrid-content-slider`} activeClassName="is-active">Hybrid Content Slider</NavLink>
 				</li>
@@ -179,6 +187,9 @@ function HookContent() {
 				</li>
 				<li className={urlChk('/lightbox') ? 'is-active' : ''}>
 					<NavLink data-route="true" onClick={(e) => refreshTitle(e)} to={`${url}/lightbox`} activeClassName="is-active">Lightbox</NavLink>
+				</li>
+				<li className={urlChk('/list-bulleted') ? 'is-active' : ''}>
+					<NavLink data-route="true" onClick={(e) => refreshTitle(e)} to={`${url}/list-bulleted`} activeClassName="is-active">List Bulleted</NavLink>
 				</li>
 				<li className={urlChk('/modal-dialog') ? 'is-active' : ''}>
 					<NavLink data-route="true" onClick={(e) => refreshTitle(e)} to={`${url}/modal-dialog`} activeClassName="is-active">Modal Dialog</NavLink>
@@ -222,6 +233,10 @@ function HookContent() {
 				<li className={urlChk('/timeline') ? 'is-active' : ''}>
 					<NavLink data-route="true" onClick={(e) => refreshTitle(e)} to={`${url}/timeline`} activeClassName="is-active">Timeline</NavLink>
 				</li>
+				<li className={urlChk('/tooltip') ? 'is-active' : ''}>
+					<NavLink data-route="true" onClick={(e) => refreshTitle(e)} to={`${url}/tooltip`} activeClassName="is-active">Tooltip</NavLink>
+				</li>
+				
 
 
 
@@ -275,6 +290,9 @@ function HookContent() {
 				<li className={urlChk('#app-goto__merge-input__section') ? 'is-active' : ''}>
 					<NavLink data-route="true" onClick={(e)=>refreshTitle(e)} to={`${url}/form#app-goto__merge-input__section`} activeClassName="is-active">Merge Input</NavLink>
 				</li>
+				<li className={urlChk('#app-goto__tag-input__section') ? 'is-active' : ''}>
+					<NavLink data-route="true" onClick={(e)=>refreshTitle(e)} to={`${url}/form#app-goto__tag-input__section`} activeClassName="is-active">Tag Input</NavLink>
+				</li>
 				<li className={urlChk('#app-goto__flex-layout__section') ? 'is-active' : ''}>
 					<NavLink data-route="true" onClick={(e)=>refreshTitle(e)} to={`${url}/form#app-goto__flex-layout__section`} activeClassName="is-active">Flex Layout</NavLink>
 				</li>
@@ -286,6 +304,9 @@ function HookContent() {
 				<li className={urlChk('/infinite-scroll') ? 'is-active' : ''}>
 					<NavLink data-route="true" onClick={(e)=>refreshTitle(e)} to={`${url}/infinite-scroll`} activeClassName="is-active">Infinite Scroll</NavLink>
 				</li>
+				<li className={urlChk('/image-perspective-hover') ? 'is-active' : ''}>
+					<NavLink data-route="true" onClick={(e) => refreshTitle(e)} to={`${url}/image-perspective-hover`} activeClassName="is-active">Image Perspective Hover</NavLink>
+				</li>	
 				<li className={urlChk('/mousewheel-interaction') ? 'is-active' : ''}>
 					<NavLink data-route="true" onClick={(e)=>refreshTitle(e)} to={`${url}/mousewheel-interaction`} activeClassName="is-active">Mousewheel Interaction</NavLink>
 				</li>
@@ -325,7 +346,6 @@ function HookContent() {
 				<li className={urlChk('/navigation') ? 'is-active' : ''}>
 					<NavLink data-route="true" onClick={(e)=>refreshTitle(e)} to={`${url}/navigation`} activeClassName="is-active">Navigation</NavLink>
 				</li>
-
 
 				{/*    /////////////////////////   */} 
 				<li className="poemkit-demo-nav-header">MEDIA</li>
@@ -369,6 +389,15 @@ function HookContent() {
 
 
 						</Route>
+
+
+
+
+
+
+
+
+
 							
 						<Route path={`${path}/accordion`}><AccordionDemo/><SeoChild title="Accordion"/></Route>
 						<Route path={`${path}/accordion-slider`}><AccordionSliderDemo/><SeoChild title="Accordion Slider"/></Route>
@@ -377,6 +406,7 @@ function HookContent() {
 						<Route path={`${path}/card`}><CardDemo/><SeoChild title="Card"/></Route>
 						<Route path={`${path}/counter`}><CounterDemo/><SeoChild title="Counter"/></Route>
 						<Route path={`${path}/cascading-dropDown-list`}><CascadingDropDownListDemo/><SeoChild title="Cascading DropDown List"/></Route>
+						<Route path={`${path}/content-placeholder`}><ContentPlaceholderDemo/><SeoChild title="Content Placeholder"/></Route>
 						<Route path={`${path}/dropdown-menu`}><DropdownMenuDemo/><SeoChild title="Dropdown Menu"/></Route>
 						<Route path={`${path}/form`}><FormDemo/><SeoChild title="Form"/></Route>
 						<Route path={`${path}/grid`}><GridDemo/><SeoChild title="Grid"/></Route>
@@ -384,7 +414,9 @@ function HookContent() {
 						<Route path={`${path}/hybrid-content-slider`}><HybridContentSliderDemo/><SeoChild title="Hybrid Content Slider"/></Route>
 						<Route path={`${path}/infinite-scroll`}><InfiniteScrollDemo/><SeoChild title="Infinite Scroll"/></Route>
 						<Route path={`${path}/image-shapes`}><ImageShapesDemo/><SeoChild title="Image Shapes"/></Route>
+						<Route path={`${path}/image-perspective-hover`}><ImagePerspectiveHoverDemo/><SeoChild title="Image Perspective Hover"/></Route>
 						<Route path={`${path}/lightbox`}><LightboxDemo/><SeoChild title="Lightbox"/></Route>
+						<Route path={`${path}/list-bulleted`}><ListBulletedDemo/><SeoChild title="List Bulleted"/></Route>
 						<Route path={`${path}/modal-dialog`}><ModalDialogDemo/><SeoChild title="Modal Dialog"/></Route>
 						<Route path={`${path}/multilevel-dropdown-menu`}><MultilevelDropdownMenuDemo/><SeoChild title="Multiple-Level Dropdown Menu"/></Route>
 						<Route path={`${path}/mousewheel-interaction`}><MousewheelInteractionDemo/><SeoChild title="Mousewheel Interaction"/></Route>
@@ -405,8 +437,8 @@ function HookContent() {
 						<Route path={`${path}/table-grid`}><TableGridDemo/><SeoChild title="Table Grid"/></Route>
 						<Route path={`${path}/table-sorter`}><TableSorterDemo/><SeoChild title="Table Sorter"/></Route>
 						<Route path={`${path}/timeline`}><TimelineDemo/><SeoChild title="Timeline"/></Route>
+						<Route path={`${path}/tooltip`}><TooltipDemo/><SeoChild title="Tooltip"/></Route>
 						<Route path={`${path}/video`}><VideoDemo/><SeoChild title="Video"/></Route>
-
 
 					</Switch>
 
@@ -570,7 +602,14 @@ class ComponentsDemo extends Component {
 				}
 
 
-				@media all and (min-width: 1441px) {
+				@media all and (max-width: 1600px) and (min-width: 1441px) {
+					.poemkit-demo-container {
+						max-width: 1100px;
+						left: 100px;
+					}
+				}
+
+				@media all and (min-width: 1601px) {
 					.poemkit-demo-container {
 						max-width: 1140px;
 						left: 60px;

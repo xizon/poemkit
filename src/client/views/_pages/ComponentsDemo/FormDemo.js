@@ -4,6 +4,7 @@ import {
 	Input,
 	PasswordInput,
 	MergeInput,
+	TagInput,
 	Textarea,
 	Select,
 	CustomSelect,
@@ -1369,6 +1370,61 @@ export default () => {
 
 
 
+			{/*<!-- Content 
+			====================================================== -->*/}
+			<section>
+				<div className="container">
+					<div className="row">
+						<div className="col-12">
+							<h3 className="app-header-title">Tag Input</h3>
+							<hr />
+
+
+						</div>
+					</div>
+					{/*<!-- .row end -->*/}
+
+				</div>
+				{/*<!-- .container end -->*/}
+
+			</section>
+
+
+
+
+
+		   {/*<!-- Content 
+			====================================================== -->*/}
+			<section className="poemkit-spacing--s">
+				<div className="container">
+
+						<div className="row">
+							<div className="col-12">
+
+								<TagInput ui="rounded" placeholder="Add tag..." name="tagInput-name-1" />
+								<hr />
+
+								<TagInput ui="rounded" placeholder="Add tag..." name="tagInput-name-2" maxTags={5} value="tag1,tag2,tag3"/>
+							
+
+								
+							</div>     
+
+
+						</div>
+						{/*<!-- .row end -->*/}  
+
+
+				</div>
+				{/*<!-- .container end -->*/}
+
+
+
+			</section>
+
+
+
+
 		   {/*<!-- Content 
 			====================================================== -->*/}
 			<section className="poemkit-spacing--s poemkit-spacing--no-top">
@@ -1664,6 +1720,12 @@ export default () => {
 											<td>Name is not deprecated when used with form fields.</td>
 										</tr>
 										<tr>
+											<td><code>placeholder</code></td>
+											<td>string</td>
+											<td>-</td>
+											<td>Specifies a short hint that describes.</td>
+										</tr>
+										<tr>
 											<td><code>maxLength</code></td>
 											<td>number</td>
 											<td>-</td>
@@ -1753,6 +1815,12 @@ export default () => {
 											<td>string</td>
 											<td>-</td>
 											<td>Name is not deprecated when used with form fields.</td>
+										</tr>
+										<tr>
+											<td><code>placeholder</code></td>
+											<td>string</td>
+											<td>-</td>
+											<td>Specifies a short hint that describes.</td>
 										</tr>
 										<tr>
 											<td><code>maxLength</code></td>
@@ -1846,6 +1914,12 @@ export default () => {
 											<td>Name is not deprecated when used with form fields.</td>
 										</tr>
 										<tr>
+											<td><code>placeholder</code></td>
+											<td>string</td>
+											<td>-</td>
+											<td>Specifies a short hint that describes.</td>
+										</tr>
+										<tr>
 											<td><code>maxLength</code></td>
 											<td>number</td>
 											<td>-</td>
@@ -1878,6 +1952,72 @@ export default () => {
 							<p className="mb-5">It accepts all props which this control support.</p>
 
 							{/*<!-- ++++++++ -->*/}
+
+
+							<h4>Tag Input</h4>
+							<div>
+								<pre>import {`{TagInput}`} from '@poemkit/components/Form/index.tsx';</pre>
+							</div>
+							<div className="table-responsive-md">
+								<table className="table table-bordered table-striped mb-5">
+									<thead>
+										<tr>
+											<th>Property</th>
+											<th>Type</th>
+											<th>Default</th>
+											<th>Description</th>
+										</tr>
+									</thead>
+									<tbody>
+										<tr>
+											<td><code>maxTags</code></td>
+											<td>number</td>
+											<td>10</td>
+											<td>Maximum number of tags that can be added.</td>
+										</tr>
+										<tr>
+											<td><code>ui</code></td>
+											<td>string</td>
+											<td>-</td>
+											<td>The overlay style of the control. Can be used at the same time, separated by spaces. The optional values are:<br /><strong>corners:</strong><br /><code>pill</code>, <code>rounded</code><br /><strong>size:</strong><br /><code>fullwidth</code></td>
+										</tr>
+										<tr>
+											<td><code>value</code></td>
+											<td>string</td>
+											<td>-</td>
+											<td>Set a default value for this control. It accepts multiple values, separated by commas. like this: <code className="text-wrap">{`tag1,tag2,tag3`}</code></td>
+										</tr>
+										<tr>
+											<td><code>name</code></td>
+											<td>string</td>
+											<td>-</td>
+											<td>Name is not deprecated when used with form fields.</td>
+										</tr>
+										<tr>
+											<td><code>placeholder</code></td>
+											<td>string</td>
+											<td>-</td>
+											<td>Specifies a short hint that describes.</td>
+										</tr>
+										<tr>
+											<td><code>disabled</code></td>
+											<td>boolean</td>
+											<td>false</td>
+											<td>Whether the input is disabled</td>
+										</tr>
+										<tr>
+											<td><code>required</code></td>
+											<td>boolean</td>
+											<td>false</td>
+											<td>When present, it specifies that a field must be filled out before submitting the form.</td>
+										</tr>
+									</tbody>
+								</table>
+
+							</div>
+
+							{/*<!-- ++++++++ -->*/}
+
 
 
 							<h4>Textarea</h4>
@@ -1930,6 +2070,12 @@ export default () => {
 											<td>string</td>
 											<td>-</td>
 											<td>Name is not deprecated when used with form fields.</td>
+										</tr>
+										<tr>
+											<td><code>placeholder</code></td>
+											<td>string</td>
+											<td>-</td>
+											<td>Specifies a short hint that describes.</td>
 										</tr>
 										<tr>
 											<td><code>maxLength</code></td>
@@ -2284,7 +2430,7 @@ export default () => {
 											<td><code>value</code></td>
 											<td>string</td>
 											<td>-</td>
-											<td>Set a default value for this control</td>
+											<td>Set a default value for this control.  It accepts multiple values, separated by commas. like this: <code className="text-wrap">{`value-1,value-2`}</code></td>
 										</tr>
 										<tr>
 											<td><code>name</code></td>

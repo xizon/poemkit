@@ -1,12 +1,8 @@
-/* ====================================================== 
-   <!-- Basic Layout Styles -->                                      
+/* ======================================================
+   <!-- Grid -->
 /* ====================================================== */
+@import '@poemkit/components/_utils/styles/_variable-and-mixin.scss';
 
-/* 
- ---------------------------
- 4. PoemKit Grid
- ---------------------------
- */ 
 
 .rtl [class*='poemkit-core-grid__col-'] {
 	float: right;
@@ -38,7 +34,6 @@
 
 
 @include poemkitCoreGridGenerateRTL( '.poemkit-core-grid', 15px );
-
 
 
 

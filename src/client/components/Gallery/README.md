@@ -39,12 +39,12 @@ export default () => {
     <>
 
       <Gallery fixedColumns={3} data={[
-                      {"title":"Image Title", "url":`/assets/images/demo-1.jpg`},
-                      {"title":"Image Title", "url":`/assets/images/demo-2.jpg`},
-                      {"title":"Image Title", "url":`/assets/images/demo-3.jpg`},
-                      {"title":"Image Title", "url":`/assets/images/demo-4.jpg`},
-                      {"title":"Image Title", "url":`/assets/images/demo-5.jpg`},
-                      {"url":`/assets/images/demo-6.jpg`}
+                      {"title":"Image Title", "url":`/path/demo.png`},
+                      {"title":"Image Title", "url":`/path/demo.png`},
+                      {"title":"Image Title", "url":`/path/demo.png`},
+                      {"title":"Image Title", "url":`/path/demo.png`},
+                      {"title":"Image Title", "url":`/path/demo.png`},
+                      {"url":`/path/demo.png`}
                       ]} />
 
     </>

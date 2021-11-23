@@ -6,6 +6,8 @@ import ScrollReveal from '@poemkit/components/ScrollReveal/index.tsx';
 //Create or Remove Sidebar Menu
 import { SidebarMenu } from '@poemkit/pages/ComponentsDemo/_SidebarMenu.js';
 
+//get project config
+import { rootDirectory } from '@poemkit/config/websiteConfig.js';
 
 export default () => {
 
@@ -136,6 +138,28 @@ export default () => {
 			</div>
 		</ScrollReveal>
 
+
+		<div className="poemkit-spacing--s">
+			<ScrollReveal className="d-inline-block poemkit-sr-image-anim poemkit-sr-image-anim--x" config='{"viewport":"50%","from":"","to":".is-active","infinite":false}'>
+				<img src={`${rootDirectory}/assets/images/demo/test-img-big-1.jpg`} style={{maxWidth:"500px"}} alt="" />
+			</ScrollReveal>
+		</div>
+
+
+
+		<div className="poemkit-spacing--s">
+			<ScrollReveal className="d-inline-block poemkit-sr-image-anim poemkit-sr-image-anim--y" config='{"viewport":"50%","from":"","to":".is-active","infinite":false}'>
+				<img src={`${rootDirectory}/assets/images/demo/test-img-big-2.jpg`} style={{maxWidth:"500px"}} alt="" />
+			</ScrollReveal>
+		</div>
+
+
+
+		<div className="poemkit-spacing--s">
+			<ScrollReveal className="d-inline-block poemkit-sr-image-anim poemkit-sr-image-anim--z" config='{"viewport":"50%","from":"","to":".is-active","infinite":false}'>
+				<img src={`${rootDirectory}/assets/images/demo/test-img-big-3.jpg`} style={{maxWidth:"500px"}} alt="" />
+			</ScrollReveal>
+		</div>
 
 
 		{/*<!-- API 

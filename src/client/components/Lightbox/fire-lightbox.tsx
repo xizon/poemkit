@@ -1,8 +1,10 @@
 import { __ } from '@poemkit/components/_utils/_all';
 
- /*-- Apply Third-party plugins --*/
-import { disableBodyScroll } from '@poemkit/components/_plugins/_lib-scrolllock';
+/*-- Apply Third-party animation plugins --*/
 import TweenMax from '@poemkit/components/_plugins/_lib-gsap';
+
+//Disables body scroll locking
+import { disableBodyScroll } from '@poemkit/components/_plugins/_lib-scrolllock';
 
 //
 import axios from 'axios';

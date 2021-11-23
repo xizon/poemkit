@@ -4,7 +4,7 @@
 
 ## Version
 
-=> 0.0.1 (October 10, 2021)
+=> 0.0.2 (November 22, 2021)
 
 
 ## API
@@ -111,6 +111,30 @@ export default () => {
 
 			</div>
 		</ScrollReveal>
+
+
+
+		<div className="poemkit-spacing--s">
+			<ScrollReveal className="d-inline-block poemkit-sr-image-anim poemkit-sr-image-anim--x" config='{"viewport":"50%","from":"","to":".is-active","infinite":false}'>
+				<img src={`/path/demo.png`} style={{maxWidth:"500px"}} alt="" />
+			</ScrollReveal>
+		</div>
+
+
+
+		<div className="poemkit-spacing--s">
+			<ScrollReveal className="d-inline-block poemkit-sr-image-anim poemkit-sr-image-anim--y" config='{"viewport":"50%","from":"","to":".is-active","infinite":false}'>
+				<img src={`/path/demo.png`} style={{maxWidth:"500px"}} alt="" />
+			</ScrollReveal>
+		</div>
+
+
+
+		<div className="poemkit-spacing--s">
+			<ScrollReveal className="d-inline-block poemkit-sr-image-anim poemkit-sr-image-anim--z" config='{"viewport":"50%","from":"","to":".is-active","infinite":false}'>
+				<img src={`/path/demo.png`} style={{maxWidth:"500px"}} alt="" />
+			</ScrollReveal>
+		</div>
 	  
 	  
     </>

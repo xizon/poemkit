@@ -29,7 +29,7 @@ export default class TableGridRow extends Component<TableGridRowProps, TableGrid
 		
 		const _fields = this.props.data!.data!;
 		const _selected = this.props.data!.selected!;
-		const rowClasses = _selected ? 'poemkit-table-grid__row is-drop-target' : 'poemkit-table-grid__row';
+		const rowClassName = _selected ? 'poemkit-table-grid__row is-drop-target' : 'poemkit-table-grid__row';
 
 		
 		const fields = _fields.map((el, i) => {
@@ -38,7 +38,7 @@ export default class TableGridRow extends Component<TableGridRowProps, TableGrid
 												
 		return (
 		  <>
-			<div className={rowClasses} role="row" id={this.uniqueID}>
+			<div className={rowClassName} role="row" id={this.uniqueID}>
 				{fields}
 			</div>
 	

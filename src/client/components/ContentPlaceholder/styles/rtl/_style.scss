@@ -1,0 +1,27 @@
+/* ======================================================
+   <!-- Content Placeholder -->
+/* ====================================================== */
+@import '@poemkit/components/_utils/styles/_variable-and-mixin.scss';
+
+
+.rtl .poemkit-content-placeholder {
+
+	.poemkit-content-placeholder__thumbSlot {
+		float: right;
+
+		~ .poemkit-content-placeholder__textSlot {
+			margin-left: auto;
+			margin-right: 20px;
+			float: right;
+		}
+
+	}
+
+
+	.uix-content-placeholder__view--aspectRatio {
+		.poemkit-content-placeholder__thumbSlot {
+			float: none;
+		}
+	}
+
+}

@@ -20,6 +20,7 @@ import Navigation from '@poemkit/components/Navigation/index.tsx';
 | `mobileLogo` | string | - | Specify a LOGO address for mobile navigation. |
 | `label` | string | - | Specify a navigation label.  |
 | `displayMobileNav` | boolean | false | Whether to enable mobile navigation.  |
+| `direction` | null \| `vertical` \| `horizontal` | horizontal | The navigation direction.  |
 
 
 

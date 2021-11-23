@@ -1,0 +1,138 @@
+/* ======================================================
+   <!-- Vertical Menu (RTL) -->
+/* ====================================================== */
+@import '@poemkit/components/_utils/styles/_variable-and-mixin.scss';
+
+/*
+ * 1. Primary Menu
+ * 2. Sub Menu (Using WordPress default class name )
+ * 3. Multi-level Sub Menu Position
+ * 4. Mega/Dropdown Menu
+ * 5. Dropdown Arrow
+*/
+
+$vertical-menu-w            : 250px;
+$vertical-menu-sub-w        : 200px;
+$vertical-menu-font-size    : 0.75rem;
+$vertical-menu-top          : 0;
+
+.rtl .poemkit-v-menu__container:not(.is-mobile) {
+	left: auto;
+	right: 0;
+	box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1);
+
+	/*
+	 ---------------------------
+	 1. Primary Menu
+	 ---------------------------
+	 */
+	ul.poemkit-menu {
+
+		li {
+			text-align: left;
+
+
+			.poemkit-bubble {
+				right: auto;
+				left: 1rem;
+			}
+
+		}
+
+
+		/*
+		 ---------------------------
+		 2. Sub Menu (Using WordPress default class name )
+		 ---------------------------
+		 */
+		ul.sub-menu {
+			left: auto;
+			right: #{$vertical-menu-w + $vertical-menu-sub-w*0};
+
+
+			/*
+			 ---------------------------
+			 3. Multi-level Sub Menu Position
+			 ---------------------------
+			 */
+			 @for $i from 1 through 10 {
+				$sel: if($i == 1, "ul", selector-nest($sel, "ul")) !global;
+			
+				#{$sel} {
+					right: #{$vertical-menu-sub-w * $i};
+				}
+			}
+
+		}
+
+		/*
+		 ---------------------------
+		 4. Mega/Dropdown Menu
+		 ---------------------------
+		 */
+		/* Multi-column */
+		li.multi-column {
+
+			span.multi-column-title {
+				text-align: right;
+
+			}
+
+			> ul {
+
+
+
+				ul {
+
+					li {
+						text-align: right;
+					}
+				}
+
+				li {
+
+					ul {
+						border-right: none;
+
+					}
+
+
+				}
+
+
+				> li {
+
+					&:first-child {
+						border-right: none;
+					}
+
+					ul {
+						left: auto;
+						right: 0;
+					}
+
+				}
+
+
+			}
+
+
+		}
+
+
+	}
+
+
+
+	/*
+	 ---------------------------
+	 4. Dropdown Arrow
+	 ---------------------------
+	 */
+	.poemkit-menu__arrow {
+		right: auto;
+		left: .5rem;
+	}
+
+
+}

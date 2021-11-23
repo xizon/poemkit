@@ -1,0 +1,14 @@
+/* ======================================================
+   <!-- ToolTip -->
+/* ====================================================== */
+@import '@poemkit/components/_utils/styles/_variable-and-mixin.scss';
+
+
+.rtl .poemkit-tooltip {
+
+	> div {
+		text-align: right;
+
+	}
+
+}

@@ -1,6 +1,6 @@
 import { __ } from '@poemkit/components/_utils/_all';
 
-/*-- Apply Third-party plugins --*/
+//Enables body scroll locking
 import { enableBodyScroll } from '@poemkit/components/_plugins/_lib-scrolllock';
 
 

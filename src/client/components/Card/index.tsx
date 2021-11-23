@@ -5,10 +5,9 @@
  */
 import React, { Component } from 'react';
 
-/*-- Apply Third-party plugins (import location should be in front of "global scripts and styles") --*/
+/*-- Apply Third-party plugins (import location should be in front of "GLOBAL STYLES") --*/
 import '@poemkit/components/_plugins/_lib-bootstrap';
 import '@poemkit/components/_plugins/_lib-icons';
-import TweenMax, { TimelineMax } from '@poemkit/components/_plugins/_lib-gsap';
 
 /*-- Apply global scripts and styles --*/
 import '@poemkit/components/_utils/styles/_all.scss';
@@ -231,7 +230,7 @@ export default class Card extends Component<CardProps, CardState> {
 					<>
 
 						<div id={cid} className="poemkit-card--gallery" role="figure">
-							<div className="poemkit-card--gallery__preview poemkit-core-grid__col-12 poemkit-core-grid__mobile-stack">
+							<div className="poemkit-card--gallery__preview">
 								{/*<!-- image begin -->*/}
 								<img src={_bgConfig.src} alt="" />
 								{/*<!-- image end -->*/}
@@ -264,7 +263,7 @@ export default class Card extends Component<CardProps, CardState> {
 
 
 						<div id={cid} className="poemkit-card--gallery poemkit-card--gallery--horizontal" role="figure">
-							<div className={`poemkit-card--gallery__preview poemkit-core-grid__col-${_contentRatio} poemkit-core-grid__mobile-stack`} style={_bgStyles}>
+							<div className={`poemkit-card--gallery__preview poemkit-card--gallery__grid__col-${_contentRatio} poemkit-card--gallery__preview--mobile-stack`} style={_bgStyles}>
 								{/*<!-- image begin -->*/}
 								<img src={_bgConfig.src} alt="" />
 								{/*<!-- image end -->*/}
@@ -290,13 +289,13 @@ export default class Card extends Component<CardProps, CardState> {
 					<>
 
 						<div id={cid} className="poemkit-card--gallery poemkit-card--gallery--overlay" role="figure">
-							<div className="poemkit-card--gallery__preview poemkit-core-grid__col-12 poemkit-core-grid__mobile-stack">
+							<div className="poemkit-card--gallery__preview">
 								{/*<!-- image begin -->*/}
 								<img src={_bgConfig.src} alt="" />
 								{/*<!-- image end -->*/}
 
 							</div>
-							<div className={`poemkit-card--gallery__body ${verticalCenter ? 'poemkit-card--gallery__body--verticalCenter' : ''} poemkit-core-grid__col-${_contentRatio} poemkit-core-grid__mobile-stack`}>
+							<div className={`poemkit-card--gallery__body ${verticalCenter ? 'poemkit-card--gallery__body--verticalCenter' : ''} poemkit-card--gallery__grid__col-${_contentRatio} poemkit-card--gallery__preview--mobile-stack`}>
 								<div className="poemkit-card--gallery__header">
 									<div className="poemkit-card--gallery__header__child">
 										{/*<!-- content begin -->*/}
@@ -467,7 +466,6 @@ export default class Card extends Component<CardProps, CardState> {
 		return (
 			<>
 				{res}
-
 			</>
 		)
 	}

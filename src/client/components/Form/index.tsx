@@ -19,5 +19,5 @@ export { default as File } from '@poemkit/components/Form/File';
 export { default as FileField } from '@poemkit/components/Form/FileField';
 export { default as MergeInput } from '@poemkit/components/Form/MergeInput';
 export { default as PasswordInput } from '@poemkit/components/Form/PasswordInput';
-
+export { default as TagInput } from '@poemkit/components/Form/TagInput';
 

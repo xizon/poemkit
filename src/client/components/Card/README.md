@@ -61,7 +61,7 @@ export default () => {
       <p>The following is a gallery style card using flex.</p>
       {/* ================================================================== */} 
 
-      <Card type="gallery-v-img" avatar={null} bgConfig={{ "src": `/assets/images/demo/spiral-galaxy-1920x1080.jpg` }} title="Name" titleEllipsis={false} subTitle="0/15/18" btnIcon={<i className="fa fa-ellipsis-h" aria-hidden="true"></i>} btnClickEvent={(e) => { e.preventDefault(); alert('click event'); }} overlayArea={<>
+      <Card type="gallery-v-img" avatar={null} bgConfig={{ "src": `/path/demo.png` }} title="Name" titleEllipsis={false} subTitle="0/15/18" btnIcon={<i className="fa fa-ellipsis-h" aria-hidden="true"></i>} btnClickEvent={(e) => { e.preventDefault(); alert('click event'); }} overlayArea={<>
         <div className="poemkit-card--gallery__status">
           <div className="poemkit-card--gallery__status__item">
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 469.33 469.33" fill="currentColor">
@@ -90,11 +90,11 @@ export default () => {
 
 
 
-      <Card type="gallery-v-img" avatar={null} bgConfig={{ "src": `/assets/images/demo/spiral-galaxy-1920x1080.jpg` }} title="Long title Long title Long title Long title Long title Long title Long title Long title Long title Long title Long title Long title Long title Long title" titleEllipsis={false} subTitle="0/15/18" btnIcon={<i className="fa fa-ellipsis-h" aria-hidden="true"></i>} />
+      <Card type="gallery-v-img" avatar={null} bgConfig={{ "src": `/path/demo.png` }} title="Long title Long title Long title Long title Long title Long title Long title Long title Long title Long title Long title Long title Long title Long title" titleEllipsis={false} subTitle="0/15/18" btnIcon={<i className="fa fa-ellipsis-h" aria-hidden="true"></i>} />
 
 
 
-      <Card type="gallery-v-img" avatar={null} bgConfig={{ "src": `/assets/images/demo/spiral-galaxy-1920x1080.jpg` }} title="Long title Long title Long title Long title Long title Long title Long title Long title Long title Long title Long title Long title Long title Long title" titleEllipsis={true} subTitle="0/15/18" btnIcon={<i className="fa fa-ellipsis-h" aria-hidden="true"></i>} />
+      <Card type="gallery-v-img" avatar={null} bgConfig={{ "src": `/path/demo.png` }} title="Long title Long title Long title Long title Long title Long title Long title Long title Long title Long title Long title Long title Long title Long title" titleEllipsis={true} subTitle="0/15/18" btnIcon={<i className="fa fa-ellipsis-h" aria-hidden="true"></i>} />
 
 
 
@@ -188,7 +188,7 @@ export default () => {
       {/*    /////////////////////////   */} 
 
 
-      <Card type="gallery-h-img" contentRatio={8} bgConfig={{ "src": `/assets/images/demo/spiral-galaxy-1920x1080.jpg`, "position": "center center", "size": "cover", "repeat": "no-repeat", "fill": false }}>
+      <Card type="gallery-h-img" contentRatio={8} bgConfig={{ "src": `/path/demo.png`, "position": "center center", "size": "cover", "repeat": "no-repeat", "fill": false }}>
         <span className="d-block m-4">
           <small className="poemkit-typo--color-sub">Categories</small>
           <h3>Full-stack Designer</h3>
@@ -197,7 +197,7 @@ export default () => {
       </Card>
 
 
-      <Card type="gallery-h-img" contentRatio={4} bgConfig={{ "src": `/assets/images/demo/spiral-galaxy-1920x600.jpg`, "position": "center center", "size": "cover", "repeat": "no-repeat", "fill": false }}>
+      <Card type="gallery-h-img" contentRatio={4} bgConfig={{ "src": `/path/demo.png`, "position": "center center", "size": "cover", "repeat": "no-repeat", "fill": false }}>
         <span className="d-block m-4">
           <small className="poemkit-typo--color-sub">Categories</small>
           <h3>Full-stack Designer</h3>
@@ -210,7 +210,7 @@ export default () => {
       {/*    /////////////////////////   */} 
 
 
-      <Card type="gallery-v-custom" bgConfig={{ "src": `/assets/images/demo/spiral-galaxy-1920x600.jpg`, "position": "center center", "size": "cover", "repeat": "no-repeat", "fill": false }}>
+      <Card type="gallery-v-custom" bgConfig={{ "src": `/path/demo.png`, "position": "center center", "size": "cover", "repeat": "no-repeat", "fill": false }}>
         <span className="d-block m-4">
           <small className="poemkit-typo--color-sub">Categories</small>
           <h3>Full-stack Designer</h3>
@@ -221,7 +221,7 @@ export default () => {
 
 
 
-      <Card type="gallery-v-custom" bgConfig={{ "src": `/assets/images/demo/spiral-galaxy-1920x309.jpg`, "position": "center center", "size": "cover", "repeat": "no-repeat", "fill": false }} overlayArea={<>
+      <Card type="gallery-v-custom" bgConfig={{ "src": `/path/demo.png`, "position": "center center", "size": "cover", "repeat": "no-repeat", "fill": false }} overlayArea={<>
         <div className="poemkit-card--gallery__status">
           <div className="poemkit-card--gallery__status__item">
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 469.33 469.33" fill="currentColor">
@@ -253,7 +253,7 @@ export default () => {
 
 
 
-      <Card type="gallery-v-custom" bgConfig={{ "src": `/assets/images/demo/spiral-galaxy-1920x309.jpg`, "position": "center center", "size": "cover", "repeat": "no-repeat", "fill": false }}>
+      <Card type="gallery-v-custom" bgConfig={{ "src": `/path/demo.png`, "position": "center center", "size": "cover", "repeat": "no-repeat", "fill": false }}>
         {/*<!-- menu group begin -->*/}
         <div className="poemkit-card--gallery__menu">
           <div className="poemkit-card--gallery__menu__avatar">
@@ -284,7 +284,7 @@ export default () => {
 
 
 
-      <Card type="gallery-full-info" verticalCenter={false} contentRatio={12} bgConfig={{ "src": `/assets/images/demo/spiral-galaxy-1920x1080.jpg`, "position": "center center", "size": "cover", "repeat": "no-repeat", "fill": false }}>
+      <Card type="gallery-full-info" verticalCenter={false} contentRatio={12} bgConfig={{ "src": `/path/demo.png`, "position": "center center", "size": "cover", "repeat": "no-repeat", "fill": false }}>
         <span className="d-block m-4 poemkit-typo--color-white">
           <small className="poemkit-typo--color-sub">Categories</small>
           <h4 className="poemkit-spacing--no">Full-stack Designer</h4>
@@ -294,7 +294,7 @@ export default () => {
 
 
 
-      <Card type="gallery-full-info" verticalCenter={false} contentRatio={5} bgConfig={{ "src": `/assets/images/demo/spiral-galaxy-1920x1080.jpg`, "position": "center center", "size": "cover", "repeat": "no-repeat", "fill": false }}>
+      <Card type="gallery-full-info" verticalCenter={false} contentRatio={5} bgConfig={{ "src": `/path/demo.png`, "position": "center center", "size": "cover", "repeat": "no-repeat", "fill": false }}>
         <span className="d-block m-4 poemkit-typo--color-white">
           <small className="poemkit-typo--color-sub">Categories</small>
           <h4 className="poemkit-spacing--no">Content ratio is 5:7 (12 grid system)</h4>
@@ -304,7 +304,7 @@ export default () => {
 
       
 
-      <Card type="gallery-full-info" verticalCenter={true} contentRatio={6} bgConfig={{ "src": `/assets/images/demo/spiral-galaxy-1920x1080.jpg`, "position": "center center", "size": "cover", "repeat": "no-repeat", "fill": false }}>
+      <Card type="gallery-full-info" verticalCenter={true} contentRatio={6} bgConfig={{ "src": `/path/demo.png`, "position": "center center", "size": "cover", "repeat": "no-repeat", "fill": false }}>
         <span className="d-block m-4 poemkit-typo--color-white">
           <h4 className="poemkit-spacing--no">Vertically center content ratio is 1:1 (12 grid system)</h4>
           <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit.</p>

@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import { __ } from '@poemkit/components/_utils/_all';
-import TweenMax, { TimelineMax } from '@poemkit/components/_plugins/_lib-gsap';
 
+/*-- Apply Third-party animation plugins --*/
+import TweenMax from '@poemkit/components/_plugins/_lib-gsap';
 
 /* Recursively nested components to traverse nodes
 -------------------------------------------------*/		

@@ -119,7 +119,7 @@ export default () => {
 			<div className="container">
 				<div className="row">
 					<div className="col-12">
-						<h3 className="app-header-title">Demos</h3>
+						<h3 className="app-header-title">Horizontal</h3>
 						<p>Support mobile device access (If the displayMobileNav property is <code>true</code>).</p>
 						<hr />
 
@@ -158,6 +158,51 @@ export default () => {
 		</section>   
 
 
+
+
+		{/*<!-- Content   
+		====================================================== -->*/}
+		<section className="poemkit-spacing--s poemkit-spacing--no-bottom">
+			<div className="container">
+				<div className="row">
+					<div className="col-12">
+						<h3 className="app-header-title">Vertical</h3>
+						<p>Support mobile device access (If the displayMobileNav property is <code>true</code>).</p>
+						<hr />
+
+					</div>
+				</div>
+				{/*<!-- .row end -->*/}
+
+			</div>
+			{/*<!-- .container end -->*/}
+
+		</section>
+
+
+
+
+
+	   {/*<!-- Content  
+		====================================================== -->*/}
+		<section className="poemkit-spacing--s">
+			<div className="container">
+					<div className="row">
+						<div className="col-12">
+
+							<div style={{position:"relative",zIndex:1,border:"1px solid #ddd",borderRadius:"8px",background:"#f9f9f9",display:"flex",flex:"0 0 100%"}}>
+								<Navigation data={menuListData} position="left" direction="vertical"/>
+							</div>
+							
+						</div>
+					</div>
+					{/*<!-- .row end -->*/}
+
+
+			</div>
+			{/*<!-- .container end -->*/}
+
+		</section>   
 
  
 		{/*<!-- API 
@@ -224,7 +269,12 @@ export default () => {
 											<td>false</td>
 											<td>Whether to enable mobile navigation.</td>
 										</tr>
-
+										<tr>
+											<td><code>direction</code></td>
+											<td>null | <code>vertical</code> | <code>horizontal</code></td>
+											<td>horizontal</td>
+											<td>The navigation direction.</td>
+										</tr>									
 									</tbody>
 								</table>
 
