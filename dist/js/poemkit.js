@@ -4,9 +4,9 @@
  * Generated with "npm run build"
  *
  * ## Project Name        :  PoemKit
- * ## Project Description :  A free web kits with React for fast web design and development via SSR.
+ * ## Project Description :  React Toolkit for Building a Full Website.
  * ## Project URL         :  https://uiux.cc
- * ## Version             :  0.1.7
+ * ## Version             :  0.1.8
  * ## Based on            :  PoemKit (https://github.com/xizon/poemkit#readme)
  * ## Last Update         :  November 25, 2021
  * ## Created by          :  UIUX Lab (https://uiux.cc) (uiuxlab@gmail.com)
@@ -45337,7 +45337,7 @@ function SeoVars() {
     "imgURL": '',
     "bodyClasses": 'home',
     "pageTitle": pageTitle,
-    "desc": 'A free web kits with React for fast web design and development via SSR.'
+    "desc": 'React Toolkit for Building a Full Website'
   };
 }
 
@@ -45402,7 +45402,7 @@ function Seo() {
   }, /*#__PURE__*/react.createElement("img", {
     src: "".concat(websiteConfig.rootDirectory, "/assets/images/logo-colorful.png"),
     alt: "PoemKit"
-  }), /*#__PURE__*/react.createElement("p", null, "A free web kits with React for fast web design and development via SSR. Using react, redux, router, axios and express. This project was bootstrapped with nodejs library. Project supports automatic deployments from a number of repository hosting services via pm2. PoemKit delivers more than ", /*#__PURE__*/react.createElement("strong", {
+  }), /*#__PURE__*/react.createElement("p", null, "A free web kit with React for fast web design and development via SSR. Using react, redux, router, axios and express. This project was bootstrapped with nodejs library. Project supports automatic deployments from a number of repository hosting services via pm2. PoemKit delivers more than ", /*#__PURE__*/react.createElement("strong", {
     className: "poemkit-typo--color-highlight"
   }, "50+"), " built-in UI components for building modern web applications."), /*#__PURE__*/react.createElement("p", null, /*#__PURE__*/react.createElement(NavLink, {
     "data-route": "true",
