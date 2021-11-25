@@ -1,5 +1,9 @@
 # Changelog
 
+#### = 0.1.7 (November 25, 2021) =
+
+* Tweak: Built-in component style optimization.
+
 
 #### = 0.1.6 (November 23, 2021) =
 

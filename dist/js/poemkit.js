@@ -6,9 +6,9 @@
  * ## Project Name        :  PoemKit
  * ## Project Description :  A free web kits with React for fast web design and development via SSR.
  * ## Project URL         :  https://uiux.cc
- * ## Version             :  0.1.6
+ * ## Version             :  0.1.7
  * ## Based on            :  PoemKit (https://github.com/xizon/poemkit#readme)
- * ## Last Update         :  November 23, 2021
+ * ## Last Update         :  November 25, 2021
  * ## Created by          :  UIUX Lab (https://uiux.cc) (uiuxlab@gmail.com)
  * ## Released under the MIT license.
  *

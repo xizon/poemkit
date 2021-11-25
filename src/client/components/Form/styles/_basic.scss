@@ -1525,8 +1525,8 @@ $controls-merge-button-width: 20%;
 		}
 
 		&:hover {
-			border-color: $highlight-color1;
-			@include bg-gradient( 'to bottom' );
+			border-color: #d7d7d7;
+			background: #EEEEEE;
 		}
 
 		&.is-active {
