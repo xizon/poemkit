@@ -1,0 +1,11 @@
+/* ======================================================
+   <!-- Rating -->
+/* ====================================================== */
+@import '@poemkit/components/_utils/styles/_variable-and-mixin.scss';
+
+.poemkit-rating-star svg {
+    width: 15px;
+    cursor: pointer;
+    margin-right: 3px;
+}
+  

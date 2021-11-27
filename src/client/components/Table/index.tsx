@@ -63,7 +63,7 @@ export default class Table extends Component<TableProps, TableState> {
 
 		const self = this;
 		
-		__( document ).ready( function() {
+		__( document ).ready( () => {
 
 			const reactDomEl: any = self.rootRef.current;
 			const $el = __( reactDomEl );			

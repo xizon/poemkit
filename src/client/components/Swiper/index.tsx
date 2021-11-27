@@ -52,7 +52,7 @@ export default class Swiper extends Component<SwiperProps, SwiperState> {
 		
 		const self = this;
 
-		__( document ).ready( function() {
+		__( document ).ready( () => {
 
 			const reactDomEl: any = self.rootRef.current;
 			const $el = __( reactDomEl );
@@ -366,7 +366,7 @@ export default class Swiper extends Component<SwiperProps, SwiperState> {
 					spaceBetween: 30,
 					loop: true,
 					speed: 1000,
-					centeredSlides: true, //If true, then active slide will be centered, not always on the left side.
+					centeredSlides: true, //When true, then active slide will be centered, not always on the left side.
 					pagination: {
 						el: '.swiper-pagination',
 						clickable: true,

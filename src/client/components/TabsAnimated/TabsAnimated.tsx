@@ -67,7 +67,7 @@ export default class TabsAnimated extends Component<TabsAnimatedProps, TabsAnima
 	componentDidMount() {
 		
 
-		__( document ).ready( function() {
+		__( document ).ready( () => {
 
 			//init content boxes height
 			const maxContentHeight = __( '.poemkit-tabs-animated .poemkit-tabs__content' ).maxDimension().height;	

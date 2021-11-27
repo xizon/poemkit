@@ -94,10 +94,10 @@ export default class BackToTop extends Component<BackToTopProps, BackToTopState>
 
         const self = this;
 
-        __( document ).ready( function() {
+        __( document ).ready( () => {
 
             // Move HTML templates to tag end body </body>
-            Array.prototype.forEach.call(document.querySelectorAll('.poemkit-to-top:not(.is-loaded)'), function (node) {
+            Array.prototype.forEach.call(document.querySelectorAll('.poemkit-to-top:not(.is-loaded)'), (node) => {
                 node.classList.add( 'is-loaded' );
                 document.body.appendChild(node);
             });
@@ -136,6 +136,12 @@ export default class BackToTop extends Component<BackToTopProps, BackToTopState>
 
 		// Kill all aniamtions
 		TweenMax.killAll();
+
+
+        // Remove all moved elements
+        Array.prototype.forEach.call(document.querySelectorAll('.poemkit-to-top.is-loaded'), (node) => {
+            node.remove();
+        });
 
     }
 

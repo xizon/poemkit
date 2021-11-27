@@ -86,7 +86,7 @@ export default class Accordion extends Component<AccordionProps, AccordionState>
             });
 
 			//to open
-            Array.prototype.forEach.call($li, function (node) {
+            Array.prototype.forEach.call($li, (node) => {
 				node.classList.remove( 'is-active' );
 				node.setAttribute( 'aria-expanded', false );
             });

@@ -35,6 +35,7 @@ import PaginationDemo from '@poemkit/pages/ComponentsDemo/PaginationDemo.js';
 import ParallaxDemo from '@poemkit/pages/ComponentsDemo/ParallaxDemo.js';
 import ProgressBarDemo from '@poemkit/pages/ComponentsDemo/ProgressBarDemo.js';
 import PeriodicalScrollDemo from '@poemkit/pages/ComponentsDemo/PeriodicalScrollDemo.js';
+import RatingDemo from '@poemkit/pages/ComponentsDemo/RatingDemo.js';
 import ScrollRevealDemo from '@poemkit/pages/ComponentsDemo/ScrollRevealDemo.js';
 import SlideshowDemo from '@poemkit/pages/ComponentsDemo/SlideshowDemo.js';
 import SwiperDemo from '@poemkit/pages/ComponentsDemo/SwiperDemo.js';
@@ -48,6 +49,7 @@ import TableGridDemo from '@poemkit/pages/ComponentsDemo/TableGridDemo.js';
 import TableSorterDemo from '@poemkit/pages/ComponentsDemo/TableSorterDemo.js';
 import TimelineDemo from '@poemkit/pages/ComponentsDemo/TimelineDemo.js';
 import TooltipDemo from '@poemkit/pages/ComponentsDemo/TooltipDemo.js';
+import ToasterDemo from '@poemkit/pages/ComponentsDemo/ToasterDemo.js';
 import VideoDemo from '@poemkit/pages/ComponentsDemo/VideoDemo.js';
 
 
@@ -203,6 +205,9 @@ function HookContent() {
 				<li className={urlChk('/periodical-scroll') ? 'is-active' : ''}>
 					<NavLink data-route="true" onClick={(e) => refreshTitle(e)} to={`${url}/periodical-scroll`} activeClassName="is-active">Periodical Scroll</NavLink>
 				</li>
+				<li className={urlChk('/rating') ? 'is-active' : ''}>
+					<NavLink data-route="true" onClick={(e) => refreshTitle(e)} to={`${url}/rating`} activeClassName="is-active">Rating</NavLink>
+				</li>
 				<li className={urlChk('/slideshow') ? 'is-active' : ''}>
 					<NavLink data-route="true" onClick={(e) => refreshTitle(e)} to={`${url}/slideshow`} activeClassName="is-active">Slideshow</NavLink>
 				</li>
@@ -236,10 +241,11 @@ function HookContent() {
 				<li className={urlChk('/tooltip') ? 'is-active' : ''}>
 					<NavLink data-route="true" onClick={(e) => refreshTitle(e)} to={`${url}/tooltip`} activeClassName="is-active">Tooltip</NavLink>
 				</li>
-				
+				<li className={urlChk('/toaster') ? 'is-active' : ''}>
+					<NavLink data-route="true" onClick={(e) => refreshTitle(e)} to={`${url}/toaster`} activeClassName="is-active">Toaster</NavLink>
+				</li>	
 
-
-
+	
                 {/*    /////////////////////////   */} 
 				<li className="poemkit-demo-nav-header">FORMS</li>
 				<li className={urlChk('#app-goto__input__section') ? 'is-active' : ''}>
@@ -391,13 +397,6 @@ function HookContent() {
 						</Route>
 
 
-
-
-
-
-
-
-
 							
 						<Route path={`${path}/accordion`}><AccordionDemo/><SeoChild title="Accordion"/></Route>
 						<Route path={`${path}/accordion-slider`}><AccordionSliderDemo/><SeoChild title="Accordion Slider"/></Route>
@@ -425,6 +424,7 @@ function HookContent() {
 						<Route path={`${path}/parallax`}><ParallaxDemo/><SeoChild title="Parallax"/></Route>
 						<Route path={`${path}/progress-bar`}><ProgressBarDemo/><SeoChild title="Progress Bar"/></Route>
 						<Route path={`${path}/periodical-scroll`}><PeriodicalScrollDemo/><SeoChild title="Periodical Scroll"/></Route>
+						<Route path={`${path}/rating`}><RatingDemo/><SeoChild title="Rating"/></Route>
 						<Route path={`${path}/scroll-reveal`}><ScrollRevealDemo/><SeoChild title="Scroll Reveal"/></Route>
 						<Route path={`${path}/slideshow`}><SlideshowDemo/><SeoChild title="Slideshow"/></Route>
 						<Route path={`${path}/swiper`}><SwiperDemo/><SeoChild title="Swiper"/></Route>
@@ -438,6 +438,7 @@ function HookContent() {
 						<Route path={`${path}/table-sorter`}><TableSorterDemo/><SeoChild title="Table Sorter"/></Route>
 						<Route path={`${path}/timeline`}><TimelineDemo/><SeoChild title="Timeline"/></Route>
 						<Route path={`${path}/tooltip`}><TooltipDemo/><SeoChild title="Tooltip"/></Route>
+						<Route path={`${path}/toaster`}><ToasterDemo/><SeoChild title="Toaster"/></Route>
 						<Route path={`${path}/video`}><VideoDemo/><SeoChild title="Video"/></Route>
 
 					</Switch>

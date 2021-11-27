@@ -6,9 +6,9 @@
  * ## Project Name        :  PoemKit
  * ## Project Description :  React Toolkit for Building a Full Website.
  * ## Project URL         :  https://uiux.cc
- * ## Version             :  0.1.8
+ * ## Version             :  0.1.9
  * ## Based on            :  PoemKit (https://github.com/xizon/poemkit#readme)
- * ## Last Update         :  November 25, 2021
+ * ## Last Update         :  November 28, 2021
  * ## Created by          :  UIUX Lab (https://uiux.cc) (uiuxlab@gmail.com)
  * ## Released under the MIT license.
  *
@@ -30770,6 +30770,15 @@ ol.poemkit-list--numbered-large.poemkit-list--numbered-bg li::before,
 }
 
 /* ======================================================
+   <!-- Rating -->
+/* ====================================================== */
+.poemkit-rating-star svg {
+  width: 15px;
+  cursor: pointer;
+  margin-right: 3px;
+}
+
+/* ======================================================
    <!-- Scroll Reveal -->
 /* ====================================================== */
 /*
@@ -34891,6 +34900,111 @@ table.is-horizontal th,
 /* ====================================================== */
 .rtl .poemkit-tooltip > div {
   text-align: right;
+}
+
+/* ======================================================
+   <!-- Toaster -->
+/* ====================================================== */
+.poemkit-toaster__container {
+  width: 400px;
+  position: fixed;
+  left: 50%;
+  bottom: 0;
+  z-index: 100;
+}
+
+.poemkit-toaster__container--left {
+  left: 15px;
+}
+
+.poemkit-toaster__container--right {
+  left: auto;
+  right: 15px;
+}
+
+.poemkit-toaster__container--center {
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.poemkit-toaster {
+  position: relative;
+  width: 100%;
+  bottom: 15px;
+  display: flex;
+  flex-flow: column-reverse nowrap;
+}
+
+.poemkit-toaster::before {
+  content: '';
+  top: -80px;
+  bottom: 0;
+  left: -8px;
+  right: -8px;
+  position: absolute;
+  background-color: transparent;
+  pointer-events: none;
+}
+
+.poemkit-toaster:hover .poemkit-toast {
+  transform: perspective(100px) translateZ(0) !important;
+}
+
+.poemkit-toast {
+  width: 100%;
+  height: auto;
+  position: relative;
+  bottom: 0;
+  transition: all .25s;
+}
+
+.poemkit-toast__content {
+  width: 100%;
+  height: 64px;
+  overflow: hidden;
+  padding: 8px 16px;
+  background: #fff;
+  border-radius: 4px;
+  box-shadow: rgba(0, 0, 0, 0.1) 0px 2px 4px 0px;
+  cursor: pointer;
+  border: 1px solid #d0d0d0;
+  transition: none;
+  height: auto;
+  overflow: visible;
+}
+
+.poemkit-toast__closebtn {
+  cursor: pointer;
+  position: absolute;
+  right: 5px;
+  top: 5px;
+}
+
+.poemkit-toast__closebtn:hover path {
+  fill: #f00;
+}
+
+.poemkit-toast h4 {
+  margin: 0;
+  padding: 0;
+  font-size: 0.875rem;
+  opacity: .5;
+}
+
+.poemkit-toast p {
+  margin: 0;
+  padding: 0;
+  font-size: 0.75rem;
+}
+
+.poemkit-toast.is-animating {
+  opacity: 0;
+}
+
+.poemkit-toast.is-animating .poemkit-toast__content {
+  overflow: hidden;
+  transition: all .2s;
+  transform: perspective(100px) translateZ(-100px);
 }
 
 @keyframes plyr-progress {

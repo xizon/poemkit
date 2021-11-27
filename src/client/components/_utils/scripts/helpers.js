@@ -3,8 +3,8 @@
  * Core Helpers
  *
  * @package: poemkit
- * @version: 0.42
- * @last update: November 22, 2021
+ * @version: 0.43
+ * @last update: November 27, 2021
  * @author: UIUX Lab <uiuxlab@gmail.com>
  * @license: MIT
  *
@@ -2516,7 +2516,16 @@ const __ = (function () {
 			if ( res == 'true' ) res = true;
 			if ( res == 'false' ) res = false;
 			if ( isValidNumeric(res) ) res = parseFloat(res);
-			if ( isJSON(res) ) res = Object.prototype.toString.call(res) === '[object Object]' ? res : JSON.parse(res);
+	
+			//check if Array or JSON format
+			if ( isJSON(res) ) {
+				if ( Object.prototype.toString.call(res) === '[object Object]' ) {
+					res = [res];
+				} else {
+					//If the result is an array, you need to determine whether it is the expected array
+					res = [JSON.parse(res)];
+				}
+			}
 			
 			// Non-existent attributes
 			return res == undefined ? null : res;
@@ -2541,8 +2550,16 @@ const __ = (function () {
 			if ( res == 'true' ) res = true;
 			if ( res == 'false' ) res = false;
 			if ( isValidNumeric(res) ) res = parseFloat(res);
-			if ( isJSON(res) ) res = Object.prototype.toString.call(res) === '[object Object]' ? res : JSON.parse(res);
-
+	
+			//check if Array or JSON format
+			if ( isJSON(res) ) {
+				if ( Object.prototype.toString.call(res) === '[object Object]' ) {
+					res = [res];
+				} else {
+					//If the result is an array, you need to determine whether it is the expected array
+					res = [JSON.parse(res)];
+				}
+			}
 			// Non-existent attributes
 			return res == undefined ? null : res;
 		} else {
@@ -3512,6 +3529,7 @@ const __ = (function () {
 	
     return __;
 })();
+
 
 export default __;
 

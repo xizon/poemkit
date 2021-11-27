@@ -50,10 +50,6 @@ import { TabsAnimated, TabList, TabPanel } from '@poemkit/components/TabsAnimate
 export default () => {
   return (
     <>
-	  
-		<h3>Tabs Animated</h3>
-	    <p>The most basic style allows you to set transition animation</p>
-		{/* ================================================================== */} 
 
 		<TabsAnimated>
 			<TabList key="tab-list-1" defaultActive>Tab 1</TabList>

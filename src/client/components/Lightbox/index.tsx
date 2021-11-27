@@ -117,7 +117,7 @@ export default class Lightbox extends Component<LightboxProps, LightboxState> {
 
         const self = this;
 
-        __( document ).ready( function() {
+        __( document ).ready( () => {
 
         
             // The name of the relevant style of the container
@@ -152,7 +152,7 @@ export default class Lightbox extends Component<LightboxProps, LightboxState> {
             
 
             // Move HTML templates to tag end body </body>
-            Array.prototype.forEach.call(document.querySelectorAll('.poemkit-lightbox__htmlcontent-template:not(.is-loaded)'), function (node) {
+            Array.prototype.forEach.call(document.querySelectorAll('.poemkit-lightbox__htmlcontent-template:not(.is-loaded)'), (node) => {
                 node.classList.add( 'is-loaded' );
                 document.body.appendChild(node);
             });
@@ -253,6 +253,11 @@ export default class Lightbox extends Component<LightboxProps, LightboxState> {
 
 		// Kill all aniamtions
 		TweenMax.killAll();  
+
+        // Remove all moved elements
+        Array.prototype.forEach.call(document.querySelectorAll('.poemkit-lightbox__htmlcontent-template.is-loaded'), (node) => {
+            node.remove();
+        });
 
     }
 

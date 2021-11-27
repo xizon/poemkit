@@ -65,15 +65,14 @@ export function countTo(curElement: any, config: countToConfig) {
     // references & variables that will change with each update
     let loopCount = 0,
         value = _numberStart,
-        data = $el.data('count-to') || {};
+        dataInterval: any = null;
 
-    $el.data('count-to', data);
 
     // if an existing interval can be found, clear it first
-    if (data.interval) {
-        clearInterval(data.interval);
+    if (dataInterval !== null) {
+        clearInterval(dataInterval);
     }
-    data.interval = setInterval(updateTimer, _refreshInterval);
+    dataInterval = setInterval(updateTimer, _refreshInterval);
 
     // initialize the element with the starting value
     render(value);
@@ -90,8 +89,7 @@ export function countTo(curElement: any, config: countToConfig) {
 
         if (loopCount >= loops) {
             // remove the interval
-            $el.removeData('count-to');
-            clearInterval(data.interval);
+            clearInterval(dataInterval);
             value = _numberEnd;
 
             if (typeof(_complete) === 'function') {

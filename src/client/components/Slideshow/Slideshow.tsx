@@ -70,7 +70,7 @@ export default class Slideshow extends Component<SlideshowProps, SlideshowState>
 
         const self = this;
 
-        __( document ).ready( function() {
+        __( document ).ready( () => {
 
 			const reactDomEl: any = self.rootRef.current;
 			const $el = __( reactDomEl );

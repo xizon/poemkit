@@ -1,5 +1,14 @@
 # Changelog
 
+#### = 0.1.9 (November 27, 2021) =
+
+* Fix: Fixed the problem that the helper script gets an array or JSON string.
+* New: Add new UI components `Rating`.
+* New: Add new UI components `Toaster`.
+* Tweak: Add a description for each UI component.
+* Tweak: Improved the performance for some UI components.
+
+
 #### = 0.1.8 (November 25, 2021) =
 
 * Tweak: Built-in component style optimization.

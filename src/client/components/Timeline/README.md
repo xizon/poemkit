@@ -14,7 +14,7 @@ import Timeline from '@poemkit/components/Timeline/index.tsx';
 ```
 | Property | Type | Default | Description |
 | --- | --- | --- | --- |
-| `interactiveEnabled` | boolean  | false | If true, the click event will be used to control the display effect of the timeline. |
+| `interactiveEnabled` | boolean  | false | When true, the click event will be used to control the display effect of the timeline. |
 | `focusEnabled` | boolean  | false | With the focus effect enabled, only one Item will be displayed each time you switch. Only available when `interactiveEnabled` is true. |
 | `focusCenteredEnabled` | boolean  | false | Let the focus of the entire interaction always be displayed in the center. Only available when `focusEnabled` is true. |
 | `speed` | number  | 500 | Transition speed. This setting sets how long the transition animation lasts. Amount of time measured in milliseconds. |

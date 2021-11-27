@@ -291,7 +291,7 @@ export default class ModalDialog extends Component<ModalDialogProps, ModalDialog
         const self = this;
         window.curVideo = null;
 
-        __( document ).ready( function() {
+        __( document ).ready( () => {
 
             //Add modal mask to stage
             if (__('.poemkit-modal-mask').length == 0) {
@@ -305,7 +305,7 @@ export default class ModalDialog extends Component<ModalDialogProps, ModalDialog
 
 
             // Move HTML templates to tag end body </body>
-            Array.prototype.forEach.call(document.querySelectorAll('.poemkit-modal-box:not(.is-loaded)'), function (node) {
+            Array.prototype.forEach.call(document.querySelectorAll('.poemkit-modal-box:not(.is-loaded)'), (node) => {
                 node.classList.add( 'is-loaded' );
                 document.body.appendChild(node);
             });   
@@ -344,6 +344,10 @@ export default class ModalDialog extends Component<ModalDialogProps, ModalDialog
         // Cancels a timeout previously established by calling setTimeout().
         clearTimeout( window.setCloseModalDialog );	
 
+        // Remove all moved elements
+        Array.prototype.forEach.call(document.querySelectorAll('.poemkit-modal-box.is-loaded'), (node) => {
+            node.remove();
+        });
 
     }
 

@@ -76,7 +76,7 @@ export default class HybridContentSlider extends Component<HybridContentSliderPr
 
         const self = this;
 
-        __( document ).ready( function() {
+        __( document ).ready( () => {
 
 			const reactDomEl: any = self.rootRef.current;
 			const $el = __( reactDomEl );

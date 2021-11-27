@@ -81,11 +81,8 @@ export default class DynamicFields extends Component<DynamicFieldsProps, Dynamic
 	
 	handleClickRemove(param) { // param is the argument you passed to the function
 		
-		const root = this.rootRef.current;
-		const self = this;
 		const curVal = this.state.elVals;
 		
-	
 		//button status
 		if ( curVal.length <= parseFloat(this.props.maxFields) && this.addBtnRef.current != null ) {
 			this.addBtnRef.current.style.display = 'inherit';
@@ -93,13 +90,13 @@ export default class DynamicFields extends Component<DynamicFieldsProps, Dynamic
 		
 		
 		//
-		return function (e) { // e is the event object that returned
+		return (e) => { // e is the event object that returned
 			e.preventDefault();
 			
 			let elVals = [...curVal];
 			elVals.splice(param,1);
 			//console.log(curVal); //[[""],[""],[""],[""]]
-			self.setState({ elVals });
+			this.setState({ elVals });
 		};
 	}
 	

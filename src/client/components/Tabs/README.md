@@ -14,8 +14,8 @@ import { Tabs } from '@poemkit/components/Tabs/index.tsx';
 ```
 | Property | Type | Default | Description |
 | --- | --- | --- | --- |
-| `center` | boolean | false | If true, the navigation button of the component is centered |
-| `fullwidth` | boolean | false | If true, the navigation buttons of the component will be automatically filled in the 100% width area |
+| `center` | boolean | false | When true, the navigation button of the component is centered |
+| `fullwidth` | boolean | false | When true, the navigation buttons of the component will be automatically filled in the 100% width area |
 | `rotation` | boolean | false | Set whether to enable the rotation layout of the component. When the value is true, the two properties of `rotationRadius` and `rotationWrapperAngle` are valid.  |
 | `rotationRadius` | number | 130 | Set the radius of rotation |
 | `rotationWrapperAngle` | number | 0 | Set the rotation angle of the entire component |

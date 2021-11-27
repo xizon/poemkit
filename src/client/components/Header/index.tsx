@@ -75,7 +75,7 @@ export default class Header extends Component<HeaderProps, HeaderState> {
 		
 		const self = this;
 	
-		__( document ).ready( function() {
+		__( document ).ready( () => {
 		
 			__( 'body' ).loader({
 				imagesSelector: 'body img',

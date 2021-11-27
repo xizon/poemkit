@@ -39,7 +39,7 @@ interface ItemConfig {
 
 
 type TimelineProps = {
-    /** If true, the click event will be used to control the display effect of the timeline. */
+    /** When true, the click event will be used to control the display effect of the timeline. */
     interactiveEnabled?: boolean;
     /** With the focus effect enabled, only one Item will be displayed each time you switch. 
      * Only available when `interactiveEnabled` is true. */

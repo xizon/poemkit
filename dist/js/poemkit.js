@@ -6,9 +6,9 @@
  * ## Project Name        :  PoemKit
  * ## Project Description :  React Toolkit for Building a Full Website.
  * ## Project URL         :  https://uiux.cc
- * ## Version             :  0.1.8
+ * ## Version             :  0.1.9
  * ## Based on            :  PoemKit (https://github.com/xizon/poemkit#readme)
- * ## Last Update         :  November 25, 2021
+ * ## Last Update         :  November 28, 2021
  * ## Created by          :  UIUX Lab (https://uiux.cc) (uiuxlab@gmail.com)
  * ## Released under the MIT license.
  *
@@ -31733,8 +31733,8 @@ function _readOnlyError(name) {
  * Core Helpers
  *
  * @package: poemkit
- * @version: 0.42
- * @last update: November 22, 2021
+ * @version: 0.43
+ * @last update: November 27, 2021
  * @author: UIUX Lab <uiuxlab@gmail.com>
  * @license: MIT
  *
@@ -33942,8 +33942,17 @@ var __ = function () {
       var res = this.dataset[_s];
       if (res == 'true') res = true;
       if (res == 'false') res = false;
-      if (isValidNumeric(res)) res = parseFloat(res);
-      if (isJSON(res)) res = Object.prototype.toString.call(res) === '[object Object]' ? res : JSON.parse(res); // Non-existent attributes
+      if (isValidNumeric(res)) res = parseFloat(res); //check if Array or JSON format
+
+      if (isJSON(res)) {
+        if (Object.prototype.toString.call(res) === '[object Object]') {
+          res = [res];
+        } else {
+          //If the result is an array, you need to determine whether it is the expected array
+          res = [JSON.parse(res)];
+        }
+      } // Non-existent attributes
+
 
       return res == undefined ? null : res;
     } else {
@@ -33966,8 +33975,17 @@ var __ = function () {
       var res = this[a];
       if (res == 'true') res = true;
       if (res == 'false') res = false;
-      if (isValidNumeric(res)) res = parseFloat(res);
-      if (isJSON(res)) res = Object.prototype.toString.call(res) === '[object Object]' ? res : JSON.parse(res); // Non-existent attributes
+      if (isValidNumeric(res)) res = parseFloat(res); //check if Array or JSON format
+
+      if (isJSON(res)) {
+        if (Object.prototype.toString.call(res) === '[object Object]') {
+          res = [res];
+        } else {
+          //If the result is an array, you need to determine whether it is the expected array
+          res = [JSON.parse(res)];
+        }
+      } // Non-existent attributes
+
 
       return res == undefined ? null : res;
     } else {
@@ -47990,7 +48008,7 @@ var Accordion = /*#__PURE__*/function (_Component) {
   }, /*#__PURE__*/react.createElement("path", {
     fill: "#d2d2d2",
     d: "M8.32,0h106.24c4.58,0,8.32,3.74,8.32,8.32v74.62c0,4.57-3.74,8.32-8.32,8.32H8.32C3.74,91.26,0,87.51,0,82.94 V8.32C0,3.74,3.74,0,8.32,0L8.32,0z M54.46,72.22L32,58.61v-8.63l22.46-13.61v10.26l-13.65,7.69l13.65,7.7V72.22L54.46,72.22z M68.42,72.22l22.46-13.61v-8.63L68.42,36.37v10.26l13.65,7.69l-13.65,7.7V72.22L68.42,72.22z M117.97,23.29H5.29v60.46 c0,0.64,0.25,1.2,0.67,1.63c0.42,0.42,0.99,0.67,1.63,0.67h108.04c0.64,0,1.2-0.25,1.63-0.67c0.43-0.43,0.67-0.99,0.67-1.63V23.29 H117.97L117.97,23.29z M106.64,9.35c2.27,0,4.11,1.84,4.11,4.11c0,2.27-1.84,4.11-4.11,4.11c-2.27,0-4.11-1.84-4.11-4.11 C102.54,11.19,104.38,9.35,106.64,9.35L106.64,9.35z M78.8,9.35c2.27,0,4.11,1.84,4.11,4.11c0,2.27-1.84,4.11-4.11,4.11 c-2.27,0-4.11-1.84-4.11-4.11C74.69,11.19,76.53,9.35,78.8,9.35L78.8,9.35z M92.72,9.35c2.27,0,4.11,1.84,4.11,4.11 c0,2.27-1.84,4.11-4.11,4.11c-2.27,0-4.11-1.84-4.11-4.11C88.61,11.19,90.45,9.35,92.72,9.35L92.72,9.35z"
-  })), "Docs on GitHub"))))))), /*#__PURE__*/react.createElement("section", {
+  })), "Docs on GitHub"))), /*#__PURE__*/react.createElement("p", null, "Accordions let users expand and collapse sections of content."))))), /*#__PURE__*/react.createElement("section", {
     className: "poemkit-spacing--s poemkit-spacing--no-bottom"
   }, /*#__PURE__*/react.createElement("div", {
     className: "container"
@@ -48424,7 +48442,7 @@ var AccordionSlider = /*#__PURE__*/function (_Component) {
   }, /*#__PURE__*/react.createElement("path", {
     fill: "#d2d2d2",
     d: "M8.32,0h106.24c4.58,0,8.32,3.74,8.32,8.32v74.62c0,4.57-3.74,8.32-8.32,8.32H8.32C3.74,91.26,0,87.51,0,82.94 V8.32C0,3.74,3.74,0,8.32,0L8.32,0z M54.46,72.22L32,58.61v-8.63l22.46-13.61v10.26l-13.65,7.69l13.65,7.7V72.22L54.46,72.22z M68.42,72.22l22.46-13.61v-8.63L68.42,36.37v10.26l13.65,7.69l-13.65,7.7V72.22L68.42,72.22z M117.97,23.29H5.29v60.46 c0,0.64,0.25,1.2,0.67,1.63c0.42,0.42,0.99,0.67,1.63,0.67h108.04c0.64,0,1.2-0.25,1.63-0.67c0.43-0.43,0.67-0.99,0.67-1.63V23.29 H117.97L117.97,23.29z M106.64,9.35c2.27,0,4.11,1.84,4.11,4.11c0,2.27-1.84,4.11-4.11,4.11c-2.27,0-4.11-1.84-4.11-4.11 C102.54,11.19,104.38,9.35,106.64,9.35L106.64,9.35z M78.8,9.35c2.27,0,4.11,1.84,4.11,4.11c0,2.27-1.84,4.11-4.11,4.11 c-2.27,0-4.11-1.84-4.11-4.11C74.69,11.19,76.53,9.35,78.8,9.35L78.8,9.35z M92.72,9.35c2.27,0,4.11,1.84,4.11,4.11 c0,2.27-1.84,4.11-4.11,4.11c-2.27,0-4.11-1.84-4.11-4.11C88.61,11.19,90.45,9.35,92.72,9.35L92.72,9.35z"
-  })), "Docs on GitHub"))))))), /*#__PURE__*/react.createElement("section", {
+  })), "Docs on GitHub"))), /*#__PURE__*/react.createElement("p", null, "This component combines the functionality of an accordion with that of a slider."))))), /*#__PURE__*/react.createElement("section", {
     className: "poemkit-spacing--s poemkit-spacing--no-bottom"
   }, /*#__PURE__*/react.createElement("div", {
     className: "container"
@@ -48854,7 +48872,7 @@ var ButtonGroup = /*#__PURE__*/function (_Component) {
   }, /*#__PURE__*/react.createElement("path", {
     fill: "#d2d2d2",
     d: "M8.32,0h106.24c4.58,0,8.32,3.74,8.32,8.32v74.62c0,4.57-3.74,8.32-8.32,8.32H8.32C3.74,91.26,0,87.51,0,82.94 V8.32C0,3.74,3.74,0,8.32,0L8.32,0z M54.46,72.22L32,58.61v-8.63l22.46-13.61v10.26l-13.65,7.69l13.65,7.7V72.22L54.46,72.22z M68.42,72.22l22.46-13.61v-8.63L68.42,36.37v10.26l13.65,7.69l-13.65,7.7V72.22L68.42,72.22z M117.97,23.29H5.29v60.46 c0,0.64,0.25,1.2,0.67,1.63c0.42,0.42,0.99,0.67,1.63,0.67h108.04c0.64,0,1.2-0.25,1.63-0.67c0.43-0.43,0.67-0.99,0.67-1.63V23.29 H117.97L117.97,23.29z M106.64,9.35c2.27,0,4.11,1.84,4.11,4.11c0,2.27-1.84,4.11-4.11,4.11c-2.27,0-4.11-1.84-4.11-4.11 C102.54,11.19,104.38,9.35,106.64,9.35L106.64,9.35z M78.8,9.35c2.27,0,4.11,1.84,4.11,4.11c0,2.27-1.84,4.11-4.11,4.11 c-2.27,0-4.11-1.84-4.11-4.11C74.69,11.19,76.53,9.35,78.8,9.35L78.8,9.35z M92.72,9.35c2.27,0,4.11,1.84,4.11,4.11 c0,2.27-1.84,4.11-4.11,4.11c-2.27,0-4.11-1.84-4.11-4.11C88.61,11.19,90.45,9.35,92.72,9.35L92.72,9.35z"
-  })), "Docs on GitHub"))))))), /*#__PURE__*/react.createElement("section", {
+  })), "Docs on GitHub"))), /*#__PURE__*/react.createElement("p", null, "Traditionally displayed as shapes with a label."))))), /*#__PURE__*/react.createElement("section", {
     className: "poemkit-spacing--s poemkit-spacing--no-bottom"
   }, /*#__PURE__*/react.createElement("div", {
     className: "container"
@@ -49661,7 +49679,11 @@ var BackToTop = /*#__PURE__*/function (_Component) {
       window.removeEventListener('scroll', this.windowScrollUpdate);
       window.removeEventListener('touchmove', this.windowScrollUpdate); // Kill all aniamtions
 
-      TweenMax_TweenMax.killAll();
+      TweenMax_TweenMax.killAll(); // Remove all moved elements
+
+      Array.prototype.forEach.call(document.querySelectorAll('.poemkit-to-top.is-loaded'), function (node) {
+        node.remove();
+      });
     }
   }, {
     key: "render",
@@ -49725,7 +49747,7 @@ var BackToTop = /*#__PURE__*/function (_Component) {
   }, /*#__PURE__*/react.createElement("path", {
     fill: "#d2d2d2",
     d: "M8.32,0h106.24c4.58,0,8.32,3.74,8.32,8.32v74.62c0,4.57-3.74,8.32-8.32,8.32H8.32C3.74,91.26,0,87.51,0,82.94 V8.32C0,3.74,3.74,0,8.32,0L8.32,0z M54.46,72.22L32,58.61v-8.63l22.46-13.61v10.26l-13.65,7.69l13.65,7.7V72.22L54.46,72.22z M68.42,72.22l22.46-13.61v-8.63L68.42,36.37v10.26l13.65,7.69l-13.65,7.7V72.22L68.42,72.22z M117.97,23.29H5.29v60.46 c0,0.64,0.25,1.2,0.67,1.63c0.42,0.42,0.99,0.67,1.63,0.67h108.04c0.64,0,1.2-0.25,1.63-0.67c0.43-0.43,0.67-0.99,0.67-1.63V23.29 H117.97L117.97,23.29z M106.64,9.35c2.27,0,4.11,1.84,4.11,4.11c0,2.27-1.84,4.11-4.11,4.11c-2.27,0-4.11-1.84-4.11-4.11 C102.54,11.19,104.38,9.35,106.64,9.35L106.64,9.35z M78.8,9.35c2.27,0,4.11,1.84,4.11,4.11c0,2.27-1.84,4.11-4.11,4.11 c-2.27,0-4.11-1.84-4.11-4.11C74.69,11.19,76.53,9.35,78.8,9.35L78.8,9.35z M92.72,9.35c2.27,0,4.11,1.84,4.11,4.11 c0,2.27-1.84,4.11-4.11,4.11c-2.27,0-4.11-1.84-4.11-4.11C88.61,11.19,90.45,9.35,92.72,9.35L92.72,9.35z"
-  })), "Docs on GitHub"))))))), /*#__PURE__*/react.createElement("section", {
+  })), "Docs on GitHub"))), /*#__PURE__*/react.createElement("p", null, "Scroll the page down to preview. The button is in the bottom right corner of the screen."))))), /*#__PURE__*/react.createElement("section", {
     className: "poemkit-spacing--s"
   }, /*#__PURE__*/react.createElement("div", {
     className: "container"
@@ -49735,7 +49757,7 @@ var BackToTop = /*#__PURE__*/function (_Component) {
     className: "col-12"
   }, /*#__PURE__*/react.createElement("h3", {
     className: "app-header-title"
-  }, "Demos"), /*#__PURE__*/react.createElement("p", null, "Scroll the page down to preview. The button is in the bottom right corner of the screen."), /*#__PURE__*/react.createElement("hr", null))))), /*#__PURE__*/react.createElement("div", {
+  }, "Demos"), /*#__PURE__*/react.createElement("hr", null))))), /*#__PURE__*/react.createElement("div", {
     style: {
       height: "1000px"
     }
@@ -50229,7 +50251,7 @@ var Card = /*#__PURE__*/function (_Component) {
   }, /*#__PURE__*/react.createElement("path", {
     fill: "#d2d2d2",
     d: "M8.32,0h106.24c4.58,0,8.32,3.74,8.32,8.32v74.62c0,4.57-3.74,8.32-8.32,8.32H8.32C3.74,91.26,0,87.51,0,82.94 V8.32C0,3.74,3.74,0,8.32,0L8.32,0z M54.46,72.22L32,58.61v-8.63l22.46-13.61v10.26l-13.65,7.69l13.65,7.7V72.22L54.46,72.22z M68.42,72.22l22.46-13.61v-8.63L68.42,36.37v10.26l13.65,7.69l-13.65,7.7V72.22L68.42,72.22z M117.97,23.29H5.29v60.46 c0,0.64,0.25,1.2,0.67,1.63c0.42,0.42,0.99,0.67,1.63,0.67h108.04c0.64,0,1.2-0.25,1.63-0.67c0.43-0.43,0.67-0.99,0.67-1.63V23.29 H117.97L117.97,23.29z M106.64,9.35c2.27,0,4.11,1.84,4.11,4.11c0,2.27-1.84,4.11-4.11,4.11c-2.27,0-4.11-1.84-4.11-4.11 C102.54,11.19,104.38,9.35,106.64,9.35L106.64,9.35z M78.8,9.35c2.27,0,4.11,1.84,4.11,4.11c0,2.27-1.84,4.11-4.11,4.11 c-2.27,0-4.11-1.84-4.11-4.11C74.69,11.19,76.53,9.35,78.8,9.35L78.8,9.35z M92.72,9.35c2.27,0,4.11,1.84,4.11,4.11 c0,2.27-1.84,4.11-4.11,4.11c-2.27,0-4.11-1.84-4.11-4.11C88.61,11.19,90.45,9.35,92.72,9.35L92.72,9.35z"
-  })), "Docs on GitHub"))))))), /*#__PURE__*/react.createElement("section", {
+  })), "Docs on GitHub"))), /*#__PURE__*/react.createElement("p", null, "Card as an entry point for the user, displaying small rectangular or square modules that contain different kinds of information."))))), /*#__PURE__*/react.createElement("section", {
     className: "poemkit-spacing--s poemkit-spacing--no-bottom"
   }, /*#__PURE__*/react.createElement("div", {
     className: "container"
@@ -50949,14 +50971,13 @@ function countTo(curElement, config) {
 
   var loopCount = 0,
       value = _numberStart,
-      data = $el.data('count-to') || {};
-  $el.data('count-to', data); // if an existing interval can be found, clear it first
+      dataInterval = null; // if an existing interval can be found, clear it first
 
-  if (data.interval) {
-    clearInterval(data.interval);
+  if (dataInterval !== null) {
+    clearInterval(dataInterval);
   }
 
-  data.interval = setInterval(updateTimer, _refreshInterval); // initialize the element with the starting value
+  dataInterval = setInterval(updateTimer, _refreshInterval); // initialize the element with the starting value
 
   render(value);
 
@@ -50971,8 +50992,7 @@ function countTo(curElement, config) {
 
     if (loopCount >= loops) {
       // remove the interval
-      $el.removeData('count-to');
-      clearInterval(data.interval);
+      clearInterval(dataInterval);
       value = _numberEnd;
 
       if (typeof _complete === 'function') {
@@ -51177,7 +51197,7 @@ var Counter = /*#__PURE__*/function (_Component) {
   }, /*#__PURE__*/react.createElement("path", {
     fill: "#d2d2d2",
     d: "M8.32,0h106.24c4.58,0,8.32,3.74,8.32,8.32v74.62c0,4.57-3.74,8.32-8.32,8.32H8.32C3.74,91.26,0,87.51,0,82.94 V8.32C0,3.74,3.74,0,8.32,0L8.32,0z M54.46,72.22L32,58.61v-8.63l22.46-13.61v10.26l-13.65,7.69l13.65,7.7V72.22L54.46,72.22z M68.42,72.22l22.46-13.61v-8.63L68.42,36.37v10.26l13.65,7.69l-13.65,7.7V72.22L68.42,72.22z M117.97,23.29H5.29v60.46 c0,0.64,0.25,1.2,0.67,1.63c0.42,0.42,0.99,0.67,1.63,0.67h108.04c0.64,0,1.2-0.25,1.63-0.67c0.43-0.43,0.67-0.99,0.67-1.63V23.29 H117.97L117.97,23.29z M106.64,9.35c2.27,0,4.11,1.84,4.11,4.11c0,2.27-1.84,4.11-4.11,4.11c-2.27,0-4.11-1.84-4.11-4.11 C102.54,11.19,104.38,9.35,106.64,9.35L106.64,9.35z M78.8,9.35c2.27,0,4.11,1.84,4.11,4.11c0,2.27-1.84,4.11-4.11,4.11 c-2.27,0-4.11-1.84-4.11-4.11C74.69,11.19,76.53,9.35,78.8,9.35L78.8,9.35z M92.72,9.35c2.27,0,4.11,1.84,4.11,4.11 c0,2.27-1.84,4.11-4.11,4.11c-2.27,0-4.11-1.84-4.11-4.11C88.61,11.19,90.45,9.35,92.72,9.35L92.72,9.35z"
-  })), "Docs on GitHub"))))))), /*#__PURE__*/react.createElement("section", {
+  })), "Docs on GitHub"))), /*#__PURE__*/react.createElement("p", null, "Create a number animation, as in, imagine a number changing from 1 to 2, then 2 to 3, then 3 to 4, etc. "))))), /*#__PURE__*/react.createElement("section", {
     className: "poemkit-spacing--s poemkit-spacing--no-bottom"
   }, /*#__PURE__*/react.createElement("div", {
     className: "container"
@@ -51891,7 +51911,7 @@ var CascadingDropDownList = /*#__PURE__*/function (_Component) {
   }, /*#__PURE__*/react.createElement("path", {
     fill: "#d2d2d2",
     d: "M8.32,0h106.24c4.58,0,8.32,3.74,8.32,8.32v74.62c0,4.57-3.74,8.32-8.32,8.32H8.32C3.74,91.26,0,87.51,0,82.94 V8.32C0,3.74,3.74,0,8.32,0L8.32,0z M54.46,72.22L32,58.61v-8.63l22.46-13.61v10.26l-13.65,7.69l13.65,7.7V72.22L54.46,72.22z M68.42,72.22l22.46-13.61v-8.63L68.42,36.37v10.26l13.65,7.69l-13.65,7.7V72.22L68.42,72.22z M117.97,23.29H5.29v60.46 c0,0.64,0.25,1.2,0.67,1.63c0.42,0.42,0.99,0.67,1.63,0.67h108.04c0.64,0,1.2-0.25,1.63-0.67c0.43-0.43,0.67-0.99,0.67-1.63V23.29 H117.97L117.97,23.29z M106.64,9.35c2.27,0,4.11,1.84,4.11,4.11c0,2.27-1.84,4.11-4.11,4.11c-2.27,0-4.11-1.84-4.11-4.11 C102.54,11.19,104.38,9.35,106.64,9.35L106.64,9.35z M78.8,9.35c2.27,0,4.11,1.84,4.11,4.11c0,2.27-1.84,4.11-4.11,4.11 c-2.27,0-4.11-1.84-4.11-4.11C74.69,11.19,76.53,9.35,78.8,9.35L78.8,9.35z M92.72,9.35c2.27,0,4.11,1.84,4.11,4.11 c0,2.27-1.84,4.11-4.11,4.11c-2.27,0-4.11-1.84-4.11-4.11C88.61,11.19,90.45,9.35,92.72,9.35L92.72,9.35z"
-  })), "Docs on GitHub"))))))), /*#__PURE__*/react.createElement("section", {
+  })), "Docs on GitHub"))), /*#__PURE__*/react.createElement("p", null, "Create a dynamic dropdown form that loads its data via JSON data. Support infinite recursion."))))), /*#__PURE__*/react.createElement("section", {
     className: "poemkit-spacing--s poemkit-spacing--no-bottom"
   }, /*#__PURE__*/react.createElement("div", {
     className: "container"
@@ -51901,7 +51921,7 @@ var CascadingDropDownList = /*#__PURE__*/function (_Component) {
     className: "col-12"
   }, /*#__PURE__*/react.createElement("h3", {
     className: "app-header-title"
-  }, "Dynamic Drop Down List from JSON"), /*#__PURE__*/react.createElement("p", null, "Create a dynamic dropdown form that loads its data via JSON data. Support infinite recursion."), /*#__PURE__*/react.createElement("hr", null))))), /*#__PURE__*/react.createElement("section", {
+  }, "Dynamic Drop Down List from JSON"), /*#__PURE__*/react.createElement("hr", null))))), /*#__PURE__*/react.createElement("section", {
     className: "poemkit-spacing--s"
   }, /*#__PURE__*/react.createElement("div", {
     className: "container"
@@ -52187,7 +52207,7 @@ var ContentPlaceholder = /*#__PURE__*/function (_Component) {
   }), /*#__PURE__*/react.createElement("path", {
     fill: "#d2d2d2",
     d: "M227.49,192.276c0,4.745,2.783,9.109,7.095,11.123l39.455,18.329l-39.455,18.33c-4.31,2.004-7.095,6.368-7.095,11.118v0.322c0,4.205,2.117,8.068,5.668,10.336c1.974,1.258,4.254,1.924,6.595,1.924c1.793,0,3.528-0.383,5.17-1.142l63.08-29.335c4.307-2.009,7.09-6.372,7.09-11.115v-0.877c0-4.748-2.783-9.113-7.094-11.117l-63.08-29.333c-1.591-0.74-3.373-1.131-5.152-1.131c-2.355,0-4.643,0.661-6.604,1.912c-3.551,2.263-5.67,6.127-5.67,10.337v0.318H227.49L227.49,192.276z"
-  }))))), "Docs on GitHub"))))))), /*#__PURE__*/react.createElement("section", {
+  }))))), "Docs on GitHub"))), /*#__PURE__*/react.createElement("p", null, "These placeholders provide good UX, it gives users a sense of what to expect where on the page when the loading finishes."))))), /*#__PURE__*/react.createElement("section", {
     className: "poemkit-spacing--s poemkit-spacing--no-bottom"
   }, /*#__PURE__*/react.createElement("div", {
     className: "container"
@@ -52197,7 +52217,7 @@ var ContentPlaceholder = /*#__PURE__*/function (_Component) {
     className: "col-12"
   }, /*#__PURE__*/react.createElement("h3", {
     className: "app-header-title"
-  }, "For Page Loading"), /*#__PURE__*/react.createElement("p", null, "These placeholders provide good UX, it gives users a sense of what to expect where on the page when the loading finishes."), /*#__PURE__*/react.createElement("hr", null))))), /*#__PURE__*/react.createElement("section", {
+  }, "For Page Loading"), /*#__PURE__*/react.createElement("hr", null))))), /*#__PURE__*/react.createElement("section", {
     className: "poemkit-spacing--s"
   }, /*#__PURE__*/react.createElement("div", {
     className: "container poemkit-t-c"
@@ -52530,7 +52550,7 @@ var data1 = [{
   }, /*#__PURE__*/react.createElement("path", {
     fill: "#d2d2d2",
     d: "M8.32,0h106.24c4.58,0,8.32,3.74,8.32,8.32v74.62c0,4.57-3.74,8.32-8.32,8.32H8.32C3.74,91.26,0,87.51,0,82.94 V8.32C0,3.74,3.74,0,8.32,0L8.32,0z M54.46,72.22L32,58.61v-8.63l22.46-13.61v10.26l-13.65,7.69l13.65,7.7V72.22L54.46,72.22z M68.42,72.22l22.46-13.61v-8.63L68.42,36.37v10.26l13.65,7.69l-13.65,7.7V72.22L68.42,72.22z M117.97,23.29H5.29v60.46 c0,0.64,0.25,1.2,0.67,1.63c0.42,0.42,0.99,0.67,1.63,0.67h108.04c0.64,0,1.2-0.25,1.63-0.67c0.43-0.43,0.67-0.99,0.67-1.63V23.29 H117.97L117.97,23.29z M106.64,9.35c2.27,0,4.11,1.84,4.11,4.11c0,2.27-1.84,4.11-4.11,4.11c-2.27,0-4.11-1.84-4.11-4.11 C102.54,11.19,104.38,9.35,106.64,9.35L106.64,9.35z M78.8,9.35c2.27,0,4.11,1.84,4.11,4.11c0,2.27-1.84,4.11-4.11,4.11 c-2.27,0-4.11-1.84-4.11-4.11C74.69,11.19,76.53,9.35,78.8,9.35L78.8,9.35z M92.72,9.35c2.27,0,4.11,1.84,4.11,4.11 c0,2.27-1.84,4.11-4.11,4.11c-2.27,0-4.11-1.84-4.11-4.11C88.61,11.19,90.45,9.35,92.72,9.35L92.72,9.35z"
-  })), "Docs on GitHub"))))))), /*#__PURE__*/react.createElement("section", {
+  })), "Docs on GitHub"))), /*#__PURE__*/react.createElement("p", null, "This component allows users to select an item from a list that ", /*#__PURE__*/react.createElement("strong", null, "drops down"), " once we click on it."))))), /*#__PURE__*/react.createElement("section", {
     className: "poemkit-spacing--s poemkit-spacing--no-bottom"
   }, /*#__PURE__*/react.createElement("div", {
     className: "container"
@@ -54548,9 +54568,9 @@ var DynamicFields = /*#__PURE__*/function (_Component) {
   }, {
     key: "handleClickRemove",
     value: function handleClickRemove(param) {
+      var _this2 = this;
+
       // param is the argument you passed to the function
-      var root = this.rootRef.current;
-      var self = this;
       var curVal = this.state.elVals; //button status
 
       if (curVal.length <= parseFloat(this.props.maxFields) && this.addBtnRef.current != null) {
@@ -54566,7 +54586,7 @@ var DynamicFields = /*#__PURE__*/function (_Component) {
 
         elVals.splice(param, 1); //console.log(curVal); //[[""],[""],[""],[""]]
 
-        self.setState({
+        _this2.setState({
           elVals: elVals
         });
       };
@@ -54574,7 +54594,7 @@ var DynamicFields = /*#__PURE__*/function (_Component) {
   }, {
     key: "createUI",
     value: function createUI() {
-      var _this2 = this;
+      var _this3 = this;
 
       return this.state.elVals.map(function (el, i) {
         return /*#__PURE__*/react.createElement("div", {
@@ -54583,15 +54603,15 @@ var DynamicFields = /*#__PURE__*/function (_Component) {
         }, el.map(function (data, index) {
           return /*#__PURE__*/react.createElement(react.Fragment, {
             key: index
-          }, _this2.props.tempHtmlString);
+          }, _this3.props.tempHtmlString);
         }), "\xA0\xA0", /*#__PURE__*/react.createElement("a", {
           href: "#",
           className: "poemkit-controls__dynamic-fields__removebtn",
-          onClick: _this2.handleClickRemove(i)
+          onClick: _this3.handleClickRemove(i)
         }, /*#__PURE__*/react.createElement("i", {
           className: "fa fa-minus-circle",
           "aria-hidden": "true"
-        })), " ", _this2.props.removeLabel || '');
+        })), " ", _this3.props.removeLabel || '');
       });
     }
   }, {
@@ -55534,7 +55554,7 @@ var TagInput = /*#__PURE__*/function (_Component) {
   }, /*#__PURE__*/react.createElement("path", {
     fill: "#d2d2d2",
     d: "M8.32,0h106.24c4.58,0,8.32,3.74,8.32,8.32v74.62c0,4.57-3.74,8.32-8.32,8.32H8.32C3.74,91.26,0,87.51,0,82.94 V8.32C0,3.74,3.74,0,8.32,0L8.32,0z M54.46,72.22L32,58.61v-8.63l22.46-13.61v10.26l-13.65,7.69l13.65,7.7V72.22L54.46,72.22z M68.42,72.22l22.46-13.61v-8.63L68.42,36.37v10.26l13.65,7.69l-13.65,7.7V72.22L68.42,72.22z M117.97,23.29H5.29v60.46 c0,0.64,0.25,1.2,0.67,1.63c0.42,0.42,0.99,0.67,1.63,0.67h108.04c0.64,0,1.2-0.25,1.63-0.67c0.43-0.43,0.67-0.99,0.67-1.63V23.29 H117.97L117.97,23.29z M106.64,9.35c2.27,0,4.11,1.84,4.11,4.11c0,2.27-1.84,4.11-4.11,4.11c-2.27,0-4.11-1.84-4.11-4.11 C102.54,11.19,104.38,9.35,106.64,9.35L106.64,9.35z M78.8,9.35c2.27,0,4.11,1.84,4.11,4.11c0,2.27-1.84,4.11-4.11,4.11 c-2.27,0-4.11-1.84-4.11-4.11C74.69,11.19,76.53,9.35,78.8,9.35L78.8,9.35z M92.72,9.35c2.27,0,4.11,1.84,4.11,4.11 c0,2.27-1.84,4.11-4.11,4.11c-2.27,0-4.11-1.84-4.11-4.11C88.61,11.19,90.45,9.35,92.72,9.35L92.72,9.35z"
-  })), "Docs on GitHub"))))))), /*#__PURE__*/react.createElement("form", {
+  })), "Docs on GitHub"))), /*#__PURE__*/react.createElement("p", null, "Form components are reusable elements that allow content creators and marketers to compose forms via the form builder. Each component represents a specific form field, such as a text box for user input, a group of radio buttons, etc."))))), /*#__PURE__*/react.createElement("form", {
     method: "post",
     action: "#",
     id: "app-my-form"
@@ -56890,7 +56910,7 @@ var GridColumn = /*#__PURE__*/function (_Component) {
   }, /*#__PURE__*/react.createElement("path", {
     fill: "#d2d2d2",
     d: "M8.32,0h106.24c4.58,0,8.32,3.74,8.32,8.32v74.62c0,4.57-3.74,8.32-8.32,8.32H8.32C3.74,91.26,0,87.51,0,82.94 V8.32C0,3.74,3.74,0,8.32,0L8.32,0z M54.46,72.22L32,58.61v-8.63l22.46-13.61v10.26l-13.65,7.69l13.65,7.7V72.22L54.46,72.22z M68.42,72.22l22.46-13.61v-8.63L68.42,36.37v10.26l13.65,7.69l-13.65,7.7V72.22L68.42,72.22z M117.97,23.29H5.29v60.46 c0,0.64,0.25,1.2,0.67,1.63c0.42,0.42,0.99,0.67,1.63,0.67h108.04c0.64,0,1.2-0.25,1.63-0.67c0.43-0.43,0.67-0.99,0.67-1.63V23.29 H117.97L117.97,23.29z M106.64,9.35c2.27,0,4.11,1.84,4.11,4.11c0,2.27-1.84,4.11-4.11,4.11c-2.27,0-4.11-1.84-4.11-4.11 C102.54,11.19,104.38,9.35,106.64,9.35L106.64,9.35z M78.8,9.35c2.27,0,4.11,1.84,4.11,4.11c0,2.27-1.84,4.11-4.11,4.11 c-2.27,0-4.11-1.84-4.11-4.11C74.69,11.19,76.53,9.35,78.8,9.35L78.8,9.35z M92.72,9.35c2.27,0,4.11,1.84,4.11,4.11 c0,2.27-1.84,4.11-4.11,4.11c-2.27,0-4.11-1.84-4.11-4.11C88.61,11.19,90.45,9.35,92.72,9.35L92.72,9.35z"
-  })), "Docs on GitHub"))))))), /*#__PURE__*/react.createElement("section", {
+  })), "Docs on GitHub"))), /*#__PURE__*/react.createElement("p", null, "This component is used to match different content module sections."))))), /*#__PURE__*/react.createElement("section", {
     className: "poemkit-spacing--s poemkit-spacing--no-bottom"
   }, /*#__PURE__*/react.createElement("div", {
     className: "container"
@@ -58655,7 +58675,7 @@ var Gallery = /*#__PURE__*/function (_Component) {
   }, /*#__PURE__*/react.createElement("path", {
     fill: "#d2d2d2",
     d: "M8.32,0h106.24c4.58,0,8.32,3.74,8.32,8.32v74.62c0,4.57-3.74,8.32-8.32,8.32H8.32C3.74,91.26,0,87.51,0,82.94 V8.32C0,3.74,3.74,0,8.32,0L8.32,0z M54.46,72.22L32,58.61v-8.63l22.46-13.61v10.26l-13.65,7.69l13.65,7.7V72.22L54.46,72.22z M68.42,72.22l22.46-13.61v-8.63L68.42,36.37v10.26l13.65,7.69l-13.65,7.7V72.22L68.42,72.22z M117.97,23.29H5.29v60.46 c0,0.64,0.25,1.2,0.67,1.63c0.42,0.42,0.99,0.67,1.63,0.67h108.04c0.64,0,1.2-0.25,1.63-0.67c0.43-0.43,0.67-0.99,0.67-1.63V23.29 H117.97L117.97,23.29z M106.64,9.35c2.27,0,4.11,1.84,4.11,4.11c0,2.27-1.84,4.11-4.11,4.11c-2.27,0-4.11-1.84-4.11-4.11 C102.54,11.19,104.38,9.35,106.64,9.35L106.64,9.35z M78.8,9.35c2.27,0,4.11,1.84,4.11,4.11c0,2.27-1.84,4.11-4.11,4.11 c-2.27,0-4.11-1.84-4.11-4.11C74.69,11.19,76.53,9.35,78.8,9.35L78.8,9.35z M92.72,9.35c2.27,0,4.11,1.84,4.11,4.11 c0,2.27-1.84,4.11-4.11,4.11c-2.27,0-4.11-1.84-4.11-4.11C88.61,11.19,90.45,9.35,92.72,9.35L92.72,9.35z"
-  })), "Docs on GitHub"))))))), /*#__PURE__*/react.createElement("section", {
+  })), "Docs on GitHub"))), /*#__PURE__*/react.createElement("p", null, "This component allows you to add images to your template."))))), /*#__PURE__*/react.createElement("section", {
     className: "poemkit-spacing--s poemkit-spacing--no-bottom"
   }, /*#__PURE__*/react.createElement("div", {
     className: "container"
@@ -60160,7 +60180,7 @@ var HybridContentSlider = /*#__PURE__*/function (_Component) {
   }), /*#__PURE__*/react.createElement("path", {
     fill: "#d2d2d2",
     d: "M227.49,192.276c0,4.745,2.783,9.109,7.095,11.123l39.455,18.329l-39.455,18.33c-4.31,2.004-7.095,6.368-7.095,11.118v0.322c0,4.205,2.117,8.068,5.668,10.336c1.974,1.258,4.254,1.924,6.595,1.924c1.793,0,3.528-0.383,5.17-1.142l63.08-29.335c4.307-2.009,7.09-6.372,7.09-11.115v-0.877c0-4.748-2.783-9.113-7.094-11.117l-63.08-29.333c-1.591-0.74-3.373-1.131-5.152-1.131c-2.355,0-4.643,0.661-6.604,1.912c-3.551,2.263-5.67,6.127-5.67,10.337v0.318H227.49L227.49,192.276z"
-  }))))), "Docs on GitHub"))))))), /*#__PURE__*/react.createElement("section", {
+  }))))), "Docs on GitHub"))), /*#__PURE__*/react.createElement("p", null, "This is a draggable slide that can mix text and images, and automatically calculate its height and width."))))), /*#__PURE__*/react.createElement("section", {
     className: "poemkit-spacing--s"
   }, /*#__PURE__*/react.createElement("div", {
     className: "container"
@@ -60617,7 +60637,7 @@ var InfiniteScrollDemo_Item = function Item(_ref) {
   }, /*#__PURE__*/react.createElement("path", {
     fill: "#d2d2d2",
     d: "M8.32,0h106.24c4.58,0,8.32,3.74,8.32,8.32v74.62c0,4.57-3.74,8.32-8.32,8.32H8.32C3.74,91.26,0,87.51,0,82.94 V8.32C0,3.74,3.74,0,8.32,0L8.32,0z M54.46,72.22L32,58.61v-8.63l22.46-13.61v10.26l-13.65,7.69l13.65,7.7V72.22L54.46,72.22z M68.42,72.22l22.46-13.61v-8.63L68.42,36.37v10.26l13.65,7.69l-13.65,7.7V72.22L68.42,72.22z M117.97,23.29H5.29v60.46 c0,0.64,0.25,1.2,0.67,1.63c0.42,0.42,0.99,0.67,1.63,0.67h108.04c0.64,0,1.2-0.25,1.63-0.67c0.43-0.43,0.67-0.99,0.67-1.63V23.29 H117.97L117.97,23.29z M106.64,9.35c2.27,0,4.11,1.84,4.11,4.11c0,2.27-1.84,4.11-4.11,4.11c-2.27,0-4.11-1.84-4.11-4.11 C102.54,11.19,104.38,9.35,106.64,9.35L106.64,9.35z M78.8,9.35c2.27,0,4.11,1.84,4.11,4.11c0,2.27-1.84,4.11-4.11,4.11 c-2.27,0-4.11-1.84-4.11-4.11C74.69,11.19,76.53,9.35,78.8,9.35L78.8,9.35z M92.72,9.35c2.27,0,4.11,1.84,4.11,4.11 c0,2.27-1.84,4.11-4.11,4.11c-2.27,0-4.11-1.84-4.11-4.11C88.61,11.19,90.45,9.35,92.72,9.35L92.72,9.35z"
-  })), "Docs on GitHub"))))))), /*#__PURE__*/react.createElement("section", {
+  })), "Docs on GitHub"))), /*#__PURE__*/react.createElement("p", null, "This component creates a mechanism that shows data based on an endless scroll event and loads data only as needed to avoid critical performance issues."))))), /*#__PURE__*/react.createElement("section", {
     className: "poemkit-spacing--s poemkit-spacing--no-bottom"
   }, /*#__PURE__*/react.createElement("div", {
     className: "container"
@@ -60882,7 +60902,7 @@ var ImageShapes = /*#__PURE__*/function (_Component) {
   }), /*#__PURE__*/react.createElement("path", {
     fill: "#d2d2d2",
     d: "M227.49,192.276c0,4.745,2.783,9.109,7.095,11.123l39.455,18.329l-39.455,18.33c-4.31,2.004-7.095,6.368-7.095,11.118v0.322c0,4.205,2.117,8.068,5.668,10.336c1.974,1.258,4.254,1.924,6.595,1.924c1.793,0,3.528-0.383,5.17-1.142l63.08-29.335c4.307-2.009,7.09-6.372,7.09-11.115v-0.877c0-4.748-2.783-9.113-7.094-11.117l-63.08-29.333c-1.591-0.74-3.373-1.131-5.152-1.131c-2.355,0-4.643,0.661-6.604,1.912c-3.551,2.263-5.67,6.127-5.67,10.337v0.318H227.49L227.49,192.276z"
-  }))))), "Docs on GitHub"))))))), /*#__PURE__*/react.createElement("section", {
+  }))))), "Docs on GitHub"))), /*#__PURE__*/react.createElement("p", null, "Use SVG paths to create image of arbitrary shapes."))))), /*#__PURE__*/react.createElement("section", {
     className: "poemkit-spacing--s poemkit-spacing--no-bottom"
   }, /*#__PURE__*/react.createElement("div", {
     className: "container"
@@ -61265,7 +61285,7 @@ var ImagePerspectiveHover = /*#__PURE__*/function (_Component) {
   }), /*#__PURE__*/react.createElement("path", {
     fill: "#d2d2d2",
     d: "M227.49,192.276c0,4.745,2.783,9.109,7.095,11.123l39.455,18.329l-39.455,18.33c-4.31,2.004-7.095,6.368-7.095,11.118v0.322c0,4.205,2.117,8.068,5.668,10.336c1.974,1.258,4.254,1.924,6.595,1.924c1.793,0,3.528-0.383,5.17-1.142l63.08-29.335c4.307-2.009,7.09-6.372,7.09-11.115v-0.877c0-4.748-2.783-9.113-7.094-11.117l-63.08-29.333c-1.591-0.74-3.373-1.131-5.152-1.131c-2.355,0-4.643,0.661-6.604,1.912c-3.551,2.263-5.67,6.127-5.67,10.337v0.318H227.49L227.49,192.276z"
-  }))))), "Docs on GitHub"))))))), /*#__PURE__*/react.createElement("section", {
+  }))))), "Docs on GitHub"))), /*#__PURE__*/react.createElement("p", null, "Create a image deformation effect for mouse interaction."))))), /*#__PURE__*/react.createElement("section", {
     className: "poemkit-spacing--s poemkit-spacing--no-bottom"
   }, /*#__PURE__*/react.createElement("div", {
     className: "container"
@@ -62430,7 +62450,11 @@ var Lightbox = /*#__PURE__*/function (_Component) {
 
       window.removeEventListener('popstate', this.urlChange); // Kill all aniamtions
 
-      TweenMax_TweenMax.killAll();
+      TweenMax_TweenMax.killAll(); // Remove all moved elements
+
+      Array.prototype.forEach.call(document.querySelectorAll('.poemkit-lightbox__htmlcontent-template.is-loaded'), function (node) {
+        node.remove();
+      });
     }
   }, {
     key: "render",
@@ -62525,7 +62549,7 @@ var Lightbox = /*#__PURE__*/function (_Component) {
   }, /*#__PURE__*/react.createElement("path", {
     fill: "#d2d2d2",
     d: "M8.32,0h106.24c4.58,0,8.32,3.74,8.32,8.32v74.62c0,4.57-3.74,8.32-8.32,8.32H8.32C3.74,91.26,0,87.51,0,82.94 V8.32C0,3.74,3.74,0,8.32,0L8.32,0z M54.46,72.22L32,58.61v-8.63l22.46-13.61v10.26l-13.65,7.69l13.65,7.7V72.22L54.46,72.22z M68.42,72.22l22.46-13.61v-8.63L68.42,36.37v10.26l13.65,7.69l-13.65,7.7V72.22L68.42,72.22z M117.97,23.29H5.29v60.46 c0,0.64,0.25,1.2,0.67,1.63c0.42,0.42,0.99,0.67,1.63,0.67h108.04c0.64,0,1.2-0.25,1.63-0.67c0.43-0.43,0.67-0.99,0.67-1.63V23.29 H117.97L117.97,23.29z M106.64,9.35c2.27,0,4.11,1.84,4.11,4.11c0,2.27-1.84,4.11-4.11,4.11c-2.27,0-4.11-1.84-4.11-4.11 C102.54,11.19,104.38,9.35,106.64,9.35L106.64,9.35z M78.8,9.35c2.27,0,4.11,1.84,4.11,4.11c0,2.27-1.84,4.11-4.11,4.11 c-2.27,0-4.11-1.84-4.11-4.11C74.69,11.19,76.53,9.35,78.8,9.35L78.8,9.35z M92.72,9.35c2.27,0,4.11,1.84,4.11,4.11 c0,2.27-1.84,4.11-4.11,4.11c-2.27,0-4.11-1.84-4.11-4.11C88.61,11.19,90.45,9.35,92.72,9.35L92.72,9.35z"
-  })), "Docs on GitHub"))))))), /*#__PURE__*/react.createElement("section", {
+  })), "Docs on GitHub"))), /*#__PURE__*/react.createElement("p", null, "A lightbox is a type of popup used to emphasize a piece of content including images, HTML elements, and important announcements. This window appears on the top of your website (as a popup)."))))), /*#__PURE__*/react.createElement("section", {
     className: "poemkit-spacing--s poemkit-spacing--no-bottom"
   }, /*#__PURE__*/react.createElement("div", {
     className: "container"
@@ -62880,7 +62904,7 @@ var ListBulleted = /*#__PURE__*/function (_Component) {
   }), /*#__PURE__*/react.createElement("path", {
     fill: "#d2d2d2",
     d: "M227.49,192.276c0,4.745,2.783,9.109,7.095,11.123l39.455,18.329l-39.455,18.33c-4.31,2.004-7.095,6.368-7.095,11.118v0.322c0,4.205,2.117,8.068,5.668,10.336c1.974,1.258,4.254,1.924,6.595,1.924c1.793,0,3.528-0.383,5.17-1.142l63.08-29.335c4.307-2.009,7.09-6.372,7.09-11.115v-0.877c0-4.748-2.783-9.113-7.094-11.117l-63.08-29.333c-1.591-0.74-3.373-1.131-5.152-1.131c-2.355,0-4.643,0.661-6.604,1.912c-3.551,2.263-5.67,6.127-5.67,10.337v0.318H227.49L227.49,192.276z"
-  }))))), "Docs on GitHub"))))))), /*#__PURE__*/react.createElement("section", {
+  }))))), "Docs on GitHub"))), /*#__PURE__*/react.createElement("p", null, "This component allows a writer to create a list that stands out from the text with any symbol."))))), /*#__PURE__*/react.createElement("section", {
     className: "poemkit-spacing--s poemkit-spacing--no-bottom"
   }, /*#__PURE__*/react.createElement("div", {
     className: "container"
@@ -63501,7 +63525,11 @@ var ModalDialog = /*#__PURE__*/function (_Component) {
 
       TweenMax_TweenMax.killAll(); // Cancels a timeout previously established by calling setTimeout().
 
-      clearTimeout(window.setCloseModalDialog);
+      clearTimeout(window.setCloseModalDialog); // Remove all moved elements
+
+      Array.prototype.forEach.call(document.querySelectorAll('.poemkit-modal-box.is-loaded'), function (node) {
+        node.remove();
+      });
     }
   }, {
     key: "render",
@@ -63614,7 +63642,7 @@ var ModalDialog = /*#__PURE__*/function (_Component) {
   }, /*#__PURE__*/react.createElement("path", {
     fill: "#d2d2d2",
     d: "M8.32,0h106.24c4.58,0,8.32,3.74,8.32,8.32v74.62c0,4.57-3.74,8.32-8.32,8.32H8.32C3.74,91.26,0,87.51,0,82.94 V8.32C0,3.74,3.74,0,8.32,0L8.32,0z M54.46,72.22L32,58.61v-8.63l22.46-13.61v10.26l-13.65,7.69l13.65,7.7V72.22L54.46,72.22z M68.42,72.22l22.46-13.61v-8.63L68.42,36.37v10.26l13.65,7.69l-13.65,7.7V72.22L68.42,72.22z M117.97,23.29H5.29v60.46 c0,0.64,0.25,1.2,0.67,1.63c0.42,0.42,0.99,0.67,1.63,0.67h108.04c0.64,0,1.2-0.25,1.63-0.67c0.43-0.43,0.67-0.99,0.67-1.63V23.29 H117.97L117.97,23.29z M106.64,9.35c2.27,0,4.11,1.84,4.11,4.11c0,2.27-1.84,4.11-4.11,4.11c-2.27,0-4.11-1.84-4.11-4.11 C102.54,11.19,104.38,9.35,106.64,9.35L106.64,9.35z M78.8,9.35c2.27,0,4.11,1.84,4.11,4.11c0,2.27-1.84,4.11-4.11,4.11 c-2.27,0-4.11-1.84-4.11-4.11C74.69,11.19,76.53,9.35,78.8,9.35L78.8,9.35z M92.72,9.35c2.27,0,4.11,1.84,4.11,4.11 c0,2.27-1.84,4.11-4.11,4.11c-2.27,0-4.11-1.84-4.11-4.11C88.61,11.19,90.45,9.35,92.72,9.35L92.72,9.35z"
-  })), "Docs on GitHub"))))))), /*#__PURE__*/react.createElement("section", {
+  })), "Docs on GitHub"))), /*#__PURE__*/react.createElement("p", null, "A modal dialog is a pop-window that forces the user to interact with it before they can go back to using the parent application."))))), /*#__PURE__*/react.createElement("section", {
     className: "poemkit-spacing--s poemkit-spacing--no-bottom"
   }, /*#__PURE__*/react.createElement("div", {
     className: "container"
@@ -63624,7 +63652,7 @@ var ModalDialog = /*#__PURE__*/function (_Component) {
     className: "col-12"
   }, /*#__PURE__*/react.createElement("h3", {
     className: "app-header-title"
-  }, "Modal Dialog"), /*#__PURE__*/react.createElement("p", null, "A modal dialog is a pop-window that forces the user to interact with it before they can go back to using the parent application."), /*#__PURE__*/react.createElement("hr", null))))), /*#__PURE__*/react.createElement("section", {
+  }, "Text or Images"), /*#__PURE__*/react.createElement("p", null, "Contains text or images information."), /*#__PURE__*/react.createElement("hr", null))))), /*#__PURE__*/react.createElement("section", {
     className: "poemkit-spacing--s"
   }, /*#__PURE__*/react.createElement("div", {
     className: "container"
@@ -63673,7 +63701,7 @@ var ModalDialog = /*#__PURE__*/function (_Component) {
     className: "col-12"
   }, /*#__PURE__*/react.createElement("h3", {
     className: "app-header-title"
-  }, "Modal Dialog (Video)"), /*#__PURE__*/react.createElement("p", null, "Use the following HTML code to fire video."), /*#__PURE__*/react.createElement("hr", null))))), /*#__PURE__*/react.createElement("section", {
+  }, "Video"), /*#__PURE__*/react.createElement("p", null, "Use the following HTML code to fire video."), /*#__PURE__*/react.createElement("hr", null))))), /*#__PURE__*/react.createElement("section", {
     className: "poemkit-spacing--s"
   }, /*#__PURE__*/react.createElement("div", {
     className: "container"
@@ -64000,7 +64028,7 @@ var menuListData = [{
   }, /*#__PURE__*/react.createElement("path", {
     fill: "#d2d2d2",
     d: "M8.32,0h106.24c4.58,0,8.32,3.74,8.32,8.32v74.62c0,4.57-3.74,8.32-8.32,8.32H8.32C3.74,91.26,0,87.51,0,82.94 V8.32C0,3.74,3.74,0,8.32,0L8.32,0z M54.46,72.22L32,58.61v-8.63l22.46-13.61v10.26l-13.65,7.69l13.65,7.7V72.22L54.46,72.22z M68.42,72.22l22.46-13.61v-8.63L68.42,36.37v10.26l13.65,7.69l-13.65,7.7V72.22L68.42,72.22z M117.97,23.29H5.29v60.46 c0,0.64,0.25,1.2,0.67,1.63c0.42,0.42,0.99,0.67,1.63,0.67h108.04c0.64,0,1.2-0.25,1.63-0.67c0.43-0.43,0.67-0.99,0.67-1.63V23.29 H117.97L117.97,23.29z M106.64,9.35c2.27,0,4.11,1.84,4.11,4.11c0,2.27-1.84,4.11-4.11,4.11c-2.27,0-4.11-1.84-4.11-4.11 C102.54,11.19,104.38,9.35,106.64,9.35L106.64,9.35z M78.8,9.35c2.27,0,4.11,1.84,4.11,4.11c0,2.27-1.84,4.11-4.11,4.11 c-2.27,0-4.11-1.84-4.11-4.11C74.69,11.19,76.53,9.35,78.8,9.35L78.8,9.35z M92.72,9.35c2.27,0,4.11,1.84,4.11,4.11 c0,2.27-1.84,4.11-4.11,4.11c-2.27,0-4.11-1.84-4.11-4.11C88.61,11.19,90.45,9.35,92.72,9.35L92.72,9.35z"
-  })), "Docs on GitHub"))))))), /*#__PURE__*/react.createElement("section", {
+  })), "Docs on GitHub"))), /*#__PURE__*/react.createElement("p", null, "This component creates the data for the multi-level dependent drop down list."))))), /*#__PURE__*/react.createElement("section", {
     className: "poemkit-spacing--s poemkit-spacing--no-bottom"
   }, /*#__PURE__*/react.createElement("div", {
     className: "container"
@@ -64255,7 +64283,7 @@ var MousewheelInteraction = /*#__PURE__*/function (_Component) {
   }), /*#__PURE__*/react.createElement("path", {
     fill: "#d2d2d2",
     d: "M227.49,192.276c0,4.745,2.783,9.109,7.095,11.123l39.455,18.329l-39.455,18.33c-4.31,2.004-7.095,6.368-7.095,11.118v0.322c0,4.205,2.117,8.068,5.668,10.336c1.974,1.258,4.254,1.924,6.595,1.924c1.793,0,3.528-0.383,5.17-1.142l63.08-29.335c4.307-2.009,7.09-6.372,7.09-11.115v-0.877c0-4.748-2.783-9.113-7.094-11.117l-63.08-29.333c-1.591-0.74-3.373-1.131-5.152-1.131c-2.355,0-4.643,0.661-6.604,1.912c-3.551,2.263-5.67,6.127-5.67,10.337v0.318H227.49L227.49,192.276z"
-  }))))), "Docs on GitHub"))))))), /*#__PURE__*/react.createElement("section", {
+  }))))), "Docs on GitHub"))), /*#__PURE__*/react.createElement("p", null, "This component is used to pass the return function for the interaction and response of the mousewheel."))))), /*#__PURE__*/react.createElement("section", {
     className: "poemkit-spacing--s poemkit-spacing--no-bottom"
   }, /*#__PURE__*/react.createElement("div", {
     className: "container"
@@ -64415,7 +64443,7 @@ var NavigationDemo_menuListData = [{
   }, /*#__PURE__*/react.createElement("path", {
     fill: "#d2d2d2",
     d: "M8.32,0h106.24c4.58,0,8.32,3.74,8.32,8.32v74.62c0,4.57-3.74,8.32-8.32,8.32H8.32C3.74,91.26,0,87.51,0,82.94 V8.32C0,3.74,3.74,0,8.32,0L8.32,0z M54.46,72.22L32,58.61v-8.63l22.46-13.61v10.26l-13.65,7.69l13.65,7.7V72.22L54.46,72.22z M68.42,72.22l22.46-13.61v-8.63L68.42,36.37v10.26l13.65,7.69l-13.65,7.7V72.22L68.42,72.22z M117.97,23.29H5.29v60.46 c0,0.64,0.25,1.2,0.67,1.63c0.42,0.42,0.99,0.67,1.63,0.67h108.04c0.64,0,1.2-0.25,1.63-0.67c0.43-0.43,0.67-0.99,0.67-1.63V23.29 H117.97L117.97,23.29z M106.64,9.35c2.27,0,4.11,1.84,4.11,4.11c0,2.27-1.84,4.11-4.11,4.11c-2.27,0-4.11-1.84-4.11-4.11 C102.54,11.19,104.38,9.35,106.64,9.35L106.64,9.35z M78.8,9.35c2.27,0,4.11,1.84,4.11,4.11c0,2.27-1.84,4.11-4.11,4.11 c-2.27,0-4.11-1.84-4.11-4.11C74.69,11.19,76.53,9.35,78.8,9.35L78.8,9.35z M92.72,9.35c2.27,0,4.11,1.84,4.11,4.11 c0,2.27-1.84,4.11-4.11,4.11c-2.27,0-4.11-1.84-4.11-4.11C88.61,11.19,90.45,9.35,92.72,9.35L92.72,9.35z"
-  })), "Docs on GitHub"))))))), /*#__PURE__*/react.createElement("section", {
+  })), "Docs on GitHub"))), /*#__PURE__*/react.createElement("p", null, "This component creates the data for primary responsive navigation."))))), /*#__PURE__*/react.createElement("section", {
     className: "poemkit-spacing--s poemkit-spacing--no-bottom"
   }, /*#__PURE__*/react.createElement("div", {
     className: "container"
@@ -64561,7 +64589,7 @@ function gotoPageNumber(number) {
   }, /*#__PURE__*/react.createElement("path", {
     fill: "#d2d2d2",
     d: "M8.32,0h106.24c4.58,0,8.32,3.74,8.32,8.32v74.62c0,4.57-3.74,8.32-8.32,8.32H8.32C3.74,91.26,0,87.51,0,82.94 V8.32C0,3.74,3.74,0,8.32,0L8.32,0z M54.46,72.22L32,58.61v-8.63l22.46-13.61v10.26l-13.65,7.69l13.65,7.7V72.22L54.46,72.22z M68.42,72.22l22.46-13.61v-8.63L68.42,36.37v10.26l13.65,7.69l-13.65,7.7V72.22L68.42,72.22z M117.97,23.29H5.29v60.46 c0,0.64,0.25,1.2,0.67,1.63c0.42,0.42,0.99,0.67,1.63,0.67h108.04c0.64,0,1.2-0.25,1.63-0.67c0.43-0.43,0.67-0.99,0.67-1.63V23.29 H117.97L117.97,23.29z M106.64,9.35c2.27,0,4.11,1.84,4.11,4.11c0,2.27-1.84,4.11-4.11,4.11c-2.27,0-4.11-1.84-4.11-4.11 C102.54,11.19,104.38,9.35,106.64,9.35L106.64,9.35z M78.8,9.35c2.27,0,4.11,1.84,4.11,4.11c0,2.27-1.84,4.11-4.11,4.11 c-2.27,0-4.11-1.84-4.11-4.11C74.69,11.19,76.53,9.35,78.8,9.35L78.8,9.35z M92.72,9.35c2.27,0,4.11,1.84,4.11,4.11 c0,2.27-1.84,4.11-4.11,4.11c-2.27,0-4.11-1.84-4.11-4.11C88.61,11.19,90.45,9.35,92.72,9.35L92.72,9.35z"
-  })), "Docs on GitHub"))))))), /*#__PURE__*/react.createElement("section", null, /*#__PURE__*/react.createElement("div", {
+  })), "Docs on GitHub"))), /*#__PURE__*/react.createElement("p", null, "This component create a list of arbitrary items that is the process of splitting information over multiple pages instead of showing it all on a single page."))))), /*#__PURE__*/react.createElement("section", null, /*#__PURE__*/react.createElement("div", {
     className: "container"
   }, /*#__PURE__*/react.createElement("div", {
     className: "row"
@@ -65180,7 +65208,7 @@ var Parallax = /*#__PURE__*/function (_Component) {
   }, /*#__PURE__*/react.createElement("path", {
     fill: "#d2d2d2",
     d: "M8.32,0h106.24c4.58,0,8.32,3.74,8.32,8.32v74.62c0,4.57-3.74,8.32-8.32,8.32H8.32C3.74,91.26,0,87.51,0,82.94 V8.32C0,3.74,3.74,0,8.32,0L8.32,0z M54.46,72.22L32,58.61v-8.63l22.46-13.61v10.26l-13.65,7.69l13.65,7.7V72.22L54.46,72.22z M68.42,72.22l22.46-13.61v-8.63L68.42,36.37v10.26l13.65,7.69l-13.65,7.7V72.22L68.42,72.22z M117.97,23.29H5.29v60.46 c0,0.64,0.25,1.2,0.67,1.63c0.42,0.42,0.99,0.67,1.63,0.67h108.04c0.64,0,1.2-0.25,1.63-0.67c0.43-0.43,0.67-0.99,0.67-1.63V23.29 H117.97L117.97,23.29z M106.64,9.35c2.27,0,4.11,1.84,4.11,4.11c0,2.27-1.84,4.11-4.11,4.11c-2.27,0-4.11-1.84-4.11-4.11 C102.54,11.19,104.38,9.35,106.64,9.35L106.64,9.35z M78.8,9.35c2.27,0,4.11,1.84,4.11,4.11c0,2.27-1.84,4.11-4.11,4.11 c-2.27,0-4.11-1.84-4.11-4.11C74.69,11.19,76.53,9.35,78.8,9.35L78.8,9.35z M92.72,9.35c2.27,0,4.11,1.84,4.11,4.11 c0,2.27-1.84,4.11-4.11,4.11c-2.27,0-4.11-1.84-4.11-4.11C88.61,11.19,90.45,9.35,92.72,9.35L92.72,9.35z"
-  })), "Docs on GitHub"))))))), /*#__PURE__*/react.createElement("section", {
+  })), "Docs on GitHub"))), /*#__PURE__*/react.createElement("p", null, "Use the Parallax component to create the illusion of depth with layers of images. It allows the use of images or any mix of HTML elements."))))), /*#__PURE__*/react.createElement("section", {
     className: "poemkit-spacing--s"
   }, /*#__PURE__*/react.createElement("div", {
     className: "container"
@@ -65530,7 +65558,7 @@ var ProgressBar = /*#__PURE__*/function (_Component) {
   }, /*#__PURE__*/react.createElement("path", {
     fill: "#d2d2d2",
     d: "M8.32,0h106.24c4.58,0,8.32,3.74,8.32,8.32v74.62c0,4.57-3.74,8.32-8.32,8.32H8.32C3.74,91.26,0,87.51,0,82.94 V8.32C0,3.74,3.74,0,8.32,0L8.32,0z M54.46,72.22L32,58.61v-8.63l22.46-13.61v10.26l-13.65,7.69l13.65,7.7V72.22L54.46,72.22z M68.42,72.22l22.46-13.61v-8.63L68.42,36.37v10.26l13.65,7.69l-13.65,7.7V72.22L68.42,72.22z M117.97,23.29H5.29v60.46 c0,0.64,0.25,1.2,0.67,1.63c0.42,0.42,0.99,0.67,1.63,0.67h108.04c0.64,0,1.2-0.25,1.63-0.67c0.43-0.43,0.67-0.99,0.67-1.63V23.29 H117.97L117.97,23.29z M106.64,9.35c2.27,0,4.11,1.84,4.11,4.11c0,2.27-1.84,4.11-4.11,4.11c-2.27,0-4.11-1.84-4.11-4.11 C102.54,11.19,104.38,9.35,106.64,9.35L106.64,9.35z M78.8,9.35c2.27,0,4.11,1.84,4.11,4.11c0,2.27-1.84,4.11-4.11,4.11 c-2.27,0-4.11-1.84-4.11-4.11C74.69,11.19,76.53,9.35,78.8,9.35L78.8,9.35z M92.72,9.35c2.27,0,4.11,1.84,4.11,4.11 c0,2.27-1.84,4.11-4.11,4.11c-2.27,0-4.11-1.84-4.11-4.11C88.61,11.19,90.45,9.35,92.72,9.35L92.72,9.35z"
-  })), "Docs on GitHub"))))))), /*#__PURE__*/react.createElement("section", {
+  })), "Docs on GitHub"))), /*#__PURE__*/react.createElement("p", null, "This component creates progress bars to help users visualize where they are in a series of steps."))))), /*#__PURE__*/react.createElement("section", {
     className: "poemkit-spacing--s poemkit-spacing--no-bottom"
   }, /*#__PURE__*/react.createElement("div", {
     className: "container"
@@ -65772,12 +65800,14 @@ var PeriodicalScroll = /*#__PURE__*/function (_Component) {
   }, {
     key: "handleMouseLeave",
     value: function handleMouseLeave(index) {
-      var self = this;
+      var _this2 = this;
+
       return function (e) {
         // e is the event object that returned
-        self.tl.play(); //Avoid differences in the direction of element transitions
+        _this2.tl.play(); //Avoid differences in the direction of element transitions
 
-        var root = self.rootRef.current;
+
+        var root = _this2.rootRef.current;
         var listWrapper = root.querySelector('ul');
         var items = listWrapper.querySelectorAll('li');
         var itemHeight = items[0].clientHeight; //including: padding
@@ -65796,7 +65826,7 @@ var PeriodicalScroll = /*#__PURE__*/function (_Component) {
   }, {
     key: "componentDidMount",
     value: function componentDidMount() {
-      var _this2 = this;
+      var _this3 = this;
 
       var self = this;
       var root = this.rootRef.current;
@@ -65820,7 +65850,7 @@ var PeriodicalScroll = /*#__PURE__*/function (_Component) {
       TweenMax_TweenMax.killTweensOf(items); //pauses wherever the playhead currently is:
 
       setTimeout(function () {
-        _this2.tl.play();
+        _this3.tl.play();
       }, speed);
       this.tl.add(TweenMax_TweenMax.staggerFromTo(items, speed / 1000, {
         opacity: 0,
@@ -65853,7 +65883,7 @@ var PeriodicalScroll = /*#__PURE__*/function (_Component) {
   }, {
     key: "render",
     value: function render() {
-      var _this3 = this;
+      var _this4 = this;
 
       var _this$props = this.props,
           id = _this$props.id,
@@ -65868,7 +65898,7 @@ var PeriodicalScroll = /*#__PURE__*/function (_Component) {
         var childProps = PeriodicalScroll_objectSpread({}, item.props);
 
         return /*#__PURE__*/react.createElement(PeriodicalScrollItem, extends_extends({
-          elAnimLeaveEv: _this3.handleMouseLeave(i),
+          elAnimLeaveEv: _this4.handleMouseLeave(i),
           key: "item" + i
         }, childProps));
       }) : "")));
@@ -65938,7 +65968,7 @@ var PeriodicalScroll = /*#__PURE__*/function (_Component) {
   }), /*#__PURE__*/react.createElement("path", {
     fill: "#d2d2d2",
     d: "M227.49,192.276c0,4.745,2.783,9.109,7.095,11.123l39.455,18.329l-39.455,18.33c-4.31,2.004-7.095,6.368-7.095,11.118v0.322c0,4.205,2.117,8.068,5.668,10.336c1.974,1.258,4.254,1.924,6.595,1.924c1.793,0,3.528-0.383,5.17-1.142l63.08-29.335c4.307-2.009,7.09-6.372,7.09-11.115v-0.877c0-4.748-2.783-9.113-7.094-11.117l-63.08-29.333c-1.591-0.74-3.373-1.131-5.152-1.131c-2.355,0-4.643,0.661-6.604,1.912c-3.551,2.263-5.67,6.127-5.67,10.337v0.318H227.49L227.49,192.276z"
-  }))))), "Docs on GitHub"))))))), /*#__PURE__*/react.createElement("section", {
+  }))))), "Docs on GitHub"))), /*#__PURE__*/react.createElement("p", null, "This component creates a seamlessly scrolling data list of elements. It has a time interval to focus users on browsing information."))))), /*#__PURE__*/react.createElement("section", {
     className: "poemkit-spacing--s poemkit-spacing--no-bottom"
   }, /*#__PURE__*/react.createElement("div", {
     className: "container"
@@ -65991,6 +66021,263 @@ var PeriodicalScroll = /*#__PURE__*/function (_Component) {
   }, /*#__PURE__*/react.createElement("table", {
     className: "table table-bordered table-striped mb-5"
   }, /*#__PURE__*/react.createElement("thead", null, /*#__PURE__*/react.createElement("tr", null, /*#__PURE__*/react.createElement("th", null, "Property"), /*#__PURE__*/react.createElement("th", null, "Type"), /*#__PURE__*/react.createElement("th", null, "Default"), /*#__PURE__*/react.createElement("th", null, "Description"))), /*#__PURE__*/react.createElement("tbody", null, /*#__PURE__*/react.createElement("tr", null, /*#__PURE__*/react.createElement("td", null, /*#__PURE__*/react.createElement("code", null, "elAnimLeaveEv")), /*#__PURE__*/react.createElement("td", null, "function"), /*#__PURE__*/react.createElement("td", null, "-"), /*#__PURE__*/react.createElement("td", null, "Handling events when the mouse leaves the element")))))))))));
+});
+;// CONCATENATED MODULE: ./src/client/components/Rating/index.tsx
+
+
+
+
+
+
+
+
+function Rating_createSuper(Derived) { var hasNativeReflectConstruct = Rating_isNativeReflectConstruct(); return function _createSuperInternal() { var Super = _getPrototypeOf(Derived), result; if (hasNativeReflectConstruct) { var NewTarget = _getPrototypeOf(this).constructor; result = Reflect.construct(Super, arguments, NewTarget); } else { result = Super.apply(this, arguments); } return _possibleConstructorReturn(this, result); }; }
+
+function Rating_isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Reflect.construct) return false; if (Reflect.construct.sham) return false; if (typeof Proxy === "function") return true; try { Boolean.prototype.valueOf.call(Reflect.construct(Boolean, [], function () {})); return true; } catch (e) { return false; } }
+
+/* 
+ *************************************
+ * <!-- Rating -->
+ *************************************
+ */
+
+/*-- Apply Third-party plugins (import location should be in front of "global scripts and styles") --*/
+
+
+
+/*-- Apply global scripts and styles --*/
+
+
+
+
+/*-- Apply this component styles --*/
+
+
+
+var Rating = /*#__PURE__*/function (_Component) {
+  _inherits(Rating, _Component);
+
+  var _super = Rating_createSuper(Rating);
+
+  function Rating(props) {
+    var _this;
+
+    _classCallCheck(this, Rating);
+
+    _this = _super.call(this, props);
+
+    _defineProperty(_assertThisInitialized(_this), "uniqueID", void 0);
+
+    _this.uniqueID = 'app-' + helpers.GUID.create();
+    var stars = _this.props.stars ? _this.props.stars : 0;
+    _this.state = {
+      value: stars,
+      dynamicValue: stars,
+      updated: false
+    };
+    return _this;
+  }
+
+  _createClass(Rating, [{
+    key: "handleClick",
+    value: function handleClick(newValue) {
+      if (!this.state.updated) {
+        this.setState({
+          value: newValue,
+          dynamicValue: newValue,
+          //Only allow one selection
+          updated: this.props.repeated ? false : true
+        });
+
+        if (typeof this.props.refreshCallback === 'function') {
+          this.props.refreshCallback(newValue);
+        }
+      }
+    }
+  }, {
+    key: "handleMouseEnter",
+    value: function handleMouseEnter(newValue) {
+      if (!this.state.updated) this.setState({
+        dynamicValue: newValue
+      });
+    }
+  }, {
+    key: "handleMouseLeave",
+    value: function handleMouseLeave(newValue) {
+      if (!this.state.updated) this.setState({
+        dynamicValue: this.state.value
+      });
+    }
+  }, {
+    key: "render",
+    value: function render() {
+      var _this$props = this.props,
+          name = _this$props.name,
+          activeColor = _this$props.activeColor,
+          inactiveColor = _this$props.inactiveColor,
+          id = _this$props.id;
+      var cid = id || this.uniqueID;
+      var starSpans = [];
+      var currentValue = this.state.dynamicValue;
+
+      for (var v = 1; v <= 5; v++) {
+        if (v <= currentValue) {
+          starSpans.push( /*#__PURE__*/react.createElement("span", {
+            id: cid,
+            key: v,
+            className: "poemkit-rating-star",
+            onMouseEnter: this.handleMouseEnter.bind(this, v),
+            onMouseLeave: this.handleMouseLeave.bind(this, v),
+            onClick: this.handleClick.bind(this, v)
+          }, /*#__PURE__*/react.createElement("svg", {
+            className: "is-active",
+            x: "0px",
+            y: "0px",
+            viewBox: "0 0 940.688 940.688"
+          }, /*#__PURE__*/react.createElement("g", null, /*#__PURE__*/react.createElement("path", {
+            fill: activeColor ? activeColor : '#ff851b',
+            d: "M885.344,319.071l-258-3.8l-102.7-264.399c-19.8-48.801-88.899-48.801-108.6,0l-102.7,264.399l-258,3.8c-53.4,3.101-75.1,70.2-33.7,103.9l209.2,181.4l-71.3,247.7c-14,50.899,41.1,92.899,86.5,65.899l224.3-122.7l224.3,122.601c45.4,27,100.5-15,86.5-65.9l-71.3-247.7l209.2-181.399C960.443,389.172,938.744,322.071,885.344,319.071z"
+          })))));
+        } else {
+          starSpans.push( /*#__PURE__*/react.createElement("span", {
+            id: cid,
+            key: v,
+            className: "poemkit-rating-star",
+            onMouseEnter: this.handleMouseEnter.bind(this, v),
+            onMouseLeave: this.handleMouseLeave.bind(this, v),
+            onClick: this.handleClick.bind(this, v)
+          }, /*#__PURE__*/react.createElement("svg", {
+            x: "0px",
+            y: "0px",
+            viewBox: "0 0 248.294 248.294"
+          }, /*#__PURE__*/react.createElement("g", null, /*#__PURE__*/react.createElement("path", {
+            fill: inactiveColor ? inactiveColor : '#333',
+            d: "M55.688,242.322c2.882,0,6.069-0.719,9.439-2.24l59.032-32.156l59.032,32.156c3.369,1.521,6.557,2.24,9.437,2.24c8.933,0,14.963-6.917,14.543-18.36l-7.71-65.312l44.062-45.268c9.166-12.062,4.732-25.004-9.908-28.908l-65.53-10.529l-28.932-58.22c-4.242-6.49-9.959-9.754-15.732-9.754c-5.512,0-11.063,2.973-15.422,8.952L74.461,73.941l-59.893,10.06c-14.566,4.163-18.943,17.314-9.777,29.377l44.06,45.264l-7.71,65.311C40.721,235.405,46.753,242.322,55.688,242.322zM20.734,102.347l56.896-9.558l8.961-1.505l4.492-7.906l32.191-56.649l27.689,55.713l4.378,8.809l9.712,1.557l62.101,9.98l-41.388,42.515l-6.353,6.534l1.064,9.045l7.057,59.795l-54.231-29.548l-9.145-4.979l-9.147,4.979l-54.227,29.548l7.052-59.795l1.066-9.045l-6.352-6.534L20.734,102.347z"
+          })))));
+        }
+      }
+
+      return /*#__PURE__*/react.createElement(react.Fragment, null, starSpans, /*#__PURE__*/react.createElement("input", {
+        name: name || '',
+        type: "hidden",
+        defaultValue: this.state.value
+      }));
+    }
+  }]);
+
+  return Rating;
+}(react.Component);
+
+
+;// CONCATENATED MODULE: ./src/client/views/_pages/ComponentsDemo/RatingDemo.js
+
+
+ //Create or Remove Sidebar Menu
+
+
+/* harmony default export */ const RatingDemo = (function () {
+  react.useEffect(function () {
+    // Equivalent to componentDidMount and componentDidUpdate:
+    helpers(document).ready(function () {
+      //Create sidebar menu
+      SidebarMenu();
+    });
+  });
+  return /*#__PURE__*/react.createElement(react.Fragment, null, /*#__PURE__*/react.createElement("section", null, /*#__PURE__*/react.createElement("div", {
+    className: "container"
+  }, /*#__PURE__*/react.createElement("div", {
+    className: "row"
+  }, /*#__PURE__*/react.createElement("div", {
+    className: "col-12"
+  }, /*#__PURE__*/react.createElement("h1", {
+    className: "poemkit-typo--h2"
+  }, "Rating", /*#__PURE__*/react.createElement("a", {
+    className: "poemkit-typo--h3 align-middle",
+    href: "https://github.com/xizon/poemkit-kit-react/tree/main/src/client/components/Rating",
+    target: "_blank"
+  }, /*#__PURE__*/react.createElement("span", {
+    className: "poemkit-dir--right",
+    style: {
+      fontSize: "0.75rem",
+      color: "#ababab",
+      margin: ".5rem .5rem 0 0"
+    }
+  }, /*#__PURE__*/react.createElement("svg", {
+    style: {
+      marginRight: ".5rem"
+    },
+    width: "15",
+    viewBox: "0 0 392.186 392.186"
+  }, /*#__PURE__*/react.createElement("g", null, /*#__PURE__*/react.createElement("g", null, /*#__PURE__*/react.createElement("g", null, /*#__PURE__*/react.createElement("path", {
+    fill: "#d2d2d2",
+    d: "M368.62,17.951H23.568C10.57,17.951,0,28.524,0,41.52v309.146c0,12.996,10.57,23.568,23.568,23.568h345.053c12.994,0,23.564-10.572,23.564-23.568V41.52C392.188,28.525,381.614,17.951,368.62,17.951z M297.56,57.528c0-4.806,3.896-8.703,8.701-8.703h8.703c4.808,0,8.701,3.896,8.701,8.703v9.863c0,4.806-3.896,8.702-8.701,8.702h-8.703c-4.805,0-8.701-3.896-8.701-8.702V57.528z M257.093,57.528c0-4.806,3.898-8.703,8.703-8.703h8.701c4.805,0,8.703,3.896,8.703,8.703v9.863c0,4.806-3.898,8.702-8.703,8.702h-8.701c-4.805,0-8.703-3.896-8.703-8.702V57.528z M363.903,345.951H28.282V102.235h335.621V345.951L363.903,345.951z M364.132,67.391c0,4.806-3.896,8.702-8.701,8.702h-8.703c-4.809,0-8.702-3.896-8.702-8.702v-9.863c0-4.806,3.896-8.703,8.702-8.703h8.703c4.806,0,8.701,3.896,8.701,8.703V67.391z"
+  }), /*#__PURE__*/react.createElement("path", {
+    fill: "#d2d2d2",
+    d: "M84.185,233.284l63.084,29.336c1.631,0.755,3.367,1.138,5.162,1.138c2.338,0,4.617-0.664,6.598-1.924c3.547-2.267,5.666-6.13,5.666-10.334v-0.322c0-4.752-2.785-9.116-7.096-11.118l-39.455-18.332l39.455-18.334c4.311-2.004,7.096-6.367,7.096-11.117v-0.319c0-4.21-2.119-8.075-5.666-10.334c-1.961-1.253-4.246-1.916-6.605-1.916c-1.779,0-3.563,0.391-5.16,1.133l-63.08,29.333c-4.307,2.004-7.09,6.369-7.09,11.117v0.877C77.093,226.909,79.874,231.272,84.185,233.284z"
+  }), /*#__PURE__*/react.createElement("path", {
+    fill: "#d2d2d2",
+    d: "M165.257,293.036c2.301,3.149,6.002,5.03,9.9,5.03h0.316c5.352,0,10.041-3.426,11.672-8.517L228.7,160.788c1.192-3.716,0.531-7.818-1.771-10.973c-2.301-3.15-6.002-5.03-9.901-5.03h-0.315c-5.354,0-10.048,3.425-11.679,8.516l-41.559,128.771C162.292,285.793,162.958,289.889,165.257,293.036z"
+  }), /*#__PURE__*/react.createElement("path", {
+    fill: "#d2d2d2",
+    d: "M227.49,192.276c0,4.745,2.783,9.109,7.095,11.123l39.455,18.329l-39.455,18.33c-4.31,2.004-7.095,6.368-7.095,11.118v0.322c0,4.205,2.117,8.068,5.668,10.336c1.974,1.258,4.254,1.924,6.595,1.924c1.793,0,3.528-0.383,5.17-1.142l63.08-29.335c4.307-2.009,7.09-6.372,7.09-11.115v-0.877c0-4.748-2.783-9.113-7.094-11.117l-63.08-29.333c-1.591-0.74-3.373-1.131-5.152-1.131c-2.355,0-4.643,0.661-6.604,1.912c-3.551,2.263-5.67,6.127-5.67,10.337v0.318H227.49L227.49,192.276z"
+  }))))), "Docs on GitHub"))), /*#__PURE__*/react.createElement("p", null, "This component creates a 5-star rating system for ranking products, services, or articles on your web page."))))), /*#__PURE__*/react.createElement("section", {
+    className: "poemkit-spacing--s poemkit-spacing--no-bottom"
+  }, /*#__PURE__*/react.createElement("div", {
+    className: "container"
+  }, /*#__PURE__*/react.createElement("div", {
+    className: "row"
+  }, /*#__PURE__*/react.createElement("div", {
+    className: "col-12"
+  }, /*#__PURE__*/react.createElement("h3", {
+    className: "app-header-title"
+  }, "Demos"), /*#__PURE__*/react.createElement("hr", null))))), /*#__PURE__*/react.createElement("section", {
+    className: "poemkit-spacing--s"
+  }, /*#__PURE__*/react.createElement("div", {
+    className: "container"
+  }, /*#__PURE__*/react.createElement("div", {
+    className: "row"
+  }, /*#__PURE__*/react.createElement("div", {
+    className: "col-12"
+  }, /*#__PURE__*/react.createElement(Rating, {
+    name: "app-rating-0"
+  }), /*#__PURE__*/react.createElement("br", null), /*#__PURE__*/react.createElement(Rating, {
+    name: "app-rating-1",
+    stars: 1,
+    refreshCallback: function refreshCallback(newRating) {
+      console.log("The new rating is: ".concat(newRating));
+    }
+  }), " (contains callback function)", /*#__PURE__*/react.createElement("br", null), /*#__PURE__*/react.createElement(Rating, {
+    name: "app-rating-2",
+    stars: 2
+  }), /*#__PURE__*/react.createElement("br", null), /*#__PURE__*/react.createElement(Rating, {
+    name: "app-rating-3",
+    stars: 3,
+    repeated: true
+  }), " (can be selected multiple times)", /*#__PURE__*/react.createElement("br", null), /*#__PURE__*/react.createElement(Rating, {
+    name: "app-rating-4",
+    stars: 4,
+    repeated: true
+  }), " (can be selected multiple times)", /*#__PURE__*/react.createElement("br", null), /*#__PURE__*/react.createElement(Rating, {
+    name: "app-rating-5",
+    stars: 3,
+    activeColor: "blue",
+    inactiveColor: "#ddd"
+  }), " (custom colors)", /*#__PURE__*/react.createElement("br", null))))), /*#__PURE__*/react.createElement("section", null, /*#__PURE__*/react.createElement("div", {
+    className: "container"
+  }, /*#__PURE__*/react.createElement("div", {
+    className: "row"
+  }, /*#__PURE__*/react.createElement("div", {
+    className: "col-12"
+  }, /*#__PURE__*/react.createElement("h3", {
+    className: "app-header-title"
+  }, "API"), /*#__PURE__*/react.createElement("hr", null), /*#__PURE__*/react.createElement("article", {
+    className: "poemkit-spacing--s",
+    itemProp: "text"
+  }, /*#__PURE__*/react.createElement("h4", null, "Rating"), /*#__PURE__*/react.createElement("div", null, /*#__PURE__*/react.createElement("pre", null, "import Rating from '@poemkit/components/Rating/index.tsx';")), /*#__PURE__*/react.createElement("div", {
+    className: "table-responsive-md"
+  }, /*#__PURE__*/react.createElement("table", {
+    className: "table table-bordered table-striped mb-5"
+  }, /*#__PURE__*/react.createElement("thead", null, /*#__PURE__*/react.createElement("tr", null, /*#__PURE__*/react.createElement("th", null, "Property"), /*#__PURE__*/react.createElement("th", null, "Type"), /*#__PURE__*/react.createElement("th", null, "Default"), /*#__PURE__*/react.createElement("th", null, "Description"))), /*#__PURE__*/react.createElement("tbody", null, /*#__PURE__*/react.createElement("tr", null, /*#__PURE__*/react.createElement("td", null, /*#__PURE__*/react.createElement("code", null, "name")), /*#__PURE__*/react.createElement("td", null, "string"), /*#__PURE__*/react.createElement("td", null, "-"), /*#__PURE__*/react.createElement("td", null, "Set a name for the form field for this component")), /*#__PURE__*/react.createElement("tr", null, /*#__PURE__*/react.createElement("td", null, /*#__PURE__*/react.createElement("code", null, "activeColor")), /*#__PURE__*/react.createElement("td", null, "string"), /*#__PURE__*/react.createElement("td", null, "#ff851b"), /*#__PURE__*/react.createElement("td", null, "Active color for shape")), /*#__PURE__*/react.createElement("tr", null, /*#__PURE__*/react.createElement("td", null, /*#__PURE__*/react.createElement("code", null, "inactiveColor")), /*#__PURE__*/react.createElement("td", null, "string"), /*#__PURE__*/react.createElement("td", null, "#333"), /*#__PURE__*/react.createElement("td", null, "Inactive color for shape")), /*#__PURE__*/react.createElement("tr", null, /*#__PURE__*/react.createElement("td", null, /*#__PURE__*/react.createElement("code", null, "repeated")), /*#__PURE__*/react.createElement("td", null, "boolean"), /*#__PURE__*/react.createElement("td", null, "false"), /*#__PURE__*/react.createElement("td", null, "When true, do not allow repeated selection")), /*#__PURE__*/react.createElement("tr", null, /*#__PURE__*/react.createElement("td", null, /*#__PURE__*/react.createElement("code", null, "stars")), /*#__PURE__*/react.createElement("td", null, "number"), /*#__PURE__*/react.createElement("td", null, "0"), /*#__PURE__*/react.createElement("td", null, "Specify a rating number, an integer ", /*#__PURE__*/react.createElement("code", null, "0"), " to ", /*#__PURE__*/react.createElement("code", null, "5"))), /*#__PURE__*/react.createElement("tr", null, /*#__PURE__*/react.createElement("td", null, /*#__PURE__*/react.createElement("code", null, "refreshCallback")), /*#__PURE__*/react.createElement("td", null, "function | null"), /*#__PURE__*/react.createElement("td", null, "-"), /*#__PURE__*/react.createElement("td", null, "This function is called whenever the data is updated. Exposes the JSON format data about the page number as an argument.")))))))))));
 });
 ;// CONCATENATED MODULE: ./src/client/components/ScrollReveal/index.tsx
 
@@ -66333,7 +66620,7 @@ var ScrollReveal = /*#__PURE__*/function (_Component) {
   }, /*#__PURE__*/react.createElement("path", {
     fill: "#d2d2d2",
     d: "M8.32,0h106.24c4.58,0,8.32,3.74,8.32,8.32v74.62c0,4.57-3.74,8.32-8.32,8.32H8.32C3.74,91.26,0,87.51,0,82.94 V8.32C0,3.74,3.74,0,8.32,0L8.32,0z M54.46,72.22L32,58.61v-8.63l22.46-13.61v10.26l-13.65,7.69l13.65,7.7V72.22L54.46,72.22z M68.42,72.22l22.46-13.61v-8.63L68.42,36.37v10.26l13.65,7.69l-13.65,7.7V72.22L68.42,72.22z M117.97,23.29H5.29v60.46 c0,0.64,0.25,1.2,0.67,1.63c0.42,0.42,0.99,0.67,1.63,0.67h108.04c0.64,0,1.2-0.25,1.63-0.67c0.43-0.43,0.67-0.99,0.67-1.63V23.29 H117.97L117.97,23.29z M106.64,9.35c2.27,0,4.11,1.84,4.11,4.11c0,2.27-1.84,4.11-4.11,4.11c-2.27,0-4.11-1.84-4.11-4.11 C102.54,11.19,104.38,9.35,106.64,9.35L106.64,9.35z M78.8,9.35c2.27,0,4.11,1.84,4.11,4.11c0,2.27-1.84,4.11-4.11,4.11 c-2.27,0-4.11-1.84-4.11-4.11C74.69,11.19,76.53,9.35,78.8,9.35L78.8,9.35z M92.72,9.35c2.27,0,4.11,1.84,4.11,4.11 c0,2.27-1.84,4.11-4.11,4.11c-2.27,0-4.11-1.84-4.11-4.11C88.61,11.19,90.45,9.35,92.72,9.35L92.72,9.35z"
-  })), "Docs on GitHub"))))))), /*#__PURE__*/react.createElement("section", {
+  })), "Docs on GitHub"))), /*#__PURE__*/react.createElement("p", null, "This component creates a section for easily animating elements as they enter/leave the viewport."))))), /*#__PURE__*/react.createElement("section", {
     className: "poemkit-spacing--s"
   }, /*#__PURE__*/react.createElement("div", {
     className: "container"
@@ -67300,7 +67587,7 @@ var Slideshow = /*#__PURE__*/function (_Component) {
   }, /*#__PURE__*/react.createElement("path", {
     fill: "#d2d2d2",
     d: "M8.32,0h106.24c4.58,0,8.32,3.74,8.32,8.32v74.62c0,4.57-3.74,8.32-8.32,8.32H8.32C3.74,91.26,0,87.51,0,82.94 V8.32C0,3.74,3.74,0,8.32,0L8.32,0z M54.46,72.22L32,58.61v-8.63l22.46-13.61v10.26l-13.65,7.69l13.65,7.7V72.22L54.46,72.22z M68.42,72.22l22.46-13.61v-8.63L68.42,36.37v10.26l13.65,7.69l-13.65,7.7V72.22L68.42,72.22z M117.97,23.29H5.29v60.46 c0,0.64,0.25,1.2,0.67,1.63c0.42,0.42,0.99,0.67,1.63,0.67h108.04c0.64,0,1.2-0.25,1.63-0.67c0.43-0.43,0.67-0.99,0.67-1.63V23.29 H117.97L117.97,23.29z M106.64,9.35c2.27,0,4.11,1.84,4.11,4.11c0,2.27-1.84,4.11-4.11,4.11c-2.27,0-4.11-1.84-4.11-4.11 C102.54,11.19,104.38,9.35,106.64,9.35L106.64,9.35z M78.8,9.35c2.27,0,4.11,1.84,4.11,4.11c0,2.27-1.84,4.11-4.11,4.11 c-2.27,0-4.11-1.84-4.11-4.11C74.69,11.19,76.53,9.35,78.8,9.35L78.8,9.35z M92.72,9.35c2.27,0,4.11,1.84,4.11,4.11 c0,2.27-1.84,4.11-4.11,4.11c-2.27,0-4.11-1.84-4.11-4.11C88.61,11.19,90.45,9.35,92.72,9.35L92.72,9.35z"
-  })), "Docs on GitHub"))))))), /*#__PURE__*/react.createElement("section", {
+  })), "Docs on GitHub"))), /*#__PURE__*/react.createElement("p", null, "Use this component to create online slideshows with custom CSS. You can configure the transition effect directly through CSS."))))), /*#__PURE__*/react.createElement("section", {
     className: "poemkit-spacing--s"
   }, /*#__PURE__*/react.createElement("div", {
     className: "container"
@@ -78386,7 +78673,7 @@ var Swiper_Swiper = /*#__PURE__*/function (_Component) {
             loop: true,
             speed: 1000,
             centeredSlides: true,
-            //If true, then active slide will be centered, not always on the left side.
+            //When true, then active slide will be centered, not always on the left side.
             pagination: {
               el: '.swiper-pagination',
               clickable: true,
@@ -79157,7 +79444,7 @@ var Swiper_Swiper = /*#__PURE__*/function (_Component) {
   }, /*#__PURE__*/react.createElement("path", {
     fill: "#d2d2d2",
     d: "M8.32,0h106.24c4.58,0,8.32,3.74,8.32,8.32v74.62c0,4.57-3.74,8.32-8.32,8.32H8.32C3.74,91.26,0,87.51,0,82.94 V8.32C0,3.74,3.74,0,8.32,0L8.32,0z M54.46,72.22L32,58.61v-8.63l22.46-13.61v10.26l-13.65,7.69l13.65,7.7V72.22L54.46,72.22z M68.42,72.22l22.46-13.61v-8.63L68.42,36.37v10.26l13.65,7.69l-13.65,7.7V72.22L68.42,72.22z M117.97,23.29H5.29v60.46 c0,0.64,0.25,1.2,0.67,1.63c0.42,0.42,0.99,0.67,1.63,0.67h108.04c0.64,0,1.2-0.25,1.63-0.67c0.43-0.43,0.67-0.99,0.67-1.63V23.29 H117.97L117.97,23.29z M106.64,9.35c2.27,0,4.11,1.84,4.11,4.11c0,2.27-1.84,4.11-4.11,4.11c-2.27,0-4.11-1.84-4.11-4.11 C102.54,11.19,104.38,9.35,106.64,9.35L106.64,9.35z M78.8,9.35c2.27,0,4.11,1.84,4.11,4.11c0,2.27-1.84,4.11-4.11,4.11 c-2.27,0-4.11-1.84-4.11-4.11C74.69,11.19,76.53,9.35,78.8,9.35L78.8,9.35z M92.72,9.35c2.27,0,4.11,1.84,4.11,4.11 c0,2.27-1.84,4.11-4.11,4.11c-2.27,0-4.11-1.84-4.11-4.11C88.61,11.19,90.45,9.35,92.72,9.35L92.72,9.35z"
-  })), "Docs on GitHub"))))))), /*#__PURE__*/react.createElement(Swiper_Swiper, null), /*#__PURE__*/react.createElement("section", {
+  })), "Docs on GitHub"))), /*#__PURE__*/react.createElement("p", null, "This is a variety of custom stateless components based on the ", /*#__PURE__*/react.createElement("strong", null, "Swiper"), " plug-in, mainly used to create presentation effects."))))), /*#__PURE__*/react.createElement(Swiper_Swiper, null), /*#__PURE__*/react.createElement("section", {
     className: "poemkit-spacing--s poemkit-spacing--no-bottom"
   }, /*#__PURE__*/react.createElement("div", {
     className: "container"
@@ -79454,7 +79741,7 @@ var Sticky = /*#__PURE__*/function (_Component) {
   }, /*#__PURE__*/react.createElement("path", {
     fill: "#d2d2d2",
     d: "M8.32,0h106.24c4.58,0,8.32,3.74,8.32,8.32v74.62c0,4.57-3.74,8.32-8.32,8.32H8.32C3.74,91.26,0,87.51,0,82.94 V8.32C0,3.74,3.74,0,8.32,0L8.32,0z M54.46,72.22L32,58.61v-8.63l22.46-13.61v10.26l-13.65,7.69l13.65,7.7V72.22L54.46,72.22z M68.42,72.22l22.46-13.61v-8.63L68.42,36.37v10.26l13.65,7.69l-13.65,7.7V72.22L68.42,72.22z M117.97,23.29H5.29v60.46 c0,0.64,0.25,1.2,0.67,1.63c0.42,0.42,0.99,0.67,1.63,0.67h108.04c0.64,0,1.2-0.25,1.63-0.67c0.43-0.43,0.67-0.99,0.67-1.63V23.29 H117.97L117.97,23.29z M106.64,9.35c2.27,0,4.11,1.84,4.11,4.11c0,2.27-1.84,4.11-4.11,4.11c-2.27,0-4.11-1.84-4.11-4.11 C102.54,11.19,104.38,9.35,106.64,9.35L106.64,9.35z M78.8,9.35c2.27,0,4.11,1.84,4.11,4.11c0,2.27-1.84,4.11-4.11,4.11 c-2.27,0-4.11-1.84-4.11-4.11C74.69,11.19,76.53,9.35,78.8,9.35L78.8,9.35z M92.72,9.35c2.27,0,4.11,1.84,4.11,4.11 c0,2.27-1.84,4.11-4.11,4.11c-2.27,0-4.11-1.84-4.11-4.11C88.61,11.19,90.45,9.35,92.72,9.35L92.72,9.35z"
-  })), "Docs on GitHub"))))))), /*#__PURE__*/react.createElement("section", {
+  })), "Docs on GitHub"))), /*#__PURE__*/react.createElement("p", null, "Sticky positioning can be thought of as a hybrid of relative and fixed positioning. It also returns the sticky element to its original non-sticky position when scrolling back above it."))))), /*#__PURE__*/react.createElement("section", {
     className: "poemkit-spacing--s poemkit-spacing--no-bottom"
   }, /*#__PURE__*/react.createElement("div", {
     className: "container"
@@ -79799,7 +80086,7 @@ var SeamlessScrollingElement = /*#__PURE__*/function (_Component) {
   }), /*#__PURE__*/react.createElement("path", {
     fill: "#d2d2d2",
     d: "M227.49,192.276c0,4.745,2.783,9.109,7.095,11.123l39.455,18.329l-39.455,18.33c-4.31,2.004-7.095,6.368-7.095,11.118v0.322c0,4.205,2.117,8.068,5.668,10.336c1.974,1.258,4.254,1.924,6.595,1.924c1.793,0,3.528-0.383,5.17-1.142l63.08-29.335c4.307-2.009,7.09-6.372,7.09-11.115v-0.877c0-4.748-2.783-9.113-7.094-11.117l-63.08-29.333c-1.591-0.74-3.373-1.131-5.152-1.131c-2.355,0-4.643,0.661-6.604,1.912c-3.551,2.263-5.67,6.127-5.67,10.337v0.318H227.49L227.49,192.276z"
-  }))))), "Docs on GitHub"))))))), /*#__PURE__*/react.createElement("section", {
+  }))))), "Docs on GitHub"))), /*#__PURE__*/react.createElement("p", null, "This component can control what happens when the text reaches the edges of its content area using its attributes. For example, create an infinite scrolling text effect."))))), /*#__PURE__*/react.createElement("section", {
     className: "poemkit-spacing--s poemkit-spacing--no-bottom"
   }, /*#__PURE__*/react.createElement("div", {
     className: "container"
@@ -80079,7 +80366,7 @@ var ShowMoreLess = /*#__PURE__*/function (_Component) {
   }), /*#__PURE__*/react.createElement("path", {
     fill: "#d2d2d2",
     d: "M227.49,192.276c0,4.745,2.783,9.109,7.095,11.123l39.455,18.329l-39.455,18.33c-4.31,2.004-7.095,6.368-7.095,11.118v0.322c0,4.205,2.117,8.068,5.668,10.336c1.974,1.258,4.254,1.924,6.595,1.924c1.793,0,3.528-0.383,5.17-1.142l63.08-29.335c4.307-2.009,7.09-6.372,7.09-11.115v-0.877c0-4.748-2.783-9.113-7.094-11.117l-63.08-29.333c-1.591-0.74-3.373-1.131-5.152-1.131c-2.355,0-4.643,0.661-6.604,1.912c-3.551,2.263-5.67,6.127-5.67,10.337v0.318H227.49L227.49,192.276z"
-  }))))), "Docs on GitHub"))))))), /*#__PURE__*/react.createElement("section", {
+  }))))), "Docs on GitHub"))), /*#__PURE__*/react.createElement("p", null, "This component creates a show more/less text effect."))))), /*#__PURE__*/react.createElement("section", {
     className: "poemkit-spacing--s poemkit-spacing--no-bottom"
   }, /*#__PURE__*/react.createElement("div", {
     className: "container"
@@ -80556,7 +80843,7 @@ var Tabs = /*#__PURE__*/function (_Component) {
   }, /*#__PURE__*/react.createElement("path", {
     fill: "#d2d2d2",
     d: "M8.32,0h106.24c4.58,0,8.32,3.74,8.32,8.32v74.62c0,4.57-3.74,8.32-8.32,8.32H8.32C3.74,91.26,0,87.51,0,82.94 V8.32C0,3.74,3.74,0,8.32,0L8.32,0z M54.46,72.22L32,58.61v-8.63l22.46-13.61v10.26l-13.65,7.69l13.65,7.7V72.22L54.46,72.22z M68.42,72.22l22.46-13.61v-8.63L68.42,36.37v10.26l13.65,7.69l-13.65,7.7V72.22L68.42,72.22z M117.97,23.29H5.29v60.46 c0,0.64,0.25,1.2,0.67,1.63c0.42,0.42,0.99,0.67,1.63,0.67h108.04c0.64,0,1.2-0.25,1.63-0.67c0.43-0.43,0.67-0.99,0.67-1.63V23.29 H117.97L117.97,23.29z M106.64,9.35c2.27,0,4.11,1.84,4.11,4.11c0,2.27-1.84,4.11-4.11,4.11c-2.27,0-4.11-1.84-4.11-4.11 C102.54,11.19,104.38,9.35,106.64,9.35L106.64,9.35z M78.8,9.35c2.27,0,4.11,1.84,4.11,4.11c0,2.27-1.84,4.11-4.11,4.11 c-2.27,0-4.11-1.84-4.11-4.11C74.69,11.19,76.53,9.35,78.8,9.35L78.8,9.35z M92.72,9.35c2.27,0,4.11,1.84,4.11,4.11 c0,2.27-1.84,4.11-4.11,4.11c-2.27,0-4.11-1.84-4.11-4.11C88.61,11.19,90.45,9.35,92.72,9.35L92.72,9.35z"
-  })), "Docs on GitHub"))))))), /*#__PURE__*/react.createElement("section", {
+  })), "Docs on GitHub"))), /*#__PURE__*/react.createElement("p", null, "Tabbed interfaces are a way of navigating between multiple panels, reducing clutter and fitting more into a smaller space."))))), /*#__PURE__*/react.createElement("section", {
     className: "poemkit-spacing--s poemkit-spacing--no-bottom"
   }, /*#__PURE__*/react.createElement("div", {
     className: "container"
@@ -80767,7 +81054,7 @@ var Tabs = /*#__PURE__*/function (_Component) {
     className: "table-responsive-md"
   }, /*#__PURE__*/react.createElement("table", {
     className: "table table-bordered table-striped mb-5"
-  }, /*#__PURE__*/react.createElement("thead", null, /*#__PURE__*/react.createElement("tr", null, /*#__PURE__*/react.createElement("th", null, "Property"), /*#__PURE__*/react.createElement("th", null, "Type"), /*#__PURE__*/react.createElement("th", null, "Default"), /*#__PURE__*/react.createElement("th", null, "Description"))), /*#__PURE__*/react.createElement("tbody", null, /*#__PURE__*/react.createElement("tr", null, /*#__PURE__*/react.createElement("td", null, /*#__PURE__*/react.createElement("code", null, "center")), /*#__PURE__*/react.createElement("td", null, "boolean"), /*#__PURE__*/react.createElement("td", null, "false"), /*#__PURE__*/react.createElement("td", null, "If true, the navigation button of the component is centered")), /*#__PURE__*/react.createElement("tr", null, /*#__PURE__*/react.createElement("td", null, /*#__PURE__*/react.createElement("code", null, "fullwidth")), /*#__PURE__*/react.createElement("td", null, "boolean"), /*#__PURE__*/react.createElement("td", null, "false"), /*#__PURE__*/react.createElement("td", null, "If true, the navigation buttons of the component will be automatically filled in the 100% width area")), /*#__PURE__*/react.createElement("tr", null, /*#__PURE__*/react.createElement("td", null, /*#__PURE__*/react.createElement("code", null, "rotation")), /*#__PURE__*/react.createElement("td", null, "boolean"), /*#__PURE__*/react.createElement("td", null, "false"), /*#__PURE__*/react.createElement("td", null, "Set whether to enable the rotation layout of the component. When the value is true, the two properties of ", /*#__PURE__*/react.createElement("code", null, "rotationRadius"), " and ", /*#__PURE__*/react.createElement("code", null, "rotationWrapperAngle"), " are valid.")), /*#__PURE__*/react.createElement("tr", null, /*#__PURE__*/react.createElement("td", null, /*#__PURE__*/react.createElement("code", null, "rotationRadius")), /*#__PURE__*/react.createElement("td", null, "number"), /*#__PURE__*/react.createElement("td", null, "130"), /*#__PURE__*/react.createElement("td", null, "Set the radius of rotation")), /*#__PURE__*/react.createElement("tr", null, /*#__PURE__*/react.createElement("td", null, /*#__PURE__*/react.createElement("code", null, "rotationWrapperAngle")), /*#__PURE__*/react.createElement("td", null, "number"), /*#__PURE__*/react.createElement("td", null, "0"), /*#__PURE__*/react.createElement("td", null, "Set the rotation angle of the entire component"))))), /*#__PURE__*/react.createElement("h4", null, "Tab List"), /*#__PURE__*/react.createElement("div", null, /*#__PURE__*/react.createElement("pre", null, "import ", "{TabList}", " from '@poemkit/components/Tabs/index.tsx';")), /*#__PURE__*/react.createElement("div", {
+  }, /*#__PURE__*/react.createElement("thead", null, /*#__PURE__*/react.createElement("tr", null, /*#__PURE__*/react.createElement("th", null, "Property"), /*#__PURE__*/react.createElement("th", null, "Type"), /*#__PURE__*/react.createElement("th", null, "Default"), /*#__PURE__*/react.createElement("th", null, "Description"))), /*#__PURE__*/react.createElement("tbody", null, /*#__PURE__*/react.createElement("tr", null, /*#__PURE__*/react.createElement("td", null, /*#__PURE__*/react.createElement("code", null, "center")), /*#__PURE__*/react.createElement("td", null, "boolean"), /*#__PURE__*/react.createElement("td", null, "false"), /*#__PURE__*/react.createElement("td", null, "When true, the navigation button of the component is centered")), /*#__PURE__*/react.createElement("tr", null, /*#__PURE__*/react.createElement("td", null, /*#__PURE__*/react.createElement("code", null, "fullwidth")), /*#__PURE__*/react.createElement("td", null, "boolean"), /*#__PURE__*/react.createElement("td", null, "false"), /*#__PURE__*/react.createElement("td", null, "When true, the navigation buttons of the component will be automatically filled in the 100% width area")), /*#__PURE__*/react.createElement("tr", null, /*#__PURE__*/react.createElement("td", null, /*#__PURE__*/react.createElement("code", null, "rotation")), /*#__PURE__*/react.createElement("td", null, "boolean"), /*#__PURE__*/react.createElement("td", null, "false"), /*#__PURE__*/react.createElement("td", null, "Set whether to enable the rotation layout of the component. When the value is true, the two properties of ", /*#__PURE__*/react.createElement("code", null, "rotationRadius"), " and ", /*#__PURE__*/react.createElement("code", null, "rotationWrapperAngle"), " are valid.")), /*#__PURE__*/react.createElement("tr", null, /*#__PURE__*/react.createElement("td", null, /*#__PURE__*/react.createElement("code", null, "rotationRadius")), /*#__PURE__*/react.createElement("td", null, "number"), /*#__PURE__*/react.createElement("td", null, "130"), /*#__PURE__*/react.createElement("td", null, "Set the radius of rotation")), /*#__PURE__*/react.createElement("tr", null, /*#__PURE__*/react.createElement("td", null, /*#__PURE__*/react.createElement("code", null, "rotationWrapperAngle")), /*#__PURE__*/react.createElement("td", null, "number"), /*#__PURE__*/react.createElement("td", null, "0"), /*#__PURE__*/react.createElement("td", null, "Set the rotation angle of the entire component"))))), /*#__PURE__*/react.createElement("h4", null, "Tab List"), /*#__PURE__*/react.createElement("div", null, /*#__PURE__*/react.createElement("pre", null, "import ", "{TabList}", " from '@poemkit/components/Tabs/index.tsx';")), /*#__PURE__*/react.createElement("div", {
     className: "table-responsive-md"
   }, /*#__PURE__*/react.createElement("table", {
     className: "table table-bordered table-striped mb-5"
@@ -81073,7 +81360,7 @@ var TabsAnimated = /*#__PURE__*/function (_Component) {
   }, /*#__PURE__*/react.createElement("path", {
     fill: "#d2d2d2",
     d: "M8.32,0h106.24c4.58,0,8.32,3.74,8.32,8.32v74.62c0,4.57-3.74,8.32-8.32,8.32H8.32C3.74,91.26,0,87.51,0,82.94 V8.32C0,3.74,3.74,0,8.32,0L8.32,0z M54.46,72.22L32,58.61v-8.63l22.46-13.61v10.26l-13.65,7.69l13.65,7.7V72.22L54.46,72.22z M68.42,72.22l22.46-13.61v-8.63L68.42,36.37v10.26l13.65,7.69l-13.65,7.7V72.22L68.42,72.22z M117.97,23.29H5.29v60.46 c0,0.64,0.25,1.2,0.67,1.63c0.42,0.42,0.99,0.67,1.63,0.67h108.04c0.64,0,1.2-0.25,1.63-0.67c0.43-0.43,0.67-0.99,0.67-1.63V23.29 H117.97L117.97,23.29z M106.64,9.35c2.27,0,4.11,1.84,4.11,4.11c0,2.27-1.84,4.11-4.11,4.11c-2.27,0-4.11-1.84-4.11-4.11 C102.54,11.19,104.38,9.35,106.64,9.35L106.64,9.35z M78.8,9.35c2.27,0,4.11,1.84,4.11,4.11c0,2.27-1.84,4.11-4.11,4.11 c-2.27,0-4.11-1.84-4.11-4.11C74.69,11.19,76.53,9.35,78.8,9.35L78.8,9.35z M92.72,9.35c2.27,0,4.11,1.84,4.11,4.11 c0,2.27-1.84,4.11-4.11,4.11c-2.27,0-4.11-1.84-4.11-4.11C88.61,11.19,90.45,9.35,92.72,9.35L92.72,9.35z"
-  })), "Docs on GitHub"))))))), /*#__PURE__*/react.createElement("section", {
+  })), "Docs on GitHub"))), /*#__PURE__*/react.createElement("p", null, "This is a Tabbed interfaces that can customize CSS transition effects."))))), /*#__PURE__*/react.createElement("section", {
     className: "poemkit-spacing--s poemkit-spacing--no-bottom"
   }, /*#__PURE__*/react.createElement("div", {
     className: "container"
@@ -81083,7 +81370,7 @@ var TabsAnimated = /*#__PURE__*/function (_Component) {
     className: "col-12"
   }, /*#__PURE__*/react.createElement("h3", {
     className: "app-header-title"
-  }, "Tab Animated Normal"), /*#__PURE__*/react.createElement("p", null, "The most basic style allows you to set transition animation"), /*#__PURE__*/react.createElement("hr", null))))), /*#__PURE__*/react.createElement("section", {
+  }, "Demos"), /*#__PURE__*/react.createElement("hr", null))))), /*#__PURE__*/react.createElement("section", {
     className: "poemkit-spacing--s"
   }, /*#__PURE__*/react.createElement("div", {
     className: "container"
@@ -81942,7 +82229,7 @@ var data5 = {
   }, /*#__PURE__*/react.createElement("path", {
     fill: "#d2d2d2",
     d: "M8.32,0h106.24c4.58,0,8.32,3.74,8.32,8.32v74.62c0,4.57-3.74,8.32-8.32,8.32H8.32C3.74,91.26,0,87.51,0,82.94 V8.32C0,3.74,3.74,0,8.32,0L8.32,0z M54.46,72.22L32,58.61v-8.63l22.46-13.61v10.26l-13.65,7.69l13.65,7.7V72.22L54.46,72.22z M68.42,72.22l22.46-13.61v-8.63L68.42,36.37v10.26l13.65,7.69l-13.65,7.7V72.22L68.42,72.22z M117.97,23.29H5.29v60.46 c0,0.64,0.25,1.2,0.67,1.63c0.42,0.42,0.99,0.67,1.63,0.67h108.04c0.64,0,1.2-0.25,1.63-0.67c0.43-0.43,0.67-0.99,0.67-1.63V23.29 H117.97L117.97,23.29z M106.64,9.35c2.27,0,4.11,1.84,4.11,4.11c0,2.27-1.84,4.11-4.11,4.11c-2.27,0-4.11-1.84-4.11-4.11 C102.54,11.19,104.38,9.35,106.64,9.35L106.64,9.35z M78.8,9.35c2.27,0,4.11,1.84,4.11,4.11c0,2.27-1.84,4.11-4.11,4.11 c-2.27,0-4.11-1.84-4.11-4.11C74.69,11.19,76.53,9.35,78.8,9.35L78.8,9.35z M92.72,9.35c2.27,0,4.11,1.84,4.11,4.11 c0,2.27-1.84,4.11-4.11,4.11c-2.27,0-4.11-1.84-4.11-4.11C88.61,11.19,90.45,9.35,92.72,9.35L92.72,9.35z"
-  })), "Docs on GitHub"))))))), /*#__PURE__*/react.createElement("section", {
+  })), "Docs on GitHub"))), /*#__PURE__*/react.createElement("p", null, "Use the data format to create elements that match the native table."))))), /*#__PURE__*/react.createElement("section", {
     className: "poemkit-spacing--s poemkit-spacing--no-bottom"
   }, /*#__PURE__*/react.createElement("div", {
     className: "container"
@@ -82407,7 +82694,7 @@ var TableGridDemo_data1 = {
   }, /*#__PURE__*/react.createElement("path", {
     fill: "#d2d2d2",
     d: "M8.32,0h106.24c4.58,0,8.32,3.74,8.32,8.32v74.62c0,4.57-3.74,8.32-8.32,8.32H8.32C3.74,91.26,0,87.51,0,82.94 V8.32C0,3.74,3.74,0,8.32,0L8.32,0z M54.46,72.22L32,58.61v-8.63l22.46-13.61v10.26l-13.65,7.69l13.65,7.7V72.22L54.46,72.22z M68.42,72.22l22.46-13.61v-8.63L68.42,36.37v10.26l13.65,7.69l-13.65,7.7V72.22L68.42,72.22z M117.97,23.29H5.29v60.46 c0,0.64,0.25,1.2,0.67,1.63c0.42,0.42,0.99,0.67,1.63,0.67h108.04c0.64,0,1.2-0.25,1.63-0.67c0.43-0.43,0.67-0.99,0.67-1.63V23.29 H117.97L117.97,23.29z M106.64,9.35c2.27,0,4.11,1.84,4.11,4.11c0,2.27-1.84,4.11-4.11,4.11c-2.27,0-4.11-1.84-4.11-4.11 C102.54,11.19,104.38,9.35,106.64,9.35L106.64,9.35z M78.8,9.35c2.27,0,4.11,1.84,4.11,4.11c0,2.27-1.84,4.11-4.11,4.11 c-2.27,0-4.11-1.84-4.11-4.11C74.69,11.19,76.53,9.35,78.8,9.35L78.8,9.35z M92.72,9.35c2.27,0,4.11,1.84,4.11,4.11 c0,2.27-1.84,4.11-4.11,4.11c-2.27,0-4.11-1.84-4.11-4.11C88.61,11.19,90.45,9.35,92.72,9.35L92.72,9.35z"
-  })), "Docs on GitHub"))))))), /*#__PURE__*/react.createElement("section", {
+  })), "Docs on GitHub"))), /*#__PURE__*/react.createElement("p", null, "Use the data format to create elements that match the native table. But not applicable to tables with ", /*#__PURE__*/react.createElement("code", null, "<table>")))))), /*#__PURE__*/react.createElement("section", {
     className: "poemkit-spacing--s poemkit-spacing--no-bottom"
   }, /*#__PURE__*/react.createElement("div", {
     className: "container"
@@ -82417,7 +82704,7 @@ var TableGridDemo_data1 = {
     className: "col-12"
   }, /*#__PURE__*/react.createElement("h3", {
     className: "app-header-title"
-  }, "Row Dropzone"), /*#__PURE__*/react.createElement("p", null, "Not applicable to tables with ", /*#__PURE__*/react.createElement("code", null, "<table>")), /*#__PURE__*/react.createElement("hr", null))))), /*#__PURE__*/react.createElement("section", {
+  }, "Row Dropzone"), /*#__PURE__*/react.createElement("hr", null))))), /*#__PURE__*/react.createElement("section", {
     className: "poemkit-spacing--s"
   }, /*#__PURE__*/react.createElement("div", {
     className: "container"
@@ -82952,7 +83239,7 @@ var TableSorterDemo_data1 = {
   }, /*#__PURE__*/react.createElement("path", {
     fill: "#d2d2d2",
     d: "M8.32,0h106.24c4.58,0,8.32,3.74,8.32,8.32v74.62c0,4.57-3.74,8.32-8.32,8.32H8.32C3.74,91.26,0,87.51,0,82.94 V8.32C0,3.74,3.74,0,8.32,0L8.32,0z M54.46,72.22L32,58.61v-8.63l22.46-13.61v10.26l-13.65,7.69l13.65,7.7V72.22L54.46,72.22z M68.42,72.22l22.46-13.61v-8.63L68.42,36.37v10.26l13.65,7.69l-13.65,7.7V72.22L68.42,72.22z M117.97,23.29H5.29v60.46 c0,0.64,0.25,1.2,0.67,1.63c0.42,0.42,0.99,0.67,1.63,0.67h108.04c0.64,0,1.2-0.25,1.63-0.67c0.43-0.43,0.67-0.99,0.67-1.63V23.29 H117.97L117.97,23.29z M106.64,9.35c2.27,0,4.11,1.84,4.11,4.11c0,2.27-1.84,4.11-4.11,4.11c-2.27,0-4.11-1.84-4.11-4.11 C102.54,11.19,104.38,9.35,106.64,9.35L106.64,9.35z M78.8,9.35c2.27,0,4.11,1.84,4.11,4.11c0,2.27-1.84,4.11-4.11,4.11 c-2.27,0-4.11-1.84-4.11-4.11C74.69,11.19,76.53,9.35,78.8,9.35L78.8,9.35z M92.72,9.35c2.27,0,4.11,1.84,4.11,4.11 c0,2.27-1.84,4.11-4.11,4.11c-2.27,0-4.11-1.84-4.11-4.11C88.61,11.19,90.45,9.35,92.72,9.35L92.72,9.35z"
-  })), "Docs on GitHub"))))))), /*#__PURE__*/react.createElement("section", {
+  })), "Docs on GitHub"))), /*#__PURE__*/react.createElement("p", null, "This component turns a standard HTML table with THEAD and TBODY tags into a sortable table without page refreshes."))))), /*#__PURE__*/react.createElement("section", {
     className: "poemkit-spacing--s poemkit-spacing--no-bottom"
   }, /*#__PURE__*/react.createElement("div", {
     className: "container"
@@ -83489,7 +83776,7 @@ var TimelineDemo_data = [{
   }), /*#__PURE__*/react.createElement("path", {
     fill: "#d2d2d2",
     d: "M227.49,192.276c0,4.745,2.783,9.109,7.095,11.123l39.455,18.329l-39.455,18.33c-4.31,2.004-7.095,6.368-7.095,11.118v0.322c0,4.205,2.117,8.068,5.668,10.336c1.974,1.258,4.254,1.924,6.595,1.924c1.793,0,3.528-0.383,5.17-1.142l63.08-29.335c4.307-2.009,7.09-6.372,7.09-11.115v-0.877c0-4.748-2.783-9.113-7.094-11.117l-63.08-29.333c-1.591-0.74-3.373-1.131-5.152-1.131c-2.355,0-4.643,0.661-6.604,1.912c-3.551,2.263-5.67,6.127-5.67,10.337v0.318H227.49L227.49,192.276z"
-  }))))), "Docs on GitHub"))))))), /*#__PURE__*/react.createElement("section", {
+  }))))), "Docs on GitHub"))), /*#__PURE__*/react.createElement("p", null, "This component is used to create a horizontal or vertical timeline layout. It supports an adjustable time range to change the view for zooming in or out."))))), /*#__PURE__*/react.createElement("section", {
     className: "poemkit-spacing--s poemkit-spacing--no-bottom"
   }, /*#__PURE__*/react.createElement("div", {
     className: "container"
@@ -83696,7 +83983,7 @@ var TimelineDemo_data = [{
     className: "table-responsive-md"
   }, /*#__PURE__*/react.createElement("table", {
     className: "table table-bordered table-striped mb-5"
-  }, /*#__PURE__*/react.createElement("thead", null, /*#__PURE__*/react.createElement("tr", null, /*#__PURE__*/react.createElement("th", null, "Property"), /*#__PURE__*/react.createElement("th", null, "Type"), /*#__PURE__*/react.createElement("th", null, "Default"), /*#__PURE__*/react.createElement("th", null, "Description"))), /*#__PURE__*/react.createElement("tbody", null, /*#__PURE__*/react.createElement("tr", null, /*#__PURE__*/react.createElement("td", null, /*#__PURE__*/react.createElement("code", null, "interactiveEnabled")), /*#__PURE__*/react.createElement("td", null, "boolean"), /*#__PURE__*/react.createElement("td", null, "false"), /*#__PURE__*/react.createElement("td", null, "If true, the click event will be used to control the display effect of the timeline.")), /*#__PURE__*/react.createElement("tr", null, /*#__PURE__*/react.createElement("td", null, /*#__PURE__*/react.createElement("code", null, "focusEnabled")), /*#__PURE__*/react.createElement("td", null, "boolean"), /*#__PURE__*/react.createElement("td", null, "false"), /*#__PURE__*/react.createElement("td", null, "With the focus effect enabled, only one Item will be displayed each time you switch. Only available when ", /*#__PURE__*/react.createElement("code", null, "interactiveEnabled"), " is true.")), /*#__PURE__*/react.createElement("tr", null, /*#__PURE__*/react.createElement("td", null, /*#__PURE__*/react.createElement("code", null, "focusCenteredEnabled")), /*#__PURE__*/react.createElement("td", null, "boolean"), /*#__PURE__*/react.createElement("td", null, "false"), /*#__PURE__*/react.createElement("td", null, "Let the focus of the entire interaction always be displayed in the center. Only available when ", /*#__PURE__*/react.createElement("code", null, "focusEnabled"), " is true.")), /*#__PURE__*/react.createElement("tr", null, /*#__PURE__*/react.createElement("td", null, /*#__PURE__*/react.createElement("code", null, "speed")), /*#__PURE__*/react.createElement("td", null, "number"), /*#__PURE__*/react.createElement("td", null, "500"), /*#__PURE__*/react.createElement("td", null, "Transition speed. This setting sets how long the transition animation lasts. Amount of time measured in milliseconds.")), /*#__PURE__*/react.createElement("tr", null, /*#__PURE__*/react.createElement("td", null, /*#__PURE__*/react.createElement("code", null, "easing")), /*#__PURE__*/react.createElement("td", null, /*#__PURE__*/react.createElement("code", null, "linear"), " | ", /*#__PURE__*/react.createElement("code", null, "easeIn"), " | ", /*#__PURE__*/react.createElement("code", null, "easeOut"), " | ", /*#__PURE__*/react.createElement("code", null, "easeInOut")), /*#__PURE__*/react.createElement("td", null, "-"), /*#__PURE__*/react.createElement("td", null, "Types of easing animation")), /*#__PURE__*/react.createElement("tr", null, /*#__PURE__*/react.createElement("td", null, /*#__PURE__*/react.createElement("code", null, "direction")), /*#__PURE__*/react.createElement("td", null, "string"), /*#__PURE__*/react.createElement("td", null, "horizontal"), /*#__PURE__*/react.createElement("td", null, "The direction of the component animation, the value can be ", /*#__PURE__*/react.createElement("code", null, "vertical"), " and ", /*#__PURE__*/react.createElement("code", null, "horizontal"))), /*#__PURE__*/react.createElement("tr", null, /*#__PURE__*/react.createElement("td", null, /*#__PURE__*/react.createElement("code", null, "centered")), /*#__PURE__*/react.createElement("td", null, "boolean"), /*#__PURE__*/react.createElement("td", null, "false"), /*#__PURE__*/react.createElement("td", null, "Centered vertical or horizontal timelines. In this layout, the timeline runs right down the center of the page, with branches coming off of alternate sides of the timeline. When ", /*#__PURE__*/react.createElement("code", null, "focusEnabled"), " is true, this setting is invalid.")), /*#__PURE__*/react.createElement("tr", null, /*#__PURE__*/react.createElement("td", null, /*#__PURE__*/react.createElement("code", null, "data")), /*#__PURE__*/react.createElement("td", null, "array"), /*#__PURE__*/react.createElement("td", null, "-"), /*#__PURE__*/react.createElement("td", null, "Specify data of items as a JSON string format. Such as: ", /*#__PURE__*/react.createElement("br", null), /*#__PURE__*/react.createElement("code", {
+  }, /*#__PURE__*/react.createElement("thead", null, /*#__PURE__*/react.createElement("tr", null, /*#__PURE__*/react.createElement("th", null, "Property"), /*#__PURE__*/react.createElement("th", null, "Type"), /*#__PURE__*/react.createElement("th", null, "Default"), /*#__PURE__*/react.createElement("th", null, "Description"))), /*#__PURE__*/react.createElement("tbody", null, /*#__PURE__*/react.createElement("tr", null, /*#__PURE__*/react.createElement("td", null, /*#__PURE__*/react.createElement("code", null, "interactiveEnabled")), /*#__PURE__*/react.createElement("td", null, "boolean"), /*#__PURE__*/react.createElement("td", null, "false"), /*#__PURE__*/react.createElement("td", null, "When true, the click event will be used to control the display effect of the timeline.")), /*#__PURE__*/react.createElement("tr", null, /*#__PURE__*/react.createElement("td", null, /*#__PURE__*/react.createElement("code", null, "focusEnabled")), /*#__PURE__*/react.createElement("td", null, "boolean"), /*#__PURE__*/react.createElement("td", null, "false"), /*#__PURE__*/react.createElement("td", null, "With the focus effect enabled, only one Item will be displayed each time you switch. Only available when ", /*#__PURE__*/react.createElement("code", null, "interactiveEnabled"), " is true.")), /*#__PURE__*/react.createElement("tr", null, /*#__PURE__*/react.createElement("td", null, /*#__PURE__*/react.createElement("code", null, "focusCenteredEnabled")), /*#__PURE__*/react.createElement("td", null, "boolean"), /*#__PURE__*/react.createElement("td", null, "false"), /*#__PURE__*/react.createElement("td", null, "Let the focus of the entire interaction always be displayed in the center. Only available when ", /*#__PURE__*/react.createElement("code", null, "focusEnabled"), " is true.")), /*#__PURE__*/react.createElement("tr", null, /*#__PURE__*/react.createElement("td", null, /*#__PURE__*/react.createElement("code", null, "speed")), /*#__PURE__*/react.createElement("td", null, "number"), /*#__PURE__*/react.createElement("td", null, "500"), /*#__PURE__*/react.createElement("td", null, "Transition speed. This setting sets how long the transition animation lasts. Amount of time measured in milliseconds.")), /*#__PURE__*/react.createElement("tr", null, /*#__PURE__*/react.createElement("td", null, /*#__PURE__*/react.createElement("code", null, "easing")), /*#__PURE__*/react.createElement("td", null, /*#__PURE__*/react.createElement("code", null, "linear"), " | ", /*#__PURE__*/react.createElement("code", null, "easeIn"), " | ", /*#__PURE__*/react.createElement("code", null, "easeOut"), " | ", /*#__PURE__*/react.createElement("code", null, "easeInOut")), /*#__PURE__*/react.createElement("td", null, "-"), /*#__PURE__*/react.createElement("td", null, "Types of easing animation")), /*#__PURE__*/react.createElement("tr", null, /*#__PURE__*/react.createElement("td", null, /*#__PURE__*/react.createElement("code", null, "direction")), /*#__PURE__*/react.createElement("td", null, "string"), /*#__PURE__*/react.createElement("td", null, "horizontal"), /*#__PURE__*/react.createElement("td", null, "The direction of the component animation, the value can be ", /*#__PURE__*/react.createElement("code", null, "vertical"), " and ", /*#__PURE__*/react.createElement("code", null, "horizontal"))), /*#__PURE__*/react.createElement("tr", null, /*#__PURE__*/react.createElement("td", null, /*#__PURE__*/react.createElement("code", null, "centered")), /*#__PURE__*/react.createElement("td", null, "boolean"), /*#__PURE__*/react.createElement("td", null, "false"), /*#__PURE__*/react.createElement("td", null, "Centered vertical or horizontal timelines. In this layout, the timeline runs right down the center of the page, with branches coming off of alternate sides of the timeline. When ", /*#__PURE__*/react.createElement("code", null, "focusEnabled"), " is true, this setting is invalid.")), /*#__PURE__*/react.createElement("tr", null, /*#__PURE__*/react.createElement("td", null, /*#__PURE__*/react.createElement("code", null, "data")), /*#__PURE__*/react.createElement("td", null, "array"), /*#__PURE__*/react.createElement("td", null, "-"), /*#__PURE__*/react.createElement("td", null, "Specify data of items as a JSON string format. Such as: ", /*#__PURE__*/react.createElement("br", null), /*#__PURE__*/react.createElement("code", {
     className: "text-wrap"
   }, "[{\"url\":\"xxx.jpg\",\"title\":<>Title 1</>,\"content\":\"<><p>content here</p></>\",\"node\":\"<>Feb 19</>},{\"url\":\"xxx.jpg\",\"title\":<>Title 1</>,\"content\":\"<><p>content here</p></>\",\"node\":\"<>Jan 2</>}]"))), /*#__PURE__*/react.createElement("tr", null, /*#__PURE__*/react.createElement("td", null, /*#__PURE__*/react.createElement("code", null, "arrowPrevIcon")), /*#__PURE__*/react.createElement("td", null, "ReactNode"), /*#__PURE__*/react.createElement("td", null, "-"), /*#__PURE__*/react.createElement("td", null, "Previous arrow icon")), /*#__PURE__*/react.createElement("tr", null, /*#__PURE__*/react.createElement("td", null, /*#__PURE__*/react.createElement("code", null, "arrowNextIcon")), /*#__PURE__*/react.createElement("td", null, "ReactNode"), /*#__PURE__*/react.createElement("td", null, "-"), /*#__PURE__*/react.createElement("td", null, "Next arrow icon"))))), /*#__PURE__*/react.createElement("p", null, "Array configuration properties of the ", /*#__PURE__*/react.createElement("code", null, "data"), ":"), /*#__PURE__*/react.createElement("div", {
     className: "table-responsive-md"
@@ -83944,7 +84231,7 @@ var Tooltip = /*#__PURE__*/function (_Component) {
   }), /*#__PURE__*/react.createElement("path", {
     fill: "#d2d2d2",
     d: "M227.49,192.276c0,4.745,2.783,9.109,7.095,11.123l39.455,18.329l-39.455,18.33c-4.31,2.004-7.095,6.368-7.095,11.118v0.322c0,4.205,2.117,8.068,5.668,10.336c1.974,1.258,4.254,1.924,6.595,1.924c1.793,0,3.528-0.383,5.17-1.142l63.08-29.335c4.307-2.009,7.09-6.372,7.09-11.115v-0.877c0-4.748-2.783-9.113-7.094-11.117l-63.08-29.333c-1.591-0.74-3.373-1.131-5.152-1.131c-2.355,0-4.643,0.661-6.604,1.912c-3.551,2.263-5.67,6.127-5.67,10.337v0.318H227.49L227.49,192.276z"
-  }))))), "Docs on GitHub"))))))), /*#__PURE__*/react.createElement("section", {
+  }))))), "Docs on GitHub"))), /*#__PURE__*/react.createElement("p", null, "This component creates an element that provides little hints that help users understand a part or process in an interface."))))), /*#__PURE__*/react.createElement("section", {
     className: "poemkit-spacing--s poemkit-spacing--no-bottom"
   }, /*#__PURE__*/react.createElement("div", {
     className: "container"
@@ -84146,6 +84433,325 @@ var Tooltip = /*#__PURE__*/function (_Component) {
   }, /*#__PURE__*/react.createElement("table", {
     className: "table table-bordered table-striped mb-5"
   }, /*#__PURE__*/react.createElement("thead", null, /*#__PURE__*/react.createElement("tr", null, /*#__PURE__*/react.createElement("th", null, "Property"), /*#__PURE__*/react.createElement("th", null, "Type"), /*#__PURE__*/react.createElement("th", null, "Default"), /*#__PURE__*/react.createElement("th", null, "Description"))), /*#__PURE__*/react.createElement("tbody", null, /*#__PURE__*/react.createElement("tr", null, /*#__PURE__*/react.createElement("td", null, /*#__PURE__*/react.createElement("code", null, "direction")), /*#__PURE__*/react.createElement("td", null, /*#__PURE__*/react.createElement("code", null, "top"), " | ", /*#__PURE__*/react.createElement("code", null, "top-right"), " | ", /*#__PURE__*/react.createElement("code", null, "top-left"), " | ", /*#__PURE__*/react.createElement("code", null, "bottom"), " | ", /*#__PURE__*/react.createElement("code", null, "bottom-right"), " | ", /*#__PURE__*/react.createElement("code", null, "bottom-left")), /*#__PURE__*/react.createElement("td", null, "top"), /*#__PURE__*/react.createElement("td", null, "The direction of the tip. Defaults to ", /*#__PURE__*/react.createElement("code", null, "top"), ".")), /*#__PURE__*/react.createElement("tr", null, /*#__PURE__*/react.createElement("td", null, /*#__PURE__*/react.createElement("code", null, "size")), /*#__PURE__*/react.createElement("td", null, /*#__PURE__*/react.createElement("code", null, "auto"), " | ", /*#__PURE__*/react.createElement("code", null, "large"), " | ", /*#__PURE__*/react.createElement("code", null, "medium"), " | ", /*#__PURE__*/react.createElement("code", null, "small")), /*#__PURE__*/react.createElement("td", null, "auto"), /*#__PURE__*/react.createElement("td", null, "The size of the content area. Defaults to ", /*#__PURE__*/react.createElement("code", null, "auto"), ".")), /*#__PURE__*/react.createElement("tr", null, /*#__PURE__*/react.createElement("td", null, /*#__PURE__*/react.createElement("code", null, "hoverDelay")), /*#__PURE__*/react.createElement("td", null, "number"), /*#__PURE__*/react.createElement("td", null, "200"), /*#__PURE__*/react.createElement("td", null, "The number of milliseconds to determine hover intent")), /*#__PURE__*/react.createElement("tr", null, /*#__PURE__*/react.createElement("td", null, /*#__PURE__*/react.createElement("code", null, "mouseOutDelay")), /*#__PURE__*/react.createElement("td", null, "number"), /*#__PURE__*/react.createElement("td", null, "-"), /*#__PURE__*/react.createElement("td", null, "The number of milliseconds to determine hover-end intent, defaults to the hoverDelay value")), /*#__PURE__*/react.createElement("tr", null, /*#__PURE__*/react.createElement("td", null, /*#__PURE__*/react.createElement("code", null, "showTriggerContent")), /*#__PURE__*/react.createElement("td", null, "ReactNode"), /*#__PURE__*/react.createElement("td", null, "-"), /*#__PURE__*/react.createElement("td", null, "Set a piece of text or HTML code for the show trigger")), /*#__PURE__*/react.createElement("tr", null, /*#__PURE__*/react.createElement("td", null, /*#__PURE__*/react.createElement("code", null, "hideTriggerContent")), /*#__PURE__*/react.createElement("td", null, "ReactNode"), /*#__PURE__*/react.createElement("td", null, "-"), /*#__PURE__*/react.createElement("td", null, "Set a piece of text or HTML code for the hide trigger")))))))))));
+});
+;// CONCATENATED MODULE: ./src/client/components/Toaster/index.tsx
+
+
+
+
+
+
+
+
+function Toaster_createSuper(Derived) { var hasNativeReflectConstruct = Toaster_isNativeReflectConstruct(); return function _createSuperInternal() { var Super = _getPrototypeOf(Derived), result; if (hasNativeReflectConstruct) { var NewTarget = _getPrototypeOf(this).constructor; result = Reflect.construct(Super, arguments, NewTarget); } else { result = Super.apply(this, arguments); } return _possibleConstructorReturn(this, result); }; }
+
+function Toaster_isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Reflect.construct) return false; if (Reflect.construct.sham) return false; if (typeof Proxy === "function") return true; try { Boolean.prototype.valueOf.call(Reflect.construct(Boolean, [], function () {})); return true; } catch (e) { return false; } }
+
+/* 
+ *************************************
+ * <!-- Toaster -->
+ *************************************
+ */
+
+/*-- Apply Third-party plugins (import location should be in front of "global scripts and styles") --*/
+
+
+
+/*-- Apply global scripts and styles --*/
+
+
+
+
+/*-- Apply this component styles --*/
+
+
+
+var Toast = function Toast(props) {
+  return /*#__PURE__*/react.createElement("div", {
+    className: "poemkit-toast ".concat(props.removed ? 'is-animating' : ''),
+    "data-index": props.index,
+    style: {
+      transform: "perspective(100px) translateZ(-".concat(2 * props.index, "px) translateY(").concat(35 * props.index, "px)"),
+      zIndex: props.depth
+    }
+  }, /*#__PURE__*/react.createElement("div", {
+    className: "poemkit-toast__content"
+  }, props.title === '' || props.title === false ? '' : /*#__PURE__*/react.createElement(react.Fragment, null, /*#__PURE__*/react.createElement("h4", {
+    className: "poemkit-toast__title"
+  }, props.title)), /*#__PURE__*/react.createElement("p", {
+    className: "poemkit-toast__message"
+  }, props.message)), /*#__PURE__*/react.createElement("svg", {
+    onClick: function onClick() {
+      props.closeEv(props.index);
+    },
+    className: "poemkit-toast__closebtn",
+    width: "12px",
+    height: "12px",
+    viewBox: "0 0 16 16"
+  }, /*#__PURE__*/react.createElement("path", {
+    d: "M9.41 8l3.29-3.29c.19-.18.3-.43.3-.71a1.003 1.003 0 00-1.71-.71L8 6.59l-3.29-3.3a1.003 1.003 0 00-1.42 1.42L6.59 8 3.3 11.29c-.19.18-.3.43-.3.71a1.003 1.003 0 001.71.71L8 9.41l3.29 3.29c.18.19.43.3.71.3a1.003 1.003 0 00.71-1.71L9.41 8z",
+    fillRule: "evenodd"
+  })));
+};
+
+var Toaster = /*#__PURE__*/function (_Component) {
+  _inherits(Toaster, _Component);
+
+  var _super = Toaster_createSuper(Toaster);
+
+  function Toaster(props) {
+    var _this;
+
+    _classCallCheck(this, Toaster);
+
+    _this = _super.call(this, props);
+
+    _defineProperty(_assertThisInitialized(_this), "uniqueID", void 0);
+
+    _defineProperty(_assertThisInitialized(_this), "autoHideTimeout", void 0);
+
+    _defineProperty(_assertThisInitialized(_this), "F", void 0);
+
+    _this.uniqueID = 'app-' + helpers.GUID.create();
+    _this.autoHideTimeout = false;
+    _this.state = {
+      toasts: _this.props.data ? _this.props.data : []
+    };
+    _this.clickToCloseItem = _this.clickToCloseItem.bind(_assertThisInitialized(_this));
+    return _this;
+  }
+
+  _createClass(Toaster, [{
+    key: "clickToCloseItem",
+    value: function clickToCloseItem(index) {
+      var _this2 = this;
+
+      var items = this.state.toasts;
+
+      if (items[index] !== undefined) {
+        items[index].removed = true; //console.log('clicked ', index, 'curr state:', items);
+
+        this.setState({
+          toasts: items
+        }); //Let the removed animation show
+
+        setTimeout(function () {
+          var newItems = _this2.state.toasts;
+          newItems.splice(index, 1); //delete one item
+          //console.log('new after interval:', newItems);
+
+          _this2.setState({
+            toasts: newItems
+          });
+        }, 300);
+      }
+    }
+  }, {
+    key: "autoCloseItem",
+    value: function autoCloseItem(allItems) {
+      var _this3 = this;
+
+      var items = this.state.toasts;
+      items = items.reverse();
+
+      if (allItems[items.length - 1] !== undefined) {
+        allItems[items.length - 1].removed = true;
+        this.setState({
+          toasts: items.reverse()
+        }); //Let the removed animation show
+
+        setTimeout(function () {
+          var newItems = _this3.state.toasts;
+          newItems = newItems.reverse();
+          newItems.splice(newItems.length - 1, 1); //delete one item
+
+          _this3.setState({
+            toasts: newItems.reverse()
+          });
+        }, 300);
+      }
+    }
+  }, {
+    key: "componentDidMount",
+    value: function componentDidMount() {
+      var _this4 = this;
+
+      var autoCloseTime = this.props.autoCloseTime; //Auto hide
+
+      var _autoCloseTime = typeof autoCloseTime === 'undefined' || autoCloseTime === false ? false : autoCloseTime;
+
+      if (_autoCloseTime !== false) {
+        var items = this.state.toasts;
+        items.forEach(function (item, index) {
+          _this4.autoHideTimeout = setTimeout(function () {
+            _this4.autoCloseItem(items);
+          }, _autoCloseTime * (index + 1));
+        });
+      }
+    }
+  }, {
+    key: "componentWillUnmount",
+    value:
+    /** Remove the global list of events, especially as scroll and interval. */
+    function componentWillUnmount() {
+      // Cancels a timeout previously established by calling setTimeout().
+      clearTimeout(this.autoHideTimeout);
+    }
+  }, {
+    key: "render",
+    value: function render() {
+      var _this5 = this;
+
+      var _this$props = this.props,
+          direction = _this$props.direction,
+          id = _this$props.id;
+      var toasts = this.state.toasts;
+      var depth = toasts.length + 1;
+      return /*#__PURE__*/react.createElement(react.Fragment, null, /*#__PURE__*/react.createElement("div", {
+        id: id || this.uniqueID,
+        className: "poemkit-toaster__container poemkit-toaster__container--".concat(direction ? direction : 'center')
+      }, /*#__PURE__*/react.createElement("div", {
+        className: "poemkit-toaster"
+      }, toasts.map(function (item, i) {
+        return /*#__PURE__*/react.createElement(Toast, {
+          depth: depth - i,
+          key: i,
+          index: i,
+          title: item.title,
+          message: item.message,
+          removed: item.removed,
+          closeEv: _this5.clickToCloseItem
+        });
+      }))));
+    }
+  }]);
+
+  return Toaster;
+}(react.Component);
+
+
+;// CONCATENATED MODULE: ./src/client/views/_pages/ComponentsDemo/ToasterDemo.js
+
+
+ //Create or Remove Sidebar Menu
+
+
+/* harmony default export */ const ToasterDemo = (function () {
+  react.useEffect(function () {
+    // Equivalent to componentDidMount and componentDidUpdate:
+    helpers(document).ready(function () {
+      //Create sidebar menu
+      SidebarMenu();
+    });
+  });
+  return /*#__PURE__*/react.createElement(react.Fragment, null, /*#__PURE__*/react.createElement("section", null, /*#__PURE__*/react.createElement("div", {
+    className: "container"
+  }, /*#__PURE__*/react.createElement("div", {
+    className: "row"
+  }, /*#__PURE__*/react.createElement("div", {
+    className: "col-12"
+  }, /*#__PURE__*/react.createElement("h1", {
+    className: "poemkit-typo--h2"
+  }, "Toaster", /*#__PURE__*/react.createElement("a", {
+    className: "poemkit-typo--h3 align-middle",
+    href: "https://github.com/xizon/poemkit-kit-react/tree/main/src/client/components/Toaster",
+    target: "_blank"
+  }, /*#__PURE__*/react.createElement("span", {
+    className: "poemkit-dir--right",
+    style: {
+      fontSize: "0.75rem",
+      color: "#ababab",
+      margin: ".5rem .5rem 0 0"
+    }
+  }, /*#__PURE__*/react.createElement("svg", {
+    style: {
+      marginRight: ".5rem"
+    },
+    width: "15",
+    viewBox: "0 0 392.186 392.186"
+  }, /*#__PURE__*/react.createElement("g", null, /*#__PURE__*/react.createElement("g", null, /*#__PURE__*/react.createElement("g", null, /*#__PURE__*/react.createElement("path", {
+    fill: "#d2d2d2",
+    d: "M368.62,17.951H23.568C10.57,17.951,0,28.524,0,41.52v309.146c0,12.996,10.57,23.568,23.568,23.568h345.053c12.994,0,23.564-10.572,23.564-23.568V41.52C392.188,28.525,381.614,17.951,368.62,17.951z M297.56,57.528c0-4.806,3.896-8.703,8.701-8.703h8.703c4.808,0,8.701,3.896,8.701,8.703v9.863c0,4.806-3.896,8.702-8.701,8.702h-8.703c-4.805,0-8.701-3.896-8.701-8.702V57.528z M257.093,57.528c0-4.806,3.898-8.703,8.703-8.703h8.701c4.805,0,8.703,3.896,8.703,8.703v9.863c0,4.806-3.898,8.702-8.703,8.702h-8.701c-4.805,0-8.703-3.896-8.703-8.702V57.528z M363.903,345.951H28.282V102.235h335.621V345.951L363.903,345.951z M364.132,67.391c0,4.806-3.896,8.702-8.701,8.702h-8.703c-4.809,0-8.702-3.896-8.702-8.702v-9.863c0-4.806,3.896-8.703,8.702-8.703h8.703c4.806,0,8.701,3.896,8.701,8.703V67.391z"
+  }), /*#__PURE__*/react.createElement("path", {
+    fill: "#d2d2d2",
+    d: "M84.185,233.284l63.084,29.336c1.631,0.755,3.367,1.138,5.162,1.138c2.338,0,4.617-0.664,6.598-1.924c3.547-2.267,5.666-6.13,5.666-10.334v-0.322c0-4.752-2.785-9.116-7.096-11.118l-39.455-18.332l39.455-18.334c4.311-2.004,7.096-6.367,7.096-11.117v-0.319c0-4.21-2.119-8.075-5.666-10.334c-1.961-1.253-4.246-1.916-6.605-1.916c-1.779,0-3.563,0.391-5.16,1.133l-63.08,29.333c-4.307,2.004-7.09,6.369-7.09,11.117v0.877C77.093,226.909,79.874,231.272,84.185,233.284z"
+  }), /*#__PURE__*/react.createElement("path", {
+    fill: "#d2d2d2",
+    d: "M165.257,293.036c2.301,3.149,6.002,5.03,9.9,5.03h0.316c5.352,0,10.041-3.426,11.672-8.517L228.7,160.788c1.192-3.716,0.531-7.818-1.771-10.973c-2.301-3.15-6.002-5.03-9.901-5.03h-0.315c-5.354,0-10.048,3.425-11.679,8.516l-41.559,128.771C162.292,285.793,162.958,289.889,165.257,293.036z"
+  }), /*#__PURE__*/react.createElement("path", {
+    fill: "#d2d2d2",
+    d: "M227.49,192.276c0,4.745,2.783,9.109,7.095,11.123l39.455,18.329l-39.455,18.33c-4.31,2.004-7.095,6.368-7.095,11.118v0.322c0,4.205,2.117,8.068,5.668,10.336c1.974,1.258,4.254,1.924,6.595,1.924c1.793,0,3.528-0.383,5.17-1.142l63.08-29.335c4.307-2.009,7.09-6.372,7.09-11.115v-0.877c0-4.748-2.783-9.113-7.094-11.117l-63.08-29.333c-1.591-0.74-3.373-1.131-5.152-1.131c-2.355,0-4.643,0.661-6.604,1.912c-3.551,2.263-5.67,6.127-5.67,10.337v0.318H227.49L227.49,192.276z"
+  }))))), "Docs on GitHub"))), /*#__PURE__*/react.createElement("p", null, "This component is used to show an ephemeral message as an overlay."))))), /*#__PURE__*/react.createElement("section", {
+    className: "poemkit-spacing--s poemkit-spacing--no-bottom"
+  }, /*#__PURE__*/react.createElement("div", {
+    className: "container"
+  }, /*#__PURE__*/react.createElement("div", {
+    className: "row"
+  }, /*#__PURE__*/react.createElement("div", {
+    className: "col-12"
+  }, /*#__PURE__*/react.createElement("h3", {
+    className: "app-header-title"
+  }, "Default Display"), /*#__PURE__*/react.createElement("hr", null))))), /*#__PURE__*/react.createElement("section", {
+    className: "poemkit-spacing--s"
+  }, /*#__PURE__*/react.createElement("div", {
+    className: "container"
+  }, /*#__PURE__*/react.createElement("div", {
+    className: "row"
+  }, /*#__PURE__*/react.createElement("div", {
+    className: "col-12"
+  }, /*#__PURE__*/react.createElement("p", null, "Please look at the bottom of the window, you can set the attribute ", /*#__PURE__*/react.createElement("code", null, "direction"), " to control its position."), /*#__PURE__*/react.createElement(Toaster, {
+    direction: "right",
+    autoCloseTime: 3000,
+    data: [{
+      title: "Toast one",
+      message: "First..."
+    }, {
+      title: "Toast two",
+      message: "Source of radiant heat."
+    }, {
+      title: "Toast three",
+      message: "ok!"
+    }, {
+      title: "Toast four",
+      message: "Last item here..."
+    }]
+  }), /*#__PURE__*/react.createElement(Toaster, {
+    direction: "center",
+    autoCloseTime: false,
+    data: [{
+      title: false,
+      message: /*#__PURE__*/react.createElement(react.Fragment, null, /*#__PURE__*/react.createElement("div", {
+        style: {
+          fontSize: "14px"
+        }
+      }, "This is ", /*#__PURE__*/react.createElement("span", {
+        style: {
+          color: "orange"
+        }
+      }, "orange"), " text"))
+    }]
+  }))))), /*#__PURE__*/react.createElement("section", null, /*#__PURE__*/react.createElement("div", {
+    className: "container"
+  }, /*#__PURE__*/react.createElement("div", {
+    className: "row"
+  }, /*#__PURE__*/react.createElement("div", {
+    className: "col-12"
+  }, /*#__PURE__*/react.createElement("h3", {
+    className: "app-header-title"
+  }, "API"), /*#__PURE__*/react.createElement("hr", null), /*#__PURE__*/react.createElement("article", {
+    className: "poemkit-spacing--s",
+    itemProp: "text"
+  }, /*#__PURE__*/react.createElement("h4", null, "Toaster"), /*#__PURE__*/react.createElement("div", null, /*#__PURE__*/react.createElement("pre", null, "import Toaster from '@poemkit/components/Toaster/index.tsx';")), /*#__PURE__*/react.createElement("div", {
+    className: "table-responsive-md"
+  }, /*#__PURE__*/react.createElement("table", {
+    className: "table table-bordered table-striped mb-5"
+  }, /*#__PURE__*/react.createElement("thead", null, /*#__PURE__*/react.createElement("tr", null, /*#__PURE__*/react.createElement("th", null, "Property"), /*#__PURE__*/react.createElement("th", null, "Type"), /*#__PURE__*/react.createElement("th", null, "Default"), /*#__PURE__*/react.createElement("th", null, "Description"))), /*#__PURE__*/react.createElement("tbody", null, /*#__PURE__*/react.createElement("tr", null, /*#__PURE__*/react.createElement("td", null, /*#__PURE__*/react.createElement("code", null, "direction")), /*#__PURE__*/react.createElement("td", null, /*#__PURE__*/react.createElement("code", null, "left"), " | ", /*#__PURE__*/react.createElement("code", null, "center"), " | ", /*#__PURE__*/react.createElement("code", null, "right")), /*#__PURE__*/react.createElement("td", null, "center"), /*#__PURE__*/react.createElement("td", null, "The direction of the toaster")), /*#__PURE__*/react.createElement("tr", null, /*#__PURE__*/react.createElement("td", null, /*#__PURE__*/react.createElement("code", null, "autoCloseTime")), /*#__PURE__*/react.createElement("td", null, "boolean | number"), /*#__PURE__*/react.createElement("td", null, "false"), /*#__PURE__*/react.createElement("td", null, "Set an automatic closing time, multiple items will be accumulated in order. Amount of time measured in milliseconds. If false or without this attribute, Auto-Close will be disabled.")), /*#__PURE__*/react.createElement("tr", null, /*#__PURE__*/react.createElement("td", null, /*#__PURE__*/react.createElement("code", null, "data")), /*#__PURE__*/react.createElement("td", null, "array"), /*#__PURE__*/react.createElement("td", null, "-"), /*#__PURE__*/react.createElement("td", null, "Specify data of toasts as a JSON string format. Such as: ", /*#__PURE__*/react.createElement("br", null), /*#__PURE__*/react.createElement("code", {
+    className: "text-wrap"
+  }, "[{\"title\":\"Title 1\",\"message\":\"description...\"},{\"title\":\"Title 2\",\"message\":\"description...\"}]")))))), /*#__PURE__*/react.createElement("p", null, "Array configuration properties of the ", /*#__PURE__*/react.createElement("code", null, "data"), ":"), /*#__PURE__*/react.createElement("div", {
+    className: "table-responsive-md"
+  }, /*#__PURE__*/react.createElement("table", {
+    className: "table table-bordered table-striped mb-5"
+  }, /*#__PURE__*/react.createElement("thead", null, /*#__PURE__*/react.createElement("tr", null, /*#__PURE__*/react.createElement("th", null, "Property"), /*#__PURE__*/react.createElement("th", null, "Type"), /*#__PURE__*/react.createElement("th", null, "Default"), /*#__PURE__*/react.createElement("th", null, "Description"))), /*#__PURE__*/react.createElement("tbody", null, /*#__PURE__*/react.createElement("tr", null, /*#__PURE__*/react.createElement("td", null, /*#__PURE__*/react.createElement("code", null, "title")), /*#__PURE__*/react.createElement("td", null, "string | boolean"), /*#__PURE__*/react.createElement("td", null, "-"), /*#__PURE__*/react.createElement("td", null, "Specifies an alternate and title text for the toast")), /*#__PURE__*/react.createElement("tr", null, /*#__PURE__*/react.createElement("td", null, /*#__PURE__*/react.createElement("code", null, "message")), /*#__PURE__*/react.createElement("td", null, "ReactNode"), /*#__PURE__*/react.createElement("td", null, "-"), /*#__PURE__*/react.createElement("td", null, "Specifies the content, or HTML elements to the toast")))))))))));
 });
 ;// CONCATENATED MODULE: ./node_modules/@babel/runtime/helpers/esm/arrayWithHoles.js
 function _arrayWithHoles(arr) {
@@ -93875,7 +94481,7 @@ var Video = /*#__PURE__*/function (_Component) {
   }, /*#__PURE__*/react.createElement("path", {
     fill: "#d2d2d2",
     d: "M8.32,0h106.24c4.58,0,8.32,3.74,8.32,8.32v74.62c0,4.57-3.74,8.32-8.32,8.32H8.32C3.74,91.26,0,87.51,0,82.94 V8.32C0,3.74,3.74,0,8.32,0L8.32,0z M54.46,72.22L32,58.61v-8.63l22.46-13.61v10.26l-13.65,7.69l13.65,7.7V72.22L54.46,72.22z M68.42,72.22l22.46-13.61v-8.63L68.42,36.37v10.26l13.65,7.69l-13.65,7.7V72.22L68.42,72.22z M117.97,23.29H5.29v60.46 c0,0.64,0.25,1.2,0.67,1.63c0.42,0.42,0.99,0.67,1.63,0.67h108.04c0.64,0,1.2-0.25,1.63-0.67c0.43-0.43,0.67-0.99,0.67-1.63V23.29 H117.97L117.97,23.29z M106.64,9.35c2.27,0,4.11,1.84,4.11,4.11c0,2.27-1.84,4.11-4.11,4.11c-2.27,0-4.11-1.84-4.11-4.11 C102.54,11.19,104.38,9.35,106.64,9.35L106.64,9.35z M78.8,9.35c2.27,0,4.11,1.84,4.11,4.11c0,2.27-1.84,4.11-4.11,4.11 c-2.27,0-4.11-1.84-4.11-4.11C74.69,11.19,76.53,9.35,78.8,9.35L78.8,9.35z M92.72,9.35c2.27,0,4.11,1.84,4.11,4.11 c0,2.27-1.84,4.11-4.11,4.11c-2.27,0-4.11-1.84-4.11-4.11C88.61,11.19,90.45,9.35,92.72,9.35L92.72,9.35z"
-  })), "Docs on GitHub"))))))), /*#__PURE__*/react.createElement("section", {
+  })), "Docs on GitHub"))), /*#__PURE__*/react.createElement("p", null, "Use the ", /*#__PURE__*/react.createElement("strong", null, "Plyr"), " plug-in to create a video playback area, which can be used as a video background."))))), /*#__PURE__*/react.createElement("section", {
     className: "poemkit-spacing--s poemkit-spacing--no-bottom"
   }, /*#__PURE__*/react.createElement("div", {
     className: "container"
@@ -93963,6 +94569,8 @@ function ComponentsDemo_isNativeReflectConstruct() { if (typeof Reflect === "und
 
 
  //components list
+
+
 
 
 
@@ -94283,6 +94891,15 @@ function ComponentsDemo_HookContent() {
     to: "".concat(url, "/periodical-scroll"),
     activeClassName: "is-active"
   }, "Periodical Scroll")), /*#__PURE__*/react.createElement("li", {
+    className: urlChk('/rating') ? 'is-active' : ''
+  }, /*#__PURE__*/react.createElement(NavLink, {
+    "data-route": "true",
+    onClick: function onClick(e) {
+      return refreshTitle(e);
+    },
+    to: "".concat(url, "/rating"),
+    activeClassName: "is-active"
+  }, "Rating")), /*#__PURE__*/react.createElement("li", {
     className: urlChk('/slideshow') ? 'is-active' : ''
   }, /*#__PURE__*/react.createElement(NavLink, {
     "data-route": "true",
@@ -94382,6 +94999,15 @@ function ComponentsDemo_HookContent() {
     to: "".concat(url, "/tooltip"),
     activeClassName: "is-active"
   }, "Tooltip")), /*#__PURE__*/react.createElement("li", {
+    className: urlChk('/toaster') ? 'is-active' : ''
+  }, /*#__PURE__*/react.createElement(NavLink, {
+    "data-route": "true",
+    onClick: function onClick(e) {
+      return refreshTitle(e);
+    },
+    to: "".concat(url, "/toaster"),
+    activeClassName: "is-active"
+  }, "Toaster")), /*#__PURE__*/react.createElement("li", {
     className: "poemkit-demo-nav-header"
   }, "FORMS"), /*#__PURE__*/react.createElement("li", {
     className: urlChk('#app-goto__input__section') ? 'is-active' : ''
@@ -94792,6 +95418,10 @@ function ComponentsDemo_HookContent() {
   }, /*#__PURE__*/react.createElement(PeriodicalScrollDemo, null), /*#__PURE__*/react.createElement(SeoChild, {
     title: "Periodical Scroll"
   })), /*#__PURE__*/react.createElement(Route, {
+    path: "".concat(path, "/rating")
+  }, /*#__PURE__*/react.createElement(RatingDemo, null), /*#__PURE__*/react.createElement(SeoChild, {
+    title: "Rating"
+  })), /*#__PURE__*/react.createElement(Route, {
     path: "".concat(path, "/scroll-reveal")
   }, /*#__PURE__*/react.createElement(ScrollRevealDemo, null), /*#__PURE__*/react.createElement(SeoChild, {
     title: "Scroll Reveal"
@@ -94843,6 +95473,10 @@ function ComponentsDemo_HookContent() {
     path: "".concat(path, "/tooltip")
   }, /*#__PURE__*/react.createElement(TooltipDemo, null), /*#__PURE__*/react.createElement(SeoChild, {
     title: "Tooltip"
+  })), /*#__PURE__*/react.createElement(Route, {
+    path: "".concat(path, "/toaster")
+  }, /*#__PURE__*/react.createElement(ToasterDemo, null), /*#__PURE__*/react.createElement(SeoChild, {
+    title: "Toaster"
   })), /*#__PURE__*/react.createElement(Route, {
     path: "".concat(path, "/video")
   }, /*#__PURE__*/react.createElement(VideoDemo, null), /*#__PURE__*/react.createElement(SeoChild, {

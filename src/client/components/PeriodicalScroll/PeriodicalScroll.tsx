@@ -60,13 +60,12 @@ export default class PeriodicalScroll extends Component < PeriodicalScrollProps,
 
     handleMouseLeave(index) {
 
-        const self = this;
-
-		return function (e) { // e is the event object that returned
-            self.tl.play();
+      
+		return (e) => { // e is the event object that returned
+            this.tl.play();
 
             //Avoid differences in the direction of element transitions
-            const root: any = self.rootRef.current;
+            const root: any = this.rootRef.current;
             const listWrapper = root.querySelector( 'ul' );
             const items = listWrapper.querySelectorAll( 'li' );
             const itemHeight  = items[0].clientHeight; //including: padding

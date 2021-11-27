@@ -1,0 +1,110 @@
+/* ======================================================
+   <!-- Toaster -->
+/* ====================================================== */
+@import '@poemkit/components/_utils/styles/_variable-and-mixin.scss';
+
+.poemkit-toaster__container {
+    width: 400px;
+    position: fixed;
+    left: 50%;
+    bottom: 0;
+    z-index: 100;
+
+    &--left {
+        left: 15px;
+    }
+
+    &--right {
+        left: auto;
+        right: 15px;
+    }
+
+    &--center {
+        left: 50%;
+        transform: translateX(-50%);
+    }
+
+}
+  
+.poemkit-toaster {
+    position: relative;
+    width: 100%;
+    bottom: 15px;
+    display: flex;
+    flex-flow: column-reverse nowrap;
+ 
+    &::before {
+        content: '';
+        top: -80px;
+        bottom: 0;
+        left: -8px;
+        right: -8px;
+        position: absolute;
+        background-color: transparent;
+        pointer-events: none;
+    }
+
+    &:hover {
+        .poemkit-toast {
+            transform: perspective(100px) translateZ(0) !important;
+        }
+    }
+}
+  
+.poemkit-toast {
+    width: 100%;
+    height: auto;
+    position: relative;
+    bottom: 0;
+    transition: all .25s;
+
+    &__content {
+        width: 100%;
+        height: 64px;
+        overflow: hidden;
+        padding: 8px 16px;
+        background: #fff;
+        border-radius: 4px;
+        @include outer-shadow( 'light' );
+        cursor: pointer;
+        border: 1px solid #d0d0d0;
+        transition: none;
+        height: auto;
+        overflow: visible;
+    }
+
+    &__closebtn {
+        cursor: pointer;
+        position: absolute;
+        right: 5px;
+        top: 5px;
+    }
+
+    &__closebtn:hover path {
+        fill: #f00;
+    }
+
+    h4 {
+        margin: 0;
+        padding: 0;
+        font-size: 0.875rem;
+        opacity: .5;
+    }
+
+    p {
+        margin: 0;
+        padding: 0;
+        font-size: 0.75rem;
+    }
+
+    &.is-animating {
+        opacity: 0;
+
+        .poemkit-toast__content {
+            overflow: hidden;
+            transition: all .2s;
+            transform: perspective(100px) translateZ(-100px);
+        }
+    }
+}
+
