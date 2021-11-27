@@ -66193,7 +66193,7 @@ var Rating = /*#__PURE__*/function (_Component) {
     className: "poemkit-typo--h2"
   }, "Rating", /*#__PURE__*/react.createElement("a", {
     className: "poemkit-typo--h3 align-middle",
-    href: "https://github.com/xizon/poemkit-kit-react/tree/main/src/client/components/Rating",
+    href: "https://github.com/xizon/poemkit/tree/main/src/client/components/Rating",
     target: "_blank"
   }, /*#__PURE__*/react.createElement("span", {
     className: "poemkit-dir--right",
@@ -84654,7 +84654,7 @@ var Toaster = /*#__PURE__*/function (_Component) {
     className: "poemkit-typo--h2"
   }, "Toaster", /*#__PURE__*/react.createElement("a", {
     className: "poemkit-typo--h3 align-middle",
-    href: "https://github.com/xizon/poemkit-kit-react/tree/main/src/client/components/Toaster",
+    href: "https://github.com/xizon/poemkit/tree/main/src/client/components/Toaster",
     target: "_blank"
   }, /*#__PURE__*/react.createElement("span", {
     className: "poemkit-dir--right",
