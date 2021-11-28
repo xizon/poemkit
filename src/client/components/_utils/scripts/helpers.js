@@ -3,8 +3,8 @@
  * Core Helpers
  *
  * @package: poemkit
- * @version: 0.43
- * @last update: November 27, 2021
+ * @version: 0.44
+ * @last update: November 28, 2021
  * @author: UIUX Lab <uiuxlab@gmail.com>
  * @license: MIT
  *
@@ -130,6 +130,14 @@ __( document ).ready( function() {
 			//+++++++++++++++++++++++++++++++++++++++++++
 			// Click event demos
 			//+++++++++++++++++++++++++++++++++++++++++++
+
+
+			__( '.menu li a' ).off( 'click' ).one( 'click', function( e ) {
+				e.preventDefault();
+				console.log( 'This will be clicked only once' );
+			});
+
+
 			__( '.menu li' ).off( 'click' ).on( 'click', function( e ) {
 				console.log('e: ', e);
 				console.log('this: ', this);
@@ -2593,17 +2601,39 @@ const __ = (function () {
 		delete this.dataset[_s];
     }
 		
-	
+
+
 	/*
-	 * Attach an event handler function for one or more events to the selected elements.
+	 * Attach a handler to an event for the elements. The handler is executed at most once per element per event type.
 	 *
 	 * @param  {String} eventType         - One event types and optional namespaces, such as "click" 
 	 * @param  {?String} selector         - A selector string to filter the descendants of the selected elements that trigger the event. 
 	 * @param  {Function} fn              - A function to execute when the event is triggered. 
 	 * @return {Void}      
 	 */
-	__.prototype.on = function(eventType, selector, fn) {
-		const self = this;
+	 __.prototype.one = function(eventType, selector, fn) {
+		__( this ).on( eventType, selector, fn, true);
+	};
+	
+
+
+	/*
+	 * Attach an event handler function for one or more events to the selected elements.
+	 *
+	 * @param  {String} eventType         - One event types and optional namespaces, such as "click" 
+	 * @param  {?String} selector         - A selector string to filter the descendants of the selected elements 
+	 *                                      that trigger the event. 
+	 * @param  {Function} fn              - A function to execute when the event is triggered. 
+	 * @param  {Boolean} once             - A boolean value indicating that the listener should be invoked at most 
+	 *                                      once after being added. If true, the listener would be automatically 
+	 *                                      removed when invoked.
+	 * @return {Void}      
+	 */
+	__.prototype.on = function(eventType, selector, fn, once) {
+
+		if ( typeof (once) === 'undefined' ) once = false;
+
+		let _curFun = null;
 		
 		if (typeof(fn) !== 'function') {
 			fn = selector;
@@ -2616,7 +2646,7 @@ const __ = (function () {
 		
 		if (selector) {
 			//if string
-			const _curFun = function(evt) {
+			_curFun = function(evt) {
 				
 				[].slice.call( this.querySelectorAll(selector) ).forEach(function(el) {
 					if (el === evt.target) {
@@ -2633,13 +2663,12 @@ const __ = (function () {
 				function: fn,
 				selector: selector
 			});
-										   
-			self.addEventListener(eventType, _curFun);
-			
+						
+
 		} else {
 		
 			//if HTML element
-			const _curFun = function(evt) {
+			_curFun = function(evt) {
 				fn.call(this, evt);
 			};
 			
@@ -2651,10 +2680,13 @@ const __ = (function () {
 				selector: selector
 			});
 			
-			this.addEventListener(eventType, _curFun, false);
-
 		}
 
+		if ( once ) {
+			this.addEventListener(eventType, _curFun, {once: true});
+		} else {
+			this.addEventListener(eventType, _curFun);
+		}
 	
 		
 	};
@@ -3340,6 +3372,7 @@ const __ = (function () {
 		data: __.prototype.data,
 		prop: __.prototype.prop,
 		removeAttr: __.prototype.removeAttr,
+		one: __.prototype.one,
 		on: __.prototype.on,
 		off: __.prototype.off,
 		offset: __.prototype.offset,
