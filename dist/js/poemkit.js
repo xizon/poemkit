@@ -6,9 +6,9 @@
  * ## Project Name        :  PoemKit
  * ## Project Description :  React Toolkit for Building a Full Website.
  * ## Project URL         :  https://uiux.cc
- * ## Version             :  0.1.9
+ * ## Version             :  0.2.0
  * ## Based on            :  PoemKit (https://github.com/xizon/poemkit#readme)
- * ## Last Update         :  November 28, 2021
+ * ## Last Update         :  December 1, 2021
  * ## Created by          :  UIUX Lab (https://uiux.cc) (uiuxlab@gmail.com)
  * ## Released under the MIT license.
  *
@@ -31304,7 +31304,7 @@ function useRouteMatch(path) {
   return path ? react_router_matchPath(location.pathname, path) : match;
 }
 
-if (false) { var secondaryBuildName, initialBuildName, buildNames, react_router_key, global; }
+if (false) { var secondaryBuildName, initialBuildName, buildNames, key, global; }
 
 
 //# sourceMappingURL=react-router.js.map
@@ -31720,3123 +31720,3083 @@ function _defineProperty(obj, key, value) {
 
   return obj;
 }
-;// CONCATENATED MODULE: ./node_modules/@babel/runtime/helpers/esm/readOnlyError.js
-function _readOnlyError(name) {
-  throw new TypeError("\"" + name + "\" is read-only");
+;// CONCATENATED MODULE: ./src/client/components/_utils/scripts/helpers/_internal/traverseIndex.ts
+/*
+* Traverse the counter of a selector, reset to 0 when calling 	`__(selector).XXX()`
+* @private
+*/
+var traverseIndex = {
+  // for `each()`
+  each: 0,
+  // for `eq()`
+  eq: 0,
+  // for `first()`
+  first: 0,
+  // for `last()`
+  last: 0,
+  total_last: 0,
+  // for `filter()`
+  filter: 0,
+  // for `not()`
+  not: 0,
+  // for `maxDimension()`
+  maxDimension: 0,
+  total_maxDimension: 0,
+  elements_maxDimension: []
+};
+/* harmony default export */ const _internal_traverseIndex = (traverseIndex);
+;// CONCATENATED MODULE: ./src/client/components/_utils/scripts/helpers/_internal/isJSON.ts
+
+
+/*
+* Determine whether it is in JSON format
+* @private
+*/
+function isJSON(str) {
+  if (typeof str === 'string' && str.length > 0) {
+    if (str.replace(/\"\"/g, '').replace(/\,/g, '') == '[{}]') {
+      return false;
+    } else {
+      if (/^[\],:{}\s]*$/.test(str.replace(/\\["\\\/bfnrtu]/g, '@').replace(/"[^"\\\n\r]*"|true|false|null|-?\d+(?:\.\d*)?(?:[eE][+\-]?\d+)?/g, ']').replace(/(?:^|:|,)(?:\s*\[)+/g, ''))) {
+        return true;
+      } else {
+        return false;
+      }
+    }
+  } else {
+    if ((0,esm_typeof/* default */.Z)(str) === 'object' && Object.prototype.toString.call(str) === '[object Object]' && !str.length) {
+      return true;
+    } else {
+      return false;
+    }
+  }
 }
-;// CONCATENATED MODULE: ./src/client/components/_utils/scripts/helpers.js
+
+/* harmony default export */ const _internal_isJSON = (isJSON);
+;// CONCATENATED MODULE: ./src/client/components/_utils/scripts/helpers/_public/ajax.ts
+
+/*
+* Perform an asynchronous HTTP (Ajax) request.
+*
+* @param  {Json} props   - The attribute and value to be set, the format is JSON
+* @return {Void} 
+*/
+
+function ajax(props) {
+  if (!_internal_isJSON(props)) return false;
+  var self = this;
+
+  var _url = typeof props.url !== 'undefined' ? props.url : '';
+
+  var _method = typeof props.method !== 'undefined' ? props.method : 'POST';
+
+  var _loadedFn = typeof props.complete !== 'undefined' ? props.complete : null;
+
+  if (_url != '') {
+    var config = {
+      mode: 'cors',
+      method: _method
+    };
+    fetch(_url, config).then(function (response) {
+      return response.json();
+    }).then(function (result) {
+      //console.log('Success:', result);
+      if (_loadedFn && typeof _loadedFn == "function") {
+        _loadedFn.call(self, result);
+      }
+    })["catch"](function (error) {
+      console.error('Error:', error);
+    });
+  }
+}
+
+/* harmony default export */ const _public_ajax = (ajax);
+;// CONCATENATED MODULE: ./src/client/components/_utils/scripts/helpers/_public/browser.ts
+/*
+* Determine whether it is a special browser
+*
+* @return {Json}  - Boolean judgment collection of common browsers
+*/
+var browser = function () {
+  var browser = {};
+
+  if (typeof navigator !== 'undefined') {
+    // Test via a getter in the options object to see if the passive property is accessed
+    var supportsPassive = false;
+
+    try {
+      var opts = Object.defineProperty({}, 'passive', {
+        get: function get() {
+          supportsPassive = true;
+        }
+      });
+      window.addEventListener("testPassive", function (e) {}, opts);
+      window.removeEventListener("testPassive", function (e) {}, opts);
+    } catch (e) {}
+
+    browser = {
+      isMobile: /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent),
+      isAndroid: /(android)/i.test(navigator.userAgent),
+      isPC: !navigator.userAgent.match(/(iPhone|iPod|Android|ios|Mobile)/i),
+      isSafari: !!navigator.userAgent.match(/Version\/[\d\.]+.*Safari/),
+
+      /*Test to 9, 10. */
+      isIE: !!window.ActiveXObject || "ActiveXObject" in window,
+
+      /*Test to 6 ~ 11 (not edge) */
+      supportsPassive: supportsPassive
+    };
+  }
+
+  return browser;
+}();
+
+/* harmony default export */ const _public_browser = (browser);
+;// CONCATENATED MODULE: ./src/client/components/_utils/scripts/helpers/_public/cssProperty.ts
+
+
+/*
+* Get the CSS property
+*
+* @description This function can be used separately in HTML pages or custom JavaScript.
+* @param  {!Element} el     - The Element for which to get the computed style. Using class name or ID to locate.
+* @return {String|Object}   - The value of property.
+*/
+var cssProperty = function () {
+  function t() {}
+
+  return t.version = "0.0.1",
+  /*
+  * Get the -webkit-transition-duration property
+  *
+  * @param {Element} el - A DOM node containing one selector to match against.
+  * @return {Number}    - Returns a pure number.
+  */
+  t.getTransitionDuration = function (el) {
+    if ((0,esm_typeof/* default */.Z)(el) === ( true ? "undefined" : 0)) {
+      return 0;
+    }
+
+    var style = window.getComputedStyle(el),
+        duration = style.webkitTransitionDuration,
+        delay = style.webkitTransitionDelay;
+
+    if ((0,esm_typeof/* default */.Z)(duration) != ( true ? "undefined" : 0)) {
+      // fix miliseconds vs seconds
+      duration = duration.indexOf("ms") > -1 ? parseFloat(duration) : parseFloat(duration) * 1000;
+      delay = delay.indexOf("ms") > -1 ? parseFloat(delay) : parseFloat(delay) * 1000;
+      return duration;
+    } else {
+      return 0;
+    }
+  },
+  /*
+  * Get an object's absolute position on the page
+  *
+  * @param {Element} el - A DOM node containing one selector to match against.
+  * @return {Json}    - An object containing the properties top and left. 
+  */
+  t.getAbsoluteCoordinates = function (el) {
+    var windowWidth = window.innerWidth,
+        leftPos = null,
+        topPos = null;
+
+    if (!document.getElementsByTagName('body')[0].className.match(/rtl/)) {
+      leftPos = el.offsetLeft == 0 ? el.parentElement.offsetLeft : el.offsetLeft;
+      topPos = el.offsetTop == 0 ? el.parentElement.offsetTop : el.offsetTop;
+    } else {
+      // width and height in pixels, including padding and border
+      // Corresponds to outerWidth(), outerHeight()
+      leftPos = el.offsetLeft == 0 ? windowWidth - (el.parentElement.offsetLeft + el.parentElement.offsetWidth) : windowWidth - (el.offsetLeft + el.offsetWidth);
+      topPos = el.offsetTop == 0 ? windowWidth - (el.parentElement.offsetTop + el.parentElement.offsetHeight) : windowWidth - (el.offsetTop + el.offsetHeight);
+    }
+
+    return {
+      'left': leftPos,
+      'top': topPos
+    };
+  }, //
+  t;
+}();
+
+/* harmony default export */ const _public_cssProperty = (cssProperty);
+;// CONCATENATED MODULE: ./src/client/components/_utils/scripts/helpers/_public/debounce.ts
+/*
+* Debounce
+*
+* @param  {Function} fn    - A function to be executed within the time limit.
+* @param  {Number} limit   - Waiting time.
+* @return {Function}       - Returns a new function.
+*/
+function debounce(fn) {
+  var limit = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 300;
+  var timer;
+  return function () {
+    //Every time this returned function is called, the timer is cleared to ensure that fn is not executed
+    clearTimeout(timer); // When the returned function is called for the last time (that is the user stops a continuous operation)
+    // Execute fn after another delay milliseconds
+
+    timer = setTimeout(function () {
+      fn.apply(this, arguments);
+    }, limit);
+  };
+}
+
+;
+/* harmony default export */ const _public_debounce = (debounce);
+;// CONCATENATED MODULE: ./src/client/components/_utils/scripts/helpers/_public/deepClone.ts
+
+
+/*
+*  Create a deep copy of the set of matched elements.
+*
+* @param  {Object|Element} obj             - The array, JSON or HTML element to be copied.
+* @return {Object|Element}   
+*/
+function deepClone(obj) {
+  if (obj.nodeType === 1) {
+    return obj.cloneNode(true);
+  } else {
+    var objClone = Array.isArray(obj) ? [] : {};
+
+    if (obj && (0,esm_typeof/* default */.Z)(obj) === "object") {
+      for (var key in obj) {
+        if (obj.hasOwnProperty(key)) {
+          //Determine whether the ojb child element is an object, if it is, copy it recursively
+          if (obj[key] && (0,esm_typeof/* default */.Z)(obj[key]) === "object") {
+            objClone[key] = deepClone(obj[key]);
+          } else {
+            //If not, simply copy
+            objClone[key] = obj[key];
+          }
+        }
+      }
+    }
+
+    return objClone;
+  }
+}
+
+;
+/* harmony default export */ const _public_deepClone = (deepClone);
+;// CONCATENATED MODULE: ./src/client/components/_utils/scripts/helpers/_public/GUID.ts
+/*
+* Create GUID / UUID
+*
+* @description This function can be used separately in HTML pages or custom JavaScript.
+* @return {String}                        - The globally-unique identifiers.
+*/
+var GUID = function () {
+  function t() {}
+
+  return t.version = "0.0.1",
+  /*
+  * Generate a string of unique characters
+  *
+  * @return {String}
+  */
+  t.create = function () {
+    return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function (c) {
+      var r = Math.random() * 16 | 0,
+          v = c == 'x' ? r : r & 0x3 | 0x8;
+      return v.toString(16);
+    });
+  }, //
+  t;
+}();
+
+/* harmony default export */ const _public_GUID = (GUID);
+;// CONCATENATED MODULE: ./src/client/components/_utils/scripts/helpers/_public/htmlDecode.ts
+/*
+*  HTML entities decode
+*
+* @param {string} str          - Input text.
+* @return {string}             - Filtered text.
+*/
+function htmlDecode(str) {
+  var res = '';
+
+  if (typeof document === 'undefined') {
+    var entities = [['amp', '&'], ['apos', '\''], ['#x27', '\''], ['#x2F', '/'], ['#39', '\''], ['#47', '/'], ['lt', '<'], ['gt', '>'], ['nbsp', ' '], ['quot', '"'], ['#60', '<'], ['#62', '>']];
+
+    for (var i = 0, max = entities.length; i < max; i++) {
+      str = str.replace(new RegExp('&' + entities[i][0] + ';', 'g'), entities[i][1]);
+    }
+
+    res = str;
+  } else {
+    var txt = document.createElement('textarea');
+    txt.innerHTML = str;
+    res = txt.value;
+  }
+
+  return res;
+}
+
+/* harmony default export */ const _public_htmlDecode = (htmlDecode);
+;// CONCATENATED MODULE: ./src/client/components/_utils/scripts/helpers/_public/htmlEncode.ts
+/*
+*  HTML entities encode.
+*
+* @param {string} str          - Input text.
+* @return {string}             - Filtered text.
+*/
+function htmlEncode(str) {
+  var res = '';
+
+  if (typeof document === 'undefined') {
+    res = str.replace(/[\u00A0-\u9999<>\&]/g, function (i) {
+      return '&#' + i.charCodeAt(0) + ';';
+    });
+  } else {
+    var div = document.createElement('div'); //Creates a new Text node. This method can be used to escape HTML characters.
+
+    div.appendChild(document.createTextNode(str));
+    res = div.innerHTML;
+  } //Convert single and double quotes
+
+
+  res = res.replace(/"/g, '&quot;').replace(/'/g, '&#39;');
+  return res;
+}
+
+/* harmony default export */ const _public_htmlEncode = (htmlEncode);
+;// CONCATENATED MODULE: ./src/client/components/_utils/scripts/helpers/_public/isTouchCapable.ts
+/*
+* To determine if it is a touch screen.
+*
+* @return {Boolean} 
+*/
+function isTouchCapable() {
+  return 'ontouchstart' in window || window.DocumentTouch && document instanceof window.DocumentTouch || window.navigator.maxTouchPoints > 0;
+}
+
+/* harmony default export */ const _public_isTouchCapable = (isTouchCapable);
+;// CONCATENATED MODULE: ./src/client/components/_utils/scripts/helpers/_public/lastUrlParamFormat.ts
+/*
+* Capitalize the first letter of all words in a string
+*
+* @param  {String} s                 - Any string.
+* @return {String}                   - A new string.
+*/
+function lastUrlParamFormat(s) {
+  s = s || '';
+
+  if (s.length > 0) {
+    s = s.replace(/\-/g, ' ').replace(/\_/g, ' ');
+    var pieces = s.split(" ");
+
+    for (var i = 0; i < pieces.length; i++) {
+      var j = pieces[i].charAt(0).toUpperCase();
+      pieces[i] = j + pieces[i].substr(1);
+    }
+
+    return pieces.join(" ");
+  } else {
+    return s;
+  }
+}
+
+/* harmony default export */ const _public_lastUrlParamFormat = (lastUrlParamFormat);
+;// CONCATENATED MODULE: ./src/client/components/_utils/scripts/helpers/_public/math.ts
+/*
+* Evaluating a string as a mathematical expression in JavaScript
+*
+* @description This function can be used separately in HTML pages or custom JavaScript.
+* @return {String}            - New calculation result.
+*/
+var math = function () {
+  function t() {}
+
+  return t.version = "0.0.2",
+  /*
+  * Expression parsing and evaluation
+  *
+  * @param {String} s - A math expression given in string.
+  * @return {Number}  - Returns a pure number calculated.
+  */
+  t.evaluate = function (s) {
+    var chars = s.replace(/\s/g, '').split("");
+    var n = [],
+        op = [],
+        index = 0,
+        oplast = true;
+    n[index] = ""; // Parse the expression
+
+    for (var c = 0; c < chars.length; c++) {
+      if (isNaN(parseInt(chars[c])) && chars[c] !== "." && !oplast) {
+        op[index] = chars[c];
+        index++;
+        n[index] = "";
+        oplast = true;
+      } else {
+        n[index] += chars[c];
+        oplast = false;
+      }
+    } // Calculate the expression
+
+
+    s = parseFloat(n[0]);
+
+    for (var o = 0; o < op.length; o++) {
+      var num = parseFloat(n[o + 1]);
+
+      switch (op[o]) {
+        case "+":
+          s = s + num;
+          break;
+
+        case "-":
+          s = s - num;
+          break;
+
+        case "*":
+          s = s * num;
+          break;
+
+        case "/":
+          s = s / num;
+          break;
+      }
+    }
+
+    return s;
+  },
+  /*
+  * Generate random number between two numbers
+  *
+  * @return {Number} min - Enter a expected minimum.
+  * @return {Number} max - Enter a expected maximum.
+  * @return {Number}     - A new random number
+  */
+  t.getRandomFloat = function (min, max) {
+    return Math.random() * (max - min) + min;
+  },
+  /*
+  * Returns the degree from radian.
+  *
+  * @return {Number} rad - Value of radian.
+  * @return {Number}
+  * @usage: 
+   angle = rad / ( Math.PI / 180 )  = rad * ( 180/Math.PI );
+  */
+  t.getDegree = function (rad) {
+    return rad / Math.PI * 180;
+  },
+  /*
+  * Returns the radian degree .
+  *
+  * @return {Number} deg - Value of degree.
+  * @return {Number}
+  * @usage: 
+   rad = Math.PI / 180 * 30 ;
+  */
+  t.getRadian = function (deg) {
+    return deg * Math.PI / 180;
+  },
+  /*
+  * Convert three.js scene rotation to polar coordinates
+  *
+  * @return {Number} x - X coordinate value.
+  * @return {Number} y - Y coordinate value.
+  * @return {Number} z - Z coordinate value.
+  * @return {Json}
+  * @usage: 
+   x = r * cos（θ）
+  y = r * sin（θ）  
+  */
+  t.getPolarCoord = function (x, y, z) {
+    var nx = Math.cos(x) * Math.cos(y) * z,
+        nz = Math.cos(x) * Math.sin(y) * z,
+        ny = Math.sin(x) * z;
+    return {
+      x: nx,
+      y: ny,
+      z: nz
+    };
+  }, //
+  t;
+}();
+
+/* harmony default export */ const _public_math = (math);
+;// CONCATENATED MODULE: ./src/client/components/_utils/scripts/helpers/_public/removeFirstLastStr.ts
+/*
+* Remove first, last or both symbols
+*
+* @param  {String} str       - Any string.
+* @param  {String} symbol    - The target string to remove.
+* @param  {Number} type      - Type of all or not. if `0`, is all.
+* @return {String}           - An new string.
+*/
+function removeFirstLastStr(str) {
+  var symbol = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : ',';
+  var type = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : 0;
+
+  if (typeof str === 'string') {
+    if (type == 0) {
+      var flRegExp = new RegExp('^\\' + symbol + '|\\' + symbol + '$', 'g');
+      return str.replace(flRegExp, '');
+    } else {
+      var _flRegExp = new RegExp('' + symbol + '\s*$', 'g');
+
+      return str.replace(_flRegExp, '');
+    }
+  } else {
+    return str;
+  }
+}
+
+;
+/* harmony default export */ const _public_removeFirstLastStr = (removeFirstLastStr);
+;// CONCATENATED MODULE: ./src/client/components/_utils/scripts/helpers/_internal/isValidNumeric.ts
+/*
+* Check if a string is a valid number
+* @private
+*/
+function isValidNumeric(str) {
+  if (typeof str != "string") return false; // we only process strings!  
+
+  if (!isNaN(str) && // use type coercion to parse the _entirety_ of the string (`parseFloat` alone does not do this)
+  !isNaN(parseFloat(str)) // ensure strings of whitespace fail
+  ) {
+    return true;
+  } else {
+    return false;
+  }
+}
+
+/* harmony default export */ const _internal_isValidNumeric = (isValidNumeric);
+;// CONCATENATED MODULE: ./src/client/components/_utils/scripts/helpers/_public/setDefaultOptions.ts
 
 
 
+/*
+*  Set a default JSON format configuration
+*
+* @param  {Json} props         - Set some default keys and values.
+* @param  {Json} options       - A JSON variable passed in from outside, including key and value.
+* @return {Json}               - Merge the new and old values.
+*/
+
+function setDefaultOptions(props, options) {
+  if ((0,esm_typeof/* default */.Z)(options) === ( true ? "undefined" : 0) || options === null || options === false) options = {}; //Set a default configuration
+
+  if (_internal_isJSON(props)) {
+    var defaultConfigValues = Object.values(props);
+    Object.keys(props).forEach(function (prop, index) {
+      // Well-formed string type
+      Object.keys(options).forEach(function (prop2, index2) {
+        if (prop2 === prop) {
+          var _v = options[prop2];
+          if (_v == 'true') _v = true;
+          if (_v == 'false') _v = false;
+          if (_internal_isValidNumeric(_v)) _v = parseFloat(_v);
+          if (_internal_isJSON(_v)) _v = Object.prototype.toString.call(_v) === '[object Object]' ? _v : JSON.parse(_v);
+          options[prop2] = _v;
+        }
+      }); //
+
+      if ((0,esm_typeof/* default */.Z)(options[prop]) === ( true ? "undefined" : 0) || options[prop] === null) options[prop] = defaultConfigValues[index];
+    });
+  }
+
+  return options;
+}
+
+;
+/* harmony default export */ const _public_setDefaultOptions = (setDefaultOptions);
+;// CONCATENATED MODULE: ./src/client/components/_utils/scripts/helpers/_internal/toCamelCase.ts
+/*
+* Convert string to camel case
+* @private
+*/
+function toCamelCase(s) {
+  if (typeof s === 'string') {
+    var firstWord = "";
+    var arr = s.split("-");
+
+    for (var i = 1; i < arr.length; i++) {
+      firstWord = arr[i].charAt(0).toUpperCase();
+      arr[i] = firstWord + arr[i].slice(1);
+    }
+
+    arr = arr.join(""); //Convert the arr array to a string
+
+    return arr;
+  } else {
+    return s;
+  }
+}
+
+/* harmony default export */ const _internal_toCamelCase = (toCamelCase);
+;// CONCATENATED MODULE: ./src/client/components/_utils/scripts/helpers/_public/trim.ts
+/*
+* Remove all spaces in the string
+*
+* @param  {String} s                 - Any string.
+* @param  {Boolean} isGlobal         - If the value is `true`, remove all spaces including the middle
+* @return {String}                   - A new string with no spaces
+*/
+function trim(s) {
+  var isGlobal = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : false;
+
+  if (typeof s === 'string') {
+    var result;
+    result = s.replace(/(^\s+)|(\s+$)/g, "");
+
+    if (isGlobal === true) {
+      result = result.replace(/\s/g, "");
+    }
+
+    return result;
+  } else {
+    return s;
+  }
+}
+
+/* harmony default export */ const _public_trim = (trim);
+;// CONCATENATED MODULE: ./src/client/components/_utils/scripts/helpers/_public/styleFormat.ts
+
+
+/*
+* Convert HTML Element's `Style` Attribute to JSON
+*
+* @param  {String} str   - The content of the style attribute in the HTML element, usually a string
+* @return {Json}     - An HTML element to a JSON object
+*/
+
+function styleFormat(s) {
+  s = s || '';
+
+  if (s.length > 0) {
+    var styles = s.split(';'),
+        json = {};
+    var i = styles.length,
+        style,
+        k,
+        v;
+
+    while (i--) {
+      style = styles[i].split(':');
+      k = _internal_toCamelCase(_public_trim(style[0]));
+      v = _public_trim(style[1]);
+
+      if (k.length > 0 && v.length > 0) {
+        json[k] = v;
+      }
+    }
+
+    return json;
+  } else {
+    return '';
+  }
+}
+
+;
+/* harmony default export */ const _public_styleFormat = (styleFormat);
+;// CONCATENATED MODULE: ./src/client/components/_utils/scripts/helpers/_public/throttle.ts
+/*
+* Throttle
+*
+* @param  {Function} fn    - A function to be executed within the time limit.
+* @param  {Number} limit   - Waiting time.
+* @return {Function}       - Returns a new function.
+*/
+function throttle(fn) {
+  var limit = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 300;
+  var waiting = false;
+  return function () {
+    if (!waiting) {
+      fn.apply(this, arguments);
+      waiting = true;
+      setTimeout(function () {
+        waiting = false;
+      }, limit);
+    }
+  };
+}
+
+;
+/* harmony default export */ const _public_throttle = (throttle);
+;// CONCATENATED MODULE: ./src/client/components/_utils/scripts/helpers/_public/toSlug.ts
+/*
+* Convert a string to slug.
+*
+* @param  {String} str            - Any string.
+* @return {String}                - A new string.
+*/
+function toSlug(str) {
+  if (typeof str == 'string' && str.length > 0) {
+    return str.toString().replace(/[^\w\s\-！￥【】\u4e00-\u9eff]/gi, '').replace(/\s/g, '-').replace(/(\-){2,}/g, '-').replace(/\-\s*$/, '').toLowerCase();
+  } else {
+    return str;
+  }
+}
+
+;
+/* harmony default export */ const _public_toSlug = (toSlug);
+;// CONCATENATED MODULE: ./src/client/components/_utils/scripts/helpers/_public/validate.ts
+
+/*
+* Object validation
+*
+* @return {Boolean}  
+*/
+
+var validate = function () {
+  function t() {}
+
+  return t.version = "0.0.1", t.isNumber = function (B) {
+    var A = /^[\d|\.|,]+$/;
+    return A.test(B);
+  }, t.isInt = function (B) {
+    if (B == "") {
+      return false;
+    }
+
+    var A = /\D+/;
+    return !A.test(B);
+  }, t.isEmail = function (A) {
+    var B = /^\s*([A-Za-z0-9_-]+(\.\w+)*@(\w+\.)+\w{2,3})\s*$/;
+    return B.test(A);
+  }, t.isTel = function (A) {
+    //const B = /^[\d|\-|\s|\_]+$/;
+    var B = /^[0-9- ]{7,20}$/;
+    return B.test(A);
+  }, t.isMobile = function (A) {
+    //const B = /^13[0-9]{9}|15[012356789][0-9]{8}|18[0256789][0-9]{8}|147[0-9]{8}$/;
+    var B = /^1[0-9]{10}$/;
+    return B.test(A);
+  }, t.isJSON = function (A) {
+    return _internal_isJSON(A);
+  }, //
+  t;
+}();
+
+/* harmony default export */ const _public_validate = (validate);
+;// CONCATENATED MODULE: ./src/client/components/_utils/scripts/helpers/find.ts
+/*
+* Get the descendants of each element in the current set of matched elements
+*
+* @param  {String} s           - A string containing a selector expression to match elements against.
+* @return {Array}              - The collection of elements
+*/
+function find(s) {
+  // The symbol ">" is not allowed at the beginning of the find() method.
+  if (/(^\s*|,\s*)>/.test(s)) {
+    var removeId;
+
+    if (!this.id) {
+      this.id = 'ID_' + new Date().getTime();
+      removeId = true;
+    }
+
+    s = s.replace(/(^\s*|,\s*)>/g, '$1#' + this.id + ' >');
+    var result = document.querySelectorAll(s);
+
+    if (removeId) {
+      this.id = null;
+    }
+
+    return [].slice.call(result);
+  } else {
+    return [].slice.call(this.querySelectorAll(s));
+  }
+}
+
+;
+/* harmony default export */ const helpers_find = (find);
+;// CONCATENATED MODULE: ./src/client/components/_utils/scripts/helpers/closest.ts
+/*
+* Traverses the Element and its parents (heading toward the document root) 
+* until it finds a node that matches the provided selector string. 
+*
+* @param  {String} s           - A string containing a selector expression to match elements against.
+* @return {Array}              - Contains only a collection of HTML elements.
+*/
+function closest(s) {
+  //using recursivity
+  var el = this.closest(s); //Must judge the result of closest()
+
+  if (el === null) {
+    return [];
+  } else {
+    return el;
+  }
+}
+
+/* harmony default export */ const helpers_closest = (closest);
+;// CONCATENATED MODULE: ./src/client/components/_utils/scripts/helpers/prev.ts
+/*
+* Returns the Element immediately prior to the specified one in its parent's children list, 
+* or null if the specified element is the first one in the list.
+*
+* @param  {String} s       - A string containing a selector expression to match elements against.
+* @return {Array}          - Contains only a collection of HTML elements.
+*/
+function prev(s) {
+  var el = this.previousElementSibling;
+
+  if (s === undefined) {
+    if (el !== null) return el;
+  } else {
+    if (el !== null && ( //Determine whether the ID, class and HTML nodes match
+    el.nodeName.toLowerCase() === s || el.classList.contains(s.replace(/\./g, '')) || '#' + el.id === s)) {
+      return el;
+    } else {
+      return [];
+    }
+  }
+}
+
+/* harmony default export */ const helpers_prev = (prev);
+;// CONCATENATED MODULE: ./src/client/components/_utils/scripts/helpers/next.ts
+/*
+* Returns the element immediately following the specified one in its parent's children list, 
+* or null if the specified element is the last one in the list.
+*
+* @param  {String} s       - A string containing a selector expression to match elements against.
+* @return {Array}          - Contains only a collection of HTML elements.
+*/
+function next(s) {
+  var el = this.nextElementSibling;
+
+  if (s === undefined) {
+    if (el !== null) return el;
+  } else {
+    if (el !== null && ( //Determine whether the ID, class and HTML nodes match
+    el.nodeName.toLowerCase() === s || el.classList.contains(s.replace(/\./g, '')) || '#' + el.id === s)) {
+      return el;
+    } else {
+      return [];
+    }
+  }
+}
+
+/* harmony default export */ const helpers_next = (next);
+;// CONCATENATED MODULE: ./src/client/components/_utils/scripts/helpers/parent.ts
+/*
+* Returns the DOM node's parent Element, or null if the node either has no parent,
+* or its parent isn't a DOM Element.
+*
+* @param  {String} s       - A string containing a selector expression to match elements against.
+* @return {Array}          - Contains only a collection of HTML elements.
+*/
+function parent_parent(s) {
+  var el = this.parentElement;
+
+  if (s === undefined) {
+    if (el !== null) return el;
+  } else {
+    if (el !== null && ( //Determine whether the ID, class and HTML nodes match
+    el.nodeName.toLowerCase() === s || el.classList.contains(s.replace(/\./g, '')) || '#' + el.id === s)) {
+      return el;
+    } else {
+      return [];
+    }
+  }
+}
+
+/* harmony default export */ const helpers_parent = (parent_parent);
+;// CONCATENATED MODULE: ./src/client/components/_utils/scripts/helpers/parents.ts
+/*
+* Get the ancestors of each element in the current set of matched elements.
+*
+* @param  {String} s                 - A string containing a selector expression to match elements against.
+* @return {Array}                    - Contains only a collection of HTML elements.
+*/
+function parents(s) {
+  var parentSelector = document.querySelector(s); // If no parentSelector defined will bubble up all the way to *document*
+
+  if (parentSelector === undefined) {
+    parentSelector = document;
+  }
+
+  var parents = [];
+  var _parent = this.parentNode;
+
+  while (_parent !== parentSelector) {
+    var _currentNode = _parent; //Determine whether the ID, class and HTML nodes match
+
+    if (s !== undefined) {
+      if (_currentNode.nodeName.toLowerCase() === s || _currentNode.classList.contains(s.replace(/\./g, '')) || '#' + _currentNode.id === s) {
+        parents.push(_currentNode);
+      }
+    } else {
+      parents.push(_currentNode);
+    } //
+
+
+    _parent = _currentNode.parentNode;
+  } // Push that parentSelector you wanted to stop at
+
+
+  if (parentSelector !== null) parents.push(parentSelector);
+  return parents;
+}
+
+/* harmony default export */ const helpers_parents = (parents);
+;// CONCATENATED MODULE: ./src/client/components/_utils/scripts/helpers/children.ts
+/*
+* Returns a live HTMLCollection which contains all of the child elements 
+* of the node upon which it was called.
+*
+* @param  {Element} s         - The selector that needs to be filtered. A DOMstring containing 
+*                               one selector to match against.
+* @return {Array}              -  The collection of elements
+*/
+function children(s) {
+  var self = this;
+  var childrenList = self.children;
+  var res = [];
+
+  if (childrenList) {
+    for (var i = 0; i < childrenList.length; i++) {
+      var _currentNode = childrenList[i]; //Determine whether the ID, class and HTML nodes match
+
+      if (s !== undefined) {
+        if (_currentNode.nodeName.toLowerCase() === s || _currentNode.classList.contains(s.replace(/\./g, '')) || '#' + _currentNode.id === s) {
+          res.push(_currentNode);
+        }
+      } else {
+        res.push(_currentNode);
+      }
+    }
+  }
+
+  return res;
+}
+
+/* harmony default export */ const helpers_children = (children);
+;// CONCATENATED MODULE: ./src/client/components/_utils/scripts/helpers/siblings.ts
+/*
+* Get the siblings of each element in the set of matched elements
+*
+* @param  {String} s                 - A string containing a selector expression to match elements against.
+* @return {Array}              -  The collection of elements
+*/
+function siblings(s) {
+  var self = this; // for collecting siblings
+
+  var siblings = []; // if no parent, return no sibling
+
+  if (!self.parentNode) {
+    return siblings;
+  } // first child of the parent node
+
+
+  var sibling = self.parentNode.firstChild; // collecting siblings
+
+  while (sibling) {
+    if (sibling.nodeType === 1 && sibling !== self) {
+      //Determine whether the ID, class and HTML nodes match
+      if (s !== undefined) {
+        if (sibling.nodeName.toLowerCase() === s || sibling.classList.contains(s.replace(/\./g, '')) || '#' + sibling.id === s) {
+          siblings.push(sibling);
+        }
+      } else {
+        siblings.push(sibling);
+      }
+    } //
+
+
+    sibling = sibling.nextSibling;
+  }
+
+  return siblings;
+}
+
+/* harmony default export */ const helpers_siblings = (siblings);
+;// CONCATENATED MODULE: ./src/client/components/_utils/scripts/helpers/each.ts
+
+
+/*
+* Iterate over an object, executing a function for each matched element.
+*
+* @param  {Function} fn         - A function to execute for each matched element.
+* @return {Void} 
+*/
+
+function each(fn) {
+  if (fn && typeof fn == "function") {
+    //If the ID does not exist, itemDomsStr cannot be obtained
+    if (this.id.length === 0) {
+      this.id = 'eachitem-' + _public_GUID.create();
+    } //!import: The returned HTML element must be current, 
+    //otherwise all HTML elements under document may be queried
+
+
+    var itemDomsStr = '#' + this.id;
+    fn.call(this, _internal_traverseIndex.each, itemDomsStr); // Traverse the counter of a selector, reset to 0 when calling 	`__(selector).XXX()`
+
+    _internal_traverseIndex.each++;
+  }
+}
+
+/* harmony default export */ const helpers_each = (each);
+;// CONCATENATED MODULE: ./src/client/components/_utils/scripts/helpers/eq.ts
+
+/*
+* Reduce the set of matched elements to the one at the specified index.
+*
+* @param  {Number} index   - A number for index.
+* @return {Array}          - Contains only a collection of HTML elements.
+*/
+
+function eq(index) {
+  var res = [];
+
+  if (_internal_traverseIndex.eq === index) {
+    res = this;
+  } // Traverse the counter of a selector, reset to 0 when calling 	`__(selector).XXX()`
+
+
+  _internal_traverseIndex.eq++;
+  return res;
+}
+
+/* harmony default export */ const helpers_eq = (eq);
+;// CONCATENATED MODULE: ./src/client/components/_utils/scripts/helpers/first.ts
+
+/*
+* Reduce the set of matched elements to the first in the set.
+*
+* @return {Array}          - Contains only a collection of HTML elements.
+*/
+
+function first() {
+  var res = [];
+
+  if (_internal_traverseIndex.first === 0) {
+    res = this;
+  } // Traverse the counter of a selector, reset to 0 when calling 	`__(selector).XXX()`
+
+
+  _internal_traverseIndex.first++;
+  return res;
+}
+
+/* harmony default export */ const helpers_first = (first);
+;// CONCATENATED MODULE: ./src/client/components/_utils/scripts/helpers/last.ts
+
+/*
+* Reduce the set of matched elements to the last in the set.
+*
+* @return {Array}          - Contains only a collection of HTML elements.
+*/
+
+function last() {
+  var res = [];
+
+  if (_internal_traverseIndex.last === _internal_traverseIndex.total_last - 1) {
+    res = this;
+  } // Traverse the counter of a selector, reset to 0 when calling 	`__(selector).XXX()`
+
+
+  _internal_traverseIndex.last++;
+  return res;
+}
+
+/* harmony default export */ const helpers_last = (last);
+;// CONCATENATED MODULE: ./src/client/components/_utils/scripts/helpers/filter.ts
+
+/*
+* Reduce the set of matched elements to those that match the selector or pass the function's test.
+*
+* @param  {String} s           - A string containing a selector expression to match elements against.
+* @return {Array}              -  The collection of elements
+*/
+
+function filter(s) {
+  var res = [];
+  if (s === undefined) return res;
+
+  if (this.classList.contains(s.replace(/\./g, ''))) {
+    res.push(this);
+  } // Traverse the counter of a selector, reset to 0 when calling 	`__(selector).XXX()`
+
+
+  _internal_traverseIndex.filter++;
+  return res;
+}
+
+/* harmony default export */ const helpers_filter = (filter);
+;// CONCATENATED MODULE: ./src/client/components/_utils/scripts/helpers/not.ts
+
+/*
+* Remove elements from the set of matched elements.
+*
+* @param  {String} s           - A string containing a selector expression to match elements against.
+* @return {Array}              -  The collection of elements
+*/
+
+function not(s) {
+  var res = [];
+  if (s === undefined) return res;
+
+  if (!this.classList.contains(s.replace(/\./g, ''))) {
+    res.push(this);
+  } // Traverse the counter of a selector, reset to 0 when calling 	`__(selector).XXX()`
+
+
+  _internal_traverseIndex.not++;
+  return res;
+}
+
+/* harmony default export */ const helpers_not = (not);
+;// CONCATENATED MODULE: ./src/client/components/_utils/scripts/helpers/maxDimension.ts
+
+/*
+*  Find the Tallest or widest of all elements
+*
+* @return {Json}      - An object containing the properties width and height.
+*/
+
+function maxDimension() {
+  if (_internal_traverseIndex.maxDimension === _internal_traverseIndex.total_maxDimension - 1) {
+    var currentSelector = _internal_traverseIndex.elements_maxDimension;
+    var elementHeights = Array.prototype.map.call(currentSelector, function (el) {
+      return el.clientHeight;
+    });
+    var elementWidths = Array.prototype.map.call(currentSelector, function (el) {
+      return el.clientWidth;
+    });
+    var maxHeight = Math.max.apply(null, elementHeights);
+    var maxWidth = Math.max.apply(null, elementWidths);
+    return {
+      'height': maxHeight,
+      'width': maxWidth
+    };
+  } // Traverse the counter of a selector, reset to 0 when calling 	`__(selector).XXX()`
+
+
+  _internal_traverseIndex.maxDimension++;
+  _internal_traverseIndex.elements_maxDimension.push(this);
+}
+
+/* harmony default export */ const helpers_maxDimension = (maxDimension);
+;// CONCATENATED MODULE: ./src/client/components/_utils/scripts/helpers/ready.ts
+/*
+* Code included inside the code will run once the entire page (all DOM) is ready.
+*
+* @param  {Function} fn   - A function to execute after the DOM is ready.
+* @return {Void}
+*/
+function ready(fn) {
+  if (document.readyState != 'loading') {
+    fn();
+  } else if (document.addEventListener) {
+    document.addEventListener('DOMContentLoaded', fn);
+  } else {
+    document.attachEvent('onreadystatechange', function () {
+      if (document.readyState != 'loading') fn();
+    });
+  }
+}
+
+/* harmony default export */ const helpers_ready = (ready);
+;// CONCATENATED MODULE: ./src/client/components/_utils/scripts/helpers/loader.ts
+
+
+/*
+* Detect when images and videos have been loaded. 
+*
+* @param  {Json} props   - Contains three event functions before loading, loading, and loading completed.
+* @return {Void}
+*/
+
+function loader(props) {
+  var self = this;
+  var sources = [];
+  var loadingFn = null,
+      progressFn = null,
+      loadedFn = null,
+      imagesSelector = 'body img',
+      videosSelector = 'body video';
+
+  if (_internal_isJSON(props)) {
+    loadingFn = props.startEvent;
+    progressFn = props.progressEvent;
+    loadedFn = props.endEvent;
+    imagesSelector = props.imagesSelector;
+    videosSelector = props.videosSelector;
+  } //count all images on a page
+
+
+  if (typeof document.images !== 'undefined' && document.images.length == 0) {
+    var imgPlaceholder = document.createElement("div");
+    imgPlaceholder.innerHTML = '<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt="" style="display:none">'; // insert liLast at the end of <>
+
+    document.body.append(imgPlaceholder);
+  } //loading
+
+
+  if (loadingFn && typeof loadingFn == "function") {
+    loadingFn();
+  } //Push all images from page
+
+
+  var imgs = document.querySelectorAll(imagesSelector);
+
+  for (var i = 0; i < imgs.length; i++) {
+    sources.push({
+      "url": imgs[i].src,
+      "type": 'img'
+    });
+  } //Push all videos from page
+
+
+  var videos = document.querySelectorAll(videosSelector);
+
+  for (var _i = 0; _i < videos.length; _i++) {
+    var _sources = videos[_i].getElementsByTagName('source');
+
+    sources.push({
+      "url": _sources.length > 0 ? _sources[0].src : videos[_i].src,
+      "type": 'video'
+    });
+  } //Execute after all images and videos have loaded
+
+
+  var per = 0;
+  var perInit = 1;
+
+  if (sources.length == 0) {
+    per = 100;
+  }
+
+  var loadResources = function loadResources() {
+    var promises = [];
+
+    var _loop = function _loop(_i2) {
+      if (sources[_i2].type == 'img') {
+        ///////////
+        // IMAGE //
+        ///////////   
+        var _promise = new Promise(function (resolve, reject) {
+          var img = document.createElement('img');
+          img.crossOrigin = 'anonymous';
+          img.src = sources[_i2].url;
+
+          img.onload = function (e) {
+            //Compatible with safari and firefox
+            if ((0,esm_typeof/* default */.Z)(e.path) === ( true ? "undefined" : 0)) {
+              return resolve(e.target.currentSrc);
+            } else {
+              return resolve(e.path[0].currentSrc);
+            }
+          };
+        }).then(textureLoaded);
+
+        promises.push(_promise);
+      } else {
+        ///////////
+        // VIDEO //
+        ///////////    
+        var _promise2 = new Promise(function (resolve, reject) {
+          var video = document.createElement('video');
+          video.addEventListener("loadedmetadata", function (e) {
+            //Compatible with safari and firefox
+            if ((0,esm_typeof/* default */.Z)(e.path) === ( true ? "undefined" : 0)) {
+              return resolve(e.target.currentSrc);
+            } else {
+              return resolve(e.path[0].currentSrc);
+            }
+          }, false); // start download meta-datas
+
+          video.src = sources[_i2].url;
+        }).then(textureLoaded);
+
+        promises.push(_promise2);
+      }
+    };
+
+    for (var _i2 = 0; _i2 < sources.length; _i2++) {
+      _loop(_i2);
+    } //end for
+
+
+    return Promise.all(promises);
+  };
+
+  var textureLoaded = function textureLoaded(url) {
+    //progress number
+    per = 100 * (perInit / sources.length);
+    if (isNaN(per)) per = 100; //Call back progress 
+
+    /* console.log( 'progress: ' + per + '%' ); */
+
+    if (progressFn && typeof progressFn == "function") {
+      progressFn.call(self, per);
+    }
+
+    perInit++;
+    return per;
+  }; //and videos loaded
+  //Must be placed behind the loadResources()
+
+
+  loadResources().then(function (images) {
+    if (loadedFn && typeof loadedFn == "function") {
+      loadedFn();
+    }
+  });
+}
+
+/* harmony default export */ const helpers_loader = (loader);
+;// CONCATENATED MODULE: ./src/client/components/_utils/scripts/helpers/append.ts
+/*
+* Puts data inside an element at the last index (Vanilla JS also has this method)
+*
+* @param  {Element|String} el   - An element or string to be parsed as HTML or XML and inserted into the tree.
+* @return {Void}
+*/
+function append(el) {
+  if (typeof el === 'string') {
+    // Just inside the element, after its last child.
+    if (document.createElement("div").insertAdjacentHTML) {
+      this.insertAdjacentHTML("beforeend", el);
+      return this;
+    }
+  } else {
+    var html = typeof el === 'string' ? el : el.outerHTML;
+    this.innerHTML += html;
+  }
+}
+
+/* harmony default export */ const helpers_append = (append);
+;// CONCATENATED MODULE: ./src/client/components/_utils/scripts/helpers/prepend.ts
+/*
+* Puts the prepending element at the first index.  (Vanilla JS also has this method)
+*
+* @param  {Element|String} el   - An element or string to be parsed as HTML or XML and inserted into the tree.
+* @return {Void}
+*/
+function prepend(el) {
+  if (typeof el === 'string') {
+    // Just inside the element, before its first child.
+    if (document.createElement("div").insertAdjacentHTML) {
+      this.insertAdjacentHTML("afterbegin", el);
+      return this;
+    }
+  } else {
+    var html = typeof el === 'string' ? el : el.outerHTML;
+    this.innerHTML = html + this.innerHTML;
+  }
+}
+
+/* harmony default export */ const helpers_prepend = (prepend);
+;// CONCATENATED MODULE: ./src/client/components/_utils/scripts/helpers/before.ts
+/*
+* Before the element itself.
+*
+* @param  {String} el   - The string to be parsed as HTML or XML and inserted into the tree.
+* @return {Void}
+*/
+function before(el) {
+  if (typeof el === 'string') {
+    // Before the element itself.
+    if (document.createElement("div").insertAdjacentHTML) {
+      this.insertAdjacentHTML("beforebegin", el);
+      return this;
+    }
+  } else {
+    var html = typeof el === 'string' ? el : el.outerHTML;
+    this.insertAdjacentHTML("beforebegin", html);
+  }
+}
+
+/* harmony default export */ const helpers_before = (before);
+;// CONCATENATED MODULE: ./src/client/components/_utils/scripts/helpers/after.ts
+/*
+* After the element itself.
+*
+* @param  {String} el   - The string to be parsed as HTML or XML and inserted into the tree.
+* @return {Void}
+*/
+function after(el) {
+  if (typeof el === 'string') {
+    //  After the element itself.
+    if (document.createElement("div").insertAdjacentHTML) {
+      this.insertAdjacentHTML("afterend", el);
+      return this;
+    }
+  } else {
+    var html = typeof el === 'string' ? el : el.outerHTML;
+    this.insertAdjacentHTML("afterend", html);
+  }
+}
+
+/* harmony default export */ const helpers_after = (after);
+;// CONCATENATED MODULE: ./src/client/components/_utils/scripts/helpers/prependTo.ts
+/*
+* Insert an element as the first child node of another
+*
+* @param  {Element} el  - A DOM node containing one selector to match against.
+*/
+function prependTo(el) {
+  if (this.firstChild) {
+    this.insertBefore(el, this.firstChild);
+  }
+}
+
+/* harmony default export */ const helpers_prependTo = (prependTo);
+;// CONCATENATED MODULE: ./src/client/components/_utils/scripts/helpers/appendTo.ts
+/*
+* Insert an element to the end of the target
+*
+* @param  {Element} el  - A DOM node containing one selector to match against.
+*/
+function appendTo(el) {
+  this.appendChild(el);
+}
+
+/* harmony default export */ const helpers_appendTo = (appendTo);
+;// CONCATENATED MODULE: ./src/client/components/_utils/scripts/helpers/wrapInner.ts
+/*
+* Wrap an HTML structure around the content of each element in the set of matched elements.
+*
+* @param  {String} el   - An HTML snippet.
+* @return {Void}
+*/
+function wrapInner(el) {
+  //get old value
+  var val = this.innerHTML; //empty default value
+
+  this.innerHTML = ''; //The DOMParser() method is awesome, but the parseFromString() method stops at IE10.
+
+  var support = function () {
+    if (!window.DOMParser) return false;
+    var parser = new DOMParser();
+
+    try {
+      parser.parseFromString('x', 'text/html');
+    } catch (err) {
+      return false;
+    }
+
+    return true;
+  }(); //Convert a template string into HTML DOM nodes
+
+
+  var stringToHTML = function stringToHTML(str) {
+    // If DOMParser is supported, use it
+    if (support) {
+      var parser = new DOMParser();
+      var doc = parser.parseFromString(str, 'text/html');
+      var _res = doc.body;
+      return _res.children[0];
+    } // Otherwise, fallback to old-school method
+
+
+    var dom = document.createElement('div');
+    dom.innerHTML = str;
+    var res = dom;
+    return res.children[0];
+  };
+
+  if (typeof el === 'string') {
+    var div = this.appendChild(stringToHTML(el));
+    div.innerHTML = val;
+
+    while (this.firstChild !== div) {
+      div.appendChild(this.firstChild);
+    }
+  }
+}
+
+/* harmony default export */ const helpers_wrapInner = (wrapInner);
+;// CONCATENATED MODULE: ./src/client/components/_utils/scripts/helpers/html.ts
+/*
+* Get the HTML contents of the first element in the set of matched elements or set the HTML contents of every matched element.
+*
+* @param  {?String} el   - A string of HTML to set as the content of each matched element.
+* @return {Void|String}     - The HTML content to set
+*/
+function html(el) {
+  if (el === undefined) {
+    return {
+      data: this.innerHTML
+    };
+  } else {
+    this.innerHTML = el;
+  }
+}
+
+/* harmony default export */ const helpers_html = (html);
+;// CONCATENATED MODULE: ./src/client/components/_utils/scripts/helpers/text.ts
+
+/*
+* Get the combined text contents of each element in the set of matched elements, including 
+* their descendants, or set the text contents of the matched elements.
+*
+* @param  {?String} el      - The text to set as the content of each matched element.
+* @return {Void|String}     - The HTML content to set
+*/
+
+function text_text(el) {
+  if (el === undefined) {
+    //Remove HTML Tags
+    var htmlstr = this.innerHTML;
+    htmlstr = htmlstr.replace(/(<([^>]+)>)/ig, '');
+    return {
+      data: htmlstr
+    };
+  } else {
+    this.innerHTML = _public_htmlEncode(el);
+  }
+}
+
+/* harmony default export */ const helpers_text = (text_text);
+;// CONCATENATED MODULE: ./src/client/components/_utils/scripts/helpers/clone.ts
+/*
+* Create a deep copy of the set of matched elements.
+*
+* @return {Array}          - Contains only a collection of HTML elements. 
+*                            Returns a duplicate of the node on which this method was called.
+*/
+function clone() {
+  return {
+    data: this.cloneNode(true)
+  };
+}
+
+/* harmony default export */ const helpers_clone = (clone);
+;// CONCATENATED MODULE: ./src/client/components/_utils/scripts/helpers/addClass.ts
+/*
+* Adds the specified class(es) to each element in the set of matched elements.
+*
+* @param  {String} c   - One or more space-separated classes to be added to the class attribute of each matched element.
+* @return {Void}
+*/
+function addClass(c) {
+  if (!/^\S+$/g.test(c)) {
+    // It has only whitespace
+    var classArray = c.split(' ');
+    var className; // Loop through the array of classes to add one class at a time
+
+    for (var j = 0; j < classArray.length; j++) {
+      className = classArray[j];
+      this.classList.add(className);
+    }
+  } else {
+    this.classList.add(c);
+  }
+}
+
+/* harmony default export */ const helpers_addClass = (addClass);
+;// CONCATENATED MODULE: ./src/client/components/_utils/scripts/helpers/removeClass.ts
+/*
+* Remove a single class, multiple classes, or all classes from each element in the set of matched elements.
+*
+* @param  {String} c   - One or more space-separated classes to be removed from the class attribute of each matched element.
+* @return {Void}
+*/
+function removeClass(c) {
+  if (!/^\S+$/g.test(c)) {
+    // It has only whitespace
+    var classArray = c.split(' ');
+    var className; // Loop through the array of classes to add one class at a time
+
+    for (var j = 0; j < classArray.length; j++) {
+      className = classArray[j];
+      this.classList.remove(className);
+    }
+  } else {
+    this.classList.remove(c);
+  }
+}
+
+/* harmony default export */ const helpers_removeClass = (removeClass);
+;// CONCATENATED MODULE: ./src/client/components/_utils/scripts/helpers/toggleClass.ts
+/*
+* Add or remove one or more classes from each element in the set of matched elements, 
+* depending on either the class's presence or the value of the state argument.
+*
+* @param  {String} c   - One or more classes (separated by spaces) to be toggled for each element in the matched set.
+* @return {Void}
+*/
+function toggleClass(c) {
+  if (!/^\S+$/g.test(c)) {
+    // It has only whitespace
+    var classArray = c.split(' ');
+    var className; // Loop through the array of classes to add one class at a time
+
+    for (var j = 0; j < classArray.length; j++) {
+      className = classArray[j];
+
+      if (this.classList.contains(className)) {
+        this.classList.remove(className);
+      } else {
+        this.classList.add(className);
+      }
+    }
+  } else {
+    if (this.classList.contains(c)) {
+      this.classList.remove(c);
+    } else {
+      this.classList.add(c);
+    }
+  }
+}
+
+/* harmony default export */ const helpers_toggleClass = (toggleClass);
+;// CONCATENATED MODULE: ./src/client/components/_utils/scripts/helpers/css.ts
+
+/*
+* Set the style properties of elements:
+*
+* @param  {Json} props   - The attribute and value to be set, the format is JSON
+* @return {Void}
+*/
+
+function css(props, value) {
+  var self = this;
+
+  if (_internal_isJSON(props)) {
+    //the json is ok
+    Object.keys(props).forEach(function (prop) {
+      self.style[prop] = props[prop];
+    });
+  } else {
+    if (value !== undefined) {
+      self.style[props] = value;
+    }
+  }
+}
+
+;
+/* harmony default export */ const helpers_css = (css);
+;// CONCATENATED MODULE: ./src/client/components/_utils/scripts/helpers/_internal/stringlineToHump.ts
+/*
+* Convert string to hump naming
+* @private
+*/
+function stringlineToHump(str) {
+  if (typeof str === 'string' && str.length > 0) {
+    var re = /-(\w)/g;
+    str = str.replace(re, function ($0, $1) {
+      return $1.toUpperCase();
+    });
+    return str;
+  } else {
+    return str;
+  }
+}
+
+/* harmony default export */ const _internal_stringlineToHump = (stringlineToHump);
+;// CONCATENATED MODULE: ./src/client/components/_utils/scripts/helpers/removeData.ts
+
+/*
+* Remove a previously-stored piece of data.
+*
+* @param  {String} a                 - A string naming the piece of data to delete.
+* @return {Void} 
+*/
+
+function removeData(a) {
+  a = a || '';
+
+  var _s = _internal_stringlineToHump(a);
+
+  delete this.dataset[_s];
+}
+
+/* harmony default export */ const helpers_removeData = (removeData);
+;// CONCATENATED MODULE: ./src/client/components/_utils/scripts/helpers/attr.ts
+/*
+* Set one or more attributes for the set of matched elements.
+*
+* @param  {String} a                 - The name of the attribute to set.
+* @param  {String} v               - A value to set for the attribute. 
+* @return {Void|String}              - Get the value of an attribute for the first element in the set of matched elements.
+*/
+function attr(a, v) {
+  a = a || '';
+
+  if (v === undefined) {
+    var res = this.getAttribute(a); // Non-existent attributes
+
+    return res == null ? null : res;
+  } else {
+    this.setAttribute(a, v);
+  }
+}
+
+;
+/* harmony default export */ const helpers_attr = (attr);
+;// CONCATENATED MODULE: ./src/client/components/_utils/scripts/helpers/data.ts
+
+
+
+/*
+* Store arbitrary data associated with the matched elements.
+*
+* @param  {String} a                 - A string naming the piece of data to set
+* @param  {String} v                 - The new data value.
+* @return {Void|String}              - Return arbitrary data associated with the first element as set by data() or by an HTML5 data-* attribute.
+*/
+
+function data(a, v) {
+  a = a || '';
+
+  var _s = _internal_stringlineToHump(a);
+
+  if (v === undefined) {
+    var res = this.dataset[_s];
+    if (res == 'true') res = true;
+    if (res == 'false') res = false;
+    if (_internal_isValidNumeric(res)) res = parseFloat(res); //check if Array or JSON format
+
+    if (_internal_isJSON(res)) {
+      if (Object.prototype.toString.call(res) === '[object Object]') {
+        res = [res];
+      } else {
+        //If the result is an array, you need to determine whether it is the expected array
+        res = [JSON.parse(res)];
+      }
+    } // Non-existent attributes
+
+
+    return res == undefined ? null : res;
+  } else {
+    this.dataset[_s] = v;
+  }
+}
+
+/* harmony default export */ const helpers_data = (data);
+;// CONCATENATED MODULE: ./src/client/components/_utils/scripts/helpers/prop.ts
+
+
+/*
+* Set one or more attributes for the set of matched Form elements.
+*
+* @param  {String} a                 - The name of the attribute to set.
+* @param  {String} v                 - A value to set for the attribute. 
+* @return {Void|String}              - Get the value of an attribute for the first element in the set of matched elements.
+*/
+
+function prop(a, v) {
+  a = a || '';
+
+  if (v === undefined) {
+    var res = this[a];
+    if (res == 'true') res = true;
+    if (res == 'false') res = false;
+    if (_internal_isValidNumeric(res)) res = parseFloat(res); //check if Array or JSON format
+
+    if (_internal_isJSON(res)) {
+      if (Object.prototype.toString.call(res) === '[object Object]') {
+        res = [res];
+      } else {
+        //If the result is an array, you need to determine whether it is the expected array
+        res = [JSON.parse(res)];
+      }
+    } // Non-existent attributes
+
+
+    return res == undefined ? null : res;
+  } else {
+    this[a] = v;
+  }
+}
+
+/* harmony default export */ const helpers_prop = (prop);
+;// CONCATENATED MODULE: ./src/client/components/_utils/scripts/helpers/removeAttr.ts
+/*
+* Remove an attribute from each element in the set of matched elements.
+*
+* @param  {String} a                 - A string naming the piece of data to delete.
+* @return {Void} 
+*/
+function removeAttr(a) {
+  a = a || '';
+  this.removeAttribute(a);
+}
+
+/* harmony default export */ const helpers_removeAttr = (removeAttr);
+;// CONCATENATED MODULE: ./src/client/components/_utils/scripts/helpers/one.ts
+
+/*
+* Attach a handler to an event for the elements. The handler is executed at most once per element per event type.
+*
+* @param  {String} eventType         - One event types and optional namespaces, such as "click" 
+* @param  {?String} selector         - A selector string to filter the descendants of the selected elements that trigger the event. 
+* @param  {Function} fn              - A function to execute when the event is triggered. 
+* @return {Void}      
+*/
+
+function one(eventType, selector, fn) {
+  _core_wrap(this).on(eventType, selector, fn, true);
+}
+
+/* harmony default export */ const helpers_one = (one);
+;// CONCATENATED MODULE: ./src/client/components/_utils/scripts/helpers/_internal/isChild.ts
+/*
+* Determine whether it is Child Node
+* @private
+*/
+function isChild(el, p) {
+  if (!el || !p || !p.childNodes || !p.childNodes.length) {
+    return false;
+  }
+
+  return [].slice.call(p.childNodes).filter(function (n) {
+    var found = n === el;
+
+    if (!found && n.childNodes && n.childNodes.length) {
+      return isChild(el, n);
+    }
+
+    return found;
+  }).length;
+}
+
+/* harmony default export */ const _internal_isChild = (isChild);
+;// CONCATENATED MODULE: ./src/client/components/_utils/scripts/helpers/on.ts
+
+/*
+* Attach an event handler function for one or more events to the selected elements.
+*
+* @param  {String} eventType         - One event types and optional namespaces, such as "click" 
+* @param  {?String} selector         - A selector string to filter the descendants of the selected elements 
+*                                      that trigger the event. 
+* @param  {Function} fn              - A function to execute when the event is triggered. 
+* @param  {Boolean} once             - A boolean value indicating that the listener should be invoked at most 
+*                                      once after being added. If true, the listener would be automatically 
+*                                      removed when invoked.
+* @return {Void}      
+*/
+
+function on(eventType, selector, fn, once) {
+  if (typeof once === 'undefined') once = false;
+  var _curFun = null;
+
+  if (typeof fn !== 'function') {
+    fn = selector;
+    selector = null;
+  }
+
+  if (!this.myListeners) {
+    this.myListeners = [];
+  }
+
+  ;
+
+  if (selector) {
+    //if string
+    _curFun = function _curFun(evt) {
+      [].slice.call(this.querySelectorAll(selector)).forEach(function (el) {
+        if (el === evt.target) {
+          fn.call(el, evt);
+        } else if (_internal_isChild(evt.target, el)) {
+          fn.call(el, evt);
+        }
+      });
+    };
+
+    this.myListeners.push({
+      eType: eventType,
+      callBack: _curFun,
+      "function": fn,
+      selector: selector
+    });
+  } else {
+    //if HTML element
+    _curFun = function _curFun(evt) {
+      fn.call(this, evt);
+    };
+
+    this.myListeners.push({
+      eType: eventType,
+      callBack: _curFun,
+      "function": fn,
+      selector: selector
+    });
+  }
+
+  if (once) {
+    this.addEventListener(eventType, _curFun, {
+      once: true
+    });
+  } else {
+    this.addEventListener(eventType, _curFun);
+  }
+}
+
+/* harmony default export */ const helpers_on = (on);
+;// CONCATENATED MODULE: ./src/client/components/_utils/scripts/helpers/off.ts
+/*
+* Remove an event handler.
+*
+* @param  {?String} eventType             - One event types and optional namespaces, such as "click"
+* @param  {?String|Function} curSelector  - A selector string or function to filter the descendants of the selected elements that trigger the event. 
+* @return {Void}      
+*/
+function off(eventType, curSelector) {
+  if (this.myListeners) {
+    for (var i = 0; i < this.myListeners.length; i++) {
+      if (typeof curSelector !== 'undefined') {
+        if (typeof curSelector === "function") {
+          //is function
+          if (curSelector === this.myListeners[i]["function"]) this.removeEventListener(this.myListeners[i].eType, this.myListeners[i].callBack);
+        } else {
+          //is string
+          if (curSelector === this.myListeners[i].selector) this.removeEventListener(this.myListeners[i].eType, this.myListeners[i].callBack);
+        }
+      } else {
+        this.removeEventListener(this.myListeners[i].eType, this.myListeners[i].callBack);
+      }
+    }
+
+    ;
+    delete this.myListeners;
+  }
+
+  ;
+}
+
+/* harmony default export */ const helpers_off = (off);
+;// CONCATENATED MODULE: ./src/client/components/_utils/scripts/helpers/offset.ts
+/*
+* Get the current coordinates of the first element in the set of matched elements, relative to the document.
+*
+* @return {Json}      - An object containing the properties top and left. 
+*/
+function offset() {
+  var box = this.getBoundingClientRect();
+  var top = 0,
+      left = 0; //Include scrollbar and border
+
+  top = box.top + window.pageYOffset - document.documentElement.clientTop;
+  left = box.left + window.pageXOffset - document.documentElement.clientLeft;
+  return {
+    top: top,
+    left: left
+  };
+}
+
+/* harmony default export */ const helpers_offset = (offset);
+;// CONCATENATED MODULE: ./src/client/components/_utils/scripts/helpers/position.ts
+/*
+* Get the current coordinates of the first element in the set of matched elements, relative to the offset parent.
+*
+* @return {Json}      - An object containing the properties top and left.
+*/
+function position() {
+  var top = this.offsetTop ? this.offsetTop : 0,
+      left = this.offsetLeft ? this.offsetLeft : 0;
+  return {
+    top: top,
+    left: left
+  };
+}
+
+/* harmony default export */ const helpers_position = (position);
+;// CONCATENATED MODULE: ./src/client/components/_utils/scripts/helpers/scrollTop.ts
+/*
+* Get the number of pixels that an element's content is scrolled vertically.
+*
+* @return {Number}  - Returns a pure number calculated.
+*/
+function scrollTop() {
+  var supportPageOffset = window.pageXOffset !== undefined;
+  var isCSS1Compat = (document.compatMode || "") === "CSS1Compat";
+  var scrollTop = supportPageOffset ? window.pageYOffset : isCSS1Compat ? this.scrollTop : document.body.scrollTop;
+  return scrollTop;
+}
+
+/* harmony default export */ const helpers_scrollTop = (scrollTop);
+;// CONCATENATED MODULE: ./src/client/components/_utils/scripts/helpers/scrollLeft.ts
+/*
+* Get the number of pixels that an element's content is scrolled from its left edge.
+*
+@return {Number}  - Returns a pure number calculated.
+*/
+function scrollLeft(val) {
+  var supportPageOffset = window.pageXOffset !== undefined;
+  var isCSS1Compat = (document.compatMode || "") === "CSS1Compat";
+  var scrollLeft = supportPageOffset ? window.pageXOffset : isCSS1Compat ? this.scrollLeft : document.body.scrollLeft;
+  return scrollLeft;
+}
+
+/* harmony default export */ const helpers_scrollLeft = (scrollLeft);
+;// CONCATENATED MODULE: ./src/client/components/_utils/scripts/helpers/_internal/actualPropertyValue.ts
+/*
+* Get the actual value with user specific methed
+* it can be 'width', 'height', 'outerWidth', 'outerHeight'
+* @private
+* @param {Element} el           - A DOM node containing one selector to match against.
+* @param {String} prop          - A string naming the property of style.
+* @param {?Json} config         - Whether or not margin is included. The key `includeMargin` 
+									takes effect when set to true
+* @return {Number}              - Returns a pure number.
+*/
+function actualPropertyValue(el, prop, config) {
+  var style = window.getComputedStyle ? window.getComputedStyle(el) : el.currentStyle,
+      display = style.display,
+      position = style.position,
+      visibility = style.visibility;
+  var marginWidth = 0;
+  var marginHeight = 0;
+  var maxVal;
+  var actualVal;
+
+  if (config && config.includeMargin === true) {
+    marginWidth = parseFloat(style.marginLeft) + parseFloat(style.marginRight);
+    marginHeight = parseFloat(style.marginTop) + parseFloat(style.marginBottom);
+  }
+
+  if (prop === 'width') {
+    maxVal = parseFloat(style.maxWidth); // if its not hidden we just return normal height
+
+    if (display !== 'none' && maxVal !== '0') {
+      return el.clientWidth;
+    }
+  }
+
+  if (prop === 'height') {
+    maxVal = parseFloat(style.maxHeight);
+
+    if (display !== 'none' && maxVal !== '0') {
+      return el.clientHeight;
+    }
+  }
+
+  if (prop === 'outerWidth') {
+    maxVal = parseFloat(style.maxWidth);
+
+    if (display !== 'none' && maxVal !== '0') {
+      return el.offsetWidth + marginWidth;
+    }
+  }
+
+  if (prop === 'outerHeight') {
+    maxVal = parseFloat(style.maxHeight);
+
+    if (display !== 'none' && maxVal !== '0') {
+      return el.offsetHeight + marginHeight;
+    }
+  } // the element is hidden so:
+  // making the el block so we can meassure its height but still be hidden
+
+
+  el.style.position = 'absolute';
+  el.style.visibility = 'hidden';
+  el.style.display = 'block';
+  if (prop === 'width') actualVal = el.clientWidth;
+  if (prop === 'height') actualVal = el.clientHeight;
+  if (prop === 'outerWidth') actualVal = el.offsetWidth + marginWidth;
+  if (prop === 'outerHeight') actualVal = el.offsetHeight + marginHeight; // reverting to the original values
+
+  el.style.display = display;
+  el.style.position = position;
+  el.style.visibility = visibility;
+  return actualVal;
+}
+
+/* harmony default export */ const _internal_actualPropertyValue = (actualPropertyValue);
+;// CONCATENATED MODULE: ./src/client/components/_utils/scripts/helpers/_internal/getStyle.ts
+
+/*
+* Get real style data
+* @private
+*/
+
+function getStyle(el, attr) {
+  var self = el;
+
+  if (typeof window !== 'undefined') {
+    //document or window data
+    //-----------------
+    if (self === document.body) {
+      if (attr == 'height') return document.body.clientHeight;
+      if (attr == 'width') return document.body.clientWidth;
+    }
+
+    if (self === window) {
+      if (attr == 'height') return window.innerHeight;
+      if (attr == 'width') return window.innerWidth;
+    } //element data
+    //-----------------
+
+
+    var _val = 0;
+    var computedStyle = window.getComputedStyle ? getComputedStyle(self) // Standards
+    : self.currentStyle; // Old IE
+
+    if (computedStyle) {
+      // This will be true on nearly all browsers
+      _val = computedStyle[attr]; //return ??px
+    } // if getComputedStyle return 'auto'
+
+
+    if (attr === 'height' && _val === 'auto') return _internal_actualPropertyValue(self, 'height');
+    if (attr === 'width' && _val === 'auto') return _internal_actualPropertyValue(self, 'width'); //
+
+    var newVal = /\d+/.exec(_val); // Array ["123"]
+
+    return parseFloat(newVal);
+  } else {
+    return 0;
+  }
+}
+
+/* harmony default export */ const _internal_getStyle = (getStyle);
+;// CONCATENATED MODULE: ./src/client/components/_utils/scripts/helpers/width.ts
+
+/*
+* Get or set the current computed width for elenments
+*
+* @param  {?String|?Number} val         - An integer representing the number of pixels, or 
+*                                         an integer along with an optional unit of measure appended (as a string).
+* @return {Void|Number}                 -  Get the current computed width for the first element in the set of matched elements.
+*/
+
+function width(val) {
+  var self = this;
+
+  if (typeof val !== 'undefined') {
+    self.style.width = val.toString().indexOf('%') < 0 ? val + 'px' : val;
+  }
+
+  return _internal_getStyle(self, 'width');
+}
+
+/* harmony default export */ const helpers_width = (width);
+;// CONCATENATED MODULE: ./src/client/components/_utils/scripts/helpers/height.ts
+
+/*
+* Get or set the current computed height for elenments
+*
+* @param  {?String|?Number} val         - An integer representing the number of pixels, or 
+*                                         an integer along with an optional unit of measure appended (as a string).
+* @return {Void|Number}                 -  Get the current computed height for the first element in the set of matched elements.
+*/
+
+function height(val) {
+  var self = this;
+
+  if (typeof val !== 'undefined') {
+    self.style.height = val.toString().indexOf('%') < 0 ? val + 'px' : val;
+  }
+
+  return _internal_getStyle(self, 'height');
+}
+
+/* harmony default export */ const helpers_height = (height);
+;// CONCATENATED MODULE: ./src/client/components/_utils/scripts/helpers/outerWidth.ts
+
+/*
+* Get or set the current computed outer width for elenments (including padding, border, and optionally margin)
+*
+* @param  {Boolean} includeMargin         - A Boolean indicating whether to include the element's margin in the calculation.
+* @return {Number}  - Returns the width of the element, including left and right padding, border, and optionally margin, in pixels.
+*/
+
+function outerWidth_outerWidth(includeMargin) {
+  var self = this;
+  var width_IncPaddingBorderScrollbar = self.offsetWidth;
+  var marginLeft = _internal_getStyle(self, 'marginLeft');
+  var marginRight = _internal_getStyle(self, 'marginRight');
+  var borderLeftWidth = _internal_getStyle(self, 'borderLeftWidth') || 0;
+  var borderRightWidth = _internal_getStyle(self, 'borderRightWidth') || 0;
+  var totalWidth = width_IncPaddingBorderScrollbar;
+
+  if (typeof includeMargin !== 'undefined') {
+    totalWidth = totalWidth + marginLeft + marginRight;
+  }
+
+  return totalWidth;
+}
+
+/* harmony default export */ const helpers_outerWidth = (outerWidth_outerWidth);
+;// CONCATENATED MODULE: ./src/client/components/_utils/scripts/helpers/outerHeight.ts
+
+/*
+* Get or set the current computed outer height for elenments (including padding, border, and optionally margin)
+*
+* @param  {Boolean} includeMargin         - A Boolean indicating whether to include the element's margin in the calculation.
+* @return {Number}   - Returns the height of the element, including left and right padding, border, and optionally margin, in pixels.
+*/
+
+function outerHeight_outerHeight(includeMargin) {
+  var self = this;
+  var height_IncPaddingBorderScrollbar = self.offsetHeight;
+  var marginTop = _internal_getStyle(self, 'marginTop');
+  var marginBottom = _internal_getStyle(self, 'marginBottom');
+  var borderTopWidth = _internal_getStyle(self, 'borderTopWidth') || 0;
+  var borderBottomWidth = _internal_getStyle(self, 'borderBottomWidth') || 0;
+  var totalHeight = height_IncPaddingBorderScrollbar;
+
+  if (typeof includeMargin !== 'undefined') {
+    totalHeight = totalHeight + marginTop + marginBottom;
+  }
+
+  return totalHeight;
+}
+
+/* harmony default export */ const helpers_outerHeight = (outerHeight_outerHeight);
+;// CONCATENATED MODULE: ./src/client/components/_utils/scripts/helpers/remove.ts
+/*
+* Remove the set of matched elements from the DOM.
+*
+* @return {Void} 
+*/
+function remove() {
+  this.parentNode.removeChild(this);
+}
+
+/* harmony default export */ const helpers_remove = (remove);
+;// CONCATENATED MODULE: ./src/client/components/_utils/scripts/helpers/empty.ts
+/*
+* Remove all child nodes of the set of matched elements from the DOM.
+*
+* @return {Void} 
+*/
+function empty() {
+  while (this.firstChild) {
+    this.removeChild(this.firstChild);
+  }
+}
+
+/* harmony default export */ const helpers_empty = (empty);
+;// CONCATENATED MODULE: ./src/client/components/_utils/scripts/helpers/allAttrs.ts
+/*
+* Traverse all the attribute names and values in an HTML element
+*
+* @return {Array}              - A new array containing the properties name and value.
+*/
+function allAttrs() {
+  var newArr = [];
+  Array.from(this.attributes).filter(function (obj) {
+    return obj.specified;
+  }).map(function (obj) {
+    newArr[obj.nodeName] = obj.textContent;
+  });
+  return {
+    data: newArr
+  };
+}
+
+/* harmony default export */ const helpers_allAttrs = (allAttrs);
+;// CONCATENATED MODULE: ./src/client/components/_utils/scripts/helpers/hasClass.ts
+/*
+* Determine whether any of the matched elements are assigned the given class.
+*
+* @param  {String} v         - The class name to search for.
+* @return {Boolean}   - Return true if the class is assigned to an element
+*/
+function hasClass(v) {
+  return this.classList.contains(v) ? true : false;
+}
+
+/* harmony default export */ const helpers_hasClass = (hasClass);
+;// CONCATENATED MODULE: ./src/client/components/_utils/scripts/helpers/_internal/elementPath.ts
+/*
+* Get CSS path from Dom element
+* @private
+*/
+function elementPath(el) {
+  if (!(el instanceof Element)) return; //
+
+  var path = [];
+  var itemIndex = 0;
+
+  while (el.nodeType === Node.ELEMENT_NODE) {
+    var oldSelector = el.nodeName.toLowerCase();
+    var selector = oldSelector;
+
+    if (el.id) {
+      if (itemIndex > 0) selector += '#' + el.id;
+    }
+
+    if (el.className) {
+      selector += '.' + el.className.replace(/\s+/g, ".");
+    }
+
+    selector = selector.replace(/\.\./g, "."); //Add one or more items to the start of an array's result set.
+
+    path.unshift(selector); //
+
+    el = el.parentNode; //
+
+    itemIndex++;
+  }
+
+  return path.join(" > ");
+}
+
+/* harmony default export */ const _internal_elementPath = (elementPath);
+;// CONCATENATED MODULE: ./src/client/components/_utils/scripts/helpers/val.ts
+
+/*
+* Get or set the current value of the first element in the set of matched elements.
+*
+* @param  {?String|?Number|?Array} v      - Corresponding to the value of each matched element.
+* @return {String}          - Get the values of form elements.
+*/
+
+function val(v) {
+  var controlType = '';
+
+  if (this.tagName == "INPUT" || this.tagName == "TEXTARTA") {
+    //not `radio`, `checkbox`
+    if (this.type != 'checkbox' && this.type != 'radio') {
+      controlType = 'input-textarea';
+    } //`checkbox`
+
+
+    if (this.type == 'checkbox') {
+      controlType = 'checkbox';
+    } //`radio`
+
+
+    if (this.type == 'radio') {
+      controlType = 'radio';
+    }
+  } //`select`
+
+
+  if (this.tagName == "SELECT") {
+    controlType = 'select';
+  } //
+
+
+  if (typeof v !== 'undefined') {
+    switch (controlType) {
+      case "input-textarea":
+        this.value = v;
+        break;
+
+      case "checkbox":
+        this.checked = v;
+        break;
+
+      case "radio":
+        var currentSelectorDomsStr = _internal_elementPath(this);
+        var currentSelector = [].slice.call(document.querySelectorAll(currentSelectorDomsStr));
+        currentSelector.map(function (item, index) {
+          if (item.value == v.toString()) {
+            item.checked = true;
+          }
+        });
+        break;
+
+      case "select":
+        this.value = v;
+        this.dispatchEvent(new Event('change'));
+        break;
+
+      default:
+        this.value = v;
+    } //end switch
+
+  }
+
+  switch (controlType) {
+    case "input-textarea":
+      return this.value;
+
+    case "checkbox":
+      return this.checked ? 1 : 0;
+
+    case "radio":
+      var _currentSelectorDomsStr = _internal_elementPath(this);
+
+      var _currentSelector = [].slice.call(document.querySelectorAll(_currentSelectorDomsStr));
+
+      var radios = _currentSelector;
+      var _value = null;
+
+      for (var i = 0; i < radios.length; i++) {
+        if (radios[i].checked) {
+          // do whatever you want with the checked radio
+          _value = radios[i].value; // only one radio can be logically checked, don't check the rest
+
+          break;
+        }
+      }
+
+      return _value;
+
+    case "select":
+      return this.value;
+
+    default:
+      return this.value;
+  } //end switch
+
+}
+
+/* harmony default export */ const helpers_val = (val);
+;// CONCATENATED MODULE: ./src/client/components/_utils/scripts/helpers/show.ts
+/*
+* Display the matched elements.
+*
+* @return {Void} 
+*/
+function show() {
+  // use inherit so that your CSS controls block/flex/inline-block etc
+  this.style.display = 'inherit';
+}
+
+/* harmony default export */ const helpers_show = (show);
+;// CONCATENATED MODULE: ./src/client/components/_utils/scripts/helpers/hide.ts
+/*
+* Hide the matched elements.
+*
+* @return {Void}    
+*/
+function hide() {
+  this.style.display = 'none';
+}
+
+/* harmony default export */ const helpers_hide = (hide);
+;// CONCATENATED MODULE: ./src/client/components/_utils/scripts/helpers/fadeIn.ts
+/*
+* Display the matched elements by fading them to opaque.
+*
+* @param  {Number} speed             - A string or number determining how long the animation will run.
+* @param  {Function} callback        - A function to call once the animation is complete, called once per matched element.
+* @return {Void} 
+*/
+function fadeIn(speed, callback) {
+  var elem = this;
+  var opacity = 0;
+
+  if (!elem.style.opacity) {
+    elem.style.opacity = 0;
+  }
+
+  elem.style.display = "inherit";
+  var inInterval = setInterval(function () {
+    opacity += .02;
+    elem.style.opacity = opacity;
+
+    if (opacity >= 1) {
+      clearInterval(inInterval); //do something after inInterval()
+
+      elem.style.removeProperty("opacity");
+
+      if (callback && typeof callback == "function") {
+        callback();
+      }
+    }
+  }, speed / 50);
+}
+
+/* harmony default export */ const helpers_fadeIn = (fadeIn);
+;// CONCATENATED MODULE: ./src/client/components/_utils/scripts/helpers/fadeOut.ts
+/*
+* Hide the matched elements by fading them to transparent.
+*
+* @param  {Number} speed             - A string or number determining how long the animation will run.
+* @param  {Function} callback        - A function to call once the animation is complete, called once per matched element.
+* @return {Void} 
+*/
+function fadeOut(speed, callback) {
+  var elem = this;
+  var opacity = 1;
+
+  if (!elem.style.opacity) {
+    elem.style.opacity = 1;
+  }
+
+  var outInterval = setInterval(function () {
+    opacity -= .02;
+    elem.style.opacity = opacity;
+
+    if (opacity <= 0) {
+      clearInterval(outInterval); //do something after outInterval()
+
+      elem.style.opacity = 0;
+      elem.style.display = "none"; //adding dispaly property and equall to none	
+
+      if (callback && typeof callback == "function") {
+        callback();
+      }
+    }
+  }, speed / 50);
+}
+
+/* harmony default export */ const helpers_fadeOut = (fadeOut);
+;// CONCATENATED MODULE: ./src/client/components/_utils/scripts/helpers/serializeArray.ts
+
+
+/*
+* Serialize html form to JSON
+*
+* @return {Void}    
+*/
+function serializeArray() {
+  var form = this;
+  var objects = [];
+
+  if ((0,esm_typeof/* default */.Z)(form) == 'object' && form.nodeName.toLowerCase() == "form") {
+    var fieldsTypes = ['input', 'textarea', 'select', 'checkbox', 'progress', 'datalist'];
+    fieldsTypes.map(function (item, index) {
+      var fields = form.getElementsByTagName(item);
+
+      for (var i = 0; i < fields.length; i++) {
+        objects[objects.length] = {
+          name: fields[i].getAttribute("name"),
+          value: fields[i].value
+        };
+      }
+    });
+  }
+
+  return objects;
+}
+
+/* harmony default export */ const helpers_serializeArray = (serializeArray);
+;// CONCATENATED MODULE: ./src/client/components/_utils/scripts/helpers/getIndex.ts
+/*
+* Search for a given element from among the matched elements.
+*
+* @return {Number}     - The return value is an integer indicating the position of the 
+*                        first element within the object relative to its sibling elements.
+*/
+function getIndex() {
+  var self = this;
+  var children = self.parentNode.childNodes;
+  var num = 0;
+
+  for (var i = 0; i < children.length; i++) {
+    if (children[i] == self) return num;
+    if (children[i].nodeType == 1) num++;
+  }
+
+  return -1;
+}
+
+/* harmony default export */ const helpers_getIndex = (getIndex);
+;// CONCATENATED MODULE: ./src/client/components/_utils/scripts/helpers/trigger.ts
+/*
+* Bind an event in the HTML element
+*
+* @param  {String} eventType         - One event types and optional namespaces, such as "click" 
+* @return {Void}  
+*/
+function trigger(eventType) {
+  var fire = function fire(elem, type) {
+    // create and dispatch the event
+    var event = new CustomEvent(type, {
+      detail: {
+        hazcheeseburger: true
+      }
+    });
+    elem.dispatchEvent(event);
+  };
+
+  document.addEventListener("plop", function () {}, false);
+  fire(this, eventType);
+}
+
+/* harmony default export */ const helpers_trigger = (trigger);
+;// CONCATENATED MODULE: ./src/client/components/_utils/scripts/helpers/_internal/easing.ts
+/*
+* Some easing functions
+* @private
+* @link: https://easings.net
+* @param {Number} t   - time (Amount of time that has passed since the beginning of the animation. Usually starts at 0 and is slowly increased using a game loop or other update function.)
+* @param {Number} b   - beginning value (The starting point of the animation. Usually it's a static value, you can start at 0 for example.)
+* @param {Number} c   - change in value (The amount of change needed to go from starting point to end point. It's also usually a static value.)
+* @param {Number} d   - duration (Amount of time the animation will take. Usually a static value aswell.)
+* @return {Number}
+*/
+function easeLinear(t, b, c, d) {
+  return c * t / d + b;
+}
+
+function easeInQuart(t, b, c, d) {
+  return c * (t /= d) * t * t * t + b;
+}
+
+function easeOutQuart(t, b, c, d) {
+  return -c * ((t = t / d - 1) * t * t * t - 1) + b;
+}
+
+function easeInOutQuart(t, b, c, d) {
+  if ((t /= d / 2) < 1) return c / 2 * t * t * t * t + b;
+  return -c / 2 * ((t -= 2) * t * t * t - 2) + b;
+}
+
+function easeInCubic(t, b, c, d) {
+  return c * (t /= d) * t * t + b;
+}
+
+function easeOutCubic(t, b, c, d) {
+  return c * ((t = t / d - 1) * t * t + 1) + b;
+}
+
+function easeInOutCubic(t, b, c, d) {
+  if ((t /= d / 2) < 1) return c / 2 * t * t * t + b;
+  return c / 2 * ((t -= 2) * t * t + 2) + b;
+}
+
+
+;// CONCATENATED MODULE: ./src/client/components/_utils/scripts/helpers/animate.ts
+
+/*
+* Create a new Animation, applies it to the element, then plays the animation
+* @param  {String} prop         - The style property to be set.
+* @param  {Number} from         - The initial offset of the object
+* @param  {Number} to           - The end offset of the object
+* @param  {String} unit         - Unit string, such as `px` and `%`, and so on.
+* @param  {Number} duration     - The number of milliseconds each iteration of the animation takes to complete
+* @param  {String} easing       - The rate of the animation's change over time. Accepts the pre-defined values "linear", "ease-in", "ease-out", and "ease-in-out"
+* @param  {Function} complete   - A function to call once the animation is complete, called once per matched element.
+* @return {Void}
+*/
+
+function animate(prop, from, to, unit, duration, easing, complete) {
+  var el = this;
+  var start = new Date().getTime();
+  var timer = setInterval(function () {
+    var time = new Date().getTime() - start;
+    var val;
+
+    switch (easing) {
+      case "linear":
+        val = easeLinear(time, from, to - from, duration);
+        break;
+
+      case "ease-in":
+        val = easeInCubic(time, from, to - from, duration);
+        break;
+
+      case "ease-out":
+        val = easeOutCubic(time, from, to - from, duration);
+        break;
+
+      case "ease-in-out":
+        val = easeInOutCubic(time, from, to - from, duration);
+        break;
+
+      default:
+        val = easeLinear(time, from, to - from, duration);
+    } //
+
+
+    var res = val + unit;
+    el.style[prop] = res;
+
+    if (time >= duration) {
+      clearInterval(timer); //
+
+      if (complete && typeof complete == "function") {
+        complete.call(el);
+      }
+    }
+  }, 1000 / 60);
+}
+
+/* harmony default export */ const helpers_animate = (animate);
+;// CONCATENATED MODULE: ./src/client/components/_utils/scripts/helpers/_core/wrap.ts
+
+/*
+* Wrap the selector
+* @private
+*
+* @param  {String|Element} s       - The selector to search for or HTML element to wrap with functionality
+* @param  {?Element} root           - OPTIONAL An HTML element to start the element query from
+* @return {Array}                  - The collection of elements, wrapped with functionality (see API methods)
+*/
+
+function selector(s, root) {
+  root = root || document;
+
+  if (typeof s !== 'undefined') {
+    if (typeof s === 'string') {
+      //1) string
+      return wrap([].slice.call(root.querySelectorAll(s)));
+    } else if (s.tagName) {
+      //2) HTML elements
+      return wrap([s]);
+    } else {
+      if (s == window) {
+        return wrap([s]);
+      } //3) document or other
+
+
+      switch (s.nodeType) {
+        case 9:
+          //if Document
+          return wrap([document.body]);
+
+        default:
+          return [];
+      }
+    }
+  } //typeof (s) !== 'undefined'
+
+
+  return [];
+}
+/* ------------- Independent Methods (public) -------------- */
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+selector.ajax = _public_ajax;
+selector.browser = _public_browser;
+selector.cssProperty = _public_cssProperty;
+selector.debounce = _public_debounce;
+selector.deepClone = _public_deepClone;
+selector.GUID = _public_GUID;
+selector.htmlDecode = _public_htmlDecode;
+selector.htmlEncode = _public_htmlEncode;
+selector.isTouchCapable = _public_isTouchCapable;
+selector.lastUrlParamFormat = _public_lastUrlParamFormat;
+selector.math = _public_math;
+selector.removeFirstLastStr = _public_removeFirstLastStr;
+selector.setDefaultOptions = _public_setDefaultOptions;
+selector.styleFormat = _public_styleFormat;
+selector.throttle = _public_throttle;
+selector.toSlug = _public_toSlug;
+selector.trim = _public_trim;
+selector.validate = _public_validate;
+/* ------------- Private Methods -------------- */
+//dom
+
+
+
+
+
+
+
+
+ //traverse with index
+
+
+
+
+
+
+
+ //functions
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ //dom
+
+selector.prototype.find = helpers_find;
+selector.prototype.closest = helpers_closest;
+selector.prototype.prev = helpers_prev;
+selector.prototype.next = helpers_next;
+selector.prototype.parent = helpers_parent;
+selector.prototype.parents = helpers_parents;
+selector.prototype.children = helpers_children;
+selector.prototype.siblings = helpers_siblings; //traverse with index
+
+selector.prototype.each = helpers_each;
+selector.prototype.eq = helpers_eq;
+selector.prototype.first = helpers_first;
+selector.prototype.last = helpers_last;
+selector.prototype.filter = helpers_filter;
+selector.prototype.not = helpers_not;
+selector.prototype.maxDimension = helpers_maxDimension; //functions
+
+selector.prototype.ready = helpers_ready;
+selector.prototype.loader = helpers_loader;
+selector.prototype.append = helpers_append;
+selector.prototype.prepend = helpers_prepend;
+selector.prototype.before = helpers_before;
+selector.prototype.after = helpers_after;
+selector.prototype.prependTo = helpers_prependTo;
+selector.prototype.appendTo = helpers_appendTo;
+selector.prototype.wrapInner = helpers_wrapInner;
+selector.prototype.html = helpers_html;
+selector.prototype.text = helpers_text;
+selector.prototype.clone = helpers_clone;
+selector.prototype.addClass = helpers_addClass;
+selector.prototype.removeClass = helpers_removeClass;
+selector.prototype.toggleClass = helpers_toggleClass;
+selector.prototype.css = helpers_css;
+selector.prototype.removeData = helpers_removeData;
+selector.prototype.attr = helpers_attr;
+selector.prototype.data = helpers_data;
+selector.prototype.prop = helpers_prop;
+selector.prototype.removeAttr = helpers_removeAttr;
+selector.prototype.one = helpers_one;
+selector.prototype.on = helpers_on;
+selector.prototype.off = helpers_off;
+selector.prototype.offset = helpers_offset;
+selector.prototype.position = helpers_position;
+selector.prototype.scrollTop = helpers_scrollTop;
+selector.prototype.scrollLeft = helpers_scrollLeft;
+selector.prototype.width = helpers_width;
+selector.prototype.height = helpers_height;
+selector.prototype.outerWidth = helpers_outerWidth;
+selector.prototype.outerHeight = helpers_outerHeight;
+selector.prototype.remove = helpers_remove;
+selector.prototype.empty = helpers_empty;
+selector.prototype.allAttrs = helpers_allAttrs;
+selector.prototype.hasClass = helpers_hasClass;
+selector.prototype.val = helpers_val;
+selector.prototype.show = helpers_show;
+selector.prototype.hide = helpers_hide;
+selector.prototype.fadeIn = helpers_fadeIn;
+selector.prototype.fadeOut = helpers_fadeOut;
+selector.prototype.serializeArray = helpers_serializeArray;
+selector.prototype.index = helpers_getIndex;
+selector.prototype.trigger = helpers_trigger;
+selector.prototype.animate = helpers_animate;
+var API = {
+  //dom
+  find: selector.prototype.find,
+  closest: selector.prototype.closest,
+  prev: selector.prototype.prev,
+  next: selector.prototype.next,
+  parent: selector.prototype.parent,
+  parents: selector.prototype.parents,
+  children: selector.prototype.children,
+  siblings: selector.prototype.siblings,
+  //traverse with index
+  each: selector.prototype.each,
+  eq: selector.prototype.eq,
+  first: selector.prototype.first,
+  last: selector.prototype.last,
+  filter: selector.prototype.filter,
+  not: selector.prototype.not,
+  maxDimension: selector.prototype.maxDimension,
+  //functions
+  ready: selector.prototype.ready,
+  loader: selector.prototype.loader,
+  append: selector.prototype.append,
+  prepend: selector.prototype.prepend,
+  before: selector.prototype.before,
+  after: selector.prototype.after,
+  prependTo: selector.prototype.prependTo,
+  appendTo: selector.prototype.appendTo,
+  wrapInner: selector.prototype.wrapInner,
+  html: selector.prototype.html,
+  text: selector.prototype.text,
+  clone: selector.prototype.clone,
+  addClass: selector.prototype.addClass,
+  removeClass: selector.prototype.removeClass,
+  toggleClass: selector.prototype.toggleClass,
+  css: selector.prototype.css,
+  removeData: selector.prototype.removeData,
+  attr: selector.prototype.attr,
+  data: selector.prototype.data,
+  prop: selector.prototype.prop,
+  removeAttr: selector.prototype.removeAttr,
+  one: selector.prototype.one,
+  on: selector.prototype.on,
+  off: selector.prototype.off,
+  offset: selector.prototype.offset,
+  position: selector.prototype.position,
+  scrollTop: selector.prototype.scrollTop,
+  scrollLeft: selector.prototype.scrollLeft,
+  width: selector.prototype.width,
+  height: selector.prototype.height,
+  outerWidth: selector.prototype.outerWidth,
+  outerHeight: selector.prototype.outerHeight,
+  remove: selector.prototype.remove,
+  empty: selector.prototype.empty,
+  allAttrs: selector.prototype.allAttrs,
+  hasClass: selector.prototype.hasClass,
+  val: selector.prototype.val,
+  show: selector.prototype.show,
+  hide: selector.prototype.hide,
+  fadeIn: selector.prototype.fadeIn,
+  fadeOut: selector.prototype.fadeOut,
+  serializeArray: selector.prototype.serializeArray,
+  index: selector.prototype.index,
+  trigger: selector.prototype.trigger,
+  animate: selector.prototype.animate
+};
+
+function wrap(list) {
+  Object.keys(API).forEach(function (fn) {
+    list[fn] = function () {
+      //slice method can also be called to convert Array-like objects/collections to a new Array. 
+      //You just bind the method to the object. The arguments inside a function is an example of an 'array-like object'.
+      var args = arguments; //
+
+      var result; // ////////////////////
+      // Traverse the counter of a selector, reset to 0 when calling 	`__(selector).XXX()`
+      //----------------------	
+
+      switch (fn) {
+        case 'each':
+          // for `each()`
+          _internal_traverseIndex.each = 0;
+          break;
+
+        case 'eq':
+          // for `eq()`
+          _internal_traverseIndex.eq = 0;
+          break;
+
+        case 'first':
+          // for `first()`
+          _internal_traverseIndex.first = 0;
+          break;
+
+        case 'last':
+          // for `last()`
+          _internal_traverseIndex.last = 0;
+          _internal_traverseIndex.total_last = list.length;
+          break;
+
+        case 'filter':
+          // for `filter()`
+          _internal_traverseIndex.filter = 0;
+          break;
+
+        case 'not':
+          // for `not()`
+          _internal_traverseIndex.not = 0;
+          break;
+
+        case 'maxDimension':
+          // for `maxDimension()`
+          _internal_traverseIndex.maxDimension = 0;
+          _internal_traverseIndex.total_maxDimension = list.length;
+          _internal_traverseIndex.elements_maxDimension = [];
+          break;
+      } // ////////////////////
+      // Methods that return value is `DOM elements using selectors`
+      //----------------------
+
+
+      if (Array.isArray(this)) {
+        result = [];
+        this.forEach(function (root) {
+          var fnResult = API[fn].apply(root, [].slice.call(args));
+
+          if (Array.isArray(fnResult)) {
+            result = result.concat(fnResult);
+          } else if (fnResult !== undefined) {
+            result.push(fnResult);
+          }
+        });
+
+        if (fn === 'find' || fn === 'closest' || fn === 'prev' || fn === 'next' || fn === 'first' || fn === 'last' || fn === 'parent' || fn === 'parents' || fn === 'children' || fn === 'eq' || fn === 'filter' || fn === 'not' || fn === 'siblings') {
+          wrap(result);
+        } else {
+          result = result.length && result || undefined;
+        }
+      } else {
+        result = API[fn].apply(this, [].slice.call(args));
+      } //end Array.isArray(this)
+      // ////////////////////
+      // Methods that return value is `JSON`, `Boolean` or `Number`
+      //----------------------
+
+
+      if (fn === 'hasClass' || fn === 'offset' || fn === 'position' || fn === 'index' || fn === 'width' || fn === 'outerWidth' || fn === 'height' || fn === 'outerHeight' || fn === 'maxDimension' || fn === 'allAttrs' || fn === 'scrollTop' || fn === 'scrollLeft' || fn === 'html' || fn === 'text' || fn === 'clone') {
+        return result === undefined ? this : typeof result[0].data !== 'undefined' ? result[0].data : result[0];
+      } // ////////////////////
+      // Methods that return value is `Array` or `HTML element`
+      //----------------------
+
+
+      if (fn === 'data' || fn === 'attr' || fn === 'prop' || fn === 'val') {
+        return result === undefined ? this : result[0];
+      } // ////////////////////
+      // The default returns value from a function
+      //----------------------
+
+
+      return result === undefined ? this : result;
+    };
+  });
+  return list;
+}
+
+/* harmony default export */ const _core_wrap = (selector);
+;// CONCATENATED MODULE: ./src/client/components/_utils/scripts/helpers/_core/global.ts
+
+
+var __ = function () {
+  'use strict';
+
+  if (typeof window !== 'undefined') {
+    window.__ = _core_wrap;
+  }
+
+  return _core_wrap;
+}();
+
+/* harmony default export */ const _core_global = (__);
+;// CONCATENATED MODULE: ./src/client/components/_utils/scripts/helpers/index.ts
 /* 
  *************************************
  * Core Helpers
  *
- * @package: poemkit
- * @version: 0.43
- * @last update: November 27, 2021
+ * @package: https://github.com/xizon/boot-helpers
+ * @version: 0.46
+ * @last update: November 30, 2021
  * @author: UIUX Lab <uiuxlab@gmail.com>
  * @license: MIT
  *
  *************************************
  */
 
-/*
-
-
-__( document ).ready( function() {
-	//do something
-});
-
-
-__( 'body' ).loader({
-	imagesSelector: 'body img',
-	videosSelector: 'body video',
-	startEvent: function() {
-		//do something
-		console.log( '=> loading.' );
-	},
-	progressEvent: function(percent) {
-		//do something
-		console.log( '=> progress: ' + percent + '%' );
-	},
-	endEvent: function() {
-		
-		console.log( '=> loaded!!!' );
-		//do something
-	}
-});
-
-
-
-__( document ).ready( function() {
-
-	__( 'body' ).loader({
-		imagesSelector: 'body img',
-		videosSelector: 'body video',
-		startEvent: function() {
-			console.log( '=> loading.' );
-		},
-		progressEvent: function(percent) {
-			console.log( '=> progress: ' + percent + '%' );
-		},
-		endEvent: function() {
-			console.log( '=> loaded!!!' );
-
-
-			//+++++++++++++++++++++++++++++++++++++++++++
-			// Dom demos
-			//+++++++++++++++++++++++++++++++++++++++++++
-			__( '.demo' ).remove();
-			__( '.demo' ).empty();
-			__( '.demo' ).show();
-			__( '.demo' ).hide();
-			__( '.demo' ).addClass( 'class-3' );
-			__( '.demo, .demo2' ).addClass( 'class-4' );
-			__( '.demo' ).find( 'li' ).addClass( 'class-1 class-2' );
-			__( '.demo' ).find( 'li' ).removeClass( 'class-2' );
-			__( '.demo' ).find( '> .demo2' ).addClass( 'class-3' );
-			__( '.demo' ).find( '> .demo2' ).find( 'li' ).addClass( 'class-3-2' );
-			__( '.demo' ).closest( '.container' ).addClass( 'class-4' );
-			__( '.demo' ).css({
-				'background': '#f00',
-				'font-size': '18px'
-			});
-			__( '#demo' ).css( 'background-color', '#f60' );
-			__( '.demo' ).data( 'bg', 'red' );
-			__( '.demo' ).attr( 'disabled', 'disabled' );
-			__( '.demo' ).width( 300 );
-			__( '.menu li:first-child' ).width( "50%" );
-			
-			if( __( '.demo' ).data( 'activated' ) === null ) {
-			   //do something...
-			}
-			if( __( '.demo' ).attr( 'data-activated' ) === null ) {
-			   //do something...
-			}	
-
-			__( '.menu li' ).eq(1).append( '<span style="color:green">after</span>');
-			__( '.menu li' ).eq(1).prepend( '<span style="color:red">before</span>');
-			__( '.menu li' ).first().before( '<li style="color:green">(first)before</li>');
-			__( '.menu li' ).last().after( '<li style="color:red">(last)after</li>');
-			__( 'h1' ).wrapInner( '<span class="new-div" />' );
-			√√
-			__( 'h1' ).text( 'New H1' );
-
-			__( '.demo1' ).prev().addClass( 'prev' );
-			__( '.demo2' ).next().addClass( 'next' );
-			__( '.demo3' ).parent().addClass( 'parent' );
-			__( '.menu' ).parents().addClass( 'all-parents' );
-			__( '.demo' ).children().addClass( 'children-all' );
-			__( '.class-1' ).siblings().addClass( 'class-siblings' );
-
-			__( '.demo1' ).prev( 'ul' ).addClass( 'prev' );
-			__( '.demo2' ).next( 'ul' ).addClass( 'next' );
-			__( '.demo3' ).parent( 'ul' ).addClass( 'parent' );
-			__( '.menu' ).parents( 'ul' ).addClass( 'all-parents' );
-			__( '.demo' ).children( '.demo-children2' ).addClass( 'children-single' );
-			__( '.class-1' ).siblings( 'ul' ).addClass( 'class-siblings' );
-
-
-			__( '.class-1' ).not( '.class-2' ).addClass( 'class-not' );
-			__( '.class-1' ).filter( '.class-2' ).addClass( 'class-filter' );
-			
-			__( '.demo' ).trigger( 'click' );
-			__( '.demo' ).toggleClass( 'class-toggle-1 class-toggle-2' );
-
-			
-			//append HTML Element
-			const htmlObject = document.createElement('div');
-			htmlObject.innerHTML = '<span style="color:green">after</span>';
-			__( '.menu li' ).eq(1).append( htmlObject.firstChild );
-
-			//clone HTML Element
-			const cloneHTML = __( '.uix-menu__container' ).clone();
-			__( cloneHTML ).addClass( 'is-mobile' );
-			__( 'body' ).prependTo( cloneHTML );
-			__( 'body' ).appendTo( cloneHTML );
-
-
-			
-			//+++++++++++++++++++++++++++++++++++++++++++
-			// Click event demos
-			//+++++++++++++++++++++++++++++++++++++++++++
-			__( '.menu li' ).off( 'click' ).on( 'click', function( e ) {
-				console.log('e: ', e);
-				console.log('this: ', this);
-				console.log('index(): ', __( this ).index());
-				console.log('attr(class): ', __( this ).attr( 'class' ));
-				__( this ).addClass( 'new-class' )
-			});
-
-			
-			__( document ).off( 'click', '.menu li' );
-			__( document ).on( 'click', '.menu li', function( e ) {
-				console.log('e: ', e);
-				console.log('this: ', this);
-				console.log('index(): ', __( this ).index());
-				console.log('attr(class): ', __( this ).attr( 'class' ));
-				__( this ).addClass( 'new-class' )
-			});
-
-
-			__( '#imghere' ).off( 'click', imgFn);
-			__( '#imghere' ).on( 'click', imgFn);
-			function imgFn() {
-				console.log( 'imgFn' );
-			}
-
-
-			
-			//+++++++++++++++++++++++++++++++++++++++++++
-			// Retrieve data demos
-			//+++++++++++++++++++++++++++++++++++++++++++
-			console.log( '<h1> content: ' + __( 'h1' ).html());
-			console.log( '<h1> content: ' + __( 'h1' ).text());
-			console.log( 'len() of .menu li: ' + __( '.menu li' ).length );
-			console.log( 'len() of #none: ' + __( '#none' ).length );
-			console.log( 'width(): ' + __( '.demo' ).width() );
-			console.log( 'outerWidth(): ' + __( '.demo' ).outerWidth() );
-			console.log( 'outerWidth( true ): ' + __( '.demo' ).outerWidth(true) );
-			
-			console.log( 'height(): ' + __( '.demo' ).height() );
-			console.log( 'outerHeight(): ' + __( '.demo' ).outerHeight() );
-			console.log( 'outerHeight( true ): ' + __( '.demo' ).outerHeight(true) );	
-			
-			console.log( 'document h: ', __( document ).height() );
-			console.log( 'document w: ', __( document ).width() );
-			console.log( 'window h: ', __( window ).height() );			
-			console.log( 'window h: ', __( window ).width() );			
-			console.log( 'window scrollTop: ', __( window ).scrollTop() );			
-			console.log( 'window scrollLeft: ', __( window ).scrollLeft() );	
-
-			
-			console.log( 'data: [data-bg] value: ' + __( '.demo' ).data( 'bg' ) );
-			console.log( 'attr: [disabled] value: ' + __( '.demo' ).attr( 'disabled' ) );
-			console.log( 'allAttrs(): ', __( '.demo' ).allAttrs() );
-			
-			
-			console.log( __( '.demo' ).hasClass( 'class-1' ) );
-			console.log( __( 'h1' ).offset() );
-			console.log( __( 'h1' ).position() );		
-			console.log( __( '.demo' ).maxDimension() );		
-			console.log( __( '.menu li:nth-child(2)' ).index() );
-
-
-			// Traverse all attribute names and values
-			const allAttrs = __( '#demo' ).allAttrs();
-			for (let key in allAttrs) {
-				console.log( key + ' = ' + allAttrs[key] );
-			}
-
-
-			
-			//+++++++++++++++++++++++++++++++++++++++++++
-			// Loop demos
-			//+++++++++++++++++++++++++++++++++++++++++++
-			__( '.menu li' ).each( function( index, curSelector )  {
-				console.log( index + ' : ' );
-				console.log( this );
-				this.style.background = '#333';
-				__( this ).css({
-					'background': '#f00',
-					'font-size': '18px'
-				});
-				
-				
-				//Nested `each() `
-				//__( curSelector) are generally used for exact each selector
-				__( curSelector ).find( 'ul > li' ).each( function( index ) {
-					__( this ).attr( 'id', 'li-id-' + index );
-				});
-	
-	
-				//Nested `eq()`
-				for (let k = 0; k<liNum; k++) {
-					__( curSelector + ' ul > li' ).eq(k).css({
-						'font-size'        : '18px'
-					});
-					
-					__( curSelector + ' ul > li:nth-child('+k+') > a' ).css({
-						'font-size'        : '18px'
-					});
-				}
-
-			});
-
-
-			//+++++++++++++++++++++++++++++++++++++++++++
-			// Animation demos
-			//+++++++++++++++++++++++++++++++++++++++++++
-			__( '.demo' ).fadeOut(1000, function(){
-				setTimeout( function() {
-					__( '.demo' ).fadeIn(3000);
-				},1000 );
-
-			});
-
-			__( '.menu' ).animate( 'marginLeft', 0, 100, 'px', 1500, 'ease-out', function(){ console.log(this.className); } );
-			__( '.menu' ).animate( 'marginTop', 0, 200, 'px', 1500, 'ease-out', function(){ console.log(this.className); } );
-
-			
-			
-			//+++++++++++++++++++++++++++++++++++++++++++
-			// AJAX demos
-			//+++++++++++++++++++++++++++++++++++++++++++
-			__.ajax({
-				url: 'https://restcountries.com/v2/name/Argentina',
-				method: 'GET',
-				complete: function( data ) {
-					console.log( '=> ajax ok!' );
-					console.log( data );
-				}
-			});
-			
-			
-			
-			//+++++++++++++++++++++++++++++++++++++++++++
-			// Form demos
-			//+++++++++++++++++++++++++++++++++++++++++++
-			__( '#input-name-1' ).val(  );  //form control: `<Input />`
-			__( '#select-name-1' ).val( 'value-3' ); //form control: `<Select />`
-			__( '#switch-name-1' ).val( true );   //form control: `<Switch />`
-			__( '#checkbox-name-1' ).val( true );  //form control: `<Checkbox />`
-			__('input[name="radio-name-1"]').val( 'value-3' ); //form control: `<Radio />`
-			
-			
-			console.log( '__( val(): ' + __( '#input' ).val());
-
-			__( '#checkbox1' ).prop('checked', true);
-			console.log( '__( prop(): ' + __( '#checkbox2' ).prop( 'checked' ));	
-
-			__( '#input' ).prop('disabled', true);
-
-
-			// To send data in the application/x-www-form-urlencoded format instead
-			const formData = new FormData();
-			const defaultPostData = {
-				action  : 'load_singlepages_ajax_content'
-			};
-			for(let k in defaultPostData) {
-				formData.append(k, defaultPostData[k]);
-			}
-
-			// For multiple form fields data acquisition
-			const oldFormData = __( '#form' ).serializeArray();  
-			oldFormData.forEach(function(item){
-				formData.append(item.name, item.value);
-			});
-
-
-
-			//+++++++++++++++++++++++++++++++++++++++++++
-			// Utilities demos
-			//+++++++++++++++++++++++++++++++++++++++++++
-			console.log( __.isTouchCapable() );  //true or false
-			console.log( __.browser.isIE );  //.isMobile, .isAndroid, .isPC, .isSafari, .isIE, .supportsPassive
-			console.log( __.GUID.create() );
-			console.log( __.math.evaluate( '100/3' ) );
-			console.log( __.math.getRandomFloat(1, 10) );
-			console.log( __.math.getDegree(135) );
-			console.log( __.math.getRadian(1) );
-			console.log( __.math.getPolarCoord(10,30,0) );
-			console.log( __.cssProperty.getAbsoluteCoordinates( __( '.col-12' )[0] ).left );
-			console.log( __.cssProperty.getTransitionDuration( __( '.col-12' )[0] ) );
-			console.log( __.styleFormat( 'font-size: 10px;background: #51B801; color:#fff; border-radius: 5px;padding: 2px 3px;display: inline-block;margin-left: 3px;' ) )
-			console.log( __.trim( 'string string spacing string' ) );
-            console.log( __.lastUrlParamFormat( 'string-string-spacing_string' ) );
-			console.log( __.removeFirstLastStr( ',string,string,string,' ) );
-			console.log( __.toSlug( 'string String2-s' ) );
-			console.log( __.htmlEncode( '<span style="color:red">text</span>' ) );
-			console.log( __.htmlDecode( '&lt;span style="color:red"&gt;text&lt;/span&gt;' ) );
-
-
-
-			console.log( __.validate.isMobile( '13167678787' ) ); //true
-			console.log( __.validate.isTel( '123-456-7890' ) ); //true
-			console.log( __.validate.isEmail( 'name@gmail.com' ) );	 //true
-			console.log( __.validate.isNumber( '1421.231' ) );	//true
-			console.log( __.validate.isInt( '1421.231' ) ); //false		
-			console.log( __.validate.isJSON( '{"a":true}' ) ); //true	
-			
-			// Scroll spy
-			const throttleFunc = __.throttle(myFunc, 300);
-			window.removeEventListener('scroll', throttleFunc);
-			window.removeEventListener('touchmove', throttleFunc);
-			window.addEventListener('scroll', throttleFunc);
-			window.addEventListener('touchmove', throttleFunc);
-
-			// Click spy
-			const debounceFunc = __.debounce(myFunc, 300);
-			function handleClick() {
-			    debounceFunc();
-			}	
-
-			// Window spy
-			const debounceFuncWindow = __.debounce(windowUpdate, 50);
-			window.removeEventListener('resize', debounceFuncWindow);
-			window.addEventListener('resize', debounceFuncWindow);
-
-
-			// Deep clone an element
-			let a = [1,2,3,4], b = __.deepClone(a);
-			let demo = document.querySelector( '#demo' ), demoCopy = __.deepClone(demo);
-
-
-			// Set a default configuration
-			function myFun(curElement, config) {
-				if ( typeof curElement === typeof undefined ) return;
-				config = __.setDefaultOptions({
-					"src"          : false,
-					"htmlID"       : false,
-					"fixed"        : false,
-					"ajax"         : false
-				}, config);
-
-				console.log( config ); //{src: 'https://google.com', htmlID: true, fixed: false, ajax: false}
-
-			}
-			myFun( __( '.demo-trigger' ), {
-				src: 'https://google.com',
-				htmlID: true
-			});
-
-
-
-		}
-	});
-
-
-
-});
-
-		
-*/
-var __ = function () {
-  'use strict'; // Traverse the counter of a selector, reset to 0 when calling 	`__(selector).XXX()`
-
-  var traverseIndex = {
-    // for `each()`
-    each: 0,
-    // for `eq()`
-    eq: 0,
-    // for `first()`
-    first: 0,
-    // for `last()`
-    last: 0,
-    total_last: 0,
-    // for `filter()`
-    filter: 0,
-    // for `not()`
-    not: 0,
-    // for `maxDimension()`
-    maxDimension: 0,
-    total_maxDimension: 0,
-    elements_maxDimension: []
-  };
-  /*
-   * Wrap the selector
-   * @public
-   */
-
-  function __(s, root) {
-    return __.prototype.core(s, root);
-  }
-  /*
-   * Get real style data
-   * @private
-   */
-
-
-  function getStyle(el, attr) {
-    var self = el;
-
-    if (typeof window !== 'undefined') {
-      //document or window data
-      //-----------------
-      if (self === document.body) {
-        if (attr == 'height') return document.body.clientHeight;
-        if (attr == 'width') return document.body.clientWidth;
-      }
-
-      if (self === window) {
-        if (attr == 'height') return window.innerHeight;
-        if (attr == 'width') return window.innerWidth;
-      } //element data
-      //-----------------
-
-
-      var _val = 0;
-      var computedStyle = window.getComputedStyle ? getComputedStyle(self) // Standards
-      : self.currentStyle; // Old IE
-
-      if (computedStyle) {
-        // This will be true on nearly all browsers
-        _val = computedStyle[attr]; //return ??px
-      } // if getComputedStyle return 'auto'
-
-
-      if (attr === 'height' && _val === 'auto') return actualPropertyValue(self, 'height');
-      if (attr === 'width' && _val === 'auto') return actualPropertyValue(self, 'width'); //
-
-      var newVal = /\d+/.exec(_val); // Array ["123"]
-
-      return parseFloat(newVal);
-    } else {
-      return 0;
-    }
-  }
-  /*
-   * Determine whether it is Child Node
-   * @private
-   */
-
-
-  function isChild(el, p) {
-    if (!el || !p || !p.childNodes || !p.childNodes.length) {
-      return false;
-    }
-
-    return [].slice.call(p.childNodes).filter(function (n) {
-      var found = n === el;
-
-      if (!found && n.childNodes && n.childNodes.length) {
-        return isChild(el, n);
-      }
-
-      return found;
-    }).length;
-  }
-  /*
-   * Determine whether it is in JSON format
-   * @private
-   */
-
-
-  function isJSON(str) {
-    if (typeof str === 'string' && str.length > 0) {
-      if (str.replace(/\"\"/g, '').replace(/\,/g, '') == '[{}]') {
-        return false;
-      } else {
-        if (/^[\],:{}\s]*$/.test(str.replace(/\\["\\\/bfnrtu]/g, '@').replace(/"[^"\\\n\r]*"|true|false|null|-?\d+(?:\.\d*)?(?:[eE][+\-]?\d+)?/g, ']').replace(/(?:^|:|,)(?:\s*\[)+/g, ''))) {
-          return true;
-        } else {
-          return false;
-        }
-      }
-    } else {
-      if ((0,esm_typeof/* default */.Z)(str) === 'object' && Object.prototype.toString.call(str) === '[object Object]' && !str.length) {
-        return true;
-      } else {
-        return false;
-      }
-    }
-  }
-  /*
-   * Delete elements in the array
-   * @private
-   */
-
-
-  function removeArray(arr) {
-    var what,
-        args = arguments,
-        len = args.length,
-        index;
-
-    while (len > 1 && arr.length) {
-      what = args[--len];
-
-      while ((index = arr.indexOf(what)) !== -1) {
-        arr.splice(index, 1);
-      }
-    }
-
-    return arr;
-  }
-  /*
-   * Convert string to camel case
-   * @private
-   */
-
-
-  function toCamelCase(s) {
-    if (typeof s === 'string') {
-      var firstWord = "";
-      var arr = s.split("-");
-
-      for (var i = 1; i < arr.length; i++) {
-        firstWord = arr[i].charAt(0).toUpperCase();
-        arr[i] = firstWord + arr[i].slice(1);
-      }
-
-      arr = arr.join(""); //Convert the arr array to a string
-
-      return arr;
-    } else {
-      return s;
-    }
-  }
-  /*
-   * Get CSS path from Dom element
-   * @private
-   */
-
-
-  function elementPath(el) {
-    if (!(el instanceof Element)) return; //
-
-    var path = [];
-    var itemIndex = 0;
-
-    while (el.nodeType === Node.ELEMENT_NODE) {
-      var oldSelector = el.nodeName.toLowerCase();
-      var selector = oldSelector;
-
-      if (el.id) {
-        if (itemIndex > 0) selector += '#' + el.id;
-      }
-
-      if (el.className) {
-        selector += '.' + el.className.replace(/\s+/g, ".");
-      }
-
-      selector = selector.replace(/\.\./g, "."); //Add one or more items to the start of an array's result set.
-
-      path.unshift(selector); //
-
-      el = el.parentNode; //
-
-      itemIndex++;
-    }
-
-    return path.join(" > ");
-  }
-  /*
-  * Check if a string is a valid number
-  * @private
-  */
-
-
-  function isValidNumeric(str) {
-    if (typeof str != "string") return false; // we only process strings!  
-
-    if (!isNaN(str) && // use type coercion to parse the _entirety_ of the string (`parseFloat` alone does not do this)
-    !isNaN(parseFloat(str)) // ensure strings of whitespace fail
-    ) {
-      return true;
-    } else {
-      return false;
-    }
-  }
-  /*
-  * Convert string to hump naming
-  * @private
-  */
-
-
-  function stringlineToHump(str) {
-    if (typeof str === 'string' && str.length > 0) {
-      var re = /-(\w)/g;
-      str = str.replace(re, function ($0, $1) {
-        return $1.toUpperCase();
-      });
-      return str;
-    } else {
-      return str;
-    }
-  }
-  /*
-  * Get the actual value with user specific methed
-  * it can be 'width', 'height', 'outerWidth', 'outerHeight'
-  * @private
-  * @param {Element} el           - A DOM node containing one selector to match against.
-  * @param {String} prop          - A string naming the property of style.
-  * @param {?Json} config         - Whether or not margin is included. The key `includeMargin` 
-                                    takes effect when set to true
-  * @return {Number}              - Returns a pure number.
-  */
-
-
-  function actualPropertyValue(el, prop, config) {
-    var style = window.getComputedStyle ? window.getComputedStyle(el) : el.currentStyle,
-        display = style.display,
-        position = style.position,
-        visibility = style.visibility;
-    var marginWidth = 0;
-    var marginHeight = 0;
-    var maxVal;
-    var actualVal;
-
-    if (config && config.includeMargin === true) {
-      marginWidth = parseFloat(style.marginLeft) + parseFloat(style.marginRight);
-      marginHeight = parseFloat(style.marginTop) + parseFloat(style.marginBottom);
-    }
-
-    if (prop === 'width') {
-      maxVal = parseFloat(style.maxWidth); // if its not hidden we just return normal height
-
-      if (display !== 'none' && maxVal !== '0') {
-        return el.clientWidth;
-      }
-    }
-
-    if (prop === 'height') {
-      maxVal = parseFloat(style.maxHeight);
-
-      if (display !== 'none' && maxVal !== '0') {
-        return el.clientHeight;
-      }
-    }
-
-    if (prop === 'outerWidth') {
-      maxVal = parseFloat(style.maxWidth);
-
-      if (display !== 'none' && maxVal !== '0') {
-        return el.offsetWidth + marginWidth;
-      }
-    }
-
-    if (prop === 'outerHeight') {
-      maxVal = parseFloat(style.maxHeight);
-
-      if (display !== 'none' && maxVal !== '0') {
-        return el.offsetHeight + marginHeight;
-      }
-    } // the element is hidden so:
-    // making the el block so we can meassure its height but still be hidden
-
-
-    el.style.position = 'absolute';
-    el.style.visibility = 'hidden';
-    el.style.display = 'block';
-    if (prop === 'width') actualVal = el.clientWidth;
-    if (prop === 'height') actualVal = el.clientHeight;
-    if (prop === 'outerWidth') actualVal = el.offsetWidth + marginWidth;
-    if (prop === 'outerHeight') actualVal = el.offsetHeight + marginHeight; // reverting to the original values
-
-    el.style.display = display;
-    el.style.position = position;
-    el.style.visibility = visibility;
-    return actualVal;
-  }
-  /*
-  * Some easing functions
-  * @private
-  * @link: https://easings.net
-  * @param {Number} t   - time (Amount of time that has passed since the beginning of the animation. Usually starts at 0 and is slowly increased using a game loop or other update function.)
-  * @param {Number} b   - beginning value (The starting point of the animation. Usually it's a static value, you can start at 0 for example.)
-  * @param {Number} c   - change in value (The amount of change needed to go from starting point to end point. It's also usually a static value.)
-  * @param {Number} d   - duration (Amount of time the animation will take. Usually a static value aswell.)
-  * @return {Number}
-  */
-
-
-  function easeLinear(t, b, c, d) {
-    return c * t / d + b;
-  }
-
-  function easeInQuart(t, b, c, d) {
-    return c * (t /= d) * t * t * t + b;
-  }
-
-  function easeOutQuart(t, b, c, d) {
-    return -c * ((t = t / d - 1) * t * t * t - 1) + b;
-  }
-
-  function easeInOutQuart(t, b, c, d) {
-    if ((t /= d / 2) < 1) return c / 2 * t * t * t * t + b;
-    return -c / 2 * ((t -= 2) * t * t * t - 2) + b;
-  }
-
-  function easeInCubic(t, b, c, d) {
-    return c * (t /= d) * t * t + b;
-  }
-
-  function easeOutCubic(t, b, c, d) {
-    return c * ((t = t / d - 1) * t * t + 1) + b;
-  }
-
-  function easeInOutCubic(t, b, c, d) {
-    if ((t /= d / 2) < 1) return c / 2 * t * t * t + b;
-    return c / 2 * ((t -= 2) * t * t + 2) + b;
-  }
-  /* ------------- Independent Methods -------------- */
-
-  /*
-   * Object validation
-   *
-   * @return {Boolean}  
-   */
-
-
-  __.validate = __.validate || function () {
-    function t() {}
-
-    return t.version = "0.0.1", t.isNumber = function (B) {
-      var A = /^[\d|\.|,]+$/;
-      return A.test(B);
-    }, t.isInt = function (B) {
-      if (B == "") {
-        return false;
-      }
-
-      var A = /\D+/;
-      return !A.test(B);
-    }, t.isEmail = function (A) {
-      var B = /^\s*([A-Za-z0-9_-]+(\.\w+)*@(\w+\.)+\w{2,3})\s*$/;
-      return B.test(A);
-    }, t.isTel = function (A) {
-      //const B = /^[\d|\-|\s|\_]+$/;
-      var B = /^[0-9- ]{7,20}$/;
-      return B.test(A);
-    }, t.isMobile = function (A) {
-      //const B = /^13[0-9]{9}|15[012356789][0-9]{8}|18[0256789][0-9]{8}|147[0-9]{8}$/;
-      var B = /^1[0-9]{10}$/;
-      return B.test(A);
-    }, t.isJSON = function (A) {
-      return isJSON(A);
-    }, //
-    t;
-  }();
-  /*
-   * To determine if it is a touch screen.
-   *
-   * @return {Boolean} 
-   */
-
-
-  __.isTouchCapable = function () {
-    return 'ontouchstart' in window || window.DocumentTouch && document instanceof window.DocumentTouch || window.navigator.maxTouchPoints > 0;
-  };
-  /*
-   * Determine whether it is a special browser
-   *
-   * @return {Json}  - Boolean judgment collection of common browsers
-   */
-
-
-  __.browser = __.browser || function () {
-    var browser = {};
-
-    if (typeof navigator !== 'undefined') {
-      // Add feature test for passive event listener support
-      var supportsPassive = false;
-
-      try {
-        document.addEventListener('test', null, {
-          get passive() {
-            supportsPassive = true;
-          }
-
-        });
-      } catch (e) {}
-
-      browser = {
-        isMobile: /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent),
-        isAndroid: /(android)/i.test(navigator.userAgent),
-        isPC: !navigator.userAgent.match(/(iPhone|iPod|Android|ios|Mobile)/i),
-        isSafari: !!navigator.userAgent.match(/Version\/[\d\.]+.*Safari/),
-
-        /*Test to 9, 10. */
-        isIE: !!window.ActiveXObject || "ActiveXObject" in window,
-
-        /*Test to 6 ~ 11 (not edge) */
-        supportsPassive: supportsPassive
-      };
-    }
-
-    return browser;
-  }();
-  /*
-   * Create GUID / UUID
-   *
-   * @description This function can be used separately in HTML pages or custom JavaScript.
-   * @return {String}                        - The globally-unique identifiers.
-   */
-
-
-  __.GUID = __.GUID || function () {
-    function t() {}
-
-    return t.version = "0.0.1",
-    /*
-     * Generate a string of unique characters
-     *
-     * @return {String}
-     */
-    t.create = function () {
-      return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function (c) {
-        var r = Math.random() * 16 | 0,
-            v = c == 'x' ? r : r & 0x3 | 0x8;
-        return v.toString(16);
-      });
-    }, //
-    t;
-  }();
-  /*
-   * Evaluating a string as a mathematical expression in JavaScript
-   *
-   * @description This function can be used separately in HTML pages or custom JavaScript.
-   * @return {String}            - New calculation result.
-   */
-
-
-  __.math = __.math || function () {
-    function t() {}
-
-    return t.version = "0.0.2",
-    /*
-     * Expression parsing and evaluation
-     *
-     * @param {String} s - A math expression given in string.
-     * @return {Number}  - Returns a pure number calculated.
-     */
-    t.evaluate = function (s) {
-      var chars = s.replace(/\s/g, '').split("");
-      var n = [],
-          op = [],
-          index = 0,
-          oplast = true;
-      n[index] = ""; // Parse the expression
-
-      for (var c = 0; c < chars.length; c++) {
-        if (isNaN(parseInt(chars[c])) && chars[c] !== "." && !oplast) {
-          op[index] = chars[c];
-          index++;
-          n[index] = "";
-          oplast = true;
-        } else {
-          n[index] += chars[c];
-          oplast = false;
-        }
-      } // Calculate the expression
-
-
-      s = parseFloat(n[0]);
-
-      for (var o = 0; o < op.length; o++) {
-        var num = parseFloat(n[o + 1]);
-
-        switch (op[o]) {
-          case "+":
-            s = s + num;
-            break;
-
-          case "-":
-            s = s - num;
-            break;
-
-          case "*":
-            s = s * num;
-            break;
-
-          case "/":
-            s = s / num;
-            break;
-        }
-      }
-
-      return s;
-    },
-    /*
-     * Generate random number between two numbers
-     *
-     * @return {Number} min - Enter a expected minimum.
-     * @return {Number} max - Enter a expected maximum.
-     * @return {Number}     - A new random number
-     */
-    t.getRandomFloat = function (min, max) {
-      return Math.random() * (max - min) + min;
-    },
-    /*
-     * Returns the degree from radian.
-     *
-     * @return {Number} rad - Value of radian.
-     * @return {Number}
-     * @usage: 
-    	   angle = rad / ( Math.PI / 180 )  = rad * ( 180/Math.PI );
-     */
-    t.getDegree = function (rad) {
-      return rad / Math.PI * 180;
-    },
-    /*
-     * Returns the radian degree .
-     *
-     * @return {Number} deg - Value of degree.
-     * @return {Number}
-     * @usage: 
-    		rad = Math.PI / 180 * 30 ;
-     */
-    t.getRadian = function (deg) {
-      return deg * Math.PI / 180;
-    },
-    /*
-     * Convert three.js scene rotation to polar coordinates
-     *
-     * @return {Number} x - X coordinate value.
-     * @return {Number} y - Y coordinate value.
-     * @return {Number} z - Z coordinate value.
-     * @return {Json}
-     * @usage: 
-    		x = r * cos（θ）
-    	y = r * sin（θ）  
-     */
-    t.getPolarCoord = function (x, y, z) {
-      var nx = Math.cos(x) * Math.cos(y) * z,
-          nz = Math.cos(x) * Math.sin(y) * z,
-          ny = Math.sin(x) * z;
-      return {
-        x: nx,
-        y: ny,
-        z: nz
-      };
-    }, //
-    t;
-  }();
-  /*
-   * Get the CSS property
-   *
-   * @description This function can be used separately in HTML pages or custom JavaScript.
-   * @param  {!Element} el     - The Element for which to get the computed style. Using class name or ID to locate.
-   * @return {String|Object}   - The value of property.
-   */
-
-
-  __.cssProperty = __.cssProperty || function () {
-    function t() {}
-
-    return t.version = "0.0.1",
-    /*
-     * Get the -webkit-transition-duration property
-     *
-     * @param {Element} el - A DOM node containing one selector to match against.
-     * @return {Number}    - Returns a pure number.
-     */
-    t.getTransitionDuration = function (el) {
-      if ((0,esm_typeof/* default */.Z)(el) === ( true ? "undefined" : 0)) {
-        return 0;
-      }
-
-      var style = window.getComputedStyle(el),
-          duration = style.webkitTransitionDuration,
-          delay = style.webkitTransitionDelay;
-
-      if ((0,esm_typeof/* default */.Z)(duration) != ( true ? "undefined" : 0)) {
-        // fix miliseconds vs seconds
-        duration = duration.indexOf("ms") > -1 ? parseFloat(duration) : parseFloat(duration) * 1000;
-        delay = delay.indexOf("ms") > -1 ? parseFloat(delay) : parseFloat(delay) * 1000;
-        return duration;
-      } else {
-        return 0;
-      }
-    },
-    /*
-     * Get an object's absolute position on the page
-     *
-     * @param {Element} el - A DOM node containing one selector to match against.
-     * @return {Json}    - An object containing the properties top and left. 
-     */
-    t.getAbsoluteCoordinates = function (el) {
-      var windowWidth = window.innerWidth,
-          leftPos = null,
-          topPos = null;
-
-      if (!document.getElementsByTagName('body')[0].className.match(/rtl/)) {
-        leftPos = el.offsetLeft == 0 ? el.parentElement.offsetLeft : el.offsetLeft;
-        topPos = el.offsetTop == 0 ? el.parentElement.offsetTop : el.offsetTop;
-      } else {
-        // width and height in pixels, including padding and border
-        // Corresponds to outerWidth(), outerHeight()
-        leftPos = el.offsetLeft == 0 ? windowWidth - (el.parentElement.offsetLeft + el.parentElement.offsetWidth) : windowWidth - (el.offsetLeft + el.offsetWidth);
-        topPos = el.offsetTop == 0 ? windowWidth - (el.parentElement.offsetTop + el.parentElement.offsetHeight) : windowWidth - (el.offsetTop + el.offsetHeight);
-      }
-
-      return {
-        'left': leftPos,
-        'top': topPos
-      };
-    }, //
-    t;
-  }();
-  /*
-   * Perform an asynchronous HTTP (Ajax) request.
-   *
-   * @param  {Json} props   - The attribute and value to be set, the format is JSON
-   * @return {Void} 
-   */
-
-
-  __.ajax = function (props) {
-    if (!isJSON(props)) return false;
-    var self = this;
-
-    var _url = typeof props.url !== 'undefined' ? props.url : '';
-
-    var _method = typeof props.method !== 'undefined' ? props.method : 'POST';
-
-    var _loadedFn = typeof props.complete !== 'undefined' ? props.complete : null;
-
-    if (_url != '') {
-      var config = {
-        mode: 'cors',
-        method: _method
-      };
-      fetch(_url, config).then(function (response) {
-        return response.json();
-      }).then(function (result) {
-        //console.log('Success:', result);
-        if (_loadedFn && typeof _loadedFn == "function") {
-          _loadedFn.call(self, result);
-        }
-      })["catch"](function (error) {
-        console.error('Error:', error);
-      });
-    }
-  };
-  /*
-   * Remove all spaces in the string
-   *
-   * @param  {String} s                 - Any string.
-   * @param  {Boolean} isGlobal         - If the value is `true`, remove all spaces including the middle
-   * @return {String}                   - A new string with no spaces
-   */
-
-
-  __.trim = function (s) {
-    var isGlobal = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : false;
-
-    if (typeof s === 'string') {
-      var result;
-      result = s.replace(/(^\s+)|(\s+$)/g, "");
-
-      if (isGlobal === true) {
-        result = result.replace(/\s/g, "");
-      }
-
-      return result;
-    } else {
-      return s;
-    }
-  };
-  /*
-   * Capitalize the first letter of all words in a string
-   *
-   * @param  {String} s                 - Any string.
-   * @return {String}                   - A new string.
-   */
-
-
-  __.lastUrlParamFormat = function (s) {
-    s = s || '';
-
-    if (s.length > 0) {
-      s = s.replace(/\-/g, ' ').replace(/\_/g, ' ');
-      var pieces = s.split(" ");
-
-      for (var i = 0; i < pieces.length; i++) {
-        var j = pieces[i].charAt(0).toUpperCase();
-        pieces[i] = j + pieces[i].substr(1);
-      }
-
-      return pieces.join(" ");
-    } else {
-      return s;
-    }
-  };
-  /*
-   * Convert HTML Element's `Style` Attribute to JSON
-   *
-   * @param  {String} str   - The content of the style attribute in the HTML element, usually a string
-   * @return {Json}     - An HTML element to a JSON object
-   */
-
-
-  __.styleFormat = function (s) {
-    s = s || '';
-
-    if (s.length > 0) {
-      var styles = s.split(';'),
-          json = {};
-      var i = styles.length,
-          style,
-          k,
-          v;
-
-      while (i--) {
-        style = styles[i].split(':');
-        k = toCamelCase(__.trim(style[0]));
-        v = __.trim(style[1]);
-
-        if (k.length > 0 && v.length > 0) {
-          json[k] = v;
-        }
-      }
-
-      return json;
-    } else {
-      return '';
-    }
-  };
-  /*
-   * Remove first, last or both symbols
-   *
-   * @param  {String} str       - Any string.
-   * @param  {String} symbol    - The target string to remove.
-   * @param  {Number} type      - Type of all or not. if `0`, is all.
-   * @return {String}           - An new string.
-   */
-
-
-  __.removeFirstLastStr = function (str) {
-    var symbol = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : ',';
-    var type = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : 0;
-
-    if (typeof str === 'string') {
-      if (type == 0) {
-        var flRegExp = new RegExp('^\\' + symbol + '|\\' + symbol + '$', 'g');
-        return str.replace(flRegExp, '');
-      } else {
-        var _flRegExp = new RegExp('' + symbol + '\s*$', 'g');
-
-        return str.replace(_flRegExp, '');
-      }
-    } else {
-      return str;
-    }
-  };
-  /*
-   * Convert a string to slug.
-   *
-   * @param  {String} str            - Any string.
-   * @return {String}                - A new string.
-   */
-
-
-  __.toSlug = function (str) {
-    if (typeof str == 'string' && str.length > 0) {
-      return str.toString().replace(/[^\w\s\-！￥【】\u4e00-\u9eff]/gi, '').replace(/\s/g, '-').replace(/(\-){2,}/g, '-').replace(/\-\s*$/, '').toLowerCase();
-    } else {
-      return str;
-    }
-  };
-  /*
-   * Throttle
-   *
-   * @param  {Function} fn    - A function to be executed within the time limit.
-   * @param  {Number} limit   - Waiting time.
-   * @return {Function}       - Returns a new function.
-   */
-
-
-  __.throttle = function (fn) {
-    var limit = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 300;
-    var waiting = false;
-    return function () {
-      if (!waiting) {
-        fn.apply(this, arguments);
-        waiting = true;
-        setTimeout(function () {
-          waiting = false;
-        }, limit);
-      }
-    };
-  };
-  /*
-   * Debounce
-   *
-   * @param  {Function} fn    - A function to be executed within the time limit.
-   * @param  {Number} limit   - Waiting time.
-   * @return {Function}       - Returns a new function.
-   */
-
-
-  __.debounce = function (fn) {
-    var limit = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 300;
-    var timer;
-    return function () {
-      //Every time this returned function is called, the timer is cleared to ensure that fn is not executed
-      clearTimeout(timer); // When the returned function is called for the last time (that is the user stops a continuous operation)
-      // Execute fn after another delay milliseconds
-
-      timer = setTimeout(function () {
-        fn.apply(this, arguments);
-      }, limit);
-    };
-  };
-  /*
-   *  Create a deep copy of the set of matched elements.
-   *
-   * @param  {Object|Element} obj             - The array, JSON or HTML element to be copied.
-   * @return {Object|Element}   
-   */
-
-
-  __.deepClone = function (obj) {
-    if (obj.nodeType === 1) {
-      return obj.cloneNode(true);
-    } else {
-      var objClone = Array.isArray(obj) ? [] : {};
-
-      if (obj && (0,esm_typeof/* default */.Z)(obj) === "object") {
-        for (key in obj) {
-          if (obj.hasOwnProperty(key)) {
-            //Determine whether the ojb child element is an object, if it is, copy it recursively
-            if (obj[key] && (0,esm_typeof/* default */.Z)(obj[key]) === "object") {
-              objClone[key] = deepClone(obj[key]);
-            } else {
-              //If not, simply copy
-              objClone[key] = obj[key];
-            }
-          }
-        }
-      }
-
-      return objClone;
-    }
-  };
-  /*
-   *  HTML entities encode.
-   *
-   * @param {string} str          - Input text.
-   * @return {string}             - Filtered text.
-   */
-
-
-  __.htmlEncode = function (str) {
-    var res = '';
-
-    if (typeof document === 'undefined') {
-      res = str.replace(/[\u00A0-\u9999<>\&]/g, function (i) {
-        return '&#' + i.charCodeAt(0) + ';';
-      });
-    } else {
-      var div = document.createElement('div'); //Creates a new Text node. This method can be used to escape HTML characters.
-
-      div.appendChild(document.createTextNode(str));
-      res = div.innerHTML;
-    } //Convert single and double quotes
-
-
-    res = res.replace(/"/g, '&quot;').replace(/'/g, '&#39;');
-    return res;
-  };
-  /*
-   *  HTML entities decode
-   *
-   * @param {string} str          - Input text.
-   * @return {string}             - Filtered text.
-   */
-
-
-  __.htmlDecode = function (str) {
-    var res = '';
-
-    if (typeof document === 'undefined') {
-      var entities = [['amp', '&'], ['apos', '\''], ['#x27', '\''], ['#x2F', '/'], ['#39', '\''], ['#47', '/'], ['lt', '<'], ['gt', '>'], ['nbsp', ' '], ['quot', '"'], ['#60', '<'], ['#62', '>']];
-
-      for (var i = 0, max = entities.length; i < max; i++) {
-        str = str.replace(new RegExp('&' + entities[i][0] + ';', 'g'), entities[i][1]);
-      }
-
-      res = str;
-    } else {
-      var txt = document.createElement('textarea');
-      txt.innerHTML = str;
-      res = txt.value;
-    }
-
-    return res;
-  };
-  /*
-   *  Set a default JSON format configuration
-   *
-   * @param  {Json} props         - Set some default keys and values.
-   * @param  {Json} options       - A JSON variable passed in from outside, including key and value.
-   * @return {Json}               - Merge the new and old values.
-   */
-
-
-  __.setDefaultOptions = function (props, options) {
-    if ((0,esm_typeof/* default */.Z)(options) === ( true ? "undefined" : 0) || options === null || options === false) options = {}; //Set a default configuration
-
-    if (isJSON(props)) {
-      var defaultConfigValues = Object.values(props);
-      Object.keys(props).forEach(function (prop, index) {
-        // Well-formed string type
-        Object.keys(options).forEach(function (prop2, index2) {
-          if (prop2 === prop) {
-            var _v = options[prop2];
-            if (_v == 'true') _v = true;
-            if (_v == 'false') _v = false;
-            if (isValidNumeric(_v)) _v = parseFloat(_v);
-            if (isJSON(_v)) _v = Object.prototype.toString.call(_v) === '[object Object]' ? _v : JSON.parse(_v);
-            options[prop2] = _v;
-          }
-        }); //
-
-        if ((0,esm_typeof/* default */.Z)(options[prop]) === ( true ? "undefined" : 0) || options[prop] === null) options[prop] = defaultConfigValues[index];
-      });
-    }
-
-    return options;
-  };
-  /* ---------------- API methods ----------------- */
-
-  /*
-   * Core method
-   *
-   * @param  {String|Element} s       - The selector to search for or HTML element to wrap with functionality
-   * @param  {Element} root           - OPTIONAL An HTML element to start the element query from
-   * @return {Array}                  - The collection of elements, wrapped with functionality (see API methods)
-   */
-
-
-  __.prototype.core = function (s, root) {
-    var self = this;
-    root = root || document;
-
-    if (typeof s !== 'undefined') {
-      if (typeof s === 'string') {
-        //1) string
-        return self.wrap([].slice.call(root.querySelectorAll(s)));
-      } else if (s.tagName) {
-        //2) HTML elements
-        return self.wrap([s]);
-      } else {
-        if (s == window) {
-          return self.wrap([s]);
-        } //3) document or other
-
-
-        switch (s.nodeType) {
-          case 9:
-            //if Document
-            return self.wrap([document.body]);
-
-          default:
-            return [];
-        }
-      }
-    } //typeof (s) !== 'undefined'
-
-
-    return [];
-  };
-  /*
-   * Code included inside the code will run once the entire page (all DOM) is ready.
-   *
-   * @param  {Function} fn   - A function to execute after the DOM is ready.
-   * @return {Void}
-   */
-
-
-  __.prototype.ready = function (fn) {
-    if (document.readyState != 'loading') {
-      fn();
-    } else if (document.addEventListener) {
-      document.addEventListener('DOMContentLoaded', fn);
-    } else {
-      document.attachEvent('onreadystatechange', function () {
-        if (document.readyState != 'loading') fn();
-      });
-    }
-  };
-  /*
-   * Detect when images and videos have been loaded. 
-   *
-   * @param  {Json} props   - Contains three event functions before loading, loading, and loading completed.
-   * @return {Void}
-   */
-
-
-  __.prototype.loader = function (props) {
-    var self = this;
-    var sources = [];
-    var loadingFn = null,
-        progressFn = null,
-        loadedFn = null,
-        imagesSelector = 'body img',
-        videosSelector = 'body video';
-
-    if (isJSON(props)) {
-      loadingFn = props.startEvent;
-      progressFn = props.progressEvent;
-      loadedFn = props.endEvent;
-      imagesSelector = props.imagesSelector;
-      videosSelector = props.videosSelector;
-    } //count all images on a page
-
-
-    if (typeof document.images !== 'undefined' && document.images.length == 0) {
-      var imgPlaceholder = document.createElement("div");
-      imgPlaceholder.innerHTML = '<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt="" style="display:none">'; // insert liLast at the end of <>
-
-      document.body.append(imgPlaceholder);
-    } //loading
-
-
-    if (loadingFn && typeof loadingFn == "function") {
-      loadingFn();
-    } //Push all images from page
-
-
-    var imgs = document.querySelectorAll(imagesSelector);
-
-    for (var i = 0; i < imgs.length; i++) {
-      sources.push({
-        "url": imgs[i].src,
-        "type": 'img'
-      });
-    } //Push all videos from page
-
-
-    var videos = document.querySelectorAll(videosSelector);
-
-    for (var _i = 0; _i < videos.length; _i++) {
-      var _sources = videos[_i].getElementsByTagName('source');
-
-      sources.push({
-        "url": _sources.length > 0 ? _sources[0].src : videos[_i].src,
-        "type": 'video'
-      });
-    } //Execute after all images and videos have loaded
-
-
-    var per = 0;
-    var perInit = 1;
-
-    if (sources.length == 0) {
-      per = 100;
-    }
-
-    var loadResources = function loadResources() {
-      var promises = [];
-
-      var _loop = function _loop(_i2) {
-        if (sources[_i2].type == 'img') {
-          ///////////
-          // IMAGE //
-          ///////////   
-          promises.push(new Promise(function (resolve, reject) {
-            var img = document.createElement('img');
-            img.crossOrigin = 'anonymous';
-            img.src = sources[_i2].url;
-
-            img.onload = function (image) {
-              //Compatible with safari and firefox
-              if ((0,esm_typeof/* default */.Z)(image.path) === ( true ? "undefined" : 0)) {
-                return resolve(image.target.currentSrc);
-              } else {
-                return resolve(image.path[0].currentSrc);
-              }
-            };
-          }).then(textureLoaded));
-        } else {
-          ///////////
-          // VIDEO //
-          ///////////    
-          promises.push(new Promise(function (resolve, reject) {
-            var video = document.createElement('video');
-            video.addEventListener('loadedmetadata', function (video) {
-              //Compatible with safari and firefox
-              if ((0,esm_typeof/* default */.Z)(video.path) === ( true ? "undefined" : 0)) {
-                return resolve(video.target.currentSrc);
-              } else {
-                return resolve(video.path[0].currentSrc);
-              }
-            }, false);
-            video.src = sources[_i2].url;
-          }).then(textureLoaded));
-        }
-      };
-
-      for (var _i2 = 0; _i2 < sources.length; _i2++) {
-        _loop(_i2);
-      } //end for
-
-
-      return Promise.all(promises);
-    };
-
-    var textureLoaded = function textureLoaded(url) {
-      //progress number
-      per = parseInt(100 * (perInit / sources.length));
-      if (isNaN(per)) per = 100; //Call back progress 
-
-      /* console.log( 'progress: ' + per + '%' ); */
-
-      if (progressFn && typeof progressFn == "function") {
-        progressFn.call(self, per);
-      }
-
-      perInit++;
-      return per;
-    }; //and videos loaded
-    //Must be placed behind the loadResources()
-
-
-    loadResources().then(function (images) {
-      if (loadedFn && typeof loadedFn == "function") {
-        loadedFn();
-      }
-    });
-  };
-  /*
-   * Puts data inside an element at the last index (Vanilla JS also has this method)
-   *
-   * @param  {Element|String} el   - An element or string to be parsed as HTML or XML and inserted into the tree.
-   * @return {Void}
-   */
-
-
-  __.prototype.append = function (el) {
-    if (typeof el === 'string') {
-      // Just inside the element, after its last child.
-      if (document.createElement("div").insertAdjacentHTML) {
-        this.insertAdjacentHTML("beforeend", el);
-        return this;
-      }
-    } else {
-      var html = typeof el === 'string' ? el : el.outerHTML;
-      this.innerHTML += html;
-    }
-  };
-  /*
-   * Puts the prepending element at the first index.  (Vanilla JS also has this method)
-   *
-   * @param  {Element|String} el   - An element or string to be parsed as HTML or XML and inserted into the tree.
-   * @return {Void}
-   */
-
-
-  __.prototype.prepend = function (el) {
-    if (typeof el === 'string') {
-      // Just inside the element, before its first child.
-      if (document.createElement("div").insertAdjacentHTML) {
-        this.insertAdjacentHTML("afterbegin", el);
-        return this;
-      }
-    } else {
-      var html = typeof el === 'string' ? el : el.outerHTML;
-      this.innerHTML = html + this.innerHTML;
-    }
-  };
-  /*
-   * Before the element itself.
-   *
-   * @param  {String} el   - The string to be parsed as HTML or XML and inserted into the tree.
-   * @return {Void}
-   */
-
-
-  __.prototype.before = function (el) {
-    if (typeof el === 'string') {
-      // Before the element itself.
-      if (document.createElement("div").insertAdjacentHTML) {
-        this.insertAdjacentHTML("beforebegin", el);
-        return this;
-      }
-    } else {
-      var html = typeof el === 'string' ? el : el.outerHTML;
-      this.insertAdjacentHTML("beforebegin", html);
-    }
-  };
-  /*
-   * After the element itself.
-   *
-   * @param  {String} el   - The string to be parsed as HTML or XML and inserted into the tree.
-   * @return {Void}
-   */
-
-
-  __.prototype.after = function (el) {
-    if (typeof el === 'string') {
-      //  After the element itself.
-      if (document.createElement("div").insertAdjacentHTML) {
-        this.insertAdjacentHTML("afterend", el);
-        return this;
-      }
-    } else {
-      var html = typeof el === 'string' ? el : el.outerHTML;
-      this.insertAdjacentHTML("afterend", html);
-    }
-  };
-  /*
-   * Insert an element as the first child node of another
-   *
-   * @param  {Element} el  - A DOM node containing one selector to match against.
-   */
-
-
-  __.prototype.prependTo = function (el) {
-    if (this.firstChild) {
-      this.insertBefore(el, this.firstChild);
-    }
-  };
-  /*
-   * Insert an element to the end of the target
-   *
-   * @param  {Element} el  - A DOM node containing one selector to match against.
-   */
-
-
-  __.prototype.appendTo = function (el) {
-    this.appendChild(el);
-  };
-  /*
-   * Wrap an HTML structure around the content of each element in the set of matched elements.
-   *
-   * @param  {String} el   - An HTML snippet.
-   * @return {Void}
-   */
-
-
-  __.prototype.wrapInner = function (el) {
-    //get old value
-    var val = this.innerHTML; //empty default value
-
-    this.innerHTML = ''; //The DOMParser() method is awesome, but the parseFromString() method stops at IE10.
-
-    var support = function () {
-      if (!window.DOMParser) return false;
-      var parser = new DOMParser();
-
-      try {
-        parser.parseFromString('x', 'text/html');
-      } catch (err) {
-        return false;
-      }
-
-      return true;
-    }(); //Convert a template string into HTML DOM nodes
-
-
-    var stringToHTML = function stringToHTML(str) {
-      // If DOMParser is supported, use it
-      if (support) {
-        var parser = new DOMParser();
-        var doc = parser.parseFromString(str, 'text/html');
-        var _res = doc.body;
-        return _res.children[0];
-      } // Otherwise, fallback to old-school method
-
-
-      var dom = document.createElement('div');
-      dom.innerHTML = str;
-      var res = dom;
-      return res.children[0];
-    };
-
-    if (typeof el === 'string') {
-      var div = this.appendChild(stringToHTML(el));
-      div.innerHTML = val;
-
-      while (this.firstChild !== div) {
-        div.appendChild(this.firstChild);
-      }
-    }
-  };
-  /*
-   * Get the HTML contents of the first element in the set of matched elements or set the HTML contents of every matched element.
-   *
-   * @param  {?String} el   - A string of HTML to set as the content of each matched element.
-   * @return {Void|String}     - The HTML content to set
-   */
-
-
-  __.prototype.html = function (el) {
-    if (el === undefined) {
-      return {
-        data: this.innerHTML
-      };
-    } else {
-      this.innerHTML = el;
-    }
-  };
-  /*
-   * Get the combined text contents of each element in the set of matched elements, including their descendants, or set the text contents of the matched elements.
-   *
-   * @param  {?String} el      - The text to set as the content of each matched element.
-   * @return {Void|String}     - The HTML content to set
-   */
-
-
-  __.prototype.text = function (el) {
-    if (el === undefined) {
-      //Remove HTML Tags
-      var htmlstr = this.innerHTML;
-      htmlstr = htmlstr.replace(/(<([^>]+)>)/ig, '');
-      return {
-        data: htmlstr
-      };
-    } else {
-      this.innerHTML = __.htmlEncode(el);
-    }
-  };
-  /*
-   * Create a deep copy of the set of matched elements.
-   *
-   * @return {Array}          - Contains only a collection of HTML elements. 
-   *                            Returns a duplicate of the node on which this method was called.
-   */
-
-
-  __.prototype.clone = function () {
-    return {
-      data: this.cloneNode(true)
-    };
-  };
-  /*
-   * Adds the specified class(es) to each element in the set of matched elements.
-   *
-   * @param  {String} c   - One or more space-separated classes to be added to the class attribute of each matched element.
-   * @return {Void}
-   */
-
-
-  __.prototype.addClass = function (c) {
-    if (!/^\S+$/g.test(c)) {
-      // It has only whitespace
-      var classArray = c.split(' ');
-      var className; // Loop through the array of classes to add one class at a time
-
-      for (var j = 0; j < classArray.length; j++) {
-        className = classArray[j];
-        this.classList.add(className);
-      }
-    } else {
-      this.classList.add(c);
-    }
-  };
-  /*
-   * Remove a single class, multiple classes, or all classes from each element in the set of matched elements.
-   *
-   * @param  {String} c   - One or more space-separated classes to be removed from the class attribute of each matched element.
-   * @return {Void}
-   */
-
-
-  __.prototype.removeClass = function (c) {
-    if (!/^\S+$/g.test(c)) {
-      // It has only whitespace
-      var classArray = c.split(' ');
-      var className; // Loop through the array of classes to add one class at a time
-
-      for (var j = 0; j < classArray.length; j++) {
-        className = classArray[j];
-        this.classList.remove(className);
-      }
-    } else {
-      this.classList.remove(c);
-    }
-  };
-  /*
-   * Add or remove one or more classes from each element in the set of matched elements, 
-   * depending on either the class's presence or the value of the state argument.
-   *
-   * @param  {String} c   - One or more classes (separated by spaces) to be toggled for each element in the matched set.
-   * @return {Void}
-   */
-
-
-  __.prototype.toggleClass = function (c) {
-    if (!/^\S+$/g.test(c)) {
-      // It has only whitespace
-      var classArray = c.split(' ');
-      var className; // Loop through the array of classes to add one class at a time
-
-      for (var j = 0; j < classArray.length; j++) {
-        className = classArray[j];
-
-        if (this.classList.contains(className)) {
-          this.classList.remove(className);
-        } else {
-          this.classList.add(className);
-        }
-      }
-    } else {
-      if (this.classList.contains(c)) {
-        this.classList.remove(c);
-      } else {
-        this.classList.add(c);
-      }
-    }
-  };
-  /*
-   * Set the style properties of elements:
-   *
-   * @param  {Json} props   - The attribute and value to be set, the format is JSON
-   * @return {Void}
-   */
-
-
-  __.prototype.css = function (props, value) {
-    var self = this;
-
-    if (isJSON(props)) {
-      //the json is ok
-      Object.keys(props).forEach(function (prop) {
-        self.style[prop] = props[prop];
-      });
-    } else {
-      if (value !== undefined) {
-        self.style[props] = value;
-      }
-    }
-  };
-  /*
-   * Get the descendants of each element in the current set of matched elements
-   *
-   * @param  {String} s           - A string containing a selector expression to match elements against.
-   * @return {Array}              - The collection of elements
-   */
-
-
-  __.prototype.find = function (s) {
-    // The symbol ">" is not allowed at the beginning of the find() method.
-    if (/(^\s*|,\s*)>/.test(s)) {
-      var removeId;
-
-      if (!this.id) {
-        this.id = 'ID_' + new Date().getTime();
-        removeId = true;
-      }
-
-      s = s.replace(/(^\s*|,\s*)>/g, '$1#' + this.id + ' >');
-      var result = document.querySelectorAll(s);
-
-      if (removeId) {
-        this.id = null;
-      }
-
-      return [].slice.call(result);
-    } else {
-      return [].slice.call(this.querySelectorAll(s));
-    }
-  };
-  /*
-   * Reduce the set of matched elements to the one at the specified index.
-   *
-   * @param  {Number} index   - A number for index.
-   * @return {Array}          - Contains only a collection of HTML elements.
-   */
-
-
-  __.prototype.eq = function (index) {
-    var res = [];
-
-    if (traverseIndex.eq === index) {
-      res = this;
-    } // Traverse the counter of a selector, reset to 0 when calling 	`__(selector).XXX()`
-
-
-    traverseIndex.eq++;
-    return res;
-  };
-  /*
-   * Returns the Element immediately prior to the specified one in its parent's children list, 
-   * or null if the specified element is the first one in the list.
-   *
-   * @param  {String} s       - A string containing a selector expression to match elements against.
-   * @return {Array}          - Contains only a collection of HTML elements.
-   */
-
-
-  __.prototype.prev = function (s) {
-    var el = this.previousElementSibling;
-
-    if (s === undefined) {
-      if (el !== null) return el;
-    } else {
-      if (el !== null && ( //Determine whether the ID, class and HTML nodes match
-      el.nodeName.toLowerCase() === s || el.classList.contains(s.replace(/\./g, '')) || '#' + el.id === s)) {
-        return el;
-      } else {
-        return [];
-      }
-    }
-  };
-  /*
-      * Returns the element immediately following the specified one in its parent's children list, 
-      * or null if the specified element is the last one in the list.
-   *
-   * @param  {String} s       - A string containing a selector expression to match elements against.
-   * @return {Array}          - Contains only a collection of HTML elements.
-   */
-
-
-  __.prototype.next = function (s) {
-    var el = this.nextElementSibling;
-
-    if (s === undefined) {
-      if (el !== null) return el;
-    } else {
-      if (el !== null && ( //Determine whether the ID, class and HTML nodes match
-      el.nodeName.toLowerCase() === s || el.classList.contains(s.replace(/\./g, '')) || '#' + el.id === s)) {
-        return el;
-      } else {
-        return [];
-      }
-    }
-  };
-  /*
-   * Returns the DOM node's parent Element, or null if the node either has no parent,
-   * or its parent isn't a DOM Element.
-   *
-   * @param  {String} s       - A string containing a selector expression to match elements against.
-   * @return {Array}          - Contains only a collection of HTML elements.
-   */
-
-
-  __.prototype.parent = function (s) {
-    var el = this.parentElement;
-
-    if (s === undefined) {
-      if (el !== null) return el;
-    } else {
-      if (el !== null && ( //Determine whether the ID, class and HTML nodes match
-      el.nodeName.toLowerCase() === s || el.classList.contains(s.replace(/\./g, '')) || '#' + el.id === s)) {
-        return el;
-      } else {
-        return [];
-      }
-    }
-  };
-  /*
-   * Get the ancestors of each element in the current set of matched elements.
-   *
-   * @param  {String} s                 - A string containing a selector expression to match elements against.
-   * @return {Array}                    - Contains only a collection of HTML elements.
-   */
-
-
-  __.prototype.parents = function (s) {
-    var parentSelector = document.querySelector(s); // If no parentSelector defined will bubble up all the way to *document*
-
-    if (parentSelector === undefined) {
-      document, _readOnlyError("parentSelector");
-    }
-
-    var parents = [];
-    var _parent = this.parentNode;
-
-    while (_parent !== parentSelector) {
-      var _currentNode = _parent; //Determine whether the ID, class and HTML nodes match
-
-      if (s !== undefined) {
-        if (_currentNode.nodeName.toLowerCase() === s || _currentNode.classList.contains(s.replace(/\./g, '')) || '#' + _currentNode.id === s) {
-          parents.push(_currentNode);
-        }
-      } else {
-        parents.push(_currentNode);
-      } //
-
-
-      _parent = _currentNode.parentNode;
-    } // Push that parentSelector you wanted to stop at
-
-
-    if (parentSelector !== null) parents.push(parentSelector);
-    return parents;
-  };
-  /*
-   * Returns a live HTMLCollection which contains all of the child elements 
-   * of the node upon which it was called.
-   *
-   * @param  {Element} s         - The selector that needs to be filtered. A DOMstring containing 
-   *                               one selector to match against.
-   * @return {Array}              -  The collection of elements
-   */
-
-
-  __.prototype.children = function (s) {
-    var self = this;
-    var childrenList = self.children;
-    var res = [];
-
-    if (childrenList) {
-      for (var i = 0; i < childrenList.length; i++) {
-        var _currentNode = childrenList[i]; //Determine whether the ID, class and HTML nodes match
-
-        if (s !== undefined) {
-          if (_currentNode.nodeName.toLowerCase() === s || _currentNode.classList.contains(s.replace(/\./g, '')) || '#' + _currentNode.id === s) {
-            res.push(_currentNode);
-          }
-        } else {
-          res.push(_currentNode);
-        }
-      }
-    }
-
-    return res;
-  };
-  /*
-   * Reduce the set of matched elements to those that match the selector or pass the function's test.
-   *
-   * @param  {String} s           - A string containing a selector expression to match elements against.
-   * @return {Array}              -  The collection of elements
-   */
-
-
-  __.prototype.filter = function (s) {
-    var res = [];
-    if (s === undefined) return res;
-
-    if (this.classList.contains(s.replace(/\./g, ''))) {
-      res.push(this);
-    } // Traverse the counter of a selector, reset to 0 when calling 	`__(selector).XXX()`
-
-
-    traverseIndex.filter++;
-    return res;
-  };
-  /*
-   * Remove elements from the set of matched elements.
-   *
-   * @param  {String} s           - A string containing a selector expression to match elements against.
-   * @return {Array}              -  The collection of elements
-   */
-
-
-  __.prototype.not = function (s) {
-    var res = [];
-    if (s === undefined) return res;
-
-    if (!this.classList.contains(s.replace(/\./g, ''))) {
-      res.push(this);
-    } // Traverse the counter of a selector, reset to 0 when calling 	`__(selector).XXX()`
-
-
-    traverseIndex.not++;
-    return res;
-  };
-  /*
-   * Get the siblings of each element in the set of matched elements
-   *
-   * @param  {String} s                 - A string containing a selector expression to match elements against.
-   * @return {Array}              -  The collection of elements
-   */
-
-
-  __.prototype.siblings = function (s) {
-    var self = this; // for collecting siblings
-
-    var siblings = []; // if no parent, return no sibling
-
-    if (!self.parentNode) {
-      return siblings;
-    } // first child of the parent node
-
-
-    var sibling = self.parentNode.firstChild; // collecting siblings
-
-    while (sibling) {
-      if (sibling.nodeType === 1 && sibling !== self) {
-        //Determine whether the ID, class and HTML nodes match
-        if (s !== undefined) {
-          if (sibling.nodeName.toLowerCase() === s || sibling.classList.contains(s.replace(/\./g, '')) || '#' + sibling.id === s) {
-            siblings.push(sibling);
-          }
-        } else {
-          siblings.push(sibling);
-        }
-      } //
-
-
-      sibling = sibling.nextSibling;
-    }
-
-    return siblings;
-  };
-  /*
-   * Reduce the set of matched elements to the first in the set.
-   *
-   * @return {Array}          - Contains only a collection of HTML elements.
-   */
-
-
-  __.prototype.first = function () {
-    var res = [];
-
-    if (traverseIndex.first === 0) {
-      res = this;
-    } // Traverse the counter of a selector, reset to 0 when calling 	`__(selector).XXX()`
-
-
-    traverseIndex.first++;
-    return res;
-  };
-  /*
-   * Reduce the set of matched elements to the last in the set.
-   *
-   * @return {Array}          - Contains only a collection of HTML elements.
-   */
-
-
-  __.prototype.last = function () {
-    var res = [];
-
-    if (traverseIndex.last === traverseIndex.total_last - 1) {
-      res = this;
-    } // Traverse the counter of a selector, reset to 0 when calling 	`__(selector).XXX()`
-
-
-    traverseIndex.last++;
-    return res;
-  };
-  /*
-   * Traverses the Element and its parents (heading toward the document root) 
-   * until it finds a node that matches the provided selector string. 
-   *
-   * @param  {String} s           - A string containing a selector expression to match elements against.
-   * @return {Array}              - Contains only a collection of HTML elements.
-   */
-
-
-  __.prototype.closest = function (s) {
-    //using recursivity
-    var el = this.closest(s); //Must judge the result of closest()
-
-    if (el === null) {
-      return [];
-    } else {
-      return el;
-    }
-  };
-  /*
-   * Set one or more attributes for the set of matched elements.
-   *
-   * @param  {String} a                 - The name of the attribute to set.
-   * @param  {String} v               - A value to set for the attribute. 
-   * @return {Void|String}              - Get the value of an attribute for the first element in the set of matched elements.
-   */
-
-
-  __.prototype.attr = function (a, v) {
-    a = a || '';
-
-    if (v === undefined) {
-      var res = this.getAttribute(a); // Non-existent attributes
-
-      return res == null ? null : res;
-    } else {
-      this.setAttribute(a, v);
-    }
-  };
-  /*
-   * Store arbitrary data associated with the matched elements.
-   *
-   * @param  {String} a                 - A string naming the piece of data to set
-   * @param  {String} v                 - The new data value.
-   * @return {Void|String}              - Return arbitrary data associated with the first element as set by data() or by an HTML5 data-* attribute.
-   */
-
-
-  __.prototype.data = function (a, v) {
-    a = a || '';
-
-    var _s = stringlineToHump(a);
-
-    if (v === undefined) {
-      var res = this.dataset[_s];
-      if (res == 'true') res = true;
-      if (res == 'false') res = false;
-      if (isValidNumeric(res)) res = parseFloat(res); //check if Array or JSON format
-
-      if (isJSON(res)) {
-        if (Object.prototype.toString.call(res) === '[object Object]') {
-          res = [res];
-        } else {
-          //If the result is an array, you need to determine whether it is the expected array
-          res = [JSON.parse(res)];
-        }
-      } // Non-existent attributes
-
-
-      return res == undefined ? null : res;
-    } else {
-      this.dataset[_s] = v;
-    }
-  };
-  /*
-   * Set one or more attributes for the set of matched Form elements.
-   *
-   * @param  {String} a                 - The name of the attribute to set.
-   * @param  {String} v                 - A value to set for the attribute. 
-   * @return {Void|String}              - Get the value of an attribute for the first element in the set of matched elements.
-   */
-
-
-  __.prototype.prop = function (a, v) {
-    a = a || '';
-
-    if (v === undefined) {
-      var res = this[a];
-      if (res == 'true') res = true;
-      if (res == 'false') res = false;
-      if (isValidNumeric(res)) res = parseFloat(res); //check if Array or JSON format
-
-      if (isJSON(res)) {
-        if (Object.prototype.toString.call(res) === '[object Object]') {
-          res = [res];
-        } else {
-          //If the result is an array, you need to determine whether it is the expected array
-          res = [JSON.parse(res)];
-        }
-      } // Non-existent attributes
-
-
-      return res == undefined ? null : res;
-    } else {
-      this[a] = v;
-    }
-  };
-  /*
-   * Remove an attribute from each element in the set of matched elements.
-   *
-   * @param  {String} a                 - A string naming the piece of data to delete.
-   * @return {Void} 
-   */
-
-
-  __.prototype.removeAttr = function (a) {
-    a = a || '';
-    this.removeAttribute(a);
-  };
-  /*
-   * Remove a previously-stored piece of data.
-   *
-   * @param  {String} a                 - A string naming the piece of data to delete.
-   * @return {Void} 
-   */
-
-
-  __.prototype.removeData = function (a) {
-    a = a || '';
-
-    var _s = stringlineToHump(a);
-
-    delete this.dataset[_s];
-  };
-  /*
-   * Attach an event handler function for one or more events to the selected elements.
-   *
-   * @param  {String} eventType         - One event types and optional namespaces, such as "click" 
-   * @param  {?String} selector         - A selector string to filter the descendants of the selected elements that trigger the event. 
-   * @param  {Function} fn              - A function to execute when the event is triggered. 
-   * @return {Void}      
-   */
-
-
-  __.prototype.on = function (eventType, selector, fn) {
-    var self = this;
-
-    if (typeof fn !== 'function') {
-      fn = selector;
-      selector = null;
-    }
-
-    if (!this.myListeners) {
-      this.myListeners = [];
-    }
-
-    ;
-
-    if (selector) {
-      //if string
-      var _curFun = function _curFun(evt) {
-        [].slice.call(this.querySelectorAll(selector)).forEach(function (el) {
-          if (el === evt.target) {
-            fn.call(el, evt);
-          } else if (isChild(evt.target, el)) {
-            fn.call(el, evt);
-          }
-        });
-      };
-
-      this.myListeners.push({
-        eType: eventType,
-        callBack: _curFun,
-        "function": fn,
-        selector: selector
-      });
-      self.addEventListener(eventType, _curFun);
-    } else {
-      //if HTML element
-      var _curFun2 = function _curFun2(evt) {
-        fn.call(this, evt);
-      };
-
-      this.myListeners.push({
-        eType: eventType,
-        callBack: _curFun2,
-        "function": fn,
-        selector: selector
-      });
-      this.addEventListener(eventType, _curFun2, false);
-    }
-  };
-  /*
-   * Remove an event handler.
-   *
-   * @param  {?String} eventType             - One event types and optional namespaces, such as "click"
-   * @param  {?String|Function} curSelector  - A selector string or function to filter the descendants of the selected elements that trigger the event. 
-   * @return {Void}      
-   */
-
-
-  __.prototype.off = function (eventType, curSelector) {
-    if (this.myListeners) {
-      for (var i = 0; i < this.myListeners.length; i++) {
-        if (typeof curSelector !== 'undefined') {
-          if (typeof curSelector === "function") {
-            //is function
-            if (curSelector === this.myListeners[i]["function"]) this.removeEventListener(this.myListeners[i].eType, this.myListeners[i].callBack);
-          } else {
-            //is string
-            if (curSelector === this.myListeners[i].selector) this.removeEventListener(this.myListeners[i].eType, this.myListeners[i].callBack);
-          }
-        } else {
-          this.removeEventListener(this.myListeners[i].eType, this.myListeners[i].callBack);
-        }
-      }
-
-      ;
-      delete this.myListeners;
-    }
-
-    ;
-  };
-  /*
-   * Get the current coordinates of the first element in the set of matched elements, relative to the document.
-   *
-   * @return {Json}      - An object containing the properties top and left. 
-   */
-
-
-  __.prototype.offset = function () {
-    var box = this.getBoundingClientRect();
-    var top = 0,
-        left = 0; //Include scrollbar and border
-
-    top = box.top + window.pageYOffset - document.documentElement.clientTop;
-    left = box.left + window.pageXOffset - document.documentElement.clientLeft;
-    return {
-      top: top,
-      left: left
-    };
-  };
-  /*
-   * Get the current coordinates of the first element in the set of matched elements, relative to the offset parent.
-   *
-   * @return {Json}      - An object containing the properties top and left.
-   */
-
-
-  __.prototype.position = function () {
-    var top = this.offsetTop ? this.offsetTop : 0,
-        left = this.offsetLeft ? this.offsetLeft : 0;
-    return {
-      top: top,
-      left: left
-    };
-  };
-  /*
-   * Get the number of pixels that an element's content is scrolled vertically.
-   *
-   * @return {Number}  - Returns a pure number calculated.
-   */
-
-
-  __.prototype.scrollTop = function () {
-    var supportPageOffset = window.pageXOffset !== undefined;
-    var isCSS1Compat = (document.compatMode || "") === "CSS1Compat";
-    var scrollTop = supportPageOffset ? window.pageYOffset : isCSS1Compat ? this.scrollTop : document.body.scrollTop;
-    return scrollTop;
-  };
-  /*
-   * Get the number of pixels that an element's content is scrolled from its left edge.
-   *
-    @return {Number}  - Returns a pure number calculated.
-   */
-
-
-  __.prototype.scrollLeft = function (val) {
-    var supportPageOffset = window.pageXOffset !== undefined;
-    var isCSS1Compat = (document.compatMode || "") === "CSS1Compat";
-    var scrollLeft = supportPageOffset ? window.pageXOffset : isCSS1Compat ? this.scrollLeft : document.body.scrollLeft;
-    return scrollLeft;
-  };
-  /*
-   * Get or set the current computed width for elenments
-   *
-   * @param  {?String|?Number} val         - An integer representing the number of pixels, or 
-      *                                         an integer along with an optional unit of measure appended (as a string).
-   * @return {Void|Number}                 -  Get the current computed width for the first element in the set of matched elements.
-   */
-
-
-  __.prototype.width = function (val) {
-    var self = this;
-
-    if (typeof val !== 'undefined') {
-      self.style.width = val.toString().indexOf('%') < 0 ? val + 'px' : val;
-    }
-
-    return getStyle(self, 'width');
-  };
-  /*
-   * Get or set the current computed height for elenments
-   *
-   * @param  {?String|?Number} val         - An integer representing the number of pixels, or 
-      *                                         an integer along with an optional unit of measure appended (as a string).
-   * @return {Void|Number}                 -  Get the current computed height for the first element in the set of matched elements.
-   */
-
-
-  __.prototype.height = function (val) {
-    var self = this;
-
-    if (typeof val !== 'undefined') {
-      self.style.height = val.toString().indexOf('%') < 0 ? val + 'px' : val;
-    }
-
-    return getStyle(self, 'height');
-  };
-  /*
-   * Get or set the current computed outer width for elenments (including padding, border, and optionally margin)
-   *
-   * @param  {Boolean} includeMargin         - A Boolean indicating whether to include the element's margin in the calculation.
-   * @return {Number}  - Returns the width of the element, including left and right padding, border, and optionally margin, in pixels.
-   */
-
-
-  __.prototype.outerWidth = function (includeMargin) {
-    var self = this;
-    var width_IncPaddingBorderScrollbar = self.offsetWidth;
-    var marginLeft = getStyle(self, 'marginLeft');
-    var marginRight = getStyle(self, 'marginRight');
-    var borderLeftWidth = getStyle(self, 'borderLeftWidth') || 0;
-    var borderRightWidth = getStyle(self, 'borderRightWidth') || 0;
-    var totalWidth = width_IncPaddingBorderScrollbar;
-
-    if (typeof includeMargin !== 'undefined') {
-      totalWidth = totalWidth + marginLeft + marginRight;
-    }
-
-    return totalWidth;
-  };
-  /*
-   * Get or set the current computed outer height for elenments (including padding, border, and optionally margin)
-   *
-   * @param  {Boolean} includeMargin         - A Boolean indicating whether to include the element's margin in the calculation.
-   * @return {Number}   - Returns the height of the element, including left and right padding, border, and optionally margin, in pixels.
-   */
-
-
-  __.prototype.outerHeight = function (includeMargin) {
-    var self = this;
-    var height_IncPaddingBorderScrollbar = self.offsetHeight;
-    var marginTop = getStyle(self, 'marginTop');
-    var marginBottom = getStyle(self, 'marginBottom');
-    var borderTopWidth = getStyle(self, 'borderTopWidth') || 0;
-    var borderBottomWidth = getStyle(self, 'borderBottomWidth') || 0;
-    var totalHeight = height_IncPaddingBorderScrollbar;
-
-    if (typeof includeMargin !== 'undefined') {
-      totalHeight = totalHeight + marginTop + marginBottom;
-    }
-
-    return totalHeight;
-  };
-  /*
-   * Remove the set of matched elements from the DOM.
-   *
-   * @return {Void} 
-   */
-
-
-  __.prototype.remove = function () {
-    this.parentNode.removeChild(this);
-  };
-  /*
-   * Remove all child nodes of the set of matched elements from the DOM.
-   *
-   * @return {Void} 
-   */
-
-
-  __.prototype.empty = function () {
-    while (this.firstChild) {
-      this.removeChild(this.firstChild);
-    }
-  };
-  /*
-   * Iterate over an object, executing a function for each matched element.
-   *
-   * @param  {Function} fn         - A function to execute for each matched element.
-   * @return {Void} 
-   */
-
-
-  __.prototype.each = function (fn) {
-    if (fn && typeof fn == "function") {
-      //If the ID does not exist, itemDomsStr cannot be obtained
-      if (this.id.length === 0) {
-        this.id = 'eachitem-' + __.GUID.create();
-      } //!import: The returned HTML element must be current, 
-      //otherwise all HTML elements under document may be queried
-
-
-      var itemDomsStr = '#' + this.id;
-      fn.call(this, traverseIndex.each, itemDomsStr); // Traverse the counter of a selector, reset to 0 when calling 	`__(selector).XXX()`
-
-      traverseIndex.each++;
-    }
-  };
-  /*
-   * Traverse all the attribute names and values in an HTML element
-   *
-   * @return {Array}              - A new array containing the properties name and value.
-   */
-
-
-  __.prototype.allAttrs = function () {
-    var newArr = [];
-    Array.from(this.attributes).filter(function (obj) {
-      return obj.specified;
-    }).map(function (obj) {
-      newArr[obj.nodeName] = obj.textContent;
-    });
-    return {
-      data: newArr
-    };
-  };
-  /*
-   * Determine whether any of the matched elements are assigned the given class.
-   *
-   * @param  {String} v         - The class name to search for.
-   * @return {Boolean}   - Return true if the class is assigned to an element
-   */
-
-
-  __.prototype.hasClass = function (v) {
-    return this.classList.contains(v) ? true : false;
-  };
-  /*
-   * Get or set the current value of the first element in the set of matched elements.
-   *
-   * @param  {?String|?Number|?Array} v      - Corresponding to the value of each matched element.
-   * @return {String}          - Get the values of form elements.
-   */
-
-
-  __.prototype.val = function (v) {
-    var controlType = '';
-
-    if (this.tagName == "INPUT" || this.tagName == "TEXTARTA") {
-      //not `radio`, `checkbox`
-      if (this.type != 'checkbox' && this.type != 'radio') {
-        controlType = 'input-textarea';
-      } //`checkbox`
-
-
-      if (this.type == 'checkbox') {
-        controlType = 'checkbox';
-      } //`radio`
-
-
-      if (this.type == 'radio') {
-        controlType = 'radio';
-      }
-    } //`select`
-
-
-    if (this.tagName == "SELECT") {
-      controlType = 'select';
-    } //
-
-
-    if (typeof v !== 'undefined') {
-      switch (controlType) {
-        case "input-textarea":
-          this.value = v;
-          break;
-
-        case "checkbox":
-          this.checked = v;
-          break;
-
-        case "radio":
-          var currentSelectorDomsStr = elementPath(this);
-          var currentSelector = [].slice.call(document.querySelectorAll(currentSelectorDomsStr));
-          currentSelector.map(function (item, index) {
-            if (item.value == v.toString()) {
-              item.checked = true;
-            }
-          });
-          break;
-
-        case "select":
-          this.value = v;
-          this.dispatchEvent(new Event('change'));
-          break;
-
-        default:
-          this.value = v;
-      } //end switch
-
-    }
-
-    switch (controlType) {
-      case "input-textarea":
-        return this.value;
-
-      case "checkbox":
-        return this.checked ? 1 : 0;
-
-      case "radio":
-        var _currentSelectorDomsStr = elementPath(this);
-
-        var _currentSelector = [].slice.call(document.querySelectorAll(_currentSelectorDomsStr));
-
-        var radios = _currentSelector;
-        var _value = null;
-
-        for (var i = 0; i < radios.length; i++) {
-          if (radios[i].checked) {
-            // do whatever you want with the checked radio
-            _value = radios[i].value; // only one radio can be logically checked, don't check the rest
-
-            break;
-          }
-        }
-
-        return _value;
-
-      case "select":
-        return this.value;
-
-      default:
-        return this.value;
-    } //end switch
-
-  };
-  /*
-   * Display the matched elements.
-   *
-   * @return {Void} 
-   */
-
-
-  __.prototype.show = function () {
-    // use inherit so that your CSS controls block/flex/inline-block etc
-    this.style.display = 'inherit';
-  };
-  /*
-   * Hide the matched elements.
-   *
-   * @return {Void}    
-   */
-
-
-  __.prototype.hide = function () {
-    this.style.display = 'none';
-  };
-  /*
-   * Display the matched elements by fading them to opaque.
-   *
-   * @param  {Number} speed             - A string or number determining how long the animation will run.
-   * @param  {Function} callback        - A function to call once the animation is complete, called once per matched element.
-   * @return {Void} 
-   */
-
-
-  __.prototype.fadeIn = function (speed, callback) {
-    var elem = this;
-    var opacity = 0;
-
-    if (!elem.style.opacity) {
-      elem.style.opacity = 0;
-    }
-
-    elem.style.display = "inherit";
-    var inInterval = setInterval(function () {
-      opacity += .02;
-      elem.style.opacity = opacity;
-
-      if (opacity >= 1) {
-        clearInterval(inInterval); //do something after inInterval()
-
-        elem.style.removeProperty("opacity");
-
-        if (callback && typeof callback == "function") {
-          callback();
-        }
-      }
-    }, speed / 50);
-  };
-  /*
-   * Hide the matched elements by fading them to transparent.
-   *
-   * @param  {Number} speed             - A string or number determining how long the animation will run.
-   * @param  {Function} callback        - A function to call once the animation is complete, called once per matched element.
-   * @return {Void} 
-   */
-
-
-  __.prototype.fadeOut = function (speed, callback) {
-    var elem = this;
-    var opacity = 1;
-
-    if (!elem.style.opacity) {
-      elem.style.opacity = 1;
-    }
-
-    var outInterval = setInterval(function () {
-      opacity -= .02;
-      elem.style.opacity = opacity;
-
-      if (opacity <= 0) {
-        clearInterval(outInterval); //do something after outInterval()
-
-        elem.style.opacity = 0;
-        elem.style.display = "none"; //adding dispaly property and equall to none	
-
-        if (callback && typeof callback == "function") {
-          callback();
-        }
-      }
-    }, speed / 50);
-  };
-  /*
-   * Serialize html form to JSON
-   *
-   * @return {Void}    
-   */
-
-
-  __.prototype.serializeArray = function () {
-    var form = this;
-    var objects = [];
-
-    if ((0,esm_typeof/* default */.Z)(form) == 'object' && form.nodeName.toLowerCase() == "form") {
-      var fieldsTypes = ['input', 'textarea', 'select', 'checkbox', 'progress', 'datalist'];
-      fieldsTypes.map(function (item, index) {
-        var fields = form.getElementsByTagName(item);
-
-        for (var i = 0; i < fields.length; i++) {
-          objects[objects.length] = {
-            name: fields[i].getAttribute("name"),
-            value: fields[i].value
-          };
-        }
-      });
-    }
-
-    return objects;
-  };
-  /*
-   * Search for a given element from among the matched elements.
-   *
-   * @return {Number}     - The return value is an integer indicating the position of the 
-   *                        first element within the object relative to its sibling elements.
-   */
-
-
-  __.prototype.index = function () {
-    var self = this;
-    var children = self.parentNode.childNodes;
-    var num = 0;
-
-    for (var i = 0; i < children.length; i++) {
-      if (children[i] == self) return num;
-      if (children[i].nodeType == 1) num++;
-    }
-
-    return -1;
-  };
-  /*
-   * Bind an event in the HTML element
-   *
-   * @param  {String} eventType         - One event types and optional namespaces, such as "click" 
-   * @return {Void}  
-   */
-
-
-  __.prototype.trigger = function (eventType) {
-    var fire = function fire(elem, type) {
-      // create and dispatch the event
-      var event = new CustomEvent(type, {
-        detail: {
-          hazcheeseburger: true
-        }
-      });
-      elem.dispatchEvent(event);
-    };
-
-    document.addEventListener("plop", function () {}, false);
-    fire(this, eventType);
-  };
-  /*
-   *  Find the Tallest or widest of all elements
-   *
-   * @return {Json}      - An object containing the properties width and height.
-   */
-
-
-  __.prototype.maxDimension = function () {
-    if (traverseIndex.maxDimension === traverseIndex.total_maxDimension - 1) {
-      var currentSelector = traverseIndex.elements_maxDimension;
-      var elementHeights = Array.prototype.map.call(currentSelector, function (el) {
-        return el.clientHeight;
-      });
-      var elementWidths = Array.prototype.map.call(currentSelector, function (el) {
-        return el.clientWidth;
-      });
-      var maxHeight = Math.max.apply(null, elementHeights);
-      var maxWidth = Math.max.apply(null, elementWidths);
-      return {
-        'height': maxHeight,
-        'width': maxWidth
-      };
-    } // Traverse the counter of a selector, reset to 0 when calling 	`__(selector).XXX()`
-
-
-    traverseIndex.maxDimension++;
-    traverseIndex.elements_maxDimension.push(this);
-  };
-  /*
-  * Create a new Animation, applies it to the element, then plays the animation
-  * @param  {String} prop         - The style property to be set.
-  * @param  {Number} from         - The initial offset of the object
-  * @param  {Number} to           - The end offset of the object
-  * @param  {String} unit         - Unit string, such as `px` and `%`, and so on.
-  * @param  {Number} duration     - The number of milliseconds each iteration of the animation takes to complete
-  * @param  {String} easing       - The rate of the animation's change over time. Accepts the pre-defined values "linear", "ease-in", "ease-out", and "ease-in-out"
-  * @param  {Function} complete   - A function to call once the animation is complete, called once per matched element.
-  * @return {Void}
-  */
-
-
-  __.prototype.animate = function (prop, from, to, unit, duration, easing, complete) {
-    var el = this;
-    var start = new Date().getTime();
-    var timer = setInterval(function () {
-      var time = new Date().getTime() - start;
-      var val;
-
-      switch (easing) {
-        case "linear":
-          val = easeLinear(time, from, to - from, duration);
-          break;
-
-        case "ease-in":
-          val = easeInCubic(time, from, to - from, duration);
-          break;
-
-        case "ease-out":
-          val = easeOutCubic(time, from, to - from, duration);
-          break;
-
-        case "ease-in-out":
-          val = easeInOutCubic(time, from, to - from, duration);
-          break;
-
-        default:
-          val = easeLinear(time, from, to - from, duration);
-      } //
-
-
-      var res = val + unit;
-      el.style[prop] = res;
-
-      if (time >= duration) {
-        clearInterval(timer); //
-
-        if (complete && typeof complete == "function") {
-          complete.call(el);
-        }
-      }
-    }, 1000 / 60);
-  };
-  /* ------------- Private Methods -------------- */
-
-
-  var API = {
-    //dom
-    find: __.prototype.find,
-    closest: __.prototype.closest,
-    prev: __.prototype.prev,
-    next: __.prototype.next,
-    parent: __.prototype.parent,
-    parents: __.prototype.parents,
-    children: __.prototype.children,
-    siblings: __.prototype.siblings,
-    //traverse with index
-    each: __.prototype.each,
-    eq: __.prototype.eq,
-    first: __.prototype.first,
-    last: __.prototype.last,
-    filter: __.prototype.filter,
-    not: __.prototype.not,
-    maxDimension: __.prototype.maxDimension,
-    //functions
-    ready: __.prototype.ready,
-    loader: __.prototype.loader,
-    append: __.prototype.append,
-    prepend: __.prototype.prepend,
-    before: __.prototype.before,
-    after: __.prototype.after,
-    prependTo: __.prototype.prependTo,
-    appendTo: __.prototype.appendTo,
-    wrapInner: __.prototype.wrapInner,
-    html: __.prototype.html,
-    text: __.prototype.text,
-    clone: __.prototype.clone,
-    addClass: __.prototype.addClass,
-    removeClass: __.prototype.removeClass,
-    toggleClass: __.prototype.toggleClass,
-    css: __.prototype.css,
-    removeData: __.prototype.removeData,
-    attr: __.prototype.attr,
-    data: __.prototype.data,
-    prop: __.prototype.prop,
-    removeAttr: __.prototype.removeAttr,
-    on: __.prototype.on,
-    off: __.prototype.off,
-    offset: __.prototype.offset,
-    position: __.prototype.position,
-    scrollTop: __.prototype.scrollTop,
-    scrollLeft: __.prototype.scrollLeft,
-    width: __.prototype.width,
-    height: __.prototype.height,
-    outerWidth: __.prototype.outerWidth,
-    outerHeight: __.prototype.outerHeight,
-    remove: __.prototype.remove,
-    empty: __.prototype.empty,
-    allAttrs: __.prototype.allAttrs,
-    hasClass: __.prototype.hasClass,
-    val: __.prototype.val,
-    show: __.prototype.show,
-    hide: __.prototype.hide,
-    fadeIn: __.prototype.fadeIn,
-    fadeOut: __.prototype.fadeOut,
-    serializeArray: __.prototype.serializeArray,
-    index: __.prototype.index,
-    trigger: __.prototype.trigger,
-    animate: __.prototype.animate
-  };
-
-  __.prototype.wrap = function (list) {
-    var self = this;
-    Object.keys(API).forEach(function (fn) {
-      list[fn] = function () {
-        //slice method can also be called to convert Array-like objects/collections to a new Array. 
-        //You just bind the method to the object. The arguments inside a function is an example of an 'array-like object'.
-        var args = arguments; //
-
-        var result; // ////////////////////
-        // Traverse the counter of a selector, reset to 0 when calling 	`__(selector).XXX()`
-        //----------------------	
-
-        switch (fn) {
-          case 'each':
-            // for `each()`
-            traverseIndex.each = 0;
-            break;
-
-          case 'eq':
-            // for `eq()`
-            traverseIndex.eq = 0;
-            break;
-
-          case 'first':
-            // for `first()`
-            traverseIndex.first = 0;
-            break;
-
-          case 'last':
-            // for `last()`
-            traverseIndex.last = 0;
-            traverseIndex.total_last = list.length;
-            break;
-
-          case 'filter':
-            // for `filter()`
-            traverseIndex.filter = 0;
-            break;
-
-          case 'not':
-            // for `not()`
-            traverseIndex.not = 0;
-            break;
-
-          case 'maxDimension':
-            // for `maxDimension()`
-            traverseIndex.maxDimension = 0;
-            traverseIndex.total_maxDimension = list.length;
-            traverseIndex.elements_maxDimension = [];
-            break;
-        } // ////////////////////
-        // Methods that return value is `DOM elements using selectors`
-        //----------------------
-
-
-        if (Array.isArray(this)) {
-          result = [];
-          this.forEach(function (root) {
-            var fnResult = API[fn].apply(root, [].slice.call(args));
-
-            if (Array.isArray(fnResult)) {
-              result = result.concat(fnResult);
-            } else if (fnResult !== undefined) {
-              result.push(fnResult);
-            }
-          });
-
-          if (fn === 'find' || fn === 'closest' || fn === 'prev' || fn === 'next' || fn === 'first' || fn === 'last' || fn === 'parent' || fn === 'parents' || fn === 'children' || fn === 'eq' || fn === 'filter' || fn === 'not' || fn === 'siblings') {
-            self.wrap(result);
-          } else {
-            result = result.length && result || undefined;
-          }
-        } else {
-          result = API[fn].apply(this, [].slice.call(args));
-        } //end Array.isArray(this)
-        // ////////////////////
-        // Methods that return value is `JSON`, `Boolean` or `Number`
-        //----------------------
-
-
-        if (fn === 'hasClass' || fn === 'offset' || fn === 'position' || fn === 'index' || fn === 'width' || fn === 'outerWidth' || fn === 'height' || fn === 'outerHeight' || fn === 'maxDimension' || fn === 'allAttrs' || fn === 'scrollTop' || fn === 'scrollLeft' || fn === 'html' || fn === 'text' || fn === 'clone') {
-          return result === undefined ? this : typeof result[0].data !== 'undefined' ? result[0].data : result[0];
-        } // ////////////////////
-        // Methods that return value is `Array` or `HTML element`
-        //----------------------
-
-
-        if (fn === 'data' || fn === 'attr' || fn === 'prop' || fn === 'val') {
-          return result === undefined ? this : result[0];
-        } // ////////////////////
-        // The default returns value from a function
-        //----------------------
-
-
-        return result === undefined ? this : result;
-      };
-    });
-    return list;
-  };
-
-  if (typeof window !== 'undefined') {
-    window.__ = __;
-  }
-
-  return __;
-}();
-
-/* harmony default export */ const helpers = (__);
+/* harmony default export */ const helpers = (_core_global);
 ;// CONCATENATED MODULE: ./src/client/components/_utils/scripts/global-variables.js
 /* 
  *************************************
@@ -43946,7 +43906,7 @@ var Header = /*#__PURE__*/function (_Component) {
  * Create or Remove Sidebar Menu 
  * 
  */
-function throttle(fn, limit) {
+function _SidebarMenu_throttle(fn, limit) {
   var waiting = false;
   return function () {
     if (!waiting) {
@@ -43960,7 +43920,7 @@ function throttle(fn, limit) {
 } // Convert a string to slug.
 
 
-function toSlug(str) {
+function _SidebarMenu_toSlug(str) {
   if (typeof str == 'string' && str.length > 0) {
     return str.toString().replace(/[^\w\s\-！￥【】\u4e00-\u9eff]/gi, '').replace(/\s/g, '-').replace(/(\-){2,}/g, '-').replace(/\-\s*$/, '').toLowerCase();
   } else {
@@ -44108,7 +44068,7 @@ function SidebarMenu() {
     docLink.querySelector('a').style.display = 'none';
     result.forEach(function (node, index) {
       var linkTitle = node.innerHTML.replace(/<a\b[^>]*>(.*?)<\/a>/ig, '');
-      var linkID = 'app-goto__' + toSlug(linkTitle);
+      var linkID = 'app-goto__' + _SidebarMenu_toSlug(linkTitle);
       var sectionID = linkID + '__section';
 
       if (document.querySelector('#' + linkID) === null) {
@@ -44140,7 +44100,7 @@ function SidebarMenu() {
 
     createSidebarMenu(allHeaderTitleLinks); //Highlight menu item when scrolling down to section
 
-    var throttleFunc = throttle(highlightNavigation, 150);
+    var throttleFunc = _SidebarMenu_throttle(highlightNavigation, 150);
     window.removeEventListener('scroll', throttleFunc);
     window.addEventListener('scroll', throttleFunc);
   }
@@ -68076,7 +68036,7 @@ function arrayUnique(arr) {
   return uniqueArray;
 }
 
-function toCamelCase(string) {
+function dom7_esm_toCamelCase(string) {
   return string.toLowerCase().replace(/-(.)/g, function (match, group) {
     return group.toUpperCase();
   });
@@ -68142,7 +68102,7 @@ function $(selector, context) {
 
 $.fn = Dom7.prototype;
 
-function addClass() {
+function dom7_esm_addClass() {
   for (var _len = arguments.length, classes = new Array(_len), _key = 0; _key < _len; _key++) {
     classes[_key] = arguments[_key];
   }
@@ -68158,7 +68118,7 @@ function addClass() {
   return this;
 }
 
-function removeClass() {
+function dom7_esm_removeClass() {
   for (var _len2 = arguments.length, classes = new Array(_len2), _key2 = 0; _key2 < _len2; _key2++) {
     classes[_key2] = arguments[_key2];
   }
@@ -68174,7 +68134,7 @@ function removeClass() {
   return this;
 }
 
-function toggleClass() {
+function dom7_esm_toggleClass() {
   for (var _len3 = arguments.length, classes = new Array(_len3), _key3 = 0; _key3 < _len3; _key3++) {
     classes[_key3] = arguments[_key3];
   }
@@ -68189,7 +68149,7 @@ function toggleClass() {
   });
 }
 
-function hasClass() {
+function dom7_esm_hasClass() {
   for (var _len4 = arguments.length, classes = new Array(_len4), _key4 = 0; _key4 < _len4; _key4++) {
     classes[_key4] = arguments[_key4];
   }
@@ -68204,7 +68164,7 @@ function hasClass() {
   }).length > 0;
 }
 
-function attr(attrs, value) {
+function dom7_esm_attr(attrs, value) {
   if (arguments.length === 1 && typeof attrs === 'string') {
     // Get attr
     if (this[0]) return this[0].getAttribute(attrs);
@@ -68228,7 +68188,7 @@ function attr(attrs, value) {
   return this;
 }
 
-function removeAttr(attr) {
+function dom7_esm_removeAttr(attr) {
   for (var i = 0; i < this.length; i += 1) {
     this[i].removeAttribute(attr);
   }
@@ -68236,7 +68196,7 @@ function removeAttr(attr) {
   return this;
 }
 
-function prop(props, value) {
+function dom7_esm_prop(props, value) {
   if (arguments.length === 1 && typeof props === 'string') {
     // Get prop
     if (this[0]) return this[0][props];
@@ -68260,7 +68220,7 @@ function prop(props, value) {
   return this;
 }
 
-function data(key, value) {
+function dom7_esm_data(key, value) {
   var el;
 
   if (typeof value === 'undefined') {
@@ -68290,7 +68250,7 @@ function data(key, value) {
   return this;
 }
 
-function removeData(key) {
+function dom7_esm_removeData(key) {
   for (var i = 0; i < this.length; i += 1) {
     var el = this[i];
 
@@ -68315,7 +68275,7 @@ function dataset() {
       var _attr = el.attributes[i];
 
       if (_attr.name.indexOf('data-') >= 0) {
-        dataset[toCamelCase(_attr.name.split('data-')[1])] = _attr.value;
+        dataset[dom7_esm_toCamelCase(_attr.name.split('data-')[1])] = _attr.value;
       }
     }
   }
@@ -68327,7 +68287,7 @@ function dataset() {
   return dataset;
 }
 
-function val(value) {
+function dom7_esm_val(value) {
   if (typeof value === 'undefined') {
     // get value
     var el = this[0];
@@ -68382,7 +68342,7 @@ function transition(duration) {
   return this;
 }
 
-function on() {
+function dom7_esm_on() {
   for (var _len5 = arguments.length, args = new Array(_len5), _key5 = 0; _key5 < _len5; _key5++) {
     args[_key5] = arguments[_key5];
   }
@@ -68467,7 +68427,7 @@ function on() {
   return this;
 }
 
-function off() {
+function dom7_esm_off() {
   for (var _len6 = arguments.length, args = new Array(_len6), _key6 = 0; _key6 < _len6; _key6++) {
     args[_key6] = arguments[_key6];
   }
@@ -68558,7 +68518,7 @@ function once() {
   return dom.on(eventName, targetSelector, onceHandler, capture);
 }
 
-function trigger() {
+function dom7_esm_trigger() {
   var window = ssr_window_esm_getWindow();
 
   for (var _len9 = arguments.length, args = new Array(_len9), _key9 = 0; _key9 < _len9; _key9++) {
@@ -68625,7 +68585,7 @@ function animationEnd(callback) {
   return this;
 }
 
-function width() {
+function dom7_esm_width() {
   var window = getWindow();
 
   if (this[0] === window) {
@@ -68653,7 +68613,7 @@ function dom7_esm_outerWidth(includeMargins) {
   return null;
 }
 
-function height() {
+function dom7_esm_height() {
   var window = getWindow();
 
   if (this[0] === window) {
@@ -68681,7 +68641,7 @@ function dom7_esm_outerHeight(includeMargins) {
   return null;
 }
 
-function offset() {
+function dom7_esm_offset() {
   if (this.length > 0) {
     var window = ssr_window_esm_getWindow();
     var document = getDocument();
@@ -68701,7 +68661,7 @@ function offset() {
   return null;
 }
 
-function hide() {
+function dom7_esm_hide() {
   for (var i = 0; i < this.length; i += 1) {
     this[i].style.display = 'none';
   }
@@ -68709,7 +68669,7 @@ function hide() {
   return this;
 }
 
-function show() {
+function dom7_esm_show() {
   var window = getWindow();
 
   for (var i = 0; i < this.length; i += 1) {
@@ -68734,7 +68694,7 @@ function styles() {
   return {};
 }
 
-function css(props, value) {
+function dom7_esm_css(props, value) {
   var window = ssr_window_esm_getWindow();
   var i;
 
@@ -68766,7 +68726,7 @@ function css(props, value) {
   return this;
 }
 
-function each(callback) {
+function dom7_esm_each(callback) {
   if (!callback) return this;
   this.forEach(function (el, index) {
     callback.apply(el, [el, index]);
@@ -68774,12 +68734,12 @@ function each(callback) {
   return this;
 }
 
-function filter(callback) {
+function dom7_esm_filter(callback) {
   var result = arrayFilter(this, callback);
   return $(result);
 }
 
-function html(html) {
+function dom7_esm_html(html) {
   if (typeof html === 'undefined') {
     return this[0] ? this[0].innerHTML : null;
   }
@@ -68862,7 +68822,7 @@ function dom7_esm_index() {
   return undefined;
 }
 
-function eq(index) {
+function dom7_esm_eq(index) {
   if (typeof index === 'undefined') return this;
   var length = this.length;
 
@@ -68879,7 +68839,7 @@ function eq(index) {
   return $([this[index]]);
 }
 
-function append() {
+function dom7_esm_append() {
   var newChild;
   var document = getDocument();
 
@@ -68907,12 +68867,12 @@ function append() {
   return this;
 }
 
-function appendTo(parent) {
+function dom7_esm_appendTo(parent) {
   $(parent).append(this);
   return this;
 }
 
-function prepend(newChild) {
+function dom7_esm_prepend(newChild) {
   var document = getDocument();
   var i;
   var j;
@@ -68937,7 +68897,7 @@ function prepend(newChild) {
   return this;
 }
 
-function prependTo(parent) {
+function dom7_esm_prependTo(parent) {
   $(parent).prepend(this);
   return this;
 }
@@ -68970,7 +68930,7 @@ function insertAfter(selector) {
   }
 }
 
-function next(selector) {
+function dom7_esm_next(selector) {
   if (this.length > 0) {
     if (selector) {
       if (this[0].nextElementSibling && $(this[0].nextElementSibling).is(selector)) {
@@ -69005,7 +68965,7 @@ function nextAll(selector) {
   return $(nextEls);
 }
 
-function prev(selector) {
+function dom7_esm_prev(selector) {
   if (this.length > 0) {
     var el = this[0];
 
@@ -69042,7 +69002,7 @@ function prevAll(selector) {
   return $(prevEls);
 }
 
-function siblings(selector) {
+function dom7_esm_siblings(selector) {
   return this.nextAll(selector).add(this.prevAll(selector));
 }
 
@@ -69062,7 +69022,7 @@ function dom7_esm_parent(selector) {
   return $(parents);
 }
 
-function parents(selector) {
+function dom7_esm_parents(selector) {
   var parents = []; // eslint-disable-line
 
   for (var i = 0; i < this.length; i += 1) {
@@ -69082,7 +69042,7 @@ function parents(selector) {
   return $(parents);
 }
 
-function closest(selector) {
+function dom7_esm_closest(selector) {
   var closest = this; // eslint-disable-line
 
   if (typeof selector === 'undefined') {
@@ -69096,7 +69056,7 @@ function closest(selector) {
   return closest;
 }
 
-function find(selector) {
+function dom7_esm_find(selector) {
   var foundElements = [];
 
   for (var i = 0; i < this.length; i += 1) {
@@ -69110,7 +69070,7 @@ function find(selector) {
   return $(foundElements);
 }
 
-function children(selector) {
+function dom7_esm_children(selector) {
   var children = []; // eslint-disable-line
 
   for (var i = 0; i < this.length; i += 1) {
@@ -69126,7 +69086,7 @@ function children(selector) {
   return $(children);
 }
 
-function remove() {
+function dom7_esm_remove() {
   for (var i = 0; i < this.length; i += 1) {
     if (this[i].parentNode) this[i].parentNode.removeChild(this[i]);
   }
@@ -69158,7 +69118,7 @@ function add() {
   return dom;
 }
 
-function empty() {
+function dom7_esm_empty() {
   for (var i = 0; i < this.length; i += 1) {
     var el = this[i];
 
@@ -69300,7 +69260,7 @@ function scrollTo() {
 } // scrollTop(top, duration, easing, callback) {
 
 
-function scrollTop() {
+function dom7_esm_scrollTop() {
   for (var _len2 = arguments.length, args = new Array(_len2), _key2 = 0; _key2 < _len2; _key2++) {
     args[_key2] = arguments[_key2];
   }
@@ -69327,7 +69287,7 @@ function scrollTop() {
   return dom.scrollTo(undefined, top, duration, easing, callback);
 }
 
-function scrollLeft() {
+function dom7_esm_scrollLeft() {
   for (var _len3 = arguments.length, args = new Array(_len3), _key3 = 0; _key3 < _len3; _key3++) {
     args[_key3] = arguments[_key3];
   }
@@ -69354,7 +69314,7 @@ function scrollLeft() {
   return dom.scrollTo(left, undefined, duration, easing, callback);
 }
 
-function animate(initialProps, initialParams) {
+function dom7_esm_animate(initialProps, initialParams) {
   var window = getWindow();
   var els = this;
   var a = {
@@ -69604,42 +69564,42 @@ var dom7_esm_scroll = shortcut('scroll');
 ;// CONCATENATED MODULE: ./src/client/components/_plugins/Swiper/src/utils/dom.js
 
 var Methods = {
-  addClass: addClass,
-  removeClass: removeClass,
-  hasClass: hasClass,
-  toggleClass: toggleClass,
-  attr: attr,
-  removeAttr: removeAttr,
+  addClass: dom7_esm_addClass,
+  removeClass: dom7_esm_removeClass,
+  hasClass: dom7_esm_hasClass,
+  toggleClass: dom7_esm_toggleClass,
+  attr: dom7_esm_attr,
+  removeAttr: dom7_esm_removeAttr,
   transform: transform,
   transition: transition,
-  on: on,
-  off: off,
-  trigger: trigger,
+  on: dom7_esm_on,
+  off: dom7_esm_off,
+  trigger: dom7_esm_trigger,
   transitionEnd: transitionEnd,
   outerWidth: dom7_esm_outerWidth,
   outerHeight: dom7_esm_outerHeight,
   styles: styles,
-  offset: offset,
-  css: css,
-  each: each,
-  html: html,
+  offset: dom7_esm_offset,
+  css: dom7_esm_css,
+  each: dom7_esm_each,
+  html: dom7_esm_html,
   text: dom7_esm_text,
   is: dom7_esm_is,
   index: dom7_esm_index,
-  eq: eq,
-  append: append,
-  prepend: prepend,
-  next: next,
+  eq: dom7_esm_eq,
+  append: dom7_esm_append,
+  prepend: dom7_esm_prepend,
+  next: dom7_esm_next,
   nextAll: nextAll,
-  prev: prev,
+  prev: dom7_esm_prev,
   prevAll: prevAll,
   parent: dom7_esm_parent,
-  parents: parents,
-  closest: closest,
-  find: find,
-  children: children,
-  filter: filter,
-  remove: remove
+  parents: dom7_esm_parents,
+  closest: dom7_esm_closest,
+  find: dom7_esm_find,
+  children: dom7_esm_children,
+  filter: dom7_esm_filter,
+  remove: dom7_esm_remove
 };
 Object.keys(Methods).forEach(function (methodName) {
   Object.defineProperty($.fn, methodName, {
@@ -69911,7 +69871,7 @@ function getDevice() {
 
 ;// CONCATENATED MODULE: ./src/client/components/_plugins/Swiper/src/utils/get-browser.js
 
-var browser;
+var get_browser_browser;
 
 function calcBrowser() {
   var window = ssr_window_esm_getWindow();
@@ -69929,11 +69889,11 @@ function calcBrowser() {
 }
 
 function getBrowser() {
-  if (!browser) {
-    browser = calcBrowser();
+  if (!get_browser_browser) {
+    get_browser_browser = calcBrowser();
   }
 
-  return browser;
+  return get_browser_browser;
 }
 
 
@@ -85391,7 +85351,7 @@ function objects_extend() {
 
  // Wrap an element
 
-function wrap(elements, wrapper) {
+function elements_wrap(elements, wrapper) {
   // Convert `elements` to an array, if necessary.
   var targets = elements.length ? elements : [elements]; // Loops backwards to prevent having to clone the wrapper on the
   // first element (see `child` below).
@@ -85912,7 +85872,7 @@ function unbindListeners() {
   }
 } // Run method when / if player is ready
 
-function ready() {
+function events_ready() {
   var _this3 = this;
 
   return new Promise(function (resolve) {
@@ -89502,7 +89462,7 @@ var ui = {
 
     this.elements.poster.removeAttribute('hidden'); // Wait until ui is ready
 
-    return ready.call(this) // Load image
+    return events_ready.call(this) // Load image
     .then(function () {
       return load_image_loadImage(poster);
     })["catch"](function (err) {
@@ -91574,7 +91534,7 @@ var media = {
         "class": this.config.classNames.video
       }); // Wrap the video in a container
 
-      wrap(this.media, this.elements.wrapper); // Poster image container
+      elements_wrap(this.media, this.elements.wrapper); // Poster image container
 
       this.elements.poster = createElement('div', {
         "class": this.config.classNames.poster
@@ -93522,7 +93482,7 @@ var Plyr = /*#__PURE__*/function () {
       this.elements.container = createElement('div', {
         tabindex: 0
       });
-      wrap(this.media, this.elements.container);
+      elements_wrap(this.media, this.elements.container);
     } // Migrate custom properties from media to container (so they work 😉)
 
 

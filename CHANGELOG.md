@@ -1,5 +1,10 @@
 # Changelog
 
+#### = 0.2.0 (November 30, 2021) =
+
+* Tweak: Refactor core helper scripts using TypeScript.
+
+
 #### = 0.1.9 (November 27, 2021) =
 
 * Fix: Fixed the problem that the helper script gets an array or JSON string.

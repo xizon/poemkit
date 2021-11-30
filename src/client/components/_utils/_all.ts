@@ -5,7 +5,7 @@
 
 */
 
-import __ from '@poemkit/components/_utils/scripts/helpers.js';
+import __ from '@poemkit/components/_utils/scripts/helpers';
 import { templateUrl, homeUrl, ajaxUrl } from '@poemkit/components/_utils/scripts/global-variables.js';
 import { setBG } from '@poemkit/components/_utils/scripts/set-background.js';
 

@@ -5,9 +5,9 @@
   "projectName": "PoemKit",
   "createdInfo": "UIUX Lab (https://uiux.cc)",
   "projectURL": "https://uiux.cc",
-  "version": "0.1.9",
+  "version": "0.2.0",
   "description": "React Toolkit for Building a Full Website.",
-  "main": "index.js",
+  "main": "dist/js/poemkit.js",
   "directories": {
     "test": "test"
   },
