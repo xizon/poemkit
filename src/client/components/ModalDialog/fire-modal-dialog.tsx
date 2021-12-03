@@ -65,7 +65,7 @@ export function fireModalDialog(curElement: any, config: fireModalDialogConfig) 
     clearTimeout( window.setCloseModalDialog );	
 
     //Add modal mask to stage
-    if ( __( '.poemkit-modal-mask' ).length == 0 ) {
+    if ( __( '.poemkit-modal-mask' ).len() == 0 ) {
         __( 'body' ).prepend( '<div className="poemkit-modal-mask"></div>' );
     }
     if ( closeOnlyBtnEnabled ) {
@@ -86,7 +86,7 @@ export function fireModalDialog(curElement: any, config: fireModalDialogConfig) 
 
 
 
-    if ( curElement.length > 0 ) {
+    if ( curElement.len() > 0 ) {
 
 
         // Locks the page

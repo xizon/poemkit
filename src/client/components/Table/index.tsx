@@ -86,7 +86,7 @@ export default class Table extends Component<TableProps, TableState> {
 
 						//get maxHeight of per row
 						const $tr = $el.find( 'tbody > tr' );
-						for (let i=0; i<$tr.length; i++ ) {
+						for (let i=0; i<$tr.len(); i++ ) {
 							const maxHeight = $el.find( '[data-table-row="'+i+'"]' ).maxDimension().height;
 							$el.find( '[data-table-row="'+i+'"]' ).css({'height': maxHeight + 'px'});
 						}

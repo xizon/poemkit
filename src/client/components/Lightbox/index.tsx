@@ -131,7 +131,7 @@ export default class Lightbox extends Component<LightboxProps, LightboxState> {
             const docURL = window.location.href;
 
 
-            if ( __( '.poemkit-lightbox__container' ).length == 0 ) {
+            if ( __( '.poemkit-lightbox__container' ).len() == 0 ) {
                 __( 'body' ).prepend(`
                     <div class="poemkit-lightbox__loading is-loaded poemkit-t-c">
                         <i class="fa fa-spinner fa-spin"></i>Loading...

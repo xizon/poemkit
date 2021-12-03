@@ -131,8 +131,6 @@ export default class ModalDialog extends Component<ModalDialogProps, ModalDialog
         if (dataCloseTime === null) dataCloseTime = false;
         if (dataCloseOnlyBtn === null) dataCloseOnlyBtn = false;
 
-
-
         // Video PopUp Interaction
         //------------------------------------------
         const hasVideo = __( curModalID ).hasClass('is-video') ? true : false;
@@ -142,7 +140,7 @@ export default class ModalDialog extends Component<ModalDialogProps, ModalDialog
             const windowWidth = window.innerWidth;
             const windowHeight = window.innerHeight;
             const $videoWrapper = __( curModalID ).find('.poemkit-modal-box__video-container');
-            const isIframe = $videoWrapper.find('iframe').length > 0 ? true : false;
+            const isIframe = $videoWrapper.find('iframe').len() > 0 ? true : false;
             let $video: any = isIframe ? $videoWrapper.find('iframe') : $videoWrapper.find('video');
 
             //
@@ -193,8 +191,8 @@ export default class ModalDialog extends Component<ModalDialogProps, ModalDialog
                 setVideo($video.width(), $video.height(), $video);
             } else {
 
-                const _sources = $video[0].getElementsByTagName('source');
-                const _src = _sources.length > 0 ? _sources[0].src : $video[0].src;
+                const _sources = $video.get(0).getElementsByTagName('source');
+                const _src = _sources.length > 0 ? _sources[0].src : $video.get(0).src;
 
                 self.getVideoDimensions(_src).then(function (res: any): void {
                     setVideo(res.width, res.height, $video);
@@ -202,7 +200,7 @@ export default class ModalDialog extends Component<ModalDialogProps, ModalDialog
             }
 
             //Set current video when the tag is <video>
-            window.curVideo = $video[0].tagName === 'VIDEO' ? $video[0] : null;
+            window.curVideo = $video.get(0).tagName === 'VIDEO' ? $video.get(0) : null;
 
 
         }
@@ -294,7 +292,7 @@ export default class ModalDialog extends Component<ModalDialogProps, ModalDialog
         __( document ).ready( () => {
 
             //Add modal mask to stage
-            if (__('.poemkit-modal-mask').length == 0) {
+            if (__('.poemkit-modal-mask').len() == 0) {
                 __('body').prepend('<div class="poemkit-modal-mask"></div>');
             }
 

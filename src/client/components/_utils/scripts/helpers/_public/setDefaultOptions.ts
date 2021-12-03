@@ -3,6 +3,7 @@ import isJSON from '../_internal/isJSON';
 
 /*
 *  Set a default JSON format configuration
+* @public
 *
 * @param  {Json} props         - Set some default keys and values.
 * @param  {Json} options       - A JSON variable passed in from outside, including key and value.

@@ -2,6 +2,7 @@
 
 /*
 *  Create a deep copy of the set of matched elements.
+* @public
 *
 * @param  {Object|Element} obj             - The array, JSON or HTML element to be copied.
 * @return {Object|Element}   

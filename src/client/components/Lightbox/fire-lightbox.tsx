@@ -142,7 +142,7 @@ export function fireLightbox(curElement: any, config: fireLightboxConfig) {
 
     // hide the content container
     const hideLightboxContent = function() {
-        TweenMax.set( $content, {
+        TweenMax.set( $content.get(-1), {
             css         : {
                 'display' : 'none'
             }
@@ -152,7 +152,7 @@ export function fireLightbox(curElement: any, config: fireLightboxConfig) {
 
     // show the content container
     const showLightboxContent = function() {
-        TweenMax.set( $content, {
+        TweenMax.set( $content.get(-1), {
             css         : {
                 'display' : 'block'
             },
@@ -360,7 +360,7 @@ export function fireLightbox(curElement: any, config: fireLightboxConfig) {
 
         const $largePhoto = __( this ).closest( '.poemkit-lightbox__html' ).find( '.poemkit-lightbox__photo-container.poemkit-lightbox__photo-sets-container' ),
             $thumb      = __( this ).closest( '.poemkit-lightbox__html' ).find( '.poemkit-lightbox__thumb-container li' ),
-            total       = $thumb.length,
+            total       = $thumb.len(),
             curIndex    = $thumb.filter( '.is-active' ).index();
         
         let prevIndex   = curIndex - 1,
@@ -398,7 +398,7 @@ export function fireLightbox(curElement: any, config: fireLightboxConfig) {
             __( '.poemkit-lightbox__original__target#' + __( this ).data( 'target-id' ) ).addClass( 'is-active' );
 
 
-            if ( __( this ).closest( '.poemkit-lightbox__container.js-poemkit-no-fixed' ).length > 0 ) {
+            if ( __( this ).closest( '.poemkit-lightbox__container.js-poemkit-no-fixed' ).len() > 0 ) {
                 __( '.poemkit-lightbox__container.js-poemkit-no-fixed, .poemkit-lightbox__original__target--imgfull' ).addClass( 'no-fixed-imgEnlarged' );
             }
 
@@ -447,14 +447,13 @@ export function fireLightbox(curElement: any, config: fireLightboxConfig) {
             __( innerEl ).addClass( 'js-poemkit-custom' );
             
             //Set container width
-            if ( __( innerEl ).find( '> .poemkit-lightbox__html .poemkit-lightbox__htmlcontent-inner' ).length > 0 ) {
+            if ( __( innerEl ).find( '> .poemkit-lightbox__html .poemkit-lightbox__htmlcontent-inner' ).len() > 0 ) {
                 
                 if ( window.innerWidth <= 768 ) {
                     __( innerEl ).css( 'width', window.innerWidth - 10 + 'px' );
                 } else {
                     __( innerEl ).css( 'width', __( innerEl ).find( '> .poemkit-lightbox__html .poemkit-lightbox__htmlcontent-inner' ).width() + 'px' );
                 }
-                
                 __( innerEl ).find( '> .poemkit-lightbox__html' ).addClass( 'js-poemkit-no-img' );
 
                 

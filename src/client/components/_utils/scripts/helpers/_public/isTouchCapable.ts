@@ -7,6 +7,7 @@ declare global {
 
 /*
 * To determine if it is a touch screen.
+* @public
 *
 * @return {Boolean} 
 */  

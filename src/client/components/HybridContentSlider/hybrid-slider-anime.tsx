@@ -74,14 +74,14 @@ export function hybridSliderAnime( curElement: any, config: hybridSliderAnimeCon
 
     let $itemsOuter     = $sliderWrapper.find( '.poemkit-hybrid-content-slider__items' ),
         $items          = $sliderWrapper.find( '.poemkit-hybrid-content-slider__items .poemkit-hybrid-content-slider__item' ),
-        itemsTotal      = $items.length,
+        itemsTotal      = $items.len(),
         amountVisible   = 1;
 
 
     //Autoplay times
     let playTimes;
     //A function called "timer" once every second (like a digital watch).
-    $sliderWrapper[0].animatedSlides;
+    $sliderWrapper.get(0).animatedSlides;
     
     
     //Store the latest position (X,Y) in a temporary variable
@@ -105,7 +105,7 @@ export function hybridSliderAnime( curElement: any, config: hybridSliderAnimeCon
     const sources = [];
 
     //Push all images from page
-    const imgs = $sliderWrapper[0].getElementsByTagName('img');
+    const imgs = $sliderWrapper.get(0).getElementsByTagName('img');
     for (let i = 0; i < imgs.length; i++) {
         sources.push({"url": imgs[i].src, "type": 'img'} as never);
     }
@@ -181,7 +181,7 @@ export function hybridSliderAnime( curElement: any, config: hybridSliderAnimeCon
             //Initialize the width and height of each item
             if ( dataDir === 'horizontal' ) {
                 const boxWidth = eachItemNewWidth;
-                TweenMax.set($items, {
+                TweenMax.set($items.get(-1), {
                     width: boxWidth,
                     height: function(i, target) {
                         return eachItemNewHeight[i];
@@ -193,7 +193,7 @@ export function hybridSliderAnime( curElement: any, config: hybridSliderAnimeCon
 
             } else {
                 
-                TweenMax.set($items, {
+                TweenMax.set($items.get(-1), {
                     height: function(i, target) {
                         return eachItemNewHeight[i];
                     },
@@ -256,7 +256,7 @@ export function hybridSliderAnime( curElement: any, config: hybridSliderAnimeCon
             movePositionWithButton( false, _prev, 'prev' );
             
             //Pause the auto play event
-            clearInterval( $sliderWrapper[0].animatedSlides );
+            clearInterval( $sliderWrapper.get(0).animatedSlides );
 
 
         }
@@ -278,7 +278,7 @@ export function hybridSliderAnime( curElement: any, config: hybridSliderAnimeCon
             movePositionWithButton( false, _next, 'next' );
 
             //Pause the auto play event
-            clearInterval( $sliderWrapper[0].animatedSlides );	 
+            clearInterval( $sliderWrapper.get(0).animatedSlides );	 
             
         } 
 
@@ -314,7 +314,7 @@ export function hybridSliderAnime( curElement: any, config: hybridSliderAnimeCon
                 movePositionWithButton( true, $btn, 'next' );
 
                 //Pause the auto play event
-                clearInterval( $sliderWrapper[0].animatedSlides );	
+                clearInterval( $sliderWrapper.get(0).animatedSlides );	
 
             }
 
@@ -361,16 +361,16 @@ export function hybridSliderAnime( curElement: any, config: hybridSliderAnimeCon
 
         if ( dataDraggable ) {
 
-            $dragTrigger[0].removeEventListener( 'mousedown', dragStart );
+            $dragTrigger.get(0).removeEventListener( 'mousedown', dragStart );
             document.removeEventListener( 'mouseup', dragEnd );
 
-            $dragTrigger[0].removeEventListener( 'touchstart', dragStart );
+            $dragTrigger.get(0).removeEventListener( 'touchstart', dragStart );
             document.removeEventListener( 'touchend', dragEnd );
 
 
             //
-            $dragTrigger[0].addEventListener( 'mousedown', dragStart );
-            $dragTrigger[0].addEventListener( 'touchstart', dragStart );
+            $dragTrigger.get(0).addEventListener( 'mousedown', dragStart );
+            $dragTrigger.get(0).addEventListener( 'touchstart', dragStart );
 
 
             //block the vertical scrolling on a touch-device while on the element
@@ -404,7 +404,7 @@ export function hybridSliderAnime( curElement: any, config: hybridSliderAnimeCon
 
             //determine whether it is the first or the last    
             currentIsFirstOrLast = false;
-            firstItemOffset = ( dataDir === 'horizontal' ) ? $itemsOuter.find( '[data-index="0"]' )[0]._gsTransform.x : $itemsOuter.find( '[data-index="0"]' )[0]._gsTransform.y;
+            firstItemOffset = ( dataDir === 'horizontal' ) ? $itemsOuter.find( '[data-index="0"]' ).get(0)._gsTransform.x : $itemsOuter.find( '[data-index="0"]' ).get(0)._gsTransform.y;
             maxMoveOffset = ( dataDir === 'horizontal' ) ? -eachItemNewWidth*(itemsTotal-amountVisible) : -totalItemsHeight;
 
 
@@ -591,7 +591,7 @@ export function hybridSliderAnime( curElement: any, config: hybridSliderAnimeCon
                 itemUpdates( $sliderWrapper, false, tempItemsPos, null, false, targetIndex, allHeightStr);
 
                 //Pause the auto play event
-                clearInterval( $sliderWrapper[0].animatedSlides );                
+                clearInterval( $sliderWrapper.get(0).animatedSlides );                
             }
 
 
@@ -612,7 +612,7 @@ export function hybridSliderAnime( curElement: any, config: hybridSliderAnimeCon
         sliderAutoPlay( playTimes, dataTiming, dataLoop );
 
         const autoplayEnter = function() {
-            clearInterval( $sliderWrapper[0].animatedSlides );
+            clearInterval( $sliderWrapper.get(0).animatedSlides );
         };
 
         const autoplayLeave = function() {
@@ -645,7 +645,7 @@ export function hybridSliderAnime( curElement: any, config: hybridSliderAnimeCon
     */
     function sliderAutoPlay( playTimes, timing, loop ) {	
 
-        $sliderWrapper[0].animatedSlides = setInterval( function() {
+        $sliderWrapper.get(0).animatedSlides = setInterval( function() {
 
             const autoMove = function( indexGo ) {
 
@@ -684,7 +684,7 @@ export function hybridSliderAnime( curElement: any, config: hybridSliderAnimeCon
 
         }, timing );
         
-        window.intervalEvents.push($sliderWrapper[0].animatedSlides);
+        window.intervalEvents.push($sliderWrapper.get(0).animatedSlides);
     }
 
 
@@ -739,7 +739,7 @@ export function hybridSliderAnime( curElement: any, config: hybridSliderAnimeCon
 
             const boxWidth = eachItemNewWidth;
             
-            TweenMax.to( $curItems, speed, {
+            TweenMax.to( $curItems.get(-1), speed, {
                 x: function(i, target) {
 
                     let xIncrement = 0;
@@ -790,10 +790,10 @@ export function hybridSliderAnime( curElement: any, config: hybridSliderAnimeCon
             
                         
                         //The state of the control button
-                        setButtonState( Math.round( $curItems.first()[0]._gsTransform.x ), Math.round( ($curItems.length - amountVisible) * boxWidth ) );  
+                        setButtonState( Math.round( $curItems.first().get(0)._gsTransform.x ), Math.round( ($curItems.len() - amountVisible) * boxWidth ) );  
 
                         //Initialize the height of container
-                        currentIndex = Math.round( $curItems.first()[0]._gsTransform.x/boxWidth );
+                        currentIndex = Math.round( $curItems.first().get(0)._gsTransform.x/boxWidth );
                         setContainerSize( currentIndex );  	 
 
                         //Set target index of the slider buttons
@@ -817,7 +817,7 @@ export function hybridSliderAnime( curElement: any, config: hybridSliderAnimeCon
 
         } else {
             
-            TweenMax.to( $curItems, speed, {
+            TweenMax.to( $curItems.get(-1), speed, {
                 y: function(i, target) {
                     
                     let yIncrement = 0;
@@ -866,7 +866,7 @@ export function hybridSliderAnime( curElement: any, config: hybridSliderAnimeCon
                     if ( !dragging && !Array.isArray( delta ) ) {
                         
                         //The state of the control button
-                        setButtonState( $curItems.first()[0]._gsTransform.y, totalItemsHeight );   
+                        setButtonState( $curItems.first().get(0)._gsTransform.y, totalItemsHeight );   
 
                         //Set target index of the slider buttons
                         setButtonTargetIndex( __( dataNext ), __( dataPrev ), btnType, indexGo ); 
@@ -986,9 +986,9 @@ export function hybridSliderAnime( curElement: any, config: hybridSliderAnimeCon
         $items.each(function (this: any, index: number) {
             let _v: number;
             if ( dataDir === 'horizontal' ) {
-                _v = __( this )[0]._gsTransform.x;
+                _v = __( this ).get(0)._gsTransform.x;
             } else {
-                _v = __( this )[0]._gsTransform.y;
+                _v = __( this ).get(0)._gsTransform.y;
             }
             pos.push( _v as never );
         }); 
@@ -1006,7 +1006,7 @@ export function hybridSliderAnime( curElement: any, config: hybridSliderAnimeCon
         
         const _h = eachItemNewHeight[Math.abs( index )];
         if ( typeof _h !== typeof undefined ) {
-            TweenMax.to( $itemsOuter, 0.2, { 
+            TweenMax.to( $itemsOuter.get(-1), 0.2, { 
                 height: eachItemNewHeight[Math.abs( index )]
             } );	    
         }

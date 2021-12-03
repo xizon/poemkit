@@ -66,7 +66,7 @@ export default class TableSorter extends Component<TableSorterProps, TableSorter
 
 		const thType  = el.data( 'sort-type' );
 		const curIndex = el.data( 'table-row' );
-		const targetComparator = __( wrapper ).find( 'tbody [data-table-row="'+curIndex+'"]' );
+		const targetComparator = __( wrapper ).find( 'tbody [data-table-row="'+curIndex+'"]' ).get(-1);
 		const root = __( wrapper ).find( 'tbody' );
 	
 		if ( thType === false ) return false;
@@ -109,7 +109,7 @@ export default class TableSorter extends Component<TableSorterProps, TableSorter
 		root.empty();
 		for (let i = 0; i < targetComparator.length; i++) {
 			const curRow = targetComparator[i].parentNode;
-			root[0].appendChild(curRow);
+			root.get(0).appendChild(curRow);
 		}
 
 

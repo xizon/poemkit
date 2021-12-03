@@ -97,7 +97,7 @@ export default class FileField extends Component<FileFieldProps, FileFieldState>
 	 */
     handleChange(event) {
 		const el = __( event.target );
-		const $input = el[0];
+		const $input = el.get(0);
 		
 		if ( $input.files && $input.files[0] ) {
 			const reader = new FileReader();

@@ -1,41 +1,51 @@
-/*
-* Returns a live HTMLCollection which contains all of the child elements 
-* of the node upon which it was called.
-*
-* @param  {Element} s         - The selector that needs to be filtered. A DOMstring containing 
-*                               one selector to match against.
-* @return {Array}              -  The collection of elements
-*/
+import $$ from './_core/instance';
+
+/**
+ * Returns a live HTMLCollection which contains all of the child elements 
+ * of the node upon which it was called.
+ *
+ * @param  {Element} s         - The selector that needs to be filtered. A DOMstring containing 
+ *                               one selector to match against.
+ * @return {Array}              -  The collection of elements
+ */
 function children(this: any, s) {
 
-	const self = this;
-	const childrenList = self.children;
-	const res = [];
+    let res = [];
 
-	if ( childrenList ) {
-		for (let i = 0; i < childrenList.length; i++ ) {
+    this.each(function (this: any) {
+        const self = this;
+        const childrenList = self.children;
 
-			const _currentNode = childrenList[i];
 
-			//Determine whether the ID, class and HTML nodes match
-			if (s !== undefined) {
-				if ( 
-					_currentNode.nodeName.toLowerCase() === s || 
-					_currentNode.classList.contains( s.replace(/\./g,'') ) || 
-					'#' + _currentNode.id === s 
-				) {
-					res.push(_currentNode as never);
-				}
-				
-			} else {
-				res.push(_currentNode as never);
-			}
-			
-		}
+        if (childrenList) {
+            for (let i = 0; i < childrenList.length; i++) {
 
-	}
+                const _currentNode = childrenList[i];
 
-	return res;
+                //Determine whether the ID, class and HTML nodes match
+                if (s !== undefined) {
+                    if (
+                        _currentNode.nodeName.toLowerCase() === s ||
+                        _currentNode.classList.contains(s.replace(/\./g, '')) ||
+                        '#' + _currentNode.id === s
+                    ) {
+                        res.push(_currentNode as never);
+                    }
+
+                } else {
+
+                    res.push(_currentNode as never);
+                }
+
+            }
+
+        }
+
+    });
+
+    return $$(res);
 
 }
+
+
 export default children;

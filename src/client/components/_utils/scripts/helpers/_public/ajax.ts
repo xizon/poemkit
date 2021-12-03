@@ -3,6 +3,7 @@ import isJSON from '../_internal/isJSON';
 
 /*
 * Perform an asynchronous HTTP (Ajax) request.
+* @public
 *
 * @param  {Json} props   - The attribute and value to be set, the format is JSON
 * @return {Void} 

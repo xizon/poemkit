@@ -3,6 +3,7 @@ import isJSON from '../_internal/isJSON';
 
 /*
 * Object validation
+* @public
 *
 * @return {Boolean}  
 */

@@ -1,5 +1,6 @@
 /*
 * Capitalize the first letter of all words in a string
+* @public
 *
 * @param  {String} s                 - Any string.
 * @return {String}                   - A new string.

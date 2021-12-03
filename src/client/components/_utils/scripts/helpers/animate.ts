@@ -8,7 +8,9 @@ import {
 	easeOutCubic,
 	easeInOutCubic
 } from './_internal/easing';
-/*
+
+
+/**
 * Create a new Animation, applies it to the element, then plays the animation
 * @param  {String} prop         - The style property to be set.
 * @param  {Number} from         - The initial offset of the object
@@ -20,46 +22,49 @@ import {
 * @return {Void}
 */
 function animate(this: any, prop, from, to, unit, duration, easing, complete) {
-	const el = this;
-	const start = new Date().getTime();
-	const timer = setInterval(function () {
-		const time = new Date().getTime() - start;
-		let val;
+    this.each(function (this: any) {
+        const el = this;
+        const start = new Date().getTime();
+        const timer = setInterval(function () {
+            const time = new Date().getTime() - start;
+            let val;
 
-		switch (easing) {
-			case "linear":
-				val = easeLinear(time, from, to - from, duration);
-				break;
-			case "ease-in":
-				val = easeInCubic(time, from, to - from, duration);
-				break;
-			case "ease-out":
-				val = easeOutCubic(time, from, to - from, duration);
-				break;
-			case "ease-in-out":
-				val = easeInOutCubic(time, from, to - from, duration);
-				break;
+            switch (easing) {
+                case "linear":
+                    val = easeLinear(time, from, to - from, duration);
+                    break;
+                case "ease-in":
+                    val = easeInCubic(time, from, to - from, duration);
+                    break;
+                case "ease-out":
+                    val = easeOutCubic(time, from, to - from, duration);
+                    break;
+                case "ease-in-out":
+                    val = easeInOutCubic(time, from, to - from, duration);
+                    break;
 
-			default:
-				val = easeLinear(time, from, to - from, duration);
-		}
-
-
-		//
-		const res = val + unit;
-		el.style[prop] = res;
-		
-		if (time >= duration) {
-			clearInterval(timer);
-
-			//
-			if (complete && (typeof complete == "function")) {
-				complete.call(el);
-			}
+                default:
+                    val = easeLinear(time, from, to - from, duration);
+            }
 
 
-		}
-	}, 1000 / 60);
+            //
+            const styleValue = val + unit;
+            el.style[prop] = styleValue;
+
+            if (time >= duration) {
+                clearInterval(timer);
+
+                //
+                if (complete && (typeof complete == 'function')) {
+                    complete.call(el);
+                }
+
+
+            }
+        }, 1000 / 60);
+    });
+    return this;
 
 }
 

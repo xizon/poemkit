@@ -154,7 +154,7 @@ export function sliderAnime( curElement: any, config: sliderAnimeConfig ) {
 
             //A function called "timer" once every second (like a digital watch).
             //An interval ID which uniquely identifies the interval, so you can remove it later by calling clearInterval().
-            $sliderWrapper[0].animatedSlides = null;
+            $sliderWrapper.get(0).animatedSlides = null;
 
 
             setTimeout(function () {
@@ -176,10 +176,10 @@ export function sliderAnime( curElement: any, config: sliderAnimeConfig ) {
             }, animDelay);
 
 
-            if ($first.find('video').length > 0) {
+            if ($first.find('video').len() > 0) {
 
                 //Returns the dimensions (intrinsic height and width ) of the video
-                const video = $first.find( 'video' )[0];
+                const video = $first.find( 'video' ).get(0);
 
                 const _sources = video.getElementsByTagName('source');
                 const _src = _sources.length > 0 ? _sources[0].src : video.src;
@@ -239,7 +239,7 @@ export function sliderAnime( curElement: any, config: sliderAnimeConfig ) {
                     sliderAutoPlay(playTimes, dataTiming, dataLoop, $sliderWrapper, dataCountTotal, dataCountCur, dataControlsPagination, dataControlsArrows);
 
                     const autoplayEnter = function() {
-                        clearInterval($sliderWrapper[0].animatedSlides);
+                        clearInterval($sliderWrapper.get(0).animatedSlides);
                     };
 
                     const autoplayLeave = function() {
@@ -290,9 +290,9 @@ export function sliderAnime( curElement: any, config: sliderAnimeConfig ) {
     function sliderAutoPlay( playTimes, timing, loop, slider, countTotalID, countCurID, paginationID, arrowsID ) {	
 
         const items = slider.find( '.poemkit-slideshow__item' ),
-              total = items.length;
+              total = items.len();
 
-        slider[0].animatedSlides = setInterval( function() {
+        slider.get(0).animatedSlides = setInterval( function() {
 
             playTimes = parseFloat( items.filter( '.is-active' ).index() );
             playTimes++;
@@ -308,7 +308,7 @@ export function sliderAnime( curElement: any, config: sliderAnimeConfig ) {
 
         }, timing );
 
-        window.intervalEvents.push(slider[0].animatedSlides);
+        window.intervalEvents.push(slider.get(0).animatedSlides);
     }
 
 
@@ -334,12 +334,12 @@ export function sliderAnime( curElement: any, config: sliderAnimeConfig ) {
         const $this                    = slider,
                 $items                   = $this.find( '.poemkit-slideshow__item' ),
                 $first                   = $items.first(),
-                itemsTotal               = $items.length;
+                itemsTotal               = $items.len();
 
 
         //If arrows does not exist on the page, it will be added by default, 
         //and the drag and drop function will be activated.
-        if ( __( arrowsID ).length == 0 ) {
+        if ( __( arrowsID ).len() == 0 ) {
             __( 'body' ).prepend( '<div style="display:none;" class="poemkit-slideshow__arrows '+arrowsID.replace('#','').replace('.','')+'"><a href="#" class="poemkit-slideshow__arrows--prev"></a><a href="#" class="poemkit-slideshow__arrows--next"></a></div>' );
         }
 
@@ -398,7 +398,7 @@ export function sliderAnime( curElement: any, config: sliderAnimeConfig ) {
                 sliderUpdates( curBtnIndex, $this, curDir, countTotalID, countCurID, paginationID, arrowsID, loop );
 
                 //Pause the auto play event
-                clearInterval( $this[0].animatedSlides );	
+                clearInterval( $this.get(0).animatedSlides );	
 
             }
 
@@ -422,7 +422,7 @@ export function sliderAnime( curElement: any, config: sliderAnimeConfig ) {
             e.preventDefault();
 
             //Pause the auto play event
-            clearInterval( $this[0].animatedSlides );   
+            clearInterval( $this.get(0).animatedSlides );   
 
             //Move animation
             prevMove();
@@ -432,7 +432,7 @@ export function sliderAnime( curElement: any, config: sliderAnimeConfig ) {
             e.preventDefault();
 
             //Pause the auto play event
-            clearInterval( $this[0].animatedSlides );   
+            clearInterval( $this.get(0).animatedSlides );   
 
             //Move animation
             nextMove();
@@ -496,16 +496,16 @@ export function sliderAnime( curElement: any, config: sliderAnimeConfig ) {
 
         if ( draggable ) {
 
-            $dragTrigger[0].removeEventListener( 'mousedown', dragStart );
+            $dragTrigger.get(0).removeEventListener( 'mousedown', dragStart );
             document.removeEventListener( 'mouseup', dragEnd );
 
-            $dragTrigger[0].removeEventListener( 'touchstart', dragStart );
+            $dragTrigger.get(0).removeEventListener( 'touchstart', dragStart );
             document.removeEventListener( 'touchend', dragEnd );
 
 
             //
-            $dragTrigger[0].addEventListener( 'mousedown', dragStart );
-            $dragTrigger[0].addEventListener( 'touchstart', dragStart );
+            $dragTrigger.get(0).addEventListener( 'mousedown', dragStart );
+            $dragTrigger.get(0).addEventListener( 'touchstart', dragStart );
 
         }
 
@@ -605,7 +605,7 @@ export function sliderAnime( curElement: any, config: sliderAnimeConfig ) {
     function sliderUpdates( elementIndex, slider, dir, countTotalID, countCurID, paginationID, arrowsID, loop ) {
 
         const $items = slider.find( '.poemkit-slideshow__item' ),
-                total  = $items.length;
+                total  = $items.len();
 
 
 
@@ -701,10 +701,10 @@ export function sliderAnime( curElement: any, config: sliderAnimeConfig ) {
     */
     function itemDefaultInit( slider, currentLlement ) {
 
-        if ( currentLlement.find( 'video' ).length > 0 ) {
+        if ( currentLlement.find( 'video' ).len() > 0 ) {
 
             //Returns the dimensions (intrinsic height and width ) of the video
-            const video = currentLlement.find( 'video' )[0];
+            const video = currentLlement.find( 'video' ).get(0);
 
             const _sources = video.getElementsByTagName('source');
             const _src = _sources.length > 0 ? _sources[0].src : video.src;

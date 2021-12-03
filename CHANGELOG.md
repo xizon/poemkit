@@ -1,5 +1,11 @@
 # Changelog
 
+#### = 0.2.1 (December 2, 2021) =
+
+* Tweak: Refactor the helper script.
+* Tweak: Fixed some details of the helper script.
+
+
 #### = 0.2.0 (November 30, 2021) =
 
 * Tweak: Refactor core helper scripts using TypeScript.

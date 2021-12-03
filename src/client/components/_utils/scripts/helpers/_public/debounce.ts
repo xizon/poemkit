@@ -1,6 +1,7 @@
 
 /*
 * Debounce
+* @public
 *
 * @param  {Function} fn    - A function to be executed within the time limit.
 * @param  {Number} limit   - Waiting time.

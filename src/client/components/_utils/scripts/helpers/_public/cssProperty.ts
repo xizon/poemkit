@@ -1,5 +1,6 @@
 /*
 * Get the CSS property
+* @public
 *
 * @description This function can be used separately in HTML pages or custom JavaScript.
 * @param  {!Element} el     - The Element for which to get the computed style. Using class name or ID to locate.

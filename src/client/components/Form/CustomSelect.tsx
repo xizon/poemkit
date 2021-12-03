@@ -113,8 +113,8 @@ export default class CustomSelect extends Component<CustomSelectProps, CustomSel
 
 		
 		//Change <select>'s option and trigger events
-		$selectWrapper.find( 'select' )[0].value = curVal;
-		$selectWrapper.find( 'select' )[0].dispatchEvent(new Event('change'));
+		$selectWrapper.find( 'select' ).get(0).value = curVal;
+		$selectWrapper.find( 'select' ).get(0).dispatchEvent(new Event('change'));
 		
 		//callback
 		if ( typeof(this.props.optionChangeCallback) === 'function' ) {

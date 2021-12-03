@@ -1,41 +1,46 @@
 
-import traverseIndex from './_internal/traverseIndex';
+/**
+ *  Find the Tallest or widest of all elements
+ *
+ * @return {Json}      - An object containing the properties width and height.
+ */
+ function maxDimension(this: any) {
+    const { storeSelector } = this;
+    let res = {
+        'height': 0,
+        'width': 0
+    };
 
-/*
-*  Find the Tallest or widest of all elements
-*
-* @return {Json}      - An object containing the properties width and height.
-*/
-function maxDimension(this: any) {
+    let traverseIndex = 0;
+    let max = storeSelector.elems.length;
 
-	if ( traverseIndex.maxDimension === traverseIndex.total_maxDimension-1 ) {
+    this.each(function (this: any) {
+        if (traverseIndex === max - 1) {
 
-		const currentSelector = traverseIndex.elements_maxDimension;
+            const elementHeights: any[] = Array.prototype.map.call(storeSelector.elems, function (el) {
+                return el.clientHeight;
+            });
 
-		const elementHeights: any[] = Array.prototype.map.call(currentSelector, function (el) {
-			return el.clientHeight;
-		});
+            const elementWidths: any[] = Array.prototype.map.call(storeSelector.elems, function (el) {
+                return el.clientWidth;
+            });
 
-		const elementWidths: any[] = Array.prototype.map.call(currentSelector, function (el) {
-			return el.clientWidth;
-		});
-
-		const maxHeight = Math.max.apply(null, elementHeights);
-		const maxWidth = Math.max.apply(null, elementWidths);
-
-
-		return {
-			'height': maxHeight,
-			'width': maxWidth
-		};
-
-	}
-
-	// Traverse the counter of a selector, reset to 0 when calling 	`__(selector).XXX()`
-	traverseIndex.maxDimension++;
-	traverseIndex.elements_maxDimension.push( this as never );
+            const maxHeight = Math.max.apply(null, elementHeights);
+            const maxWidth = Math.max.apply(null, elementWidths);
 
 
+            res = {
+                'height': maxHeight,
+                'width': maxWidth
+            };
+
+        }
+
+        // Traverse the counter of a selector, reset to 0 when calling 	`__(selector).XXX()`
+        traverseIndex++;
+    });
+
+    return res;
 
 }
 

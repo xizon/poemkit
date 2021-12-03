@@ -1,6 +1,7 @@
 
 /*
 * Convert a string to slug.
+* @public
 *
 * @param  {String} str            - Any string.
 * @return {String}                - A new string.

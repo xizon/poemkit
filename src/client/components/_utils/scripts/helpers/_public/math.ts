@@ -1,6 +1,7 @@
 	
 /*
 * Evaluating a string as a mathematical expression in JavaScript
+* @public
 *
 * @description This function can be used separately in HTML pages or custom JavaScript.
 * @return {String}            - New calculation result.

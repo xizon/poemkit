@@ -4,6 +4,7 @@ import trim from '../_public/trim';
 
 /*
 * Convert HTML Element's `Style` Attribute to JSON
+* @public
 *
 * @param  {String} str   - The content of the style attribute in the HTML element, usually a string
 * @return {Json}     - An HTML element to a JSON object

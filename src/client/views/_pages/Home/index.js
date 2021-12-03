@@ -21,7 +21,7 @@ function SeoVars() {
 		"imgURL": '',
 		"bodyClasses": 'home',
 		"pageTitle": pageTitle,
-		"desc": 'React Toolkit for Building a Full Website'
+		"desc": 'React toolkit for building a full website that also is a Micro-Frontend Architecture'
 	}
 }
 function Seo() {
@@ -66,7 +66,7 @@ export default ({ staticContext = {} }) => {
 										<img src={`${rootDirectory}/assets/images/logo-colorful.png`} alt="PoemKit" />
 
 										<p>
-											A free web kit with React for fast web design and development via SSR. Using react, redux, router, axios and express. This project was bootstrapped with nodejs library. Project supports automatic deployments from a number of repository hosting services via pm2. PoemKit delivers more than <strong className="poemkit-typo--color-highlight">50+</strong> built-in UI components for building modern web applications.
+											A free web kit with React for fast web design and development via SSR. It also is a Micro-Frontend Architecture. Using react, redux, router, axios and express. This project was bootstrapped with nodejs library. Project supports automatic deployments from a number of repository hosting services via pm2. PoemKit delivers more than <strong className="poemkit-typo--color-highlight">50+</strong> built-in UI components for building modern web applications.
 										</p>		
 										<p>
 											<NavLink data-route="true" to="/components-demo" style={{textDecoration: "underline"}}>

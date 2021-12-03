@@ -1,22 +1,21 @@
 
-import traverseIndex from './_internal/traverseIndex';
+import $$ from './_core/instance';
 
-/*
-* Reduce the set of matched elements to the first in the set.
-*
-* @return {Array}          - Contains only a collection of HTML elements.
-*/
+/**
+ * Reduce the set of matched elements to the first in the set.
+ *
+ * @return {Array}          - Contains only a collection of HTML elements.
+ */
 function first(this: any) {
-	let res = [];
+    let res = [];
 
-	if ( traverseIndex.first === 0 ) {
-		res = this;
-	}
+    let { elems } = this;
+    elems = Array.prototype.slice.call(elems);
+    elems.forEach(function (element, listIndex) {
+        if (0 === listIndex) res.push(element as never);
+    });
 
-	// Traverse the counter of a selector, reset to 0 when calling 	`__(selector).XXX()`
-	traverseIndex.first++;
-
-	return res;
+    return $$(res);
 }
 
 export default first;

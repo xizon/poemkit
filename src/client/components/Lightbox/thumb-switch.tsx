@@ -36,7 +36,7 @@ export function thumbSwitch(curElement: any, config: thumbSwitchConfig) {
 
     // show the content container
     const showLightboxContent = function () {
-        TweenMax.set(curElement.closest('.poemkit-lightbox__html'), {
+        TweenMax.set(curElement.closest('.poemkit-lightbox__html').get(-1), {
             css: {
                 'display': 'block'
             },
@@ -53,7 +53,7 @@ export function thumbSwitch(curElement: any, config: thumbSwitchConfig) {
 
 
     //all items
-    TweenMax.set($largePhoto.find('li'), {
+    TweenMax.set($largePhoto.find('li').get(-1), {
         css: {
             'display': 'none',
             'opacity': 0
@@ -65,7 +65,7 @@ export function thumbSwitch(curElement: any, config: thumbSwitchConfig) {
 
 
     //current item
-    TweenMax.set($largePhoto.find('li').eq(targetIndex), {
+    TweenMax.set($largePhoto.find('li').eq(targetIndex).get(0), {
         css: {
             'display': 'block',
             'opacity': 0

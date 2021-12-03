@@ -59,7 +59,7 @@ export default class Swiper extends Component<SwiperProps, SwiperState> {
 
 			//Synchronize multiple objects
 			//------------------------------------------
-			if ( $el.find( '#app-slider1' ).length > 0 ) {
+			if ( $el.find( '#app-slider1' ).len() > 0 ) {
 				const swiper2: any = new SW('#app-slider2', {
 					slidesPerView: 5,
 					spaceBetween: 10,
@@ -116,7 +116,7 @@ export default class Swiper extends Component<SwiperProps, SwiperState> {
 			//Swiper custom slides transform effect (Parallax effect)
 			//------------------------------------------
 
-			if ( $el.find( '#app-slider3' ).length > 0 ) {
+			if ( $el.find( '#app-slider3' ).len() > 0 ) {
 				const interleaveOffset = 0.5;
 
 				const swiper3: any = new SW('#app-slider3', {
@@ -184,7 +184,7 @@ export default class Swiper extends Component<SwiperProps, SwiperState> {
 			//Swiper custom slides transform effect (Scale Effect without left/right swipe)
 			//------------------------------------------
 
-			if ( $el.find( '#app-slider4' ).length > 0 ) {
+			if ( $el.find( '#app-slider4' ).len() > 0 ) {
 				const swiper4: any = new SW('#app-slider4', {
 					slidesPerView: 1,
 					spaceBetween: 0,
@@ -331,7 +331,7 @@ export default class Swiper extends Component<SwiperProps, SwiperState> {
 			//Centered Slides
 			//------------------------------------------	
 
-			if ( $el.find( '#app-slider5' ).length > 0 ) {
+			if ( $el.find( '#app-slider5' ).len() > 0 ) {
 				const swiper5: any = new SW('#app-slider5', {
 					slidesPerView: 3,
 					spaceBetween: 30,
@@ -360,7 +360,7 @@ export default class Swiper extends Component<SwiperProps, SwiperState> {
 			//Display half on both sides
 			//------------------------------------------		
 
-			if ( $el.find( '#app-slider6' ).length > 0 ) {
+			if ( $el.find( '#app-slider6' ).len() > 0 ) {
 				const swiper6: any = new SW('#app-slider6', {
 					slidesPerView: 'auto',//Number of slides per view, and it must be "auto"!
 					spaceBetween: 30,
@@ -389,7 +389,7 @@ export default class Swiper extends Component<SwiperProps, SwiperState> {
 			//Custom Progress Bar
 			//------------------------------------------
 
-			if ( $el.find( '#app-slider7' ).length > 0 ) {
+			if ( $el.find( '#app-slider7' ).len() > 0 ) {
 				const cusProgressBar = function( speed, length, curIndex ) {
 					TweenMax.set( '#app-slider7__progress', {
 						width: 0,
@@ -454,7 +454,7 @@ export default class Swiper extends Component<SwiperProps, SwiperState> {
 
 			//Gallery with center thumbs automatically
 			//------------------------------------------
-			if ( $el.find( '#app-slider8' ).length > 0 ) {
+			if ( $el.find( '#app-slider8' ).len() > 0 ) {
 				const swiper8: any = new SW('#app-slider8', {
 					spaceBetween: 10,
 					grabCursor: false,
@@ -517,7 +517,7 @@ export default class Swiper extends Component<SwiperProps, SwiperState> {
 
 			//Gallery with manual triggers
 			//------------------------------------------
-			if ( $el.find( '#app-slider9' ).length > 0 ) {
+			if ( $el.find( '#app-slider9' ).len() > 0 ) {
 				const swiper9: any = new SW('#app-slider9', {
 					spaceBetween: 10,
 					grabCursor: false,

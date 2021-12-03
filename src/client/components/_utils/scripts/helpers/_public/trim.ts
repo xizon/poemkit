@@ -1,5 +1,6 @@
 /*
 * Remove all spaces in the string
+* @public
 *
 * @param  {String} s                 - Any string.
 * @param  {Boolean} isGlobal         - If the value is `true`, remove all spaces including the middle

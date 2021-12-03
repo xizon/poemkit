@@ -1,5 +1,6 @@
 /*
 * Remove first, last or both symbols
+* @public
 *
 * @param  {String} str       - Any string.
 * @param  {String} symbol    - The target string to remove.

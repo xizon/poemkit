@@ -1,23 +1,27 @@
-import traverseIndex from './_internal/traverseIndex';
+import $$ from './_core/instance';
 
-/*
-* Reduce the set of matched elements to those that match the selector or pass the function's test.
-*
-* @param  {String} s           - A string containing a selector expression to match elements against.
-* @return {Array}              -  The collection of elements
-*/
+/**
+ * Reduce the set of matched elements to those that match the selector or pass the function's test.
+ *
+ * @param  {String} s           - A string containing a selector expression to match elements against.
+ * @return {Array}              -  The collection of elements
+ */
 function filter(this: any, s) {
-	let res = [];
+    let res = [];
 
-	if (s === undefined) return res;
+    this.each(function (this: any) {
 
-	if ( this.classList.contains( s.replace(/\./g,'') ) ) {
-		res.push( this as never );
-	}
+        if (s !== undefined) {
+            if (this.classList.contains(s.replace(/\./g, ''))) {
+                res.push(this as never);
+            }
+        }
 
-	// Traverse the counter of a selector, reset to 0 when calling 	`__(selector).XXX()`
-	traverseIndex.filter++;
+    });
 
-	return res;
+    return $$(res);
+
 }
+
+
 export default filter;

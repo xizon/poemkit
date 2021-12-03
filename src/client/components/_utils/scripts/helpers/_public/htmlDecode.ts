@@ -1,6 +1,7 @@
 
 /*
 *  HTML entities decode
+* @public
 *
 * @param {string} str          - Input text.
 * @return {string}             - Filtered text.

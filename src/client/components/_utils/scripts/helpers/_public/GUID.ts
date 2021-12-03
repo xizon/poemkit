@@ -1,6 +1,7 @@
 
 /*
 * Create GUID / UUID
+* @public
 *
 * @description This function can be used separately in HTML pages or custom JavaScript.
 * @return {String}                        - The globally-unique identifiers.

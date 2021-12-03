@@ -23,20 +23,20 @@ export default class MenuList extends Component<MenuListProps, MenuListState>  {
         const el = __(e.target);
         const $sub = el.next('ul');
 
-        if ($sub.length > 0) {
+        if ($sub.len() > 0) {
 
             e.preventDefault();
        
             if ( el.attr( 'aria-expanded' ) === 'false' || el.attr( 'aria-expanded' ) === null ) {
                 //Hide other all sibling <ul> of the selected element
                 const $siblingsItems = el.parent().siblings();
-				if ( $siblingsItems.length > 0 ) {
+				if ( $siblingsItems.len() > 0 ) {
 					$siblingsItems.each( function(this: any) {
 
 						const _link = __( this ).find( '> a' );
 
 						_link.removeClass('is-active').attr( 'aria-expanded', false );
-						TweenMax.to( _link.next('ul'), 0.5, { height: 0 });
+						TweenMax.to( _link.next('ul').get(-1), 0.5, { height: 0 });
 						
 		
 					});
@@ -48,8 +48,8 @@ export default class MenuList extends Component<MenuListProps, MenuListState>  {
                 //to open
                 // - temporarilty set height:auto
                 // - tween from height:0
-                TweenMax.set($sub, { height: 'auto' });
-                TweenMax.from($sub, 0.5, { height: 0 });
+                TweenMax.set($sub.get(-1), { height: 'auto' });
+                TweenMax.from($sub.get(-1), 0.5, { height: 0 });
 
             } else {
 
@@ -57,7 +57,7 @@ export default class MenuList extends Component<MenuListProps, MenuListState>  {
                 el.parent( 'li' ).removeClass( 'is-active' );
 
                 //to close
-                TweenMax.to($sub, 0.5, { height: 0 });
+                TweenMax.to($sub.get(-1), 0.5, { height: 0 });
 
             }
 

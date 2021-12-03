@@ -1,108 +1,121 @@
 
-import elementPath from './_internal/elementPath';
-/*
-* Get or set the current value of the first element in the set of matched elements.
-*
-* @param  {?String|?Number|?Array} v      - Corresponding to the value of each matched element.
-* @return {String}          - Get the values of form elements.
-*/
-function val(this: any, v) {
-	
-	let controlType = '';
-	if (this.tagName == "INPUT" || this.tagName == "TEXTARTA" ) {
+/**
+ * Get or set the current value of the first element in the set of matched elements.
+ *
+ * @param  {?String|?Number|?Array} v      - Corresponding to the value of each matched element.
+ * @return {String}          - Get the values of form elements.
+ */
+ function val(this: any, v) {
+    const rootObject = this;
+    let res: any = null;
 
-		//not `radio`, `checkbox`
-		if (this.type != 'checkbox' && this.type !='radio') {
-			controlType = 'input-textarea';
-		}
+    this.each(function (this: any) {
+        const self = this;
+        let controlType = '';
+        if (this.tagName == "INPUT" || this.tagName == "TEXTARTA") {
 
-		//`checkbox`
-		if (this.type == 'checkbox') {
-			controlType = 'checkbox';
-		}
+            //not `radio`, `checkbox`
+            if (this.type != 'checkbox' && this.type != 'radio') {
+                controlType = 'input-textarea';
+            }
 
-		//`radio`
-		if (this.type =='radio') {
-			controlType = 'radio';
-		}	
+            //`checkbox`
+            if (this.type == 'checkbox') {
+                controlType = 'checkbox';
+            }
 
-	}
+            //`radio`
+            if (this.type == 'radio') {
+                controlType = 'radio';
+            }
 
-	//`select`
-	if (this.tagName == "SELECT") {
-		controlType = 'select';
-	}
-		
-	
-	//
-	if ( typeof (v) !== 'undefined' ) {
-		
-		
-		switch (controlType) {
-			case "input-textarea":
-				
-				this.value = v;
-				break;
-			case "checkbox":
-				
-				this.checked = v;
-				break;
-			case "radio":
-				
-				const currentSelectorDomsStr = elementPath( this );
-				const currentSelector = [].slice.call( document.querySelectorAll(currentSelectorDomsStr as string) );
+        }
 
-				currentSelector.map((item, index) => {
-					if((item as unknown as HTMLFormElement).value == v.toString()) {
-						(item as unknown as HTMLFormElement).checked = true;
-					}	
-				});
+        //`select`
+        if (this.tagName == "SELECT") {
+            controlType = 'select';
+        }
 
-				break;
-			case "select":
-				
-				this.value = v;
-				this.dispatchEvent(new Event('change'));
-				break;
-			default:
-				this.value = v;
-				
-		}//end switch
-		
 
-	}	
-	
-	switch (controlType) {
-		case "input-textarea":
-			return this.value;
-		case "checkbox":
-			return this.checked ? 1 : 0;
-		case "radio":
-            
-		
-			const currentSelectorDomsStr = elementPath( this );
-			const currentSelector = [].slice.call( document.querySelectorAll(currentSelectorDomsStr as string) );
-			const radios = currentSelector;
-			let _value = null;
-			for (let i = 0; i < radios.length; i++) {
-				if ((radios[i] as unknown as HTMLFormElement).checked) {
-					// do whatever you want with the checked radio
-					_value = (radios[i] as unknown as HTMLFormElement).value;
-					// only one radio can be logically checked, don't check the rest
-					break;
-				}
-			}
+        //set value
+        if (typeof (v) !== 'undefined') {
 
-			return _value;
-		case "select":
-			return this.value;
 
-		default:
-			return this.value;
+            switch (controlType) {
+                case "input-textarea":
 
-	}//end switch
-	
-	
-}	
+                    this.value = v;
+                    res = rootObject;
+
+                    break;
+                case "checkbox":
+
+                    this.checked = v;
+                    res = rootObject;
+
+                    break;
+                case "radio":
+
+                    if (self.value == v.toString()) {
+                        self.checked = true;
+                    }
+
+                    res = rootObject;
+
+                    break;
+                case "select":
+
+                    this.value = v;
+                    this.dispatchEvent(new Event('change'));
+                    res = rootObject;
+
+                    break;
+                default:
+                    this.value = v;
+                    res = rootObject;
+
+            }//end switch
+
+
+        } else {
+
+            switch (controlType) {
+                case "input-textarea":
+                    res = this.value;
+                    break;
+
+                case "checkbox":
+                    res = this.checked ? 1 : 0;
+                    break;
+
+                case "radio":
+
+                    if (self.checked) {
+                        // do whatever you want with the checked radio
+                        res = self.value;
+                    }
+
+                    break;
+
+                case "select":
+                    res = this.value;
+
+                    break;
+
+                default:
+                    res = this.value;
+
+            }//end switch
+
+        }
+
+
+
+
+    });
+
+    return res;
+
+}
 
 export default val;

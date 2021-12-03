@@ -6,6 +6,7 @@ declare global {
 
 /*
 * Determine whether it is a special browser
+* @public
 *
 * @return {Json}  - Boolean judgment collection of common browsers
 */  

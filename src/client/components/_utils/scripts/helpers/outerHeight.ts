@@ -1,28 +1,34 @@
 import getStyle from './_internal/getStyle';
 
-/*
-* Get or set the current computed outer height for elenments (including padding, border, and optionally margin)
-*
-* @param  {Boolean} includeMargin         - A Boolean indicating whether to include the element's margin in the calculation.
-* @return {Number}   - Returns the height of the element, including left and right padding, border, and optionally margin, in pixels.
-*/  
-function outerHeight(this: any,  includeMargin ) { 
+/**
+ * Get or set the current computed outer height for elenments (including padding, border, and optionally margin)
+ *
+ * @param  {Boolean} includeMargin         - A Boolean indicating whether to include the element's margin in the calculation.
+ * @return {Number}   - Returns the height of the element, including left and right padding, border, and optionally margin, in pixels.
+ */
+ function outerHeight(this: any, includeMargin) {
+    let res = 0;
 
-	const self = this;
+    this.each(function (this: any) {
 
-	const height_IncPaddingBorderScrollbar = self.offsetHeight;
-	const marginTop = getStyle( self,  'marginTop' );
-	const marginBottom = getStyle( self,  'marginBottom' );
-	const borderTopWidth = getStyle( self,  'borderTopWidth' ) || 0;
-	const borderBottomWidth = getStyle( self,  'borderBottomWidth' ) || 0;
+        const self = this;
 
-	let totalHeight = height_IncPaddingBorderScrollbar;
+        const height_IncPaddingBorderScrollbar = self.offsetHeight;
+        const marginTop = getStyle(self, 'marginTop');
+        const marginBottom = getStyle(self, 'marginBottom');
+        const borderTopWidth = getStyle(self, 'borderTopWidth') || 0;
+        const borderBottomWidth = getStyle(self, 'borderBottomWidth') || 0;
 
-	if ( typeof (includeMargin) !== 'undefined' ) {
-		totalHeight = totalHeight+marginTop+marginBottom;
-	}
+        let totalHeight = height_IncPaddingBorderScrollbar;
 
-	return totalHeight;
+        if (typeof (includeMargin) !== 'undefined') {
+            totalHeight = totalHeight + marginTop + marginBottom;
+        }
+
+        res = totalHeight;
+    });
+
+    return res;
 }
 		
 export default outerHeight;

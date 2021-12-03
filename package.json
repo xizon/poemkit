@@ -5,8 +5,8 @@
   "projectName": "PoemKit",
   "createdInfo": "UIUX Lab (https://uiux.cc)",
   "projectURL": "https://uiux.cc",
-  "version": "0.2.0",
-  "description": "React Toolkit for Building a Full Website.",
+  "version": "0.2.1",
+  "description": "React toolkit for building a full website that also is a Micro-Frontend Architecture.",
   "main": "dist/js/poemkit.js",
   "directories": {
     "test": "test"
@@ -62,14 +62,18 @@
     "components",
     "frontend",
     "react",
-    "react-component",
+    "react-components",
     "ui",
     "kit",
     "ssr",
+    "scss",
+    "es6",
     "redux",
     "developer-tools",
     "responsive-design",
-    "toolkit"
+    "toolkit",
+    "component-library",
+    "micro-frontend"
   ],
   "license": "MIT",
   "bugs": {
