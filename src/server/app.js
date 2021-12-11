@@ -144,4 +144,19 @@ app.listen(port, () => console.log(`Frontend service listening on port: ${port},
 
 
 
+/*
+
+// Supprt https
+const cert = fs.readFileSync('/path//bundle.crt');
+const key = fs.readFileSync('/path/ca.key');
+import https from 'https';
+const server = https.createServer({key: key, cert: cert }, app);
+
+...
+app.get('/', (req, res) => { res.send('this is an secure server') });
+...
+
+server.listen(port, () => console.log(`Frontend service listening on port: ${port}, access https://localhost:${port} in the web browser`));
+*/
+
 
