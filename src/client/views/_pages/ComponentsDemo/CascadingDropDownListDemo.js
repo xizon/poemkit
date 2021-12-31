@@ -50,7 +50,7 @@ export default () => {
 			<div className="container">
 				<div className="row">
 					<div className="col-12">
-						<h3 className="app-header-title">Dynamic Drop Down List from JSON</h3>
+						<h3 className="app-header-title">Demos</h3>
 						<hr />
 
 					</div>

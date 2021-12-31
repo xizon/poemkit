@@ -51982,7 +51982,7 @@ var CascadingDropDownList = /*#__PURE__*/function (_Component) {
     className: "col-12"
   }, /*#__PURE__*/react.createElement("h3", {
     className: "app-header-title"
-  }, "Dynamic Drop Down List from JSON"), /*#__PURE__*/react.createElement("hr", null))))), /*#__PURE__*/react.createElement("section", {
+  }, "Demos"), /*#__PURE__*/react.createElement("hr", null))))), /*#__PURE__*/react.createElement("section", {
     className: "poemkit-spacing--s"
   }, /*#__PURE__*/react.createElement("div", {
     className: "container"

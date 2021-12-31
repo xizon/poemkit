@@ -136,11 +136,8 @@ class Posts extends Component {
 		console.log('[posts list]this.props:');
 		console.log(this.props);
 
-		const { contentInformation } = this.props;
-
 		//from `mapDispatchToProps()`
 		this.props.actionCreators();
-
 
 
 	}
