@@ -214,7 +214,11 @@ const webpackConfig = {
 
 			// specific mappings.
 			// Supports directories and custom aliases for specific files when the express server is running, 
-			// you need to configure the `babel.config.js` and `tsconfig.json` at the same time
+			// you need to configure the following files at the same time:
+			// 1) `babel.config.js`    --> "plugins": [["module-resolver", {"alias": {...}} ]]
+			// 2) `tsconfig.json`      --> "compilerOptions": { "paths": {...} }
+			// 3) `package.json`       --> "jest": { "moduleNameMapper": {...} }
+			
 			'@/config': path.resolve(__dirname, alias.pathConfig),
 			'@/components': path.resolve(__dirname, alias.pathComponents),
 			'@/router': path.resolve(__dirname, alias.pathRouter),
