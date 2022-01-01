@@ -293,7 +293,7 @@ if (process.env.NODE_ENV === 'production') {
 
 ### ⚙️ HTML Template:
 
-Modify the default template `./src/client/views/_html/YOUR_TEMPLATE.html`.It contains the HTML tags that [React Helmet](https://www.npmjs.com/package/react-helmet) needs to use, for example:
+Modify the default template `./src/client/views/_html/index.html`. It will be automatically generated as `./public/index.html`. It contains the HTML tags that [React Helmet](https://www.npmjs.com/package/react-helmet) needs to use, for example:
 
 ```html
 <!DOCTYPE html>

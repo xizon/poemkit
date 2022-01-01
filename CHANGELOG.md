@@ -2,7 +2,7 @@
 
 
 
-#### = 0.2.2 (January 1, 2022) =
+#### = 0.2.3 (January 1, 2022) =
 
 * Tweak: Change the path `@poemkit` to `@` to facilitate the use of Poemkit components in other apps.
 * Tweak: Delete unnecessary parts.

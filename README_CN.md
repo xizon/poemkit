@@ -296,7 +296,7 @@ if (process.env.NODE_ENV === 'production') {
 
 ### ⚙️ HTML模板:
 
-修改默认的HTML模板 `./src/client/views/_html/YOUR_TEMPLATE.html`. 它脑包含了 [React Helmet](https://www.npmjs.com/package/react-helmet) 用于SEO的HTML标签，例如:
+修改默认的HTML模板 `./src/client/views/_html/index.html`， 它将自动生成为`./public/index.html`。 它脑包含了 [React Helmet](https://www.npmjs.com/package/react-helmet) 用于SEO的HTML标签，例如:
 
 ```html
 <!DOCTYPE html>
