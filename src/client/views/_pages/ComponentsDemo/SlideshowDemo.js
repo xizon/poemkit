@@ -1,12 +1,12 @@
 import React from 'react';
-import { __ } from '@poemkit/components/_utils/_all';
-import { Slideshow, SlideshowItem } from '@poemkit/components/Slideshow/index.tsx';
+import { __ } from '@/components/_utils/_all';
+import { Slideshow, SlideshowItem } from '@/components/Slideshow/index.tsx';
 
 //Create or Remove Sidebar Menu
-import { SidebarMenu } from '@poemkit/pages/ComponentsDemo/_SidebarMenu.js';
+import { SidebarMenu } from '@/pages/ComponentsDemo/_SidebarMenu.js';
 
 //get project config
-import { rootDirectory } from '@poemkit/config/websiteConfig.js';
+import { rootDirectory } from '@/config/websiteConfig.js';
 
 
 export default () => {
@@ -236,7 +236,7 @@ export default () => {
 						<article className="poemkit-spacing--s" itemProp="text">
 							<h4>Slideshow</h4>
 							<div>
-								<pre>import {`{Slideshow}`} from '@poemkit/components/Slideshow/index.tsx';</pre>
+								<pre>import {`{Slideshow}`} from '@/components/Slideshow/index.tsx';</pre>
 							</div>
 
 							<div className="table-responsive-md">
@@ -323,7 +323,7 @@ export default () => {
 
 							<h4>Slideshow Item</h4>
 							<div>
-								<pre>import {`{SlideshowItem}`} from '@poemkit/components/Slideshow/index.tsx';</pre>
+								<pre>import {`{SlideshowItem}`} from '@/components/Slideshow/index.tsx';</pre>
 							</div>
 
 

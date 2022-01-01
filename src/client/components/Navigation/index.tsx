@@ -6,28 +6,28 @@
 import React, { Component } from 'react';
 
 /*-- Apply Third-party plugins (import location should be in front of "GLOBAL STYLES") --*/
-import '@poemkit/components/_plugins/_lib-bootstrap';
-import '@poemkit/components/_plugins/_lib-icons';
+import '@/components/_plugins/_lib-bootstrap';
+import '@/components/_plugins/_lib-icons';
 
 
 /*-- Apply global scripts and styles --*/
-import '@poemkit/components/_utils/styles/_all.scss';
-import '@poemkit/components/_utils/styles/rtl/_all.scss';
-import { __ } from '@poemkit/components/_utils/_all';
+import '@/components/_utils/styles/_all.scss';
+import '@/components/_utils/styles/rtl/_all.scss';
+import { __ } from '@/components/_utils/_all';
 
 
 /*-- Apply this component styles --*/
-import '@poemkit/components/Navigation/styles/_primary-navigation.scss';
-import '@poemkit/components/Navigation/styles/_primary-navigation-vertical.scss';
-import '@poemkit/components/Navigation/styles/_mobile-menu.scss';
-import '@poemkit/components/Navigation/styles/rtl/_primary-navigation.scss';
-import '@poemkit/components/Navigation/styles/rtl/_primary-navigation-vertical.scss';
-import '@poemkit/components/Navigation/styles/rtl/_mobile-menu.scss';
+import '@/components/Navigation/styles/_primary-navigation.scss';
+import '@/components/Navigation/styles/_primary-navigation-vertical.scss';
+import '@/components/Navigation/styles/_mobile-menu.scss';
+import '@/components/Navigation/styles/rtl/_primary-navigation.scss';
+import '@/components/Navigation/styles/rtl/_primary-navigation-vertical.scss';
+import '@/components/Navigation/styles/rtl/_mobile-menu.scss';
 
 
 
 //
-import MenuList from '@poemkit/components/Navigation/MenuList';
+import MenuList from '@/components/Navigation/MenuList';
 
 
 type NavigationProps = {

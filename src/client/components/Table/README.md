@@ -1,4 +1,4 @@
-# @poemkit/components/Table
+# @/components/Table
 
 [Source](https://github.com/xizon/poemkit/tree/main/src/client/components/Table)
 
@@ -11,7 +11,7 @@
 
 ### Table
 ```js
-import Table from '@poemkit/components/Table/index.tsx';
+import Table from '@/components/Table/index.tsx';
 ```
 | Property | Type | Default | Description |
 | --- | --- | --- | --- |
@@ -40,7 +40,7 @@ JSON configuration properties of the `data`:
 
 ```js
 import React from 'react';
-import Table from '@poemkit/components/Table/index.tsx';
+import Table from '@/components/Table/index.tsx';
 
 
 

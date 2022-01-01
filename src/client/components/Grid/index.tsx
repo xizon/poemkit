@@ -3,5 +3,5 @@
  * <!-- Grid -->
  *************************************
  */
-export { default as Grid } from '@poemkit/components/Grid/Grid';
-export { default as GridColumn } from '@poemkit/components/Grid/GridColumn';
+export { default as Grid } from '@/components/Grid/Grid';
+export { default as GridColumn } from '@/components/Grid/GridColumn';

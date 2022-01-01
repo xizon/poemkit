@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
-import { __ } from '@poemkit/components/_utils/_all';
-import TableSorterField from '@poemkit/components/TableSorter/TableSorterField';
+import { __ } from '@/components/_utils/_all';
+import TableSorterField from '@/components/TableSorter/TableSorterField';
 
 
 /* Table Sorter Row

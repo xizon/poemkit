@@ -1,4 +1,4 @@
-# @poemkit/components/DropdownMenu
+# @/components/DropdownMenu
 
 [Source](https://github.com/xizon/poemkit/tree/main/src/client/components/DropdownMenu)
 
@@ -10,7 +10,7 @@
 
 ### Dropdown Menu
 ```js
-import DropdownMenu from '@poemkit/components/DropdownMenu/index.tsx';
+import DropdownMenu from '@/components/DropdownMenu/index.tsx';
 ```
 | Property | Type | Default | Description |
 | --- | --- | --- | --- |
@@ -35,7 +35,7 @@ Array configuration properties of the `options`:
 
 ```js
 import React from 'react';
-import DropdownMenu from '@poemkit/components/DropdownMenu/index.tsx';
+import DropdownMenu from '@/components/DropdownMenu/index.tsx';
 
 export default () => {
   return (

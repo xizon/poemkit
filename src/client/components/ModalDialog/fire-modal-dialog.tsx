@@ -1,13 +1,13 @@
-import { __ } from '@poemkit/components/_utils/_all';
+import { __ } from '@/components/_utils/_all';
 
 /*-- Apply Third-party animation plugins --*/
-import TweenMax from '@poemkit/components/_plugins/_lib-gsap';
+import TweenMax from '@/components/_plugins/_lib-gsap';
 
 //Disables body scroll locking
-import { disableBodyScroll } from '@poemkit/components/_plugins/_lib-scrolllock';
+import { disableBodyScroll } from '@/components/_plugins/_lib-scrolllock';
 
 //
-import { closeModalDialog } from '@poemkit/components/ModalDialog/close-modal-dialog';
+import { closeModalDialog } from '@/components/ModalDialog/close-modal-dialog';
 
 declare global {
     interface Window {

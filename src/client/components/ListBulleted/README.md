@@ -1,4 +1,4 @@
-# @poemkit/components/ListBulleted
+# @/components/ListBulleted
 
 [Source](https://github.com/xizon/poemkit/tree/main/src/client/components/ListBulleted)
 
@@ -10,7 +10,7 @@
 
 ### List Bulleted
 ```js
-import { ListBulleted } from '@poemkit/components/ListBulleted/index.tsx';
+import { ListBulleted } from '@/components/ListBulleted/index.tsx';
 ```
 | Property | Type | Default | Description |
 | --- | --- | --- | --- |
@@ -20,7 +20,7 @@ import { ListBulleted } from '@poemkit/components/ListBulleted/index.tsx';
 
 ### List Bulleted Item
 ```js
-import { ListBulletedItem } from '@poemkit/components/ListBulleted/index.tsx';
+import { ListBulletedItem } from '@/components/ListBulleted/index.tsx';
 ```
 | Property | Type | Default | Description |
 | --- | --- | --- | --- |
@@ -32,7 +32,7 @@ import { ListBulletedItem } from '@poemkit/components/ListBulleted/index.tsx';
 
 ```js
 import React from 'react';
-import { ListBulleted, ListBulletedItem } from '@poemkit/components/ListBulleted/index.tsx';
+import { ListBulleted, ListBulletedItem } from '@/components/ListBulleted/index.tsx';
 
 export default () => {
   return (

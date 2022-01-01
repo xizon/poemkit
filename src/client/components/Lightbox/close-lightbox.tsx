@@ -1,7 +1,7 @@
-import { __ } from '@poemkit/components/_utils/_all';
+import { __ } from '@/components/_utils/_all';
 
 //Enables body scroll locking
-import { enableBodyScroll } from '@poemkit/components/_plugins/_lib-scrolllock';
+import { enableBodyScroll } from '@/components/_plugins/_lib-scrolllock';
 
 
 interface closeLightboxConfig {

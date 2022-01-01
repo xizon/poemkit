@@ -1,6 +1,6 @@
 import { useLocation } from 'react-router-dom';
-import customRoutesConfig from '@poemkit/router/RoutesConfig.js';
-import { rootDirectory, siteUrl } from '@poemkit/config/websiteConfig.js';
+import customRoutesConfig from '@/router/RoutesConfig.js';
+import { rootDirectory, siteUrl } from '@/config/websiteConfig.js';
 
 // Note: Each page cannot use the `siteInfo()` function more than once, 
 // and double import `useLocation` will cause an error

@@ -1,4 +1,4 @@
-# @poemkit/components/Gallery
+# @/components/Gallery
 
 [Source](https://github.com/xizon/poemkit/tree/main/src/client/components/Gallery)
 
@@ -10,7 +10,7 @@
 
 ### Gallery
 ```js
-import Gallery from '@poemkit/components/Gallery/index.tsx';
+import Gallery from '@/components/Gallery/index.tsx';
 ```
 | Property | Type | Default | Description |
 | --- | --- | --- | --- |
@@ -32,7 +32,7 @@ Array configuration properties of the `data`:
 
 ```js
 import React from 'react';
-import Gallery from '@poemkit/components/Gallery/index.tsx';
+import Gallery from '@/components/Gallery/index.tsx';
 
 export default () => {
   return (

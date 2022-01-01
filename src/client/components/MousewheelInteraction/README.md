@@ -1,4 +1,4 @@
-# @poemkit/components/MousewheelInteraction
+# @/components/MousewheelInteraction
 
 [Source](https://github.com/xizon/poemkit/tree/main/src/client/components/MousewheelInteraction)
 
@@ -10,7 +10,7 @@
 
 ### Mousewheel Interaction
 ```js
-import MousewheelInteraction from '@poemkit/components/MousewheelInteraction/index.tsx';
+import MousewheelInteraction from '@/components/MousewheelInteraction/index.tsx';
 ```
 | Property | Type | Default | Description |
 | --- | --- | --- | --- |
@@ -23,7 +23,7 @@ import MousewheelInteraction from '@poemkit/components/MousewheelInteraction/ind
 
 ```js
 import React from 'react';
-import MousewheelInteraction from '@poemkit/components/MousewheelInteraction/index.tsx';
+import MousewheelInteraction from '@/components/MousewheelInteraction/index.tsx';
 
 export default () => {
   return (

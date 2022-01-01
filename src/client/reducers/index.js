@@ -1,7 +1,7 @@
 import {combineReducers} from 'redux';
-import demoListReducer from '@poemkit/reducers/demoListReducer.js';
-import demoListDetailReducer from '@poemkit/reducers/demoListDetailReducer.js';
-import demoListPostsPaginationReducer from '@poemkit/reducers/demoListPostsPaginationReducer.js';
+import demoListReducer from '@/reducers/demoListReducer.js';
+import demoListDetailReducer from '@/reducers/demoListDetailReducer.js';
+import demoListPostsPaginationReducer from '@/reducers/demoListPostsPaginationReducer.js';
 
 export default combineReducers({
     listData: demoListReducer,

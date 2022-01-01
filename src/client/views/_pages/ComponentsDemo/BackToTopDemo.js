@@ -1,9 +1,9 @@
 import React from 'react';
-import { __ } from '@poemkit/components/_utils/_all';
-import BackToTop from '@poemkit/components/BackToTop/index.tsx';
+import { __ } from '@/components/_utils/_all';
+import BackToTop from '@/components/BackToTop/index.tsx';
 
 //Create or Remove Sidebar Menu
-import { SidebarMenu } from '@poemkit/pages/ComponentsDemo/_SidebarMenu.js';
+import { SidebarMenu } from '@/pages/ComponentsDemo/_SidebarMenu.js';
 
 export default () => {
 
@@ -94,7 +94,7 @@ export default () => {
 						<article className="poemkit-spacing--s" itemProp="text">
 							<h4>Back To Top</h4>
 							<div>
-								<pre>import BackToTop from '@poemkit/components/BackToTop/index.tsx';</pre>
+								<pre>import BackToTop from '@/components/BackToTop/index.tsx';</pre>
 							</div>
 
 							<div className="table-responsive-md">

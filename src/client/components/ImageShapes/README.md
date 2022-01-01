@@ -1,4 +1,4 @@
-# @poemkit/components/ImageShapes
+# @/components/ImageShapes
 
 [Source](https://github.com/xizon/poemkit/tree/main/src/client/components/ImageShapes)
 
@@ -10,7 +10,7 @@
 
 ### Image Shapes
 ```js
-import ImageShapes from '@poemkit/components/ImageShapes/index.tsx';
+import ImageShapes from '@/components/ImageShapes/index.tsx';
 ```
 | Property | Type | Default | Description |
 | --- | --- | --- | --- |
@@ -37,7 +37,7 @@ Note: SVG code must be a single path, the `containerWidth` and `containerHeight`
 
 ```js
 import React from 'react';
-import ImageShapes from '@poemkit/components/ImageShapes/index.tsx';
+import ImageShapes from '@/components/ImageShapes/index.tsx';
 
 export default () => {
   return (

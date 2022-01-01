@@ -1,6 +1,6 @@
 import { createStore, applyMiddleware } from 'redux';
 import thunk from 'redux-thunk';
-import rootReducer from '@poemkit/reducers/index.js';
+import rootReducer from '@/reducers/index.js';
 
 export default () => {
 	

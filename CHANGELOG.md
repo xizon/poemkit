@@ -1,5 +1,15 @@
 # Changelog
 
+
+
+#### = 0.2.2 (January 1, 2022) =
+
+* Tweak: Change the path `@poemkit` to `@` to facilitate the use of Poemkit components in other apps.
+* Tweak: Delete unnecessary parts.
+* Tweak: Update the https comment of the express server file.
+* Tweak: Refine the documentation section of Environment Variables and HTML Template.
+
+
 #### = 0.2.1 (December 2, 2021) =
 
 * Tweak: Refactor the helper script.

@@ -1,9 +1,9 @@
 import React from 'react';
-import { __ } from '@poemkit/components/_utils/_all';
-import ProgressBar from '@poemkit/components/ProgressBar/index.tsx';
+import { __ } from '@/components/_utils/_all';
+import ProgressBar from '@/components/ProgressBar/index.tsx';
 
 //Create or Remove Sidebar Menu
-import { SidebarMenu } from '@poemkit/pages/ComponentsDemo/_SidebarMenu.js';
+import { SidebarMenu } from '@/pages/ComponentsDemo/_SidebarMenu.js';
 
 export default () => {
 
@@ -203,7 +203,7 @@ export default () => {
 						<article className="poemkit-spacing--s" itemProp="text">
 							<h4>Progress Bar</h4>
 							<div>
-								<pre>import ProgressBar from '@poemkit/components/ProgressBar/index.tsx';</pre>
+								<pre>import ProgressBar from '@/components/ProgressBar/index.tsx';</pre>
 							</div>
 
 							<div className="table-responsive-md">

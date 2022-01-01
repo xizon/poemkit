@@ -5,14 +5,14 @@ import {
 	NavLink,
 	useRouteMatch
 } from 'react-router-dom';
-import { __ } from '@poemkit/components/_utils/_all';
-import Footer from '@poemkit/components/Footer/index.tsx';
+import { __ } from '@/components/_utils/_all';
+import Footer from '@/components/Footer/index.tsx';
 
-import NestedRoutesDetail from '@poemkit/pages/NestedRoutes/NestedRoutesDetail.js';
+import NestedRoutesDetail from '@/pages/NestedRoutes/NestedRoutesDetail.js';
 
 //manage the document head
 import { Helmet } from "react-helmet";
-import siteInfo from '@poemkit/helpers/site-info.js';
+import siteInfo from '@/helpers/site-info.js';
 function SeoVars() {
 	const {siteName, baseURL, pageTitle} = siteInfo('/nested-routes');
 	// if the value of `pageTitle` is `{{pageTitle}}`, the value 

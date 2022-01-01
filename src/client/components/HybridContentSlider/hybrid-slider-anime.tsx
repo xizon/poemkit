@@ -1,7 +1,7 @@
-import { __ } from '@poemkit/components/_utils/_all';
+import { __ } from '@/components/_utils/_all';
 
 /*-- Apply Third-party animation plugins --*/
-import TweenMax from '@poemkit/components/_plugins/_lib-gsap';
+import TweenMax from '@/components/_plugins/_lib-gsap';
 
 declare global {
     interface Window {

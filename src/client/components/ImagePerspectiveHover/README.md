@@ -1,4 +1,4 @@
-# @poemkit/components/ImagePerspectiveHover
+# @/components/ImagePerspectiveHover
 
 [Source](https://github.com/xizon/poemkit/tree/main/src/client/components/ImagePerspectiveHover)
 
@@ -10,7 +10,7 @@
 
 ### Image Perspective Hover
 ```js
-import ImagePerspectiveHover from '@poemkit/components/ImagePerspectiveHover/index.tsx';
+import ImagePerspectiveHover from '@/components/ImagePerspectiveHover/index.tsx';
 ```
 | Property | Type | Default | Description |
 | --- | --- | --- | --- |
@@ -34,7 +34,7 @@ Array configuration properties of the `data`:
 
 ```js
 import React from 'react';
-import ImagePerspectiveHover from '@poemkit/components/ImagePerspectiveHover/index.tsx';
+import ImagePerspectiveHover from '@/components/ImagePerspectiveHover/index.tsx';
 
 export default () => {
   return (

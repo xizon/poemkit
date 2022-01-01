@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
-import { __ } from '@poemkit/components/_utils/_all';
-import TableGridField from '@poemkit/components/TableGrid/TableGridField';
+import { __ } from '@/components/_utils/_all';
+import TableGridField from '@/components/TableGrid/TableGridField';
 
 
 /* Table Grid Row

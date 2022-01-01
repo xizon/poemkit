@@ -1,4 +1,4 @@
-# @poemkit/components/Video
+# @/components/Video
 
 [Source](https://github.com/xizon/poemkit/tree/main/src/client/components/Video)
 
@@ -10,7 +10,7 @@
 
 ### Video
 ```js
-import Video from '@poemkit/components/Video/index.tsx';
+import Video from '@/components/Video/index.tsx';
 ```
 | Property | Type | Default | Description |
 | --- | --- | --- | --- |
@@ -37,7 +37,7 @@ JSON configuration properties of the `config`:
 
 ```js
 import React from 'react';
-import Video from '@poemkit/components/Video/index.tsx';
+import Video from '@/components/Video/index.tsx';
 
 export default () => {
   return (

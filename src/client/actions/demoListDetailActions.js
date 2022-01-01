@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 //get project config
-import { API } from '@poemkit/config/websiteConfig.js';
+import { API } from '@/config/websiteConfig.js';
 
 const actionCreators = (id) => {
 

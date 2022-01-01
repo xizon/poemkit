@@ -1,4 +1,4 @@
-import { __ } from '@poemkit/components/_utils/_all';
+import { __ } from '@/components/_utils/_all';
 
 
 type UpdateFnType = (arg1: number) => number | void;

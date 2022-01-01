@@ -1,4 +1,4 @@
-# @poemkit/components/TableSorter
+# @/components/TableSorter
 
 [Source](https://github.com/xizon/poemkit/tree/main/src/client/components/TableSorter)
 
@@ -11,7 +11,7 @@
 
 ### Table Sorter
 ```js
-import TableSorter from '@poemkit/components/TableSorter/index.tsx';
+import TableSorter from '@/components/TableSorter/index.tsx';
 ```
 | Property | Type | Default | Description |
 | --- | --- | --- | --- |
@@ -39,7 +39,7 @@ JSON configuration properties of the `data`:
 
 ```js
 import React from 'react';
-import TableSorter from '@poemkit/components/TableSorter/index.tsx';
+import TableSorter from '@/components/TableSorter/index.tsx';
 
 
 

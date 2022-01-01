@@ -1,9 +1,9 @@
 import React from 'react';
-import { __ } from '@poemkit/components/_utils/_all';
-import TableGrid from '@poemkit/components/TableGrid/index.tsx';
+import { __ } from '@/components/_utils/_all';
+import TableGrid from '@/components/TableGrid/index.tsx';
 
 //Create or Remove Sidebar Menu
-import { SidebarMenu } from '@poemkit/pages/ComponentsDemo/_SidebarMenu.js';
+import { SidebarMenu } from '@/pages/ComponentsDemo/_SidebarMenu.js';
 
 const data1 = {
 	"headers": ["COLUMN TITLE 1","COLUMN TITLE 2","COLUMN TITLE 3"],
@@ -142,7 +142,7 @@ export default () => {
 						<article className="poemkit-spacing--s" itemProp="text">
 							<h4>Table Grid</h4>
 							<div>
-								<pre>import TableGrid from '@poemkit/components/TableGrid/index.tsx';</pre>
+								<pre>import TableGrid from '@/components/TableGrid/index.tsx';</pre>
 							</div>
 							<div className="table-responsive-md">
 

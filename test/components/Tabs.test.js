@@ -12,14 +12,14 @@ process.on('unhandledRejection', err => {
 
 
 /*
- * @poemkit/components/Tabs
+ * @/components/Tabs
  * ----------------------------------------
  */
 
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { act } from 'react-dom/test-utils';
-import { Tabs, TabList, TabPanel } from '@poemkit/components/Tabs/index.tsx';
+import { Tabs, TabList, TabPanel } from '@/components/Tabs/index.tsx';
 
 let container;
 

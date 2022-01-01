@@ -1,4 +1,4 @@
-# @poemkit/components/Header
+# @/components/Header
 
 [Source](https://github.com/xizon/poemkit/tree/main/src/client/components/Header)
 
@@ -10,7 +10,7 @@
 
 ### Header
 ```js
-import Header from '@poemkit/components/Header/index.tsx';
+import Header from '@/components/Header/index.tsx';
 ```
 | Property | Type | Default | Description |
 | --- | --- | --- | --- |
@@ -24,7 +24,7 @@ import Header from '@poemkit/components/Header/index.tsx';
 
 ```js
 import React from 'react';
-import Header from '@poemkit/components/Header/index.tsx';
+import Header from '@/components/Header/index.tsx';
 import { NavLink } from 'react-router-dom';
 
 const menuListData = [

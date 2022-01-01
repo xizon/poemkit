@@ -1,4 +1,4 @@
-# @poemkit/components/Lightbox
+# @/components/Lightbox
 
 [Source](https://github.com/xizon/poemkit/tree/main/src/client/components/Lightbox)
 
@@ -10,7 +10,7 @@
 
 ### Lightbox
 ```js
-import Lightbox from '@poemkit/components/Lightbox/index.tsx';
+import Lightbox from '@/components/Lightbox/index.tsx';
 ```
 | Property | Type | Default | Description |
 | --- | --- | --- | --- |
@@ -28,7 +28,7 @@ import Lightbox from '@poemkit/components/Lightbox/index.tsx';
 
 ```js
 import React from 'react';
-import Lightbox from '@poemkit/components/Lightbox/index.tsx';
+import Lightbox from '@/components/Lightbox/index.tsx';
 
 export default () => {
   return (

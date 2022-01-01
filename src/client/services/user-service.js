@@ -1,10 +1,10 @@
 import axios from 'axios';
 
 //get project config
-import { API } from '@poemkit/config/websiteConfig.js';
+import { API } from '@/config/websiteConfig.js';
 
 // Authority 
-import authHeader from '@poemkit/helpers/auth-header.js';
+import authHeader from '@/helpers/auth-header.js';
 
 
 

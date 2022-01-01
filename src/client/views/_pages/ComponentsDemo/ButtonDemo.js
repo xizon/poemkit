@@ -1,10 +1,10 @@
 import React from 'react';
-import { __ } from '@poemkit/components/_utils/_all';
-import { Button, ButtonGroup } from '@poemkit/components/Button/index.tsx';
+import { __ } from '@/components/_utils/_all';
+import { Button, ButtonGroup } from '@/components/Button/index.tsx';
 
 
 //Create or Remove Sidebar Menu
-import { SidebarMenu } from '@poemkit/pages/ComponentsDemo/_SidebarMenu.js';
+import { SidebarMenu } from '@/pages/ComponentsDemo/_SidebarMenu.js';
 
 export default () => {
 
@@ -547,7 +547,7 @@ export default () => {
 						<article className="poemkit-spacing--s" itemProp="text">
 							<h4>Button</h4>
 							<div>
-								<pre>import {'{Button}'} from '@poemkit/components/Button/index.tsx';</pre>
+								<pre>import {'{Button}'} from '@/components/Button/index.tsx';</pre>
 							</div>
 							<div className="table-responsive-md">
 								<table className="table table-bordered table-striped">
@@ -636,7 +636,7 @@ export default () => {
 
 							<h4>ButtonGroup</h4>
 							<div>
-								<pre>import {'{ButtonGroup}'} from '@poemkit/components/Button/index.tsx';</pre>
+								<pre>import {'{ButtonGroup}'} from '@/components/Button/index.tsx';</pre>
 							</div>
 							<div className="table-responsive-md">
 								<table className="table table-bordered table-striped mb-5">

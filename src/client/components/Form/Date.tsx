@@ -3,21 +3,21 @@ import moment from "moment";
 
 
 /*-- Apply Third-party plugins (import location should be in front of "GLOBAL STYLES") --*/
-import '@poemkit/components/_plugins/_lib-bootstrap';
-import '@poemkit/components/_plugins/_lib-icons';
+import '@/components/_plugins/_lib-bootstrap';
+import '@/components/_plugins/_lib-icons';
 
 /*-- Apply global scripts and styles --*/
-import '@poemkit/components/_utils/styles/_all.scss';
-import '@poemkit/components/_utils/styles/rtl/_all.scss';
-import { __ } from '@poemkit/components/_utils/_all';
+import '@/components/_utils/styles/_all.scss';
+import '@/components/_utils/styles/rtl/_all.scss';
+import { __ } from '@/components/_utils/_all';
 
 /*-- Apply this component styles --*/
-import '@poemkit/components/Form/styles/_basic.scss';
-import '@poemkit/components/Form/styles/_layout.scss';
-import '@poemkit/components/Form/styles/_theme_material.scss';
-import '@poemkit/components/Form/styles/rtl/_basic.scss';
-import '@poemkit/components/Form/styles/rtl/_layout.scss';
-import '@poemkit/components/Form/styles/rtl/_theme_material.scss';
+import '@/components/Form/styles/_basic.scss';
+import '@/components/Form/styles/_layout.scss';
+import '@/components/Form/styles/_theme_material.scss';
+import '@/components/Form/styles/rtl/_basic.scss';
+import '@/components/Form/styles/rtl/_layout.scss';
+import '@/components/Form/styles/rtl/_theme_material.scss';
 
 
 

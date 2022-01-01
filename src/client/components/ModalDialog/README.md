@@ -1,4 +1,4 @@
-# @poemkit/components/ModalDialog
+# @/components/ModalDialog
 
 [Source](https://github.com/xizon/poemkit/tree/main/src/client/components/ModalDialog)
 
@@ -10,7 +10,7 @@
 
 ### Modal Dialog
 ```js
-import ModalDialog from '@poemkit/components/ModalDialog/index.tsx';
+import ModalDialog from '@/components/ModalDialog/index.tsx';
 ```
 | Property | Type | Default | Description |
 | --- | --- | --- | --- |
@@ -33,7 +33,7 @@ import ModalDialog from '@poemkit/components/ModalDialog/index.tsx';
 
 ```js
 import React from 'react';
-import ModalDialog from '@poemkit/components/ModalDialog/index.tsx';
+import ModalDialog from '@/components/ModalDialog/index.tsx';
 
 export default () => {
   return (

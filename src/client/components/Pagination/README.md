@@ -1,4 +1,4 @@
-# @poemkit/components/Pagination
+# @/components/Pagination
 
 [Source](https://github.com/xizon/poemkit/tree/main/src/client/components/Pagination)
 
@@ -10,7 +10,7 @@
 
 ### Pagination
 ```js
-import Pagination from '@poemkit/components/Pagination/index.tsx';
+import Pagination from '@/components/Pagination/index.tsx';
 ```
 | Property | Type | Default | Description |
 | --- | --- | --- | --- |
@@ -37,7 +37,7 @@ import Pagination from '@poemkit/components/Pagination/index.tsx';
 
 ```js
 import React from 'react';
-import Pagination from '@poemkit/components/Pagination/index.tsx';
+import Pagination from '@/components/Pagination/index.tsx';
 
 
 function gotoPageNumber( number ) {

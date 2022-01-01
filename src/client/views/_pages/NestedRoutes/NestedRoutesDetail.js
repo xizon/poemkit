@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { useParams } from 'react-router-dom';
-import { __ } from '@poemkit/components/_utils/_all';
+import { __ } from '@/components/_utils/_all';
 
 
 function HookTopicId() {

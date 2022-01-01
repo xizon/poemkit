@@ -1,4 +1,4 @@
-# @poemkit/components/AccordionSlider
+# @/components/AccordionSlider
 
 [Source](https://github.com/xizon/poemkit/tree/main/src/client/components/AccordionSlider)
 
@@ -10,7 +10,7 @@
 
 ### Accordion Slider
 ```js
-import { AccordionSlider } from '@poemkit/components/AccordionSlider/index.tsx';
+import { AccordionSlider } from '@/components/AccordionSlider/index.tsx';
 ```
 | Property | Type | Default | Description |
 | --- | --- | --- | --- |
@@ -26,7 +26,7 @@ import { AccordionSlider } from '@poemkit/components/AccordionSlider/index.tsx';
 
 ### Accordion Slider Item
 ```js
-import { AccordionSliderItem } from '@poemkit/components/AccordionSlider/index.tsx';
+import { AccordionSliderItem } from '@/components/AccordionSlider/index.tsx';
 ```
 | Property | Type | Default | Description |
 | --- | --- | --- | --- |
@@ -44,7 +44,7 @@ import { AccordionSliderItem } from '@poemkit/components/AccordionSlider/index.t
 
 ```js
 import React from 'react';
-import { AccordionSlider, AccordionSliderItem } from '@poemkit/components/AccordionSlider/index.tsx';
+import { AccordionSlider, AccordionSliderItem } from '@/components/AccordionSlider/index.tsx';
 
 
 export default () => {

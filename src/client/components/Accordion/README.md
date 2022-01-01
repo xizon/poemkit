@@ -1,4 +1,4 @@
-# @poemkit/components/Accordion
+# @/components/Accordion
 
 [Source](https://github.com/xizon/poemkit/tree/main/src/client/components/Accordion)
 
@@ -10,7 +10,7 @@
 
 ### Accordion
 ```js
-import { Accordion } from '@poemkit/components/Accordion/index.tsx';
+import { Accordion } from '@/components/Accordion/index.tsx';
 ```
 | Property | Type | Default | Description |
 | --- | --- | --- | --- |
@@ -22,7 +22,7 @@ import { Accordion } from '@poemkit/components/Accordion/index.tsx';
 
 ### Accordion Item
 ```js
-import { AccordionItem } from '@poemkit/components/Accordion/index.tsx';
+import { AccordionItem } from '@/components/Accordion/index.tsx';
 ```
 | Property | Type | Default | Description |
 | --- | --- | --- | --- |
@@ -38,7 +38,7 @@ import { AccordionItem } from '@poemkit/components/Accordion/index.tsx';
 
 ```js
 import React from 'react';
-import { Accordion, AccordionItem } from '@poemkit/components/Accordion/index.tsx';
+import { Accordion, AccordionItem } from '@/components/Accordion/index.tsx';
 
 export default () => {
   return (

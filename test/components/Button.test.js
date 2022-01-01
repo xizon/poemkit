@@ -12,7 +12,7 @@ process.on('unhandledRejection', err => {
 
 
 /*
- * @poemkit/components/Button
+ * @/components/Button
  * ----------------------------------------
  */
 
@@ -22,7 +22,7 @@ import '@testing-library/jest-dom';
 
 
 import React from 'react';
-import { Button } from '@poemkit/components/Button/index.tsx';
+import { Button } from '@/components/Button/index.tsx';
 
 
 

@@ -1,4 +1,4 @@
-# @poemkit/components/Rating
+# @/components/Rating
 
 [Source](https://github.com/xizon/poemkit/tree/main/src/client/components/Rating)
 
@@ -10,7 +10,7 @@
 
 ### Rating
 ```js
-import Rating from '@poemkit/components/Rating/index.tsx';
+import Rating from '@/components/Rating/index.tsx';
 ```
 | Property | Type | Default | Description |
 | --- | --- | --- | --- |
@@ -26,7 +26,7 @@ import Rating from '@poemkit/components/Rating/index.tsx';
 
 ```js
 import React from 'react';
-import Rating from '@poemkit/components/Rating/index.tsx';
+import Rating from '@/components/Rating/index.tsx';
 
 export default () => {
   return (

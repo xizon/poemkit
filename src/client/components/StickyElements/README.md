@@ -1,4 +1,4 @@
-# @poemkit/components/StickyElements
+# @/components/StickyElements
 
 [Source](https://github.com/xizon/poemkit/tree/main/src/client/components/StickyElements)
 
@@ -10,7 +10,7 @@
 
 ### Sticky Elements
 ```js
-import Sticky from '@poemkit/components/StickyElements/index.tsx';
+import Sticky from '@/components/StickyElements/index.tsx';
 ```
 | Property | Type | Default | Description |
 | --- | --- | --- | --- |
@@ -25,7 +25,7 @@ The elements you actually want to stick should be wrapped in the `<Sticky />` ta
 
 ```js
 import React from 'react';
-import Sticky from '@poemkit/components/StickyElements/index.tsx';
+import Sticky from '@/components/StickyElements/index.tsx';
 
 export default () => {
   return (

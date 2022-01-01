@@ -19,14 +19,14 @@
 /******/
 /******/
 /* must be placed in the first place */
-@import '@poemkit/components/_utils/styles/_variable-and-mixin.scss';
+@import '@/components/_utils/styles/_variable-and-mixin.scss';
 
 
 /******/
 /******/
 /* base */
-@import '@poemkit/components/_utils/styles/rtl/basic.scss';
-@import '@poemkit/components/_utils/styles/rtl/brand.scss';
-@import '@poemkit/components/_utils/styles/rtl/helper-classes.scss';
-@import '@poemkit/components/_utils/styles/rtl/typography.scss';
+@import '@/components/_utils/styles/rtl/basic.scss';
+@import '@/components/_utils/styles/rtl/brand.scss';
+@import '@/components/_utils/styles/rtl/helper-classes.scss';
+@import '@/components/_utils/styles/rtl/typography.scss';
 

@@ -1,4 +1,4 @@
-# @poemkit/components/SeamlessScrollingElement
+# @/components/SeamlessScrollingElement
 
 [Source](https://github.com/xizon/poemkit/tree/main/src/client/components/SeamlessScrollingElement)
 
@@ -10,7 +10,7 @@
 
 ### Seamless Scrolling Element
 ```js
-import { SeamlessScrollingElement } from '@poemkit/components/SeamlessScrollingElement/index.tsx';
+import { SeamlessScrollingElement } from '@/components/SeamlessScrollingElement/index.tsx';
 ```
 | Property | Type | Default | Description |
 | --- | --- | --- | --- |
@@ -20,7 +20,7 @@ import { SeamlessScrollingElement } from '@poemkit/components/SeamlessScrollingE
 
 ### Seamless Scrolling Element Item
 ```js
-import { SeamlessScrollingElementItem } from '@poemkit/components/SeamlessScrollingElement/index.tsx';
+import { SeamlessScrollingElementItem } from '@/components/SeamlessScrollingElement/index.tsx';
 ```
 | Property | Type | Default | Description |
 | --- | --- | --- | --- |
@@ -31,7 +31,7 @@ import { SeamlessScrollingElementItem } from '@poemkit/components/SeamlessScroll
 
 ```js
 import React from 'react';
-import { SeamlessScrollingElement, SeamlessScrollingElementItem } from '@poemkit/components/SeamlessScrollingElement/index.tsx';
+import { SeamlessScrollingElement, SeamlessScrollingElementItem } from '@/components/SeamlessScrollingElement/index.tsx';
 
 export default () => {
   return (

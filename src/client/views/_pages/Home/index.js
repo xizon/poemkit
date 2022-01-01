@@ -1,15 +1,15 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
-import { __ } from '@poemkit/components/_utils/_all';
-import Footer from '@poemkit/components/Footer/index.tsx';
+import { __ } from '@/components/_utils/_all';
+import Footer from '@/components/Footer/index.tsx';
 
 
 //get project config
-import { rootDirectory } from '@poemkit/config/websiteConfig.js';
+import { rootDirectory } from '@/config/websiteConfig.js';
 
 //manage the document head
 import { Helmet } from "react-helmet";
-import siteInfo from '@poemkit/helpers/site-info.js';
+import siteInfo from '@/helpers/site-info.js';
 function SeoVars() {
 	const {siteName, baseURL, pageTitle} = siteInfo('/index');
 	// if the value of `pageTitle` is `{{pageTitle}}`, the value 

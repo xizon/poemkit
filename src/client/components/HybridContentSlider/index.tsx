@@ -3,5 +3,5 @@
  * <!-- Hybrid Content Slider -->
  *************************************
  */
-export { default as HybridContentSlider } from '@poemkit/components/HybridContentSlider/HybridContentSlider';
-export { default as HybridContentSliderItem } from '@poemkit/components/HybridContentSlider/HybridContentSliderItem';
+export { default as HybridContentSlider } from '@/components/HybridContentSlider/HybridContentSlider';
+export { default as HybridContentSliderItem } from '@/components/HybridContentSlider/HybridContentSliderItem';

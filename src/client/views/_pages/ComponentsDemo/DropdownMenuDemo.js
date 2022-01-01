@@ -1,9 +1,9 @@
 import React from 'react';
-import { __ } from '@poemkit/components/_utils/_all';
-import DropdownMenu from '@poemkit/components/DropdownMenu/index.tsx';
+import { __ } from '@/components/_utils/_all';
+import DropdownMenu from '@/components/DropdownMenu/index.tsx';
 
 //Create or Remove Sidebar Menu
-import { SidebarMenu } from '@poemkit/pages/ComponentsDemo/_SidebarMenu.js';
+import { SidebarMenu } from '@/pages/ComponentsDemo/_SidebarMenu.js';
 
 
 const data1 = [
@@ -130,7 +130,7 @@ export default () => {
 						<article className="poemkit-spacing--s" itemProp="text">
 							<h4>Dropdown Menu</h4>
 							<div>
-								<pre>import DropdownMenu from '@poemkit/components/DropdownMenu/index.tsx';</pre>
+								<pre>import DropdownMenu from '@/components/DropdownMenu/index.tsx';</pre>
 							</div>
 
 							<div className="table-responsive-md">

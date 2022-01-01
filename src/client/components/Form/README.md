@@ -1,4 +1,4 @@
-# @poemkit/components/Form
+# @/components/Form
 
 [Source](https://github.com/xizon/poemkit/tree/main/src/client/components/Form)
 
@@ -11,7 +11,7 @@
 
 ### Input
 ```js
-import { Input } from '@poemkit/components/Form/index.tsx';
+import { Input } from '@/components/Form/index.tsx';
 ```
 | Property | Type | Default | Description |
 | --- | --- | --- | --- |
@@ -35,7 +35,7 @@ It accepts all props which this control support.
 
 ### Password Input
 ```js
-import { PasswordInput } from '@poemkit/components/Form/index.tsx';
+import { PasswordInput } from '@/components/Form/index.tsx';
 ```
 | Property | Type | Default | Description |
 | --- | --- | --- | --- |
@@ -59,7 +59,7 @@ It accepts all props which this control support.
 
 ### Merge Input
 ```js
-import { MergeInput } from '@poemkit/components/Form/index.tsx';
+import { MergeInput } from '@/components/Form/index.tsx';
 ```
 | Property | Type | Default | Description |
 | --- | --- | --- | --- |
@@ -82,7 +82,7 @@ It accepts all props which this control support.
 
 ### Tag Input
 ```js
-import { TagInput } from '@poemkit/components/Form/index.tsx';
+import { TagInput } from '@/components/Form/index.tsx';
 ```
 | Property | Type | Default | Description |
 | --- | --- | --- | --- |
@@ -97,7 +97,7 @@ import { TagInput } from '@poemkit/components/Form/index.tsx';
 
 ### Textarea
 ```js
-import { Textarea } from '@poemkit/components/Form/index.tsx';
+import { Textarea } from '@/components/Form/index.tsx';
 ```
 | Property | Type | Default | Description |
 | --- | --- | --- | --- |
@@ -121,7 +121,7 @@ It accepts all props which this control support.
 
 ### Select
 ```js
-import { Select } from '@poemkit/components/Form/index.tsx';
+import { Select } from '@/components/Form/index.tsx';
 ```
 | Property | Type | Default | Description |
 | --- | --- | --- | --- |
@@ -143,7 +143,7 @@ It accepts all props which this control support.
 
 ### Custom Select
 ```js
-import { CustomSelect } from '@poemkit/components/Form/index.tsx';
+import { CustomSelect } from '@/components/Form/index.tsx';
 ```
 | Property | Type | Default | Description |
 | --- | --- | --- | --- |
@@ -162,7 +162,7 @@ import { CustomSelect } from '@poemkit/components/Form/index.tsx';
 
 ### Checkbox
 ```js
-import { Checkbox } from '@poemkit/components/Form/index.tsx';
+import { Checkbox } from '@/components/Form/index.tsx';
 ```
 | Property | Type | Default | Description |
 | --- | --- | --- | --- |
@@ -180,7 +180,7 @@ It accepts all props which this control support.
 
 ### Radio
 ```js
-import { Radio } from '@poemkit/components/Form/index.tsx';
+import { Radio } from '@/components/Form/index.tsx';
 ```
 | Property | Type | Default | Description |
 | --- | --- | --- | --- |
@@ -193,7 +193,7 @@ import { Radio } from '@poemkit/components/Form/index.tsx';
 
 ### Multiple Select
 ```js
-import { MultiSelect } from '@poemkit/components/Form/index.tsx';
+import { MultiSelect } from '@/components/Form/index.tsx';
 ```
 | Property | Type | Default | Description |
 | --- | --- | --- | --- |
@@ -207,7 +207,7 @@ import { MultiSelect } from '@poemkit/components/Form/index.tsx';
 
 ### Single Select
 ```js
-import { SingleSelect } from '@poemkit/components/Form/index.tsx';
+import { SingleSelect } from '@/components/Form/index.tsx';
 ```
 | Property | Type | Default | Description |
 | --- | --- | --- | --- |
@@ -222,7 +222,7 @@ import { SingleSelect } from '@poemkit/components/Form/index.tsx';
 
 ### Date
 ```js
-import { Date } from '@poemkit/components/Form/index.tsx';
+import { Date } from '@/components/Form/index.tsx';
 ```
 | Property | Type | Default | Description |
 | --- | --- | --- | --- |
@@ -243,7 +243,7 @@ It accepts all props which this control support.
 
 ### Number
 ```js
-import { Number } from '@poemkit/components/Form/index.tsx';
+import { Number } from '@/components/Form/index.tsx';
 ```
 | Property | Type | Default | Description |
 | --- | --- | --- | --- |
@@ -267,7 +267,7 @@ It accepts all props which this control support.
 
 ### Switch
 ```js
-import { Switch } from '@poemkit/components/Form/index.tsx';
+import { Switch } from '@/components/Form/index.tsx';
 ```
 | Property | Type | Default | Description |
 | --- | --- | --- | --- |
@@ -288,7 +288,7 @@ It accepts all props which this control support.
 
 ### Dynamic Fields
 ```js
-import { DynamicFields } from '@poemkit/components/Form/index.tsx';
+import { DynamicFields } from '@/components/Form/index.tsx';
 ```
 | Property | Type | Default | Description |
 | --- | --- | --- | --- |
@@ -301,7 +301,7 @@ import { DynamicFields } from '@poemkit/components/Form/index.tsx';
 
 ### File
 ```js
-import { File } from '@poemkit/components/Form/index.tsx';
+import { File } from '@/components/Form/index.tsx';
 ```
 | Property | Type | Default | Description |
 | --- | --- | --- | --- |
@@ -315,7 +315,7 @@ It accepts all props which this control support.
 
 ### File Field
 ```js
-import { FileField } from '@poemkit/components/Form/index.tsx';
+import { FileField } from '@/components/Form/index.tsx';
 ```
 | Property | Type | Default | Description |
 | --- | --- | --- | --- |
@@ -349,7 +349,7 @@ import {
 	DynamicFields,
 	File,
 	FileField
-} from '@poemkit/components/Form/index.tsx';
+} from '@/components/Form/index.tsx';
 
 
 

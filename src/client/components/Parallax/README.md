@@ -1,4 +1,4 @@
-# @poemkit/components/Parallax
+# @/components/Parallax
 
 [Source](https://github.com/xizon/poemkit/tree/main/src/client/components/Parallax)
 
@@ -10,7 +10,7 @@
 
 ### Parallax
 ```js
-import Parallax from '@poemkit/components/Parallax/index.tsx';
+import Parallax from '@/components/Parallax/index.tsx';
 ```
 | Property | Type | Default | Description |
 | --- | --- | --- | --- |
@@ -30,7 +30,7 @@ import Parallax from '@poemkit/components/Parallax/index.tsx';
 
 ```js
 import React from 'react';
-import Parallax from '@poemkit/components/Parallax/index.tsx';
+import Parallax from '@/components/Parallax/index.tsx';
 
 export default () => {
   return (

@@ -44,6 +44,7 @@ Server runs on `http://localhost:3000`
 
 * [Description](#description)
 * [Installation And Test](#installation-and-test)
+* [Custom Configuration](#custom-configuration)
 * [File Structures](#file-structures)
 * [Contributing](#contributing)
 * [Changelog](#changelog)
@@ -225,8 +226,8 @@ Stop the existing deployments:
 $ npm run destroy
 ```
 
-
-### ⚙️ Note:
+<blockquote>
+<h3>💡 Note:</h3>
  
 **a) ERROR: npm update check failed.**
 
@@ -251,6 +252,124 @@ $ npm install node-sass@4.14.1
 $ sudo npm install
 $ sudo npm rebuild node-sass
 ```
+</blockquote>
+
+
+## Custom Configuration
+
+### ⚙️ Environment Variables:
+
+To disambiguate in your `webpack.config.js` between development and production builds you may use environment variables.
+
+If you want to consider both OS X and Windows, you can use the third-party tool [cross-env](https://www.npmjs.com/package/cross-env)
+
+**Step 1.** Run the command to install cross-env
+
+```sh
+$ npm install --save-dev cross-env
+```
+
+**Step 2.** Further in the file `package.json` in scripts we will indicate the ready-made command for assembly webpack in production version
+
+```json
+"scripts": {
+	"dev": "cross-env NODE_ENV=development nodemon --require ignore-styles --exec ts-node -r tsconfig-paths/register ./src/server/server.js",
+    "build": "cross-env NODE_ENV=production webpack --progress --mode production"
+}
+```
+
+Where through cross-env set variable and value `NODE_ENV=xxx` and then we get this variable during the execution webpack
+
+
+**Step 3.** Further into the configuration file `webpack.config.js` let's apply this check from the object process and further properties env to our variable **NODE_ENV**:
+
+```js
+if (process.env.NODE_ENV === 'production') {
+    // .. тwe apply (or add) some kind of plugin
+}
+```
+
+
+
+### ⚙️ HTML Template:
+
+Modify the default template `./src/client/views/_html/YOUR_TEMPLATE.html`.It contains the HTML tags that [React Helmet](https://www.npmjs.com/package/react-helmet) needs to use, for example:
+
+```html
+<!DOCTYPE html>
+<html {{helmetHtmlAttributes}}>
+	<head>
+		<meta charset="utf-8" />
+		{{helmetTitle}}
+		
+		<!-- manifest.json provides metadata used when your web app is added to the
+             homescreen on Android. See https://developers.google.com/web/fundamentals/engage-and-retain/web-app-manifest/
+		============================================= -->
+		<link rel="manifest" href="@@{website_root_directory}/manifest.json"/>
+        
+		<!-- Mobile Settings
+		============================================= -->
+        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+        <!-- Mobile Settings end -->
+
+		<!-- Compatibility
+		============================================= -->
+        <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+        <!-- Compatibility  end -->
+        
+		<!-- Core & Theme CSS
+		============================================= -->
+        <link rel="stylesheet" href="@@{website_root_directory}/dist/css/poemkit.min.css?ver=@@{website_hash}"/>
+        <!-- Core & Theme CSS  end -->
+
+            
+		<!-- SEO
+		============================================= -->
+		{{helmetMeta}}
+		{{helmetLink}}
+        <meta name="generator" content="@@{website_generator}"/>  
+        <meta name="author" content="@@{website_author}"/> 
+        <!-- SEO  end -->
+
+
+		<!-- Favicons
+		============================================= -->
+		<link rel="icon" href="@@{website_root_directory}/assets/images/favicon/favicon-32x32.png" type="image/x-icon"/>
+		<link rel="shortcut icon" href="@@{website_root_directory}/assets/images/favicon/favicon-32x32.png" sizes="32x32"/>
+		<link rel="apple-touch-icon" href="@@{website_root_directory}/assets/images/favicon/apple-touch-icon-57x57.png"/>
+		<link rel="apple-touch-icon" sizes="72x72" href="@@{website_root_directory}/assets/images/favicon/apple-touch-icon-72x72.png"/>
+		<link rel="apple-touch-icon" sizes="114x114" href="@@{website_root_directory}/assets/images/favicon/apple-touch-icon-114x114.png"/>
+		<!-- Favicons  end -->
+
+  </head>  
+  
+  <body {{helmetBodyAttributes}}>
+
+	  <noscript>
+	      You need to enable JavaScript to run this app.
+	  </noscript>
+	  
+	  <div id="app">{{reactApp}}</div>
+	  
+	<!-- Your Plugins & Theme Scripts
+	============================================= -->
+	<script>
+		var REVISION     = "@@{website_version}",
+			APP_ROOTPATH = {
+				"templateUrl" : "@@{website_root_directory}", //If the file is in the root directory, you can leave it empty. If in another directory, you can write: "/blog"  (but no trailing slash)
+				"homeUrl"     : "",  //Eg. https://uiux.cc
+				"ajaxUrl"     : ""   //Eg. https://uiux.cc/wp-admin/admin-ajax.php
+			};
+    </script>  
+    <script>window.__PRELOADED_STATE__ = {{preloadedState}};</script>
+    <script src="@@{website_root_directory}/dist/js/poemkit.min.js?ver=@@{website_hash}"></script>
+	<!-- Your Plugins & Theme Scripts  end -->
+    
+  </body>
+</html>
+```
+
+The `./public/manifest.json` file is automatically generated based on `./src/config/tmpl-manifest.json`
 
 
 
@@ -283,16 +402,16 @@ resolve: {
 		// specific mappings.
 		// Supports directories and custom aliases for specific files when the express server is running, 
 		// you need to configure the `babel.config.js` and `tsconfig.json` at the same time
-		'@poemkit/config': path.resolve(__dirname, alias.pathConfig ),
-		'@poemkit/components': path.resolve(__dirname, alias.pathComponents ),
-		'@poemkit/router': path.resolve(__dirname, alias.pathRouter ),
-		'@poemkit/helpers': path.resolve(__dirname, alias.pathHelpers ),
-		'@poemkit/services': path.resolve(__dirname, alias.pathServices ),
-		'@poemkit/reducers': path.resolve(__dirname, alias.pathReducers ),
-		'@poemkit/pages': path.resolve(__dirname, alias.pathPages ),
-		'@poemkit/actions': path.resolve(__dirname, alias.pathActions ),
-		'@poemkit/server': path.resolve(__dirname, alias.pathServer ),
-		'@poemkit/store': path.resolve(__dirname, alias.pathStore ),
+		'@/config': path.resolve(__dirname, alias.pathConfig ),
+		'@/components': path.resolve(__dirname, alias.pathComponents ),
+		'@/router': path.resolve(__dirname, alias.pathRouter ),
+		'@/helpers': path.resolve(__dirname, alias.pathHelpers ),
+		'@/services': path.resolve(__dirname, alias.pathServices ),
+		'@/reducers': path.resolve(__dirname, alias.pathReducers ),
+		'@/pages': path.resolve(__dirname, alias.pathPages ),
+		'@/actions': path.resolve(__dirname, alias.pathActions ),
+		'@/server': path.resolve(__dirname, alias.pathServer ),
+		'@/store': path.resolve(__dirname, alias.pathStore ),
 
 	}
 },
@@ -307,16 +426,16 @@ resolve: {
 	["module-resolver", {
 	  "root": ["./src"],
 	  "alias": {
-		"@poemkit/config": "./src/config",
-		"@poemkit/components": "./src/client/components",
-		"@poemkit/router": "./src/client/router",
-		"@poemkit/helpers": "./src/client/helpers",
-		"@poemkit/services": "./src/client/services",
-		"@poemkit/reducers": "./src/client/reducers",
-		"@poemkit/pages": "./src/client/views/_pages",
-		"@poemkit/actions": "./src/client/actions",
-		"@poemkit/server": "./src/server",
-		"@poemkit/store": "./src/store"
+		"@/config": "./src/config",
+		"@/components": "./src/client/components",
+		"@/router": "./src/client/router",
+		"@/helpers": "./src/client/helpers",
+		"@/services": "./src/client/services",
+		"@/reducers": "./src/client/reducers",
+		"@/pages": "./src/client/views/_pages",
+		"@/actions": "./src/client/actions",
+		"@/server": "./src/server",
+		"@/store": "./src/store"
 	  }
 	}]
   ]
@@ -331,16 +450,16 @@ resolve: {
   "compilerOptions": {
     "baseUrl": "./src",
     "paths": {
-        "@poemkit/config/*": ["config/*"],
-        "@poemkit/components/*": ["client/components/*"],
-        "@poemkit/router/*": ["client/router/*"],
-        "@poemkit/helpers/*": ["client/helpers/*"],
-        "@poemkit/services/*": ["client/services/*"],
-        "@poemkit/reducers/*": ["client/reducers/*"],
-        "@poemkit/pages/*": ["client/views/_pages/*"],
-        "@poemkit/actions/*": ["client/actions/*"],
-        "@poemkit/server/*": ["server/*"],
-        "@poemkit/store/*": ["store/*"]
+        "@/config/*": ["config/*"],
+        "@/components/*": ["client/components/*"],
+        "@/router/*": ["client/router/*"],
+        "@/helpers/*": ["client/helpers/*"],
+        "@/services/*": ["client/services/*"],
+        "@/reducers/*": ["client/reducers/*"],
+        "@/pages/*": ["client/views/_pages/*"],
+        "@/actions/*": ["client/actions/*"],
+        "@/server/*": ["server/*"],
+        "@/store/*": ["store/*"]
     }
   }
 }
@@ -355,16 +474,16 @@ resolve: {
     "testEnvironment": "jsdom",
     "moduleNameMapper": {
       "\\.(css|less|scss|sass)$": "identity-obj-proxy",
-      "^@poemkit/config/(.*)": "<rootDir>/src/config/$1",
-      "^@poemkit/components/(.*)": "<rootDir>/src/client/components/$1",
-      "^@poemkit/router/(.*)": "<rootDir>/src/client/router/$1",
-      "^@poemkit/helpers/(.*)": "<rootDir>/src/client/helpers/$1",
-      "^@poemkit/services/(.*)": "<rootDir>/src/client/services/$1",
-      "^@poemkit/reducers/(.*)": "<rootDir>/src/client/reducers/$1",
-      "^@poemkit/pages/(.*)": "<rootDir>/src/client/views/_pages/$1",
-      "^@poemkit/actions/(.*)": "<rootDir>/src/client/actions/$1",
-      "^@poemkit/server/(.*)": "<rootDir>/src/server/$1",
-      "^@poemkit/store/(.*)": "<rootDir>/src/store/$1"
+      "^@/config/(.*)": "<rootDir>/src/config/$1",
+      "^@/components/(.*)": "<rootDir>/src/client/components/$1",
+      "^@/router/(.*)": "<rootDir>/src/client/router/$1",
+      "^@/helpers/(.*)": "<rootDir>/src/client/helpers/$1",
+      "^@/services/(.*)": "<rootDir>/src/client/services/$1",
+      "^@/reducers/(.*)": "<rootDir>/src/client/reducers/$1",
+      "^@/pages/(.*)": "<rootDir>/src/client/views/_pages/$1",
+      "^@/actions/(.*)": "<rootDir>/src/client/actions/$1",
+      "^@/server/(.*)": "<rootDir>/src/server/$1",
+      "^@/store/(.*)": "<rootDir>/src/store/$1"
     },
     "transform": {
       "^.+\\.(js|jsx)$": "babel-jest",

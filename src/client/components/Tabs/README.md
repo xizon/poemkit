@@ -1,4 +1,4 @@
-# @poemkit/components/Tabs
+# @/components/Tabs
 
 [Source](https://github.com/xizon/poemkit/tree/main/src/client/components/Tabs)
 
@@ -10,7 +10,7 @@
 
 ### Tabs
 ```js
-import { Tabs } from '@poemkit/components/Tabs/index.tsx';
+import { Tabs } from '@/components/Tabs/index.tsx';
 ```
 | Property | Type | Default | Description |
 | --- | --- | --- | --- |
@@ -24,7 +24,7 @@ import { Tabs } from '@poemkit/components/Tabs/index.tsx';
 
 ### Tab List
 ```js
-import { TabList } from '@poemkit/components/Tabs/index.tsx';
+import { TabList } from '@/components/Tabs/index.tsx';
 ```
 | Property | Type | Default | Description |
 | --- | --- | --- | --- |
@@ -34,7 +34,7 @@ import { TabList } from '@poemkit/components/Tabs/index.tsx';
 
 ### Tab Panel
 ```js
-import { TabPanel } from '@poemkit/components/Tabs/index.tsx';
+import { TabPanel } from '@/components/Tabs/index.tsx';
 ```
 | Property | Type | Default | Description |
 | --- | --- | --- | --- |
@@ -51,7 +51,7 @@ It accepts all props(include data-* attributes) which native div support.
 
 ```js
 import React from 'react';
-import { Tabs, TabList, TabPanel } from '@poemkit/components/Tabs/index.tsx';
+import { Tabs, TabList, TabPanel } from '@/components/Tabs/index.tsx';
 
 
 export default () => {

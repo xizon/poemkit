@@ -1,4 +1,4 @@
-# @poemkit/components/ContentPlaceholder
+# @/components/ContentPlaceholder
 
 [Source](https://github.com/xizon/poemkit/tree/main/src/client/components/ContentPlaceholder)
 
@@ -10,7 +10,7 @@
 
 ### Content Placeholder
 ```js
-import ContentPlaceholder from '@poemkit/components/ContentPlaceholder/index.tsx';
+import ContentPlaceholder from '@/components/ContentPlaceholder/index.tsx';
 ```
 | Property | Type | Default | Description |
 | --- | --- | --- | --- |
@@ -22,7 +22,7 @@ import ContentPlaceholder from '@poemkit/components/ContentPlaceholder/index.tsx
 
 ```js
 import React from 'react';
-import ContentPlaceholder from '@poemkit/components/ContentPlaceholder/index.tsx';
+import ContentPlaceholder from '@/components/ContentPlaceholder/index.tsx';
 
 export default () => {
   return (

@@ -1,4 +1,4 @@
-# @poemkit/components/Timeline
+# @/components/Timeline
 
 [Source](https://github.com/xizon/poemkit/tree/main/src/client/components/Timeline)
 
@@ -10,7 +10,7 @@
 
 ### Timeline
 ```js
-import Timeline from '@poemkit/components/Timeline/index.tsx';
+import Timeline from '@/components/Timeline/index.tsx';
 ```
 | Property | Type | Default | Description |
 | --- | --- | --- | --- |
@@ -41,7 +41,7 @@ Array configuration properties of the `data`:
 
 ```js
 import React from 'react';
-import Timeline from '@poemkit/components/Timeline/index.tsx';
+import Timeline from '@/components/Timeline/index.tsx';
 
 
 const data = [

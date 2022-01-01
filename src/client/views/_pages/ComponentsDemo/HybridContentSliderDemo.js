@@ -1,12 +1,12 @@
 import React from 'react';
-import { __ } from '@poemkit/components/_utils/_all';
-import { HybridContentSlider, HybridContentSliderItem } from '@poemkit/components/HybridContentSlider/index.tsx';
+import { __ } from '@/components/_utils/_all';
+import { HybridContentSlider, HybridContentSliderItem } from '@/components/HybridContentSlider/index.tsx';
 
 //Create or Remove Sidebar Menu
-import { SidebarMenu } from '@poemkit/pages/ComponentsDemo/_SidebarMenu.js';
+import { SidebarMenu } from '@/pages/ComponentsDemo/_SidebarMenu.js';
 
 //get project config
-import { rootDirectory } from '@poemkit/config/websiteConfig.js';
+import { rootDirectory } from '@/config/websiteConfig.js';
 
 
 export default () => {
@@ -352,7 +352,7 @@ export default () => {
 						<article className="poemkit-spacing--s" itemProp="text">
 							<h4>Hybrid Content Slider</h4>
 							<div>
-								<pre>import {`{HybridContentSlider}`} from '@poemkit/components/HybridContentSlider/index.tsx';</pre>
+								<pre>import {`{HybridContentSlider}`} from '@/components/HybridContentSlider/index.tsx';</pre>
 							</div>
 
 							<div className="table-responsive-md">
@@ -452,7 +452,7 @@ export default () => {
 
 							<h4>Hybrid Content Slider Item</h4>
 							<div>
-								<pre>import {`{HybridContentSliderItem}`} from '@poemkit/components/HybridContentSlider/index.tsx';</pre>
+								<pre>import {`{HybridContentSliderItem}`} from '@/components/HybridContentSlider/index.tsx';</pre>
 							</div>
 
 							<div className="table-responsive-md">

@@ -5,7 +5,7 @@
   "projectName": "PoemKit",
   "createdInfo": "UIUX Lab (https://uiux.cc)",
   "projectURL": "https://uiux.cc",
-  "version": "0.2.1",
+  "version": "0.2.2",
   "description": "React toolkit for building a full website that also is a Micro-Frontend Architecture.",
   "main": "dist/js/poemkit.js",
   "directories": {
@@ -36,16 +36,16 @@
     "testEnvironment": "jsdom",
     "moduleNameMapper": {
       "\\.(css|less|scss|sass)$": "identity-obj-proxy",
-      "^@poemkit/config/(.*)": "<rootDir>/src/config/$1",
-      "^@poemkit/components/(.*)": "<rootDir>/src/client/components/$1",
-      "^@poemkit/router/(.*)": "<rootDir>/src/client/router/$1",
-      "^@poemkit/helpers/(.*)": "<rootDir>/src/client/helpers/$1",
-      "^@poemkit/services/(.*)": "<rootDir>/src/client/services/$1",
-      "^@poemkit/reducers/(.*)": "<rootDir>/src/client/reducers/$1",
-      "^@poemkit/pages/(.*)": "<rootDir>/src/client/views/_pages/$1",
-      "^@poemkit/actions/(.*)": "<rootDir>/src/client/actions/$1",
-      "^@poemkit/server/(.*)": "<rootDir>/src/server/$1",
-      "^@poemkit/store/(.*)": "<rootDir>/src/store/$1"
+      "^@/config/(.*)": "<rootDir>/src/config/$1",
+      "^@/components/(.*)": "<rootDir>/src/client/components/$1",
+      "^@/router/(.*)": "<rootDir>/src/client/router/$1",
+      "^@/helpers/(.*)": "<rootDir>/src/client/helpers/$1",
+      "^@/services/(.*)": "<rootDir>/src/client/services/$1",
+      "^@/reducers/(.*)": "<rootDir>/src/client/reducers/$1",
+      "^@/pages/(.*)": "<rootDir>/src/client/views/_pages/$1",
+      "^@/actions/(.*)": "<rootDir>/src/client/actions/$1",
+      "^@/server/(.*)": "<rootDir>/src/server/$1",
+      "^@/store/(.*)": "<rootDir>/src/store/$1"
     },
     "transform": {
       "^.+\\.(js|jsx)$": "babel-jest",

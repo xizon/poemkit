@@ -1,4 +1,4 @@
-# @poemkit/components/Button
+# @/components/Button
 
 [Source](https://github.com/xizon/poemkit/tree/main/src/client/components/Button)
 
@@ -11,7 +11,7 @@
 
 ### Button
 ```js
-import { Button } from '@poemkit/components/Button/index.tsx';
+import { Button } from '@/components/Button/index.tsx';
 ```
 | Property | Type | Default | Description |
 | --- | --- | --- | --- |
@@ -34,7 +34,7 @@ It accepts all props(include data-* attributes) which native buttons support.
 
 ### ButtonGroup
 ```js
-import { ButtonGroup } from '@poemkit/components/Button/index.tsx';
+import { ButtonGroup } from '@/components/Button/index.tsx';
 ```
 | Property | Type | Default | Description |
 | --- | --- | --- | --- |
@@ -46,7 +46,7 @@ import { ButtonGroup } from '@poemkit/components/Button/index.tsx';
 
 ```js
 import React from 'react';
-import { Button, ButtonGroup } from '@poemkit/components/Button/index.tsx';
+import { Button, ButtonGroup } from '@/components/Button/index.tsx';
 
 
 export default () => {

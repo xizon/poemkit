@@ -1,4 +1,4 @@
-# @poemkit/components/Counter
+# @/components/Counter
 
 [Source](https://github.com/xizon/poemkit/tree/main/src/client/components/Counter)
 
@@ -10,7 +10,7 @@
 
 ### Counter
 ```js
-import Counter from '@poemkit/components/Counter/index.tsx';
+import Counter from '@/components/Counter/index.tsx';
 ```
 | Property | Type | Default | Description |
 | --- | --- | --- | --- |
@@ -28,7 +28,7 @@ import Counter from '@poemkit/components/Counter/index.tsx';
 
 ```js
 import React from 'react';
-import Counter from '@poemkit/components/Counter/index.tsx';
+import Counter from '@/components/Counter/index.tsx';
 
 export default () => {
   return (

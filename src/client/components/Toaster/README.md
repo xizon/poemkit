@@ -1,4 +1,4 @@
-# @poemkit/components/Toaster
+# @/components/Toaster
 
 [Source](https://github.com/xizon/poemkit/tree/main/src/client/components/Toaster)
 
@@ -10,7 +10,7 @@
 
 ### Toaster
 ```js
-import Toaster from '@poemkit/components/Toaster/index.tsx';
+import Toaster from '@/components/Toaster/index.tsx';
 ```
 | Property | Type | Default | Description |
 | --- | --- | --- | --- |
@@ -33,7 +33,7 @@ Array configuration properties of the `data`:
 
 ```js
 import React from 'react';
-import Toaster from '@poemkit/components/Toaster/index.tsx';
+import Toaster from '@/components/Toaster/index.tsx';
 
 export default () => {
   return (

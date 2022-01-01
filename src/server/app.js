@@ -1,9 +1,9 @@
 import express from 'express';
 import { matchRoutes } from 'react-router-config';
-import render from '@poemkit/server/renderer.js';
-import createNewStore from '@poemkit/store/createStore.js';
+import render from '@/server/renderer.js';
+import createNewStore from '@/store/createStore.js';
 
-import customRoutesConfig from '@poemkit/router/RoutesConfig.js';
+import customRoutesConfig from '@/router/RoutesConfig.js';
 
 //
 import compression from 'compression';

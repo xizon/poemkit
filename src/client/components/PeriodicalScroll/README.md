@@ -1,4 +1,4 @@
-# @poemkit/components/PeriodicalScroll
+# @/components/PeriodicalScroll
 
 [Source](https://github.com/xizon/poemkit/tree/main/src/client/components/PeriodicalScroll)
 
@@ -10,7 +10,7 @@
 
 ### Periodical Scroll
 ```js
-import { PeriodicalScroll } from '@poemkit/components/PeriodicalScroll/index.tsx';
+import { PeriodicalScroll } from '@/components/PeriodicalScroll/index.tsx';
 ```
 | Property | Type | Default | Description |
 | --- | --- | --- | --- |
@@ -20,7 +20,7 @@ import { PeriodicalScroll } from '@poemkit/components/PeriodicalScroll/index.tsx
 
 ### Periodical Scroll Item
 ```js
-import { PeriodicalScrollItem } from '@poemkit/components/PeriodicalScroll/index.tsx';
+import { PeriodicalScrollItem } from '@/components/PeriodicalScroll/index.tsx';
 ```
 | Property | Type | Default | Description |
 | --- | --- | --- | --- |
@@ -33,7 +33,7 @@ import { PeriodicalScrollItem } from '@poemkit/components/PeriodicalScroll/index
 
 ```js
 import React from 'react';
-import { PeriodicalScroll, PeriodicalScrollItem } from '@poemkit/components/PeriodicalScroll/index.tsx';
+import { PeriodicalScroll, PeriodicalScrollItem } from '@/components/PeriodicalScroll/index.tsx';
 
 export default () => {
   return (

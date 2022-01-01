@@ -1,10 +1,10 @@
 import React from 'react';
-import { __ } from '@poemkit/components/_utils/_all';
-import Swiper from '@poemkit/components/Swiper/index.tsx';
+import { __ } from '@/components/_utils/_all';
+import Swiper from '@/components/Swiper/index.tsx';
 
 
 //Create or Remove Sidebar Menu
-import { SidebarMenu } from '@poemkit/pages/ComponentsDemo/_SidebarMenu.js';
+import { SidebarMenu } from '@/pages/ComponentsDemo/_SidebarMenu.js';
 
 
 export default () => {
@@ -64,7 +64,7 @@ export default () => {
 						<article className="poemkit-spacing--s" itemProp="text">
 							<h4>Swiper</h4>
 							<div>
-								<pre>import Swiper from '@poemkit/components/Swiper/index.tsx';</pre>
+								<pre>import Swiper from '@/components/Swiper/index.tsx';</pre>
 							</div>
 							<div className="table-responsive-md">
 								<table className="table table-bordered table-striped mb-5">

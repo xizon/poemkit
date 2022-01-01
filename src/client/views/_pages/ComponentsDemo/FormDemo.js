@@ -1,5 +1,5 @@
 import React from 'react';
-import { __ } from '@poemkit/components/_utils/_all';
+import { __ } from '@/components/_utils/_all';
 import {
 	Input,
 	PasswordInput,
@@ -18,11 +18,11 @@ import {
 	DynamicFields,
 	File,
 	FileField
-} from '@poemkit/components/Form/index.tsx';
+} from '@/components/Form/index.tsx';
 
 
 //Create or Remove Sidebar Menu
-import { SidebarMenu } from '@poemkit/pages/ComponentsDemo/_SidebarMenu.js';
+import { SidebarMenu } from '@/pages/ComponentsDemo/_SidebarMenu.js';
 
 export default () => {
 
@@ -1665,7 +1665,7 @@ export default () => {
 						<article className="poemkit-spacing--s" itemProp="text">
 							<h4>Input</h4>
 							<div>
-								<pre>import {`{Input}`} from '@poemkit/components/Form/index.tsx';</pre>
+								<pre>import {`{Input}`} from '@/components/Form/index.tsx';</pre>
 							</div>
 							<div className="table-responsive-md">
 								<table className="table table-bordered table-striped">
@@ -1768,7 +1768,7 @@ export default () => {
 
 							<h4>Password Input</h4>
 							<div>
-								<pre>import {`{PasswordInput}`} from '@poemkit/components/Form/index.tsx';</pre>
+								<pre>import {`{PasswordInput}`} from '@/components/Form/index.tsx';</pre>
 							</div>
 							<div className="table-responsive-md">
 								<table className="table table-bordered table-striped">
@@ -1865,7 +1865,7 @@ export default () => {
 
 							<h4>Merge Input</h4>
 							<div>
-								<pre>import {`{MergeInput}`} from '@poemkit/components/Form/index.tsx';</pre>
+								<pre>import {`{MergeInput}`} from '@/components/Form/index.tsx';</pre>
 							</div>
 							<div className="table-responsive-md">
 								<table className="table table-bordered table-striped">
@@ -1957,7 +1957,7 @@ export default () => {
 
 							<h4>Tag Input</h4>
 							<div>
-								<pre>import {`{TagInput}`} from '@poemkit/components/Form/index.tsx';</pre>
+								<pre>import {`{TagInput}`} from '@/components/Form/index.tsx';</pre>
 							</div>
 							<div className="table-responsive-md">
 								<table className="table table-bordered table-striped mb-5">
@@ -2023,7 +2023,7 @@ export default () => {
 
 							<h4>Textarea</h4>
 							<div>
-								<pre>import {`{Textarea}`} from '@poemkit/components/Form/index.tsx';</pre>
+								<pre>import {`{Textarea}`} from '@/components/Form/index.tsx';</pre>
 							</div>
 							<div className="table-responsive-md">
 								<table className="table table-bordered table-striped">
@@ -2123,7 +2123,7 @@ export default () => {
 
 							<h4>Select</h4>
 							<div>
-								<pre>import {`{Select}`} from '@poemkit/components/Form/index.tsx';</pre>
+								<pre>import {`{Select}`} from '@/components/Form/index.tsx';</pre>
 							</div>
 							<div className="table-responsive-md">
 								<table className="table table-bordered table-striped">
@@ -2203,7 +2203,7 @@ export default () => {
 
 							<h4>Custom Select</h4>
 							<div>
-								<pre>import {`{CustomSelect}`} from '@poemkit/components/Form/index.tsx';</pre>
+								<pre>import {`{CustomSelect}`} from '@/components/Form/index.tsx';</pre>
 							</div>
 							<div className="table-responsive-md">
 								<table className="table table-bordered table-striped mb-5">
@@ -2290,7 +2290,7 @@ export default () => {
 
 							<h4>Checkbox</h4>
 							<div>
-								<pre>import {`{Checkbox}`} from '@poemkit/components/Form/index.tsx';</pre>
+								<pre>import {`{Checkbox}`} from '@/components/Form/index.tsx';</pre>
 							</div>
 							<div className="table-responsive-md">
 								<table className="table table-bordered table-striped">
@@ -2347,7 +2347,7 @@ export default () => {
 
 							<h4>Radio</h4>
 							<div>
-								<pre>import {`{Radio}`} from '@poemkit/components/Form/index.tsx';</pre>
+								<pre>import {`{Radio}`} from '@/components/Form/index.tsx';</pre>
 							</div>
 							<div className="table-responsive-md">
 								<table className="table table-bordered table-striped mb-5">
@@ -2402,7 +2402,7 @@ export default () => {
 
 							<h4>Multiple Select</h4>
 							<div>
-								<pre>import {`{MultiSelect}`} from '@poemkit/components/Form/index.tsx';</pre>
+								<pre>import {`{MultiSelect}`} from '@/components/Form/index.tsx';</pre>
 							</div>
 							<div className="table-responsive-md">
 								<table className="table table-bordered table-striped mb-5">
@@ -2456,7 +2456,7 @@ export default () => {
 
 							<h4>Single Select</h4>
 							<div>
-								<pre>import {`{SingleSelect}`} from '@poemkit/components/Form/index.tsx';</pre>
+								<pre>import {`{SingleSelect}`} from '@/components/Form/index.tsx';</pre>
 							</div>
 							<div className="table-responsive-md">
 								<table className="table table-bordered table-striped mb-5">
@@ -2522,7 +2522,7 @@ export default () => {
 
 							<h4>Date</h4>
 							<div>
-								<pre>import {`{Date}`} from '@poemkit/components/Form/index.tsx';</pre>
+								<pre>import {`{Date}`} from '@/components/Form/index.tsx';</pre>
 							</div>
 							<div className="table-responsive-md">
 								<table className="table table-bordered table-striped">
@@ -2602,7 +2602,7 @@ export default () => {
 
 							<h4>Number</h4>
 							<div>
-								<pre>import {`{Number}`} from '@poemkit/components/Form/index.tsx';</pre>
+								<pre>import {`{Number}`} from '@/components/Form/index.tsx';</pre>
 							</div>
 							<div className="table-responsive-md">
 								<table className="table table-bordered table-striped">
@@ -2695,7 +2695,7 @@ export default () => {
 
 							<h4>Switch</h4>
 							<div>
-								<pre>import {`{Switch}`} from '@poemkit/components/Form/index.tsx';</pre>
+								<pre>import {`{Switch}`} from '@/components/Form/index.tsx';</pre>
 							</div>
 							<div className="table-responsive-md">
 								<table className="table table-bordered table-striped">
@@ -2776,7 +2776,7 @@ export default () => {
 
 							<h4>Dynamic Fields</h4>
 							<div>
-								<pre>import {`{DynamicFields}`} from '@poemkit/components/Form/index.tsx';</pre>
+								<pre>import {`{DynamicFields}`} from '@/components/Form/index.tsx';</pre>
 							</div>
 							<div className="table-responsive-md">
 								<table className="table table-bordered table-striped mb-5">
@@ -2831,7 +2831,7 @@ export default () => {
 
 							<h4>File</h4>
 							<div>
-								<pre>import {`{File}`} from '@poemkit/components/Form/index.tsx';</pre>
+								<pre>import {`{File}`} from '@/components/Form/index.tsx';</pre>
 							</div>
 							<div className="table-responsive-md">
 								<table className="table table-bordered table-striped">
@@ -2881,7 +2881,7 @@ export default () => {
 
 							<h4>File Field</h4>
 							<div>
-								<pre>import {`{FileField}`} from '@poemkit/components/Form/index.tsx';</pre>
+								<pre>import {`{FileField}`} from '@/components/Form/index.tsx';</pre>
 							</div>
 							<div className="table-responsive-md">
 								<table className="table table-bordered table-striped">

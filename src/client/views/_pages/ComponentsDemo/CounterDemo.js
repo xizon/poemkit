@@ -1,9 +1,9 @@
 import React from 'react';
-import { __ } from '@poemkit/components/_utils/_all';
-import Counter from '@poemkit/components/Counter/index.tsx';
+import { __ } from '@/components/_utils/_all';
+import Counter from '@/components/Counter/index.tsx';
 
 //Create or Remove Sidebar Menu
-import { SidebarMenu } from '@poemkit/pages/ComponentsDemo/_SidebarMenu.js';
+import { SidebarMenu } from '@/pages/ComponentsDemo/_SidebarMenu.js';
 
 export default () => {
 
@@ -220,7 +220,7 @@ export default () => {
 						<article className="poemkit-spacing--s" itemProp="text">
 							<h4>Counter</h4>
 							<div>
-								<pre>import Counter from '@poemkit/components/Counter/index.tsx';</pre>
+								<pre>import Counter from '@/components/Counter/index.tsx';</pre>
 							</div>
 
 							<div className="table-responsive-md">

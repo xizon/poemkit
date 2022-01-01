@@ -1,4 +1,4 @@
-# @poemkit/components/Navigation
+# @/components/Navigation
 
 [Source](https://github.com/xizon/poemkit/tree/main/src/client/components/Navigation)
 
@@ -10,7 +10,7 @@
 
 ### Navigation
 ```js
-import Navigation from '@poemkit/components/Navigation/index.tsx';
+import Navigation from '@/components/Navigation/index.tsx';
 ```
 | Property | Type | Default | Description |
 | --- | --- | --- | --- |
@@ -52,7 +52,7 @@ JSON configuration properties of the `mega`:
 
 ```js
 import React from 'react';
-import Navigation from '@poemkit/components/Navigation/index.tsx';
+import Navigation from '@/components/Navigation/index.tsx';
 import { NavLink } from 'react-router-dom';
 
 const menuListData = [

@@ -12,13 +12,13 @@ process.on('unhandledRejection', err => {
 
 
 /*
- * @poemkit/components/InfiniteScroll
+ * @/components/InfiniteScroll
  * ----------------------------------------
  */
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { act } from 'react-dom/test-utils';
-import InfiniteScroll from '@poemkit/components/InfiniteScroll/index.tsx';
+import InfiniteScroll from '@/components/InfiniteScroll/index.tsx';
 
 
 
@@ -26,7 +26,7 @@ import InfiniteScroll from '@poemkit/components/InfiniteScroll/index.tsx';
 //-------------------------------------
 import axios from 'axios';
 //get project config
-import { API } from '@poemkit/config/websiteConfig.js';
+import { API } from '@/config/websiteConfig.js';
 
 
 jest.mock('axios');

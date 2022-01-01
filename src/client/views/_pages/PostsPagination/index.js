@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { __ } from '@poemkit/components/_utils/_all';
-import { actionCreatorOfGetDataInitial, actionCreatorOfGetDataByPage } from '@poemkit/actions/demoListPostsPaginationActions.js';
-import Pagination from '@poemkit/components/Pagination/index.tsx';
-import Footer from '@poemkit/components/Footer/index.tsx';
-import Item from '@poemkit/pages/PostsPagination/Item.js';
+import { __ } from '@/components/_utils/_all';
+import { actionCreatorOfGetDataInitial, actionCreatorOfGetDataByPage } from '@/actions/demoListPostsPaginationActions.js';
+import Pagination from '@/components/Pagination/index.tsx';
+import Footer from '@/components/Footer/index.tsx';
+import Item from '@/pages/PostsPagination/Item.js';
 
 //
 let PAGE_TITLE = null;
@@ -12,7 +12,7 @@ let SITE_NAME = null;
 
 //manage the document head
 import { Helmet } from "react-helmet";
-import siteInfo from '@poemkit/helpers/site-info.js';
+import siteInfo from '@/helpers/site-info.js';
 function SeoVars() {
 	const {siteName, baseURL, pageTitle} = siteInfo('/posts-pagination');
 	// if the value of `pageTitle` is `{{pageTitle}}`, the value 

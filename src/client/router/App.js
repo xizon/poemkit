@@ -7,15 +7,15 @@ import {
 	useLocation
 } from 'react-router-dom';
 
-import customRoutesConfig from '@poemkit/router/RoutesConfig.js';
-import Header from '@poemkit/components/Header/index.tsx';
+import customRoutesConfig from '@/router/RoutesConfig.js';
+import Header from '@/components/Header/index.tsx';
 
 //Create or Remove Sidebar Menu
-import { SidebarMenu } from '@poemkit/pages/ComponentsDemo/_SidebarMenu.js';
+import { SidebarMenu } from '@/pages/ComponentsDemo/_SidebarMenu.js';
 
 
 //get project config
-import { rootDirectory } from '@poemkit/config/websiteConfig.js';
+import { rootDirectory } from '@/config/websiteConfig.js';
 
 
 export default (props) => {

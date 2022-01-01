@@ -1,4 +1,4 @@
-# @poemkit/components/Tooltip
+# @/components/Tooltip
 
 [Source](https://github.com/xizon/poemkit/tree/main/src/client/components/Tooltip)
 
@@ -10,7 +10,7 @@
 
 ### Tooltip
 ```js
-import Tooltip from '@poemkit/components/Tooltip/index.tsx';
+import Tooltip from '@/components/Tooltip/index.tsx';
 ```
 | Property | Type | Default | Description |
 | --- | --- | --- | --- |
@@ -26,7 +26,7 @@ import Tooltip from '@poemkit/components/Tooltip/index.tsx';
 
 ```js
 import React from 'react';
-import Tooltip from '@poemkit/components/Tooltip/index.tsx';
+import Tooltip from '@/components/Tooltip/index.tsx';
 
 export default () => {
   return (

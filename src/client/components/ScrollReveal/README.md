@@ -1,4 +1,4 @@
-# @poemkit/components/ScrollReveal
+# @/components/ScrollReveal
 
 [Source](https://github.com/xizon/poemkit/tree/main/src/client/components/ScrollReveal)
 
@@ -11,7 +11,7 @@
 
 ### Scroll Reveal
 ```js
-import ScrollReveal from '@poemkit/components/ScrollReveal/index.tsx';
+import ScrollReveal from '@/components/ScrollReveal/index.tsx';
 ```
 | Property | Type | Default | Description |
 | --- | --- | --- | --- |
@@ -39,7 +39,7 @@ JSON configuration properties of the `config`:
 
 ```js
 import React from 'react';
-import ScrollReveal from '@poemkit/components/ScrollReveal/index.tsx';
+import ScrollReveal from '@/components/ScrollReveal/index.tsx';
 
 
 export default () => {

@@ -1,4 +1,4 @@
-# @poemkit/components/BackToTop
+# @/components/BackToTop
 
 [Source](https://github.com/xizon/poemkit/tree/main/src/client/components/BackToTop)
 
@@ -10,7 +10,7 @@
 
 ### Back To Top
 ```js
-import BackToTop from '@poemkit/components/BackToTop/index.tsx';
+import BackToTop from '@/components/BackToTop/index.tsx';
 ```
 | Property | Type | Default | Description |
 | --- | --- | --- | --- |
@@ -27,7 +27,7 @@ Scroll the page down to preview. The button is in the bottom right corner of the
 
 ```js
 import React from 'react';
-import BackToTop from '@poemkit/components/BackToTop/index.tsx';
+import BackToTop from '@/components/BackToTop/index.tsx';
 
 export default () => {
   return (

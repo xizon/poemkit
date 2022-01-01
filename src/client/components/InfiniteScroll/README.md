@@ -1,4 +1,4 @@
-# @poemkit/components/InfiniteScroll
+# @/components/InfiniteScroll
 
 [Source](https://github.com/xizon/poemkit/tree/main/src/client/components/InfiniteScroll)
 
@@ -10,7 +10,7 @@
 
 ### Infinite Scroll
 ```js
-import InfiniteScroll from '@poemkit/components/InfiniteScroll/index.tsx';
+import InfiniteScroll from '@/components/InfiniteScroll/index.tsx';
 ```
 | Property | Type | Default | Description |
 | --- | --- | --- | --- |
@@ -88,7 +88,7 @@ Page 2:
 
 ```js
 import React from 'react';
-import InfiniteScroll from '@poemkit/components/InfiniteScroll/index.tsx';
+import InfiniteScroll from '@/components/InfiniteScroll/index.tsx';
 
 const Item = ({ id, img, title, email }) => {
     return (

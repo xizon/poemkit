@@ -3,5 +3,5 @@
  * <!-- Button -->
  *************************************
  */
- export { default as Button } from '@poemkit/components/Button/Button';
- export { default as ButtonGroup } from '@poemkit/components/Button/ButtonGroup';
+ export { default as Button } from '@/components/Button/Button';
+ export { default as ButtonGroup } from '@/components/Button/ButtonGroup';

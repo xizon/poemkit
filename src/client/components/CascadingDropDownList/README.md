@@ -1,4 +1,4 @@
-# @poemkit/components/CascadingDropDownList
+# @/components/CascadingDropDownList
 
 [Source](https://github.com/xizon/poemkit/tree/main/src/client/components/CascadingDropDownList)
 
@@ -10,7 +10,7 @@
 
 ### Cascading DropDown List
 ```js
-import CascadingDropDownList from '@poemkit/components/CascadingDropDownList/index.tsx';
+import CascadingDropDownList from '@/components/CascadingDropDownList/index.tsx';
 ```
 | Property | Type | Default | Description |
 | --- | --- | --- | --- |
@@ -140,7 +140,7 @@ A successful response returns the details of the callback such as Sample Request
 
 ```js
 import React from 'react';
-import CascadingDropDownList from '@poemkit/components/CascadingDropDownList/index.tsx';
+import CascadingDropDownList from '@/components/CascadingDropDownList/index.tsx';
 
 export default () => {
   return (

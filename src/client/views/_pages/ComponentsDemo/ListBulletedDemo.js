@@ -1,9 +1,9 @@
 import React from 'react';
-import { __ } from '@poemkit/components/_utils/_all';
-import { ListBulleted, ListBulletedItem } from '@poemkit/components/ListBulleted/index.tsx';
+import { __ } from '@/components/_utils/_all';
+import { ListBulleted, ListBulletedItem } from '@/components/ListBulleted/index.tsx';
 
 //Create or Remove Sidebar Menu
-import { SidebarMenu } from '@poemkit/pages/ComponentsDemo/_SidebarMenu.js';
+import { SidebarMenu } from '@/pages/ComponentsDemo/_SidebarMenu.js';
 
 export default () => {
 
@@ -338,7 +338,7 @@ export default () => {
 						<article className="poemkit-spacing--s" itemProp="text">
 							<h4>List Bulleted</h4>
 							<div>
-								<pre>import {`{ListBulleted}`} from '@poemkit/components/ListBulleted/index.tsx';</pre>
+								<pre>import {`{ListBulleted}`} from '@/components/ListBulleted/index.tsx';</pre>
 							</div>
 
 							<div className="table-responsive-md">
@@ -375,7 +375,7 @@ export default () => {
 
 							<h4>List Bulleted Item</h4>
 							<div>
-								<pre>import {`{ListBulletedItem}`} from '@poemkit/components/ListBulleted/index.tsx';</pre>
+								<pre>import {`{ListBulletedItem}`} from '@/components/ListBulleted/index.tsx';</pre>
 							</div>
 
 							<div className="table-responsive-md">

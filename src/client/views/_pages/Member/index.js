@@ -1,12 +1,12 @@
 import React, { Component } from 'react';
-import { __ } from '@poemkit/components/_utils/_all';
-import LoginPage from '@poemkit/pages/Member/LoginPage.js';
-import Footer from '@poemkit/components/Footer/index.tsx';
+import { __ } from '@/components/_utils/_all';
+import LoginPage from '@/pages/Member/LoginPage.js';
+import Footer from '@/components/Footer/index.tsx';
 
 
 //manage the document head
 import { Helmet } from "react-helmet";
-import siteInfo from '@poemkit/helpers/site-info.js';
+import siteInfo from '@/helpers/site-info.js';
 function SeoVars() {
 	const {siteName, baseURL, pageTitle} = siteInfo('/member');
 	// if the value of `pageTitle` is `{{pageTitle}}`, the value 

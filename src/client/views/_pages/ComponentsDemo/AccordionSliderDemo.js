@@ -1,13 +1,13 @@
 import React from 'react';
-import { __ } from '@poemkit/components/_utils/_all';
-import { AccordionSlider, AccordionSliderItem } from '@poemkit/components/AccordionSlider/index.tsx';
+import { __ } from '@/components/_utils/_all';
+import { AccordionSlider, AccordionSliderItem } from '@/components/AccordionSlider/index.tsx';
 
 //Create or Remove Sidebar Menu
-import { SidebarMenu } from '@poemkit/pages/ComponentsDemo/_SidebarMenu.js';
+import { SidebarMenu } from '@/pages/ComponentsDemo/_SidebarMenu.js';
 
 
 //get project config
-import { rootDirectory } from '@poemkit/config/websiteConfig.js';
+import { rootDirectory } from '@/config/websiteConfig.js';
 
 
 export default () => {
@@ -184,7 +184,7 @@ export default () => {
 						<article className="poemkit-spacing--s" itemProp="text">
 							<h4>Accordion Slider</h4>
 							<div>
-								<pre>import {`{AccordionSlider}`} from '@poemkit/components/AccordionSlider/index.tsx';</pre>
+								<pre>import {`{AccordionSlider}`} from '@/components/AccordionSlider/index.tsx';</pre>
 							</div>
 
 							<div className="table-responsive-md">
@@ -252,7 +252,7 @@ export default () => {
 							{/*<!-- ++++++++ -->*/}
 							<h4>Accordion Slider Item</h4>
 							<div>
-								<pre>import {`{AccordionSliderItem}`} from '@poemkit/components/AccordionSlider/index.tsx';</pre>
+								<pre>import {`{AccordionSliderItem}`} from '@/components/AccordionSlider/index.tsx';</pre>
 							</div>
 
 							<div className="table-responsive-md">

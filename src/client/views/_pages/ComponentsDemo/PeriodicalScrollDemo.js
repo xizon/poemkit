@@ -1,9 +1,9 @@
 import React from 'react';
-import { __ } from '@poemkit/components/_utils/_all';
-import { PeriodicalScroll, PeriodicalScrollItem } from '@poemkit/components/PeriodicalScroll/index.tsx';
+import { __ } from '@/components/_utils/_all';
+import { PeriodicalScroll, PeriodicalScrollItem } from '@/components/PeriodicalScroll/index.tsx';
 
 //Create or Remove Sidebar Menu
-import { SidebarMenu } from '@poemkit/pages/ComponentsDemo/_SidebarMenu.js';
+import { SidebarMenu } from '@/pages/ComponentsDemo/_SidebarMenu.js';
 
 export default () => {
 
@@ -103,7 +103,7 @@ export default () => {
 						<article className="poemkit-spacing--s" itemProp="text">
 							<h4>Periodical Scroll</h4>
 							<div>
-								<pre>import {`{PeriodicalScroll}`} from '@poemkit/components/PeriodicalScroll/index.tsx';</pre>
+								<pre>import {`{PeriodicalScroll}`} from '@/components/PeriodicalScroll/index.tsx';</pre>
 							</div>
 
 							<div className="table-responsive-md">
@@ -142,7 +142,7 @@ export default () => {
 
 							<h4>Periodical Scroll Item</h4>
 							<div>
-								<pre>import {`{PeriodicalScrollItem}`} from '@poemkit/components/PeriodicalScroll/index.tsx';</pre>
+								<pre>import {`{PeriodicalScrollItem}`} from '@/components/PeriodicalScroll/index.tsx';</pre>
 							</div>
 
 							<div className="table-responsive-md">

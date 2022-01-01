@@ -4,15 +4,15 @@ import {
 	Switch, 
 	useRouteMatch,
 } from 'react-router-dom';
-import { __ } from '@poemkit/components/_utils/_all';
-import Footer from '@poemkit/components/Footer/index.tsx';
-import Authorized from '@poemkit/pages/Admin/Authorized.js';
-import { PrivateRoute } from '@poemkit/router/PrivateRoute.js';
+import { __ } from '@/components/_utils/_all';
+import Footer from '@/components/Footer/index.tsx';
+import Authorized from '@/pages/Admin/Authorized.js';
+import { PrivateRoute } from '@/router/PrivateRoute.js';
 
 
 //manage the document head
 import { Helmet } from "react-helmet";
-import siteInfo from '@poemkit/helpers/site-info.js';
+import siteInfo from '@/helpers/site-info.js';
 function SeoVars() {
 	const {siteName, pageTitle} = siteInfo('/admin');
 	return {

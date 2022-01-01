@@ -1,10 +1,10 @@
 import React from 'react';
-import { __ } from '@poemkit/components/_utils/_all';
-import Table from '@poemkit/components/Table/index.tsx';
+import { __ } from '@/components/_utils/_all';
+import Table from '@/components/Table/index.tsx';
 
 
 //Create or Remove Sidebar Menu
-import { SidebarMenu } from '@poemkit/pages/ComponentsDemo/_SidebarMenu.js';
+import { SidebarMenu } from '@/pages/ComponentsDemo/_SidebarMenu.js';
 
 const data1 = {
 	"fields": [
@@ -400,7 +400,7 @@ export default () => {
 						<article className="poemkit-spacing--s" itemProp="text">
 							<h4>Table</h4>
 							<div>
-								<pre>import Table from '@poemkit/components/Table/index.tsx';</pre>
+								<pre>import Table from '@/components/Table/index.tsx';</pre>
 							</div>
 							<div className="table-responsive-md">
 								<table className="table table-bordered table-striped mb-5">

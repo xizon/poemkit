@@ -1,4 +1,4 @@
-# @poemkit/components/Footer
+# @/components/Footer
 
 [Source](https://github.com/xizon/poemkit/tree/main/src/client/components/Footer)
 
@@ -10,7 +10,7 @@
 
 ### Footer
 ```js
-import Footer from '@poemkit/components/Footer/index.tsx';
+import Footer from '@/components/Footer/index.tsx';
 ```
 | Property | Type | Default | Description |
 | --- | --- | --- | --- |
@@ -21,7 +21,7 @@ import Footer from '@poemkit/components/Footer/index.tsx';
 
 ```js
 import React from 'react';
-import Footer from '@poemkit/components/Footer/index.tsx';
+import Footer from '@/components/Footer/index.tsx';
 
 export default () => {
   return (

@@ -1,9 +1,9 @@
 import React from 'react';
-import { __ } from '@poemkit/components/_utils/_all';
-import MultilevelDropdownMenu from '@poemkit/components/MultilevelDropdownMenu/index.tsx';
+import { __ } from '@/components/_utils/_all';
+import MultilevelDropdownMenu from '@/components/MultilevelDropdownMenu/index.tsx';
 
 //Create or Remove Sidebar Menu
-import { SidebarMenu } from '@poemkit/pages/ComponentsDemo/_SidebarMenu.js';
+import { SidebarMenu } from '@/pages/ComponentsDemo/_SidebarMenu.js';
 
 const menuListData = [{
 	title: "Top level 1",
@@ -162,7 +162,7 @@ export default () => {
 						<article className="poemkit-spacing--s" itemProp="text">
 							<h4>Multiple-Level Dropdown Menu</h4>
 							<div>
-								<pre>import MultilevelDropdownMenu from '@poemkit/components/MultilevelDropdownMenu/index.tsx';</pre>
+								<pre>import MultilevelDropdownMenu from '@/components/MultilevelDropdownMenu/index.tsx';</pre>
 							</div>
 
 							<div className="table-responsive-md">

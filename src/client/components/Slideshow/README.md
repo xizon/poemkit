@@ -1,4 +1,4 @@
-# @poemkit/components/Slideshow
+# @/components/Slideshow
 
 [Source](https://github.com/xizon/poemkit/tree/main/src/client/components/Slideshow)
 
@@ -10,7 +10,7 @@
 
 ### Slideshow
 ```js
-import { Slideshow } from '@poemkit/components/Slideshow/index.tsx';
+import { Slideshow } from '@/components/Slideshow/index.tsx';
 ```
 | Property | Type | Default | Description |
 | --- | --- | --- | --- |
@@ -29,7 +29,7 @@ import { Slideshow } from '@poemkit/components/Slideshow/index.tsx';
 
 ### Slideshow Item
 ```js
-import { SlideshowItem } from '@poemkit/components/Slideshow/index.tsx';
+import { SlideshowItem } from '@/components/Slideshow/index.tsx';
 ```
 | Property | Type | Default | Description |
 | --- | --- | --- | --- |
@@ -46,7 +46,7 @@ If you want to modify the transition-duration property, please directly modify t
 
 ```js
 import React from 'react';
-import { Slideshow, SlideshowItem } from '@poemkit/components/Slideshow/index.tsx';
+import { Slideshow, SlideshowItem } from '@/components/Slideshow/index.tsx';
 
 export default () => {
     return (

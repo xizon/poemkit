@@ -1,9 +1,9 @@
 import React from 'react';
-import { __ } from '@poemkit/components/_utils/_all';
-import Pagination from '@poemkit/components/Pagination/index.tsx';
+import { __ } from '@/components/_utils/_all';
+import Pagination from '@/components/Pagination/index.tsx';
 
 //Create or Remove Sidebar Menu
-import { SidebarMenu } from '@poemkit/pages/ComponentsDemo/_SidebarMenu.js';
+import { SidebarMenu } from '@/pages/ComponentsDemo/_SidebarMenu.js';
 
 
 function gotoPageNumber( number ) {
@@ -347,7 +347,7 @@ export default () => {
 						<article className="poemkit-spacing--s" itemProp="text">
 							<h4>Pagination</h4>
 							<div>
-								<pre>import Pagination from '@poemkit/components/Pagination/index.tsx';</pre>
+								<pre>import Pagination from '@/components/Pagination/index.tsx';</pre>
 							</div>
 
 							<div className="table-responsive-md">

@@ -6,24 +6,24 @@
 import React, { Component } from 'react';
 
 /*-- Apply Third-party plugins (import location should be in front of "GLOBAL STYLES") --*/
-import '@poemkit/components/_plugins/_lib-bootstrap';
-import '@poemkit/components/_plugins/_lib-icons';
+import '@/components/_plugins/_lib-bootstrap';
+import '@/components/_plugins/_lib-icons';
 
 /*-- Apply global scripts and styles --*/
-import '@poemkit/components/_utils/styles/_all.scss';
-import '@poemkit/components/_utils/styles/rtl/_all.scss';
-import { __ } from '@poemkit/components/_utils/_all';
+import '@/components/_utils/styles/_all.scss';
+import '@/components/_utils/styles/rtl/_all.scss';
+import { __ } from '@/components/_utils/_all';
 
 /*-- Apply this component styles --*/
-import '@poemkit/components/Table/styles/_style.scss';
-import '@poemkit/components/Table/styles/rtl/_style.scss';
+import '@/components/Table/styles/_style.scss';
+import '@/components/Table/styles/rtl/_style.scss';
 
 
 //
-import TableRow from '@poemkit/components/Table/TableRow';
-import TableHeaders from '@poemkit/components/Table/TableHeaders';
-import TableSummaries from '@poemkit/components/Table/TableSummaries';
-import TableColgroup from '@poemkit/components/Table/TableColgroup';
+import TableRow from '@/components/Table/TableRow';
+import TableHeaders from '@/components/Table/TableHeaders';
+import TableSummaries from '@/components/Table/TableSummaries';
+import TableColgroup from '@/components/Table/TableColgroup';
 
 
 	

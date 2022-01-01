@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { __ } from '@poemkit/components/_utils/_all';
-import actionCreators from '@poemkit/actions/demoListDetailActions.js';
-import Footer from '@poemkit/components/Footer/index.tsx';
+import { __ } from '@/components/_utils/_all';
+import actionCreators from '@/actions/demoListDetailActions.js';
+import Footer from '@/components/Footer/index.tsx';
 
 //
 let PAGE_TITLE = null;
@@ -10,7 +10,7 @@ let SITE_NAME = null;
 
 //manage the document head
 import { Helmet } from "react-helmet";
-import siteInfo from '@poemkit/helpers/site-info.js';
+import siteInfo from '@/helpers/site-info.js';
 function SeoVars() {
 	const {siteName, baseURL, pageTitle} = siteInfo('/posts', 'posts-pagination');
 	// if the value of `pageTitle` is `{{pageTitle}}`, the value 

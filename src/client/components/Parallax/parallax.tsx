@@ -1,4 +1,4 @@
-import { __ } from '@poemkit/components/_utils/_all';
+import { __ } from '@/components/_utils/_all';
 
 interface parallaxConfig {
     /** The speed of movement between elements. Recommended value: `-10.00` to `10.00` */

@@ -27,16 +27,16 @@
       "noImplicitAny": false,
       "baseUrl": "./src",
       "paths": {
-        "@poemkit/config/*": ["config/*"],
-        "@poemkit/components/*": ["client/components/*"],
-        "@poemkit/router/*": ["client/router/*"],
-        "@poemkit/helpers/*": ["client/helpers/*"],
-        "@poemkit/services/*": ["client/services/*"],
-        "@poemkit/reducers/*": ["client/reducers/*"],
-        "@poemkit/pages/*": ["client/views/_pages/*"],
-        "@poemkit/actions/*": ["client/actions/*"],
-        "@poemkit/server/*": ["server/*"],
-        "@poemkit/store/*": ["store/*"]
+        "@/config/*": ["config/*"],
+        "@/components/*": ["client/components/*"],
+        "@/router/*": ["client/router/*"],
+        "@/helpers/*": ["client/helpers/*"],
+        "@/services/*": ["client/services/*"],
+        "@/reducers/*": ["client/reducers/*"],
+        "@/pages/*": ["client/views/_pages/*"],
+        "@/actions/*": ["client/actions/*"],
+        "@/server/*": ["server/*"],
+        "@/store/*": ["store/*"]
       }
     },
     "include": [

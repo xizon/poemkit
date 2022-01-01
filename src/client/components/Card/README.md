@@ -1,4 +1,4 @@
-# @poemkit/components/Card
+# @/components/Card
 
 [Source](https://github.com/xizon/poemkit/tree/main/src/client/components/Card)
 
@@ -11,7 +11,7 @@
 
 ### Card
 ```js
-import Card from '@poemkit/components/Card/index.tsx';
+import Card from '@/components/Card/index.tsx';
 ```
 | Property | Type | Default | Description |
 | --- | --- | --- | --- |
@@ -36,7 +36,7 @@ import Card from '@poemkit/components/Card/index.tsx';
 
 ```js
 import React from 'react';
-import Card from '@poemkit/components/Card/index.tsx';
+import Card from '@/components/Card/index.tsx';
 
 
 export default () => {

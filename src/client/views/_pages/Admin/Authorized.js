@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
-import { __ } from '@poemkit/components/_utils/_all';
-import UserService from "@poemkit/services/user-service.js";
+import { __ } from '@/components/_utils/_all';
+import UserService from "@/services/user-service.js";
 
 class Authorized extends Component {
 	

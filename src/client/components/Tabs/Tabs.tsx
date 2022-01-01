@@ -1,21 +1,21 @@
 import React, { Component } from 'react';
 
 /*-- Apply Third-party plugins (import location should be in front of "GLOBAL STYLES") --*/
-import '@poemkit/components/_plugins/_lib-bootstrap';
-import '@poemkit/components/_plugins/_lib-icons';
+import '@/components/_plugins/_lib-bootstrap';
+import '@/components/_plugins/_lib-icons';
 
 /*-- Apply global scripts and styles --*/
-import '@poemkit/components/_utils/styles/_all.scss';
-import '@poemkit/components/_utils/styles/rtl/_all.scss';
-import { __ } from '@poemkit/components/_utils/_all';
+import '@/components/_utils/styles/_all.scss';
+import '@/components/_utils/styles/rtl/_all.scss';
+import { __ } from '@/components/_utils/_all';
 
 /*-- Apply this component styles --*/
-import '@poemkit/components/Tabs/styles/_style.scss';
+import '@/components/Tabs/styles/_style.scss';
 
 
 //
-import TabList from '@poemkit/components/Tabs/TabList';
-import TabPanel from '@poemkit/components/Tabs/TabPanel';
+import TabList from '@/components/Tabs/TabList';
+import TabPanel from '@/components/Tabs/TabPanel';
 
 
 type TabsProps = {

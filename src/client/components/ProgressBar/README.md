@@ -1,4 +1,4 @@
-# @poemkit/components/ProgressBar
+# @/components/ProgressBar
 
 [Source](https://github.com/xizon/poemkit/tree/main/src/client/components/ProgressBar)
 
@@ -10,7 +10,7 @@
 
 ### Progress Bar
 ```js
-import ProgressBar from '@poemkit/components/ProgressBar/index.tsx';
+import ProgressBar from '@/components/ProgressBar/index.tsx';
 ```
 | Property | Type | Default | Description |
 | --- | --- | --- | --- |
@@ -26,7 +26,7 @@ import ProgressBar from '@poemkit/components/ProgressBar/index.tsx';
 
 ```js
 import React from 'react';
-import ProgressBar from '@poemkit/components/ProgressBar/index.tsx';
+import ProgressBar from '@/components/ProgressBar/index.tsx';
 
 export default () => {
   return (

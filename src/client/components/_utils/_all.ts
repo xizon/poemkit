@@ -5,9 +5,9 @@
 
 */
 
-import __ from '@poemkit/components/_utils/scripts/helpers';
-import { templateUrl, homeUrl, ajaxUrl } from '@poemkit/components/_utils/scripts/global-variables.js';
-import { setBG } from '@poemkit/components/_utils/scripts/set-background.js';
+import __ from '@/components/_utils/scripts/helpers';
+import { templateUrl, homeUrl, ajaxUrl } from '@/components/_utils/scripts/global-variables.js';
+import { setBG } from '@/components/_utils/scripts/set-background.js';
 
 
 export { 

@@ -1,14 +1,14 @@
-import App from '@poemkit/router/App.js';
+import App from '@/router/App.js';
 //
-import Home from '@poemkit/pages/Home/index.js';
-import Posts from '@poemkit/pages/Posts/index.js';
-import PostDetail from '@poemkit/pages/Posts/PostDetail.js';
-import PostsPagination from '@poemkit/pages/PostsPagination/index.js';
-import Member from '@poemkit/pages/Member/index.js';
-import NoMatch from '@poemkit/pages/404/index.js';
-import NestedRoutes from '@poemkit/pages/NestedRoutes/index.js';
-import ComponentsDemo from '@poemkit/pages/ComponentsDemo/index.js';
-import Admin from '@poemkit/pages/Admin/index.js';
+import Home from '@/pages/Home/index.js';
+import Posts from '@/pages/Posts/index.js';
+import PostDetail from '@/pages/Posts/PostDetail.js';
+import PostsPagination from '@/pages/PostsPagination/index.js';
+import Member from '@/pages/Member/index.js';
+import NoMatch from '@/pages/404/index.js';
+import NestedRoutes from '@/pages/NestedRoutes/index.js';
+import ComponentsDemo from '@/pages/ComponentsDemo/index.js';
+import Admin from '@/pages/Admin/index.js';
 
 
 

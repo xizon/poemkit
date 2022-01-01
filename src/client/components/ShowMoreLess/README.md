@@ -1,4 +1,4 @@
-# @poemkit/components/ShowMoreLess
+# @/components/ShowMoreLess
 
 [Source](https://github.com/xizon/poemkit/tree/main/src/client/components/ShowMoreLess)
 
@@ -10,7 +10,7 @@
 
 ### Show More Less
 ```js
-import ShowMoreLess from '@poemkit/components/ShowMoreLess/index.tsx';
+import ShowMoreLess from '@/components/ShowMoreLess/index.tsx';
 ```
 | Property | Type | Default | Description |
 | --- | --- | --- | --- |
@@ -28,7 +28,7 @@ import ShowMoreLess from '@poemkit/components/ShowMoreLess/index.tsx';
 
 ```js
 import React from 'react';
-import ShowMoreLess from '@poemkit/components/ShowMoreLess/index.tsx';
+import ShowMoreLess from '@/components/ShowMoreLess/index.tsx';
 
 export default () => {
   return (

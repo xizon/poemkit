@@ -1,4 +1,4 @@
-# @poemkit/components/HybridContentSlider
+# @/components/HybridContentSlider
 
 [Source](https://github.com/xizon/poemkit/tree/main/src/client/components/HybridContentSlider)
 
@@ -10,7 +10,7 @@
 
 ### Hybrid Content Slider
 ```js
-import { HybridContentSlider } from '@poemkit/components/HybridContentSlider/index.tsx';
+import { HybridContentSlider } from '@/components/HybridContentSlider/index.tsx';
 ```
 | Property | Type | Default | Description |
 | --- | --- | --- | --- |
@@ -30,7 +30,7 @@ import { HybridContentSlider } from '@poemkit/components/HybridContentSlider/ind
 
 ### Hybrid Content Slider Item
 ```js
-import { HybridContentSliderItem } from '@poemkit/components/HybridContentSlider/index.tsx';
+import { HybridContentSliderItem } from '@/components/HybridContentSlider/index.tsx';
 ```
 | Property | Type | Default | Description |
 | --- | --- | --- | --- |
@@ -41,7 +41,7 @@ import { HybridContentSliderItem } from '@poemkit/components/HybridContentSlider
 
 ```js
 import React from 'react';
-import { HybridContentSlider, HybridContentSliderItem } from '@poemkit/components/HybridContentSlider/index.tsx';
+import { HybridContentSlider, HybridContentSliderItem } from '@/components/HybridContentSlider/index.tsx';
 
 export default () => {
     return (

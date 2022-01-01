@@ -1,4 +1,4 @@
-# @poemkit/components/Grid
+# @/components/Grid
 
 [Source](https://github.com/xizon/poemkit/tree/main/src/client/components/Grid)
 
@@ -10,7 +10,7 @@
 
 ### Grid
 ```js
-import { Grid } from '@poemkit/components/Grid/index.tsx';
+import { Grid } from '@/components/Grid/index.tsx';
 ```
 | Property | Type | Default | Description |
 | --- | --- | --- | --- |
@@ -22,7 +22,7 @@ import { Grid } from '@poemkit/components/Grid/index.tsx';
 
 ### GridColumn
 ```js
-import { GridColumn } from '@poemkit/components/Grid/index.tsx';
+import { GridColumn } from '@/components/Grid/index.tsx';
 ```
 | Property | Type | Default | Description |
 | --- | --- | --- | --- |
@@ -38,7 +38,7 @@ import { GridColumn } from '@poemkit/components/Grid/index.tsx';
 
 ```js
 import React from 'react';
-import { Grid, GridColumn } from '@poemkit/components/Grid/index.tsx';
+import { Grid, GridColumn } from '@/components/Grid/index.tsx';
 
 export default () => {
   return (

@@ -6,27 +6,27 @@
 import React, { Component } from 'react';
 
 /*-- Apply Third-party plugins (import location should be in front of "GLOBAL STYLES") --*/
-import '@poemkit/components/_plugins/_lib-bootstrap';
-import '@poemkit/components/_plugins/_lib-icons';
+import '@/components/_plugins/_lib-bootstrap';
+import '@/components/_plugins/_lib-icons';
 
 // Slideshow
-import { Swiper as SW } from '@poemkit/components/_plugins/_lib-slideshow';
+import { Swiper as SW } from '@/components/_plugins/_lib-slideshow';
 
 
 /*-- Apply global scripts and styles --*/
-import '@poemkit/components/_utils/styles/_all.scss';
-import '@poemkit/components/_utils/styles/rtl/_all.scss';
-import { __ } from '@poemkit/components/_utils/_all';
+import '@/components/_utils/styles/_all.scss';
+import '@/components/_utils/styles/rtl/_all.scss';
+import { __ } from '@/components/_utils/_all';
 
 
 /*-- Apply this component styles --*/
-import '@poemkit/components/Swiper/styles/_style.scss';
+import '@/components/Swiper/styles/_style.scss';
 
 /*-- Apply Third-party animation plugins --*/
-import TweenMax from '@poemkit/components/_plugins/_lib-gsap';
+import TweenMax from '@/components/_plugins/_lib-gsap';
 
 //get project config
-import { rootDirectory } from '@poemkit/config/websiteConfig.js';
+import { rootDirectory } from '@/config/websiteConfig.js';
 
 
 type SwiperProps = {

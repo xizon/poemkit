@@ -1,12 +1,12 @@
 import React from 'react';
-import { __ } from '@poemkit/components/_utils/_all';
-import InfiniteScroll from '@poemkit/components/InfiniteScroll/index.tsx';
+import { __ } from '@/components/_utils/_all';
+import InfiniteScroll from '@/components/InfiniteScroll/index.tsx';
 
 //Create or Remove Sidebar Menu
-import { SidebarMenu } from '@poemkit/pages/ComponentsDemo/_SidebarMenu.js';
+import { SidebarMenu } from '@/pages/ComponentsDemo/_SidebarMenu.js';
 
 //get project config
-import { API } from '@poemkit/config/websiteConfig.js';
+import { API } from '@/config/websiteConfig.js';
 
 
 const Item = ({ id, img, title, email }) => {
@@ -131,7 +131,7 @@ export default () => {
 						<article className="poemkit-spacing--s" itemProp="text">
 							<h4>Infinite Scroll</h4>
 							<div>
-								<pre>import InfiniteScroll from '@poemkit/components/InfiniteScroll/index.tsx';</pre>
+								<pre>import InfiniteScroll from '@/components/InfiniteScroll/index.tsx';</pre>
 							</div>
 
 							<div className="table-responsive-md">

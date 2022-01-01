@@ -1,9 +1,9 @@
 import React from 'react';
-import { __ } from '@poemkit/components/_utils/_all';
-import { Tabs, TabList, TabPanel } from '@poemkit/components/Tabs/index.tsx';
+import { __ } from '@/components/_utils/_all';
+import { Tabs, TabList, TabPanel } from '@/components/Tabs/index.tsx';
 
 //Create or Remove Sidebar Menu
-import { SidebarMenu } from '@poemkit/pages/ComponentsDemo/_SidebarMenu.js';
+import { SidebarMenu } from '@/pages/ComponentsDemo/_SidebarMenu.js';
 
 export default () => {
 
@@ -321,7 +321,7 @@ export default () => {
 						<article className="poemkit-spacing--s" itemProp="text">
 							<h4>Tabs</h4>
 							<div>
-								<pre>import {`{Tabs}`} from '@poemkit/components/Tabs/index.tsx';</pre>
+								<pre>import {`{Tabs}`} from '@/components/Tabs/index.tsx';</pre>
 							</div>
 
 							<div className="table-responsive-md">
@@ -375,7 +375,7 @@ export default () => {
 
 							<h4>Tab List</h4>
 							<div>
-								<pre>import {`{TabList}`} from '@poemkit/components/Tabs/index.tsx';</pre>
+								<pre>import {`{TabList}`} from '@/components/Tabs/index.tsx';</pre>
 							</div>
 
 							<div className="table-responsive-md">
@@ -412,7 +412,7 @@ export default () => {
 
 							<h4>Tab Panel</h4>
 							<div>
-								<pre>import {`{TabPanel}`} from '@poemkit/components/Tabs/index.tsx';</pre>
+								<pre>import {`{TabPanel}`} from '@/components/Tabs/index.tsx';</pre>
 							</div>
 
 							<div className="table-responsive-md">

@@ -1,10 +1,10 @@
 /* ======================================================
    <!-- Table Sorter -->
 /* ====================================================== */
-@import '@poemkit/components/_utils/styles/_variable-and-mixin.scss';
+@import '@/components/_utils/styles/_variable-and-mixin.scss';
 
 //The basic style uses the Table component
-@import '@poemkit/components/Table/styles/rtl/_style.scss';
+@import '@/components/Table/styles/rtl/_style.scss';
 
 .rtl .poemkit-table-sorter {
 

@@ -1,4 +1,4 @@
-# @poemkit/components/Swiper
+# @/components/Swiper
 
 [Source](https://github.com/xizon/poemkit/tree/main/src/client/components/Swiper)
 
@@ -11,7 +11,7 @@
 
 ### Swiper
 ```js
-import Swiper from '@poemkit/components/Swiper/index.tsx';
+import Swiper from '@/components/Swiper/index.tsx';
 ```
 <table>
     <thead>
@@ -41,7 +41,7 @@ import Swiper from '@poemkit/components/Swiper/index.tsx';
 
 ```js
 import React from 'react';
-import Swiper from '@poemkit/components/Swiper/index.tsx';
+import Swiper from '@/components/Swiper/index.tsx';
 
 export default () => {
   return (

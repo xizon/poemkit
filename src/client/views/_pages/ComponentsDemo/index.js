@@ -6,51 +6,51 @@ import {
 	useRouteMatch,
 	useLocation
 } from 'react-router-dom';
-import { __ } from '@poemkit/components/_utils/_all';
+import { __ } from '@/components/_utils/_all';
 
 //components list
-import AccordionDemo from '@poemkit/pages/ComponentsDemo/AccordionDemo.js';
-import AccordionSliderDemo from '@poemkit/pages/ComponentsDemo/AccordionSliderDemo.js';
-import ButtonDemo from '@poemkit/pages/ComponentsDemo/ButtonDemo.js';
-import BackToTopDemo from '@poemkit/pages/ComponentsDemo/BackToTopDemo.js';
-import CardDemo from '@poemkit/pages/ComponentsDemo/CardDemo.js';
-import CounterDemo from '@poemkit/pages/ComponentsDemo/CounterDemo.js';
-import CascadingDropDownListDemo from '@poemkit/pages/ComponentsDemo/CascadingDropDownListDemo.js';
-import ContentPlaceholderDemo from '@poemkit/pages/ComponentsDemo/ContentPlaceholderDemo.js';
-import DropdownMenuDemo from '@poemkit/pages/ComponentsDemo/DropdownMenuDemo.js';
-import FormDemo from '@poemkit/pages/ComponentsDemo/FormDemo.js';
-import GridDemo from '@poemkit/pages/ComponentsDemo/GridDemo.js';
-import GalleryDemo from '@poemkit/pages/ComponentsDemo/GalleryDemo.js';
-import HybridContentSliderDemo from '@poemkit/pages/ComponentsDemo/HybridContentSliderDemo.js';
-import InfiniteScrollDemo from '@poemkit/pages/ComponentsDemo/InfiniteScrollDemo.js';
-import ImageShapesDemo from '@poemkit/pages/ComponentsDemo/ImageShapesDemo.js';
-import ImagePerspectiveHoverDemo from '@poemkit/pages/ComponentsDemo/ImagePerspectiveHoverDemo.js';
-import LightboxDemo from '@poemkit/pages/ComponentsDemo/LightboxDemo.js';
-import ListBulletedDemo from '@poemkit/pages/ComponentsDemo/ListBulletedDemo.js';
-import ModalDialogDemo from '@poemkit/pages/ComponentsDemo/ModalDialogDemo.js';
-import MultilevelDropdownMenuDemo from '@poemkit/pages/ComponentsDemo/MultilevelDropdownMenuDemo.js';
-import MousewheelInteractionDemo from '@poemkit/pages/ComponentsDemo/MousewheelInteractionDemo.js';
-import NavigationDemo from '@poemkit/pages/ComponentsDemo/NavigationDemo.js';
-import PaginationDemo from '@poemkit/pages/ComponentsDemo/PaginationDemo.js';
-import ParallaxDemo from '@poemkit/pages/ComponentsDemo/ParallaxDemo.js';
-import ProgressBarDemo from '@poemkit/pages/ComponentsDemo/ProgressBarDemo.js';
-import PeriodicalScrollDemo from '@poemkit/pages/ComponentsDemo/PeriodicalScrollDemo.js';
-import RatingDemo from '@poemkit/pages/ComponentsDemo/RatingDemo.js';
-import ScrollRevealDemo from '@poemkit/pages/ComponentsDemo/ScrollRevealDemo.js';
-import SlideshowDemo from '@poemkit/pages/ComponentsDemo/SlideshowDemo.js';
-import SwiperDemo from '@poemkit/pages/ComponentsDemo/SwiperDemo.js';
-import StickyElementsDemo from '@poemkit/pages/ComponentsDemo/StickyElementsDemo.js';
-import SeamlessScrollingElementDemo from '@poemkit/pages/ComponentsDemo/SeamlessScrollingElementDemo.js';
-import ShowMoreLessDemo from '@poemkit/pages/ComponentsDemo/ShowMoreLessDemo.js';
-import TabsDemo from '@poemkit/pages/ComponentsDemo/TabsDemo.js';
-import TabsAnimatedDemo from '@poemkit/pages/ComponentsDemo/TabsAnimatedDemo.js';
-import TableDemo from '@poemkit/pages/ComponentsDemo/TableDemo.js';
-import TableGridDemo from '@poemkit/pages/ComponentsDemo/TableGridDemo.js';
-import TableSorterDemo from '@poemkit/pages/ComponentsDemo/TableSorterDemo.js';
-import TimelineDemo from '@poemkit/pages/ComponentsDemo/TimelineDemo.js';
-import TooltipDemo from '@poemkit/pages/ComponentsDemo/TooltipDemo.js';
-import ToasterDemo from '@poemkit/pages/ComponentsDemo/ToasterDemo.js';
-import VideoDemo from '@poemkit/pages/ComponentsDemo/VideoDemo.js';
+import AccordionDemo from '@/pages/ComponentsDemo/AccordionDemo.js';
+import AccordionSliderDemo from '@/pages/ComponentsDemo/AccordionSliderDemo.js';
+import ButtonDemo from '@/pages/ComponentsDemo/ButtonDemo.js';
+import BackToTopDemo from '@/pages/ComponentsDemo/BackToTopDemo.js';
+import CardDemo from '@/pages/ComponentsDemo/CardDemo.js';
+import CounterDemo from '@/pages/ComponentsDemo/CounterDemo.js';
+import CascadingDropDownListDemo from '@/pages/ComponentsDemo/CascadingDropDownListDemo.js';
+import ContentPlaceholderDemo from '@/pages/ComponentsDemo/ContentPlaceholderDemo.js';
+import DropdownMenuDemo from '@/pages/ComponentsDemo/DropdownMenuDemo.js';
+import FormDemo from '@/pages/ComponentsDemo/FormDemo.js';
+import GridDemo from '@/pages/ComponentsDemo/GridDemo.js';
+import GalleryDemo from '@/pages/ComponentsDemo/GalleryDemo.js';
+import HybridContentSliderDemo from '@/pages/ComponentsDemo/HybridContentSliderDemo.js';
+import InfiniteScrollDemo from '@/pages/ComponentsDemo/InfiniteScrollDemo.js';
+import ImageShapesDemo from '@/pages/ComponentsDemo/ImageShapesDemo.js';
+import ImagePerspectiveHoverDemo from '@/pages/ComponentsDemo/ImagePerspectiveHoverDemo.js';
+import LightboxDemo from '@/pages/ComponentsDemo/LightboxDemo.js';
+import ListBulletedDemo from '@/pages/ComponentsDemo/ListBulletedDemo.js';
+import ModalDialogDemo from '@/pages/ComponentsDemo/ModalDialogDemo.js';
+import MultilevelDropdownMenuDemo from '@/pages/ComponentsDemo/MultilevelDropdownMenuDemo.js';
+import MousewheelInteractionDemo from '@/pages/ComponentsDemo/MousewheelInteractionDemo.js';
+import NavigationDemo from '@/pages/ComponentsDemo/NavigationDemo.js';
+import PaginationDemo from '@/pages/ComponentsDemo/PaginationDemo.js';
+import ParallaxDemo from '@/pages/ComponentsDemo/ParallaxDemo.js';
+import ProgressBarDemo from '@/pages/ComponentsDemo/ProgressBarDemo.js';
+import PeriodicalScrollDemo from '@/pages/ComponentsDemo/PeriodicalScrollDemo.js';
+import RatingDemo from '@/pages/ComponentsDemo/RatingDemo.js';
+import ScrollRevealDemo from '@/pages/ComponentsDemo/ScrollRevealDemo.js';
+import SlideshowDemo from '@/pages/ComponentsDemo/SlideshowDemo.js';
+import SwiperDemo from '@/pages/ComponentsDemo/SwiperDemo.js';
+import StickyElementsDemo from '@/pages/ComponentsDemo/StickyElementsDemo.js';
+import SeamlessScrollingElementDemo from '@/pages/ComponentsDemo/SeamlessScrollingElementDemo.js';
+import ShowMoreLessDemo from '@/pages/ComponentsDemo/ShowMoreLessDemo.js';
+import TabsDemo from '@/pages/ComponentsDemo/TabsDemo.js';
+import TabsAnimatedDemo from '@/pages/ComponentsDemo/TabsAnimatedDemo.js';
+import TableDemo from '@/pages/ComponentsDemo/TableDemo.js';
+import TableGridDemo from '@/pages/ComponentsDemo/TableGridDemo.js';
+import TableSorterDemo from '@/pages/ComponentsDemo/TableSorterDemo.js';
+import TimelineDemo from '@/pages/ComponentsDemo/TimelineDemo.js';
+import TooltipDemo from '@/pages/ComponentsDemo/TooltipDemo.js';
+import ToasterDemo from '@/pages/ComponentsDemo/ToasterDemo.js';
+import VideoDemo from '@/pages/ComponentsDemo/VideoDemo.js';
 
 
 //
@@ -59,7 +59,7 @@ let SITE_NAME = null;
 
 //manage the document head
 import { Helmet } from "react-helmet";
-import siteInfo from '@poemkit/helpers/site-info.js';
+import siteInfo from '@/helpers/site-info.js';
 function SeoVars() {
 	const {siteName, baseURL, pageTitle} = siteInfo('/components-demo');
 	// if the value of `pageTitle` is `{{pageTitle}}`, the value 

@@ -1,12 +1,12 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
-import Router from '@poemkit/router/index.js';
+import Router from '@/router/index.js';
 
 //
 import { createStore, applyMiddleware } from 'redux';
 import thunk from 'redux-thunk';
-import rootReducer from '@poemkit/reducers/index.js';
+import rootReducer from '@/reducers/index.js';
 
 
 //All we need to do is grab the initial state from window.__PRELOADED_STATE__ and pass 

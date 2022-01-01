@@ -12,7 +12,7 @@ process.on('unhandledRejection', err => {
 
 
 /*
- * @poemkit/components/TabsAnimated
+ * @/components/TabsAnimated
  * ----------------------------------------
  */
 
@@ -22,7 +22,7 @@ import '@testing-library/jest-dom';
 
 
 import React from 'react';
-import { TabsAnimated, TabList, TabPanel } from '@poemkit/components/TabsAnimated/index.tsx';
+import { TabsAnimated, TabList, TabPanel } from '@/components/TabsAnimated/index.tsx';
 
 
 describe('TabsAnimated', () => {

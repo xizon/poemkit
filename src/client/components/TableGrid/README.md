@@ -1,4 +1,4 @@
-# @poemkit/components/TableGrid
+# @/components/TableGrid
 
 [Source](https://github.com/xizon/poemkit/tree/main/src/client/components/TableGrid)
 
@@ -10,7 +10,7 @@
 
 ### Table Grid
 ```js
-import TableGrid from '@poemkit/components/TableGrid/index.tsx';
+import TableGrid from '@/components/TableGrid/index.tsx';
 ```
 | Property | Type | Default | Description |
 | --- | --- | --- | --- |
@@ -31,7 +31,7 @@ JSON configuration properties of the `data`:
 
 ```js
 import React from 'react';
-import TableGrid from '@poemkit/components/TableGrid/index.tsx';
+import TableGrid from '@/components/TableGrid/index.tsx';
 
 
 const data1 = {

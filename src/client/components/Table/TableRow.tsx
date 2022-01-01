@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
-import { __ } from '@poemkit/components/_utils/_all';
+import { __ } from '@/components/_utils/_all';
 
-import TableField from '@poemkit/components/Table/TableField';
+import TableField from '@/components/Table/TableField';
 
 /* Table Row
 -------------------------------------------------*/

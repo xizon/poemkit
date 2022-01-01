@@ -1,1 +1,1 @@
-export { default as authHeader } from '@poemkit/helpers/auth-header.js';
+export { default as authHeader } from '@/helpers/auth-header.js';

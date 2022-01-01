@@ -1,4 +1,4 @@
-# @poemkit/components/TabsAnimated
+# @/components/TabsAnimated
 
 [Source](https://github.com/xizon/poemkit/tree/main/src/client/components/TabsAnimated)
 
@@ -10,7 +10,7 @@
 
 ### Tabs Animated
 ```js
-import { TabsAnimated } from '@poemkit/components/TabsAnimated/index.tsx';
+import { TabsAnimated } from '@/components/TabsAnimated/index.tsx';
 ```
 | Property | Type | Default | Description |
 | --- | --- | --- | --- |
@@ -19,7 +19,7 @@ import { TabsAnimated } from '@poemkit/components/TabsAnimated/index.tsx';
 
 ### Tab List
 ```js
-import { TabList } from '@poemkit/components/TabsAnimated/index.tsx';
+import { TabList } from '@/components/TabsAnimated/index.tsx';
 ```
 | Property | Type | Default | Description |
 | --- | --- | --- | --- |
@@ -29,7 +29,7 @@ import { TabList } from '@poemkit/components/TabsAnimated/index.tsx';
 
 ### Tab Panel
 ```js
-import { TabPanel } from '@poemkit/components/TabsAnimated/index.tsx';
+import { TabPanel } from '@/components/TabsAnimated/index.tsx';
 ```
 | Property | Type | Default | Description |
 | --- | --- | --- | --- |
@@ -44,7 +44,7 @@ It accepts all props(include data-* attributes) which native div support.
 
 ```js
 import React from 'react';
-import { TabsAnimated, TabList, TabPanel } from '@poemkit/components/TabsAnimated/index.tsx';
+import { TabsAnimated, TabList, TabPanel } from '@/components/TabsAnimated/index.tsx';
 
 
 export default () => {
