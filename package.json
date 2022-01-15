@@ -81,8 +81,6 @@
   },
   "homepage": "https://github.com/xizon/poemkit#readme",
   "devDependencies": {
-    "@node-minify/core": "^6.2.0",
-    "@node-minify/uglify-js": "^4.0.2",
     "@testing-library/jest-dom": "^5.14.1",
     "@testing-library/react": "^11.2.7",
     "@types/react": "^17.0.17",

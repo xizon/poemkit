@@ -396,7 +396,7 @@ const alias = {
 
 ...
 resolve: {
-	extensions: ['.js', '.es6', '.vue', '.jsx', '.ts', '.tsx' ],
+	extensions: ['.js', '.jsx', '.ts', '.tsx', '.scss', '.sass'],
 	alias: {
 
 		// specific mappings.
