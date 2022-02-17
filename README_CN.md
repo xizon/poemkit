@@ -20,6 +20,9 @@ PoemKit系一套免费的网站开发工具包，它也是一个微前端架构�
 
 **PoemKit可以直接通过命令工作和部署到云服务器, 但仍然需要在其背后编写真正的代码。** 这些工具包作为UI组件和逻辑模块，可以组合成一个真正的应用程序原型。它仍然需要编程功能才能使它们在实际需求中工作。PoemKit满足完全可定制的webpack配置需求。
 
+
+🚌 也可以直接使用独立的 React UI组件库 [poem-ui] [poem-ui](https://github.com/xizon/poem-ui).
+
 ---
 
 - [English Documentation](README.md)
