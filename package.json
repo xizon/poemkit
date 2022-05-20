@@ -131,12 +131,12 @@
     "webpack-dev-server": "^3.11.2"
   },
   "dependencies": {
-    "@babel/core": "^7.13.14",
-    "@babel/node": "^7.8.7",
+    "@babel/core": "^7.17.10",
+    "@babel/node": "^7.17.10",
     "@babel/plugin-proposal-class-properties": "^7.2.3",
-    "@babel/plugin-transform-runtime": "^7.9.0",
+    "@babel/plugin-transform-runtime": "^7.17.10",
     "@babel/polyfill": "^7.0.0",
-    "@babel/preset-env": "^7.2.0",
+    "@babel/preset-env": "^7.17.10",
     "@babel/preset-flow": "^7.0.0",
     "@babel/preset-react": "^7.0.0",
     "@babel/preset-typescript": "^7.1.0",
