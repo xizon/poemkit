@@ -403,7 +403,7 @@ export default class ModalDialog extends Component<ModalDialogProps, ModalDialog
                         <div className="poemkit-modal-box__content" role="document">
                             <div className="poemkit-modal-box__video-waiting"></div>
                             <div className="poemkit-modal-box__video-container">
-                                <div className="embed-responsive embed-responsive-16by9">
+                                <div className="ratio ratio-16x9">
                                     {/*<!-- ////////  content  begin //////// -->*/}
                                     {children}
                                     {/*<!-- ////////  content  end //////// -->*/}

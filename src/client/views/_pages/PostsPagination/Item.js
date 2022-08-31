@@ -5,7 +5,7 @@ export default ({ id, img, title, email }) => {
     return (
         <>
 
-            <div className="row text-center text-md-left align-items-center">
+            <div className="row text-center text-md-start align-items-center">
                 <div className="col-lg-2 col-md-2">
                     <img className="rounded mb-3" src={img} alt={title} />
                 </div>

@@ -132,7 +132,7 @@ poemkit/
 * Styling React Components in Sass/SCSS
 * Automatically bundle and generate independent core CSS and JS files
 * Project supports automatic deployments from a number of repository hosting services via pm2
-* ✂️ Pluggable: The default components import some third-party plug-ins, such as  grid system of Bootstrap 4, GSAP animation library, FontAwesome icon library, 3D engine, etc., so that you can quickly expand your website (Support on-demand configuration)
+* ✂️ Pluggable: The default components import some third-party plug-ins, such as grid system of Bootstrap 5, GSAP animation library, FontAwesome icon library, 3D engine, etc., so that you can quickly expand your website (Support on-demand configuration)
 * ✂️ Configurable Scaffold: Independently package the dist files (you could modify `webpack.config.js` to use memory mount)
 
 

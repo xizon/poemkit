@@ -5,7 +5,7 @@
   "projectName": "PoemKit",
   "createdInfo": "UIUX Lab (https://uiux.cc)",
   "projectURL": "https://uiux.cc",
-  "version": "0.2.5",
+  "version": "0.2.6",
   "description": "React toolkit for building a full website that also is a Micro-Frontend Architecture.",
   "main": "dist/js/poemkit.js",
   "directories": {
@@ -19,7 +19,7 @@
     "destroy": "pm2 stop ecosystem.config.js & pm2 delete ecosystem.config.js",
     "check": "tsc",
     "dev": "cross-env NODE_ENV=development nodemon --require ignore-styles --exec ts-node -r tsconfig-paths/register ./src/server/server.js",
-    "build": "cross-env NODE_ENV=production webpack --progress --mode production",
+    "build": "cross-env NODE_ENV=production tsc & webpack --progress --mode production",
     "test": "cross-env NODE_ENV=test jest",
     "prettier": "prettier \"./dist/css/poemkit.css\""
   },

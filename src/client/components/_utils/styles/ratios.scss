@@ -1,0 +1,46 @@
+/* ====================================================== 
+   <!-- Ratios -->      
+/* ====================================================== */
+
+.poemkit-ratio {
+	position: relative;
+	display: block;
+	width: 100%;
+	padding: 0;
+	overflow: hidden;
+}
+
+.poemkit-ratio::before {
+	display: block;
+	content: "";
+}
+
+.poemkit-ratio .poemkit-ratio-item,
+.poemkit-ratio iframe,
+.poemkit-ratio embed,
+.poemkit-ratio object,
+.poemkit-ratio video {
+	position: absolute;
+	top: 0;
+	bottom: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	border: 0;
+}
+
+.poemkit-ratio-21x9::before {
+	padding-top: 42.857143%;
+}
+
+.poemkit-ratio-16x9::before {
+	padding-top: 56.25%;
+}
+
+.poemkit-ratio-3x4::before {
+	padding-top: 133.333333%;
+}
+
+.poemkit-ratio-1x1::before {
+	padding-top: 100%;
+}

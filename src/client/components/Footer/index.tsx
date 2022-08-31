@@ -38,7 +38,7 @@ export default class Footer extends Component<{}, {}> {
 
 						<div className="row">
 							<div className="col-lg-6 col-md-6 poemkit-t-l poemkit-t-c--md">
-								Copyright &copy; PoemKit 2021.  |  All rights reserved. Created by <a href="https://uiux.cc">UIUX Lab</a>.
+								Copyright &copy; PoemKit 2022.  |  All rights reserved. Created by <a href="https://uiux.cc">UIUX Lab</a>.
 							</div>
 							<div className="col-lg-6 col-md-6 poemkit-t-r poemkit-t-c--md">
 								<div className="poemkit-footer__menu">

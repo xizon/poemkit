@@ -6,9 +6,9 @@
  * ## Project Name        :  PoemKit
  * ## Project Description :  React toolkit for building a full website that also is a Micro-Frontend Architecture.
  * ## Project URL         :  https://uiux.cc
- * ## Version             :  0.2.5
+ * ## Version             :  0.2.6
  * ## Based on            :  PoemKit (https://github.com/xizon/poemkit#readme)
- * ## Last Update         :  August 31, 2022
+ * ## Last Update         :  September 1, 2022
  * ## Created by          :  UIUX Lab (https://uiux.cc) (uiuxlab@gmail.com)
  * ## Released under the MIT license.
  *
@@ -43204,7 +43204,7 @@ var MenuList = /*#__PURE__*/function (_Component) {
       var perDefaultW = 270; //Default width of each column
       //The maximum width of the mega menu wrapper
 
-      var maxWidth = 1140; //New XL container for Bootstrap 4.x
+      var maxWidth = 1140; //New XL container for Bootstrap 5.x
 
       if (w > 1430) maxWidth = 1278; //Full width container
 
@@ -44224,7 +44224,7 @@ var Footer = /*#__PURE__*/function (_Component) {
         className: "row"
       }, /*#__PURE__*/react.createElement("div", {
         className: "col-lg-6 col-md-6 poemkit-t-l poemkit-t-c--md"
-      }, "Copyright \xA9 PoemKit 2021.  |  All rights reserved. Created by ", /*#__PURE__*/react.createElement("a", {
+      }, "Copyright \xA9 PoemKit 2022.  |  All rights reserved. Created by ", /*#__PURE__*/react.createElement("a", {
         href: "https://uiux.cc"
       }, "UIUX Lab"), "."), /*#__PURE__*/react.createElement("div", {
         className: "col-lg-6 col-md-6 poemkit-t-r poemkit-t-c--md"
@@ -46400,7 +46400,7 @@ var Pagination = /*#__PURE__*/function (_Component) {
       title = _ref.title,
       email = _ref.email;
   return /*#__PURE__*/react.createElement(react.Fragment, null, /*#__PURE__*/react.createElement("div", {
-    className: "row text-center text-md-left align-items-center"
+    className: "row text-center text-md-start align-items-center"
   }, /*#__PURE__*/react.createElement("div", {
     className: "col-lg-2 col-md-2"
   }, /*#__PURE__*/react.createElement("img", {
@@ -60362,7 +60362,7 @@ var InfiniteScrollDemo_Item = function Item(_ref) {
       title = _ref.title,
       email = _ref.email;
   return /*#__PURE__*/react.createElement(react.Fragment, null, /*#__PURE__*/react.createElement("div", {
-    className: "row text-center text-md-left align-items-center"
+    className: "row text-center text-md-start align-items-center"
   }, /*#__PURE__*/react.createElement("div", {
     className: "col-lg-2 col-md-2"
   }, /*#__PURE__*/react.createElement("img", {
@@ -62396,7 +62396,7 @@ var Lightbox = /*#__PURE__*/function (_Component) {
     triggerClassName: "poemkit-btn poemkit-btn__border--thin poemkit-btn__margin--b poemkit-btn__size--s poemkit-btn__bg--primary",
     triggerContent: /*#__PURE__*/react.createElement(react.Fragment, null, "Click Me To Show HTML Code"),
     htmlContent: /*#__PURE__*/react.createElement(react.Fragment, null, /*#__PURE__*/react.createElement("div", {
-      className: "text-left"
+      className: "text-start"
     }, /*#__PURE__*/react.createElement("p", null, /*#__PURE__*/react.createElement("h5", null, "Title 1")), /*#__PURE__*/react.createElement("p", null, "Duis mollis, est non commodo luctus, nisi erat porttitor ligula, eget lacinia odio sem nec elit. Cras mattis consectetur purus sit amet fermentum. Morbi leo risus, porta ac consectetur ac, vestibulum at eros. Praesent commodo cursus magna, vel scelerisque nisl consectetur et. ", /*#__PURE__*/react.createElement("a", {
       href: "https://example.com",
       target: "_blank"
@@ -62410,7 +62410,7 @@ var Lightbox = /*#__PURE__*/function (_Component) {
     triggerClassName: "poemkit-btn poemkit-btn__border--thin poemkit-btn__margin--b poemkit-btn__size--s poemkit-btn__bg--primary",
     triggerContent: /*#__PURE__*/react.createElement(react.Fragment, null, "Click Me To Show HTML Code (Not Fixed)"),
     htmlContent: /*#__PURE__*/react.createElement(react.Fragment, null, /*#__PURE__*/react.createElement("div", {
-      className: "text-left"
+      className: "text-start"
     }, /*#__PURE__*/react.createElement("p", null, /*#__PURE__*/react.createElement("h5", null, "Title 2")), /*#__PURE__*/react.createElement("p", null, "Duis mollis, est non commodo luctus, nisi erat porttitor ligula, eget lacinia odio sem nec elit. Cras mattis consectetur purus sit amet fermentum. Morbi leo risus, porta ac consectetur ac, vestibulum at eros. Praesent commodo cursus magna, vel scelerisque nisl consectetur et. ", /*#__PURE__*/react.createElement("a", {
       href: "https://example.com",
       target: "_blank"
@@ -63364,7 +63364,7 @@ var ModalDialog = /*#__PURE__*/function (_Component) {
       }), /*#__PURE__*/react.createElement("div", {
         className: "poemkit-modal-box__video-container"
       }, /*#__PURE__*/react.createElement("div", {
-        className: "embed-responsive embed-responsive-16by9"
+        className: "ratio ratio-16x9"
       }, children)))));
     }
   }]);

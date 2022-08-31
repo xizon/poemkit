@@ -295,15 +295,17 @@
 @include poemkitCoreGridGenerate( '.poemkit-core-grid', 15px );
 
 
-/* The breakpoint is the same as bootstrap 4 */
+/* The breakpoint is the same as bootstrap 5 */
 /*
 --breakpoint-xs:0;
 --breakpoint-sm:576px;
 --breakpoint-md:768px;
 --breakpoint-lg:992px;
 --breakpoint-xl:1200px;
+--breakpoint-xxl:1400px;
 */
 @include poemkitCoreGridColumnBreakpoint( '.poemkit-core-grid', 15px, 'sm', '576px' );	
 @include poemkitCoreGridColumnBreakpoint( '.poemkit-core-grid', 15px, 'md', '768px' );	
 @include poemkitCoreGridColumnBreakpoint( '.poemkit-core-grid', 15px, 'lg', '992px' );	
 @include poemkitCoreGridColumnBreakpoint( '.poemkit-core-grid', 15px, 'xl', '1200px' );	
+@include poemkitCoreGridColumnBreakpoint( '.poemkit-core-grid', 15px, 'xxl', '1400px' );	

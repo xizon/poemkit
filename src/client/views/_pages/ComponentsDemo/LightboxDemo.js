@@ -152,7 +152,7 @@ export default () => {
 									Click Me To Show HTML Code
 								</>}
 								htmlContent={<>
-									<div className="text-left">
+									<div className="text-start">
 										<p>
 											<h5>Title 1</h5>
 										</p>
@@ -172,7 +172,7 @@ export default () => {
 									Click Me To Show HTML Code (Not Fixed)
 								</>}
 								htmlContent={<>
-									<div className="text-left">
+									<div className="text-start">
 										<p>
 											<h5>Title 2</h5>
 										</p>

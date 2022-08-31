@@ -30,7 +30,7 @@
  1. Content Block
  ---------------------------
  */ 
-.poemkit-relative {
+ .poemkit-relative {
     position: relative;
 	
 }
@@ -60,7 +60,6 @@
 }
 
 
-
 /*----*/
 .poemkit-display-none {
     display: none !important;
@@ -86,13 +85,14 @@
     display: inline-flex !important;
 }
 
-/* The breakpoint is the same as bootstrap 4 */
+/* The breakpoint is the same as bootstrap 5 */
 /*
 --breakpoint-xs:0;
 --breakpoint-sm:576px;
 --breakpoint-md:768px;
 --breakpoint-lg:992px;
 --breakpoint-xl:1200px;
+--breakpoint-xxl:1400px;
 */
 @media all and (max-width: 576px) {
     .poemkit-display-none--sm  {
@@ -199,6 +199,31 @@
     }
 }
 
+@media all and (max-width: 1400px) {
+    .poemkit-display-none--xxl  {
+        display: none !important;
+    }
+    
+    .poemkit-display-inline--xxl  {
+        display: inline !important;
+    }
+    
+    .poemkit-display-inline-block--xxl  {
+        display: inline-block !important;
+    }
+    
+    .poemkit-display-block--xxl  {
+        display: block !important;
+    }
+    
+    .poemkit-display-flex--xxl  {
+        display: flex !important;
+    }
+    
+    .poemkit-display-inline-flex--xxl  {
+        display: inline-flex !important;
+    }
+}
 
 
 /* 
@@ -303,13 +328,14 @@
 }
 
 
-/* The breakpoint is the same as bootstrap 4 */
+/* The breakpoint is the same as bootstrap 5 */
 /*
 --breakpoint-xs:0;
 --breakpoint-sm:576px;
 --breakpoint-md:768px;
 --breakpoint-lg:992px;
 --breakpoint-xl:1200px;
+--breakpoint-xxl:1400px;
 */
 @media all and (max-width: 576px) {
 	.poemkit-t-r--sm {
@@ -360,6 +386,19 @@
 		text-align: left;
 	}
 	.poemkit-t-c--xl {
+		text-align: center;
+	}
+}
+
+@media all and (max-width: 1400px) {
+	.poemkit-t-r--xxl {
+		text-align: right;
+	}
+
+	.poemkit-t-l--xxl {
+		text-align: left;
+	}
+	.poemkit-t-c--xxl {
 		text-align: center;
 	}
 }

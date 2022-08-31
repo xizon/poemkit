@@ -175,7 +175,7 @@ export default class MenuList extends Component<MenuListProps, MenuListState>  {
         //The maximum width of the mega menu wrapper
         let maxWidth = 1140;
     
-        //New XL container for Bootstrap 4.x
+        //New XL container for Bootstrap 5.x
         if (w > 1430) maxWidth = 1278;
     
         //Full width container

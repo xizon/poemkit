@@ -1,5 +1,19 @@
 # Changelog
 
+#### = 0.2.6 (September 1, 2022) =
+
+* Tweak: Migrating to Bootstrap v5.
+  1. change class `no-gutters` to `g-0`  
+  2. change class `embed-responsive` to `ratio`, and `embed-responsive-21by9` to `ratio-16x9`
+  3. add new style to avoid default scrollbar smooth effect `@media (prefers-reduced-motion: no-preference) {:root {scroll-behavior: inherit;}}`
+  4. add new global file `ratios.scss` to `./src/client/components/_utils`
+  5. change class `text-left` to `text-start`  
+  6. change class `text-md-left` to `text-md-start`   
+  
+* Tweak: Added TypeScript checks when packaging.
+
+
+
 #### = 0.2.5 (August 31, 2022) =
 
 * Fix: Fixed fault-tolerant handling of RESTful API pages.

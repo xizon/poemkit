@@ -368,6 +368,7 @@ body.rtl {
   margin-left: unset;
 }
 
+
 .rtl .offset-11 {
   margin-right: 91.666667%;
   margin-left: unset;
@@ -629,4 +630,364 @@ body.rtl {
   &:last-of-type {
     border-radius: 5px 0 0 5px;
   }
+}
+
+/* ---------------- *-start and *-end -------------------- */
+
+.rtl .float-start {
+  float: right !important;
+}
+
+.rtl .float-end {
+  float: left !important;
+}
+
+.rtl .border-start {
+  border-right: 1px solid #dee2e6 !important;
+}
+
+.rtl .border-end {
+  border-left: 1px solid #dee2e6 !important;
+}
+
+
+.rtl .justify-content-start {
+  justify-content: flex-start !important;
+}
+
+.rtl .justify-content-end {
+  justify-content: flex-end !important;
+}
+
+
+
+.rtl .align-items-start {
+  align-items: flex-start !important;
+}
+
+.rtl .align-items-end {
+  align-items: flex-end !important;
+}
+
+
+.rtl .align-content-start {
+  align-content: flex-start !important;
+}
+
+.rtl .align-content-end {
+  align-content: flex-end !important;
+}
+
+
+.rtl .align-self-start {
+  align-self: flex-start !important;
+}
+
+.rtl .align-self-end {
+  align-self: flex-end !important;
+}
+
+
+.rtl .text-start {
+  text-align: right !important;
+}
+
+.rtl .text-end {
+  text-align: left !important;
+}
+
+.rtl .rounded-start {
+  border-bottom-right-radius: 0.25rem !important;
+  border-top-right-radius: 0.25rem !important;
+}
+
+
+.rtl .rounded-end {
+  border-top-left-radius: 0.25rem !important;
+  border-bottom-left-radius: 0.25rem !important;
+}
+
+@media (min-width: 576px) {
+  .rtl .float-sm-start {
+    float: right !important;
+  }
+
+  .rtl .float-sm-end {
+    float: left !important;
+  }
+
+
+
+  .rtl .justify-content-sm-start {
+    justify-content: flex-start !important;
+  }
+
+  .rtl .justify-content-sm-end {
+    justify-content: flex-end !important;
+  }
+
+  .rtl .align-items-sm-start {
+    align-items: flex-start !important;
+  }
+
+  .rtl .align-items-sm-end {
+    align-items: flex-end !important;
+  }
+
+
+
+  .rtl .align-content-sm-start {
+    align-content: flex-start !important;
+  }
+
+  .rtl .align-content-sm-end {
+    align-content: flex-end !important;
+  }
+
+  
+
+  .rtl .align-self-sm-start {
+    align-self: flex-start !important;
+  }
+
+  .rtl .align-self-sm-end {
+    align-self: flex-end !important;
+  }
+
+  
+  .rtl .text-sm-start {
+    text-align: right !important;
+  }
+
+  .rtl .text-sm-end {
+    text-align: left !important;
+  }
+
+}
+
+
+
+@media (min-width: 768px) {
+  .rtl .float-md-start {
+    float: right !important;
+  }
+
+  .rtl .float-md-end {
+    float: left !important;
+  }
+
+
+  .rtl .justify-content-md-start {
+    justify-content: flex-start !important;
+  }
+
+  .rtl .justify-content-md-end {
+    justify-content: flex-end !important;
+  }
+
+
+  .rtl .align-items-md-start {
+    align-items: flex-start !important;
+  }
+
+  .rtl .align-items-md-end {
+    align-items: flex-end !important;
+  }
+
+  .rtl .align-content-md-start {
+    align-content: flex-start !important;
+  }
+
+  .rtl .align-content-md-end {
+    align-content: flex-end !important;
+  }
+
+  .rtl .align-self-md-start {
+    align-self: flex-start !important;
+  }
+
+  .rtl .align-self-md-end {
+    align-self: flex-end !important;
+  }
+
+
+  .rtl .text-md-start {
+    text-align: right !important;
+  }
+
+  .rtl .text-md-end {
+    text-align: left !important;
+  }
+
+}
+
+
+
+@media (min-width: 992px) {
+  .rtl .float-lg-start {
+    float: right !important;
+  }
+
+  .rtl .float-lg-end {
+    float: left !important;
+  }
+
+
+  .rtl .justify-content-lg-start {
+    justify-content: flex-start !important;
+  }
+
+  .rtl .justify-content-lg-end {
+    justify-content: flex-end !important;
+  }
+
+
+  .rtl .align-items-lg-start {
+    align-items: flex-start !important;
+  }
+
+  .rtl .align-items-lg-end {
+    align-items: flex-end !important;
+  }
+
+  .rtl .align-content-lg-start {
+    align-content: flex-start !important;
+  }
+
+  .rtl .align-content-lg-end {
+    align-content: flex-end !important;
+  }
+
+
+
+  .rtl .align-self-lg-start {
+    align-self: flex-start !important;
+  }
+
+  .rtl .align-self-lg-end {
+    align-self: flex-end !important;
+  }
+
+  .rtl .text-lg-start {
+    text-align: right !important;
+  }
+
+  .rtl .text-lg-end {
+    text-align: left !important;
+  }
+
+}
+
+
+
+@media (min-width: 1200px) {
+  .rtl .float-xl-start {
+    float: right !important;
+  }
+
+  .rtl .float-xl-end {
+    float: left !important;
+  }
+
+
+
+  .rtl .justify-content-xl-start {
+    justify-content: flex-start !important;
+  }
+
+  .rtl .justify-content-xl-end {
+    justify-content: flex-end !important;
+  }
+
+
+  .rtl .align-items-xl-start {
+    align-items: flex-start !important;
+  }
+
+  .rtl .align-items-xl-end {
+    align-items: flex-end !important;
+  }
+
+
+  .rtl .align-content-xl-start {
+    align-content: flex-start !important;
+  }
+
+  .rtl .align-content-xl-end {
+    align-content: flex-end !important;
+  }
+
+
+  .rtl .align-self-xl-start {
+    align-self: flex-start !important;
+  }
+
+  .rtl .align-self-xl-end {
+    align-self: flex-end !important;
+  }
+
+
+  .rtl .text-xl-start {
+    text-align: right !important;
+  }
+
+  .rtl .text-xl-end {
+    text-align: left !important;
+  }
+
+}
+
+
+@media (min-width: 1400px) {
+  .rtl .float-xxl-start {
+    float: right !important;
+  }
+
+  .rtl .float-xxl-end {
+    float: left !important;
+  }
+
+ 
+  .rtl .justify-content-xxl-start {
+    justify-content: flex-start !important;
+  }
+
+  .rtl .justify-content-xxl-end {
+    justify-content: flex-end !important;
+  }
+
+  .rtl .align-items-xxl-start {
+    align-items: flex-start !important;
+  }
+
+  .rtl .align-items-xxl-end {
+    align-items: flex-end !important;
+  }
+
+  .rtl .align-content-xxl-start {
+    align-content: flex-start !important;
+  }
+
+  .rtl .align-content-xxl-end {
+    align-content: flex-end !important;
+  }
+
+
+  .rtl .align-self-xxl-start {
+    align-self: flex-start !important;
+  }
+
+  .rtl .align-self-xxl-end {
+    align-self: flex-end !important;
+  }
+
+  .rtl .text-xxl-start {
+    text-align: right !important;
+  }
+
+  .rtl .text-xxl-end {
+    text-align: left !important;
+  }
+
+ 
 }
