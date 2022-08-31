@@ -18,7 +18,7 @@ import '@/components/Form/styles/rtl/_layout.scss';
 import '@/components/Form/styles/rtl/_theme_material.scss';
 
 
-type InputProps = {
+interface InputProps extends React.ComponentPropsWithoutRef<any> {
 	type?: string;
 	theme?: string;
 	ui?: string;

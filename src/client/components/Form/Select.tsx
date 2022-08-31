@@ -19,7 +19,8 @@ import '@/components/Form/styles/rtl/_theme_material.scss';
 
 type OptionChangeFnType = (arg1: any) => void;
 
-type SelectProps = {
+
+interface SelectProps extends React.ComponentPropsWithoutRef<any> {
 	options: string;
 	theme?: string;
 	ui?: string;

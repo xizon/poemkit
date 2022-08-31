@@ -19,7 +19,7 @@ import '@/components/Form/styles/rtl/_layout.scss';
 import '@/components/Form/styles/rtl/_theme_material.scss';
 
 
-type MergeInputProps = {
+interface MergeInputProps extends React.ComponentPropsWithoutRef<any> {
 	btnType?: any;
 	type?: string;
 	ui?: string;

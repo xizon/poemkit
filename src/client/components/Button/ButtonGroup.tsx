@@ -3,6 +3,8 @@ import React, { Component } from 'react';
 type ButtonGroupProps = {
 	spacing?: string;
 	fullwidth?: boolean;
+	/** -- */
+	children: React.ReactNode;
 };
 type ButtonGroupState = false;
 

@@ -21,7 +21,7 @@ import '@/components/Form/styles/rtl/_theme_material.scss';
 
 
 
-type DateProps = {
+interface DateProps extends React.ComponentPropsWithoutRef<any> {
 	defaultNow?: string | boolean;
 	time?: string;
 	theme?: string;

@@ -41,6 +41,7 @@ type StickyProps = {
     stopTriggerOffset?: string | boolean;
     /** -- */
     id?: string;
+	children: React.ReactNode;
 };
 type StickyState = false;
 

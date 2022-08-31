@@ -46,6 +46,7 @@ type ShowMoreLessProps = {
     hideTriggerContent?: React.ReactNode;
     /** -- */
     id?: string;
+	children: React.ReactNode;
 };
 type ShowMoreLessState = {
     displayEnabled: boolean;

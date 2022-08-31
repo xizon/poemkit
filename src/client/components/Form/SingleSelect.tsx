@@ -18,8 +18,7 @@ import '@/components/Form/styles/rtl/_layout.scss';
 import '@/components/Form/styles/rtl/_theme_material.scss';
 
 
-
-type SingleSelectProps = {
+interface SingleSelectProps extends React.ComponentPropsWithoutRef<any> {
 	options: string;
 	targetID?: string;
 	theme?: string;

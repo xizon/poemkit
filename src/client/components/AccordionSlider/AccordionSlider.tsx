@@ -34,6 +34,7 @@ type AccordionSliderProps = {
 	duration?: number;
 	/** -- */
 	id?: string;
+	children: React.ReactNode;
 };
 type AccordionSliderState = false;
 

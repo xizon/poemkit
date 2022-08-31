@@ -1,7 +1,10 @@
 import React, { Component } from 'react';
 
 
-type HybridContentSliderItemProps = {};
+type HybridContentSliderItemProps = {
+	/** -- */
+	children: React.ReactNode; 
+};
 type HybridContentSliderItemState = false;
 
 

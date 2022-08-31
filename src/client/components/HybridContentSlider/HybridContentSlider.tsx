@@ -55,6 +55,7 @@ type HybridContentSliderProps = {
     customPagination?: React.ReactNode;
     /** -- */
     id?: string;
+	children: React.ReactNode;
 };
 type HybridContentSliderState = false;
 

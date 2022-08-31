@@ -1,12 +1,13 @@
 import React, { Component } from 'react';
 
-
-type TabListProps = {
+interface TabListProps extends React.ComponentPropsWithoutRef<any> {
 	defaultActive?: string | boolean | undefined;
 	targetID?: string;
 	index?: number;
 	/** Handling events for collapsing item */
 	switchEv?: React.MouseEventHandler<HTMLElement>;
+	/** -- */
+	children: React.ReactNode;
 };
 type TabListState = false;
 

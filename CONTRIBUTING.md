@@ -25,7 +25,6 @@ Default Vendor:
 - [React](https://reactjs.org/)
 - [Babel](https://babeljs.io/)
 - [Express](http://expressjs.com/)
-- [React Router](https://reacttraining.com/react-router/web/guides/quick-start/)
 - [axios](https://github.com/axios/axios)
 - [pm2](https://pm2.keymetrics.io/)
 - [React Helmet](https://github.com/nfl/react-helmet)

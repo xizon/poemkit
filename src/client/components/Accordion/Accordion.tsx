@@ -26,6 +26,7 @@ type AccordionProps = {
 	duration?: number;
 	/** -- */
 	id?: string;
+	children: React.ReactNode;
 };
 type AccordionState = {
 	showContent?: boolean;

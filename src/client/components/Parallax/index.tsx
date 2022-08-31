@@ -42,6 +42,7 @@ type ParallaxProps = {
     speed?: number | null;
     /** -- */
     id?: string;
+	children: React.ReactNode;
 };
 type ParallaxState = false;
 

@@ -26,6 +26,7 @@ type TabsProps = {
 	rotationWrapperAngle?: number;
 	/** -- */
 	id?: string;
+	children: React.ReactNode;
 };
 type TabsState = false;
 

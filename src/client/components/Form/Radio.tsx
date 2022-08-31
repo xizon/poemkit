@@ -19,7 +19,7 @@ import '@/components/Form/styles/rtl/_theme_material.scss';
 
 
 
-type RadioProps = {
+interface RadioProps extends React.ComponentPropsWithoutRef<any> {
 	options: string;
 	value?: string;
 	name?: string;

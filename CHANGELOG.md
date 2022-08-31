@@ -1,5 +1,15 @@
 # Changelog
 
+#### = 0.2.5 (August 31, 2022) =
+
+* Fix: Fixed fault-tolerant handling of RESTful API pages.
+* Fix: Replacing deprecated code in React.
+* Tweak: Modified the Deployment Methods chapter of the documentation.
+* Tweak: Simplified code for social metadata.
+* Tweak: Optimized TypeScript interfaces and types in components.
+* Tweak: Optimize webpack configuration.
+* Tweak: Upgrade Node dependencies.
+
 
 
 #### = 0.2.3 (January 1, 2022) =
@@ -200,7 +210,7 @@
 
 * Tweak: Optimized the JWT communication of axios.
 * Tweak: Adjust the structure of JWT permission demonstration.
-* Tweak: Admin and Member page permission management.
+* Tweak: Dashboard and Sign In page permission management.
 * Remove: Removed unnecessary HTML calls in the demo.
 
 

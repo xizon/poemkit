@@ -12,6 +12,8 @@ type AccordionItemProps = {
 	elAnimEndEv?: React.TransitionEventHandler<HTMLElement>;
 	/** One event type, such as `click` or `mouseover` */
 	triggerType?: string;
+	/** -- */
+	children: React.ReactNode;
 };
 type AccordionItemState = false;
 

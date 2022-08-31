@@ -39,10 +39,11 @@ interface ScrollRevealConfig {
 	infinite?: boolean | undefined;
 }
 
-type ScrollRevealProps = {
+interface ScrollRevealProps extends React.ComponentPropsWithoutRef<"div"> {
 	config: string | ScrollRevealConfig;
 	/** -- */
 	id?: string;
+	children: React.ReactNode;
 };
 type ScrollRevealState = false;
 

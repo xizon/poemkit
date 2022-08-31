@@ -14,6 +14,8 @@ type AccordionSliderItemProps = {
 	elAnimLeaveEv?: React.MouseEventHandler<HTMLElement>;
 	/** One event type, such as `click` or `mouseover` */
 	triggerType?: string;
+	/** -- */
+	children: React.ReactNode;
 };
 type AccordionSliderItemState = false;
 

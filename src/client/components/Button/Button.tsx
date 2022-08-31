@@ -14,7 +14,7 @@ import '@/components/Button/styles/_style.scss';
 import '@/components/Button/styles/rtl/_style.scss';
 
 
-type ButtonProps = {
+interface ButtonProps extends React.ComponentPropsWithoutRef<any> {
 	status?: string;
 	border?: string;
 	background?: string;
@@ -27,6 +27,7 @@ type ButtonProps = {
 	target?: string;
 	/** -- */
 	id?: string;
+	children: React.ReactNode;
 };
 type ButtonState = false;
 

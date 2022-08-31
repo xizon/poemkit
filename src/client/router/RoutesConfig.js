@@ -4,11 +4,11 @@ import Home from '@/pages/Home/index.js';
 import Posts from '@/pages/Posts/index.js';
 import PostDetail from '@/pages/Posts/PostDetail.js';
 import PostsPagination from '@/pages/PostsPagination/index.js';
-import Member from '@/pages/Member/index.js';
+import SignIn from '@/pages/SignIn/index.js';
 import NoMatch from '@/pages/404/index.js';
 import NestedRoutes from '@/pages/NestedRoutes/index.js';
 import ComponentsDemo from '@/pages/ComponentsDemo/index.js';
-import Admin from '@/pages/Admin/index.js';
+import Dashboard from '@/pages/Dashboard/index.js';
 
 
 
@@ -62,9 +62,9 @@ const routesConfig = [
         pageTitle: ''
       },
       {
-        path: "/member",
-        component: Member,
-        pageTitle: 'Member'
+        path: "/sign-in",
+        component: SignIn,
+        pageTitle: 'Sign In'
       },
       {
         path: "/posts-pagination/:page_number",
@@ -72,9 +72,9 @@ const routesConfig = [
         pageTitle: 'Posts Pagination'
       },
       {
-        path: "/admin",
-        component: Admin,
-        pageTitle: 'Admin'
+        path: "/dashboard",
+        component: Dashboard,
+        pageTitle: 'Dashboard'
       },
 
 

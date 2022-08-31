@@ -1,1 +1,0 @@
-export { default as authHeader } from '@/helpers/auth-header.js';

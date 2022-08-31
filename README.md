@@ -44,16 +44,77 @@ Server runs on `http://localhost:3000`
 ## Table of Contents
 
 
-* [Description](#description)
-* [Installation And Test](#installation-and-test)
-* [Custom Configuration](#custom-configuration)
 * [File Structures](#file-structures)
+* [Description](#description)
+* [Getting Started](#getting-started)
+* [Deploy on Custom Server](#deploy-on-custom-server)
+* [Site Configuration](#site-configuration)
 * [Contributing](#contributing)
 * [Changelog](#changelog)
 * [Browser Support](#browser-support)
 * [Supported development environment](#supported-development-environment)
 * [Licensing](#licensing)
 
+
+
+
+* * *
+
+## File Structures
+
+
+
+```sh
+poemkit/
+├── README.md
+├── CHANGELOG.md
+├── CONTRIBUTING.md
+├── LICENSE
+├── ecosystem.config.js ------------------------- # for pm2
+├── babel.config.js
+├── tsconfig.json
+├── webpack.config.js 
+├── package-lock.json
+├── package.json
+├── test/            --------------------------- # Unit Testing scripts
+├── public/          --------------------------- # HTML template of Homepage
+│   ├── index.html    
+│   ├── manifest.json
+│   └── server/  ------------------------------- # PHP scripts used to the server for testing
+│   └── assets/
+├── dist/        ------------------------------- # Files compiled, used in the production environment
+│   ├── css/
+│   │   ├── poemkit.css
+│   │   └── poemkit.min.css
+│   └── js/
+│   │   ├── poemkit.js
+│   │   └── poemkit.min.js
+├── src/
+│   ├── client/
+│   │   ├── client.js
+│   │   ├── actions/
+│   │   ├── reducers/
+│   │   ├── helpers/
+│   │   ├── services/
+│   │   ├── router/
+│   │   ├── components/ -------------------------  # Independent React components
+│   │   │     ├── */
+│   │   │     ├── _utils/ -----------------------  # General utilities & snippets(js & css)
+│   │   │     └── _plugins/ ---------------------  # Third-party plugins
+│   │   ├── views/ ------------------------------  # Website pages
+│   │   │     ├── _pages/
+│   │   │     └── _html/
+│   └── server/
+│   │   ├── app.js
+│   │   ├── server.js
+│   │   └── renderer.js
+│   └── store/
+│   │   └── createStore.js
+│   └── config/
+│   │   ├── tmpl-manifest.json  -----------------  # `manifest.json` file template
+│   │   └── websiteConfig.js  -------------------  # website config
+└──
+```
 
 
 
@@ -79,7 +140,7 @@ Server runs on `http://localhost:3000`
 
 
 
-## Installation And Test
+## Getting Started
 
 You will need to have [node](https://nodejs.org/) setup on your machine. That will output the built distributables to `./dist/*` and `./public/*.html`.
 
@@ -140,73 +201,19 @@ http://localhost:3000
 
 The new code is recommended to be bundled before debugging.
 
+**Step 6 (Optional).** Deploy node server on hosting server
 
-**Step 6 (Optional).** Start Reactjs application with PM2 as a service (only works if you are using Node v13.9.0 or above.)
-
-6.1) Installing Node and NPM
-
-```sh
-$ curl -sL https://rpm.nodesource.com/setup_14.x | sudo bash -
-$ sudo yum install nodejs
-$ node --version  #v14.16.1
-$ npm --version   #6.14.12
-$ which node babel-node #check the location of node and babel-node
-```
-
-
-6.2) Installing PM2. With NPM
+Please run the build command before deploying.
 
 ```sh
-$ sudo npm install pm2@latest -g
+$ npm run deploy 
 ```
 
-
-6.3) Install Babel globally on your machine
+Stop the existing deployments
 
 ```sh
-$ sudo npm install -g babel-cli
-$ sudo npm install -g @babel/core @babel/cli @babel/preset-env 
+$ npm run destroy
 ```
-
-
-6.4) Install TypeScript and ts-node globally on your machine
-
-```sh
-$ sudo npm install -g typescript ts-node
-```
-
-
-6.5) Install TypeScript dependencies with PM2
-
-```sh
-$ sudo pm2 install typescript
-```
-
-
-
-6.6) Frequently used commands for PM2:
-
-```sh
-#into your `"poemkit/"` folder directory.
-$ cd /{your_directory}/poemkit
-
-
-#run app
-$ pm2 start ecosystem.config.js
-
-#other commands
-$ pm2 restart ecosystem.config.js
-$ pm2 stop ecosystem.config.js
-$ pm2 delete ecosystem.config.js
-$ pm2 list
-$ pm2 logs
-```
-
-
-6.7) Use domain to access your React appication.
-
-You had created a basic React App from here, then you need to deploy a React App on Apache or Nginx web server. Please refer to the network for the tutorial on setting up the proxy.
-
 
 
 **Step 7 (Optional).** Unit Testing
@@ -215,18 +222,6 @@ You had created a basic React App from here, then you need to deploy a React App
 $ npm run test
 ```
 
-
-**Step 8 (Optional).** Deploy to the server
-
-```sh
-$ npm run deploy
-```
-
-Stop the existing deployments:
-
-```sh
-$ npm run destroy
-```
 
 <blockquote>
 <h3>💡 Note:</h3>
@@ -257,7 +252,175 @@ $ sudo npm rebuild node-sass
 </blockquote>
 
 
-## Custom Configuration
+
+## Deploy on Custom Server
+
+### ⚙️ (Step 1) Install PM2 environment
+
+Start Reactjs application with PM2 as a service (only works if you are using Node v13.9.0 or above.)
+
+1.1) Installing Node and NPM on hosting server **(Optional).**
+
+Node14+ version will be installed here
+
+```sh
+$ curl -sL https://rpm.nodesource.com/setup_14.x | sudo bash -
+$ sudo yum install nodejs
+$ node --version  #v14.16.1
+$ npm --version   #6.14.12
+$ which node babel-node #check the location of node and babel-node
+```
+
+
+1.2) Installing PM2. With NPM
+
+```sh
+$ sudo npm install pm2@latest -g
+```
+
+
+1.3) Install Babel globally on your machine
+
+```sh
+$ sudo npm install -g babel-cli
+$ sudo npm install -g @babel/core @babel/cli @babel/preset-env 
+```
+
+
+1.4) Install TypeScript and ts-node globally on your machine
+
+```sh
+$ sudo npm install -g typescript ts-node
+```
+
+
+1.5) Install TypeScript dependencies with PM2
+
+```sh
+$ sudo pm2 install typescript
+```
+
+
+1.6) Frequently used commands for PM2:
+
+```sh
+#into your `"poemkit/"` folder directory.
+$ cd /{your_directory}/poemkit
+
+
+#run app
+$ pm2 start ecosystem.config.js
+
+#other commands
+$ pm2 restart ecosystem.config.js
+$ pm2 stop ecosystem.config.js
+$ pm2 delete ecosystem.config.js
+$ pm2 list
+$ pm2 logs
+```
+
+
+1.7) Use domain to access your React appication.
+
+You had created a basic React App from here, then you need to deploy a React App on Apache or Nginx web server. Please refer to the network for the tutorial on setting up the proxy.
+
+
+### ⚙️ (Step 2) Nginx’s Site Configuration
+
+Now that the app is ready to be deployed, we should prepare the Nginx end. In case Nginx is not installed, it can be easily installed with the apt packaging system by running the following two commands:
+
+```sh
+$ sudo apt update
+$ sudo apt install nginx
+```
+or
+```sh
+$ sudo yum install nginx -y
+```
+
+Start Nginx:
+
+```sh
+$ systemctl start nginx
+```
+
+Start at boot:
+
+```sh
+$ systemctl enable nginx
+```
+
+
+
+Set Up a Firewall Using FirewallD on CentOS 8:
+
+```sh
+$ firewall-cmd --permanent --zone=public --add-service=http
+$ firewall-cmd --permanent --zone=public --add-service=https
+$ firewall-cmd --permanent --zone=public --add-port=3000/tcp
+$ firewall-cmd --reload
+$ systemctl restart nginx 
+```
+
+We can check if Nginx is running on the system:
+
+```sh
+$ systemctl status nginx
+```
+
+
+Alright, now that the Nginx service has successfully started running, we can go ahead and modify the configuration file found at `/etc/nginx/conf.d/default.conf`. This is where we will point the domain to fire up the correct React application:
+
+```sh
+$ vi /etc/nginx/conf.d/default.conf
+```
+
+At the end of the file, add:
+
+```bash
+server {
+        listen      443 ssl;
+        server_name backend1.example.com;
+
+        ...
+        location / {
+            proxy_set_header Host $http_host;
+            proxy_pass http://{YOUR_IP}:3000;
+        }
+
+}
+```
+
+After adding these lines to the file, we need to restart the Nginx service:
+
+```sh
+$ systemctl restart nginx
+```
+
+There probably won’t be any messages if the service restarted successfully. Otherwise, it will spit out lines of error messages.
+
+
+
+
+## Site Configuration
+
+### ⚙️ Enabling HTTPS on Your Server (For deployment of production)
+
+Modify the file `./src/server/app.js`, use [https.createServer([options][, requestListener])](https://nodejs.org/api/https.html#httpscreateserveroptions-requestlistener) to wrap the express service, please check out the sample code below:
+
+```js
+const cert = fs.readFileSync('/path//bundle.crt');
+const key = fs.readFileSync('/path/ca.key');
+import https from 'https';
+const server = https.createServer({key: key, cert: cert }, app);
+
+...
+app.get('/', (req, res) => { res.send('this is an secure server') });
+...
+
+server.listen(port, () => console.log(`Frontend service listening on port: ${port}, access https://localhost:${port} in the web browser`));
+```
+
 
 ### ⚙️ Environment Variables:
 
@@ -644,67 +807,6 @@ Change the API URLs of the website. Modify the key `API` of the `./src/config/we
 ```
 
 
-
-* * *
-
-
-## File Structures
-
-
-
-```sh
-poemkit/
-├── README.md
-├── CHANGELOG.md
-├── CONTRIBUTING.md
-├── LICENSE
-├── ecosystem.config.js ------------------------- # for pm2
-├── babel.config.js
-├── webpack.config.js 
-├── package-lock.json
-├── package.json
-├── test/            --------------------------- # Unit Testing scripts
-├── public/          --------------------------- # HTML template of Homepage
-│   ├── index.html    
-│   ├── manifest.json
-│   └── server/  ------------------------------- # PHP scripts used to the server for testing
-│   └── assets/
-├── dist/        ------------------------------- # Files compiled, used in the production environment
-│   ├── css/
-│   │   ├── poemkit.css
-│   │   └── poemkit.min.css
-│   └── js/
-│   │   ├── poemkit.js
-│   │   └── poemkit.min.js
-├── src/
-│   ├── client/
-│   │   ├── client.js
-│   │   ├── actions/
-│   │   ├── reducers/
-│   │   ├── helpers/
-│   │   ├── services/
-│   │   ├── router/
-│   │   ├── components/ -------------------------  # Independent React components
-│   │   │     ├── */
-│   │   │     ├── _utils/ -----------------------  # General utilities & snippets(js & css)
-│   │   │     └── _plugins/ ---------------------  # Third-party plugins
-│   │   ├── views/ ------------------------------  # Website pages
-│   │   │     ├── _pages/
-│   │   │     └── _html/
-│   └── server/
-│   │   ├── app.js
-│   │   ├── server.js
-│   │   └── renderer.js
-│   └── store/
-│   │   └── createStore.js
-│   └── config/
-│   │   ├── tmpl-manifest.json  -----------------  # `manifest.json` file template
-│   │   └── websiteConfig.js  -------------------  # website config
-└──
-```
-
-
-
 ## Contributing
 
 Finding bugs, sending pull requests or improving our docs - any contribution is welcome and highly appreciated. To get started, head over to our [contribution guidelines](CONTRIBUTING.md). Thanks!
@@ -724,11 +826,12 @@ Finding bugs, sending pull requests or improving our docs - any contribution is 
 
 ## Supported development environment
 
-- Supports React 17 +
-- Supports TypeScript 4.x.x + 
-- Supports Babel 7.x.x + 
-- Supports Webpack 5.x.x
-
+- React 17 +
+- TypeScript 4.x.x + 
+- Babel 7.x.x + 
+- Webpack 5.x.x
+- Jest 27.x.x
+- Express 4.x.x
 
 
 ## Licensing

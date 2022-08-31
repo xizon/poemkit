@@ -105,8 +105,8 @@ export default (props) => {
 		},
 		{
 			"title": <>
-				<li onTouchStart={mobileClickEv()} className={urlChk("/member") ? 'is-active' : ''}>
-					<NavLink data-route="true" to="/member" activeClassName="is-active">Member</NavLink>
+				<li onTouchStart={mobileClickEv()} className={urlChk("/sign-in") ? 'is-active' : ''}>
+					<NavLink data-route="true" to="/sign-in" activeClassName="is-active">Sign In</NavLink>
 				</li>
 			</>,
 			"link": "#",
@@ -114,8 +114,8 @@ export default (props) => {
 		},
 		{
 			"title": <>
-				<li onTouchStart={mobileClickEv()} className={urlChk("/admin") ? 'is-active' : ''}>
-					<NavLink data-route="true" to="/admin" activeClassName="is-active">Admin</NavLink>
+				<li onTouchStart={mobileClickEv()} className={urlChk("/dashboard") ? 'is-active' : ''}>
+					<NavLink data-route="true" to="/dashboard" activeClassName="is-active">Dashboard</NavLink>
 				</li>
 			</>,
 			"link": "#",

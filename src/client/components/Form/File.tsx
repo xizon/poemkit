@@ -19,8 +19,7 @@ import '@/components/Form/styles/rtl/_layout.scss';
 import '@/components/Form/styles/rtl/_theme_material.scss';
 
 
-
-type FileProps = {
+interface FileProps extends React.ComponentPropsWithoutRef<any> {
 	value?: string;
 	label?: string | object;
 	name?: string;

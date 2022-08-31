@@ -5,6 +5,8 @@ type ListBulletedItemProps = {
 	type?: string;
 	/** Set the display content of the marker, it will change according to different types */
 	marker?: React.ReactNode | undefined;
+	/** -- */
+	children: React.ReactNode;
 	
 };
 type ListBulletedItemState = false;

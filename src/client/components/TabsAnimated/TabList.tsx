@@ -1,7 +1,10 @@
 import React, { Component } from 'react';
 
-type TabListProps = {
+
+interface TabListProps extends React.ComponentPropsWithoutRef<any> {
 	defaultActive?: string | boolean | undefined;
+	/** -- */
+	children: React.ReactNode;
 };
 type TabListState = false;
 

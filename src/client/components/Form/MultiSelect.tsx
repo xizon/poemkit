@@ -18,8 +18,7 @@ import '@/components/Form/styles/rtl/_layout.scss';
 import '@/components/Form/styles/rtl/_theme_material.scss';
 
 
-
-type MultiSelectProps = {
+interface MultiSelectProps extends React.ComponentPropsWithoutRef<any> {
 	options: string;
 	theme?: string;
 	value?: string;

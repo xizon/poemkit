@@ -26,6 +26,7 @@ type PeriodicalScrollProps = {
 	timing?: number; 
     /** -- */
     id?: string;
+	children: React.ReactNode;
 };
 type PeriodicalScrollState = false;
 

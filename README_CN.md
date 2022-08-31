@@ -43,13 +43,78 @@ PoemKit系一套免费的网站开发工具包，它也是一个微前端架构�
 ## 目录
 
 
+* [目录结构](#目录结构)
 * [介绍](#介绍)
 * [开发者基本操作](#开发者基本操作)
-* [个性化配置](#个性化配置)
-* [目录结构](#目录结构)
+* [入门指引](#入门指引)
+* [部署到自定义服务器](#部署到自定义服务器)
+* [站点配置](#站点配置)
 * [兼容性](#兼容性)
 * [支持的开发环境](#支持的开发环境)
 * [许可证](#许可证)
+
+
+
+
+* * *
+
+
+## 目录结构
+
+
+
+
+```sh
+poemkit/
+├── README.md
+├── CHANGELOG.md
+├── CONTRIBUTING.md
+├── LICENSE
+├── ecosystem.config.js ------------------------- # 用于pm2部署
+├── babel.config.js
+├── tsconfig.json
+├── webpack.config.js 
+├── package-lock.json
+├── package.json 
+├── test/            --------------------------- # 单元测试脚本
+├── public/          --------------------------- # 自动生成的首页HTML静态模板
+│   ├── index.html 
+│   ├── manifest.json
+│   └── server/   ------------------------------- # 用于服务器测试的PHP脚本
+│   └── assets/
+├── dist/         ------------------------------- # web 编译出的文件，用于生产环境
+│   ├── css/
+│   │   ├── poemkit.css
+│   │   └── poemkit.min.css
+│   └── js/
+│   │   ├── poemkit.js
+│   │   └── poemkit.min.js
+├── src/
+│   ├── client/
+│   │   ├── client.js
+│   │   ├── actions/
+│   │   ├── reducers/
+│   │   ├── helpers/
+│   │   ├── services/
+│   │   ├── router/
+│   │   ├── components/ -------------------------  # 独立的UI组件
+│   │   │     ├── */
+│   │   │     ├── _utils/ -----------------------  # 常用的实用程序和样式脚本
+│   │   │     └── _plugins/ ---------------------  # 第三方插件
+│   │   ├── views/ ------------------------------  # 网站页面
+│   │   │     ├── _pages/
+│   │   │     └── _html/
+│   └── server/
+│   │   ├── app.js
+│   │   ├── server.js
+│   │   └── renderer.js
+│   └── store/
+│   │   └── createStore.js
+│   └── config/
+│   │   ├── tmpl-manifest.json  ------------------  # 自动生成的 `manifest.json` 文件模板
+│   │   └── websiteConfig.js  --------------------  # 网站配置文件(比如根目录)
+└──
+```
 
 
 
@@ -88,7 +153,7 @@ PoemKit系一套免费的网站开发工具包，它也是一个微前端架构�
 
 
 
-## 命令使用方法:
+## 入门指引
 
 **Step 1.** 下载项目
 
@@ -118,7 +183,7 @@ $ sudo npm install
 
 **Step 4.** 常用的命令:
 
-调试应用程序, 它可以用来单独检查TypeScript类型的文件而不进行编译操作，便于提高开发效率，专注整体代码的编写。
+调试应用程序, 它可以用来单独检查TypeScript类型的文件而不进行编译和打包操作，便于提高开发效率，专注整体代码的编写。
 
 ```sh
 $ npm run check
@@ -146,88 +211,24 @@ http://localhost:3000
 建议在调试之前将新代码重新编译打包。
 
 
-**Step 6 (可选).** 用PM2启动Reactjs应用程序（仅在使用Node v13.9.0或更高版本时有效）。
+**Step 6 (可选).** 在托管服务器上部署Node服务
 
-
-6.1) 安装Node和NPM
-
-```sh
-$ curl -sL https://rpm.nodesource.com/setup_14.x | sudo bash -
-$ sudo yum install nodejs
-$ node --version  #v14.16.1
-$ npm --version   #6.14.12
-$ which node babel-node #check the location of node and babel-node
-```
-
-
-6.2) 全局安装PM2
+部署前请先运行build命令.
 
 ```sh
-$ sudo npm install pm2@latest -g
+$ npm run deploy 
 ```
 
-
-6.3) 全局安装Babel
+停止现有部署
 
 ```sh
-$ sudo npm install -g babel-cli
-$ sudo npm install -g @babel/core @babel/cli @babel/preset-env 
+$ npm run destroy
 ```
-
-6.4) 全局安装TypeScript和ts-node
-
-```sh
-$ sudo npm install -g typescript ts-node
-```
-
-6.5) 使用PM2安装TypeScript依赖
-
-```sh
-$ sudo pm2 install typescript
-```
-
-
-6.6) PM2常用命令:
-
-```sh
-#先进入 `"poemkit/"` 目录 
-$ cd /{your_directory}/poemkit
-
-
-#用pm2运行应用
-$ pm2 start ecosystem.config.js
-
-#其它命令
-$ pm2 restart ecosystem.config.js
-$ pm2 stop ecosystem.config.js
-$ pm2 delete ecosystem.config.js
-$ pm2 list
-$ pm2 logs
-```
-
-
-6.7) 使用域名访问您的React应用。
-
-需要在Apache或Nginx的Web服务器上部署React App。请参考网络以获取有关设置代理的教程。
-
-
 
 **Step 7 (可选).** 单元测试
 
 ```sh
 $ npm run test
-```
-
-**Step 8 (可选).** 部署到服务器
-
-```sh
-$ npm run deploy
-```
-
-撤销现有部署:
-
-```sh
-$ npm run destroy
 ```
 
 
@@ -259,7 +260,175 @@ $ sudo npm rebuild node-sass
 </blockquote>
 
 
-## 个性化配置
+
+
+## 部署到自定义服务器
+
+### ⚙️ (Step 1) 安装PM2环境
+
+用PM2启动Reactjs应用程序（仅在使用Node v13.9.0或更高版本时有效）。
+
+1.1) 安装Node和NPM到服务器主机（可选）
+
+这里将安装Node 14的版本
+
+```sh
+$ curl -sL https://rpm.nodesource.com/setup_14.x | sudo bash -
+$ sudo yum install nodejs
+$ node --version  #v14.16.1
+$ npm --version   #6.14.12
+$ which node babel-node #check the location of node and babel-node
+```
+
+1.2) 全局安装PM2
+
+```sh
+$ sudo npm install pm2@latest -g
+```
+
+
+1.3) 全局安装Babel
+
+```sh
+$ sudo npm install -g babel-cli
+$ sudo npm install -g @babel/core @babel/cli @babel/preset-env 
+```
+
+
+1.4) 全局安装TypeScript和ts-node
+
+```sh
+$ sudo npm install -g typescript ts-node
+```
+
+
+1.5) 使用PM2安装TypeScript依赖
+
+```sh
+$ sudo pm2 install typescript
+```
+
+
+1.6) PM2常用命令:
+
+```sh
+#先进入 `"poemkit/"` 目录 
+$ cd /{your_directory}/poemkit
+
+
+#用pm2运行应用
+$ pm2 start ecosystem.config.js
+
+#其它命令
+$ pm2 restart ecosystem.config.js
+$ pm2 stop ecosystem.config.js
+$ pm2 delete ecosystem.config.js
+$ pm2 list
+$ pm2 logs
+```
+
+
+1.7) 使用域名访问您的React应用。
+
+需要在Apache或Nginx的Web服务器上部署React App。请参考网络以获取有关设置代理的教程。
+
+
+### ⚙️ (Step 2)  配置Nginx站点
+
+现在应用程序已准备好部署，我们应该准备 Nginx 端。 如果没有安装 Nginx，可以通过运行以下两个命令轻松地使用 apt 打包系统安装它：
+
+```sh
+$ sudo apt update
+$ sudo apt install nginx
+```
+或者
+```sh
+$ sudo yum install nginx -y
+```
+
+启动 Nginx:
+
+```sh
+$ systemctl start nginx
+```
+
+开机时启动:
+
+```sh
+$ systemctl enable nginx
+```
+
+
+
+在 CentOS 8 上使用 FirewallD 设置防火墙:
+
+```sh
+$ firewall-cmd --permanent --zone=public --add-service=http
+$ firewall-cmd --permanent --zone=public --add-service=https
+$ firewall-cmd --permanent --zone=public --add-port=3000/tcp
+$ firewall-cmd --reload
+$ systemctl restart nginx 
+```
+
+检查 Nginx 是否在系统上运行：
+
+```sh
+$ systemctl status nginx
+```
+
+
+好了，现在 Nginx 服务已经成功开始运行了，我们可以继续修改 `/etc/nginx/conf.d/default.conf` 中的配置文件。 这是我们将指向域以启动正确的React应用程序的地方：
+
+```sh
+$ vi /etc/nginx/conf.d/default.conf
+```
+
+在文件末尾添加：
+
+```bash
+server {
+        listen      443 ssl;
+        server_name backend1.example.com;
+
+        ...
+        location / {
+            proxy_set_header Host $http_host;
+            proxy_pass http://{YOUR_IP}:3000;
+        }
+
+}
+```
+
+将这些行添加到文件后，我们需要重新启动 Nginx 服务：
+
+```sh
+$ systemctl restart nginx
+```
+
+如果服务重新启动成功，可能不会有任何消息。 否则，它将输出多行错误消息。
+
+
+
+## 站点配置
+
+
+### ⚙️ 启用HTTPS(用于正式环境部署)
+
+修改文件 `./src/server/app.js`, 使用Node的 [https.createServer([options][, requestListener])](https://nodejs.org/api/https.html#httpscreateserveroptions-requestlistener) 来包装Express服务，请查阅下面的示范代码：
+
+```js
+const cert = fs.readFileSync('/path//bundle.crt');
+const key = fs.readFileSync('/path/ca.key');
+import https from 'https';
+const server = https.createServer({key: key, cert: cert }, app);
+
+...
+app.get('/', (req, res) => { res.send('this is an secure server') });
+...
+
+server.listen(port, () => console.log(`Frontend service listening on port: ${port}, access https://localhost:${port} in the web browser`));
+```
+
 
 
 ### ⚙️ 环境变量:
@@ -651,67 +820,6 @@ if ( process.env.NODE_ENV === 'development' ) {
 
 
 
-* * *
-
-
-## 目录结构
-
-
-
-
-```sh
-poemkit/
-├── README.md
-├── CHANGELOG.md
-├── CONTRIBUTING.md
-├── LICENSE
-├── ecosystem.config.js ------------------------- # 用于pm2部署
-├── babel.config.js
-├── webpack.config.js 
-├── package-lock.json
-├── package.json 
-├── test/            --------------------------- # 单元测试脚本
-├── public/          --------------------------- # 自动生成的首页HTML静态模板
-│   ├── index.html 
-│   ├── manifest.json
-│   └── server/   ------------------------------- # 用于服务器测试的PHP脚本
-│   └── assets/
-├── dist/         ------------------------------- # web 编译出的文件，用于生产环境
-│   ├── css/
-│   │   ├── poemkit.css
-│   │   └── poemkit.min.css
-│   └── js/
-│   │   ├── poemkit.js
-│   │   └── poemkit.min.js
-├── src/
-│   ├── client/
-│   │   ├── client.js
-│   │   ├── actions/
-│   │   ├── reducers/
-│   │   ├── helpers/
-│   │   ├── services/
-│   │   ├── router/
-│   │   ├── components/ -------------------------  # 独立的UI组件
-│   │   │     ├── */
-│   │   │     ├── _utils/ -----------------------  # 常用的实用程序和样式脚本
-│   │   │     └── _plugins/ ---------------------  # 第三方插件
-│   │   ├── views/ ------------------------------  # 网站页面
-│   │   │     ├── _pages/
-│   │   │     └── _html/
-│   └── server/
-│   │   ├── app.js
-│   │   ├── server.js
-│   │   └── renderer.js
-│   └── store/
-│   │   └── createStore.js
-│   └── config/
-│   │   ├── tmpl-manifest.json  ------------------  # 自动生成的 `manifest.json` 文件模板
-│   │   └── websiteConfig.js  --------------------  # 网站配置文件(比如根目录)
-└──
-```
-
-
-
 ## 兼容性
 
 | Chrome | Firefox | Edge | IE| Safari |Opera | iOS  | Android
@@ -720,11 +828,12 @@ poemkit/
 
 ## 支持的开发环境
 
-- 支持React 17 +
-- 支持ReactTypeScript 4.x.x + 
-- 支持ReactBabel 7.x.x + 
-- 支持ReactWebpack 5.x.x
-
+- React 17 +
+- TypeScript 4.x.x + 
+- Babel 7.x.x + 
+- Webpack 5.x.x
+- Jest 27.x.x
+- Express 4.x.x
 
 
 ## 许可证

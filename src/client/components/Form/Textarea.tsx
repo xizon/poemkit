@@ -19,7 +19,7 @@ import '@/components/Form/styles/rtl/_theme_material.scss';
 
 
 
-type TextareaProps = {
+interface TextareaProps extends React.ComponentPropsWithoutRef<any> {
 	theme?: string;
 	ui?: string;
 	value?: string;

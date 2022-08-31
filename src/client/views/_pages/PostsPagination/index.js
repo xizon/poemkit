@@ -13,6 +13,8 @@ let SITE_NAME = null;
 //manage the document head
 import { Helmet } from "react-helmet";
 import siteInfo from '@/helpers/site-info.js';
+import socialMetadata from '@/helpers/social-metadata.js';
+
 function SeoVars() {
 	const {siteName, baseURL, pageTitle} = siteInfo('/posts-pagination');
 	// if the value of `pageTitle` is `{{pageTitle}}`, the value 
@@ -39,12 +41,14 @@ function Seo() {
 			<title>{`${pageTitle} - ${siteName}`}</title>
 			<body class={`${bodyClasses}`} />
 			<meta name="description" content={`${desc}`}/>
-			<meta property="og:title" content={`${pageTitle} - ${siteName}`}/>
-			<meta property="og:url" content={`${baseURL}`}/>
-			<meta property="og:description" content={`${desc}`}/>
-			<meta property="og:type" content="website"/>
-			<meta property="og:site_name" content={`${siteName}`}/>
-			{imgURL === '' ? '' : <meta property="og:image" content={`${imgURL}`}/>}
+
+			{socialMetadata({
+				ogTitle: `${pageTitle} - ${siteName}`,
+				ogDesc: `${desc}`,
+				ogUrl: `${baseURL}`,
+				ogImage: `${imgURL}`
+			})}
+
 			<link rel="canonical" href={`${baseURL}`}/>
 		</Helmet>
 	)

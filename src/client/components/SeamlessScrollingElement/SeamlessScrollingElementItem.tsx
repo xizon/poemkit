@@ -1,7 +1,10 @@
 import React, { Component } from 'react';
 
 
-type SeamlessScrollingElementItemProps = {};
+type SeamlessScrollingElementItemProps = {
+	/** -- */
+	children: React.ReactNode;
+};
 type SeamlessScrollingElementItemState = false;
 
 

@@ -36,7 +36,7 @@ const config = {
  
 
 	  /*
-	   TYPE: User
+	   TYPE: User (The PHP files are located at `./public/server/`)
 	   ------------------------------------------
 	  */
 	  "LOGIN_REQUEST": `https://uiux.cc/server/sessions-create.php`,
@@ -51,9 +51,11 @@ const config = {
 
 
 /**
- * API for Test (Please use a PHP server environment with a local port of 8888)
+ * API for Test on Localhost
+ * 
+ * (Please use a PHP server environment with a local port of 8888)
  */
-const configTest = {
+const localConfig= {
   "rootDirectory": ROOT_DIR,
   "siteUrl": SITE_URL,
   "API": {
@@ -92,5 +94,4 @@ const configTest = {
 };
 
 
-//
 module.exports = config;

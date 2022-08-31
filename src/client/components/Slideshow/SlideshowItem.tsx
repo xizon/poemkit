@@ -4,6 +4,8 @@ import React, { Component } from 'react';
 type SlideshowItemProps = {
     /** Specify URL each item. Support image and video.  */
     url?: string | undefined;
+	/** -- */
+	children: React.ReactNode;
 };
 type SlideshowItemState = false;
 

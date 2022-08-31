@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 
-type TabPanelProps = {
+
+interface TabPanelProps extends React.ComponentPropsWithoutRef<"div"> {
 	defaultActive?: string | boolean | undefined;
 	tabpanelClass?: string;
 	targetID?: string;

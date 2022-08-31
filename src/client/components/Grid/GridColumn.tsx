@@ -5,6 +5,8 @@ type GridColumnProps = {
     stackRatio?: string | boolean | undefined;
     stackSize?: string | boolean | undefined;
     inline?: boolean | undefined;
+	/** -- */
+	children: React.ReactNode;
 };
 type GridColumnState = false;
 
@@ -84,7 +86,7 @@ export default class GridColumn extends Component<GridColumnProps, GridColumnSta
         } = this.props; 
 
         let stackClassName = '';
-        for (var i = 0; i < gridWidths.length; i++) {
+        for (let i = 0; i < gridWidths.length; i++) {
             if (gridWidths[i].ratio === stackRatio) {
                 stackClassName = ` ${gridWidths[i].class}--${stackSize}`;
                 break;

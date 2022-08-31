@@ -70,6 +70,7 @@ type ModalDialogProps = {
     enableVideo?: boolean;
     /** -- */
     id?: string;
+	children: React.ReactNode;
 };
 type ModalDialogState = false;
 

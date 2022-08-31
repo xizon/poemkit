@@ -18,8 +18,7 @@ import '@/components/Form/styles/rtl/_layout.scss';
 import '@/components/Form/styles/rtl/_theme_material.scss';
 
 
-
-type SwitchProps = {
+interface SwitchProps extends React.ComponentPropsWithoutRef<any> {
 	targetID?: string;
 	ui?: string;
 	textOff?: string;

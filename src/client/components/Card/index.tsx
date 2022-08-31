@@ -66,6 +66,8 @@ type CardProps = {
 	avatar?: string | null;
 	/** -- */
 	id?: string;
+	/** -- */
+	children: React.ReactNode;
 };
 type CardState = false;
 

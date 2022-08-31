@@ -29,6 +29,7 @@ type ListBulletedProps = {
     leadingZero?: boolean;
     /** -- */
     id?: string;
+	children: React.ReactNode;
 };
 type ListBulletedState = false;
 

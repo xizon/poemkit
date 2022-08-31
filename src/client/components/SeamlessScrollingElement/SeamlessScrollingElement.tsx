@@ -35,6 +35,7 @@ type SeamlessScrollingElementProps = {
     speed?: number;
     /** -- */
     id?: string;
+	children: React.ReactNode;
 };
 type SeamlessScrollingElementState = false;
 

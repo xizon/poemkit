@@ -49,6 +49,7 @@ type SlideshowProps = {
 	draggableCursor?: string | boolean;   
     /** -- */
     id?: string;
+	children: React.ReactNode;
 };
 type SlideshowState = false;
 

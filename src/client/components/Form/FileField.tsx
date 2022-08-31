@@ -23,8 +23,7 @@ declare global {
     interface Window { dropZoneTimeout: any; }
 }
 
-
-type FileFieldProps = {
+interface FileFieldProps extends React.ComponentPropsWithoutRef<any> {
 	value?: string;
 	label?: string | object;
 	name?: string;

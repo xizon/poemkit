@@ -13,6 +13,8 @@ import NestedRoutesDetail from '@/pages/NestedRoutes/NestedRoutesDetail.js';
 //manage the document head
 import { Helmet } from "react-helmet";
 import siteInfo from '@/helpers/site-info.js';
+import socialMetadata from '@/helpers/social-metadata.js';
+
 function SeoVars() {
 	const {siteName, baseURL, pageTitle} = siteInfo('/nested-routes');
 	// if the value of `pageTitle` is `{{pageTitle}}`, the value 
@@ -36,12 +38,14 @@ function Seo() {
 			<title>{`${pageTitle} - ${siteName}`}</title>
 			<body class={`${bodyClasses}`} />
 			<meta name="description" content={`${desc}`}/>
-			<meta property="og:title" content={`${pageTitle} - ${siteName}`}/>
-			<meta property="og:url" content={`${baseURL}`}/>
-			<meta property="og:description" content={`${desc}`}/>
-			<meta property="og:type" content="website"/>
-			<meta property="og:site_name" content={`${siteName}`}/>
-			{imgURL === '' ? '' : <meta property="og:image" content={`${imgURL}`}/>}
+
+			{socialMetadata({
+				ogTitle: `${pageTitle} - ${siteName}`,
+				ogDesc: `${desc}`,
+				ogUrl: `${baseURL}`,
+				ogImage: `${imgURL}`
+			})}
+
 			<link rel="canonical" href={`${baseURL}`}/>
 		</Helmet>
 	)
@@ -61,7 +65,7 @@ function HookContent() {
 	return (
 		<>
 		
-			<h3>Nested Routes Page</h3>
+			<h3>Nested Routes</h3>
 
 			<div><NavLink data-route="true" to={`${url}/topic-one`} activeClassName="is-active">&gt; click here to display Topic One</NavLink></div>
 			<div><NavLink data-route="true" to={`${url}/topic-two`} activeClassName="is-active">&gt; click here to display Topic Two</NavLink></div>

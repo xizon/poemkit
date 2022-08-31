@@ -6,9 +6,9 @@
  * ## Project Name        :  PoemKit
  * ## Project Description :  React toolkit for building a full website that also is a Micro-Frontend Architecture.
  * ## Project URL         :  https://uiux.cc
- * ## Version             :  0.2.2
+ * ## Version             :  0.2.5
  * ## Based on            :  PoemKit (https://github.com/xizon/poemkit#readme)
- * ## Last Update         :  January 1, 2022
+ * ## Last Update         :  August 31, 2022
  * ## Created by          :  UIUX Lab (https://uiux.cc) (uiuxlab@gmail.com)
  * ## Released under the MIT license.
  *
@@ -19169,6 +19169,12 @@ html {
   -ms-text-size-adjust: 100%;
   font-size: 16px;
   /* Required, global font size */
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
 }
 
 *,

@@ -25,6 +25,7 @@ type GridProps = {
     loop?: boolean | undefined;
     /** -- */
     id?: string;
+	children: React.ReactNode;
 };
 type GridState = false;
 

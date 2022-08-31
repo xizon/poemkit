@@ -21,6 +21,7 @@ import TabPanel from '@/components/TabsAnimated/TabPanel';
 type TabsAnimatedProps = {
 	/** -- */
 	id?: string;
+	children: React.ReactNode;
 };
 type TabsAnimatedState = {
 	selected: number;

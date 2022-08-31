@@ -18,7 +18,7 @@ import '@/components/Form/styles/rtl/_layout.scss';
 import '@/components/Form/styles/rtl/_theme_material.scss';
 
 
-type NumberProps = {
+interface NumberProps extends React.ComponentPropsWithoutRef<any> {
 	min?: any;
 	max?: any;
 	decimals?: string | number;
