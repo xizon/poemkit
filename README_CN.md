@@ -213,7 +213,7 @@ http://localhost:3000
 
 **Step 6 (可选).** 在托管服务器上部署Node服务
 
-部署前请先运行build命令.
+部署前请先运行build命令. *(如果因为 Node 权限而不能正常运行，请使用以下 [命令](#deploy-on-custom-server-commands))*
 
 ```sh
 $ npm run deploy 
@@ -268,7 +268,7 @@ $ sudo npm rebuild node-sass
 
 用PM2启动Reactjs应用程序（仅在使用Node v13.9.0或更高版本时有效）。
 
-1.1) 安装Node和NPM到服务器主机（可选）
+#### 1.1) 安装Node和NPM到服务器主机（可选）
 
 这里将安装Node 14的版本
 
@@ -280,14 +280,14 @@ $ npm --version   #6.14.12
 $ which node babel-node #check the location of node and babel-node
 ```
 
-1.2) 全局安装PM2
+#### 1.2) 全局安装PM2
 
 ```sh
 $ sudo npm install pm2@latest -g
 ```
 
 
-1.3) 全局安装Babel
+#### 1.3) 全局安装Babel
 
 ```sh
 $ sudo npm install -g babel-cli
@@ -295,21 +295,22 @@ $ sudo npm install -g @babel/core @babel/cli @babel/preset-env
 ```
 
 
-1.4) 全局安装TypeScript和ts-node
+#### 1.4) 全局安装TypeScript和ts-node
 
 ```sh
 $ sudo npm install -g typescript ts-node
 ```
 
 
-1.5) 使用PM2安装TypeScript依赖
+#### 1.5) 使用PM2安装TypeScript依赖
 
 ```sh
 $ sudo pm2 install typescript
 ```
 
+<a id="deploy-on-custom-server-commands"></a>
 
-1.6) PM2常用命令:
+#### 1.6) PM2常用命令:
 
 ```sh
 #先进入 `"poemkit/"` 目录 
@@ -328,7 +329,55 @@ $ pm2 logs
 ```
 
 
-1.7) 使用域名访问您的React应用。
+
+
+<blockquote>
+<h3>💡 使用 NPM 或 PM2 在云服务器上部署应用程序时可能出现问题的一些解决方案:</h3>
+ 
+**a）ERROR: permission denied, access '/usr/lib/node_modules'**
+
+*解决:*
+```sh
+chmod -R a+x node_modules
+```
+
+**b）ERROR:  JavaScript heap out of memory**
+
+There is a strict standard limit for memory usage in V8 to be a maximum of ~1GB (32-bit) and ~1.7GB (64-bit),  if you do not increase it manually.
+
+*解决:*
+```sh
+export NODE_OPTIONS=--max_old_space_size=4096
+```
+
+
+**c)  Error: EACCES: permission denied, mkdir '/root/.pm2/xxxx'**
+
+*解决:*
+
+一般来说，只要避免使用 `NPM` 来运行 PM2 命令即可。
+
+*您仍然可以尝试以下方法：*
+
+确保在以无守护程序模式 (pm2 kill) 启动 PM2 之前杀死任何 PM2 实例。
+
+```sh
+# re-install PM2 (optional)
+sudo npm i -g pm2   
+
+# if pm2 was reinstalled, ts-node must be reinstalled (optional)
+sudo npm install -g ts-node@latest  
+
+# clear all pm2 instances
+pm2 kill
+
+# then restart it
+pm2 start xxxxxx
+```
+</blockquote>
+
+
+#### 1.7) 使用域名访问您的React应用。
 
 需要在Apache或Nginx的Web服务器上部署React App。请参考网络以获取有关设置代理的教程。
 
@@ -417,9 +466,10 @@ $ systemctl restart nginx
 修改文件 `./src/server/app.js`, 使用Node的 [https.createServer([options][, requestListener])](https://nodejs.org/api/https.html#httpscreateserveroptions-requestlistener) 来包装Express服务，请查阅下面的示范代码：
 
 ```js
-const cert = fs.readFileSync('/path//bundle.crt');
-const key = fs.readFileSync('/path/ca.key');
+import path from 'path';
 import https from 'https';
+const cert = fs.readFileSync(path.join(__dirname,'../../path/bundle.crt'));
+const key = fs.readFileSync(path.join(__dirname,'../../path/ca.key'));
 const server = https.createServer({key: key, cert: cert }, app);
 
 ...

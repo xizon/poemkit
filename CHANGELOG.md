@@ -1,5 +1,10 @@
 # Changelog
 
+#### = 0.2.7 (September 1, 2022) =
+
+* Tweak: Added solutions to problems that may occur when deploying the application on cloud server.
+
+
 #### = 0.2.6 (September 1, 2022) =
 
 * Tweak: Migrating to Bootstrap v5.

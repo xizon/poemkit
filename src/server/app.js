@@ -146,10 +146,12 @@ app.listen(port, () => console.log(`Frontend service listening on port: ${port},
 
 /*
 
-// Supprt https
-const cert = fs.readFileSync('/path//bundle.crt');
-const key = fs.readFileSync('/path/ca.key');
+// Supprt HTTPS
+
+import path from 'path';
 import https from 'https';
+const cert = fs.readFileSync(path.join(__dirname,'../../path/bundle.crt'));
+const key = fs.readFileSync(path.join(__dirname,'../../path/ca.key'));
 const server = https.createServer({key: key, cert: cert }, app);
 
 ...

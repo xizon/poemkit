@@ -203,7 +203,7 @@ The new code is recommended to be bundled before debugging.
 
 **Step 6 (Optional).** Deploy node server on hosting server
 
-Please run the build command before deploying.
+Please run the build command before deploying. *(If it doesn't work because of Node permission, use the following [commands](#deploy-on-custom-server-commands))*
 
 ```sh
 $ npm run deploy 
@@ -228,7 +228,7 @@ $ npm run test
  
 **a) ERROR: npm update check failed.**
 
-Solution:
+*Solution:*
 
 ```sh
 $ sudo chown -R $USER:$(id -gn $USER) /Users/{username}/.config
@@ -236,7 +236,7 @@ $ sudo chown -R $USER:$(id -gn $USER) /Users/{username}/.config
 
 **b) ERROR: Node sass version 6.x.x is not compatible with ^ 4.x.x.**
 
-Solution:
+*Solution:*
 
 ```sh
 $ npm install node-sass@4.14.1
@@ -259,7 +259,7 @@ $ sudo npm rebuild node-sass
 
 Start Reactjs application with PM2 as a service (only works if you are using Node v13.9.0 or above.)
 
-1.1) Installing Node and NPM on hosting server **(Optional).**
+#### 1.1) Installing Node and NPM on hosting server **(Optional).**
 
 Node14+ version will be installed here
 
@@ -272,14 +272,14 @@ $ which node babel-node #check the location of node and babel-node
 ```
 
 
-1.2) Installing PM2. With NPM
+#### 1.2) Installing PM2. With NPM
 
 ```sh
 $ sudo npm install pm2@latest -g
 ```
 
 
-1.3) Install Babel globally on your machine
+#### 1.3) Install Babel globally on your machine
 
 ```sh
 $ sudo npm install -g babel-cli
@@ -287,21 +287,22 @@ $ sudo npm install -g @babel/core @babel/cli @babel/preset-env
 ```
 
 
-1.4) Install TypeScript and ts-node globally on your machine
+#### 1.4) Install TypeScript and ts-node globally on your machine
 
 ```sh
 $ sudo npm install -g typescript ts-node
 ```
 
 
-1.5) Install TypeScript dependencies with PM2
+#### 1.5) Install TypeScript dependencies with PM2
 
 ```sh
 $ sudo pm2 install typescript
 ```
 
+<a id="deploy-on-custom-server-commands"></a>
 
-1.6) Frequently used commands for PM2:
+#### 1.6) Frequently used commands for PM2:
 
 ```sh
 #into your `"poemkit/"` folder directory.
@@ -320,9 +321,59 @@ $ pm2 logs
 ```
 
 
-1.7) Use domain to access your React appication.
+
+<blockquote>
+<h3>💡 Some solutions to problems that may occur when deploying the application with NPM or PM2 on cloud server:</h3>
+ 
+**a）ERROR: permission denied, access '/usr/lib/node_modules'**
+
+*Solution:*
+```sh
+chmod -R a+x node_modules
+```
+
+**b）ERROR:  JavaScript heap out of memory**
+
+There is a strict standard limit for memory usage in V8 to be a maximum of ~1GB (32-bit) and ~1.7GB (64-bit),  if you do not increase it manually.
+
+*Solution:*
+```sh
+export NODE_OPTIONS=--max_old_space_size=4096
+```
+
+
+**c)  Error: EACCES: permission denied, mkdir '/root/.pm2/xxxx'**
+
+*Solution:*
+
+In general, just avoid using `NPM` to run PM2 commands.
+
+
+*You could still try the following:*
+
+Make sure you kill any PM2 instance before starting PM2 in no deamon mode (pm2 kill).
+
+```sh
+# re-install PM2 (optional)
+sudo npm i -g pm2   
+
+# if pm2 was reinstalled, ts-node must be reinstalled (optional)
+sudo npm install -g ts-node@latest  
+
+# clear all pm2 instances
+pm2 kill
+
+# then restart it
+pm2 start xxxxxx
+```
+</blockquote>
+
+
+
+#### 1.7) Use domain to access your React appication.
 
 You had created a basic React App from here, then you need to deploy a React App on Apache or Nginx web server. Please refer to the network for the tutorial on setting up the proxy.
+
 
 
 ### ⚙️ (Step 2) Nginx’s Site Configuration
@@ -409,9 +460,10 @@ There probably won’t be any messages if the service restarted successfully. Ot
 Modify the file `./src/server/app.js`, use [https.createServer([options][, requestListener])](https://nodejs.org/api/https.html#httpscreateserveroptions-requestlistener) to wrap the express service, please check out the sample code below:
 
 ```js
-const cert = fs.readFileSync('/path//bundle.crt');
-const key = fs.readFileSync('/path/ca.key');
+import path from 'path';
 import https from 'https';
+const cert = fs.readFileSync(path.join(__dirname,'../../path/bundle.crt'));
+const key = fs.readFileSync(path.join(__dirname,'../../path/ca.key'));
 const server = https.createServer({key: key, cert: cert }, app);
 
 ...
