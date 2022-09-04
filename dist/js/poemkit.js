@@ -6,9 +6,9 @@
  * ## Project Name        :  PoemKit
  * ## Project Description :  React toolkit for building a full website that also is a Micro-Frontend Architecture.
  * ## Project URL         :  https://uiux.cc
- * ## Version             :  0.2.6
+ * ## Version             :  0.2.8
  * ## Based on            :  PoemKit (https://github.com/xizon/poemkit#readme)
- * ## Last Update         :  September 1, 2022
+ * ## Last Update         :  September 4, 2022
  * ## Created by          :  UIUX Lab (https://uiux.cc) (uiuxlab@gmail.com)
  * ## Released under the MIT license.
  *
@@ -4681,7 +4681,14 @@ var config = {
     */
     "LOGIN_REQUEST": "https://uiux.cc/server/sessions-create.php",
     "USER_AUTHENTICATE": "https://uiux.cc/server/authenticate.php",
-    "SIGNUP_REQUEST": ""
+    "SIGNUP_REQUEST": "",
+
+    /*
+     TYPE: CRUD (The PHP files are located at `./public/server/`)
+     ------------------------------------------
+    */
+    "CRUD_SERVICE": "https://uiux.cc/server/curd.php",
+    "CRUD_DATA_INIT": "https://uiux.cc/server/curd-data-init.php"
   }
 };
 /**
@@ -4719,7 +4726,14 @@ var localConfig = {
     */
     "LOGIN_REQUEST": "http://localhost:8888/poemkit/public/server/sessions-create.php",
     "USER_AUTHENTICATE": "http://localhost:8888/poemkit/public/server/authenticate.php",
-    "SIGNUP_REQUEST": ""
+    "SIGNUP_REQUEST": "",
+
+    /*
+     TYPE: CRUD
+     ------------------------------------------
+    */
+    "CRUD_SERVICE": "http://localhost:8888/poemkit/public/server/curd.php",
+    "CRUD_DATA_INIT": "http://localhost:8888/poemkit/public/server/curd-data-init.php"
   }
 };
 module.exports = config;
@@ -45215,6 +45229,72 @@ var socialMetadata = function socialMetadata(props) {
 };
 
 /* harmony default export */ const social_metadata = (socialMetadata);
+// EXTERNAL MODULE: ./node_modules/axios/index.js
+var axios = __webpack_require__(9669);
+var axios_default = /*#__PURE__*/__webpack_require__.n(axios);
+;// CONCATENATED MODULE: ./src/client/services/crud-service.js
+
+
+ //get project config
+
+
+
+var CRUDService = /*#__PURE__*/function () {
+  function CRUDService() {
+    _classCallCheck(this, CRUDService);
+
+    this.url = websiteConfig.API.CRUD_SERVICE;
+    this.config = {};
+  }
+
+  _createClass(CRUDService, [{
+    key: "initData",
+    value: function initData() {
+      return axios_default().get(websiteConfig.API.CRUD_DATA_INIT, {}, this.config);
+    }
+  }, {
+    key: "getAll",
+    value: function getAll() {
+      return axios_default().get("".concat(this.url), {}, this.config);
+    }
+  }, {
+    key: "get",
+    value: function get(id) {
+      return axios_default().get("".concat(this.url, "?type=get&id=").concat(id), {}, this.config);
+    }
+  }, {
+    key: "create",
+    value: function create(data) {
+      this.config = {
+        headers: {
+          'content-type': 'multipart/form-data'
+        }
+      }; //console.log( data.entries() );
+
+      return axios_default().post("".concat(this.url, "?type=create"), data, this.config);
+    }
+  }, {
+    key: "update",
+    value: function update(id, data) {
+      this.config = {
+        headers: {
+          'content-type': 'multipart/form-data'
+        }
+      }; //console.log( data.entries() );
+
+      return axios_default().post("".concat(this.url, "?type=update&id=").concat(id), data, this.config);
+    }
+  }, {
+    key: "remove",
+    value: function remove(id) {
+      return axios_default()["delete"]("".concat(this.url, "?type=remove&id=").concat(id), {}, this.config);
+    }
+  }]);
+
+  return CRUDService;
+}();
+
+/* harmony default export */ const crud_service = (new CRUDService());
 ;// CONCATENATED MODULE: ./src/client/views/_pages/Home/index.js
 
 
@@ -45223,6 +45303,9 @@ var socialMetadata = function socialMetadata(props) {
 
  //manage the document head
 
+
+
+ //for php functions
 
 
 
@@ -45277,6 +45360,11 @@ function Seo() {
   var _ref$staticContext = _ref.staticContext,
       staticContext = _ref$staticContext === void 0 ? {} : _ref$staticContext;
   staticContext.status = 200;
+  (0,react.useEffect)(function () {
+    // init php data
+    crud_service.initData();
+  }, []); // Empty array ensures that effect is only run on mount and unmount
+
   return /*#__PURE__*/react.createElement(react.Fragment, null, /*#__PURE__*/react.createElement("main", {
     id: "poemkit-maincontent"
   }, /*#__PURE__*/react.createElement("section", {
@@ -45345,9 +45433,6 @@ function _asyncToGenerator(fn) {
 // EXTERNAL MODULE: ./node_modules/@babel/runtime/regenerator/index.js
 var regenerator = __webpack_require__(4687);
 var regenerator_default = /*#__PURE__*/__webpack_require__.n(regenerator);
-// EXTERNAL MODULE: ./node_modules/axios/index.js
-var axios = __webpack_require__(9669);
-var axios_default = /*#__PURE__*/__webpack_require__.n(axios);
 ;// CONCATENATED MODULE: ./src/client/actions/demoListActions.js
 
 
@@ -52426,6 +52511,286 @@ var data1 = [{
   }, /*#__PURE__*/react.createElement("table", {
     className: "table table-bordered table-striped mb-5"
   }, /*#__PURE__*/react.createElement("thead", null, /*#__PURE__*/react.createElement("tr", null, /*#__PURE__*/react.createElement("th", null, "Property"), /*#__PURE__*/react.createElement("th", null, "Type"), /*#__PURE__*/react.createElement("th", null, "Default"), /*#__PURE__*/react.createElement("th", null, "Description"))), /*#__PURE__*/react.createElement("tbody", null, /*#__PURE__*/react.createElement("tr", null, /*#__PURE__*/react.createElement("td", null, /*#__PURE__*/react.createElement("code", null, "label")), /*#__PURE__*/react.createElement("td", null, "string"), /*#__PURE__*/react.createElement("td", null, "-"), /*#__PURE__*/react.createElement("td", null, "Specify the label text for each option")), /*#__PURE__*/react.createElement("tr", null, /*#__PURE__*/react.createElement("td", null, /*#__PURE__*/react.createElement("code", null, "value")), /*#__PURE__*/react.createElement("td", null, "string"), /*#__PURE__*/react.createElement("td", null, "-"), /*#__PURE__*/react.createElement("td", null, "Specify the value for each option")))))))))));
+});
+;// CONCATENATED MODULE: ./node_modules/@babel/runtime/helpers/esm/arrayWithHoles.js
+function _arrayWithHoles(arr) {
+  if (Array.isArray(arr)) return arr;
+}
+;// CONCATENATED MODULE: ./node_modules/@babel/runtime/helpers/esm/iterableToArrayLimit.js
+function _iterableToArrayLimit(arr, i) {
+  var _i = arr == null ? null : typeof Symbol !== "undefined" && arr[Symbol.iterator] || arr["@@iterator"];
+
+  if (_i == null) return;
+  var _arr = [];
+  var _n = true;
+  var _d = false;
+
+  var _s, _e;
+
+  try {
+    for (_i = _i.call(arr); !(_n = (_s = _i.next()).done); _n = true) {
+      _arr.push(_s.value);
+
+      if (i && _arr.length === i) break;
+    }
+  } catch (err) {
+    _d = true;
+    _e = err;
+  } finally {
+    try {
+      if (!_n && _i["return"] != null) _i["return"]();
+    } finally {
+      if (_d) throw _e;
+    }
+  }
+
+  return _arr;
+}
+;// CONCATENATED MODULE: ./node_modules/@babel/runtime/helpers/esm/nonIterableRest.js
+function _nonIterableRest() {
+  throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method.");
+}
+;// CONCATENATED MODULE: ./node_modules/@babel/runtime/helpers/esm/slicedToArray.js
+
+
+
+
+function _slicedToArray(arr, i) {
+  return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest();
+}
+;// CONCATENATED MODULE: ./src/client/components/DashboardModal/index.tsx
+/* 
+ *************************************
+ * <!-- Dashboard Modal -->
+ *************************************
+ */
+
+/*-- Apply Third-party plugins (import location should be in front of "GLOBAL STYLES") --*/
+
+
+
+/*-- Apply global scripts and styles --*/
+
+
+
+
+/*-- Apply this component styles --*/
+
+function DashboardModal(props) {
+  var show = props.show,
+      modalId = props.modalId,
+      targetId = props.targetId,
+      title = props.title,
+      content = props.content,
+      showClickEvent = props.showClickEvent,
+      closeClickEvent = props.closeClickEvent,
+      gotoIdClickEvent = props.gotoIdClickEvent;
+
+  function handleShow(e) {
+    e.preventDefault();
+
+    if (typeof gotoIdClickEvent === 'function') {
+      gotoIdClickEvent(targetId);
+    }
+
+    if (typeof showClickEvent === 'function') {
+      showClickEvent();
+    }
+  }
+
+  function handleClose(e) {
+    e.preventDefault();
+    e.stopPropagation();
+
+    if (typeof closeClickEvent === 'function') {
+      closeClickEvent();
+    }
+  }
+
+  return /*#__PURE__*/react.createElement(react.Fragment, null, /*#__PURE__*/react.createElement("a", {
+    className: "poemkit-db-modal__trigger",
+    href: "#",
+    onClick: handleShow
+  }, title), /*#__PURE__*/react.createElement("div", {
+    id: modalId,
+    className: "poemkit-db-modal",
+    onClick: handleClose,
+    style: {
+      display: show ? 'flex' : 'none'
+    }
+  }, /*#__PURE__*/react.createElement("div", {
+    className: "poemkit-db-modal__content",
+    onClick: function onClick(e) {
+      return e.stopPropagation();
+    }
+  }, /*#__PURE__*/react.createElement("a", {
+    href: "#",
+    className: "poemkit-db-modal__close",
+    onClick: handleClose
+  }, "\xD7"), /*#__PURE__*/react.createElement("div", {
+    className: "poemkit-db-modal__flex"
+  }, /*#__PURE__*/react.createElement("div", null, content)))));
+}
+;// CONCATENATED MODULE: ./src/client/views/_pages/ComponentsDemo/DashboardModalDemo.js
+
+
+
+
+
+
+
+ //Create or Remove Sidebar Menu
+
+
+
+function handleDetail() {
+  //`id` comes from the public parameter thrown by the component `<DashboardModal />`
+  console.log('id: ', id); // other actions
+  // ...
+}
+
+/* harmony default export */ const DashboardModalDemo = (function () {
+  var _useState = (0,react.useState)(false),
+      _useState2 = _slicedToArray(_useState, 2),
+      winstate = _useState2[0],
+      setWinstate = _useState2[1];
+
+  var _useState3 = (0,react.useState)([]),
+      _useState4 = _slicedToArray(_useState3, 2),
+      datalist = _useState4[0],
+      setDataList = _useState4[1];
+
+  function getAll() {
+    return _getAll.apply(this, arguments);
+  }
+
+  function _getAll() {
+    _getAll = _asyncToGenerator( /*#__PURE__*/regenerator_default().mark(function _callee() {
+      var response, res, _data;
+
+      return regenerator_default().wrap(function _callee$(_context) {
+        while (1) {
+          switch (_context.prev = _context.next) {
+            case 0:
+              _context.next = 2;
+              return axios_default().get("https://restcountries.com/v2/all");
+
+            case 2:
+              response = _context.sent;
+              res = response.data;
+              _data = res.map(function (item, i) {
+                if (i < 6) {
+                  return /*#__PURE__*/react.createElement("li", {
+                    key: item.id
+                  }, item.name);
+                }
+              });
+              setWinstate(true);
+              setDataList( /*#__PURE__*/react.createElement(react.Fragment, null, /*#__PURE__*/react.createElement("ul", null, _data)));
+
+            case 7:
+            case "end":
+              return _context.stop();
+          }
+        }
+      }, _callee);
+    }));
+    return _getAll.apply(this, arguments);
+  }
+
+  react.useEffect(function () {
+    // Equivalent to componentDidMount and componentDidUpdate:
+    helpers(document).ready(function () {
+      //Create sidebar menu
+      SidebarMenu();
+    });
+  });
+  return /*#__PURE__*/react.createElement(react.Fragment, null, /*#__PURE__*/react.createElement("section", null, /*#__PURE__*/react.createElement("div", {
+    className: "container"
+  }, /*#__PURE__*/react.createElement("div", {
+    className: "row"
+  }, /*#__PURE__*/react.createElement("div", {
+    className: "col-12"
+  }, /*#__PURE__*/react.createElement("h1", {
+    className: "poemkit-typo--h2"
+  }, "Dashboard Modal(via API)", /*#__PURE__*/react.createElement("a", {
+    className: "poemkit-typo--h3 align-middle",
+    href: "https://github.com/xizon/poemkit/tree/main/src/client/components/DashboardModal",
+    target: "_blank"
+  }, /*#__PURE__*/react.createElement("span", {
+    className: "poemkit-dir--right",
+    style: {
+      fontSize: "0.75rem",
+      color: "#ababab",
+      margin: ".5rem .5rem 0 0"
+    }
+  }, /*#__PURE__*/react.createElement("svg", {
+    style: {
+      marginRight: ".5rem"
+    },
+    width: "15",
+    viewBox: "0 0 392.186 392.186"
+  }, /*#__PURE__*/react.createElement("g", null, /*#__PURE__*/react.createElement("g", null, /*#__PURE__*/react.createElement("g", null, /*#__PURE__*/react.createElement("path", {
+    fill: "#d2d2d2",
+    d: "M368.62,17.951H23.568C10.57,17.951,0,28.524,0,41.52v309.146c0,12.996,10.57,23.568,23.568,23.568h345.053c12.994,0,23.564-10.572,23.564-23.568V41.52C392.188,28.525,381.614,17.951,368.62,17.951z M297.56,57.528c0-4.806,3.896-8.703,8.701-8.703h8.703c4.808,0,8.701,3.896,8.701,8.703v9.863c0,4.806-3.896,8.702-8.701,8.702h-8.703c-4.805,0-8.701-3.896-8.701-8.702V57.528z M257.093,57.528c0-4.806,3.898-8.703,8.703-8.703h8.701c4.805,0,8.703,3.896,8.703,8.703v9.863c0,4.806-3.898,8.702-8.703,8.702h-8.701c-4.805,0-8.703-3.896-8.703-8.702V57.528z M363.903,345.951H28.282V102.235h335.621V345.951L363.903,345.951z M364.132,67.391c0,4.806-3.896,8.702-8.701,8.702h-8.703c-4.809,0-8.702-3.896-8.702-8.702v-9.863c0-4.806,3.896-8.703,8.702-8.703h8.703c4.806,0,8.701,3.896,8.701,8.703V67.391z"
+  }), /*#__PURE__*/react.createElement("path", {
+    fill: "#d2d2d2",
+    d: "M84.185,233.284l63.084,29.336c1.631,0.755,3.367,1.138,5.162,1.138c2.338,0,4.617-0.664,6.598-1.924c3.547-2.267,5.666-6.13,5.666-10.334v-0.322c0-4.752-2.785-9.116-7.096-11.118l-39.455-18.332l39.455-18.334c4.311-2.004,7.096-6.367,7.096-11.117v-0.319c0-4.21-2.119-8.075-5.666-10.334c-1.961-1.253-4.246-1.916-6.605-1.916c-1.779,0-3.563,0.391-5.16,1.133l-63.08,29.333c-4.307,2.004-7.09,6.369-7.09,11.117v0.877C77.093,226.909,79.874,231.272,84.185,233.284z"
+  }), /*#__PURE__*/react.createElement("path", {
+    fill: "#d2d2d2",
+    d: "M165.257,293.036c2.301,3.149,6.002,5.03,9.9,5.03h0.316c5.352,0,10.041-3.426,11.672-8.517L228.7,160.788c1.192-3.716,0.531-7.818-1.771-10.973c-2.301-3.15-6.002-5.03-9.901-5.03h-0.315c-5.354,0-10.048,3.425-11.679,8.516l-41.559,128.771C162.292,285.793,162.958,289.889,165.257,293.036z"
+  }), /*#__PURE__*/react.createElement("path", {
+    fill: "#d2d2d2",
+    d: "M227.49,192.276c0,4.745,2.783,9.109,7.095,11.123l39.455,18.329l-39.455,18.33c-4.31,2.004-7.095,6.368-7.095,11.118v0.322c0,4.205,2.117,8.068,5.668,10.336c1.974,1.258,4.254,1.924,6.595,1.924c1.793,0,3.528-0.383,5.17-1.142l63.08-29.335c4.307-2.009,7.09-6.372,7.09-11.115v-0.877c0-4.748-2.783-9.113-7.094-11.117l-63.08-29.333c-1.591-0.74-3.373-1.131-5.152-1.131c-2.355,0-4.643,0.661-6.604,1.912c-3.551,2.263-5.67,6.127-5.67,10.337v0.318H227.49L227.49,192.276z"
+  }))))), "Docs on GitHub"))), /*#__PURE__*/react.createElement("p", null, "This component creates an element that provides little hints that help users understand a part or process in an interface."))))), /*#__PURE__*/react.createElement("section", {
+    className: "poemkit-spacing--s poemkit-spacing--no-bottom"
+  }, /*#__PURE__*/react.createElement("div", {
+    className: "container"
+  }, /*#__PURE__*/react.createElement("div", {
+    className: "row"
+  }, /*#__PURE__*/react.createElement("div", {
+    className: "col-12"
+  }, /*#__PURE__*/react.createElement("h3", {
+    className: "app-header-title"
+  }, "Demos"), /*#__PURE__*/react.createElement("p", null, "This is a CRUD with axios demo on Dashboard page. ", /*#__PURE__*/react.createElement("i", null, "(The server may prohibit PHP data manipulation, Axios request will not be able to complete the data change.)")), /*#__PURE__*/react.createElement("hr", null))))), /*#__PURE__*/react.createElement("section", {
+    className: "poemkit-spacing--s"
+  }, /*#__PURE__*/react.createElement("div", {
+    className: "container"
+  }, /*#__PURE__*/react.createElement("div", {
+    className: "row"
+  }, /*#__PURE__*/react.createElement("div", {
+    className: "col-12"
+  }, /*#__PURE__*/react.createElement(DashboardModal, {
+    show: winstate,
+    modalId: "modal-1",
+    targetId: 1,
+    title: /*#__PURE__*/react.createElement(react.Fragment, null, "\uD83D\uDD25Click Here (Hyperlink, or anything)"),
+    content: datalist,
+    gotoIdClickEvent: handleDetail,
+    showClickEvent: function showClickEvent() {
+      console.log('show windw');
+      getAll();
+    },
+    closeClickEvent: function closeClickEvent() {
+      console.log('hide windw');
+      setWinstate(false);
+    }
+  }))))), /*#__PURE__*/react.createElement("section", null, /*#__PURE__*/react.createElement("div", {
+    className: "container"
+  }, /*#__PURE__*/react.createElement("div", {
+    className: "row"
+  }, /*#__PURE__*/react.createElement("div", {
+    className: "col-12"
+  }, /*#__PURE__*/react.createElement("h3", {
+    className: "app-header-title"
+  }, "API"), /*#__PURE__*/react.createElement("hr", null), /*#__PURE__*/react.createElement("article", {
+    className: "poemkit-spacing--s",
+    itemProp: "text"
+  }, /*#__PURE__*/react.createElement("h4", null, "Dashboard Modal"), /*#__PURE__*/react.createElement("div", null, /*#__PURE__*/react.createElement("pre", null, "import DashboardModal from '@/components/DashboardModal/index.tsx';")), /*#__PURE__*/react.createElement("div", {
+    className: "table-responsive-md"
+  }, /*#__PURE__*/react.createElement("table", {
+    className: "table table-bordered table-striped mb-5"
+  }, /*#__PURE__*/react.createElement("thead", null, /*#__PURE__*/react.createElement("tr", null, /*#__PURE__*/react.createElement("th", null, "Property"), /*#__PURE__*/react.createElement("th", null, "Type"), /*#__PURE__*/react.createElement("th", null, "Default"), /*#__PURE__*/react.createElement("th", null, "Description"))), /*#__PURE__*/react.createElement("tbody", null, /*#__PURE__*/react.createElement("tr", null, /*#__PURE__*/react.createElement("td", null, /*#__PURE__*/react.createElement("code", null, "modalId")), /*#__PURE__*/react.createElement("td", null, "number"), /*#__PURE__*/react.createElement("td", null, "-"), /*#__PURE__*/react.createElement("td", null, /*#__PURE__*/react.createElement("strong", null, "(Required)"), " The modal ID.")), /*#__PURE__*/react.createElement("tr", null, /*#__PURE__*/react.createElement("td", null, /*#__PURE__*/react.createElement("code", null, "targetId")), /*#__PURE__*/react.createElement("td", null, "number"), /*#__PURE__*/react.createElement("td", null, "-"), /*#__PURE__*/react.createElement("td", null, /*#__PURE__*/react.createElement("strong", null, "(Required)"), " ID parameter to send request.")), /*#__PURE__*/react.createElement("tr", null, /*#__PURE__*/react.createElement("td", null, /*#__PURE__*/react.createElement("code", null, "show")), /*#__PURE__*/react.createElement("td", null, "boolean"), /*#__PURE__*/react.createElement("td", null, "false"), /*#__PURE__*/react.createElement("td", null, "Whether to display the window by default.")), /*#__PURE__*/react.createElement("tr", null, /*#__PURE__*/react.createElement("td", null, /*#__PURE__*/react.createElement("code", null, "title")), /*#__PURE__*/react.createElement("td", null, "string | React.ReactNode"), /*#__PURE__*/react.createElement("td", null, "-"), /*#__PURE__*/react.createElement("td", null, "Trigger text of the window")), /*#__PURE__*/react.createElement("tr", null, /*#__PURE__*/react.createElement("td", null, /*#__PURE__*/react.createElement("code", null, "content")), /*#__PURE__*/react.createElement("td", null, "string | React.ReactNode"), /*#__PURE__*/react.createElement("td", null, "-"), /*#__PURE__*/react.createElement("td", null, "The content of the window displayed")), /*#__PURE__*/react.createElement("tr", null, /*#__PURE__*/react.createElement("td", null, /*#__PURE__*/react.createElement("code", null, "showClickEvent")), /*#__PURE__*/react.createElement("td", null, "function"), /*#__PURE__*/react.createElement("td", null, "-"), /*#__PURE__*/react.createElement("td", null, "Opening the window is the triggered event")), /*#__PURE__*/react.createElement("tr", null, /*#__PURE__*/react.createElement("td", null, /*#__PURE__*/react.createElement("code", null, "closeClickEvent")), /*#__PURE__*/react.createElement("td", null, "function"), /*#__PURE__*/react.createElement("td", null, "-"), /*#__PURE__*/react.createElement("td", null, "Closing the window is the triggered event")), /*#__PURE__*/react.createElement("tr", null, /*#__PURE__*/react.createElement("td", null, /*#__PURE__*/react.createElement("code", null, "gotoIdClickEvent")), /*#__PURE__*/react.createElement("td", null, "function"), /*#__PURE__*/react.createElement("td", null, "-"), /*#__PURE__*/react.createElement("td", null, "The method to call when a page is clicked. Exposes the current ID as an argument.")))))))))));
 });
 ;// CONCATENATED MODULE: ./src/client/components/Form/Input.tsx
 
@@ -84533,52 +84898,6 @@ var Toaster = /*#__PURE__*/function (_Component) {
     className: "table table-bordered table-striped mb-5"
   }, /*#__PURE__*/react.createElement("thead", null, /*#__PURE__*/react.createElement("tr", null, /*#__PURE__*/react.createElement("th", null, "Property"), /*#__PURE__*/react.createElement("th", null, "Type"), /*#__PURE__*/react.createElement("th", null, "Default"), /*#__PURE__*/react.createElement("th", null, "Description"))), /*#__PURE__*/react.createElement("tbody", null, /*#__PURE__*/react.createElement("tr", null, /*#__PURE__*/react.createElement("td", null, /*#__PURE__*/react.createElement("code", null, "title")), /*#__PURE__*/react.createElement("td", null, "string | boolean"), /*#__PURE__*/react.createElement("td", null, "-"), /*#__PURE__*/react.createElement("td", null, "Specifies an alternate and title text for the toast")), /*#__PURE__*/react.createElement("tr", null, /*#__PURE__*/react.createElement("td", null, /*#__PURE__*/react.createElement("code", null, "message")), /*#__PURE__*/react.createElement("td", null, "ReactNode"), /*#__PURE__*/react.createElement("td", null, "-"), /*#__PURE__*/react.createElement("td", null, "Specifies the content, or HTML elements to the toast")))))))))));
 });
-;// CONCATENATED MODULE: ./node_modules/@babel/runtime/helpers/esm/arrayWithHoles.js
-function _arrayWithHoles(arr) {
-  if (Array.isArray(arr)) return arr;
-}
-;// CONCATENATED MODULE: ./node_modules/@babel/runtime/helpers/esm/iterableToArrayLimit.js
-function _iterableToArrayLimit(arr, i) {
-  var _i = arr == null ? null : typeof Symbol !== "undefined" && arr[Symbol.iterator] || arr["@@iterator"];
-
-  if (_i == null) return;
-  var _arr = [];
-  var _n = true;
-  var _d = false;
-
-  var _s, _e;
-
-  try {
-    for (_i = _i.call(arr); !(_n = (_s = _i.next()).done); _n = true) {
-      _arr.push(_s.value);
-
-      if (i && _arr.length === i) break;
-    }
-  } catch (err) {
-    _d = true;
-    _e = err;
-  } finally {
-    try {
-      if (!_n && _i["return"] != null) _i["return"]();
-    } finally {
-      if (_d) throw _e;
-    }
-  }
-
-  return _arr;
-}
-;// CONCATENATED MODULE: ./node_modules/@babel/runtime/helpers/esm/nonIterableRest.js
-function _nonIterableRest() {
-  throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method.");
-}
-;// CONCATENATED MODULE: ./node_modules/@babel/runtime/helpers/esm/slicedToArray.js
-
-
-
-
-function _slicedToArray(arr, i) {
-  return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest();
-}
 ;// CONCATENATED MODULE: ./src/client/components/_plugins/Plyr/src/js/rangetouch/src/js/config.js
 var config_defaults = {
   addCSS: true,
@@ -94391,6 +94710,7 @@ function ComponentsDemo_isNativeReflectConstruct() { if (typeof Reflect === "und
 
 
 
+
  //
 
 var ComponentsDemo_PAGE_TITLE = null;
@@ -94983,6 +95303,15 @@ function ComponentsDemo_HookContent() {
     to: "".concat(url, "/sticky-elements"),
     activeClassName: "is-active"
   }, "Sticky Elements")), /*#__PURE__*/react.createElement("li", {
+    className: urlChk('/dashboard-modal-api') ? 'is-active' : ''
+  }, /*#__PURE__*/react.createElement(NavLink, {
+    "data-route": "true",
+    onClick: function onClick(e) {
+      return refreshTitle(e);
+    },
+    to: "".concat(url, "/dashboard-modal-api"),
+    activeClassName: "is-active"
+  }, "Dashboard Modal(via API)")), /*#__PURE__*/react.createElement("li", {
     className: "poemkit-demo-nav-header"
   }, "LAYOUT"), /*#__PURE__*/react.createElement("li", {
     className: urlChk('/grid') ? 'is-active' : ''
@@ -95104,6 +95433,10 @@ function ComponentsDemo_HookContent() {
     path: "".concat(path, "/dropdown-menu")
   }, /*#__PURE__*/react.createElement(DropdownMenuDemo, null), /*#__PURE__*/react.createElement(SeoChild, {
     title: "Dropdown Menu"
+  })), /*#__PURE__*/react.createElement(Route, {
+    path: "".concat(path, "/dashboard-modal-api")
+  }, /*#__PURE__*/react.createElement(DashboardModalDemo, null), /*#__PURE__*/react.createElement(SeoChild, {
+    title: "Dashboard Modal(via API)"
   })), /*#__PURE__*/react.createElement(Route, {
     path: "".concat(path, "/form")
   }, /*#__PURE__*/react.createElement(FormDemo, null), /*#__PURE__*/react.createElement(SeoChild, {
@@ -95290,8 +95623,27 @@ var ComponentsDemo = /*#__PURE__*/function (_Component) {
 /*
 Example:
 
-import authHeader from '@/services/auth-header.js';
-axios({headers: { ...authHeader(), 'Content-Type': 'application/json' }})
+import authHeader from 'auth-header.js';
+axios.post('api/path', {data: mydata}, { 
+    headers: { 
+        ...authHeader(),
+        'content-type': 'application/json'  
+    }
+}).then(function (response) {
+    ...
+});
+
+or
+
+axios({
+    method: 'post',
+    url: 'api/path',
+    data: {id: varID},
+    headers: { 
+        ...authHeader(),
+        'content-type': 'application/json'  
+    }
+})
 
 
 Note: For Node.js Express back-end, please use x-access-token header like this:
@@ -95308,6 +95660,12 @@ export default () => {
 }
 
 */
+;// CONCATENATED MODULE: ./src/client/services/is-admin.js
+// Authority 
+
+function isAdmin() {
+  return !(JSON.stringify(auth_header()) === '{}');
+}
 ;// CONCATENATED MODULE: ./src/client/services/user-service.js
 
 
@@ -95323,45 +95681,31 @@ function user_service_objectSpread(target) { for (var i = 1; i < arguments.lengt
 
 
 
+
 var UserService = /*#__PURE__*/function () {
   function UserService() {
     _classCallCheck(this, UserService);
+
+    this.url = websiteConfig.API.USER_AUTHENTICATE;
+    this.config = {};
   }
+  /**
+   * Get User Name
+   */
+
 
   _createClass(UserService, [{
     key: "getUserName",
-    value:
-    /**
-     * Get User Name
-     */
-    function getUserName() {
-      if (JSON.stringify(auth_header()) === '{}') return null;
-      return axios_default().post(websiteConfig.API.USER_AUTHENTICATE, {
+    value: function getUserName() {
+      if (!isAdmin()) return null;
+      this.config = {
         headers: user_service_objectSpread(user_service_objectSpread({}, auth_header()), {}, {
           'content-type': 'application/json'
-        }),
-        withCredentials: true
-      }).then(function (response) {
+        })
+      };
+      return axios_default().post(this.url, {}, this.config).then(function (response) {
         var jsonData = response.data;
         return jsonData.data ? jsonData.data.name : null;
-      });
-    }
-    /**
-     * Get User ID
-     */
-
-  }, {
-    key: "getUserID",
-    value: function getUserID() {
-      if (JSON.stringify(auth_header()) === '{}') return null;
-      return axios_default().post(websiteConfig.API.USER_AUTHENTICATE, {
-        headers: user_service_objectSpread(user_service_objectSpread({}, auth_header()), {}, {
-          'content-type': 'application/json'
-        }),
-        withCredentials: true
-      }).then(function (response) {
-        var jsonData = response.data;
-        return jsonData.data ? jsonData.data.user_id : null;
       });
     }
   }]);
@@ -95427,6 +95771,530 @@ var Authorized = /*#__PURE__*/function (_Component) {
 }(react.Component);
 
 /* harmony default export */ const Dashboard_Authorized = (Authorized);
+;// CONCATENATED MODULE: ./src/client/views/_pages/Dashboard/DataList.js
+
+
+
+
+
+function DataList_ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); enumerableOnly && (symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; })), keys.push.apply(keys, symbols); } return keys; }
+
+function DataList_objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = null != arguments[i] ? arguments[i] : {}; i % 2 ? DataList_ownKeys(Object(source), !0).forEach(function (key) { _defineProperty(target, key, source[key]); }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)) : DataList_ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } return target; }
+
+
+
+
+
+
+function detailTable() {
+  var id = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : '';
+  var name = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : '';
+  var email = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : '';
+  var avatar = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : '';
+  return /*#__PURE__*/react.createElement("table", null, /*#__PURE__*/react.createElement("tbody", null, /*#__PURE__*/react.createElement("tr", {
+    style: {
+      display: id != '' ? 'table-row' : 'none'
+    }
+  }, /*#__PURE__*/react.createElement("td", {
+    width: "138",
+    align: "right"
+  }, /*#__PURE__*/react.createElement("strong", null, "ID: ")), /*#__PURE__*/react.createElement("td", null, id)), /*#__PURE__*/react.createElement("tr", null, /*#__PURE__*/react.createElement("td", {
+    width: "138",
+    align: "right"
+  }, /*#__PURE__*/react.createElement("strong", null, "Name: ")), /*#__PURE__*/react.createElement("td", null, name)), /*#__PURE__*/react.createElement("tr", null, /*#__PURE__*/react.createElement("td", {
+    width: "138",
+    align: "right"
+  }, /*#__PURE__*/react.createElement("strong", null, "Email: ")), /*#__PURE__*/react.createElement("td", null, email)), /*#__PURE__*/react.createElement("tr", null, /*#__PURE__*/react.createElement("td", {
+    width: "138",
+    align: "right"
+  }, /*#__PURE__*/react.createElement("strong", null, "Avatar: ")), /*#__PURE__*/react.createElement("td", null, avatar))));
+}
+
+var DataList = function DataList() {
+  var _useState = (0,react.useState)([]),
+      _useState2 = _slicedToArray(_useState, 2),
+      datalist = _useState2[0],
+      setDataList = _useState2[1]; // detail container
+
+
+  var _useState3 = (0,react.useState)({
+    display: false,
+    content: 'loading...'
+  }),
+      _useState4 = _slicedToArray(_useState3, 2),
+      detail = _useState4[0],
+      setDetail = _useState4[1]; // form
+
+
+  var _useState5 = (0,react.useState)({
+    display: false,
+    content: 'loading...'
+  }),
+      _useState6 = _slicedToArray(_useState5, 2),
+      formAdd = _useState6[0],
+      setFormAdd = _useState6[1];
+
+  var _useState7 = (0,react.useState)({
+    display: false,
+    content: 'loading...',
+    fieldName: '',
+    fieldEmail: '',
+    fieldAvatar: ''
+  }),
+      _useState8 = _slicedToArray(_useState7, 2),
+      formEdit = _useState8[0],
+      setFormEdit = _useState8[1];
+  /**
+   * Get all data
+   * ------------------
+   */
+
+
+  function getAll() {
+    return _getAll.apply(this, arguments);
+  }
+  /**
+  * Get data from ID
+  * ------------------
+  */
+
+
+  function _getAll() {
+    _getAll = _asyncToGenerator( /*#__PURE__*/regenerator_default().mark(function _callee() {
+      var response;
+      return regenerator_default().wrap(function _callee$(_context) {
+        while (1) {
+          switch (_context.prev = _context.next) {
+            case 0:
+              _context.next = 2;
+              return crud_service.getAll();
+
+            case 2:
+              response = _context.sent;
+              setDataList(response.data.data);
+
+            case 4:
+            case "end":
+              return _context.stop();
+          }
+        }
+      }, _callee);
+    }));
+    return _getAll.apply(this, arguments);
+  }
+
+  function get(_x) {
+    return _get.apply(this, arguments);
+  }
+
+  function _get() {
+    _get = _asyncToGenerator( /*#__PURE__*/regenerator_default().mark(function _callee2(id) {
+      var response, _data;
+
+      return regenerator_default().wrap(function _callee2$(_context2) {
+        while (1) {
+          switch (_context2.prev = _context2.next) {
+            case 0:
+              _context2.next = 2;
+              return crud_service.get(id);
+
+            case 2:
+              response = _context2.sent;
+              _data = response.data.data;
+              setDetail({
+                display: !detail.display,
+                content: detailTable(_data.id, _data.name, _data.email, /*#__PURE__*/react.createElement(react.Fragment, null, /*#__PURE__*/react.createElement("img", {
+                  src: _data.avatar,
+                  width: "100"
+                })))
+              });
+
+            case 5:
+            case "end":
+              return _context2.stop();
+          }
+        }
+      }, _callee2);
+    }));
+    return _get.apply(this, arguments);
+  }
+
+  var handleDetail = (0,react.useCallback)(function (id) {
+    return function (e) {
+      e.preventDefault();
+      console.log('detail id: ', id);
+      get(id);
+    };
+  }, []);
+  /**
+  * Create a new data
+  * ------------------
+  */
+
+  function handleAddForm(e) {
+    e.preventDefault();
+    var formCode = /*#__PURE__*/react.createElement("form", {
+      tabIndex: -1,
+      method: "post",
+      style: {
+        padding: "20px"
+      }
+    }, detailTable(false, /*#__PURE__*/react.createElement(react.Fragment, null, /*#__PURE__*/react.createElement("input", {
+      type: "text",
+      size: 20,
+      name: "name"
+    })), /*#__PURE__*/react.createElement(react.Fragment, null, /*#__PURE__*/react.createElement("input", {
+      type: "text",
+      size: 20,
+      name: "email"
+    })), /*#__PURE__*/react.createElement(react.Fragment, null, /*#__PURE__*/react.createElement("input", {
+      type: "text",
+      size: 35,
+      name: "avatar",
+      placeholder: "http://"
+    }))), /*#__PURE__*/react.createElement("input", {
+      style: {
+        padding: "5px 15px",
+        background: "rgb(57 57 57)",
+        outline: "none",
+        color: "#fff",
+        borderRadius: "30px",
+        border: "none",
+        fontSize: "12px",
+        marginLeft: "142px"
+      },
+      type: "button",
+      value: "Submit",
+      onClick: handleSubmit('add')
+    }));
+    setFormAdd({
+      display: true,
+      content: formCode
+    });
+  }
+  /**
+  * Update data from ID
+  * ------------------
+  */
+
+
+  function getUpdateId(_x2) {
+    return _getUpdateId.apply(this, arguments);
+  }
+
+  function _getUpdateId() {
+    _getUpdateId = _asyncToGenerator( /*#__PURE__*/regenerator_default().mark(function _callee3(id) {
+      var response, _data, formCode;
+
+      return regenerator_default().wrap(function _callee3$(_context3) {
+        while (1) {
+          switch (_context3.prev = _context3.next) {
+            case 0:
+              _context3.next = 2;
+              return crud_service.get(id);
+
+            case 2:
+              response = _context3.sent;
+              _data = response.data.data;
+              formCode = /*#__PURE__*/react.createElement("form", {
+                tabIndex: -1,
+                style: {
+                  padding: "20px"
+                }
+              }, detailTable(false, /*#__PURE__*/react.createElement(react.Fragment, null, /*#__PURE__*/react.createElement("input", {
+                type: "text",
+                size: 20,
+                name: "name",
+                defaultValue: _data.name
+              })), /*#__PURE__*/react.createElement(react.Fragment, null, /*#__PURE__*/react.createElement("input", {
+                type: "email",
+                size: 20,
+                name: "email",
+                defaultValue: _data.email
+              })), /*#__PURE__*/react.createElement(react.Fragment, null, /*#__PURE__*/react.createElement("input", {
+                type: "text",
+                size: 35,
+                name: "avatar",
+                placeholder: "http://",
+                defaultValue: _data.avatar
+              }))), /*#__PURE__*/react.createElement("input", {
+                style: {
+                  padding: "5px 15px",
+                  background: "rgb(57 57 57)",
+                  outline: "none",
+                  color: "#fff",
+                  borderRadius: "30px",
+                  border: "none",
+                  fontSize: "12px",
+                  marginLeft: "142px"
+                },
+                type: "button",
+                value: "Update",
+                onClick: handleSubmit('edit', id)
+              }));
+              setFormEdit({
+                display: !formEdit.display,
+                content: formCode,
+                fieldName: _data.name,
+                fieldEmail: _data.email,
+                fieldAvatar: _data.avatar
+              });
+
+            case 6:
+            case "end":
+              return _context3.stop();
+          }
+        }
+      }, _callee3);
+    }));
+    return _getUpdateId.apply(this, arguments);
+  }
+
+  var handleEditForm = (0,react.useCallback)(function (id) {
+    return function (e) {
+      e.preventDefault();
+      console.log('update id: ', id);
+      getUpdateId(id);
+    };
+  }, []);
+  /**
+  * Remove data from ID
+  * ------------------
+  */
+
+  function remove(_x3) {
+    return _remove.apply(this, arguments);
+  }
+
+  function _remove() {
+    _remove = _asyncToGenerator( /*#__PURE__*/regenerator_default().mark(function _callee4(id) {
+      var response;
+      return regenerator_default().wrap(function _callee4$(_context4) {
+        while (1) {
+          switch (_context4.prev = _context4.next) {
+            case 0:
+              _context4.next = 2;
+              return crud_service.remove(id);
+
+            case 2:
+              response = _context4.sent;
+
+              if (response.data.code === 200) {
+                //refresh list
+                getAll();
+              }
+
+            case 4:
+            case "end":
+              return _context4.stop();
+          }
+        }
+      }, _callee4);
+    }));
+    return _remove.apply(this, arguments);
+  }
+
+  function handleDelete(id) {
+    //`id` comes from the public parameter thrown by the component `<DashboardModal />`
+    console.log('delete id: ', id); //
+
+    remove(id);
+  }
+  /**
+  * Create or Update form data
+  * ------------------
+  */
+
+
+  var handleSubmit = (0,react.useCallback)(function (type) {
+    var id = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : '';
+    return function (e) {
+      e.preventDefault();
+      var root = e.target.closest('form');
+      var $inputs = Array.prototype.slice.call(root.querySelectorAll('input'));
+      var serializeObj = {}; //data for each input
+
+      $inputs.forEach(function (node) {
+        if (node.type !== "button") {
+          serializeObj[node.name] = node.value;
+        }
+      }); //control status
+
+      $inputs.forEach(function (node) {
+        node.disabled = true;
+      }); //
+
+      var formData = new FormData();
+
+      var defaultPostData = DataList_objectSpread({
+        action: type === 'add' ? 'add_new_post' : 'add_edit_post'
+      }, serializeObj);
+
+      console.log('formData: ', defaultPostData);
+
+      for (var k in defaultPostData) {
+        formData.append(k, defaultPostData[k]);
+      } //
+
+
+      var refreshList = function refreshList() {
+        //control status
+        $inputs.forEach(function (node) {
+          node.value = '';
+          node.disabled = false;
+        }); //refresh list
+
+        getAll();
+      };
+
+      if (type === 'add') {
+        crud_service.create(formData).then(function (response) {
+          if (response.data.code === 200) {
+            // close window
+            setFormAdd({
+              display: false
+            });
+            refreshList();
+          }
+        });
+      }
+
+      if (type === 'edit') {
+        crud_service.update(id, formData).then(function (response) {
+          if (response.data.code === 200) {
+            // close window
+            setFormEdit({
+              display: false
+            });
+            refreshList();
+          }
+        });
+      }
+    };
+  }, []);
+  (0,react.useEffect)(function () {
+    getAll();
+  }, []); // Empty array ensures that effect is only run on mount and unmount
+
+  return /*#__PURE__*/react.createElement(react.Fragment, null, /*#__PURE__*/react.createElement("h4", null, "Data \xA0\xA0\xA0\xA0", /*#__PURE__*/react.createElement("a", {
+    style: {
+      padding: "7px 25px",
+      background: "#191919",
+      outline: "none",
+      color: "#fff",
+      borderRadius: "30px",
+      border: "none",
+      fontSize: "14px",
+      textDecoration: "none"
+    },
+    href: "#",
+    onClick: handleAddForm
+  }, "Add New")), /*#__PURE__*/react.createElement("hr", null), /*#__PURE__*/react.createElement("ul", null, !datalist ? /*#__PURE__*/react.createElement(react.Fragment, null, "Loading...") : datalist.map(function (item) {
+    return /*#__PURE__*/react.createElement("li", {
+      key: item.id
+    }, /*#__PURE__*/react.createElement("a", {
+      href: "#",
+      onClick: handleDetail(item.id)
+    }, "(", item.id, ") ", item.name, " - ", item.email), /*#__PURE__*/react.createElement("div", {
+      style: {
+        "float": "right"
+      }
+    }, /*#__PURE__*/react.createElement("a", {
+      href: "#",
+      onClick: handleEditForm(item.id)
+    }, /*#__PURE__*/react.createElement("svg", {
+      version: "1.1",
+      height: "15",
+      x: "0px",
+      y: "0px",
+      viewBox: "0 0 1000 1000",
+      enableBackground: "new 0 0 1000 1000",
+      xmlSpace: "preserve"
+    }, /*#__PURE__*/react.createElement("g", null, /*#__PURE__*/react.createElement("path", {
+      d: "M470.1,744.4L277.9,552.2L797.8,32.3L990,224.5L470.1,744.4z M345.9,552.2l124.3,124.3l452-452L797.8,100.2L345.9,552.2z"
+    }), /*#__PURE__*/react.createElement("path", {
+      d: "M238.6,576l207.6,207.6l-222.4,14.8L238.6,576z"
+    }), /*#__PURE__*/react.createElement("path", {
+      d: "M889.6,967.7H10V75h524.4v48H58v796.6h783.6V521.4h48V967.7z"
+    })))), "\xA0\xA0", /*#__PURE__*/react.createElement(DashboardModal, {
+      modalId: "modal-del-" + item.id,
+      targetId: item.id,
+      title: /*#__PURE__*/react.createElement(react.Fragment, null, /*#__PURE__*/react.createElement("svg", {
+        height: "15",
+        version: "1.1",
+        x: "0px",
+        y: "0px",
+        viewBox: "0 0 1000 1000",
+        enableBackground: "new 0 0 1000 1000",
+        xmlSpace: "preserve"
+      }, /*#__PURE__*/react.createElement("g", null, /*#__PURE__*/react.createElement("path", {
+        d: "M653.1,867.5c16.8,0,30.6-13.8,30.6-30.6V469.4c0-16.8-13.8-30.6-30.6-30.6c-16.8,0-30.6,13.8-30.6,30.6v367.5C622.5,853.7,636.3,867.5,653.1,867.5z M346.9,867.5c16.8,0,30.6-13.8,30.6-30.6V469.4c0-16.8-13.8-30.6-30.6-30.6s-30.6,13.8-30.6,30.6v367.5C316.3,853.7,330,867.5,346.9,867.5z M836.9,132.5H653.1V71.3c0-33.7-27.6-61.3-61.3-61.3H408.1c-33.7,0-61.3,27.6-61.3,61.3v61.3H163.1c-33.7,0-61.3,27.6-61.3,61.3V255c0,33.7,27.6,61.3,61.3,61.3v551.3c0,67.4,55.1,122.5,122.5,122.5h428.8c67.4,0,122.5-55.1,122.5-122.5V316.3c33.7,0,61.3-27.6,61.3-61.3v-61.2C898.1,160.1,870.6,132.5,836.9,132.5z M408.1,101.9c0-16.8,13.8-30.6,30.6-30.6h122.5c16.8,0,30.6,13.8,30.6,30.6v30.6c-29.9,0-183.8,0-183.8,0V101.9z M775.6,867.5c0,33.7-27.6,61.3-61.3,61.3H285.6c-33.7,0-61.3-27.6-61.3-61.3V316.3h551.3V867.5z M806.3,255H193.8c-16.8,0-30.6-13.8-30.6-30.6s13.8-30.6,30.6-30.6h612.5c16.8,0,30.6,13.8,30.6,30.6S823.1,255,806.3,255z M500,867.5c16.8,0,30.6-13.8,30.6-30.6V469.4c0-16.8-13.8-30.6-30.6-30.6s-30.6,13.8-30.6,30.6v367.5C469.4,853.7,483.2,867.5,500,867.5z"
+      })))),
+      content: /*#__PURE__*/react.createElement(react.Fragment, null, /*#__PURE__*/react.createElement("p", null, "You will delete this post via ID ", item.id, ". ", /*#__PURE__*/react.createElement("br", null), /*#__PURE__*/react.createElement("a", {
+        href: "#",
+        onClick: function onClick(e) {
+          e.preventDefault();
+          handleDelete(item.id);
+        }
+      }, "Are you sure?"))),
+      showClickEvent: function showClickEvent() {
+        var _modal = document.querySelector('#modal-del-' + item.id);
+
+        _modal.style.display = 'flex';
+      },
+      closeClickEvent: function closeClickEvent() {
+        var _modal = document.querySelector('#modal-del-' + item.id);
+
+        _modal.style.display = 'none';
+      }
+    })));
+  })), /*#__PURE__*/react.createElement(DashboardModal, {
+    show: detail.display,
+    modalId: "modal-detail-container",
+    targetId: 9997,
+    title: null,
+    content: detail.content,
+    closeClickEvent: function closeClickEvent() {
+      setDetail({
+        display: false
+      });
+    }
+  }), /*#__PURE__*/react.createElement(DashboardModal, {
+    show: formAdd.display,
+    modalId: "modal-form-add-container",
+    targetId: 9998,
+    title: null,
+    content: formAdd.content,
+    closeClickEvent: function closeClickEvent() {
+      setFormAdd({
+        display: false
+      });
+    }
+  }), /*#__PURE__*/react.createElement(DashboardModal, {
+    show: formEdit.display,
+    modalId: "modal-form-edit-container",
+    targetId: 9999,
+    title: null,
+    content: formEdit.content,
+    closeClickEvent: function closeClickEvent() {
+      setFormEdit({
+        display: false
+      });
+    }
+  }));
+};
+
+/* harmony default export */ const Dashboard_DataList = (DataList);
+;// CONCATENATED MODULE: ./src/client/views/_pages/Dashboard/com.index.js
+
+
+
+/* harmony default export */ const com_index = (function () {
+  return /*#__PURE__*/react.createElement(react.Fragment, null, /*#__PURE__*/react.createElement(Dashboard_Authorized, null), /*#__PURE__*/react.createElement("div", {
+    className: "alert alert-warning",
+    role: "alert"
+  }, "Note: The server may prohibit PHP data manipulation, Axios request will not be able to complete the data change."), /*#__PURE__*/react.createElement(Dashboard_DataList, null));
+});
 ;// CONCATENATED MODULE: ./src/client/router/PrivateRoute.js
 
 
@@ -95517,7 +96385,7 @@ function Dashboard_HookContent() {
   return /*#__PURE__*/react.createElement(react.Fragment, null, /*#__PURE__*/react.createElement("h3", null, "Dashboard"), /*#__PURE__*/react.createElement("hr", null), /*#__PURE__*/react.createElement(Switch, null, /*#__PURE__*/react.createElement(PrivateRoute, {
     exact: true,
     path: "/dashboard",
-    component: Dashboard_Authorized
+    component: com_index
   })));
 }
 

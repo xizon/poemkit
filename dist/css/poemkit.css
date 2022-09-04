@@ -6,9 +6,9 @@
  * ## Project Name        :  PoemKit
  * ## Project Description :  React toolkit for building a full website that also is a Micro-Frontend Architecture.
  * ## Project URL         :  https://uiux.cc
- * ## Version             :  0.2.6
+ * ## Version             :  0.2.8
  * ## Based on            :  PoemKit (https://github.com/xizon/poemkit#readme)
- * ## Last Update         :  September 1, 2022
+ * ## Last Update         :  September 4, 2022
  * ## Created by          :  UIUX Lab (https://uiux.cc) (uiuxlab@gmail.com)
  * ## Released under the MIT license.
  *
@@ -25463,6 +25463,106 @@ body.js-poemkit-menu-opened.rtl .poemkit-menu-mobile__toggle span {
 .rtl .poemkit-dropdown-menu > ul::before {
   left: auto;
   right: 20px;
+}
+
+/* ======================================================
+   <!-- Dashboard Modal -->
+/* ====================================================== */
+/* Background effect. It covers the entire site */
+.poemkit-db-modal {
+  background-color: rgba(0, 0, 0, 0.7);
+  z-index: 99999;
+  width: 100%;
+  height: 100%;
+  position: fixed;
+  /* Fix position on the top-left corner*/
+  top: 0;
+  left: 0;
+  overflow: auto;
+  padding-top: 150px;
+}
+
+.poemkit-db-modal table {
+  border: none;
+  width: "100%";
+  padding: 0;
+  margin: 0;
+}
+
+.poemkit-db-modal tr {
+  vertical-align: top;
+}
+
+.poemkit-db-modal td {
+  padding: 5px;
+}
+
+/* Modal content */
+.poemkit-db-modal__content {
+  background-color: white;
+  width: 70%;
+  max-width: 640px;
+  max-height: 70%;
+  min-height: 100px;
+  margin: auto;
+  padding: 10px;
+  border: 1px solid black;
+  border-radius: 8px;
+  transform: translateY(-100px);
+}
+
+.poemkit-db-modal__content ul {
+  font-size: 1rem;
+}
+
+.poemkit-db-modal__content ul li {
+  margin-bottom: 10px;
+  border-bottom: 1px dotted #eee;
+  padding-bottom: 10px;
+}
+
+.poemkit-db-modal__content ul li::after {
+  content: '';
+  clear: both;
+  height: 0;
+}
+
+.poemkit-db-modal__content ul li a {
+  text-decoration: underline;
+  color: #333;
+}
+
+.poemkit-db-modal__content ul li a:hover {
+  color: #f60;
+}
+
+.poemkit-db-modal__flex {
+  display: flex;
+  height: 100%;
+  flex-direction: row;
+  justify-content: left;
+  align-items: center;
+}
+
+.poemkit-db-modal__flex a {
+  text-decoration: underline;
+}
+
+/* Close button */
+.poemkit-db-modal__close {
+  color: #aaaaaa;
+  float: right;
+  font-size: 25px;
+  font-weight: bold;
+  text-decoration: none !important;
+  transform: translateY(-10px);
+}
+
+.poemkit-db-modal__close:hover,
+.poemkit-db-modal__close:focus {
+  color: #000;
+  text-decoration: none;
+  cursor: pointer;
 }
 
 @charset "UTF-8";

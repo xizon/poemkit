@@ -19,6 +19,7 @@ import CounterDemo from '@/pages/ComponentsDemo/CounterDemo.js';
 import CascadingDropDownListDemo from '@/pages/ComponentsDemo/CascadingDropDownListDemo.js';
 import ContentPlaceholderDemo from '@/pages/ComponentsDemo/ContentPlaceholderDemo.js';
 import DropdownMenuDemo from '@/pages/ComponentsDemo/DropdownMenuDemo.js';
+import DashboardModalDemo from '@/pages/ComponentsDemo/DashboardModalDemo.js';
 import FormDemo from '@/pages/ComponentsDemo/FormDemo.js';
 import GridDemo from '@/pages/ComponentsDemo/GridDemo.js';
 import GalleryDemo from '@/pages/ComponentsDemo/GalleryDemo.js';
@@ -332,7 +333,12 @@ function HookContent() {
 				<li className={urlChk('/sticky-elements') ? 'is-active' : ''}>
 					<NavLink data-route="true" onClick={(e)=>refreshTitle(e)} to={`${url}/sticky-elements`} activeClassName="is-active">Sticky Elements</NavLink>
 				</li>
+				<li className={urlChk('/dashboard-modal-api') ? 'is-active' : ''}>
+					<NavLink data-route="true" onClick={(e)=>refreshTitle(e)} to={`${url}/dashboard-modal-api`} activeClassName="is-active">Dashboard Modal(via API)</NavLink>
+				</li>
 
+
+                
 
 
 				{/*    /////////////////////////   */} 
@@ -414,6 +420,7 @@ function HookContent() {
 						<Route path={`${path}/cascading-dropDown-list`}><CascadingDropDownListDemo/><SeoChild title="Cascading DropDown List"/></Route>
 						<Route path={`${path}/content-placeholder`}><ContentPlaceholderDemo/><SeoChild title="Content Placeholder"/></Route>
 						<Route path={`${path}/dropdown-menu`}><DropdownMenuDemo/><SeoChild title="Dropdown Menu"/></Route>
+                        <Route path={`${path}/dashboard-modal-api`}><DashboardModalDemo/><SeoChild title="Dashboard Modal(via API)"/></Route>
 						<Route path={`${path}/form`}><FormDemo/><SeoChild title="Form"/></Route>
 						<Route path={`${path}/grid`}><GridDemo/><SeoChild title="Grid"/></Route>
 						<Route path={`${path}/gallery`}><GalleryDemo/><SeoChild title="Gallery"/></Route>

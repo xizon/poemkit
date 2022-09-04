@@ -41,7 +41,15 @@ const config = {
 	  */
 	  "LOGIN_REQUEST": `https://uiux.cc/server/sessions-create.php`,
 	  "USER_AUTHENTICATE": `https://uiux.cc/server/authenticate.php`,
-	  "SIGNUP_REQUEST": ""
+      "SIGNUP_REQUEST": "",
+	
+	  
+      /*
+       TYPE: CRUD (The PHP files are located at `./public/server/`)
+       ------------------------------------------
+      */
+      "CRUD_SERVICE": `https://uiux.cc/server/curd.php`,
+      "CRUD_DATA_INIT": `https://uiux.cc/server/curd-data-init.php`
 	  
 	    
   }
@@ -87,7 +95,15 @@ const localConfig= {
 	  */
 	  "LOGIN_REQUEST": "http://localhost:8888/poemkit/public/server/sessions-create.php",
 	  "USER_AUTHENTICATE": "http://localhost:8888/poemkit/public/server/authenticate.php",
-	  "SIGNUP_REQUEST": ""
+      "SIGNUP_REQUEST": "",
+
+	  
+      /*
+       TYPE: CRUD
+       ------------------------------------------
+      */
+      "CRUD_SERVICE": `http://localhost:8888/poemkit/public/server/curd.php`,
+      "CRUD_DATA_INIT": `http://localhost:8888/poemkit/public/server/curd-data-init.php`
 	  
   }
 

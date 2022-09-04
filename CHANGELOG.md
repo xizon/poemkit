@@ -1,5 +1,13 @@
 # Changelog
 
+
+#### = 0.2.8 (September 4, 2022) =
+
+* New: Add new UI components `Dashboard Modal(via API)`.
+* New: Add a CRUD with axios demo on Dashboard page.
+* Fix: Fixed a bug in front-end and back-end API communication.
+
+
 #### = 0.2.7 (September 1, 2022) =
 
 * Tweak: Added solutions to problems that may occur when deploying the application on cloud server.

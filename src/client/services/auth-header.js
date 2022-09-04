@@ -12,8 +12,27 @@ export default () => {
 /*
 Example:
 
-import authHeader from '@/services/auth-header.js';
-axios({headers: { ...authHeader(), 'Content-Type': 'application/json' }})
+import authHeader from 'auth-header.js';
+axios.post('api/path', {data: mydata}, { 
+    headers: { 
+        ...authHeader(),
+        'content-type': 'application/json'  
+    }
+}).then(function (response) {
+    ...
+});
+
+or
+
+axios({
+    method: 'post',
+    url: 'api/path',
+    data: {id: varID},
+    headers: { 
+        ...authHeader(),
+        'content-type': 'application/json'  
+    }
+})
 
 
 Note: For Node.js Express back-end, please use x-access-token header like this:

@@ -1,7 +1,7 @@
 <?php
 header("Access-Control-Allow-Methods: HEAD, GET, POST, DELETE, PUT, OPTIONS");
 header('Access-Control-Allow-Origin: *');
-header("Access-Control-Allow-Headers: Content-Type,X-Token");
+header('Access-Control-Allow-Headers: *');
 header('Access-Control-Allow-Credentials: true');
 header('Content-type: application/json');
 
@@ -46,7 +46,7 @@ function getBearerToken() {
 
 $verify_token = false;
 
-$token = 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJuYW1lIjoiSm9obiBEb2UiLCJ1c2VyX2lkIjoxMjMsInVzZXJfbmFtZSI6ImFkbWluIiwidXNlcl9wYXNzd29yZCI6ImFkbWluIn0.gLP213Yn8njgq7qq8nqw_U-e93f70aBCipnwa0tY0g0';
+$token = '';
 
 
 if ( isset( $_POST[ 'token' ] ) ) {

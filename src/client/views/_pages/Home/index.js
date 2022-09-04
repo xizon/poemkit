@@ -12,6 +12,10 @@ import { Helmet } from "react-helmet";
 import siteInfo from '@/helpers/site-info.js';
 import socialMetadata from '@/helpers/social-metadata.js';
 
+//for php functions
+import CRUDService from "@/services/crud-service.js";
+import { useEffect } from 'react';
+
 function SeoVars() {
 	const {siteName, baseURL, pageTitle} = siteInfo('/index');
 	// if the value of `pageTitle` is `{{pageTitle}}`, the value 
@@ -51,6 +55,14 @@ function Seo() {
 export default ({ staticContext = {} }) => {
     staticContext.status = 200;
     
+
+    useEffect(() => {
+
+        // init php data
+        CRUDService.initData();
+    
+      }, []); // Empty array ensures that effect is only run on mount and unmount
+
     return (
 	  <>
 		

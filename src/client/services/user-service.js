@@ -4,41 +4,37 @@ import axios from 'axios';
 import { API } from '@/config/websiteConfig.js';
 
 // Authority 
+import isAdmin from '@/services/is-admin.js';
 import authHeader from '@/services/auth-header.js';
 
 
 
 class UserService {
+	constructor() {
+		this.url = API.USER_AUTHENTICATE;
+		this.config = {};
+	}
 	
     /**
      * Get User Name
      */
 	getUserName() {
-		if (JSON.stringify(authHeader()) === '{}') return null;
-		return axios.post(API.USER_AUTHENTICATE, { 
-					headers: { ...authHeader(), 'content-type': 'application/json' },
-					withCredentials: true
-				}).then(function (response) {
+		if ( !isAdmin() ) return null;
+
+		this.config = { 
+			headers: { 
+				...authHeader(), 
+				'content-type': 'application/json'  
+			}
+		};
+		
+		return axios.post(this.url, {}, this.config).then(function (response) {
 					const jsonData = response.data;
 					return jsonData.data ? jsonData.data.name : null;
 				});
 		
 	}
 
-    /**
-     * Get User ID
-     */
-	getUserID() {
-		if (JSON.stringify(authHeader()) === '{}') return null;
-		return axios.post(API.USER_AUTHENTICATE, { 
-					headers: { ...authHeader(), 'content-type': 'application/json' },
-					withCredentials: true
-				}).then(function (response) {
-					const jsonData = response.data;
-					return jsonData.data ? jsonData.data.user_id : null;
-				});
-		
-	}
 	
 }
 
