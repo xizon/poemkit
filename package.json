@@ -5,7 +5,7 @@
   "projectName": "PoemKit",
   "createdInfo": "UIUX Lab (https://uiux.cc)",
   "projectURL": "https://uiux.cc",
-  "version": "0.2.8",
+  "version": "0.3.0",
   "description": "React toolkit for building a full website that also is a Micro-Frontend Architecture.",
   "main": "dist/js/poemkit.js",
   "directories": {

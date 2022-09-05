@@ -6,7 +6,7 @@ import {
 } from 'react-router-dom';
 import { __ } from '@/components/_utils/_all';
 import Footer from '@/components/Footer/index.tsx';
-import DashBoardComponents from '@/pages/Dashboard/com.index.js';
+import Authorized from '@/pages/Dashboard/Authorized';
 
 import { PrivateRoute } from '@/router/PrivateRoute.js';
 
@@ -52,7 +52,7 @@ function HookContent() {
 			<hr />
 		
 			  <Switch>
-                <PrivateRoute exact path="/dashboard" component={DashBoardComponents} />
+                <PrivateRoute exact path="/dashboard" component={Authorized} />
 			  </Switch>
 		</>
 	)

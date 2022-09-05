@@ -1,6 +1,12 @@
 # Changelog
 
 
+#### = 0.3.0 (September 5, 2022) =
+
+* Fix: Fixed the TypeScript path error that may occur when deploying to a cloud server.
+
+
+
 #### = 0.2.8 (September 4, 2022) =
 
 * New: Add new UI components `Dashboard Modal(via API)`.

@@ -6,9 +6,9 @@
  * ## Project Name        :  PoemKit
  * ## Project Description :  React toolkit for building a full website that also is a Micro-Frontend Architecture.
  * ## Project URL         :  https://uiux.cc
- * ## Version             :  0.2.8
+ * ## Version             :  0.3.0
  * ## Based on            :  PoemKit (https://github.com/xizon/poemkit#readme)
- * ## Last Update         :  September 4, 2022
+ * ## Last Update         :  September 5, 2022
  * ## Created by          :  UIUX Lab (https://uiux.cc) (uiuxlab@gmail.com)
  * ## Released under the MIT license.
  *
@@ -95721,6 +95721,15 @@ var UserService = /*#__PURE__*/function () {
 
 
 
+
+
+
+function Authorized_ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); enumerableOnly && (symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; })), keys.push.apply(keys, symbols); } return keys; }
+
+function Authorized_objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = null != arguments[i] ? arguments[i] : {}; i % 2 ? Authorized_ownKeys(Object(source), !0).forEach(function (key) { _defineProperty(target, key, source[key]); }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)) : Authorized_ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } return target; }
+
+
+
 function Authorized_createSuper(Derived) { var hasNativeReflectConstruct = Authorized_isNativeReflectConstruct(); return function _createSuperInternal() { var Super = _getPrototypeOf(Derived), result; if (hasNativeReflectConstruct) { var NewTarget = _getPrototypeOf(this).constructor; result = Reflect.construct(Super, arguments, NewTarget); } else { result = Super.apply(this, arguments); } return _possibleConstructorReturn(this, result); }; }
 
 function Authorized_isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Reflect.construct) return false; if (Reflect.construct.sham) return false; if (typeof Proxy === "function") return true; try { Boolean.prototype.valueOf.call(Reflect.construct(Boolean, [], function () {})); return true; } catch (e) { return false; } }
@@ -95729,62 +95738,12 @@ function Authorized_isNativeReflectConstruct() { if (typeof Reflect === "undefin
 
 
 
-var Authorized = /*#__PURE__*/function (_Component) {
-  _inherits(Authorized, _Component);
 
-  var _super = Authorized_createSuper(Authorized);
-
-  function Authorized(props) {
-    var _this;
-
-    _classCallCheck(this, Authorized);
-
-    _this = _super.call(this, props);
-    _this.state = {
-      userName: '...'
-    };
-    return _this;
-  }
-
-  _createClass(Authorized, [{
-    key: "componentDidMount",
-    value: function componentDidMount() {
-      var self = this;
-      user_service.getUserName().then(function (response) {
-        self.setState({
-          userName: response
-        });
-      });
-    }
-  }, {
-    key: "render",
-    value: function render() {
-      return /*#__PURE__*/react.createElement(react.Fragment, null, this.state.userName !== '' ? /*#__PURE__*/react.createElement(react.Fragment, null, /*#__PURE__*/react.createElement("p", {
-        style: {
-          color: "green"
-        }
-      }, "\u221A You need to be authorized after successful login to see this information."), /*#__PURE__*/react.createElement("p", null, "Your user name is: ", /*#__PURE__*/react.createElement("code", null, this.state.userName))) : '');
-    }
-  }]);
-
-  return Authorized;
-}(react.Component);
-
-/* harmony default export */ const Dashboard_Authorized = (Authorized);
-;// CONCATENATED MODULE: ./src/client/views/_pages/Dashboard/DataList.js
-
-
-
-
-
-function DataList_ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); enumerableOnly && (symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; })), keys.push.apply(keys, symbols); } return keys; }
-
-function DataList_objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = null != arguments[i] ? arguments[i] : {}; i % 2 ? DataList_ownKeys(Object(source), !0).forEach(function (key) { _defineProperty(target, key, source[key]); }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)) : DataList_ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } return target; }
-
-
-
-
-
+/*
+////////////////////////////////////////////////////////////
+///////////////   (1) Data List   ///////////////
+////////////////////////////////////////////////////////////
+*/
 
 function detailTable() {
   var id = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : '';
@@ -95810,57 +95769,19 @@ function detailTable() {
   }, /*#__PURE__*/react.createElement("strong", null, "Avatar: ")), /*#__PURE__*/react.createElement("td", null, avatar))));
 }
 
-var DataList = function DataList() {
-  var _useState = (0,react.useState)([]),
-      _useState2 = _slicedToArray(_useState, 2),
-      datalist = _useState2[0],
-      setDataList = _useState2[1]; // detail container
+var DataList = /*#__PURE__*/function (_Component) {
+  _inherits(DataList, _Component);
 
+  var _super = Authorized_createSuper(DataList);
 
-  var _useState3 = (0,react.useState)({
-    display: false,
-    content: 'loading...'
-  }),
-      _useState4 = _slicedToArray(_useState3, 2),
-      detail = _useState4[0],
-      setDetail = _useState4[1]; // form
+  function DataList(props) {
+    var _this;
 
+    _classCallCheck(this, DataList);
 
-  var _useState5 = (0,react.useState)({
-    display: false,
-    content: 'loading...'
-  }),
-      _useState6 = _slicedToArray(_useState5, 2),
-      formAdd = _useState6[0],
-      setFormAdd = _useState6[1];
+    _this = _super.call(this, props);
 
-  var _useState7 = (0,react.useState)({
-    display: false,
-    content: 'loading...',
-    fieldName: '',
-    fieldEmail: '',
-    fieldAvatar: ''
-  }),
-      _useState8 = _slicedToArray(_useState7, 2),
-      formEdit = _useState8[0],
-      setFormEdit = _useState8[1];
-  /**
-   * Get all data
-   * ------------------
-   */
-
-
-  function getAll() {
-    return _getAll.apply(this, arguments);
-  }
-  /**
-  * Get data from ID
-  * ------------------
-  */
-
-
-  function _getAll() {
-    _getAll = _asyncToGenerator( /*#__PURE__*/regenerator_default().mark(function _callee() {
+    _defineProperty(_assertThisInitialized(_this), "getAll", /*#__PURE__*/_asyncToGenerator( /*#__PURE__*/regenerator_default().mark(function _callee() {
       var response;
       return regenerator_default().wrap(function _callee$(_context) {
         while (1) {
@@ -95871,7 +95792,10 @@ var DataList = function DataList() {
 
             case 2:
               response = _context.sent;
-              setDataList(response.data.data);
+
+              _this.setState({
+                datalist: response.data.data
+              });
 
             case 4:
             case "end":
@@ -95879,422 +95803,556 @@ var DataList = function DataList() {
           }
         }
       }, _callee);
-    }));
-    return _getAll.apply(this, arguments);
-  }
-
-  function get(_x) {
-    return _get.apply(this, arguments);
-  }
-
-  function _get() {
-    _get = _asyncToGenerator( /*#__PURE__*/regenerator_default().mark(function _callee2(id) {
-      var response, _data;
-
-      return regenerator_default().wrap(function _callee2$(_context2) {
-        while (1) {
-          switch (_context2.prev = _context2.next) {
-            case 0:
-              _context2.next = 2;
-              return crud_service.get(id);
-
-            case 2:
-              response = _context2.sent;
-              _data = response.data.data;
-              setDetail({
-                display: !detail.display,
-                content: detailTable(_data.id, _data.name, _data.email, /*#__PURE__*/react.createElement(react.Fragment, null, /*#__PURE__*/react.createElement("img", {
-                  src: _data.avatar,
-                  width: "100"
-                })))
-              });
-
-            case 5:
-            case "end":
-              return _context2.stop();
-          }
-        }
-      }, _callee2);
-    }));
-    return _get.apply(this, arguments);
-  }
-
-  var handleDetail = (0,react.useCallback)(function (id) {
-    return function (e) {
-      e.preventDefault();
-      console.log('detail id: ', id);
-      get(id);
-    };
-  }, []);
-  /**
-  * Create a new data
-  * ------------------
-  */
-
-  function handleAddForm(e) {
-    e.preventDefault();
-    var formCode = /*#__PURE__*/react.createElement("form", {
-      tabIndex: -1,
-      method: "post",
-      style: {
-        padding: "20px"
-      }
-    }, detailTable(false, /*#__PURE__*/react.createElement(react.Fragment, null, /*#__PURE__*/react.createElement("input", {
-      type: "text",
-      size: 20,
-      name: "name"
-    })), /*#__PURE__*/react.createElement(react.Fragment, null, /*#__PURE__*/react.createElement("input", {
-      type: "text",
-      size: 20,
-      name: "email"
-    })), /*#__PURE__*/react.createElement(react.Fragment, null, /*#__PURE__*/react.createElement("input", {
-      type: "text",
-      size: 35,
-      name: "avatar",
-      placeholder: "http://"
-    }))), /*#__PURE__*/react.createElement("input", {
-      style: {
-        padding: "5px 15px",
-        background: "rgb(57 57 57)",
-        outline: "none",
-        color: "#fff",
-        borderRadius: "30px",
-        border: "none",
-        fontSize: "12px",
-        marginLeft: "142px"
-      },
-      type: "button",
-      value: "Submit",
-      onClick: handleSubmit('add')
-    }));
-    setFormAdd({
-      display: true,
-      content: formCode
-    });
-  }
-  /**
-  * Update data from ID
-  * ------------------
-  */
-
-
-  function getUpdateId(_x2) {
-    return _getUpdateId.apply(this, arguments);
-  }
-
-  function _getUpdateId() {
-    _getUpdateId = _asyncToGenerator( /*#__PURE__*/regenerator_default().mark(function _callee3(id) {
-      var response, _data, formCode;
-
-      return regenerator_default().wrap(function _callee3$(_context3) {
-        while (1) {
-          switch (_context3.prev = _context3.next) {
-            case 0:
-              _context3.next = 2;
-              return crud_service.get(id);
-
-            case 2:
-              response = _context3.sent;
-              _data = response.data.data;
-              formCode = /*#__PURE__*/react.createElement("form", {
-                tabIndex: -1,
-                style: {
-                  padding: "20px"
-                }
-              }, detailTable(false, /*#__PURE__*/react.createElement(react.Fragment, null, /*#__PURE__*/react.createElement("input", {
-                type: "text",
-                size: 20,
-                name: "name",
-                defaultValue: _data.name
-              })), /*#__PURE__*/react.createElement(react.Fragment, null, /*#__PURE__*/react.createElement("input", {
-                type: "email",
-                size: 20,
-                name: "email",
-                defaultValue: _data.email
-              })), /*#__PURE__*/react.createElement(react.Fragment, null, /*#__PURE__*/react.createElement("input", {
-                type: "text",
-                size: 35,
-                name: "avatar",
-                placeholder: "http://",
-                defaultValue: _data.avatar
-              }))), /*#__PURE__*/react.createElement("input", {
-                style: {
-                  padding: "5px 15px",
-                  background: "rgb(57 57 57)",
-                  outline: "none",
-                  color: "#fff",
-                  borderRadius: "30px",
-                  border: "none",
-                  fontSize: "12px",
-                  marginLeft: "142px"
-                },
-                type: "button",
-                value: "Update",
-                onClick: handleSubmit('edit', id)
-              }));
-              setFormEdit({
-                display: !formEdit.display,
-                content: formCode,
-                fieldName: _data.name,
-                fieldEmail: _data.email,
-                fieldAvatar: _data.avatar
-              });
-
-            case 6:
-            case "end":
-              return _context3.stop();
-          }
-        }
-      }, _callee3);
-    }));
-    return _getUpdateId.apply(this, arguments);
-  }
-
-  var handleEditForm = (0,react.useCallback)(function (id) {
-    return function (e) {
-      e.preventDefault();
-      console.log('update id: ', id);
-      getUpdateId(id);
-    };
-  }, []);
-  /**
-  * Remove data from ID
-  * ------------------
-  */
-
-  function remove(_x3) {
-    return _remove.apply(this, arguments);
-  }
-
-  function _remove() {
-    _remove = _asyncToGenerator( /*#__PURE__*/regenerator_default().mark(function _callee4(id) {
-      var response;
-      return regenerator_default().wrap(function _callee4$(_context4) {
-        while (1) {
-          switch (_context4.prev = _context4.next) {
-            case 0:
-              _context4.next = 2;
-              return crud_service.remove(id);
-
-            case 2:
-              response = _context4.sent;
-
-              if (response.data.code === 200) {
-                //refresh list
-                getAll();
-              }
-
-            case 4:
-            case "end":
-              return _context4.stop();
-          }
-        }
-      }, _callee4);
-    }));
-    return _remove.apply(this, arguments);
-  }
-
-  function handleDelete(id) {
-    //`id` comes from the public parameter thrown by the component `<DashboardModal />`
-    console.log('delete id: ', id); //
-
-    remove(id);
-  }
-  /**
-  * Create or Update form data
-  * ------------------
-  */
-
-
-  var handleSubmit = (0,react.useCallback)(function (type) {
-    var id = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : '';
-    return function (e) {
-      e.preventDefault();
-      var root = e.target.closest('form');
-      var $inputs = Array.prototype.slice.call(root.querySelectorAll('input'));
-      var serializeObj = {}; //data for each input
-
-      $inputs.forEach(function (node) {
-        if (node.type !== "button") {
-          serializeObj[node.name] = node.value;
-        }
-      }); //control status
-
-      $inputs.forEach(function (node) {
-        node.disabled = true;
-      }); //
-
-      var formData = new FormData();
-
-      var defaultPostData = DataList_objectSpread({
-        action: type === 'add' ? 'add_new_post' : 'add_edit_post'
-      }, serializeObj);
-
-      console.log('formData: ', defaultPostData);
-
-      for (var k in defaultPostData) {
-        formData.append(k, defaultPostData[k]);
-      } //
-
-
-      var refreshList = function refreshList() {
-        //control status
-        $inputs.forEach(function (node) {
-          node.value = '';
-          node.disabled = false;
-        }); //refresh list
-
-        getAll();
-      };
-
-      if (type === 'add') {
-        crud_service.create(formData).then(function (response) {
-          if (response.data.code === 200) {
-            // close window
-            setFormAdd({
-              display: false
-            });
-            refreshList();
-          }
-        });
-      }
-
-      if (type === 'edit') {
-        crud_service.update(id, formData).then(function (response) {
-          if (response.data.code === 200) {
-            // close window
-            setFormEdit({
-              display: false
-            });
-            refreshList();
-          }
-        });
-      }
-    };
-  }, []);
-  (0,react.useEffect)(function () {
-    getAll();
-  }, []); // Empty array ensures that effect is only run on mount and unmount
-
-  return /*#__PURE__*/react.createElement(react.Fragment, null, /*#__PURE__*/react.createElement("h4", null, "Data \xA0\xA0\xA0\xA0", /*#__PURE__*/react.createElement("a", {
-    style: {
-      padding: "7px 25px",
-      background: "#191919",
-      outline: "none",
-      color: "#fff",
-      borderRadius: "30px",
-      border: "none",
-      fontSize: "14px",
-      textDecoration: "none"
-    },
-    href: "#",
-    onClick: handleAddForm
-  }, "Add New")), /*#__PURE__*/react.createElement("hr", null), /*#__PURE__*/react.createElement("ul", null, !datalist ? /*#__PURE__*/react.createElement(react.Fragment, null, "Loading...") : datalist.map(function (item) {
-    return /*#__PURE__*/react.createElement("li", {
-      key: item.id
-    }, /*#__PURE__*/react.createElement("a", {
-      href: "#",
-      onClick: handleDetail(item.id)
-    }, "(", item.id, ") ", item.name, " - ", item.email), /*#__PURE__*/react.createElement("div", {
-      style: {
-        "float": "right"
-      }
-    }, /*#__PURE__*/react.createElement("a", {
-      href: "#",
-      onClick: handleEditForm(item.id)
-    }, /*#__PURE__*/react.createElement("svg", {
-      version: "1.1",
-      height: "15",
-      x: "0px",
-      y: "0px",
-      viewBox: "0 0 1000 1000",
-      enableBackground: "new 0 0 1000 1000",
-      xmlSpace: "preserve"
-    }, /*#__PURE__*/react.createElement("g", null, /*#__PURE__*/react.createElement("path", {
-      d: "M470.1,744.4L277.9,552.2L797.8,32.3L990,224.5L470.1,744.4z M345.9,552.2l124.3,124.3l452-452L797.8,100.2L345.9,552.2z"
-    }), /*#__PURE__*/react.createElement("path", {
-      d: "M238.6,576l207.6,207.6l-222.4,14.8L238.6,576z"
-    }), /*#__PURE__*/react.createElement("path", {
-      d: "M889.6,967.7H10V75h524.4v48H58v796.6h783.6V521.4h48V967.7z"
-    })))), "\xA0\xA0", /*#__PURE__*/react.createElement(DashboardModal, {
-      modalId: "modal-del-" + item.id,
-      targetId: item.id,
-      title: /*#__PURE__*/react.createElement(react.Fragment, null, /*#__PURE__*/react.createElement("svg", {
-        height: "15",
-        version: "1.1",
-        x: "0px",
-        y: "0px",
-        viewBox: "0 0 1000 1000",
-        enableBackground: "new 0 0 1000 1000",
-        xmlSpace: "preserve"
-      }, /*#__PURE__*/react.createElement("g", null, /*#__PURE__*/react.createElement("path", {
-        d: "M653.1,867.5c16.8,0,30.6-13.8,30.6-30.6V469.4c0-16.8-13.8-30.6-30.6-30.6c-16.8,0-30.6,13.8-30.6,30.6v367.5C622.5,853.7,636.3,867.5,653.1,867.5z M346.9,867.5c16.8,0,30.6-13.8,30.6-30.6V469.4c0-16.8-13.8-30.6-30.6-30.6s-30.6,13.8-30.6,30.6v367.5C316.3,853.7,330,867.5,346.9,867.5z M836.9,132.5H653.1V71.3c0-33.7-27.6-61.3-61.3-61.3H408.1c-33.7,0-61.3,27.6-61.3,61.3v61.3H163.1c-33.7,0-61.3,27.6-61.3,61.3V255c0,33.7,27.6,61.3,61.3,61.3v551.3c0,67.4,55.1,122.5,122.5,122.5h428.8c67.4,0,122.5-55.1,122.5-122.5V316.3c33.7,0,61.3-27.6,61.3-61.3v-61.2C898.1,160.1,870.6,132.5,836.9,132.5z M408.1,101.9c0-16.8,13.8-30.6,30.6-30.6h122.5c16.8,0,30.6,13.8,30.6,30.6v30.6c-29.9,0-183.8,0-183.8,0V101.9z M775.6,867.5c0,33.7-27.6,61.3-61.3,61.3H285.6c-33.7,0-61.3-27.6-61.3-61.3V316.3h551.3V867.5z M806.3,255H193.8c-16.8,0-30.6-13.8-30.6-30.6s13.8-30.6,30.6-30.6h612.5c16.8,0,30.6,13.8,30.6,30.6S823.1,255,806.3,255z M500,867.5c16.8,0,30.6-13.8,30.6-30.6V469.4c0-16.8-13.8-30.6-30.6-30.6s-30.6,13.8-30.6,30.6v367.5C469.4,853.7,483.2,867.5,500,867.5z"
-      })))),
-      content: /*#__PURE__*/react.createElement(react.Fragment, null, /*#__PURE__*/react.createElement("p", null, "You will delete this post via ID ", item.id, ". ", /*#__PURE__*/react.createElement("br", null), /*#__PURE__*/react.createElement("a", {
-        href: "#",
-        onClick: function onClick(e) {
-          e.preventDefault();
-          handleDelete(item.id);
-        }
-      }, "Are you sure?"))),
-      showClickEvent: function showClickEvent() {
-        var _modal = document.querySelector('#modal-del-' + item.id);
-
-        _modal.style.display = 'flex';
-      },
-      closeClickEvent: function closeClickEvent() {
-        var _modal = document.querySelector('#modal-del-' + item.id);
-
-        _modal.style.display = 'none';
-      }
     })));
-  })), /*#__PURE__*/react.createElement(DashboardModal, {
-    show: detail.display,
-    modalId: "modal-detail-container",
-    targetId: 9997,
-    title: null,
-    content: detail.content,
-    closeClickEvent: function closeClickEvent() {
-      setDetail({
-        display: false
+
+    _defineProperty(_assertThisInitialized(_this), "get", /*#__PURE__*/function () {
+      var _ref2 = _asyncToGenerator( /*#__PURE__*/regenerator_default().mark(function _callee2(id) {
+        var response, _data;
+
+        return regenerator_default().wrap(function _callee2$(_context2) {
+          while (1) {
+            switch (_context2.prev = _context2.next) {
+              case 0:
+                _context2.next = 2;
+                return crud_service.get(id);
+
+              case 2:
+                response = _context2.sent;
+                _data = response.data.data;
+
+                _this.setState({
+                  detail: {
+                    display: true,
+                    content: detailTable(_data.id, _data.name, _data.email, /*#__PURE__*/react.createElement(react.Fragment, null, /*#__PURE__*/react.createElement("img", {
+                      src: _data.avatar,
+                      width: "100"
+                    })))
+                  }
+                });
+
+              case 5:
+              case "end":
+                return _context2.stop();
+            }
+          }
+        }, _callee2);
+      }));
+
+      return function (_x) {
+        return _ref2.apply(this, arguments);
+      };
+    }());
+
+    _defineProperty(_assertThisInitialized(_this), "getUpdateId", /*#__PURE__*/function () {
+      var _ref3 = _asyncToGenerator( /*#__PURE__*/regenerator_default().mark(function _callee3(id) {
+        var response, _data, formCode;
+
+        return regenerator_default().wrap(function _callee3$(_context3) {
+          while (1) {
+            switch (_context3.prev = _context3.next) {
+              case 0:
+                _context3.next = 2;
+                return crud_service.get(id);
+
+              case 2:
+                response = _context3.sent;
+                _data = response.data.data;
+                formCode = /*#__PURE__*/react.createElement("form", {
+                  tabIndex: -1,
+                  style: {
+                    padding: "20px"
+                  }
+                }, detailTable(false, /*#__PURE__*/react.createElement(react.Fragment, null, /*#__PURE__*/react.createElement("input", {
+                  type: "text",
+                  size: 20,
+                  name: "name",
+                  defaultValue: _data.name
+                })), /*#__PURE__*/react.createElement(react.Fragment, null, /*#__PURE__*/react.createElement("input", {
+                  type: "email",
+                  size: 20,
+                  name: "email",
+                  defaultValue: _data.email
+                })), /*#__PURE__*/react.createElement(react.Fragment, null, /*#__PURE__*/react.createElement("input", {
+                  type: "text",
+                  size: 35,
+                  name: "avatar",
+                  placeholder: "http://",
+                  defaultValue: _data.avatar
+                }))), /*#__PURE__*/react.createElement("input", {
+                  style: {
+                    padding: "5px 15px",
+                    background: "rgb(57 57 57)",
+                    outline: "none",
+                    color: "#fff",
+                    borderRadius: "30px",
+                    border: "none",
+                    fontSize: "12px",
+                    marginLeft: "142px"
+                  },
+                  type: "button",
+                  value: "Update",
+                  onClick: _this.handleSubmit('edit', id)
+                }));
+
+                _this.setState({
+                  formEdit: {
+                    display: true,
+                    content: formCode
+                  }
+                });
+
+              case 6:
+              case "end":
+                return _context3.stop();
+            }
+          }
+        }, _callee3);
+      }));
+
+      return function (_x2) {
+        return _ref3.apply(this, arguments);
+      };
+    }());
+
+    _defineProperty(_assertThisInitialized(_this), "remove", /*#__PURE__*/function () {
+      var _ref4 = _asyncToGenerator( /*#__PURE__*/regenerator_default().mark(function _callee4(id) {
+        var response;
+        return regenerator_default().wrap(function _callee4$(_context4) {
+          while (1) {
+            switch (_context4.prev = _context4.next) {
+              case 0:
+                _context4.next = 2;
+                return crud_service.remove(id);
+
+              case 2:
+                response = _context4.sent;
+
+                if (response.data.code === 200) {
+                  //refresh list
+                  _this.getAll();
+                }
+
+              case 4:
+              case "end":
+                return _context4.stop();
+            }
+          }
+        }, _callee4);
+      }));
+
+      return function (_x3) {
+        return _ref4.apply(this, arguments);
+      };
+    }());
+
+    _this.state = {
+      datalist: [],
+      // detail container
+      detail: {
+        display: false,
+        content: 'loading...'
+      },
+      // form
+      formAdd: {
+        display: false,
+        content: 'loading...'
+      },
+      formEdit: {
+        display: false,
+        content: 'loading...'
+      }
+    };
+    _this.handleDetail = _this.handleDetail.bind(_assertThisInitialized(_this));
+    _this.handleAddForm = _this.handleAddForm.bind(_assertThisInitialized(_this));
+    _this.handleEditForm = _this.handleEditForm.bind(_assertThisInitialized(_this));
+    _this.handleSubmit = _this.handleSubmit.bind(_assertThisInitialized(_this));
+    _this.handleDelete = _this.handleDelete.bind(_assertThisInitialized(_this));
+    return _this;
+  }
+  /**
+   * Get all data
+   * ------------------
+   */
+
+
+  _createClass(DataList, [{
+    key: "handleDetail",
+    value: function handleDetail(id) {
+      var self = this;
+      return function (e) {
+        // e is the event object that returned
+        e.preventDefault();
+        console.log('detail id: ', id);
+        self.get(id);
+      };
+    }
+    /**
+    * Create a new data
+    * ------------------
+    */
+
+  }, {
+    key: "handleAddForm",
+    value: function handleAddForm(e) {
+      e.preventDefault();
+      var formCode = /*#__PURE__*/react.createElement("form", {
+        tabIndex: -1,
+        method: "post",
+        style: {
+          padding: "20px"
+        }
+      }, detailTable(false, /*#__PURE__*/react.createElement(react.Fragment, null, /*#__PURE__*/react.createElement("input", {
+        type: "text",
+        size: 20,
+        name: "name"
+      })), /*#__PURE__*/react.createElement(react.Fragment, null, /*#__PURE__*/react.createElement("input", {
+        type: "text",
+        size: 20,
+        name: "email"
+      })), /*#__PURE__*/react.createElement(react.Fragment, null, /*#__PURE__*/react.createElement("input", {
+        type: "text",
+        size: 35,
+        name: "avatar",
+        placeholder: "http://"
+      }))), /*#__PURE__*/react.createElement("input", {
+        style: {
+          padding: "5px 15px",
+          background: "rgb(57 57 57)",
+          outline: "none",
+          color: "#fff",
+          borderRadius: "30px",
+          border: "none",
+          fontSize: "12px",
+          marginLeft: "142px"
+        },
+        type: "button",
+        value: "Submit",
+        onClick: this.handleSubmit('add')
+      }));
+      this.setState({
+        formAdd: {
+          display: true,
+          content: formCode
+        }
       });
     }
-  }), /*#__PURE__*/react.createElement(DashboardModal, {
-    show: formAdd.display,
-    modalId: "modal-form-add-container",
-    targetId: 9998,
-    title: null,
-    content: formAdd.content,
-    closeClickEvent: function closeClickEvent() {
-      setFormAdd({
-        display: false
+    /**
+    * Update data from ID
+    * ------------------
+    */
+
+  }, {
+    key: "handleEditForm",
+    value: function handleEditForm(id) {
+      var self = this;
+      return function (e) {
+        // e is the event object that returned
+        e.preventDefault();
+        console.log('update id: ', id);
+        self.getUpdateId(id);
+      };
+    }
+    /**
+    * Remove data from ID
+    * ------------------
+    */
+
+  }, {
+    key: "handleDelete",
+    value: function handleDelete(id) {
+      console.log('delete id: ', id); //
+
+      this.remove(id);
+    }
+    /**
+    * Create or Update form data
+    * ------------------
+    */
+
+  }, {
+    key: "handleSubmit",
+    value: function handleSubmit(type) {
+      var id = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : '';
+      var self = this;
+      return function (e) {
+        // e is the event object that returned
+        e.preventDefault();
+        var root = e.target.closest('form');
+        var $inputs = Array.prototype.slice.call(root.querySelectorAll('input'));
+        var serializeObj = {}; //data for each input
+
+        $inputs.forEach(function (node) {
+          if (node.type !== "button") {
+            serializeObj[node.name] = node.value;
+          }
+        }); //control status
+
+        $inputs.forEach(function (node) {
+          node.disabled = true;
+        }); //
+
+        var formData = new FormData();
+
+        var defaultPostData = Authorized_objectSpread({
+          action: type === 'add' ? 'add_new_post' : 'add_edit_post'
+        }, serializeObj);
+
+        console.log('formData: ', defaultPostData);
+
+        for (var k in defaultPostData) {
+          formData.append(k, defaultPostData[k]);
+        } //
+
+
+        var refreshList = function refreshList() {
+          //control status
+          $inputs.forEach(function (node) {
+            node.value = '';
+            node.disabled = false;
+          }); //refresh list
+
+          self.getAll();
+        };
+
+        if (type === 'add') {
+          crud_service.create(formData).then(function (response) {
+            if (response.data.code === 200) {
+              // close window
+              self.setState(function (prevState) {
+                return Authorized_objectSpread(Authorized_objectSpread({}, prevState), {}, {
+                  formAdd: Authorized_objectSpread(Authorized_objectSpread({}, prevState.formAdd.content), {}, {
+                    display: false
+                  })
+                });
+              });
+              refreshList();
+            }
+          });
+        }
+
+        if (type === 'edit') {
+          crud_service.update(id, formData).then(function (response) {
+            if (response.data.code === 200) {
+              // close window
+              self.setState(function (prevState) {
+                return Authorized_objectSpread(Authorized_objectSpread({}, prevState), {}, {
+                  formEdit: Authorized_objectSpread(Authorized_objectSpread({}, prevState.formEdit.content), {}, {
+                    display: false
+                  })
+                });
+              });
+              refreshList();
+            }
+          });
+        }
+      };
+    }
+  }, {
+    key: "componentDidMount",
+    value: function () {
+      var _componentDidMount = _asyncToGenerator( /*#__PURE__*/regenerator_default().mark(function _callee5() {
+        return regenerator_default().wrap(function _callee5$(_context5) {
+          while (1) {
+            switch (_context5.prev = _context5.next) {
+              case 0:
+                _context5.next = 2;
+                return this.getAll();
+
+              case 2:
+              case "end":
+                return _context5.stop();
+            }
+          }
+        }, _callee5, this);
+      }));
+
+      function componentDidMount() {
+        return _componentDidMount.apply(this, arguments);
+      }
+
+      return componentDidMount;
+    }()
+  }, {
+    key: "render",
+    value: function render() {
+      var _this2 = this;
+
+      return /*#__PURE__*/react.createElement(react.Fragment, null, /*#__PURE__*/react.createElement("h4", null, "Data \xA0\xA0\xA0\xA0", /*#__PURE__*/react.createElement("a", {
+        style: {
+          padding: "7px 25px",
+          background: "#191919",
+          outline: "none",
+          color: "#fff",
+          borderRadius: "30px",
+          border: "none",
+          fontSize: "14px",
+          textDecoration: "none"
+        },
+        href: "#",
+        onClick: this.handleAddForm
+      }, "Add New")), /*#__PURE__*/react.createElement("hr", null), /*#__PURE__*/react.createElement("ul", null, !this.state.datalist ? /*#__PURE__*/react.createElement(react.Fragment, null, "Loading...") : this.state.datalist.map(function (item) {
+        return /*#__PURE__*/react.createElement("li", {
+          key: item.id
+        }, /*#__PURE__*/react.createElement("a", {
+          href: "#",
+          onClick: _this2.handleDetail(item.id)
+        }, "(", item.id, ") ", item.name, " - ", item.email), /*#__PURE__*/react.createElement("div", {
+          style: {
+            "float": "right"
+          }
+        }, /*#__PURE__*/react.createElement("a", {
+          href: "#",
+          onClick: _this2.handleEditForm(item.id)
+        }, /*#__PURE__*/react.createElement("svg", {
+          version: "1.1",
+          height: "15",
+          x: "0px",
+          y: "0px",
+          viewBox: "0 0 1000 1000",
+          enableBackground: "new 0 0 1000 1000",
+          xmlSpace: "preserve"
+        }, /*#__PURE__*/react.createElement("g", null, /*#__PURE__*/react.createElement("path", {
+          d: "M470.1,744.4L277.9,552.2L797.8,32.3L990,224.5L470.1,744.4z M345.9,552.2l124.3,124.3l452-452L797.8,100.2L345.9,552.2z"
+        }), /*#__PURE__*/react.createElement("path", {
+          d: "M238.6,576l207.6,207.6l-222.4,14.8L238.6,576z"
+        }), /*#__PURE__*/react.createElement("path", {
+          d: "M889.6,967.7H10V75h524.4v48H58v796.6h783.6V521.4h48V967.7z"
+        })))), "\xA0\xA0", /*#__PURE__*/react.createElement(DashboardModal, {
+          modalId: "modal-del-" + item.id,
+          targetId: item.id,
+          title: /*#__PURE__*/react.createElement(react.Fragment, null, /*#__PURE__*/react.createElement("svg", {
+            height: "15",
+            version: "1.1",
+            x: "0px",
+            y: "0px",
+            viewBox: "0 0 1000 1000",
+            enableBackground: "new 0 0 1000 1000",
+            xmlSpace: "preserve"
+          }, /*#__PURE__*/react.createElement("g", null, /*#__PURE__*/react.createElement("path", {
+            d: "M653.1,867.5c16.8,0,30.6-13.8,30.6-30.6V469.4c0-16.8-13.8-30.6-30.6-30.6c-16.8,0-30.6,13.8-30.6,30.6v367.5C622.5,853.7,636.3,867.5,653.1,867.5z M346.9,867.5c16.8,0,30.6-13.8,30.6-30.6V469.4c0-16.8-13.8-30.6-30.6-30.6s-30.6,13.8-30.6,30.6v367.5C316.3,853.7,330,867.5,346.9,867.5z M836.9,132.5H653.1V71.3c0-33.7-27.6-61.3-61.3-61.3H408.1c-33.7,0-61.3,27.6-61.3,61.3v61.3H163.1c-33.7,0-61.3,27.6-61.3,61.3V255c0,33.7,27.6,61.3,61.3,61.3v551.3c0,67.4,55.1,122.5,122.5,122.5h428.8c67.4,0,122.5-55.1,122.5-122.5V316.3c33.7,0,61.3-27.6,61.3-61.3v-61.2C898.1,160.1,870.6,132.5,836.9,132.5z M408.1,101.9c0-16.8,13.8-30.6,30.6-30.6h122.5c16.8,0,30.6,13.8,30.6,30.6v30.6c-29.9,0-183.8,0-183.8,0V101.9z M775.6,867.5c0,33.7-27.6,61.3-61.3,61.3H285.6c-33.7,0-61.3-27.6-61.3-61.3V316.3h551.3V867.5z M806.3,255H193.8c-16.8,0-30.6-13.8-30.6-30.6s13.8-30.6,30.6-30.6h612.5c16.8,0,30.6,13.8,30.6,30.6S823.1,255,806.3,255z M500,867.5c16.8,0,30.6-13.8,30.6-30.6V469.4c0-16.8-13.8-30.6-30.6-30.6s-30.6,13.8-30.6,30.6v367.5C469.4,853.7,483.2,867.5,500,867.5z"
+          })))),
+          content: /*#__PURE__*/react.createElement(react.Fragment, null, /*#__PURE__*/react.createElement("p", null, "You will delete this post via ID ", item.id, ". ", /*#__PURE__*/react.createElement("br", null), /*#__PURE__*/react.createElement("a", {
+            href: "#",
+            onClick: function onClick(e) {
+              e.preventDefault();
+
+              _this2.handleDelete(item.id);
+            }
+          }, "Are you sure?"))),
+          showClickEvent: function showClickEvent() {
+            var _modal = document.querySelector('#modal-del-' + item.id);
+
+            _modal.style.display = 'flex';
+          },
+          closeClickEvent: function closeClickEvent() {
+            var _modal = document.querySelector('#modal-del-' + item.id);
+
+            _modal.style.display = 'none';
+          }
+        })));
+      })), /*#__PURE__*/react.createElement(DashboardModal, {
+        show: this.state.detail.display,
+        modalId: "modal-detail-container",
+        targetId: 9997,
+        title: null,
+        content: this.state.detail.content,
+        closeClickEvent: function closeClickEvent() {
+          _this2.setState(function (prevState) {
+            return Authorized_objectSpread(Authorized_objectSpread({}, prevState), {}, {
+              detail: Authorized_objectSpread(Authorized_objectSpread({}, prevState.detail.content), {}, {
+                display: false
+              })
+            });
+          });
+        }
+      }), /*#__PURE__*/react.createElement(DashboardModal, {
+        show: this.state.formAdd.display,
+        modalId: "modal-form-add-container",
+        targetId: 9998,
+        title: null,
+        content: this.state.formAdd.content,
+        closeClickEvent: function closeClickEvent() {
+          _this2.setState(function (prevState) {
+            return Authorized_objectSpread(Authorized_objectSpread({}, prevState), {}, {
+              formAdd: Authorized_objectSpread(Authorized_objectSpread({}, prevState.formAdd.content), {}, {
+                display: false
+              })
+            });
+          });
+        }
+      }), /*#__PURE__*/react.createElement(DashboardModal, {
+        show: this.state.formEdit.display,
+        modalId: "modal-form-edit-container",
+        targetId: 9999,
+        title: null,
+        content: this.state.formEdit.content,
+        closeClickEvent: function closeClickEvent() {
+          _this2.setState(function (prevState) {
+            return Authorized_objectSpread(Authorized_objectSpread({}, prevState), {}, {
+              formEdit: Authorized_objectSpread(Authorized_objectSpread({}, prevState.formEdit.content), {}, {
+                display: false
+              })
+            });
+          });
+        }
+      }));
+    }
+  }]);
+
+  return DataList;
+}(react.Component);
+/*
+////////////////////////////////////////////////////////////
+///////////////   (2) User Info   ///////////////
+////////////////////////////////////////////////////////////
+*/
+
+
+var Authorized = /*#__PURE__*/function (_Component2) {
+  _inherits(Authorized, _Component2);
+
+  var _super2 = Authorized_createSuper(Authorized);
+
+  function Authorized(props) {
+    var _this3;
+
+    _classCallCheck(this, Authorized);
+
+    _this3 = _super2.call(this, props);
+    _this3.state = {
+      userName: '...'
+    };
+    return _this3;
+  }
+
+  _createClass(Authorized, [{
+    key: "componentDidMount",
+    value: function componentDidMount() {
+      var self = this;
+      user_service.getUserName().then(function (response) {
+        self.setState({
+          userName: response
+        });
       });
     }
-  }), /*#__PURE__*/react.createElement(DashboardModal, {
-    show: formEdit.display,
-    modalId: "modal-form-edit-container",
-    targetId: 9999,
-    title: null,
-    content: formEdit.content,
-    closeClickEvent: function closeClickEvent() {
-      setFormEdit({
-        display: false
-      });
+  }, {
+    key: "render",
+    value: function render() {
+      return /*#__PURE__*/react.createElement(react.Fragment, null, this.state.userName !== '' ? /*#__PURE__*/react.createElement(react.Fragment, null, /*#__PURE__*/react.createElement("p", {
+        style: {
+          color: "green"
+        }
+      }, "\u221A You need to be authorized after successful login to see this information."), /*#__PURE__*/react.createElement("p", null, "Your user name is: ", /*#__PURE__*/react.createElement("code", null, this.state.userName))) : '', /*#__PURE__*/react.createElement("div", {
+        className: "alert alert-warning",
+        role: "alert"
+      }, "Note: The server may prohibit PHP data manipulation, Axios request will not be able to complete the data change."), /*#__PURE__*/react.createElement(DataList, null));
     }
-  }));
-};
+  }]);
 
-/* harmony default export */ const Dashboard_DataList = (DataList);
-;// CONCATENATED MODULE: ./src/client/views/_pages/Dashboard/com.index.js
+  return Authorized;
+}(react.Component);
 
-
-
-/* harmony default export */ const com_index = (function () {
-  return /*#__PURE__*/react.createElement(react.Fragment, null, /*#__PURE__*/react.createElement(Dashboard_Authorized, null), /*#__PURE__*/react.createElement("div", {
-    className: "alert alert-warning",
-    role: "alert"
-  }, "Note: The server may prohibit PHP data manipulation, Axios request will not be able to complete the data change."), /*#__PURE__*/react.createElement(Dashboard_DataList, null));
-});
+/* harmony default export */ const Dashboard_Authorized = (Authorized);
 ;// CONCATENATED MODULE: ./src/client/router/PrivateRoute.js
 
 
@@ -96385,7 +96443,7 @@ function Dashboard_HookContent() {
   return /*#__PURE__*/react.createElement(react.Fragment, null, /*#__PURE__*/react.createElement("h3", null, "Dashboard"), /*#__PURE__*/react.createElement("hr", null), /*#__PURE__*/react.createElement(Switch, null, /*#__PURE__*/react.createElement(PrivateRoute, {
     exact: true,
     path: "/dashboard",
-    component: com_index
+    component: Dashboard_Authorized
   })));
 }
 
