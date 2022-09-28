@@ -1109,7 +1109,6 @@ export function hybridSliderAnime( curElement: any, config: hybridSliderAnimeCon
                 const _promise = new Promise(function (resolve: any, reject?: any) {
 
                     const img = document.createElement('img');
-                    img.crossOrigin = "anonymous";
                     img.src = arr[i].url;
 
                     img.onload = function (this: any, e: any) {
