@@ -1,6 +1,13 @@
 # Changelog
 
 
+
+#### = 0.3.1 (October 1, 2022) =
+
+* Tweak: Updated `<Pagination />` component.
+
+
+
 #### = 0.3.0 (September 5, 2022) =
 
 * Fix: Fixed the TypeScript path error that may occur when deploying to a cloud server.

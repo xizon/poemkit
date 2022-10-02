@@ -4,7 +4,7 @@
 
 ## Version
 
-=> 0.0.1 (October 14, 2021)
+=> 0.0.2 (October 2, 2022)
 
 ## API
 
@@ -31,6 +31,7 @@ import Pagination from '@/components/Pagination/index.tsx';
 | `firstClass` | string  | first | The classname on tag li of the first button |
 | `lastClass` | string  | last | The classname on tag li of the last button |
 | `disabledClass` | string  | is-disabled | The classname for disabled buttons |
+| `symmetry` | boolean  | false | The activation button is symmetrical on the left and right sides |
 
 
 ## Examples
@@ -63,6 +64,7 @@ export default () => {
         nextLabel="next"
         firstLabel="first"
         lastLabel="last"
+        symmetry={false}
       />	
       
 

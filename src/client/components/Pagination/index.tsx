@@ -59,7 +59,8 @@ type PaginationProps = {
     lastClass?: string;	
     /** The classname for disabled buttons */
     disabledClass?: string;	
-    
+    /** The activation button is symmetrical on the left and right sides. */
+    symmetry?: boolean;
     
 
 };
@@ -118,7 +119,8 @@ export default class Pagination extends Component<PaginationProps, PaginationSta
             nextClass,
             firstClass,
             lastClass,
-            disabledClass
+            disabledClass,
+            symmetry
         } = this.props;
 
         const visibleNavigators = pageRangeDisplayed ? pageRangeDisplayed : 3;
@@ -142,12 +144,13 @@ export default class Pagination extends Component<PaginationProps, PaginationSta
               _firstClassName = firstClass ? firstClass : 'first',
               _lastClassName = lastClass ? lastClass : 'last',
               _disabledClassName = disabledClass ? disabledClass : 'is-disabled',
-              _onlyPrevNextButtons = typeof(onlyPrevNext) === 'undefined' ? false : onlyPrevNext;
+              _onlyPrevNextButtons = typeof(onlyPrevNext) === 'undefined' ? false : onlyPrevNext,
+              _symmetry = typeof(symmetry) === 'undefined' ? false : symmetry;
 
 
         //get navigation array
         //------------------------------------------
-        const navArr = paginationNavigators( visibleNavigators, totalPages, activePage, true );
+        const navArr = paginationNavigators( visibleNavigators, totalPages, activePage, true, _symmetry );
 
 
         // Use ellipsis to extend page numbers

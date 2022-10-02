@@ -464,6 +464,14 @@ export default () => {
 											<td>is-disabled</td>
 											<td>The classname for disabled buttons</td>
 										</tr>
+										<tr>
+											<td><code>symmetry</code></td>
+											<td>boolean</td>
+											<td>false</td>
+											<td>The activation button is symmetrical on the left and right sides</td>
+										</tr>
+
+
 									</tbody>
 								</table>
 

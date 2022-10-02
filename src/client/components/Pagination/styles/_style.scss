@@ -98,6 +98,24 @@
 
 
 
+@media all and (max-width: 768px) {
+    .poemkit-pagination__container {
+        ul {
+        
+            li {
+          
+                a,
+                > span {
+                    margin-bottom: 1rem;
+                }
+            }	
+            
+        }
+    }
+
+}
+
+
 /* 
  ---------------------------
  2. Paginate WordPress Posts
@@ -134,3 +152,4 @@
 		}
 	}
 }
+

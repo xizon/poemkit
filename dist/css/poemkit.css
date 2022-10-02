@@ -8,7 +8,7 @@
  * ## Project URL         :  https://uiux.cc
  * ## Version             :  0.3.0
  * ## Based on            :  PoemKit (https://github.com/xizon/poemkit#readme)
- * ## Last Update         :  September 5, 2022
+ * ## Last Update         :  October 2, 2022
  * ## Created by          :  UIUX Lab (https://uiux.cc) (uiuxlab@gmail.com)
  * ## Released under the MIT license.
  *
@@ -23742,6 +23742,13 @@ body.js-poemkit-menu-opened.rtl .poemkit-menu-mobile__toggle span {
   pointer-events: none;
   user-select: none;
   opacity: .3;
+}
+
+@media all and (max-width: 768px) {
+  .poemkit-pagination__container ul li a,
+  .poemkit-pagination__container ul li > span {
+    margin-bottom: 1rem;
+  }
 }
 
 /* 
