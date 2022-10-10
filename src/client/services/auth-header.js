@@ -16,7 +16,7 @@ import authHeader from 'auth-header.js';
 axios.post('api/path', {data: mydata}, { 
     headers: { 
         ...authHeader(),
-        'content-type': 'application/json'  
+        'Content-Type': 'application/json'  
     }
 }).then(function (response) {
     ...
@@ -30,7 +30,7 @@ axios({
     data: {id: varID},
     headers: { 
         ...authHeader(),
-        'content-type': 'application/json'  
+        'Content-Type': 'application/json'  
     }
 })
 

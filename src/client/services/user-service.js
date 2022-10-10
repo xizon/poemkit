@@ -24,7 +24,7 @@ class UserService {
 		this.config = { 
 			headers: { 
 				...authHeader(), 
-				'content-type': 'application/json'  
+				'Content-Type': 'application/json'  
 			}
 		};
 		

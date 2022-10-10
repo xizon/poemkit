@@ -20,7 +20,7 @@ class CRUDService {
 	}
 	create(data) {
 		this.config = {
-			headers: { 'content-type':  'multipart/form-data' }
+			headers: { 'Content-Type':  'multipart/form-data' }
 		};
 
         //console.log( data.entries() );
@@ -29,7 +29,7 @@ class CRUDService {
 	}
 	update(id, data) {
 		this.config = {
-			headers: { 'content-type':  'multipart/form-data' }
+			headers: { 'Content-Type':  'multipart/form-data' }
 		};
 
         //console.log( data.entries() );
