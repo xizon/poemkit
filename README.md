@@ -312,6 +312,14 @@ $ cd /{your_directory}/poemkit
 #run app
 $ pm2 start ecosystem.config.js
 
+
+#Detect available init system, generate configuration and enable startup system, and you can check the status of the same using
+$ pm2 startup
+$ systemctl status pm2-root
+$ pm2 start /{your_directory}/poemkit/ecosystem.config.js --restart-delay=3000
+$ pm2 save
+
+
 #other commands
 $ pm2 restart ecosystem.config.js
 $ pm2 stop ecosystem.config.js

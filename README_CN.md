@@ -320,6 +320,14 @@ $ cd /{your_directory}/poemkit
 #用pm2运行应用
 $ pm2 start ecosystem.config.js
 
+
+#检测可用的初始化系统，生成配置并启用启动系统(服务器重启后自动运行pm2),并检查使用的状态
+$ pm2 startup
+$ systemctl status pm2-root
+$ pm2 start /{your_directory}/poemkit/ecosystem.config.js --restart-delay=3000
+$ pm2 save
+
+
 #其它命令
 $ pm2 restart ecosystem.config.js
 $ pm2 stop ecosystem.config.js
