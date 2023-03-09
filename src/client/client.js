@@ -22,9 +22,10 @@ const store = createStore(_reducer, _initialState, _enhancer);
 
 //
 ReactDOM.hydrate(
-  <Provider store={store}>
-    <Router/>
-  </Provider>,
-  document.querySelector('#app')
-);
-
+    <Provider store={store}>
+      <Router/>
+    </Provider>,
+    document.querySelector('#app')
+  );
+  
+  

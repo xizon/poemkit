@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import {
-	Route, 
 	Switch, 
 	useRouteMatch,
 } from 'react-router-dom';

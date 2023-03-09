@@ -264,13 +264,13 @@
                 
                 .poemkit-core-grid__row--no-gutters {
                     .poemkit-core-grid__col-3--#{$size} {
-                        width: calc(25% - #{$pad/4}) !important;
+                        width: calc(25% - #{calc($pad/4)}) !important;
                     }
                     .poemkit-core-grid__col-4--#{$size} {
-                        width: calc(33.333333333333% - #{$pad/3}) !important;
+                        width: calc(33.333333333333% - #{calc($pad/3)}) !important;
                     }
                     .poemkit-core-grid__col-6--#{$size} {
-                        width: calc(50% - #{$pad/2}) !important;
+                        width: calc(50% - #{calc($pad/2)}) !important;
                     }
                 }
 

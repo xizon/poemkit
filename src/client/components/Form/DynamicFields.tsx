@@ -23,7 +23,7 @@ type DynamicFieldsProps = {
 	value?: string;
 	removeLabel?: string;
 	addLabel?: string;
-	tempHtmlString?: string | object;
+	tempHtmlString?: any;
 	maxFields?: any;
 	/** -- */
 	id?: string;

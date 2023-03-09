@@ -1,6 +1,15 @@
 # Changelog
 
 
+#### = 0.4.0 (March 9, 2023) =
+
+* New: Tested in Node 18+ & npm 9+ environment, fixed commands in documentation.
+* Fix: Upgrade webpack to solve its compatibility with `file-loader`.
+* Tweak: Reorganize all dependencies, update to new version.
+* Tweak: Performance and stability improvements under the new system.
+* Tweak: Updated old sass code.
+* Tweak: Upgrade Bootstrap to 5.2.3
+
 
 #### = 0.3.1 (October 1, 2022) =
 

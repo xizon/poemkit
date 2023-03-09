@@ -17,6 +17,13 @@ import '@/components/Form/styles/rtl/_basic.scss';
 import '@/components/Form/styles/rtl/_layout.scss';
 import '@/components/Form/styles/rtl/_theme_material.scss';
 
+declare module 'react' {
+    interface HTMLAttributes<T> {
+        children?: any;
+    }
+}
+
+
 type OptionChangeFnType = (arg1: any) => void;
 
 

@@ -158,7 +158,7 @@ poemkit/
 **Step 1.** 下载项目
 
 ```sh
-$ sudo npm install poemkit
+$ npm install poemkit
 ```
 
 或者克隆项目: 
@@ -175,11 +175,29 @@ $ cd /{your_directory}/poemkit
 ```
 
 
-**Step 3.** 安装所需要的依赖项
+**Step 3.** 在进行所有开发工作之前，请确保您已安装 `Node 10+`。 之后，在主目录中运行以下代码来安装节点模块依赖项。
 
 ```sh
-$ sudo npm install
+$ npm install
 ```
+
+
+<blockquote>
+目前测试环境为`Node 18+`、`npm 9+`。 如果依赖安装失败（一般是升级了Nodejs版本，目前测试到Node 18+），可能是新版本的npm和旧版本的npm冲突，请使用如下命令安装依赖：
+
+```sh
+$ npm install --legacy-peer-deps
+```
+
+如果仍然安装失败，请使用此方法：删除 `package.json` 中的 **devDependencies**, **dependencies** 和 **peerDependencies**, 删除文件 `package-lock.json`，并重新安装依赖：
+
+```sh
+$ npm install --save-dev @testing-library/jest-dom @testing-library/react@12.1.2 @types/react @typescript-eslint/eslint-plugin @typescript-eslint/parser babel-loader clean-webpack-plugin cross-env css-loader css-minimizer-webpack-plugin eslint eslint-config-prettier eslint-plugin-prettier eslint-plugin-react file-loader glslify-loader html-loader html-webpack-plugin identity-obj-proxy include-file-webpack-plugin jest jsdom jest-environment-jsdom json-loader log-timestamp mime-types mini-css-extract-plugin sass nodemon postcss prettier prettier-loader random-string raw-loader react-test-renderer@17.0.2 safe-buffer sass-loader style-loader tar terser-webpack-plugin ts-jest ts-node tsconfig-paths typescript webpack webpack-cli webpack-dev-middleware webpack-dev-server
+$ npm install @babel/core @babel/node @babel/plugin-proposal-class-properties @babel/plugin-transform-runtime @babel/polyfill @babel/preset-env @babel/preset-flow @babel/preset-react @babel/preset-typescript @babel/register axios babel-plugin-module-resolver compression cors express ignore-styles moment react@17.0.2 react-dom@17.0.2 react-helmet@6.1.0 react-redux@7.2.7 react-router@5.2.0 react-router-dom@5.2.0 react-router-config@5.1.1 redux@4.2.0 redux-thunk@2.3.0
+```
+</blockquote>
+
+
 
 **Step 4.** 常用的命令:
 
@@ -254,8 +272,8 @@ $ npm install node-sass@4.14.1
 **c) 如果升级Node版本，请执行以下代码：**
 
 ```sh
-$ sudo npm install
-$ sudo npm rebuild node-sass
+$ npm install
+$ npm rebuild node-sass
 ```
 </blockquote>
 
@@ -554,6 +572,69 @@ if (process.env.NODE_ENV === 'production') {
 		============================================= -->
         <link rel="stylesheet" href="@@{website_root_directory}/dist/css/poemkit.min.css?ver=@@{website_hash}"/>
         <!-- Core & Theme CSS  end -->
+
+        <!-- Overwrite Font Files 
+           *
+           * The fonts extracted with `mini-css-extract-plugin` may not load correctly
+           * Font files in `dist/fonts/` are fetched automatically by `file-loader`, you can configure webpack.config.js to name them.
+        ============================================= --> 
+        <style>
+        @font-face {
+            font-family: 'Font Awesome 5 Free';
+            font-style: normal;
+            font-weight: 900;
+            font-display: $fa-font-display;
+            src: url('@@{website_root_directory}/dist/fonts/fa-solid-900.eot');
+            src: url('@@{website_root_directory}/dist/fonts/fa-solid-900.eot?#iefix') format('embedded-opentype'),
+            url('@@{website_root_directory}/dist/fonts/fa-solid-900.woff2') format('woff2'),
+            url('@@{website_root_directory}/dist/fonts/fa-solid-900.woff') format('woff'),
+            url('@@{website_root_directory}/dist/fonts/fa-solid-900.ttf') format('truetype'),
+            url('@@{website_root_directory}/dist/fonts/fa-solid-900.svg#fontawesome') format('svg');
+          }
+          
+          .fa,
+          .fas {
+            font-family: 'Font Awesome 5 Free';
+            font-weight: 900;
+          }
+          
+          @font-face {
+            font-family: 'Font Awesome 5 Brands';
+            font-style: normal;
+            font-weight: 400;
+            font-display: $fa-font-display;
+            src: url('@@{website_root_directory}/dist/fonts/fa-brands-400.eot');
+            src: url('@@{website_root_directory}/dist/fonts/fa-brands-400.eot?#iefix') format('embedded-opentype'),
+            url('@@{website_root_directory}/dist/fonts/fa-brands-400.woff2') format('woff2'),
+            url('@@{website_root_directory}/dist/fonts/fa-brands-400.woff') format('woff'),
+            url('@@{website_root_directory}/dist/fonts/fa-brands-400.ttf') format('truetype'),
+            url('@@{website_root_directory}/dist/fonts/fa-brands-400.svg#fontawesome') format('svg');
+            }
+
+            .fab {
+                font-family: 'Font Awesome 5 Brands';
+                font-weight: 400;
+            }
+            @font-face {
+                font-family: 'Font Awesome 5 Free';
+                font-style: normal;
+                font-weight: 400;
+                font-display: $fa-font-display;
+                src: url('@@{website_root_directory}/dist/fonts/fa-regular-400.eot');
+                src: url('@@{website_root_directory}/dist/fonts/fa-regular-400.eot?#iefix') format('embedded-opentype'),
+                url('@@{website_root_directory}/dist/fonts/fa-regular-400.woff2') format('woff2'),
+                url('@@{website_root_directory}/dist/fonts/fa-regular-400.woff') format('woff'),
+                url('@@{website_root_directory}/dist/fonts/fa-regular-400.ttf') format('truetype'),
+                url('@@{website_root_directory}/dist/fonts/fa-regular-400.svg#fontawesome') format('svg');
+            }
+
+            .far {
+                font-family: 'Font Awesome 5 Free';
+                font-weight: 400;
+            }
+        </style>
+         <!-- Overwrite Font Files   end -->
+
 
             
 		<!-- SEO
@@ -886,10 +967,10 @@ if ( process.env.NODE_ENV === 'development' ) {
 
 ## 支持的开发环境
 
-- React 17 +
+- React 18 +
 - TypeScript 4.x.x + 
 - Babel 7.x.x + 
-- Webpack 5.x.x
+- Webpack 5.7.x
 - Jest 27.x.x
 - Express 4.x.x
 

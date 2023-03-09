@@ -18,6 +18,11 @@ import '@/components/Form/styles/rtl/_layout.scss';
 import '@/components/Form/styles/rtl/_theme_material.scss';
 
 
+declare module 'react' {
+    interface HTMLAttributes<T> {
+        children?: any;
+    }
+}
 
 interface TextareaProps extends React.ComponentPropsWithoutRef<any> {
 	theme?: string;

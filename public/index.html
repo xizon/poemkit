@@ -26,9 +26,76 @@
         
 		<!-- Core & Theme CSS
 		============================================= -->
-        <link rel="stylesheet" href="/dist/css/poemkit.min.css?ver=2mlMsVUqyf9K59J6bgxQ"/>
+        <link rel="stylesheet" href="/dist/css/poemkit.min.css?ver=XENipZdFx1vgdSfO1FYM"/>
         <!-- Core & Theme CSS  end -->
 		
+
+
+        <!-- Overwrite Font Files 
+           *
+           * The fonts extracted with `mini-css-extract-plugin` may not load correctly
+           * Font files in `dist/fonts/` are fetched automatically by `file-loader`, you can configure webpack.config.js to name them.
+        ============================================= --> 
+        <style>
+        @font-face {
+            font-family: 'Font Awesome 5 Free';
+            font-style: normal;
+            font-weight: 900;
+            font-display: $fa-font-display;
+            src: url('/dist/fonts/fa-solid-900.eot');
+            src: url('/dist/fonts/fa-solid-900.eot?#iefix') format('embedded-opentype'),
+            url('/dist/fonts/fa-solid-900.woff2') format('woff2'),
+            url('/dist/fonts/fa-solid-900.woff') format('woff'),
+            url('/dist/fonts/fa-solid-900.ttf') format('truetype'),
+            url('/dist/fonts/fa-solid-900.svg#fontawesome') format('svg');
+          }
+          
+          .fa,
+          .fas {
+            font-family: 'Font Awesome 5 Free';
+            font-weight: 900;
+          }
+          
+          @font-face {
+            font-family: 'Font Awesome 5 Brands';
+            font-style: normal;
+            font-weight: 400;
+            font-display: $fa-font-display;
+            src: url('/dist/fonts/fa-brands-400.eot');
+            src: url('/dist/fonts/fa-brands-400.eot?#iefix') format('embedded-opentype'),
+            url('/dist/fonts/fa-brands-400.woff2') format('woff2'),
+            url('/dist/fonts/fa-brands-400.woff') format('woff'),
+            url('/dist/fonts/fa-brands-400.ttf') format('truetype'),
+            url('/dist/fonts/fa-brands-400.svg#fontawesome') format('svg');
+            }
+
+            .fab {
+                font-family: 'Font Awesome 5 Brands';
+                font-weight: 400;
+            }
+            @font-face {
+                font-family: 'Font Awesome 5 Free';
+                font-style: normal;
+                font-weight: 400;
+                font-display: $fa-font-display;
+                src: url('/dist/fonts/fa-regular-400.eot');
+                src: url('/dist/fonts/fa-regular-400.eot?#iefix') format('embedded-opentype'),
+                url('/dist/fonts/fa-regular-400.woff2') format('woff2'),
+                url('/dist/fonts/fa-regular-400.woff') format('woff'),
+                url('/dist/fonts/fa-regular-400.ttf') format('truetype'),
+                url('/dist/fonts/fa-regular-400.svg#fontawesome') format('svg');
+            }
+
+            .far {
+                font-family: 'Font Awesome 5 Free';
+                font-weight: 400;
+            }
+        </style>
+         <!-- Overwrite Font Files   end -->
+
+
+
+
 
             
 		<!-- SEO
@@ -69,7 +136,7 @@
 	============================================= -->
 	
 	<script>
-		var REVISION     = "0.3.0",
+		var REVISION     = "0.4.0",
 			APP_ROOTPATH = {
 				"templateUrl" : "", //If the file is in the root directory, you can leave it empty. If in another directory, you can write: "/blog"  (but no trailing slash)
 				"homeUrl"     : "",  //Eg. https://uiux.cc
@@ -77,7 +144,7 @@
 			};
     </script>  
     <script>window.__PRELOADED_STATE__ = {{preloadedState}};</script>
-    <script src="/dist/js/poemkit.min.js?ver=2mlMsVUqyf9K59J6bgxQ"></script>
+    <script src="/dist/js/poemkit.min.js?ver=XENipZdFx1vgdSfO1FYM"></script>
 
 
 	<!-- Your Plugins & Theme Scripts  end -->

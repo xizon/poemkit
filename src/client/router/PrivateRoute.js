@@ -1,5 +1,8 @@
 import React from 'react';
-import { Route, Redirect } from 'react-router-dom';
+import { 
+    Route, 
+    Redirect 
+} from 'react-router-dom';
 
 
 // The goal is to prevent the user to access any pages if is is not Logged In.

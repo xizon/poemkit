@@ -29,6 +29,73 @@
         <!-- Core & Theme CSS  end -->
 		
 
+
+        <!-- Overwrite Font Files 
+           *
+           * The fonts extracted with `mini-css-extract-plugin` may not load correctly
+           * Font files in `dist/fonts/` are fetched automatically by `file-loader`, you can configure webpack.config.js to name them.
+        ============================================= --> 
+        <style>
+        @font-face {
+            font-family: 'Font Awesome 5 Free';
+            font-style: normal;
+            font-weight: 900;
+            font-display: $fa-font-display;
+            src: url('@@{website_root_directory}/dist/fonts/fa-solid-900.eot');
+            src: url('@@{website_root_directory}/dist/fonts/fa-solid-900.eot?#iefix') format('embedded-opentype'),
+            url('@@{website_root_directory}/dist/fonts/fa-solid-900.woff2') format('woff2'),
+            url('@@{website_root_directory}/dist/fonts/fa-solid-900.woff') format('woff'),
+            url('@@{website_root_directory}/dist/fonts/fa-solid-900.ttf') format('truetype'),
+            url('@@{website_root_directory}/dist/fonts/fa-solid-900.svg#fontawesome') format('svg');
+          }
+          
+          .fa,
+          .fas {
+            font-family: 'Font Awesome 5 Free';
+            font-weight: 900;
+          }
+          
+          @font-face {
+            font-family: 'Font Awesome 5 Brands';
+            font-style: normal;
+            font-weight: 400;
+            font-display: $fa-font-display;
+            src: url('@@{website_root_directory}/dist/fonts/fa-brands-400.eot');
+            src: url('@@{website_root_directory}/dist/fonts/fa-brands-400.eot?#iefix') format('embedded-opentype'),
+            url('@@{website_root_directory}/dist/fonts/fa-brands-400.woff2') format('woff2'),
+            url('@@{website_root_directory}/dist/fonts/fa-brands-400.woff') format('woff'),
+            url('@@{website_root_directory}/dist/fonts/fa-brands-400.ttf') format('truetype'),
+            url('@@{website_root_directory}/dist/fonts/fa-brands-400.svg#fontawesome') format('svg');
+            }
+
+            .fab {
+                font-family: 'Font Awesome 5 Brands';
+                font-weight: 400;
+            }
+            @font-face {
+                font-family: 'Font Awesome 5 Free';
+                font-style: normal;
+                font-weight: 400;
+                font-display: $fa-font-display;
+                src: url('@@{website_root_directory}/dist/fonts/fa-regular-400.eot');
+                src: url('@@{website_root_directory}/dist/fonts/fa-regular-400.eot?#iefix') format('embedded-opentype'),
+                url('@@{website_root_directory}/dist/fonts/fa-regular-400.woff2') format('woff2'),
+                url('@@{website_root_directory}/dist/fonts/fa-regular-400.woff') format('woff'),
+                url('@@{website_root_directory}/dist/fonts/fa-regular-400.ttf') format('truetype'),
+                url('@@{website_root_directory}/dist/fonts/fa-regular-400.svg#fontawesome') format('svg');
+            }
+
+            .far {
+                font-family: 'Font Awesome 5 Free';
+                font-weight: 400;
+            }
+        </style>
+         <!-- Overwrite Font Files   end -->
+
+
+
+
+
             
 		<!-- SEO
 		============================================= -->

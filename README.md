@@ -148,7 +148,7 @@ You will need to have [node](https://nodejs.org/) setup on your machine. That wi
 **Step 1.** Use NPM (Locate your current directory of project, and enter the following command.) or download the latest version from [Github](https://github.com/xizon/poemkit). For nodejs you have to install some dependencies.
 
 ```sh
-$ sudo npm install poemkit
+$ npm install poemkit
 ```
 
 Or clone the repo to get all source files including build scripts: 
@@ -168,8 +168,23 @@ $ cd /{your_directory}/poemkit
 **Step 3.** Before doing all dev stuff make sure you have `Node 10+` installed. After that, run the following code in the main directory to install the node module dependencies.
 
 ```sh
-$ sudo npm install
+$ npm install
 ```
+
+<blockquote>
+The current test environment is `Node 18+`, `npm 9+`. If dependency installation fails ( Usually it is because you have upgraded your Nodejs version, currently tested to Node 18+ ), maybe the new version of npm will conflict with the old version of npm, please use following command to install dependencies:
+
+```sh
+$ npm install --legacy-peer-deps
+```
+
+If the installation still fails, please use this method: remove **devDependencies**, **dependencies** and **peerDependencies** in `package.json`, delete file `package-lock.json` and reinstall dependencies:
+
+```sh
+$ npm install --save-dev @testing-library/jest-dom @testing-library/react@12.1.2 @types/react @typescript-eslint/eslint-plugin @typescript-eslint/parser babel-loader clean-webpack-plugin cross-env css-loader css-minimizer-webpack-plugin eslint eslint-config-prettier eslint-plugin-prettier eslint-plugin-react file-loader glslify-loader html-loader html-webpack-plugin identity-obj-proxy include-file-webpack-plugin jest jsdom jest-environment-jsdom json-loader log-timestamp mime-types mini-css-extract-plugin sass nodemon postcss prettier prettier-loader random-string raw-loader react-test-renderer@17.0.2 safe-buffer sass-loader style-loader tar terser-webpack-plugin ts-jest ts-node tsconfig-paths typescript webpack webpack-cli webpack-dev-middleware webpack-dev-server
+$ npm install @babel/core @babel/node @babel/plugin-proposal-class-properties @babel/plugin-transform-runtime @babel/polyfill @babel/preset-env @babel/preset-flow @babel/preset-react @babel/preset-typescript @babel/register axios babel-plugin-module-resolver compression cors express ignore-styles moment react@17.0.2 react-dom@17.0.2 react-helmet@6.1.0 react-redux@7.2.7 react-router@5.2.0 react-router-dom@5.2.0 react-router-config@5.1.1 redux@4.2.0 redux-thunk@2.3.0
+```
+</blockquote>
 
 
 **Step 4.** Commonly used commands:
@@ -246,8 +261,8 @@ $ npm install node-sass@4.14.1
 **c) If you upgrade the version of Node, please execute the following code:**
 
 ```sh
-$ sudo npm install
-$ sudo npm rebuild node-sass
+$ npm install
+$ npm rebuild node-sass
 ```
 </blockquote>
 
@@ -546,6 +561,70 @@ Modify the default template `./src/client/views/_html/index.html`. It will be au
 		============================================= -->
         <link rel="stylesheet" href="@@{website_root_directory}/dist/css/poemkit.min.css?ver=@@{website_hash}"/>
         <!-- Core & Theme CSS  end -->
+
+
+        <!-- Overwrite Font Files 
+           *
+           * The fonts extracted with `mini-css-extract-plugin` may not load correctly
+           * Font files in `dist/fonts/` are fetched automatically by `file-loader`, you can configure webpack.config.js to name them.
+        ============================================= --> 
+        <style>
+        @font-face {
+            font-family: 'Font Awesome 5 Free';
+            font-style: normal;
+            font-weight: 900;
+            font-display: $fa-font-display;
+            src: url('@@{website_root_directory}/dist/fonts/fa-solid-900.eot');
+            src: url('@@{website_root_directory}/dist/fonts/fa-solid-900.eot?#iefix') format('embedded-opentype'),
+            url('@@{website_root_directory}/dist/fonts/fa-solid-900.woff2') format('woff2'),
+            url('@@{website_root_directory}/dist/fonts/fa-solid-900.woff') format('woff'),
+            url('@@{website_root_directory}/dist/fonts/fa-solid-900.ttf') format('truetype'),
+            url('@@{website_root_directory}/dist/fonts/fa-solid-900.svg#fontawesome') format('svg');
+          }
+          
+          .fa,
+          .fas {
+            font-family: 'Font Awesome 5 Free';
+            font-weight: 900;
+          }
+          
+          @font-face {
+            font-family: 'Font Awesome 5 Brands';
+            font-style: normal;
+            font-weight: 400;
+            font-display: $fa-font-display;
+            src: url('@@{website_root_directory}/dist/fonts/fa-brands-400.eot');
+            src: url('@@{website_root_directory}/dist/fonts/fa-brands-400.eot?#iefix') format('embedded-opentype'),
+            url('@@{website_root_directory}/dist/fonts/fa-brands-400.woff2') format('woff2'),
+            url('@@{website_root_directory}/dist/fonts/fa-brands-400.woff') format('woff'),
+            url('@@{website_root_directory}/dist/fonts/fa-brands-400.ttf') format('truetype'),
+            url('@@{website_root_directory}/dist/fonts/fa-brands-400.svg#fontawesome') format('svg');
+            }
+
+            .fab {
+                font-family: 'Font Awesome 5 Brands';
+                font-weight: 400;
+            }
+            @font-face {
+                font-family: 'Font Awesome 5 Free';
+                font-style: normal;
+                font-weight: 400;
+                font-display: $fa-font-display;
+                src: url('@@{website_root_directory}/dist/fonts/fa-regular-400.eot');
+                src: url('@@{website_root_directory}/dist/fonts/fa-regular-400.eot?#iefix') format('embedded-opentype'),
+                url('@@{website_root_directory}/dist/fonts/fa-regular-400.woff2') format('woff2'),
+                url('@@{website_root_directory}/dist/fonts/fa-regular-400.woff') format('woff'),
+                url('@@{website_root_directory}/dist/fonts/fa-regular-400.ttf') format('truetype'),
+                url('@@{website_root_directory}/dist/fonts/fa-regular-400.svg#fontawesome') format('svg');
+            }
+
+            .far {
+                font-family: 'Font Awesome 5 Free';
+                font-weight: 400;
+            }
+        </style>
+         <!-- Overwrite Font Files   end -->
+
 
             
 		<!-- SEO
@@ -886,10 +965,10 @@ Finding bugs, sending pull requests or improving our docs - any contribution is 
 
 ## Supported development environment
 
-- React 17 +
+- React 18 +
 - TypeScript 4.x.x + 
 - Babel 7.x.x + 
-- Webpack 5.x.x
+- Webpack 5.7.x
 - Jest 27.x.x
 - Express 4.x.x
 

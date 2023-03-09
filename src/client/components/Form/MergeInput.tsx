@@ -18,6 +18,11 @@ import '@/components/Form/styles/rtl/_basic.scss';
 import '@/components/Form/styles/rtl/_layout.scss';
 import '@/components/Form/styles/rtl/_theme_material.scss';
 
+declare module 'react' {
+    interface HTMLAttributes<T> {
+        children?: any;
+    }
+}
 
 interface MergeInputProps extends React.ComponentPropsWithoutRef<any> {
 	btnType?: any;
