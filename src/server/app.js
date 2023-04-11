@@ -1,4 +1,5 @@
 import express from 'express';
+import cors from 'cors';
 import { matchRoutes } from 'react-router-config';
 import render from '@/server/renderer.js';
 import createNewStore from '@/store/createStore.js';
@@ -44,6 +45,11 @@ app.use(
 );
 
 
+//add other middleware
+// Note: `app.use(..., express.static(...))` cannot be placed before `app.use(cors())`
+app.use(cors({origin: '*' }));
+
+
 //To use multiple static assets directories, call the express.static middleware function multiple times:
 app.use(express.static( 'public' ));
 app.use(express.static( 'dist' ));
@@ -52,11 +58,6 @@ app.use(express.static( 'dist' ));
 //served by the express.static function, specify a mount path for the static directory, as shown below:
 app.use('/', express.static( 'public' ));
 app.use('/dist', express.static( 'dist' ));
-
-
-// use it before all route definitions
-import cors from 'cors';
-app.use(cors({origin: '*' }));
 
 
 
