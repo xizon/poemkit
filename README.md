@@ -20,7 +20,7 @@ A free web kit with React for fast web design and development via SSR. It also i
 
 **PoemKit can work and deploy through commands, it still requires real code to be written behind them.** These kits serve as UI components and some logic modules that can be put together into a real website or application prototype that will still require programming functions to make them work in the real world. PoemKit meets fully customizable webpack requirements.
 
-🚌 You can also use a standalone React UI components library  (based on BootStrap 5) [React Pure Bootstrap](https://github.com/xizon/react-pure-bootstrap).
+🚌 You can also use a standalone React UI components library  (based on BootStrap 5) [Funda UI](https://github.com/xizon/funda-ui).
 
 ---
 
